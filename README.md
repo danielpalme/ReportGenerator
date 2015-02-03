@@ -17,7 +17,7 @@ The following output formats are supported by ReportGenerator:
 * [OpenCover](https://github.com/OpenCover/opencover)
 * [PartCover](https://github.com/sawilde/partcover.net4) (4.0)
 * [PartCover](http://sourceforge.net/projects/partcover/) (2.2, 2.3)
-* Visual Studio ([vstest.console.exe](Visual Studio Coverage Tools#vstestconsoleexe), [CodeCoverage.exe](Visual Studio Coverage Tools#CodeCoverageexe))
+* Visual Studio ([vstest.console.exe](https://github.com/danielpalme/ReportGenerator/wiki/Visual-Studio-Coverage-Tools#vstestconsoleexe), [CodeCoverage.exe](https://github.com/danielpalme/ReportGenerator/wiki/Visual-Studio-Coverage-Tools#codecoverageexe))
 * [NCover](http://www.ncover.com/download/current) (tested version 1.5.8, other versions may not work)
 
 Also available as **NuGet** package: http://www.nuget.org/packages/ReportGenerator
