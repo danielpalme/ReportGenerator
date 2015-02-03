@@ -30,8 +30,8 @@ Twitter: [@danielpalme](http://twitter.com/danielpalme)
 
 ## Screenshots
 The screenshots show two snippets of the generated reports:
-
-[image:Screenshot|screenshot1.gif] [image:Screenshot|screenshot2.gif]
+![Screenshot 1](http://danielpalme.github.io/ReportGenerator/resources/screenshot1.png)
+![Screenshot 2](http://danielpalme.github.io/ReportGenerator/resources/screenshot2.png)
 
 ## Usage
 ReportGenerator is a commandline tool which requires the following parameters:
