@@ -20,9 +20,9 @@ The following output formats are supported by ReportGenerator:
 * Visual Studio ([vstest.console.exe](Visual Studio Coverage Tools#vstestconsoleexe), [CodeCoverage.exe](Visual Studio Coverage Tools#CodeCoverageexe))
 * [NCover](http://www.ncover.com/download/current) (tested version 1.5.8, other versions may not work)
 
-Also available as **NuGet** package: [url:http://www.nuget.org/packages/ReportGenerator]
+Also available as **NuGet** package: http://www.nuget.org/packages/ReportGenerator
 
-Additional information about ReportGenerator can be found under [Resources](#Resources).
+Additional information about ReportGenerator can be found under [Resources](#resources).
 
 Author: Daniel Palme  
 Blog: [www.palmmedia.de](http://www.palmmedia.de)  
