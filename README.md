@@ -11,7 +11,7 @@ The following output formats are supported by ReportGenerator:
 * XML, XMLSummary
 * Latex, LatexSummary
 * TextSummary
-* [Custom reports]
+* [Custom reports](https://github.com/danielpalme/ReportGenerator/wiki/Custom-reports)
 
 **Compatibility:**
 * [OpenCover](https://github.com/OpenCover/opencover)
