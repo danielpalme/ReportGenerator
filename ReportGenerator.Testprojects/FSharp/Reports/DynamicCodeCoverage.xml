@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<results>
+  <modules>
+    <module name="test.exe" path="test.exe" id="5A12DCB4826D9B419B7D42DC1C864D4601000000" block_coverage="59.03" line_coverage="55.93" blocks_covered="85" blocks_not_covered="59" lines_covered="33" lines_partially_covered="3" lines_not_covered="23">
+      <functions>
+        <function id="8272" token="0x6000001" name="MouseBehavior()" type_name="MouseBehavior" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="2">
+          <ranges>
+            <range source_id="1" covered="no" start_line="7" start_column="13" end_line="7" end_column="26" />
+            <range source_id="1" covered="no" start_line="8" start_column="5" end_line="8" end_column="31" />
+          </ranges>
+        </function>
+        <function id="8284" token="0x6000002" name="get_TrackMouseProperty()" type_name="MouseBehavior" block_coverage="57.14" line_coverage="0.00" blocks_covered="4" blocks_not_covered="3" lines_covered="0" lines_partially_covered="1" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" covered="partial" start_line="25" start_column="51" end_line="25" end_column="69" />
+          </ranges>
+        </function>
+        <function id="8316" token="0x6000003" name="get_MousePositionProperty()" type_name="MouseBehavior" block_coverage="57.14" line_coverage="0.00" blocks_covered="4" blocks_not_covered="3" lines_covered="0" lines_partially_covered="1" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" covered="partial" start_line="26" start_column="54" end_line="26" end_column="75" />
+          </ranges>
+        </function>
+        <function id="8364" token="0x6000005" name="MyFrameworkElement()" type_name="MyFrameworkElement" block_coverage="100.00" line_coverage="100.00" blocks_covered="2" blocks_not_covered="0" lines_covered="2" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" covered="yes" start_line="28" start_column="6" end_line="28" end_column="24" />
+            <range source_id="1" covered="yes" start_line="29" start_column="5" end_line="29" end_column="31" />
+          </ranges>
+        </function>
+        <function id="8376" token="0x6000006" name="DoMouseMove()" type_name="MyFrameworkElement" block_coverage="100.00" line_coverage="100.00" blocks_covered="6" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" covered="yes" start_line="32" start_column="9" end_line="32" end_column="116" />
+          </ranges>
+        </function>
+        <function id="8428" token="0x6000007" name="TestMouseBehavior()" type_name="TestMouseBehavior" block_coverage="100.00" line_coverage="100.00" blocks_covered="2" blocks_not_covered="0" lines_covered="2" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" covered="yes" start_line="34" start_column="6" end_line="34" end_column="23" />
+            <range source_id="1" covered="yes" start_line="35" start_column="5" end_line="35" end_column="31" />
+          </ranges>
+        </function>
+        <function id="8440" token="0x6000008" name="get_MousePositionProperty()" type_name="TestMouseBehavior" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="7" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="1" covered="no" start_line="53" start_column="54" end_line="53" end_column="75" />
+          </ranges>
+        </function>
+        <function id="8472" token="0x6000009" name="RunTest()" type_name="TestMouseBehavior" block_coverage="100.00" line_coverage="100.00" blocks_covered="12" blocks_not_covered="0" lines_covered="5" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" covered="yes" start_line="58" start_column="9" end_line="58" end_column="69" />
+            <range source_id="1" covered="yes" start_line="59" start_column="9" end_line="59" end_column="66" />
+            <range source_id="1" covered="yes" start_line="62" start_column="9" end_line="62" end_column="30" />
+            <range source_id="1" covered="yes" start_line="65" start_column="9" end_line="65" end_column="74" />
+            <range source_id="1" covered="yes" start_line="66" start_column="9" end_line="66" end_column="37" />
+          </ranges>
+        </function>
+        <function id="8608" token="0x600000b" name="main(string[])" type_name="Program" block_coverage="100.00" line_coverage="100.00" blocks_covered="7" blocks_not_covered="0" lines_covered="5" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" covered="yes" start_line="13" start_column="5" end_line="13" end_column="20" />
+            <range source_id="0" covered="yes" start_line="14" start_column="5" end_line="14" end_column="43" />
+            <range source_id="0" covered="yes" start_line="15" start_column="5" end_line="15" end_column="23" />
+            <range source_id="0" covered="yes" start_line="16" start_column="5" end_line="16" end_column="18" />
+            <range source_id="0" covered="yes" start_line="17" start_column="5" end_line="17" end_column="6" />
+          </ranges>
+        </function>
+        <function id="8668" token="0x600000c" name="Tests()" type_name="Program.Tests" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="0" covered="no" start_line="5" start_column="6" end_line="5" end_column="11" />
+          </ranges>
+        </function>
+        <function id="8680" token="0x600000d" name="FSharp_ExecuteTest()" type_name="Program.Tests" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="3" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="0" covered="no" start_line="8" start_column="9" end_line="8" end_column="44" />
+          </ranges>
+        </function>
+        <function id="8696" token="0x600000e" name="$Module1()" type_name="$Module1" block_coverage="100.00" line_coverage="100.00" blocks_covered="23" blocks_not_covered="0" lines_covered="7" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" covered="yes" start_line="7" start_column="13" end_line="7" end_column="26" />
+            <range source_id="1" covered="yes" start_line="10" start_column="12" end_line="10" end_column="159" />
+            <range source_id="1" covered="yes" start_line="12" start_column="16" end_line="12" end_column="34" />
+            <range source_id="1" covered="yes" start_line="23" start_column="9" end_line="23" end_column="148" />
+            <range source_id="1" covered="yes" start_line="34" start_column="6" end_line="34" end_column="23" />
+            <range source_id="1" covered="yes" start_line="38" start_column="12" end_line="38" end_column="163" />
+            <range source_id="1" covered="yes" start_line="51" start_column="9" end_line="51" end_column="152" />
+          </ranges>
+        </function>
+        <function id="8992" token="0x6000010" name="Invoke(System.Windows.Input.MouseEventArgs)" type_name="$Module1.mouseMove@16" block_coverage="66.67" line_coverage="50.00" blocks_covered="6" blocks_not_covered="3" lines_covered="1" lines_partially_covered="1" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" covered="yes" start_line="16" start_column="17" end_line="16" end_column="55" />
+            <range source_id="1" covered="partial" start_line="17" start_column="17" end_line="17" end_column="67" />
+          </ranges>
+        </function>
+        <function id="9088" token="0x6000012" name="Invoke(System.Windows.Input.MouseEventHandler)" type_name="$Module1.trackMouseChanged@20-1" block_coverage="100.00" line_coverage="100.00" blocks_covered="2" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" covered="yes" start_line="20" start_column="30" end_line="20" end_column="39" />
+          </ranges>
+        </function>
+        <function id="9120" token="0x6000014" name="Invoke(System.Windows.Input.MouseEventHandler)" type_name="$Module1.trackMouseChanged@20-2" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="1" covered="no" start_line="20" start_column="30" end_line="20" end_column="39" />
+          </ranges>
+        </function>
+        <function id="9152" token="0x6000016" name="Invoke(object, System.Windows.Input.MouseEventArgs)" type_name="$Module1.trackMouseChanged@20-4" block_coverage="100.00" line_coverage="100.00" blocks_covered="2" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" covered="yes" start_line="20" start_column="30" end_line="20" end_column="39" />
+          </ranges>
+        </function>
+        <function id="9180" token="0x6000018" name="Invoke(Microsoft.FSharp.Core.FSharpFunc&lt;object, Microsoft.FSharp.Core.FSharpFunc&lt;System.Windows.Input.MouseEventArgs, Microsoft.FSharp.Core.Unit&gt;&gt;)" type_name="$Module1.trackMouseChanged@20-3" block_coverage="100.00" line_coverage="100.00" blocks_covered="3" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" covered="yes" start_line="20" start_column="30" end_line="20" end_column="39" />
+          </ranges>
+        </function>
+        <function id="9208" token="0x600001a" name="Invoke(System.Windows.DependencyObject, System.Windows.DependencyPropertyChangedEventArgs)" type_name="$Module1.trackMouseChanged@14" block_coverage="83.33" line_coverage="75.00" blocks_covered="10" blocks_not_covered="2" lines_covered="6" lines_partially_covered="0" lines_not_covered="2">
+          <ranges>
+            <range source_id="1" covered="yes" start_line="14" start_column="13" end_line="14" end_column="49" />
+            <range source_id="1" covered="yes" start_line="15" start_column="17" end_line="15" end_column="45" />
+            <range source_id="1" covered="yes" start_line="18" start_column="13" end_line="18" end_column="44" />
+            <range source_id="1" covered="partial" start_line="19" start_column="13" end_line="20" end_column="21" />
+            <range source_id="1" covered="yes" start_line="20" start_column="22" end_line="20" end_column="54" />
+            <range source_id="1" covered="no" start_line="21" start_column="22" end_line="21" end_column="30" />
+          </ranges>
+        </function>
+        <function id="9308" token="0x600001c" name="Invoke(System.Windows.DependencyObject, System.Windows.DependencyPropertyChangedEventArgs)" type_name="$Module1.-cctor@23" block_coverage="100.00" line_coverage="100.00" blocks_covered="2" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" covered="yes" start_line="23" start_column="129" end_line="23" end_column="146" />
+          </ranges>
+        </function>
+        <function id="9344" token="0x600001e" name="Invoke(System.Windows.Input.MouseEventArgs)" type_name="$Module1.mouseMove@44-1" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="9" lines_covered="0" lines_partially_covered="0" lines_not_covered="2">
+          <ranges>
+            <range source_id="1" covered="no" start_line="44" start_column="17" end_line="44" end_column="55" />
+            <range source_id="1" covered="no" start_line="45" start_column="17" end_line="45" end_column="67" />
+          </ranges>
+        </function>
+        <function id="9440" token="0x6000020" name="Invoke(System.Windows.Input.MouseEventHandler)" type_name="$Module1.trackMouseChanged@48-6" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="1" covered="no" start_line="48" start_column="30" end_line="48" end_column="39" />
+          </ranges>
+        </function>
+        <function id="9472" token="0x6000022" name="Invoke(System.Windows.Input.MouseEventHandler)" type_name="$Module1.trackMouseChanged@48-7" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="1" covered="no" start_line="48" start_column="30" end_line="48" end_column="39" />
+          </ranges>
+        </function>
+        <function id="9504" token="0x6000024" name="Invoke(object, System.Windows.Input.MouseEventArgs)" type_name="$Module1.trackMouseChanged@48-9" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="1" covered="no" start_line="48" start_column="30" end_line="48" end_column="39" />
+          </ranges>
+        </function>
+        <function id="9532" token="0x6000026" name="Invoke(Microsoft.FSharp.Core.FSharpFunc&lt;object, Microsoft.FSharp.Core.FSharpFunc&lt;System.Windows.Input.MouseEventArgs, Microsoft.FSharp.Core.Unit&gt;&gt;)" type_name="$Module1.trackMouseChanged@48-8" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="3" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="1" covered="no" start_line="48" start_column="30" end_line="48" end_column="39" />
+          </ranges>
+        </function>
+        <function id="9560" token="0x6000028" name="Invoke(System.Windows.DependencyObject, System.Windows.DependencyPropertyChangedEventArgs)" type_name="$Module1.trackMouseChanged@42-5" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="12" lines_covered="0" lines_partially_covered="0" lines_not_covered="8">
+          <ranges>
+            <range source_id="1" covered="no" start_line="42" start_column="13" end_line="42" end_column="49" />
+            <range source_id="1" covered="no" start_line="43" start_column="17" end_line="43" end_column="45" />
+            <range source_id="1" covered="no" start_line="46" start_column="13" end_line="46" end_column="44" />
+            <range source_id="1" covered="no" start_line="47" start_column="13" end_line="48" end_column="21" />
+            <range source_id="1" covered="no" start_line="48" start_column="22" end_line="48" end_column="54" />
+            <range source_id="1" covered="no" start_line="49" start_column="22" end_line="49" end_column="30" />
+          </ranges>
+        </function>
+        <function id="9660" token="0x600002a" name="Invoke(System.Windows.DependencyObject, System.Windows.DependencyPropertyChangedEventArgs)" type_name="$Module1.trackMouseProperty@51" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="1" covered="no" start_line="51" start_column="133" end_line="51" end_column="150" />
+          </ranges>
+        </function>
+      </functions>
+      <source_files>
+        <source_file id="0" path="C:\temp\Program.fs">
+        </source_file>
+        <source_file id="1" path="C:\temp\Module1.fs">
+        </source_file>
+      </source_files>
+    </module>
+  </modules>
+</results>

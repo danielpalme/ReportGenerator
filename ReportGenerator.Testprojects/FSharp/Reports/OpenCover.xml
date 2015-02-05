@@ -1,0 +1,657 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CoverageSession xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Summary numSequencePoints="56" visitedSequencePoints="36" numBranchPoints="40" visitedBranchPoints="18" sequenceCoverage="64.29" branchCoverage="45" maxCyclomaticComplexity="2" minCyclomaticComplexity="0" />
+  <Modules>
+    <Module skippedDueTo="Filter" hash="B8-B5-2E-7E-34-97-29-CA-77-E0-D3-F9-3F-72-2B-1B-B6-4A-87-98">
+      <FullName>C:\WINDOWS\Microsoft.Net\assembly\GAC_64\mscorlib\v4.0_4.0.0.0__b77a5c561934e089\mscorlib.dll</FullName>
+      <ModuleName>mscorlib</ModuleName>
+      <Classes />
+    </Module>
+    <Module hash="E2-30-E5-27-45-2F-A0-16-C2-23-6D-F3-D1-00-75-84-B4-BC-6B-81">
+      <Summary numSequencePoints="56" visitedSequencePoints="36" numBranchPoints="40" visitedBranchPoints="18" sequenceCoverage="64.29" branchCoverage="45" maxCyclomaticComplexity="2" minCyclomaticComplexity="0" />
+      <FullName>C:\temp\Test.exe</FullName>
+      <ModuleName>Test</ModuleName>
+      <Files>
+        <File uid="1" fullPath="C:\temp\Module1.fs" />
+        <File uid="4" fullPath="C:\temp\Program.fs" />
+      </Files>
+      <Classes>
+        <Class>
+          <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" />
+          <FullName>&lt;Module&gt;</FullName>
+          <Methods />
+        </Class>
+        <Class>
+          <Summary numSequencePoints="4" visitedSequencePoints="2" numBranchPoints="7" visitedBranchPoints="4" sequenceCoverage="50" branchCoverage="57.14" maxCyclomaticComplexity="2" minCyclomaticComplexity="1" />
+          <FullName>ViewModels.MouseBehavior</FullName>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="2" sequenceCoverage="100" branchCoverage="66.67" isConstructor="false" isStatic="true" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="1" numBranchPoints="3" visitedBranchPoints="2" sequenceCoverage="100" branchCoverage="66.67" maxCyclomaticComplexity="2" minCyclomaticComplexity="2" />
+              <MetadataToken>100663298</MetadataToken>
+              <Name>System.Windows.DependencyProperty ViewModels.MouseBehavior::get_TrackMouseProperty()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="1" ordinal="0" offset="0" sl="25" sc="51" el="25" ec="69" bec="2" bev="1" fileid="1" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="2" ordinal="0" offset="8" sl="25" path="0" offsetchain="10" offsetend="14" fileid="1" />
+                <BranchPoint vc="1" uspid="3" ordinal="1" offset="8" sl="25" path="1" offsetchain="12" offsetend="23" fileid="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="1" ordinal="0" offset="0" sl="25" sc="51" el="25" ec="69" bec="2" bev="1" fileid="1" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="2" sequenceCoverage="100" branchCoverage="66.67" isConstructor="false" isStatic="true" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="1" numBranchPoints="3" visitedBranchPoints="2" sequenceCoverage="100" branchCoverage="66.67" maxCyclomaticComplexity="2" minCyclomaticComplexity="2" />
+              <MetadataToken>100663299</MetadataToken>
+              <Name>System.Windows.DependencyProperty ViewModels.MouseBehavior::get_MousePositionProperty()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="4" ordinal="0" offset="0" sl="26" sc="54" el="26" ec="75" bec="2" bev="1" fileid="1" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="5" ordinal="0" offset="8" sl="26" path="0" offsetchain="10" offsetend="14" fileid="1" />
+                <BranchPoint vc="1" uspid="6" ordinal="1" offset="8" sl="26" path="1" offsetchain="12" offsetend="23" fileid="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="4" ordinal="0" offset="0" sl="26" sc="54" el="26" ec="75" bec="2" bev="1" fileid="1" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="2" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663297</MetadataToken>
+              <Name>System.Void ViewModels.MouseBehavior::.ctor()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="7" ordinal="0" offset="0" sl="8" sc="5" el="8" ec="31" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="8" ordinal="1" offset="9" sl="7" sc="13" el="7" ec="26" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="7" ordinal="0" offset="0" sl="8" sc="5" el="8" ec="31" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="true" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663300</MetadataToken>
+              <Name>System.Void ViewModels.MouseBehavior::.cctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="1" uspid="9" ordinal="0" offset="0" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="3" visitedSequencePoints="3" numBranchPoints="2" visitedBranchPoints="2" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+          <FullName>ViewModels.MyFrameworkElement</FullName>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="100" branchCoverage="100" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="2" visitedSequencePoints="2" numBranchPoints="1" visitedBranchPoints="1" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663301</MetadataToken>
+              <Name>System.Void ViewModels.MyFrameworkElement::.ctor()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="10" ordinal="0" offset="0" sl="29" sc="5" el="29" ec="31" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="1" uspid="11" ordinal="1" offset="9" sl="28" sc="6" el="28" ec="24" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="10" ordinal="0" offset="0" sl="29" sc="5" el="29" ec="31" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="100" branchCoverage="100" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="1" numBranchPoints="1" visitedBranchPoints="1" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663302</MetadataToken>
+              <Name>System.Void ViewModels.MyFrameworkElement::DoMouseMove()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="12" ordinal="0" offset="0" sl="32" sc="9" el="32" ec="116" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="12" ordinal="0" offset="0" sl="32" sc="9" el="32" ec="116" bec="0" bev="0" fileid="1" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="8" visitedSequencePoints="7" numBranchPoints="5" visitedBranchPoints="2" sequenceCoverage="87.5" branchCoverage="40" maxCyclomaticComplexity="2" minCyclomaticComplexity="1" />
+          <FullName>ViewModels.TestMouseBehavior</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="2" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="3" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="2" minCyclomaticComplexity="2" />
+              <MetadataToken>100663304</MetadataToken>
+              <Name>System.Windows.DependencyProperty ViewModels.TestMouseBehavior::get_MousePositionProperty()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="13" ordinal="0" offset="0" sl="53" sc="54" el="53" ec="75" bec="2" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="14" ordinal="0" offset="8" sl="53" path="0" offsetchain="10" offsetend="14" fileid="1" />
+                <BranchPoint vc="0" uspid="15" ordinal="1" offset="8" sl="53" path="1" offsetchain="12" offsetend="23" fileid="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="13" ordinal="0" offset="0" sl="53" sc="54" el="53" ec="75" bec="2" bev="0" fileid="1" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="100" branchCoverage="100" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="2" visitedSequencePoints="2" numBranchPoints="1" visitedBranchPoints="1" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663303</MetadataToken>
+              <Name>System.Void ViewModels.TestMouseBehavior::.ctor()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="16" ordinal="0" offset="0" sl="35" sc="5" el="35" ec="31" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="1" uspid="17" ordinal="1" offset="9" sl="34" sc="6" el="34" ec="23" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="16" ordinal="0" offset="0" sl="35" sc="5" el="35" ec="31" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="100" branchCoverage="100" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="5" visitedSequencePoints="5" numBranchPoints="1" visitedBranchPoints="1" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663305</MetadataToken>
+              <Name>System.Void ViewModels.TestMouseBehavior::RunTest()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="18" ordinal="0" offset="0" sl="58" sc="9" el="58" ec="69" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="1" uspid="19" ordinal="1" offset="38" sl="59" sc="9" el="59" ec="66" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="1" uspid="20" ordinal="2" offset="55" sl="62" sc="9" el="62" ec="30" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="1" uspid="21" ordinal="3" offset="62" sl="65" sc="9" el="65" ec="74" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="1" uspid="22" ordinal="4" offset="74" sl="66" sc="9" el="66" ec="37" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="18" ordinal="0" offset="0" sl="58" sc="9" el="58" ec="69" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="true" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663306</MetadataToken>
+              <Name>System.Void ViewModels.TestMouseBehavior::.cctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="1" uspid="23" ordinal="0" offset="0" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="5" visitedSequencePoints="5" numBranchPoints="1" visitedBranchPoints="1" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+          <FullName>Program</FullName>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="100" branchCoverage="100" isConstructor="false" isStatic="true" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="5" visitedSequencePoints="5" numBranchPoints="1" visitedBranchPoints="1" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663307</MetadataToken>
+              <Name>System.Int32 Program::main(System.String[])</Name>
+              <FileRef uid="4" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="24" ordinal="0" offset="0" sl="13" sc="5" el="13" ec="20" bec="0" bev="0" fileid="4" />
+                <SequencePoint vc="1" uspid="25" ordinal="1" offset="17" sl="14" sc="5" el="14" ec="43" bec="0" bev="0" fileid="4" />
+                <SequencePoint vc="1" uspid="26" ordinal="2" offset="23" sl="15" sc="5" el="15" ec="23" bec="0" bev="0" fileid="4" />
+                <SequencePoint vc="1" uspid="27" ordinal="3" offset="30" sl="16" sc="5" el="16" ec="18" bec="0" bev="0" fileid="4" />
+                <SequencePoint vc="1" uspid="28" ordinal="4" offset="46" sl="17" sc="5" el="17" ec="6" bec="0" bev="0" fileid="4" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="24" ordinal="0" offset="0" sl="13" sc="5" el="13" ec="20" bec="0" bev="0" fileid="4" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="2" visitedSequencePoints="0" numBranchPoints="2" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+          <FullName>Program/Tests</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663308</MetadataToken>
+              <Name>System.Void Program/Tests::.ctor()</Name>
+              <FileRef uid="4" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="29" ordinal="0" offset="0" sl="5" sc="6" el="5" ec="11" bec="0" bev="0" fileid="4" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="29" ordinal="0" offset="0" sl="5" sc="6" el="5" ec="11" bec="0" bev="0" fileid="4" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663309</MetadataToken>
+              <Name>System.Void Program/Tests::FSharp_ExecuteTest()</Name>
+              <FileRef uid="4" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="30" ordinal="0" offset="0" sl="8" sc="9" el="8" ec="44" bec="0" bev="0" fileid="4" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="30" ordinal="0" offset="0" sl="8" sc="9" el="8" ec="44" bec="0" bev="0" fileid="4" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" />
+          <FullName>&lt;StartupCode$Test&gt;.$Program</FullName>
+          <Methods />
+        </Class>
+        <Class>
+          <Summary numSequencePoints="8" visitedSequencePoints="8" numBranchPoints="1" visitedBranchPoints="1" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+          <FullName>&lt;StartupCode$Test&gt;.$Module1</FullName>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="100" branchCoverage="100" isConstructor="true" isStatic="true" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="8" visitedSequencePoints="8" numBranchPoints="1" visitedBranchPoints="1" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663310</MetadataToken>
+              <Name>System.Void &lt;StartupCode$Test&gt;.$Module1::.cctor()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="31" ordinal="0" offset="0" sl="10" sc="12" el="10" ec="159" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="1" uspid="32" ordinal="1" offset="61" sl="12" sc="16" el="12" ec="34" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="1" uspid="33" ordinal="2" offset="67" sl="23" sc="9" el="23" ec="148" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="1" uspid="34" ordinal="3" offset="136" sl="7" sc="13" el="7" ec="26" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="1" uspid="35" ordinal="4" offset="137" sl="38" sc="12" el="38" ec="163" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="1" uspid="36" ordinal="5" offset="197" sl="34" sc="6" el="34" ec="23" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="1" uspid="37" ordinal="6" offset="204" sl="51" sc="9" el="51" ec="152" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="1" uspid="38" ordinal="7" offset="264" sl="34" sc="6" el="34" ec="23" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="31" ordinal="0" offset="0" sl="10" sc="12" el="10" ec="159" bec="0" bev="0" fileid="1" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="2" visitedSequencePoints="2" numBranchPoints="3" visitedBranchPoints="2" sequenceCoverage="100" branchCoverage="66.67" maxCyclomaticComplexity="2" minCyclomaticComplexity="1" />
+          <FullName>&lt;StartupCode$Test&gt;.$Module1/mouseMove@16</FullName>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663311</MetadataToken>
+              <Name>System.Void &lt;StartupCode$Test&gt;.$Module1/mouseMove@16::.ctor(System.Windows.FrameworkElement)</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="1" uspid="39" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="2" sequenceCoverage="100" branchCoverage="66.67" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="2" visitedSequencePoints="2" numBranchPoints="3" visitedBranchPoints="2" sequenceCoverage="100" branchCoverage="66.67" maxCyclomaticComplexity="2" minCyclomaticComplexity="2" />
+              <MetadataToken>100663312</MetadataToken>
+              <Name>Microsoft.FSharp.Core.Unit &lt;StartupCode$Test&gt;.$Module1/mouseMove@16::Invoke(System.Windows.Input.MouseEventArgs)</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="40" ordinal="0" offset="0" sl="16" sc="17" el="16" ec="55" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="1" uspid="41" ordinal="1" offset="19" sl="17" sc="17" el="17" ec="67" bec="2" bev="1" fileid="1" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="42" ordinal="0" offset="33" sl="17" path="0" offsetchain="35" offsetend="39" fileid="1" />
+                <BranchPoint vc="1" uspid="43" ordinal="1" offset="33" sl="17" path="1" offsetchain="37" offsetend="48" fileid="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="40" ordinal="0" offset="0" sl="16" sc="17" el="16" ec="55" bec="0" bev="0" fileid="1" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="1" visitedSequencePoints="1" numBranchPoints="1" visitedBranchPoints="1" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+          <FullName>&lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@20-1</FullName>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663313</MetadataToken>
+              <Name>System.Void &lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@20-1::.ctor(System.Windows.FrameworkElement)</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="1" uspid="44" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="100" branchCoverage="100" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="1" numBranchPoints="1" visitedBranchPoints="1" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663314</MetadataToken>
+              <Name>Microsoft.FSharp.Core.Unit &lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@20-1::Invoke(System.Windows.Input.MouseEventHandler)</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="45" ordinal="0" offset="0" sl="20" sc="30" el="20" ec="39" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="45" ordinal="0" offset="0" sl="20" sc="30" el="20" ec="39" bec="0" bev="0" fileid="1" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+          <FullName>&lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@20-2</FullName>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663315</MetadataToken>
+              <Name>System.Void &lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@20-2::.ctor(System.Windows.FrameworkElement)</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="1" uspid="46" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663316</MetadataToken>
+              <Name>Microsoft.FSharp.Core.Unit &lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@20-2::Invoke(System.Windows.Input.MouseEventHandler)</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="47" ordinal="0" offset="0" sl="20" sc="30" el="20" ec="39" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="47" ordinal="0" offset="0" sl="20" sc="30" el="20" ec="39" bec="0" bev="0" fileid="1" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="1" visitedSequencePoints="1" numBranchPoints="1" visitedBranchPoints="1" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+          <FullName>&lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@20-4</FullName>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663317</MetadataToken>
+              <Name>System.Void &lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@20-4::.ctor(Microsoft.FSharp.Core.FSharpFunc`2&lt;System.Object,Microsoft.FSharp.Core.FSharpFunc`2&lt;System.Windows.Input.MouseEventArgs,Microsoft.FSharp.Core.Unit&gt;&gt;)</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="1" uspid="48" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="100" branchCoverage="100" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="1" numBranchPoints="1" visitedBranchPoints="1" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663318</MetadataToken>
+              <Name>System.Void &lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@20-4::Invoke(System.Object,System.Windows.Input.MouseEventArgs)</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="49" ordinal="0" offset="0" sl="20" sc="30" el="20" ec="39" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="49" ordinal="0" offset="0" sl="20" sc="30" el="20" ec="39" bec="0" bev="0" fileid="1" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="1" visitedSequencePoints="1" numBranchPoints="1" visitedBranchPoints="1" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+          <FullName>&lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@20-3</FullName>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663319</MetadataToken>
+              <Name>System.Void &lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@20-3::.ctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="1" uspid="50" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="100" branchCoverage="100" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="1" numBranchPoints="1" visitedBranchPoints="1" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663320</MetadataToken>
+              <Name>System.Windows.Input.MouseEventHandler &lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@20-3::Invoke(Microsoft.FSharp.Core.FSharpFunc`2&lt;System.Object,Microsoft.FSharp.Core.FSharpFunc`2&lt;System.Windows.Input.MouseEventArgs,Microsoft.FSharp.Core.Unit&gt;&gt;)</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="51" ordinal="0" offset="0" sl="20" sc="30" el="20" ec="39" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="51" ordinal="0" offset="0" sl="20" sc="30" el="20" ec="39" bec="0" bev="0" fileid="1" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="6" visitedSequencePoints="5" numBranchPoints="3" visitedBranchPoints="2" sequenceCoverage="83.33" branchCoverage="66.67" maxCyclomaticComplexity="2" minCyclomaticComplexity="1" />
+          <FullName>&lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@14</FullName>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663321</MetadataToken>
+              <Name>System.Void &lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@14::.ctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="1" uspid="52" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="2" sequenceCoverage="83.33" branchCoverage="66.67" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="6" visitedSequencePoints="5" numBranchPoints="3" visitedBranchPoints="2" sequenceCoverage="83.33" branchCoverage="66.67" maxCyclomaticComplexity="2" minCyclomaticComplexity="2" />
+              <MetadataToken>100663322</MetadataToken>
+              <Name>Microsoft.FSharp.Core.Unit &lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@14::Invoke(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="53" ordinal="0" offset="0" sl="14" sc="13" el="14" ec="49" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="1" uspid="54" ordinal="1" offset="8" sl="15" sc="17" el="15" ec="45" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="1" uspid="55" ordinal="2" offset="15" sl="18" sc="13" el="18" ec="44" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="1" uspid="56" ordinal="3" offset="28" sl="19" sc="13" el="20" ec="21" bec="2" bev="1" fileid="1" />
+                <SequencePoint vc="1" uspid="57" ordinal="4" offset="35" sl="20" sc="22" el="20" ec="54" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="58" ordinal="5" offset="68" sl="21" sc="22" el="21" ec="30" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="1" uspid="59" ordinal="0" offset="29" sl="19" path="0" offsetchain="31" offsetend="35" fileid="1" />
+                <BranchPoint vc="0" uspid="60" ordinal="1" offset="29" sl="19" path="1" offsetchain="33" offsetend="68" fileid="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="53" ordinal="0" offset="0" sl="14" sc="13" el="14" ec="49" bec="0" bev="0" fileid="1" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="1" visitedSequencePoints="1" numBranchPoints="1" visitedBranchPoints="1" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+          <FullName>&lt;StartupCode$Test&gt;.$Module1/-cctor@23</FullName>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663323</MetadataToken>
+              <Name>System.Void &lt;StartupCode$Test&gt;.$Module1/-cctor@23::.ctor(Microsoft.FSharp.Core.FSharpFunc`2&lt;System.Windows.DependencyObject,Microsoft.FSharp.Core.FSharpFunc`2&lt;System.Windows.DependencyPropertyChangedEventArgs,Microsoft.FSharp.Core.Unit&gt;&gt;)</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="1" uspid="61" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="100" branchCoverage="100" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="1" numBranchPoints="1" visitedBranchPoints="1" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663324</MetadataToken>
+              <Name>System.Void &lt;StartupCode$Test&gt;.$Module1/-cctor@23::Invoke(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="62" ordinal="0" offset="0" sl="23" sc="129" el="23" ec="146" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="62" ordinal="0" offset="0" sl="23" sc="129" el="23" ec="146" bec="0" bev="0" fileid="1" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="2" visitedSequencePoints="0" numBranchPoints="3" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="2" minCyclomaticComplexity="1" />
+          <FullName>&lt;StartupCode$Test&gt;.$Module1/mouseMove@44-1</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663325</MetadataToken>
+              <Name>System.Void &lt;StartupCode$Test&gt;.$Module1/mouseMove@44-1::.ctor(System.Windows.FrameworkElement)</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="63" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="2" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="2" visitedSequencePoints="0" numBranchPoints="3" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="2" minCyclomaticComplexity="2" />
+              <MetadataToken>100663326</MetadataToken>
+              <Name>Microsoft.FSharp.Core.Unit &lt;StartupCode$Test&gt;.$Module1/mouseMove@44-1::Invoke(System.Windows.Input.MouseEventArgs)</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="64" ordinal="0" offset="0" sl="44" sc="17" el="44" ec="55" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="65" ordinal="1" offset="19" sl="45" sc="17" el="45" ec="67" bec="2" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="66" ordinal="0" offset="33" sl="45" path="0" offsetchain="35" offsetend="39" fileid="1" />
+                <BranchPoint vc="0" uspid="67" ordinal="1" offset="33" sl="45" path="1" offsetchain="37" offsetend="48" fileid="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="64" ordinal="0" offset="0" sl="44" sc="17" el="44" ec="55" bec="0" bev="0" fileid="1" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+          <FullName>&lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@48-6</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663327</MetadataToken>
+              <Name>System.Void &lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@48-6::.ctor(System.Windows.FrameworkElement)</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="68" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663328</MetadataToken>
+              <Name>Microsoft.FSharp.Core.Unit &lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@48-6::Invoke(System.Windows.Input.MouseEventHandler)</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="69" ordinal="0" offset="0" sl="48" sc="30" el="48" ec="39" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="69" ordinal="0" offset="0" sl="48" sc="30" el="48" ec="39" bec="0" bev="0" fileid="1" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+          <FullName>&lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@48-7</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663329</MetadataToken>
+              <Name>System.Void &lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@48-7::.ctor(System.Windows.FrameworkElement)</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="70" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663330</MetadataToken>
+              <Name>Microsoft.FSharp.Core.Unit &lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@48-7::Invoke(System.Windows.Input.MouseEventHandler)</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="71" ordinal="0" offset="0" sl="48" sc="30" el="48" ec="39" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="71" ordinal="0" offset="0" sl="48" sc="30" el="48" ec="39" bec="0" bev="0" fileid="1" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+          <FullName>&lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@48-9</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663331</MetadataToken>
+              <Name>System.Void &lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@48-9::.ctor(Microsoft.FSharp.Core.FSharpFunc`2&lt;System.Object,Microsoft.FSharp.Core.FSharpFunc`2&lt;System.Windows.Input.MouseEventArgs,Microsoft.FSharp.Core.Unit&gt;&gt;)</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="72" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663332</MetadataToken>
+              <Name>System.Void &lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@48-9::Invoke(System.Object,System.Windows.Input.MouseEventArgs)</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="73" ordinal="0" offset="0" sl="48" sc="30" el="48" ec="39" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="73" ordinal="0" offset="0" sl="48" sc="30" el="48" ec="39" bec="0" bev="0" fileid="1" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+          <FullName>&lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@48-8</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663333</MetadataToken>
+              <Name>System.Void &lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@48-8::.ctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="74" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663334</MetadataToken>
+              <Name>System.Windows.Input.MouseEventHandler &lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@48-8::Invoke(Microsoft.FSharp.Core.FSharpFunc`2&lt;System.Object,Microsoft.FSharp.Core.FSharpFunc`2&lt;System.Windows.Input.MouseEventArgs,Microsoft.FSharp.Core.Unit&gt;&gt;)</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="75" ordinal="0" offset="0" sl="48" sc="30" el="48" ec="39" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="75" ordinal="0" offset="0" sl="48" sc="30" el="48" ec="39" bec="0" bev="0" fileid="1" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="6" visitedSequencePoints="0" numBranchPoints="3" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="2" minCyclomaticComplexity="1" />
+          <FullName>&lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@42-5</FullName>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663335</MetadataToken>
+              <Name>System.Void &lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@42-5::.ctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="1" uspid="76" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="2" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="6" visitedSequencePoints="0" numBranchPoints="3" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="2" minCyclomaticComplexity="2" />
+              <MetadataToken>100663336</MetadataToken>
+              <Name>Microsoft.FSharp.Core.Unit &lt;StartupCode$Test&gt;.$Module1/trackMouseChanged@42-5::Invoke(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="77" ordinal="0" offset="0" sl="42" sc="13" el="42" ec="49" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="78" ordinal="1" offset="8" sl="43" sc="17" el="43" ec="45" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="79" ordinal="2" offset="15" sl="46" sc="13" el="46" ec="44" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="80" ordinal="3" offset="28" sl="47" sc="13" el="48" ec="21" bec="2" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="81" ordinal="4" offset="35" sl="48" sc="22" el="48" ec="54" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="82" ordinal="5" offset="68" sl="49" sc="22" el="49" ec="30" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="83" ordinal="0" offset="29" sl="47" path="0" offsetchain="31" offsetend="35" fileid="1" />
+                <BranchPoint vc="0" uspid="84" ordinal="1" offset="29" sl="47" path="1" offsetchain="33" offsetend="68" fileid="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="77" ordinal="0" offset="0" sl="42" sc="13" el="42" ec="49" bec="0" bev="0" fileid="1" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+          <FullName>&lt;StartupCode$Test&gt;.$Module1/trackMouseProperty@51</FullName>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663337</MetadataToken>
+              <Name>System.Void &lt;StartupCode$Test&gt;.$Module1/trackMouseProperty@51::.ctor(Microsoft.FSharp.Core.FSharpFunc`2&lt;System.Windows.DependencyObject,Microsoft.FSharp.Core.FSharpFunc`2&lt;System.Windows.DependencyPropertyChangedEventArgs,Microsoft.FSharp.Core.Unit&gt;&gt;)</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="1" uspid="85" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663338</MetadataToken>
+              <Name>System.Void &lt;StartupCode$Test&gt;.$Module1/trackMouseProperty@51::Invoke(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="86" ordinal="0" offset="0" sl="51" sc="133" el="51" ec="150" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="86" ordinal="0" offset="0" sl="51" sc="133" el="51" ec="150" bec="0" bev="0" fileid="1" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" />
+          <FullName>&lt;StartupCode$Test&gt;.$.NETFramework,Version=v4.0.AssemblyAttributes</FullName>
+          <Methods />
+        </Class>
+      </Classes>
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="AB-93-D6-03-44-AE-2D-B9-ED-FA-E9-99-79-68-A8-99-EF-8C-B5-48">
+      <FullName>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\PresentationFramework\v4.0_4.0.0.0__31bf3856ad364e35\PresentationFramework.dll</FullName>
+      <ModuleName>PresentationFramework</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="17-F2-54-20-BA-F3-5E-87-57-2A-44-70-E1-43-1F-92-2F-94-DA-AA">
+      <FullName>C:\WINDOWS\Microsoft.Net\assembly\GAC_64\PresentationCore\v4.0_4.0.0.0__31bf3856ad364e35\PresentationCore.dll</FullName>
+      <ModuleName>PresentationCore</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="DF-F3-98-CB-51-F3-7C-D8-04-5D-A0-B4-28-B0-05-7E-A5-E2-BB-E5">
+      <FullName>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\WindowsBase\v4.0_4.0.0.0__31bf3856ad364e35\WindowsBase.dll</FullName>
+      <ModuleName>WindowsBase</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="04-DF-13-16-0B-F4-57-A9-D9-9C-5A-63-DC-51-CD-BF-FD-3A-AF-DA">
+      <FullName>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</FullName>
+      <ModuleName>System</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="8C-01-69-43-04-90-E4-34-9B-36-3A-11-D0-94-4C-69-E1-CE-B8-89">
+      <FullName>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Xaml\v4.0_4.0.0.0__b77a5c561934e089\System.Xaml.dll</FullName>
+      <ModuleName>System.Xaml</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="0A-54-48-67-A0-1C-6C-85-82-1F-2D-9A-5C-88-99-7E-E7-CC-CC-10">
+      <FullName>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\FSharp.Core\v4.0_4.3.0.0__b03f5f7f11d50a3a\FSharp.Core.dll</FullName>
+      <ModuleName>FSharp.Core</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="C1-16-C8-5F-B4-14-C6-C3-58-F7-C3-FF-0C-02-08-7E-BF-7A-CB-DB">
+      <FullName>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\UIAutomationTypes\v4.0_4.0.0.0__31bf3856ad364e35\UIAutomationTypes.dll</FullName>
+      <ModuleName>UIAutomationTypes</ModuleName>
+      <Classes />
+    </Module>
+  </Modules>
+</CoverageSession>

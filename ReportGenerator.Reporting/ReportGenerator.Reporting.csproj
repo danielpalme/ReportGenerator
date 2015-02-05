@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{006E4F14-5F6F-416C-8F81-9082ED76A991}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Palmmedia.ReportGenerator.Reporting</RootNamespace>
+    <AssemblyName>ReportGenerator.Reporting</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\ReportGenerator.Reporting.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="TextSummaryReportBuilder.cs" />
+    <Compile Include="XmlReportBuilder.cs" />
+    <Compile Include="XmlSummaryReportBuilder.cs" />
+    <Compile Include="LatexReportBuilder.cs" />
+    <Compile Include="LatexSummaryReportBuilder.cs" />
+    <Compile Include="HtmlSummaryReportBuilder.cs" />
+    <Compile Include="Rendering\HtmlRenderer.cs" />
+    <Compile Include="Rendering\IReportRenderer.cs" />
+    <Compile Include="Rendering\LatexRenderer.cs" />
+    <Compile Include="Rendering\RendererBase.cs" />
+    <Compile Include="Rendering\XmlRenderer.cs" />
+    <Compile Include="ReportBuilderBase.cs" />
+    <Compile Include="HtmlReportBuilder.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ReportGenerator\ReportGenerator.csproj">
+      <Project>{bbdf4589-00c7-44c9-97e5-641d708bca3c}</Project>
+      <Name>ReportGenerator</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Rendering\resources\custom.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Rendering\resources\customAngularApp.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Rendering\resources\angular.min.js" />
+    <EmbeddedResource Include="Rendering\resources\react.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Rendering\resources\customReactComponents.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Rendering\resources\react.modified.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Rendering\resources\chartist.min.css" />
+    <EmbeddedResource Include="Rendering\resources\chartist.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Rendering\resources\jquery-1.11.2.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Rendering\resources\matchMedia.js" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy $(TargetPath) $(SolutionDir)ReportGenerator\$(OutDir)$(TargetFileName)
+copy $(TargetPath) $(SolutionDir)ReportGeneratorTest\$(OutDir)$(TargetFileName)</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

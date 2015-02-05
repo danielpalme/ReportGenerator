@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BBDF4589-00C7-44C9-97E5-641D708BCA3C}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Palmmedia.ReportGenerator</RootNamespace>
+    <AssemblyName>ReportGenerator</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>../PalmmediaKey.snk</AssemblyOriginatorKeyFile>
+    <ApplicationIcon>ProgrammIcon.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\ReportGenerator.XML</DocumentationFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Palmmedia.ReportGenerator.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.NRefactory, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ICSharpCode.NRefactory.5.5.0\lib\Net40\ICSharpCode.NRefactory.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory.Cecil">
+      <HintPath>..\packages\ICSharpCode.NRefactory.5.5.0\lib\Net40\ICSharpCode.NRefactory.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory.CSharp, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ICSharpCode.NRefactory.5.5.0\lib\Net40\ICSharpCode.NRefactory.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory.Xml">
+      <HintPath>..\packages\ICSharpCode.NRefactory.5.5.0\lib\Net40\ICSharpCode.NRefactory.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="Microsoft.Build.Utilities.v4.0" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\FileSearch.cs" />
+    <Compile Include="Parser\Analysis\Branch.cs" />
+    <Compile Include="Parser\Analysis\HistoricCoverage.cs" />
+    <Compile Include="Parser\Analysis\SummaryResult.cs" />
+    <Compile Include="Parser\Analysis\LineAnalysis.cs" />
+    <Compile Include="Parser\Analysis\TestMethod.cs" />
+    <Compile Include="Parser\DynamicCodeCoverageParser.cs" />
+    <Compile Include="Parser\Preprocessing\DynamicCodeCoverageReportPreprocessor.cs" />
+    <Compile Include="Parser\Preprocessing\VisualStudioReportPreprocessor.cs" />
+    <Compile Include="Parser\Preprocessing\FileSearch\SafeDirectorySearcher.cs" />
+    <Compile Include="Parser\VisualStudioParser.cs" />
+    <Compile Include="Properties\ReportResources.Designer.cs">
+      <DependentUpon>ReportResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportConfigurationBuilder.cs" />
+    <Compile Include="Properties\Help.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Help.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Parser\Analysis\CodeFile.cs" />
+    <Compile Include="Parser\Analysis\CoverageType.cs" />
+    <Compile Include="Common\LinqExtensions.cs" />
+    <Compile Include="Parser\Preprocessing\FileSearch\ClassSearcherFactory.cs" />
+    <Compile Include="Parser\Preprocessing\FileSearch\MultiDirectoryClassSearcher.cs" />
+    <Compile Include="ReportConfiguration.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="MSBuild\ReportGenerator.cs" />
+    <Compile Include="Parser\Preprocessing\CodeAnalysis\PropertyElement.cs" />
+    <Compile Include="Parser\Preprocessing\CodeAnalysis\SourceElement.cs" />
+    <Compile Include="Parser\Preprocessing\FileSearch\ClassSearcher.cs" />
+    <Compile Include="Parser\Preprocessing\FileSearch\CommonDirectorySearcher.cs" />
+    <Compile Include="Parser\Analysis\MethodMetric.cs" />
+    <Compile Include="Parser\Analysis\Metric.cs" />
+    <Compile Include="Parser\OpenCoverParser.cs" />
+    <Compile Include="Parser\IParser.cs" />
+    <Compile Include="Parser\Preprocessing\ReportPreprocessorBase.cs" />
+    <Compile Include="Parser\Preprocessing\PartCover23ReportPreprocessor.cs" />
+    <Compile Include="Parser\Preprocessing\PartCover22ReportPreprocessor.cs" />
+    <Compile Include="Parser\Preprocessing\OpenCoverReportPreprocessor.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Parser\Analysis\FileAnalysis.cs" />
+    <Compile Include="Parser\Analysis\ShortLineAnalysis.cs" />
+    <Compile Include="Parser\Analysis\LineVisitStatus.cs" />
+    <Compile Include="Reporting\DefaultAssemblyFilter.cs" />
+    <Compile Include="Reporting\FileUnblocker.cs" />
+    <Compile Include="Reporting\HistoryParser.cs" />
+    <Compile Include="Reporting\IAssemblyFilter.cs" />
+    <Compile Include="Reporting\IReportBuilder.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\IReportBuilderFactory.cs" />
+    <Compile Include="Reporting\MefReportBuilderFactory.cs" />
+    <Compile Include="Reporting\HistoryReportGenerator.cs" />
+    <Compile Include="Reporting\ReportGenerator.cs" />
+    <Compile Include="VerbosityLevel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Parser\Analysis\Class.cs" />
+    <Compile Include="Parser\Analysis\Assembly.cs" />
+    <Compile Include="Parser\Preprocessing\CodeAnalysis\SourceCodeAnalyzer.cs" />
+    <Compile Include="Parser\Preprocessing\CodeAnalysis\PartCoverMethodElement.cs" />
+    <Compile Include="Parser\Preprocessing\CodeAnalysis\SourceElementPosition.cs" />
+    <Compile Include="Parser\MultiReportParser.cs" />
+    <Compile Include="Parser\NCoverParser.cs" />
+    <Compile Include="Parser\ParserBase.cs" />
+    <Compile Include="Parser\ParserFactory.cs" />
+    <Compile Include="Parser\PartCover22Parser.cs" />
+    <Compile Include="Parser\PartCover23Parser.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ProgrammIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Help.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Help.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\ReportResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ReportResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

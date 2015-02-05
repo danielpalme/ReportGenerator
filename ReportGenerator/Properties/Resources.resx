@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddedCoverageInformationOfProperties" xml:space="preserve">
+    <value>Added coverage information of {0}/{1} auto properties</value>
+  </data>
+  <data name="AddedCoverageInformationOfPropertiesOpenCover" xml:space="preserve">
+    <value>Added coverage information of {0}/{1} auto properties to module '{2}'</value>
+  </data>
+  <data name="AddedCoverageInformationUnexecutedMethods" xml:space="preserve">
+    <value>Added coverage information of {0}/{1} unexecuted methods</value>
+  </data>
+  <data name="AnalyzingClasses" xml:space="preserve">
+    <value>Analyzing {0} classes</value>
+  </data>
+  <data name="CreatingHistoryReport" xml:space="preserve">
+    <value>Creating history report</value>
+  </data>
+  <data name="CreatingReport" xml:space="preserve">
+    <value>Creating report {0}/{1} (Assembly: {2}, Class: {3})</value>
+  </data>
+  <data name="CreatingSummary" xml:space="preserve">
+    <value>Creating summary</value>
+  </data>
+  <data name="CssNotSaved" xml:space="preserve">
+    <value>CSS '{0}' could not be saved: {1}</value>
+  </data>
+  <data name="CurrentAssembly" xml:space="preserve">
+    <value>Current Assembly: {0}</value>
+  </data>
+  <data name="DefaultReportBuilderReplaced" xml:space="preserve">
+    <value>The default report builder for report type '{0}' was replaced.</value>
+  </data>
+  <data name="ErrorDuringReadingFile" xml:space="preserve">
+    <value>Error during reading file '{0}': {1}</value>
+  </data>
+  <data name="ErrorDuringReadingHistoricReport" xml:space="preserve">
+    <value>Error during reading historic report '{0}': {1}</value>
+  </data>
+  <data name="ErrorDuringReadingReport" xml:space="preserve">
+    <value>Error during reading report '{0}': {1}</value>
+  </data>
+  <data name="ErrorDuringRenderingClassReport" xml:space="preserve">
+    <value>Error during rendering report for class '{0}' (Report type: '{1}'): {2}</value>
+  </data>
+  <data name="ErrorDuringRenderingSummaryReport" xml:space="preserve">
+    <value>Error during rendering summary report (Report type: '{0}'): {1}</value>
+  </data>
+  <data name="FailedReportFilePattern" xml:space="preserve">
+    <value>The report file pattern '{0}' is invalid.</value>
+  </data>
+  <data name="FileDoesNotExist" xml:space="preserve">
+    <value>File '{0}' does not exist (any more).</value>
+  </data>
+  <data name="FileLoadError" xml:space="preserve">
+    <value>Failed to load file '{0}'. Please unblock all files in installation directory. See https://reportgenerator.codeplex.com/wikipage?title=FAQ#FileLoadException for details.</value>
+  </data>
+  <data name="HistoryDirectoryCouldNotBeCreated" xml:space="preserve">
+    <value>The history directory '{0}' could not be created: {1}</value>
+  </data>
+  <data name="IndexingClasses" xml:space="preserve">
+    <value>Indexing classes in directory '{0}'</value>
+  </data>
+  <data name="InitializingReportBuilders" xml:space="preserve">
+    <value>Initializing report builders for report types: {0}</value>
+  </data>
+  <data name="InitiatingParser" xml:space="preserve">
+    <value>Initiating parser for {0}</value>
+  </data>
+  <data name="InvalidFilter" xml:space="preserve">
+    <value>The filter '{0}' is invalid. Filters must start with '+' or '-'.</value>
+  </data>
+  <data name="LoadingReport" xml:space="preserve">
+    <value>Loading report '{0}'</value>
+  </data>
+  <data name="NoAssembliesHaveBeenCovered" xml:space="preserve">
+    <value>No assemblies have been covered.</value>
+  </data>
+  <data name="NoReportFiles" xml:space="preserve">
+    <value>No report files specified.</value>
+  </data>
+  <data name="NoTargetDirectory" xml:space="preserve">
+    <value>No target directory specified.</value>
+  </data>
+  <data name="NotExistingReportFile" xml:space="preserve">
+    <value>The report file '{0}' does not exist.</value>
+  </data>
+  <data name="PreprocessingReport" xml:space="preserve">
+    <value>Preprocessing report</value>
+  </data>
+  <data name="ReadingHistoricReports" xml:space="preserve">
+    <value>Reading historic reports</value>
+  </data>
+  <data name="ReportGenerationTook" xml:space="preserve">
+    <value>Report generation took {0:f1} seconds</value>
+  </data>
+  <data name="SeveralCustomReportBuildersWithSameReportType" xml:space="preserve">
+    <value>Several custom report builders for report type '{0}' exist. This may cause problems if they try to write to the same files/directory.</value>
+  </data>
+  <data name="SourceDirectoryDoesNotExist" xml:space="preserve">
+    <value>The source code directory '{0}' does not exist.</value>
+  </data>
+  <data name="TargetDirectoryCouldNotBeCreated" xml:space="preserve">
+    <value>The target directory '{0}' could not be created: {1}</value>
+  </data>
+  <data name="UnknownReportType" xml:space="preserve">
+    <value>Unknown report type '{0}'.</value>
+  </data>
+  <data name="UnknownVerbosityLevel" xml:space="preserve">
+    <value>Unknown verbosity level.</value>
+  </data>
+</root>

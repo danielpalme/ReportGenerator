@@ -1,0 +1,94 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{CF7103C9-F21C-49AC-BD14-C7EBCEA2FA21}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testprojects", "Testprojects", "{BBF2B724-E28A-4D5E-A82A-95E51ADBB3E0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSharp", "CSharp", "{B27F2CDF-8E01-4D2C-9A26-972F02A0EFB6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{792589C7-7E2C-4C31-9FB3-A64F85BDF826}"
+	ProjectSection(SolutionItems) = preProject
+		ReportGenerator.Testprojects\CSharp\Reports\DynamicCodeCoverage.xml = ReportGenerator.Testprojects\CSharp\Reports\DynamicCodeCoverage.xml
+		ReportGenerator.Testprojects\CSharp\Reports\MultiDynamicCodeCoverage.xml = ReportGenerator.Testprojects\CSharp\Reports\MultiDynamicCodeCoverage.xml
+		ReportGenerator.Testprojects\CSharp\Reports\MultiNCover1.5.8.xml = ReportGenerator.Testprojects\CSharp\Reports\MultiNCover1.5.8.xml
+		ReportGenerator.Testprojects\CSharp\Reports\MultiOpenCover.xml = ReportGenerator.Testprojects\CSharp\Reports\MultiOpenCover.xml
+		ReportGenerator.Testprojects\CSharp\Reports\MultiPartcover2.2.xml = ReportGenerator.Testprojects\CSharp\Reports\MultiPartcover2.2.xml
+		ReportGenerator.Testprojects\CSharp\Reports\MultiPartcover2.3.xml = ReportGenerator.Testprojects\CSharp\Reports\MultiPartcover2.3.xml
+		ReportGenerator.Testprojects\CSharp\Reports\MultiVisualStudio2010.coveragexml = ReportGenerator.Testprojects\CSharp\Reports\MultiVisualStudio2010.coveragexml
+		ReportGenerator.Testprojects\CSharp\Reports\NCover1.5.8.xml = ReportGenerator.Testprojects\CSharp\Reports\NCover1.5.8.xml
+		ReportGenerator.Testprojects\CSharp\Reports\OpenCover.xml = ReportGenerator.Testprojects\CSharp\Reports\OpenCover.xml
+		ReportGenerator.Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml = ReportGenerator.Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml
+		ReportGenerator.Testprojects\CSharp\Reports\Partcover2.2.xml = ReportGenerator.Testprojects\CSharp\Reports\Partcover2.2.xml
+		ReportGenerator.Testprojects\CSharp\Reports\Partcover2.3.0.35109.xml = ReportGenerator.Testprojects\CSharp\Reports\Partcover2.3.0.35109.xml
+		ReportGenerator.Testprojects\CSharp\Reports\Partcover2.3.xml = ReportGenerator.Testprojects\CSharp\Reports\Partcover2.3.xml
+		ReportGenerator.Testprojects\CSharp\Reports\Partcover4.0.10620.xml = ReportGenerator.Testprojects\CSharp\Reports\Partcover4.0.10620.xml
+		ReportGenerator.Testprojects\CSharp\Reports\VisualStudio2010.coveragexml = ReportGenerator.Testprojects\CSharp\Reports\VisualStudio2010.coveragexml
+		ReportGenerator.Testprojects\CSharp\Reports\VisualStudio2012.coveragexml = ReportGenerator.Testprojects\CSharp\Reports\VisualStudio2012.coveragexml
+		ReportGenerator.Testprojects\CSharp\Reports\VisualStudio2013.coveragexml = ReportGenerator.Testprojects\CSharp\Reports\VisualStudio2013.coveragexml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FSharp", "FSharp", "{9223804A-D678-4EE8-BD89-19A6114DB86F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{8775E975-19C9-4F40-869B-04A8488AECC3}"
+	ProjectSection(SolutionItems) = preProject
+		ReportGenerator.Testprojects\FSharp\Reports\DynamicCodeCoverage.xml = ReportGenerator.Testprojects\FSharp\Reports\DynamicCodeCoverage.xml
+		ReportGenerator.Testprojects\FSharp\Reports\OpenCover.xml = ReportGenerator.Testprojects\FSharp\Reports\OpenCover.xml
+		ReportGenerator.Testprojects\FSharp\Reports\VisualStudio2010.coveragexml = ReportGenerator.Testprojects\FSharp\Reports\VisualStudio2010.coveragexml
+		ReportGenerator.Testprojects\FSharp\Reports\VisualStudio2013.coveragexml = ReportGenerator.Testprojects\FSharp\Reports\VisualStudio2013.coveragexml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportGenerator", "ReportGenerator\ReportGenerator.csproj", "{BBDF4589-00C7-44C9-97E5-641D708BCA3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportGeneratorTest", "ReportGeneratorTest\ReportGeneratorTest.csproj", "{FFCA13D6-B6CE-442A-9F93-149AE9B0AA1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportGenerator.Reporting", "ReportGenerator.Reporting\ReportGenerator.Reporting.csproj", "{006E4F14-5F6F-416C-8F81-9082ED76A991}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_CSharp", "ReportGenerator.Testprojects\CSharp\Project\Test_CSharp.csproj", "{4AF221C2-D0A0-43BD-8D36-82F99515A5D6}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Test_FSharp", "ReportGenerator.Testprojects\FSharp\Project\Test_FSharp.fsproj", "{953D4A9C-5271-4A6D-876A-7E41B93BEE77}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BBDF4589-00C7-44C9-97E5-641D708BCA3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBDF4589-00C7-44C9-97E5-641D708BCA3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBDF4589-00C7-44C9-97E5-641D708BCA3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBDF4589-00C7-44C9-97E5-641D708BCA3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFCA13D6-B6CE-442A-9F93-149AE9B0AA1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFCA13D6-B6CE-442A-9F93-149AE9B0AA1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFCA13D6-B6CE-442A-9F93-149AE9B0AA1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFCA13D6-B6CE-442A-9F93-149AE9B0AA1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{006E4F14-5F6F-416C-8F81-9082ED76A991}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{006E4F14-5F6F-416C-8F81-9082ED76A991}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{006E4F14-5F6F-416C-8F81-9082ED76A991}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{006E4F14-5F6F-416C-8F81-9082ED76A991}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AF221C2-D0A0-43BD-8D36-82F99515A5D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AF221C2-D0A0-43BD-8D36-82F99515A5D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AF221C2-D0A0-43BD-8D36-82F99515A5D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AF221C2-D0A0-43BD-8D36-82F99515A5D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{953D4A9C-5271-4A6D-876A-7E41B93BEE77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{953D4A9C-5271-4A6D-876A-7E41B93BEE77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{953D4A9C-5271-4A6D-876A-7E41B93BEE77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{953D4A9C-5271-4A6D-876A-7E41B93BEE77}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B27F2CDF-8E01-4D2C-9A26-972F02A0EFB6} = {BBF2B724-E28A-4D5E-A82A-95E51ADBB3E0}
+		{792589C7-7E2C-4C31-9FB3-A64F85BDF826} = {B27F2CDF-8E01-4D2C-9A26-972F02A0EFB6}
+		{9223804A-D678-4EE8-BD89-19A6114DB86F} = {BBF2B724-E28A-4D5E-A82A-95E51ADBB3E0}
+		{8775E975-19C9-4F40-869B-04A8488AECC3} = {9223804A-D678-4EE8-BD89-19A6114DB86F}
+		{4AF221C2-D0A0-43BD-8D36-82F99515A5D6} = {B27F2CDF-8E01-4D2C-9A26-972F02A0EFB6}
+		{953D4A9C-5271-4A6D-876A-7E41B93BEE77} = {9223804A-D678-4EE8-BD89-19A6114DB86F}
+	EndGlobalSection
+EndGlobal

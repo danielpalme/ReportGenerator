@@ -1,0 +1,216 @@
+<PartCoverReport date="2011-12-12T22:14:02.4581569+01:00">
+ <File id="4" url="C:\temp\PartialClass.cs" />
+ <File id="5" url="C:\temp\PartialClass2.cs" />
+ <File id="1" url="C:\temp\Program.cs" />
+ <File id="2" url="C:\temp\TestClass.cs" />
+ <File id="3" url="C:\temp\TestClass2.cs" />
+ <Assembly name="Test" module="C:\temp\Test.exe" />
+ <Type asm="Test" name="Test.TestClass" flags="1048576">
+  <Method name="SampleFunction" sig="void  ()" flags="134" iflags="0">
+   <pt visit="1" pos="0" len="1" fid="2" sl="8" sc="9" el="8" ec="10" />
+   <pt visit="1" pos="1" len="11" fid="2" sl="9" sc="13" el="9" ec="47" />
+   <pt visit="1" pos="12" len="3" fid="2" sl="10" sc="13" el="10" ec="24" />
+   <pt visit="1" pos="15" len="8" fid="2" sl="12" sc="13" el="12" ec="23" />
+   <pt visit="1" pos="23" len="3" />
+   <pt visit="1" pos="26" len="1" fid="2" sl="13" sc="13" el="13" ec="14" />
+   <pt visit="1" pos="27" len="22" fid="2" sl="14" sc="17" el="14" ec="61" />
+   <pt visit="1" pos="49" len="1" fid="2" sl="15" sc="13" el="15" ec="14" />
+   <pt visit="1" pos="50" len="2" />
+   <pt visit="0" pos="52" len="1" fid="2" sl="17" sc="13" el="17" ec="14" />
+   <pt visit="0" pos="53" len="22" fid="2" sl="18" sc="17" el="18" ec="65" />
+   <pt visit="0" pos="75" len="1" fid="2" sl="19" sc="13" el="19" ec="14" />
+   <pt visit="1" pos="76" len="1" fid="2" sl="20" sc="9" el="20" ec="10" />
+  </Method>
+  <Method name=".ctor" sig="void  ()" flags="6278" iflags="0">
+   <pt visit="1" pos="0" len="6" />
+   <pt visit="1" pos="6" len="1" />
+  </Method>
+ </Type>
+ <Type asm="Test" name="Test.TestClassNestedClass" flags="1048578">
+  <Method name="SampleFunction" sig="void  ()" flags="134" iflags="0" />
+  <Method name=".ctor" sig="void  ()" flags="6278" iflags="0" />
+ </Type>
+ <Type asm="Test" name="Test.SomeClass" flags="1048577">
+  <Method name="get_Property1" sig="string  ()" flags="2182" iflags="0">
+   <pt visit="0" pos="0" len="9" />
+   <pt visit="0" pos="9" len="2" />
+  </Method>
+  <Method name="set_Property1" sig="void  (string)" flags="2182" iflags="0">
+   <pt visit="1" pos="0" len="8" />
+  </Method>
+  <Method name=".ctor" sig="void  ()" flags="6278" iflags="0">
+   <pt visit="1" pos="0" len="6" />
+   <pt visit="1" pos="6" len="1" />
+  </Method>
+ </Type>
+ <Type asm="Test" name="Test.TestClass2&lt;&gt;c__DisplayClass3" flags="1048835">
+  <Method name=".ctor" sig="void  ()" flags="6278" iflags="0">
+   <pt visit="1" pos="0" len="6" />
+   <pt visit="1" pos="6" len="1" />
+  </Method>
+  <Method name="&lt;SampleFunction&gt;b__1" sig="bool  (string)" flags="134" iflags="0">
+   <pt visit="3" pos="0" len="16" fid="3" sl="54" sc="45" el="54" ec="95" />
+   <pt visit="3" pos="16" len="2" />
+  </Method>
+ </Type>
+ <Type asm="Test" name="Test.Program" flags="1048576">
+  <Method name="Main" sig="void  (string[])" flags="145" iflags="0">
+   <pt visit="1" pos="0" len="1" fid="1" sl="7" sc="9" el="7" ec="10" />
+   <pt visit="1" pos="1" len="11" fid="1" sl="8" sc="13" el="8" ec="46" />
+   <pt visit="1" pos="12" len="16" fid="1" sl="10" sc="13" el="10" ec="53" />
+   <pt visit="1" pos="28" len="21" fid="1" sl="11" sc="13" el="11" ec="61" />
+   <pt visit="1" pos="49" len="11" fid="1" sl="13" sc="13" el="13" ec="51" />
+   <pt visit="1" pos="60" len="11" fid="1" sl="14" sc="13" el="14" ec="51" />
+   <pt visit="1" pos="71" len="13" fid="1" sl="15" sc="13" el="15" ec="51" />
+   <pt visit="1" pos="84" len="16" fid="1" sl="17" sc="13" el="17" ec="69" />
+   <pt visit="1" pos="100" len="16" fid="1" sl="18" sc="13" el="18" ec="69" />
+   <pt visit="1" pos="116" len="16" fid="1" sl="20" sc="13" el="20" ec="48" />
+   <pt visit="1" pos="132" len="1" fid="1" sl="21" sc="9" el="21" ec="10" />
+  </Method>
+  <Method name=".ctor" sig="void  ()" flags="6278" iflags="0">
+   <pt visit="0" pos="0" len="6" />
+   <pt visit="0" pos="6" len="1" />
+  </Method>
+ </Type>
+ <Type asm="Test" name="Test.PartialClass" flags="1048576">
+  <Method name="UnExecutedMethod_1" sig="void  ()" flags="134" iflags="0">
+   <pt visit="0" pos="0" len="1" fid="4" sl="13" sc="9" el="13" ec="10" />
+   <pt visit="0" pos="1" len="11" fid="4" sl="14" sc="13" el="14" ec="39" />
+   <pt visit="0" pos="12" len="1" fid="4" sl="15" sc="9" el="15" ec="10" />
+  </Method>
+  <Method name="get_SomeProperty" sig="int  ()" flags="2182" iflags="0">
+   <pt visit="0" pos="0" len="1" fid="4" sl="21" sc="17" el="21" ec="18" />
+   <pt visit="0" pos="1" len="9" fid="4" sl="21" sc="19" el="21" ec="44" />
+   <pt visit="0" pos="10" len="2" fid="4" sl="21" sc="45" el="21" ec="46" />
+  </Method>
+  <Method name="set_SomeProperty" sig="void  (int)" flags="2182" iflags="0">
+   <pt visit="1" pos="0" len="1" fid="4" sl="24" sc="13" el="24" ec="14" />
+   <pt visit="1" pos="1" len="8" fid="4" sl="25" sc="17" el="25" ec="31" />
+   <pt visit="1" pos="9" len="3" />
+   <pt visit="1" pos="12" len="1" fid="4" sl="26" sc="17" el="26" ec="18" />
+   <pt visit="1" pos="13" len="7" fid="4" sl="27" sc="21" el="27" ec="43" />
+   <pt visit="1" pos="20" len="1" fid="4" sl="28" sc="17" el="28" ec="18" />
+   <pt visit="1" pos="21" len="2" />
+   <pt visit="0" pos="23" len="1" fid="4" sl="30" sc="17" el="30" ec="18" />
+   <pt visit="0" pos="24" len="7" fid="4" sl="31" sc="21" el="31" ec="47" />
+   <pt visit="0" pos="31" len="1" fid="4" sl="32" sc="17" el="32" ec="18" />
+   <pt visit="1" pos="32" len="1" fid="4" sl="33" sc="13" el="33" ec="14" />
+  </Method>
+  <Method name="ExecutedMethod_2" sig="void  ()" flags="134" iflags="0">
+   <pt visit="1" pos="0" len="1" fid="5" sl="8" sc="9" el="8" ec="10" />
+   <pt visit="1" pos="1" len="11" fid="5" sl="9" sc="13" el="9" ec="39" />
+   <pt visit="1" pos="12" len="1" fid="5" sl="10" sc="9" el="10" ec="10" />
+  </Method>
+  <Method name="UnExecutedMethod_2" sig="void  ()" flags="134" iflags="0">
+   <pt visit="0" pos="0" len="1" fid="5" sl="13" sc="9" el="13" ec="10" />
+   <pt visit="0" pos="1" len="11" fid="5" sl="14" sc="13" el="14" ec="39" />
+   <pt visit="0" pos="12" len="1" fid="5" sl="15" sc="9" el="15" ec="10" />
+  </Method>
+  <Method name=".ctor" sig="void  ()" flags="6278" iflags="0">
+   <pt visit="3" pos="0" len="6" />
+   <pt visit="3" pos="6" len="1" />
+  </Method>
+  <Method name="ExecutedMethod_1" sig="void  ()" flags="134" iflags="0">
+   <pt visit="1" pos="0" len="1" fid="4" sl="8" sc="9" el="8" ec="10" />
+   <pt visit="1" pos="1" len="11" fid="4" sl="9" sc="13" el="9" ec="39" />
+   <pt visit="1" pos="12" len="1" fid="4" sl="10" sc="9" el="10" ec="10" />
+  </Method>
+ </Type>
+ <Type asm="Test" name="Test.TestClass2" flags="1048576">
+  <Method name="get_UnExecutedProperty" sig="string  ()" flags="2182" iflags="0">
+   <pt visit="0" pos="0" len="9" />
+   <pt visit="0" pos="9" len="2" />
+  </Method>
+  <Method name="&lt;SampleFunction&gt;b__0" sig="int  (int)" flags="145" iflags="0">
+   <pt visit="4" pos="0" len="6" fid="3" sl="45" sc="46" el="45" ec="51" />
+   <pt visit="4" pos="6" len="2" />
+  </Method>
+  <Method name="set_UnExecutedProperty" sig="void  (string)" flags="2182" iflags="0">
+   <pt visit="0" pos="0" len="8" />
+  </Method>
+  <Method name=".ctor" sig="void  ()" flags="6278" iflags="0">
+   <pt visit="0" pos="0" len="11" fid="3" sl="11" sc="9" el="11" ec="78" />
+   <pt visit="0" pos="11" len="7" fid="3" sl="17" sc="9" el="17" ec="28" />
+   <pt visit="0" pos="18" len="1" fid="3" sl="18" sc="9" el="18" ec="10" />
+   <pt visit="0" pos="19" len="11" fid="3" sl="19" sc="13" el="19" ec="34" />
+   <pt visit="0" pos="30" len="12" fid="3" sl="20" sc="13" el="20" ec="46" />
+   <pt visit="0" pos="42" len="2" fid="3" sl="21" sc="9" el="21" ec="10" />
+  </Method>
+  <Method name=".ctor" sig="void  (string)" flags="6278" iflags="0">
+   <pt visit="2" pos="0" len="11" fid="3" sl="11" sc="9" el="11" ec="78" />
+   <pt visit="2" pos="11" len="7" fid="3" sl="23" sc="9" el="23" ec="39" />
+   <pt visit="2" pos="18" len="1" fid="3" sl="24" sc="9" el="24" ec="10" />
+   <pt visit="2" pos="19" len="7" fid="3" sl="25" sc="13" el="25" ec="30" />
+   <pt visit="2" pos="26" len="14" fid="3" sl="26" sc="13" el="26" ec="49" />
+   <pt visit="2" pos="40" len="2" fid="3" sl="27" sc="9" el="27" ec="10" />
+  </Method>
+  <Method name="ExecutedMethod" sig="void  ()" flags="134" iflags="0">
+   <pt visit="1" pos="0" len="1" fid="3" sl="30" sc="9" el="30" ec="10" />
+   <pt visit="1" pos="1" len="12" fid="3" sl="31" sc="13" el="31" ec="42" />
+   <pt visit="1" pos="13" len="12" fid="3" sl="32" sc="13" el="32" ec="54" />
+   <pt visit="1" pos="25" len="1" fid="3" sl="33" sc="9" el="33" ec="10" />
+  </Method>
+  <Method name="UnExecutedMethod" sig="void  ()" flags="134" iflags="0">
+   <pt visit="0" pos="0" len="1" fid="3" sl="36" sc="9" el="36" ec="10" />
+   <pt visit="0" pos="1" len="12" fid="3" sl="37" sc="13" el="37" ec="42" />
+   <pt visit="0" pos="13" len="12" fid="3" sl="38" sc="13" el="38" ec="54" />
+   <pt visit="0" pos="25" len="1" fid="3" sl="39" sc="9" el="39" ec="10" />
+  </Method>
+  <Method name="get_ExecutedProperty" sig="string  ()" flags="2182" iflags="0">
+   <pt visit="1" pos="0" len="9" />
+   <pt visit="1" pos="9" len="2" />
+  </Method>
+  <Method name="SampleFunction" sig="void  (string)" flags="134" iflags="0">
+   <pt visit="1" pos="0" len="15" />
+   <pt visit="1" pos="15" len="1" fid="3" sl="42" sc="9" el="42" ec="10" />
+   <pt visit="1" pos="16" len="18" fid="3" sl="43" sc="13" el="43" ec="53" />
+   <pt visit="1" pos="34" len="38" fid="3" sl="45" sc="13" el="45" ec="53" />
+   <pt visit="1" pos="72" len="1" fid="3" sl="47" sc="13" el="47" ec="20" />
+   <pt visit="1" pos="73" len="8" fid="3" sl="47" sc="34" el="47" ec="41" />
+   <pt visit="1" pos="81" len="2" />
+   <pt visit="4" pos="83" len="8" fid="3" sl="47" sc="22" el="47" ec="30" />
+   <pt visit="4" pos="91" len="1" fid="3" sl="48" sc="13" el="48" ec="14" />
+   <pt visit="4" pos="92" len="7" fid="3" sl="49" sc="17" el="49" ec="41" />
+   <pt visit="4" pos="99" len="1" fid="3" sl="50" sc="13" el="50" ec="14" />
+   <pt visit="5" pos="100" len="9" fid="3" sl="47" sc="31" el="47" ec="33" />
+   <pt visit="5" pos="109" len="26" />
+   <pt visit="1" pos="135" len="1" />
+   <pt visit="1" pos="136" len="38" fid="3" sl="52" sc="13" el="52" ec="76" />
+   <pt visit="1" pos="174" len="24" fid="3" sl="54" sc="13" el="54" ec="105" />
+   <pt visit="1" pos="198" len="4" />
+   <pt visit="1" pos="202" len="1" fid="3" sl="55" sc="13" el="55" ec="14" />
+   <pt visit="1" pos="203" len="23" fid="3" sl="56" sc="17" el="56" ec="52" />
+   <pt visit="1" pos="226" len="1" fid="3" sl="57" sc="13" el="57" ec="14" />
+   <pt visit="1" pos="227" len="2" fid="3" sl="58" sc="9" el="58" ec="10" />
+  </Method>
+  <Method name="set_ExecutedProperty" sig="void  (string)" flags="2182" iflags="0">
+   <pt visit="2" pos="0" len="8" />
+  </Method>
+  <Method name="DoSomething" sig="string  (string, string[], System.Guid, string, string, System.Decimal, int, stringint, ref int, float, double, bool, unsigned byte, char, object, byte, short, unsigned int, unsigned long, unsigned short)" flags="134" iflags="0">
+   <pt visit="0" pos="0" len="1" fid="3" sl="80" sc="9" el="80" ec="10" />
+   <pt visit="0" pos="1" len="4" fid="3" sl="81" sc="13" el="81" ec="19" />
+   <pt visit="0" pos="5" len="4" fid="3" sl="82" sc="13" el="82" ec="25" />
+   <pt visit="0" pos="9" len="2" fid="3" sl="83" sc="9" el="83" ec="10" />
+  </Method>
+ </Type>
+ <Type asm="Test" name="Test.PartialClassWithAutoProperties" flags="1048577">
+  <Method name="get_Property2" sig="string  ()" flags="2182" iflags="0">
+   <pt visit="0" pos="0" len="9" />
+   <pt visit="0" pos="9" len="2" />
+  </Method>
+  <Method name="set_Property2" sig="void  (string)" flags="2182" iflags="0">
+   <pt visit="1" pos="0" len="8" />
+  </Method>
+  <Method name="get_Property1" sig="string  ()" flags="2182" iflags="0">
+   <pt visit="0" pos="0" len="9" />
+   <pt visit="0" pos="9" len="2" />
+  </Method>
+  <Method name="set_Property1" sig="void  (string)" flags="2182" iflags="0">
+   <pt visit="1" pos="0" len="8" />
+  </Method>
+  <Method name=".ctor" sig="void  ()" flags="6278" iflags="0">
+   <pt visit="2" pos="0" len="6" />
+   <pt visit="2" pos="6" len="1" />
+  </Method>
+ </Type>
+</PartCoverReport>

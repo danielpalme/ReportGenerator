@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="coverage.xsl" type="text/xsl"?>
+<!-- saved from url=(0022)http://www.ncover.org/ -->
+<coverage profilerVersion="1.5.8 Beta" driverVersion="1.5.8.0" startTime="2011-12-12T22:44:49.7762531+01:00" measureTime="2011-12-12T22:44:49.8563683+01:00">
+  <module moduleId="2" name="C:\temp\Test.exe" assembly="Test" assemblyIdentity="Test, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null, processorArchitecture=MSIL">
+    <method name="ExecutedMethod_1" excluded="false" instrumented="true" class="Test.PartialClass">
+      <seqpnt visitcount="1" line="9" column="13" endline="9" endcolumn="39" excluded="false" document="C:\temp\PartialClass.cs" />
+      <seqpnt visitcount="1" line="10" column="9" endline="10" endcolumn="10" excluded="false" document="C:\temp\PartialClass.cs" />
+    </method>
+    <method name="ExecutedMethod_2" excluded="false" instrumented="true" class="Test.PartialClass">
+      <seqpnt visitcount="1" line="9" column="13" endline="9" endcolumn="39" excluded="false" document="C:\temp\PartialClass2.cs" />
+      <seqpnt visitcount="1" line="10" column="9" endline="10" endcolumn="10" excluded="false" document="C:\temp\PartialClass2.cs" />
+    </method>
+    <method name="UnExecutedMethod_2" excluded="false" instrumented="true" class="Test.PartialClass">
+      <seqpnt visitcount="0" line="14" column="13" endline="14" endcolumn="39" excluded="false" document="C:\temp\PartialClass2.cs" />
+      <seqpnt visitcount="0" line="15" column="9" endline="15" endcolumn="10" excluded="false" document="C:\temp\PartialClass2.cs" />
+    </method>
+    <method name="UnExecutedMethod_1" excluded="false" instrumented="true" class="Test.PartialClass">
+      <seqpnt visitcount="0" line="14" column="13" endline="14" endcolumn="39" excluded="false" document="C:\temp\PartialClass.cs" />
+      <seqpnt visitcount="0" line="15" column="9" endline="15" endcolumn="10" excluded="false" document="C:\temp\PartialClass.cs" />
+    </method>
+    <method name="get_SomeProperty" excluded="false" instrumented="true" class="Test.PartialClass">
+      <seqpnt visitcount="0" line="21" column="19" endline="21" endcolumn="44" excluded="false" document="C:\temp\PartialClass.cs" />
+      <seqpnt visitcount="0" line="21" column="45" endline="21" endcolumn="46" excluded="false" document="C:\temp\PartialClass.cs" />
+    </method>
+    <method name="set_SomeProperty" excluded="false" instrumented="true" class="Test.PartialClass">
+      <seqpnt visitcount="1" line="25" column="17" endline="25" endcolumn="31" excluded="false" document="C:\temp\PartialClass.cs" />
+      <seqpnt visitcount="1" line="27" column="21" endline="27" endcolumn="43" excluded="false" document="C:\temp\PartialClass.cs" />
+      <seqpnt visitcount="0" line="31" column="21" endline="31" endcolumn="47" excluded="false" document="C:\temp\PartialClass.cs" />
+      <seqpnt visitcount="1" line="33" column="13" endline="33" endcolumn="14" excluded="false" document="C:\temp\PartialClass.cs" />
+    </method>
+    <method name="Main" excluded="false" instrumented="true" class="Test.Program">
+      <seqpnt visitcount="1" line="8" column="13" endline="8" endcolumn="46" excluded="false" document="C:\temp\Program.cs" />
+      <seqpnt visitcount="1" line="10" column="13" endline="10" endcolumn="53" excluded="false" document="C:\temp\Program.cs" />
+      <seqpnt visitcount="1" line="11" column="13" endline="11" endcolumn="61" excluded="false" document="C:\temp\Program.cs" />
+      <seqpnt visitcount="1" line="13" column="13" endline="13" endcolumn="51" excluded="false" document="C:\temp\Program.cs" />
+      <seqpnt visitcount="1" line="14" column="13" endline="14" endcolumn="51" excluded="false" document="C:\temp\Program.cs" />
+      <seqpnt visitcount="1" line="15" column="13" endline="15" endcolumn="51" excluded="false" document="C:\temp\Program.cs" />
+      <seqpnt visitcount="1" line="17" column="13" endline="17" endcolumn="69" excluded="false" document="C:\temp\Program.cs" />
+      <seqpnt visitcount="1" line="18" column="13" endline="18" endcolumn="69" excluded="false" document="C:\temp\Program.cs" />
+      <seqpnt visitcount="1" line="20" column="13" endline="20" endcolumn="48" excluded="false" document="C:\temp\Program.cs" />
+      <seqpnt visitcount="1" line="21" column="9" endline="21" endcolumn="10" excluded="false" document="C:\temp\Program.cs" />
+    </method>
+    <method name="SampleFunction" excluded="false" instrumented="true" class="Test.TestClass">
+      <seqpnt visitcount="1" line="9" column="13" endline="9" endcolumn="47" excluded="false" document="C:\temp\TestClass.cs" />
+      <seqpnt visitcount="1" line="10" column="13" endline="10" endcolumn="24" excluded="false" document="C:\temp\TestClass.cs" />
+      <seqpnt visitcount="1" line="12" column="13" endline="12" endcolumn="23" excluded="false" document="C:\temp\TestClass.cs" />
+      <seqpnt visitcount="1" line="14" column="17" endline="14" endcolumn="61" excluded="false" document="C:\temp\TestClass.cs" />
+      <seqpnt visitcount="0" line="18" column="17" endline="18" endcolumn="65" excluded="false" document="C:\temp\TestClass.cs" />
+      <seqpnt visitcount="1" line="20" column="9" endline="20" endcolumn="10" excluded="false" document="C:\temp\TestClass.cs" />
+    </method>
+    <method name="SampleFunction" excluded="false" instrumented="false" class="Test.TestClass+NestedClass">
+      <seqpnt visitcount="0" line="25" column="13" endline="25" endcolumn="14" excluded="false" document="C:\temp\TestClass.cs" />
+      <seqpnt visitcount="0" line="26" column="17" endline="26" endcolumn="50" excluded="false" document="C:\temp\TestClass.cs" />
+      <seqpnt visitcount="0" line="27" column="13" endline="27" endcolumn="14" excluded="false" document="C:\temp\TestClass.cs" />
+    </method>
+    <method name=".ctor" excluded="false" instrumented="true" class="Test.TestClass2">
+      <seqpnt visitcount="0" line="11" column="9" endline="11" endcolumn="78" excluded="false" document="C:\temp\TestClass2.cs" />
+      <seqpnt visitcount="0" line="17" column="9" endline="17" endcolumn="28" excluded="false" document="C:\temp\TestClass2.cs" />
+      <seqpnt visitcount="0" line="19" column="13" endline="19" endcolumn="34" excluded="false" document="C:\temp\TestClass2.cs" />
+      <seqpnt visitcount="0" line="20" column="13" endline="20" endcolumn="46" excluded="false" document="C:\temp\TestClass2.cs" />
+      <seqpnt visitcount="0" line="21" column="9" endline="21" endcolumn="10" excluded="false" document="C:\temp\TestClass2.cs" />
+    </method>
+    <method name=".ctor" excluded="false" instrumented="true" class="Test.TestClass2">
+      <seqpnt visitcount="2" line="11" column="9" endline="11" endcolumn="78" excluded="false" document="C:\temp\TestClass2.cs" />
+      <seqpnt visitcount="2" line="23" column="9" endline="23" endcolumn="39" excluded="false" document="C:\temp\TestClass2.cs" />
+      <seqpnt visitcount="2" line="25" column="13" endline="25" endcolumn="30" excluded="false" document="C:\temp\TestClass2.cs" />
+      <seqpnt visitcount="2" line="26" column="13" endline="26" endcolumn="49" excluded="false" document="C:\temp\TestClass2.cs" />
+      <seqpnt visitcount="2" line="27" column="9" endline="27" endcolumn="10" excluded="false" document="C:\temp\TestClass2.cs" />
+    </method>
+    <method name="ExecutedMethod" excluded="false" instrumented="true" class="Test.TestClass2">
+      <seqpnt visitcount="1" line="31" column="13" endline="31" endcolumn="42" excluded="false" document="C:\temp\TestClass2.cs" />
+      <seqpnt visitcount="1" line="32" column="13" endline="32" endcolumn="54" excluded="false" document="C:\temp\TestClass2.cs" />
+      <seqpnt visitcount="1" line="33" column="9" endline="33" endcolumn="10" excluded="false" document="C:\temp\TestClass2.cs" />
+    </method>
+    <method name="UnExecutedMethod" excluded="false" instrumented="true" class="Test.TestClass2">
+      <seqpnt visitcount="0" line="37" column="13" endline="37" endcolumn="42" excluded="false" document="C:\temp\TestClass2.cs" />
+      <seqpnt visitcount="0" line="38" column="13" endline="38" endcolumn="54" excluded="false" document="C:\temp\TestClass2.cs" />
+      <seqpnt visitcount="0" line="39" column="9" endline="39" endcolumn="10" excluded="false" document="C:\temp\TestClass2.cs" />
+    </method>
+    <method name="SampleFunction" excluded="false" instrumented="true" class="Test.TestClass2">
+      <seqpnt visitcount="1" line="43" column="13" endline="43" endcolumn="53" excluded="false" document="C:\temp\TestClass2.cs" />
+      <seqpnt visitcount="1" line="45" column="13" endline="45" endcolumn="53" excluded="false" document="C:\temp\TestClass2.cs" />
+      <seqpnt visitcount="1" line="47" column="34" endline="47" endcolumn="41" excluded="false" document="C:\temp\TestClass2.cs" />
+      <seqpnt visitcount="4" line="47" column="22" endline="47" endcolumn="30" excluded="false" document="C:\temp\TestClass2.cs" />
+      <seqpnt visitcount="4" line="49" column="17" endline="49" endcolumn="41" excluded="false" document="C:\temp\TestClass2.cs" />
+      <seqpnt visitcount="5" line="47" column="31" endline="47" endcolumn="33" excluded="false" document="C:\temp\TestClass2.cs" />
+      <seqpnt visitcount="1" line="52" column="13" endline="52" endcolumn="76" excluded="false" document="C:\temp\TestClass2.cs" />
+      <seqpnt visitcount="1" line="54" column="13" endline="54" endcolumn="105" excluded="false" document="C:\temp\TestClass2.cs" />
+      <seqpnt visitcount="1" line="56" column="17" endline="56" endcolumn="52" excluded="false" document="C:\temp\TestClass2.cs" />
+      <seqpnt visitcount="1" line="58" column="9" endline="58" endcolumn="10" excluded="false" document="C:\temp\TestClass2.cs" />
+    </method>
+    <method name="&lt;SampleFunction&gt;b__0" excluded="false" instrumented="true" class="Test.TestClass2">
+      <seqpnt visitcount="4" line="45" column="46" endline="45" endcolumn="51" excluded="false" document="C:\temp\TestClass2.cs" />
+    </method>
+    <method name="DoSomething" excluded="false" instrumented="true" class="Test.TestClass2">
+      <seqpnt visitcount="0" line="81" column="13" endline="81" endcolumn="19" excluded="false" document="C:\temp\TestClass2.cs" />
+      <seqpnt visitcount="0" line="82" column="13" endline="82" endcolumn="25" excluded="false" document="C:\temp\TestClass2.cs" />
+      <seqpnt visitcount="0" line="83" column="9" endline="83" endcolumn="10" excluded="false" document="C:\temp\TestClass2.cs" />
+    </method>
+    <method name="&lt;SampleFunction&gt;b__1" excluded="false" instrumented="true" class="Test.TestClass2+&lt;&gt;c__DisplayClass3">
+      <seqpnt visitcount="3" line="54" column="45" endline="54" endcolumn="95" excluded="false" document="C:\temp\TestClass2.cs" />
+    </method>
+  </module>
+</coverage>
