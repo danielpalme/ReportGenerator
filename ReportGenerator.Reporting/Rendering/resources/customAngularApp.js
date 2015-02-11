@@ -58,12 +58,12 @@ function DetailViewCtrl($scope) {
                 if (lineAnalysis.LVS !== 'gray') {
                     cells[0].setAttribute('class', 'red');
                     cells[1].innerText = '0';
-                    cells[3].setAttribute('class', 'lightred');
+                    cells[4].setAttribute('class', 'lightred');
                 }
             } else {
                 cells[0].setAttribute('class', lineAnalysis.LVS);
                 cells[1].innerText = lineAnalysis.VC;
-                cells[3].setAttribute('class', 'light' + lineAnalysis.LVS);
+                cells[4].setAttribute('class', 'light' + lineAnalysis.LVS);
             }
         }
     };
