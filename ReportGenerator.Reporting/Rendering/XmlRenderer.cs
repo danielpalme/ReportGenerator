@@ -67,7 +67,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// <param name="text">The text.</param>
         public void Header(string text)
         {
-            this.reportTextWriter.WriteStartElement(XmlRenderer.ReplaceInvalidXmlChars(text));
+            this.reportTextWriter.WriteStartElement(XmlRenderer.ReplaceNonLetterChars(text));
         }
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// <param name="value">The text of the second column.</param>
         public void KeyValueRow(string key, string value)
         {
-            this.reportTextWriter.WriteStartElement(XmlRenderer.ReplaceInvalidXmlChars(key));
+            this.reportTextWriter.WriteStartElement(XmlRenderer.ReplaceNonLetterChars(key));
             this.reportTextWriter.WriteValue(value);
             this.reportTextWriter.WriteEndElement();
         }
@@ -150,7 +150,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                 throw new ArgumentNullException("files");
             }
 
-            this.reportTextWriter.WriteStartElement(XmlRenderer.ReplaceInvalidXmlChars(key));
+            this.reportTextWriter.WriteStartElement(XmlRenderer.ReplaceNonLetterChars(key));
 
             foreach (var file in files)
             {
@@ -173,11 +173,11 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                 throw new ArgumentNullException("metric");
             }
 
-            this.reportTextWriter.WriteStartElement(XmlRenderer.ReplaceInvalidXmlChars(metric.ShortName));
+            this.reportTextWriter.WriteStartElement(XmlRenderer.ReplaceNonLetterChars(metric.ShortName));
 
             foreach (var m in metric.Metrics)
             {
-                this.reportTextWriter.WriteStartElement(XmlRenderer.ReplaceInvalidXmlChars(m.Name));
+                this.reportTextWriter.WriteStartElement(XmlRenderer.ReplaceNonLetterChars(m.Name));
                 this.reportTextWriter.WriteValue(m.Value.ToString(CultureInfo.InvariantCulture));
                 this.reportTextWriter.WriteEndElement();
             }
@@ -200,7 +200,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             this.reportTextWriter.WriteAttributeString("line", analysis.LineNumber.ToString(CultureInfo.InvariantCulture));
             this.reportTextWriter.WriteAttributeString("visits", analysis.LineVisits.ToString(CultureInfo.InvariantCulture));
             this.reportTextWriter.WriteAttributeString("coverage", analysis.LineVisitStatus.ToString());
-            this.reportTextWriter.WriteAttributeString("content", analysis.LineContent);
+            this.reportTextWriter.WriteAttributeString("content", XmlRenderer.ReplaceInvalidXmlChars(analysis.LineContent));
             this.reportTextWriter.WriteEndElement();
         }
 

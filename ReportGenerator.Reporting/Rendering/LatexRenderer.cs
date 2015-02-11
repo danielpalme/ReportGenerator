@@ -295,6 +295,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                 .Replace("~", " "); // replace '~' since this used for the \verb command
 
             formattedLine = ShortenString(formattedLine);
+            formattedLine = XmlRenderer.ReplaceInvalidXmlChars(formattedLine);
 
             string lineVisitStatus = "gray";
 
