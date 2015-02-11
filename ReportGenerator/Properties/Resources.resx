@@ -169,7 +169,7 @@
     <value>File '{0}' does not exist (any more).</value>
   </data>
   <data name="FileLoadError" xml:space="preserve">
-    <value>Failed to load file '{0}'. Please unblock all files in installation directory. See https://reportgenerator.codeplex.com/wikipage?title=FAQ#FileLoadException for details.</value>
+    <value>Failed to load file '{0}'. Please unblock all files in installation directory. See https://github.com/danielpalme/ReportGenerator/wiki/FAQ#i-get-a-fileloadexception-when-executing-reportgenerator-how-can-i-fix-this for details.</value>
   </data>
   <data name="HistoryDirectoryCouldNotBeCreated" xml:space="preserve">
     <value>The history directory '{0}' could not be created: {1}</value>
