@@ -54,6 +54,12 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+2.1.1.0
+
+    * Fix: Issue #2: HTML class report: Select test method does not update page 
+           correctly
+    * Fix: Issue #1: Handling of invalid XML characters
+
 2.1.0.0
 
     * New: Trend/History charts of line and branch coverage
