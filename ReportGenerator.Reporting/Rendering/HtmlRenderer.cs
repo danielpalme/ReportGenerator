@@ -193,16 +193,13 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         {
             this.reportTextWriter.WriteLine("<div data-ng-if=\"filteringEnabled\" data-reactive-table data-data=\"assemblies\"></div>");
 
-            string html = string.Format(
-                CultureInfo.InvariantCulture,
-                "<div class=\"customizebox\"><input data-ng-click=\"enableFiltering()\" value=\"{0}\" title=\"{1}\" type=\"submit\" /></div>",
+            this.reportTextWriter.WriteLine("<div data-ng-if=\"!filteringEnabled\">");
+            this.reportTextWriter.WriteLine("<div id=\"filterButtonContainer\" class=\"customizebox\" style=\"display: none;\"><input data-ng-click=\"enableFiltering()\" value=\"{0}\" title=\"{1}\" type=\"submit\" /></div>",
                 ReportResources.ShowCustomizeBox,
                 ReportResources.ShowCustomizeBoxHelp);
-
-            this.reportTextWriter.WriteLine("<div data-ng-if=\"!filteringEnabled\">");
             this.reportTextWriter.WriteLine("<script type=\"text/javascript\">");
             this.reportTextWriter.WriteLine("/* <![CDATA[ */");
-            this.reportTextWriter.WriteLine("document.write('{0}');", html);
+            this.reportTextWriter.WriteLine("document.getElementById('filterButtonContainer').style.display = 'block';");
             this.reportTextWriter.WriteLine("/* ]]> */");
             this.reportTextWriter.WriteLine("</script>");
             this.reportTextWriter.WriteLine("</div>");

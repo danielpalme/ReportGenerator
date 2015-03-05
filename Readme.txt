@@ -54,6 +54,11 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+2.1.2.0
+
+    * Fix: Issue #7: Improved Filter button handling
+    * Fix: Issue #6: Removed reference to JS map
+    
 2.1.1.0
 
     * Fix: Issue #2: HTML class report: Select test method does not update page 
