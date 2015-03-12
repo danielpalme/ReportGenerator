@@ -35,11 +35,6 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// </summary>
         /// <param name="assemblies">The assemblies.</param>
         /// <param name="historyDirectory">The history directory.</param>
-        /// <exception cref="System.ArgumentNullException">
-        /// assemblies
-        /// or
-        /// parser
-        /// </exception>
         internal HistoryParser(IEnumerable<Assembly> assemblies, string historyDirectory)
         {
             if (assemblies == null)

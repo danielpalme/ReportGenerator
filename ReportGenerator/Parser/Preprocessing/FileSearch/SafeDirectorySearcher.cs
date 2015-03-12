@@ -35,6 +35,10 @@ namespace Palmmedia.ReportGenerator.Parser.Preprocessing.FileSearch
             {
                 return Enumerable.Empty<string>();
             }
+            catch (IOException)
+            {
+                return Enumerable.Empty<string>();
+            }
         }
     }
 }

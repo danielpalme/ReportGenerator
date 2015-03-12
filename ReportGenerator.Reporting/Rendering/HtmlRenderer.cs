@@ -194,7 +194,8 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             this.reportTextWriter.WriteLine("<div data-ng-if=\"filteringEnabled\" data-reactive-table data-data=\"assemblies\"></div>");
 
             this.reportTextWriter.WriteLine("<div data-ng-if=\"!filteringEnabled\">");
-            this.reportTextWriter.WriteLine("<div id=\"filterButtonContainer\" class=\"customizebox\" style=\"display: none;\"><input data-ng-click=\"enableFiltering()\" value=\"{0}\" title=\"{1}\" type=\"submit\" /></div>",
+            this.reportTextWriter.WriteLine(
+                "<div id=\"filterButtonContainer\" class=\"customizebox\" style=\"display: none;\"><input data-ng-click=\"enableFiltering()\" value=\"{0}\" title=\"{1}\" type=\"submit\" /></div>",
                 ReportResources.ShowCustomizeBox,
                 ReportResources.ShowCustomizeBoxHelp);
             this.reportTextWriter.WriteLine("<script type=\"text/javascript\">");
