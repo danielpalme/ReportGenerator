@@ -54,9 +54,15 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+2.1.4.0
+
+    * New: Improved log message for custom report plugins
+    * Fix: Issue #10: Better handling of file references for older OpenCover
+           versions
+
 2.1.3.0
 
-    * Fix: Issue #3: Better handling of PathTooLongExceptions
+    * Fix: Issue #8: Better handling of PathTooLongExceptions
 
 2.1.2.0
 

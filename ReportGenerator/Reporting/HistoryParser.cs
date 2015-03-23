@@ -44,7 +44,7 @@ namespace Palmmedia.ReportGenerator.Reporting
 
             if (historyDirectory == null)
             {
-                throw new ArgumentNullException("parser");
+                throw new ArgumentNullException("historyDirectory");
             }
 
             this.assemblies = assemblies;

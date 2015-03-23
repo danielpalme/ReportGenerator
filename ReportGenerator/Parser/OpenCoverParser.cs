@@ -228,10 +228,8 @@ namespace Palmmedia.ReportGenerator.Parser
                 .Select(seqpnt => seqpnt.Attribute("fileid").Value)
                 .ToArray();
 
-            // Only required for backwards compatiability, older versions of OpenCover did not apply fileid for partial classes
+            // Only required for backwards compatibility, older versions of OpenCover did not apply fileid for partial classes
             var fileIdsOfClassInFileRef = methods
-                .Elements("SequencePoints")
-                .Elements("SequencePoint")
                 .Where(m => m.Element("FileRef") != null)
                 .Select(m => m.Element("FileRef").Attribute("uid").Value)
                 .ToArray();

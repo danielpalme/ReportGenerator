@@ -116,8 +116,14 @@ namespace Palmmedia.ReportGenerator.Reporting
                     Logger.ErrorFormat(Resources.FileLoadError, file.FullName);
                     throw;
                 }
-                catch (ReflectionTypeLoadException)
+                catch (ReflectionTypeLoadException ex)
                 {
+                    if (!file.Name.Equals("ICSharpCode.NRefactory.Cecil.dll", StringComparison.OrdinalIgnoreCase))
+                    {
+                        string errors = string.Join(Environment.NewLine, ex.LoaderExceptions.Select(e => "-" + e.Message));
+                        Logger.ErrorFormat(Resources.FileReflectionLoadError, file.FullName, errors);
+                    }
+
                     // Ignore assemblies that throw this exception
                 }
             }

@@ -223,6 +223,16 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to load file &apos;{0}&apos;. Errors:
+        ///{1}.
+        /// </summary>
+        internal static string FileReflectionLoadError {
+            get {
+                return ResourceManager.GetString("FileReflectionLoadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The history directory &apos;{0}&apos; could not be created: {1}.
         /// </summary>
         internal static string HistoryDirectoryCouldNotBeCreated {
