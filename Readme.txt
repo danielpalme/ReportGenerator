@@ -54,6 +54,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+2.1.5.0
+
+    * Fix: Issue #16: Optimized CSS for printing HTML report
+
 2.1.4.0
 
     * New: Improved log message for custom report plugins
