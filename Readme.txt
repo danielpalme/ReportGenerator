@@ -54,6 +54,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+2.1.6.0
+
+    * Fix: Issue #18: Improved handling of nested classes
+    
 2.1.5.0
 
     * Fix: Issue #16: Optimized CSS for printing HTML report

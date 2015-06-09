@@ -188,9 +188,13 @@ namespace Palmmedia.ReportGenerator.Parser
                 .Elements("Class")
                 .Where(c => !c.Element("FullName").Value.Contains("__")
                     && !c.Element("FullName").Value.Contains("<")
-                    && !c.Element("FullName").Value.Contains("/")
                     && c.Attribute("skippedDueTo") == null)
-                .Select(c => c.Element("FullName").Value)
+                .Select(c =>
+                    {
+                        string fullname = c.Element("FullName").Value;
+                        int nestedClassSeparatorIndex = fullname.IndexOf('/');
+                        return nestedClassSeparatorIndex > -1 ? fullname.Substring(0, nestedClassSeparatorIndex) : fullname;
+                    })
                 .Distinct()
                 .OrderBy(name => name)
                 .ToArray();
