@@ -184,8 +184,8 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Analysis
             Assert.IsNotNull(fileAnalysis);
             Assert.IsNull(fileAnalysis.Error);
             Assert.AreEqual(fileAnalysis.Path, fileAnalysis.Path);
-            Assert.AreEqual(56, sut.TotalLines);
-            Assert.AreEqual(56, fileAnalysis.Lines.Count());
+            Assert.AreEqual(84, sut.TotalLines);
+            Assert.AreEqual(84, fileAnalysis.Lines.Count());
 
             Assert.AreEqual(1, fileAnalysis.Lines.ElementAt(0).LineNumber);
             Assert.AreEqual(-1, fileAnalysis.Lines.ElementAt(0).LineVisits);

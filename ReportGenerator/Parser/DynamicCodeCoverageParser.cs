@@ -54,10 +54,13 @@ namespace Palmmedia.ReportGenerator.Parser
                 .Elements("functions")
                 .Elements("function")
                 .Select(f => f.Attribute("type_name").Value)
-                .Where(c => !c.Contains("__")
-                    && !c.Contains("<>")
-                    && !c.Contains(".")
+                .Where(c => !c.Contains("<>")
                     && !c.StartsWith("$", StringComparison.OrdinalIgnoreCase))
+                .Select(t =>
+                {
+                    int nestedClassSeparatorIndex = t.IndexOf('.');
+                    return nestedClassSeparatorIndex > -1 ? t.Substring(0, nestedClassSeparatorIndex) : t;
+                })
                 .Distinct()
                 .OrderBy(name => name)
                 .ToArray();
@@ -81,7 +84,8 @@ namespace Palmmedia.ReportGenerator.Parser
             var fileIdsOfClass = module
                 .Elements("functions")
                 .Elements("function")
-                .Where(c => c.Attribute("type_name").Value.Equals(className))
+                .Where(c => c.Attribute("type_name").Value.Equals(className, StringComparison.Ordinal)
+                            || c.Attribute("type_name").Value.StartsWith(className + ".", StringComparison.Ordinal))
                 .Elements("ranges")
                 .Elements("range")
                 .Select(r => r.Attribute("source_id").Value)

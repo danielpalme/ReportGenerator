@@ -104,11 +104,15 @@ namespace Palmmedia.ReportGenerator.Parser
                 .Elements("NamespaceTable")
                 .Elements("Class")
                 .Elements("ClassName")
-                .Where(c => !c.Value.Contains("__")
-                    && !c.Value.Contains("<>")
-                    && !c.Value.Contains(".")
+                .Where(c => !c.Value.Contains("<>")
                     && !c.Value.StartsWith("$", StringComparison.OrdinalIgnoreCase))
-                .Select(c => c.Parent.Parent.Element("NamespaceName").Value + "." + c.Value)
+                .Select(c =>
+                {
+                    string fullname = c.Value;
+                    int nestedClassSeparatorIndex = fullname.IndexOf('.');
+                    fullname = nestedClassSeparatorIndex > -1 ? fullname.Substring(0, nestedClassSeparatorIndex) : fullname;
+                    return c.Parent.Parent.Element("NamespaceName").Value + "." + fullname;
+                })
                 .Distinct()
                 .OrderBy(name => name)
                 .ToArray();
@@ -132,7 +136,8 @@ namespace Palmmedia.ReportGenerator.Parser
                 .Where(m => m.Element("ModuleName").Value.Equals(assembly.Name))
                 .Elements("NamespaceTable")
                 .Elements("Class")
-                .Where(c => (c.Parent.Element("NamespaceName").Value + "." + c.Element("ClassName").Value).Equals(className))
+                .Where(c => (c.Parent.Element("NamespaceName").Value + "." + c.Element("ClassName").Value).Equals(className, StringComparison.Ordinal)
+                            || (c.Parent.Element("NamespaceName").Value + "." + c.Element("ClassName").Value).StartsWith(className + ".", StringComparison.Ordinal))
                 .Elements("Method")
                 .Elements("Lines")
                 .Elements("SourceFileID")

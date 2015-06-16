@@ -54,6 +54,11 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+2.1.7.0
+
+    * Fix: Issue #19: Changed Nuget package structure to support VS 2015
+    * Fix: Issue #20: Improved handling of classes with all async/await methods
+
 2.1.6.0
 
     * Fix: Issue #18: Improved handling of nested classes

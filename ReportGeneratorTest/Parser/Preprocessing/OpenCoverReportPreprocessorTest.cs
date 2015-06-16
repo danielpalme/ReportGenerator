@@ -49,7 +49,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Preprocessing
             var classSearcherFactory = new ClassSearcherFactory();
             new OpenCoverReportPreprocessor(report, classSearcherFactory, new ClassSearcher(string.Empty)).Execute();
 
-            Assert.AreEqual(14, report.Descendants("File").Count(), "Wrong number of total files.");
+            Assert.AreEqual(15, report.Descendants("File").Count(), "Wrong number of total files.");
 
             var gettersAndSetters = report.Descendants("Class")
                 .Single(c => c.Element("FullName") != null && c.Element("FullName").Value == "Test.TestClass2")

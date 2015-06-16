@@ -168,7 +168,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [TestMethod]
         public void NumberOfFilesTest()
         {
-            Assert.AreEqual(11, assembliesWithoutPreprocessing.SelectMany(a => a.Classes).SelectMany(a => a.Files).Distinct().Count(), "Wrong number of files");
+            Assert.AreEqual(12, assembliesWithoutPreprocessing.SelectMany(a => a.Classes).SelectMany(a => a.Files).Distinct().Count(), "Wrong number of files");
         }
 
         /// <summary>
@@ -187,7 +187,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [TestMethod]
         public void ClassesInAssemblyTest()
         {
-            Assert.AreEqual(16, assembliesWithoutPreprocessing.SelectMany(a => a.Classes).Count(), "Wrong number of classes");
+            Assert.AreEqual(17, assembliesWithoutPreprocessing.SelectMany(a => a.Classes).Count(), "Wrong number of classes");
         }
 
         /// <summary>

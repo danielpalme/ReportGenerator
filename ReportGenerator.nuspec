@@ -16,14 +16,14 @@
     <tags>Code Coverage Reporting Testing</tags>
   </metadata>
   <files>
-    <file src="target\bin\ICSharpCode.NRefactory.dll" target="ICSharpCode.NRefactory.dll" />
-    <file src="target\bin\ICSharpCode.NRefactory.CSharp.dll" target="ICSharpCode.NRefactory.CSharp.dll" />
+    <file src="target\bin\ICSharpCode.NRefactory.dll" target="tools" />
+    <file src="target\bin\ICSharpCode.NRefactory.CSharp.dll" target="tools" />
+    <file src="target\bin\log4net.dll" target="tools" />
+    <file src="target\bin\ReportGenerator.exe" target="tools" />
+    <file src="target\bin\ReportGenerator.XML" target="tools" />
+    <file src="target\bin\ReportGenerator.Reporting.dll" target="tools" />
+    <file src="target\bin\ReportGenerator.Reporting.XML" target="tools" />
     <file src="target\bin\LICENSE.txt" target="LICENSE.txt" />
-    <file src="target\bin\log4net.dll" target="log4net.dll" />
     <file src="target\bin\Readme.txt" target="Readme.txt" />
-    <file src="target\bin\ReportGenerator.exe" target="ReportGenerator.exe" />
-    <file src="target\bin\ReportGenerator.XML" target="ReportGenerator.XML" />
-    <file src="target\bin\ReportGenerator.Reporting.dll" target="ReportGenerator.Reporting.dll" />
-    <file src="target\bin\ReportGenerator.Reporting.XML" target="ReportGenerator.Reporting.XML" />
   </files>
 </package>
