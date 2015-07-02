@@ -54,6 +54,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+2.1.8.0
+
+    * Fix: Issue #22: Correct order of historic coverage information
+
 2.1.7.0
 
     * Fix: Issue #19: Changed Nuget package structure to support VS 2015

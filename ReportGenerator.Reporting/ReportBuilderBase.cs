@@ -240,7 +240,8 @@ namespace Palmmedia.ReportGenerator.Reporting
 
             var executionTimes = historicCoverages
                 .Select(h => h.ExecutionTime)
-                .Distinct();
+                .Distinct()
+                .OrderBy(e => e);
 
             var result = new List<HistoricCoverage>();
 

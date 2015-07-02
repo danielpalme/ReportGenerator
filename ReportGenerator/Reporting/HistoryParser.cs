@@ -58,7 +58,7 @@ namespace Palmmedia.ReportGenerator.Reporting
         {
             Logger.Info(Resources.ReadingHistoricReports);
 
-            foreach (var file in Directory.EnumerateFiles(this.historyDirectory, "*_CoverageHistory.xml"))
+            foreach (var file in Directory.EnumerateFiles(this.historyDirectory, "*_CoverageHistory.xml").OrderBy(f => f))
             {
                 try
                 {
