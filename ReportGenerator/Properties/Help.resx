@@ -130,6 +130,9 @@
     <value>Reports: The coverage reports that should be parsed (separated by semicolon). Wildcards are allowed.</value>
   </data>
   <data name="Explanations10" xml:space="preserve">
+    <value>         Exclusion filters take precedence over inclusion filters. Wildcards are allowed.</value>
+  </data>
+  <data name="Explanations11" xml:space="preserve">
     <value>Verbosity: The verbosity level of the log messages.</value>
   </data>
   <data name="Explanations2" xml:space="preserve">
@@ -154,7 +157,7 @@
     <value>Filters: Optional list of assemblies that should be included or excluded in the report.</value>
   </data>
   <data name="Explanations9" xml:space="preserve">
-    <value>         Exclusion filters take precedence over inclusion filters. Wildcards are allowed.</value>
+    <value>Filters: Optional list of classes that should be included or excluded in the report.</value>
   </data>
   <data name="Parameters" xml:space="preserve">
     <value>Parameters:</value>
@@ -175,9 +178,12 @@
     <value>[[\"]-historydir:&lt;history directory&gt;[\"]]</value>
   </data>
   <data name="Parameters6" xml:space="preserve">
-    <value>[[\"]-filters:&lt;(+|-)filter&gt;[;&lt;(+|-)filter&gt;][;&lt;(+|-)filter&gt;][\"]]</value>
+    <value>[[\"]-assemblyfilters:&lt;(+|-)filter&gt;[;&lt;(+|-)filter&gt;][;&lt;(+|-)filter&gt;][\"]]</value>
   </data>
   <data name="Parameters7" xml:space="preserve">
+    <value>[[\"]-classfilters:&lt;(+|-)filter&gt;[;&lt;(+|-)filter&gt;][;&lt;(+|-)filter&gt;][\"]]</value>
+  </data>
+  <data name="Parameters8" xml:space="preserve">
     <value>[[\"]-verbosity:&lt;{0}&gt;[\"]]</value>
   </data>
   <data name="ReportTypeValues" xml:space="preserve">

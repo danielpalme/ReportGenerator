@@ -37,12 +37,18 @@ namespace Palmmedia.ReportGenerator.Reporting
         private readonly IAssemblyFilter assemblyFilter;
 
         /// <summary>
+        /// The class filter.
+        /// </summary>
+        private readonly IClassFilter classFilter;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ReportGenerator" /> class.
         /// </summary>
         /// <param name="parser">The IParser to use.</param>
         /// <param name="assemblyFilter">The assembly filter.</param>
+        /// <param name="classFilter">The class filter.</param>
         /// <param name="renderers">The renderers.</param>
-        internal ReportGenerator(IParser parser, IAssemblyFilter assemblyFilter, IEnumerable<IReportBuilder> renderers)
+        internal ReportGenerator(IParser parser, IAssemblyFilter assemblyFilter, IClassFilter classFilter, IEnumerable<IReportBuilder> renderers)
         {
             if (parser == null)
             {
@@ -54,6 +60,11 @@ namespace Palmmedia.ReportGenerator.Reporting
                 throw new ArgumentNullException("assemblyFilter");
             }
 
+            if (classFilter == null)
+            {
+                throw new ArgumentNullException("classFilter");
+            }
+
             if (renderers == null)
             {
                 throw new ArgumentNullException("renderers");
@@ -61,6 +72,7 @@ namespace Palmmedia.ReportGenerator.Reporting
 
             this.parser = parser;
             this.assemblyFilter = assemblyFilter;
+            this.classFilter = classFilter;
             this.renderers = renderers;
         }
 
@@ -72,7 +84,19 @@ namespace Palmmedia.ReportGenerator.Reporting
         internal void CreateReport(bool addHistoricCoverage, DateTime executionTime)
         {
             var filteredAssemblies = this.parser.Assemblies
-                .Where(a => this.assemblyFilter.IsAssemblyIncludedInReport(a.Name));
+                .Where(a => this.assemblyFilter.IsAssemblyIncludedInReport(a.Name))
+                .Select(a =>
+                {
+                    var newAssembly = new Assembly(a.Name);
+                    foreach (var @class in a.Classes)
+                    {
+                        if (classFilter.IsClassIncludedInReport(@class.Name))
+                        {
+                            newAssembly.AddClass(@class);
+                        }
+                    }
+                    return newAssembly;
+                });
 
             int numberOfClasses = filteredAssemblies.Sum(a => a.Classes.Count());
 

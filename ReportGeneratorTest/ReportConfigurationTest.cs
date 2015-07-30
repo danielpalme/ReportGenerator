@@ -49,7 +49,8 @@ namespace Palmmedia.ReportGeneratorTest
         {
             Assert.IsNotNull(this.configuration.ReportFiles);
             Assert.IsNotNull(this.configuration.SourceDirectories);
-            Assert.IsNotNull(this.configuration.Filters);
+            Assert.IsNotNull(this.configuration.AssemblyFilters);
+            Assert.IsNotNull(this.configuration.ClassFilters);
         }
 
         #endregion
@@ -65,6 +66,7 @@ namespace Palmmedia.ReportGeneratorTest
                 new string[] { },
                 new string[] { },
                 new string[] { },
+                new string[] { },
                 string.Empty);
 
             Assert.IsTrue(this.configuration.ReportFiles.Contains(ReportPath), "ReportPath does not exist in ReportFiles.");
@@ -72,7 +74,8 @@ namespace Palmmedia.ReportGeneratorTest
             Assert.AreEqual("C:\\temp\\historic", this.configuration.HistoryDirectory, "Wrong target directory applied.");
             Assert.IsTrue(this.configuration.ReportTypes.Contains("Html"), "Wrong report type applied.");
             Assert.AreEqual(0, this.configuration.SourceDirectories.Count(), "Wrong number of source directories.");
-            Assert.AreEqual(0, this.configuration.Filters.Count(), "Wrong number of filters.");
+            Assert.AreEqual(0, this.configuration.AssemblyFilters.Count(), "Wrong number of AssemblyFilters.");
+            Assert.AreEqual(0, this.configuration.ClassFilters.Count(), "Wrong number of ClassFilters.");
             Assert.AreEqual(VerbosityLevel.Verbose, this.configuration.VerbosityLevel, "Wrong verbosity level applied.");
         }
 
@@ -87,6 +90,7 @@ namespace Palmmedia.ReportGeneratorTest
                 new[] { "Latex", "Xml", "Html" },
                 new[] { FileManager.GetCSharpCodeDirectory() },
                 new[] { "+Test", "-Test" },
+                new[] { "+Test2", "-Test2" },
                 VerbosityLevel.Info.ToString());
 
             Assert.IsTrue(this.configuration.ReportFiles.Contains(ReportPath), "ReportPath does not exist in ReportFiles.");
@@ -95,8 +99,10 @@ namespace Palmmedia.ReportGeneratorTest
             Assert.IsTrue(this.configuration.ReportTypes.Contains("Xml"), "Wrong report type applied.");
             Assert.IsTrue(this.configuration.ReportTypes.Contains("Html"), "Wrong report type applied.");
             Assert.IsTrue(this.configuration.SourceDirectories.Contains(FileManager.GetCSharpCodeDirectory()), "Directory does not exist in Source directories.");
-            Assert.IsTrue(this.configuration.Filters.Contains("+Test"), "Filter does not exist in ReportFiles.");
-            Assert.IsTrue(this.configuration.Filters.Contains("-Test"), "Filter does not exist in ReportFiles.");
+            Assert.IsTrue(this.configuration.AssemblyFilters.Contains("+Test"), "AssemblyFilters does not exist in ReportFiles.");
+            Assert.IsTrue(this.configuration.AssemblyFilters.Contains("-Test"), "AssemblyFilters does not exist in ReportFiles.");
+            Assert.IsTrue(this.configuration.ClassFilters.Contains("+Test2"), "ClassFilters does not exist in ReportFiles.");
+            Assert.IsTrue(this.configuration.ClassFilters.Contains("-Test2"), "ClassFilters does not exist in ReportFiles.");
             Assert.AreEqual(VerbosityLevel.Info, this.configuration.VerbosityLevel, "Wrong verbosity level applied.");
         }
 
@@ -123,6 +129,7 @@ namespace Palmmedia.ReportGeneratorTest
                 new[] { "Latex" },
                 new[] { FileManager.GetCSharpCodeDirectory() },
                 new[] { "+Test", "-Test" },
+                new[] { "+Test2", "-Test2" },
                 VerbosityLevel.Info.ToString());
 
             Assert.IsFalse(this.configuration.Validate(), "Validation should fail.");
@@ -139,6 +146,7 @@ namespace Palmmedia.ReportGeneratorTest
                 new[] { "Latex" },
                 new[] { FileManager.GetCSharpCodeDirectory() },
                 new[] { "+Test", "-Test" },
+                new[] { "+Test2", "-Test2" },
                 VerbosityLevel.Info.ToString());
 
             Assert.IsFalse(this.configuration.Validate(), "Validation should fail.");
@@ -155,6 +163,7 @@ namespace Palmmedia.ReportGeneratorTest
                 new[] { "Latex" },
                 new[] { FileManager.GetCSharpCodeDirectory() },
                 new[] { "+Test", "-Test" },
+                new[] { "+Test2", "-Test2" },
                 VerbosityLevel.Info.ToString());
 
             Assert.IsFalse(this.configuration.Validate(), "Validation should fail.");
@@ -171,6 +180,7 @@ namespace Palmmedia.ReportGeneratorTest
                 new[] { "Latex" },
                 new[] { FileManager.GetCSharpCodeDirectory() },
                 new[] { "+Test", "-Test" },
+                new[] { "+Test2", "-Test2" },
                 VerbosityLevel.Info.ToString());
 
             Assert.IsFalse(this.configuration.Validate(), "Validation should fail.");
@@ -187,6 +197,7 @@ namespace Palmmedia.ReportGeneratorTest
                 new[] { "Latex" },
                 new[] { FileManager.GetCSharpCodeDirectory() },
                 new[] { "+Test", "-Test" },
+                new[] { "+Test2", "-Test2" },
                 VerbosityLevel.Info.ToString());
 
             Assert.IsFalse(this.configuration.Validate(), "Validation should fail.");
@@ -203,6 +214,7 @@ namespace Palmmedia.ReportGeneratorTest
                 new[] { "DoesNotExist" },
                 new[] { FileManager.GetCSharpCodeDirectory() },
                 new[] { "+Test", "-Test" },
+                new[] { "+Test2", "-Test2" },
                 VerbosityLevel.Info.ToString());
 
             Assert.IsFalse(this.configuration.Validate(), "Validation should fail.");
@@ -219,6 +231,7 @@ namespace Palmmedia.ReportGeneratorTest
                 new[] { "Latex" },
                 new[] { Path.Combine(FileManager.GetCSharpCodeDirectory(), "123456") },
                 new[] { "+Test", "-Test" },
+                new[] { "+Test2", "-Test2" },
                 VerbosityLevel.Info.ToString());
 
             Assert.IsFalse(this.configuration.Validate(), "Validation should fail.");
@@ -235,6 +248,7 @@ namespace Palmmedia.ReportGeneratorTest
                 new[] { "Latex" },
                 new[] { FileManager.GetCSharpCodeDirectory() },
                 new[] { "Test" },
+                new[] { "Test2" },
                 VerbosityLevel.Info.ToString());
 
             Assert.IsFalse(this.configuration.Validate(), "Validation should fail.");

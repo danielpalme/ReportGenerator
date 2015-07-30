@@ -49,7 +49,8 @@ namespace Palmmedia.ReportGeneratorTest
         {
             Assert.IsNotNull(this.configuration.ReportFiles);
             Assert.IsNotNull(this.configuration.SourceDirectories);
-            Assert.IsNotNull(this.configuration.Filters);
+            Assert.IsNotNull(this.configuration.AssemblyFilters);
+            Assert.IsNotNull(this.configuration.ClassFilters);
         }
 
         #endregion
@@ -70,7 +71,8 @@ namespace Palmmedia.ReportGeneratorTest
             Assert.AreEqual("C:\\temp", this.configuration.TargetDirectory, "Wrong target directory applied.");
             Assert.IsTrue(this.configuration.ReportTypes.Contains("Latex"), "Wrong report type applied.");
             Assert.IsFalse(this.configuration.SourceDirectories.Any(), "Source directories should be empty.");
-            Assert.IsFalse(this.configuration.Filters.Any(), "Filters should be empty.");
+            Assert.IsFalse(this.configuration.AssemblyFilters.Any(), "AssemblyFilters should be empty.");
+            Assert.IsFalse(this.configuration.ClassFilters.Any(), "ClassFilters should be empty.");
         }
 
         [TestMethod]
@@ -82,7 +84,8 @@ namespace Palmmedia.ReportGeneratorTest
                 "-targetdir:C:\\temp",
                 "-reporttype:Latex",
                 "-sourcedirs:C:\\temp\\source;C:\\temp\\source2",
-                "-filters:+Test;-Test",
+                "-assemblyfilters:+Test;-Test",
+                "-classfilters:+Test2;-Test2",
                 "-verbosity:" + VerbosityLevel.Info.ToString()
             };
 
@@ -93,8 +96,10 @@ namespace Palmmedia.ReportGeneratorTest
             Assert.IsTrue(this.configuration.ReportTypes.Contains("Latex"), "Wrong report type applied.");
             Assert.IsTrue(this.configuration.SourceDirectories.Contains("C:\\temp\\source"), "Directory does not exist in Source directories.");
             Assert.IsTrue(this.configuration.SourceDirectories.Contains("C:\\temp\\source2"), "Directory does not exist in Source directories.");
-            Assert.IsTrue(this.configuration.Filters.Contains("+Test"), "Filter does not exist in ReportFiles.");
-            Assert.IsTrue(this.configuration.Filters.Contains("-Test"), "Filter does not exist in ReportFiles.");
+            Assert.IsTrue(this.configuration.AssemblyFilters.Contains("+Test"), "AssemblyFilters does not exist in ReportFiles.");
+            Assert.IsTrue(this.configuration.ClassFilters.Contains("+Test2"), "ClassFilters does not exist in ReportFiles.");
+            Assert.IsTrue(this.configuration.AssemblyFilters.Contains("-Test"), "AssemblyFilters does not exist in ReportFiles.");
+            Assert.IsTrue(this.configuration.ClassFilters.Contains("-Test2"), "ClassFilters does not exist in ReportFiles.");
             Assert.AreEqual(VerbosityLevel.Info, this.configuration.VerbosityLevel, "Wrong verbosity level applied.");
         }
     }
