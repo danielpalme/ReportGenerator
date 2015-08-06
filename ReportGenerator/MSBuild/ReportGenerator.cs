@@ -54,12 +54,28 @@ namespace Palmmedia.ReportGenerator.MSBuild
         public ITaskItem[] SourceDirectories { get; set; }
 
         /// <summary>
-        /// Gets or sets the assembly filters.
+        /// Gets or sets the assembly filters (old property).
         /// </summary>
         /// <value>
         /// The assembly filters.
         /// </value>
         public ITaskItem[] Filters { get; set; }
+
+        /// <summary>
+        /// Gets or sets the assembly filters (new property).
+        /// </summary>
+        /// <value>
+        /// The assembly filters.
+        /// </value>
+        public ITaskItem[] AssemblyFilters { get; set; }
+
+        /// <summary>
+        /// Gets or sets the class filters.
+        /// </summary>
+        /// <value>
+        /// The class filters.
+        /// </value>
+        public ITaskItem[] ClassFilters { get; set; }
 
         /// <summary>
         /// Gets or sets the verbosity level.
@@ -84,6 +100,8 @@ namespace Palmmedia.ReportGenerator.MSBuild
                 reportTypes = this.ReportTypes.Select(r => r.ItemSpec).ToArray();
             }
 
+            ITaskItem[] assemblyFilters = this.AssemblyFilters ?? this.Filters;
+
             ReportConfiguration configuration = new ReportConfiguration(
                 new MefReportBuilderFactory(),
                 this.ReportFiles == null ? Enumerable.Empty<string>() : this.ReportFiles.Select(r => r.ItemSpec),
@@ -91,7 +109,8 @@ namespace Palmmedia.ReportGenerator.MSBuild
                 this.HistoryDirectory,
                 reportTypes,
                 this.SourceDirectories == null ? Enumerable.Empty<string>() : this.SourceDirectories.Select(r => r.ItemSpec),
-                this.Filters == null ? Enumerable.Empty<string>() : this.Filters.Select(r => r.ItemSpec),
+                assemblyFilters == null ? Enumerable.Empty<string>() : assemblyFilters.Select(r => r.ItemSpec),
+                this.ClassFilters == null ? Enumerable.Empty<string>() : this.ClassFilters.Select(r => r.ItemSpec),
                 this.VerbosityLevel);
 
             return Program.Execute(configuration);

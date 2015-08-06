@@ -7,12 +7,12 @@ using System.Text.RegularExpressions;
 namespace Palmmedia.ReportGenerator.Reporting
 {
     /// <summary>
-    /// Default implementation of <see cref="IAssemblyFilter"/>.
-    /// An assembly is included if at least one include filter matches their name.
+    /// Default implementation of <see cref="IFilter"/>.
+    /// An element is included if at least one include filter matches their name.
     /// The assembly is excluded if at least one exclude filter matches its name.
     /// Exclusion filters take precedence over inclusion filters. Wildcards are allowed in filters.
     /// </summary>
-    internal class DefaultAssemblyFilter : IAssemblyFilter
+    internal class DefaultFilter : IFilter
     {
         /// <summary>
         /// The include filters.
@@ -25,10 +25,10 @@ namespace Palmmedia.ReportGenerator.Reporting
         private readonly IEnumerable<string> excludeFilters;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DefaultAssemblyFilter"/> class.
+        /// Initializes a new instance of the <see cref="DefaultFilter"/> class.
         /// </summary>
         /// <param name="filters">The filters.</param>
-        internal DefaultAssemblyFilter(IEnumerable<string> filters)
+        internal DefaultFilter(IEnumerable<string> filters)
         {
             if (filters == null)
             {
@@ -50,21 +50,21 @@ namespace Palmmedia.ReportGenerator.Reporting
         }
 
         /// <summary>
-        /// Determines whether the given assembly should be included in the report.
+        /// Determines whether the given element should be included in the report.
         /// </summary>
-        /// <param name="assemblyName">Name of the assembly.</param>
+        /// <param name="name">Name of the element.</param>
         /// <returns>
-        ///   <c>true</c> if assembly should be included in the report; otherwise, <c>false</c>.
+        ///   <c>true</c> if element should be included in the report; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsAssemblyIncludedInReport(string assemblyName)
+        public bool IsElementIncludedInReport(string name)
         {
-            if (this.excludeFilters.Any(f => Regex.IsMatch(assemblyName, f)))
+            if (this.excludeFilters.Any(f => Regex.IsMatch(name, f)))
             {
                 return false;
             }
             else
             {
-                return this.includeFilters.Any(f => Regex.IsMatch(assemblyName, f));
+                return this.includeFilters.Any(f => Regex.IsMatch(name, f));
             }
         }
 

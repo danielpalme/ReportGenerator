@@ -54,6 +54,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+2.2.0.0
+
+    * New: Added filtering for classes
+
 2.1.8.0
 
     * Fix: Issue #22: Correct order of historic coverage information

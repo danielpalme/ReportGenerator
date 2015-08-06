@@ -101,7 +101,7 @@
     <Compile Include="Parser\Preprocessing\OpenCoverReportPreprocessorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reporting\MefReportBuilderFactoryTest.cs" />
-    <Compile Include="Reporting\DefaultAssemblyFilterTest.cs" />
+    <Compile Include="Reporting\DefaultFilterTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ReportGenerator\ReportGenerator.csproj">

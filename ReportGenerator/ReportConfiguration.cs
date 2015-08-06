@@ -43,7 +43,8 @@ namespace Palmmedia.ReportGenerator
         /// <param name="historyDirectory">The history directory.</param>
         /// <param name="reportTypes">The report types.</param>
         /// <param name="sourceDirectories">The source directories.</param>
-        /// <param name="filters">The filters.</param>
+        /// <param name="assemblyFilters">The assembly filters.</param>
+        /// <param name="classFilters">The class filters.</param>
         /// <param name="verbosityLevel">The verbosity level.</param>
         internal ReportConfiguration(
             IReportBuilderFactory reportBuilderFactory,
@@ -52,7 +53,8 @@ namespace Palmmedia.ReportGenerator
             string historyDirectory,
             IEnumerable<string> reportTypes,
             IEnumerable<string> sourceDirectories,
-            IEnumerable<string> filters,
+            IEnumerable<string> assemblyFilters,
+            IEnumerable<string> classFilters,
             string verbosityLevel)
         {
             if (reportBuilderFactory == null)
@@ -80,9 +82,14 @@ namespace Palmmedia.ReportGenerator
                 throw new ArgumentNullException("sourceDirectories");
             }
 
-            if (filters == null)
+            if (assemblyFilters == null)
             {
-                throw new ArgumentNullException("filters");
+                throw new ArgumentNullException("assemblyFilters");
+            }
+
+            if (classFilters == null)
+            {
+                throw new ArgumentNullException("classFilters");
             }
 
             this.ReportBuilderFactory = reportBuilderFactory;
@@ -112,7 +119,8 @@ namespace Palmmedia.ReportGenerator
             }
 
             this.SourceDirectories = sourceDirectories;
-            this.Filters = filters;
+            this.AssemblyFilters = assemblyFilters;
+            this.ClassFilters = classFilters;
 
             if (verbosityLevel != null)
             {
@@ -159,9 +167,14 @@ namespace Palmmedia.ReportGenerator
         internal IEnumerable<string> SourceDirectories { get; private set; }
 
         /// <summary>
-        /// Gets the filters.
+        /// Gets the assembly filters.
         /// </summary>
-        internal IEnumerable<string> Filters { get; private set; }
+        internal IEnumerable<string> AssemblyFilters { get; private set; }
+
+        /// <summary>
+        /// Gets the class filters.
+        /// </summary>
+        internal IEnumerable<string> ClassFilters { get; private set; }
 
         /// <summary>
         /// Gets the verbosity level.
@@ -256,7 +269,7 @@ namespace Palmmedia.ReportGenerator
                 }
             }
 
-            foreach (var filter in this.Filters)
+            foreach (var filter in this.AssemblyFilters)
             {
                 if (string.IsNullOrEmpty(filter)
                     || (!filter.StartsWith("+", StringComparison.OrdinalIgnoreCase)

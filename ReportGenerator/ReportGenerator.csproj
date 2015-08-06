@@ -141,10 +141,10 @@
     <Compile Include="Parser\Analysis\FileAnalysis.cs" />
     <Compile Include="Parser\Analysis\ShortLineAnalysis.cs" />
     <Compile Include="Parser\Analysis\LineVisitStatus.cs" />
-    <Compile Include="Reporting\DefaultAssemblyFilter.cs" />
+    <Compile Include="Reporting\DefaultFilter.cs" />
     <Compile Include="Reporting\FileUnblocker.cs" />
     <Compile Include="Reporting\HistoryParser.cs" />
-    <Compile Include="Reporting\IAssemblyFilter.cs" />
+    <Compile Include="Reporting\IFilter.cs" />
     <Compile Include="Reporting\IReportBuilder.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -214,6 +214,7 @@
     <EmbeddedResource Include="Properties\Help.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Help.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\ReportResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
