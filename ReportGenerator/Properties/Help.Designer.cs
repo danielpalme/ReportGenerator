@@ -196,7 +196,7 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [\&quot;]-reports:&lt;report&gt;[;&lt;report&gt;][;&lt;report&gt;][\&quot;].
+        ///   Looks up a localized string similar to [&quot;]-reports:&lt;report&gt;[;&lt;report&gt;][;&lt;report&gt;][&quot;].
         /// </summary>
         internal static string Parameters1 {
             get {
@@ -205,7 +205,7 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [\&quot;]-targetdir:&lt;target directory&gt;[\&quot;].
+        ///   Looks up a localized string similar to [&quot;]-targetdir:&lt;target directory&gt;[&quot;].
         /// </summary>
         internal static string Parameters2 {
             get {
@@ -214,7 +214,7 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [[\&quot;]-reporttypes:&lt;{0}&gt;[;&lt;{0}&gt;][\&quot;]]&quot;.
+        ///   Looks up a localized string similar to [[&quot;]-reporttypes:&lt;{0}&gt;[;&lt;{0}&gt;][&quot;]]&quot;.
         /// </summary>
         internal static string Parameters3 {
             get {
@@ -223,7 +223,7 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [[\&quot;]-sourcedirs:&lt;directory&gt;[;&lt;directory&gt;][;&lt;directory&gt;][\&quot;]].
+        ///   Looks up a localized string similar to [[&quot;]-sourcedirs:&lt;directory&gt;[;&lt;directory&gt;][;&lt;directory&gt;][&quot;]].
         /// </summary>
         internal static string Parameters4 {
             get {
@@ -232,7 +232,7 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [[\&quot;]-historydir:&lt;history directory&gt;[\&quot;]].
+        ///   Looks up a localized string similar to [[&quot;]-historydir:&lt;history directory&gt;[&quot;]].
         /// </summary>
         internal static string Parameters5 {
             get {
@@ -241,7 +241,7 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [[\&quot;]-assemblyfilters:&lt;(+|-)filter&gt;[;&lt;(+|-)filter&gt;][;&lt;(+|-)filter&gt;][\&quot;]].
+        ///   Looks up a localized string similar to [[&quot;]-assemblyfilters:&lt;(+|-)filter&gt;[;&lt;(+|-)filter&gt;][;&lt;(+|-)filter&gt;][&quot;]].
         /// </summary>
         internal static string Parameters6 {
             get {
@@ -250,7 +250,7 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [[\&quot;]-classfilters:&lt;(+|-)filter&gt;[;&lt;(+|-)filter&gt;][;&lt;(+|-)filter&gt;][\&quot;]].
+        ///   Looks up a localized string similar to [[&quot;]-classfilters:&lt;(+|-)filter&gt;[;&lt;(+|-)filter&gt;][;&lt;(+|-)filter&gt;][&quot;]].
         /// </summary>
         internal static string Parameters7 {
             get {
@@ -259,7 +259,7 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [[\&quot;]-verbosity:&lt;{0}&gt;[\&quot;]].
+        ///   Looks up a localized string similar to [[&quot;]-verbosity:&lt;{0}&gt;[&quot;]].
         /// </summary>
         internal static string Parameters8 {
             get {

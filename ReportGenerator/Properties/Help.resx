@@ -163,28 +163,28 @@
     <value>Parameters:</value>
   </data>
   <data name="Parameters1" xml:space="preserve">
-    <value>[\"]-reports:&lt;report&gt;[;&lt;report&gt;][;&lt;report&gt;][\"]</value>
+    <value>["]-reports:&lt;report&gt;[;&lt;report&gt;][;&lt;report&gt;]["]</value>
   </data>
   <data name="Parameters2" xml:space="preserve">
-    <value>[\"]-targetdir:&lt;target directory&gt;[\"]</value>
+    <value>["]-targetdir:&lt;target directory&gt;["]</value>
   </data>
   <data name="Parameters3" xml:space="preserve">
-    <value>[[\"]-reporttypes:&lt;{0}&gt;[;&lt;{0}&gt;][\"]]"</value>
+    <value>[["]-reporttypes:&lt;{0}&gt;[;&lt;{0}&gt;]["]]"</value>
   </data>
   <data name="Parameters4" xml:space="preserve">
-    <value>[[\"]-sourcedirs:&lt;directory&gt;[;&lt;directory&gt;][;&lt;directory&gt;][\"]]</value>
+    <value>[["]-sourcedirs:&lt;directory&gt;[;&lt;directory&gt;][;&lt;directory&gt;]["]]</value>
   </data>
   <data name="Parameters5" xml:space="preserve">
-    <value>[[\"]-historydir:&lt;history directory&gt;[\"]]</value>
+    <value>[["]-historydir:&lt;history directory&gt;["]]</value>
   </data>
   <data name="Parameters6" xml:space="preserve">
-    <value>[[\"]-assemblyfilters:&lt;(+|-)filter&gt;[;&lt;(+|-)filter&gt;][;&lt;(+|-)filter&gt;][\"]]</value>
+    <value>[["]-assemblyfilters:&lt;(+|-)filter&gt;[;&lt;(+|-)filter&gt;][;&lt;(+|-)filter&gt;]["]]</value>
   </data>
   <data name="Parameters7" xml:space="preserve">
-    <value>[[\"]-classfilters:&lt;(+|-)filter&gt;[;&lt;(+|-)filter&gt;][;&lt;(+|-)filter&gt;][\"]]</value>
+    <value>[["]-classfilters:&lt;(+|-)filter&gt;[;&lt;(+|-)filter&gt;][;&lt;(+|-)filter&gt;]["]]</value>
   </data>
   <data name="Parameters8" xml:space="preserve">
-    <value>[[\"]-verbosity:&lt;{0}&gt;[\"]]</value>
+    <value>[["]-verbosity:&lt;{0}&gt;["]]</value>
   </data>
   <data name="ReportTypeValues" xml:space="preserve">
     <value>             Values: {0}</value>

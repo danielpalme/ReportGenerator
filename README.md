@@ -43,7 +43,8 @@ Parameters:
     [["]-reporttypes:<None|Html|HtmlSummary|...>[;<None|Html|HtmlSummary|...>]["]]
     [["]-sourcedirs:<directory>[;<directory>][;<directory>]["]]
     [["]-historydir:<history directory>["]]
-    [["]-filters:<(+|-)filter>[;<(+|-)filter>][;<(+|-)filter>]["]]
+    [["]-assemblyfilters:<(+|-)filter>[;<(+|-)filter>][;<(+|-)filter>]["]]
+    [["]-classfilters:<(+|-)filter>[;<(+|-)filter>][;<(+|-)filter>]["]]
     [["]-verbosity:<Verbose|Info|Error>["]]
 
 Explanations:
@@ -62,12 +63,17 @@ Explanations:
    Filters:           Optional list of assemblies that should be included or excluded
                       in the report. Exclusion filters take precedence over inclusion 
                       filters. Wildcards are allowed.
+   Assembly Filters:  Optional list of assemblies that should be included or excluded in the report.
+   Class Filters:     Optional list of classes that should be included or excluded in the report.
+                      Exclusion filters take precedence over inclusion filters.                      
+                      Wildcards are allowed.
    Verbosity:         The verbosity level of the log messages.
                       Values: Verbose, Info, Error
 
 Default values:
    -reporttypes:Html
-   -filters:+*
+   -assemblyfilters:+*
+   -classfilters:+*
    -verbosity:Verbose
 
 Examples:
@@ -75,7 +81,7 @@ Examples:
    "-reports:target\*\*.xml" "-targetdir:C:\report" -reporttypes:Latex;HtmlSummary
    "-reports:coverage1.xml;coverage2.xml" "-targetdir:report"
    "-reports:coverage.xml" "-targetdir:C:\report" -reporttypes:Latex "-sourcedirs:C:\MyProject"
-   "-reports:coverage.xml" "-targetdir:C:\report" "-sourcedirs:C:\MyProject1;C:\MyProject2" "-filters:+Included;-Exclude
+   "-reports:coverage.xml" "-targetdir:C:\report" "-sourcedirs:C:\MyProject1;C:\MyProject2" "-assemblyfilters:+Included;-Exclude
 d.*"
 ```
 
@@ -91,7 +97,7 @@ A MSBuild task also exists:
     <SourceDirectories Include="C:\MyProject2" />
   </ItemGroup>
   <Target Name="Coverage">
-    <ReportGenerator ReportFiles="@(CoverageFiles)" TargetDirectory="report" ReportTypes="Html;Latex" SourceDirectories="@(SourceDirectories)" HistoryDirectory="history" Filters="+Include;-Excluded" VerbosityLevel="Verbose" />
+    <ReportGenerator ReportFiles="@(CoverageFiles)" TargetDirectory="report" ReportTypes="Html;Latex" SourceDirectories="@(SourceDirectories)" HistoryDirectory="history" AssemblyFilters="+Include;-Excluded" VerbosityLevel="Verbose" />
   </Target>
 </Project>
 ```
