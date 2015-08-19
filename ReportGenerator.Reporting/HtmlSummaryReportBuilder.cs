@@ -17,10 +17,7 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// <value>
         /// The report format.
         /// </value>
-        public override string ReportType
-        {
-            get { return "HtmlSummary"; }
-        }
+        public override string ReportType => "HtmlSummary";
 
         /// <summary>
         /// Creates a class report.

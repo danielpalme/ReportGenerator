@@ -44,7 +44,7 @@ namespace Palmmedia.ReportGenerator.Parser.Preprocessing
         /// <summary>
         /// Gets the report file as XContainer.
         /// </summary>
-        protected XContainer Report { get; private set; }
+        protected XContainer Report { get; }
 
         /// <summary>
         /// Gets or sets the <see cref="ClassSearcher"/> instance which is instantiated during preprocessing depending on the source directories used in the report.

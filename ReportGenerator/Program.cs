@@ -27,7 +27,7 @@ namespace Palmmedia.ReportGenerator
         {
             if (configuration == null)
             {
-                throw new ArgumentNullException("configuration");
+                throw new ArgumentNullException(nameof(configuration));
             }
 
             var appender = new ColoredConsoleAppender()

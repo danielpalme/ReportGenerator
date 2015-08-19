@@ -19,12 +19,12 @@ namespace Palmmedia.ReportGenerator.Common
         {
             if (string.IsNullOrEmpty(pattern))
             {
-                throw new ArgumentException("Pattern must not be empty.", "pattern");
+                throw new ArgumentException("Pattern must not be empty.", nameof(pattern));
             }
 
             if (pattern.Intersect(Path.GetInvalidPathChars()).Any())
             {
-                throw new ArgumentException("Pattern contains invalid character.", "pattern");
+                throw new ArgumentException("Pattern contains invalid character.", nameof(pattern));
             }
 
             pattern = pattern.Replace('/', Path.DirectorySeparatorChar);
@@ -40,7 +40,7 @@ namespace Palmmedia.ReportGenerator.Common
 
             if (pathRooted && parts.Length < 2)
             {
-                throw new ArgumentException("Pattern in no valid file pattern.", "pattern");
+                throw new ArgumentException("Pattern in no valid file pattern.", nameof(pattern));
             }
 
             bool directoryIsUNCPath = pattern.StartsWith(@"\\", StringComparison.Ordinal);

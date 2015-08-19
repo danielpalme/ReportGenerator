@@ -44,7 +44,7 @@ namespace Palmmedia.ReportGenerator.Parser
         {
             if (report == null)
             {
-                throw new ArgumentNullException("report");
+                throw new ArgumentNullException(nameof(report));
             }
 
             this.types = report.Descendants("type").ToArray();
@@ -97,7 +97,7 @@ namespace Palmmedia.ReportGenerator.Parser
         private Class ProcessClass(Assembly assembly, string className)
         {
             var fileIdsOfClass = this.types
-                .Where(type => type.Attribute("asm").Value.Equals(assembly.Name) 
+                .Where(type => type.Attribute("asm").Value.Equals(assembly.Name)
                     && (type.Attribute("name").Value.Equals(className, StringComparison.Ordinal)
                         || type.Attribute("name").Value.StartsWith(className + "<", StringComparison.Ordinal)))
                 .Elements("method")
@@ -134,7 +134,7 @@ namespace Palmmedia.ReportGenerator.Parser
             string fileId = this.fileIdByFilenameDictionary[filePath];
 
             var seqpntsOfFile = this.types
-                .Where(type => type.Attribute("asm").Value.Equals(@class.Assembly.Name) 
+                .Where(type => type.Attribute("asm").Value.Equals(@class.Assembly.Name)
                     && (type.Attribute("name").Value.Equals(@class.Name, StringComparison.Ordinal)
                         || type.Attribute("name").Value.StartsWith(@class.Name + "<", StringComparison.Ordinal)))
                 .Elements("method")

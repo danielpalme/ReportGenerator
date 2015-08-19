@@ -29,7 +29,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
             this.Name = name;
@@ -49,33 +49,21 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <summary>
         /// Gets the list of metrics.
         /// </summary>
-        public IEnumerable<Metric> Metrics
-        {
-            get
-            {
-                return this.metrics;
-            }
-        }
+        public IEnumerable<Metric> Metrics => this.metrics;
 
         /// <summary>
         /// Gets the name of the method.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; }
 
         /// <summary>
         /// Gets the short name of the method (method arguments are omitted).
         /// </summary>
         /// <value>The short name of the method.</value>
-        public string ShortName
-        {
-            get
-            {
-                return Regex.Replace(
+        public string ShortName => Regex.Replace(
                     this.Name,
                     MethodRegex,
                     m => string.Format(CultureInfo.InvariantCulture, "{0}({1})", m.Groups["MethodName"].Value, m.Groups["Arguments"].Value.Length > 0 ? "..." : string.Empty));
-            }
-        }
 
         /// <summary>
         /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
@@ -103,10 +91,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
         /// </returns>
-        public override int GetHashCode()
-        {
-            return this.Name.GetHashCode();
-        }
+        public override int GetHashCode() => this.Name.GetHashCode();
 
         /// <summary>
         /// Adds the given metric.
@@ -134,7 +119,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         {
             if (methodMetric == null)
             {
-                throw new ArgumentNullException("methodMetric");
+                throw new ArgumentNullException(nameof(methodMetric));
             }
 
             foreach (var metric in methodMetric.metrics)

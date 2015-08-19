@@ -59,37 +59,37 @@ namespace Palmmedia.ReportGenerator
         {
             if (reportBuilderFactory == null)
             {
-                throw new ArgumentNullException("reportBuilderFactory");
+                throw new ArgumentNullException(nameof(reportBuilderFactory));
             }
 
             if (reportFilePatterns == null)
             {
-                throw new ArgumentNullException("reportFilePatterns");
+                throw new ArgumentNullException(nameof(reportFilePatterns));
             }
 
             if (targetDirectory == null)
             {
-                throw new ArgumentNullException("targetDirectory");
+                throw new ArgumentNullException(nameof(targetDirectory));
             }
 
             if (reportTypes == null)
             {
-                throw new ArgumentNullException("reportTypes");
+                throw new ArgumentNullException(nameof(reportTypes));
             }
 
             if (sourceDirectories == null)
             {
-                throw new ArgumentNullException("sourceDirectories");
+                throw new ArgumentNullException(nameof(sourceDirectories));
             }
 
             if (assemblyFilters == null)
             {
-                throw new ArgumentNullException("assemblyFilters");
+                throw new ArgumentNullException(nameof(assemblyFilters));
             }
 
             if (classFilters == null)
             {
-                throw new ArgumentNullException("classFilters");
+                throw new ArgumentNullException(nameof(classFilters));
             }
 
             this.ReportBuilderFactory = reportBuilderFactory;
@@ -133,53 +133,47 @@ namespace Palmmedia.ReportGenerator
         /// <summary>
         /// Gets the report builder factory.
         /// </summary>
-        internal IReportBuilderFactory ReportBuilderFactory { get; private set; }
+        internal IReportBuilderFactory ReportBuilderFactory { get; }
 
         /// <summary>
         /// Gets the report files.
         /// </summary>
-        internal IEnumerable<string> ReportFiles
-        {
-            get
-            {
-                return this.reportFiles;
-            }
-        }
+        internal IEnumerable<string> ReportFiles => this.reportFiles;
 
         /// <summary>
         /// Gets the target directory.
         /// </summary>
-        internal string TargetDirectory { get; private set; }
+        internal string TargetDirectory { get; }
 
         /// <summary>
         /// Gets the history directory.
         /// </summary>
-        internal string HistoryDirectory { get; private set; }
+        internal string HistoryDirectory { get; }
 
         /// <summary>
         /// Gets the type of the report.
         /// </summary>
-        internal IEnumerable<string> ReportTypes { get; private set; }
+        internal IEnumerable<string> ReportTypes { get; }
 
         /// <summary>
         /// Gets the source directories.
         /// </summary>
-        internal IEnumerable<string> SourceDirectories { get; private set; }
+        internal IEnumerable<string> SourceDirectories { get; }
 
         /// <summary>
         /// Gets the assembly filters.
         /// </summary>
-        internal IEnumerable<string> AssemblyFilters { get; private set; }
+        internal IEnumerable<string> AssemblyFilters { get; }
 
         /// <summary>
         /// Gets the class filters.
         /// </summary>
-        internal IEnumerable<string> ClassFilters { get; private set; }
+        internal IEnumerable<string> ClassFilters { get; }
 
         /// <summary>
         /// Gets the verbosity level.
         /// </summary>
-        internal VerbosityLevel VerbosityLevel { get; private set; }
+        internal VerbosityLevel VerbosityLevel { get; }
 
         /// <summary>
         /// Validates all parameters.

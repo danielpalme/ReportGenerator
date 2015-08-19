@@ -7,25 +7,13 @@ namespace Palmmedia.ReportGeneratorTest
     {
         private const string TEMPDIRECTORY = @"C:\temp";
 
-        internal static string GetCSharpReportDirectory()
-        {
-            return Path.Combine(GetFilesDirectory(), "CSharp", "Reports");
-        }
+        internal static string GetCSharpReportDirectory() => Path.Combine(GetFilesDirectory(), "CSharp", "Reports");
 
-        internal static string GetFSharpReportDirectory()
-        {
-            return Path.Combine(GetFilesDirectory(), "FSharp", "Reports");
-        }
+        internal static string GetFSharpReportDirectory() => Path.Combine(GetFilesDirectory(), "FSharp", "Reports");
 
-        internal static string GetCSharpCodeDirectory()
-        {
-            return Path.Combine(GetFilesDirectory(), "CSharp", "Project");
-        }
+        internal static string GetCSharpCodeDirectory() => Path.Combine(GetFilesDirectory(), "CSharp", "Project");
 
-        internal static string GetFSharpCodeDirectory()
-        {
-            return Path.Combine(GetFilesDirectory(), "FSharp", "Project");
-        }
+        internal static string GetFSharpCodeDirectory() => Path.Combine(GetFilesDirectory(), "FSharp", "Project");
 
         internal static string GetFilesDirectory()
         {

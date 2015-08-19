@@ -30,7 +30,7 @@ namespace Palmmedia.ReportGenerator.Parser.Preprocessing.CodeAnalysis
         {
             if (filename == null)
             {
-                throw new ArgumentNullException("filename");
+                throw new ArgumentNullException(nameof(filename));
             }
 
             AstNode parentNode = GetParentNode(filename);
@@ -57,12 +57,12 @@ namespace Palmmedia.ReportGenerator.Parser.Preprocessing.CodeAnalysis
         {
             if (filename == null)
             {
-                throw new ArgumentNullException("filename");
+                throw new ArgumentNullException(nameof(filename));
             }
 
             if (sourceElement == null)
             {
-                throw new ArgumentNullException("sourceElement");
+                throw new ArgumentNullException(nameof(sourceElement));
             }
 
             AstNode parentNode = GetParentNode(filename);
@@ -174,7 +174,7 @@ namespace Palmmedia.ReportGenerator.Parser.Preprocessing.CodeAnalysis
                 catch (UnauthorizedAccessException)
                 {
                     return null;
-                } 
+                }
             }
         }
 

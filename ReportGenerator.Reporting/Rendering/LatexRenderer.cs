@@ -150,7 +150,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         {
             if (path == null)
             {
-                throw new ArgumentNullException("path");
+                throw new ArgumentNullException(nameof(path));
             }
 
             if (path.Length > 78)
@@ -263,7 +263,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         {
             if (metric == null)
             {
-                throw new ArgumentNullException("metric");
+                throw new ArgumentNullException(nameof(metric));
             }
 
             string metrics = string.Join(" & ", metric.Metrics.Select(m => m.Value.ToString(CultureInfo.InvariantCulture)));
@@ -286,7 +286,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         {
             if (analysis == null)
             {
-                throw new ArgumentNullException("analysis");
+                throw new ArgumentNullException(nameof(analysis));
             }
 
             string formattedLine = analysis.LineContent
@@ -343,7 +343,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         {
             if (assembly == null)
             {
-                throw new ArgumentNullException("assembly");
+                throw new ArgumentNullException(nameof(assembly));
             }
 
             string row = string.Format(
@@ -363,7 +363,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         {
             if (@class == null)
             {
-                throw new ArgumentNullException("class");
+                throw new ArgumentNullException(nameof(@class));
             }
 
             string row = string.Format(
@@ -469,10 +469,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// </summary>
         /// <param name="text">The text to shorten.</param>
         /// <returns>The shortened string.</returns>
-        private static string ShortenString(string text)
-        {
-            return ShortenString(text, 78);
-        }
+        private static string ShortenString(string text) => ShortenString(text, 78);
 
         /// <summary>
         /// Shortens the given string.
@@ -495,13 +492,10 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// </summary>
         /// <param name="text">The text.</param>
         /// <returns>The text with escaped latex chars.</returns>
-        private static string EscapeLatexChars(string text)
-        {
-            return text
+        private static string EscapeLatexChars(string text) => text
                 .Replace(@"\", @"\textbackslash ")
                 .Replace("%", @"\%")
                 .Replace("#", @"\#")
                 .Replace("_", @"\_");
-        }
     }
 }

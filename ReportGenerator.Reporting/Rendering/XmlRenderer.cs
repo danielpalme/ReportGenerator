@@ -147,7 +147,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         {
             if (files == null)
             {
-                throw new ArgumentNullException("files");
+                throw new ArgumentNullException(nameof(files));
             }
 
             this.reportTextWriter.WriteStartElement(XmlRenderer.ReplaceNonLetterChars(key));
@@ -170,7 +170,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         {
             if (metric == null)
             {
-                throw new ArgumentNullException("metric");
+                throw new ArgumentNullException(nameof(metric));
             }
 
             this.reportTextWriter.WriteStartElement(XmlRenderer.ReplaceNonLetterChars(metric.ShortName));
@@ -193,7 +193,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         {
             if (analysis == null)
             {
-                throw new ArgumentNullException("analysis");
+                throw new ArgumentNullException(nameof(analysis));
             }
 
             this.reportTextWriter.WriteStartElement("LineAnalysis");
@@ -234,7 +234,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         {
             if (assembly == null)
             {
-                throw new ArgumentNullException("assembly");
+                throw new ArgumentNullException(nameof(assembly));
             }
 
             if (this.closeAssemblyNode)
@@ -261,7 +261,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         {
             if (@class == null)
             {
-                throw new ArgumentNullException("class");
+                throw new ArgumentNullException(nameof(@class));
             }
 
             this.reportTextWriter.WriteStartElement("Class");

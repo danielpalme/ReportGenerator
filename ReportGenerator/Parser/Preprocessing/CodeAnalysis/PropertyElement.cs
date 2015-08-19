@@ -24,7 +24,7 @@ namespace Palmmedia.ReportGenerator.Parser.Preprocessing.CodeAnalysis
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
             this.name = name.Substring(4);

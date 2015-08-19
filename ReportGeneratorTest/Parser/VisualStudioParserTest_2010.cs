@@ -131,13 +131,10 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             Assert.AreEqual(4, metrics.First().Metrics.ElementAt(1).Value, "Wrong value of metric");
         }
 
-        private static FileAnalysis GetFileAnalysis(IEnumerable<Assembly> assemblies, string className, string fileName)
-        {
-            return assemblies
+        private static FileAnalysis GetFileAnalysis(IEnumerable<Assembly> assemblies, string className, string fileName) => assemblies
                 .Single(a => a.Name == "Test.exe").Classes
                 .Single(c => c.Name == className).Files
                 .Single(f => f.Path == fileName)
                 .AnalyzeFile();
-        }
     }
 }

@@ -39,17 +39,17 @@ namespace Palmmedia.ReportGenerator.Reporting
         {
             if (reportRenderer == null)
             {
-                throw new ArgumentNullException("reportRenderer");
+                throw new ArgumentNullException(nameof(reportRenderer));
             }
 
             if (@class == null)
             {
-                throw new ArgumentNullException("@class");
+                throw new ArgumentNullException(nameof(@class));
             }
 
             if (fileAnalyses == null)
             {
-                throw new ArgumentNullException("fileAnalyses");
+                throw new ArgumentNullException(nameof(fileAnalyses));
             }
 
             reportRenderer.BeginClassReport(this.TargetDirectory, @class.Assembly.ShortName, @class.Name);
@@ -146,12 +146,12 @@ namespace Palmmedia.ReportGenerator.Reporting
         {
             if (reportRenderer == null)
             {
-                throw new ArgumentNullException("reportRenderer");
+                throw new ArgumentNullException(nameof(reportRenderer));
             }
 
             if (summaryResult == null)
             {
-                throw new ArgumentNullException("summaryResult");
+                throw new ArgumentNullException(nameof(summaryResult));
             }
 
             reportRenderer.BeginSummaryReport(this.TargetDirectory, ReportResources.Summary);

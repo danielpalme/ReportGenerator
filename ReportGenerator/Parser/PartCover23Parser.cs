@@ -57,7 +57,7 @@ namespace Palmmedia.ReportGenerator.Parser
         {
             if (report == null)
             {
-                throw new ArgumentNullException("report");
+                throw new ArgumentNullException(nameof(report));
             }
 
             this.types = report.Descendants("Type").ToArray();

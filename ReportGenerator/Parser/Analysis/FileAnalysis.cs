@@ -36,25 +36,19 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// Gets the path.
         /// </summary>
         /// <value>The path.</value>
-        public string Path { get; private set; }
+        public string Path { get; }
 
         /// <summary>
         /// Gets the error.
         /// </summary>
         /// <value>The error.</value>
-        public string Error { get; private set; }
+        public string Error { get; }
 
         /// <summary>
         /// Gets the coverage information of the lines in the file.
         /// </summary>
         /// <value>The lines.</value>
-        public IEnumerable<LineAnalysis> Lines
-        {
-            get
-            {
-                return this.lineAnalysis;
-            }
-        }
+        public IEnumerable<LineAnalysis> Lines => this.lineAnalysis;
 
         /// <summary>
         /// Adds the given line analysis to the file analysis.

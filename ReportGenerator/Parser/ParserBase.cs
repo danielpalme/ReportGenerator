@@ -19,13 +19,7 @@ namespace Palmmedia.ReportGenerator.Parser
         /// Gets the assemblies that have been found in the report.
         /// </summary>
         /// <value>The assemblies.</value>
-        public IEnumerable<Assembly> Assemblies
-        {
-            get
-            {
-                return this.assemblies.OrderBy(a => a.Name);
-            }
-        }
+        public IEnumerable<Assembly> Assemblies => this.assemblies.OrderBy(a => a.Name);
 
         /// <summary>
         /// Returns a <see cref="System.String"/> that represents this instance.
@@ -33,10 +27,7 @@ namespace Palmmedia.ReportGenerator.Parser
         /// <returns>
         /// A <see cref="System.String"/> that represents this instance.
         /// </returns>
-        public override string ToString()
-        {
-            return this.GetType().Name;
-        }
+        public override string ToString() => this.GetType().Name;
 
         /// <summary>
         /// Adds the given assembly.

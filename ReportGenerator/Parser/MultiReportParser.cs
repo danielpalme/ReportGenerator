@@ -57,7 +57,7 @@ namespace Palmmedia.ReportGenerator.Parser
         {
             if (parser == null)
             {
-                throw new ArgumentNullException("parser");
+                throw new ArgumentNullException(nameof(parser));
             }
 
             this.parserNames.Add(parser.ToString());

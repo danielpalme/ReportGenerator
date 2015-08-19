@@ -38,12 +38,12 @@ namespace Palmmedia.ReportGenerator.Reporting
         {
             if (parser == null)
             {
-                throw new ArgumentNullException("parser");
+                throw new ArgumentNullException(nameof(parser));
             }
 
             if (historyDirectory == null)
             {
-                throw new ArgumentNullException("historyDirectory");
+                throw new ArgumentNullException(nameof(historyDirectory));
             }
 
             this.parser = parser;

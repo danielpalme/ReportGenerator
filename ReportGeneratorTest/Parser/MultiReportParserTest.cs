@@ -205,13 +205,10 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             Assert.AreEqual(2, fileAnalysis.Lines.Single(l => l.LineNumber == 45).TotalBranches.Value, "Wrong number of total branches");
         }
 
-        private static FileAnalysis GetFileAnalysis(IEnumerable<Assembly> assemblies, string className, string fileName)
-        {
-            return assemblies
+        private static FileAnalysis GetFileAnalysis(IEnumerable<Assembly> assemblies, string className, string fileName) => assemblies
                 .Single(a => a.Name == "Test").Classes
                 .Single(c => c.Name == className).Files
                 .Single(f => f.Path == fileName)
                 .AnalyzeFile();
-        }
     }
 }

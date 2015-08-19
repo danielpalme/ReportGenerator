@@ -16,7 +16,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
             this.Name = name;
@@ -26,7 +26,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <summary>
         /// Gets the name.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; }
 
         /// <summary>
         /// Gets the value.

@@ -52,9 +52,6 @@
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
         /// </returns>
-        public override int GetHashCode()
-        {
-            return this.identifier.GetHashCode();
-        }
+        public override int GetHashCode() => this.identifier.GetHashCode();
     }
 }

@@ -22,7 +22,7 @@ namespace Palmmedia.ReportGenerator.Parser.Preprocessing.FileSearch
         {
             if (classSearchers == null)
             {
-                throw new ArgumentNullException("classSearchers");
+                throw new ArgumentNullException(nameof(classSearchers));
             }
 
             this.classSearchers = classSearchers;
@@ -33,11 +33,8 @@ namespace Palmmedia.ReportGenerator.Parser.Preprocessing.FileSearch
         /// </summary>
         /// <param name="className">Name of the class (with full namespace).</param>
         /// <returns>The files the class is defined in.</returns>
-        internal override IEnumerable<string> GetFilesOfClass(string className)
-        {
-            return this.classSearchers
+        internal override IEnumerable<string> GetFilesOfClass(string className) => this.classSearchers
                 .SelectMany(c => c.GetFilesOfClass(className))
                 .Distinct();
-        }
     }
 }

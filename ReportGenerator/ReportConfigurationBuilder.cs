@@ -29,7 +29,7 @@ namespace Palmmedia.ReportGenerator
         {
             if (reportBuilderFactory == null)
             {
-                throw new ArgumentNullException("reportBuilderFactory");
+                throw new ArgumentNullException(nameof(reportBuilderFactory));
             }
 
             this.reportBuilderFactory = reportBuilderFactory;
@@ -44,7 +44,7 @@ namespace Palmmedia.ReportGenerator
         {
             if (args == null)
             {
-                throw new ArgumentNullException("args");
+                throw new ArgumentNullException(nameof(args));
             }
 
             if (args.Length > 0 && Regex.IsMatch(args[0], "-\\w{2,}:"))

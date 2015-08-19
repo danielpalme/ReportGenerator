@@ -52,12 +52,12 @@ namespace Palmmedia.ReportGenerator.Parser.Preprocessing.CodeAnalysis
         {
             if (methodname == null)
             {
-                throw new ArgumentNullException("methodname");
+                throw new ArgumentNullException(nameof(methodname));
             }
 
             if (signature == null)
             {
-                throw new ArgumentNullException("signature");
+                throw new ArgumentNullException(nameof(signature));
             }
 
             this.methodname = methodname;
@@ -70,13 +70,7 @@ namespace Palmmedia.ReportGenerator.Parser.Preprocessing.CodeAnalysis
         /// <summary>
         /// Gets a value indicating whether this method is a constructor.
         /// </summary>
-        private bool IsConstructor
-        {
-            get
-            {
-                return this.methodname == ".ctor";
-            }
-        }
+        private bool IsConstructor => this.methodname == ".ctor";
 
         /// <summary>
         /// Determines whether the given <see cref="ICSharpCode.NRefactory.PatternMatching.INode"/> matches the <see cref="SourceElement"/>.

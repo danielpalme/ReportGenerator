@@ -45,7 +45,7 @@ namespace Palmmedia.ReportGenerator.Parser.Preprocessing.FileSearch
         /// <summary>
         /// Gets the directory that should be searched for class files.
         /// </summary>
-        internal string Directory { get; private set; }
+        internal string Directory { get; }
 
         /// <summary>
         /// Gets the files the given class is defined in.

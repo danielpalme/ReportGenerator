@@ -37,7 +37,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <value>
         /// The execution time.
         /// </value>
-        public DateTime ExecutionTime { get; private set; }
+        public DateTime ExecutionTime { get; }
 
         /// <summary>
         /// Gets or sets the number of covered lines.
@@ -55,13 +55,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// Gets the coverage quota of the class.
         /// </summary>
         /// <value>The coverage quota.</value>
-        public decimal? CoverageQuota
-        {
-            get
-            {
-                return (this.CoverableLines == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)this.CoveredLines / (double)this.CoverableLines) / 10;
-            }
-        }
+        public decimal? CoverageQuota => (this.CoverableLines == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)this.CoveredLines / (double)this.CoverableLines) / 10;
 
         /// <summary>
         /// Gets or sets the number of total lines.
@@ -89,13 +83,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// Gets the branch coverage quota of the class.
         /// </summary>
         /// <value>The branch coverage quota.</value>
-        public decimal? BranchCoverageQuota
-        {
-            get
-            {
-                return (this.TotalBranches == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)this.CoveredBranches / (double)this.TotalBranches) / 10;
-            }
-        }
+        public decimal? BranchCoverageQuota => (this.TotalBranches == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)this.CoveredBranches / (double)this.TotalBranches) / 10;
 
         /// <summary>
         /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
@@ -127,13 +115,10 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
         /// </returns>
-        public override int GetHashCode()
-        {
-            return this.CoveredLines
+        public override int GetHashCode() => this.CoveredLines
                 + this.CoverableLines
                 + this.TotalLines
                 + this.CoveredBranches
                 + this.TotalBranches;
-        }
     }
 }

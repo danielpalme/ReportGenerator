@@ -39,7 +39,7 @@ namespace Palmmedia.ReportGenerator.Parser
         {
             if (report == null)
             {
-                throw new ArgumentNullException("report");
+                throw new ArgumentNullException(nameof(report));
             }
 
             this.modules = report.Descendants("Module").ToArray();
@@ -76,13 +76,13 @@ namespace Palmmedia.ReportGenerator.Parser
                     continue;
                 }
 
-                var metrics = new[] 
+                var metrics = new[]
                 {
                     new Metric(
-                        "Blocks covered", 
+                        "Blocks covered",
                         int.Parse(method.Element("BlocksCovered").Value, CultureInfo.InvariantCulture)),
                     new Metric(
-                        "Blocks not covered", 
+                        "Blocks not covered",
                         int.Parse(method.Element("BlocksNotCovered").Value, CultureInfo.InvariantCulture))
                 };
 

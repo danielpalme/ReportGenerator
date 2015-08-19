@@ -56,12 +56,12 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         {
             if (path == null)
             {
-                throw new ArgumentNullException("path");
+                throw new ArgumentNullException(nameof(path));
             }
 
             if (lineCoverage == null)
             {
-                throw new ArgumentNullException("lineCoverage");
+                throw new ArgumentNullException(nameof(lineCoverage));
             }
 
             this.Path = path;
@@ -73,7 +73,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// Gets the path.
         /// </summary>
         /// <value>The path.</value>
-        public string Path { get; private set; }
+        public string Path { get; }
 
         /// <summary>
         /// Gets the test methods.
@@ -81,37 +81,19 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <value>
         /// The test methods.
         /// </value>
-        public IEnumerable<TestMethod> TestMethods
-        {
-            get
-            {
-                return this.lineCoveragesByTestMethod.Keys;
-            }
-        }
+        public IEnumerable<TestMethod> TestMethods => this.lineCoveragesByTestMethod.Keys;
 
         /// <summary>
         /// Gets the number of covered lines.
         /// </summary>
         /// <value>The number of covered lines.</value>
-        public int CoveredLines
-        {
-            get
-            {
-                return this.lineCoverage.Count(l => l > 0);
-            }
-        }
+        public int CoveredLines => this.lineCoverage.Count(l => l > 0);
 
         /// <summary>
         /// Gets the number of coverable lines.
         /// </summary>
         /// <value>The number of coverable lines.</value>
-        public int CoverableLines
-        {
-            get
-            {
-                return this.lineCoverage.Count(l => l >= 0);
-            }
-        }
+        public int CoverableLines => this.lineCoverage.Count(l => l >= 0);
 
         /// <summary>
         /// Gets the number of total lines.
@@ -183,10 +165,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
         /// </returns>
-        public override int GetHashCode()
-        {
-            return this.Path.GetHashCode();
-        }
+        public override int GetHashCode() => this.Path.GetHashCode();
 
         /// <summary>
         /// Adds the coverage by test method.
@@ -197,12 +176,12 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         {
             if (testMethod == null)
             {
-                throw new ArgumentNullException("testMethod");
+                throw new ArgumentNullException(nameof(testMethod));
             }
 
             if (coverage == null)
             {
-                throw new ArgumentNullException("coverage");
+                throw new ArgumentNullException(nameof(coverage));
             }
 
             this.lineCoveragesByTestMethod.Add(testMethod, coverage);
@@ -286,7 +265,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         {
             if (file == null)
             {
-                throw new ArgumentNullException("file");
+                throw new ArgumentNullException(nameof(file));
             }
 
             // Resize coverage array if neccessary

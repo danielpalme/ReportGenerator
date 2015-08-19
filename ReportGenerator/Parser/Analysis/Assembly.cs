@@ -23,7 +23,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
             this.Name = name;
@@ -32,18 +32,12 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <summary>
         /// Gets the list of classes in assembly.
         /// </summary>
-        public IEnumerable<Class> Classes
-        {
-            get
-            {
-                return this.classes.OrderBy(c => c.Name);
-            }
-        }
+        public IEnumerable<Class> Classes => this.classes.OrderBy(c => c.Name);
 
         /// <summary>
         /// Gets the name of the assembly.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; }
 
         /// <summary>
         /// Gets the short name of the assembly.
@@ -62,49 +56,25 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// Gets the number of covered lines.
         /// </summary>
         /// <value>The covered lines.</value>
-        public int CoveredLines
-        {
-            get
-            {
-                return this.classes.Sum(c => c.CoveredLines);
-            }
-        }
+        public int CoveredLines => this.classes.Sum(c => c.CoveredLines);
 
         /// <summary>
         /// Gets the number of coverable lines.
         /// </summary>
         /// <value>The coverable lines.</value>
-        public int CoverableLines
-        {
-            get
-            {
-                return this.classes.Sum(c => c.CoverableLines);
-            }
-        }
+        public int CoverableLines => this.classes.Sum(c => c.CoverableLines);
 
         /// <summary>
         /// Gets the number of total lines.
         /// </summary>
         /// <value>The total lines.</value>
-        public int? TotalLines
-        {
-            get
-            {
-                return this.classes.Sum(c => c.TotalLines);
-            }
-        }
+        public int? TotalLines => this.classes.Sum(c => c.TotalLines);
 
         /// <summary>
         /// Gets the coverage quota of the class.
         /// </summary>
         /// <value>The coverage quota.</value>
-        public decimal? CoverageQuota
-        {
-            get
-            {
-                return (this.CoverableLines == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)this.CoveredLines / (double)this.CoverableLines) / 10;
-            }
-        }
+        public decimal? CoverageQuota => (this.CoverableLines == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)this.CoveredLines / (double)this.CoverableLines) / 10;
 
         /// <summary>
         /// Gets the number of covered branches.
@@ -112,13 +82,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <value>
         /// The number of covered branches.
         /// </value>
-        public int? CoveredBranches
-        {
-            get
-            {
-                return this.classes.Sum(f => f.CoveredBranches);
-            }
-        }
+        public int? CoveredBranches => this.classes.Sum(f => f.CoveredBranches);
 
         /// <summary>
         /// Gets the number of total branches.
@@ -126,25 +90,13 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <value>
         /// The number of total branches.
         /// </value>
-        public int? TotalBranches
-        {
-            get
-            {
-                return this.classes.Sum(f => f.TotalBranches);
-            }
-        }
+        public int? TotalBranches => this.classes.Sum(f => f.TotalBranches);
 
         /// <summary>
         /// Gets the branch coverage quota of the class.
         /// </summary>
         /// <value>The branch coverage quota.</value>
-        public decimal? BranchCoverageQuota
-        {
-            get
-            {
-                return (this.TotalBranches == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)this.CoveredBranches / (double)this.TotalBranches) / 10;
-            }
-        }
+        public decimal? BranchCoverageQuota => (this.TotalBranches == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)this.CoveredBranches / (double)this.TotalBranches) / 10;
 
         /// <summary>
         /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
@@ -172,10 +124,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
         /// </returns>
-        public override int GetHashCode()
-        {
-            return this.Name.GetHashCode();
-        }
+        public override int GetHashCode() => this.Name.GetHashCode();
 
         /// <summary>
         /// Adds the given class to the assembly.
@@ -194,7 +143,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         {
             if (assembly == null)
             {
-                throw new ArgumentNullException("assembly");
+                throw new ArgumentNullException(nameof(assembly));
             }
 
             foreach (var @class in assembly.classes)

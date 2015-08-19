@@ -41,7 +41,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <summary>
         /// Gets the line number.
         /// </summary>
-        public int LineNumber { get; private set; }
+        public int LineNumber { get; }
 
         /// <summary>
         /// Gets the content of the line.
@@ -49,7 +49,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <value>
         /// The content of the line.
         /// </value>
-        public string LineContent { get; private set; }
+        public string LineContent { get; }
 
         /// <summary>
         /// Gets the line coverage by test method.
@@ -57,7 +57,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <value>
         /// The line coverage by test method.
         /// </value>
-        public IDictionary<TestMethod, ShortLineAnalysis> LineCoverageByTestMethod { get; private set; }
+        public IDictionary<TestMethod, ShortLineAnalysis> LineCoverageByTestMethod { get; }
 
         /// <summary>
         /// Gets the number of covered branches.
@@ -65,7 +65,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <value>
         /// The number of covered branches.
         /// </value>
-        public int? CoveredBranches { get; private set; }
+        public int? CoveredBranches { get; }
 
         /// <summary>
         /// Gets the number of total branches.
@@ -73,6 +73,6 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <value>
         /// The number of total branches.
         /// </value>
-        public int? TotalBranches { get; private set; }
+        public int? TotalBranches { get; }
     }
 }

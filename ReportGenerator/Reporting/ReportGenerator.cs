@@ -52,22 +52,22 @@ namespace Palmmedia.ReportGenerator.Reporting
         {
             if (parser == null)
             {
-                throw new ArgumentNullException("parser");
+                throw new ArgumentNullException(nameof(parser));
             }
 
             if (assemblyFilter == null)
             {
-                throw new ArgumentNullException("assemblyFilter");
+                throw new ArgumentNullException(nameof(assemblyFilter));
             }
 
             if (classFilter == null)
             {
-                throw new ArgumentNullException("classFilter");
+                throw new ArgumentNullException(nameof(classFilter));
             }
 
             if (renderers == null)
             {
-                throw new ArgumentNullException("renderers");
+                throw new ArgumentNullException(nameof(renderers));
             }
 
             this.parser = parser;

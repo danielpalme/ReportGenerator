@@ -45,7 +45,7 @@ namespace Palmmedia.ReportGenerator.Parser
         {
             if (report == null)
             {
-                throw new ArgumentNullException("report");
+                throw new ArgumentNullException(nameof(report));
             }
 
             this.modules = report.Descendants("Module")
@@ -88,16 +88,16 @@ namespace Palmmedia.ReportGenerator.Parser
                     continue;
                 }
 
-                var metrics = new[] 
-                { 
+                var metrics = new[]
+                {
                     new Metric(
-                        "Cyclomatic Complexity", 
+                        "Cyclomatic Complexity",
                         methodGroup.Max(m => int.Parse(m.Attribute("cyclomaticComplexity").Value, CultureInfo.InvariantCulture))),
                     new Metric(
-                        "Sequence Coverage", 
+                        "Sequence Coverage",
                         methodGroup.Max(m => decimal.Parse(m.Attribute("sequenceCoverage").Value, CultureInfo.InvariantCulture))),
                     new Metric(
-                        "Branch Coverage", 
+                        "Branch Coverage",
                         methodGroup.Max(m => decimal.Parse(m.Attribute("branchCoverage").Value, CultureInfo.InvariantCulture)))
                 };
 

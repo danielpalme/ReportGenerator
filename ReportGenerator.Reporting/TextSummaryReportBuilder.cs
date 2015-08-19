@@ -22,10 +22,7 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// <value>
         /// The report type.
         /// </value>
-        public string ReportType
-        {
-            get { return "TextSummary"; }
-        }
+        public string ReportType => "TextSummary";
 
         /// <summary>
         /// Gets or sets the target directory where reports are stored.
@@ -52,7 +49,7 @@ namespace Palmmedia.ReportGenerator.Reporting
         {
             if (summaryResult == null)
             {
-                throw new ArgumentNullException("summaryResult");
+                throw new ArgumentNullException(nameof(summaryResult));
             }
 
             string targetPath = Path.Combine(this.TargetDirectory, "Summary.txt");

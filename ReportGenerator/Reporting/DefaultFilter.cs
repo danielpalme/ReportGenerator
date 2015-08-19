@@ -32,7 +32,7 @@ namespace Palmmedia.ReportGenerator.Reporting
         {
             if (filters == null)
             {
-                throw new ArgumentNullException("filters");
+                throw new ArgumentNullException(nameof(filters));
             }
 
             this.excludeFilters = filters

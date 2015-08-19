@@ -19,11 +19,11 @@
         /// <summary>
         /// Gets the start line number.
         /// </summary>
-        internal int Start { get; private set; }
+        internal int Start { get; }
 
         /// <summary>
         /// Gets the end line number
         /// </summary>
-        internal int End { get; private set; }
+        internal int End { get; }
     }
 }

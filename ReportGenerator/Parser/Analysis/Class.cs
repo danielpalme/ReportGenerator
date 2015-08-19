@@ -38,12 +38,12 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
             if (assembly == null)
             {
-                throw new ArgumentNullException("assembly");
+                throw new ArgumentNullException(nameof(assembly));
             }
 
             this.Name = name;
@@ -53,97 +53,55 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <summary>
         /// Gets the name of the class.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; }
 
         /// <summary>
         /// Gets the assembly.
         /// </summary>
         /// <value>The assembly.</value>
-        public Assembly Assembly { get; private set; }
+        public Assembly Assembly { get; }
 
         /// <summary>
         /// Gets the files.
         /// </summary>
         /// <value>The files.</value>
-        public IEnumerable<CodeFile> Files
-        {
-            get
-            {
-                return this.files.OrderBy(f => f.Path);
-            }
-        }
+        public IEnumerable<CodeFile> Files => this.files.OrderBy(f => f.Path);
 
         /// <summary>
         /// Gets the method metrics.
         /// </summary>
         /// <value>The method metrics.</value>
-        public IEnumerable<MethodMetric> MethodMetrics
-        {
-            get
-            {
-                return this.methodMetrics;
-            }
-        }
+        public IEnumerable<MethodMetric> MethodMetrics => this.methodMetrics;
 
         /// <summary>
         /// Gets the historic coverage information.
         /// </summary>
         /// <value>The historic coverage information.</value>
-        public IEnumerable<HistoricCoverage> HistoricCoverages
-        {
-            get
-            {
-                return this.historicCoverages;
-            }
-        }
+        public IEnumerable<HistoricCoverage> HistoricCoverages => this.historicCoverages;
 
         /// <summary>
         /// Gets the coverage type.
         /// </summary>
         /// <value>The coverage type.</value>
-        public CoverageType CoverageType
-        {
-            get
-            {
-                return this.files.Count == 0 ? CoverageType.MethodCoverage : CoverageType.LineCoverage;
-            }
-        }
+        public CoverageType CoverageType => this.files.Count == 0 ? CoverageType.MethodCoverage : CoverageType.LineCoverage;
 
         /// <summary>
         /// Gets the number of covered lines.
         /// </summary>
         /// <value>The covered lines.</value>
-        public int CoveredLines
-        {
-            get
-            {
-                return this.files.Sum(f => f.CoveredLines);
-            }
-        }
+        public int CoveredLines => this.files.Sum(f => f.CoveredLines);
 
         /// <summary>
         /// Gets the number of coverable lines.
         /// </summary>
         /// <value>The coverable lines.</value>
-        public int CoverableLines
-        {
-            get
-            {
-                return this.files.Sum(f => f.CoverableLines);
-            }
-        }
+        public int CoverableLines => this.files.Sum(f => f.CoverableLines);
 
         /// <summary>
         /// Gets the number of total lines.
         /// </summary>
         /// <value>The total lines.</value>
-        public int? TotalLines
-        {
-            get
-            {
-                return this.files.Sum(f => f.TotalLines);
-            }
-        }
+        public int? TotalLines => this.files.Sum(f => f.TotalLines);
 
         /// <summary>
         /// Gets or sets the coverage quota of the class.
@@ -175,13 +133,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <value>
         /// The number of covered branches.
         /// </value>
-        public int? CoveredBranches
-        {
-            get
-            {
-                return this.files.Sum(f => f.CoveredBranches);
-            }
-        }
+        public int? CoveredBranches => this.files.Sum(f => f.CoveredBranches);
 
         /// <summary>
         /// Gets the number of total branches.
@@ -189,25 +141,13 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <value>
         /// The number of total branches.
         /// </value>
-        public int? TotalBranches
-        {
-            get
-            {
-                return this.files.Sum(f => f.TotalBranches);
-            }
-        }
+        public int? TotalBranches => this.files.Sum(f => f.TotalBranches);
 
         /// <summary>
         /// Gets the branch coverage quota of the class.
         /// </summary>
         /// <value>The branch coverage quota.</value>
-        public decimal? BranchCoverageQuota
-        {
-            get
-            {
-                return (this.TotalBranches == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)this.CoveredBranches / (double)this.TotalBranches) / 10;
-            }
-        }
+        public decimal? BranchCoverageQuota => (this.TotalBranches == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)this.CoveredBranches / (double)this.TotalBranches) / 10;
 
         /// <summary>
         /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
@@ -235,10 +175,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
         /// </returns>
-        public override int GetHashCode()
-        {
-            return this.Name.GetHashCode();
-        }
+        public override int GetHashCode() => this.Name.GetHashCode();
 
         /// <summary>
         /// Adds the given file.
@@ -275,7 +212,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         {
             if (@class == null)
             {
-                throw new ArgumentNullException("class");
+                throw new ArgumentNullException(nameof(@class));
             }
 
             if (this.coverageQuota.HasValue && @class.coverageQuota.HasValue)

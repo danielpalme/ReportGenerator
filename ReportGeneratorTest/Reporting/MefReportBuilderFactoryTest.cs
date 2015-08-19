@@ -44,10 +44,7 @@ namespace Palmmedia.ReportGeneratorTest.Reporting
         /// <value>
         /// The type of the report.
         /// </value>
-        public string ReportType
-        {
-            get { return "Latex"; }
-        }
+        public string ReportType => "Latex";
 
         /// <summary>
         /// Gets or sets the target directory where reports are stored.

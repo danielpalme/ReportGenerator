@@ -31,7 +31,7 @@ namespace Palmmedia.ReportGenerator.Parser
         {
             if (reportFiles == null)
             {
-                throw new ArgumentNullException("reportFiles");
+                throw new ArgumentNullException(nameof(reportFiles));
             }
 
             var classSearcherFactory = new ClassSearcherFactory();

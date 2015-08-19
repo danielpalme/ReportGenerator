@@ -22,12 +22,12 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
             if (shortName == null)
             {
-                throw new ArgumentNullException("shortName");
+                throw new ArgumentNullException(nameof(shortName));
             }
 
             this.Name = name;
@@ -41,7 +41,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <value>
         /// The name.
         /// </value>
-        public string Name { get; private set; }
+        public string Name { get; }
 
         /// <summary>
         /// Gets the short name.
@@ -49,7 +49,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <value>
         /// The short name.
         /// </value>
-        public string ShortName { get; private set; }
+        public string ShortName { get; }
 
         /// <summary>
         /// Gets the id of the test method.
@@ -57,7 +57,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <value>
         /// The id.
         /// </value>
-        public long Id { get; private set; }
+        public long Id { get; }
 
         /// <summary>
         /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
@@ -85,9 +85,6 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
         /// </returns>
-        public override int GetHashCode()
-        {
-            return this.Name.GetHashCode();
-        }
+        public override int GetHashCode() => this.Name.GetHashCode();
     }
 }

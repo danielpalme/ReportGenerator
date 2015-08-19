@@ -118,7 +118,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         {
             if (testMethods == null)
             {
-                throw new ArgumentNullException("testMethods");
+                throw new ArgumentNullException(nameof(testMethods));
             }
 
             if (!testMethods.Any())
@@ -238,7 +238,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         {
             if (assemblies == null)
             {
-                throw new ArgumentNullException("assemblies");
+                throw new ArgumentNullException(nameof(assemblies));
             }
 
             this.reportTextWriter.WriteLine("<script type=\"text/javascript\">");
@@ -301,7 +301,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         {
             if (headers == null)
             {
-                throw new ArgumentNullException("headers");
+                throw new ArgumentNullException(nameof(headers));
             }
 
             this.reportTextWriter.WriteLine("<table class=\"overview\">");
@@ -324,7 +324,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         {
             if (headers == null)
             {
-                throw new ArgumentNullException("headers");
+                throw new ArgumentNullException(nameof(headers));
             }
 
             this.reportTextWriter.WriteLine("<table class=\"lineAnalysis\">");
@@ -375,7 +375,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         {
             if (metric == null)
             {
-                throw new ArgumentNullException("metric");
+                throw new ArgumentNullException(nameof(metric));
             }
 
             this.reportTextWriter.Write("<tr>");
@@ -398,7 +398,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         {
             if (analysis == null)
             {
-                throw new ArgumentNullException("analysis");
+                throw new ArgumentNullException(nameof(analysis));
             }
 
             string formattedLine = analysis.LineContent
@@ -492,7 +492,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         {
             if (historicCoverages == null)
             {
-                throw new ArgumentNullException("historicCoverages");
+                throw new ArgumentNullException(nameof(historicCoverages));
             }
 
             historicCoverages = this.FilterHistoricCoverages(historicCoverages, 100);
@@ -542,7 +542,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         {
             if (assembly == null)
             {
-                throw new ArgumentNullException("assembly");
+                throw new ArgumentNullException(nameof(assembly));
             }
 
             this.reportTextWriter.Write("<tr>");
@@ -571,7 +571,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         {
             if (@class == null)
             {
-                throw new ArgumentNullException("class");
+                throw new ArgumentNullException(nameof(@class));
             }
 
             string filenameColumn = @class.Name;

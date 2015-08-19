@@ -39,12 +39,12 @@ namespace Palmmedia.ReportGenerator.Reporting
         {
             if (assemblies == null)
             {
-                throw new ArgumentNullException("assemblies");
+                throw new ArgumentNullException(nameof(assemblies));
             }
 
             if (historyDirectory == null)
             {
-                throw new ArgumentNullException("historyDirectory");
+                throw new ArgumentNullException(nameof(historyDirectory));
             }
 
             this.assemblies = assemblies;

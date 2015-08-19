@@ -23,10 +23,7 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// <value>
         /// The type of the report.
         /// </value>
-        public override string ReportType
-        {
-            get { return "Latex"; }
-        }
+        public override string ReportType => "Latex";
 
         /// <summary>
         /// Creates a class report.

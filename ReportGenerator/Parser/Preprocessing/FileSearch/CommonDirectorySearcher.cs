@@ -18,7 +18,7 @@ namespace Palmmedia.ReportGenerator.Parser.Preprocessing.FileSearch
         {
             if (files == null)
             {
-                throw new ArgumentNullException("files");
+                throw new ArgumentNullException(nameof(files));
             }
 
             if (!files.Any())

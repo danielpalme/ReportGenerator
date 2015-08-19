@@ -16,7 +16,7 @@ namespace Palmmedia.ReportGenerator.Parser.Preprocessing.CodeAnalysis
         {
             if (classname == null)
             {
-                throw new ArgumentNullException("classname");
+                throw new ArgumentNullException(nameof(classname));
             }
 
             this.Classname = classname;
@@ -26,7 +26,7 @@ namespace Palmmedia.ReportGenerator.Parser.Preprocessing.CodeAnalysis
         /// Gets the classname.
         /// </summary>
         /// <value>The classname.</value>
-        internal string Classname { get; private set; }
+        internal string Classname { get; }
 
         /// <summary>
         /// Determines whether the given <see cref="ICSharpCode.NRefactory.PatternMatching.INode"/> matches the <see cref="SourceElement"/>.

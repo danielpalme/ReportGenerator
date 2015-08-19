@@ -19,7 +19,7 @@ namespace Palmmedia.ReportGenerator.Common
         {
             if (input == null)
             {
-                throw new ArgumentNullException("input");
+                throw new ArgumentNullException(nameof(input));
             }
 
             var result = new HashSet<T>();
@@ -42,7 +42,7 @@ namespace Palmmedia.ReportGenerator.Common
         {
             if (input == null)
             {
-                throw new ArgumentNullException("input");
+                throw new ArgumentNullException(nameof(input));
             }
 
             var result = new Queue<T>();
@@ -68,7 +68,7 @@ namespace Palmmedia.ReportGenerator.Common
         {
             if (element == null)
             {
-                throw new ArgumentNullException("element");
+                throw new ArgumentNullException(nameof(element));
             }
 
             XAttribute attribute = element.Attribute(attributeName);

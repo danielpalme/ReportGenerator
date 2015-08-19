@@ -30,11 +30,11 @@
         /// <summary>
         /// Gets the line visit status.
         /// </summary>
-        public LineVisitStatus LineVisitStatus { get; private set; }
+        public LineVisitStatus LineVisitStatus { get; }
 
         /// <summary>
         /// Gets the number of line visits.
         /// </summary>
-        public int LineVisits { get; private set; }
+        public int LineVisits { get; }
     }
 }

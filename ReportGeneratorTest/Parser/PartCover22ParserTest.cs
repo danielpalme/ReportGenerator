@@ -155,13 +155,10 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             Assert.AreEqual(0, assembliesWithoutPreprocessing.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.TestClass").MethodMetrics.Count(), "Wrong number of metrics");
         }
 
-        private static FileAnalysis GetFileAnalysis(IEnumerable<Assembly> assemblies, string className, string fileName)
-        {
-            return assemblies
+        private static FileAnalysis GetFileAnalysis(IEnumerable<Assembly> assemblies, string className, string fileName) => assemblies
                 .Single(a => a.Name == "Test").Classes
                 .Single(c => c.Name == className).Files
                 .Single(f => f.Path == fileName)
                 .AnalyzeFile();
-        }
     }
 }

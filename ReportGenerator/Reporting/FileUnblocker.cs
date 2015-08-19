@@ -12,10 +12,7 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// </summary>
         /// <param name="fileName">Name of the file.</param>
         /// <returns><c>true</c> if file was unblocked successfully; otherwise, <c>false</c></returns>
-        public static bool Unblock(string fileName)
-        {
-            return DeleteFile(fileName + ":Zone.Identifier");
-        }
+        public static bool Unblock(string fileName) => DeleteFile(fileName + ":Zone.Identifier");
 
         /// <summary>
         /// Deletes the file.
