@@ -60,9 +60,6 @@ Explanations:
                       without path information.
    History directory: Optional directory for storing persistent coverage information.
                       Can be used in future reports to show coverage evolution.
-   Filters:           Optional list of assemblies that should be included or excluded
-                      in the report. Exclusion filters take precedence over inclusion 
-                      filters. Wildcards are allowed.
    Assembly Filters:  Optional list of assemblies that should be included or excluded in the report.
    Class Filters:     Optional list of classes that should be included or excluded in the report.
                       Exclusion filters take precedence over inclusion filters.                      
