@@ -56,8 +56,7 @@ Explanations:
                       semicolon). Wildcards are allowed.
    Targetdirectory:   The directory where the generated report should be saved.
    Reporttypes:       The output formats and scope (separated by semicolon).
-                      Values: None, Html, HtmlSummary, Xml, XmlSummary, Latex,
-                              LatexSummary
+                      Values: Badges, Html, HtmlSummary, Latex, LatexSummary, TextSummary, Xml, XmlSummary
    SourceDirectories: Optional directories which contain the corresponding source code
                       (separated by semicolon).
                       The source files are used if coverage report contains classes
