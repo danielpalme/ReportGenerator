@@ -957,7 +957,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         {
             this.reportTextWriter.Write(string.Format(
                 CultureInfo.InvariantCulture,
-                "<div class=\"footer\">{0} {1} {2}<br />{3} - {4}<br /><a href=\"http://www.palmmedia.de\">www.palmmedia.de</a></div>",
+                "<div class=\"footer\">{0} {1} {2}<br />{3} - {4}<br /><a href=\"https://github.com/danielpalme/ReportGenerator\">GitHub</a> | <a href=\"http://www.palmmedia.de\">www.palmmedia.de</a></div>",
                 ReportResources.GeneratedBy,
                 typeof(IReportBuilder).Assembly.GetName().Name,
                 typeof(IReportBuilder).Assembly.GetName().Version,

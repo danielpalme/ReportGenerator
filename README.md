@@ -11,6 +11,7 @@ The following output formats are supported by ReportGenerator:
 * XML, XMLSummary
 * Latex, LatexSummary
 * TextSummary
+* Badges
 * [Custom reports](https://github.com/danielpalme/ReportGenerator/wiki/Custom-reports)
 
 **Compatibility:**
@@ -32,6 +33,9 @@ Twitter: [@danielpalme](http://twitter.com/danielpalme)
 The screenshots show two snippets of the generated reports:
 ![Screenshot 1](http://danielpalme.github.io/ReportGenerator/resources/screenshot1.png)
 ![Screenshot 2](http://danielpalme.github.io/ReportGenerator/resources/screenshot2.png)
+
+### Badges
+![Sample badge](http://danielpalme.github.io/ReportGenerator/resources/badge.svg)
 
 ## Usage
 ReportGenerator is a commandline tool which requires the following parameters:

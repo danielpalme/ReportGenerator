@@ -150,6 +150,9 @@
   <data name="Classes" xml:space="preserve">
     <value>Classes:</value>
   </data>
+  <data name="CodeCoverage" xml:space="preserve">
+    <value>Code coverage</value>
+  </data>
   <data name="CollapseAll" xml:space="preserve">
     <value>Collapse all</value>
   </data>
@@ -160,10 +163,13 @@
     <value>Coverable lines:</value>
   </data>
   <data name="Coverage" xml:space="preserve">
-    <value>Line Coverage</value>
+    <value>Line coverage</value>
   </data>
   <data name="Coverage2" xml:space="preserve">
-    <value>Line Coverage:</value>
+    <value>Line coverage:</value>
+  </data>
+  <data name="Coverage3" xml:space="preserve">
+    <value>Coverage</value>
   </data>
   <data name="CoverageReport" xml:space="preserve">
     <value>Coverage Report</value>

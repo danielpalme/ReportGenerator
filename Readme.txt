@@ -27,6 +27,7 @@ The following output formats are supported by ReportGenerator:
 -XML, XMLSummary
 -Latex, LatexSummary
 -TextSummary
+-Badges
 -Custom formats (https://reportgenerator.codeplex.com/documentation)
 
 Compatibility:
@@ -53,6 +54,10 @@ For further details take a look at LICENSE.txt.
 =======================================================================
 
 CHANGELOG
+
+2.3.0.0
+
+    * New: Issue #25: Added badges (SVG format)
 
 2.2.0.0
 

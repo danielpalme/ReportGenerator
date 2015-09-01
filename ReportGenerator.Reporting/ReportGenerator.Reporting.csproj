@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BadgeReportBuilder.cs" />
     <Compile Include="TextSummaryReportBuilder.cs" />
     <Compile Include="XmlReportBuilder.cs" />
     <Compile Include="XmlSummaryReportBuilder.cs" />
