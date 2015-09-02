@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Palmmedia.ReportGenerator;
+using Palmmedia.ReportGenerator.Logging;
 using Palmmedia.ReportGenerator.Reporting;
 
 namespace Palmmedia.ReportGeneratorTest

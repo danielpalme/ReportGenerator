@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using Palmmedia.ReportGenerator.Logging;
 using Palmmedia.ReportGenerator.Properties;
 using Palmmedia.ReportGenerator.Reporting;
 

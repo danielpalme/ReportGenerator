@@ -4,7 +4,7 @@ using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using log4net;
+using Palmmedia.ReportGenerator.Logging;
 using Palmmedia.ReportGenerator.Properties;
 
 namespace Palmmedia.ReportGenerator.Reporting
@@ -17,7 +17,7 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// <summary>
         /// The Logger.
         /// </summary>
-        private static readonly ILog Logger = LogManager.GetLogger(typeof(MefReportBuilderFactory));
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(MefReportBuilderFactory));
 
         /// <summary>
         /// Gets the available report types.

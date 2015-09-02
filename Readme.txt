@@ -55,6 +55,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+2.3.1.0
+
+    * Fix: Issue #26: Removed dependency to log4net
+    
 2.3.0.0
 
     * New: Issue #25: Added badges (SVG format)

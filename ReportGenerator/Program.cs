@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
-using log4net;
-using log4net.Appender;
+using Palmmedia.ReportGenerator.Logging;
 using Palmmedia.ReportGenerator.Parser;
 using Palmmedia.ReportGenerator.Properties;
 using Palmmedia.ReportGenerator.Reporting;
@@ -16,7 +15,7 @@ namespace Palmmedia.ReportGenerator
         /// <summary>
         /// The Logger.
         /// </summary>
-        private static readonly ILog Logger = LogManager.GetLogger(typeof(Program));
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(Program));
 
         /// <summary>
         /// Executes the report generation.
@@ -30,28 +29,12 @@ namespace Palmmedia.ReportGenerator
                 throw new ArgumentNullException(nameof(configuration));
             }
 
-            var appender = new ColoredConsoleAppender()
-            {
-                Layout = new log4net.Layout.PatternLayout("%message%newline")
-            };
-            appender.AddMapping(new ColoredConsoleAppender.LevelColors { Level = log4net.Core.Level.Warn, ForeColor = ColoredConsoleAppender.Colors.Purple | ColoredConsoleAppender.Colors.HighIntensity });
-            appender.AddMapping(new ColoredConsoleAppender.LevelColors { Level = log4net.Core.Level.Error, ForeColor = ColoredConsoleAppender.Colors.Red | ColoredConsoleAppender.Colors.HighIntensity });
-            appender.ActivateOptions();
-            log4net.Config.BasicConfigurator.Configure(appender);
-
             if (!configuration.Validate())
             {
                 return false;
             }
 
-            if (configuration.VerbosityLevel == VerbosityLevel.Info)
-            {
-                appender.Threshold = log4net.Core.Level.Info;
-            }
-            else if (configuration.VerbosityLevel == VerbosityLevel.Error)
-            {
-                appender.Threshold = log4net.Core.Level.Error;
-            }
+            LoggerFactory.VerbosityLevel = configuration.VerbosityLevel;
 
             var stopWatch = new System.Diagnostics.Stopwatch();
             stopWatch.Start();

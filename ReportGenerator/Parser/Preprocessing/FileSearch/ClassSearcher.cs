@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using log4net;
+using Palmmedia.ReportGenerator.Logging;
 using Palmmedia.ReportGenerator.Parser.Preprocessing.CodeAnalysis;
 using Palmmedia.ReportGenerator.Properties;
 
@@ -14,7 +14,7 @@ namespace Palmmedia.ReportGenerator.Parser.Preprocessing.FileSearch
         /// <summary>
         /// The Logger.
         /// </summary>
-        private static readonly ILog Logger = LogManager.GetLogger(typeof(ClassSearcher));
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(ClassSearcher));
 
         /// <summary>
         /// Dictionary containing the files a class is defined in by its classname.

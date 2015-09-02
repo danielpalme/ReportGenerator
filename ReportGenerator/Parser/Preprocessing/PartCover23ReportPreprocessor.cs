@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using log4net;
+using Palmmedia.ReportGenerator.Logging;
 using Palmmedia.ReportGenerator.Parser.Preprocessing.CodeAnalysis;
 using Palmmedia.ReportGenerator.Parser.Preprocessing.FileSearch;
 using Palmmedia.ReportGenerator.Properties;
@@ -17,7 +17,7 @@ namespace Palmmedia.ReportGenerator.Parser.Preprocessing
         /// <summary>
         /// The Logger.
         /// </summary>
-        private static readonly ILog Logger = LogManager.GetLogger(typeof(PartCover23ReportPreprocessor));
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(PartCover23ReportPreprocessor));
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PartCover23ReportPreprocessor"/> class.

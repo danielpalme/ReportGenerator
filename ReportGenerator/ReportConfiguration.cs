@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using log4net;
 using Palmmedia.ReportGenerator.Common;
+using Palmmedia.ReportGenerator.Logging;
 using Palmmedia.ReportGenerator.Properties;
 using Palmmedia.ReportGenerator.Reporting;
 
@@ -17,7 +17,7 @@ namespace Palmmedia.ReportGenerator
         /// <summary>
         /// The Logger.
         /// </summary>
-        private static readonly ILog Logger = LogManager.GetLogger(typeof(ReportConfiguration));
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(ReportConfiguration));
 
         /// <summary>
         /// The report files.

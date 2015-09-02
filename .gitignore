@@ -1,12 +1,10 @@
 /packages/CoverageTools
 /packages/ICSharpCode.NRefactory*
-/packages/log4net*
 /packages/Mono.Cecil*
 /packages/Moq*
 /packages/MSBuildTasks*
 /packages/NuGet.CommandLine*
 /packages/OpenCover*
-/packages/ReportGenerator*
 /TestResults
 /ReportGenerator.Testprojects/TestResults
 /target

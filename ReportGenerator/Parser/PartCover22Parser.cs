@@ -4,8 +4,8 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using log4net;
 using Palmmedia.ReportGenerator.Common;
+using Palmmedia.ReportGenerator.Logging;
 using Palmmedia.ReportGenerator.Parser.Analysis;
 using Palmmedia.ReportGenerator.Properties;
 
@@ -19,7 +19,7 @@ namespace Palmmedia.ReportGenerator.Parser
         /// <summary>
         /// The Logger.
         /// </summary>
-        private static readonly ILog Logger = LogManager.GetLogger(typeof(PartCover22Parser));
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(PartCover22Parser));
 
         /// <summary>
         /// Dictionary containing the file ids by the file's path.

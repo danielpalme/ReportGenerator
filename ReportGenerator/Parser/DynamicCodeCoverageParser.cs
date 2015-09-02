@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using log4net;
+using Palmmedia.ReportGenerator.Logging;
 using Palmmedia.ReportGenerator.Parser.Analysis;
 using Palmmedia.ReportGenerator.Properties;
 
@@ -19,7 +19,7 @@ namespace Palmmedia.ReportGenerator.Parser
         /// <summary>
         /// The Logger.
         /// </summary>
-        private static readonly ILog Logger = LogManager.GetLogger(typeof(DynamicCodeCoverageParser));
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(DynamicCodeCoverageParser));
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DynamicCodeCoverageParser"/> class.

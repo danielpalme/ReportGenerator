@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using log4net;
+using Palmmedia.ReportGenerator.Logging;
 using Palmmedia.ReportGenerator.Parser;
 using Palmmedia.ReportGenerator.Parser.Analysis;
 using Palmmedia.ReportGenerator.Properties;
@@ -19,7 +18,7 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// <summary>
         /// The Logger.
         /// </summary>
-        private static readonly ILog Logger = LogManager.GetLogger(typeof(ReportGenerator));
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(ReportGenerator));
 
         /// <summary>
         /// The parser to use.
@@ -112,7 +111,6 @@ namespace Palmmedia.ReportGenerator.Reporting
                     counter++;
 
                     Logger.DebugFormat(
-                        CultureInfo.InvariantCulture,
                         " " + Resources.CreatingReport,
                         counter,
                         numberOfClasses,
@@ -135,7 +133,6 @@ namespace Palmmedia.ReportGenerator.Reporting
                         catch (Exception ex)
                         {
                             Logger.ErrorFormat(
-                                CultureInfo.InvariantCulture,
                                 "  " + Resources.ErrorDuringRenderingClassReport,
                                 @class.Name,
                                 renderer.ReportType,
@@ -157,7 +154,6 @@ namespace Palmmedia.ReportGenerator.Reporting
                 catch (Exception ex)
                 {
                     Logger.ErrorFormat(
-                        CultureInfo.InvariantCulture,
                         "  " + Resources.ErrorDuringRenderingSummaryReport,
                         renderer.ReportType,
                         ex.Message);

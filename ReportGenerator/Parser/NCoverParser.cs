@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using log4net;
+using Palmmedia.ReportGenerator.Logging;
 using Palmmedia.ReportGenerator.Parser.Analysis;
 using Palmmedia.ReportGenerator.Properties;
 
@@ -17,7 +17,7 @@ namespace Palmmedia.ReportGenerator.Parser
         /// <summary>
         /// The Logger.
         /// </summary>
-        private static readonly ILog Logger = LogManager.GetLogger(typeof(NCoverParser));
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(NCoverParser));
 
         /// <summary>
         /// The module elements of the report.
