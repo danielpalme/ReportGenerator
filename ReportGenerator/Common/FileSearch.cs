@@ -43,11 +43,16 @@ namespace Palmmedia.ReportGenerator.Common
                 throw new ArgumentException("Pattern in no valid file pattern.", nameof(pattern));
             }
 
-            bool directoryIsUNCPath = pattern.StartsWith(@"\\", StringComparison.Ordinal);
+            bool directoryIsUNCPath = pattern.StartsWith("\\", StringComparison.Ordinal);
 
             if (directoryIsUNCPath)
             {
-                parts[0] = @"\\" + parts[0];
+                parts[0] = "\\" + parts[0];
+            }
+
+            if (pattern.StartsWith("/", StringComparison.Ordinal))
+            {
+                parts[0] = "/" + parts[0];
             }
 
             if (parts[0].EndsWith(":"))
