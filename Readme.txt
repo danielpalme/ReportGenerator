@@ -57,7 +57,7 @@ CHANGELOG
 
 2.3.1.0
 
-    * Fix: Issue #26: Removed dependency to log4net
+    * Fix: Issue #26: Improved Mono/Linux support (removed log4net)
     
 2.3.0.0
 
