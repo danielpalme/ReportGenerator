@@ -55,6 +55,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+2.3.2.0
+
+    * Fix: Issue #27: Improved CSS
+    
 2.3.1.0
 
     * Fix: Issue #26: Improved Mono/Linux support (removed log4net)
