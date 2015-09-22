@@ -33,7 +33,7 @@ a.collapsed { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUg
 
 #testmethods { position: fixed; right: 0; top: 200px; background-color: #fff; width: 0; height: 300px; -webkit-transition:all .5s linear;-moz-transition:all .5s linear;transition:all .5s; border-left: solid 25px #a7bac5; border-top: solid 1px #a7bac5; border-bottom: solid 1px #a7bac5; }
 #testmethods:hover, #testmethods.pinned { width: 600px; }
-#testmethods h2 { -moz-transform: rotate(270deg); -o-transform: rotate(270deg); -webkit-transform: rotate(270deg); transform: rotate(270deg); text-align: center; width: 300px; height: 300px; padding: 0; margin: 0; position: absolute; left: -21px; }
+#testmethods h2 { -moz-transform: rotate(270deg); -o-transform: rotate(270deg); -webkit-transform: rotate(270deg); transform: rotate(270deg); text-align: center; width: 300px; padding: 0; margin: 0; position: absolute; left: -162px; top:140px; }
 #testmethods div { margin: 10px; overflow: auto; height: 280px; font-size: 0.9em; }
 #testmethods span { max-width: 580px; white-space: nowrap; display: block; }
 #pin { position: absolute; left: -25px; width: 25px; height: 300px; background-position: 4px 2px; background-repeat: no-repeat; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAPCAYAAAAGRPQsAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAAOVJREFUOE+dkzsShCAMhr0TR7GxsKW1sPUAVngCWofK2hn6PVeWwPBMmGW2+Bwh5CcvJgBIGHuDFAIEslyg7cdtZ/sv0o8+1yBSMJ+vM1GnHv5j9E6EPNvtzLwjR50ag9TjqZL0pGbEiwjNc8HRuWA6luyENeJqx7ODaho0+SjczcYZxoUCbYOqyDxuJNSgKBHjOolF73a4gIiVCySmigex2HMjkFnheJqalYtIEsFa9iJkXkglUqI2KoDpp/3/xUJKtNv1eBCRSHAMIjg2SdyPUT3Y8ZWwQoixL9RjQ4fUn0v1veELzKqo/wKmCB4AAAAASUVORK5CYII=);}
