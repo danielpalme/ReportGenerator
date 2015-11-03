@@ -47,7 +47,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Preprocessing
             var classSearcherFactory = new ClassSearcherFactory();
             new PartCover23ReportPreprocessor(report, classSearcherFactory, new ClassSearcher(string.Empty)).Execute();
 
-            Assert.AreEqual(8, report.Root.Elements("File").Count(), "Wrong number of total files.");
+            Assert.AreEqual(7, report.Root.Elements("File").Count(), "Wrong number of total files.");
 
             var gettersAndSetters = report.Root.Elements("Type")
                 .Single(c => c.Attribute("name").Value == "Test.TestClass2")

@@ -73,7 +73,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// <param name="title">The title.</param>
         public void BeginSummaryReport(string targetDirectory, string title)
         {
-            string targetPath = Path.Combine(targetDirectory, "index.htm");
+            string targetPath = Path.Combine(targetDirectory, this.onlySummary ? "summary.htm" : "index.htm");
             this.CreateTextWriter(targetPath);
 
             using (var cssStream = GetCombinedCss())

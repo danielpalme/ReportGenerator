@@ -1,8 +1,8 @@
-..\packages\OpenCover.4.5.3522\OpenCover.Console.exe "-register:user" "-target:CSharp\Project\bin\Debug\Test.exe" "-filter:+[Test]*" "-output:CSharp\Reports\OpenCover.xml" "-excludebyattribute:*.CoverageExclude*"
+..\packages\OpenCover.4.6.166\tools\OpenCover.Console.exe "-register:user" "-target:CSharp\Project\bin\Debug\Test.exe" "-filter:+[Test]*" "-output:CSharp\Reports\OpenCover.xml" "-excludebyattribute:*.CoverageExclude*"
 
-..\packages\OpenCover.4.5.3522\OpenCover.Console.exe -register:user -"target:C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\IDE\MSTest.exe" "-targetargs:/noisolation /testcontainer:CSharp\Project\bin\Debug\Test.exe" "-filter:+[*]*" "-output:CSharp\Reports\OpenCoverWithTrackedMethods.xml" "-coverbytest:*"
+..\packages\OpenCover.4.6.166\tools\OpenCover.Console.exe -register:user -"target:C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\MSTest.exe" "-targetargs:/noisolation /testcontainer:CSharp\Project\bin\Debug\Test.exe" "-filter:+[*]*" "-output:CSharp\Reports\OpenCoverWithTrackedMethods.xml" "-coverbytest:*"
 
-..\packages\OpenCover.4.5.3522\OpenCover.Console.exe -register:user "-target:FSharp\Project\bin\Debug\Test.exe" "-output:FSharp\Reports\OpenCover.xml"
+..\packages\OpenCover.4.6.166\tools\OpenCover.Console.exe -register:user "-target:FSharp\Project\bin\Debug\Test.exe" "-output:FSharp\Reports\OpenCover.xml"
 
 $pathToReplace1 = [regex]::Escape((Get-Location).Path + "\CSharp\Project\bin\Debug")
 $pathToReplace2 = [regex]::Escape((Get-Location).Path + "\CSharp\Project")

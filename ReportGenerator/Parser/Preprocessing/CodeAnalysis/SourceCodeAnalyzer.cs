@@ -171,6 +171,11 @@ namespace Palmmedia.ReportGenerator.Parser.Preprocessing.CodeAnalysis
                 {
                     return null;
                 }
+                catch (InvalidCastException)
+                {
+                    // NRefactory does not support .NET 4.6 yet
+                    return null;
+                }
                 catch (UnauthorizedAccessException)
                 {
                     return null;

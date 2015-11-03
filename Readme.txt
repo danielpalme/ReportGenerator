@@ -57,6 +57,10 @@ CHANGELOG
 
 2.3.2.0
 
+    * Fix: Issue #30: Improved support of .NET 4.6
+
+2.3.2.0
+
     * Fix: Issue #27: Improved CSS
     
 2.3.1.0
