@@ -55,7 +55,11 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
-2.3.2.0
+2.3.4.0
+
+    * Fix: Issue #31: Improved support for shared folders
+
+2.3.3.0
 
     * Fix: Issue #30: Improved support of .NET 4.6
 
