@@ -55,6 +55,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+2.3.5.0
+
+    * New: Added branch coverage to XML report
+
 2.3.4.0
 
     * Fix: Issue #31: Improved support for shared folders

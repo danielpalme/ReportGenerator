@@ -200,6 +200,9 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             this.reportTextWriter.WriteAttributeString("line", analysis.LineNumber.ToString(CultureInfo.InvariantCulture));
             this.reportTextWriter.WriteAttributeString("visits", analysis.LineVisits.ToString(CultureInfo.InvariantCulture));
             this.reportTextWriter.WriteAttributeString("coverage", analysis.LineVisitStatus.ToString());
+            this.reportTextWriter.WriteAttributeString("coveredbranches", analysis.CoveredBranches.HasValue ? analysis.CoveredBranches.Value.ToString(CultureInfo.InvariantCulture) : string.Empty);
+            this.reportTextWriter.WriteAttributeString("totalbranches", analysis.TotalBranches.HasValue ? analysis.TotalBranches.Value.ToString(CultureInfo.InvariantCulture) : string.Empty);
+
             this.reportTextWriter.WriteAttributeString("content", XmlRenderer.ReplaceInvalidXmlChars(analysis.LineContent));
             this.reportTextWriter.WriteEndElement();
         }
@@ -249,6 +252,10 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             this.reportTextWriter.WriteAttributeString("coveredlines", assembly.CoveredLines.ToString(CultureInfo.InvariantCulture));
             this.reportTextWriter.WriteAttributeString("coverablelines", assembly.CoverableLines.ToString(CultureInfo.InvariantCulture));
             this.reportTextWriter.WriteAttributeString("totallines", assembly.TotalLines.HasValue ? assembly.TotalLines.Value.ToString(CultureInfo.InvariantCulture) : string.Empty);
+            this.reportTextWriter.WriteAttributeString("branchcoverage", assembly.BranchCoverageQuota.HasValue ? assembly.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : string.Empty);
+            this.reportTextWriter.WriteAttributeString("coveredbranches", assembly.CoveredBranches.HasValue ? assembly.CoveredBranches.Value.ToString(CultureInfo.InvariantCulture) : string.Empty);
+            this.reportTextWriter.WriteAttributeString("totalbranches", assembly.TotalBranches.HasValue ? assembly.TotalBranches.Value.ToString(CultureInfo.InvariantCulture) : string.Empty);
+
 
             this.closeAssemblyNode = true;
         }
@@ -270,6 +277,9 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             this.reportTextWriter.WriteAttributeString("coveredlines", @class.CoveredLines.ToString(CultureInfo.InvariantCulture));
             this.reportTextWriter.WriteAttributeString("coverablelines", @class.CoverableLines.ToString(CultureInfo.InvariantCulture));
             this.reportTextWriter.WriteAttributeString("totallines", @class.TotalLines.HasValue ? @class.TotalLines.Value.ToString(CultureInfo.InvariantCulture) : string.Empty);
+            this.reportTextWriter.WriteAttributeString("branchcoverage", @class.BranchCoverageQuota.HasValue ? @class.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : string.Empty);
+            this.reportTextWriter.WriteAttributeString("coveredbranches", @class.CoveredBranches.HasValue ? @class.CoveredBranches.Value.ToString(CultureInfo.InvariantCulture) : string.Empty);
+            this.reportTextWriter.WriteAttributeString("totalbranches", @class.TotalBranches.HasValue ? @class.TotalBranches.Value.ToString(CultureInfo.InvariantCulture) : string.Empty);
             this.reportTextWriter.WriteEndElement();
         }
 
