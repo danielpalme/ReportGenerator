@@ -58,6 +58,7 @@ CHANGELOG
 2.3.5.0
 
     * New: Added branch coverage to XML report
+    * Fix: Issue #33: Improved handling of obfuscated getters and setters
 
 2.3.4.0
 
