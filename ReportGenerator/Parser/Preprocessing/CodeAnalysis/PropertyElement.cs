@@ -9,6 +9,9 @@ namespace Palmmedia.ReportGenerator.Parser.Preprocessing.CodeAnalysis
     /// </summary>
     internal class PropertyElement : SourceElement
     {
+        private const string GetterPrefix = "get_";
+        private const string SetterPrefix = "set_";
+
         /// <summary>
         /// The name of the property.
         /// </summary>
@@ -27,7 +30,17 @@ namespace Palmmedia.ReportGenerator.Parser.Preprocessing.CodeAnalysis
                 throw new ArgumentNullException(nameof(name));
             }
 
-            this.name = name.Substring(4);
+            this.name = name;
+
+            //Cut off prefix only if property starts with standard getter ("get_") / setter prefix ("set_")
+            if (this.name.StartsWith(GetterPrefix, StringComparison.Ordinal))
+            {
+                this.name = name.Substring(GetterPrefix.Length);
+            }
+            else if (this.name.StartsWith(SetterPrefix, StringComparison.Ordinal))
+            {
+                this.name = name.Substring(SetterPrefix.Length);
+            }
         }
 
         /// <summary>
