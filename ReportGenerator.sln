@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{CF7103C9-F21C-49AC-BD14-C7EBCEA2FA21}"
 	ProjectSection(SolutionItems) = preProject
@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSharp", "CSharp", "{B27F2C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{792589C7-7E2C-4C31-9FB3-A64F85BDF826}"
 	ProjectSection(SolutionItems) = preProject
+		ReportGenerator.Testprojects\CSharp\Reports\dotCover.xml = ReportGenerator.Testprojects\CSharp\Reports\dotCover.xml
 		ReportGenerator.Testprojects\CSharp\Reports\DynamicCodeCoverage.xml = ReportGenerator.Testprojects\CSharp\Reports\DynamicCodeCoverage.xml
 		ReportGenerator.Testprojects\CSharp\Reports\MultiDynamicCodeCoverage.xml = ReportGenerator.Testprojects\CSharp\Reports\MultiDynamicCodeCoverage.xml
 		ReportGenerator.Testprojects\CSharp\Reports\MultiNCover1.5.8.xml = ReportGenerator.Testprojects\CSharp\Reports\MultiNCover1.5.8.xml
@@ -37,7 +38,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FSharp", "FSharp", "{922380
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{8775E975-19C9-4F40-869B-04A8488AECC3}"
 	ProjectSection(SolutionItems) = preProject
+		ReportGenerator.Testprojects\FSharp\Reports\dotCover.xml = ReportGenerator.Testprojects\FSharp\Reports\dotCover.xml
 		ReportGenerator.Testprojects\FSharp\Reports\DynamicCodeCoverage.xml = ReportGenerator.Testprojects\FSharp\Reports\DynamicCodeCoverage.xml
+		ReportGenerator.Testprojects\CSharp\Reports\MultidotCover.xml = ReportGenerator.Testprojects\CSharp\Reports\MultidotCover.xml
 		ReportGenerator.Testprojects\FSharp\Reports\OpenCover.xml = ReportGenerator.Testprojects\FSharp\Reports\OpenCover.xml
 		ReportGenerator.Testprojects\FSharp\Reports\VisualStudio2010.coveragexml = ReportGenerator.Testprojects\FSharp\Reports\VisualStudio2010.coveragexml
 		ReportGenerator.Testprojects\FSharp\Reports\VisualStudio2013.coveragexml = ReportGenerator.Testprojects\FSharp\Reports\VisualStudio2013.coveragexml

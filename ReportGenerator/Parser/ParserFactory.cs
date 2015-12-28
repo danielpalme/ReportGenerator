@@ -76,7 +76,27 @@ namespace Palmmedia.ReportGenerator.Parser
                 return parsers;
             }
 
-            if (report.Descendants("PartCoverReport").Any())
+            if (report.Descendants("CoverageSession").Any())
+            {
+                foreach (var item in report.Descendants("CoverageSession"))
+                {
+                    Logger.Debug(" " + Resources.PreprocessingReport);
+                    new OpenCoverReportPreprocessor(item, classSearcherFactory, globalClassSearcher).Execute();
+                    Logger.DebugFormat(" " + Resources.InitiatingParser, "OpenCover");
+                    parsers.Add(new OpenCoverParser(item));
+                }
+            }
+            else if (report.Descendants("Root").Where(e => e.Attribute("ReportType") != null && e.Attribute("ReportType").Value == "DetailedXml").Any())
+            {
+                foreach (var item in report.Descendants("Root").Where(e => e.Attribute("ReportType") != null && e.Attribute("ReportType").Value == "DetailedXml"))
+                {
+                    Logger.Debug(" " + Resources.PreprocessingReport);
+                    new DotCoverReportPreprocessor(item).Execute();
+                    Logger.DebugFormat(" " + Resources.InitiatingParser, "dotCover");
+                    parsers.Add(new DotCoverParser(item));
+                }
+            }
+            else if (report.Descendants("PartCoverReport").Any())
             {
                 // PartCover 2.2 and PartCover 2.3 reports differ in version attribute, so use this to determine the correct parser
                 if (report.Descendants("PartCoverReport").First().Attribute("ver") != null)
@@ -98,16 +118,6 @@ namespace Palmmedia.ReportGenerator.Parser
                         Logger.DebugFormat(" " + Resources.InitiatingParser, "PartCover 2.3");
                         parsers.Add(new PartCover23Parser(item));
                     }
-                }
-            }
-            else if (report.Descendants("CoverageSession").Any())
-            {
-                foreach (var item in report.Descendants("CoverageSession"))
-                {
-                    Logger.Debug(" " + Resources.PreprocessingReport);
-                    new OpenCoverReportPreprocessor(item, classSearcherFactory, globalClassSearcher).Execute();
-                    Logger.DebugFormat(" " + Resources.InitiatingParser, "OpenCover");
-                    parsers.Add(new OpenCoverParser(item));
                 }
             }
             else if (report.Descendants("coverage").Any())

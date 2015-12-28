@@ -1,0 +1,776 @@
+﻿<root>
+    <Root CoveredStatements="128" TotalStatements="204" CoveragePercent="63" ReportType="DetailedXml" DotCoverVersion="10.0.2">
+      <FileIndices>
+        <File Index="1" Name="C:\temp\analyzertestclass.cs" />
+        <File Index="2" Name="C:\temp\classwithexcludes.cs" />
+        <File Index="3" Name="C:\temp\codecontract_contract.cs" />
+        <File Index="4" Name="C:\temp\codecontract_target.cs" />
+        <File Index="5" Name="C:\temp\genericclass.cs" />
+        <File Index="6" Name="C:\temp\notmatchingfilename.cs" />
+        <File Index="7" Name="C:\temp\partialclasswithautoproperties2.cs" />
+        <File Index="8" Name="C:\temp\partialclasswithautoproperties.cs" />
+        <File Index="9" Name="C:\temp\partialclass2.cs" />
+        <File Index="10" Name="C:\temp\partialclass.cs" />
+        <File Index="11" Name="C:\temp\program.cs" />
+        <File Index="12" Name="C:\temp\abstractclass.cs" />
+        <File Index="13" Name="C:\temp\testclass.cs" />
+        <File Index="14" Name="C:\temp\testclass2.cs" />
+        <File Index="15" Name="C:\temp\asyncclass.cs" />
+      </FileIndices>
+      <Assembly Name="Test" CoveredStatements="128" TotalStatements="204" CoveragePercent="63">
+        <Namespace Name="Test" CoveredStatements="128" TotalStatements="204" CoveragePercent="63">
+          <Type Name="AbstractClass" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+            <Method Name=".ctor():System.Void" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+              <Statement FileIndex="12" Line="7" Column="9" EndLine="7" EndColumn="31" Covered="True" />
+              <Statement FileIndex="12" Line="8" Column="9" EndLine="8" EndColumn="10" Covered="True" />
+              <Statement FileIndex="12" Line="9" Column="13" EndLine="9" EndColumn="60" Covered="True" />
+              <Statement FileIndex="12" Line="10" Column="9" EndLine="10" EndColumn="10" Covered="True" />
+            </Method>
+          </Type>
+          <Type Name="AbstractClass_SampleImpl1" CoveredStatements="4" TotalStatements="8" CoveragePercent="50">
+            <Method Name=".ctor():System.Void" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+              <Statement FileIndex="12" Line="20" Column="15" EndLine="20" EndColumn="21" Covered="True" />
+              <Statement FileIndex="12" Line="21" Column="9" EndLine="21" EndColumn="10" Covered="True" />
+              <Statement FileIndex="12" Line="22" Column="13" EndLine="22" EndColumn="58" Covered="True" />
+              <Statement FileIndex="12" Line="23" Column="9" EndLine="23" EndColumn="10" Covered="True" />
+            </Method>
+            <Method Name="Method1():System.Void" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+              <Statement FileIndex="12" Line="26" Column="9" EndLine="26" EndColumn="10" Covered="False" />
+              <Statement FileIndex="12" Line="27" Column="13" EndLine="27" EndColumn="49" Covered="False" />
+            </Method>
+            <Method Name="Method2():System.Void" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+              <Statement FileIndex="12" Line="31" Column="9" EndLine="31" EndColumn="10" Covered="False" />
+              <Statement FileIndex="12" Line="32" Column="13" EndLine="32" EndColumn="49" Covered="False" />
+            </Method>
+          </Type>
+          <Type Name="AbstractClass_SampleImpl2" CoveredStatements="4" TotalStatements="8" CoveragePercent="50">
+            <Method Name=".ctor():System.Void" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+              <Statement FileIndex="12" Line="39" Column="15" EndLine="39" EndColumn="21" Covered="True" />
+              <Statement FileIndex="12" Line="40" Column="9" EndLine="40" EndColumn="10" Covered="True" />
+              <Statement FileIndex="12" Line="41" Column="13" EndLine="41" EndColumn="58" Covered="True" />
+              <Statement FileIndex="12" Line="42" Column="9" EndLine="42" EndColumn="10" Covered="True" />
+            </Method>
+            <Method Name="Method1():System.Void" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+              <Statement FileIndex="12" Line="45" Column="9" EndLine="45" EndColumn="10" Covered="False" />
+              <Statement FileIndex="12" Line="46" Column="13" EndLine="46" EndColumn="49" Covered="False" />
+            </Method>
+            <Method Name="Method2():System.Void" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+              <Statement FileIndex="12" Line="50" Column="9" EndLine="50" EndColumn="10" Covered="False" />
+              <Statement FileIndex="12" Line="51" Column="13" EndLine="51" EndColumn="49" Covered="False" />
+            </Method>
+          </Type>
+          <Type Name="AbstractGenericClass&lt;TModel,TState&gt;" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+            <Method Name="PostProcess(Test.ISomeObjectInterface&lt;TModel,TState&gt;):System.Boolean" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+              <Statement FileIndex="5" Line="12" Column="9" EndLine="12" EndColumn="10" Covered="False" />
+              <Statement FileIndex="5" Line="13" Column="13" EndLine="13" EndColumn="25" Covered="False" />
+              <Statement FileIndex="5" Line="14" Column="9" EndLine="14" EndColumn="10" Covered="False" />
+            </Method>
+          </Type>
+          <Type Name="AnalyzerTestClass" CoveredStatements="0" TotalStatements="12" CoveragePercent="0">
+            <Method Name=".ctor():System.Void" CoveredStatements="0" TotalStatements="4" CoveragePercent="0">
+              <Statement FileIndex="1" Line="9" Column="9" EndLine="9" EndColumn="35" Covered="False" />
+              <Statement FileIndex="1" Line="10" Column="9" EndLine="10" EndColumn="10" Covered="False" />
+              <Statement FileIndex="1" Line="11" Column="13" EndLine="11" EndColumn="40" Covered="False" />
+              <Statement FileIndex="1" Line="12" Column="9" EndLine="12" EndColumn="10" Covered="False" />
+            </Method>
+            <Method Name="DoSomething(System.String,System.String[],System.Guid,System.Collections.Generic.IEnumerable&lt;System.String&gt;,System.Collections.Generic.IList&lt;System.String&gt;,System.Decimal,System.Int32,System.Int64,System.Collections.Generic.Dictionary&lt;System.String,System.Int32&gt;,System.Int32,System.Single,System.Double,System.Boolean,System.Byte,System.Char,System.Object,System.SByte,System.Int16,System.UInt32,System.UInt64,System.UInt16,ICSharpCode.NRefactory.PatternMatching.INode):System.String" CoveredStatements="0" TotalStatements="4" CoveragePercent="0">
+              <Statement FileIndex="1" Line="37" Column="9" EndLine="37" EndColumn="10" Covered="False" />
+              <Statement FileIndex="1" Line="38" Column="13" EndLine="38" EndColumn="19" Covered="False" />
+              <Statement FileIndex="1" Line="39" Column="13" EndLine="39" EndColumn="25" Covered="False" />
+              <Statement FileIndex="1" Line="40" Column="9" EndLine="40" EndColumn="10" Covered="False" />
+            </Method>
+            <Method Name="GenericMethod&lt;T1,T2&gt;(T1,T2,System.Int32):System.Void" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+              <Statement FileIndex="1" Line="43" Column="9" EndLine="43" EndColumn="10" Covered="False" />
+              <Statement FileIndex="1" Line="44" Column="9" EndLine="44" EndColumn="10" Covered="False" />
+            </Method>
+            <Method Name="get_AutoProperty():System.String" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+              <Statement FileIndex="1" Line="46" Column="38" EndLine="46" EndColumn="42" Covered="False" />
+            </Method>
+            <Method Name="set_AutoProperty(System.String):System.Void" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+              <Statement FileIndex="1" Line="46" Column="43" EndLine="46" EndColumn="47" Covered="False" />
+            </Method>
+          </Type>
+          <Type Name="AsyncClass" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+            <Type Name="&lt;SendAsync&gt;d__0" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+              <Method Name="MoveNext():System.Void" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+                <Statement FileIndex="15" Line="10" Column="9" EndLine="10" EndColumn="10" Covered="True" />
+                <Statement FileIndex="15" Line="11" Column="13" EndLine="11" EndColumn="51" Covered="True" />
+                <Statement FileIndex="15" Line="12" Column="13" EndLine="12" EndColumn="69" Covered="True" />
+                <Statement FileIndex="15" Line="13" Column="9" EndLine="13" EndColumn="10" Covered="True" />
+              </Method>
+            </Type>
+          </Type>
+          <Type Name="ClassWithExcludes" CoveredStatements="8" TotalStatements="10" CoveragePercent="80">
+            <Method Name="ExcludedMethod():System.Void" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
+              <Statement FileIndex="2" Line="18" Column="9" EndLine="18" EndColumn="10" Covered="True" />
+              <Statement FileIndex="2" Line="19" Column="13" EndLine="19" EndColumn="44" Covered="True" />
+              <Statement FileIndex="2" Line="20" Column="9" EndLine="20" EndColumn="10" Covered="True" />
+            </Method>
+            <Method Name="get_ExcludedProperty():System.String" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+              <Statement FileIndex="2" Line="9" Column="42" EndLine="9" EndColumn="46" Covered="False" />
+            </Method>
+            <Method Name="get_IncludedProperty():System.String" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+              <Statement FileIndex="2" Line="6" Column="42" EndLine="6" EndColumn="46" Covered="False" />
+            </Method>
+            <Method Name="IncludedMethod():System.Void" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
+              <Statement FileIndex="2" Line="12" Column="9" EndLine="12" EndColumn="10" Covered="True" />
+              <Statement FileIndex="2" Line="13" Column="13" EndLine="13" EndColumn="44" Covered="True" />
+              <Statement FileIndex="2" Line="14" Column="9" EndLine="14" EndColumn="10" Covered="True" />
+            </Method>
+            <Method Name="set_ExcludedProperty(System.String):System.Void" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+              <Statement FileIndex="2" Line="9" Column="47" EndLine="9" EndColumn="51" Covered="True" />
+            </Method>
+            <Method Name="set_IncludedProperty(System.String):System.Void" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+              <Statement FileIndex="2" Line="6" Column="47" EndLine="6" EndColumn="51" Covered="True" />
+            </Method>
+          </Type>
+          <Type Name="CodeContract_Contract" CoveredStatements="0" TotalStatements="4" CoveragePercent="0">
+            <Method Name="Calculate(System.Int32):System.Int32" CoveredStatements="0" TotalStatements="4" CoveragePercent="0">
+              <Statement FileIndex="3" Line="10" Column="9" EndLine="10" EndColumn="10" Covered="False" />
+              <Statement FileIndex="3" Line="11" Column="13" EndLine="11" EndColumn="88" Covered="False" />
+              <Statement FileIndex="3" Line="13" Column="13" EndLine="13" EndColumn="33" Covered="False" />
+              <Statement FileIndex="3" Line="14" Column="9" EndLine="14" EndColumn="10" Covered="False" />
+            </Method>
+          </Type>
+          <Type Name="CodeContract_Target" CoveredStatements="7" TotalStatements="7" CoveragePercent="100">
+            <Method Name="Calculate(System.Int32):System.Int32" CoveredStatements="7" TotalStatements="7" CoveragePercent="100">
+              <Statement FileIndex="4" Line="7" Column="9" EndLine="7" EndColumn="10" Covered="True" />
+              <Statement FileIndex="4" Line="8" Column="13" EndLine="8" EndColumn="27" Covered="True" />
+              <Statement FileIndex="4" Line="9" Column="13" EndLine="9" EndColumn="14" Covered="True" />
+              <Statement FileIndex="4" Line="10" Column="17" EndLine="10" EndColumn="26" Covered="True" />
+              <Statement FileIndex="4" Line="13" Column="13" EndLine="13" EndColumn="14" Covered="True" />
+              <Statement FileIndex="4" Line="14" Column="17" EndLine="14" EndColumn="26" Covered="True" />
+              <Statement FileIndex="4" Line="16" Column="9" EndLine="16" EndColumn="10" Covered="True" />
+            </Method>
+          </Type>
+          <Type Name="CoverageExcludeAttribute" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
+          <Type Name="GenericClass&lt;TModel,TState&gt;" CoveredStatements="8" TotalStatements="8" CoveragePercent="100">
+            <Method Name="PostProcess(Test.ISomeObjectInterface&lt;TModel,TState&gt;):System.Boolean" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+              <Statement FileIndex="5" Line="28" Column="9" EndLine="28" EndColumn="10" Covered="True" />
+              <Statement FileIndex="5" Line="29" Column="13" EndLine="29" EndColumn="46" Covered="True" />
+              <Statement FileIndex="5" Line="30" Column="13" EndLine="30" EndColumn="25" Covered="True" />
+              <Statement FileIndex="5" Line="31" Column="9" EndLine="31" EndColumn="10" Covered="True" />
+            </Method>
+            <Method Name="Process(Test.ISomeObjectInterface&lt;TModel,TState&gt;):System.Boolean" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+              <Statement FileIndex="5" Line="22" Column="9" EndLine="22" EndColumn="10" Covered="True" />
+              <Statement FileIndex="5" Line="23" Column="13" EndLine="23" EndColumn="42" Covered="True" />
+              <Statement FileIndex="5" Line="24" Column="13" EndLine="24" EndColumn="25" Covered="True" />
+              <Statement FileIndex="5" Line="25" Column="9" EndLine="25" EndColumn="10" Covered="True" />
+            </Method>
+          </Type>
+          <Type Name="PartialClass" CoveredStatements="12" TotalStatements="24" CoveragePercent="50">
+            <Method Name="ExecutedMethod_1():System.Void" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
+              <Statement FileIndex="10" Line="8" Column="9" EndLine="8" EndColumn="10" Covered="True" />
+              <Statement FileIndex="10" Line="9" Column="13" EndLine="9" EndColumn="39" Covered="True" />
+              <Statement FileIndex="10" Line="10" Column="9" EndLine="10" EndColumn="10" Covered="True" />
+            </Method>
+            <Method Name="ExecutedMethod_2():System.Void" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
+              <Statement FileIndex="9" Line="8" Column="9" EndLine="8" EndColumn="10" Covered="True" />
+              <Statement FileIndex="9" Line="9" Column="13" EndLine="9" EndColumn="39" Covered="True" />
+              <Statement FileIndex="9" Line="10" Column="9" EndLine="10" EndColumn="10" Covered="True" />
+            </Method>
+            <Method Name="get_SomeProperty():System.Int32" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+              <Statement FileIndex="10" Line="21" Column="17" EndLine="21" EndColumn="18" Covered="False" />
+              <Statement FileIndex="10" Line="21" Column="19" EndLine="21" EndColumn="44" Covered="False" />
+              <Statement FileIndex="10" Line="21" Column="45" EndLine="21" EndColumn="46" Covered="False" />
+            </Method>
+            <Method Name="set_SomeProperty(System.Int32):System.Void" CoveredStatements="6" TotalStatements="9" CoveragePercent="67">
+              <Statement FileIndex="10" Line="24" Column="13" EndLine="24" EndColumn="14" Covered="True" />
+              <Statement FileIndex="10" Line="25" Column="17" EndLine="25" EndColumn="31" Covered="True" />
+              <Statement FileIndex="10" Line="26" Column="17" EndLine="26" EndColumn="18" Covered="True" />
+              <Statement FileIndex="10" Line="27" Column="21" EndLine="27" EndColumn="43" Covered="True" />
+              <Statement FileIndex="10" Line="28" Column="17" EndLine="28" EndColumn="18" Covered="True" />
+              <Statement FileIndex="10" Line="30" Column="17" EndLine="30" EndColumn="18" Covered="False" />
+              <Statement FileIndex="10" Line="31" Column="21" EndLine="31" EndColumn="47" Covered="False" />
+              <Statement FileIndex="10" Line="32" Column="17" EndLine="32" EndColumn="18" Covered="False" />
+              <Statement FileIndex="10" Line="33" Column="13" EndLine="33" EndColumn="14" Covered="True" />
+            </Method>
+            <Method Name="UnExecutedMethod_1():System.Void" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+              <Statement FileIndex="10" Line="13" Column="9" EndLine="13" EndColumn="10" Covered="False" />
+              <Statement FileIndex="10" Line="14" Column="13" EndLine="14" EndColumn="39" Covered="False" />
+              <Statement FileIndex="10" Line="15" Column="9" EndLine="15" EndColumn="10" Covered="False" />
+            </Method>
+            <Method Name="UnExecutedMethod_2():System.Void" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+              <Statement FileIndex="9" Line="13" Column="9" EndLine="13" EndColumn="10" Covered="False" />
+              <Statement FileIndex="9" Line="14" Column="13" EndLine="14" EndColumn="39" Covered="False" />
+              <Statement FileIndex="9" Line="15" Column="9" EndLine="15" EndColumn="10" Covered="False" />
+            </Method>
+          </Type>
+          <Type Name="PartialClassWithAutoProperties" CoveredStatements="2" TotalStatements="5" CoveragePercent="40">
+            <Method Name="get_ExpressionBodiedProperty():System.String" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+              <Statement FileIndex="7" Line="8" Column="51" EndLine="8" EndColumn="57" Covered="False" />
+            </Method>
+            <Method Name="get_Property1():System.String" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+              <Statement FileIndex="8" Line="6" Column="35" EndLine="6" EndColumn="39" Covered="False" />
+            </Method>
+            <Method Name="get_Property2():System.String" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+              <Statement FileIndex="7" Line="6" Column="35" EndLine="6" EndColumn="39" Covered="False" />
+            </Method>
+            <Method Name="set_Property1(System.String):System.Void" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+              <Statement FileIndex="8" Line="6" Column="40" EndLine="6" EndColumn="44" Covered="True" />
+            </Method>
+            <Method Name="set_Property2(System.String):System.Void" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+              <Statement FileIndex="7" Line="6" Column="40" EndLine="6" EndColumn="44" Covered="True" />
+            </Method>
+          </Type>
+          <Type Name="Program" CoveredStatements="35" TotalStatements="44" CoveragePercent="80">
+            <Type Name="&lt;CallAsyncMethod&gt;d__3" CoveredStatements="6" TotalStatements="6" CoveragePercent="100">
+              <Method Name="MoveNext():System.Void" CoveredStatements="6" TotalStatements="6" CoveragePercent="100">
+                <Statement FileIndex="11" Line="62" Column="9" EndLine="62" EndColumn="10" Covered="True" />
+                <Statement FileIndex="11" Line="63" Column="13" EndLine="63" EndColumn="54" Covered="True" />
+                <Statement FileIndex="11" Line="64" Column="13" EndLine="64" EndColumn="89" Covered="True" />
+                <Statement FileIndex="11" Line="65" Column="13" EndLine="65" EndColumn="66" Covered="True" />
+                <Statement FileIndex="11" Line="66" Column="13" EndLine="66" EndColumn="101" Covered="True" />
+                <Statement FileIndex="11" Line="67" Column="9" EndLine="67" EndColumn="10" Covered="True" />
+              </Method>
+            </Type>
+            <Type Name="EchoHandler" CoveredStatements="7" TotalStatements="7" CoveragePercent="100">
+              <Method Name=".ctor(System.Net.Http.HttpResponseMessage):System.Void" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+                <Statement FileIndex="11" Line="73" Column="13" EndLine="73" EndColumn="61" Covered="True" />
+                <Statement FileIndex="11" Line="74" Column="13" EndLine="74" EndColumn="14" Covered="True" />
+                <Statement FileIndex="11" Line="75" Column="17" EndLine="75" EndColumn="43" Covered="True" />
+                <Statement FileIndex="11" Line="76" Column="13" EndLine="76" EndColumn="14" Covered="True" />
+              </Method>
+              <Method Name="SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken):System.Threading.Tasks.Task&lt;System.Net.Http.HttpResponseMessage&gt;" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
+                <Statement FileIndex="11" Line="79" Column="13" EndLine="79" EndColumn="14" Covered="True" />
+                <Statement FileIndex="11" Line="80" Column="17" EndLine="80" EndColumn="56" Covered="True" />
+                <Statement FileIndex="11" Line="81" Column="13" EndLine="81" EndColumn="14" Covered="True" />
+              </Method>
+            </Type>
+            <Method Name="CSharp_ExecuteTest1():System.Void" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+              <Statement FileIndex="11" Line="51" Column="9" EndLine="51" EndColumn="10" Covered="False" />
+              <Statement FileIndex="11" Line="52" Column="13" EndLine="52" EndColumn="24" Covered="False" />
+              <Statement FileIndex="11" Line="53" Column="9" EndLine="53" EndColumn="10" Covered="False" />
+            </Method>
+            <Method Name="CSharp_ExecuteTest2():System.Void" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+              <Statement FileIndex="11" Line="57" Column="9" EndLine="57" EndColumn="10" Covered="False" />
+              <Statement FileIndex="11" Line="58" Column="13" EndLine="58" EndColumn="24" Covered="False" />
+              <Statement FileIndex="11" Line="59" Column="9" EndLine="59" EndColumn="10" Covered="False" />
+            </Method>
+            <Method Name="Main(System.String[]):System.Void" CoveredStatements="22" TotalStatements="25" CoveragePercent="88">
+              <Statement FileIndex="11" Line="12" Column="9" EndLine="12" EndColumn="10" Covered="True" />
+              <Statement FileIndex="11" Line="13" Column="13" EndLine="13" EndColumn="46" Covered="True" />
+              <Statement FileIndex="11" Line="15" Column="13" EndLine="15" EndColumn="53" Covered="True" />
+              <Statement FileIndex="11" Line="16" Column="13" EndLine="16" EndColumn="61" Covered="True" />
+              <Statement FileIndex="11" Line="18" Column="13" EndLine="18" EndColumn="51" Covered="True" />
+              <Statement FileIndex="11" Line="19" Column="13" EndLine="19" EndColumn="51" Covered="True" />
+              <Statement FileIndex="11" Line="20" Column="13" EndLine="20" EndColumn="51" Covered="True" />
+              <Statement FileIndex="11" Line="22" Column="13" EndLine="22" EndColumn="69" Covered="True" />
+              <Statement FileIndex="11" Line="23" Column="13" EndLine="23" EndColumn="69" Covered="True" />
+              <Statement FileIndex="11" Line="25" Column="13" EndLine="25" EndColumn="48" Covered="True" />
+              <Statement FileIndex="11" Line="27" Column="13" EndLine="27" EndColumn="54" Covered="True" />
+              <Statement FileIndex="11" Line="28" Column="13" EndLine="28" EndColumn="54" Covered="True" />
+              <Statement FileIndex="11" Line="30" Column="13" EndLine="30" EndColumn="65" Covered="True" />
+              <Statement FileIndex="11" Line="31" Column="13" EndLine="31" EndColumn="69" Covered="True" />
+              <Statement FileIndex="11" Line="33" Column="13" EndLine="33" EndColumn="53" Covered="True" />
+              <Statement FileIndex="11" Line="35" Column="13" EndLine="35" EndColumn="45" Covered="True" />
+              <Statement FileIndex="11" Line="36" Column="13" EndLine="36" EndColumn="45" Covered="True" />
+              <Statement FileIndex="11" Line="38" Column="13" EndLine="38" EndColumn="31" Covered="True" />
+              <Statement FileIndex="11" Line="41" Column="13" EndLine="41" EndColumn="14" Covered="True" />
+              <Statement FileIndex="11" Line="42" Column="17" EndLine="42" EndColumn="56" Covered="True" />
+              <Statement FileIndex="11" Line="43" Column="13" EndLine="43" EndColumn="14" Covered="True" />
+              <Statement FileIndex="11" Line="44" Column="13" EndLine="44" EndColumn="45" Covered="False" />
+              <Statement FileIndex="11" Line="45" Column="13" EndLine="45" EndColumn="14" Covered="False" />
+              <Statement FileIndex="11" Line="46" Column="13" EndLine="46" EndColumn="14" Covered="False" />
+              <Statement FileIndex="11" Line="47" Column="9" EndLine="47" EndColumn="10" Covered="True" />
+            </Method>
+          </Type>
+          <Type Name="SomeClass" CoveredStatements="1" TotalStatements="2" CoveragePercent="50">
+            <Method Name="get_Property1():System.String" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+              <Statement FileIndex="6" Line="6" Column="35" EndLine="6" EndColumn="39" Covered="False" />
+            </Method>
+            <Method Name="set_Property1(System.String):System.Void" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+              <Statement FileIndex="6" Line="6" Column="40" EndLine="6" EndColumn="44" Covered="True" />
+            </Method>
+          </Type>
+          <Type Name="SomeModel" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
+          <Type Name="TestClass" CoveredStatements="9" TotalStatements="15" CoveragePercent="60">
+            <Type Name="NestedClass" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+              <Method Name="SampleFunction():System.Void" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+                <Statement FileIndex="13" Line="30" Column="13" EndLine="30" EndColumn="14" Covered="False" />
+                <Statement FileIndex="13" Line="31" Column="17" EndLine="34" EndColumn="31" Covered="False" />
+                <Statement FileIndex="13" Line="35" Column="13" EndLine="35" EndColumn="14" Covered="False" />
+              </Method>
+            </Type>
+            <Method Name="SampleFunction():System.Void" CoveredStatements="9" TotalStatements="12" CoveragePercent="75">
+              <Statement FileIndex="13" Line="8" Column="9" EndLine="8" EndColumn="10" Covered="True" />
+              <Statement FileIndex="13" Line="9" Column="13" EndLine="12" EndColumn="27" Covered="True" />
+              <Statement FileIndex="13" Line="14" Column="13" EndLine="14" EndColumn="37" Covered="True" />
+              <Statement FileIndex="13" Line="15" Column="13" EndLine="15" EndColumn="24" Covered="True" />
+              <Statement FileIndex="13" Line="17" Column="13" EndLine="17" EndColumn="32" Covered="True" />
+              <Statement FileIndex="13" Line="18" Column="13" EndLine="18" EndColumn="14" Covered="True" />
+              <Statement FileIndex="13" Line="19" Column="17" EndLine="19" EndColumn="61" Covered="True" />
+              <Statement FileIndex="13" Line="20" Column="13" EndLine="20" EndColumn="14" Covered="True" />
+              <Statement FileIndex="13" Line="22" Column="13" EndLine="22" EndColumn="14" Covered="False" />
+              <Statement FileIndex="13" Line="23" Column="17" EndLine="23" EndColumn="65" Covered="False" />
+              <Statement FileIndex="13" Line="24" Column="13" EndLine="24" EndColumn="14" Covered="False" />
+              <Statement FileIndex="13" Line="25" Column="9" EndLine="25" EndColumn="10" Covered="True" />
+            </Method>
+          </Type>
+          <Type Name="TestClass2" CoveredStatements="30" TotalStatements="46" CoveragePercent="65">
+            <Type Name="&lt;&gt;c" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+              <Method Name="&lt;SampleFunction&gt;b__14_0(System.Int32):System.Int32" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+                <Statement FileIndex="14" Line="45" Column="46" EndLine="45" EndColumn="51" Covered="True" />
+              </Method>
+            </Type>
+            <Type Name="&lt;&gt;c__DisplayClass14_0" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+              <Method Name="&lt;SampleFunction&gt;b__1(System.String):System.Boolean" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+                <Statement FileIndex="14" Line="54" Column="45" EndLine="54" EndColumn="95" Covered="True" />
+              </Method>
+            </Type>
+            <Method Name=".ctor():System.Void" CoveredStatements="0" TotalStatements="6" CoveragePercent="0">
+              <Statement FileIndex="14" Line="11" Column="9" EndLine="11" EndColumn="78" Covered="False" />
+              <Statement FileIndex="14" Line="17" Column="9" EndLine="17" EndColumn="28" Covered="False" />
+              <Statement FileIndex="14" Line="18" Column="9" EndLine="18" EndColumn="10" Covered="False" />
+              <Statement FileIndex="14" Line="19" Column="13" EndLine="19" EndColumn="34" Covered="False" />
+              <Statement FileIndex="14" Line="20" Column="13" EndLine="20" EndColumn="46" Covered="False" />
+              <Statement FileIndex="14" Line="21" Column="9" EndLine="21" EndColumn="10" Covered="False" />
+            </Method>
+            <Method Name=".ctor(System.String):System.Void" CoveredStatements="6" TotalStatements="6" CoveragePercent="100">
+              <Statement FileIndex="14" Line="11" Column="9" EndLine="11" EndColumn="78" Covered="True" />
+              <Statement FileIndex="14" Line="23" Column="9" EndLine="23" EndColumn="39" Covered="True" />
+              <Statement FileIndex="14" Line="24" Column="9" EndLine="24" EndColumn="10" Covered="True" />
+              <Statement FileIndex="14" Line="25" Column="13" EndLine="25" EndColumn="30" Covered="True" />
+              <Statement FileIndex="14" Line="26" Column="13" EndLine="26" EndColumn="49" Covered="True" />
+              <Statement FileIndex="14" Line="27" Column="9" EndLine="27" EndColumn="10" Covered="True" />
+            </Method>
+            <Method Name="DoSomething(System.String,System.String[],System.Guid,System.Collections.Generic.IEnumerable&lt;System.String&gt;,System.Collections.Generic.IList&lt;System.String&gt;,System.Decimal,System.Int32,System.Collections.Generic.Dictionary&lt;System.String,System.Int32&gt;,System.Int32,System.Single,System.Double,System.Boolean,System.Byte,System.Char,System.Object,System.SByte,System.Int16,System.UInt32,System.UInt64,System.UInt16):System.String" CoveredStatements="0" TotalStatements="4" CoveragePercent="0">
+              <Statement FileIndex="14" Line="80" Column="9" EndLine="80" EndColumn="10" Covered="False" />
+              <Statement FileIndex="14" Line="81" Column="13" EndLine="81" EndColumn="19" Covered="False" />
+              <Statement FileIndex="14" Line="82" Column="13" EndLine="82" EndColumn="25" Covered="False" />
+              <Statement FileIndex="14" Line="83" Column="9" EndLine="83" EndColumn="10" Covered="False" />
+            </Method>
+            <Method Name="ExecutedMethod():System.Void" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+              <Statement FileIndex="14" Line="30" Column="9" EndLine="30" EndColumn="10" Covered="True" />
+              <Statement FileIndex="14" Line="31" Column="13" EndLine="31" EndColumn="42" Covered="True" />
+              <Statement FileIndex="14" Line="32" Column="13" EndLine="32" EndColumn="54" Covered="True" />
+              <Statement FileIndex="14" Line="33" Column="9" EndLine="33" EndColumn="10" Covered="True" />
+            </Method>
+            <Method Name="get_ExecutedProperty():System.String" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+              <Statement FileIndex="14" Line="13" Column="42" EndLine="13" EndColumn="46" Covered="True" />
+            </Method>
+            <Method Name="get_UnExecutedProperty():System.String" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+              <Statement FileIndex="14" Line="15" Column="44" EndLine="15" EndColumn="48" Covered="False" />
+            </Method>
+            <Method Name="SampleFunction(System.String):System.Void" CoveredStatements="16" TotalStatements="16" CoveragePercent="100">
+              <Statement FileIndex="14" Line="42" Column="9" EndLine="42" EndColumn="10" Covered="True" />
+              <Statement FileIndex="14" Line="43" Column="13" EndLine="43" EndColumn="53" Covered="True" />
+              <Statement FileIndex="14" Line="45" Column="13" EndLine="45" EndColumn="53" Covered="True" />
+              <Statement FileIndex="14" Line="47" Column="13" EndLine="47" EndColumn="20" Covered="True" />
+              <Statement FileIndex="14" Line="47" Column="34" EndLine="47" EndColumn="41" Covered="True" />
+              <Statement FileIndex="14" Line="47" Column="22" EndLine="47" EndColumn="30" Covered="True" />
+              <Statement FileIndex="14" Line="48" Column="13" EndLine="48" EndColumn="14" Covered="True" />
+              <Statement FileIndex="14" Line="49" Column="17" EndLine="49" EndColumn="41" Covered="True" />
+              <Statement FileIndex="14" Line="50" Column="13" EndLine="50" EndColumn="14" Covered="True" />
+              <Statement FileIndex="14" Line="47" Column="31" EndLine="47" EndColumn="33" Covered="True" />
+              <Statement FileIndex="14" Line="52" Column="13" EndLine="52" EndColumn="76" Covered="True" />
+              <Statement FileIndex="14" Line="54" Column="13" EndLine="54" EndColumn="105" Covered="True" />
+              <Statement FileIndex="14" Line="55" Column="13" EndLine="55" EndColumn="14" Covered="True" />
+              <Statement FileIndex="14" Line="56" Column="17" EndLine="56" EndColumn="52" Covered="True" />
+              <Statement FileIndex="14" Line="57" Column="13" EndLine="57" EndColumn="14" Covered="True" />
+              <Statement FileIndex="14" Line="58" Column="9" EndLine="58" EndColumn="10" Covered="True" />
+            </Method>
+            <Method Name="set_ExecutedProperty(System.String):System.Void" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+              <Statement FileIndex="14" Line="13" Column="47" EndLine="13" EndColumn="51" Covered="True" />
+            </Method>
+            <Method Name="set_UnExecutedProperty(System.String):System.Void" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+              <Statement FileIndex="14" Line="15" Column="49" EndLine="15" EndColumn="53" Covered="False" />
+            </Method>
+            <Method Name="UnExecutedMethod():System.Void" CoveredStatements="0" TotalStatements="4" CoveragePercent="0">
+              <Statement FileIndex="14" Line="36" Column="9" EndLine="36" EndColumn="10" Covered="False" />
+              <Statement FileIndex="14" Line="37" Column="13" EndLine="37" EndColumn="42" Covered="False" />
+              <Statement FileIndex="14" Line="38" Column="13" EndLine="38" EndColumn="54" Covered="False" />
+              <Statement FileIndex="14" Line="39" Column="9" EndLine="39" EndColumn="10" Covered="False" />
+            </Method>
+          </Type>
+        </Namespace>
+      </Assembly>
+    </Root>
+    <Root CoveredStatements="128" TotalStatements="204" CoveragePercent="63" ReportType="DetailedXml" DotCoverVersion="10.0.2">
+      <FileIndices>
+        <File Index="1" Name="C:\temp\analyzertestclass.cs" />
+        <File Index="2" Name="C:\temp\classwithexcludes.cs" />
+        <File Index="3" Name="C:\temp\codecontract_contract.cs" />
+        <File Index="4" Name="C:\temp\codecontract_target.cs" />
+        <File Index="5" Name="C:\temp\genericclass.cs" />
+        <File Index="6" Name="C:\temp\notmatchingfilename.cs" />
+        <File Index="7" Name="C:\temp\partialclasswithautoproperties2.cs" />
+        <File Index="8" Name="C:\temp\partialclasswithautoproperties.cs" />
+        <File Index="9" Name="C:\temp\partialclass2.cs" />
+        <File Index="10" Name="C:\temp\partialclass.cs" />
+        <File Index="11" Name="C:\temp\program.cs" />
+        <File Index="12" Name="C:\temp\abstractclass.cs" />
+        <File Index="13" Name="C:\temp\testclass.cs" />
+        <File Index="14" Name="C:\temp\testclass2.cs" />
+        <File Index="15" Name="C:\temp\asyncclass.cs" />
+      </FileIndices>
+      <Assembly Name="Test" CoveredStatements="128" TotalStatements="204" CoveragePercent="63">
+        <Namespace Name="Test" CoveredStatements="128" TotalStatements="204" CoveragePercent="63">
+          <Type Name="AbstractClass" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+            <Method Name=".ctor():System.Void" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+              <Statement FileIndex="12" Line="7" Column="9" EndLine="7" EndColumn="31" Covered="True" />
+              <Statement FileIndex="12" Line="8" Column="9" EndLine="8" EndColumn="10" Covered="True" />
+              <Statement FileIndex="12" Line="9" Column="13" EndLine="9" EndColumn="60" Covered="True" />
+              <Statement FileIndex="12" Line="10" Column="9" EndLine="10" EndColumn="10" Covered="True" />
+            </Method>
+          </Type>
+          <Type Name="AbstractClass_SampleImpl1" CoveredStatements="4" TotalStatements="8" CoveragePercent="50">
+            <Method Name=".ctor():System.Void" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+              <Statement FileIndex="12" Line="20" Column="15" EndLine="20" EndColumn="21" Covered="True" />
+              <Statement FileIndex="12" Line="21" Column="9" EndLine="21" EndColumn="10" Covered="True" />
+              <Statement FileIndex="12" Line="22" Column="13" EndLine="22" EndColumn="58" Covered="True" />
+              <Statement FileIndex="12" Line="23" Column="9" EndLine="23" EndColumn="10" Covered="True" />
+            </Method>
+            <Method Name="Method1():System.Void" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+              <Statement FileIndex="12" Line="26" Column="9" EndLine="26" EndColumn="10" Covered="False" />
+              <Statement FileIndex="12" Line="27" Column="13" EndLine="27" EndColumn="49" Covered="False" />
+            </Method>
+            <Method Name="Method2():System.Void" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+              <Statement FileIndex="12" Line="31" Column="9" EndLine="31" EndColumn="10" Covered="False" />
+              <Statement FileIndex="12" Line="32" Column="13" EndLine="32" EndColumn="49" Covered="False" />
+            </Method>
+          </Type>
+          <Type Name="AbstractClass_SampleImpl2" CoveredStatements="4" TotalStatements="8" CoveragePercent="50">
+            <Method Name=".ctor():System.Void" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+              <Statement FileIndex="12" Line="39" Column="15" EndLine="39" EndColumn="21" Covered="True" />
+              <Statement FileIndex="12" Line="40" Column="9" EndLine="40" EndColumn="10" Covered="True" />
+              <Statement FileIndex="12" Line="41" Column="13" EndLine="41" EndColumn="58" Covered="True" />
+              <Statement FileIndex="12" Line="42" Column="9" EndLine="42" EndColumn="10" Covered="True" />
+            </Method>
+            <Method Name="Method1():System.Void" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+              <Statement FileIndex="12" Line="45" Column="9" EndLine="45" EndColumn="10" Covered="False" />
+              <Statement FileIndex="12" Line="46" Column="13" EndLine="46" EndColumn="49" Covered="False" />
+            </Method>
+            <Method Name="Method2():System.Void" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+              <Statement FileIndex="12" Line="50" Column="9" EndLine="50" EndColumn="10" Covered="False" />
+              <Statement FileIndex="12" Line="51" Column="13" EndLine="51" EndColumn="49" Covered="False" />
+            </Method>
+          </Type>
+          <Type Name="AbstractGenericClass&lt;TModel,TState&gt;" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+            <Method Name="PostProcess(Test.ISomeObjectInterface&lt;TModel,TState&gt;):System.Boolean" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+              <Statement FileIndex="5" Line="12" Column="9" EndLine="12" EndColumn="10" Covered="False" />
+              <Statement FileIndex="5" Line="13" Column="13" EndLine="13" EndColumn="25" Covered="False" />
+              <Statement FileIndex="5" Line="14" Column="9" EndLine="14" EndColumn="10" Covered="False" />
+            </Method>
+          </Type>
+          <Type Name="AnalyzerTestClass" CoveredStatements="0" TotalStatements="12" CoveragePercent="0">
+            <Method Name=".ctor():System.Void" CoveredStatements="0" TotalStatements="4" CoveragePercent="0">
+              <Statement FileIndex="1" Line="9" Column="9" EndLine="9" EndColumn="35" Covered="False" />
+              <Statement FileIndex="1" Line="10" Column="9" EndLine="10" EndColumn="10" Covered="False" />
+              <Statement FileIndex="1" Line="11" Column="13" EndLine="11" EndColumn="40" Covered="False" />
+              <Statement FileIndex="1" Line="12" Column="9" EndLine="12" EndColumn="10" Covered="False" />
+            </Method>
+            <Method Name="DoSomething(System.String,System.String[],System.Guid,System.Collections.Generic.IEnumerable&lt;System.String&gt;,System.Collections.Generic.IList&lt;System.String&gt;,System.Decimal,System.Int32,System.Int64,System.Collections.Generic.Dictionary&lt;System.String,System.Int32&gt;,System.Int32,System.Single,System.Double,System.Boolean,System.Byte,System.Char,System.Object,System.SByte,System.Int16,System.UInt32,System.UInt64,System.UInt16,ICSharpCode.NRefactory.PatternMatching.INode):System.String" CoveredStatements="0" TotalStatements="4" CoveragePercent="0">
+              <Statement FileIndex="1" Line="37" Column="9" EndLine="37" EndColumn="10" Covered="False" />
+              <Statement FileIndex="1" Line="38" Column="13" EndLine="38" EndColumn="19" Covered="False" />
+              <Statement FileIndex="1" Line="39" Column="13" EndLine="39" EndColumn="25" Covered="False" />
+              <Statement FileIndex="1" Line="40" Column="9" EndLine="40" EndColumn="10" Covered="False" />
+            </Method>
+            <Method Name="GenericMethod&lt;T1,T2&gt;(T1,T2,System.Int32):System.Void" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+              <Statement FileIndex="1" Line="43" Column="9" EndLine="43" EndColumn="10" Covered="False" />
+              <Statement FileIndex="1" Line="44" Column="9" EndLine="44" EndColumn="10" Covered="False" />
+            </Method>
+            <Method Name="get_AutoProperty():System.String" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+              <Statement FileIndex="1" Line="46" Column="38" EndLine="46" EndColumn="42" Covered="False" />
+            </Method>
+            <Method Name="set_AutoProperty(System.String):System.Void" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+              <Statement FileIndex="1" Line="46" Column="43" EndLine="46" EndColumn="47" Covered="False" />
+            </Method>
+          </Type>
+          <Type Name="AsyncClass" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+            <Type Name="&lt;SendAsync&gt;d__0" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+              <Method Name="MoveNext():System.Void" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+                <Statement FileIndex="15" Line="10" Column="9" EndLine="10" EndColumn="10" Covered="True" />
+                <Statement FileIndex="15" Line="11" Column="13" EndLine="11" EndColumn="51" Covered="True" />
+                <Statement FileIndex="15" Line="12" Column="13" EndLine="12" EndColumn="69" Covered="True" />
+                <Statement FileIndex="15" Line="13" Column="9" EndLine="13" EndColumn="10" Covered="True" />
+              </Method>
+            </Type>
+          </Type>
+          <Type Name="ClassWithExcludes" CoveredStatements="8" TotalStatements="10" CoveragePercent="80">
+            <Method Name="ExcludedMethod():System.Void" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
+              <Statement FileIndex="2" Line="18" Column="9" EndLine="18" EndColumn="10" Covered="True" />
+              <Statement FileIndex="2" Line="19" Column="13" EndLine="19" EndColumn="44" Covered="True" />
+              <Statement FileIndex="2" Line="20" Column="9" EndLine="20" EndColumn="10" Covered="True" />
+            </Method>
+            <Method Name="get_ExcludedProperty():System.String" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+              <Statement FileIndex="2" Line="9" Column="42" EndLine="9" EndColumn="46" Covered="False" />
+            </Method>
+            <Method Name="get_IncludedProperty():System.String" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+              <Statement FileIndex="2" Line="6" Column="42" EndLine="6" EndColumn="46" Covered="False" />
+            </Method>
+            <Method Name="IncludedMethod():System.Void" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
+              <Statement FileIndex="2" Line="12" Column="9" EndLine="12" EndColumn="10" Covered="True" />
+              <Statement FileIndex="2" Line="13" Column="13" EndLine="13" EndColumn="44" Covered="True" />
+              <Statement FileIndex="2" Line="14" Column="9" EndLine="14" EndColumn="10" Covered="True" />
+            </Method>
+            <Method Name="set_ExcludedProperty(System.String):System.Void" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+              <Statement FileIndex="2" Line="9" Column="47" EndLine="9" EndColumn="51" Covered="True" />
+            </Method>
+            <Method Name="set_IncludedProperty(System.String):System.Void" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+              <Statement FileIndex="2" Line="6" Column="47" EndLine="6" EndColumn="51" Covered="True" />
+            </Method>
+          </Type>
+          <Type Name="CodeContract_Contract" CoveredStatements="0" TotalStatements="4" CoveragePercent="0">
+            <Method Name="Calculate(System.Int32):System.Int32" CoveredStatements="0" TotalStatements="4" CoveragePercent="0">
+              <Statement FileIndex="3" Line="10" Column="9" EndLine="10" EndColumn="10" Covered="False" />
+              <Statement FileIndex="3" Line="11" Column="13" EndLine="11" EndColumn="88" Covered="False" />
+              <Statement FileIndex="3" Line="13" Column="13" EndLine="13" EndColumn="33" Covered="False" />
+              <Statement FileIndex="3" Line="14" Column="9" EndLine="14" EndColumn="10" Covered="False" />
+            </Method>
+          </Type>
+          <Type Name="CodeContract_Target" CoveredStatements="7" TotalStatements="7" CoveragePercent="100">
+            <Method Name="Calculate(System.Int32):System.Int32" CoveredStatements="7" TotalStatements="7" CoveragePercent="100">
+              <Statement FileIndex="4" Line="7" Column="9" EndLine="7" EndColumn="10" Covered="True" />
+              <Statement FileIndex="4" Line="8" Column="13" EndLine="8" EndColumn="27" Covered="True" />
+              <Statement FileIndex="4" Line="9" Column="13" EndLine="9" EndColumn="14" Covered="True" />
+              <Statement FileIndex="4" Line="10" Column="17" EndLine="10" EndColumn="26" Covered="True" />
+              <Statement FileIndex="4" Line="13" Column="13" EndLine="13" EndColumn="14" Covered="True" />
+              <Statement FileIndex="4" Line="14" Column="17" EndLine="14" EndColumn="26" Covered="True" />
+              <Statement FileIndex="4" Line="16" Column="9" EndLine="16" EndColumn="10" Covered="True" />
+            </Method>
+          </Type>
+          <Type Name="CoverageExcludeAttribute" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
+          <Type Name="GenericClass&lt;TModel,TState&gt;" CoveredStatements="8" TotalStatements="8" CoveragePercent="100">
+            <Method Name="PostProcess(Test.ISomeObjectInterface&lt;TModel,TState&gt;):System.Boolean" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+              <Statement FileIndex="5" Line="28" Column="9" EndLine="28" EndColumn="10" Covered="True" />
+              <Statement FileIndex="5" Line="29" Column="13" EndLine="29" EndColumn="46" Covered="True" />
+              <Statement FileIndex="5" Line="30" Column="13" EndLine="30" EndColumn="25" Covered="True" />
+              <Statement FileIndex="5" Line="31" Column="9" EndLine="31" EndColumn="10" Covered="True" />
+            </Method>
+            <Method Name="Process(Test.ISomeObjectInterface&lt;TModel,TState&gt;):System.Boolean" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+              <Statement FileIndex="5" Line="22" Column="9" EndLine="22" EndColumn="10" Covered="True" />
+              <Statement FileIndex="5" Line="23" Column="13" EndLine="23" EndColumn="42" Covered="True" />
+              <Statement FileIndex="5" Line="24" Column="13" EndLine="24" EndColumn="25" Covered="True" />
+              <Statement FileIndex="5" Line="25" Column="9" EndLine="25" EndColumn="10" Covered="True" />
+            </Method>
+          </Type>
+          <Type Name="PartialClass" CoveredStatements="12" TotalStatements="24" CoveragePercent="50">
+            <Method Name="ExecutedMethod_1():System.Void" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
+              <Statement FileIndex="10" Line="8" Column="9" EndLine="8" EndColumn="10" Covered="True" />
+              <Statement FileIndex="10" Line="9" Column="13" EndLine="9" EndColumn="39" Covered="True" />
+              <Statement FileIndex="10" Line="10" Column="9" EndLine="10" EndColumn="10" Covered="True" />
+            </Method>
+            <Method Name="ExecutedMethod_2():System.Void" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
+              <Statement FileIndex="9" Line="8" Column="9" EndLine="8" EndColumn="10" Covered="True" />
+              <Statement FileIndex="9" Line="9" Column="13" EndLine="9" EndColumn="39" Covered="True" />
+              <Statement FileIndex="9" Line="10" Column="9" EndLine="10" EndColumn="10" Covered="True" />
+            </Method>
+            <Method Name="get_SomeProperty():System.Int32" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+              <Statement FileIndex="10" Line="21" Column="17" EndLine="21" EndColumn="18" Covered="False" />
+              <Statement FileIndex="10" Line="21" Column="19" EndLine="21" EndColumn="44" Covered="False" />
+              <Statement FileIndex="10" Line="21" Column="45" EndLine="21" EndColumn="46" Covered="False" />
+            </Method>
+            <Method Name="set_SomeProperty(System.Int32):System.Void" CoveredStatements="6" TotalStatements="9" CoveragePercent="67">
+              <Statement FileIndex="10" Line="24" Column="13" EndLine="24" EndColumn="14" Covered="True" />
+              <Statement FileIndex="10" Line="25" Column="17" EndLine="25" EndColumn="31" Covered="True" />
+              <Statement FileIndex="10" Line="26" Column="17" EndLine="26" EndColumn="18" Covered="True" />
+              <Statement FileIndex="10" Line="27" Column="21" EndLine="27" EndColumn="43" Covered="True" />
+              <Statement FileIndex="10" Line="28" Column="17" EndLine="28" EndColumn="18" Covered="True" />
+              <Statement FileIndex="10" Line="30" Column="17" EndLine="30" EndColumn="18" Covered="False" />
+              <Statement FileIndex="10" Line="31" Column="21" EndLine="31" EndColumn="47" Covered="False" />
+              <Statement FileIndex="10" Line="32" Column="17" EndLine="32" EndColumn="18" Covered="False" />
+              <Statement FileIndex="10" Line="33" Column="13" EndLine="33" EndColumn="14" Covered="True" />
+            </Method>
+            <Method Name="UnExecutedMethod_1():System.Void" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+              <Statement FileIndex="10" Line="13" Column="9" EndLine="13" EndColumn="10" Covered="False" />
+              <Statement FileIndex="10" Line="14" Column="13" EndLine="14" EndColumn="39" Covered="False" />
+              <Statement FileIndex="10" Line="15" Column="9" EndLine="15" EndColumn="10" Covered="False" />
+            </Method>
+            <Method Name="UnExecutedMethod_2():System.Void" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+              <Statement FileIndex="9" Line="13" Column="9" EndLine="13" EndColumn="10" Covered="False" />
+              <Statement FileIndex="9" Line="14" Column="13" EndLine="14" EndColumn="39" Covered="False" />
+              <Statement FileIndex="9" Line="15" Column="9" EndLine="15" EndColumn="10" Covered="False" />
+            </Method>
+          </Type>
+          <Type Name="PartialClassWithAutoProperties" CoveredStatements="2" TotalStatements="5" CoveragePercent="40">
+            <Method Name="get_ExpressionBodiedProperty():System.String" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+              <Statement FileIndex="7" Line="8" Column="51" EndLine="8" EndColumn="57" Covered="False" />
+            </Method>
+            <Method Name="get_Property1():System.String" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+              <Statement FileIndex="8" Line="6" Column="35" EndLine="6" EndColumn="39" Covered="False" />
+            </Method>
+            <Method Name="get_Property2():System.String" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+              <Statement FileIndex="7" Line="6" Column="35" EndLine="6" EndColumn="39" Covered="False" />
+            </Method>
+            <Method Name="set_Property1(System.String):System.Void" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+              <Statement FileIndex="8" Line="6" Column="40" EndLine="6" EndColumn="44" Covered="True" />
+            </Method>
+            <Method Name="set_Property2(System.String):System.Void" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+              <Statement FileIndex="7" Line="6" Column="40" EndLine="6" EndColumn="44" Covered="True" />
+            </Method>
+          </Type>
+          <Type Name="Program" CoveredStatements="35" TotalStatements="44" CoveragePercent="80">
+            <Type Name="&lt;CallAsyncMethod&gt;d__3" CoveredStatements="6" TotalStatements="6" CoveragePercent="100">
+              <Method Name="MoveNext():System.Void" CoveredStatements="6" TotalStatements="6" CoveragePercent="100">
+                <Statement FileIndex="11" Line="62" Column="9" EndLine="62" EndColumn="10" Covered="True" />
+                <Statement FileIndex="11" Line="63" Column="13" EndLine="63" EndColumn="54" Covered="True" />
+                <Statement FileIndex="11" Line="64" Column="13" EndLine="64" EndColumn="89" Covered="True" />
+                <Statement FileIndex="11" Line="65" Column="13" EndLine="65" EndColumn="66" Covered="True" />
+                <Statement FileIndex="11" Line="66" Column="13" EndLine="66" EndColumn="101" Covered="True" />
+                <Statement FileIndex="11" Line="67" Column="9" EndLine="67" EndColumn="10" Covered="True" />
+              </Method>
+            </Type>
+            <Type Name="EchoHandler" CoveredStatements="7" TotalStatements="7" CoveragePercent="100">
+              <Method Name=".ctor(System.Net.Http.HttpResponseMessage):System.Void" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+                <Statement FileIndex="11" Line="73" Column="13" EndLine="73" EndColumn="61" Covered="True" />
+                <Statement FileIndex="11" Line="74" Column="13" EndLine="74" EndColumn="14" Covered="True" />
+                <Statement FileIndex="11" Line="75" Column="17" EndLine="75" EndColumn="43" Covered="True" />
+                <Statement FileIndex="11" Line="76" Column="13" EndLine="76" EndColumn="14" Covered="True" />
+              </Method>
+              <Method Name="SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken):System.Threading.Tasks.Task&lt;System.Net.Http.HttpResponseMessage&gt;" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
+                <Statement FileIndex="11" Line="79" Column="13" EndLine="79" EndColumn="14" Covered="True" />
+                <Statement FileIndex="11" Line="80" Column="17" EndLine="80" EndColumn="56" Covered="True" />
+                <Statement FileIndex="11" Line="81" Column="13" EndLine="81" EndColumn="14" Covered="True" />
+              </Method>
+            </Type>
+            <Method Name="CSharp_ExecuteTest1():System.Void" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+              <Statement FileIndex="11" Line="51" Column="9" EndLine="51" EndColumn="10" Covered="False" />
+              <Statement FileIndex="11" Line="52" Column="13" EndLine="52" EndColumn="24" Covered="False" />
+              <Statement FileIndex="11" Line="53" Column="9" EndLine="53" EndColumn="10" Covered="False" />
+            </Method>
+            <Method Name="CSharp_ExecuteTest2():System.Void" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+              <Statement FileIndex="11" Line="57" Column="9" EndLine="57" EndColumn="10" Covered="False" />
+              <Statement FileIndex="11" Line="58" Column="13" EndLine="58" EndColumn="24" Covered="False" />
+              <Statement FileIndex="11" Line="59" Column="9" EndLine="59" EndColumn="10" Covered="False" />
+            </Method>
+            <Method Name="Main(System.String[]):System.Void" CoveredStatements="22" TotalStatements="25" CoveragePercent="88">
+              <Statement FileIndex="11" Line="12" Column="9" EndLine="12" EndColumn="10" Covered="True" />
+              <Statement FileIndex="11" Line="13" Column="13" EndLine="13" EndColumn="46" Covered="True" />
+              <Statement FileIndex="11" Line="15" Column="13" EndLine="15" EndColumn="53" Covered="True" />
+              <Statement FileIndex="11" Line="16" Column="13" EndLine="16" EndColumn="61" Covered="True" />
+              <Statement FileIndex="11" Line="18" Column="13" EndLine="18" EndColumn="51" Covered="True" />
+              <Statement FileIndex="11" Line="19" Column="13" EndLine="19" EndColumn="51" Covered="True" />
+              <Statement FileIndex="11" Line="20" Column="13" EndLine="20" EndColumn="51" Covered="True" />
+              <Statement FileIndex="11" Line="22" Column="13" EndLine="22" EndColumn="69" Covered="True" />
+              <Statement FileIndex="11" Line="23" Column="13" EndLine="23" EndColumn="69" Covered="True" />
+              <Statement FileIndex="11" Line="25" Column="13" EndLine="25" EndColumn="48" Covered="True" />
+              <Statement FileIndex="11" Line="27" Column="13" EndLine="27" EndColumn="54" Covered="True" />
+              <Statement FileIndex="11" Line="28" Column="13" EndLine="28" EndColumn="54" Covered="True" />
+              <Statement FileIndex="11" Line="30" Column="13" EndLine="30" EndColumn="65" Covered="True" />
+              <Statement FileIndex="11" Line="31" Column="13" EndLine="31" EndColumn="69" Covered="True" />
+              <Statement FileIndex="11" Line="33" Column="13" EndLine="33" EndColumn="53" Covered="True" />
+              <Statement FileIndex="11" Line="35" Column="13" EndLine="35" EndColumn="45" Covered="True" />
+              <Statement FileIndex="11" Line="36" Column="13" EndLine="36" EndColumn="45" Covered="True" />
+              <Statement FileIndex="11" Line="38" Column="13" EndLine="38" EndColumn="31" Covered="True" />
+              <Statement FileIndex="11" Line="41" Column="13" EndLine="41" EndColumn="14" Covered="True" />
+              <Statement FileIndex="11" Line="42" Column="17" EndLine="42" EndColumn="56" Covered="True" />
+              <Statement FileIndex="11" Line="43" Column="13" EndLine="43" EndColumn="14" Covered="True" />
+              <Statement FileIndex="11" Line="44" Column="13" EndLine="44" EndColumn="45" Covered="False" />
+              <Statement FileIndex="11" Line="45" Column="13" EndLine="45" EndColumn="14" Covered="False" />
+              <Statement FileIndex="11" Line="46" Column="13" EndLine="46" EndColumn="14" Covered="False" />
+              <Statement FileIndex="11" Line="47" Column="9" EndLine="47" EndColumn="10" Covered="True" />
+            </Method>
+          </Type>
+          <Type Name="SomeClass" CoveredStatements="1" TotalStatements="2" CoveragePercent="50">
+            <Method Name="get_Property1():System.String" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+              <Statement FileIndex="6" Line="6" Column="35" EndLine="6" EndColumn="39" Covered="False" />
+            </Method>
+            <Method Name="set_Property1(System.String):System.Void" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+              <Statement FileIndex="6" Line="6" Column="40" EndLine="6" EndColumn="44" Covered="True" />
+            </Method>
+          </Type>
+          <Type Name="SomeModel" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
+          <Type Name="TestClass" CoveredStatements="9" TotalStatements="15" CoveragePercent="60">
+            <Type Name="NestedClass" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+              <Method Name="SampleFunction():System.Void" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+                <Statement FileIndex="13" Line="30" Column="13" EndLine="30" EndColumn="14" Covered="False" />
+                <Statement FileIndex="13" Line="31" Column="17" EndLine="34" EndColumn="31" Covered="False" />
+                <Statement FileIndex="13" Line="35" Column="13" EndLine="35" EndColumn="14" Covered="False" />
+              </Method>
+            </Type>
+            <Method Name="SampleFunction():System.Void" CoveredStatements="9" TotalStatements="12" CoveragePercent="75">
+              <Statement FileIndex="13" Line="8" Column="9" EndLine="8" EndColumn="10" Covered="True" />
+              <Statement FileIndex="13" Line="9" Column="13" EndLine="12" EndColumn="27" Covered="True" />
+              <Statement FileIndex="13" Line="14" Column="13" EndLine="14" EndColumn="37" Covered="True" />
+              <Statement FileIndex="13" Line="15" Column="13" EndLine="15" EndColumn="24" Covered="True" />
+              <Statement FileIndex="13" Line="17" Column="13" EndLine="17" EndColumn="32" Covered="True" />
+              <Statement FileIndex="13" Line="18" Column="13" EndLine="18" EndColumn="14" Covered="True" />
+              <Statement FileIndex="13" Line="19" Column="17" EndLine="19" EndColumn="61" Covered="True" />
+              <Statement FileIndex="13" Line="20" Column="13" EndLine="20" EndColumn="14" Covered="True" />
+              <Statement FileIndex="13" Line="22" Column="13" EndLine="22" EndColumn="14" Covered="False" />
+              <Statement FileIndex="13" Line="23" Column="17" EndLine="23" EndColumn="65" Covered="False" />
+              <Statement FileIndex="13" Line="24" Column="13" EndLine="24" EndColumn="14" Covered="False" />
+              <Statement FileIndex="13" Line="25" Column="9" EndLine="25" EndColumn="10" Covered="True" />
+            </Method>
+          </Type>
+          <Type Name="TestClass2" CoveredStatements="30" TotalStatements="46" CoveragePercent="65">
+            <Type Name="&lt;&gt;c" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+              <Method Name="&lt;SampleFunction&gt;b__14_0(System.Int32):System.Int32" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+                <Statement FileIndex="14" Line="45" Column="46" EndLine="45" EndColumn="51" Covered="True" />
+              </Method>
+            </Type>
+            <Type Name="&lt;&gt;c__DisplayClass14_0" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+              <Method Name="&lt;SampleFunction&gt;b__1(System.String):System.Boolean" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+                <Statement FileIndex="14" Line="54" Column="45" EndLine="54" EndColumn="95" Covered="True" />
+              </Method>
+            </Type>
+            <Method Name=".ctor():System.Void" CoveredStatements="0" TotalStatements="6" CoveragePercent="0">
+              <Statement FileIndex="14" Line="11" Column="9" EndLine="11" EndColumn="78" Covered="False" />
+              <Statement FileIndex="14" Line="17" Column="9" EndLine="17" EndColumn="28" Covered="False" />
+              <Statement FileIndex="14" Line="18" Column="9" EndLine="18" EndColumn="10" Covered="False" />
+              <Statement FileIndex="14" Line="19" Column="13" EndLine="19" EndColumn="34" Covered="False" />
+              <Statement FileIndex="14" Line="20" Column="13" EndLine="20" EndColumn="46" Covered="False" />
+              <Statement FileIndex="14" Line="21" Column="9" EndLine="21" EndColumn="10" Covered="False" />
+            </Method>
+            <Method Name=".ctor(System.String):System.Void" CoveredStatements="6" TotalStatements="6" CoveragePercent="100">
+              <Statement FileIndex="14" Line="11" Column="9" EndLine="11" EndColumn="78" Covered="True" />
+              <Statement FileIndex="14" Line="23" Column="9" EndLine="23" EndColumn="39" Covered="True" />
+              <Statement FileIndex="14" Line="24" Column="9" EndLine="24" EndColumn="10" Covered="True" />
+              <Statement FileIndex="14" Line="25" Column="13" EndLine="25" EndColumn="30" Covered="True" />
+              <Statement FileIndex="14" Line="26" Column="13" EndLine="26" EndColumn="49" Covered="True" />
+              <Statement FileIndex="14" Line="27" Column="9" EndLine="27" EndColumn="10" Covered="True" />
+            </Method>
+            <Method Name="DoSomething(System.String,System.String[],System.Guid,System.Collections.Generic.IEnumerable&lt;System.String&gt;,System.Collections.Generic.IList&lt;System.String&gt;,System.Decimal,System.Int32,System.Collections.Generic.Dictionary&lt;System.String,System.Int32&gt;,System.Int32,System.Single,System.Double,System.Boolean,System.Byte,System.Char,System.Object,System.SByte,System.Int16,System.UInt32,System.UInt64,System.UInt16):System.String" CoveredStatements="0" TotalStatements="4" CoveragePercent="0">
+              <Statement FileIndex="14" Line="80" Column="9" EndLine="80" EndColumn="10" Covered="False" />
+              <Statement FileIndex="14" Line="81" Column="13" EndLine="81" EndColumn="19" Covered="False" />
+              <Statement FileIndex="14" Line="82" Column="13" EndLine="82" EndColumn="25" Covered="False" />
+              <Statement FileIndex="14" Line="83" Column="9" EndLine="83" EndColumn="10" Covered="False" />
+            </Method>
+            <Method Name="ExecutedMethod():System.Void" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+              <Statement FileIndex="14" Line="30" Column="9" EndLine="30" EndColumn="10" Covered="True" />
+              <Statement FileIndex="14" Line="31" Column="13" EndLine="31" EndColumn="42" Covered="True" />
+              <Statement FileIndex="14" Line="32" Column="13" EndLine="32" EndColumn="54" Covered="True" />
+              <Statement FileIndex="14" Line="33" Column="9" EndLine="33" EndColumn="10" Covered="True" />
+            </Method>
+            <Method Name="get_ExecutedProperty():System.String" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+              <Statement FileIndex="14" Line="13" Column="42" EndLine="13" EndColumn="46" Covered="True" />
+            </Method>
+            <Method Name="get_UnExecutedProperty():System.String" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+              <Statement FileIndex="14" Line="15" Column="44" EndLine="15" EndColumn="48" Covered="False" />
+            </Method>
+            <Method Name="SampleFunction(System.String):System.Void" CoveredStatements="16" TotalStatements="16" CoveragePercent="100">
+              <Statement FileIndex="14" Line="42" Column="9" EndLine="42" EndColumn="10" Covered="True" />
+              <Statement FileIndex="14" Line="43" Column="13" EndLine="43" EndColumn="53" Covered="True" />
+              <Statement FileIndex="14" Line="45" Column="13" EndLine="45" EndColumn="53" Covered="True" />
+              <Statement FileIndex="14" Line="47" Column="13" EndLine="47" EndColumn="20" Covered="True" />
+              <Statement FileIndex="14" Line="47" Column="34" EndLine="47" EndColumn="41" Covered="True" />
+              <Statement FileIndex="14" Line="47" Column="22" EndLine="47" EndColumn="30" Covered="True" />
+              <Statement FileIndex="14" Line="48" Column="13" EndLine="48" EndColumn="14" Covered="True" />
+              <Statement FileIndex="14" Line="49" Column="17" EndLine="49" EndColumn="41" Covered="True" />
+              <Statement FileIndex="14" Line="50" Column="13" EndLine="50" EndColumn="14" Covered="True" />
+              <Statement FileIndex="14" Line="47" Column="31" EndLine="47" EndColumn="33" Covered="True" />
+              <Statement FileIndex="14" Line="52" Column="13" EndLine="52" EndColumn="76" Covered="True" />
+              <Statement FileIndex="14" Line="54" Column="13" EndLine="54" EndColumn="105" Covered="True" />
+              <Statement FileIndex="14" Line="55" Column="13" EndLine="55" EndColumn="14" Covered="True" />
+              <Statement FileIndex="14" Line="56" Column="17" EndLine="56" EndColumn="52" Covered="True" />
+              <Statement FileIndex="14" Line="57" Column="13" EndLine="57" EndColumn="14" Covered="True" />
+              <Statement FileIndex="14" Line="58" Column="9" EndLine="58" EndColumn="10" Covered="True" />
+            </Method>
+            <Method Name="set_ExecutedProperty(System.String):System.Void" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+              <Statement FileIndex="14" Line="13" Column="47" EndLine="13" EndColumn="51" Covered="True" />
+            </Method>
+            <Method Name="set_UnExecutedProperty(System.String):System.Void" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+              <Statement FileIndex="14" Line="15" Column="49" EndLine="15" EndColumn="53" Covered="False" />
+            </Method>
+            <Method Name="UnExecutedMethod():System.Void" CoveredStatements="0" TotalStatements="4" CoveragePercent="0">
+              <Statement FileIndex="14" Line="36" Column="9" EndLine="36" EndColumn="10" Covered="False" />
+              <Statement FileIndex="14" Line="37" Column="13" EndLine="37" EndColumn="42" Covered="False" />
+              <Statement FileIndex="14" Line="38" Column="13" EndLine="38" EndColumn="54" Covered="False" />
+              <Statement FileIndex="14" Line="39" Column="9" EndLine="39" EndColumn="10" Covered="False" />
+            </Method>
+          </Type>
+        </Namespace>
+      </Assembly>
+    </Root>
+</root>

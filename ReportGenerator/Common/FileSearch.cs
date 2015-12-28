@@ -47,7 +47,7 @@ namespace Palmmedia.ReportGenerator.Common
 
             if (directoryIsUNCPath)
             {
-                parts[0] =  @"\\" + parts[0];
+                parts[0] = @"\\" + parts[0];
             }
             else if (pattern.StartsWith(@"\", StringComparison.Ordinal))
             {

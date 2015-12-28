@@ -33,6 +33,10 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             parserName = ParserFactory.CreateParser(new string[] { filePath }, new string[] { }).ToString();
             Assert.AreEqual("OpenCoverParser", parserName, "Wrong parser");
 
+            filePath = Path.Combine(FileManager.GetCSharpReportDirectory(), "dotCover.xml");
+            parserName = ParserFactory.CreateParser(new string[] { filePath }, new string[] { }).ToString();
+            Assert.AreEqual("DotCoverParser", parserName, "Wrong parser");
+
             filePath = Path.Combine(FileManager.GetCSharpReportDirectory(), "VisualStudio2010.coveragexml");
             parserName = ParserFactory.CreateParser(new string[] { filePath }, new string[] { }).ToString();
             Assert.AreEqual("VisualStudioParser", parserName, "Wrong parser");
@@ -63,6 +67,10 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             filePath = Path.Combine(FileManager.GetCSharpReportDirectory(), "MultiOpenCover.xml");
             parserName = ParserFactory.CreateParser(new string[] { filePath }, new string[] { }).ToString();
             Assert.AreEqual("MultiReportParser (2x OpenCoverParser)", parserName, "Wrong parser");
+
+            filePath = Path.Combine(FileManager.GetCSharpReportDirectory(), "MultidotCover.xml");
+            parserName = ParserFactory.CreateParser(new string[] { filePath }, new string[] { }).ToString();
+            Assert.AreEqual("MultiReportParser (2x DotCoverParser)", parserName, "Wrong parser");
 
             filePath = Path.Combine(FileManager.GetCSharpReportDirectory(), "MultiVisualStudio2010.coveragexml");
             parserName = ParserFactory.CreateParser(new string[] { filePath }, new string[] { }).ToString();

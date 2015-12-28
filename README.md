@@ -15,9 +15,10 @@ The following output formats are supported by ReportGenerator:
 * [Custom reports](https://github.com/danielpalme/ReportGenerator/wiki/Custom-reports)
 
 **Compatibility:**
-* [OpenCover](https://github.com/OpenCover/opencover)
-* [PartCover](https://github.com/sawilde/partcover.net4) (4.0)
-* [PartCover](http://sourceforge.net/projects/partcover/) (2.2, 2.3)
+* [OpenCover](https://github.com/OpenCover/opencover) ([Nuget](https://www.nuget.org/packages/OpenCover))
+* [PartCover](https://github.com/sawilde/partcover.net4) 4.0 ([Nuget](https://www.nuget.org/packages/partcovernet4/))
+* [PartCover](http://sourceforge.net/projects/partcover/) 2.2, 2.3
+* [dotCover](https://www.jetbrains.com/dotcover/help/dotCover__Console_Runner_Commands.html) ([Nuget](https://www.nuget.org/packages/JetBrains.dotCover.CommandLineTools/), /ReportType=DetailedXML)
 * Visual Studio ([vstest.console.exe](https://github.com/danielpalme/ReportGenerator/wiki/Visual-Studio-Coverage-Tools#vstestconsoleexe), [CodeCoverage.exe](https://github.com/danielpalme/ReportGenerator/wiki/Visual-Studio-Coverage-Tools#codecoverageexe))
 * [NCover](http://www.ncover.com/download/current) (tested version 1.5.8, other versions may not work)
 

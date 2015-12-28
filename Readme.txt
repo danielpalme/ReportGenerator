@@ -35,6 +35,7 @@ Compatibility:
 OpenCover
 PartCover 4.0
 PartCover 2.2, 2.3
+dotCover
 Visual Studio (vstest.console.exe, CodeCoverage.exe)
 NCover (tested version 1.5.8, other versions may not work)
 
@@ -55,6 +56,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+2.4.0.0
+
+    * New: Issue #34: Added support for dotCover
+    
 2.3.5.0
 
     * New: Added branch coverage to XML report
