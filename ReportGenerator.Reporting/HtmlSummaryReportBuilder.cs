@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Text;
 using Palmmedia.ReportGenerator.Parser.Analysis;
 using Palmmedia.ReportGenerator.Reporting.Rendering;
 
@@ -34,7 +35,7 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// <param name="summaryResult">The summary result.</param>
         public override void CreateSummaryReport(SummaryResult summaryResult)
         {
-            using (var renderer = new HtmlRenderer(true))
+            using (var renderer = new HtmlRenderer(true, new StringBuilder()))
             {
                 this.CreateSummaryReport(renderer, summaryResult);
             }

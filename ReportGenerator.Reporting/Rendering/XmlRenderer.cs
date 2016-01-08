@@ -256,7 +256,6 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             this.reportTextWriter.WriteAttributeString("coveredbranches", assembly.CoveredBranches.HasValue ? assembly.CoveredBranches.Value.ToString(CultureInfo.InvariantCulture) : string.Empty);
             this.reportTextWriter.WriteAttributeString("totalbranches", assembly.TotalBranches.HasValue ? assembly.TotalBranches.Value.ToString(CultureInfo.InvariantCulture) : string.Empty);
 
-
             this.closeAssemblyNode = true;
         }
 

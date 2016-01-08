@@ -500,14 +500,14 @@ var AssemblyTable = React.createClass({
             React.DOM.table({ className: 'overview' },
                 React.DOM.colgroup(null,
                     React.DOM.col(null),
-                    React.DOM.col({ style: { 'width': '90px' } }),
-                    React.DOM.col({ style: { 'width': '105px' } }),
-                    React.DOM.col({ style: { 'width': '100px' } }),
-                    React.DOM.col({ style: { 'width': '70px' } }),
-                    React.DOM.col({ style: { 'width': '98px' } }),
-                    React.DOM.col({ style: { 'width': '112px' } }),
-                    React.DOM.col({ style: { 'width': '98px' } }),
-                    React.DOM.col({ style: { 'width': '112px' } })),
+                    React.DOM.col({ className: 'column90' }),
+                    React.DOM.col({ className: 'column105' }),
+                    React.DOM.col({ className: 'column100' }),
+                    React.DOM.col({ className: 'column70' }),
+                    React.DOM.col({ className: 'column98' }),
+                    React.DOM.col({ className: 'column112' }),
+                    React.DOM.col({ className: 'column98' }),
+                    React.DOM.col({ className: 'column112' })),
                 TableHeader({
                     sortby: this.props.sortby,
                     sortorder: this.props.sortorder,
@@ -567,9 +567,9 @@ var AssemblyRow = React.createClass({
             { className: 'coverage' },
             React.DOM.tbody(null,
                 React.DOM.tr(null,
-                    React.DOM.td({ className: 'green' + greenHidden, style: { width: Math.round(this.props.assembly.coverage()) + 'px' } }, ' '),
-                    React.DOM.td({ className: 'red' + redHidden, style: { width: (100 - Math.round(this.props.assembly.coverage())) + 'px' } }, ' '),
-                    React.DOM.td({ className: 'gray' + grayHidden, style: { width: '100px' } }, ' '))));
+                    React.DOM.td({ className: 'green covered' + Math.round(this.props.assembly.coverage()) + greenHidden }, ' '),
+                    React.DOM.td({ className: 'red covered' + (100 - Math.round(this.props.assembly.coverage())) + redHidden }, ' '),
+                    React.DOM.td({ className: 'gray covered100' + grayHidden }, ' '))));
 
         branchGreenHidden = !isNaN(this.props.assembly.coverage()) && Math.round(this.props.assembly.branchCoverage()) > 0 ? '' : ' hidden';
         branchRedHidden = !isNaN(this.props.assembly.coverage()) && 100 - Math.round(this.props.assembly.branchCoverage()) > 0 ? '' : ' hidden';
@@ -579,9 +579,9 @@ var AssemblyRow = React.createClass({
             { className: 'coverage' },
             React.DOM.tbody(null,
                 React.DOM.tr(null,
-                    React.DOM.td({ className: 'green' + branchGreenHidden, style: { width: Math.round(this.props.assembly.branchCoverage()) + 'px' } }, ' '),
-                    React.DOM.td({ className: 'red' + branchRedHidden, style: { width: (100 - Math.round(this.props.assembly.branchCoverage())) + 'px' } }, ' '),
-                    React.DOM.td({ className: 'gray' + branchGrayHidden, style: { width: '100px' } }, ' '))));
+                    React.DOM.td({ className: 'green covered' + Math.round(this.props.assembly.branchCoverage()) + branchGreenHidden }, ' '),
+                    React.DOM.td({ className: 'red covered' + (100 - Math.round(this.props.assembly.branchCoverage())) + branchRedHidden }, ' '),
+                    React.DOM.td({ className: 'gray covered100' + branchGrayHidden }, ' '))));
 
         id = '_' + createRandomId(8);
 
@@ -635,9 +635,9 @@ var ClassRow = React.createClass({
             { className: 'coverage' },
             React.DOM.tbody(null,
                 React.DOM.tr(null,
-                    React.DOM.td({ className: 'green' + greenHidden, style: { width: Math.round(this.props.clazz.coverage) + 'px' } }, ' '),
-                    React.DOM.td({ className: 'red' + redHidden, style: { width: (100 - Math.round(this.props.clazz.coverage)) + 'px' } }, ' '),
-                    React.DOM.td({ className: 'gray' + grayHidden, style: { width: '100px' } }, ' '))));
+                    React.DOM.td({ className: 'green covered' + Math.round(this.props.clazz.coverage) + greenHidden }, ' '),
+                    React.DOM.td({ className: 'red covered' + (100 - Math.round(this.props.clazz.coverage)) + redHidden }, ' '),
+                    React.DOM.td({ className: 'gray covered100' + grayHidden }, ' '))));
 
         branchGreenHidden = !isNaN(this.props.clazz.branchCoverage) && Math.round(this.props.clazz.branchCoverage) > 0 ? '' : ' hidden';
         branchRedHidden = !isNaN(this.props.clazz.branchCoverage) && 100 - Math.round(this.props.clazz.branchCoverage) > 0 ? '' : ' hidden';
@@ -647,9 +647,9 @@ var ClassRow = React.createClass({
             { className: 'coverage' },
             React.DOM.tbody(null,
                 React.DOM.tr(null,
-                    React.DOM.td({ className: 'green' + branchGreenHidden, style: { width: Math.round(this.props.clazz.branchCoverage) + 'px' } }, ' '),
-                    React.DOM.td({ className: 'red' + branchRedHidden, style: { width: (100 - Math.round(this.props.clazz.branchCoverage)) + 'px' } }, ' '),
-                    React.DOM.td({ className: 'gray' + branchGrayHidden, style: { width: '100px' } }, ' '))));
+                    React.DOM.td({ className: 'green covered' + Math.round(this.props.clazz.branchCoverage) + branchGreenHidden }, ' '),
+                    React.DOM.td({ className: 'red covered' + (100 - Math.round(this.props.clazz.branchCoverage)) + branchRedHidden }, ' '),
+                    React.DOM.td({ className: 'gray covered100' + branchGrayHidden }, ' '))));
 
         return (
             React.DOM.tr({ className: this.props.clazz.parent.parent !== null ? 'namespace' : null },
@@ -681,7 +681,7 @@ var ClassRow = React.createClass({
 });
 
 var CoverageHistoryChart = React.createClass({
-    componentDidMount: function () {
+    updateChart: function () {
         if (this.props.historicCoverage.length <= 1) {
             return;
         }
@@ -709,9 +709,21 @@ var CoverageHistoryChart = React.createClass({
             fullWidth: true,
         });
     },
+    componentDidMount: function () {
+        this.updateChart();
+    },
+    componentDidUpdate: function () {
+        this.updateChart();
+    },
     render: function () {
         if (this.props.historicCoverage.length <= 1) {
-            return (React.DOM.div());
+            return (
+                React.DOM.div(
+                {
+                    id: this.props.id,
+                    className: 'hidden',
+                })
+            );
         } else {
             return (
                 React.DOM.div(

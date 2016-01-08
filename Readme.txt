@@ -59,6 +59,7 @@ CHANGELOG
 2.4.0.0
 
     * New: Issue #34: Added support for dotCover
+    * Fix: Issue #35: Improved Jenkins CSP compliance
     
 2.3.5.0
 

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using Palmmedia.ReportGenerator.Parser.Analysis;
 using Palmmedia.ReportGenerator.Properties;
 
@@ -53,6 +54,11 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         private readonly bool onlySummary;
 
         /// <summary>
+        /// Contains report specific JavaScript content.
+        /// </summary>
+        private readonly StringBuilder javaScriptContent;
+
+        /// <summary>
         /// The report builder.
         /// </summary>
         private TextWriter reportTextWriter;
@@ -61,9 +67,11 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// Initializes a new instance of the <see cref="HtmlRenderer" /> class.
         /// </summary>
         /// <param name="onlySummary">if set to <c>true</c> only a summary report is created (no class reports).</param>
-        internal HtmlRenderer(bool onlySummary)
+        /// <param name="javaScriptContent">StringBuilder used to collect report specific JavaScript.</param>
+        internal HtmlRenderer(bool onlySummary, StringBuilder javaScriptContent)
         {
             this.onlySummary = onlySummary;
+            this.javaScriptContent = javaScriptContent;
         }
 
         /// <summary>
@@ -76,7 +84,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             string targetPath = Path.Combine(targetDirectory, this.onlySummary ? "summary.htm" : "index.htm");
             this.CreateTextWriter(targetPath);
 
-            using (var cssStream = GetCombinedCss())
+            using (var cssStream = this.GetCombinedCss())
             {
                 string style = this.onlySummary ?
                     "<style TYPE=\"text/css\">" + new StreamReader(cssStream).ReadToEnd() + "</style>"
@@ -126,33 +134,27 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                 return;
             }
 
-            StringBuilder html = new StringBuilder();
-
-            html.Append("<div id=\"testmethods\" data-ng-class=\"pinned ? \\'pinned\\' : \\'\\'\">");
-            html.AppendFormat("<h2 id=\"pinheader\">{0}</h2>", ReportResources.Testmethods);
-            html.Append("<a id=\"pin\" data-ng-click=\"togglePin()\">&nbsp;</a><div>");
+            this.reportTextWriter.WriteLine("<div id=\"testmethods\" class=\"ng-hide\" data-ng-show=\"true\" data-ng-class=\"pinned ? 'pinned' : ''\">");
+            this.reportTextWriter.WriteLine("<h2 id=\"pinheader\">{0}</h2>", ReportResources.Testmethods);
+            this.reportTextWriter.WriteLine("<a id=\"pin\" data-ng-click=\"togglePin()\">&nbsp;</a>");
+            this.reportTextWriter.WriteLine("<div>");
 
             int counter = 0;
 
-            html.AppendFormat("<span><input type=\"radio\" name=\"method\" value=\"AllTestMethods\" id=\"method{1}\" data-ng-change=\"switchTestMethod(\\'AllTestMethods\\')\" data-ng-model=\"selectedTestMethod\" /><label for=\"method{1}\" title=\"{0}\">{0}</label></span>", ReportResources.All, counter);
+            this.reportTextWriter.WriteLine("<span><input type=\"radio\" name=\"method\" value=\"AllTestMethods\" id=\"method{1}\" data-ng-change=\"switchTestMethod('AllTestMethods')\" data-ng-model=\"selectedTestMethod\" /><label for=\"method{1}\" title=\"{0}\">{0}</label></span>", ReportResources.All, counter);
 
             foreach (var testMethod in testMethods)
             {
                 counter++;
-                html.AppendFormat(
-                    "<span><input type=\"radio\" name=\"method\" value=\"M{0}\" id=\"method{0}\" data-ng-change=\"switchTestMethod(\\'M{0}\\')\" data-ng-model=\"selectedTestMethod\" /><label for=\"method{0}\" title=\"{2}\">{1}</label></span>",
+                this.reportTextWriter.WriteLine(
+                    "<span><input type=\"radio\" name=\"method\" value=\"M{0}\" id=\"method{0}\" data-ng-change=\"switchTestMethod('M{0}')\" data-ng-model=\"selectedTestMethod\" /><label for=\"method{0}\" title=\"{2}\">{1}</label></span>",
                     testMethod.Id,
                     WebUtility.HtmlEncode(testMethod.ShortName),
                     WebUtility.HtmlEncode(testMethod.Name));
             }
 
-            html.Append("</div></div>");
-
-            this.reportTextWriter.WriteLine("<script type=\"text/javascript\">");
-            this.reportTextWriter.WriteLine("/* <![CDATA[ */");
-            this.reportTextWriter.WriteLine("document.write('{0}');", html.ToString());
-            this.reportTextWriter.WriteLine("/* ]]> */");
-            this.reportTextWriter.WriteLine("</script>");
+            this.reportTextWriter.WriteLine("</div>");
+            this.reportTextWriter.WriteLine("</div>");
         }
 
         /// <summary>
@@ -180,7 +182,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         {
             this.reportTextWriter.WriteLine("<table class=\"overview\">");
             this.reportTextWriter.WriteLine("<colgroup>");
-            this.reportTextWriter.WriteLine("<col style=\"width: 135px;\" />");
+            this.reportTextWriter.WriteLine("<col class=\"column135\" />");
             this.reportTextWriter.WriteLine("<col />");
             this.reportTextWriter.WriteLine("</colgroup>");
             this.reportTextWriter.WriteLine("<tbody>");
@@ -195,27 +197,22 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
 
             this.reportTextWriter.WriteLine("<div data-ng-if=\"!filteringEnabled\">");
             this.reportTextWriter.WriteLine(
-                "<div id=\"filterButtonContainer\" class=\"customizebox\" style=\"display: none;\"><input data-ng-click=\"enableFiltering()\" value=\"{0}\" title=\"{1}\" type=\"submit\" /></div>",
+                "<div class=\"ng-hide customizebox\" data-ng-show=\"true\"><input data-ng-click=\"enableFiltering()\" value=\"{0}\" title=\"{1}\" type=\"submit\" /></div>",
                 ReportResources.ShowCustomizeBox,
                 ReportResources.ShowCustomizeBoxHelp);
-            this.reportTextWriter.WriteLine("<script type=\"text/javascript\">");
-            this.reportTextWriter.WriteLine("/* <![CDATA[ */");
-            this.reportTextWriter.WriteLine("document.getElementById('filterButtonContainer').style.display = 'block';");
-            this.reportTextWriter.WriteLine("/* ]]> */");
-            this.reportTextWriter.WriteLine("</script>");
             this.reportTextWriter.WriteLine("</div>");
 
             this.reportTextWriter.WriteLine("<table data-ng-if=\"!filteringEnabled\" class=\"overview\">");
             this.reportTextWriter.WriteLine("<colgroup>");
             this.reportTextWriter.WriteLine("<col />");
-            this.reportTextWriter.WriteLine("<col style=\"width: 90px;\" />");
-            this.reportTextWriter.WriteLine("<col style=\"width: 105px;\" />");
-            this.reportTextWriter.WriteLine("<col style=\"width: 100px;\" />");
-            this.reportTextWriter.WriteLine("<col style=\"width: 70px;\" />");
-            this.reportTextWriter.WriteLine("<col style=\"width: 60px;\" />");
-            this.reportTextWriter.WriteLine("<col style=\"width: 112px;\" />");
-            this.reportTextWriter.WriteLine("<col style=\"width: 60px;\" />");
-            this.reportTextWriter.WriteLine("<col style=\"width: 112px;\" />");
+            this.reportTextWriter.WriteLine("<col class=\"column90\" />");
+            this.reportTextWriter.WriteLine("<col class=\"column105\" />");
+            this.reportTextWriter.WriteLine("<col class=\"column100\" />");
+            this.reportTextWriter.WriteLine("<col class=\"column70\" />");
+            this.reportTextWriter.WriteLine("<col class=\"column60\" />");
+            this.reportTextWriter.WriteLine("<col class=\"column112\" />");
+            this.reportTextWriter.WriteLine("<col class=\"column60\" />");
+            this.reportTextWriter.WriteLine("<col class=\"column112\" />");
             this.reportTextWriter.WriteLine("</colgroup>");
 
             this.reportTextWriter.WriteLine(
@@ -241,16 +238,14 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                 throw new ArgumentNullException(nameof(assemblies));
             }
 
-            this.reportTextWriter.WriteLine("<script type=\"text/javascript\">");
-            this.reportTextWriter.WriteLine("/* <![CDATA[ */");
-
-            this.reportTextWriter.WriteLine("var assemblies = [");
+            this.javaScriptContent.AppendLine("var assemblies = [");
 
             foreach (var assembly in assemblies)
             {
-                this.reportTextWriter.WriteLine("  {");
-                this.reportTextWriter.WriteLine("    \"name\" : \"{0}\",", assembly.Name);
-                this.reportTextWriter.WriteLine("    \"classes\" : [");
+                this.javaScriptContent.AppendLine("  {");
+                this.javaScriptContent.AppendFormat("    \"name\" : \"{0}\",", assembly.Name);
+                this.javaScriptContent.AppendLine();
+                this.javaScriptContent.AppendLine("    \"classes\" : [");
 
                 foreach (var @class in assembly.Classes)
                 {
@@ -263,34 +258,31 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                         branchCoverageHistory = "[" + string.Join(",", historicCoverages.Select(h => h.BranchCoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture))) + "]";
                     }
 
-                    this.reportTextWriter.Write("    { ");
-                    this.reportTextWriter.Write(" \"name\" : \"{0}\",", @class.Name);
-                    this.reportTextWriter.Write(
+                    this.javaScriptContent.Append("    { ");
+                    this.javaScriptContent.AppendFormat(" \"name\" : \"{0}\",", @class.Name);
+                    this.javaScriptContent.AppendFormat(
                         " \"reportPath\" : \"{0}\",",
                         this.onlySummary ? string.Empty : GetClassReportFilename(@class.Assembly.ShortName, @class.Name));
-                    this.reportTextWriter.Write(" \"coveredLines\" : {0},", @class.CoveredLines);
-                    this.reportTextWriter.Write(" \"uncoveredLines\" : {0},", @class.CoverableLines - @class.CoveredLines);
-                    this.reportTextWriter.Write(" \"coverableLines\" : {0},", @class.CoverableLines);
-                    this.reportTextWriter.Write(" \"totalLines\" : {0},", @class.TotalLines.GetValueOrDefault());
-                    this.reportTextWriter.Write(" \"coverageType\" : \"{0}\",", @class.CoverageType);
-                    this.reportTextWriter.Write(
+                    this.javaScriptContent.AppendFormat(" \"coveredLines\" : {0},", @class.CoveredLines);
+                    this.javaScriptContent.AppendFormat(" \"uncoveredLines\" : {0},", @class.CoverableLines - @class.CoveredLines);
+                    this.javaScriptContent.AppendFormat(" \"coverableLines\" : {0},", @class.CoverableLines);
+                    this.javaScriptContent.AppendFormat(" \"totalLines\" : {0},", @class.TotalLines.GetValueOrDefault());
+                    this.javaScriptContent.AppendFormat(" \"coverageType\" : \"{0}\",", @class.CoverageType);
+                    this.javaScriptContent.AppendFormat(
                         " \"methodCoverage\" : {0},",
                         @class.CoverageType == CoverageType.MethodCoverage && @class.CoverageQuota.HasValue ? @class.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : "\"-\"");
-                    this.reportTextWriter.Write(" \"coveredBranches\" : {0},", @class.CoveredBranches.GetValueOrDefault());
-                    this.reportTextWriter.Write(" \"totalBranches\" : {0},", @class.TotalBranches.GetValueOrDefault());
-                    this.reportTextWriter.Write(" \"lineCoverageHistory\" : {0},", lineCoverageHistory);
-                    this.reportTextWriter.Write(" \"branchCoverageHistory\" : {0}", branchCoverageHistory);
+                    this.javaScriptContent.AppendFormat(" \"coveredBranches\" : {0},", @class.CoveredBranches.GetValueOrDefault());
+                    this.javaScriptContent.AppendFormat(" \"totalBranches\" : {0},", @class.TotalBranches.GetValueOrDefault());
+                    this.javaScriptContent.AppendFormat(" \"lineCoverageHistory\" : {0},", lineCoverageHistory);
+                    this.javaScriptContent.AppendFormat(" \"branchCoverageHistory\" : {0}", branchCoverageHistory);
 
-                    this.reportTextWriter.WriteLine(" },");
+                    this.javaScriptContent.AppendLine(" },");
                 }
 
-                this.reportTextWriter.WriteLine("  ]},");
+                this.javaScriptContent.AppendLine("  ]},");
             }
 
-            this.reportTextWriter.WriteLine("];");
-
-            this.reportTextWriter.WriteLine("/* ]]> */");
-            this.reportTextWriter.WriteLine("</script>");
+            this.javaScriptContent.AppendLine("];");
         }
 
         /// <summary>
@@ -460,7 +452,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             {
                 int branchCoverage = (int)(100 * (double)analysis.CoveredBranches.Value / analysis.TotalBranches.Value);
                 branchCoverage -= branchCoverage % 10;
-                this.reportTextWriter.Write("<td class=\"branch coverage{0}\">&nbsp;</td>", branchCoverage);
+                this.reportTextWriter.Write("<td class=\"branch{0}\">&nbsp;</td>", branchCoverage);
             }
             else
             {
@@ -495,6 +487,10 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                 throw new ArgumentNullException(nameof(historicCoverages));
             }
 
+            string id = Guid.NewGuid().ToString("N");
+
+            this.reportTextWriter.WriteLine("<div id=\"mainHistoryChart\" class=\"ct-chart\" data-history-chart data-data=\"historyChartData{0}\"></div>", id);
+
             historicCoverages = this.FilterHistoricCoverages(historicCoverages, 100);
 
             var series = new List<string>();
@@ -514,24 +510,19 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                     h.BranchCoverageQuota.HasValue ? string.Format(CultureInfo.InvariantCulture, "<br /><span class=\"branchcoverage\"></span> {0} {1}% ({2}/{3})", ReportResources.BranchCoverage2, h.BranchCoverageQuota.Value, h.CoveredBranches, h.TotalBranches) : null,
                     string.Format(CultureInfo.InvariantCulture, "<br />{0} {1}", ReportResources.TotalLines, h.TotalLines)));
 
-            string id = Guid.NewGuid().ToString("N");
-            this.reportTextWriter.WriteLine("<div id=\"chart{0}\" class=\"ct-chart\" data-history-chart data-data=\"chartData{0}\"></div>", id);
-
-            this.reportTextWriter.WriteLine("<script type=\"text/javascript\">");
-            this.reportTextWriter.WriteLine("/* <![CDATA[ */");
-
-            this.reportTextWriter.WriteLine("var chartData{0} = {{", id);
-            this.reportTextWriter.WriteLine(
+            this.javaScriptContent.AppendFormat("var historyChartData{0} = {{", id);
+            this.javaScriptContent.AppendLine();
+            this.javaScriptContent.AppendFormat(
                 "    \"series\" : [{0}],",
                 string.Join(",", series));
+            this.javaScriptContent.AppendLine();
 
-            this.reportTextWriter.WriteLine(
-                "    \"tooltips\" : [{0}]",
-                string.Join(",", toolTips));
-            this.reportTextWriter.WriteLine("};");
-
-            this.reportTextWriter.WriteLine("/* ]]> */");
-            this.reportTextWriter.WriteLine("</script>");
+            this.javaScriptContent.AppendFormat(
+                 "    \"tooltips\" : [{0}]",
+                 string.Join(",", toolTips));
+            this.javaScriptContent.AppendLine();
+            this.javaScriptContent.AppendLine("};");
+            this.javaScriptContent.AppendLine();
         }
 
         /// <summary>
@@ -613,8 +604,8 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
 
             if (!this.onlySummary)
             {
-                SaveCss(targetDirectory);
-                SaveJavaScript(targetDirectory);
+                this.SaveCss(targetDirectory);
+                this.SaveJavaScript(targetDirectory);
             }
         }
 
@@ -670,17 +661,17 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
 
                 if (covered > 0)
                 {
-                    stringBuilder.Append("<td class=\"green\" style=\"width: " + covered + "px;\">&nbsp;</td>");
+                    stringBuilder.Append("<td class=\"green covered" + covered + "\">&nbsp;</td>");
                 }
 
                 if (uncovered > 0)
                 {
-                    stringBuilder.Append("<td class=\"red\" style=\"width: " + uncovered + "px;\">&nbsp;</td>");
+                    stringBuilder.Append("<td class=\"red covered" + uncovered + "\">&nbsp;</td>");
                 }
             }
             else
             {
-                stringBuilder.Append("<td class=\"gray\" style=\"width: 100px;\">&nbsp;</td>");
+                stringBuilder.Append("<td class=\"gray covered100\">&nbsp;</td>");
             }
 
             stringBuilder.Append("</tr></table>");
@@ -754,15 +745,30 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// Saves the CSS.
         /// </summary>
         /// <param name="targetDirectory">The target directory.</param>
-        private static void SaveCss(string targetDirectory)
+        private void SaveCss(string targetDirectory)
         {
             string targetPath = Path.Combine(targetDirectory, "report.css");
 
             using (var fs = new FileStream(targetPath, FileMode.Create))
             {
-                using (var cssStream = GetCombinedCss())
+                using (var cssStream = this.GetCombinedCss())
                 {
                     cssStream.CopyTo(fs);
+
+                    if (!this.onlySummary)
+                    {
+                        cssStream.Position = 0;
+                        string css = new StreamReader(cssStream).ReadToEnd();
+
+                        var matches = Regex.Matches(css, @"url\(pic_(?<filename>.+).png\),\surl\(data:image/png;base64,(?<base64image>.+)\)");
+
+                        foreach (Match match in matches)
+                        {
+                            System.IO.File.WriteAllBytes(
+                                Path.Combine(targetDirectory, "pic_" + match.Groups["filename"].Value + ".png"),
+                                Convert.FromBase64String(match.Groups["base64image"].Value));
+                        }
+                    }
                 }
             }
         }
@@ -771,13 +777,13 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// Saves the java script.
         /// </summary>
         /// <param name="targetDirectory">The target directory.</param>
-        private static void SaveJavaScript(string targetDirectory)
+        private void SaveJavaScript(string targetDirectory)
         {
             string targetPath = Path.Combine(targetDirectory, "combined.js");
 
             using (var fs = new FileStream(targetPath, FileMode.Create))
             {
-                using (var javaScriptStream = GetCombinedJavascript())
+                using (var javaScriptStream = this.GetCombinedJavascript())
                 {
                     javaScriptStream.CopyTo(fs);
                 }
@@ -788,7 +794,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// Gets the combined CSS.
         /// </summary>
         /// <returns>The combined CSS.</returns>
-        private static Stream GetCombinedCss()
+        private Stream GetCombinedCss()
         {
             var ms = new MemoryStream();
 
@@ -817,7 +823,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// Gets the combined javascript.
         /// </summary>
         /// <returns>The combined javascript.</returns>
-        private static Stream GetCombinedJavascript()
+        private Stream GetCombinedJavascript()
         {
             var ms = new MemoryStream();
 
@@ -862,6 +868,11 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             }
 
             ms.Write(lineBreak, 0, lineBreak.Length);
+            ms.Write(lineBreak, 0, lineBreak.Length);
+
+            byte[] assembliesText = Encoding.UTF8.GetBytes(this.javaScriptContent.ToString());
+            ms.Write(assembliesText, 0, assembliesText.Length);
+
             ms.Write(lineBreak, 0, lineBreak.Length);
 
             var sb = new StringBuilder();
@@ -964,14 +975,17 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                 DateTime.Now.ToShortDateString(),
                 DateTime.Now.ToLongTimeString()));
 
-            using (var javaScriptStream = GetCombinedJavascript())
-            {
-                string javascript = this.onlySummary ?
-                    "<script type=\"text/javascript\">/* <![CDATA[ */ " + new StreamReader(javaScriptStream).ReadToEnd() + " /* ]]> */ </script>"
-                    : "<script type=\"text/javascript\" src=\"combined.js\"></script>";
+            string javascript = "<script type=\"text/javascript\" src=\"combined.js\"></script>";
 
-                this.reportTextWriter.Write(HtmlEnd, javascript);
+            if (this.onlySummary)
+            {
+                using (var javaScriptStream = this.GetCombinedJavascript())
+                {
+                    javascript = "<script type=\"text/javascript\">/* <![CDATA[ */ " + new StreamReader(javaScriptStream).ReadToEnd() + " /* ]]> */ </script>";
+                }
             }
+
+            this.reportTextWriter.Write(HtmlEnd, javascript);
         }
 
         /// <summary>

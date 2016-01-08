@@ -142,7 +142,6 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// </value>
         public string TargetDirectory { get; set; }
 
-
         /// <summary>
         /// Creates a class report.
         /// </summary>
@@ -165,25 +164,24 @@ namespace Palmmedia.ReportGenerator.Reporting
 
             if (summaryResult.CoverageQuota.HasValue)
             {
-                File.WriteAllText
-                    (Path.Combine(this.TargetDirectory, "badge_linecoverage.svg"),
+                File.WriteAllText(
+                    Path.Combine(this.TargetDirectory, "badge_linecoverage.svg"),
                     this.CreateBadge(summaryResult, true, false));
             }
 
             if (summaryResult.BranchCoverageQuota.HasValue)
             {
-                File.WriteAllText
-                    (Path.Combine(this.TargetDirectory, "badge_branchcoverage.svg"),
+                File.WriteAllText(
+                    Path.Combine(this.TargetDirectory, "badge_branchcoverage.svg"),
                     this.CreateBadge(summaryResult, false, true));
             }
 
             if (summaryResult.CoverageQuota.HasValue && summaryResult.BranchCoverageQuota.HasValue)
             {
-                File.WriteAllText
-                    (Path.Combine(this.TargetDirectory, "badge_combined.svg"),
+                File.WriteAllText(
+                    Path.Combine(this.TargetDirectory, "badge_combined.svg"),
                     this.CreateBadge(summaryResult, true, true));
             }
-
         }
 
         /// <summary>

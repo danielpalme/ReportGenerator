@@ -57,12 +57,12 @@ function DetailViewCtrl($scope) {
                 lineAnalysis = coverageData.AllTestMethods;
                 if (lineAnalysis.LVS !== 'gray') {
                     cells[0].setAttribute('class', 'red');
-                    cells[1].innerText = '0';
+                    cells[1].innerText = cells[1].textContent = '0';
                     cells[4].setAttribute('class', 'lightred');
                 }
             } else {
                 cells[0].setAttribute('class', lineAnalysis.LVS);
-                cells[1].innerText = lineAnalysis.VC;
+                cells[1].innerText = cells[1].textContent = lineAnalysis.VC;
                 cells[4].setAttribute('class', 'light' + lineAnalysis.LVS);
             }
         }
