@@ -111,9 +111,9 @@ namespace Palmmedia.ReportGenerator.Parser
         /// <param name="methods">The methods.</param>
         /// <param name="fileIds">The file ids of the class.</param>
         /// <returns>The branches by line number.</returns>
-        private static Dictionary<int, List<Branch>> GetBranches(XElement[] methods, HashSet<string> fileIds)
+        private static Dictionary<int, ICollection<Branch>> GetBranches(XElement[] methods, HashSet<string> fileIds)
         {
-            var result = new Dictionary<int, List<Branch>>();
+            var result = new Dictionary<int, ICollection<Branch>>();
 
             var branchPoints = methods
                 .Elements("BranchPoints")
@@ -149,14 +149,23 @@ namespace Palmmedia.ReportGenerator.Parser
                     int.Parse(branchPoint.Attribute("vc").Value, CultureInfo.InvariantCulture),
                     identifier);
 
-                List<Branch> branches = null;
+                ICollection<Branch> branches = null;
                 if (result.TryGetValue(lineNumber, out branches))
                 {
-                    branches.Add(branch);
+                    HashSet<Branch> branchesHashset = (HashSet<Branch>)branches;
+                    if (branchesHashset.Contains(branch))
+                    {
+                        // Not perfect for performance, but Hashset has no GetElement method
+                        branchesHashset.First(b => b.Equals(branch)).BranchVisits += branch.BranchVisits;
+                    }
+                    else
+                    {
+                        branches.Add(branch);
+                    }
                 }
                 else
                 {
-                    branches = new List<Branch>();
+                    branches = new HashSet<Branch>();
                     branches.Add(branch);
 
                     result.Add(lineNumber, branches);

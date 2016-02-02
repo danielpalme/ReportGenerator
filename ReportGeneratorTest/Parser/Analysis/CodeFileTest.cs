@@ -64,7 +64,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Analysis
         [TestMethod]
         public void Constructor_WithBranches()
         {
-            var branches = new Dictionary<int, List<Branch>>()
+            var branches = new Dictionary<int, ICollection<Branch>>()
             {
                 { 1, new List<Branch>() { new Branch(1, "1"), new Branch(0, "2") } },
                 { 2, new List<Branch>() { new Branch(0, "3"), new Branch(2, "4") } }
@@ -82,7 +82,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Analysis
         [TestMethod]
         public void Merge_CodeFileToMergeHasNoBranches_BranchCoverageInformationIsUpdated()
         {
-            var branches = new Dictionary<int, List<Branch>>()
+            var branches = new Dictionary<int, ICollection<Branch>>()
             {
                 { 1, new List<Branch>() { new Branch(1, "1"), new Branch(0, "2") } },
                 { 2, new List<Branch>() { new Branch(0, "3"), new Branch(2, "4") } }
@@ -103,7 +103,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Analysis
         [TestMethod]
         public void Merge_TargetCodeFileHasNoBranches_BranchCoverageInformationIsUpdated()
         {
-            var branches = new Dictionary<int, List<Branch>>()
+            var branches = new Dictionary<int, ICollection<Branch>>()
             {
                 { 1, new List<Branch>() { new Branch(1, "1"), new Branch(0, "2") } },
                 { 2, new List<Branch>() { new Branch(0, "3"), new Branch(2, "4") } }
@@ -146,14 +146,14 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Analysis
         [TestMethod]
         public void Merge_MergeCodeFileWithLongerCoverageArray_CoverageInformationIsUpdated()
         {
-            var branches = new Dictionary<int, List<Branch>>()
+            var branches = new Dictionary<int, ICollection<Branch>>()
             {
                 { 1, new List<Branch>() { new Branch(1, "1"), new Branch(0, "2") } },
                 { 2, new List<Branch>() { new Branch(0, "3"), new Branch(2, "4") } }
             };
             var sut = new CodeFile("C:\\temp\\Program.cs", new int[] { -1, -1, -1, 0, 0, 0, 1, 1, 1 }, branches);
 
-            var branches2 = new Dictionary<int, List<Branch>>()
+            var branches2 = new Dictionary<int, ICollection<Branch>>()
             {
                 { 1, new List<Branch>() { new Branch(4, "1"), new Branch(3, "5") } },
                 { 3, new List<Branch>() { new Branch(0, "3"), new Branch(2, "4") } }

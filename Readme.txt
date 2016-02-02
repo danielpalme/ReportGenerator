@@ -56,6 +56,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+2.4.1.0
+
+    * New: Issue #36: Improved calculation of branch coverage
+
 2.4.0.0
 
     * New: Issue #34: Added support for dotCover

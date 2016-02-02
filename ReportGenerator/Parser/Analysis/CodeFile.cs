@@ -34,7 +34,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <summary>
         /// The branches by line number.
         /// </summary>
-        private IDictionary<int, List<Branch>> branches;
+        private IDictionary<int, ICollection<Branch>> branches;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CodeFile"/> class.
@@ -52,7 +52,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <param name="path">The path.</param>
         /// <param name="lineCoverage">The line coverage.</param>
         /// <param name="branches">The branches.</param>
-        internal CodeFile(string path, int[] lineCoverage, IDictionary<int, List<Branch>> branches)
+        internal CodeFile(string path, int[] lineCoverage, IDictionary<int, ICollection<Branch>> branches)
         {
             if (path == null)
             {
@@ -209,7 +209,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
                 int currentLineNumber = 0;
 
                 var result = new FileAnalysis(this.Path);
-                List<Branch> branchesOfLine = null;
+                ICollection<Branch> branchesOfLine = null;
 
                 foreach (var line in lines)
                 {
@@ -350,12 +350,12 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
             {
                 if (this.branches == null)
                 {
-                    this.branches = new Dictionary<int, List<Branch>>();
+                    this.branches = new Dictionary<int, ICollection<Branch>>();
                 }
 
                 foreach (var branchByLine in file.branches)
                 {
-                    List<Branch> branches = null;
+                    ICollection<Branch> branches = null;
 
                     if (this.branches.TryGetValue(branchByLine.Key, out branches))
                     {
