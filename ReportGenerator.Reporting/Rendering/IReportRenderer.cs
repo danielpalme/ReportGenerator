@@ -12,8 +12,9 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// Begins the summary report.
         /// </summary>
         /// <param name="targetDirectory">The target directory.</param>
+        /// <param name="fileName">The file name.</param>
         /// <param name="title">The title.</param>
-        void BeginSummaryReport(string targetDirectory, string title);
+        void BeginSummaryReport(string targetDirectory, string fileName, string title);
 
         /// <summary>
         /// Begins the class report.
@@ -137,5 +138,10 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// </summary>
         /// <param name="historicCoverages">The historic coverages.</param>
         void Chart(IEnumerable<HistoricCoverage> historicCoverages);
+
+        /// <summary>
+        /// Adds the footer to the report.
+        /// </summary>
+        void AddFooter();
     }
 }

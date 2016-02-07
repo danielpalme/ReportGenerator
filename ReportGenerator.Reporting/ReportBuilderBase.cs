@@ -134,6 +134,7 @@ namespace Palmmedia.ReportGenerator.Reporting
                 reportRenderer.Paragraph(ReportResources.NoFilesFound);
             }
 
+            reportRenderer.AddFooter();
             reportRenderer.SaveClassReport(this.TargetDirectory, @class.Assembly.ShortName, @class.Name);
         }
 
@@ -154,7 +155,7 @@ namespace Palmmedia.ReportGenerator.Reporting
                 throw new ArgumentNullException(nameof(summaryResult));
             }
 
-            reportRenderer.BeginSummaryReport(this.TargetDirectory, ReportResources.Summary);
+            reportRenderer.BeginSummaryReport(this.TargetDirectory, null, ReportResources.Summary);
             reportRenderer.Header(ReportResources.Summary);
 
             reportRenderer.BeginKeyValueTable();
@@ -209,7 +210,7 @@ namespace Palmmedia.ReportGenerator.Reporting
             }
 
             reportRenderer.CustomSummary(summaryResult.Assemblies);
-
+            reportRenderer.AddFooter();
             reportRenderer.SaveSummaryReport(this.TargetDirectory);
         }
 

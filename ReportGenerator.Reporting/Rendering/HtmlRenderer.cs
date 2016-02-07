@@ -78,10 +78,17 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// Begins the summary report.
         /// </summary>
         /// <param name="targetDirectory">The target directory.</param>
+        /// <param name="fileName">The file name.</param>
         /// <param name="title">The title.</param>
-        public void BeginSummaryReport(string targetDirectory, string title)
+        public void BeginSummaryReport(string targetDirectory, string fileName, string title)
         {
             string targetPath = Path.Combine(targetDirectory, this.onlySummary ? "summary.htm" : "index.htm");
+
+            if (fileName != null)
+            {
+                targetPath = Path.Combine(targetDirectory, fileName);
+            }
+
             this.CreateTextWriter(targetPath);
 
             using (var cssStream = this.GetCombinedCss())
@@ -595,6 +602,21 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         }
 
         /// <summary>
+        /// Adds the footer to the report.
+        /// </summary>
+        public void AddFooter()
+        {
+            this.reportTextWriter.Write(string.Format(
+                CultureInfo.InvariantCulture,
+                "<div class=\"footer\">{0} {1} {2}<br />{3} - {4}<br /><a href=\"https://github.com/danielpalme/ReportGenerator\">GitHub</a> | <a href=\"http://www.palmmedia.de\">www.palmmedia.de</a></div>",
+                ReportResources.GeneratedBy,
+                typeof(IReportBuilder).Assembly.GetName().Name,
+                typeof(IReportBuilder).Assembly.GetName().Version,
+                DateTime.Now.ToShortDateString(),
+                DateTime.Now.ToLongTimeString()));
+        }
+
+        /// <summary>
         /// Saves a summary report.
         /// </summary>
         /// <param name="targetDirectory">The target directory.</param>
@@ -966,15 +988,6 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// </summary>
         private void FinishReport()
         {
-            this.reportTextWriter.Write(string.Format(
-                CultureInfo.InvariantCulture,
-                "<div class=\"footer\">{0} {1} {2}<br />{3} - {4}<br /><a href=\"https://github.com/danielpalme/ReportGenerator\">GitHub</a> | <a href=\"http://www.palmmedia.de\">www.palmmedia.de</a></div>",
-                ReportResources.GeneratedBy,
-                typeof(IReportBuilder).Assembly.GetName().Name,
-                typeof(IReportBuilder).Assembly.GetName().Version,
-                DateTime.Now.ToShortDateString(),
-                DateTime.Now.ToLongTimeString()));
-
             string javascript = "<script type=\"text/javascript\" src=\"combined.js\"></script>";
 
             if (this.onlySummary)

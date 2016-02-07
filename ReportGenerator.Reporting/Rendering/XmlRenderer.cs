@@ -28,8 +28,9 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// Begins the summary report.
         /// </summary>
         /// <param name="targetDirectory">The target directory.</param>
+        /// <param name="fileName">The file name.</param>
         /// <param name="title">The title.</param>
-        public void BeginSummaryReport(string targetDirectory, string title)
+        public void BeginSummaryReport(string targetDirectory, string fileName, string title)
         {
             string targetPath = Path.Combine(targetDirectory, "Summary.xml");
             this.CreateXmlWriter(targetPath);
@@ -280,6 +281,13 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             this.reportTextWriter.WriteAttributeString("coveredbranches", @class.CoveredBranches.HasValue ? @class.CoveredBranches.Value.ToString(CultureInfo.InvariantCulture) : string.Empty);
             this.reportTextWriter.WriteAttributeString("totalbranches", @class.TotalBranches.HasValue ? @class.TotalBranches.Value.ToString(CultureInfo.InvariantCulture) : string.Empty);
             this.reportTextWriter.WriteEndElement();
+        }
+
+        /// <summary>
+        /// Adds the footer to the report.
+        /// </summary>
+        public void AddFooter()
+        {
         }
 
         /// <summary>

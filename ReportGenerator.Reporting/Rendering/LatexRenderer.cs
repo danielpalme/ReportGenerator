@@ -81,8 +81,9 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// Begins the summary report.
         /// </summary>
         /// <param name="targetDirectory">The target directory.</param>
+        /// <param name="fileName">The file name.</param>
         /// <param name="title">The title.</param>
-        public void BeginSummaryReport(string targetDirectory, string title)
+        public void BeginSummaryReport(string targetDirectory, string fileName, string title)
         {
             this.summaryReportStream = new MemoryStream();
             this.reportTextWriter = this.summaryReportTextWriter = new StreamWriter(this.summaryReportStream);
@@ -373,6 +374,13 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                 @class.CoverageQuota.HasValue ? @class.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + @"\%" : string.Empty);
 
             this.reportTextWriter.WriteLine(row);
+        }
+
+        /// <summary>
+        /// Adds the footer to the report.
+        /// </summary>
+        public void AddFooter()
+        {
         }
 
         /// <summary>

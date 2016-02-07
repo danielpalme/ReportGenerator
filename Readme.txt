@@ -56,6 +56,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+2.4.2.0
+
+    * New: Added new report types (HTMLChart, PNGChart, CsvSummary)
+    
 2.4.1.0
 
     * New: Issue #36: Improved calculation of branch coverage
