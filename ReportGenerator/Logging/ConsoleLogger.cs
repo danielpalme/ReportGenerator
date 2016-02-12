@@ -18,7 +18,10 @@ namespace Palmmedia.ReportGenerator.Logging
         /// <param name="message">The message</param>
         public void Debug(string message)
         {
-            this.DebugFormat(message);
+            if (this.VerbosityLevel == VerbosityLevel.Verbose)
+            {
+                Console.WriteLine(message);
+            }
         }
 
         /// <summary>
@@ -40,7 +43,10 @@ namespace Palmmedia.ReportGenerator.Logging
         /// <param name="message">The message</param>
         public void Info(string message)
         {
-            this.InfoFormat(message);
+            if (this.VerbosityLevel == VerbosityLevel.Verbose || this.VerbosityLevel == VerbosityLevel.Info)
+            {
+                Console.WriteLine(message);
+            }
         }
 
         /// <summary>
@@ -62,7 +68,9 @@ namespace Palmmedia.ReportGenerator.Logging
         /// <param name="message">The message</param>
         public void Warn(string message)
         {
-            this.WarnFormat(message);
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine(message);
+            Console.ResetColor();
         }
 
         /// <summary>
@@ -83,7 +91,9 @@ namespace Palmmedia.ReportGenerator.Logging
         /// <param name="message">The message</param>
         public void Error(string message)
         {
-            this.ErrorFormat(message);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(message);
+            Console.ResetColor();
         }
 
         /// <summary>

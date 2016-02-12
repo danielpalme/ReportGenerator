@@ -23,10 +23,12 @@ ReportGenerator (e.g. a build log file).
 
 The following output formats are supported by ReportGenerator:
 
--HTML, HTMLSummary
+-HTML, HTMLSummary, HTMLChart
 -XML, XMLSummary
 -Latex, LatexSummary
 -TextSummary
+-CsvSummary
+-PngChart
 -Badges
 -Custom formats (https://reportgenerator.codeplex.com/documentation)
 
@@ -55,6 +57,10 @@ For further details take a look at LICENSE.txt.
 =======================================================================
 
 CHANGELOG
+
+2.4.3.0
+
+    * Fix: Issue #38: Improved logging
 
 2.4.2.0
 

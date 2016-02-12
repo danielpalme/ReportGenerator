@@ -12,7 +12,7 @@ The following output formats are supported by ReportGenerator:
 * Latex, LatexSummary
 * TextSummary
 * CsvSummary
-* PNGChart
+* PngChart
 * Badges
 * [Custom reports](https://github.com/danielpalme/ReportGenerator/wiki/Custom-reports)
 
