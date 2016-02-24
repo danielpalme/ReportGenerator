@@ -113,7 +113,8 @@ namespace Palmmedia.ReportGenerator.MSBuild
                 this.ClassFilters == null ? Enumerable.Empty<string>() : this.ClassFilters.Select(r => r.ItemSpec),
                 this.VerbosityLevel);
 
-            return Program.Execute(configuration);
+            var generator = new Generator();
+            return generator.GenerateReport(configuration);
         }
     }
 }

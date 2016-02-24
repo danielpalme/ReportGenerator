@@ -3,12 +3,12 @@
     /// <summary>
     /// Interface for loggers.
     /// </summary>
-    internal interface ILogger
+    public interface ILogger
     {
         /// <summary>
-        /// Sets the verbosity level.
+        /// Gets or sets the verbosity level.
         /// </summary>
-        VerbosityLevel VerbosityLevel { set; }
+        VerbosityLevel VerbosityLevel { get; set; }
 
         /// <summary>
         /// Log a message at DEBUG level.

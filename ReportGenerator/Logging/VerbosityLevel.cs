@@ -3,7 +3,7 @@
     /// <summary>
     /// Enumeration for the logging verbosity.
     /// </summary>
-    internal enum VerbosityLevel
+    public enum VerbosityLevel
     {
         /// <summary>
         /// All messages are logged.

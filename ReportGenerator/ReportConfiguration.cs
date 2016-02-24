@@ -12,7 +12,7 @@ namespace Palmmedia.ReportGenerator
     /// <summary>
     /// Provides all parameters that are required for report generation.
     /// </summary>
-    internal class ReportConfiguration
+    public class ReportConfiguration
     {
         /// <summary>
         /// The Logger.
@@ -46,7 +46,7 @@ namespace Palmmedia.ReportGenerator
         /// <param name="assemblyFilters">The assembly filters.</param>
         /// <param name="classFilters">The class filters.</param>
         /// <param name="verbosityLevel">The verbosity level.</param>
-        internal ReportConfiguration(
+        public ReportConfiguration(
             IReportBuilderFactory reportBuilderFactory,
             IEnumerable<string> reportFilePatterns,
             string targetDirectory,
@@ -61,7 +61,7 @@ namespace Palmmedia.ReportGenerator
             {
                 throw new ArgumentNullException(nameof(reportBuilderFactory));
             }
-
+            
             if (reportFilePatterns == null)
             {
                 throw new ArgumentNullException(nameof(reportFilePatterns));
@@ -93,7 +93,6 @@ namespace Palmmedia.ReportGenerator
             }
 
             this.ReportBuilderFactory = reportBuilderFactory;
-
             foreach (var reportFilePattern in reportFilePatterns)
             {
                 try
@@ -133,47 +132,47 @@ namespace Palmmedia.ReportGenerator
         /// <summary>
         /// Gets the report builder factory.
         /// </summary>
-        internal IReportBuilderFactory ReportBuilderFactory { get; }
+        public IReportBuilderFactory ReportBuilderFactory { get; }
 
         /// <summary>
         /// Gets the report files.
         /// </summary>
-        internal IEnumerable<string> ReportFiles => this.reportFiles;
+        public IEnumerable<string> ReportFiles => this.reportFiles;
 
         /// <summary>
         /// Gets the target directory.
         /// </summary>
-        internal string TargetDirectory { get; }
+        public string TargetDirectory { get; }
 
         /// <summary>
         /// Gets the history directory.
         /// </summary>
-        internal string HistoryDirectory { get; }
+        public string HistoryDirectory { get; }
 
         /// <summary>
         /// Gets the type of the report.
         /// </summary>
-        internal IEnumerable<string> ReportTypes { get; }
+        public IEnumerable<string> ReportTypes { get; }
 
         /// <summary>
         /// Gets the source directories.
         /// </summary>
-        internal IEnumerable<string> SourceDirectories { get; }
+        public IEnumerable<string> SourceDirectories { get; }
 
         /// <summary>
         /// Gets the assembly filters.
         /// </summary>
-        internal IEnumerable<string> AssemblyFilters { get; }
+        public IEnumerable<string> AssemblyFilters { get; }
 
         /// <summary>
         /// Gets the class filters.
         /// </summary>
-        internal IEnumerable<string> ClassFilters { get; }
+        public IEnumerable<string> ClassFilters { get; }
 
         /// <summary>
         /// Gets the verbosity level.
         /// </summary>
-        internal VerbosityLevel VerbosityLevel { get; }
+        public VerbosityLevel VerbosityLevel { get; }
 
         /// <summary>
         /// Validates all parameters.
