@@ -5,29 +5,51 @@ namespace Palmmedia.ReportGenerator.Logging
     /// <summary>
     /// Factory for loggers.
     /// </summary>
-    internal class LoggerFactory
+    public static class LoggerFactory
     {
         /// <summary>
-        /// The cached logger.
+        /// Inner factory synchronization object.
         /// </summary>
-        private static readonly ILogger Logger = new ConsoleLogger();
+        private static readonly object InnerFactorySync = new object();
 
         /// <summary>
-        /// Sets the verbosity level.
+        /// Inner factory.
+        /// </summary>
+        private static volatile ILoggerFactory innerFactory = new ConsoleLoggerFactory();
+
+        /// <summary>
+        /// Sets the verbosity level of loggers.
         /// </summary>
         public static VerbosityLevel VerbosityLevel
         {
             set
             {
-                Logger.VerbosityLevel = value;
+                innerFactory.VerbosityLevel = value;
             }
         }
 
         /// <summary>
         /// Initializes the logger for the given type.
         /// </summary>
-        /// <param name="tpye">The type of the class that uses the logger.</param>
+        /// <param name="type">The type of the class that uses the logger.</param>
         /// <returns>The logger.</returns>
-        public static ILogger GetLogger(Type tpye) => Logger;
+        public static ILogger GetLogger(Type type) => innerFactory.GetLogger(type);
+
+        /// <summary>
+        /// Configures the inner logger factory.
+        /// </summary>
+        /// <param name="factory">The inner logger factory.</param>
+        public static void Configure(ILoggerFactory factory)
+        {
+            if (factory == null)
+            {
+                throw new ArgumentNullException(nameof(factory));
+            }
+
+            lock (InnerFactorySync)
+            {
+                innerFactory = factory;
+            }
+        }
     }
 }

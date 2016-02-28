@@ -22,10 +22,7 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// <value>
         /// The report type.
         /// </value>
-        public string ReportType
-        {
-            get { return "CsvSummary"; }
-        }
+        public string ReportType => "CsvSummary";
 
         /// <summary>
         /// Gets or sets the target directory where reports are stored.

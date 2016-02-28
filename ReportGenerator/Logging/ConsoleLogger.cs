@@ -10,7 +10,7 @@ namespace Palmmedia.ReportGenerator.Logging
         /// <summary>
         /// Gets or sets the verbosity level.
         /// </summary>
-        public VerbosityLevel VerbosityLevel { private get; set; }
+        public VerbosityLevel VerbosityLevel { get; set; }
 
         /// <summary>
         /// Log a message at DEBUG level.

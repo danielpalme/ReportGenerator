@@ -58,6 +58,11 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+2.4.4.0
+
+    * New: Added extensibility points
+           https://github.com/danielpalme/ReportGenerator/pull/40
+
 2.4.3.0
 
     * Fix: Issue #38: Improved logging

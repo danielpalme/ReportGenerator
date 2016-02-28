@@ -19,10 +19,7 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// <value>
         /// The report type.
         /// </value>
-        public override string ReportType
-        {
-            get { return "HtmlChart"; }
-        }
+        public override string ReportType => "HtmlChart";
 
         /// <summary>
         /// Creates the summary report.

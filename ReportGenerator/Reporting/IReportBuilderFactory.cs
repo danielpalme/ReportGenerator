@@ -5,7 +5,7 @@ namespace Palmmedia.ReportGenerator.Reporting
     /// <summary>
     /// Interface for factories that create instances of <see cref="IReportBuilder"/>.
     /// </summary>
-    internal interface IReportBuilderFactory
+    public interface IReportBuilderFactory
     {
         /// <summary>
         /// Gets the available report types.

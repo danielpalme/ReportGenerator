@@ -21,10 +21,7 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// <value>
         /// The report type.
         /// </value>
-        public string ReportType
-        {
-            get { return "PngChart"; }
-        }
+        public string ReportType => "PngChart";
 
         /// <summary>
         /// Gets or sets the target directory where reports are stored.

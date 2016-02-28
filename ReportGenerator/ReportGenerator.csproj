@@ -109,8 +109,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\FileSearch.cs" />
+    <Compile Include="IReportGenerator.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
+    <Compile Include="Logging\ConsoleLoggerFactory.cs" />
     <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\ILoggerFactory.cs" />
     <Compile Include="Logging\LoggerFactory.cs" />
     <Compile Include="Parser\Analysis\Branch.cs" />
     <Compile Include="Parser\Analysis\HistoricCoverage.cs" />
@@ -160,6 +163,7 @@
     <Compile Include="Parser\Analysis\FileAnalysis.cs" />
     <Compile Include="Parser\Analysis\ShortLineAnalysis.cs" />
     <Compile Include="Parser\Analysis\LineVisitStatus.cs" />
+    <Compile Include="Generator.cs" />
     <Compile Include="Reporting\DefaultFilter.cs" />
     <Compile Include="Reporting\FileUnblocker.cs" />
     <Compile Include="Reporting\HistoryParser.cs" />
