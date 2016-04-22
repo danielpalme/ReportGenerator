@@ -19,6 +19,7 @@
     <file src="target\bin\ICSharpCode.NRefactory.dll" target="tools" />
     <file src="target\bin\ICSharpCode.NRefactory.CSharp.dll" target="tools" />
     <file src="target\bin\ReportGenerator.exe" target="tools" />
+    <file src="target\bin\ReportGenerator.exe.config" target="tools" />
     <file src="target\bin\ReportGenerator.XML" target="tools" />
     <file src="target\bin\ReportGenerator.Reporting.dll" target="tools" />
     <file src="target\bin\ReportGenerator.Reporting.XML" target="tools" />
