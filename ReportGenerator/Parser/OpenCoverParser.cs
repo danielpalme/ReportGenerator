@@ -101,7 +101,16 @@ namespace Palmmedia.ReportGenerator.Parser
                         methodGroup.Max(m => decimal.Parse(m.Attribute("branchCoverage").Value, CultureInfo.InvariantCulture)))
                 };
 
-                @class.AddMethodMetric(new MethodMetric(methodGroup.Key, metrics));
+                string methodName = methodGroup.Key;
+
+                Match match = Regex.Match(methodName, @"<(?<CompilerGeneratedName>.+)>.+__.+::MoveNext\(\)$");
+
+                if (match.Success)
+                {
+                    methodName = match.Groups["CompilerGeneratedName"].Value + "()";
+                }
+
+                @class.AddMethodMetric(new MethodMetric(methodName, metrics));
             }
         }
 

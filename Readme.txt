@@ -58,6 +58,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+2.4.6.0
+
+    * Fix: Issue #56: Improved method naming in metrics for async methods
+
 2.4.5.0
 
     * Fix: Issue #44: Added limit to number of parsed historic files

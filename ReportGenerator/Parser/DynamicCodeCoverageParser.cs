@@ -188,6 +188,13 @@ namespace Palmmedia.ReportGenerator.Parser
                         int.Parse(method.Attribute("blocks_not_covered").Value, CultureInfo.InvariantCulture))
                 };
 
+                Match match = Regex.Match(method.Attribute("type_name").Value, @"^.*<(?<CompilerGeneratedName>.+)>.+__.+$");
+
+                if (match.Success)
+                {
+                    methodName = match.Groups["CompilerGeneratedName"].Value + "()";
+                }
+
                 @class.AddMethodMetric(new MethodMetric(methodName, metrics));
             }
         }

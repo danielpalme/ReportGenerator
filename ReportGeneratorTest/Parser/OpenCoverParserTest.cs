@@ -235,6 +235,11 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             Assert.AreEqual(75M, metrics.First().Metrics.ElementAt(1).Value, "Wrong value of metric");
             Assert.AreEqual("Branch Coverage", metrics.First().Metrics.ElementAt(2).Name, "Wrong name of metric");
             Assert.AreEqual(60, metrics.First().Metrics.ElementAt(2).Value, "Wrong value of metric");
+
+            metrics = assembliesWithoutPreprocessing.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.AsyncClass").MethodMetrics;
+
+            Assert.AreEqual(1, metrics.Count(), "Wrong number of method metrics");
+            Assert.AreEqual("SendAsync()", metrics.First().Name, "Wrong name of method");
         }
 
         private static FileAnalysis GetFileAnalysis(IEnumerable<Assembly> assemblies, string className, string fileName) => assemblies
