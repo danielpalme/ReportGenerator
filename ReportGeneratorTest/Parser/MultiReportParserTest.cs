@@ -179,11 +179,11 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             Assert.AreEqual("System.Void Test.TestClass::SampleFunction()", metrics.First().Name, "Wrong name of method");
             Assert.AreEqual(3, metrics.First().Metrics.Count(), "Wrong number of metrics");
 
-            Assert.AreEqual("Cyclomatic Complexity", metrics.First().Metrics.ElementAt(0).Name, "Wrong name of metric");
+            Assert.AreEqual("Cyclomatic complexity", metrics.First().Metrics.ElementAt(0).Name, "Wrong name of metric");
             Assert.AreEqual(111, metrics.First().Metrics.ElementAt(0).Value, "Wrong value of metric");
-            Assert.AreEqual("Sequence Coverage", metrics.First().Metrics.ElementAt(1).Name, "Wrong name of metric");
+            Assert.AreEqual("Sequence coverage", metrics.First().Metrics.ElementAt(1).Name, "Wrong name of metric");
             Assert.AreEqual(222, metrics.First().Metrics.ElementAt(1).Value, "Wrong value of metric");
-            Assert.AreEqual("Branch Coverage", metrics.First().Metrics.ElementAt(2).Name, "Wrong name of metric");
+            Assert.AreEqual("Branch coverage", metrics.First().Metrics.ElementAt(2).Name, "Wrong name of metric");
             Assert.AreEqual(333, metrics.First().Metrics.ElementAt(2).Value, "Wrong value of metric");
         }
 

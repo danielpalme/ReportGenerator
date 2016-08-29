@@ -129,6 +129,12 @@
   <data name="Assembly" xml:space="preserve">
     <value>Assembly:</value>
   </data>
+  <data name="BlocksCovered" xml:space="preserve">
+    <value>Blocks covered</value>
+  </data>
+  <data name="BlocksNotCovered" xml:space="preserve">
+    <value>Blocks not covered</value>
+  </data>
   <data name="BranchCoverage" xml:space="preserve">
     <value>Branch coverage</value>
   </data>
@@ -183,6 +189,12 @@
   <data name="CoveredLines" xml:space="preserve">
     <value>Covered lines:</value>
   </data>
+  <data name="CrapScore" xml:space="preserve">
+    <value>Crap Score</value>
+  </data>
+  <data name="CyclomaticComplexity" xml:space="preserve">
+    <value>Cyclomatic complexity</value>
+  </data>
   <data name="ExpandAll" xml:space="preserve">
     <value>Expand all</value>
   </data>
@@ -231,8 +243,14 @@
   <data name="NoGrouping" xml:space="preserve">
     <value>No grouping</value>
   </data>
+  <data name="NPathComplexity" xml:space="preserve">
+    <value>NPath complexity</value>
+  </data>
   <data name="Parser" xml:space="preserve">
     <value>Parser:</value>
+  </data>
+  <data name="SequenceCoverage" xml:space="preserve">
+    <value>Sequence coverage</value>
   </data>
   <data name="ShowCustomizeBox" xml:space="preserve">
     <value>Enable filtering</value>

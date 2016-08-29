@@ -24,6 +24,11 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         public HistoricCoverage(Class @class, DateTime executionTime)
             : this(executionTime)
         {
+            if (@class == null)
+            {
+                throw new ArgumentNullException(nameof(@class));
+            }
+
             this.CoveredLines = @class.CoveredLines;
             this.CoverableLines = @class.CoverableLines;
             this.TotalLines = @class.TotalLines.GetValueOrDefault();

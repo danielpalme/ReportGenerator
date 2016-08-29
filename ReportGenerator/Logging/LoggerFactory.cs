@@ -18,10 +18,15 @@ namespace Palmmedia.ReportGenerator.Logging
         private static volatile ILoggerFactory innerFactory = new ConsoleLoggerFactory();
 
         /// <summary>
-        /// Sets the verbosity level of loggers.
+        /// Gets or sets the verbosity level of loggers.
         /// </summary>
         public static VerbosityLevel VerbosityLevel
         {
+            get
+            {
+                return innerFactory.VerbosityLevel;
+            }
+
             set
             {
                 innerFactory.VerbosityLevel = value;

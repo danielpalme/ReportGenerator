@@ -97,6 +97,24 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Blocks covered.
+        /// </summary>
+        public static string BlocksCovered {
+            get {
+                return ResourceManager.GetString("BlocksCovered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blocks not covered.
+        /// </summary>
+        public static string BlocksNotCovered {
+            get {
+                return ResourceManager.GetString("BlocksNotCovered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Branch coverage.
         /// </summary>
         public static string BranchCoverage {
@@ -259,6 +277,24 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Crap Score.
+        /// </summary>
+        public static string CrapScore {
+            get {
+                return ResourceManager.GetString("CrapScore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cyclomatic complexity.
+        /// </summary>
+        public static string CyclomaticComplexity {
+            get {
+                return ResourceManager.GetString("CyclomaticComplexity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Expand all.
         /// </summary>
         public static string ExpandAll {
@@ -403,11 +439,29 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NPath complexity.
+        /// </summary>
+        public static string NPathComplexity {
+            get {
+                return ResourceManager.GetString("NPathComplexity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Parser:.
         /// </summary>
         public static string Parser {
             get {
                 return ResourceManager.GetString("Parser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sequence coverage.
+        /// </summary>
+        public static string SequenceCoverage {
+            get {
+                return ResourceManager.GetString("SequenceCoverage", resourceCulture);
             }
         }
         

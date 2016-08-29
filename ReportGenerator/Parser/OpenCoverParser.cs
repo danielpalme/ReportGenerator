@@ -88,18 +88,42 @@ namespace Palmmedia.ReportGenerator.Parser
                     continue;
                 }
 
-                var metrics = new[]
+                var metrics = new List<Metric>()
                 {
                     new Metric(
-                        "Cyclomatic Complexity",
+                        ReportResources.CyclomaticComplexity,
+                        new Uri("https://en.wikipedia.org/wiki/Cyclomatic_complexity"),
                         methodGroup.Max(m => int.Parse(m.Attribute("cyclomaticComplexity").Value, CultureInfo.InvariantCulture))),
                     new Metric(
-                        "Sequence Coverage",
+                        ReportResources.SequenceCoverage,
+                        new Uri("https://en.wikipedia.org/wiki/Code_coverage"),
                         methodGroup.Max(m => decimal.Parse(m.Attribute("sequenceCoverage").Value, CultureInfo.InvariantCulture))),
                     new Metric(
-                        "Branch Coverage",
+                        ReportResources.BranchCoverage,
+                        new Uri("https://en.wikipedia.org/wiki/Code_coverage"),
                         methodGroup.Max(m => decimal.Parse(m.Attribute("branchCoverage").Value, CultureInfo.InvariantCulture)))
                 };
+
+                var npathComplexityAttributes = methodGroup.Select(m => m.Attribute("nPathComplexity")).Where(a => a != null).ToArray();
+
+                if (npathComplexityAttributes.Length > 0)
+                {
+                    metrics.Insert(
+                        1, 
+                        new Metric(
+                        ReportResources.NPathComplexity,
+                        new Uri("https://modess.io/npath-complexity-cyclomatic-complexity-explained"),
+                        npathComplexityAttributes.Max(a => int.Parse(a.Value, CultureInfo.InvariantCulture))));
+                }
+
+                var crapScoreAttributes = methodGroup.Select(m => m.Attribute("crapScore")).Where(a => a != null).ToArray();
+                if (crapScoreAttributes.Length > 0)
+                {
+                    metrics.Add(new Metric(
+                        ReportResources.CrapScore,
+                        new Uri("https://googletesting.blogspot.de/2011/02/this-code-is-crap.html"),
+                        crapScoreAttributes.Max(a => decimal.Parse(a.Value, CultureInfo.InvariantCulture))));
+                }
 
                 string methodName = methodGroup.Key;
 

@@ -19,18 +19,18 @@ namespace Palmmedia.ReportGenerator
         /// <summary>
         /// Executes the report generation.
         /// </summary>
-        /// <param name="configuration">The configuration.</param>
+        /// <param name="reportConfiguration">The report configuration.</param>
         /// <returns><c>true</c> if report was generated successfully; otherwise <c>false</c>.</returns>
-        public bool GenerateReport(ReportConfiguration configuration)
+        public bool GenerateReport(ReportConfiguration reportConfiguration)
         {
-            if (configuration == null)
+            if (reportConfiguration == null)
             {
-                throw new ArgumentNullException(nameof(configuration));
+                throw new ArgumentNullException(nameof(reportConfiguration));
             }
 
             // set it before validate
-            LoggerFactory.VerbosityLevel = configuration.VerbosityLevel;
-            if (!configuration.Validate())
+            LoggerFactory.VerbosityLevel = reportConfiguration.VerbosityLevel;
+            if (!reportConfiguration.Validate())
             {
                 return false;
             }
@@ -39,28 +39,28 @@ namespace Palmmedia.ReportGenerator
             stopWatch.Start();
             DateTime executionTime = DateTime.Now;
 
-            var parser = ParserFactory.CreateParser(configuration.ReportFiles, configuration.SourceDirectories);
+            var parser = ParserFactory.CreateParser(reportConfiguration.ReportFiles, reportConfiguration.SourceDirectories);
 
-            if (configuration.HistoryDirectory != null)
+            if (reportConfiguration.HistoryDirectory != null)
             {
                 new Reporting.HistoryParser(
                     parser.Assemblies,
-                    configuration.HistoryDirectory)
+                    reportConfiguration.HistoryDirectory)
                         .ApplyHistoricCoverage();
             }
 
             new Reporting.ReportGenerator(
                 parser,
-                new DefaultFilter(configuration.AssemblyFilters),
-                new DefaultFilter(configuration.ClassFilters),
-                configuration.ReportBuilderFactory.GetReportBuilders(configuration.TargetDirectory, configuration.ReportTypes))
-                    .CreateReport(configuration.HistoryDirectory != null, executionTime);
+                new DefaultFilter(reportConfiguration.AssemblyFilters),
+                new DefaultFilter(reportConfiguration.ClassFilters),
+                reportConfiguration.ReportBuilderFactory.GetReportBuilders(reportConfiguration.TargetDirectory, reportConfiguration.ReportTypes))
+                    .CreateReport(reportConfiguration.HistoryDirectory != null, executionTime);
 
-            if (configuration.HistoryDirectory != null)
+            if (reportConfiguration.HistoryDirectory != null)
             {
                 new Reporting.HistoryReportGenerator(
                     parser,
-                    configuration.HistoryDirectory)
+                    reportConfiguration.HistoryDirectory)
                         .CreateReport(executionTime);
             }
 

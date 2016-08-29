@@ -355,20 +355,20 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
 
                 foreach (var branchByLine in file.branches)
                 {
-                    ICollection<Branch> branches = null;
+                    ICollection<Branch> existingBranches = null;
 
-                    if (this.branches.TryGetValue(branchByLine.Key, out branches))
+                    if (this.branches.TryGetValue(branchByLine.Key, out existingBranches))
                     {
                         foreach (var branch in branchByLine.Value)
                         {
-                            Branch existingBranch = branches.FirstOrDefault(b => b.Equals(branch));
+                            Branch existingBranch = existingBranches.FirstOrDefault(b => b.Equals(branch));
                             if (existingBranch != null)
                             {
                                 existingBranch.BranchVisits += branch.BranchVisits;
                             }
                             else
                             {
-                                branches.Add(branch);
+                                existingBranches.Add(branch);
                             }
                         }
                     }

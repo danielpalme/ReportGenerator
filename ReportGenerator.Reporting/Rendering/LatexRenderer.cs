@@ -91,7 +91,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             string start = string.Format(
                 CultureInfo.InvariantCulture,
                 LatexStart,
-                ReportResources.CoverageReport,
+                EscapeLatexChars(ReportResources.CoverageReport),
                 typeof(IReportBuilder).Assembly.GetName().Name,
                 typeof(IReportBuilder).Assembly.GetName().Version);
 
@@ -199,14 +199,19 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// <summary>
         /// Adds a metrics table to the report.
         /// </summary>
-        /// <param name="headers">The headers.</param>
-        public void BeginMetricsTable(IEnumerable<string> headers)
+        /// <param name="metric">The metric.</param>
+        public void BeginMetricsTable(MethodMetric metric)
         {
-            string columns = "|" + string.Join("|", headers.Select(h => "l")) + "|";
+            if (metric == null)
+            {
+                throw new ArgumentNullException(nameof(metric));
+            }
+
+            string columns = "|l|" + string.Join("|", metric.Metrics.Select(m => "l")) + "|";
 
             this.reportTextWriter.WriteLine(@"\begin{longtable}[l]{" + columns + "}");
             this.reportTextWriter.WriteLine(@"\hline");
-            this.reportTextWriter.Write(string.Join(" & ", headers.Select(h => @"\textbf{" + EscapeLatexChars(h) + "}")));
+            this.reportTextWriter.Write(@"\textbf{" + EscapeLatexChars(ReportResources.Method) + "} & " + string.Join(" & ", metric.Metrics.Select(m => @"\textbf{" + EscapeLatexChars(m.Name) + "}")));
             this.reportTextWriter.WriteLine(@"\\");
             this.reportTextWriter.WriteLine(@"\hline");
         }

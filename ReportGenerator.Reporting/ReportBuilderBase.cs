@@ -87,7 +87,7 @@ namespace Palmmedia.ReportGenerator.Reporting
             {
                 reportRenderer.Header(ReportResources.Metrics);
 
-                reportRenderer.BeginMetricsTable(Enumerable.Repeat(ReportResources.Method, 1).Union(metrics.First().Metrics.Select(m => m.Name)));
+                reportRenderer.BeginMetricsTable(metrics.First());
 
                 foreach (var metric in metrics)
                 {

@@ -29,12 +29,12 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Analysis
         public void AddMetric_AddSingleMetric_MetricIsStored()
         {
             MethodMetric sut = new MethodMetric("Test");
-            var metric = new Metric("Metric1", 10);
+            var metric = new Metric("Metric1", null, 10);
 
             sut.AddMetric(metric);
 
             Assert.AreEqual(metric, sut.Metrics.First(), "Not equal");
-            Assert.AreEqual(1, sut.Metrics.Count(), "Wrong number of classes");
+            Assert.AreEqual(1, sut.Metrics.Count(), "Wrong number of metrics");
         }
 
         /// <summary>
@@ -43,16 +43,16 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Analysis
         [TestMethod]
         public void Merge_MergeMethodMetric_MetricsAreStored()
         {
-            var metric1 = new Metric("Metric1", 10);
-            var metric2 = new Metric("Metric1", 15);
-            var metric3 = new Metric("Metric2", 20);
+            var metric1 = new Metric("Metric1", null, 10);
+            var metric2 = new Metric("Metric1", null, 15);
+            var metric3 = new Metric("Metric2", null, 20);
 
             MethodMetric sut = new MethodMetric("Test", new[] { metric1 });
             var methodMetricToMerge = new MethodMetric("Test", new[] { metric2, metric3 });
 
             sut.Merge(methodMetricToMerge);
 
-            Assert.AreEqual(2, sut.Metrics.Count(), "Wrong number of classes");
+            Assert.AreEqual(2, sut.Metrics.Count(), "Wrong number of metrics");
             Assert.AreEqual(metric1, sut.Metrics.First(), "Not equal");
             Assert.AreEqual(15, sut.Metrics.First().Value, "Not equal");
             Assert.AreEqual(metric3, sut.Metrics.ElementAt(1), "Not equal");

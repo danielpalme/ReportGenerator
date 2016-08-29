@@ -114,8 +114,8 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// <summary>
         /// Adds a metrics table to the report.
         /// </summary>
-        /// <param name="headers">The headers.</param>
-        public void BeginMetricsTable(IEnumerable<string> headers)
+        /// <param name="metric">The metric.</param>
+        public void BeginMetricsTable(MethodMetric metric)
         {
         }
 

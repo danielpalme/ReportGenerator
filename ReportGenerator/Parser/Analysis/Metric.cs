@@ -11,8 +11,9 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// Initializes a new instance of the <see cref="Metric"/> class.
         /// </summary>
         /// <param name="name">The name.</param>
+        /// <param name="explanationUrl">The explanation url.</param>
         /// <param name="value">The value.</param>
-        internal Metric(string name, decimal value)
+        internal Metric(string name, Uri explanationUrl, decimal value)
         {
             if (name == null)
             {
@@ -20,6 +21,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
             }
 
             this.Name = name;
+            this.ExplanationUrl = explanationUrl;
             this.Value = value;
         }
 
@@ -27,6 +29,11 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// Gets the name.
         /// </summary>
         public string Name { get; }
+
+        /// <summary>
+        /// Gets the explanation url.
+        /// </summary>
+        public Uri ExplanationUrl { get; }
 
         /// <summary>
         /// Gets the value.

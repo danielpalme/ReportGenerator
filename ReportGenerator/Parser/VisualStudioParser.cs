@@ -79,10 +79,12 @@ namespace Palmmedia.ReportGenerator.Parser
                 var metrics = new[]
                 {
                     new Metric(
-                        "Blocks covered",
+                        ReportResources.BlocksCovered,
+                        new Uri("https://en.wikipedia.org/wiki/Code_coverage"),
                         int.Parse(method.Element("BlocksCovered").Value, CultureInfo.InvariantCulture)),
                     new Metric(
-                        "Blocks not covered",
+                        ReportResources.BlocksNotCovered,
+                        new Uri("https://en.wikipedia.org/wiki/Code_coverage"),
                         int.Parse(method.Element("BlocksNotCovered").Value, CultureInfo.InvariantCulture))
                 };
 

@@ -97,7 +97,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                     "<style TYPE=\"text/css\">" + new StreamReader(cssStream).ReadToEnd() + "</style>"
                     : CssLink;
 
-                this.reportTextWriter.WriteLine(HtmlStart, WebUtility.HtmlEncode(title), ReportResources.CoverageReport, style, "SummaryViewCtrl");
+                this.reportTextWriter.WriteLine(HtmlStart, WebUtility.HtmlEncode(title), WebUtility.HtmlEncode(ReportResources.CoverageReport), style, "SummaryViewCtrl");
             }
         }
 
@@ -113,7 +113,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
 
             this.CreateTextWriter(Path.Combine(targetDirectory, fileName));
 
-            this.reportTextWriter.WriteLine(HtmlStart, WebUtility.HtmlEncode(className), ReportResources.CoverageReport, CssLink, "DetailViewCtrl");
+            this.reportTextWriter.WriteLine(HtmlStart, WebUtility.HtmlEncode(className), WebUtility.HtmlEncode(ReportResources.CoverageReport), CssLink, "DetailViewCtrl");
         }
 
         /// <summary>
@@ -142,13 +142,13 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             }
 
             this.reportTextWriter.WriteLine("<div id=\"testmethods\" class=\"ng-hide\" data-ng-show=\"true\" data-ng-class=\"pinned ? 'pinned' : ''\">");
-            this.reportTextWriter.WriteLine("<h2 id=\"pinheader\">{0}</h2>", ReportResources.Testmethods);
+            this.reportTextWriter.WriteLine("<h2 id=\"pinheader\">{0}</h2>", WebUtility.HtmlEncode(ReportResources.Testmethods));
             this.reportTextWriter.WriteLine("<a id=\"pin\" data-ng-click=\"togglePin()\">&nbsp;</a>");
             this.reportTextWriter.WriteLine("<div>");
 
             int counter = 0;
 
-            this.reportTextWriter.WriteLine("<span><input type=\"radio\" name=\"method\" value=\"AllTestMethods\" id=\"method{1}\" data-ng-change=\"switchTestMethod('AllTestMethods')\" data-ng-model=\"selectedTestMethod\" /><label for=\"method{1}\" title=\"{0}\">{0}</label></span>", ReportResources.All, counter);
+            this.reportTextWriter.WriteLine("<span><input type=\"radio\" name=\"method\" value=\"AllTestMethods\" id=\"method{1}\" data-ng-change=\"switchTestMethod('AllTestMethods')\" data-ng-model=\"selectedTestMethod\" /><label for=\"method{1}\" title=\"{0}\">{0}</label></span>", WebUtility.HtmlEncode(ReportResources.All), counter);
 
             foreach (var testMethod in testMethods)
             {
@@ -205,8 +205,8 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             this.reportTextWriter.WriteLine("<div data-ng-if=\"!filteringEnabled\">");
             this.reportTextWriter.WriteLine(
                 "<div class=\"ng-hide customizebox\" data-ng-show=\"true\"><input data-ng-click=\"enableFiltering()\" value=\"{0}\" title=\"{1}\" type=\"submit\" /></div>",
-                ReportResources.ShowCustomizeBox,
-                ReportResources.ShowCustomizeBoxHelp);
+                WebUtility.HtmlEncode(ReportResources.ShowCustomizeBox),
+                WebUtility.HtmlEncode(ReportResources.ShowCustomizeBoxHelp));
             this.reportTextWriter.WriteLine("</div>");
 
             this.reportTextWriter.WriteLine("<table data-ng-if=\"!filteringEnabled\" class=\"overview\">");
@@ -224,13 +224,13 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
 
             this.reportTextWriter.WriteLine(
                 "<thead><tr><th>{0}</th><th class=\"right\">{1}</th><th class=\"right\">{2}</th><th class=\"right\">{3}</th><th class=\"right\">{4}</th><th class=\"center\" colspan=\"2\">{5}</th><th class=\"center\" colspan=\"2\">{6}</th></tr></thead>",
-                ReportResources.Name,
-                ReportResources.Covered,
-                ReportResources.Uncovered,
-                ReportResources.Coverable,
-                ReportResources.Total,
-                ReportResources.Coverage,
-                ReportResources.BranchCoverage);
+                WebUtility.HtmlEncode(ReportResources.Name),
+                WebUtility.HtmlEncode(ReportResources.Covered),
+                WebUtility.HtmlEncode(ReportResources.Uncovered),
+                WebUtility.HtmlEncode(ReportResources.Coverable),
+                WebUtility.HtmlEncode(ReportResources.Total),
+                WebUtility.HtmlEncode(ReportResources.Coverage),
+                WebUtility.HtmlEncode(ReportResources.BranchCoverage));
             this.reportTextWriter.WriteLine("<tbody>");
         }
 
@@ -295,20 +295,29 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// <summary>
         /// Adds a metrics table to the report.
         /// </summary>
-        /// <param name="headers">The headers.</param>
-        public void BeginMetricsTable(IEnumerable<string> headers)
+        /// <param name="metric">The metric.</param>
+        public void BeginMetricsTable(MethodMetric metric)
         {
-            if (headers == null)
+            if (metric == null)
             {
-                throw new ArgumentNullException(nameof(headers));
+                throw new ArgumentNullException(nameof(metric));
             }
 
             this.reportTextWriter.WriteLine("<table class=\"overview\">");
             this.reportTextWriter.Write("<thead><tr>");
 
-            foreach (var header in headers)
+            this.reportTextWriter.Write("<th>{0}</th>", WebUtility.HtmlEncode(ReportResources.Method));
+
+            foreach (var met in metric.Metrics)
             {
-                this.reportTextWriter.Write("<th>{0}</th>", WebUtility.HtmlEncode(header));
+                if (met.ExplanationUrl == null)
+                {
+                    this.reportTextWriter.Write("<th>{0}</th>", WebUtility.HtmlEncode(met.Name));
+                }
+                else
+                {
+                    this.reportTextWriter.Write("<th>{0} <a href=\"{1}\" class=\"info\">&nbsp;</a></th>", WebUtility.HtmlEncode(met.Name), WebUtility.HtmlEncode(met.ExplanationUrl.OriginalString));
+                }
             }
 
             this.reportTextWriter.WriteLine("</tr></thead>");
@@ -417,7 +426,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             string title = null;
             if (analysis.CoveredBranches.HasValue && analysis.TotalBranches.HasValue && analysis.TotalBranches.Value > 0)
             {
-                title = string.Format(ReportResources.CoveredBranches, analysis.CoveredBranches, analysis.TotalBranches);
+                title = string.Format(WebUtility.HtmlEncode(ReportResources.CoveredBranches), analysis.CoveredBranches, analysis.TotalBranches);
             }
 
             if (title != null)
@@ -513,9 +522,9 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                     "'<h3>{0} - {1}</h3>{2}{3}{4}'",
                     h.ExecutionTime.ToShortDateString(),
                     h.ExecutionTime.ToLongTimeString(),
-                    h.CoverageQuota.HasValue ? string.Format(CultureInfo.InvariantCulture, "<br /><span class=\"linecoverage\"></span> {0} {1}% ({2}/{3})", ReportResources.Coverage2, h.CoverageQuota.Value, h.CoveredLines, h.CoverableLines) : null,
-                    h.BranchCoverageQuota.HasValue ? string.Format(CultureInfo.InvariantCulture, "<br /><span class=\"branchcoverage\"></span> {0} {1}% ({2}/{3})", ReportResources.BranchCoverage2, h.BranchCoverageQuota.Value, h.CoveredBranches, h.TotalBranches) : null,
-                    string.Format(CultureInfo.InvariantCulture, "<br />{0} {1}", ReportResources.TotalLines, h.TotalLines)));
+                    h.CoverageQuota.HasValue ? string.Format(CultureInfo.InvariantCulture, "<br /><span class=\"linecoverage\"></span> {0} {1}% ({2}/{3})", WebUtility.HtmlEncode(ReportResources.Coverage2), h.CoverageQuota.Value, h.CoveredLines, h.CoverableLines) : null,
+                    h.BranchCoverageQuota.HasValue ? string.Format(CultureInfo.InvariantCulture, "<br /><span class=\"branchcoverage\"></span> {0} {1}% ({2}/{3})", WebUtility.HtmlEncode(ReportResources.BranchCoverage2), h.BranchCoverageQuota.Value, h.CoveredBranches, h.TotalBranches) : null,
+                    string.Format(CultureInfo.InvariantCulture, "<br />{0} {1}", WebUtility.HtmlEncode(ReportResources.TotalLines), h.TotalLines)));
 
             this.javaScriptContent.AppendFormat("var historyChartData{0} = {{", id);
             this.javaScriptContent.AppendLine();
@@ -609,7 +618,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             this.reportTextWriter.Write(string.Format(
                 CultureInfo.InvariantCulture,
                 "<div class=\"footer\">{0} {1} {2}<br />{3} - {4}<br /><a href=\"https://github.com/danielpalme/ReportGenerator\">GitHub</a> | <a href=\"http://www.palmmedia.de\">www.palmmedia.de</a></div>",
-                ReportResources.GeneratedBy,
+                WebUtility.HtmlEncode(ReportResources.GeneratedBy),
                 typeof(IReportBuilder).Assembly.GetName().Name,
                 typeof(IReportBuilder).Assembly.GetName().Version,
                 DateTime.Now.ToShortDateString(),
@@ -901,37 +910,37 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             sb.AppendLine("var translations = {");
             sb.AppendFormat("'lineCoverage': '{0}'", CoverageType.LineCoverage.ToString());
             sb.AppendLine(",");
-            sb.AppendFormat("'noGrouping': '{0}'", ReportResources.NoGrouping);
+            sb.AppendFormat("'noGrouping': '{0}'", WebUtility.HtmlEncode(ReportResources.NoGrouping));
             sb.AppendLine(",");
-            sb.AppendFormat("'byAssembly': '{0}'", ReportResources.ByAssembly);
+            sb.AppendFormat("'byAssembly': '{0}'", WebUtility.HtmlEncode(ReportResources.ByAssembly));
             sb.AppendLine(",");
-            sb.AppendFormat("'byNamespace': '{0}'", ReportResources.ByNamespace);
+            sb.AppendFormat("'byNamespace': '{0}'", WebUtility.HtmlEncode(ReportResources.ByNamespace));
             sb.AppendLine(",");
-            sb.AppendFormat("'all': '{0}'", ReportResources.All);
+            sb.AppendFormat("'all': '{0}'", WebUtility.HtmlEncode(ReportResources.All));
             sb.AppendLine(",");
-            sb.AppendFormat("'collapseAll': '{0}'", ReportResources.CollapseAll);
+            sb.AppendFormat("'collapseAll': '{0}'", WebUtility.HtmlEncode(ReportResources.CollapseAll));
             sb.AppendLine(",");
-            sb.AppendFormat("'expandAll': '{0}'", ReportResources.ExpandAll);
+            sb.AppendFormat("'expandAll': '{0}'", WebUtility.HtmlEncode(ReportResources.ExpandAll));
             sb.AppendLine(",");
-            sb.AppendFormat("'grouping': '{0}'", ReportResources.Grouping);
+            sb.AppendFormat("'grouping': '{0}'", WebUtility.HtmlEncode(ReportResources.Grouping));
             sb.AppendLine(",");
-            sb.AppendFormat("'filter': '{0}'", ReportResources.Filter);
+            sb.AppendFormat("'filter': '{0}'", WebUtility.HtmlEncode(ReportResources.Filter));
             sb.AppendLine(",");
-            sb.AppendFormat("'name': '{0}'", ReportResources.Name);
+            sb.AppendFormat("'name': '{0}'", WebUtility.HtmlEncode(ReportResources.Name));
             sb.AppendLine(",");
-            sb.AppendFormat("'covered': '{0}'", ReportResources.Covered);
+            sb.AppendFormat("'covered': '{0}'", WebUtility.HtmlEncode(ReportResources.Covered));
             sb.AppendLine(",");
-            sb.AppendFormat("'uncovered': '{0}'", ReportResources.Uncovered);
+            sb.AppendFormat("'uncovered': '{0}'", WebUtility.HtmlEncode(ReportResources.Uncovered));
             sb.AppendLine(",");
-            sb.AppendFormat("'coverable': '{0}'", ReportResources.Coverable);
+            sb.AppendFormat("'coverable': '{0}'", WebUtility.HtmlEncode(ReportResources.Coverable));
             sb.AppendLine(",");
-            sb.AppendFormat("'total': '{0}'", ReportResources.Total);
+            sb.AppendFormat("'total': '{0}'", WebUtility.HtmlEncode(ReportResources.Total));
             sb.AppendLine(",");
-            sb.AppendFormat("'coverage': '{0}'", ReportResources.Coverage);
+            sb.AppendFormat("'coverage': '{0}'", WebUtility.HtmlEncode(ReportResources.Coverage));
             sb.AppendLine(",");
-            sb.AppendFormat("'branchCoverage': '{0}'", ReportResources.BranchCoverage);
+            sb.AppendFormat("'branchCoverage': '{0}'", WebUtility.HtmlEncode(ReportResources.BranchCoverage));
             sb.AppendLine(",");
-            sb.AppendFormat("'history': '{0}'", ReportResources.History);
+            sb.AppendFormat("'history': '{0}'", WebUtility.HtmlEncode(ReportResources.History));
             sb.AppendLine();
             sb.AppendLine("};");
 

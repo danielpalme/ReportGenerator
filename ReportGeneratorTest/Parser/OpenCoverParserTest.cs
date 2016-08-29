@@ -87,8 +87,8 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             Assert.AreEqual(0, fileAnalysis.Lines.Single(l => l.LineNumber == 81).LineVisits, "Wrong number of line visits");
             Assert.IsFalse(fileAnalysis.Lines.Single(l => l.LineNumber == 44).CoveredBranches.HasValue, "No covered branches");
             Assert.IsFalse(fileAnalysis.Lines.Single(l => l.LineNumber == 44).TotalBranches.HasValue, "No total branches");
-            Assert.AreEqual(1, fileAnalysis.Lines.Single(l => l.LineNumber == 45).CoveredBranches.Value, "Wrong number of covered branches");
-            Assert.AreEqual(2, fileAnalysis.Lines.Single(l => l.LineNumber == 45).TotalBranches.Value, "Wrong number of total branches");
+            Assert.AreEqual(1, fileAnalysis.Lines.Single(l => l.LineNumber == 54).CoveredBranches.Value, "Wrong number of covered branches");
+            Assert.AreEqual(2, fileAnalysis.Lines.Single(l => l.LineNumber == 54).TotalBranches.Value, "Wrong number of total branches");
 
             fileAnalysis = GetFileAnalysis(assembliesWithoutPreprocessing, "Test.PartialClass", "C:\\temp\\PartialClass.cs");
             Assert.AreEqual(1, fileAnalysis.Lines.Single(l => l.LineNumber == 9).LineVisits, "Wrong number of line visits");
@@ -129,8 +129,8 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             Assert.AreEqual(0, fileAnalysis.Lines.Single(l => l.LineNumber == 81).LineVisits, "Wrong number of line visits");
             Assert.IsFalse(fileAnalysis.Lines.Single(l => l.LineNumber == 44).CoveredBranches.HasValue, "No covered branches");
             Assert.IsFalse(fileAnalysis.Lines.Single(l => l.LineNumber == 44).TotalBranches.HasValue, "No total branches");
-            Assert.AreEqual(1, fileAnalysis.Lines.Single(l => l.LineNumber == 45).CoveredBranches.Value, "Wrong number of covered branches");
-            Assert.AreEqual(2, fileAnalysis.Lines.Single(l => l.LineNumber == 45).TotalBranches.Value, "Wrong number of total branches");
+            Assert.AreEqual(1, fileAnalysis.Lines.Single(l => l.LineNumber == 54).CoveredBranches.Value, "Wrong number of covered branches");
+            Assert.AreEqual(2, fileAnalysis.Lines.Single(l => l.LineNumber == 54).TotalBranches.Value, "Wrong number of total branches");
 
             fileAnalysis = GetFileAnalysis(assembliesWithPreprocessing, "Test.PartialClass", "C:\\temp\\PartialClass.cs");
             Assert.AreEqual(1, fileAnalysis.Lines.Single(l => l.LineNumber == 9).LineVisits, "Wrong number of line visits");
@@ -227,14 +227,18 @@ namespace Palmmedia.ReportGeneratorTest.Parser
 
             Assert.AreEqual(2, metrics.Count(), "Wrong number of method metrics");
             Assert.AreEqual("System.Void Test.TestClass::SampleFunction()", metrics.First().Name, "Wrong name of method");
-            Assert.AreEqual(3, metrics.First().Metrics.Count(), "Wrong number of metrics");
+            Assert.AreEqual(5, metrics.First().Metrics.Count(), "Wrong number of metrics");
 
-            Assert.AreEqual("Cyclomatic Complexity", metrics.First().Metrics.ElementAt(0).Name, "Wrong name of metric");
+            Assert.AreEqual("Cyclomatic complexity", metrics.First().Metrics.ElementAt(0).Name, "Wrong name of metric");
             Assert.AreEqual(3, metrics.First().Metrics.ElementAt(0).Value, "Wrong value of metric");
-            Assert.AreEqual("Sequence Coverage", metrics.First().Metrics.ElementAt(1).Name, "Wrong name of metric");
-            Assert.AreEqual(75M, metrics.First().Metrics.ElementAt(1).Value, "Wrong value of metric");
-            Assert.AreEqual("Branch Coverage", metrics.First().Metrics.ElementAt(2).Name, "Wrong name of metric");
-            Assert.AreEqual(60, metrics.First().Metrics.ElementAt(2).Value, "Wrong value of metric");
+            Assert.AreEqual("NPath complexity", metrics.First().Metrics.ElementAt(1).Name, "Wrong name of metric");
+            Assert.AreEqual(2, metrics.First().Metrics.ElementAt(1).Value, "Wrong value of metric");
+            Assert.AreEqual("Sequence coverage", metrics.First().Metrics.ElementAt(2).Name, "Wrong name of metric");
+            Assert.AreEqual(75M, metrics.First().Metrics.ElementAt(2).Value, "Wrong value of metric");
+            Assert.AreEqual("Branch coverage", metrics.First().Metrics.ElementAt(3).Name, "Wrong name of metric");
+            Assert.AreEqual(66.67M, metrics.First().Metrics.ElementAt(3).Value, "Wrong value of metric");
+            Assert.AreEqual("Crap Score", metrics.First().Metrics.ElementAt(4).Name, "Wrong name of metric");
+            Assert.AreEqual(3.14M, metrics.First().Metrics.ElementAt(4).Value, "Wrong value of metric");
 
             metrics = assembliesWithoutPreprocessing.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.AsyncClass").MethodMetrics;
 
