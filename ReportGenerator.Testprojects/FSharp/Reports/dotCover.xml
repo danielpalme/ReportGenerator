@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Root CoveredStatements="36" TotalStatements="56" CoveragePercent="64" ReportType="DetailedXml" DotCoverVersion="10.0.2">
+<Root CoveredStatements="36" TotalStatements="56" CoveragePercent="64" ReportType="DetailedXml" DotCoverVersion="2016.2">
   <FileIndices>
-    <File Index="1" Name="C:\temp\module1.fs" />
-    <File Index="2" Name="C:\temp\program.fs" />
+    <File Index="1" Name="C:\temp\Module1.fs" ChecksumAlgorithm="MD5" Checksum="FD4305B710589A02450E52CEC282368A" />
+    <File Index="2" Name="C:\temp\Program.fs" ChecksumAlgorithm="MD5" Checksum="85C90A9BFBDC3E8A58375E222D8DC993" />
   </FileIndices>
   <Assembly Name="Test" CoveredStatements="36" TotalStatements="56" CoveragePercent="64">
     <Namespace Name="&lt;StartupCode$Test&gt;" CoveredStatements="19" TotalStatements="34" CoveragePercent="56">
