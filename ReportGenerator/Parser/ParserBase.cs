@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using Palmmedia.ReportGenerator.Parser.Analysis;
@@ -10,6 +11,26 @@ namespace Palmmedia.ReportGenerator.Parser
     /// </summary>
     internal abstract class ParserBase : IParser
     {
+        /// <summary>
+        /// The cyclomatic complexity URI.
+        /// </summary>
+        protected static readonly Uri CyclomaticComplexityUri = new Uri("https://en.wikipedia.org/wiki/Cyclomatic_complexity");
+
+        /// <summary>
+        /// The code coverage URI.
+        /// </summary>
+        protected static readonly Uri CodeCoverageUri = new Uri("https://en.wikipedia.org/wiki/Code_coverage");
+
+        /// <summary>
+        /// The n path complexity URI.
+        /// </summary>
+        protected static readonly Uri NPathComplexityUri = new Uri("https://modess.io/npath-complexity-cyclomatic-complexity-explained");
+
+        /// <summary>
+        /// The crap score URI.
+        /// </summary>
+        protected static readonly Uri CrapScoreUri = new Uri("https://googletesting.blogspot.de/2011/02/this-code-is-crap.html");
+
         /// <summary>
         /// The assemblies found in the report.
         /// </summary>

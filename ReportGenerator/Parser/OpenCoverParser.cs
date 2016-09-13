@@ -92,15 +92,15 @@ namespace Palmmedia.ReportGenerator.Parser
                 {
                     new Metric(
                         ReportResources.CyclomaticComplexity,
-                        new Uri("https://en.wikipedia.org/wiki/Cyclomatic_complexity"),
+                        ParserBase.CyclomaticComplexityUri,
                         methodGroup.Max(m => int.Parse(m.Attribute("cyclomaticComplexity").Value, CultureInfo.InvariantCulture))),
                     new Metric(
                         ReportResources.SequenceCoverage,
-                        new Uri("https://en.wikipedia.org/wiki/Code_coverage"),
+                        ParserBase.CodeCoverageUri,
                         methodGroup.Max(m => decimal.Parse(m.Attribute("sequenceCoverage").Value, CultureInfo.InvariantCulture))),
                     new Metric(
                         ReportResources.BranchCoverage,
-                        new Uri("https://en.wikipedia.org/wiki/Code_coverage"),
+                        ParserBase.CodeCoverageUri,
                         methodGroup.Max(m => decimal.Parse(m.Attribute("branchCoverage").Value, CultureInfo.InvariantCulture)))
                 };
 
@@ -109,10 +109,10 @@ namespace Palmmedia.ReportGenerator.Parser
                 if (npathComplexityAttributes.Length > 0)
                 {
                     metrics.Insert(
-                        1, 
+                        1,
                         new Metric(
                         ReportResources.NPathComplexity,
-                        new Uri("https://modess.io/npath-complexity-cyclomatic-complexity-explained"),
+                        ParserBase.NPathComplexityUri,
                         npathComplexityAttributes.Max(a => int.Parse(a.Value, CultureInfo.InvariantCulture))));
                 }
 
@@ -121,7 +121,7 @@ namespace Palmmedia.ReportGenerator.Parser
                 {
                     metrics.Add(new Metric(
                         ReportResources.CrapScore,
-                        new Uri("https://googletesting.blogspot.de/2011/02/this-code-is-crap.html"),
+                        ParserBase.CrapScoreUri,
                         crapScoreAttributes.Max(a => decimal.Parse(a.Value, CultureInfo.InvariantCulture))));
                 }
 
