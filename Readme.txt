@@ -62,6 +62,7 @@ CHANGELOG
 
     * New: Issue #57: Added support for OpenCover's 'Crap Score' metric
     * New: Added support for OpenCover's 'NPath complexity' metric
+    * Fix: Issue #60: Improved merging from different paths
     * Fix: Issue #56: Improved method naming in metrics for async methods
 
 2.4.5.0

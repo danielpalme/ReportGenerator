@@ -239,7 +239,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
 
             foreach (var file in @class.files)
             {
-                var existingFile = this.files.FirstOrDefault(f => f.Path == file.Path);
+                var existingFile = this.files.FirstOrDefault(f => f.Equals(file));
                 if (existingFile != null)
                 {
                     existingFile.Merge(file);

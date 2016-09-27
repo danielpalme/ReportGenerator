@@ -155,7 +155,10 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
             else
             {
                 var codeFile = (CodeFile)obj;
-                return codeFile.Path.Equals(this.Path);
+                string fileNameToCompare = codeFile.Path.Substring(codeFile.Path.LastIndexOf('\\') + 1);
+
+                string fileName = this.Path.Substring(this.Path.LastIndexOf('\\') + 1);
+                return fileName.Equals(fileNameToCompare, StringComparison.OrdinalIgnoreCase);
             }
         }
 
