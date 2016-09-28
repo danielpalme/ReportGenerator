@@ -122,8 +122,10 @@
     <Compile Include="Parser\Analysis\TestMethod.cs" />
     <Compile Include="Parser\DynamicCodeCoverageParser.cs" />
     <Compile Include="Parser\DotCoverParser.cs" />
+    <Compile Include="Parser\CoberturaParser.cs" />
     <Compile Include="Parser\Preprocessing\DynamicCodeCoverageReportPreprocessor.cs" />
     <Compile Include="Parser\Preprocessing\DotCoverReportPreprocessor.cs" />
+    <Compile Include="Parser\Preprocessing\CoberturaReportPreprocessor.cs" />
     <Compile Include="Parser\Preprocessing\VisualStudioReportPreprocessor.cs" />
     <Compile Include="Parser\Preprocessing\FileSearch\SafeDirectorySearcher.cs" />
     <Compile Include="Parser\VisualStudioParser.cs" />

@@ -11,9 +11,13 @@ namespace Palmmedia.ReportGeneratorTest
 
         internal static string GetFSharpReportDirectory() => Path.Combine(GetFilesDirectory(), "FSharp", "Reports");
 
+        internal static string GetJavaReportDirectory() => Path.Combine(GetFilesDirectory(), "Java", "Reports");
+
         internal static string GetCSharpCodeDirectory() => Path.Combine(GetFilesDirectory(), "CSharp", "Project");
 
         internal static string GetFSharpCodeDirectory() => Path.Combine(GetFilesDirectory(), "FSharp", "Project");
+
+        internal static string GetJavaCodeDirectory() => Path.Combine(GetFilesDirectory(), "Java", "Project");
 
         internal static string GetFilesDirectory()
         {
@@ -29,7 +33,8 @@ namespace Palmmedia.ReportGeneratorTest
             }
 
             var files = new DirectoryInfo(GetCSharpCodeDirectory()).GetFiles("*.cs")
-                .Concat(new DirectoryInfo(GetFSharpCodeDirectory()).GetFiles("*.fs"));
+                .Concat(new DirectoryInfo(GetFSharpCodeDirectory()).GetFiles("*.fs"))
+                .Concat(new DirectoryInfo(GetJavaCodeDirectory()).GetFiles("*.java"));
 
             foreach (var fileInfo in files)
             {
@@ -42,7 +47,8 @@ namespace Palmmedia.ReportGeneratorTest
             if (Directory.Exists(TEMPDIRECTORY))
             {
                 var files = new DirectoryInfo(TEMPDIRECTORY).GetFiles("*.cs")
-                    .Concat(new DirectoryInfo(TEMPDIRECTORY).GetFiles("*.fs"));
+                    .Concat(new DirectoryInfo(TEMPDIRECTORY).GetFiles("*.fs"))
+                    .Concat(new DirectoryInfo(TEMPDIRECTORY).GetFiles("*.java"));
 
                 foreach (var fileInfo in files)
                 {

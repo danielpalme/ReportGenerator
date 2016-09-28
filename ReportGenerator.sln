@@ -1,14 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{CF7103C9-F21C-49AC-BD14-C7EBCEA2FA21}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testprojects", "Testprojects", "{BBF2B724-E28A-4D5E-A82A-95E51ADBB3E0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSharp", "CSharp", "{B27F2CDF-8E01-4D2C-9A26-972F02A0EFB6}"
 EndProject
@@ -56,6 +54,23 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_CSharp", "ReportGenera
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Test_FSharp", "ReportGenerator.Testprojects\FSharp\Project\Test_FSharp.fsproj", "{953D4A9C-5271-4A6D-876A-7E41B93BEE77}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Java", "Java", "{89813866-CE17-47E5-BCA3-4740F8624BA5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project", "Project", "{F02BAC2E-AD05-4AE9-B37B-A6B7CA732FBA}"
+	ProjectSection(SolutionItems) = preProject
+		ReportGenerator.Testprojects\Java\Project\AbstractClass.java = ReportGenerator.Testprojects\Java\Project\AbstractClass.java
+		ReportGenerator.Testprojects\Java\Project\AbstractClass_SampleImpl1.java = ReportGenerator.Testprojects\Java\Project\AbstractClass_SampleImpl1.java
+		ReportGenerator.Testprojects\Java\Project\AbstractClass_SampleImpl2.java = ReportGenerator.Testprojects\Java\Project\AbstractClass_SampleImpl2.java
+		ReportGenerator.Testprojects\Java\Project\GenericClass.java = ReportGenerator.Testprojects\Java\Project\GenericClass.java
+		ReportGenerator.Testprojects\Java\Project\Program.java = ReportGenerator.Testprojects\Java\Project\Program.java
+		ReportGenerator.Testprojects\Java\Project\TestClass.java = ReportGenerator.Testprojects\Java\Project\TestClass.java
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{654FDEDF-31DE-47E4-A02E-F42DB1ACC722}"
+	ProjectSection(SolutionItems) = preProject
+		ReportGenerator.Testprojects\Java\Reports\Cobertura2.1.1.xml = ReportGenerator.Testprojects\Java\Reports\Cobertura2.1.1.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,11 +102,11 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{B27F2CDF-8E01-4D2C-9A26-972F02A0EFB6} = {BBF2B724-E28A-4D5E-A82A-95E51ADBB3E0}
 		{792589C7-7E2C-4C31-9FB3-A64F85BDF826} = {B27F2CDF-8E01-4D2C-9A26-972F02A0EFB6}
-		{9223804A-D678-4EE8-BD89-19A6114DB86F} = {BBF2B724-E28A-4D5E-A82A-95E51ADBB3E0}
 		{8775E975-19C9-4F40-869B-04A8488AECC3} = {9223804A-D678-4EE8-BD89-19A6114DB86F}
 		{4AF221C2-D0A0-43BD-8D36-82F99515A5D6} = {B27F2CDF-8E01-4D2C-9A26-972F02A0EFB6}
 		{953D4A9C-5271-4A6D-876A-7E41B93BEE77} = {9223804A-D678-4EE8-BD89-19A6114DB86F}
+		{F02BAC2E-AD05-4AE9-B37B-A6B7CA732FBA} = {89813866-CE17-47E5-BCA3-4740F8624BA5}
+		{654FDEDF-31DE-47E4-A02E-F42DB1ACC722} = {89813866-CE17-47E5-BCA3-4740F8624BA5}
 	EndGlobalSection
 EndGlobal

@@ -73,7 +73,9 @@
   <ItemGroup>
     <Compile Include="Common\FileSearchTest.cs" />
     <Compile Include="Parser\Analysis\BranchTest.cs" />
+    <Compile Include="Parser\CoberturaParserTest.cs" />
     <Compile Include="Parser\DotCoverParserTest.cs" />
+    <Compile Include="Parser\Preprocessing\CoberturaReportPreprocessorTest.cs" />
     <Compile Include="Parser\Preprocessing\DotCoverReportPreprocessorTest.cs" />
     <Compile Include="Parser\VisualStudioParserTest_2013.cs" />
     <Compile Include="Parser\VisualStudioParserTest_2012.cs" />

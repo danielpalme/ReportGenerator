@@ -124,8 +124,18 @@ namespace Palmmedia.ReportGenerator.Parser
             {
                 foreach (var item in report.Descendants("coverage"))
                 {
-                    Logger.DebugFormat(" " + Resources.InitiatingParser, "NCover");
-                    parsers.Add(new NCoverParser(item));
+                    if (item.Attribute("profilerVersion") != null)
+                    {
+                        Logger.DebugFormat(" " + Resources.InitiatingParser, "NCover");
+                        parsers.Add(new NCoverParser(item));
+                    }
+                    else
+                    {
+                        Logger.Debug(" " + Resources.PreprocessingReport);
+                        new CoberturaReportPreprocessor(item).Execute();
+                        Logger.DebugFormat(" " + Resources.InitiatingParser, "Cobertura");
+                        parsers.Add(new CoberturaParser(item));
+                    }
                 }
             }
             else if (report.Descendants("CoverageDSPriv").Any())

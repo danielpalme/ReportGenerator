@@ -40,6 +40,7 @@ PartCover 2.2, 2.3
 dotCover
 Visual Studio (vstest.console.exe, CodeCoverage.exe)
 NCover (tested version 1.5.8, other versions may not work)
+Cobertura
 
 Also available as NuGet package:
 http://nuget.org/List/Packages/ReportGenerator
@@ -60,6 +61,7 @@ CHANGELOG
 
 2.4.6.0
 
+    * New: Issue #61: Added support for Cobertura
     * New: Issue #57: Added support for OpenCover's 'Crap Score' metric
     * New: Added support for OpenCover's 'NPath complexity' metric
     * Fix: Issue #60: Improved merging from different paths

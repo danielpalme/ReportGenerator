@@ -23,6 +23,7 @@ The following output formats are supported by ReportGenerator:
 * [dotCover](https://www.jetbrains.com/dotcover/help/dotCover__Console_Runner_Commands.html) ([Nuget](https://www.nuget.org/packages/JetBrains.dotCover.CommandLineTools/), /ReportType=DetailedXML)
 * Visual Studio ([vstest.console.exe](https://github.com/danielpalme/ReportGenerator/wiki/Visual-Studio-Coverage-Tools#vstestconsoleexe), [CodeCoverage.exe](https://github.com/danielpalme/ReportGenerator/wiki/Visual-Studio-Coverage-Tools#codecoverageexe))
 * [NCover](http://www.ncover.com/download/current) (tested version 1.5.8, other versions may not work)
+* [Cobertura](https://github.com/cobertura/cobertura) 
 
 Also available as **NuGet** package: http://www.nuget.org/packages/ReportGenerator
 
