@@ -342,7 +342,8 @@ var AssemblyComponent = React.createClass({
             filter: '',
             sortby: 'name',
             sortorder: 'asc',
-            assemblies: this.getAssemblies(this.props.assemblies, '0', '', 'name', 'asc')
+            assemblies: this.getAssemblies(this.props.assemblies, '0', '', 'name', 'asc'),
+            branchCoverageAvailable: this.props.branchCoverageAvailable
         };
     },
     collapseAll: function () {
@@ -411,6 +412,7 @@ var AssemblyComponent = React.createClass({
                     assemblies: this.state.assemblies,
                     sortby: this.state.sortby,
                     sortorder: this.state.sortorder,
+                    branchCoverageAvailable: this.state.branchCoverageAvailable,
                     updateSorting: this.updateSorting,
                     toggleCollapse: this.toggleCollapse
                 }))
@@ -477,7 +479,10 @@ var AssemblyTable = React.createClass({
 
         if (currentElement.visible(this.props.filter)) {
             if (currentElement.isNamespace) {
-                result.push(AssemblyRow({ assembly: currentElement, toggleCollapse: this.props.toggleCollapse }));
+                result.push(AssemblyRow({ assembly: currentElement,
+                    branchCoverageAvailable: this.props.branchCoverageAvailable,
+                    toggleCollapse: this.props.toggleCollapse
+                }));
 
                 if (!currentElement.collapsed) {
                     for (i = 0, l = currentElement.subelements.length; i < l; i++) {
@@ -485,7 +490,10 @@ var AssemblyTable = React.createClass({
                     }
                 }
             } else {
-                result.push(ClassRow({ clazz: currentElement }));
+                result.push(ClassRow({
+                    clazz: currentElement,
+                    branchCoverageAvailable: this.props.branchCoverageAvailable
+                }));
             }
         }
     },
@@ -506,12 +514,13 @@ var AssemblyTable = React.createClass({
                     React.DOM.col({ className: 'column70' }),
                     React.DOM.col({ className: 'column98' }),
                     React.DOM.col({ className: 'column112' }),
-                    React.DOM.col({ className: 'column98' }),
-                    React.DOM.col({ className: 'column112' })),
+                    this.props.branchCoverageAvailable ? React.DOM.col({ className: 'column98' }) : null,
+                    this.props.branchCoverageAvailable ? React.DOM.col({ className: 'column112' }) : null),
                 TableHeader({
                     sortby: this.props.sortby,
                     sortorder: this.props.sortorder,
-                    updateSorting: this.props.updateSorting
+                    updateSorting: this.props.updateSorting,
+                    branchCoverageAvailable: this.props.branchCoverageAvailable
                 }),
                 React.DOM.tbody(null, rows))
         );
@@ -546,8 +555,8 @@ var TableHeader = React.createClass({
                         React.DOM.a({ className: totalClass, href: '#', onClick: function () { this.sortingChangedHandler('total'); }.bind(this) }, translations.total)),
                     React.DOM.th({ className: 'center', colSpan: '2' },
                         React.DOM.a({ className: coverageClass, href: '#', onClick: function () { this.sortingChangedHandler('coverage'); }.bind(this) }, translations.coverage)),
-                    React.DOM.th({ className: 'center', colSpan: '2' },
-                        React.DOM.a({ className: branchCoverageClass, href: '#', onClick: function () { this.sortingChangedHandler('branchcoverage'); }.bind(this) }, translations.branchCoverage))))
+                    this.props.branchCoverageAvailable ? React.DOM.th({ className: 'center', colSpan: '2' },
+                        React.DOM.a({ className: branchCoverageClass, href: '#', onClick: function () { this.sortingChangedHandler('branchcoverage'); }.bind(this) }, translations.branchCoverage)): null))
         );
     }
 });
@@ -607,12 +616,12 @@ var AssemblyRow = React.createClass({
                     },
                     isNaN(this.props.assembly.coverage()) ? '' : this.props.assembly.coverage() + '%'),
             React.DOM.th(null, coverageTable),
-            React.DOM.th(
+            this.props.branchCoverageAvailable ? React.DOM.th(
                     {
                         className: 'right'
                     },
-                    isNaN(this.props.assembly.branchCoverage()) ? '' : this.props.assembly.branchCoverage() + '%'),
-            React.DOM.th(null, branchCoverageTable))
+                    isNaN(this.props.assembly.branchCoverage()) ? '' : this.props.assembly.branchCoverage() + '%') : null,
+            this.props.branchCoverageAvailable ? React.DOM.th(null, branchCoverageTable) : null)
         );
     }
 });
@@ -667,15 +676,15 @@ var ClassRow = React.createClass({
                     }),
                     this.props.clazz.coveragePercent),
                 React.DOM.td(null, coverageTable),
-                React.DOM.td({ className: 'right' },
+                this.props.branchCoverageAvailable ? React.DOM.td({ className: 'right' },
                     CoverageHistoryChart({
                         historicCoverage: this.props.clazz.branchCoverageHistory,
                         cssClass: 'tinybranchcoveragechart',
                         title: translations.history + ": " + translations.branchCoverage,
                         id: 'chart' + createRandomId(8)
                     }),
-                    this.props.clazz.branchCoveragePercent),
-                React.DOM.td(null, branchCoverageTable))
+                    this.props.clazz.branchCoveragePercent) : null,
+                this.props.branchCoverageAvailable ? React.DOM.td(null, branchCoverageTable) : null)
         );
     }
 });

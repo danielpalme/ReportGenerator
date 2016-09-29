@@ -66,6 +66,7 @@ CHANGELOG
     * New: Added support for OpenCover's 'NPath complexity' metric
     * Fix: Issue #60: Improved merging from different paths
     * Fix: Issue #56: Improved method naming in metrics for async methods
+    * Fix: Issue #55: Branch coverage columns only rendered if available
 
 2.4.5.0
 

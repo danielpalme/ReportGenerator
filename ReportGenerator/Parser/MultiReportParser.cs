@@ -18,6 +18,19 @@ namespace Palmmedia.ReportGenerator.Parser
         private readonly List<string> parserNames = new List<string>();
 
         /// <summary>
+        /// Indicates whether the used parsers supports branch coverage.
+        /// </summary>
+        private bool supportsBranchCoverage = false;
+
+        /// <summary>
+        /// Gets a value indicating whether the used parser supports branch coverage.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if used parser supports branch coverage; otherwise, <c>false</c>.
+        /// </value>
+        public override bool SupportsBranchCoverage => this.supportsBranchCoverage;
+
+        /// <summary>
         /// Returns a <see cref="System.String"/> that represents this instance.
         /// </summary>
         /// <returns>
@@ -61,6 +74,7 @@ namespace Palmmedia.ReportGenerator.Parser
             }
 
             this.parserNames.Add(parser.ToString());
+            this.supportsBranchCoverage |= parser.SupportsBranchCoverage;
 
             this.MergeAssemblies(parser.Assemblies);
         }

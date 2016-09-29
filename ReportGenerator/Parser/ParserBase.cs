@@ -43,6 +43,14 @@ namespace Palmmedia.ReportGenerator.Parser
         public IEnumerable<Assembly> Assemblies => this.assemblies.OrderBy(a => a.Name);
 
         /// <summary>
+        /// Gets a value indicating whether the used parser supports branch coverage.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if used parser supports branch coverage; otherwise, <c>false</c>.
+        /// </value>
+        public virtual bool SupportsBranchCoverage => false;
+
+        /// <summary>
         /// Returns a <see cref="System.String"/> that represents this instance.
         /// </summary>
         /// <returns>

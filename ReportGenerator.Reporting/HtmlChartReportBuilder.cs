@@ -46,7 +46,7 @@ namespace Palmmedia.ReportGenerator.Reporting
                 reportRenderer.Chart(historicCoverages);
             }
 
-            reportRenderer.CustomSummary(summaryResult.Assemblies);
+            reportRenderer.CustomSummary(summaryResult.Assemblies, summaryResult.SupportsBranchCoverage);
 
             reportRenderer.SaveSummaryReport(this.TargetDirectory);
         }

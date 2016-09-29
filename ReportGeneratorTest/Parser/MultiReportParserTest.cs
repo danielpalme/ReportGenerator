@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using Palmmedia.ReportGenerator.Parser;
 using Palmmedia.ReportGenerator.Parser.Analysis;
 using Palmmedia.ReportGenerator.Parser.Preprocessing;
@@ -60,6 +61,29 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         }
 
         #endregion
+
+        /// <summary>
+        /// A test for SupportsBranchCoverage
+        /// </summary>
+        [TestMethod]
+        public void SupportsBranchCoverage()
+        {
+            var multiReportParser = new MultiReportParser();
+
+            Assert.IsFalse(multiReportParser.SupportsBranchCoverage);
+
+            var mock = new Mock<IParser>();
+            mock.Setup(p => p.SupportsBranchCoverage).Returns(false);
+            multiReportParser.AddParser(mock.Object);
+
+            Assert.IsFalse(multiReportParser.SupportsBranchCoverage);
+
+            mock = new Mock<IParser>();
+            mock.Setup(p => p.SupportsBranchCoverage).Returns(true);
+            multiReportParser.AddParser(mock.Object);
+
+            Assert.IsTrue(multiReportParser.SupportsBranchCoverage);
+        }
 
         /// <summary>
         /// A test for NumberOfLineVisits

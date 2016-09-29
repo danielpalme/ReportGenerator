@@ -62,6 +62,15 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         #endregion
 
         /// <summary>
+        /// A test for SupportsBranchCoverage
+        /// </summary>
+        [TestMethod]
+        public void SupportsBranchCoverage()
+        {
+            Assert.IsTrue(new OpenCoverParser(XDocument.Load(FilePath1)).SupportsBranchCoverage);
+        }
+
+        /// <summary>
         /// A test for NumberOfLineVisits
         /// </summary>
         [TestMethod]

@@ -143,7 +143,7 @@ namespace Palmmedia.ReportGenerator.Reporting
             }
 
             Logger.Debug(" " + Resources.CreatingSummary);
-            SummaryResult summaryResult = new SummaryResult(filteredAssemblies, this.parser.ToString());
+            SummaryResult summaryResult = new SummaryResult(filteredAssemblies, this.parser.ToString(), this.parser.SupportsBranchCoverage);
 
             foreach (var renderer in this.renderers)
             {

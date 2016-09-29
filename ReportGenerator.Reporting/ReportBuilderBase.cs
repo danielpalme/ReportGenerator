@@ -190,15 +190,15 @@ namespace Palmmedia.ReportGenerator.Reporting
 
             if (summaryResult.Assemblies.Any())
             {
-                reportRenderer.BeginSummaryTable();
+                reportRenderer.BeginSummaryTable(summaryResult.SupportsBranchCoverage);
 
                 foreach (var assembly in summaryResult.Assemblies)
                 {
-                    reportRenderer.SummaryAssembly(assembly);
+                    reportRenderer.SummaryAssembly(assembly, summaryResult.SupportsBranchCoverage);
 
                     foreach (var @class in assembly.Classes)
                     {
-                        reportRenderer.SummaryClass(@class);
+                        reportRenderer.SummaryClass(@class, summaryResult.SupportsBranchCoverage);
                     }
                 }
 
@@ -209,7 +209,7 @@ namespace Palmmedia.ReportGenerator.Reporting
                 reportRenderer.Paragraph(ReportResources.NoCoveredAssemblies);
             }
 
-            reportRenderer.CustomSummary(summaryResult.Assemblies);
+            reportRenderer.CustomSummary(summaryResult.Assemblies, summaryResult.SupportsBranchCoverage);
             reportRenderer.AddFooter();
             reportRenderer.SaveSummaryReport(this.TargetDirectory);
         }

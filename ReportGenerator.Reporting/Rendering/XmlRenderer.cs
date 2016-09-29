@@ -43,7 +43,8 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// Adds custom summary elements to the report.
         /// </summary>
         /// <param name="assemblies">The assemblies.</param>
-        public void CustomSummary(IEnumerable<Assembly> assemblies)
+        /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
+        public void CustomSummary(IEnumerable<Assembly> assemblies, bool branchCoverageAvailable)
         {
         }
 
@@ -107,7 +108,8 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// <summary>
         /// Adds a summary table to the report.
         /// </summary>
-        public void BeginSummaryTable()
+        /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
+        public void BeginSummaryTable(bool branchCoverageAvailable)
         {
         }
 
@@ -234,7 +236,8 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// Adds the coverage information of an assembly to the report.
         /// </summary>
         /// <param name="assembly">The assembly.</param>
-        public void SummaryAssembly(Assembly assembly)
+        /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
+        public void SummaryAssembly(Assembly assembly, bool branchCoverageAvailable)
         {
             if (assembly == null)
             {
@@ -264,7 +267,8 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// Adds the coverage information of a class to the report.
         /// </summary>
         /// <param name="class">The class.</param>
-        public void SummaryClass(Class @class)
+        /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
+        public void SummaryClass(Class @class, bool branchCoverageAvailable)
         {
             if (@class == null)
             {

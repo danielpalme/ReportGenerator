@@ -13,5 +13,13 @@ namespace Palmmedia.ReportGenerator.Parser
         /// </summary>
         /// <value>The assemblies.</value>
         IEnumerable<Assembly> Assemblies { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether the used parser supports branch coverage.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if used parser supports branch coverage; otherwise, <c>false</c>.
+        /// </value>
+        bool SupportsBranchCoverage { get; }
     }
 }

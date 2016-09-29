@@ -198,9 +198,10 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// <summary>
         /// Adds a summary table to the report.
         /// </summary>
-        public void BeginSummaryTable()
+        /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
+        public void BeginSummaryTable(bool branchCoverageAvailable)
         {
-            this.reportTextWriter.WriteLine("<div data-ng-if=\"filteringEnabled\" data-reactive-table data-data=\"assemblies\"></div>");
+            this.reportTextWriter.WriteLine("<div data-ng-if=\"filteringEnabled\" data-reactive-table data-assemblies=\"assemblies\" data-branch-coverage-available=\"branchCoverageAvailable\"></div>");
 
             this.reportTextWriter.WriteLine("<div data-ng-if=\"!filteringEnabled\">");
             this.reportTextWriter.WriteLine(
@@ -218,19 +219,31 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             this.reportTextWriter.WriteLine("<col class=\"column70\" />");
             this.reportTextWriter.WriteLine("<col class=\"column60\" />");
             this.reportTextWriter.WriteLine("<col class=\"column112\" />");
-            this.reportTextWriter.WriteLine("<col class=\"column60\" />");
-            this.reportTextWriter.WriteLine("<col class=\"column112\" />");
+
+            if (branchCoverageAvailable)
+            {
+                this.reportTextWriter.WriteLine("<col class=\"column60\" />");
+                this.reportTextWriter.WriteLine("<col class=\"column112\" />");
+            }
+
             this.reportTextWriter.WriteLine("</colgroup>");
 
-            this.reportTextWriter.WriteLine(
-                "<thead><tr><th>{0}</th><th class=\"right\">{1}</th><th class=\"right\">{2}</th><th class=\"right\">{3}</th><th class=\"right\">{4}</th><th class=\"center\" colspan=\"2\">{5}</th><th class=\"center\" colspan=\"2\">{6}</th></tr></thead>",
+            this.reportTextWriter.Write(
+                "<thead><tr><th>{0}</th><th class=\"right\">{1}</th><th class=\"right\">{2}</th><th class=\"right\">{3}</th><th class=\"right\">{4}</th><th class=\"center\" colspan=\"2\">{5}</th>",
                 WebUtility.HtmlEncode(ReportResources.Name),
                 WebUtility.HtmlEncode(ReportResources.Covered),
                 WebUtility.HtmlEncode(ReportResources.Uncovered),
                 WebUtility.HtmlEncode(ReportResources.Coverable),
                 WebUtility.HtmlEncode(ReportResources.Total),
-                WebUtility.HtmlEncode(ReportResources.Coverage),
+                WebUtility.HtmlEncode(ReportResources.Coverage));
+            if (branchCoverageAvailable)
+            {
+                this.reportTextWriter.Write(
+                "<th class=\"center\" colspan=\"2\">{0}</th>",
                 WebUtility.HtmlEncode(ReportResources.BranchCoverage));
+            }
+
+            this.reportTextWriter.WriteLine("</tr></thead>");
             this.reportTextWriter.WriteLine("<tbody>");
         }
 
@@ -238,7 +251,8 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// Adds custom summary elements to the report.
         /// </summary>
         /// <param name="assemblies">The assemblies.</param>
-        public void CustomSummary(IEnumerable<Assembly> assemblies)
+        /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
+        public void CustomSummary(IEnumerable<Assembly> assemblies, bool branchCoverageAvailable)
         {
             if (assemblies == null)
             {
@@ -290,6 +304,11 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             }
 
             this.javaScriptContent.AppendLine("];");
+
+            this.javaScriptContent.AppendLine();
+            this.javaScriptContent.AppendLine();
+
+            this.javaScriptContent.AppendLine("var branchCoverageAvailable = " + branchCoverageAvailable.ToString().ToLowerInvariant() + ";");
         }
 
         /// <summary>
@@ -545,7 +564,8 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// Adds the coverage information of an assembly to the report.
         /// </summary>
         /// <param name="assembly">The assembly.</param>
-        public void SummaryAssembly(Assembly assembly)
+        /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
+        public void SummaryAssembly(Assembly assembly, bool branchCoverageAvailable)
         {
             if (assembly == null)
             {
@@ -563,10 +583,15 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                 assembly.CoverageQuota.HasValue ? CoverageType.LineCoverage.ToString() : string.Empty,
                 assembly.CoverageQuota.HasValue ? assembly.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
             this.reportTextWriter.Write("<th>{0}</th>", CreateCoverageTable(assembly.CoverageQuota));
-            this.reportTextWriter.Write(
+
+            if (branchCoverageAvailable)
+            {
+                this.reportTextWriter.Write(
                 "<th class=\"right\">{0}</th>",
                 assembly.BranchCoverageQuota.HasValue ? assembly.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
-            this.reportTextWriter.Write("<th>{0}</th>", CreateCoverageTable(assembly.BranchCoverageQuota));
+                this.reportTextWriter.Write("<th>{0}</th>", CreateCoverageTable(assembly.BranchCoverageQuota));
+            }
+
             this.reportTextWriter.WriteLine("</tr>");
         }
 
@@ -574,7 +599,8 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// Adds the coverage information of a class to the report.
         /// </summary>
         /// <param name="class">The class.</param>
-        public void SummaryClass(Class @class)
+        /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
+        public void SummaryClass(Class @class, bool branchCoverageAvailable)
         {
             if (@class == null)
             {
@@ -603,10 +629,15 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                 @class.CoverageType,
                 @class.CoverageQuota.HasValue ? @class.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
             this.reportTextWriter.Write("<td>{0}</td>", CreateCoverageTable(@class.CoverageQuota));
-            this.reportTextWriter.Write(
-                "<td class=\"right\">{0}</td>",
-                @class.BranchCoverageQuota.HasValue ? @class.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
-            this.reportTextWriter.Write("<td>{0}</td>", CreateCoverageTable(@class.BranchCoverageQuota));
+
+            if (branchCoverageAvailable)
+            {
+                this.reportTextWriter.Write(
+                    "<td class=\"right\">{0}</td>",
+                    @class.BranchCoverageQuota.HasValue ? @class.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
+                this.reportTextWriter.Write("<td>{0}</td>", CreateCoverageTable(@class.BranchCoverageQuota));
+            }
+
             this.reportTextWriter.WriteLine("</tr>");
         }
 

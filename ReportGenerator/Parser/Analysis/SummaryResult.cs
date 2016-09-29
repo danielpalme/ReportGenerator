@@ -14,7 +14,8 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// </summary>
         /// <param name="assemblies">The assemblies.</param>
         /// <param name="usedParser">The used parser.</param>
-        internal SummaryResult(IEnumerable<Assembly> assemblies, string usedParser)
+        /// <param name="supportsBranchCoverage">if set to <c>true</c> the used parser supports branch coverage.</param>
+        internal SummaryResult(IEnumerable<Assembly> assemblies, string usedParser, bool supportsBranchCoverage)
         {
             if (assemblies == null)
             {
@@ -28,6 +29,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
 
             this.Assemblies = assemblies;
             this.UsedParser = usedParser;
+            this.SupportsBranchCoverage = supportsBranchCoverage;
         }
 
         /// <summary>
@@ -45,6 +47,14 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// The used parser.
         /// </value>
         public string UsedParser { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether the used parser supports branch coverage.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if used parser supports branch coverage; otherwise, <c>false</c>.
+        /// </value>
+        public bool SupportsBranchCoverage { get; }
 
         /// <summary>
         /// Gets the number of covered lines.

@@ -69,6 +69,14 @@ namespace Palmmedia.ReportGenerator.Parser
         }
 
         /// <summary>
+        /// Gets a value indicating whether the used parser supports branch coverage.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if used parser supports branch coverage; otherwise, <c>false</c>.
+        /// </value>
+        public override bool SupportsBranchCoverage => true;
+
+        /// <summary>
         /// Extracts the metrics from the given <see cref="XElement">XElements</see>.
         /// </summary>
         /// <param name="methods">The methods.</param>

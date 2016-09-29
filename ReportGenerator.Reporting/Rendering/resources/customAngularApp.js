@@ -4,6 +4,7 @@ function SummaryViewCtrl($scope) {
 
     $scope.filteringEnabled = false;
     $scope.assemblies = [];
+    $scope.branchCoverageAvailable = branchCoverageAvailable;
 
     $scope.enableFiltering = function () {
         console.log("Enabling filtering");
@@ -78,12 +79,13 @@ coverageApp.directive('reactiveTable', function () {
     return {
         restrict: 'A',
         scope: {
-            data: '='
+            assemblies: '=',
+            branchCoverageAvailable: '='
         },
         link: function (scope, el, attrs) {
-            scope.$watchCollection('data', function (newValue, oldValue) {
+            scope.$watchCollection('assemblies', function (newValue, oldValue) {
                 React.renderComponent(
-                    AssemblyComponent({ assemblies: newValue }),
+                    AssemblyComponent({ assemblies: newValue, branchCoverageAvailable: scope.branchCoverageAvailable }),
                     el[0]);
             });
         }
