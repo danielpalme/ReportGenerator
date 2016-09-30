@@ -16,6 +16,11 @@
         NotCovered,
 
         /// <summary>
+        /// Line was partially covered.
+        /// </summary>
+        PartiallyCovered,
+
+        /// <summary>
         /// Line was covered.
         /// </summary>
         Covered

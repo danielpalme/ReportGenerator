@@ -131,7 +131,8 @@ namespace Palmmedia.ReportGenerator.Parser
                 {
                     LineNumberStart = int.Parse(l.Attribute("start_line").Value, CultureInfo.InvariantCulture),
                     LineNumberEnd = int.Parse(l.Attribute("end_line").Value, CultureInfo.InvariantCulture),
-                    Coverage = l.Attribute("covered").Value.Equals("no") ? 0 : 1
+                    Coverage = l.Attribute("covered").Value.Equals("no") ? 0 : 
+                    (l.Attribute("covered").Value.Equals("partial") ? 1 : 2)
                 })
                 .OrderBy(seqpnt => seqpnt.LineNumberEnd)
                 .ToArray();

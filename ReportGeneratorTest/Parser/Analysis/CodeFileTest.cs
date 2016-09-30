@@ -175,7 +175,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Analysis
         [TestMethod]
         public void AnalyzeFile_ExistingFile_AnalysisIsReturned()
         {
-            var sut = new CodeFile("C:\\temp\\Program.cs", new int[] { -2, -1, 0, 1 });
+            var sut = new CodeFile("C:\\temp\\Program.cs", new int[] { -2, -1, 0, 1, 2 });
 
             Assert.IsNull(sut.TotalLines);
 
@@ -197,7 +197,11 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Analysis
 
             Assert.AreEqual(3, fileAnalysis.Lines.ElementAt(2).LineNumber);
             Assert.AreEqual(1, fileAnalysis.Lines.ElementAt(2).LineVisits);
-            Assert.AreEqual(LineVisitStatus.Covered, fileAnalysis.Lines.ElementAt(2).LineVisitStatus);
+            Assert.AreEqual(LineVisitStatus.PartiallyCovered, fileAnalysis.Lines.ElementAt(2).LineVisitStatus);
+
+            Assert.AreEqual(4, fileAnalysis.Lines.ElementAt(3).LineNumber);
+            Assert.AreEqual(2, fileAnalysis.Lines.ElementAt(3).LineVisits);
+            Assert.AreEqual(LineVisitStatus.Covered, fileAnalysis.Lines.ElementAt(3).LineVisitStatus);
         }
 
         /// <summary>
@@ -208,11 +212,11 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Analysis
         {
             var sut = new CodeFile("C:\\temp\\Program.cs", new int[] { -2, -1, 0, 1 });
             var testMethod = new TestMethod("TestFull", "Test");
-            sut.AddCoverageByTestMethod(testMethod, new int[] { -2, 1, -1, 0 });
+            sut.AddCoverageByTestMethod(testMethod, new int[] { -2, 2, -1, 0 });
 
             var fileAnalysis = sut.AnalyzeFile();
 
-            Assert.AreEqual(1, fileAnalysis.Lines.First().LineCoverageByTestMethod[testMethod].LineVisits);
+            Assert.AreEqual(2, fileAnalysis.Lines.First().LineCoverageByTestMethod[testMethod].LineVisits);
             Assert.AreEqual(LineVisitStatus.Covered, fileAnalysis.Lines.First().LineCoverageByTestMethod[testMethod].LineVisitStatus);
         }
 

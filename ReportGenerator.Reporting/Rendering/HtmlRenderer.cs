@@ -748,17 +748,16 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// <returns>The corresponding CSS class.</returns>
         private static string ConvertToCssClass(LineVisitStatus lineVisitStatus, bool lightcolor)
         {
-            if (lineVisitStatus == LineVisitStatus.Covered)
+            switch (lineVisitStatus)
             {
-                return lightcolor ? "lightgreen" : "green";
-            }
-            else if (lineVisitStatus == LineVisitStatus.NotCovered)
-            {
-                return lightcolor ? "lightred" : "red";
-            }
-            else
-            {
-                return lightcolor ? "lightgray" : "gray";
+                case LineVisitStatus.Covered:
+                    return lightcolor ? "lightgreen" : "green";
+                case LineVisitStatus.NotCovered:
+                    return lightcolor ? "lightred" : "red";
+                case LineVisitStatus.PartiallyCovered:
+                    return lightcolor ? "lightorange" : "orange";
+                default:
+                    return lightcolor ? "lightgray" : "gray";
             }
         }
 

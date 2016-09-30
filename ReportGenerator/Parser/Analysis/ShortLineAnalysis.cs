@@ -13,17 +13,20 @@
         {
             this.LineVisits = lineVisits;
 
-            if (lineVisits == 0)
+            switch (lineVisits)
             {
-                this.LineVisitStatus = LineVisitStatus.NotCovered;
-            }
-            else if (lineVisits > 0)
-            {
-                this.LineVisitStatus = LineVisitStatus.Covered;
-            }
-            else
-            {
-                this.LineVisitStatus = LineVisitStatus.NotCoverable;
+                case 0:
+                    this.LineVisitStatus = LineVisitStatus.NotCovered;
+                    break;
+                case 1:
+                    this.LineVisitStatus = LineVisitStatus.PartiallyCovered;
+                    break;
+                case 2:
+                    this.LineVisitStatus = LineVisitStatus.Covered;
+                    break;
+                default:
+                    this.LineVisitStatus = LineVisitStatus.NotCoverable;
+                    break;
             }
         }
 

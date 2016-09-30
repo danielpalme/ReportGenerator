@@ -305,15 +305,22 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             formattedLine = ShortenString(formattedLine);
             formattedLine = XmlRenderer.ReplaceInvalidXmlChars(formattedLine);
 
-            string lineVisitStatus = "gray";
+            string lineVisitStatus;
 
-            if (analysis.LineVisitStatus == LineVisitStatus.Covered)
+            switch (analysis.LineVisitStatus)
             {
-                lineVisitStatus = "green";
-            }
-            else if (analysis.LineVisitStatus == LineVisitStatus.NotCovered)
-            {
-                lineVisitStatus = "red";
+                case LineVisitStatus.Covered:
+                    lineVisitStatus = "green";
+                    break;
+                case LineVisitStatus.NotCovered:
+                    lineVisitStatus = "red";
+                    break;
+                case LineVisitStatus.PartiallyCovered:
+                    lineVisitStatus = "orange";
+                    break;
+                default:
+                    lineVisitStatus = "gray";
+                    break;
             }
 
             string row = string.Format(
