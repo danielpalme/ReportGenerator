@@ -21,7 +21,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// <summary>
         /// The line coverage by test method.
         /// </summary>
-        private readonly IDictionary<TestMethod, int[]> lineCoveragesByTestMethod = new Dictionary<TestMethod, int[]>();
+        private readonly IDictionary<TestMethod, CoverageByTrackedMethod> lineCoveragesByTestMethod = new Dictionary<TestMethod, CoverageByTrackedMethod>();
 
         /// <summary>
         /// Array containing the coverage information by line number.
@@ -32,27 +32,34 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         private int[] lineCoverage;
 
         /// <summary>
+        /// Array containing the line visit status by line number.
+        /// </summary>
+        private LineVisitStatus[] lineVisitStatus;
+
+        /// <summary>
         /// The branches by line number.
         /// </summary>
         private IDictionary<int, ICollection<Branch>> branches;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CodeFile"/> class.
+        /// Initializes a new instance of the <see cref="CodeFile" /> class.
         /// </summary>
         /// <param name="path">The path of the file.</param>
         /// <param name="lineCoverage">The line coverage.</param>
-        internal CodeFile(string path, int[] lineCoverage)
-            : this(path, lineCoverage, null)
+        /// <param name="lineVisitStatus">The line visit status.</param>
+        internal CodeFile(string path, int[] lineCoverage, LineVisitStatus[] lineVisitStatus)
+            : this(path, lineCoverage, lineVisitStatus, null)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CodeFile"/> class.
+        /// Initializes a new instance of the <see cref="CodeFile" /> class.
         /// </summary>
         /// <param name="path">The path.</param>
         /// <param name="lineCoverage">The line coverage.</param>
+        /// <param name="lineVisitStatus">The line visit status.</param>
         /// <param name="branches">The branches.</param>
-        internal CodeFile(string path, int[] lineCoverage, IDictionary<int, ICollection<Branch>> branches)
+        internal CodeFile(string path, int[] lineCoverage, LineVisitStatus[] lineVisitStatus, IDictionary<int, ICollection<Branch>> branches)
         {
             if (path == null)
             {
@@ -64,8 +71,19 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
                 throw new ArgumentNullException(nameof(lineCoverage));
             }
 
+            if (lineVisitStatus == null)
+            {
+                throw new ArgumentNullException(nameof(lineVisitStatus));
+            }
+
+            if (lineCoverage.LongLength != lineVisitStatus.LongLength)
+            {
+                throw new ArgumentException("Length of 'lineCoverage' and 'lineVisitStatus' must match", nameof(lineVisitStatus));
+            }
+
             this.Path = path;
             this.lineCoverage = lineCoverage;
+            this.lineVisitStatus = lineVisitStatus;
             this.branches = branches;
         }
 
@@ -174,20 +192,20 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// Adds the coverage by test method.
         /// </summary>
         /// <param name="testMethod">The test method.</param>
-        /// <param name="coverage">The coverage.</param>
-        internal void AddCoverageByTestMethod(TestMethod testMethod, int[] coverage)
+        /// <param name="trackedMethodCoverage">The coverage by for test method.</param>
+        internal void AddCoverageByTestMethod(TestMethod testMethod, CoverageByTrackedMethod trackedMethodCoverage)
         {
             if (testMethod == null)
             {
                 throw new ArgumentNullException(nameof(testMethod));
             }
 
-            if (coverage == null)
+            if (trackedMethodCoverage == null)
             {
-                throw new ArgumentNullException(nameof(coverage));
+                throw new ArgumentNullException(nameof(trackedMethodCoverage));
             }
 
-            this.lineCoveragesByTestMethod.Add(testMethod, coverage);
+            this.lineCoveragesByTestMethod.Add(testMethod, trackedMethodCoverage);
         }
 
         /// <summary>
@@ -218,15 +236,29 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
                 {
                     currentLineNumber++;
                     int visits = this.lineCoverage.Length > currentLineNumber ? this.lineCoverage[currentLineNumber] : -1;
+                    LineVisitStatus lineVisitStatus = this.lineVisitStatus.Length > currentLineNumber ? this.lineVisitStatus[currentLineNumber] : LineVisitStatus.NotCoverable;
 
                     var lineCoverageByTestMethod = this.lineCoveragesByTestMethod
-                        .ToDictionary(l => l.Key, l => new ShortLineAnalysis(l.Value.Length > currentLineNumber ? l.Value[currentLineNumber] : -1));
+                        .ToDictionary(
+                        l => l.Key,
+                        l =>
+                        {
+                            if (l.Value.Coverage.Length > currentLineNumber)
+                            {
+                                return new ShortLineAnalysis(l.Value.Coverage[currentLineNumber], l.Value.LineVisitStatus[currentLineNumber]);
+                            }
+                            else
+                            {
+                                return new ShortLineAnalysis(-1, LineVisitStatus.NotCoverable);
+                            }
+                        });
 
                     if (this.branches != null && this.branches.TryGetValue(currentLineNumber, out branchesOfLine))
                     {
                         result.AddLineAnalysis(
                             new LineAnalysis(
                                 visits,
+                                lineVisitStatus,
                                 lineCoverageByTestMethod,
                                 currentLineNumber,
                                 line.TrimEnd(),
@@ -238,6 +270,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
                         result.AddLineAnalysis(
                             new LineAnalysis(
                                 visits,
+                                lineVisitStatus,
                                 lineCoverageByTestMethod,
                                 currentLineNumber,
                                 line.TrimEnd()));
@@ -286,6 +319,14 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
                 this.lineCoverage = newLineCoverage;
             }
 
+            // Resize line visit status array if neccessary
+            if (file.lineVisitStatus.LongLength > this.lineVisitStatus.LongLength)
+            {
+                LineVisitStatus[] newLineVisitStatus = new LineVisitStatus[file.lineVisitStatus.LongLength];
+                Array.Copy(this.lineVisitStatus, newLineVisitStatus, this.lineVisitStatus.LongLength);
+                this.lineVisitStatus = newLineVisitStatus;
+            }
+
             for (long i = 0; i < file.lineCoverage.LongLength; i++)
             {
                 int coverage = this.lineCoverage[i];
@@ -302,50 +343,72 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
                 this.lineCoverage[i] = coverage;
             }
 
+            for (long i = 0; i < file.lineVisitStatus.LongLength; i++)
+            {
+                int lineVisitStatus = Math.Max((int)this.lineVisitStatus[i], (int)file.lineVisitStatus[i]);
+
+                this.lineVisitStatus[i] = (LineVisitStatus)lineVisitStatus;
+            }
+
             foreach (var lineCoverageByTestMethod in file.lineCoveragesByTestMethod)
             {
-                int[] existingLineCoverageByTestMethod = null;
+                CoverageByTrackedMethod existingTrackedMethodCoverage = null;
 
-                this.lineCoveragesByTestMethod.TryGetValue(lineCoverageByTestMethod.Key, out existingLineCoverageByTestMethod);
+                this.lineCoveragesByTestMethod.TryGetValue(lineCoverageByTestMethod.Key, out existingTrackedMethodCoverage);
 
-                if (existingLineCoverageByTestMethod == null)
+                if (existingTrackedMethodCoverage == null)
                 {
                     this.lineCoveragesByTestMethod.Add(lineCoverageByTestMethod);
                 }
                 else
                 {
                     // Resize coverage array if neccessary
-                    if (existingLineCoverageByTestMethod.LongLength > lineCoverageByTestMethod.Value.LongLength)
+                    if (lineCoverageByTestMethod.Value.Coverage.LongLength > existingTrackedMethodCoverage.Coverage.LongLength)
                     {
-                        int[] newLineCoverage = new int[lineCoverageByTestMethod.Value.LongLength];
+                        int[] newLineCoverage = new int[lineCoverageByTestMethod.Value.Coverage.LongLength];
 
-                        Array.Copy(lineCoverageByTestMethod.Value, newLineCoverage, lineCoverageByTestMethod.Value.LongLength);
+                        Array.Copy(lineCoverageByTestMethod.Value.Coverage, newLineCoverage, lineCoverageByTestMethod.Value.Coverage.LongLength);
 
-                        for (long i = existingLineCoverageByTestMethod.LongLength; i < lineCoverageByTestMethod.Value.LongLength; i++)
+                        for (long i = existingTrackedMethodCoverage.Coverage.LongLength; i < lineCoverageByTestMethod.Value.Coverage.LongLength; i++)
                         {
                             newLineCoverage[i] = -1;
                         }
 
-                        existingLineCoverageByTestMethod = newLineCoverage;
+                        existingTrackedMethodCoverage.Coverage = newLineCoverage;
                     }
 
-                    for (long i = 0; i < lineCoverageByTestMethod.Value.LongLength; i++)
+                    // Resize line visit status array if neccessary
+                    if (lineCoverageByTestMethod.Value.LineVisitStatus.LongLength > existingTrackedMethodCoverage.LineVisitStatus.LongLength)
                     {
-                        int coverage = existingLineCoverageByTestMethod[i];
+                        LineVisitStatus[] newLineVisitStatus = new LineVisitStatus[lineCoverageByTestMethod.Value.LineVisitStatus.LongLength];
+                        Array.Copy(lineCoverageByTestMethod.Value.LineVisitStatus, newLineVisitStatus, lineCoverageByTestMethod.Value.LineVisitStatus.LongLength);
+                        existingTrackedMethodCoverage.LineVisitStatus = newLineVisitStatus;
+                    }
+
+                    for (long i = 0; i < lineCoverageByTestMethod.Value.Coverage.LongLength; i++)
+                    {
+                        int coverage = existingTrackedMethodCoverage.Coverage[i];
 
                         if (coverage < 0)
                         {
-                            coverage = lineCoverageByTestMethod.Value[i];
+                            coverage = lineCoverageByTestMethod.Value.Coverage[i];
                         }
-                        else if (lineCoverageByTestMethod.Value[i] > 0)
+                        else if (lineCoverageByTestMethod.Value.Coverage[i] > 0)
                         {
-                            coverage += lineCoverageByTestMethod.Value[i];
+                            coverage += lineCoverageByTestMethod.Value.Coverage[i];
                         }
 
-                        existingLineCoverageByTestMethod[i] = coverage;
+                        existingTrackedMethodCoverage.Coverage[i] = coverage;
                     }
 
-                    this.lineCoveragesByTestMethod[lineCoverageByTestMethod.Key] = existingLineCoverageByTestMethod;
+                    for (long i = 0; i < lineCoverageByTestMethod.Value.LineVisitStatus.LongLength; i++)
+                    {
+                        int lineVisitStatus = Math.Max((int)existingTrackedMethodCoverage.LineVisitStatus[i], (int)lineCoverageByTestMethod.Value.LineVisitStatus[i]);
+
+                        existingTrackedMethodCoverage.LineVisitStatus[i] = (LineVisitStatus)lineVisitStatus;
+                    }
+
+                    this.lineCoveragesByTestMethod[lineCoverageByTestMethod.Key] = existingTrackedMethodCoverage;
                 }
             }
 

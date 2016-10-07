@@ -110,6 +110,24 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         }
 
         /// <summary>
+        /// A test for LineVisitStatus
+        /// </summary>
+        [TestMethod]
+        public void LineVisitStatusTest()
+        {
+            var fileAnalysis = GetFileAnalysis(assembliesWithPreprocessing, "Test.TestClass", "C:\\temp\\TestClass.cs");
+
+            var line = fileAnalysis.Lines.Single(l => l.LineNumber == 1);
+            Assert.AreEqual(LineVisitStatus.NotCoverable, line.LineVisitStatus, "Wrong line visit status");
+
+            line = fileAnalysis.Lines.Single(l => l.LineNumber == 15);
+            Assert.AreEqual(LineVisitStatus.Covered, line.LineVisitStatus, "Wrong line visit status");
+
+            line = fileAnalysis.Lines.Single(l => l.LineNumber == 18);
+            Assert.AreEqual(LineVisitStatus.NotCovered, line.LineVisitStatus, "Wrong line visit status");
+        }
+
+        /// <summary>
         /// A test for NumberOfFiles
         /// </summary>
         [TestMethod]

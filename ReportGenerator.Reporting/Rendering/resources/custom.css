@@ -63,6 +63,8 @@ a.collapsed { background-image: url(pic_collapsed.png), url(data:image/png;base6
 .lightgreen { background-color: #dcf4dc; }
 .red { background-color: #f00; }
 .lightred { background-color: #f7dede; }
+.orange { background-color: #FFA500; }
+.lightorange { background-color: #FFEFD5; }
 .gray { background-color: #dcdcdc; }
 .lightgray { color: #888888; }
 

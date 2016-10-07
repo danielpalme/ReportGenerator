@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -47,6 +48,68 @@ namespace Palmmedia.ReportGenerator.Parser
             Parallel.ForEach(assemblyNames, assemblyName => this.AddAssembly(this.ProcessAssembly(assemblyName)));
 
             this.modules = null;
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the used parser supports branch coverage.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if used parser supports branch coverage; otherwise, <c>false</c>.
+        /// </value>
+        public override bool SupportsBranchCoverage => true;
+
+        /// <summary>
+        /// Gets the branches by line number.
+        /// </summary>
+        /// <param name="lines">The lines.</param>
+        /// <returns>The branches by line number.</returns>
+        private static Dictionary<int, ICollection<Branch>> GetBranches(IEnumerable<XElement> lines)
+        {
+            var result = new Dictionary<int, ICollection<Branch>>();
+
+            var branchPoints = lines
+                .Elements("conditions")
+                .Elements("condition")
+                .ToArray();
+
+            foreach (var branchPoint in branchPoints)
+            {
+                int lineNumber = int.Parse(branchPoint.Parent.Parent.Attribute("number").Value, CultureInfo.InvariantCulture);
+
+                string identifier = string.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}_{1}",
+                    lineNumber,
+                    branchPoint.Attribute("number").Value);
+
+                var branch = new Branch(
+                    branchPoint.Attribute("coverage").Value.Equals("0%") ? 0 : 1,
+                    identifier);
+
+                ICollection<Branch> branches = null;
+                if (result.TryGetValue(lineNumber, out branches))
+                {
+                    HashSet<Branch> branchesHashset = (HashSet<Branch>)branches;
+                    if (branchesHashset.Contains(branch))
+                    {
+                        // Not perfect for performance, but Hashset has no GetElement method
+                        branchesHashset.First(b => b.Equals(branch)).BranchVisits += branch.BranchVisits;
+                    }
+                    else
+                    {
+                        branches.Add(branch);
+                    }
+                }
+                else
+                {
+                    branches = new HashSet<Branch>();
+                    branches.Add(branch);
+
+                    result.Add(lineNumber, branches);
+                }
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -110,26 +173,31 @@ namespace Palmmedia.ReportGenerator.Parser
         /// <returns>The <see cref="CodeFile"/>.</returns>
         private CodeFile ProcessFile(Class @class, string filePath)
         {
-            var linesOfFile = this.modules
+            var lines = this.modules
                 .Where(m => m.Attribute("name").Value.Equals(@class.Assembly.Name))
                 .Elements("classes")
                 .Elements("class")
                 .Where(c => c.Attribute("name").Value.Equals(@class.Name)
                             || c.Attribute("name").Value.StartsWith(@class.Name + "$", StringComparison.Ordinal))
                 .Elements("lines")
-                .Elements("line")
-                .Select(line => new
-                {
-                    LineNumber = int.Parse(line.Attribute("number").Value, CultureInfo.InvariantCulture),
-                    Visits = int.Parse(line.Attribute("hits").Value, CultureInfo.InvariantCulture)
-                })
+                .Elements("line");
+
+            var linesOfFile = lines.Select(line => new
+            {
+                LineNumber = int.Parse(line.Attribute("number").Value, CultureInfo.InvariantCulture),
+                Visits = int.Parse(line.Attribute("hits").Value, CultureInfo.InvariantCulture)
+            })
                 .ToArray();
 
+            var branches = GetBranches(lines);
+
             int[] coverage = new int[] { };
+            LineVisitStatus[] lineVisitStatus = new LineVisitStatus[] { };
 
             if (linesOfFile.Length > 0)
             {
                 coverage = new int[linesOfFile[linesOfFile.LongLength - 1].LineNumber + 1];
+                lineVisitStatus = new LineVisitStatus[linesOfFile[linesOfFile.LongLength - 1].LineNumber + 1];
 
                 for (int i = 0; i < coverage.Length; i++)
                 {
@@ -139,10 +207,21 @@ namespace Palmmedia.ReportGenerator.Parser
                 foreach (var line in linesOfFile)
                 {
                     coverage[line.LineNumber] = line.Visits;
+
+                    bool partiallyCovered = false;
+
+                    ICollection<Branch> branchesOfLine = null;
+                    if (branches.TryGetValue(line.LineNumber, out branchesOfLine))
+                    {
+                        partiallyCovered = branchesOfLine.Any(b => b.BranchVisits == 0);
+                    }
+
+                    LineVisitStatus statusOfLine = line.Visits > 0 ? (partiallyCovered ? LineVisitStatus.PartiallyCovered : LineVisitStatus.Covered) : LineVisitStatus.NotCovered;
+                    lineVisitStatus[line.LineNumber] = statusOfLine;
                 }
             }
 
-            return new CodeFile(filePath, coverage);
+            return new CodeFile(filePath, coverage, lineVisitStatus, branches);
         }
     }
 }

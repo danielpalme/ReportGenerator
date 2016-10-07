@@ -131,16 +131,19 @@ namespace Palmmedia.ReportGenerator.Parser
                 {
                     LineNumberStart = int.Parse(l.Attribute("start_line").Value, CultureInfo.InvariantCulture),
                     LineNumberEnd = int.Parse(l.Attribute("end_line").Value, CultureInfo.InvariantCulture),
-                    Coverage = l.Attribute("covered").Value.Equals("no") ? 0 : 1
+                    Coverage = l.Attribute("covered").Value.Equals("no") ? 0 : 1,
+                    Partial = l.Attribute("covered").Value.Equals("partial")
                 })
                 .OrderBy(seqpnt => seqpnt.LineNumberEnd)
                 .ToArray();
 
             int[] coverage = new int[] { };
+            LineVisitStatus[] lineVisitStatus = new LineVisitStatus[] { };
 
             if (linesOfFile.Length > 0)
             {
                 coverage = new int[linesOfFile[linesOfFile.LongLength - 1].LineNumberEnd + 1];
+                lineVisitStatus = new LineVisitStatus[linesOfFile[linesOfFile.LongLength - 1].LineNumberEnd + 1];
 
                 for (int i = 0; i < coverage.Length; i++)
                 {
@@ -152,11 +155,17 @@ namespace Palmmedia.ReportGenerator.Parser
                     for (int lineNumber = seqpnt.LineNumberStart; lineNumber <= seqpnt.LineNumberEnd; lineNumber++)
                     {
                         coverage[lineNumber] = coverage[lineNumber] == -1 ? seqpnt.Coverage : Math.Min(coverage[lineNumber] + seqpnt.Coverage, 1);
+
+                        if (lineVisitStatus[lineNumber] != LineVisitStatus.Covered)
+                        {
+                            LineVisitStatus statusOfLine = seqpnt.Partial ? LineVisitStatus.PartiallyCovered : (seqpnt.Coverage == 1 ? LineVisitStatus.Covered : LineVisitStatus.NotCovered);
+                            lineVisitStatus[lineNumber] = (LineVisitStatus)Math.Max((int)lineVisitStatus[lineNumber], (int)statusOfLine);
+                        }
                     }
                 }
             }
 
-            return new CodeFile(filePath, coverage);
+            return new CodeFile(filePath, coverage, lineVisitStatus);
         }
 
         /// <summary>

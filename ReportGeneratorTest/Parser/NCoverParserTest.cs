@@ -26,6 +26,8 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext)
         {
+            FileManager.CopyTestClasses();
+
             var report = XDocument.Load(FilePath);
             assemblies = new NCoverParser(report).Assemblies;
         }
@@ -34,6 +36,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [ClassCleanup]
         public static void MyClassCleanup()
         {
+            FileManager.DeleteTestClasses();
         }
 
         // Use TestInitialize to run code before running each test
@@ -74,6 +77,24 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             fileAnalysis = GetFileAnalysis(assemblies, "Test.PartialClass", "C:\\temp\\PartialClass2.cs");
             Assert.AreEqual(1, fileAnalysis.Lines.Single(l => l.LineNumber == 9).LineVisits, "Wrong number of line visits");
             Assert.AreEqual(0, fileAnalysis.Lines.Single(l => l.LineNumber == 14).LineVisits, "Wrong number of line visits");
+        }
+
+        /// <summary>
+        /// A test for LineVisitStatus
+        /// </summary>
+        [TestMethod]
+        public void LineVisitStatusTest()
+        {
+            var fileAnalysis = GetFileAnalysis(assemblies, "Test.TestClass", "C:\\temp\\TestClass.cs");
+
+            var line = fileAnalysis.Lines.Single(l => l.LineNumber == 1);
+            Assert.AreEqual(LineVisitStatus.NotCoverable, line.LineVisitStatus, "Wrong line visit status");
+
+            line = fileAnalysis.Lines.Single(l => l.LineNumber == 10);
+            Assert.AreEqual(LineVisitStatus.Covered, line.LineVisitStatus, "Wrong line visit status");
+
+            line = fileAnalysis.Lines.Single(l => l.LineNumber == 18);
+            Assert.AreEqual(LineVisitStatus.NotCovered, line.LineVisitStatus, "Wrong line visit status");
         }
 
         /// <summary>

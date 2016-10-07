@@ -174,10 +174,12 @@ namespace Palmmedia.ReportGenerator.Parser
                 .ToArray();
 
             int[] coverage = new int[] { };
+            LineVisitStatus[] lineVisitStatus = new LineVisitStatus[] { };
 
             if (seqpntsOfFile.Length > 0)
             {
                 coverage = new int[seqpntsOfFile[seqpntsOfFile.LongLength - 1].LineNumberEnd + 1];
+                lineVisitStatus = new LineVisitStatus[seqpntsOfFile[seqpntsOfFile.LongLength - 1].LineNumberEnd + 1];
 
                 for (int i = 0; i < coverage.Length; i++)
                 {
@@ -189,11 +191,12 @@ namespace Palmmedia.ReportGenerator.Parser
                     for (int lineNumber = seqpnt.LineNumberStart; lineNumber <= seqpnt.LineNumberEnd; lineNumber++)
                     {
                         coverage[lineNumber] = coverage[lineNumber] == -1 ? seqpnt.Visits : coverage[lineNumber] + seqpnt.Visits;
+                        lineVisitStatus[lineNumber] = lineVisitStatus[lineNumber] == LineVisitStatus.Covered || seqpnt.Visits > 0 ? LineVisitStatus.Covered : LineVisitStatus.NotCovered;
                     }
                 }
             }
 
-            return new CodeFile(filePath, coverage);
+            return new CodeFile(filePath, coverage, lineVisitStatus);
         }
     }
 }

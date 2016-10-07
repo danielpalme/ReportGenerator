@@ -34,7 +34,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Analysis
         {
             var assembly = new Assembly("C:\\test\\TestAssembly.dll");
             var sut = new Class("Test", assembly);
-            var file = new CodeFile("C:\\temp\\Program.cs", new int[0]);
+            var file = new CodeFile("C:\\temp\\Program.cs", new int[0], new LineVisitStatus[0]);
             sut.AddFile(file);
 
             Assert.AreEqual(file, sut.Files.First(), "Not equal");
@@ -50,7 +50,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Analysis
             var assembly = new Assembly("C:\\test\\TestAssembly.dll");
             var sut = new Class("Test", assembly);
             var classToMerge = new Class("Test", assembly);
-            var file = new CodeFile("C:\\temp\\Program.cs", new int[0]);
+            var file = new CodeFile("C:\\temp\\Program.cs", new int[0], new LineVisitStatus[0]);
             var methodMetric = new MethodMetric("Test");
             classToMerge.AddFile(file);
             classToMerge.AddMethodMetric(methodMetric);

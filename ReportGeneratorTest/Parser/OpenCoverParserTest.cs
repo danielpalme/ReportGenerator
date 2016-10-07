@@ -172,6 +172,47 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         }
 
         /// <summary>
+        /// A test for LineVisitStatus
+        /// </summary>
+        [TestMethod]
+        public void LineVisitStatusTest_WithTrackedMethods()
+        {
+            var fileAnalysis = GetFileAnalysis(assembliesWithTrackedMethods, "Test.TestClass", "C:\\temp\\TestClass.cs");
+
+            var line = fileAnalysis.Lines.Single(l => l.LineNumber == 1);
+
+            Assert.AreEqual(LineVisitStatus.NotCoverable, line.LineVisitStatus, "Wrong line visit status");
+
+            Assert.AreEqual(2, line.LineCoverageByTestMethod.Count, "Wrong number of test methods");
+            Assert.AreEqual(LineVisitStatus.NotCoverable, line.LineCoverageByTestMethod.First().Value.LineVisitStatus, "Wrong line visit status");
+            Assert.AreEqual(LineVisitStatus.NotCoverable, line.LineCoverageByTestMethod.ElementAt(1).Value.LineVisitStatus, "Wrong line visit status");
+
+            line = fileAnalysis.Lines.Single(l => l.LineNumber == 15);
+
+            Assert.AreEqual(LineVisitStatus.Covered, line.LineVisitStatus, "Wrong line visit status");
+
+            Assert.AreEqual(2, line.LineCoverageByTestMethod.Count, "Wrong number of test methods");
+            Assert.AreEqual(LineVisitStatus.Covered, line.LineCoverageByTestMethod.First().Value.LineVisitStatus, "Wrong line visit status");
+            Assert.AreEqual(LineVisitStatus.Covered, line.LineCoverageByTestMethod.ElementAt(1).Value.LineVisitStatus, "Wrong line visit status");
+
+            line = fileAnalysis.Lines.Single(l => l.LineNumber == 17);
+
+            Assert.AreEqual(LineVisitStatus.PartiallyCovered, line.LineVisitStatus, "Wrong line visit status");
+
+            Assert.AreEqual(2, line.LineCoverageByTestMethod.Count, "Wrong number of test methods");
+            Assert.AreEqual(LineVisitStatus.PartiallyCovered, line.LineCoverageByTestMethod.First().Value.LineVisitStatus, "Wrong line visit status");
+            Assert.AreEqual(LineVisitStatus.PartiallyCovered, line.LineCoverageByTestMethod.ElementAt(1).Value.LineVisitStatus, "Wrong line visit status");
+
+            line = fileAnalysis.Lines.Single(l => l.LineNumber == 22);
+
+            Assert.AreEqual(LineVisitStatus.NotCovered, line.LineVisitStatus, "Wrong line visit status");
+
+            Assert.AreEqual(2, line.LineCoverageByTestMethod.Count, "Wrong number of test methods");
+            Assert.AreEqual(LineVisitStatus.NotCovered, line.LineCoverageByTestMethod.First().Value.LineVisitStatus, "Wrong line visit status");
+            Assert.AreEqual(LineVisitStatus.NotCovered, line.LineCoverageByTestMethod.ElementAt(1).Value.LineVisitStatus, "Wrong line visit status");
+        }
+
+        /// <summary>
         /// A test for NumberOfFiles
         /// </summary>
         [TestMethod]

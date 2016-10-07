@@ -5,6 +5,7 @@ using System.Xml.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Palmmedia.ReportGenerator.Parser;
 using Palmmedia.ReportGenerator.Parser.Analysis;
+using Palmmedia.ReportGenerator.Parser.Preprocessing;
 
 namespace Palmmedia.ReportGeneratorTest.Parser
 {
@@ -29,7 +30,9 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         {
             FileManager.CopyTestClasses();
 
-            assemblies = new CoberturaParser(XDocument.Load(FilePath1)).Assemblies;
+            var report = XDocument.Load(FilePath1);
+            new CoberturaReportPreprocessor(report).Execute();
+            assemblies = new CoberturaParser(report).Assemblies;
         }
 
         // Use ClassCleanup to run code after all tests in a class have run
@@ -40,6 +43,49 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         }
 
         #endregion
+
+        /// <summary>
+        /// A test for SupportsBranchCoverage
+        /// </summary>
+        [TestMethod]
+        public void SupportsBranchCoverage()
+        {
+            Assert.IsTrue(new CoberturaParser(XDocument.Load(FilePath1)).SupportsBranchCoverage);
+        }
+
+        /// <summary>
+        /// A test for NumberOfLineVisits
+        /// </summary>
+        [TestMethod]
+        public void NumberOfLineVisitsTest()
+        {
+            var fileAnalysis = GetFileAnalysis(assemblies, "TestClass", "C:\\temp\\TestClass.java");
+            Assert.AreEqual(1, fileAnalysis.Lines.Single(l => l.LineNumber == 11).LineVisits, "Wrong number of line visits");
+            Assert.AreEqual(1, fileAnalysis.Lines.Single(l => l.LineNumber == 12).LineVisits, "Wrong number of line visits");
+            Assert.AreEqual(0, fileAnalysis.Lines.Single(l => l.LineNumber == 19).LineVisits, "Wrong number of line visits");
+            Assert.AreEqual(-1, fileAnalysis.Lines.Single(l => l.LineNumber == 1).LineVisits, "Wrong number of line visits");
+        }
+
+        /// <summary>
+        /// A test for LineVisitStatus
+        /// </summary>
+        [TestMethod]
+        public void LineVisitStatusTest()
+        {
+            var fileAnalysis = GetFileAnalysis(assemblies, "TestClass", "C:\\temp\\TestClass.java");
+
+            var line = fileAnalysis.Lines.Single(l => l.LineNumber == 1);
+            Assert.AreEqual(LineVisitStatus.NotCoverable, line.LineVisitStatus, "Wrong line visit status");
+
+            line = fileAnalysis.Lines.Single(l => l.LineNumber == 12);
+            Assert.AreEqual(LineVisitStatus.Covered, line.LineVisitStatus, "Wrong line visit status");
+
+            line = fileAnalysis.Lines.Single(l => l.LineNumber == 14);
+            Assert.AreEqual(LineVisitStatus.PartiallyCovered, line.LineVisitStatus, "Wrong line visit status");
+
+            line = fileAnalysis.Lines.Single(l => l.LineNumber == 19);
+            Assert.AreEqual(LineVisitStatus.NotCovered, line.LineVisitStatus, "Wrong line visit status");
+        }
 
         /// <summary>
         /// A test for NumberOfFiles
@@ -86,5 +132,11 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         {
             Assert.AreEqual(3, assemblies.Single(a => a.Name == string.Empty).Classes.Single(c => c.Name == "AbstractClass").CoverableLines, "Wrong Coverable Lines");
         }
+
+        private static FileAnalysis GetFileAnalysis(IEnumerable<Assembly> assemblies, string className, string fileName) => assemblies
+                .Single(a => a.Name == string.Empty).Classes
+                .Single(c => c.Name == className).Files
+                .Single(f => f.Path == fileName)
+                .AnalyzeFile();
     }
 }

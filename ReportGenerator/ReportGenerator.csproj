@@ -120,6 +120,7 @@
     <Compile Include="Parser\Analysis\SummaryResult.cs" />
     <Compile Include="Parser\Analysis\LineAnalysis.cs" />
     <Compile Include="Parser\Analysis\TestMethod.cs" />
+    <Compile Include="Parser\Analysis\CoverageByTrackedMethod.cs" />
     <Compile Include="Parser\DynamicCodeCoverageParser.cs" />
     <Compile Include="Parser\DotCoverParser.cs" />
     <Compile Include="Parser\CoberturaParser.cs" />

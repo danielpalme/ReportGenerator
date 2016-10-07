@@ -11,11 +11,12 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// Initializes a new instance of the <see cref="LineAnalysis" /> class.
         /// </summary>
         /// <param name="lineVisits">The number of line visits.</param>
+        /// <param name="lineVisitStatus">The line visit status.</param>
         /// <param name="lineCoverageByTestMethod">The line coverage by test method.</param>
         /// <param name="lineNumber">The line number.</param>
         /// <param name="lineContent">Content of the line.</param>
-        internal LineAnalysis(int lineVisits, IDictionary<TestMethod, ShortLineAnalysis> lineCoverageByTestMethod, int lineNumber, string lineContent)
-            : base(lineVisits)
+        internal LineAnalysis(int lineVisits, LineVisitStatus lineVisitStatus, IDictionary<TestMethod, ShortLineAnalysis> lineCoverageByTestMethod, int lineNumber, string lineContent)
+            : base(lineVisits, lineVisitStatus)
         {
             this.LineCoverageByTestMethod = lineCoverageByTestMethod;
             this.LineNumber = lineNumber;
@@ -23,16 +24,17 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LineAnalysis"/> class.
+        /// Initializes a new instance of the <see cref="LineAnalysis" /> class.
         /// </summary>
         /// <param name="lineVisits">The number of line visits.</param>
+        /// <param name="lineVisitStatus">The line visit status.</param>
         /// <param name="lineCoverageByTestMethod">The line coverage by test method.</param>
         /// <param name="lineNumber">The line number.</param>
         /// <param name="lineContent">Content of the line.</param>
         /// <param name="coveredBranches">The covered branches.</param>
         /// <param name="totalBranches">The total branches.</param>
-        internal LineAnalysis(int lineVisits, IDictionary<TestMethod, ShortLineAnalysis> lineCoverageByTestMethod, int lineNumber, string lineContent, int coveredBranches, int totalBranches)
-            : this(lineVisits, lineCoverageByTestMethod, lineNumber, lineContent)
+        internal LineAnalysis(int lineVisits, LineVisitStatus lineVisitStatus, IDictionary<TestMethod, ShortLineAnalysis> lineCoverageByTestMethod, int lineNumber, string lineContent, int coveredBranches, int totalBranches)
+            : this(lineVisits, lineVisitStatus, lineCoverageByTestMethod, lineNumber, lineContent)
         {
             this.CoveredBranches = coveredBranches;
             this.TotalBranches = totalBranches;

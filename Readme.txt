@@ -59,14 +59,16 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
-2.4.6.0
+2.5.0.0
 
+    * New: Issue #57: Added support for OpenCover's 'Crap Score' and 'NPath 
+           complexity' metric
     * New: Issue #61: Added support for Cobertura
-    * New: Issue #57: Added support for OpenCover's 'Crap Score' metric
-    * New: Added support for OpenCover's 'NPath complexity' metric
-    * Fix: Issue #60: Improved merging from different paths
-    * Fix: Issue #56: Improved method naming in metrics for async methods
+    * New: Issue #63: Visual indicator for partially covered lines
+           (OpenCover, CodeCoverage.exe, Cobertura)
     * Fix: Issue #55: Branch coverage columns only rendered if available
+    * Fix: Issue #56: Improved method naming in metrics for async methods
+    * Fix: Issue #60: Improved merging from different paths
 
 2.4.5.0
 

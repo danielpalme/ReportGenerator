@@ -359,27 +359,31 @@ namespace Palmmedia.ReportGenerator.Parser
                 .OrderBy(seqpnt => seqpnt.LineNumberEnd)
                 .ToArray();
 
-            int[] coverage = new int[] { };
             var branches = GetBranches(methods, fileIds);
 
-            var trackedMethodsCoverage = seqpntsOfFile
+            var coverageByTrackedMethod = seqpntsOfFile
                 .SelectMany(s => s.TrackedMethodRefs)
                 .Select(t => t.TrackedMethodId)
                 .Distinct()
-                .ToDictionary(id => id, id => new int[] { });
+                .ToDictionary(id => id, id => new CoverageByTrackedMethod { Coverage = new int[] { }, LineVisitStatus = new LineVisitStatus[] { } });
+
+            int[] coverage = new int[] { };
+            LineVisitStatus[] lineVisitStatus = new LineVisitStatus[] { };
 
             if (seqpntsOfFile.Length > 0)
             {
                 coverage = new int[seqpntsOfFile[seqpntsOfFile.LongLength - 1].LineNumberEnd + 1];
+                lineVisitStatus = new LineVisitStatus[seqpntsOfFile[seqpntsOfFile.LongLength - 1].LineNumberEnd + 1];
 
                 for (int i = 0; i < coverage.Length; i++)
                 {
                     coverage[i] = -1;
                 }
 
-                foreach (var name in trackedMethodsCoverage.Keys.ToArray())
+                foreach (var trackedMethodCoverage in coverageByTrackedMethod)
                 {
-                    trackedMethodsCoverage[name] = (int[])coverage.Clone();
+                    trackedMethodCoverage.Value.Coverage = (int[])coverage.Clone();
+                    trackedMethodCoverage.Value.LineVisitStatus = new LineVisitStatus[seqpntsOfFile[seqpntsOfFile.LongLength - 1].LineNumberEnd + 1];
                 }
 
                 foreach (var seqpnt in seqpntsOfFile)
@@ -389,29 +393,51 @@ namespace Palmmedia.ReportGenerator.Parser
                         int visits = coverage[lineNumber] == -1 ? seqpnt.Visits : coverage[lineNumber] + seqpnt.Visits;
                         coverage[lineNumber] = visits;
 
+                        if (lineVisitStatus[lineNumber] != LineVisitStatus.Covered)
+                        {
+                            bool partiallyCovered = false;
+
+                            ICollection<Branch> branchesOfLine = null;
+
+                            // Use 'LineNumberStart' instead of 'lineNumber' here. Branches have line number of first line of seqpnt
+                            if (branches.TryGetValue(seqpnt.LineNumberStart, out branchesOfLine))
+                            {
+                                partiallyCovered = branchesOfLine.Any(b => b.BranchVisits == 0);
+                            }
+
+                            LineVisitStatus statusOfLine = visits > 0 ? (partiallyCovered ? LineVisitStatus.PartiallyCovered : LineVisitStatus.Covered) : LineVisitStatus.NotCovered;
+                            lineVisitStatus[lineNumber] = (LineVisitStatus)Math.Max((int)lineVisitStatus[lineNumber], (int)statusOfLine);
+                        }
+
                         if (visits > -1)
                         {
-                            foreach (var trackedMethodCoverage in trackedMethodsCoverage)
+                            foreach (var trackedMethodCoverage in coverageByTrackedMethod)
                             {
-                                if (trackedMethodCoverage.Value[lineNumber] == -1)
+                                if (trackedMethodCoverage.Value.Coverage[lineNumber] == -1)
                                 {
-                                    trackedMethodCoverage.Value[lineNumber] = 0;
+                                    trackedMethodCoverage.Value.Coverage[lineNumber] = 0;
+                                    trackedMethodCoverage.Value.LineVisitStatus[lineNumber] = LineVisitStatus.NotCovered;
                                 }
                             }
                         }
 
                         foreach (var trackedMethod in seqpnt.TrackedMethodRefs)
                         {
-                            var trackedMethodCoverage = trackedMethodsCoverage[trackedMethod.TrackedMethodId];
-                            trackedMethodCoverage[lineNumber] = trackedMethodCoverage[lineNumber] == -1 ? trackedMethod.Visits : trackedMethodCoverage[lineNumber] + trackedMethod.Visits;
+                            var trackedMethodCoverage = coverageByTrackedMethod[trackedMethod.TrackedMethodId];
+
+                            int trackeMethodVisits = trackedMethodCoverage.Coverage[lineNumber] == -1 ? trackedMethod.Visits : trackedMethodCoverage.Coverage[lineNumber] + trackedMethod.Visits;
+                            LineVisitStatus statusOfLine = trackeMethodVisits > 0 ? (LineVisitStatus)Math.Min((int)LineVisitStatus.Covered, (int)lineVisitStatus[lineNumber]) : LineVisitStatus.NotCovered;
+
+                            trackedMethodCoverage.Coverage[lineNumber] = trackeMethodVisits;
+                            trackedMethodCoverage.LineVisitStatus[lineNumber] = statusOfLine;
                         }
                     }
                 }
             }
 
-            var codeFile = new CodeFile(filePath, coverage, branches);
+            var codeFile = new CodeFile(filePath, coverage, lineVisitStatus, branches);
 
-            foreach (var trackedMethodCoverage in trackedMethodsCoverage)
+            foreach (var trackedMethodCoverage in coverageByTrackedMethod)
             {
                 string name = null;
 
