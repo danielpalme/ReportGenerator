@@ -26,13 +26,14 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
 <head>
 <meta charset=""utf-8"" />
 <title>{0} - {1}</title>
+<link href=""https://fonts.googleapis.com/css?family=Open+Sans"" rel=""stylesheet"">
 {2}
-</head><body data-ng-controller=""{3}""><div class=""container"">";
+</head><body data-ng-controller=""{3}""><div class=""container""><div class=""containerleft"">";
 
         /// <summary>
         /// The end of each generated HTML file.
         /// </summary>
-        private const string HtmlEnd = @"</div>
+        private const string HtmlEnd = @"</div></div>
 {0}
 </body></html>";
 
@@ -129,39 +130,65 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// Adds the test methods to the report.
         /// </summary>
         /// <param name="testMethods">The test methods.</param>
-        public void TestMethods(IEnumerable<TestMethod> testMethods)
+        /// <param name="codeElementsByFileIndex">Code elements by file index.</param>
+        public void TestMethods(IEnumerable<TestMethod> testMethods, IDictionary<int, IEnumerable<CodeElement>> codeElementsByFileIndex)
         {
             if (testMethods == null)
             {
                 throw new ArgumentNullException(nameof(testMethods));
             }
 
-            if (!testMethods.Any())
+            if (!testMethods.Any() && codeElementsByFileIndex.Count == 0)
             {
                 return;
             }
 
-            this.reportTextWriter.WriteLine("<div id=\"testmethods\" class=\"ng-hide\" data-ng-show=\"true\" data-ng-class=\"pinned ? 'pinned' : ''\">");
-            this.reportTextWriter.WriteLine("<h2 id=\"pinheader\">{0}</h2>", WebUtility.HtmlEncode(ReportResources.Testmethods));
-            this.reportTextWriter.WriteLine("<a id=\"pin\" data-ng-click=\"togglePin()\">&nbsp;</a>");
-            this.reportTextWriter.WriteLine("<div>");
+            // Close 'containerleft' and begin 'containerright'
+            this.reportTextWriter.WriteLine("</div>");
+            this.reportTextWriter.WriteLine("<div class=\"containerright\">");
+            this.reportTextWriter.WriteLine("<div class=\"containerrightfixed\">");
 
-            int counter = 0;
-
-            this.reportTextWriter.WriteLine("<span><input type=\"radio\" name=\"method\" value=\"AllTestMethods\" id=\"method{1}\" data-ng-change=\"switchTestMethod('AllTestMethods')\" data-ng-model=\"selectedTestMethod\" /><label for=\"method{1}\" title=\"{0}\">{0}</label></span>", WebUtility.HtmlEncode(ReportResources.All), counter);
-
-            foreach (var testMethod in testMethods)
+            if (testMethods.Any())
             {
-                counter++;
+                this.reportTextWriter.WriteLine("<h1>{0}</h1>", WebUtility.HtmlEncode(ReportResources.Testmethods));
+
+                int counter = 0;
+
                 this.reportTextWriter.WriteLine(
-                    "<span><input type=\"radio\" name=\"method\" value=\"M{0}\" id=\"method{0}\" data-ng-change=\"switchTestMethod('M{0}')\" data-ng-model=\"selectedTestMethod\" /><label for=\"method{0}\" title=\"{2}\">{1}</label></span>",
-                    testMethod.Id,
-                    WebUtility.HtmlEncode(testMethod.ShortName),
-                    WebUtility.HtmlEncode(testMethod.Name));
+                    "<label title=\"{0}\"><input type=\"radio\" name=\"method\" value=\"AllTestMethods\" data-ng-change=\"switchTestMethod('AllTestMethods')\" data-ng-model=\"selectedTestMethod\" />{0}</label>",
+                    WebUtility.HtmlEncode(ReportResources.All),
+                    counter);
+
+                foreach (var testMethod in testMethods)
+                {
+                    counter++;
+                    this.reportTextWriter.WriteLine(
+                        "<br /><label title=\"{0}\"><input type=\"radio\" name=\"method\" value=\"M{1}\" data-ng-change=\"switchTestMethod('M{1}')\" data-ng-model=\"selectedTestMethod\" />{2}</label>",
+                        WebUtility.HtmlEncode(testMethod.Name),
+                        testMethod.Id,
+                        WebUtility.HtmlEncode(testMethod.ShortName));
+                }
             }
 
-            this.reportTextWriter.WriteLine("</div>");
-            this.reportTextWriter.WriteLine("</div>");
+            if (codeElementsByFileIndex.Count > 0)
+            {
+                this.reportTextWriter.WriteLine("<h1>{0}</h1>", WebUtility.HtmlEncode(ReportResources.MethodsProperties));
+
+                foreach (var item in codeElementsByFileIndex)
+                {
+                    foreach (var codeElement in item.Value)
+                    {
+                        this.reportTextWriter.WriteLine(
+                            "<a class=\"{0}\" href=\"#file{1}_line{2}\" data-ng-click=\"navigateToCodeElement('#file{1}_line{2}')\" title=\"{3}\">{3}</a><br />",
+                            codeElement.Type == CodeElementType.Method ? "method" : "property",
+                            item.Key,
+                            codeElement.Line,
+                            WebUtility.HtmlEncode(codeElement.Name));
+                    }
+                }
+            }
+
+            this.reportTextWriter.WriteLine("<br/></div>");
         }
 
         /// <summary>
@@ -187,7 +214,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// </summary>
         public void BeginKeyValueTable()
         {
-            this.reportTextWriter.WriteLine("<table class=\"overview\">");
+            this.reportTextWriter.WriteLine("<table class=\"overview table-fixed\">");
             this.reportTextWriter.WriteLine("<colgroup>");
             this.reportTextWriter.WriteLine("<col class=\"column135\" />");
             this.reportTextWriter.WriteLine("<col />");
@@ -210,7 +237,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                 WebUtility.HtmlEncode(ReportResources.ShowCustomizeBoxHelp));
             this.reportTextWriter.WriteLine("</div>");
 
-            this.reportTextWriter.WriteLine("<table data-ng-if=\"!filteringEnabled\" class=\"overview\">");
+            this.reportTextWriter.WriteLine("<table data-ng-if=\"!filteringEnabled\" class=\"overview table-fixed\">");
             this.reportTextWriter.WriteLine("<colgroup>");
             this.reportTextWriter.WriteLine("<col />");
             this.reportTextWriter.WriteLine("<col class=\"column90\" />");
@@ -420,8 +447,9 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// <summary>
         /// Adds the coverage information of a single line of a file to the report.
         /// </summary>
+        /// <param name="fileIndex">The index of the file.</param>
         /// <param name="analysis">The line analysis.</param>
-        public void LineAnalysis(LineAnalysis analysis)
+        public void LineAnalysis(int fileIndex, LineAnalysis analysis)
         {
             if (analysis == null)
             {
@@ -480,7 +508,8 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                 "<td class=\"leftmargin rightmargin right\">{0}</td>",
                 analysis.LineVisitStatus != LineVisitStatus.NotCoverable ? analysis.LineVisits.ToString(CultureInfo.InvariantCulture) : string.Empty);
             this.reportTextWriter.Write(
-                "<td class=\"rightmargin right\"><code>{0}</code></td>",
+                "<td class=\"rightmargin right\"><a id=\"file{0}_line{1}\"></a><code>{1}</code></td>",
+                fileIndex,
                 analysis.LineNumber);
 
             if (title != null)

@@ -148,6 +148,40 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             Assert.AreEqual(66.6m, assemblies.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.PartialClassWithAutoProperties").CoverageQuota, "Wrong coverage quota");
         }
 
+        /// <summary>
+        /// A test for MethodMetrics
+        /// </summary>
+        [TestMethod]
+        public void MethodMetricsTest()
+        {
+            Assert.AreEqual(0, assemblies.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.TestClass").MethodMetrics.Count(), "Wrong number of metrics");
+        }
+
+        /// <summary>
+        /// A test for CodeElements
+        /// </summary>
+        [TestMethod]
+        public void CodeElementsTest()
+        {
+            var codeElements = GetFile(assemblies, "Test.TestClass", "C:\\temp\\TestClass.cs").CodeElements;
+            Assert.AreEqual(2, codeElements.Count(), "Wrong number of code elements");
+
+            codeElements = GetFile(assemblies, "Test.PartialClass", "C:\\temp\\PartialClass.cs").CodeElements;
+            Assert.AreEqual(4, codeElements.Count(), "Wrong number of code elements");
+
+            codeElements = GetFile(assemblies, "Test.TestClass2", "C:\\temp\\TestClass2.cs").CodeElements;
+            Assert.AreEqual(10, codeElements.Count(), "Wrong number of code elements");
+
+            codeElements = GetFile(assemblies, "Test.AsyncClass", "C:\\temp\\AsyncClass.cs").CodeElements;
+            Assert.AreEqual(1, codeElements.Count(), "Wrong number of code elements");
+            Assert.AreEqual("SendAsync()", codeElements.First().Name, "Wrong name of code elements");
+        }
+
+        private static CodeFile GetFile(IEnumerable<Assembly> assemblies, string className, string fileName) => assemblies
+                .Single(a => a.Name == "Test").Classes
+                .Single(c => c.Name == className).Files
+                .Single(f => f.Path == fileName);
+
         private static FileAnalysis GetFileAnalysis(IEnumerable<Assembly> assemblies, string className, string fileName) => assemblies
                 .Single(a => a.Name == "Test").Classes
                 .Single(c => c.Name == className).Files

@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Palmmedia.ReportGenerator.Logging;
@@ -14,6 +16,11 @@ namespace Palmmedia.ReportGenerator.Parser
     /// </summary>
     internal class DotCoverParser : ParserBase
     {
+        /// <summary>
+        /// Regex to analyze if a method name belongs to a lamda expression.
+        /// </summary>
+        private const string LambdaMethodRegex = @"<.+>.+__.+\(.*\)";
+
         /// <summary>
         /// The Logger.
         /// </summary>
@@ -54,6 +61,62 @@ namespace Palmmedia.ReportGenerator.Parser
 
             this.modules = null;
             this.files = null;
+        }
+
+        /// <summary>
+        /// Extracts the methods/properties of the given <see cref="XElement">XElements</see>.
+        /// </summary>
+        /// <param name="codeFile">The code file.</param>
+        /// <param name="fileId">The id of the file.</param>
+        /// <param name="methods">The methods.</param>
+        private static void SetCodeElements(CodeFile codeFile, string fileId, IEnumerable<XElement> methods)
+        {
+            foreach (var method in methods)
+            {
+                string methodName = ExtractMethodName(method.Parent.Attribute("Name").Value, method.Attribute("Name").Value);
+
+                if (Regex.IsMatch(methodName, LambdaMethodRegex))
+                {
+                    continue;
+                }
+
+                CodeElementType type = CodeElementType.Method;
+
+                if (methodName.StartsWith("get_")
+                    || methodName.StartsWith("set_"))
+                {
+                    type = CodeElementType.Property;
+                    methodName = methodName.Substring(4);
+                }
+
+                var statement = method
+                    .Elements("Statement")
+                    .FirstOrDefault();
+
+                if (statement != null && statement.Attribute("FileIndex").Value == fileId)
+                {
+                    int line = int.Parse(statement.Attribute("Line").Value, CultureInfo.InvariantCulture);
+                    codeFile.AddCodeElement(new CodeElement(methodName, type, line));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Extracts the method name. For async methods the original name is returned.
+        /// </summary>
+        /// <param name="typeName">The name of the class.</param>
+        /// <param name="methodName">The full method name.</param>
+        /// <returns>The method name.</returns>
+        private static string ExtractMethodName(string typeName, string methodName)
+        {
+            Match match = Regex.Match(typeName + methodName, @"<(?<CompilerGeneratedName>.+)>.+__.+MoveNext\(\):.+$");
+
+            if (match.Success)
+            {
+                return match.Groups["CompilerGeneratedName"].Value + "()";
+            }
+
+            return methodName.Substring(0, methodName.LastIndexOf(':'));
         }
 
         /// <summary>
@@ -127,12 +190,16 @@ namespace Palmmedia.ReportGenerator.Parser
             var assemblyElement = this.modules
                 .Where(m => m.Attribute("Name").Value.Equals(@class.Assembly.Name));
 
-            var statements = assemblyElement
+            var methodsOfFile = assemblyElement
                .Elements("Namespace")
                .Elements("Type")
                .Concat(assemblyElement.Elements("Type"))
                .Where(c => (c.Parent.Attribute("Name").Value + "." + c.Attribute("Name").Value).Equals(@class.Name))
-               .Descendants("Statement")
+               .Descendants("Method")
+               .ToArray();
+
+            var statements = methodsOfFile
+               .Elements("Statement")
                .Where(c => c.Attribute("FileIndex").Value == fileId)
                .Select(c => new
                {
@@ -169,6 +236,8 @@ namespace Palmmedia.ReportGenerator.Parser
 
             string filePath = this.files.First(f => f.Attribute("Index").Value == fileId).Attribute("Name").Value;
             var codeFile = new CodeFile(filePath, coverage, lineVisitStatus);
+
+            SetCodeElements(codeFile, fileId, methodsOfFile);
 
             return codeFile;
         }

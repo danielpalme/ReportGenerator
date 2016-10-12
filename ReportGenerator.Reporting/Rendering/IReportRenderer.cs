@@ -48,7 +48,8 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// Adds the test methods to the report.
         /// </summary>
         /// <param name="testMethods">The test methods.</param>
-        void TestMethods(IEnumerable<TestMethod> testMethods);
+        /// <param name="codeElementsByFileIndex">Code elements by file index.</param>
+        void TestMethods(IEnumerable<TestMethod> testMethods, IDictionary<int, IEnumerable<CodeElement>> codeElementsByFileIndex);
 
         /// <summary>
         /// Adds a file of a class to a report.
@@ -129,8 +130,9 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// <summary>
         /// Adds the coverage information of a single line of a file to the report.
         /// </summary>
+        /// <param name="fileIndex">The index of the file.</param>
         /// <param name="analysis">The line analysis.</param>
-        void LineAnalysis(LineAnalysis analysis);
+        void LineAnalysis(int fileIndex, LineAnalysis analysis);
 
         /// <summary>
         /// Finishes the current table.

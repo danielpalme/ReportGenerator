@@ -59,6 +59,45 @@ namespace Palmmedia.ReportGenerator.Parser
         public override bool SupportsBranchCoverage => true;
 
         /// <summary>
+        /// Extracts the metrics from the given <see cref="XElement">XElements</see>.
+        /// </summary>
+        /// <param name="methods">The methods.</param>
+        /// <param name="class">The class.</param>
+        private static void SetMethodMetrics(IEnumerable<XElement> methods, Class @class)
+        {
+            foreach (var method in methods)
+            {
+                string methodName = method.Attribute("name").Value + method.Attribute("signature").Value;
+
+                var metrics = new List<Metric>()
+                {
+                    new Metric(
+                        ReportResources.Coverage,
+                        ParserBase.CodeCoverageUri,
+                        Math.Round(decimal.Parse(method.Attribute("line-rate").Value, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero)),
+                    new Metric(
+                        ReportResources.BranchCoverage,
+                        ParserBase.CodeCoverageUri,
+                         Math.Round(decimal.Parse(method.Attribute("branch-rate").Value, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero))
+                };
+
+                var cyclomaticComplexityAttribute = method.Attribute("complexity");
+
+                if (cyclomaticComplexityAttribute != null)
+                {
+                    metrics.Insert(
+                        0,
+                        new Metric(
+                        ReportResources.CyclomaticComplexity,
+                        ParserBase.CyclomaticComplexityUri,
+                         Math.Round(decimal.Parse(cyclomaticComplexityAttribute.Value, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero)));
+                }
+
+                @class.AddMethodMetric(new MethodMetric(methodName, metrics));
+            }
+        }
+
+        /// <summary>
         /// Gets the branches by line number.
         /// </summary>
         /// <param name="lines">The lines.</param>
@@ -110,6 +149,29 @@ namespace Palmmedia.ReportGenerator.Parser
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Extracts the methods/properties of the given <see cref="XElement">XElements</see>.
+        /// </summary>
+        /// <param name="codeFile">The code file.</param>
+        /// <param name="methodsOfFile">The methods of the file.</param>
+        private static void SetCodeElements(CodeFile codeFile, IEnumerable<XElement> methodsOfFile)
+        {
+            foreach (var method in methodsOfFile)
+            {
+                string methodName = method.Attribute("name").Value + method.Attribute("signature").Value;
+
+                var line = method.Elements("lines")
+                    .Elements("line")
+                    .FirstOrDefault();
+
+                if (line != null)
+                {
+                    int lineNumber = int.Parse(line.Attribute("number").Value, CultureInfo.InvariantCulture);
+                    codeFile.AddCodeElement(new CodeElement(methodName, CodeElementType.Method, lineNumber));
+                }
+            }
         }
 
         /// <summary>
@@ -173,14 +235,24 @@ namespace Palmmedia.ReportGenerator.Parser
         /// <returns>The <see cref="CodeFile"/>.</returns>
         private CodeFile ProcessFile(Class @class, string filePath)
         {
-            var lines = this.modules
+            var classes = this.modules
                 .Where(m => m.Attribute("name").Value.Equals(@class.Assembly.Name))
                 .Elements("classes")
                 .Elements("class")
                 .Where(c => c.Attribute("name").Value.Equals(@class.Name)
                             || c.Attribute("name").Value.StartsWith(@class.Name + "$", StringComparison.Ordinal))
-                .Elements("lines")
-                .Elements("line");
+                .ToArray();
+
+            var methodsOfFile = classes
+                .Elements("methods")
+                .Elements("method")
+                .ToArray();
+
+            SetMethodMetrics(methodsOfFile, @class);
+
+            var lines = classes.Elements("lines")
+                .Elements("line")
+                .ToArray();
 
             var linesOfFile = lines.Select(line => new
             {
@@ -221,7 +293,11 @@ namespace Palmmedia.ReportGenerator.Parser
                 }
             }
 
-            return new CodeFile(filePath, coverage, lineVisitStatus, branches);
+            var codeFile = new CodeFile(filePath, coverage, lineVisitStatus, branches);
+
+            SetCodeElements(codeFile, methodsOfFile);
+
+            return codeFile;
         }
     }
 }

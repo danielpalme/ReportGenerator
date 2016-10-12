@@ -17,6 +17,11 @@ namespace Palmmedia.ReportGenerator.Parser
     internal class DynamicCodeCoverageParser : ParserBase
     {
         /// <summary>
+        /// Regex to analyze if a method name belongs to a lamda expression.
+        /// </summary>
+        private const string LambdaMethodRegex = "<.+>.+__";
+
+        /// <summary>
         /// The Logger.
         /// </summary>
         private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(DynamicCodeCoverageParser));
@@ -165,7 +170,11 @@ namespace Palmmedia.ReportGenerator.Parser
                 }
             }
 
-            return new CodeFile(filePath, coverage, lineVisitStatus);
+            var codeFile = new CodeFile(filePath, coverage, lineVisitStatus);
+
+            SetCodeElements(codeFile, methods);
+
+            return codeFile;
         }
 
         /// <summary>
@@ -182,10 +191,12 @@ namespace Palmmedia.ReportGenerator.Parser
                 // Exclude properties and lambda expressions
                 if (methodName.StartsWith("get_", StringComparison.Ordinal)
                     || methodName.StartsWith("set_", StringComparison.Ordinal)
-                    || Regex.IsMatch(methodName, "<.+>.+__"))
+                    || Regex.IsMatch(methodName, LambdaMethodRegex))
                 {
                     continue;
                 }
+
+                methodName = ExtractMethodName(methodName, method.Attribute("type_name").Value);
 
                 var metrics = new[]
                 {
@@ -199,15 +210,64 @@ namespace Palmmedia.ReportGenerator.Parser
                         int.Parse(method.Attribute("blocks_not_covered").Value, CultureInfo.InvariantCulture))
                 };
 
-                Match match = Regex.Match(method.Attribute("type_name").Value, @"^.*<(?<CompilerGeneratedName>.+)>.+__.+$");
-
-                if (match.Success)
-                {
-                    methodName = match.Groups["CompilerGeneratedName"].Value + "()";
-                }
-
                 @class.AddMethodMetric(new MethodMetric(methodName, metrics));
             }
+        }
+
+        /// <summary>
+        /// Extracts the methods/properties of the given <see cref="XElement">XElements</see>.
+        /// </summary>
+        /// <param name="codeFile">The code file.</param>
+        /// <param name="methodsOfFile">The methods of the file.</param>
+        private static void SetCodeElements(CodeFile codeFile, IEnumerable<XElement> methodsOfFile)
+        {
+            foreach (var method in methodsOfFile)
+            {
+                if (Regex.IsMatch(method.Attribute("name").Value, LambdaMethodRegex))
+                {
+                    continue;
+                }
+
+                string methodName = ExtractMethodName(method.Attribute("name").Value, method.Attribute("type_name").Value);
+
+                CodeElementType type = CodeElementType.Method;
+
+                if (methodName.StartsWith("get_")
+                    || methodName.StartsWith("set_"))
+                {
+                    type = CodeElementType.Property;
+                    methodName = methodName.Substring(4);
+                }
+
+                var seqpnt = method
+                    .Elements("ranges")
+                    .Elements("range")
+                    .FirstOrDefault();
+
+                if (seqpnt != null)
+                {
+                    int line = int.Parse(seqpnt.Attribute("start_line").Value, CultureInfo.InvariantCulture);
+                    codeFile.AddCodeElement(new CodeElement(methodName, type, line));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Extracts the method name. For async methods the original name is returned.
+        /// </summary>
+        /// <param name="methodName">The full method name.</param>
+        /// <param name="typeName">The type name.</param>
+        /// <returns>The method name.</returns>
+        private static string ExtractMethodName(string methodName, string typeName)
+        {
+            Match match = Regex.Match(typeName, @"^.*<(?<CompilerGeneratedName>.+)>.+__.+$");
+
+            if (match.Success)
+            {
+                methodName = match.Groups["CompilerGeneratedName"].Value + "()";
+            }
+
+            return methodName;
         }
     }
 }

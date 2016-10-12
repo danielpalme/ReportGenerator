@@ -1,5 +1,5 @@
 /* Angular controller for summary report */
-function SummaryViewCtrl($scope) {
+function SummaryViewCtrl($scope, $window) {
     var self = this;
 
     $scope.filteringEnabled = false;
@@ -16,17 +16,20 @@ function SummaryViewCtrl($scope) {
     self.initialize = function () {
         var i, l, numberOfClasses;
 
-        numberOfClasses = 0;
+        if ($window.history === undefined || $window.history.replaceState === undefined || $window.history.state === null) {
+            numberOfClasses = 0;
 
-        for (i = 0, l = assemblies.length; i < l; i++) {
-            numberOfClasses += assemblies[i].classes.length;
-            if (numberOfClasses > 1500) {
-                console.log("Number of classes (filtering disabled): " + numberOfClasses);
-                return;
+            for (i = 0, l = assemblies.length; i < l; i++) {
+                numberOfClasses += assemblies[i].classes.length;
+                if (numberOfClasses > 1500) {
+                    console.log("Number of classes (filtering disabled): " + numberOfClasses);
+                    return;
+                }
             }
+
+            console.log("Number of classes (filtering enabled): " + numberOfClasses);
         }
 
-        console.log("Number of classes (filtering enabled): " + numberOfClasses);
         $scope.enableFiltering();
     };
 
@@ -34,15 +37,10 @@ function SummaryViewCtrl($scope) {
 }
 
 /* Angular controller for class reports */
-function DetailViewCtrl($scope) {
+function DetailViewCtrl($scope, $window) {
     var self = this;
 
-    $scope.pinned = false;
     $scope.selectedTestMethod = "AllTestMethods";
-
-    $scope.togglePin = function () {
-        $scope.pinned = !$scope.pinned;
-    };
 
     $scope.switchTestMethod = function (method) {
         console.log("Selected test method: " + method);
@@ -66,6 +64,13 @@ function DetailViewCtrl($scope) {
                 cells[1].innerText = cells[1].textContent = lineAnalysis.VC;
                 cells[4].setAttribute('class', 'light' + lineAnalysis.LVS);
             }
+        }
+    };
+
+    $scope.navigateToCodeElement = function (hash) {
+        // Prevent history entries when selecting methods/properties
+        if ($window.history !== undefined && $window.history.replaceState !== undefined) {
+            $window.history.replaceState(undefined, undefined, hash);
         }
     };
 }

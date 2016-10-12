@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Palmmedia.ReportGenerator.Common;
@@ -16,6 +17,11 @@ namespace Palmmedia.ReportGenerator.Parser
     /// </summary>
     internal class PartCover23Parser : ParserBase
     {
+        /// <summary>
+        /// Regex to analyze if a method name belongs to a lamda expression.
+        /// </summary>
+        private const string LambdaMethodRegex = "<.+>.+__";
+
         /// <summary>
         /// The Logger.
         /// </summary>
@@ -92,6 +98,46 @@ namespace Palmmedia.ReportGenerator.Parser
         }
 
         /// <summary>
+        /// Extracts the methods/properties of the given <see cref="XElement">XElements</see>.
+        /// </summary>
+        /// <param name="codeFile">The code file.</param>
+        /// <param name="fileId">The id of the file.</param>
+        /// <param name="methods">The methods.</param>
+        private static void SetCodeElements(CodeFile codeFile, string fileId, IEnumerable<XElement> methods)
+        {
+            foreach (var method in methods)
+            {
+                if (Regex.IsMatch(method.Attribute("name").Value, LambdaMethodRegex))
+                {
+                    continue;
+                }
+
+                string sig = method.Attribute("sig").Value;
+                string methodName = method.Attribute("name").Value + sig.Substring(sig.LastIndexOf('('));
+
+                CodeElementType type = CodeElementType.Method;
+
+                if (methodName.StartsWith("get_")
+                    || methodName.StartsWith("set_"))
+                {
+                    type = CodeElementType.Property;
+                    methodName = methodName.Substring(4);
+                }
+
+                var seqpnt = method
+                    .Elements("pt")
+                    .Where(pt => pt.HasAttributeWithValue("fid", fileId))
+                    .FirstOrDefault();
+
+                if (seqpnt != null)
+                {
+                    int line = int.Parse(seqpnt.Attribute("sl").Value, CultureInfo.InvariantCulture);
+                    codeFile.AddCodeElement(new CodeElement(methodName, type, line));
+                }
+            }
+        }
+
+        /// <summary>
         /// Processes the given assembly.
         /// </summary>
         /// <param name="assemblyName">Name of the assembly.</param>
@@ -157,12 +203,14 @@ namespace Palmmedia.ReportGenerator.Parser
         {
             string fileId = this.fileIdByFilenameDictionary[filePath];
 
-            var seqpntsOfFile = this.types
+            var methods = this.types
                 .Where(type => this.assembliesByIdDictionary[type.Attribute(this.assemblyAttribute).Value].Equals(@class.Assembly.Name)
                     && (type.Attribute("name").Value.Equals(@class.Name, StringComparison.Ordinal)
                         || type.Attribute("name").Value.StartsWith(@class.Name + "<", StringComparison.Ordinal)))
                 .Elements("Method")
-                .Elements("pt")
+                .ToArray();
+
+            var seqpntsOfFile = methods.Elements("pt")
                 .Where(seqpnt => seqpnt.HasAttributeWithValue("fid", fileId))
                 .Select(seqpnt => new
                 {
@@ -196,7 +244,11 @@ namespace Palmmedia.ReportGenerator.Parser
                 }
             }
 
-            return new CodeFile(filePath, coverage, lineVisitStatus);
+            var codeFile = new CodeFile(filePath, coverage, lineVisitStatus);
+
+            SetCodeElements(codeFile, fileId, methods);
+
+            return codeFile;
         }
     }
 }

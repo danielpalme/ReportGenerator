@@ -116,7 +116,9 @@
     <Compile Include="Logging\ILoggerFactory.cs" />
     <Compile Include="Logging\LoggerFactory.cs" />
     <Compile Include="Parser\Analysis\Branch.cs" />
+    <Compile Include="Parser\Analysis\CodeElement.cs" />
     <Compile Include="Parser\Analysis\HistoricCoverage.cs" />
+    <Compile Include="Parser\Analysis\CodeElementType.cs" />
     <Compile Include="Parser\Analysis\SummaryResult.cs" />
     <Compile Include="Parser\Analysis\LineAnalysis.cs" />
     <Compile Include="Parser\Analysis\TestMethod.cs" />

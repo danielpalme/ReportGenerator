@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Palmmedia.ReportGenerator.Logging;
@@ -14,6 +16,11 @@ namespace Palmmedia.ReportGenerator.Parser
     /// </summary>
     internal class NCoverParser : ParserBase
     {
+        /// <summary>
+        /// Regex to analyze if a method name belongs to a lamda expression.
+        /// </summary>
+        private const string LambdaMethodRegex = "<.+>.+__.+";
+
         /// <summary>
         /// The Logger.
         /// </summary>
@@ -46,6 +53,43 @@ namespace Palmmedia.ReportGenerator.Parser
             Parallel.ForEach(assemblyNames, assemblyName => this.AddAssembly(this.ProcessAssembly(assemblyName)));
 
             this.modules = null;
+        }
+
+        /// <summary>
+        /// Extracts the methods/properties of the given <see cref="XElement">XElements</see>.
+        /// </summary>
+        /// <param name="codeFile">The code file.</param>
+        /// <param name="methodsOfClass">The methods of the class.</param>
+        private static void SetCodeElements(CodeFile codeFile, IEnumerable<XElement> methodsOfClass)
+        {
+            foreach (var method in methodsOfClass)
+            {
+                string methodName = method.Attribute("name").Value;
+
+                if (Regex.IsMatch(methodName, LambdaMethodRegex))
+                {
+                    continue;
+                }
+
+                CodeElementType type = CodeElementType.Method;
+
+                if (methodName.StartsWith("get_")
+                    || methodName.StartsWith("set_"))
+                {
+                    type = CodeElementType.Property;
+                    methodName = methodName.Substring(4);
+                }
+
+                var seqpnt = method
+                    .Elements("seqpnt")
+                    .FirstOrDefault();
+
+                if (seqpnt != null && seqpnt.Attribute("document").Value.Equals(codeFile.Path))
+                {
+                    int line = int.Parse(seqpnt.Attribute("line").Value, CultureInfo.InvariantCulture);
+                    codeFile.AddCodeElement(new CodeElement(methodName, type, line));
+                }
+            }
         }
 
         /// <summary>
@@ -86,7 +130,8 @@ namespace Palmmedia.ReportGenerator.Parser
                 .Where(module => module.Attribute("assembly").Value.Equals(assembly.Name)).Elements("method")
                 .Where(method => method.Attribute("class").Value.Equals(className))
                 .Where(m => m.Attribute("excluded").Value == "false")
-                .Elements("seqpnt").Select(seqpnt => seqpnt.Attribute("document").Value)
+                .Elements("seqpnt")
+                .Select(seqpnt => seqpnt.Attribute("document").Value)
                 .Distinct()
                 .ToArray();
 
@@ -108,12 +153,14 @@ namespace Palmmedia.ReportGenerator.Parser
         /// <returns>The <see cref="CodeFile"/>.</returns>
         private CodeFile ProcessFile(Class @class, string filePath)
         {
-            var seqpntsOfFile = this.modules
+            var methodsOfClass = this.modules
                 .Where(type => type.Attribute("assembly").Value.Equals(@class.Assembly.Name))
                 .Elements("method")
                 .Where(m => m.Attribute("excluded").Value == "false")
                 .Where(method => method.Attribute("class").Value.StartsWith(@class.Name, StringComparison.Ordinal))
-                .Elements("seqpnt")
+                .ToArray();
+
+            var seqpntsOfFile = methodsOfClass.Elements("seqpnt")
                 .Where(seqpnt => seqpnt.Attribute("document").Value.Equals(filePath) && seqpnt.Attribute("line").Value != "16707566")
                 .Select(seqpnt => new
                 {
@@ -147,7 +194,11 @@ namespace Palmmedia.ReportGenerator.Parser
                 }
             }
 
-            return new CodeFile(filePath, coverage, lineVisitStatus);
+            var codeFile = new CodeFile(filePath, coverage, lineVisitStatus);
+
+            SetCodeElements(codeFile, methodsOfClass);
+
+            return codeFile;
         }
     }
 }

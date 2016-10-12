@@ -262,7 +262,7 @@
     <value>Summary</value>
   </data>
   <data name="Testmethods" xml:space="preserve">
-    <value>Test methods</value>
+    <value>Coverage by test methods</value>
   </data>
   <data name="Total" xml:space="preserve">
     <value>Total</value>
@@ -275,5 +275,8 @@
   </data>
   <data name="UncoveredLines" xml:space="preserve">
     <value>Uncovered lines:</value>
+  </data>
+  <data name="MethodsProperties" xml:space="preserve">
+    <value>Methods/Properties</value>
   </data>
 </root>
