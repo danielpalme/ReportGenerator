@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Palmmedia.ReportGenerator.Logging;
@@ -72,7 +73,7 @@ namespace Palmmedia.ReportGenerator.Parser
                 .Elements("Namespace")
                 .Elements("Type")
                 .Concat(assemblyElement.Elements("Type"))
-                .Where(c => !c.Attribute("Name").Value.Contains("__"))
+                .Where(c => !Regex.IsMatch(c.Attribute("Name").Value, "<.*>.+__"))
                 .Select(c => c.Parent.Attribute("Name").Value + "." + c.Attribute("Name").Value)
                 .Distinct()
                 .OrderBy(name => name)

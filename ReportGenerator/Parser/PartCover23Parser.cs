@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Palmmedia.ReportGenerator.Common;
@@ -101,7 +102,8 @@ namespace Palmmedia.ReportGenerator.Parser
             Logger.DebugFormat("  " + Resources.CurrentAssembly, assemblyName);
 
             var classNames = this.types
-                .Where(type => this.assembliesByIdDictionary[type.Attribute(this.assemblyAttribute).Value].Equals(assemblyName) && !type.Attribute("name").Value.Contains("__"))
+                .Where(type => this.assembliesByIdDictionary[type.Attribute(this.assemblyAttribute).Value].Equals(assemblyName)
+                    && !Regex.IsMatch(type.Attribute("name").Value, "<.*>.+__"))
                 .Select(type => type.Attribute("name").Value)
                 .OrderBy(name => name)
                 .Distinct()

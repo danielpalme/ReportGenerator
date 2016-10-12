@@ -236,8 +236,7 @@ namespace Palmmedia.ReportGenerator.Parser
                 .Where(m => m.Element("ModuleName").Value.Equals(assemblyName))
                 .Elements("Classes")
                 .Elements("Class")
-                .Where(c => !c.Element("FullName").Value.Contains("__")
-                    && !c.Element("FullName").Value.Contains("<")
+                .Where(c => !c.Element("FullName").Value.Contains("<")
                     && c.Attribute("skippedDueTo") == null)
                 .Select(c =>
                     {

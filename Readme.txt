@@ -69,6 +69,7 @@ CHANGELOG
     * Fix: Issue #55: Branch coverage columns only rendered if available
     * Fix: Issue #56: Improved method naming in metrics for async methods
     * Fix: Issue #60: Improved merging from different paths
+    * Fix: Issue #67: Improved handling of classes with name '__'
 
 2.4.5.0
 
