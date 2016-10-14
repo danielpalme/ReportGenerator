@@ -1,0 +1,31 @@
+﻿<project name="JaCoCo" xmlns:jacoco="antlib:org.jacoco.ant">
+    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+        <classpath path="../packages/CoverageTools/JaCoCo/jacoco-0.7.7/jacocoant.jar" />
+    </taskdef>
+	
+	<jacoco:coverage>
+		<java classname="Program" fork="true">
+			<classpath>
+				<pathelement location="./Java/bin/classes"/>
+			</classpath>
+		</java>
+	</jacoco:coverage>
+	
+	<jacoco:report>			
+		<executiondata>
+			<file file="jacoco.exec"/>
+		</executiondata>
+				
+		<structure name="Example Project">
+			<classfiles>
+				<fileset dir="./Java/bin/classes"/>
+			</classfiles>
+			<sourcefiles encoding="UTF-8">
+				<fileset dir="./Java/Project"/>
+			</sourcefiles>
+		</structure>
+				
+		<!--html destdir="Java/Reports"/-->		
+		<xml destfile="Java/Reports/JaCoCo0.7.7.xml"/>
+	</jacoco:report>
+</project>
