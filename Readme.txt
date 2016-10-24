@@ -66,6 +66,8 @@ CHANGELOG
     * New: Issue #61: Added support for Cobertura
     * New: Issue #63: Visual indicator for partially covered lines
            (OpenCover, CodeCoverage.exe, Cobertura)
+    * Fix: Issue #62: Improved HTML report (Keeping state of summary report,
+           added method list on class report)
     * Fix: Issue #55: Branch coverage columns only rendered if available
     * Fix: Issue #56: Improved method naming in metrics for async methods
     * Fix: Issue #60: Improved merging from different paths

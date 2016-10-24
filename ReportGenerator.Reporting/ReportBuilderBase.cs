@@ -101,13 +101,7 @@ namespace Palmmedia.ReportGenerator.Reporting
 
             if (fileAnalyses.Any())
             {
-                var testMethods = @class.Files
-                    .SelectMany(f => f.TestMethods)
-                    .Distinct()
-                    .OrderBy(l => l.ShortName);
-
-                reportRenderer.TestMethods(testMethods);
-
+                int fileIndex = 0;
                 foreach (var fileAnalysis in fileAnalyses)
                 {
                     reportRenderer.File(fileAnalysis.Path);
@@ -122,11 +116,13 @@ namespace Palmmedia.ReportGenerator.Reporting
 
                         foreach (var line in fileAnalysis.Lines)
                         {
-                            reportRenderer.LineAnalysis(line);
+                            reportRenderer.LineAnalysis(fileIndex, line);
                         }
 
                         reportRenderer.FinishTable();
                     }
+
+                    fileIndex++;
                 }
             }
             else
@@ -135,6 +131,25 @@ namespace Palmmedia.ReportGenerator.Reporting
             }
 
             reportRenderer.AddFooter();
+
+            if (fileAnalyses.Any())
+            {
+                var testMethods = @class.Files
+                    .SelectMany(f => f.TestMethods)
+                    .Distinct()
+                    .OrderBy(l => l.ShortName);
+
+                var codeElementsByFileIndex = new Dictionary<int, IEnumerable<CodeElement>>();
+
+                int fileIndex = 0;
+                foreach (var file in @class.Files)
+                {
+                    codeElementsByFileIndex.Add(fileIndex++, file.CodeElements.OrderBy(c => c.Line));
+                }
+
+                reportRenderer.TestMethods(testMethods, codeElementsByFileIndex);
+            }
+
             reportRenderer.SaveClassReport(this.TargetDirectory, @class.Assembly.ShortName, @class.Name);
         }
 

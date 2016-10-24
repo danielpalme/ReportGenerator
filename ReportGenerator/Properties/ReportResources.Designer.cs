@@ -394,6 +394,15 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Methods/Properties.
+        /// </summary>
+        public static string MethodsProperties {
+            get {
+                return ResourceManager.GetString("MethodsProperties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Metrics.
         /// </summary>
         public static string Metrics {
@@ -493,7 +502,7 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Test methods.
+        ///   Looks up a localized string similar to Coverage by test methods.
         /// </summary>
         public static string Testmethods {
             get {

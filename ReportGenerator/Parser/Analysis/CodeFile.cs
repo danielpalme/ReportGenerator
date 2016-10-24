@@ -24,6 +24,11 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         private readonly IDictionary<TestMethod, CoverageByTrackedMethod> lineCoveragesByTestMethod = new Dictionary<TestMethod, CoverageByTrackedMethod>();
 
         /// <summary>
+        /// The code elements..
+        /// </summary>
+        private readonly HashSet<CodeElement> codeElements = new HashSet<CodeElement>();
+
+        /// <summary>
         /// Array containing the coverage information by line number.
         /// -1: Not coverable
         /// 0: Not visited
@@ -100,6 +105,14 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// The test methods.
         /// </value>
         public IEnumerable<TestMethod> TestMethods => this.lineCoveragesByTestMethod.Keys;
+
+        /// <summary>
+        /// Gets the code elements.
+        /// </summary>
+        /// <value>
+        /// The code elements.
+        /// </value>
+        public IEnumerable<CodeElement> CodeElements => this.codeElements;
 
         /// <summary>
         /// Gets the number of covered lines.
@@ -206,6 +219,15 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
             }
 
             this.lineCoveragesByTestMethod.Add(testMethod, trackedMethodCoverage);
+        }
+
+        /// <summary>
+        /// Adds the code element.
+        /// </summary>
+        /// <param name="codeElement">The code element.</param>
+        internal void AddCodeElement(CodeElement codeElement)
+        {
+            this.codeElements.Add(codeElement);
         }
 
         /// <summary>
@@ -410,6 +432,11 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
 
                     this.lineCoveragesByTestMethod[lineCoverageByTestMethod.Key] = existingTrackedMethodCoverage;
                 }
+            }
+
+            foreach (var codeElement in file.codeElements)
+            {
+                this.codeElements.Add(codeElement);
             }
 
             if (file.branches != null)

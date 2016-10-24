@@ -133,6 +133,41 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             Assert.AreEqual(3, assemblies.Single(a => a.Name == string.Empty).Classes.Single(c => c.Name == "AbstractClass").CoverableLines, "Wrong Coverable Lines");
         }
 
+        /// <summary>
+        /// A test for MethodMetrics
+        /// </summary>
+        [TestMethod]
+        public void MethodMetricsTest()
+        {
+            var metrics = assemblies.Single(a => a.Name == string.Empty).Classes.Single(c => c.Name == "TestClass").MethodMetrics;
+
+            Assert.AreEqual(4, metrics.Count(), "Wrong number of method metrics");
+            Assert.AreEqual("<init>()V", metrics.First().Name, "Wrong name of method");
+            Assert.AreEqual(3, metrics.First().Metrics.Count(), "Wrong number of metrics");
+
+            Assert.AreEqual("Cyclomatic complexity", metrics.First().Metrics.ElementAt(0).Name, "Wrong name of metric");
+            Assert.AreEqual(0, metrics.First().Metrics.ElementAt(0).Value, "Wrong value of metric");
+            Assert.AreEqual("Line coverage", metrics.First().Metrics.ElementAt(1).Name, "Wrong name of metric");
+            Assert.AreEqual(1.0M, metrics.First().Metrics.ElementAt(1).Value, "Wrong value of metric");
+            Assert.AreEqual("Branch coverage", metrics.First().Metrics.ElementAt(2).Name, "Wrong name of metric");
+            Assert.AreEqual(1.0M, metrics.First().Metrics.ElementAt(2).Value, "Wrong value of metric");
+        }
+
+        /// <summary>
+        /// A test for CodeElements
+        /// </summary>
+        [TestMethod]
+        public void CodeElementsTest()
+        {
+            var codeElements = GetFile(assemblies, "TestClass", "C:\\temp\\TestClass.java").CodeElements;
+            Assert.AreEqual(4, codeElements.Count(), "Wrong number of code elements");
+        }
+
+        private static CodeFile GetFile(IEnumerable<Assembly> assemblies, string className, string fileName) => assemblies
+                .Single(a => a.Name == string.Empty).Classes
+                .Single(c => c.Name == className).Files
+                .Single(f => f.Path == fileName);
+
         private static FileAnalysis GetFileAnalysis(IEnumerable<Assembly> assemblies, string className, string fileName) => assemblies
                 .Single(a => a.Name == string.Empty).Classes
                 .Single(c => c.Name == className).Files

@@ -336,15 +336,30 @@ var AssemblyComponent = React.createClass({
         return result;
     },
     getInitialState: function () {
-        return {
-            grouping: '0',
-            groupingMaximum: this.getGroupingMaximum(this.props.assemblies),
-            filter: '',
-            sortby: 'name',
-            sortorder: 'asc',
-            assemblies: this.getAssemblies(this.props.assemblies, '0', '', 'name', 'asc'),
-            branchCoverageAvailable: this.props.branchCoverageAvailable
-        };
+        var state, collapseState;
+
+        if (window.history !== undefined && window.history.replaceState !== undefined && window.history.state !== null) {
+            state = angular.copy(window.history.state);
+            collapseState = state.assemblies;
+        } else {
+            state = {
+                grouping: '0',
+                groupingMaximum: this.getGroupingMaximum(this.props.assemblies),
+                filter: '',
+                sortby: 'name',
+                sortorder: 'asc',
+                assemblies: null,
+                branchCoverageAvailable: this.props.branchCoverageAvailable
+            };
+        }
+
+        state.assemblies = this.getAssemblies(this.props.assemblies, state.grouping, state.filter, state.sortby, state.sortorder);
+
+        if (collapseState !== undefined) {
+            this.restoreCollapseState(collapseState, state.assemblies);
+        }
+
+        return state;
     },
     collapseAll: function () {
         console.log("Collapsing all");
@@ -396,12 +411,48 @@ var AssemblyComponent = React.createClass({
         assemblies = this.getAssemblies(this.props.assemblies, this.state.grouping, sortby, sortorder);
         this.setState({ sortby: sortby, sortorder: sortorder, assemblies: assemblies });
     },
+    restoreCollapseState: function (source, target) {
+        var i;
+
+        for (i = 0; i < target.length; i++) {
+            if (target[i].isNamespace) {
+                target[i].collapsed = source[i].collapsed;
+                this.restoreCollapseState(source[i].subelements, target[i].subelements)
+            }
+        }
+    },
+    extractCollapseState: function (target) {
+        var i, currentResult, result = [];
+
+        for (i = 0; i < target.length; i++) {
+            if (target[i].isNamespace) {
+                currentResult = {
+                    collapsed: target[i].collapsed,
+                    subelements: this.extractCollapseState(target[i].subelements)
+
+                };
+                result.push(currentResult);
+            }
+        }
+
+        return result;
+    },
     render: function () {
+        if (window.history !== undefined && window.history.replaceState !== undefined) {
+            var historyState, i;
+            historyState = angular.copy(this.state);
+
+            historyState.assemblies = this.extractCollapseState(historyState.assemblies);
+
+            window.history.replaceState(historyState, null);
+        }
+
         return (
             React.DOM.div(null,
                 SearchBar({
                     groupingMaximum: this.state.groupingMaximum,
                     grouping: this.state.grouping,
+                    filter: this.state.filter,
                     collapseAll: this.collapseAll,
                     expandAll: this.expandAll,
                     updateGrouping: this.updateGrouping,
@@ -421,10 +472,12 @@ var AssemblyComponent = React.createClass({
 });
 
 var SearchBar = React.createClass({
-    collapseAllClickHandler: function () {
+    collapseAllClickHandler: function (event) {
+        event.nativeEvent.preventDefault();
         this.props.collapseAll();
     },
-    expandAllClickHandler: function () {
+    expandAllClickHandler: function (event) {
+        event.nativeEvent.preventDefault();
         this.props.expandAll();
     },
     groupingChangedHandler: function () {
@@ -445,9 +498,9 @@ var SearchBar = React.createClass({
         return (
             React.DOM.div({ className: 'customizebox' },
                 React.DOM.div(null,
-                    React.DOM.a({ href: '#', onClick: this.collapseAllClickHandler }, translations.collapseAll),
+                    React.DOM.a({ href: '', onClick: this.collapseAllClickHandler }, translations.collapseAll),
                     React.DOM.span(null, " | "),
-                    React.DOM.a({ href: '#', onClick: this.expandAllClickHandler }, translations.expandAll)),
+                    React.DOM.a({ href: '', onClick: this.expandAllClickHandler }, translations.expandAll)),
                 React.DOM.div({ className: 'center' },
                     React.DOM.span(null, groupingDescription),
                     React.DOM.br(),
@@ -466,6 +519,7 @@ var SearchBar = React.createClass({
                     React.DOM.input({
                         ref: 'filterInput',
                         type: 'text',
+                        value: this.props.filter,
                         onChange: this.filterChangedHandler,
                         onInput: this.filterChangedHandler /* Handle text input immediately */
                     })))
@@ -528,7 +582,8 @@ var AssemblyTable = React.createClass({
 });
 
 var TableHeader = React.createClass({
-    sortingChangedHandler: function (sortby) {
+    sortingChangedHandler: function (event, sortby) {
+        event.nativeEvent.preventDefault();
         this.props.updateSorting(sortby);
     },
     render: function () {
@@ -544,25 +599,26 @@ var TableHeader = React.createClass({
             React.DOM.thead(null,
                 React.DOM.tr(null,
                     React.DOM.th(null,
-                        React.DOM.a({ className: nameClass, href: '#', onClick: function () { this.sortingChangedHandler('name'); }.bind(this) }, translations.name)),
+                        React.DOM.a({ className: nameClass, href: '', onClick: function (event) { this.sortingChangedHandler(event, 'name'); }.bind(this) }, translations.name)),
                     React.DOM.th({ className: 'right' },
-                        React.DOM.a({ className: coveredClass, href: '#', onClick: function () { this.sortingChangedHandler('covered'); }.bind(this) }, translations.covered)),
+                        React.DOM.a({ className: coveredClass, href: '', onClick: function (event) { this.sortingChangedHandler(event, 'covered'); }.bind(this) }, translations.covered)),
                     React.DOM.th({ className: 'right' },
-                        React.DOM.a({ className: uncoveredClass, href: '#', onClick: function () { this.sortingChangedHandler('uncovered'); }.bind(this) }, translations.uncovered)),
+                        React.DOM.a({ className: uncoveredClass, href: '', onClick: function (event) { this.sortingChangedHandler(event, 'uncovered'); }.bind(this) }, translations.uncovered)),
                     React.DOM.th({ className: 'right' },
-                        React.DOM.a({ className: coverableClass, href: '#', onClick: function () { this.sortingChangedHandler('coverable'); }.bind(this) }, translations.coverable)),
+                        React.DOM.a({ className: coverableClass, href: '', onClick: function (event) { this.sortingChangedHandler(event, 'coverable'); }.bind(this) }, translations.coverable)),
                     React.DOM.th({ className: 'right' },
-                        React.DOM.a({ className: totalClass, href: '#', onClick: function () { this.sortingChangedHandler('total'); }.bind(this) }, translations.total)),
+                        React.DOM.a({ className: totalClass, href: '', onClick: function (event) { this.sortingChangedHandler(event, 'total'); }.bind(this) }, translations.total)),
                     React.DOM.th({ className: 'center', colSpan: '2' },
-                        React.DOM.a({ className: coverageClass, href: '#', onClick: function () { this.sortingChangedHandler('coverage'); }.bind(this) }, translations.coverage)),
+                        React.DOM.a({ className: coverageClass, href: '', onClick: function (event) { this.sortingChangedHandler(event, 'coverage'); }.bind(this) }, translations.coverage)),
                     this.props.branchCoverageAvailable ? React.DOM.th({ className: 'center', colSpan: '2' },
-                        React.DOM.a({ className: branchCoverageClass, href: '#', onClick: function () { this.sortingChangedHandler('branchcoverage'); }.bind(this) }, translations.branchCoverage)): null))
+                        React.DOM.a({ className: branchCoverageClass, href: '', onClick: function (event) { this.sortingChangedHandler(event, 'branchcoverage'); }.bind(this) }, translations.branchCoverage)) : null))
         );
     }
 });
 
 var AssemblyRow = React.createClass({
-    toggleCollapseClickHandler: function () {
+    toggleCollapseClickHandler: function (event) {
+        event.nativeEvent.preventDefault();
         this.props.toggleCollapse(this.props.assembly);
     },
     render: function () {
@@ -600,7 +656,7 @@ var AssemblyRow = React.createClass({
                 React.DOM.a(
                         {
                             id: this.props.assembly.name + id,
-                            href: '#' + this.props.assembly.name + id,
+                            href: '',
                             onClick: this.toggleCollapseClickHandler,
                             className: this.props.assembly.collapsed ? 'collapsed' : 'expanded'
                         },

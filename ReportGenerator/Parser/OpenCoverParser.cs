@@ -18,6 +18,11 @@ namespace Palmmedia.ReportGenerator.Parser
     internal class OpenCoverParser : ParserBase
     {
         /// <summary>
+        /// Regex to analyze if a method name belongs to a lamda expression.
+        /// </summary>
+        private const string LambdaMethodRegex = "::<.+>.+__";
+
+        /// <summary>
         /// The Logger.
         /// </summary>
         private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(OpenCoverParser));
@@ -91,7 +96,7 @@ namespace Palmmedia.ReportGenerator.Parser
                 if (method.Attribute("skippedDueTo") != null
                     || method.HasAttributeWithValue("isGetter", "true")
                     || method.HasAttributeWithValue("isSetter", "true")
-                    || Regex.IsMatch(methodGroup.Key, "::<.+>.+__"))
+                    || Regex.IsMatch(methodGroup.Key, LambdaMethodRegex))
                 {
                     continue;
                 }
@@ -133,16 +138,7 @@ namespace Palmmedia.ReportGenerator.Parser
                         crapScoreAttributes.Max(a => decimal.Parse(a.Value, CultureInfo.InvariantCulture))));
                 }
 
-                string methodName = methodGroup.Key;
-
-                Match match = Regex.Match(methodName, @"<(?<CompilerGeneratedName>.+)>.+__.+::MoveNext\(\)$");
-
-                if (match.Success)
-                {
-                    methodName = match.Groups["CompilerGeneratedName"].Value + "()";
-                }
-
-                @class.AddMethodMetric(new MethodMetric(methodName, metrics));
+                @class.AddMethodMetric(new MethodMetric(ExtractMethodName(methodGroup.Key), metrics));
             }
         }
 
@@ -214,6 +210,63 @@ namespace Palmmedia.ReportGenerator.Parser
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Extracts the methods/properties of the given <see cref="XElement">XElements</see>.
+        /// </summary>
+        /// <param name="codeFile">The code file.</param>
+        /// <param name="methodsOfFile">The methods of the file.</param>
+        private static void SetCodeElements(CodeFile codeFile, IEnumerable<XElement> methodsOfFile)
+        {
+            foreach (var method in methodsOfFile)
+            {
+                if (method.Attribute("skippedDueTo") != null
+                    || Regex.IsMatch(method.Element("Name").Value, LambdaMethodRegex))
+                {
+                    continue;
+                }
+
+                string methodName = ExtractMethodName(method.Element("Name").Value);
+                methodName = methodName.Substring(methodName.LastIndexOf(':') + 1);
+
+                CodeElementType type = CodeElementType.Method;
+
+                if (method.HasAttributeWithValue("isGetter", "true")
+                    || method.HasAttributeWithValue("isSetter", "true"))
+                {
+                    type = CodeElementType.Property;
+                    methodName = methodName.Substring(4);
+                }
+
+                var seqpnt = method
+                    .Elements("SequencePoints")
+                    .Elements("SequencePoint")
+                    .FirstOrDefault();
+
+                if (seqpnt != null)
+                {
+                    int line = int.Parse(seqpnt.Attribute("sl").Value, CultureInfo.InvariantCulture);
+                    codeFile.AddCodeElement(new CodeElement(methodName, type, line));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Extracts the method name. For async methods the original name is returned.
+        /// </summary>
+        /// <param name="methodName">The full method name.</param>
+        /// <returns>The method name.</returns>
+        private static string ExtractMethodName(string methodName)
+        {
+            Match match = Regex.Match(methodName, @"<(?<CompilerGeneratedName>.+)>.+__.+::MoveNext\(\)$");
+
+            if (match.Success)
+            {
+                methodName = match.Groups["CompilerGeneratedName"].Value + "()";
+            }
+
+            return methodName;
         }
 
         /// <summary>
@@ -448,6 +501,8 @@ namespace Palmmedia.ReportGenerator.Parser
                     codeFile.AddCoverageByTestMethod(testMethod, trackedMethodCoverage.Value);
                 }
             }
+
+            SetCodeElements(codeFile, methodsOfFile);
 
             return codeFile;
         }

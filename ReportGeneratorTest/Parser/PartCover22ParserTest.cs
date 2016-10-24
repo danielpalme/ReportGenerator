@@ -173,6 +173,27 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             Assert.AreEqual(0, assembliesWithoutPreprocessing.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.TestClass").MethodMetrics.Count(), "Wrong number of metrics");
         }
 
+        /// <summary>
+        /// A test for CodeElements
+        /// </summary>
+        [TestMethod]
+        public void CodeElementsTest()
+        {
+            var codeElements = GetFile(assembliesWithPreprocessing, "Test.TestClass", "C:\\temp\\TestClass.cs").CodeElements;
+            Assert.AreEqual(1, codeElements.Count(), "Wrong number of code elements");
+
+            codeElements = GetFile(assembliesWithPreprocessing, "Test.PartialClass", "C:\\temp\\PartialClass.cs").CodeElements;
+            Assert.AreEqual(4, codeElements.Count(), "Wrong number of code elements");
+
+            codeElements = GetFile(assembliesWithPreprocessing, "Test.TestClass2", "C:\\temp\\TestClass2.cs").CodeElements;
+            Assert.AreEqual(10, codeElements.Count(), "Wrong number of code elements");
+        }
+
+        private static CodeFile GetFile(IEnumerable<Assembly> assemblies, string className, string fileName) => assemblies
+                .Single(a => a.Name == "Test").Classes
+                .Single(c => c.Name == className).Files
+                .Single(f => f.Path == fileName);
+
         private static FileAnalysis GetFileAnalysis(IEnumerable<Assembly> assemblies, string className, string fileName) => assemblies
                 .Single(a => a.Name == "Test").Classes
                 .Single(c => c.Name == className).Files
