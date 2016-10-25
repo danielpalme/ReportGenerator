@@ -414,11 +414,17 @@ var AssemblyComponent = React.createClass({
     restoreCollapseState: function (source, target) {
         var i;
 
-        for (i = 0; i < target.length; i++) {
-            if (target[i].isNamespace) {
-                target[i].collapsed = source[i].collapsed;
-                this.restoreCollapseState(source[i].subelements, target[i].subelements)
+        try {
+            for (i = 0; i < target.length; i++) {
+                if (target[i].isNamespace) {
+                    target[i].collapsed = source[i].collapsed;
+                    this.restoreCollapseState(source[i].subelements, target[i].subelements)
+                }
             }
+        } catch (e) {
+            // This can only happen if assembly structure was changed.
+            // That means the complete report was updated in the background and the reloaded in the same tab/window.
+            console.log("Restoring of collapse state failed.");
         }
     },
     extractCollapseState: function (target) {
