@@ -4,7 +4,7 @@
     </taskdef>
 	
 	<jacoco:coverage>
-		<java classname="Program" fork="true">
+		<java classname="test.Program" fork="true">
 			<classpath>
 				<pathelement location="./Java/bin/classes"/>
 			</classpath>

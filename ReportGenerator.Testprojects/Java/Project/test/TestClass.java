@@ -1,3 +1,4 @@
+package test;
 import java.util.*;
 
 class TestClass

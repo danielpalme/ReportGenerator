@@ -59,10 +59,10 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [TestMethod]
         public void NumberOfLineVisitsTest()
         {
-            var fileAnalysis = GetFileAnalysis(assemblies, "TestClass", "C:\\temp\\TestClass.java");
-            Assert.AreEqual(1, fileAnalysis.Lines.Single(l => l.LineNumber == 11).LineVisits, "Wrong number of line visits");
-            Assert.AreEqual(1, fileAnalysis.Lines.Single(l => l.LineNumber == 12).LineVisits, "Wrong number of line visits");
-            Assert.AreEqual(0, fileAnalysis.Lines.Single(l => l.LineNumber == 19).LineVisits, "Wrong number of line visits");
+            var fileAnalysis = GetFileAnalysis(assemblies, "test.TestClass", "C:\\temp\\test\\TestClass.java");
+            Assert.AreEqual(1, fileAnalysis.Lines.Single(l => l.LineNumber == 15).LineVisits, "Wrong number of line visits");
+            Assert.AreEqual(1, fileAnalysis.Lines.Single(l => l.LineNumber == 17).LineVisits, "Wrong number of line visits");
+            Assert.AreEqual(0, fileAnalysis.Lines.Single(l => l.LineNumber == 20).LineVisits, "Wrong number of line visits");
             Assert.AreEqual(-1, fileAnalysis.Lines.Single(l => l.LineNumber == 1).LineVisits, "Wrong number of line visits");
         }
 
@@ -72,7 +72,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [TestMethod]
         public void LineVisitStatusTest()
         {
-            var fileAnalysis = GetFileAnalysis(assemblies, "TestClass", "C:\\temp\\TestClass.java");
+            var fileAnalysis = GetFileAnalysis(assemblies, "test.TestClass", "C:\\temp\\test\\TestClass.java");
 
             var line = fileAnalysis.Lines.Single(l => l.LineNumber == 1);
             Assert.AreEqual(LineVisitStatus.NotCoverable, line.LineVisitStatus, "Wrong line visit status");
@@ -80,10 +80,10 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             line = fileAnalysis.Lines.Single(l => l.LineNumber == 12);
             Assert.AreEqual(LineVisitStatus.Covered, line.LineVisitStatus, "Wrong line visit status");
 
-            line = fileAnalysis.Lines.Single(l => l.LineNumber == 14);
+            line = fileAnalysis.Lines.Single(l => l.LineNumber == 15);
             Assert.AreEqual(LineVisitStatus.PartiallyCovered, line.LineVisitStatus, "Wrong line visit status");
 
-            line = fileAnalysis.Lines.Single(l => l.LineNumber == 19);
+            line = fileAnalysis.Lines.Single(l => l.LineNumber == 20);
             Assert.AreEqual(LineVisitStatus.NotCovered, line.LineVisitStatus, "Wrong line visit status");
         }
 
@@ -93,7 +93,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [TestMethod]
         public void NumberOfFilesTest()
         {
-            Assert.AreEqual(6, assemblies.SelectMany(a => a.Classes).SelectMany(a => a.Files).Distinct().Count(), "Wrong number of files");
+            Assert.AreEqual(7, assemblies.SelectMany(a => a.Classes).SelectMany(a => a.Files).Distinct().Count(), "Wrong number of files");
         }
 
         /// <summary>
@@ -102,8 +102,8 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [TestMethod]
         public void FilesOfClassTest()
         {
-            Assert.AreEqual(1, assemblies.Single(a => a.Name == string.Empty).Classes.Single(c => c.Name == "TestClass").Files.Count(), "Wrong number of files");
-            Assert.AreEqual(1, assemblies.Single(a => a.Name == string.Empty).Classes.Single(c => c.Name == "GenericClass").Files.Count(), "Wrong number of files");
+            Assert.AreEqual(1, assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "test.TestClass").Files.Count(), "Wrong number of files");
+            Assert.AreEqual(1, assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "test.GenericClass").Files.Count(), "Wrong number of files");
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [TestMethod]
         public void ClassesInAssemblyTest()
         {
-            Assert.AreEqual(6, assemblies.SelectMany(a => a.Classes).Count(), "Wrong number of classes");
+            Assert.AreEqual(7, assemblies.SelectMany(a => a.Classes).Count(), "Wrong number of classes");
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [TestMethod]
         public void AssembliesTest()
         {
-            Assert.AreEqual(1, assemblies.Count(), "Wrong number of assemblies");
+            Assert.AreEqual(2, assemblies.Count(), "Wrong number of assemblies");
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [TestMethod]
         public void GetCoverableLinesOfClassTest()
         {
-            Assert.AreEqual(3, assemblies.Single(a => a.Name == string.Empty).Classes.Single(c => c.Name == "AbstractClass").CoverableLines, "Wrong Coverable Lines");
+            Assert.AreEqual(3, assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "test.AbstractClass").CoverableLines, "Wrong Coverable Lines");
         }
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [TestMethod]
         public void MethodMetricsTest()
         {
-            var metrics = assemblies.Single(a => a.Name == string.Empty).Classes.Single(c => c.Name == "TestClass").MethodMetrics;
+            var metrics = assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "test.TestClass").MethodMetrics;
 
             Assert.AreEqual(4, metrics.Count(), "Wrong number of method metrics");
             Assert.AreEqual("<init>()V", metrics.First().Name, "Wrong name of method");
@@ -159,17 +159,17 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [TestMethod]
         public void CodeElementsTest()
         {
-            var codeElements = GetFile(assemblies, "TestClass", "C:\\temp\\TestClass.java").CodeElements;
+            var codeElements = GetFile(assemblies, "test.TestClass", "C:\\temp\\test\\TestClass.java").CodeElements;
             Assert.AreEqual(4, codeElements.Count(), "Wrong number of code elements");
         }
 
         private static CodeFile GetFile(IEnumerable<Assembly> assemblies, string className, string fileName) => assemblies
-                .Single(a => a.Name == string.Empty).Classes
+                .Single(a => a.Name == "test").Classes
                 .Single(c => c.Name == className).Files
                 .Single(f => f.Path == fileName);
 
         private static FileAnalysis GetFileAnalysis(IEnumerable<Assembly> assemblies, string className, string fileName) => assemblies
-                .Single(a => a.Name == string.Empty).Classes
+                .Single(a => a.Name == "test").Classes
                 .Single(c => c.Name == className).Files
                 .Single(f => f.Path == fileName)
                 .AnalyzeFile();

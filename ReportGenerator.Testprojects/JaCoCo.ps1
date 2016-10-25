@@ -1,6 +1,8 @@
 New-Item -ItemType Directory -Force Java\bin
 New-Item -ItemType Directory -Force Java\bin\classes
-javac -d Java\bin\classes Java\Project\*.java
+New-Item -ItemType Directory -Force Java\bin\classes\sub
+javac -d Java\bin\classes Java\Project\test\*.java
+javac -d Java\bin\classes Java\Project\test\sub\*.java
  
 ".\..\packages\CoverageTools\apache-ant-1.9.7\bin\ant" -f ".\JaCoCo_Ant.xml"
 

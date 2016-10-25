@@ -1,11 +1,13 @@
 New-Item -ItemType Directory -Force Java\bin
 New-Item -ItemType Directory -Force Java\bin\classes
+New-Item -ItemType Directory -Force Java\bin\classes\sub
 New-Item -ItemType Directory -Force Java\bin\instrumented
-javac -d Java\bin\classes Java\Project\*.java
+javac -d Java\bin\classes Java\Project\test\*.java
+javac -d Java\bin\classes Java\Project\test\sub\*.java
  
 ..\packages\CoverageTools\Cobertura\cobertura-2.1.1\cobertura-instrument.bat Java\bin\classes --destination Java\bin\instrumented
  
-java -cp "..\packages\CoverageTools\Cobertura\slf4j-api-1.7.5\slf4j-api-1.7.5.jar;..\packages\CoverageTools\Cobertura\logback-1.0.13\logback-core-1.0.13.jar;..\packages\CoverageTools\Cobertura\logback-1.0.13\logback-classic-1.0.13.jar;..\packages\CoverageTools\Cobertura\cobertura-2.1.1\cobertura-2.1.1.jar;Java\bin\instrumented;Java\bin\classes" Program
+java -cp "..\packages\CoverageTools\Cobertura\slf4j-api-1.7.5\slf4j-api-1.7.5.jar;..\packages\CoverageTools\Cobertura\logback-1.0.13\logback-core-1.0.13.jar;..\packages\CoverageTools\Cobertura\logback-1.0.13\logback-classic-1.0.13.jar;..\packages\CoverageTools\Cobertura\cobertura-2.1.1\cobertura-2.1.1.jar;Java\bin\instrumented;Java\bin\classes" test.Program
  
 #..\packages\CoverageTools\Cobertura\cobertura-2.1.1\cobertura-report.bat --format html --datafile Java\bin\cobertura.ser --destination Java\Reports Java\Project
 ..\packages\CoverageTools\Cobertura\cobertura-2.1.1\cobertura-report.bat --format xml --destination Java\Reports "$((Get-Location).Path)\Java\Project"

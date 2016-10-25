@@ -57,18 +57,25 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Java", "Java", "{89813866-CE17-47E5-BCA3-4740F8624BA5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project", "Project", "{F02BAC2E-AD05-4AE9-B37B-A6B7CA732FBA}"
-	ProjectSection(SolutionItems) = preProject
-		ReportGenerator.Testprojects\Java\Project\AbstractClass.java = ReportGenerator.Testprojects\Java\Project\AbstractClass.java
-		ReportGenerator.Testprojects\Java\Project\AbstractClass_SampleImpl1.java = ReportGenerator.Testprojects\Java\Project\AbstractClass_SampleImpl1.java
-		ReportGenerator.Testprojects\Java\Project\AbstractClass_SampleImpl2.java = ReportGenerator.Testprojects\Java\Project\AbstractClass_SampleImpl2.java
-		ReportGenerator.Testprojects\Java\Project\GenericClass.java = ReportGenerator.Testprojects\Java\Project\GenericClass.java
-		ReportGenerator.Testprojects\Java\Project\Program.java = ReportGenerator.Testprojects\Java\Project\Program.java
-		ReportGenerator.Testprojects\Java\Project\TestClass.java = ReportGenerator.Testprojects\Java\Project\TestClass.java
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{654FDEDF-31DE-47E4-A02E-F42DB1ACC722}"
 	ProjectSection(SolutionItems) = preProject
 		ReportGenerator.Testprojects\Java\Reports\Cobertura2.1.1.xml = ReportGenerator.Testprojects\Java\Reports\Cobertura2.1.1.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{1749EF69-D43F-4874-8290-8134B80D65E5}"
+	ProjectSection(SolutionItems) = preProject
+		ReportGenerator.Testprojects\Java\Project\test\AbstractClass.java = ReportGenerator.Testprojects\Java\Project\test\AbstractClass.java
+		ReportGenerator.Testprojects\Java\Project\test\AbstractClass_SampleImpl1.java = ReportGenerator.Testprojects\Java\Project\test\AbstractClass_SampleImpl1.java
+		ReportGenerator.Testprojects\Java\Project\test\AbstractClass_SampleImpl2.java = ReportGenerator.Testprojects\Java\Project\test\AbstractClass_SampleImpl2.java
+		ReportGenerator.Testprojects\Java\Project\test\GenericClass.java = ReportGenerator.Testprojects\Java\Project\test\GenericClass.java
+		ReportGenerator.Testprojects\Java\Project\test\Program.java = ReportGenerator.Testprojects\Java\Project\test\Program.java
+		ReportGenerator.Testprojects\Java\Project\test\TestClass.java = ReportGenerator.Testprojects\Java\Project\test\TestClass.java
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sub", "sub", "{2EE13C01-7211-44B6-81A7-7D02DD7C1B3F}"
+	ProjectSection(SolutionItems) = preProject
+		ReportGenerator.Testprojects\Java\Project\test\sub\Sub.java = ReportGenerator.Testprojects\Java\Project\test\sub\Sub.java
 	EndProjectSection
 EndProject
 Global
@@ -108,5 +115,7 @@ Global
 		{953D4A9C-5271-4A6D-876A-7E41B93BEE77} = {9223804A-D678-4EE8-BD89-19A6114DB86F}
 		{F02BAC2E-AD05-4AE9-B37B-A6B7CA732FBA} = {89813866-CE17-47E5-BCA3-4740F8624BA5}
 		{654FDEDF-31DE-47E4-A02E-F42DB1ACC722} = {89813866-CE17-47E5-BCA3-4740F8624BA5}
+		{1749EF69-D43F-4874-8290-8134B80D65E5} = {F02BAC2E-AD05-4AE9-B37B-A6B7CA732FBA}
+		{2EE13C01-7211-44B6-81A7-7D02DD7C1B3F} = {1749EF69-D43F-4874-8290-8134B80D65E5}
 	EndGlobalSection
 EndGlobal
