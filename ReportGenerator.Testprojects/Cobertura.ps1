@@ -1,7 +1,7 @@
 New-Item -ItemType Directory -Force Java\bin
 New-Item -ItemType Directory -Force Java\bin\classes
-New-Item -ItemType Directory -Force Java\bin\classes\sub
 New-Item -ItemType Directory -Force Java\bin\instrumented
+
 javac -d Java\bin\classes Java\Project\test\*.java
 javac -d Java\bin\classes Java\Project\test\sub\*.java
  
