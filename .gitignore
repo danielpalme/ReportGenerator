@@ -1,4 +1,5 @@
 /.vs
+/packages/chocolatey*
 /packages/CoverageTools
 /packages/JetBrains.dotCover.CommandLineTools*
 /packages/ICSharpCode.NRefactory*

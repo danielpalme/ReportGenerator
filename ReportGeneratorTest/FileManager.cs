@@ -32,13 +32,25 @@ namespace Palmmedia.ReportGeneratorTest
                 Directory.CreateDirectory(TEMPDIRECTORY);
             }
 
+            string javaDir = Path.Combine(TEMPDIRECTORY, "test");
+            if (!Directory.Exists(javaDir))
+            {
+                Directory.CreateDirectory(javaDir);
+            }
+
             var files = new DirectoryInfo(GetCSharpCodeDirectory()).GetFiles("*.cs")
-                .Concat(new DirectoryInfo(GetFSharpCodeDirectory()).GetFiles("*.fs"))
-                .Concat(new DirectoryInfo(GetJavaCodeDirectory()).GetFiles("*.java"));
+                .Concat(new DirectoryInfo(GetFSharpCodeDirectory()).GetFiles("*.fs"));
 
             foreach (var fileInfo in files)
             {
                 File.Copy(fileInfo.FullName, Path.Combine(TEMPDIRECTORY, fileInfo.Name), true);
+            }
+
+            files = new DirectoryInfo(Path.Combine(GetJavaCodeDirectory(), "test")).GetFiles("*.java");
+
+            foreach (var fileInfo in files)
+            {
+                File.Copy(fileInfo.FullName, Path.Combine(javaDir, fileInfo.Name), true);
             }
         }
 
@@ -53,11 +65,6 @@ namespace Palmmedia.ReportGeneratorTest
                 foreach (var fileInfo in files)
                 {
                     File.Delete(fileInfo.FullName);
-                }
-
-                if (new DirectoryInfo(TEMPDIRECTORY).GetFiles().Length == 0)
-                {
-                    Directory.Delete(TEMPDIRECTORY);
                 }
             }
         }

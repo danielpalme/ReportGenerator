@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
-    <id>ReportGenerator</id>
+    <id>reportgenerator.portable</id>
     <version>2.0.0.0</version>
     <title />
     <authors>Daniel Palme</authors>
@@ -16,14 +16,6 @@
     <tags>Code Coverage Reporting Testing</tags>
   </metadata>
   <files>
-    <file src="target\bin\ICSharpCode.NRefactory.dll" target="tools" />
-    <file src="target\bin\ICSharpCode.NRefactory.CSharp.dll" target="tools" />
-    <file src="target\bin\ReportGenerator.exe" target="tools" />
-    <file src="target\bin\ReportGenerator.exe.config" target="tools" />
-    <file src="target\bin\ReportGenerator.XML" target="tools" />
-    <file src="target\bin\ReportGenerator.Reporting.dll" target="tools" />
-    <file src="target\bin\ReportGenerator.Reporting.XML" target="tools" />
-    <file src="target\bin\LICENSE.txt" target="LICENSE.txt" />
-    <file src="target\bin\Readme.txt" target="Readme.txt" />
+    <file src="tools\chocolateyInstall.ps1" target="tools" />
   </files>
 </package>

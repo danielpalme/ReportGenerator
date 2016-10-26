@@ -1,0 +1,4 @@
+$packageName = 'reportgenerator.portable'
+$url = 'https://github.com/danielpalme/ReportGenerator/releases/download/v[[version]]/ReportGenerator_[[version]].zip'
+$toolsDir = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
+Install-ChocolateyZipPackage $packageName $url $toolsDir
