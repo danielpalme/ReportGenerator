@@ -22,24 +22,13 @@ namespace Palmmedia.ReportGeneratorTest.Parser
 
         #region Additional test attributes
 
-        // You can use the following additional attributes as you write your tests:
-
         // Use ClassInitialize to run code before running the first test in the class
         [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext)
         {
-            FileManager.CopyTestClasses();
-
             var report = XDocument.Load(FilePath1);
             new CoberturaReportPreprocessor(report).Execute();
             assemblies = new CoberturaParser(report).Assemblies;
-        }
-
-        // Use ClassCleanup to run code after all tests in a class have run
-        [ClassCleanup]
-        public static void MyClassCleanup()
-        {
-            FileManager.DeleteTestClasses();
         }
 
         #endregion

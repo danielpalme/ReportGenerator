@@ -35,8 +35,6 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext)
         {
-            FileManager.CopyTestClasses();
-
             assembliesWithoutPreprocessing = new OpenCoverParser(XDocument.Load(FilePath1)).Assemblies;
 
             var report = XDocument.Load(FilePath1);
@@ -50,13 +48,6 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             globalClassSearcher = classSearcherFactory.CreateClassSearcher("C:\\test");
             new OpenCoverReportPreprocessor(report, classSearcherFactory, globalClassSearcher).Execute();
             assembliesWithTrackedMethods = new OpenCoverParser(report).Assemblies;
-        }
-
-        // Use ClassCleanup to run code after all tests in a class have run
-        [ClassCleanup]
-        public static void MyClassCleanup()
-        {
-            FileManager.DeleteTestClasses();
         }
 
         #endregion

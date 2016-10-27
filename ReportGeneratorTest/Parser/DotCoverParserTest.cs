@@ -27,16 +27,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext)
         {
-            FileManager.CopyTestClasses();
-
             assemblies = new DotCoverParser(XDocument.Load(FilePath1)).Assemblies;
-        }
-
-        // Use ClassCleanup to run code after all tests in a class have run
-        [ClassCleanup]
-        public static void MyClassCleanup()
-        {
-            FileManager.DeleteTestClasses();
         }
 
         #endregion

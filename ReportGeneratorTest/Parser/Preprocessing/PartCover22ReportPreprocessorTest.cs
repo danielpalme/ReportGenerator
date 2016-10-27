@@ -16,26 +16,6 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Preprocessing
     {
         private static readonly string FilePath = Path.Combine(FileManager.GetCSharpReportDirectory(), "Partcover2.2.xml");
 
-        #region Additional test attributes
-
-        // You can use the following additional attributes as you write your tests:
-
-        // Use ClassInitialize to run code before running the first test in the class
-        [ClassInitialize]
-        public static void MyClassInitialize(TestContext testContext)
-        {
-            FileManager.CopyTestClasses();
-        }
-
-        // Use ClassCleanup to run code after all tests in a class have run
-        [ClassCleanup]
-        public static void MyClassCleanup()
-        {
-            FileManager.DeleteTestClasses();
-        }
-
-        #endregion
-
         /// <summary>
         /// A test for Execute
         /// </summary>

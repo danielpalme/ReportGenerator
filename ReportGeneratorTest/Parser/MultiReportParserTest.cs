@@ -32,8 +32,6 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext)
         {
-            FileManager.CopyTestClasses();
-
             var multiReportParser = new MultiReportParser();
             multiReportParser.AddParser(new PartCover22Parser(XDocument.Load(FilePath1)));
             multiReportParser.AddParser(new PartCover22Parser(XDocument.Load(FilePath1)));
@@ -51,13 +49,6 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             new PartCover23ReportPreprocessor(report, classSearcherFactory, globalClassSearcher).Execute();
             multiReportParser.AddParser(new PartCover23Parser(report));
             assembliesWithPreprocessing = multiReportParser.Assemblies;
-        }
-
-        // Use ClassCleanup to run code after all tests in a class have run
-        [ClassCleanup]
-        public static void MyClassCleanup()
-        {
-            FileManager.DeleteTestClasses();
         }
 
         #endregion

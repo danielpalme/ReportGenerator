@@ -1,31 +1,16 @@
 ﻿using System.IO;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Palmmedia.ReportGeneratorTest
 {
-    internal static class FileManager
+    [TestClass]
+    public static class FileManager
     {
         private const string TEMPDIRECTORY = @"C:\temp";
 
-        internal static string GetCSharpReportDirectory() => Path.Combine(GetFilesDirectory(), "CSharp", "Reports");
-
-        internal static string GetFSharpReportDirectory() => Path.Combine(GetFilesDirectory(), "FSharp", "Reports");
-
-        internal static string GetJavaReportDirectory() => Path.Combine(GetFilesDirectory(), "Java", "Reports");
-
-        internal static string GetCSharpCodeDirectory() => Path.Combine(GetFilesDirectory(), "CSharp", "Project");
-
-        internal static string GetFSharpCodeDirectory() => Path.Combine(GetFilesDirectory(), "FSharp", "Project");
-
-        internal static string GetJavaCodeDirectory() => Path.Combine(GetFilesDirectory(), "Java", "Project");
-
-        internal static string GetFilesDirectory()
-        {
-            var baseDirectory = new DirectoryInfo(System.Reflection.Assembly.GetExecutingAssembly().Location).Parent.Parent.Parent.Parent.FullName;
-            return Path.Combine(baseDirectory, "ReportGenerator.Testprojects");
-        }
-
-        internal static void CopyTestClasses()
+        [AssemblyInitialize]
+        public static void CopyTestClasses(TestContext context)
         {
             if (!Directory.Exists(TEMPDIRECTORY))
             {
@@ -54,7 +39,8 @@ namespace Palmmedia.ReportGeneratorTest
             }
         }
 
-        internal static void DeleteTestClasses()
+        [AssemblyCleanup]
+        public static void DeleteTestClasses()
         {
             if (Directory.Exists(TEMPDIRECTORY))
             {
@@ -66,7 +52,40 @@ namespace Palmmedia.ReportGeneratorTest
                 {
                     File.Delete(fileInfo.FullName);
                 }
+
+                string javaDir = Path.Combine(TEMPDIRECTORY, "test");
+                files = new DirectoryInfo(javaDir).GetFiles("*.java");
+
+                foreach (var fileInfo in files)
+                {
+                    File.Delete(fileInfo.FullName);
+                }
+
+                Directory.Delete(javaDir);
+
+                if (!Directory.EnumerateFiles(TEMPDIRECTORY).Any())
+                {
+                    Directory.Delete(TEMPDIRECTORY);
+                }
             }
+        }
+
+        internal static string GetCSharpReportDirectory() => Path.Combine(GetFilesDirectory(), "CSharp", "Reports");
+
+        internal static string GetFSharpReportDirectory() => Path.Combine(GetFilesDirectory(), "FSharp", "Reports");
+
+        internal static string GetJavaReportDirectory() => Path.Combine(GetFilesDirectory(), "Java", "Reports");
+
+        internal static string GetCSharpCodeDirectory() => Path.Combine(GetFilesDirectory(), "CSharp", "Project");
+
+        internal static string GetFSharpCodeDirectory() => Path.Combine(GetFilesDirectory(), "FSharp", "Project");
+
+        internal static string GetJavaCodeDirectory() => Path.Combine(GetFilesDirectory(), "Java", "Project");
+
+        internal static string GetFilesDirectory()
+        {
+            var baseDirectory = new DirectoryInfo(System.Reflection.Assembly.GetExecutingAssembly().Location).Parent.Parent.Parent.Parent.FullName;
+            return Path.Combine(baseDirectory, "ReportGenerator.Testprojects");
         }
     }
 }
