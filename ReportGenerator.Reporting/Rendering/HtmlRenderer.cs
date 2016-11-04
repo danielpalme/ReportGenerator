@@ -25,6 +25,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
 <html data-ng-app=""coverageApp"">
 <head>
 <meta charset=""utf-8"" />
+<meta http-equiv=""X-UA-Compatible"" content=""IE=EDGE,chrome=1"" />
 <title>{0} - {1}</title>
 <link href=""https://fonts.googleapis.com/css?family=Open+Sans"" rel=""stylesheet"">
 {2}
@@ -179,7 +180,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                     foreach (var codeElement in item.Value)
                     {
                         this.reportTextWriter.WriteLine(
-                            "<a class=\"{0}\" href=\"#file{1}_line{2}\" data-ng-click=\"navigateToCodeElement('#file{1}_line{2}')\" title=\"{3}\">{3}</a><br />",
+                            "<a class=\"{0}\" href=\"#file{1}_line{2}\" data-ng-click=\"navigateToHash('#file{1}_line{2}')\" title=\"{3}\">{3}</a><br />",
                             codeElement.Type == CodeElementType.Method ? "method" : "property",
                             item.Key,
                             codeElement.Line,
@@ -413,7 +414,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// <param name="files">The files.</param>
         public void KeyValueRow(string key, IEnumerable<string> files)
         {
-            string value = string.Join("<br />", files.Select(v => string.Format(CultureInfo.InvariantCulture, "<a href=\"#{0}\">{1}</a>", WebUtility.HtmlEncode(ReplaceNonLetterChars(v)), WebUtility.HtmlEncode(v))));
+            string value = string.Join("<br />", files.Select(v => string.Format(CultureInfo.InvariantCulture, "<a href=\"#{0}\" data-ng-click=\"navigateToHash('#{0}')\">{1}</a>", WebUtility.HtmlEncode(ReplaceNonLetterChars(v)), WebUtility.HtmlEncode(v))));
 
             this.reportTextWriter.WriteLine(
                 "<tr><th>{0}</th><td>{1}</td></tr>",

@@ -67,7 +67,7 @@ function DetailViewCtrl($scope, $window) {
         }
     };
 
-    $scope.navigateToCodeElement = function (hash) {
+    $scope.navigateToHash = function (hash) {
         // Prevent history entries when selecting methods/properties
         if ($window.history !== undefined && $window.history.replaceState !== undefined) {
             $window.history.replaceState(undefined, undefined, hash);
