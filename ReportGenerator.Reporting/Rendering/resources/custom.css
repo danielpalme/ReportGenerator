@@ -103,7 +103,7 @@ a.collapsed { background-image: url(pic_collapsed.png), url(data:image/png;base6
 .column98 { width: 98px; }
 .column100 { width: 100px; }
 .column105 { width: 105px; }
-.column112 { width: 112px; }
+.column112 { width: 112px; min-width: 112px; }
 .column135 { width: 135px; }
 
 .covered0 { width: 0px; }

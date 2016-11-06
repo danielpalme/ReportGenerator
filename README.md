@@ -110,6 +110,7 @@ A MSBuild task also exists:
 
 ## Resources
 
+* http://www.palmmedia.de/Blog/2016/11/6/reportgenerator-new-release-with-enhanced-html-report-and-cobertura-support
 * http://www.palmmedia.de/Blog/2015/1/27/reportgenerator-new-beta-with-historytrend-charts
 * http://www.palmmedia.de/Blog/2012/4/29/reportgenerator-new-release-with-more-advanced-report-preprocessing
 * http://www.palmmedia.de/Blog/2009/10/30/msbuild-code-coverage-analysis-with-partcover-and-reportgenerator
