@@ -24,7 +24,7 @@ ReportGenerator (e.g. a build log file).
 
 The following output formats are supported by ReportGenerator:
 
--HTML, HTMLSummary, HTMLChart
+-HTML, HTMLSummary, HTMLChart, MHTML
 -XML, XMLSummary
 -Latex, LatexSummary
 -TextSummary
@@ -65,6 +65,7 @@ CHANGELOG
     * New: Issue #57: Added support for OpenCover's 'Crap Score' and 'NPath 
            complexity' metric
     * New: Issue #61: Added support for Cobertura
+    * New: Issue #68: Added new report type (MHTML)
     * New: Issue #63: Visual indicator for partially covered lines
            (OpenCover, CodeCoverage.exe, Cobertura)
     * Fix: Issue #62: Improved HTML report (Keeping state of summary report,

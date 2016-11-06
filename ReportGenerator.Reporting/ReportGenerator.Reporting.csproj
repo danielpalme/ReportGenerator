@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="BadgeReportBuilder.cs" />
     <Compile Include="CsvSummaryReportBuilder.cs" />
+    <Compile Include="MhtmlReportBuilder.cs" />
     <Compile Include="HtmlChartReportBuilder.cs" />
     <Compile Include="PngChartReportBuilder.cs" />
     <Compile Include="TextSummaryReportBuilder.cs" />
