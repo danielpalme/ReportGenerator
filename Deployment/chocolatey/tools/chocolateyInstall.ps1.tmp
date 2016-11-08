@@ -1,4 +1,4 @@
 $packageName = 'reportgenerator.portable'
 $url = 'https://github.com/danielpalme/ReportGenerator/releases/download/v[[version]]/ReportGenerator_[[version]].zip'
 $toolsDir = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
-Install-ChocolateyZipPackage $packageName $url $toolsDir
+Install-ChocolateyZipPackage -PackageName $packageName -Url $url -UnzipLocation $toolsDir -Checksum [[checksum]] -ChecksumType sha256
