@@ -9,7 +9,7 @@ a:hover { color: #000; text-decoration: none; }
 
 .container { margin: auto; max-width: 1500px; width: 90%; background-color: #fff; display: table; box-shadow: 0 0 60px #7d7d7d; height: 100%; }
 .containerleft { display: table-cell; padding: 0 20px 20px 20px; }
-.containerright { border-left: solid 1px #6f6f6f; display: table-cell; width: 340px; background-color: #e5e5e5; height: 100%; }
+.containerright { border-left: solid 1px #6f6f6f; display: table-cell; width: 340px; min-width: 340px; background-color: #e5e5e5; height: 100%; }
 .containerrightfixed { position: fixed; padding: 0 20px 20px 20px; width: 300px; overflow-y: auto; height: 100%; top: 0; bottom: 0; }
 .containerrightfixed h1 { background-color: #c00; }
 .containerrightfixed label, .containerright a { white-space: nowrap; overflow: hidden; display: inline-block; max-width: 300px; text-overflow: ellipsis; }
@@ -103,7 +103,7 @@ a.collapsed { background-image: url(pic_collapsed.png), url(data:image/png;base6
 .column98 { width: 98px; }
 .column100 { width: 100px; }
 .column105 { width: 105px; }
-.column112 { width: 112px; min-width: 112px; }
+.column112 { width: 112px; }
 .column135 { width: 135px; }
 
 .covered0 { width: 0px; }

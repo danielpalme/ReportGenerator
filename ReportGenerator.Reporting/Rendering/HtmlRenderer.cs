@@ -350,7 +350,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                 throw new ArgumentNullException(nameof(metric));
             }
 
-            this.reportTextWriter.WriteLine("<table class=\"overview\">");
+            this.reportTextWriter.WriteLine("<table class=\"overview table-fixed\">");
             this.reportTextWriter.Write("<thead><tr>");
 
             this.reportTextWriter.Write("<th>{0}</th>", WebUtility.HtmlEncode(ReportResources.Method));

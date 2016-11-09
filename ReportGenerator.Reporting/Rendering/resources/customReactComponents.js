@@ -565,7 +565,7 @@ var AssemblyTable = React.createClass({
         }
 
         return (
-            React.DOM.table({ className: 'overview' },
+            React.DOM.table({ className: 'overview table-fixed' },
                 React.DOM.colgroup(null,
                     React.DOM.col(null),
                     React.DOM.col({ className: 'column90' }),

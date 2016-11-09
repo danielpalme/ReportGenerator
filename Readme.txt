@@ -60,6 +60,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+2.5.1.0
+
+    * Fix: Issue #69: Fixed width of coverage bars
+
 2.5.0.0
 
     * New: Issue #57: Added support for OpenCover's 'Crap Score' and 'NPath 
