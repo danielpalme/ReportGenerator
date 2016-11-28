@@ -131,11 +131,16 @@ coverageApp.directive('historyChart', function ($window) {
             });
 
             chart.on('mousemove', function (event) {
+                var box = el[0].getBoundingClientRect();
+                var left = event.pageX - box.left - window.pageXOffset;
+                var top = event.pageY - box.top - window.pageYOffset;
+
                 tooltip.css({
-                    left: (event.offsetX || event.originalEvent.layerX) - tooltip.width() / 2 - 5,
-                    top: (event.offsetY || event.originalEvent.layerY) - tooltip.height() - 40
+                    left: left - tooltip.width() / 2 - 5,
+                    top: top - tooltip.height() - 40
                 });
             });
+
         }
     };
 });

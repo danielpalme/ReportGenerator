@@ -62,6 +62,10 @@ CHANGELOG
 
 2.5.1.0
 
+    * Fix: Issue #72: Fixed tooltip position in coverage chart
+
+2.5.1.0
+
     * Fix: Issue #69: Fixed width of coverage bars
 
 2.5.0.0
