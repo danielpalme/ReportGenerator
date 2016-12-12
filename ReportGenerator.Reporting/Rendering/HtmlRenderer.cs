@@ -27,7 +27,6 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
 <meta charset=""utf-8"" />
 <meta http-equiv=""X-UA-Compatible"" content=""IE=EDGE,chrome=1"" />
 <title>{0} - {1}</title>
-<link href=""https://fonts.googleapis.com/css?family=Open+Sans"" rel=""stylesheet"">
 {2}
 </head><body data-ng-controller=""{3}""><div class=""container""><div class=""containerleft"">";
 
@@ -181,7 +180,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                     {
                         this.reportTextWriter.WriteLine(
                             "<a class=\"{0}\" href=\"#file{1}_line{2}\" data-ng-click=\"navigateToHash('#file{1}_line{2}')\" title=\"{3}\">{3}</a><br />",
-                            codeElement.Type == CodeElementType.Method ? "method" : "property",
+                            codeElement.CodeElementType == CodeElementType.Method ? "method" : "property",
                             item.Key,
                             codeElement.Line,
                             WebUtility.HtmlEncode(codeElement.Name));
