@@ -91,8 +91,8 @@ namespace Palmmedia.ReportGenerator.Parser
 
                 CodeElementType type = CodeElementType.Method;
 
-                if (methodName.StartsWith("get_")
-                    || methodName.StartsWith("set_"))
+                if (methodName.StartsWith("get_", StringComparison.OrdinalIgnoreCase)
+                    || methodName.StartsWith("set_", StringComparison.OrdinalIgnoreCase))
                 {
                     type = CodeElementType.Property;
                     methodName = methodName.Substring(4);

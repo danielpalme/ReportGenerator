@@ -45,6 +45,10 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             parserName = ParserFactory.CreateParser(new string[] { filePath }, new string[] { }).ToString();
             Assert.AreEqual("DynamicCodeCoverageParser", parserName, "Wrong parser");
 
+            filePath = Path.Combine(FileManager.GetCSharpReportDirectory(), "mprof-report.xml");
+            parserName = ParserFactory.CreateParser(new string[] { filePath }, new string[] { }).ToString();
+            Assert.AreEqual("MProfParser", parserName, "Wrong parser");
+
             filePath = Path.Combine(FileManager.GetJavaReportDirectory(), "Cobertura2.1.1.xml");
             parserName = ParserFactory.CreateParser(new string[] { filePath }, new string[] { }).ToString();
             Assert.AreEqual("CoberturaParser", parserName, "Wrong parser");

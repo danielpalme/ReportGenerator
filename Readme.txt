@@ -42,6 +42,7 @@ dotCover
 Visual Studio (vstest.console.exe, CodeCoverage.exe)
 NCover (tested version 1.5.8, other versions may not work)
 Cobertura
+Mono (mprof-report)
 
 Also available as NuGet package:
 http://nuget.org/List/Packages/ReportGenerator
@@ -60,9 +61,11 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
-2.5.1.0
+2.5.2.0
 
+    * New: Issue #74: Added support for Mono's mprof-report
     * Fix: Issue #72: Fixed tooltip position in coverage chart
+    * Fix: Issue #75: Removed Google font in HTML report
 
 2.5.1.0
 

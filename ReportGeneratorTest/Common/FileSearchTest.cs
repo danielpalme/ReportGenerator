@@ -98,7 +98,7 @@ namespace Palmmedia.ReportGeneratorTest.Common
         public void GetFiles_SingleDirectory_XmlFilesFound()
         {
             var files = FileSearch.GetFiles(Path.Combine(FileManager.GetCSharpReportDirectory(), "*.xml")).ToArray();
-            Assert.AreEqual(15, files.Length);
+            Assert.AreEqual(16, files.Length);
         }
 
         [TestMethod]

@@ -24,7 +24,7 @@ The following output formats are supported by ReportGenerator:
 * Visual Studio ([vstest.console.exe](https://github.com/danielpalme/ReportGenerator/wiki/Visual-Studio-Coverage-Tools#vstestconsoleexe), [CodeCoverage.exe](https://github.com/danielpalme/ReportGenerator/wiki/Visual-Studio-Coverage-Tools#codecoverageexe))
 * [NCover](http://www.ncover.com/download/current) (tested version 1.5.8, other versions may not work)
 * [Cobertura](https://github.com/cobertura/cobertura) 
-
+* Mono ([mprof-report](http://www.mono-project.com/docs/debug+profile/profile/profiler/#analyzing-the-profile-data))
 Also available as **NuGet** package: http://www.nuget.org/packages/ReportGenerator
 
 Additional information about ReportGenerator can be found under [Resources](#resources).

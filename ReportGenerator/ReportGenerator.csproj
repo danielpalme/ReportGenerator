@@ -131,6 +131,7 @@
     <Compile Include="Parser\Preprocessing\CoberturaReportPreprocessor.cs" />
     <Compile Include="Parser\Preprocessing\VisualStudioReportPreprocessor.cs" />
     <Compile Include="Parser\Preprocessing\FileSearch\SafeDirectorySearcher.cs" />
+    <Compile Include="Parser\MProfParser.cs" />
     <Compile Include="Parser\VisualStudioParser.cs" />
     <Compile Include="Properties\ReportResources.Designer.cs">
       <DependentUpon>ReportResources.resx</DependentUpon>

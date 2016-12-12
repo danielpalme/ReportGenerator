@@ -11,7 +11,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// Initializes a new instance of the <see cref="CodeElement" /> class.
         /// </summary>
         /// <param name="name">The name.</param>
-        /// <param name="type">The <see cref="CodeElementType"/>.</param>
+        /// <param name="type">The <see cref="Analysis.CodeElementType"/>.</param>
         /// <param name="line">The line number.</param>
         internal CodeElement(string name, CodeElementType type, int line)
         {
@@ -21,7 +21,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
             }
 
             this.Name = name;
-            this.Type = type;
+            this.CodeElementType = type;
             this.Line = line;
         }
 
@@ -34,12 +34,12 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         public string Name { get; }
 
         /// <summary>
-        /// Gets the <see cref="CodeElementType"/>.
+        /// Gets the <see cref="Analysis.CodeElementType"/>.
         /// </summary>
         /// <value>
-        /// The <see cref="CodeElementType"/>.
+        /// The <see cref="Analysis.CodeElementType"/>.
         /// </value>
-        public CodeElementType Type { get; }
+        public CodeElementType CodeElementType { get; }
 
         /// <summary>
         /// Gets the line number.

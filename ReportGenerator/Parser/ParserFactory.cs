@@ -129,12 +129,17 @@ namespace Palmmedia.ReportGenerator.Parser
                         Logger.DebugFormat(" " + Resources.InitiatingParser, "NCover");
                         parsers.Add(new NCoverParser(item));
                     }
-                    else
+                    else if (item.Attributes().Count() > 1)
                     {
                         Logger.Debug(" " + Resources.PreprocessingReport);
                         new CoberturaReportPreprocessor(item).Execute();
                         Logger.DebugFormat(" " + Resources.InitiatingParser, "Cobertura");
                         parsers.Add(new CoberturaParser(item));
+                    }
+                    else
+                    {
+                        Logger.DebugFormat(" " + Resources.InitiatingParser, "mprof");
+                        parsers.Add(new MProfParser(item));
                     }
                 }
             }
