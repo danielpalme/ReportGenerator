@@ -63,6 +63,7 @@ CHANGELOG
 
 2.5.3.0
 
+    * New: Issue #78: Added support for custom storage of historic files
     * Fix: Issue #79: Fixed IndexOutOfRangeException in CoberturaParser
 
 2.5.2.0

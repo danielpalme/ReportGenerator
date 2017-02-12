@@ -153,6 +153,9 @@
   <data name="ErrorDuringReadingHistoricReport" xml:space="preserve">
     <value>Error during reading historic report '{0}': {1}</value>
   </data>
+  <data name="ErrorDuringReadingHistoricReports" xml:space="preserve">
+    <value>Error during reading historic reports: {0}</value>
+  </data>
   <data name="ErrorDuringReadingReport" xml:space="preserve">
     <value>Error during reading report '{0}': {1}</value>
   </data>
@@ -161,6 +164,9 @@
   </data>
   <data name="ErrorDuringRenderingSummaryReport" xml:space="preserve">
     <value>Error during rendering summary report (Report type: '{0}'): {1}</value>
+  </data>
+  <data name="ErrorDuringSavingHistoricReport" xml:space="preserve">
+    <value>Error during saving historic report '{0}': {1}</value>
   </data>
   <data name="FailedReportFilePattern" xml:space="preserve">
     <value>The report file pattern '{0}' is invalid.</value>
@@ -213,6 +219,9 @@
   </data>
   <data name="ReportGenerationTook" xml:space="preserve">
     <value>Report generation took {0:f1} seconds</value>
+  </data>
+  <data name="SeveralCustomHistoryStorages" xml:space="preserve">
+    <value>Several custom history storages exist. Please ensure that only one custom storage exists.</value>
   </data>
   <data name="SeveralCustomReportBuildersWithSameReportType" xml:space="preserve">
     <value>Several custom report builders for report type '{0}' exist. This may cause problems if they try to write to the same files/directory.</value>

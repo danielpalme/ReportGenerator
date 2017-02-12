@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition.Hosting;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 using Palmmedia.ReportGenerator.Logging;
 using Palmmedia.ReportGenerator.Properties;
 
@@ -27,7 +24,7 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// </returns>
         public IEnumerable<string> GetAvailableReportTypes()
         {
-            var reportBuilders = LoadReportBuilders();
+            var reportBuilders = MefHelper.LoadInstancesOfType<IReportBuilder>().ToArray();
 
             return reportBuilders
                 .Select(r => r.ReportType)
@@ -48,7 +45,7 @@ namespace Palmmedia.ReportGenerator.Reporting
         {
             Logger.InfoFormat(Resources.InitializingReportBuilders, string.Join(", ", reportTypes));
 
-            var reportBuilders = LoadReportBuilders()
+            var reportBuilders = MefHelper.LoadInstancesOfType<IReportBuilder>()
                 .Where(r => reportTypes.Contains(r.ReportType, StringComparer.OrdinalIgnoreCase))
                 .OrderBy(r => r.ReportType)
                 .ToArray();
@@ -90,49 +87,6 @@ namespace Palmmedia.ReportGenerator.Reporting
             }
 
             return result;
-        }
-
-        /// <summary>
-        /// Loads the report builders.
-        /// </summary>
-        /// <returns>The report builders.</returns>
-        private static IEnumerable<IReportBuilder> LoadReportBuilders()
-        {
-            AggregateCatalog aggregateCatalog = new AggregateCatalog();
-
-            foreach (var file in new FileInfo(typeof(MefReportBuilderFactory).Assembly.Location).Directory.EnumerateFiles("*.dll"))
-            {
-                try
-                {
-                    // Unblock files, this prevents FileLoadException (e.g. if file was extracted from a ZIP archive)
-                    FileUnblocker.Unblock(file.FullName);
-
-                    var assemblyCatalog = new AssemblyCatalog(Assembly.LoadFrom(file.FullName));
-                    assemblyCatalog.Parts.ToArray(); // This may throw ReflectionTypeLoadException 
-                    aggregateCatalog.Catalogs.Add(assemblyCatalog);
-                }
-                catch (FileLoadException)
-                {
-                    Logger.ErrorFormat(Resources.FileLoadError, file.FullName);
-                    throw;
-                }
-                catch (ReflectionTypeLoadException ex)
-                {
-                    if (!file.Name.Equals("ICSharpCode.NRefactory.Cecil.dll", StringComparison.OrdinalIgnoreCase))
-                    {
-                        string errors = string.Join(Environment.NewLine, ex.LoaderExceptions.Select(e => "-" + e.Message));
-                        Logger.ErrorFormat(Resources.FileReflectionLoadError, file.FullName, errors);
-                    }
-
-                    // Ignore assemblies that throw this exception
-                }
-            }
-
-            using (var container = new CompositionContainer(aggregateCatalog))
-            {
-                var reportBuilders = container.GetExportedValues<IReportBuilder>();
-                return reportBuilders;
-            }
         }
     }
 }
