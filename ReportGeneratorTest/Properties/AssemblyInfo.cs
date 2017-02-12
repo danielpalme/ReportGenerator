@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Palmmedia")]
 [assembly: AssemblyProduct("ReportGeneratorTest")]
-[assembly: AssemblyCopyright("Copyright © Palmmedia 2015")]
+[assembly: AssemblyCopyright("Copyright © Palmmedia 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -31,6 +31,6 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("2.5.2.0")]
-[assembly: AssemblyFileVersion("2.5.2.0")]
+[assembly: AssemblyVersion("2.5.3.0")]
+[assembly: AssemblyFileVersion("2.5.3.0")]
 [assembly: NeutralResourcesLanguageAttribute("en-US")]

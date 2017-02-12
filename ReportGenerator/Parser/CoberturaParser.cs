@@ -254,11 +254,13 @@ namespace Palmmedia.ReportGenerator.Parser
                 .Elements("line")
                 .ToArray();
 
-            var linesOfFile = lines.Select(line => new
-            {
-                LineNumber = int.Parse(line.Attribute("number").Value, CultureInfo.InvariantCulture),
-                Visits = int.Parse(line.Attribute("hits").Value, CultureInfo.InvariantCulture)
-            })
+            var linesOfFile = lines
+                .Select(line => new
+                {
+                    LineNumber = int.Parse(line.Attribute("number").Value, CultureInfo.InvariantCulture),
+                    Visits = int.Parse(line.Attribute("hits").Value, CultureInfo.InvariantCulture)
+                })
+                .OrderBy(seqpnt => seqpnt.LineNumber)
                 .ToArray();
 
             var branches = GetBranches(lines);

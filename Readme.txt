@@ -61,6 +61,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+2.5.3.0
+
+    * Fix: Issue #79: Fixed IndexOutOfRangeException in CoberturaParser
+
 2.5.2.0
 
     * New: Issue #74: Added support for Mono's mprof-report
