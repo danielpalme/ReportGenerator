@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 using Palmmedia.ReportGenerator.Logging;
 using Palmmedia.ReportGenerator.Parser.Analysis;
 using Palmmedia.ReportGenerator.Properties;
 
-namespace Palmmedia.ReportGenerator.Reporting
+namespace Palmmedia.ReportGenerator.Reporting.History
 {
     /// <summary>
     /// Reads all historic coverage files created by <see cref="HistoryReportGenerator"/> and adds the information to all classes.
@@ -21,60 +20,69 @@ namespace Palmmedia.ReportGenerator.Reporting
         private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(HistoryParser));
 
         /// <summary>
-        /// The assemblies.
+        /// The history storage.
         /// </summary>
-        private readonly IEnumerable<Assembly> assemblies;
+        private readonly IHistoryStorage historyStorage;
 
         /// <summary>
-        /// The history directory.
+        /// Initializes a new instance of the <see cref="HistoryParser" /> class.
         /// </summary>
-        private readonly string historyDirectory;
+        /// <param name="historyStorage">The history storage.</param>
+        internal HistoryParser(IHistoryStorage historyStorage)
+        {
+            if (historyStorage == null)
+            {
+                throw new ArgumentNullException(nameof(historyStorage));
+            }
+
+            this.historyStorage = historyStorage;
+        }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HistoryParser"/> class.
+        /// Reads all historic coverage files created by <see cref="HistoryReportGenerator" /> and adds the information to all classes.
         /// </summary>
         /// <param name="assemblies">The assemblies.</param>
-        /// <param name="historyDirectory">The history directory.</param>
-        internal HistoryParser(IEnumerable<Assembly> assemblies, string historyDirectory)
+        internal void ApplyHistoricCoverage(IEnumerable<Assembly> assemblies)
         {
             if (assemblies == null)
             {
                 throw new ArgumentNullException(nameof(assemblies));
             }
 
-            if (historyDirectory == null)
-            {
-                throw new ArgumentNullException(nameof(historyDirectory));
-            }
-
-            this.assemblies = assemblies;
-            this.historyDirectory = historyDirectory;
-        }
-
-        /// <summary>
-        /// Reads all historic coverage files created by <see cref="HistoryReportGenerator"/> and adds the information to all classes.
-        /// </summary>
-        internal void ApplyHistoricCoverage()
-        {
             Logger.Info(Resources.ReadingHistoricReports);
 
-            var files = Directory
-                .EnumerateFiles(this.historyDirectory, "*_CoverageHistory.xml")
-                .OrderByDescending(f => f)
-                .Take(Settings.Default.MaximumOfHistoricCoverageFiles)
-                .Reverse();
+            IEnumerable<string> files = null;
+
+            try
+            {
+                files = this.historyStorage.GetHistoryFilePaths()
+                    .OrderByDescending(f => f)
+                    .Take(Settings.Default.MaximumOfHistoricCoverageFiles)
+                    .Reverse()
+                    .ToArray();
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorFormat(" " + Resources.ErrorDuringReadingHistoricReports, ex.Message);
+                return;
+            }
 
             foreach (var file in files)
             {
                 try
                 {
-                    XDocument document = XDocument.Load(file);
+                    XDocument document = null;
+
+                    using (var stream = this.historyStorage.LoadFile(file))
+                    {
+                        document = XDocument.Load(stream);
+                    }
 
                     DateTime date = DateTime.ParseExact(document.Root.Attribute("date").Value, "yyyy-MM-dd_HH-mm-ss", CultureInfo.InvariantCulture);
 
                     foreach (var assemblyElement in document.Root.Elements("assembly"))
                     {
-                        Assembly assembly = this.assemblies
+                        Assembly assembly = assemblies
                             .SingleOrDefault(a => a.Name == assemblyElement.Attribute("name").Value);
 
                         if (assembly == null)

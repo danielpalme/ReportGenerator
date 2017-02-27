@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Xml.Linq;
 using Palmmedia.ReportGenerator.Logging;
-using Palmmedia.ReportGenerator.Parser;
+using Palmmedia.ReportGenerator.Parser.Analysis;
 using Palmmedia.ReportGenerator.Properties;
 
-namespace Palmmedia.ReportGenerator.Reporting
+namespace Palmmedia.ReportGenerator.Reporting.History
 {
     /// <summary>
     /// Generates historic report containing coverage information of current test run.
@@ -20,42 +21,36 @@ namespace Palmmedia.ReportGenerator.Reporting
         private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(HistoryReportGenerator));
 
         /// <summary>
-        /// The parser to use.
+        /// The history storage.
         /// </summary>
-        private readonly IParser parser;
+        private readonly IHistoryStorage historyStorage;
 
         /// <summary>
-        /// The history directory.
+        /// Initializes a new instance of the <see cref="HistoryReportGenerator" /> class.
         /// </summary>
-        private readonly string historyDirectory;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="HistoryReportGenerator"/> class.
-        /// </summary>
-        /// <param name="parser">The parser.</param>
-        /// <param name="historyDirectory">The history directory.</param>
-        internal HistoryReportGenerator(IParser parser, string historyDirectory)
+        /// <param name="historyStorage">The history storage.</param>
+        internal HistoryReportGenerator(IHistoryStorage historyStorage)
         {
-            if (parser == null)
+            if (historyStorage == null)
             {
-                throw new ArgumentNullException(nameof(parser));
+                throw new ArgumentNullException(nameof(historyStorage));
             }
 
-            if (historyDirectory == null)
-            {
-                throw new ArgumentNullException(nameof(historyDirectory));
-            }
-
-            this.parser = parser;
-            this.historyDirectory = historyDirectory;
+            this.historyStorage = historyStorage;
         }
 
         /// <summary>
         /// Starts the generation of the report.
         /// </summary>
+        /// <param name="assemblies">The assemblies.</param>
         /// <param name="executionTime">The execution time.</param>
-        internal void CreateReport(DateTime executionTime)
+        internal void CreateReport(IEnumerable<Assembly> assemblies, DateTime executionTime)
         {
+            if (assemblies == null)
+            {
+                throw new ArgumentNullException(nameof(assemblies));
+            }
+
             Logger.Info(Resources.CreatingHistoryReport);
 
             string date = executionTime.ToString("yyyy-MM-dd_HH-mm-ss", CultureInfo.InvariantCulture);
@@ -65,7 +60,7 @@ namespace Palmmedia.ReportGenerator.Reporting
                 new XAttribute("version", "1.0"),
                 new XAttribute("date", date));
 
-            foreach (var assembly in this.parser.Assemblies)
+            foreach (var assembly in assemblies)
             {
                 var assemblyElement = new XElement(
                     "assembly",
@@ -89,7 +84,18 @@ namespace Palmmedia.ReportGenerator.Reporting
             }
 
             var document = new XDocument(new XDeclaration("1.0", "UTF-8", "yes"), rootElement);
-            document.Save(Path.Combine(this.historyDirectory, date + "_CoverageHistory.xml"));
+            string fileName = date + "_CoverageHistory.xml";
+            try
+            {
+                using (var stream = new MemoryStream())
+                {
+                    this.historyStorage.SaveFile(stream, fileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorFormat(" " + Resources.ErrorDuringSavingHistoricReport, fileName, ex.Message);
+            }
         }
     }
 }

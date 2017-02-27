@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using Palmmedia.ReportGenerator.Parser.Analysis;
 using Palmmedia.ReportGenerator.Properties;
-using Palmmedia.ReportGenerator.Reporting;
 
 namespace Palmmedia.ReportGenerator.Reporting
 {
@@ -47,6 +46,11 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// <param name="summaryResult">The summary result.</param>
         public void CreateSummaryReport(SummaryResult summaryResult)
         {
+            if (summaryResult == null)
+            {
+                throw new ArgumentNullException(nameof(summaryResult));
+            }
+
             string targetPath = Path.Combine(this.TargetDirectory, "Summary.csv");
 
             using (var reportTextWriter = new StreamWriter(new FileStream(targetPath, FileMode.Create), Encoding.UTF8))

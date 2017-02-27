@@ -3,6 +3,7 @@ using Palmmedia.ReportGenerator.Logging;
 using Palmmedia.ReportGenerator.Parser;
 using Palmmedia.ReportGenerator.Properties;
 using Palmmedia.ReportGenerator.Reporting;
+using Palmmedia.ReportGenerator.Reporting.History;
 
 namespace Palmmedia.ReportGenerator
 {
@@ -41,12 +42,12 @@ namespace Palmmedia.ReportGenerator
 
             var parser = ParserFactory.CreateParser(reportConfiguration.ReportFiles, reportConfiguration.SourceDirectories);
 
-            if (reportConfiguration.HistoryDirectory != null)
+            var historyStorage = new MefHistoryStorageFactory().GetHistoryStorage(reportConfiguration);
+
+            if (historyStorage != null)
             {
-                new Reporting.HistoryParser(
-                    parser.Assemblies,
-                    reportConfiguration.HistoryDirectory)
-                        .ApplyHistoricCoverage();
+                new HistoryParser(historyStorage)
+                        .ApplyHistoricCoverage(parser.Assemblies);
             }
 
             new Reporting.ReportGenerator(
@@ -56,12 +57,10 @@ namespace Palmmedia.ReportGenerator
                 reportConfiguration.ReportBuilderFactory.GetReportBuilders(reportConfiguration.TargetDirectory, reportConfiguration.ReportTypes))
                     .CreateReport(reportConfiguration.HistoryDirectory != null, executionTime);
 
-            if (reportConfiguration.HistoryDirectory != null)
+            if (historyStorage != null)
             {
-                new Reporting.HistoryReportGenerator(
-                    parser,
-                    reportConfiguration.HistoryDirectory)
-                        .CreateReport(executionTime);
+                new HistoryReportGenerator(historyStorage)
+                        .CreateReport(parser.Assemblies, executionTime);
             }
 
             stopWatch.Stop();

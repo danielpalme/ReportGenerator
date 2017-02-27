@@ -177,7 +177,10 @@
     <Compile Include="Generator.cs" />
     <Compile Include="Reporting\DefaultFilter.cs" />
     <Compile Include="Reporting\FileUnblocker.cs" />
-    <Compile Include="Reporting\HistoryParser.cs" />
+    <Compile Include="Reporting\History\FileHistoryStorage.cs" />
+    <Compile Include="Reporting\History\HistoryParser.cs" />
+    <Compile Include="Reporting\History\IHistoryStorage.cs" />
+    <Compile Include="Reporting\History\MefHistoryStorageFactory.cs" />
     <Compile Include="Reporting\IFilter.cs" />
     <Compile Include="Reporting\IReportBuilder.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -186,8 +189,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Reporting\IReportBuilderFactory.cs" />
+    <Compile Include="Reporting\MefHelper.cs" />
     <Compile Include="Reporting\MefReportBuilderFactory.cs" />
-    <Compile Include="Reporting\HistoryReportGenerator.cs" />
+    <Compile Include="Reporting\History\HistoryReportGenerator.cs" />
     <Compile Include="Reporting\ReportGenerator.cs" />
     <Compile Include="Logging\VerbosityLevel.cs" />
   </ItemGroup>
