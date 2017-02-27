@@ -22,7 +22,7 @@ namespace Palmmedia.ReportGenerator.Reporting.History
         Stream LoadFile(string filePath);
 
         /// <summary>
-        /// Returns a stream for saving the file with the given name.
+        /// Saves the file with the given name.
         /// </summary>
         /// <param name="stream">The stream containing the file content.</param>
         /// <param name="fileName">Name of the file.</param>
