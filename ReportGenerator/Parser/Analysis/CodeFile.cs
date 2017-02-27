@@ -218,7 +218,15 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
                 throw new ArgumentNullException(nameof(trackedMethodCoverage));
             }
 
-            this.lineCoveragesByTestMethod.Add(testMethod, trackedMethodCoverage);
+            CoverageByTrackedMethod existingTrackedMethodCoverage;
+            if (!this.lineCoveragesByTestMethod.TryGetValue(testMethod, out existingTrackedMethodCoverage))
+            {
+                this.lineCoveragesByTestMethod.Add(testMethod, trackedMethodCoverage);
+            }
+            else
+            {
+                this.lineCoveragesByTestMethod[testMethod] = MergeCoverageByTrackedMetho(existingTrackedMethodCoverage, trackedMethodCoverage);
+            }
         }
 
         /// <summary>
@@ -326,7 +334,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
                 throw new ArgumentNullException(nameof(file));
             }
 
-            // Resize coverage array if neccessary
+            // Resize coverage array if necessary
             if (file.lineCoverage.LongLength > this.lineCoverage.LongLength)
             {
                 int[] newLineCoverage = new int[file.lineCoverage.LongLength];
@@ -341,7 +349,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
                 this.lineCoverage = newLineCoverage;
             }
 
-            // Resize line visit status array if neccessary
+            // Resize line visit status array if necessary
             if (file.lineVisitStatus.LongLength > this.lineVisitStatus.LongLength)
             {
                 LineVisitStatus[] newLineVisitStatus = new LineVisitStatus[file.lineVisitStatus.LongLength];
@@ -384,53 +392,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
                 }
                 else
                 {
-                    // Resize coverage array if neccessary
-                    if (lineCoverageByTestMethod.Value.Coverage.LongLength > existingTrackedMethodCoverage.Coverage.LongLength)
-                    {
-                        int[] newLineCoverage = new int[lineCoverageByTestMethod.Value.Coverage.LongLength];
-
-                        Array.Copy(lineCoverageByTestMethod.Value.Coverage, newLineCoverage, lineCoverageByTestMethod.Value.Coverage.LongLength);
-
-                        for (long i = existingTrackedMethodCoverage.Coverage.LongLength; i < lineCoverageByTestMethod.Value.Coverage.LongLength; i++)
-                        {
-                            newLineCoverage[i] = -1;
-                        }
-
-                        existingTrackedMethodCoverage.Coverage = newLineCoverage;
-                    }
-
-                    // Resize line visit status array if neccessary
-                    if (lineCoverageByTestMethod.Value.LineVisitStatus.LongLength > existingTrackedMethodCoverage.LineVisitStatus.LongLength)
-                    {
-                        LineVisitStatus[] newLineVisitStatus = new LineVisitStatus[lineCoverageByTestMethod.Value.LineVisitStatus.LongLength];
-                        Array.Copy(lineCoverageByTestMethod.Value.LineVisitStatus, newLineVisitStatus, lineCoverageByTestMethod.Value.LineVisitStatus.LongLength);
-                        existingTrackedMethodCoverage.LineVisitStatus = newLineVisitStatus;
-                    }
-
-                    for (long i = 0; i < lineCoverageByTestMethod.Value.Coverage.LongLength; i++)
-                    {
-                        int coverage = existingTrackedMethodCoverage.Coverage[i];
-
-                        if (coverage < 0)
-                        {
-                            coverage = lineCoverageByTestMethod.Value.Coverage[i];
-                        }
-                        else if (lineCoverageByTestMethod.Value.Coverage[i] > 0)
-                        {
-                            coverage += lineCoverageByTestMethod.Value.Coverage[i];
-                        }
-
-                        existingTrackedMethodCoverage.Coverage[i] = coverage;
-                    }
-
-                    for (long i = 0; i < lineCoverageByTestMethod.Value.LineVisitStatus.LongLength; i++)
-                    {
-                        int lineVisitStatus = Math.Max((int)existingTrackedMethodCoverage.LineVisitStatus[i], (int)lineCoverageByTestMethod.Value.LineVisitStatus[i]);
-
-                        existingTrackedMethodCoverage.LineVisitStatus[i] = (LineVisitStatus)lineVisitStatus;
-                    }
-
-                    this.lineCoveragesByTestMethod[lineCoverageByTestMethod.Key] = existingTrackedMethodCoverage;
+                    this.lineCoveragesByTestMethod[lineCoverageByTestMethod.Key] = MergeCoverageByTrackedMetho(existingTrackedMethodCoverage, lineCoverageByTestMethod.Value);
                 }
             }
 
@@ -471,6 +433,63 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Merges the two tracked method coverage.
+        /// </summary>
+        /// <param name="existingTrackedMethodCoverage">The existing tracked method coverage.</param>
+        /// <param name="lineCoverageByTestMethod">The new line coverage by test method.</param>
+        /// <returns>The merged tracked method coverage.</returns>
+        private static CoverageByTrackedMethod MergeCoverageByTrackedMetho(CoverageByTrackedMethod existingTrackedMethodCoverage, CoverageByTrackedMethod lineCoverageByTestMethod)
+        {
+            // Resize coverage array if neccessary
+            if (lineCoverageByTestMethod.Coverage.LongLength > existingTrackedMethodCoverage.Coverage.LongLength)
+            {
+                int[] newLineCoverage = new int[lineCoverageByTestMethod.Coverage.LongLength];
+
+                Array.Copy(lineCoverageByTestMethod.Coverage, newLineCoverage, lineCoverageByTestMethod.Coverage.LongLength);
+
+                for (long i = existingTrackedMethodCoverage.Coverage.LongLength; i < lineCoverageByTestMethod.Coverage.LongLength; i++)
+                {
+                    newLineCoverage[i] = -1;
+                }
+
+                existingTrackedMethodCoverage.Coverage = newLineCoverage;
+            }
+
+            // Resize line visit status array if neccessary
+            if (lineCoverageByTestMethod.LineVisitStatus.LongLength > existingTrackedMethodCoverage.LineVisitStatus.LongLength)
+            {
+                LineVisitStatus[] newLineVisitStatus = new LineVisitStatus[lineCoverageByTestMethod.LineVisitStatus.LongLength];
+                Array.Copy(lineCoverageByTestMethod.LineVisitStatus, newLineVisitStatus, lineCoverageByTestMethod.LineVisitStatus.LongLength);
+                existingTrackedMethodCoverage.LineVisitStatus = newLineVisitStatus;
+            }
+
+            for (long i = 0; i < lineCoverageByTestMethod.Coverage.LongLength; i++)
+            {
+                int coverage = existingTrackedMethodCoverage.Coverage[i];
+
+                if (coverage < 0)
+                {
+                    coverage = lineCoverageByTestMethod.Coverage[i];
+                }
+                else if (lineCoverageByTestMethod.Coverage[i] > 0)
+                {
+                    coverage += lineCoverageByTestMethod.Coverage[i];
+                }
+
+                existingTrackedMethodCoverage.Coverage[i] = coverage;
+            }
+
+            for (long i = 0; i < lineCoverageByTestMethod.LineVisitStatus.LongLength; i++)
+            {
+                int lineVisitStatus = Math.Max((int)existingTrackedMethodCoverage.LineVisitStatus[i], (int)lineCoverageByTestMethod.LineVisitStatus[i]);
+
+                existingTrackedMethodCoverage.LineVisitStatus[i] = (LineVisitStatus)lineVisitStatus;
+            }
+
+            return existingTrackedMethodCoverage;
         }
     }
 }

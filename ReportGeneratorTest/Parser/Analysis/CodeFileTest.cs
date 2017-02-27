@@ -227,5 +227,35 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Analysis
             Assert.IsFalse(target1.Equals(null), "Objects are equal");
             Assert.IsFalse(target1.Equals(new object()), "Objects are equal");
         }
+
+        /// <summary>
+        /// A test for AddCoverageByTestMethod
+        /// </summary>
+        [TestMethod]
+        public void AddCoverageByTestMethod_AddCoverageByTestMethodForExistingMethod_CoverageInformationIsMerged()
+        {
+            var sut = new CodeFile("C:\\temp\\Program.cs", new int[0], new LineVisitStatus[0]);
+            var testMethod = new TestMethod("TestFull", "Test");
+
+            var coverageByTrackedMethod = new CoverageByTrackedMethod() { Coverage = new int[] { -1, -1, -1, -1, 0, 0, 0,  1, 1, 1 }, LineVisitStatus = new LineVisitStatus[] { LineVisitStatus.NotCoverable, LineVisitStatus.NotCoverable, LineVisitStatus.NotCoverable, LineVisitStatus.NotCoverable, LineVisitStatus.NotCovered, LineVisitStatus.NotCovered, LineVisitStatus.NotCovered, LineVisitStatus.Covered, LineVisitStatus.Covered, LineVisitStatus.Covered } };
+            var repeatedCoverageByTrackedMethod = new CoverageByTrackedMethod() { Coverage = new int[] { -1,  0,  1, -1, 1, 0, 1, -1, 1, 0 }, LineVisitStatus = new LineVisitStatus[] { LineVisitStatus.NotCoverable, LineVisitStatus.NotCovered, LineVisitStatus.Covered, LineVisitStatus.NotCoverable, LineVisitStatus.Covered, LineVisitStatus.NotCovered, LineVisitStatus.Covered, LineVisitStatus.NotCoverable, LineVisitStatus.Covered, LineVisitStatus.NotCovered } };
+
+            sut.AddCoverageByTestMethod(testMethod, coverageByTrackedMethod);
+            sut.AddCoverageByTestMethod(testMethod, repeatedCoverageByTrackedMethod);
+
+            Assert.IsTrue(sut.TestMethods.Contains(testMethod));
+
+            // using AnalyseFile() to retrieve merged coverage by test method
+            var lineAnalyses = sut.AnalyzeFile().Lines;
+            var testMethodCoverage = lineAnalyses.Take(9).Select(l => l.LineCoverageByTestMethod).ToArray();
+
+            Assert.IsTrue(testMethodCoverage.All(coverage => coverage.ContainsKey(testMethod)), "All lines should be covered by given test method");
+
+            var actualLineVisits = testMethodCoverage.Select(c => c[testMethod].LineVisits).ToArray();
+            var actualLineVisitStatuses = testMethodCoverage.Select(c => c[testMethod].LineVisitStatus).ToArray();
+
+            CollectionAssert.AreEqual(new int[] { 0, 1, -1, 1, 0, 1, 1, 2, 1 }, actualLineVisits, "LineVisits does not match");
+            CollectionAssert.AreEqual(new LineVisitStatus[] { LineVisitStatus.NotCovered, LineVisitStatus.Covered, LineVisitStatus.NotCoverable, LineVisitStatus.Covered, LineVisitStatus.NotCovered, LineVisitStatus.Covered, LineVisitStatus.Covered, LineVisitStatus.Covered, LineVisitStatus.Covered }, actualLineVisitStatuses, "LineVisitStatus does not match");
+        }
     }
 }

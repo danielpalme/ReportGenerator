@@ -64,6 +64,7 @@ CHANGELOG
 2.5.3.0
 
     * Fix: Issue #79: Fixed IndexOutOfRangeException in CoberturaParser
+    * Fix: Issue #83: Added support for duplicate test methods per file
 
 2.5.2.0
 
