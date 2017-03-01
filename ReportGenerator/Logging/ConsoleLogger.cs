@@ -18,7 +18,7 @@ namespace Palmmedia.ReportGenerator.Logging
         /// <param name="message">The message</param>
         public void Debug(string message)
         {
-            if (this.VerbosityLevel == VerbosityLevel.Verbose)
+            if (this.VerbosityLevel < VerbosityLevel.Info)
             {
                 Console.WriteLine(message);
             }
@@ -31,7 +31,7 @@ namespace Palmmedia.ReportGenerator.Logging
         /// <param name="args">The arguments</param>
         public void DebugFormat(string format, params object[] args)
         {
-            if (this.VerbosityLevel == VerbosityLevel.Verbose)
+            if (this.VerbosityLevel < VerbosityLevel.Info)
             {
                 Console.WriteLine(format, args);
             }
@@ -43,7 +43,7 @@ namespace Palmmedia.ReportGenerator.Logging
         /// <param name="message">The message</param>
         public void Info(string message)
         {
-            if (this.VerbosityLevel == VerbosityLevel.Verbose || this.VerbosityLevel == VerbosityLevel.Info)
+            if (this.VerbosityLevel < VerbosityLevel.Warning)
             {
                 Console.WriteLine(message);
             }
@@ -56,7 +56,7 @@ namespace Palmmedia.ReportGenerator.Logging
         /// <param name="args">The arguments</param>
         public void InfoFormat(string format, params object[] args)
         {
-            if (this.VerbosityLevel == VerbosityLevel.Verbose || this.VerbosityLevel == VerbosityLevel.Info)
+            if (this.VerbosityLevel < VerbosityLevel.Warning)
             {
                 Console.WriteLine(format, args);
             }
@@ -68,9 +68,12 @@ namespace Palmmedia.ReportGenerator.Logging
         /// <param name="message">The message</param>
         public void Warn(string message)
         {
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine(message);
-            Console.ResetColor();
+            if (this.VerbosityLevel < VerbosityLevel.Error)
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine(message);
+                Console.ResetColor();
+            }
         }
 
         /// <summary>
@@ -80,9 +83,12 @@ namespace Palmmedia.ReportGenerator.Logging
         /// <param name="args">The arguments</param>
         public void WarnFormat(string format, params object[] args)
         {
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine(format, args);
-            Console.ResetColor();
+            if (this.VerbosityLevel < VerbosityLevel.Error)
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine(format, args);
+                Console.ResetColor();
+            }
         }
 
         /// <summary>

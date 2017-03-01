@@ -61,6 +61,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+2.5.4.0
+
+    * New: Issue #85: Added new verbosity levels: Warning, Off
+
 2.5.3.0
 
     * New: Issue #78: Added support for custom storage of historic files

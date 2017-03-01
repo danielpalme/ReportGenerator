@@ -16,8 +16,18 @@
         Info,
 
         /// <summary>
+        /// Only warnings and errors are logged.
+        /// </summary>
+        Warning,
+
+        /// <summary>
         /// Only errors are logged.
         /// </summary>
-        Error
+        Error,
+
+        /// <summary>
+        /// Nothing is logged.
+        /// </summary>
+        Off
     }
 }

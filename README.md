@@ -56,7 +56,7 @@ Parameters:
     [["]-historydir:<history directory>["]]
     [["]-assemblyfilters:<(+|-)filter>[;<(+|-)filter>][;<(+|-)filter>]["]]
     [["]-classfilters:<(+|-)filter>[;<(+|-)filter>][;<(+|-)filter>]["]]
-    [["]-verbosity:<Verbose|Info|Error>["]]
+    [["]-verbosity:<Verbose|Info|Warning|Error|Off>["]]
 
 Explanations:
    Reports:           The coverage reports that should be parsed (separated by 
@@ -75,7 +75,7 @@ Explanations:
                       Exclusion filters take precedence over inclusion filters.                      
                       Wildcards are allowed.
    Verbosity:         The verbosity level of the log messages.
-                      Values: Verbose, Info, Error
+                      Values: Verbose, Info, Warning, Error, Off
 
 Default values:
    -reporttypes:Html
