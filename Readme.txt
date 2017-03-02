@@ -61,6 +61,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+2.5.5.0
+
+    * Fix: Issue #85: Added new verbosity levels: Warning, Off
+
 2.5.4.0
 
     * New: Issue #85: Added new verbosity levels: Warning, Off

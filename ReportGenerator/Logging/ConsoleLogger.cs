@@ -97,9 +97,12 @@ namespace Palmmedia.ReportGenerator.Logging
         /// <param name="message">The message</param>
         public void Error(string message)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(message);
-            Console.ResetColor();
+            if (this.VerbosityLevel < VerbosityLevel.Off)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(message);
+                Console.ResetColor();
+            }
         }
 
         /// <summary>
@@ -109,9 +112,12 @@ namespace Palmmedia.ReportGenerator.Logging
         /// <param name="args">The arguments</param>
         public void ErrorFormat(string format, params object[] args)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(format, args);
-            Console.ResetColor();
+            if (this.VerbosityLevel < VerbosityLevel.Off)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(format, args);
+                Console.ResetColor();
+            }
         }
     }
 }
