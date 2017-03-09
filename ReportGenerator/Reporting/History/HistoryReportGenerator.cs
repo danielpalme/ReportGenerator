@@ -89,6 +89,8 @@ namespace Palmmedia.ReportGenerator.Reporting.History
             {
                 using (var stream = new MemoryStream())
                 {
+                    document.Save(stream);
+                    stream.Position = 0;
                     this.historyStorage.SaveFile(stream, fileName);
                 }
             }

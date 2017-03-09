@@ -61,6 +61,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+2.5.6.0
+
+    * Fix: Issue #87: Fixed history coverage file generation
+
 2.5.5.0
 
     * Fix: Issue #85: Added new verbosity levels: Warning, Off
