@@ -61,6 +61,11 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+2.5.7.0
+
+    * New: Issue #89: Addes support fo rCobertura line-rate and
+           branch-rate metrics
+
 2.5.6.0
 
     * Fix: Issue #87: Fixed history coverage file generation
