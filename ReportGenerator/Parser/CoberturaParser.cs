@@ -69,17 +69,29 @@ namespace Palmmedia.ReportGenerator.Parser
             {
                 string methodName = method.Attribute("name").Value + method.Attribute("signature").Value;
 
-                var metrics = new List<Metric>()
+                var metrics = new List<Metric>();
+
+                var lineRate = method.Attribute("line-rate");
+
+                if (lineRate != null)
                 {
-                    new Metric(
+                    metrics.Add(new Metric(
                         ReportResources.Coverage,
                         ParserBase.CodeCoverageUri,
-                        Math.Round(decimal.Parse(method.Attribute("line-rate").Value, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero)),
-                    new Metric(
+                        Math.Round(decimal.Parse(lineRate.Value, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero))
+                    );
+                }
+
+                var branchRate = method.Attribute("branch-rate");
+
+                if (branchRate != null)
+                {
+                    metrics.Add(new Metric(
                         ReportResources.BranchCoverage,
                         ParserBase.CodeCoverageUri,
-                         Math.Round(decimal.Parse(method.Attribute("branch-rate").Value, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero))
-                };
+                        Math.Round(decimal.Parse(branchRate.Value, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero))
+                    );
+                }
 
                 var cyclomaticComplexityAttribute = method.Attribute("complexity");
 
