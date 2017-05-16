@@ -28,7 +28,7 @@ a.property {background-image: url(pic_property.png), url(data:image/png;base64,i
 th { text-align: left; }
 .table-fixed { table-layout: fixed; }
 .overview { border: solid 1px #c1c1c1; border-collapse: collapse; width: 100%; word-wrap: break-word; }
-.overview th { border: solid 1px #c1c1c1; border-collapse: collapse; padding: 2px 5px 2px 5px; background-color: #ddd; }
+.overview th { border: solid 1px #c1c1c1; border-collapse: collapse; padding: 2px 4px 2px 4px; background-color: #ddd; }
 .overview tr.namespace th { background-color: #dcdcdc; }
 .overview thead th { background-color: #d1d1d1; }
 .overview th a { color: #000; }

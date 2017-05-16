@@ -55,6 +55,11 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         private readonly bool onlySummary;
 
         /// <summary>
+        /// Indicates that CSS and JavaScript is included into the HTML instead of seperate files.
+        /// </summary>
+        private readonly bool inlineCssAndJavaScript;
+
+        /// <summary>
         /// Contains report specific JavaScript content.
         /// </summary>
         private readonly StringBuilder javaScriptContent;
@@ -68,10 +73,12 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// Initializes a new instance of the <see cref="HtmlRenderer" /> class.
         /// </summary>
         /// <param name="onlySummary">if set to <c>true</c> only a summary report is created (no class reports).</param>
+        /// <param name="inlineCssAndJavaScript">if set to <c>true</c> CSS and JavaScript is included into the HTML instead of seperate files.</param>
         /// <param name="javaScriptContent">StringBuilder used to collect report specific JavaScript.</param>
-        internal HtmlRenderer(bool onlySummary, StringBuilder javaScriptContent)
+        internal HtmlRenderer(bool onlySummary, bool inlineCssAndJavaScript, StringBuilder javaScriptContent)
         {
             this.onlySummary = onlySummary;
+            this.inlineCssAndJavaScript = inlineCssAndJavaScript;
             this.javaScriptContent = javaScriptContent;
         }
 
@@ -94,7 +101,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
 
             using (var cssStream = this.GetCombinedCss())
             {
-                string style = this.onlySummary ?
+                string style = this.inlineCssAndJavaScript ?
                     "<style TYPE=\"text/css\">" + new StreamReader(cssStream).ReadToEnd() + "</style>"
                     : CssLink;
 
@@ -113,8 +120,14 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             string fileName = GetClassReportFilename(assemblyName, className);
 
             this.CreateTextWriter(Path.Combine(targetDirectory, fileName));
+            using (var cssStream = this.GetCombinedCss())
+            {
+                string style = this.inlineCssAndJavaScript ?
+                    "<style TYPE=\"text/css\">" + new StreamReader(cssStream).ReadToEnd() + "</style>"
+                    : CssLink;
 
-            this.reportTextWriter.WriteLine(HtmlStart, WebUtility.HtmlEncode(className), WebUtility.HtmlEncode(ReportResources.CoverageReport), CssLink, "DetailViewCtrl");
+                this.reportTextWriter.WriteLine(HtmlStart, WebUtility.HtmlEncode(className), WebUtility.HtmlEncode(ReportResources.CoverageReport), style, "DetailViewCtrl");
+            }
         }
 
         /// <summary>
@@ -693,7 +706,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         {
             this.SaveReport();
 
-            if (!this.onlySummary)
+            if (!this.inlineCssAndJavaScript)
             {
                 this.SaveCss(targetDirectory);
                 this.SaveJavaScript(targetDirectory);
@@ -845,7 +858,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                 {
                     cssStream.CopyTo(fs);
 
-                    if (!this.onlySummary)
+                    if (!this.inlineCssAndJavaScript)
                     {
                         cssStream.Position = 0;
                         string css = new StreamReader(cssStream).ReadToEnd();
@@ -1058,7 +1071,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         {
             string javascript = "<script type=\"text/javascript\" src=\"combined.js\"></script>";
 
-            if (this.onlySummary)
+            if (this.inlineCssAndJavaScript)
             {
                 using (var javaScriptStream = this.GetCombinedJavascript())
                 {

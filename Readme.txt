@@ -61,9 +61,13 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+2.5.8.0
+
+    * New: Issue #90: Added report type "HtmlInline"
+
 2.5.7.0
 
-    * New: Issue #89: Addes support fo rCobertura line-rate and
+    * New: Issue #89: Added support for Cobertura line-rate and
            branch-rate metrics
 
 2.5.6.0

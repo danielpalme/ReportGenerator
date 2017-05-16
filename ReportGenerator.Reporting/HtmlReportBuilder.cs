@@ -32,7 +32,7 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// <param name="fileAnalyses">The file analyses that correspond to the class.</param>
         public override void CreateClassReport(Class @class, IEnumerable<FileAnalysis> fileAnalyses)
         {
-            using (var renderer = new HtmlRenderer(false, this.javaScriptContent))
+            using (var renderer = new HtmlRenderer(false, false, this.javaScriptContent))
             {
                 this.CreateClassReport(renderer, @class, fileAnalyses);
             }
@@ -44,7 +44,7 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// <param name="summaryResult">The summary result.</param>
         public override void CreateSummaryReport(SummaryResult summaryResult)
         {
-            using (var renderer = new HtmlRenderer(false, this.javaScriptContent))
+            using (var renderer = new HtmlRenderer(false, false, this.javaScriptContent))
             {
                 this.CreateSummaryReport(renderer, summaryResult);
             }
