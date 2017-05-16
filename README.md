@@ -6,8 +6,8 @@ The reports do not only show the coverage quota, but also include the source cod
 ReportGenerator supports merging several reports into one.
 It is also possible to pass one XML file containing several reports to ReportGenerator (e.g. a build log file).
 
-The following output formats are supported by ReportGenerator:
-* HTML, HTMLSummary, HTMLChart, [MHTML](https://en.wikipedia.org/wiki/MHTML)
+The following [output formats](https://github.com/danielpalme/ReportGenerator/wiki/Output-formats) are supported by ReportGenerator:
+* HTML, HTMLSummary, HTMLInline HTMLChart, [MHTML](https://en.wikipedia.org/wiki/MHTML)
 * XML, XMLSummary
 * Latex, LatexSummary
 * TextSummary
