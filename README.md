@@ -7,7 +7,7 @@ ReportGenerator supports merging several reports into one.
 It is also possible to pass one XML file containing several reports to ReportGenerator (e.g. a build log file).
 
 The following [output formats](https://github.com/danielpalme/ReportGenerator/wiki/Output-formats) are supported by ReportGenerator:
-* HTML, HTMLSummary, HTMLInline HTMLChart, [MHTML](https://en.wikipedia.org/wiki/MHTML)
+* HTML, HTMLSummary, HTMLInline, HTMLChart, [MHTML](https://en.wikipedia.org/wiki/MHTML)
 * XML, XMLSummary
 * Latex, LatexSummary
 * TextSummary
