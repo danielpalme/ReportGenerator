@@ -72,7 +72,31 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// Gets the number of total lines.
         /// </summary>
         /// <value>The total lines.</value>
-        public int? TotalLines => this.Assemblies.Sum(a => a.TotalLines);
+        public int? TotalLines
+        {
+            get
+            {
+                var processedFiles = new HashSet<string>();
+                int? result = null;
+
+                foreach (var assembly in this.Assemblies)
+                {
+                    foreach (var clazz in assembly.Classes)
+                    {
+                        foreach (var file in clazz.Files)
+                        {
+                            if (!processedFiles.Contains(file.Path) && file.TotalLines.HasValue)
+                            {
+                                processedFiles.Add(file.Path);
+                                result = result.HasValue ? result + file.TotalLines : file.TotalLines;
+                            }
+                        }
+                    }
+                }
+
+                return result;
+            }
+        }
 
         /// <summary>
         /// Gets the coverage quota of the class.

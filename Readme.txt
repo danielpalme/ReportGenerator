@@ -61,6 +61,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+2.5.9.0
+
+    * Fix: Issue #92: Improved total lines metric on summary page
+
 2.5.8.0
 
     * New: Issue #90: Added report type "HtmlInline"
