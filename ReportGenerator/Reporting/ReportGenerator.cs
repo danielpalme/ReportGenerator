@@ -41,13 +41,18 @@ namespace Palmmedia.ReportGenerator.Reporting
         private readonly IFilter classFilter;
 
         /// <summary>
+        /// The file filter.
+        /// </summary>
+        private readonly IFilter fileFilter;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ReportGenerator" /> class.
         /// </summary>
         /// <param name="parser">The IParser to use.</param>
         /// <param name="assemblyFilter">The assembly filter.</param>
         /// <param name="classFilter">The class filter.</param>
         /// <param name="renderers">The renderers.</param>
-        internal ReportGenerator(IParser parser, IFilter assemblyFilter, IFilter classFilter, IEnumerable<IReportBuilder> renderers)
+        internal ReportGenerator(IParser parser, IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter, IEnumerable<IReportBuilder> renderers)
         {
             if (parser == null)
             {
@@ -64,6 +69,11 @@ namespace Palmmedia.ReportGenerator.Reporting
                 throw new ArgumentNullException(nameof(classFilter));
             }
 
+            if (fileFilter == null)
+            {
+                throw new ArgumentNullException(nameof(fileFilter));
+            }
+
             if (renderers == null)
             {
                 throw new ArgumentNullException(nameof(renderers));
@@ -72,6 +82,7 @@ namespace Palmmedia.ReportGenerator.Reporting
             this.parser = parser;
             this.assemblyFilter = assemblyFilter;
             this.classFilter = classFilter;
+            this.fileFilter = fileFilter;
             this.renderers = renderers;
         }
 
@@ -92,6 +103,9 @@ namespace Palmmedia.ReportGenerator.Reporting
                         if (classFilter.IsElementIncludedInReport(@class.Name))
                         {
                             newAssembly.AddClass(@class);
+                            foreach(var file in @class.Files.Where(f => !this.fileFilter.IsElementIncludedInReport(f.Path))) {
+                                @class.RemoveFile(file);
+                            }
                         }
                     }
 
@@ -119,7 +133,7 @@ namespace Palmmedia.ReportGenerator.Reporting
 
                     foreach (var renderer in this.renderers)
                     {
-                        var fileAnalyses = @class.Files.Select(f => f.AnalyzeFile()).ToArray();
+                        var fileAnalyses = @class.Files.Where(f => this.fileFilter.IsElementIncludedInReport(f.Path)).Select(f => f.AnalyzeFile()).ToArray();
 
                         try
                         {

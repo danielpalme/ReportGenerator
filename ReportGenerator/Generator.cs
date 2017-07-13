@@ -54,6 +54,7 @@ namespace Palmmedia.ReportGenerator
                 parser,
                 new DefaultFilter(reportConfiguration.AssemblyFilters),
                 new DefaultFilter(reportConfiguration.ClassFilters),
+                new DefaultFilter(reportConfiguration.FileFilters),
                 reportConfiguration.ReportBuilderFactory.GetReportBuilders(reportConfiguration.TargetDirectory, reportConfiguration.ReportTypes))
                     .CreateReport(reportConfiguration.HistoryDirectory != null, executionTime);
 

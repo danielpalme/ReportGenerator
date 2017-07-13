@@ -149,6 +149,7 @@ namespace Palmmedia.ReportGenerator
             var sourceDirectories = new string[] { };
             var assemblyFilters = new string[] { };
             var classFilters = new string[] { };
+            var fileFilters = new string[] { };
             string verbosityLevel = null;
 
             string value = null;
@@ -196,12 +197,17 @@ namespace Palmmedia.ReportGenerator
                 classFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             }
 
+            if (namedArguments.TryGetValue("FILEFILTERS", out value))
+            {
+                fileFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            }
+
             if (namedArguments.TryGetValue("VERBOSITY", out value))
             {
                 verbosityLevel = value;
             }
 
-            return new ReportConfiguration(this.reportBuilderFactory, reportFilePatterns, targetDirectory, historyDirectory, reportTypes, sourceDirectories, assemblyFilters, classFilters, verbosityLevel);
+            return new ReportConfiguration(this.reportBuilderFactory, reportFilePatterns, targetDirectory, historyDirectory, reportTypes, sourceDirectories, assemblyFilters, classFilters, fileFilters, verbosityLevel);
         }
 
         /// <summary>
@@ -218,6 +224,7 @@ namespace Palmmedia.ReportGenerator
             var sourceDirectories = new string[] { };
             var assemblyFilters = new string[] { };
             var classFilters = new string[] { };
+            var fileFilters = new string[] { };
             string verbosityLevel = null;
 
             if (args.Length > 0)
@@ -235,7 +242,8 @@ namespace Palmmedia.ReportGenerator
                 reportTypes = new[] { args[2] };
             }
 
-            return new ReportConfiguration(this.reportBuilderFactory, reportFilePatterns, targetDirectory, null, reportTypes, sourceDirectories, assemblyFilters, classFilters, verbosityLevel);
+            return new ReportConfiguration(this.reportBuilderFactory, reportFilePatterns, targetDirectory, null, reportTypes, sourceDirectories, assemblyFilters, classFilters, fileFilters, verbosityLevel);
         }
     }
 }
+
