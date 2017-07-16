@@ -97,7 +97,7 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to                   Exclusion filters take precedence over inclusion filters. Wildcards are allowed..
+        ///   Looks up a localized string similar to File Filters:     Optional list of files that should be included or excluded in the report..
         /// </summary>
         internal static string Explanations10 {
             get {
@@ -106,11 +106,20 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Verbosity: The verbosity level of the log messages..
+        ///   Looks up a localized string similar to                   Exclusion filters take precedence over inclusion filters. Wildcards are allowed..
         /// </summary>
         internal static string Explanations11 {
             get {
                 return ResourceManager.GetString("Explanations11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verbosity: The verbosity level of the log messages..
+        /// </summary>
+        internal static string Explanations12 {
+            get {
+                return ResourceManager.GetString("Explanations12", resourceCulture);
             }
         }
         
@@ -259,11 +268,20 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [[&quot;]-verbosity:&lt;{0}&gt;[&quot;]].
+        ///   Looks up a localized string similar to [[&quot;]-filefilters:&lt;(+|-)filter&gt;[;&lt;(+|-)filter&gt;][;&lt;(+|-)filter&gt;][&quot;]].
         /// </summary>
         internal static string Parameters8 {
             get {
                 return ResourceManager.GetString("Parameters8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [[&quot;]-verbosity:&lt;{0}&gt;[&quot;]].
+        /// </summary>
+        internal static string Parameters9 {
+            get {
+                return ResourceManager.GetString("Parameters9", resourceCulture);
             }
         }
         

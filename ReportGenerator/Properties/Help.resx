@@ -130,9 +130,12 @@
     <value>Reports: The coverage reports that should be parsed (separated by semicolon). Wildcards are allowed.</value>
   </data>
   <data name="Explanations10" xml:space="preserve">
-    <value>                  Exclusion filters take precedence over inclusion filters. Wildcards are allowed.</value>
+    <value>File Filters:     Optional list of files that should be included or excluded in the report.</value>
   </data>
   <data name="Explanations11" xml:space="preserve">
+    <value>                  Exclusion filters take precedence over inclusion filters. Wildcards are allowed.</value>
+  </data>
+  <data name="Explanations12" xml:space="preserve">
     <value>Verbosity: The verbosity level of the log messages.</value>
   </data>
   <data name="Explanations2" xml:space="preserve">
@@ -184,6 +187,9 @@
     <value>[["]-classfilters:&lt;(+|-)filter&gt;[;&lt;(+|-)filter&gt;][;&lt;(+|-)filter&gt;]["]]</value>
   </data>
   <data name="Parameters8" xml:space="preserve">
+    <value>[["]-filefilters:&lt;(+|-)filter&gt;[;&lt;(+|-)filter&gt;][;&lt;(+|-)filter&gt;]["]]</value>
+  </data>
+  <data name="Parameters9" xml:space="preserve">
     <value>[["]-verbosity:&lt;{0}&gt;["]]</value>
   </data>
   <data name="ReportTypeValues" xml:space="preserve">

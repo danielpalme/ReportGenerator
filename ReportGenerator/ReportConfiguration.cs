@@ -45,6 +45,7 @@ namespace Palmmedia.ReportGenerator
         /// <param name="sourceDirectories">The source directories.</param>
         /// <param name="assemblyFilters">The assembly filters.</param>
         /// <param name="classFilters">The class filters.</param>
+        /// <param name="fileFilters">The file filters.</param>
         /// <param name="verbosityLevel">The verbosity level.</param>
         public ReportConfiguration(
             IReportBuilderFactory reportBuilderFactory,
@@ -55,13 +56,14 @@ namespace Palmmedia.ReportGenerator
             IEnumerable<string> sourceDirectories,
             IEnumerable<string> assemblyFilters,
             IEnumerable<string> classFilters,
+            IEnumerable<string> fileFilters,
             string verbosityLevel)
         {
             if (reportBuilderFactory == null)
             {
                 throw new ArgumentNullException(nameof(reportBuilderFactory));
             }
-            
+
             if (reportFilePatterns == null)
             {
                 throw new ArgumentNullException(nameof(reportFilePatterns));
@@ -92,6 +94,11 @@ namespace Palmmedia.ReportGenerator
                 throw new ArgumentNullException(nameof(classFilters));
             }
 
+            if (fileFilters == null)
+            {
+                throw new ArgumentNullException(nameof(fileFilters));
+            }
+
             this.ReportBuilderFactory = reportBuilderFactory;
             foreach (var reportFilePattern in reportFilePatterns)
             {
@@ -120,6 +127,7 @@ namespace Palmmedia.ReportGenerator
             this.SourceDirectories = sourceDirectories;
             this.AssemblyFilters = assemblyFilters;
             this.ClassFilters = classFilters;
+            this.FileFilters = fileFilters;
 
             if (verbosityLevel != null)
             {
@@ -168,6 +176,11 @@ namespace Palmmedia.ReportGenerator
         /// Gets the class filters.
         /// </summary>
         public IEnumerable<string> ClassFilters { get; }
+
+        /// <summary>
+        /// Gets the file filters.
+        /// </summary>
+        public IEnumerable<string> FileFilters { get; }
 
         /// <summary>
         /// Gets the verbosity level.

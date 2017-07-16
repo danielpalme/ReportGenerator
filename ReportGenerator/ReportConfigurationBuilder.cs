@@ -88,7 +88,8 @@ namespace Palmmedia.ReportGenerator
             Console.WriteLine("    " + Help.Parameters5);
             Console.WriteLine("    " + Help.Parameters6);
             Console.WriteLine("    " + Help.Parameters7);
-            Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "    " + Help.Parameters8, string.Join("|", Enum.GetNames(typeof(VerbosityLevel)))));
+            Console.WriteLine("    " + Help.Parameters8);
+            Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "    " + Help.Parameters9, string.Join("|", Enum.GetNames(typeof(VerbosityLevel)))));
 
             Console.WriteLine();
             Console.WriteLine(Help.Explanations);
@@ -104,6 +105,7 @@ namespace Palmmedia.ReportGenerator
             Console.WriteLine("    " + Help.Explanations9);
             Console.WriteLine("    " + Help.Explanations10);
             Console.WriteLine("    " + Help.Explanations11);
+            Console.WriteLine("    " + Help.Explanations12);
             Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "    " + Help.VerbosityValues, string.Join(", ", Enum.GetNames(typeof(VerbosityLevel)))));
 
             Console.WriteLine();
@@ -111,6 +113,7 @@ namespace Palmmedia.ReportGenerator
             Console.WriteLine("   -reporttypes:Html");
             Console.WriteLine("   -assemblyfilters:+*");
             Console.WriteLine("   -classfilters:+*");
+            Console.WriteLine("   -filefilters:+*");
             Console.WriteLine("   -verbosity:" + VerbosityLevel.Verbose);
 
             Console.WriteLine();
@@ -149,6 +152,7 @@ namespace Palmmedia.ReportGenerator
             var sourceDirectories = new string[] { };
             var assemblyFilters = new string[] { };
             var classFilters = new string[] { };
+            var fileFilters = new string[] { };
             string verbosityLevel = null;
 
             string value = null;
@@ -196,12 +200,17 @@ namespace Palmmedia.ReportGenerator
                 classFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             }
 
+            if (namedArguments.TryGetValue("FILEFILTERS", out value))
+            {
+                fileFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            }
+
             if (namedArguments.TryGetValue("VERBOSITY", out value))
             {
                 verbosityLevel = value;
             }
 
-            return new ReportConfiguration(this.reportBuilderFactory, reportFilePatterns, targetDirectory, historyDirectory, reportTypes, sourceDirectories, assemblyFilters, classFilters, verbosityLevel);
+            return new ReportConfiguration(this.reportBuilderFactory, reportFilePatterns, targetDirectory, historyDirectory, reportTypes, sourceDirectories, assemblyFilters, classFilters, fileFilters, verbosityLevel);
         }
 
         /// <summary>
@@ -218,6 +227,7 @@ namespace Palmmedia.ReportGenerator
             var sourceDirectories = new string[] { };
             var assemblyFilters = new string[] { };
             var classFilters = new string[] { };
+            var fileFilters = new string[] { };
             string verbosityLevel = null;
 
             if (args.Length > 0)
@@ -235,7 +245,7 @@ namespace Palmmedia.ReportGenerator
                 reportTypes = new[] { args[2] };
             }
 
-            return new ReportConfiguration(this.reportBuilderFactory, reportFilePatterns, targetDirectory, null, reportTypes, sourceDirectories, assemblyFilters, classFilters, verbosityLevel);
+            return new ReportConfiguration(this.reportBuilderFactory, reportFilePatterns, targetDirectory, null, reportTypes, sourceDirectories, assemblyFilters, classFilters, fileFilters, verbosityLevel);
         }
     }
 }

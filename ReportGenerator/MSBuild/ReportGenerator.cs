@@ -78,6 +78,14 @@ namespace Palmmedia.ReportGenerator.MSBuild
         public ITaskItem[] ClassFilters { get; set; }
 
         /// <summary>
+        /// Gets or sets the file filters.
+        /// </summary>
+        /// <value>
+        /// The file filters.
+        /// </value>
+        public ITaskItem[] FileFilters { get; set; }
+
+        /// <summary>
         /// Gets or sets the verbosity level.
         /// </summary>
         /// <value>
@@ -111,6 +119,7 @@ namespace Palmmedia.ReportGenerator.MSBuild
                 this.SourceDirectories == null ? Enumerable.Empty<string>() : this.SourceDirectories.Select(r => r.ItemSpec),
                 assemblyFilters == null ? Enumerable.Empty<string>() : assemblyFilters.Select(r => r.ItemSpec),
                 this.ClassFilters == null ? Enumerable.Empty<string>() : this.ClassFilters.Select(r => r.ItemSpec),
+                this.FileFilters == null ? Enumerable.Empty<string>() : this.FileFilters.Select(r => r.ItemSpec),
                 this.VerbosityLevel);
 
             return new Generator().GenerateReport(configuration);

@@ -45,7 +45,7 @@ Cobertura
 Mono (mprof-report)
 
 Also available as NuGet package:
-http://nuget.org/List/Packages/ReportGenerator
+https://www.nuget.org/packages/ReportGenerator/
 
 =======================================================================
 
@@ -60,6 +60,10 @@ For further details take a look at LICENSE.txt.
 =======================================================================
 
 CHANGELOG
+
+2.5.10.0
+
+    * New: Issue #94: Added filtering for files
 
 2.5.9.0
 

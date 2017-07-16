@@ -187,6 +187,15 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         }
 
         /// <summary>
+        /// Removes the given file.
+        /// </summary>
+        /// <param name="codeFile">The code file.</param>
+        internal void RemoveFile(CodeFile codeFile)
+        {
+            this.files.Remove(codeFile);
+        }
+
+        /// <summary>
         /// Adds the given method metric.
         /// </summary>
         /// <param name="methodMetric">The method metric.</param>
