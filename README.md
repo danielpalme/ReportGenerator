@@ -40,7 +40,7 @@ The screenshots show two snippets of the generated reports:
 ![Screenshot 2](http://danielpalme.github.io/ReportGenerator/resources/screenshot2.png)
 
 ### Badges
-Badges in SVG format can be generated if `-reporttypes:Badges` is used:
+Badges in SVG and PNG format can be generated if `-reporttypes:Badges` is used:
 
 ![Sample badge](http://danielpalme.github.io/ReportGenerator/resources/badge.svg)
 

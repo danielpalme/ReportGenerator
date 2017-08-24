@@ -61,6 +61,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+2.5.11.0
+
+    * New: Issue #93: Added badges in PNG format
+
 2.5.10.0
 
     * New: Issue #94: Added filtering for files
