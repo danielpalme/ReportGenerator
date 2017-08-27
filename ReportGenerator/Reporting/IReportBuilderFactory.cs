@@ -16,9 +16,10 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// <summary>
         /// Gets the report builders that correspond to the given <paramref name="reportTypes"/>.
         /// </summary>
-        /// <param name="targetDirectory">The target directory where reports are stored.</param>
-        /// <param name="reportTypes">The report types.</param>
-        /// <returns>The report builders.</returns>
-        IEnumerable<IReportBuilder> GetReportBuilders(string targetDirectory, IEnumerable<string> reportTypes);
+        /// <param name="reportConfiguration">The report configuration.</param>
+        /// <returns>
+        /// The report builders.
+        /// </returns>
+        IEnumerable<IReportBuilder> GetReportBuilders(IReportConfiguration reportConfiguration);
     }
 }

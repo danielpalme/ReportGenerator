@@ -189,6 +189,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Reporting\IReportBuilderFactory.cs" />
+    <Compile Include="Reporting\IReportConfiguration.cs" />
     <Compile Include="Reporting\MefHelper.cs" />
     <Compile Include="Reporting\MefReportBuilderFactory.cs" />
     <Compile Include="Reporting\History\HistoryReportGenerator.cs" />

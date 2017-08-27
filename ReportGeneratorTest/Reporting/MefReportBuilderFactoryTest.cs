@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Palmmedia.ReportGenerator.Logging;
 using Palmmedia.ReportGenerator.Parser.Analysis;
 using Palmmedia.ReportGenerator.Reporting;
 
@@ -26,10 +27,10 @@ namespace Palmmedia.ReportGeneratorTest.Reporting
         {
             var factory = new MefReportBuilderFactory();
 
-            var reportBuilders = factory.GetReportBuilders("C:\\temp", new[] { "Html" });
+            var reportBuilders = factory.GetReportBuilders(new ReportConfiguration() { TargetDirectory = "C:\\temp", ReportTypes = new[] { "Html" } });
             Assert.AreEqual(1, reportBuilders.Count(), "Default report builder not available.");
 
-            reportBuilders = factory.GetReportBuilders("C:\\temp", new[] { "Latex" });
+            reportBuilders = factory.GetReportBuilders(new ReportConfiguration() { TargetDirectory = "C:\\temp", ReportTypes = new[] { "Latex" } });
             Assert.AreEqual(1, reportBuilders.Count(), "Report builder not available.");
             Assert.AreEqual(typeof(AdditionalLatexReportBuilder), reportBuilders.First().GetType(), "Non default report builder should get returned");
         }
@@ -46,12 +47,12 @@ namespace Palmmedia.ReportGeneratorTest.Reporting
             public string ReportType => "Latex";
 
             /// <summary>
-            /// Gets or sets the target directory where reports are stored.
+            /// Gets or sets the report configuration.
             /// </summary>
             /// <value>
-            /// The target directory.
+            /// The report configuration.
             /// </value>
-            public string TargetDirectory { get; set; }
+            public IReportConfiguration ReportConfiguration { get; set; }
 
             /// <summary>
             /// Creates a class report.
@@ -69,6 +70,27 @@ namespace Palmmedia.ReportGeneratorTest.Reporting
             public void CreateSummaryReport(SummaryResult summaryResult)
             {
             }
+        }
+
+        private class ReportConfiguration : IReportConfiguration
+        {
+            public string TargetDirectory { get; set; }
+
+            public string HistoryDirectory { get; set; }
+
+            public IEnumerable<string> ReportTypes { get; set; }
+
+            public IEnumerable<string> SourceDirectories { get; set; }
+
+            public IEnumerable<string> AssemblyFilters { get; set; }
+
+            public IEnumerable<string> ClassFilters { get; set; }
+
+            public IEnumerable<string> FileFilters { get; set; }
+
+            public VerbosityLevel VerbosityLevel { get; set; }
+
+            public string Tag { get; set; }
         }
     }
 }

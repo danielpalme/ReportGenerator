@@ -44,7 +44,8 @@ namespace Palmmedia.ReportGenerator.Reporting.History
         /// </summary>
         /// <param name="assemblies">The assemblies.</param>
         /// <param name="executionTime">The execution time.</param>
-        internal void CreateReport(IEnumerable<Assembly> assemblies, DateTime executionTime)
+        /// <param name="tag">The custom tag (e.g. build number).</param>
+        internal void CreateReport(IEnumerable<Assembly> assemblies, DateTime executionTime, string tag)
         {
             if (assemblies == null)
             {
@@ -58,7 +59,8 @@ namespace Palmmedia.ReportGenerator.Reporting.History
             var rootElement = new XElement(
                 "coverage",
                 new XAttribute("version", "1.0"),
-                new XAttribute("date", date));
+                new XAttribute("date", date),
+                new XAttribute("tag", tag));
 
             foreach (var assembly in assemblies)
             {

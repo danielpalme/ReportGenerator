@@ -79,6 +79,7 @@ namespace Palmmedia.ReportGenerator.Reporting.History
                     }
 
                     DateTime date = DateTime.ParseExact(document.Root.Attribute("date").Value, "yyyy-MM-dd_HH-mm-ss", CultureInfo.InvariantCulture);
+                    string tag = document.Root.Attribute("tag")?.Value;
 
                     foreach (var assemblyElement in document.Root.Elements("assembly"))
                     {
@@ -100,7 +101,7 @@ namespace Palmmedia.ReportGenerator.Reporting.History
                                 continue;
                             }
 
-                            HistoricCoverage historicCoverage = new HistoricCoverage(date)
+                            HistoricCoverage historicCoverage = new HistoricCoverage(date, tag)
                             {
                                 CoveredLines = int.Parse(classElement.Attribute("coveredlines").Value, CultureInfo.InvariantCulture),
                                 CoverableLines = int.Parse(classElement.Attribute("coverablelines").Value, CultureInfo.InvariantCulture),

@@ -11,9 +11,11 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// Initializes a new instance of the <see cref="HistoricCoverage" /> class.
         /// </summary>
         /// <param name="executionTime">The execution time.</param>
-        public HistoricCoverage(DateTime executionTime)
+        /// <param name="tag">The custom tag (e.g. build number).</param>
+        public HistoricCoverage(DateTime executionTime, string tag)
         {
             this.ExecutionTime = executionTime;
+            this.Tag = tag;
         }
 
         /// <summary>
@@ -21,8 +23,9 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// </summary>
         /// <param name="class">The class.</param>
         /// <param name="executionTime">The execution time.</param>
-        public HistoricCoverage(Class @class, DateTime executionTime)
-            : this(executionTime)
+        /// <param name="tag">The custom tag (e.g. build number).</param>
+        public HistoricCoverage(Class @class, DateTime executionTime, string tag)
+            : this(executionTime, tag)
         {
             if (@class == null)
             {
@@ -43,6 +46,14 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// The execution time.
         /// </value>
         public DateTime ExecutionTime { get; }
+
+        /// <summary>
+        /// Gets the custom tag (e.g. build number).
+        /// </summary>
+        /// <value>
+        /// The custom tag.
+        /// </value>
+        public string Tag { get; }
 
         /// <summary>
         /// Gets or sets the number of covered lines.

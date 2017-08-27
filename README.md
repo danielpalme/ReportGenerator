@@ -58,6 +58,7 @@ Parameters:
     [["]-classfilters:<(+|-)filter>[;<(+|-)filter>][;<(+|-)filter>]["]]
     [["]-filefilters:<(+|-)filter>[;<(+|-)filter>][;<(+|-)filter>]["]]
     [["]-verbosity:<Verbose|Info|Warning|Error|Off>["]]
+    [["]-tag:<tag>["]]
 
 Explanations:
    Reports:           The coverage reports that should be parsed (separated by 
@@ -79,6 +80,7 @@ Explanations:
                       Wildcards are allowed.
    Verbosity:         The verbosity level of the log messages.
                       Values: Verbose, Info, Warning, Error, Off
+   Tag:               Optional tag or build version.
 
 Default values:
    -reporttypes:Html
@@ -89,7 +91,7 @@ Default values:
 
 Examples:
    "-reports:coverage.xml" "-targetdir:C:\report"
-   "-reports:target\*\*.xml" "-targetdir:C:\report" -reporttypes:Latex;HtmlSummary
+   "-reports:target\*\*.xml" "-targetdir:C:\report" -reporttypes:Latex;HtmlSummary -tag:v1.4.5
    "-reports:coverage1.xml;coverage2.xml" "-targetdir:report"
    "-reports:coverage.xml" "-targetdir:C:\report" -reporttypes:Latex "-sourcedirs:C:\MyProject"
    "-reports:coverage.xml" "-targetdir:C:\report" "-sourcedirs:C:\MyProject1;C:\MyProject2" "-assemblyfilters:+Included;-Exclude

@@ -24,12 +24,12 @@ namespace Palmmedia.ReportGenerator.Reporting
         public string ReportType => "PngChart";
 
         /// <summary>
-        /// Gets or sets the target directory where reports are stored.
+        /// Gets or sets the report configuration.
         /// </summary>
         /// <value>
-        /// The target directory.
+        /// The report configuration.
         /// </value>
-        public string TargetDirectory { get; set; }
+        public IReportConfiguration ReportConfiguration { get; set; }
 
         /// <summary>
         /// Creates a class report.
@@ -110,7 +110,7 @@ namespace Palmmedia.ReportGenerator.Reporting
                     counter++;
                 }
 
-                chart.SaveImage(Path.Combine(this.TargetDirectory, "CoverageHistory.png"), ChartImageFormat.Png);
+                chart.SaveImage(Path.Combine(this.ReportConfiguration.TargetDirectory, "CoverageHistory.png"), ChartImageFormat.Png);
             }
         }
 
@@ -138,7 +138,7 @@ namespace Palmmedia.ReportGenerator.Reporting
                     .Where(h => h.ExecutionTime.Equals(executionTime))
                     .ToArray();
 
-                result.Add(new HistoricCoverage(executionTime)
+                result.Add(new HistoricCoverage(executionTime, historicCoveragesOfExecutionTime[0].Tag)
                 {
                     CoveredLines = historicCoveragesOfExecutionTime.Sum(h => h.CoveredLines),
                     CoverableLines = historicCoveragesOfExecutionTime.Sum(h => h.CoverableLines),

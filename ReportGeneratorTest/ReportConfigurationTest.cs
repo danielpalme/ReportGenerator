@@ -69,7 +69,8 @@ namespace Palmmedia.ReportGeneratorTest
                 new string[] { },
                 new string[] { },
                 new string[] { },
-                string.Empty);
+                string.Empty,
+                null);
 
             Assert.IsTrue(this.configuration.ReportFiles.Contains(ReportPath), "ReportPath does not exist in ReportFiles.");
             Assert.AreEqual("C:\\temp", this.configuration.TargetDirectory, "Wrong target directory applied.");
@@ -94,7 +95,8 @@ namespace Palmmedia.ReportGeneratorTest
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
                 new[] { "+Test3", "-Test3" },
-                VerbosityLevel.Info.ToString());
+                VerbosityLevel.Info.ToString(),
+                null);
 
             Assert.IsTrue(this.configuration.ReportFiles.Contains(ReportPath), "ReportPath does not exist in ReportFiles.");
             Assert.AreEqual("C:\\temp", this.configuration.TargetDirectory, "Wrong target directory applied.");
@@ -136,7 +138,8 @@ namespace Palmmedia.ReportGeneratorTest
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
                 new string[] { },
-                VerbosityLevel.Info.ToString());
+                VerbosityLevel.Info.ToString(),
+                null);
 
             Assert.IsFalse(this.configuration.Validate(), "Validation should fail.");
         }
@@ -154,7 +157,8 @@ namespace Palmmedia.ReportGeneratorTest
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
                 new string[] { },
-                VerbosityLevel.Info.ToString());
+                VerbosityLevel.Info.ToString(),
+                null);
 
             Assert.IsFalse(this.configuration.Validate(), "Validation should fail.");
         }
@@ -172,7 +176,8 @@ namespace Palmmedia.ReportGeneratorTest
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
                 new string[] { },
-                VerbosityLevel.Info.ToString());
+                VerbosityLevel.Info.ToString(),
+                null);
 
             Assert.IsFalse(this.configuration.Validate(), "Validation should fail.");
         }
@@ -190,7 +195,8 @@ namespace Palmmedia.ReportGeneratorTest
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
                 new string[] { },
-                VerbosityLevel.Info.ToString());
+                VerbosityLevel.Info.ToString(),
+                null);
 
             Assert.IsFalse(this.configuration.Validate(), "Validation should fail.");
         }
@@ -208,7 +214,8 @@ namespace Palmmedia.ReportGeneratorTest
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
                 new string[] { },
-                VerbosityLevel.Info.ToString());
+                VerbosityLevel.Info.ToString(),
+                null);
 
             Assert.IsFalse(this.configuration.Validate(), "Validation should fail.");
         }
@@ -226,7 +233,8 @@ namespace Palmmedia.ReportGeneratorTest
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
                 new string[] { },
-                VerbosityLevel.Info.ToString());
+                VerbosityLevel.Info.ToString(),
+                null);
 
             Assert.IsFalse(this.configuration.Validate(), "Validation should fail.");
         }
@@ -244,7 +252,8 @@ namespace Palmmedia.ReportGeneratorTest
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
                 new string[] { },
-                VerbosityLevel.Info.ToString());
+                VerbosityLevel.Info.ToString(),
+                null);
 
             Assert.IsFalse(this.configuration.Validate(), "Validation should fail.");
         }
@@ -262,7 +271,8 @@ namespace Palmmedia.ReportGeneratorTest
                 new[] { "Test" },
                 new[] { "Test2" },
                 new string[] { },
-                VerbosityLevel.Info.ToString());
+                VerbosityLevel.Info.ToString(),
+                null);
 
             Assert.IsFalse(this.configuration.Validate(), "Validation should fail.");
         }

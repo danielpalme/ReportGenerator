@@ -19,7 +19,7 @@ namespace Palmmedia.ReportGenerator.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Help {
@@ -88,7 +88,7 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reports: The coverage reports that should be parsed (separated by semicolon). Wildcards are allowed..
+        ///   Looks up a localized string similar to Reports:            The coverage reports that should be parsed (separated by semicolon). Wildcards are allowed..
         /// </summary>
         internal static string Explanations1 {
             get {
@@ -97,7 +97,7 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to File Filters:     Optional list of files that should be included or excluded in the report..
+        ///   Looks up a localized string similar to File Filters:       Optional list of files that should be included or excluded in the report..
         /// </summary>
         internal static string Explanations10 {
             get {
@@ -106,7 +106,7 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to                   Exclusion filters take precedence over inclusion filters. Wildcards are allowed..
+        ///   Looks up a localized string similar to                     Exclusion filters take precedence over inclusion filters. Wildcards are allowed..
         /// </summary>
         internal static string Explanations11 {
             get {
@@ -115,7 +115,7 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Verbosity: The verbosity level of the log messages..
+        ///   Looks up a localized string similar to Verbosity:          The verbosity level of the log messages..
         /// </summary>
         internal static string Explanations12 {
             get {
@@ -124,7 +124,16 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Target directory: The directory where the generated report should be saved..
+        ///   Looks up a localized string similar to Optional tag or build version..
+        /// </summary>
+        internal static string Explanations13 {
+            get {
+                return ResourceManager.GetString("Explanations13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target directory:   The directory where the generated report should be saved..
         /// </summary>
         internal static string Explanations2 {
             get {
@@ -133,7 +142,7 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reporttypes: The output formats and scope (separated by semicolon)..
+        ///   Looks up a localized string similar to Reporttypes:        The output formats and scope (separated by semicolon)..
         /// </summary>
         internal static string Explanations3 {
             get {
@@ -160,7 +169,7 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to History directory: Optional directory for storing persistent coverage information..
+        ///   Looks up a localized string similar to History directory:  Optional directory for storing persistent coverage information..
         /// </summary>
         internal static string Explanations6 {
             get {
@@ -169,7 +178,7 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to                    Can be used in future reports to show coverage evolution..
+        ///   Looks up a localized string similar to                     Can be used in future reports to show coverage evolution..
         /// </summary>
         internal static string Explanations7 {
             get {
@@ -178,7 +187,7 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Assembly Filters: Optional list of assemblies that should be included or excluded in the report..
+        ///   Looks up a localized string similar to Assembly Filters:   Optional list of assemblies that should be included or excluded in the report..
         /// </summary>
         internal static string Explanations8 {
             get {
@@ -187,7 +196,7 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Class Filters:    Optional list of classes that should be included or excluded in the report..
+        ///   Looks up a localized string similar to Class Filters:      Optional list of classes that should be included or excluded in the report..
         /// </summary>
         internal static string Explanations9 {
             get {
@@ -210,6 +219,15 @@ namespace Palmmedia.ReportGenerator.Properties {
         internal static string Parameters1 {
             get {
                 return ResourceManager.GetString("Parameters1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [[&quot;]-tag:&lt;tag&gt;[&quot;]].
+        /// </summary>
+        internal static string Parameters10 {
+            get {
+                return ResourceManager.GetString("Parameters10", resourceCulture);
             }
         }
         
@@ -286,7 +304,7 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to              Values: {0}.
+        ///   Looks up a localized string similar to                     Values: {0}.
         /// </summary>
         internal static string ReportTypeValues {
             get {
@@ -295,7 +313,7 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to            Values: {0}.
+        ///   Looks up a localized string similar to                     Values: {0}.
         /// </summary>
         internal static string VerbosityValues {
             get {

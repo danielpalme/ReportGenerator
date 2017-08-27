@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using Palmmedia.ReportGenerator.Logging;
 using Palmmedia.ReportGenerator.Parser.Analysis;
 
 namespace Palmmedia.ReportGenerator.Reporting
@@ -16,9 +17,9 @@ namespace Palmmedia.ReportGenerator.Reporting
         private readonly IReportBuilder htmlReportBuilder = new HtmlReportBuilder();
 
         /// <summary>
-        /// The target directory.
+        /// The report configuration.
         /// </summary>
-        private string targetDirectory;
+        private IReportConfiguration reportConfiguration;
 
         /// <summary>
         /// The temporary HTML report target directory.
@@ -34,24 +35,23 @@ namespace Palmmedia.ReportGenerator.Reporting
         public string ReportType => "MHtml";
 
         /// <summary>
-        /// Gets or sets the target directory where reports are stored.
+        /// Gets or sets the report configuration.
         /// </summary>
         /// <value>
-        /// The target directory.
+        /// The report configuration.
         /// </value>
-        public string TargetDirectory
+        public IReportConfiguration ReportConfiguration
         {
             get
             {
-                return this.targetDirectory;
+                return this.reportConfiguration;
             }
 
             set
             {
-                this.targetDirectory = value;
-                this.htmlReportTargetDirectory = Path.Combine(value, "tmphtml");
-
-                this.htmlReportBuilder.TargetDirectory = this.htmlReportTargetDirectory;
+                this.reportConfiguration = value;
+                this.htmlReportTargetDirectory = Path.Combine(value.TargetDirectory, "tmphtml");
+                this.htmlReportBuilder.ReportConfiguration = new HtmlReportBuilderReportConfiguration(value, this.htmlReportTargetDirectory);
             }
         }
 
@@ -123,7 +123,7 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// </summary>
         private void CreateMhtmlFile()
         {
-            using (var writer = new StreamWriter(new FileStream(Path.Combine(this.TargetDirectory, "Summary.mht"), FileMode.Create)))
+            using (var writer = new StreamWriter(new FileStream(Path.Combine(this.ReportConfiguration.TargetDirectory, "Summary.mht"), FileMode.Create)))
             {
                 writer.WriteLine("MIME-Version: 1.0");
                 writer.WriteLine("Content-Type: multipart/related;");
@@ -161,6 +161,73 @@ namespace Palmmedia.ReportGenerator.Reporting
 
                 writer.Write("------=_NextPart_000_0000_01D23618.54EBCBE0--");
             }
+        }
+
+        /// <summary>
+        /// Wraps another <see cref="IReportConfiguration"/> but makes it possible to override the target directory.
+        /// </summary>
+        private class HtmlReportBuilderReportConfiguration : IReportConfiguration
+        {
+            /// <summary>
+            /// The wrapped <see cref="IReportConfiguration"/> instance.
+            /// </summary>
+            private readonly IReportConfiguration reportConfiguration;
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="HtmlReportBuilderReportConfiguration"/> class.
+            /// </summary>
+            /// <param name="reportConfiguration">The wrapped <see cref="IReportConfiguration"/> instance.</param>
+            /// <param name="targetDirectory">The custom target directory.</param>
+            public HtmlReportBuilderReportConfiguration(IReportConfiguration reportConfiguration, string targetDirectory)
+            {
+                this.reportConfiguration = reportConfiguration;
+                this.TargetDirectory = targetDirectory;
+            }
+
+            /// <summary>
+            /// Gets the target directory.
+            /// </summary>
+            public string TargetDirectory { get; private set; }
+
+            /// <summary>
+            /// Gets the history directory.
+            /// </summary>
+            public string HistoryDirectory => this.reportConfiguration.TargetDirectory;
+
+            /// <summary>
+            /// Gets the type of the report.
+            /// </summary>
+            public IEnumerable<string> ReportTypes => this.reportConfiguration.ReportTypes;
+
+            /// <summary>
+            /// Gets the source directories.
+            /// </summary>
+            public IEnumerable<string> SourceDirectories => this.reportConfiguration.SourceDirectories;
+
+            /// <summary>
+            /// Gets the assembly filters.
+            /// </summary>
+            public IEnumerable<string> AssemblyFilters => this.reportConfiguration.AssemblyFilters;
+
+            /// <summary>
+            /// Gets the class filters.
+            /// </summary>
+            public IEnumerable<string> ClassFilters => this.reportConfiguration.ClassFilters;
+
+            /// <summary>
+            /// Gets the file filters.
+            /// </summary>
+            public IEnumerable<string> FileFilters => this.reportConfiguration.FileFilters;
+
+            /// <summary>
+            /// Gets the verbosity level.
+            /// </summary>
+            public VerbosityLevel VerbosityLevel => this.reportConfiguration.VerbosityLevel;
+
+            /// <summary>
+            /// Gets the custom tag (e.g. build number).
+            /// </summary>
+            public string Tag => this.reportConfiguration.Tag;
         }
     }
 }

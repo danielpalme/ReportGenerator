@@ -38,7 +38,7 @@ namespace Palmmedia.ReportGenerator.Reporting
                 throw new ArgumentNullException(nameof(summaryResult));
             }
 
-            reportRenderer.BeginSummaryReport(this.TargetDirectory, "CoverageHistory.htm", ReportResources.Summary);
+            reportRenderer.BeginSummaryReport(this.ReportConfiguration.TargetDirectory, "CoverageHistory.htm", ReportResources.Summary);
 
             var historicCoverages = this.GetOverallHistoricCoverages(summaryResult.Assemblies.SelectMany(a => a.Classes));
             if (historicCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue))
@@ -48,7 +48,7 @@ namespace Palmmedia.ReportGenerator.Reporting
 
             reportRenderer.CustomSummary(summaryResult.Assemblies, summaryResult.SupportsBranchCoverage);
 
-            reportRenderer.SaveSummaryReport(this.TargetDirectory);
+            reportRenderer.SaveSummaryReport(this.ReportConfiguration.TargetDirectory);
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace Palmmedia.ReportGenerator.Reporting
                     .Where(h => h.ExecutionTime.Equals(executionTime))
                     .ToArray();
 
-                result.Add(new HistoricCoverage(executionTime)
+                result.Add(new HistoricCoverage(executionTime, historicCoveragesOfExecutionTime[0].Tag)
                 {
                     CoveredLines = historicCoveragesOfExecutionTime.Sum(h => h.CoveredLines),
                     CoverableLines = historicCoveragesOfExecutionTime.Sum(h => h.CoverableLines),

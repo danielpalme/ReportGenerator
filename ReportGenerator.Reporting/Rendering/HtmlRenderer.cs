@@ -580,12 +580,13 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
 
             var toolTips = historicCoverages.Select(h =>
                 string.Format(
-                    "'<h3>{0} - {1}</h3>{2}{3}{4}'",
+                    "'<h3>{0} - {1}</h3>{2}{3}{4}{5}'",
                     h.ExecutionTime.ToShortDateString(),
                     h.ExecutionTime.ToLongTimeString(),
                     h.CoverageQuota.HasValue ? string.Format(CultureInfo.InvariantCulture, "<br /><span class=\"linecoverage\"></span> {0} {1}% ({2}/{3})", WebUtility.HtmlEncode(ReportResources.Coverage2), h.CoverageQuota.Value, h.CoveredLines, h.CoverableLines) : null,
                     h.BranchCoverageQuota.HasValue ? string.Format(CultureInfo.InvariantCulture, "<br /><span class=\"branchcoverage\"></span> {0} {1}% ({2}/{3})", WebUtility.HtmlEncode(ReportResources.BranchCoverage2), h.BranchCoverageQuota.Value, h.CoveredBranches, h.TotalBranches) : null,
-                    string.Format(CultureInfo.InvariantCulture, "<br />{0} {1}", WebUtility.HtmlEncode(ReportResources.TotalLines), h.TotalLines)));
+                    string.Format(CultureInfo.InvariantCulture, "<br />{0} {1}", WebUtility.HtmlEncode(ReportResources.TotalLines), h.TotalLines),
+                    h.Tag != null ? string.Format(CultureInfo.InvariantCulture, "<br />{0} {1}", WebUtility.HtmlEncode(ReportResources.Tag), h.Tag) : string.Empty));
 
             this.javaScriptContent.AppendFormat("var historyChartData{0} = {{", id);
             this.javaScriptContent.AppendLine();

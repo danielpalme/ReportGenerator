@@ -25,12 +25,12 @@ namespace Palmmedia.ReportGenerator.Reporting
         public string ReportType => "TextSummary";
 
         /// <summary>
-        /// Gets or sets the target directory where reports are stored.
+        /// Gets or sets the report configuration.
         /// </summary>
         /// <value>
-        /// The target directory.
+        /// The report configuration.
         /// </value>
-        public string TargetDirectory { get; set; }
+        public IReportConfiguration ReportConfiguration { get; set; }
 
         /// <summary>
         /// Creates a class report.
@@ -52,7 +52,7 @@ namespace Palmmedia.ReportGenerator.Reporting
                 throw new ArgumentNullException(nameof(summaryResult));
             }
 
-            string targetPath = Path.Combine(this.TargetDirectory, "Summary.txt");
+            string targetPath = Path.Combine(this.ReportConfiguration.TargetDirectory, "Summary.txt");
 
             using (var reportTextWriter = new StreamWriter(new FileStream(targetPath, FileMode.Create), Encoding.UTF8))
             {

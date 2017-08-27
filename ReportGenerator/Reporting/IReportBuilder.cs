@@ -17,12 +17,12 @@ namespace Palmmedia.ReportGenerator.Reporting
         string ReportType { get; }
 
         /// <summary>
-        /// Gets or sets the target directory where reports are stored.
+        /// Gets or sets the report configuration.
         /// </summary>
         /// <value>
-        /// The target directory.
+        /// The report configuration.
         /// </value>
-        string TargetDirectory { get; set; }
+        IReportConfiguration ReportConfiguration { get; set; }
 
         /// <summary>
         /// Creates a class report.

@@ -92,7 +92,8 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// </summary>
         /// <param name="addHistoricCoverage">if set to <c>true</c> historic coverage information is added to classes.</param>
         /// <param name="executionTime">The execution time.</param>
-        internal void CreateReport(bool addHistoricCoverage, DateTime executionTime)
+        /// <param name="tag">The custom tag (e.g. build number).</param>
+        internal void CreateReport(bool addHistoricCoverage, DateTime executionTime, string tag)
         {
             var filteredAssemblies = this.parser.Assemblies
                 .Where(a => this.assemblyFilter.IsElementIncludedInReport(a.Name))
@@ -141,7 +142,7 @@ namespace Palmmedia.ReportGenerator.Reporting
                         {
                             if (addHistoricCoverage)
                             {
-                                @class.AddHistoricCoverage(new HistoricCoverage(@class, executionTime));
+                                @class.AddHistoricCoverage(new HistoricCoverage(@class, executionTime, tag));
                             }
 
                             renderer.CreateClassReport(@class, fileAnalyses);

@@ -12,7 +12,7 @@ namespace Palmmedia.ReportGenerator
     /// <summary>
     /// Provides all parameters that are required for report generation.
     /// </summary>
-    public class ReportConfiguration
+    public class ReportConfiguration : IReportConfiguration
     {
         /// <summary>
         /// The Logger.
@@ -47,6 +47,7 @@ namespace Palmmedia.ReportGenerator
         /// <param name="classFilters">The class filters.</param>
         /// <param name="fileFilters">The file filters.</param>
         /// <param name="verbosityLevel">The verbosity level.</param>
+        /// <param name="tag">The custom tag (e.g. build number).</param>
         public ReportConfiguration(
             IReportBuilderFactory reportBuilderFactory,
             IEnumerable<string> reportFilePatterns,
@@ -57,7 +58,8 @@ namespace Palmmedia.ReportGenerator
             IEnumerable<string> assemblyFilters,
             IEnumerable<string> classFilters,
             IEnumerable<string> fileFilters,
-            string verbosityLevel)
+            string verbosityLevel,
+            string tag)
         {
             if (reportBuilderFactory == null)
             {
@@ -135,6 +137,8 @@ namespace Palmmedia.ReportGenerator
                 this.verbosityLevelValid = Enum.TryParse<VerbosityLevel>(verbosityLevel, true, out parsedVerbosityLevel);
                 this.VerbosityLevel = parsedVerbosityLevel;
             }
+
+            this.Tag = tag;
         }
 
         /// <summary>
@@ -186,6 +190,11 @@ namespace Palmmedia.ReportGenerator
         /// Gets the verbosity level.
         /// </summary>
         public VerbosityLevel VerbosityLevel { get; }
+
+        /// <summary>
+        /// Gets the custom tag (e.g. build number).
+        /// </summary>
+        public string Tag { get; }
 
         /// <summary>
         /// Validates all parameters.

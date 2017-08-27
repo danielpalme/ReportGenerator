@@ -127,22 +127,25 @@
     <value>Explanations:</value>
   </data>
   <data name="Explanations1" xml:space="preserve">
-    <value>Reports: The coverage reports that should be parsed (separated by semicolon). Wildcards are allowed.</value>
+    <value>Reports:            The coverage reports that should be parsed (separated by semicolon). Wildcards are allowed.</value>
   </data>
   <data name="Explanations10" xml:space="preserve">
-    <value>File Filters:     Optional list of files that should be included or excluded in the report.</value>
+    <value>File Filters:       Optional list of files that should be included or excluded in the report.</value>
   </data>
   <data name="Explanations11" xml:space="preserve">
-    <value>                  Exclusion filters take precedence over inclusion filters. Wildcards are allowed.</value>
+    <value>                    Exclusion filters take precedence over inclusion filters. Wildcards are allowed.</value>
   </data>
   <data name="Explanations12" xml:space="preserve">
-    <value>Verbosity: The verbosity level of the log messages.</value>
+    <value>Verbosity:          The verbosity level of the log messages.</value>
+  </data>
+  <data name="Explanations13" xml:space="preserve">
+    <value>Tag:                Optional tag or build version.</value>
   </data>
   <data name="Explanations2" xml:space="preserve">
-    <value>Target directory: The directory where the generated report should be saved.</value>
+    <value>Target directory:   The directory where the generated report should be saved.</value>
   </data>
   <data name="Explanations3" xml:space="preserve">
-    <value>Reporttypes: The output formats and scope (separated by semicolon).</value>
+    <value>Reporttypes:        The output formats and scope (separated by semicolon).</value>
   </data>
   <data name="Explanations4" xml:space="preserve">
     <value>Source directories: Optional directories which contain the corresponding source code (separated by semicolon).</value>
@@ -151,22 +154,25 @@
     <value>                    The source files are used if coverage report contains classes without path information.</value>
   </data>
   <data name="Explanations6" xml:space="preserve">
-    <value>History directory: Optional directory for storing persistent coverage information.</value>
+    <value>History directory:  Optional directory for storing persistent coverage information.</value>
   </data>
   <data name="Explanations7" xml:space="preserve">
-    <value>                   Can be used in future reports to show coverage evolution.</value>
+    <value>                    Can be used in future reports to show coverage evolution.</value>
   </data>
   <data name="Explanations8" xml:space="preserve">
-    <value>Assembly Filters: Optional list of assemblies that should be included or excluded in the report.</value>
+    <value>Assembly Filters:   Optional list of assemblies that should be included or excluded in the report.</value>
   </data>
   <data name="Explanations9" xml:space="preserve">
-    <value>Class Filters:    Optional list of classes that should be included or excluded in the report.</value>
+    <value>Class Filters:      Optional list of classes that should be included or excluded in the report.</value>
   </data>
   <data name="Parameters" xml:space="preserve">
     <value>Parameters:</value>
   </data>
   <data name="Parameters1" xml:space="preserve">
     <value>["]-reports:&lt;report&gt;[;&lt;report&gt;][;&lt;report&gt;]["]</value>
+  </data>
+  <data name="Parameters10" xml:space="preserve">
+    <value>[["]-tag:&lt;tag&gt;["]]</value>
   </data>
   <data name="Parameters2" xml:space="preserve">
     <value>["]-targetdir:&lt;target directory&gt;["]</value>
@@ -193,9 +199,9 @@
     <value>[["]-verbosity:&lt;{0}&gt;["]]</value>
   </data>
   <data name="ReportTypeValues" xml:space="preserve">
-    <value>             Values: {0}</value>
+    <value>                    Values: {0}</value>
   </data>
   <data name="VerbosityValues" xml:space="preserve">
-    <value>           Values: {0}</value>
+    <value>                    Values: {0}</value>
   </data>
 </root>

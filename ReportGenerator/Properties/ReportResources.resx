@@ -279,4 +279,7 @@
   <data name="MethodsProperties" xml:space="preserve">
     <value>Methods/Properties</value>
   </data>
+  <data name="Tag" xml:space="preserve">
+    <value>Tag:</value>
+  </data>
 </root>

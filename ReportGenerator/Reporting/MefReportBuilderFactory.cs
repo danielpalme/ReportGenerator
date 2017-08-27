@@ -34,19 +34,18 @@ namespace Palmmedia.ReportGenerator.Reporting
         }
 
         /// <summary>
-        /// Gets the report builders that correspond to the given <paramref name="reportTypes" />.
+        /// Gets the report builders that correspond to the given <paramref name="reportConfiguration" />.
         /// </summary>
-        /// <param name="targetDirectory">The target directory where reports are stored.</param>
-        /// <param name="reportTypes">The report types.</param>
+        /// <param name="reportConfiguration">The report configuration.</param>
         /// <returns>
         /// The report builders.
         /// </returns>
-        public IEnumerable<IReportBuilder> GetReportBuilders(string targetDirectory, IEnumerable<string> reportTypes)
+        public IEnumerable<IReportBuilder> GetReportBuilders(IReportConfiguration reportConfiguration)
         {
-            Logger.InfoFormat(Resources.InitializingReportBuilders, string.Join(", ", reportTypes));
+            Logger.InfoFormat(Resources.InitializingReportBuilders, string.Join(", ", reportConfiguration.ReportTypes));
 
             var reportBuilders = MefHelper.LoadInstancesOfType<IReportBuilder>()
-                .Where(r => reportTypes.Contains(r.ReportType, StringComparer.OrdinalIgnoreCase))
+                .Where(r => reportConfiguration.ReportTypes.Contains(r.ReportType, StringComparer.OrdinalIgnoreCase))
                 .OrderBy(r => r.ReportType)
                 .ToArray();
 
@@ -83,7 +82,7 @@ namespace Palmmedia.ReportGenerator.Reporting
 
             foreach (var reportBuilder in result)
             {
-                reportBuilder.TargetDirectory = targetDirectory;
+                reportBuilder.ReportConfiguration = reportConfiguration;
             }
 
             return result;

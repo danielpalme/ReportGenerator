@@ -94,6 +94,14 @@ namespace Palmmedia.ReportGenerator.MSBuild
         public string VerbosityLevel { get; set; }
 
         /// <summary>
+        /// Gets or sets the custom tag (e.g. build number).
+        /// </summary>
+        /// <value>
+        /// The custom tag.
+        /// </value>
+        public string Tag { get; set; }
+
+        /// <summary>
         /// When overridden in a derived class, executes the task.
         /// </summary>
         /// <returns>
@@ -120,7 +128,8 @@ namespace Palmmedia.ReportGenerator.MSBuild
                 assemblyFilters == null ? Enumerable.Empty<string>() : assemblyFilters.Select(r => r.ItemSpec),
                 this.ClassFilters == null ? Enumerable.Empty<string>() : this.ClassFilters.Select(r => r.ItemSpec),
                 this.FileFilters == null ? Enumerable.Empty<string>() : this.FileFilters.Select(r => r.ItemSpec),
-                this.VerbosityLevel);
+                this.VerbosityLevel,
+                this.Tag);
 
             return new Generator().GenerateReport(configuration);
         }

@@ -55,13 +55,13 @@ namespace Palmmedia.ReportGenerator
                 new DefaultFilter(reportConfiguration.AssemblyFilters),
                 new DefaultFilter(reportConfiguration.ClassFilters),
                 new DefaultFilter(reportConfiguration.FileFilters),
-                reportConfiguration.ReportBuilderFactory.GetReportBuilders(reportConfiguration.TargetDirectory, reportConfiguration.ReportTypes))
-                    .CreateReport(reportConfiguration.HistoryDirectory != null, executionTime);
+                reportConfiguration.ReportBuilderFactory.GetReportBuilders(reportConfiguration))
+                    .CreateReport(reportConfiguration.HistoryDirectory != null, executionTime, reportConfiguration.Tag);
 
             if (historyStorage != null)
             {
                 new HistoryReportGenerator(historyStorage)
-                        .CreateReport(parser.Assemblies, executionTime);
+                        .CreateReport(parser.Assemblies, executionTime, reportConfiguration.Tag);
             }
 
             stopWatch.Stop();

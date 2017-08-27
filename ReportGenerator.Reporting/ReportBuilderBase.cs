@@ -22,12 +22,12 @@ namespace Palmmedia.ReportGenerator.Reporting
         public abstract string ReportType { get; }
 
         /// <summary>
-        /// Gets or sets the target directory where reports are stored.
+        /// Gets or sets the report configuration.
         /// </summary>
         /// <value>
-        /// The target directory.
+        /// The report configuration.
         /// </value>
-        public string TargetDirectory { get; set; }
+        public IReportConfiguration ReportConfiguration { get; set; }
 
         /// <summary>
         /// Creates a class report.
@@ -52,7 +52,7 @@ namespace Palmmedia.ReportGenerator.Reporting
                 throw new ArgumentNullException(nameof(fileAnalyses));
             }
 
-            reportRenderer.BeginClassReport(this.TargetDirectory, @class.Assembly.ShortName, @class.Name);
+            reportRenderer.BeginClassReport(this.ReportConfiguration.TargetDirectory, @class.Assembly.ShortName, @class.Name);
 
             reportRenderer.Header(ReportResources.Summary);
 
@@ -71,6 +71,11 @@ namespace Palmmedia.ReportGenerator.Reporting
             if (branchCoverage.HasValue)
             {
                 reportRenderer.KeyValueRow(ReportResources.BranchCoverage2, branchCoverage.Value.ToString(CultureInfo.InvariantCulture) + "%");
+            }
+
+            if (this.ReportConfiguration.Tag != null)
+            {
+                reportRenderer.KeyValueRow(ReportResources.Tag, this.ReportConfiguration.Tag);
             }
 
             reportRenderer.FinishTable();
@@ -150,7 +155,7 @@ namespace Palmmedia.ReportGenerator.Reporting
                 reportRenderer.TestMethods(testMethods, codeElementsByFileIndex);
             }
 
-            reportRenderer.SaveClassReport(this.TargetDirectory, @class.Assembly.ShortName, @class.Name);
+            reportRenderer.SaveClassReport(this.ReportConfiguration.TargetDirectory, @class.Assembly.ShortName, @class.Name);
         }
 
         /// <summary>
@@ -170,7 +175,7 @@ namespace Palmmedia.ReportGenerator.Reporting
                 throw new ArgumentNullException(nameof(summaryResult));
             }
 
-            reportRenderer.BeginSummaryReport(this.TargetDirectory, null, ReportResources.Summary);
+            reportRenderer.BeginSummaryReport(this.ReportConfiguration.TargetDirectory, null, ReportResources.Summary);
             reportRenderer.Header(ReportResources.Summary);
 
             reportRenderer.BeginKeyValueTable();
@@ -190,6 +195,11 @@ namespace Palmmedia.ReportGenerator.Reporting
             if (branchCoverage.HasValue)
             {
                 reportRenderer.KeyValueRow(ReportResources.BranchCoverage2, branchCoverage.Value.ToString(CultureInfo.InvariantCulture) + "%");
+            }
+
+            if (this.ReportConfiguration.Tag != null)
+            {
+                reportRenderer.KeyValueRow(ReportResources.Tag, this.ReportConfiguration.Tag);
             }
 
             reportRenderer.FinishTable();
@@ -226,7 +236,7 @@ namespace Palmmedia.ReportGenerator.Reporting
 
             reportRenderer.CustomSummary(summaryResult.Assemblies, summaryResult.SupportsBranchCoverage);
             reportRenderer.AddFooter();
-            reportRenderer.SaveSummaryReport(this.TargetDirectory);
+            reportRenderer.SaveSummaryReport(this.ReportConfiguration.TargetDirectory);
         }
 
         /// <summary>
@@ -267,7 +277,7 @@ namespace Palmmedia.ReportGenerator.Reporting
                     .Where(h => h.ExecutionTime.Equals(executionTime))
                     .ToArray();
 
-                result.Add(new HistoricCoverage(executionTime)
+                result.Add(new HistoricCoverage(executionTime, historicCoveragesOfExecutionTime[0].Tag)
                 {
                     CoveredLines = historicCoveragesOfExecutionTime.Sum(h => h.CoveredLines),
                     CoverableLines = historicCoveragesOfExecutionTime.Sum(h => h.CoverableLines),

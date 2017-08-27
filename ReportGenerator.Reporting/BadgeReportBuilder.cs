@@ -147,12 +147,12 @@ namespace Palmmedia.ReportGenerator.Reporting
         public string ReportType => "Badges";
 
         /// <summary>
-        /// Gets or sets the target directory where reports are stored.
+        /// Gets or sets the report configuration.
         /// </summary>
         /// <value>
-        /// The target directory.
+        /// The report configuration.
         /// </value>
-        public string TargetDirectory { get; set; }
+        public IReportConfiguration ReportConfiguration { get; set; }
 
         /// <summary>
         /// Creates a class report.
@@ -177,29 +177,29 @@ namespace Palmmedia.ReportGenerator.Reporting
             if (summaryResult.CoverageQuota.HasValue)
             {
                 File.WriteAllText(
-                    Path.Combine(this.TargetDirectory, "badge_linecoverage.svg"),
+                    Path.Combine(this.ReportConfiguration.TargetDirectory, "badge_linecoverage.svg"),
                     this.CreateSvgBadge(summaryResult, true, false));
 
                 File.WriteAllBytes(
-                    Path.Combine(this.TargetDirectory, "badge_linecoverage.png"),
+                    Path.Combine(this.ReportConfiguration.TargetDirectory, "badge_linecoverage.png"),
                     this.CreatePngBadge(summaryResult, true));
             }
 
             if (summaryResult.BranchCoverageQuota.HasValue)
             {
                 File.WriteAllText(
-                    Path.Combine(this.TargetDirectory, "badge_branchcoverage.svg"),
+                    Path.Combine(this.ReportConfiguration.TargetDirectory, "badge_branchcoverage.svg"),
                     this.CreateSvgBadge(summaryResult, false, true));
 
                 File.WriteAllBytes(
-                    Path.Combine(this.TargetDirectory, "badge_branchcoverage.png"),
+                    Path.Combine(this.ReportConfiguration.TargetDirectory, "badge_branchcoverage.png"),
                     this.CreatePngBadge(summaryResult, false));
             }
 
             if (summaryResult.CoverageQuota.HasValue && summaryResult.BranchCoverageQuota.HasValue)
             {
                 File.WriteAllText(
-                    Path.Combine(this.TargetDirectory, "badge_combined.svg"),
+                    Path.Combine(this.ReportConfiguration.TargetDirectory, "badge_combined.svg"),
                     this.CreateSvgBadge(summaryResult, true, true));
             }
         }

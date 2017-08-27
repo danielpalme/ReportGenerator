@@ -90,6 +90,7 @@ namespace Palmmedia.ReportGenerator
             Console.WriteLine("    " + Help.Parameters7);
             Console.WriteLine("    " + Help.Parameters8);
             Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "    " + Help.Parameters9, string.Join("|", Enum.GetNames(typeof(VerbosityLevel)))));
+            Console.WriteLine("    " + Help.Parameters10);
 
             Console.WriteLine();
             Console.WriteLine(Help.Explanations);
@@ -107,6 +108,7 @@ namespace Palmmedia.ReportGenerator
             Console.WriteLine("    " + Help.Explanations11);
             Console.WriteLine("    " + Help.Explanations12);
             Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "    " + Help.VerbosityValues, string.Join(", ", Enum.GetNames(typeof(VerbosityLevel)))));
+            Console.WriteLine("    " + Help.Explanations13);
 
             Console.WriteLine();
             Console.WriteLine(Help.DefaultValues);
@@ -119,7 +121,7 @@ namespace Palmmedia.ReportGenerator
             Console.WriteLine();
             Console.WriteLine(Help.Examples);
             Console.WriteLine("   \"-reports:coverage.xml\" \"-targetdir:C:\\report\"");
-            Console.WriteLine("   \"-reports:target\\*\\*.xml\" \"-targetdir:C:\\report\" -reporttypes:Latex;HtmlSummary");
+            Console.WriteLine("   \"-reports:target\\*\\*.xml\" \"-targetdir:C:\\report\" -reporttypes:Latex;HtmlSummary -tag:v1.4.5");
             Console.WriteLine("   \"-reports:coverage1.xml;coverage2.xml\" \"-targetdir:report\"");
             Console.WriteLine("   \"-reports:coverage.xml\" \"-targetdir:C:\\report\" -reporttypes:Latex \"-sourcedirs:C:\\MyProject\"");
             Console.WriteLine("   \"-reports:coverage.xml\" \"-targetdir:C:\\report\" \"-sourcedirs:C:\\MyProject1;C:\\MyProject2\" \"-assemblyfilters:+Included;-Excluded.*\"");
@@ -154,6 +156,7 @@ namespace Palmmedia.ReportGenerator
             var classFilters = new string[] { };
             var fileFilters = new string[] { };
             string verbosityLevel = null;
+            string tag = null;
 
             string value = null;
 
@@ -210,7 +213,12 @@ namespace Palmmedia.ReportGenerator
                 verbosityLevel = value;
             }
 
-            return new ReportConfiguration(this.reportBuilderFactory, reportFilePatterns, targetDirectory, historyDirectory, reportTypes, sourceDirectories, assemblyFilters, classFilters, fileFilters, verbosityLevel);
+            if (namedArguments.TryGetValue("TAG", out value))
+            {
+                tag = value;
+            }
+
+            return new ReportConfiguration(this.reportBuilderFactory, reportFilePatterns, targetDirectory, historyDirectory, reportTypes, sourceDirectories, assemblyFilters, classFilters, fileFilters, verbosityLevel, tag);
         }
 
         /// <summary>
@@ -229,6 +237,7 @@ namespace Palmmedia.ReportGenerator
             var classFilters = new string[] { };
             var fileFilters = new string[] { };
             string verbosityLevel = null;
+            string tag = null;
 
             if (args.Length > 0)
             {
@@ -245,7 +254,7 @@ namespace Palmmedia.ReportGenerator
                 reportTypes = new[] { args[2] };
             }
 
-            return new ReportConfiguration(this.reportBuilderFactory, reportFilePatterns, targetDirectory, null, reportTypes, sourceDirectories, assemblyFilters, classFilters, fileFilters, verbosityLevel);
+            return new ReportConfiguration(this.reportBuilderFactory, reportFilePatterns, targetDirectory, null, reportTypes, sourceDirectories, assemblyFilters, classFilters, fileFilters, verbosityLevel, tag);
         }
     }
 }
