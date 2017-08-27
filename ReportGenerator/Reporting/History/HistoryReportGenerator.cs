@@ -60,7 +60,7 @@ namespace Palmmedia.ReportGenerator.Reporting.History
                 "coverage",
                 new XAttribute("version", "1.0"),
                 new XAttribute("date", date),
-                new XAttribute("tag", tag));
+                new XAttribute("tag", tag ?? string.Empty));
 
             foreach (var assembly in assemblies)
             {
