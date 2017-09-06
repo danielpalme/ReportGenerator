@@ -26,6 +26,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
 <head>
 <meta charset=""utf-8"" />
 <meta http-equiv=""X-UA-Compatible"" content=""IE=EDGE,chrome=1"" />
+<link href=""data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACbklEQVR4AX2TA7AcQRCGu894wqFi27btcmxbKqYQ27Zt27alF1un9Ux2dmuvNvx7pP/rJcI/tH37difP84HWrVu/gv8IzZNDhw55FEXpIUlSG1mWSwFArD32vyqB7EfEK1ardXOF9DIHjlfeRf4APEtPr/DJ4Vj4duLEEoE8eYBSypZD9YRWGRJIxYFSYCsWtFxz2B2dotVf3o4DPvh89WVB2EkJcT3PlAlsy5dDWiDAIKHS0foagPEoaA1TRIU04kq+PINc1qyZpEjkHlGUFJaV1dvFi0OmlSvB4/GEcnMVH1OEMgD6nuanrMWPbru7MCp+/1QqSUPU7EDUDaL27OCFxo2hyNy5oWxQ7hFYaFnm0W/L6ClYwDoOqd//BGQ5DxCik3WABjvZrVuoycTdj4iVAdS9+G1oLSDFB0gzZZJBlq2G2dxvKmSXul3w8QRIom7RAcYYKUpIc+b8CoqSajazes0jQOej2eBjbpvJQn8ZI7V8R1qw4C4V0MwwsvpC5qDXxizwrEoCEDWoKcBoKQULtRzATwULtvVZrWsM81eOg5HjfXCjTZCZ/wCwMB6k8lTsgvty5nQUdbnuZXO58sR4Hia3dsLJUfmBmMLIzEbGbcTuhF8pa6IFEABgdZYs5Yt6vUevVLQl7F5RHghSk1lvzZAfFz8LX7a/b5Ax8f7J+Kc8K1Omcsfa+vp9b5Gzg69MENBtMVn1UeRZCD4eefMufPNHm4x5D0788TMxFRpespYsyH292RLrOtKcyWhHkMIi4d7Gbgtf+fUOm33+g9m3Qn/9G80asGQInn9wMchLgsOXmPbp+JhDHPxFPwEZfJCacwZ2SQAAAABJRU5ErkJggg=="" rel=""icon"" type=""image/x-icon"" />
 <title>{0} - {1}</title>
 {2}
 </head><body data-ng-controller=""{3}""><div class=""container""><div class=""containerleft"">";
