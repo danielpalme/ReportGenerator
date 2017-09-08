@@ -26,7 +26,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
 <head>
 <meta charset=""utf-8"" />
 <meta http-equiv=""X-UA-Compatible"" content=""IE=EDGE,chrome=1"" />
-<link href=""data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACbklEQVR4AX2TA7AcQRCGu894wqFi27btcmxbKqYQ27Zt27alF1un9Ux2dmuvNvx7pP/rJcI/tH37difP84HWrVu/gv8IzZNDhw55FEXpIUlSG1mWSwFArD32vyqB7EfEK1ardXOF9DIHjlfeRf4APEtPr/DJ4Vj4duLEEoE8eYBSypZD9YRWGRJIxYFSYCsWtFxz2B2dotVf3o4DPvh89WVB2EkJcT3PlAlsy5dDWiDAIKHS0foagPEoaA1TRIU04kq+PINc1qyZpEjkHlGUFJaV1dvFi0OmlSvB4/GEcnMVH1OEMgD6nuanrMWPbru7MCp+/1QqSUPU7EDUDaL27OCFxo2hyNy5oWxQ7hFYaFnm0W/L6ClYwDoOqd//BGQ5DxCik3WABjvZrVuoycTdj4iVAdS9+G1oLSDFB0gzZZJBlq2G2dxvKmSXul3w8QRIom7RAcYYKUpIc+b8CoqSajazes0jQOej2eBjbpvJQn8ZI7V8R1qw4C4V0MwwsvpC5qDXxizwrEoCEDWoKcBoKQULtRzATwULtvVZrWsM81eOg5HjfXCjTZCZ/wCwMB6k8lTsgvty5nQUdbnuZXO58sR4Hia3dsLJUfmBmMLIzEbGbcTuhF8pa6IFEABgdZYs5Yt6vUevVLQl7F5RHghSk1lvzZAfFz8LX7a/b5Ax8f7J+Kc8K1Omcsfa+vp9b5Gzg69MENBtMVn1UeRZCD4eefMufPNHm4x5D0788TMxFRpespYsyH292RLrOtKcyWhHkMIi4d7Gbgtf+fUOm33+g9m3Qn/9G80asGQInn9wMchLgsOXmPbp+JhDHPxFPwEZfJCacwZ2SQAAAABJRU5ErkJggg=="" rel=""icon"" type=""image/x-icon"" />
+<link href=""data:image/png;base64,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"" rel=""icon"" type=""image/x-icon"" />
 <title>{0} - {1}</title>
 {2}
 </head><body data-ng-controller=""{3}""><div class=""container""><div class=""containerleft"">";
@@ -144,8 +144,9 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// Adds the test methods to the report.
         /// </summary>
         /// <param name="testMethods">The test methods.</param>
+        /// <param name="fileAnalyses">The file analyses that correspond to the class.</param>
         /// <param name="codeElementsByFileIndex">Code elements by file index.</param>
-        public void TestMethods(IEnumerable<TestMethod> testMethods, IDictionary<int, IEnumerable<CodeElement>> codeElementsByFileIndex)
+        public void TestMethods(IEnumerable<TestMethod> testMethods, IEnumerable<FileAnalysis> fileAnalyses, IDictionary<int, IEnumerable<CodeElement>> codeElementsByFileIndex)
         {
             if (testMethods == null)
             {
@@ -166,18 +167,41 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             {
                 this.reportTextWriter.WriteLine("<h1>{0}</h1>", WebUtility.HtmlEncode(ReportResources.Testmethods));
 
-                int counter = 0;
+                int coverableLines = fileAnalyses.Sum(f => f.Lines.Count(l => l.LineVisitStatus != LineVisitStatus.NotCoverable));
+                int coveredLines = fileAnalyses.Sum(f => f.Lines.Count(l => l.LineVisitStatus > LineVisitStatus.NotCovered));
+                decimal? coverage = (coverableLines == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)coveredLines / (double)coverableLines) / 10;
+
+                int? coverageRounded = null;
+
+                if (coverage.HasValue)
+                {
+                    coverageRounded = (int)coverage.Value;
+                    coverageRounded -= coverageRounded % 10;
+                }
 
                 this.reportTextWriter.WriteLine(
-                    "<label title=\"{0}\"><input type=\"radio\" name=\"method\" value=\"AllTestMethods\" data-ng-change=\"switchTestMethod('AllTestMethods')\" data-ng-model=\"selectedTestMethod\" />{0}</label>",
-                    WebUtility.HtmlEncode(ReportResources.All),
-                    counter);
+                    "<label class=\"percentagebar{0}\" title=\"{1}{2}\"><input type=\"radio\" name=\"method\" value=\"AllTestMethods\" data-ng-change=\"switchTestMethod('AllTestMethods')\" data-ng-model=\"selectedTestMethod\" />{2}</label>",
+                    coverage.HasValue ? coverageRounded.ToString() : "undefined",
+                    coverage.HasValue ? ReportResources.Coverage2 + " " + coverage.Value.ToString(CultureInfo.InvariantCulture) + "% - " : string.Empty,
+                    WebUtility.HtmlEncode(ReportResources.All));
 
                 foreach (var testMethod in testMethods)
                 {
-                    counter++;
+                    coveredLines = fileAnalyses.Sum(f => f.Lines.Count(l => l.LineCoverageByTestMethod.ContainsKey(testMethod) && l.LineCoverageByTestMethod[testMethod].LineVisitStatus > LineVisitStatus.NotCovered));
+                    coverage = (coverableLines == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)coveredLines / (double)coverableLines) / 10;
+
+                    coverageRounded = null;
+
+                    if (coverage.HasValue)
+                    {
+                        coverageRounded = (int)coverage.Value;
+                        coverageRounded -= coverageRounded % 10;
+                    }
+
                     this.reportTextWriter.WriteLine(
-                        "<br /><label title=\"{0}\"><input type=\"radio\" name=\"method\" value=\"M{1}\" data-ng-change=\"switchTestMethod('M{1}')\" data-ng-model=\"selectedTestMethod\" />{2}</label>",
+                        "<br /><label class=\"percentagebar{0}\" title=\"{1}{2}\"><input type=\"radio\" name=\"method\" value=\"M{3}\" data-ng-change=\"switchTestMethod('M{3}')\" data-ng-model=\"selectedTestMethod\" />{4}</label>",
+                        coverage.HasValue ? coverageRounded.ToString() : "undefined",
+                        coverage.HasValue ? ReportResources.Coverage2 + " " + coverage.Value.ToString(CultureInfo.InvariantCulture) + "% - " : string.Empty,
                         WebUtility.HtmlEncode(testMethod.Name),
                         testMethod.Id,
                         WebUtility.HtmlEncode(testMethod.ShortName));

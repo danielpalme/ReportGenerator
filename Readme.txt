@@ -63,6 +63,7 @@ CHANGELOG
 
 3.0.0.0
 
+    * New: Issue #70: Added coverage indicator to test method selection
     * New: Issue #99: Added new command line parameter "-tag" to add
            a custom text to reports and historic charts
 

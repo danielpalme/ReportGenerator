@@ -152,7 +152,7 @@ namespace Palmmedia.ReportGenerator.Reporting
                     codeElementsByFileIndex.Add(fileIndex++, file.CodeElements.OrderBy(c => c.Line));
                 }
 
-                reportRenderer.TestMethods(testMethods, codeElementsByFileIndex);
+                reportRenderer.TestMethods(testMethods, fileAnalyses, codeElementsByFileIndex);
             }
 
             reportRenderer.SaveClassReport(this.ReportConfiguration.TargetDirectory, @class.Assembly.ShortName, @class.Name);

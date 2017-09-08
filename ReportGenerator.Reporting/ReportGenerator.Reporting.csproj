@@ -97,6 +97,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Rendering\resources\matchMedia.js" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Rendering\resources\32.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy $(TargetPath) $(SolutionDir)ReportGenerator\$(OutDir)$(TargetFileName)
