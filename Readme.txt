@@ -66,6 +66,7 @@ CHANGELOG
     * New: Issue #70: Added coverage indicator to test method selection
     * New: Issue #99: Added new command line parameter "-tag" to add
            a custom text to reports and historic charts
+    * New: Issue #101: Added stripped lines on summary table
 
 2.5.11.0
 
