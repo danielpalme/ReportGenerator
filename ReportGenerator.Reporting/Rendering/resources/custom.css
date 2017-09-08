@@ -36,6 +36,7 @@ th { text-align: left; }
 .overview td { border: solid 1px #c1c1c1; border-collapse: collapse; padding: 2px 5px 2px 5px; }
 .coverage { border: solid 1px #c1c1c1; border-collapse: collapse; font-size: 5px; height: 10px; }
 .coverage td { padding: 0; border: none; }
+.stripped tr:nth-child(2n+1) { background-color: #F3F3F3; }
 
 .customizebox { font-size: 0.75em; margin-bottom: 7px; }
 .customizebox div { width: 33.33%; display: inline-block; }
