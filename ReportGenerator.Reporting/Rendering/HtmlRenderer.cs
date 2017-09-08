@@ -250,7 +250,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                 WebUtility.HtmlEncode(ReportResources.ShowCustomizeBoxHelp));
             this.reportTextWriter.WriteLine("</div>");
 
-            this.reportTextWriter.WriteLine("<table data-ng-if=\"!filteringEnabled\" class=\"overview table-fixed\">");
+            this.reportTextWriter.WriteLine("<table data-ng-if=\"!filteringEnabled\" class=\"overview table-fixed stripped\">");
             this.reportTextWriter.WriteLine("<colgroup>");
             this.reportTextWriter.WriteLine("<col />");
             this.reportTextWriter.WriteLine("<col class=\"column90\" />");
