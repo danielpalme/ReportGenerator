@@ -593,31 +593,52 @@ var TableHeader = React.createClass({
         this.props.updateSorting(sortby);
     },
     render: function () {
-        var nameClass = this.props.sortby === 'name' ? 'sortactive' + '_' + this.props.sortorder : 'sortinactive_asc';
-        var coveredClass = this.props.sortby === 'covered' ? 'sortactive' + '_' + this.props.sortorder : 'sortinactive_asc';
-        var uncoveredClass = this.props.sortby === 'uncovered' ? 'sortactive' + '_' + this.props.sortorder : 'sortinactive_asc';
-        var coverableClass = this.props.sortby === 'coverable' ? 'sortactive' + '_' + this.props.sortorder : 'sortinactive_asc';
-        var totalClass = this.props.sortby === 'total' ? 'sortactive' + '_' + this.props.sortorder : 'sortinactive_asc';
-        var coverageClass = this.props.sortby === 'coverage' ? 'sortactive' + '_' + this.props.sortorder : 'sortinactive_asc';
-        var branchCoverageClass = this.props.sortby === 'branchcoverage' ? 'sortactive' + '_' + this.props.sortorder : 'sortinactive_asc';
+        var nameClass = this.props.sortby === 'name' ? (this.props.sortorder === 'desc' ? 'icon-up-dir highlight' : 'icon-down-dir highlight') : 'icon-down-dir';
+        var coveredClass = this.props.sortby === 'covered' ? (this.props.sortorder === 'desc' ? 'icon-up-dir highlight' : 'icon-down-dir highlight') : 'icon-down-dir';
+        var uncoveredClass = this.props.sortby === 'uncovered' ? (this.props.sortorder === 'desc' ? 'icon-up-dir highlight' : 'icon-down-dir highlight') : 'icon-down-dir';
+        var coverableClass = this.props.sortby === 'coverable' ? (this.props.sortorder === 'desc' ? 'icon-up-dir highlight' : 'icon-down-dir highlight') : 'icon-down-dir';
+        var totalClass = this.props.sortby === 'total' ? (this.props.sortorder === 'desc' ? 'icon-up-dir highlight' : 'icon-down-dir highlight') : 'icon-down-dir';
+        var coverageClass = this.props.sortby === 'coverage' ? (this.props.sortorder === 'desc' ? 'icon-up-dir highlight' : 'icon-down-dir highlight') : 'icon-down-dir';
+        var branchCoverageClass = this.props.sortby === 'branchcoverage' ? (this.props.sortorder === 'desc' ? 'icon-up-dir highlight' : 'icon-down-dir highlight') : 'icon-down-dir';
 
         return (
             React.DOM.thead(null,
                 React.DOM.tr(null,
                     React.DOM.th(null,
-                        React.DOM.a({ className: nameClass, href: '', onClick: function (event) { this.sortingChangedHandler(event, 'name'); }.bind(this) }, translations.name)),
+                        React.DOM.a(
+                            { href: '', onClick: function (event) { this.sortingChangedHandler(event, 'name'); }.bind(this) },
+                            React.DOM.i({ className: nameClass }),
+                            translations.name)),
                     React.DOM.th({ className: 'right' },
-                        React.DOM.a({ className: coveredClass, href: '', onClick: function (event) { this.sortingChangedHandler(event, 'covered'); }.bind(this) }, translations.covered)),
+                        React.DOM.a(
+                            { href: '', onClick: function (event) { this.sortingChangedHandler(event, 'covered'); }.bind(this) },
+                            React.DOM.i({ className: coveredClass }),
+                            translations.covered)),
                     React.DOM.th({ className: 'right' },
-                        React.DOM.a({ className: uncoveredClass, href: '', onClick: function (event) { this.sortingChangedHandler(event, 'uncovered'); }.bind(this) }, translations.uncovered)),
+                        React.DOM.a(
+                            { href: '', onClick: function (event) { this.sortingChangedHandler(event, 'uncovered'); }.bind(this) },
+                            React.DOM.i({ className: uncoveredClass }),
+                            translations.uncovered)),
                     React.DOM.th({ className: 'right' },
-                        React.DOM.a({ className: coverableClass, href: '', onClick: function (event) { this.sortingChangedHandler(event, 'coverable'); }.bind(this) }, translations.coverable)),
+                        React.DOM.a(
+                            { href: '', onClick: function (event) { this.sortingChangedHandler(event, 'coverable'); }.bind(this) },
+                            React.DOM.i({ className: coverableClass }),
+                            translations.coverable)),
                     React.DOM.th({ className: 'right' },
-                        React.DOM.a({ className: totalClass, href: '', onClick: function (event) { this.sortingChangedHandler(event, 'total'); }.bind(this) }, translations.total)),
+                        React.DOM.a(
+                            { href: '', onClick: function (event) { this.sortingChangedHandler(event, 'total'); }.bind(this) },
+                            React.DOM.i({ className: totalClass }),
+                            translations.total)),
                     React.DOM.th({ className: 'center', colSpan: '2' },
-                        React.DOM.a({ className: coverageClass, href: '', onClick: function (event) { this.sortingChangedHandler(event, 'coverage'); }.bind(this) }, translations.coverage)),
+                        React.DOM.a(
+                            { href: '', onClick: function (event) { this.sortingChangedHandler(event, 'coverage'); }.bind(this) },
+                            React.DOM.i({ className: coverageClass }),
+                            translations.coverage)),
                     this.props.branchCoverageAvailable ? React.DOM.th({ className: 'center', colSpan: '2' },
-                        React.DOM.a({ className: branchCoverageClass, href: '', onClick: function (event) { this.sortingChangedHandler(event, 'branchcoverage'); }.bind(this) }, translations.branchCoverage)) : null))
+                        React.DOM.a(
+                            { href: '', onClick: function (event) { this.sortingChangedHandler(event, 'branchcoverage'); }.bind(this) },
+                            React.DOM.i({ className: branchCoverageClass }),
+                            translations.branchCoverage)) : null))
         );
     }
 });
@@ -663,9 +684,9 @@ var AssemblyRow = React.createClass({
                         {
                             id: this.props.assembly.name + id,
                             href: '',
-                            onClick: this.toggleCollapseClickHandler,
-                            className: this.props.assembly.collapsed ? 'collapsed' : 'expanded'
+                            onClick: this.toggleCollapseClickHandler
                         },
+                        React.DOM.i({ className: this.props.assembly.collapsed ? 'icon-plus' : 'icon-minus highlight'}),
                         this.props.assembly.name)),
             React.DOM.th({ className: 'right' }, this.props.assembly.coveredLines),
             React.DOM.th({ className: 'right' }, this.props.assembly.uncoveredLines),

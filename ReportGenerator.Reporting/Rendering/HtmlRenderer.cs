@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Text.RegularExpressions;
 using Palmmedia.ReportGenerator.Parser.Analysis;
 using Palmmedia.ReportGenerator.Properties;
 
@@ -217,8 +216,8 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                     foreach (var codeElement in item.Value)
                     {
                         this.reportTextWriter.WriteLine(
-                            "<a class=\"{0}\" href=\"#file{1}_line{2}\" data-ng-click=\"navigateToHash('#file{1}_line{2}')\" title=\"{3}\">{3}</a><br />",
-                            codeElement.CodeElementType == CodeElementType.Method ? "method" : "property",
+                            "<i class=\"icon-{0} testmethodicon\"></i><a href=\"#file{1}_line{2}\" data-ng-click=\"navigateToHash('#file{1}_line{2}')\" title=\"{3}\">{3}</a><br />",
+                            codeElement.CodeElementType == CodeElementType.Method ? "cube" : "wrench",
                             item.Key,
                             codeElement.Line,
                             WebUtility.HtmlEncode(codeElement.Name));
@@ -400,7 +399,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                 }
                 else
                 {
-                    this.reportTextWriter.Write("<th>{0} <a href=\"{1}\" class=\"info\">&nbsp;</a></th>", WebUtility.HtmlEncode(met.Name), WebUtility.HtmlEncode(met.ExplanationUrl.OriginalString));
+                    this.reportTextWriter.Write("<th>{0} <a href=\"{1}\"><i class=\"icon-info-circled info\"></a></th>", WebUtility.HtmlEncode(met.Name), WebUtility.HtmlEncode(met.ExplanationUrl.OriginalString));
                 }
             }
 
@@ -554,7 +553,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             {
                 int branchCoverage = (int)(100 * (double)analysis.CoveredBranches.Value / analysis.TotalBranches.Value);
                 branchCoverage -= branchCoverage % 10;
-                this.reportTextWriter.Write("<td class=\"branch{0}\">&nbsp;</td>", branchCoverage);
+                this.reportTextWriter.Write("<td class=\"percentagebar{0}\"><i class=\"icon-fork\"></i></td>", branchCoverage);
             }
             else
             {
@@ -883,21 +882,6 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                 using (var cssStream = this.GetCombinedCss())
                 {
                     cssStream.CopyTo(fs);
-
-                    if (!this.inlineCssAndJavaScript)
-                    {
-                        cssStream.Position = 0;
-                        string css = new StreamReader(cssStream).ReadToEnd();
-
-                        var matches = Regex.Matches(css, @"url\(pic_(?<filename>.+).png\),\surl\(data:image/png;base64,(?<base64image>.+)\)");
-
-                        foreach (Match match in matches)
-                        {
-                            System.IO.File.WriteAllBytes(
-                                Path.Combine(targetDirectory, "pic_" + match.Groups["filename"].Value + ".png"),
-                                Convert.FromBase64String(match.Groups["base64image"].Value));
-                        }
-                    }
                 }
             }
         }
