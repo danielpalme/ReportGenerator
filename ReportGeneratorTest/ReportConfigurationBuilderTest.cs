@@ -57,26 +57,6 @@ namespace Palmmedia.ReportGeneratorTest
         #endregion
 
         [TestMethod]
-        public void InitWithLegacyArguments_AllPropertiesApplied()
-        {
-            string[] legacyArguments = new string[]
-            {
-                ReportPath,
-                "C:\\temp",
-                "Latex"
-            };
-
-            this.configuration = this.reportConfigurationBuilder.Create(legacyArguments);
-
-            Assert.IsTrue(this.configuration.ReportFiles.Contains(ReportPath), "ReportPath does not exist in ReportFiles.");
-            Assert.AreEqual("C:\\temp", this.configuration.TargetDirectory, "Wrong target directory applied.");
-            Assert.IsTrue(this.configuration.ReportTypes.Contains("Latex"), "Wrong report type applied.");
-            Assert.IsFalse(this.configuration.SourceDirectories.Any(), "Source directories should be empty.");
-            Assert.IsFalse(this.configuration.AssemblyFilters.Any(), "AssemblyFilters should be empty.");
-            Assert.IsFalse(this.configuration.ClassFilters.Any(), "ClassFilters should be empty.");
-        }
-
-        [TestMethod]
         public void InitWithNamedArguments_OldFilters_AllPropertiesApplied()
         {
             string[] namedArguments = new string[]
