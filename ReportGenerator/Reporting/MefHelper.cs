@@ -26,39 +26,40 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// <returns>The instances.</returns>
         public static IEnumerable<T> LoadInstancesOfType<T>()
         {
-            AggregateCatalog aggregateCatalog = new AggregateCatalog();
-
-            foreach (var file in new FileInfo(typeof(MefHelper).Assembly.Location).Directory.EnumerateFiles("*.dll"))
+            using (AggregateCatalog aggregateCatalog = new AggregateCatalog())
             {
-                try
+                foreach (var file in new FileInfo(typeof(MefHelper).Assembly.Location).Directory.EnumerateFiles("*.dll"))
                 {
-                    // Unblock files, this prevents FileLoadException (e.g. if file was extracted from a ZIP archive)
-                    FileUnblocker.Unblock(file.FullName);
-
-                    var assemblyCatalog = new AssemblyCatalog(Assembly.LoadFrom(file.FullName));
-                    assemblyCatalog.Parts.ToArray(); // This may throw ReflectionTypeLoadException 
-                    aggregateCatalog.Catalogs.Add(assemblyCatalog);
-                }
-                catch (FileLoadException)
-                {
-                    Logger.ErrorFormat(Resources.FileLoadError, file.FullName);
-                    throw;
-                }
-                catch (ReflectionTypeLoadException ex)
-                {
-                    if (!file.Name.Equals("ICSharpCode.NRefactory.Cecil.dll", StringComparison.OrdinalIgnoreCase))
+                    try
                     {
-                        string errors = string.Join(Environment.NewLine, ex.LoaderExceptions.Select(e => "-" + e.Message));
-                        Logger.ErrorFormat(Resources.FileReflectionLoadError, file.FullName, errors);
+                        // Unblock files, this prevents FileLoadException (e.g. if file was extracted from a ZIP archive)
+                        FileUnblocker.Unblock(file.FullName);
+
+                        var assemblyCatalog = new AssemblyCatalog(Assembly.LoadFrom(file.FullName));
+                        assemblyCatalog.Parts.ToArray(); // This may throw ReflectionTypeLoadException 
+                        aggregateCatalog.Catalogs.Add(assemblyCatalog);
                     }
+                    catch (FileLoadException)
+                    {
+                        Logger.ErrorFormat(Resources.FileLoadError, file.FullName);
+                        throw;
+                    }
+                    catch (ReflectionTypeLoadException ex)
+                    {
+                        if (!file.Name.Equals("ICSharpCode.NRefactory.Cecil.dll", StringComparison.OrdinalIgnoreCase))
+                        {
+                            string errors = string.Join(Environment.NewLine, ex.LoaderExceptions.Select(e => "-" + e.Message));
+                            Logger.ErrorFormat(Resources.FileReflectionLoadError, file.FullName, errors);
+                        }
 
-                    // Ignore assemblies that throw this exception
+                        // Ignore assemblies that throw this exception
+                    }
                 }
-            }
 
-            using (var container = new CompositionContainer(aggregateCatalog))
-            {
-                return container.GetExportedValues<T>();
+                using (var container = new CompositionContainer(aggregateCatalog))
+                {
+                    return container.GetExportedValues<T>();
+                }
             }
         }
     }

@@ -12,6 +12,8 @@
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1703:ResourceStringsShouldBeSpelledCorrectly", MessageId = "github", Scope = "resource", Target = "Palmmedia.ReportGenerator.Properties.Resources.resources", Justification = "Spelling ist valid.")]
 
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1703:ResourceStringsShouldBeSpelledCorrectly", Scope = "resource", Target = "Palmmedia.ReportGenerator.Properties.Help.resources", Justification = "Spelling ist valid.")]
+
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Palmmedia", Scope = "namespace", Target = "Palmmedia.ReportGenerator", Justification = "Spelling ist valid.")]
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Palmmedia", Scope = "namespace", Target = "Palmmedia.ReportGenerator.Common", Justification = "Spelling ist valid.")]
@@ -42,8 +44,22 @@
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", Scope = "member", Target = "Palmmedia.ReportGenerator.ReportConfigurationBuilder.#ShowHelp()", Justification = "Spelling ist valid.")]
 
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1703:ResourceStringsShouldBeSpelledCorrectly", Scope = "resource", Target = "Palmmedia.ReportGenerator.Properties.Help.resources", Justification = "Spelling ist valid.")]
-
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Scope = "member", Target = "Palmmedia.ReportGenerator.Reporting.MefReportBuilderFactory.#LoadReportBuilders()", Justification = "Catalogs are disposed when CompositionContainer gets disposed.")]
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Reflection.Assembly.LoadFile", Scope = "member", Target = "Palmmedia.ReportGenerator.Reporting.MefReportBuilderFactory.#LoadReportBuilders()", Justification = "Assemblies have to get loaded to support plugins.")]
+
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1500:VariableNamesShouldNotMatchFieldNames", MessageId = "metrics", Scope = "member", Target = "Palmmedia.ReportGenerator.Parser.Analysis.MethodMetric.#AddMetrics(System.Collections.Generic.IEnumerable`1<Palmmedia.ReportGenerator.Parser.Analysis.Metric>)")]
+
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1500:VariableNamesShouldNotMatchFieldNames", MessageId = "lineAnalysis", Scope = "member", Target = "Palmmedia.ReportGenerator.Parser.Analysis.FileAnalysis.#AddLineAnalysis(Palmmedia.ReportGenerator.Parser.Analysis.LineAnalysis)")]
+
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1500:VariableNamesShouldNotMatchFieldNames", MessageId = "lineVisitStatus", Scope = "member", Target = "Palmmedia.ReportGenerator.Parser.Analysis.CodeFile.#AnalyzeFile()")]
+
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1500:VariableNamesShouldNotMatchFieldNames", MessageId = "lineVisitStatus", Scope = "member", Target = "Palmmedia.ReportGenerator.Parser.Analysis.CodeFile.#Merge(Palmmedia.ReportGenerator.Parser.Analysis.CodeFile)")]
+
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1500:VariableNamesShouldNotMatchFieldNames", MessageId = "methodname", Scope = "member", Target = "Palmmedia.ReportGenerator.Parser.Preprocessing.CodeAnalysis.PartCoverMethodElement.#DoesMethodnameMatch(System.String)")]
+
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1500:VariableNamesShouldNotMatchFieldNames", MessageId = "methods", Scope = "member", Target = "Palmmedia.ReportGenerator.Parser.MProfParser.#ProcessFile(Palmmedia.ReportGenerator.Parser.Analysis.Class,System.String)")]
+
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1500:VariableNamesShouldNotMatchFieldNames", MessageId = "metrics", Scope = "member", Target = "Palmmedia.ReportGenerator.Parser.Analysis.MethodMetric.#AddMetrics(System.Collections.Generic.IEnumerable`1<Palmmedia.ReportGenerator.Parser.Analysis.Metric>)")]
+
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1500:VariableNamesShouldNotMatchFieldNames", MessageId = "parameters", Scope = "member", Target = "Palmmedia.ReportGenerator.Parser.Preprocessing.CodeAnalysis.PartCoverMethodElement.#AreParametersMatching(System.Collections.Generic.ICollection`1<ICSharpCode.NRefactory.CSharp.ParameterDeclaration>)")]

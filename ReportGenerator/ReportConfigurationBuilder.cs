@@ -141,7 +141,8 @@ namespace Palmmedia.ReportGenerator
                 assemblyFilters,
                 classFilters,
                 fileFilters,
-                verbosityLevel, tag);
+                verbosityLevel,
+                tag);
         }
 
         /// <summary>

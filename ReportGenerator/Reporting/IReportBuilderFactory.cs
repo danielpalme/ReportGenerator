@@ -14,7 +14,7 @@ namespace Palmmedia.ReportGenerator.Reporting
         IEnumerable<string> GetAvailableReportTypes();
 
         /// <summary>
-        /// Gets the report builders that correspond to the given <paramref name="reportTypes"/>.
+        /// Gets the report builders that correspond to the given <paramref name="reportConfiguration"/>.
         /// </summary>
         /// <param name="reportConfiguration">The report configuration.</param>
         /// <returns>

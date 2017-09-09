@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Palmmedia.ReportGenerator.Reporting.History
@@ -46,6 +47,16 @@ namespace Palmmedia.ReportGenerator.Reporting.History
         /// <param name="fileName">Name of the file.</param>
         public void SaveFile(Stream stream, string fileName)
         {
+            if (stream == null)
+            {
+                throw new ArgumentNullException(nameof(stream));
+            }
+
+            if (fileName == null)
+            {
+                throw new ArgumentNullException(nameof(fileName));
+            }
+
             using (var output = File.OpenWrite(Path.Combine(this.historyDirectory, fileName)))
             {
                 stream.CopyTo(output);
