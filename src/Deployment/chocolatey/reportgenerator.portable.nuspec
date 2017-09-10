@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>reportgenerator.portable</id>
-    <version>2.0.0.0</version>
+    <version>3.0.0.0</version>
     <title>ReportGenerator (Portable) - Generates reports for various code coverage tools</title>
     <authors>Daniel Palme</authors>
     <owners>Daniel Palme</owners> 

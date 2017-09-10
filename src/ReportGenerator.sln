@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{CF7103C9-F21C-49AC-BD14-C7EBCEA2FA21}"
 	ProjectSection(SolutionItems) = preProject
@@ -45,9 +45,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{8775
 		ReportGenerator.Testprojects\FSharp\Reports\VisualStudio2013.coveragexml = ReportGenerator.Testprojects\FSharp\Reports\VisualStudio2013.coveragexml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportGenerator", "ReportGenerator\ReportGenerator.csproj", "{BBDF4589-00C7-44C9-97E5-641D708BCA3C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportGenerator.Console", "ReportGenerator.Console\ReportGenerator.Console.csproj", "{BBDF4589-00C7-44C9-97E5-641D708BCA3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportGeneratorTest", "ReportGeneratorTest\ReportGeneratorTest.csproj", "{FFCA13D6-B6CE-442A-9F93-149AE9B0AA1B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportGenerator.Console.Test", "ReportGenerator.Console.Test\ReportGenerator.Console.Test.csproj", "{FFCA13D6-B6CE-442A-9F93-149AE9B0AA1B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportGenerator.Reporting", "ReportGenerator.Reporting\ReportGenerator.Reporting.csproj", "{006E4F14-5F6F-416C-8F81-9082ED76A991}"
 EndProject
@@ -118,5 +118,8 @@ Global
 		{654FDEDF-31DE-47E4-A02E-F42DB1ACC722} = {89813866-CE17-47E5-BCA3-4740F8624BA5}
 		{1749EF69-D43F-4874-8290-8134B80D65E5} = {F02BAC2E-AD05-4AE9-B37B-A6B7CA732FBA}
 		{2EE13C01-7211-44B6-81A7-7D02DD7C1B3F} = {1749EF69-D43F-4874-8290-8134B80D65E5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2D015F29-27FC-43DD-91EE-3E5BA880F7D2}
 	EndGlobalSection
 EndGlobal

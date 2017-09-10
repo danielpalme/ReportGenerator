@@ -39,7 +39,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\target\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -48,7 +48,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\target\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -110,9 +110,9 @@
     <Compile Include="Reporting\DefaultFilterTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ReportGenerator\ReportGenerator.csproj">
+    <ProjectReference Include="..\ReportGenerator.Console\ReportGenerator.Console.csproj">
       <Project>{BBDF4589-00C7-44C9-97E5-641D708BCA3C}</Project>
-      <Name>ReportGenerator</Name>
+      <Name>ReportGenerator.Console</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
