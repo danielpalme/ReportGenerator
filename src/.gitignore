@@ -1,13 +1,5 @@
 /.vs
-/packages/chocolatey*
 /packages/CoverageTools
-/packages/JetBrains.dotCover.CommandLineTools*
-/packages/ICSharpCode.NRefactory*
-/packages/Mono.Cecil*
-/packages/Moq*
-/packages/MSBuildTasks*
-/packages/NuGet.CommandLine*
-/packages/OpenCover*
 /TestResults
 /ReportGenerator.Testprojects/TestResults
 /target
