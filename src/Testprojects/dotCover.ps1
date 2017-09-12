@@ -1,6 +1,6 @@
-..\packages\CoverageTools\JetBrains.dotCover.CommandLineTools.2016.2.20160818.172304\tools\dotCover.exe a /TargetExecutable=CSharp\Project\bin\Debug\Test.exe /ReportType=DetailedXML /Output=CSharp\Reports\dotCover.xml
+CoverageTools\JetBrains.dotCover.CommandLineTools.2016.2.20160818.172304\tools\dotCover.exe a /TargetExecutable=CSharp\Project\bin\Debug\Test.exe /ReportType=DetailedXML /Output=CSharp\Reports\dotCover.xml
 
-..\packages\CoverageTools\JetBrains.dotCover.CommandLineTools.2016.2.20160818.172304\tools\dotCover.exe  a /TargetExecutable=FSharp\Project\bin\Debug\Test.exe /ReportType=DetailedXML /Output=FSharp\Reports\dotCover.xml
+CoverageTools\JetBrains.dotCover.CommandLineTools.2016.2.20160818.172304\tools\dotCover.exe  a /TargetExecutable=FSharp\Project\bin\Debug\Test.exe /ReportType=DetailedXML /Output=FSharp\Reports\dotCover.xml
 
 $pathToReplace1 = [regex]::Escape((Get-Location).Path + "\CSharp\Project\bin\Debug")
 $pathToReplace2 = [regex]::Escape((Get-Location).Path + "\CSharp\Project")

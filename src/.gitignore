@@ -1,7 +1,7 @@
 /.vs
-/packages/CoverageTools
 /TestResults
-/ReportGenerator.Testprojects/TestResults
+/Testprojects/CoverageTools
+/Testprojects/TestResults
 /target
 /resources
 /build.proj

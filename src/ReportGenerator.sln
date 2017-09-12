@@ -7,37 +7,37 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSharp", "CSharp", "{B27F2C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{792589C7-7E2C-4C31-9FB3-A64F85BDF826}"
 	ProjectSection(SolutionItems) = preProject
-		ReportGenerator.Testprojects\CSharp\Reports\dotCover.xml = ReportGenerator.Testprojects\CSharp\Reports\dotCover.xml
-		ReportGenerator.Testprojects\CSharp\Reports\DynamicCodeCoverage.xml = ReportGenerator.Testprojects\CSharp\Reports\DynamicCodeCoverage.xml
-		ReportGenerator.Testprojects\CSharp\Reports\mprof-report.xml = ReportGenerator.Testprojects\CSharp\Reports\mprof-report.xml
-		ReportGenerator.Testprojects\CSharp\Reports\MultiDynamicCodeCoverage.xml = ReportGenerator.Testprojects\CSharp\Reports\MultiDynamicCodeCoverage.xml
-		ReportGenerator.Testprojects\CSharp\Reports\MultiNCover1.5.8.xml = ReportGenerator.Testprojects\CSharp\Reports\MultiNCover1.5.8.xml
-		ReportGenerator.Testprojects\CSharp\Reports\MultiOpenCover.xml = ReportGenerator.Testprojects\CSharp\Reports\MultiOpenCover.xml
-		ReportGenerator.Testprojects\CSharp\Reports\MultiPartcover2.2.xml = ReportGenerator.Testprojects\CSharp\Reports\MultiPartcover2.2.xml
-		ReportGenerator.Testprojects\CSharp\Reports\MultiPartcover2.3.xml = ReportGenerator.Testprojects\CSharp\Reports\MultiPartcover2.3.xml
-		ReportGenerator.Testprojects\CSharp\Reports\MultiVisualStudio2010.coveragexml = ReportGenerator.Testprojects\CSharp\Reports\MultiVisualStudio2010.coveragexml
-		ReportGenerator.Testprojects\CSharp\Reports\NCover1.5.8.xml = ReportGenerator.Testprojects\CSharp\Reports\NCover1.5.8.xml
-		ReportGenerator.Testprojects\CSharp\Reports\OpenCover.xml = ReportGenerator.Testprojects\CSharp\Reports\OpenCover.xml
-		ReportGenerator.Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml = ReportGenerator.Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml
-		ReportGenerator.Testprojects\CSharp\Reports\Partcover2.2.xml = ReportGenerator.Testprojects\CSharp\Reports\Partcover2.2.xml
-		ReportGenerator.Testprojects\CSharp\Reports\Partcover2.3.0.35109.xml = ReportGenerator.Testprojects\CSharp\Reports\Partcover2.3.0.35109.xml
-		ReportGenerator.Testprojects\CSharp\Reports\Partcover2.3.xml = ReportGenerator.Testprojects\CSharp\Reports\Partcover2.3.xml
-		ReportGenerator.Testprojects\CSharp\Reports\Partcover4.0.10620.xml = ReportGenerator.Testprojects\CSharp\Reports\Partcover4.0.10620.xml
-		ReportGenerator.Testprojects\CSharp\Reports\VisualStudio2010.coveragexml = ReportGenerator.Testprojects\CSharp\Reports\VisualStudio2010.coveragexml
-		ReportGenerator.Testprojects\CSharp\Reports\VisualStudio2012.coveragexml = ReportGenerator.Testprojects\CSharp\Reports\VisualStudio2012.coveragexml
-		ReportGenerator.Testprojects\CSharp\Reports\VisualStudio2013.coveragexml = ReportGenerator.Testprojects\CSharp\Reports\VisualStudio2013.coveragexml
+		Testprojects\CSharp\Reports\dotCover.xml = Testprojects\CSharp\Reports\dotCover.xml
+		Testprojects\CSharp\Reports\DynamicCodeCoverage.xml = Testprojects\CSharp\Reports\DynamicCodeCoverage.xml
+		Testprojects\CSharp\Reports\mprof-report.xml = Testprojects\CSharp\Reports\mprof-report.xml
+		Testprojects\CSharp\Reports\MultiDynamicCodeCoverage.xml = Testprojects\CSharp\Reports\MultiDynamicCodeCoverage.xml
+		Testprojects\CSharp\Reports\MultiNCover1.5.8.xml = Testprojects\CSharp\Reports\MultiNCover1.5.8.xml
+		Testprojects\CSharp\Reports\MultiOpenCover.xml = Testprojects\CSharp\Reports\MultiOpenCover.xml
+		Testprojects\CSharp\Reports\MultiPartcover2.2.xml = Testprojects\CSharp\Reports\MultiPartcover2.2.xml
+		Testprojects\CSharp\Reports\MultiPartcover2.3.xml = Testprojects\CSharp\Reports\MultiPartcover2.3.xml
+		Testprojects\CSharp\Reports\MultiVisualStudio2010.coveragexml = Testprojects\CSharp\Reports\MultiVisualStudio2010.coveragexml
+		Testprojects\CSharp\Reports\NCover1.5.8.xml = Testprojects\CSharp\Reports\NCover1.5.8.xml
+		Testprojects\CSharp\Reports\OpenCover.xml = Testprojects\CSharp\Reports\OpenCover.xml
+		Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml = Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml
+		Testprojects\CSharp\Reports\Partcover2.2.xml = Testprojects\CSharp\Reports\Partcover2.2.xml
+		Testprojects\CSharp\Reports\Partcover2.3.0.35109.xml = Testprojects\CSharp\Reports\Partcover2.3.0.35109.xml
+		Testprojects\CSharp\Reports\Partcover2.3.xml = Testprojects\CSharp\Reports\Partcover2.3.xml
+		Testprojects\CSharp\Reports\Partcover4.0.10620.xml = Testprojects\CSharp\Reports\Partcover4.0.10620.xml
+		Testprojects\CSharp\Reports\VisualStudio2010.coveragexml = Testprojects\CSharp\Reports\VisualStudio2010.coveragexml
+		Testprojects\CSharp\Reports\VisualStudio2012.coveragexml = Testprojects\CSharp\Reports\VisualStudio2012.coveragexml
+		Testprojects\CSharp\Reports\VisualStudio2013.coveragexml = Testprojects\CSharp\Reports\VisualStudio2013.coveragexml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FSharp", "FSharp", "{9223804A-D678-4EE8-BD89-19A6114DB86F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{8775E975-19C9-4F40-869B-04A8488AECC3}"
 	ProjectSection(SolutionItems) = preProject
-		ReportGenerator.Testprojects\FSharp\Reports\dotCover.xml = ReportGenerator.Testprojects\FSharp\Reports\dotCover.xml
-		ReportGenerator.Testprojects\FSharp\Reports\DynamicCodeCoverage.xml = ReportGenerator.Testprojects\FSharp\Reports\DynamicCodeCoverage.xml
-		ReportGenerator.Testprojects\CSharp\Reports\MultidotCover.xml = ReportGenerator.Testprojects\CSharp\Reports\MultidotCover.xml
-		ReportGenerator.Testprojects\FSharp\Reports\OpenCover.xml = ReportGenerator.Testprojects\FSharp\Reports\OpenCover.xml
-		ReportGenerator.Testprojects\FSharp\Reports\VisualStudio2010.coveragexml = ReportGenerator.Testprojects\FSharp\Reports\VisualStudio2010.coveragexml
-		ReportGenerator.Testprojects\FSharp\Reports\VisualStudio2013.coveragexml = ReportGenerator.Testprojects\FSharp\Reports\VisualStudio2013.coveragexml
+		Testprojects\FSharp\Reports\dotCover.xml = Testprojects\FSharp\Reports\dotCover.xml
+		Testprojects\FSharp\Reports\DynamicCodeCoverage.xml = Testprojects\FSharp\Reports\DynamicCodeCoverage.xml
+		Testprojects\CSharp\Reports\MultidotCover.xml = Testprojects\CSharp\Reports\MultidotCover.xml
+		Testprojects\FSharp\Reports\OpenCover.xml = Testprojects\FSharp\Reports\OpenCover.xml
+		Testprojects\FSharp\Reports\VisualStudio2010.coveragexml = Testprojects\FSharp\Reports\VisualStudio2010.coveragexml
+		Testprojects\FSharp\Reports\VisualStudio2013.coveragexml = Testprojects\FSharp\Reports\VisualStudio2013.coveragexml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportGenerator.Console", "ReportGenerator.Console\ReportGenerator.Console.csproj", "{BBDF4589-00C7-44C9-97E5-641D708BCA3C}"
@@ -46,9 +46,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportGenerator.Console.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportGenerator.Reporting", "ReportGenerator.Reporting\ReportGenerator.Reporting.csproj", "{006E4F14-5F6F-416C-8F81-9082ED76A991}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_CSharp", "ReportGenerator.Testprojects\CSharp\Project\Test_CSharp.csproj", "{4AF221C2-D0A0-43BD-8D36-82F99515A5D6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_CSharp", "Testprojects\CSharp\Project\Test_CSharp.csproj", "{4AF221C2-D0A0-43BD-8D36-82F99515A5D6}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Test_FSharp", "ReportGenerator.Testprojects\FSharp\Project\Test_FSharp.fsproj", "{953D4A9C-5271-4A6D-876A-7E41B93BEE77}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Test_FSharp", "Testprojects\FSharp\Project\Test_FSharp.fsproj", "{953D4A9C-5271-4A6D-876A-7E41B93BEE77}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Java", "Java", "{89813866-CE17-47E5-BCA3-4740F8624BA5}"
 EndProject
@@ -56,22 +56,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project", "Project", "{F02B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{654FDEDF-31DE-47E4-A02E-F42DB1ACC722}"
 	ProjectSection(SolutionItems) = preProject
-		ReportGenerator.Testprojects\Java\Reports\Cobertura2.1.1.xml = ReportGenerator.Testprojects\Java\Reports\Cobertura2.1.1.xml
+		Testprojects\Java\Reports\Cobertura2.1.1.xml = Testprojects\Java\Reports\Cobertura2.1.1.xml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{1749EF69-D43F-4874-8290-8134B80D65E5}"
 	ProjectSection(SolutionItems) = preProject
-		ReportGenerator.Testprojects\Java\Project\test\AbstractClass.java = ReportGenerator.Testprojects\Java\Project\test\AbstractClass.java
-		ReportGenerator.Testprojects\Java\Project\test\AbstractClass_SampleImpl1.java = ReportGenerator.Testprojects\Java\Project\test\AbstractClass_SampleImpl1.java
-		ReportGenerator.Testprojects\Java\Project\test\AbstractClass_SampleImpl2.java = ReportGenerator.Testprojects\Java\Project\test\AbstractClass_SampleImpl2.java
-		ReportGenerator.Testprojects\Java\Project\test\GenericClass.java = ReportGenerator.Testprojects\Java\Project\test\GenericClass.java
-		ReportGenerator.Testprojects\Java\Project\test\Program.java = ReportGenerator.Testprojects\Java\Project\test\Program.java
-		ReportGenerator.Testprojects\Java\Project\test\TestClass.java = ReportGenerator.Testprojects\Java\Project\test\TestClass.java
+		Testprojects\Java\Project\test\AbstractClass.java = Testprojects\Java\Project\test\AbstractClass.java
+		Testprojects\Java\Project\test\AbstractClass_SampleImpl1.java = Testprojects\Java\Project\test\AbstractClass_SampleImpl1.java
+		Testprojects\Java\Project\test\AbstractClass_SampleImpl2.java = Testprojects\Java\Project\test\AbstractClass_SampleImpl2.java
+		Testprojects\Java\Project\test\GenericClass.java = Testprojects\Java\Project\test\GenericClass.java
+		Testprojects\Java\Project\test\Program.java = Testprojects\Java\Project\test\Program.java
+		Testprojects\Java\Project\test\TestClass.java = Testprojects\Java\Project\test\TestClass.java
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sub", "sub", "{2EE13C01-7211-44B6-81A7-7D02DD7C1B3F}"
 	ProjectSection(SolutionItems) = preProject
-		ReportGenerator.Testprojects\Java\Project\test\sub\Sub.java = ReportGenerator.Testprojects\Java\Project\test\sub\Sub.java
+		Testprojects\Java\Project\test\sub\Sub.java = Testprojects\Java\Project\test\sub\Sub.java
 	EndProjectSection
 EndProject
 Global

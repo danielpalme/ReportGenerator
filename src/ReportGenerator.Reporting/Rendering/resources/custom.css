@@ -15,8 +15,6 @@ a:hover { color: #000; text-decoration: none; }
 .containerrightfixed label, .containerright a { white-space: nowrap; overflow: hidden; display: inline-block; max-width: 300px; text-overflow: ellipsis; }
 .containerright a { margin-bottom: 3px; }
 
-.testmethodicon { vertical-align: super; }
-
 @media screen and (max-width:1200px){ 
     .container { box-shadow: none; width: 100%; }
     .containerright { display: none; }
