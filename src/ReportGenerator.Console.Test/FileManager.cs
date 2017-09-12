@@ -85,7 +85,7 @@ namespace Palmmedia.ReportGeneratorTest
         internal static string GetFilesDirectory()
         {
             var baseDirectory = new DirectoryInfo(System.Reflection.Assembly.GetExecutingAssembly().Location).Parent.Parent.Parent.Parent.FullName;
-            return Path.Combine(baseDirectory, "ReportGenerator.Testprojects");
+            return Path.Combine(baseDirectory, "Testprojects");
         }
     }
 }
