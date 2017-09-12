@@ -593,13 +593,13 @@ var TableHeader = React.createClass({
         this.props.updateSorting(sortby);
     },
     render: function () {
-        var nameClass = this.props.sortby === 'name' ? (this.props.sortorder === 'desc' ? 'icon-up-dir highlight' : 'icon-down-dir highlight') : 'icon-down-dir';
-        var coveredClass = this.props.sortby === 'covered' ? (this.props.sortorder === 'desc' ? 'icon-up-dir highlight' : 'icon-down-dir highlight') : 'icon-down-dir';
-        var uncoveredClass = this.props.sortby === 'uncovered' ? (this.props.sortorder === 'desc' ? 'icon-up-dir highlight' : 'icon-down-dir highlight') : 'icon-down-dir';
-        var coverableClass = this.props.sortby === 'coverable' ? (this.props.sortorder === 'desc' ? 'icon-up-dir highlight' : 'icon-down-dir highlight') : 'icon-down-dir';
-        var totalClass = this.props.sortby === 'total' ? (this.props.sortorder === 'desc' ? 'icon-up-dir highlight' : 'icon-down-dir highlight') : 'icon-down-dir';
-        var coverageClass = this.props.sortby === 'coverage' ? (this.props.sortorder === 'desc' ? 'icon-up-dir highlight' : 'icon-down-dir highlight') : 'icon-down-dir';
-        var branchCoverageClass = this.props.sortby === 'branchcoverage' ? (this.props.sortorder === 'desc' ? 'icon-up-dir highlight' : 'icon-down-dir highlight') : 'icon-down-dir';
+        var nameClass = this.props.sortby === 'name' ? (this.props.sortorder === 'desc' ? 'icon-up-dir_active' : 'icon-down-dir_active') : 'icon-down-dir';
+        var coveredClass = this.props.sortby === 'covered' ? (this.props.sortorder === 'desc' ? 'icon-up-dir_active' : 'icon-down-dir_active') : 'icon-down-dir';
+        var uncoveredClass = this.props.sortby === 'uncovered' ? (this.props.sortorder === 'desc' ? 'icon-up-dir_active' : 'icon-down-dir_active') : 'icon-down-dir';
+        var coverableClass = this.props.sortby === 'coverable' ? (this.props.sortorder === 'desc' ? 'icon-up-dir_active' : 'icon-down-dir_active') : 'icon-down-dir';
+        var totalClass = this.props.sortby === 'total' ? (this.props.sortorder === 'desc' ? 'icon-up-dir_active' : 'icon-down-dir_active') : 'icon-down-dir';
+        var coverageClass = this.props.sortby === 'coverage' ? (this.props.sortorder === 'desc' ? 'icon-up-dir_active' : 'icon-down-dir_active') : 'icon-down-dir';
+        var branchCoverageClass = this.props.sortby === 'branchcoverage' ? (this.props.sortorder === 'desc' ? 'icon-up-dir_active' : 'icon-down-dir_active') : 'icon-down-dir';
 
         return (
             React.DOM.thead(null,
@@ -686,7 +686,7 @@ var AssemblyRow = React.createClass({
                             href: '',
                             onClick: this.toggleCollapseClickHandler
                         },
-                        React.DOM.i({ className: this.props.assembly.collapsed ? 'icon-plus' : 'icon-minus highlight'}),
+                        React.DOM.i({ className: this.props.assembly.collapsed ? 'icon-plus' : 'icon-minus'}),
                         this.props.assembly.name)),
             React.DOM.th({ className: 'right' }, this.props.assembly.coveredLines),
             React.DOM.th({ className: 'right' }, this.props.assembly.uncoveredLines),

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using Palmmedia.ReportGenerator.Parser.Analysis;
 using Palmmedia.ReportGenerator.Properties;
 
@@ -216,11 +217,11 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                     foreach (var codeElement in item.Value)
                     {
                         this.reportTextWriter.WriteLine(
-                            "<i class=\"icon-{0} testmethodicon\"></i><a href=\"#file{1}_line{2}\" data-ng-click=\"navigateToHash('#file{1}_line{2}')\" title=\"{3}\">{3}</a><br />",
-                            codeElement.CodeElementType == CodeElementType.Method ? "cube" : "wrench",
+                            "<a href=\"#file{0}_line{1}\" data-ng-click=\"navigateToHash('#file{0}_line{1}')\" title=\"{2}\"><i class=\"icon-{3}\"></i>{2}</a><br />",
                             item.Key,
                             codeElement.Line,
-                            WebUtility.HtmlEncode(codeElement.Name));
+                            WebUtility.HtmlEncode(codeElement.Name),
+                            codeElement.CodeElementType == CodeElementType.Method ? "cube" : "wrench");
                     }
                 }
             }
@@ -399,7 +400,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                 }
                 else
                 {
-                    this.reportTextWriter.Write("<th>{0} <a href=\"{1}\"><i class=\"icon-info-circled info\"></a></th>", WebUtility.HtmlEncode(met.Name), WebUtility.HtmlEncode(met.ExplanationUrl.OriginalString));
+                    this.reportTextWriter.Write("<th>{0} <a href=\"{1}\"><i class=\"icon-info-circled\"></a></th>", WebUtility.HtmlEncode(met.Name), WebUtility.HtmlEncode(met.ExplanationUrl.OriginalString));
                 }
             }
 
@@ -882,6 +883,21 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                 using (var cssStream = this.GetCombinedCss())
                 {
                     cssStream.CopyTo(fs);
+
+                    if (!this.inlineCssAndJavaScript)
+                    {
+                        cssStream.Position = 0;
+                        string css = new StreamReader(cssStream).ReadToEnd();
+
+                        var matches = Regex.Matches(css, @"url\(icon_(?<filename>.+).svg\),\surl\(data:image/svg\+xml;base64,(?<base64image>.+)\)");
+
+                        foreach (Match match in matches)
+                        {
+                            System.IO.File.WriteAllBytes(
+                                Path.Combine(targetDirectory, "icon_" + match.Groups["filename"].Value + ".svg"),
+                                Convert.FromBase64String(match.Groups["base64image"].Value));
+                        }
+                    }
                 }
             }
         }
