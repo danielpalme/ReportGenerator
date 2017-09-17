@@ -79,6 +79,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sub", "sub", "{2EE13C01-721
 		ReportGenerator.Testprojects\Java\Project\test\sub\Sub.java = ReportGenerator.Testprojects\Java\Project\test\sub\Sub.java
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportGenerator.Reporting.Test", "ReportGenerator.Reporting.Test\ReportGenerator.Reporting.Test.csproj", "{6794C939-97E1-4800-9F16-8D1BEED24DC2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,10 @@ Global
 		{953D4A9C-5271-4A6D-876A-7E41B93BEE77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{953D4A9C-5271-4A6D-876A-7E41B93BEE77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{953D4A9C-5271-4A6D-876A-7E41B93BEE77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6794C939-97E1-4800-9F16-8D1BEED24DC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6794C939-97E1-4800-9F16-8D1BEED24DC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6794C939-97E1-4800-9F16-8D1BEED24DC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6794C939-97E1-4800-9F16-8D1BEED24DC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -118,5 +124,8 @@ Global
 		{654FDEDF-31DE-47E4-A02E-F42DB1ACC722} = {89813866-CE17-47E5-BCA3-4740F8624BA5}
 		{1749EF69-D43F-4874-8290-8134B80D65E5} = {F02BAC2E-AD05-4AE9-B37B-A6B7CA732FBA}
 		{2EE13C01-7211-44B6-81A7-7D02DD7C1B3F} = {1749EF69-D43F-4874-8290-8134B80D65E5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BB7B25C5-917C-43AD-BD0E-CCEEC6BCB2CB}
 	EndGlobalSection
 EndGlobal

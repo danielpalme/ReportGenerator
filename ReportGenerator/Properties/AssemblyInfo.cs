@@ -39,4 +39,5 @@ using System.Runtime.InteropServices;
 
 [assembly: CLSCompliant(true)]
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("ReportGeneratorTest")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("ReportGenerator.Reporting.Test")]
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("DynamicProxyGenAssembly2")]

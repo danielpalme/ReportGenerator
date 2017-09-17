@@ -36,3 +36,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("2.5.11.0")]
 
 [assembly: CLSCompliant(true)]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("ReportGenerator.Reporting.Test")]

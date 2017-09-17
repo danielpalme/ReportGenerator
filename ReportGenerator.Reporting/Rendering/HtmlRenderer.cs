@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Palmmedia.ReportGenerator.Parser.Analysis;
 using Palmmedia.ReportGenerator.Properties;
+using Palmmedia.ReportGenerator.Reporting.Rendering.RiskHotspots;
 
 namespace Palmmedia.ReportGenerator.Reporting.Rendering
 {
@@ -287,6 +288,38 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             this.reportTextWriter.WriteLine("<tbody>");
         }
 
+        string CreateRiskHotspotsCloud(IEnumerable<RiskHotspot> hotspots)
+        {
+            var jsHotspotsBuilder = new StringBuilder();
+            foreach (var hotspot in hotspots)
+            {
+                var name = $"text: '{hotspot.ClassNameShort}'";
+                var weight = $"weight: '{hotspot.CrapScore}'";
+                var link = string.Format(
+                    CultureInfo.InvariantCulture,
+                    "link: '{0}'",
+                    WebUtility.HtmlEncode(GetClassReportFilename(hotspot.AssemblyShortName, hotspot.ClassName)));
+                var html =
+                    $"html: {{title: 'Riskiest method: {hotspot.ClassNameShort}.{hotspot.MethodNameShort}\\n" +
+                    $"Complexity: {hotspot.Complexity}\\n" +
+                    $"Coverage: {hotspot.Coverage}%\\n" +
+                    $"Branch coverage: {hotspot.BranchCoverage}%\\n" +
+                    $"Crap score: {hotspot.CrapScore}'}}";
+                jsHotspotsBuilder.AppendLine($"{{ {name}, {weight}, {link}, {html} }},");
+            }
+            return @"
+                var hotspots = [ " + jsHotspotsBuilder + @" ];
+
+                $(document).ready(function() {
+	                $('#hotspotsCloud').jQCloud(hotspots, {
+                        width: 1100,
+	                    height: 350,
+                        colors: ['#800026', '#bd0026', '#e31a1c', '#fc4e2a', '#fd8d3c', '#feb24c']
+	                });
+                });
+            ";
+        }
+
         /// <summary>
         /// Adds custom summary elements to the report.
         /// </summary>
@@ -349,6 +382,13 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             this.javaScriptContent.AppendLine();
 
             this.javaScriptContent.AppendLine("var branchCoverageAvailable = " + branchCoverageAvailable.ToString().ToLowerInvariant() + ";");
+
+            // Risk Hotspots analysis results
+            Header("Risk Hotspots");
+            this.reportTextWriter.Write("<div id='hotspotsCloud'></div>");
+            var hotspots = RiskHotspotsAnalysis.DetectHotspots(assemblies);
+            var hotspotsJqCloud = CreateRiskHotspotsCloud(hotspots);
+            this.javaScriptContent.AppendLine(hotspotsJqCloud);
         }
 
         /// <summary>
@@ -917,6 +957,16 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                 stream.CopyTo(ms);
             }
 
+            ms.Write(lineBreak, 0, lineBreak.Length);
+            ms.Write(lineBreak, 0, lineBreak.Length);
+
+            // https://github.com/mistic100/jQCloud
+            using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
+                "Palmmedia.ReportGenerator.Reporting.Rendering.resources.jqcloud.min.css"))
+            {
+                stream.CopyTo(ms);
+            }
+
             ms.Position = 0;
 
             return ms;
@@ -966,6 +1016,15 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             // Required for rendering charts in IE 9
             using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
     "Palmmedia.ReportGenerator.Reporting.Rendering.resources.matchMedia.js"))
+            {
+                stream.CopyTo(ms);
+            }
+
+            ms.Write(lineBreak, 0, lineBreak.Length);
+
+            // https://github.com/mistic100/jQCloud
+            using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
+                "Palmmedia.ReportGenerator.Reporting.Rendering.resources.jqcloud.min.js"))
             {
                 stream.CopyTo(ms);
             }
