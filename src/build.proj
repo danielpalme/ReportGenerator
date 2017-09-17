@@ -24,7 +24,8 @@
 
   <!-- Version, adjust before build -->
   <PropertyGroup>
-    <Version>3.0.0-beta3</Version>
+    <Version>3.0.0.0</Version>
+    <VersionShort>3.0.0</VersionShort>
   </PropertyGroup>
   
   <!-- Tools -->
@@ -96,6 +97,6 @@ target\bin\Release\Readme.txt;" />
   </Target>
       
   <Target Name="Publish" DependsOnTargets="Deploy">
-    <Exec Command="$(NuGetCommandLine) push .\target\ReportGenerator.$(Version).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
+    <Exec Command="$(NuGetCommandLine) push .\target\ReportGenerator.$(VersionShort).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
   </Target> 
 </Project>
