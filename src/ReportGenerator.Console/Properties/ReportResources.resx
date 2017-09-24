@@ -282,4 +282,7 @@
   <data name="Tag" xml:space="preserve">
     <value>Tag:</value>
   </data>
+  <data name="RiskHotspots" xml:space="preserve">
+    <value>Risk Hotspots</value>
+  </data>
 </root>
