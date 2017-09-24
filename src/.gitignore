@@ -1,0 +1,12 @@
+/.vs
+/TestResults
+/Testprojects/CoverageTools
+/Testprojects/TestResults
+/target
+/resources
+/publish.bat
+*.suo
+*.user
+*.Cache
+bin
+obj
