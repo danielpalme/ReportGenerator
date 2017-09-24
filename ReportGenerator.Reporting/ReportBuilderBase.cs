@@ -226,7 +226,7 @@ namespace Palmmedia.ReportGenerator.Reporting
 
             reportRenderer.CustomSummary(summaryResult.Assemblies, summaryResult.SupportsBranchCoverage);
 
-            var canRenderRiskHotspots = reportRenderer.RiskHotspots(null);
+            var canRenderRiskHotspots = reportRenderer.RiskHotspots();
             if (canRenderRiskHotspots)
             {
                 reportRenderer.Header(ReportResources.RiskHotspots);
