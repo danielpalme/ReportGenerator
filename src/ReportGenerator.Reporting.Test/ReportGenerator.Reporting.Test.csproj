@@ -41,7 +41,6 @@
       <HintPath>..\packages\Moq.4.2.1507.0118\lib\net40\Moq.dll</HintPath>
       <Private>True</Private>
     </Reference>
-
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
@@ -57,12 +56,11 @@
       <Project>{006e4f14-5f6f-416c-8f81-9082ed76a991}</Project>
       <Name>ReportGenerator.Reporting</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ReportGenerator\ReportGenerator.csproj">
+    <ProjectReference Include="..\ReportGenerator.Console\ReportGenerator.Console.csproj">
       <Project>{bbdf4589-00c7-44c9-97e5-641d708bca3c}</Project>
       <Name>ReportGenerator</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-
 </Project>
