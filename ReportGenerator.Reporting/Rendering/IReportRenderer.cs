@@ -146,6 +146,14 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         void Chart(IEnumerable<HistoricCoverage> historicCoverages);
 
         /// <summary>
+        /// Summary of Risk Hotspots (based on CRAP score)
+        /// </summary>
+        /// <param name="assemblies">The assemblies. Null when only testing the renderer's capability.</param>
+        /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
+        /// <returns>True if capable of rendering risk hotspots, otherwise false</returns>
+        bool RiskHotspots(IEnumerable<Assembly> assemblies = null, bool branchCoverageAvailable = true);
+
+        /// <summary>
         /// Adds the footer to the report.
         /// </summary>
         void AddFooter();

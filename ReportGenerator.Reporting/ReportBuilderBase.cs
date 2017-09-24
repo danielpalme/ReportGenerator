@@ -225,6 +225,14 @@ namespace Palmmedia.ReportGenerator.Reporting
             }
 
             reportRenderer.CustomSummary(summaryResult.Assemblies, summaryResult.SupportsBranchCoverage);
+
+            var canRenderRiskHotspots = reportRenderer.RiskHotspots(null);
+            if (canRenderRiskHotspots)
+            {
+                reportRenderer.Header(ReportResources.RiskHotspots);
+                reportRenderer.RiskHotspots(summaryResult.Assemblies, summaryResult.SupportsBranchCoverage);
+            }
+
             reportRenderer.AddFooter();
             reportRenderer.SaveSummaryReport(this.TargetDirectory);
         }

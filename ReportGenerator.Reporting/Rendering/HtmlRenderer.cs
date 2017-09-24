@@ -382,13 +382,6 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             this.javaScriptContent.AppendLine();
 
             this.javaScriptContent.AppendLine("var branchCoverageAvailable = " + branchCoverageAvailable.ToString().ToLowerInvariant() + ";");
-
-            // Risk Hotspots analysis results
-            Header(ReportResources.RiskHotspots);
-            this.reportTextWriter.Write("<div id='hotspotsCloud'></div>");
-            var hotspots = RiskHotspotsAnalysis.DetectHotspots(assemblies);
-            var hotspotsJqCloud = CreateRiskHotspotsCloud(hotspots, branchCoverageAvailable);
-            this.javaScriptContent.AppendLine(hotspotsJqCloud);
         }
 
         /// <summary>
@@ -640,6 +633,24 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             this.javaScriptContent.AppendLine();
             this.javaScriptContent.AppendLine("};");
             this.javaScriptContent.AppendLine();
+        }
+
+        /// <summary>
+        /// Summary of Risk Hotspots (based on CRAP score)
+        /// </summary>
+        /// <param name="assemblies">The assemblies. Null when only testing the renderer's capability.</param>
+        /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
+        /// <returns>True if capable of rendering risk hotspots, otherwise false</returns>
+        public bool RiskHotspots(IEnumerable<Assembly> assemblies = null, bool branchCoverageAvailable = true)
+        {
+            if (assemblies != null)
+            {
+                this.reportTextWriter.Write("<div id='hotspotsCloud'></div>");
+                var hotspots = RiskHotspotsAnalysis.DetectHotspots(assemblies);
+                var hotspotsJqCloud = CreateRiskHotspotsCloud(hotspots, branchCoverageAvailable);
+                this.javaScriptContent.AppendLine(hotspotsJqCloud);
+            }
+            return true;
         }
 
         /// <summary>
