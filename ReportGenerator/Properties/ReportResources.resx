@@ -279,4 +279,7 @@
   <data name="MethodsProperties" xml:space="preserve">
     <value>Methods/Properties</value>
   </data>
+  <data name="RiskHotspots" xml:space="preserve">
+    <value>Risk Hotspots</value>
+  </data>
 </root>

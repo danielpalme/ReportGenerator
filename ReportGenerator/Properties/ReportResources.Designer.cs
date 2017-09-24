@@ -466,6 +466,15 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Risk Hotspots.
+        /// </summary>
+        public static string RiskHotspots {
+            get {
+                return ResourceManager.GetString("RiskHotspots", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sequence coverage.
         /// </summary>
         public static string SequenceCoverage {
