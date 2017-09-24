@@ -288,7 +288,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             this.reportTextWriter.WriteLine("<tbody>");
         }
 
-        string CreateRiskHotspotsCloud(IEnumerable<RiskHotspot> hotspots)
+        string CreateRiskHotspotsCloud(IEnumerable<RiskHotspot> hotspots, bool branchCoverageAvailable)
         {
             var jsHotspotsBuilder = new StringBuilder();
             foreach (var hotspot in hotspots)
@@ -303,7 +303,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                     $"html: {{title: 'Riskiest method: {hotspot.ClassNameShort}.{hotspot.MethodNameShort}\\n" +
                     $"Complexity: {hotspot.Complexity}\\n" +
                     $"Coverage: {hotspot.Coverage}%\\n" +
-                    $"Branch coverage: {hotspot.BranchCoverage}%\\n" +
+                    (branchCoverageAvailable ? $"Branch coverage: {hotspot.BranchCoverage}%\\n" : "") +
                     $"Crap score: {hotspot.CrapScore}'}}";
                 jsHotspotsBuilder.AppendLine($"{{ {name}, {weight}, {link}, {html} }},");
             }
@@ -384,10 +384,10 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             this.javaScriptContent.AppendLine("var branchCoverageAvailable = " + branchCoverageAvailable.ToString().ToLowerInvariant() + ";");
 
             // Risk Hotspots analysis results
-            Header("Risk Hotspots");
+            Header(ReportResources.RiskHotspots);
             this.reportTextWriter.Write("<div id='hotspotsCloud'></div>");
             var hotspots = RiskHotspotsAnalysis.DetectHotspots(assemblies);
-            var hotspotsJqCloud = CreateRiskHotspotsCloud(hotspots);
+            var hotspotsJqCloud = CreateRiskHotspotsCloud(hotspots, branchCoverageAvailable);
             this.javaScriptContent.AppendLine(hotspotsJqCloud);
         }
 
