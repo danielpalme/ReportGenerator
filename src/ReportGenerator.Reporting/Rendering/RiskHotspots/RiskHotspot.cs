@@ -1,7 +1,7 @@
 ﻿
 namespace Palmmedia.ReportGenerator.Reporting.Rendering.RiskHotspots
 {
-    internal class RiskHotspot
+    public class RiskHotspot
     {
         public string AssemblyShortName { get; set; }
         public string ClassName { get; set; }

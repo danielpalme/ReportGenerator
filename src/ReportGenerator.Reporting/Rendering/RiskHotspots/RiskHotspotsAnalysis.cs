@@ -18,7 +18,6 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering.RiskHotspots
                 foreach (var @class in assembly.Classes)
                 {
                     var hotspot = new RiskHotspot {AssemblyShortName = assembly.ShortName, ClassName = @class.Name};
-                    hotspotsCloud.Add(hotspot);
 
                     foreach (var method in @class.MethodMetrics)
                     {
@@ -50,6 +49,9 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering.RiskHotspots
                             hotspot.CrapScore = crapScore;
                         }
                     }
+
+                    if (hotspot.CrapScore != 0)
+                        hotspotsCloud.Add(hotspot);
                 }
             }
 

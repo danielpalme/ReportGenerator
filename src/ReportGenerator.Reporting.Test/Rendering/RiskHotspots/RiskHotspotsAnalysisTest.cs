@@ -38,17 +38,17 @@ namespace ReportGenerator.Reporting.Test.Rendering.RiskHotspots
             assembly1.AddClass(@class1B);
             assembly2.AddClass(@class2A);
             assembly2.AddClass(@class2B);
-            var method1A1 = new MethodMetric("method1A1", new List<Metric> {new Metric("dummyMetric", null, 1)});
-            var method1A2 = new MethodMetric("method1A2", new List<Metric> { new Metric("dummyMetric", null, 1) });
+            var method1A1 = new MethodMetric("method1A1", new List<Metric> {new Metric(ReportResources.CrapScore, null, 1)});
+            var method1A2 = new MethodMetric("method1A2", new List<Metric> { new Metric(ReportResources.CrapScore, null, 1) });
             @class1A.AddMethodMetric(method1A1);
             @class1A.AddMethodMetric(method1A2);
-            var method1B1 = new MethodMetric("method1B1", new List<Metric> { new Metric("dummyMetric", null, 1) });
-            var method1B2 = new MethodMetric("method1B2", new List<Metric> { new Metric("dummyMetric", null, 1) });
+            var method1B1 = new MethodMetric("method1B1", new List<Metric> { new Metric(ReportResources.CrapScore, null, 1) });
+            var method1B2 = new MethodMetric("method1B2", new List<Metric> { new Metric(ReportResources.CrapScore, null, 1) });
             @class1B.AddMethodMetric(method1B1);
             @class1B.AddMethodMetric(method1B2);
-            var method2A1 = new MethodMetric("method2A1", new List<Metric> { new Metric("dummyMetric", null, 1) });
+            var method2A1 = new MethodMetric("method2A1", new List<Metric> { new Metric(ReportResources.CrapScore, null, 1) });
             @class2A.AddMethodMetric(method2A1);
-            var method2B1 = new MethodMetric("method2B1", new List<Metric> { new Metric("dummyMetric", null, 1) });
+            var method2B1 = new MethodMetric("method2B1", new List<Metric> { new Metric(ReportResources.CrapScore, null, 1) });
             @class2B.AddMethodMetric(method2B1);
 
             var assemblies = new List<Assembly> {assembly1, assembly2};
@@ -192,6 +192,29 @@ namespace ReportGenerator.Reporting.Test.Rendering.RiskHotspots
             Assert.AreEqual(50, hotspotsList[0].CrapScore);
             Assert.AreEqual(40, hotspotsList[1].CrapScore);
             Assert.AreEqual(30, hotspotsList[2].CrapScore);
+        }
+
+        [TestMethod]
+        public void NoHotspots_WhenNoCrapScore()
+        {
+            // arrage
+            var assembly = new Assembly("assembly");
+            var @class = new Class("class", assembly);
+            assembly.AddClass(@class);
+            var method = new MethodMetric("method");
+            method.AddMetric(new Metric(ReportResources.CyclomaticComplexity, null, 1));
+            method.AddMetric(new Metric(ReportResources.SequenceCoverage, null, 2));
+            method.AddMetric(new Metric(ReportResources.BranchCoverage, null, 3));
+            // CRAP score not present at all!
+            //method.AddMetric(new Metric(ReportResources.CrapScore, null, 4));
+            @class.AddMethodMetric(method);
+            var assemblies = new List<Assembly> { assembly };
+
+            // act
+            var hotspots = RiskHotspotsAnalysis.DetectHotspots(assemblies);
+
+            // assert
+            Assert.IsFalse(hotspots.Any());
         }
     }
 }

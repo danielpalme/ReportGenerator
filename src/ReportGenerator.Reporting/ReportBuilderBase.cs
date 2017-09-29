@@ -5,6 +5,7 @@ using System.Linq;
 using Palmmedia.ReportGenerator.Parser.Analysis;
 using Palmmedia.ReportGenerator.Properties;
 using Palmmedia.ReportGenerator.Reporting.Rendering;
+using Palmmedia.ReportGenerator.Reporting.Rendering.RiskHotspots;
 
 namespace Palmmedia.ReportGenerator.Reporting
 {
@@ -239,8 +240,12 @@ namespace Palmmedia.ReportGenerator.Reporting
             var canRenderRiskHotspots = reportRenderer.RiskHotspots();
             if (canRenderRiskHotspots)
             {
-                reportRenderer.Header(ReportResources.RiskHotspots);
-                reportRenderer.RiskHotspots(summaryResult.Assemblies, summaryResult.SupportsBranchCoverage);
+                var hotspots = RiskHotspotsAnalysis.DetectHotspots(summaryResult.Assemblies);
+                if (hotspots.Any())
+                {
+                    reportRenderer.Header(ReportResources.RiskHotspots);
+                    reportRenderer.RiskHotspots(hotspots, summaryResult.SupportsBranchCoverage);
+                }
             }
 
             reportRenderer.AddFooter();

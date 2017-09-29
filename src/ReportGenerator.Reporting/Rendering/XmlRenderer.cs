@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using Palmmedia.ReportGenerator.Parser.Analysis;
+using Palmmedia.ReportGenerator.Reporting.Rendering.RiskHotspots;
 
 namespace Palmmedia.ReportGenerator.Reporting.Rendering
 {
@@ -238,10 +239,10 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// <summary>
         /// Summary of Risk Hotspots (based on CRAP score)
         /// </summary>
-        /// <param name="assemblies">The assemblies. Null when only testing the renderer's capability.</param>
+        /// <param name="hotspots">The hotspots detected. Null when only testing the renderer's capability.</param>
         /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
         /// <returns>True if capable of rendering risk hotspots, otherwise false</returns>
-        public bool RiskHotspots(IEnumerable<Assembly> assemblies = null, bool branchCoverageAvailable = true)
+        public bool RiskHotspots(IEnumerable<RiskHotspot> hotspots = null, bool branchCoverageAvailable = true)
         {
             return false;
         }
