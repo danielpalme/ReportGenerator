@@ -38,15 +38,11 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             assembliesWithoutPreprocessing = new OpenCoverParser(XDocument.Load(FilePath1)).Assemblies;
 
             var report = XDocument.Load(FilePath1);
-            var classSearcherFactory = new ClassSearcherFactory();
-            var globalClassSearcher = classSearcherFactory.CreateClassSearcher("C:\\test");
-            new OpenCoverReportPreprocessor(report, classSearcherFactory, globalClassSearcher).Execute();
+            new OpenCoverReportPreprocessor(report).Execute();
             assembliesWithPreprocessing = new OpenCoverParser(report).Assemblies;
 
             report = XDocument.Load(FilePath2);
-            classSearcherFactory = new ClassSearcherFactory();
-            globalClassSearcher = classSearcherFactory.CreateClassSearcher("C:\\test");
-            new OpenCoverReportPreprocessor(report, classSearcherFactory, globalClassSearcher).Execute();
+            new OpenCoverReportPreprocessor(report).Execute();
             assembliesWithTrackedMethods = new OpenCoverParser(report).Assemblies;
         }
 

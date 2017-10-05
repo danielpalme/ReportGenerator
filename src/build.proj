@@ -24,8 +24,8 @@
 
   <!-- Version, adjust before build -->
   <PropertyGroup>
-    <Version>3.0.0.0</Version>
-    <VersionShort>3.0.0</VersionShort>
+    <Version>3.0.1.0</Version>
+    <VersionShort>3.0.1</VersionShort>
   </PropertyGroup>
   
   <!-- Tools -->
@@ -49,12 +49,11 @@
     <PropertyGroup>
       <TestFiles>target\bin\Release\ReportGeneratorTest.dll</TestFiles>
       <ReportNamespaces>+[ReportGenerator]*</ReportNamespaces>
-      <MSTestPath Condition="!Exists('C:\Program Files (x86)')">C:\Program Files\Microsoft Visual Studio 14.0\Common7\IDE</MSTestPath>
-      <MSTestPath Condition="Exists('C:\Program Files (x86)')">C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE</MSTestPath>
+      <VSTestPath>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\CommonExtensions\Microsoft\TestWindow</VSTestPath>
     </PropertyGroup>
   
     <MakeDir Directories="target\reports\coverage" />
-    <Exec Command="$(OpenCover) -register:user -target:&quot;$(MSTestPath)\MSTest.exe&quot; -targetargs:&quot;/noisolation /testcontainer:$(TestFiles)&quot; -filter:$(ReportNamespaces) -output:target\reports\coverage\coverage.xml -returntargetcode -coverbytest:*" />
+    <Exec Command="$(OpenCover) -register:user -target:&quot;$(VSTestPath)\vstest.console.exe&quot; -targetargs:&quot;$(TestFiles) /InIsolation /platform:x64&quot; -filter:$(ReportNamespaces) -output:target\reports\coverage\coverage.xml -returntargetcode -coverbytest:*" />
     <RemoveDir Directories="TestResults" />
   </Target>
   

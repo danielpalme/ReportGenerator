@@ -25,9 +25,8 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Preprocessing
         public void Execute_SequencePointsOfAutoPropertiesAdded()
         {
             XDocument report = XDocument.Load(CSharpFilePath);
-
-            var classSearcherFactory = new ClassSearcherFactory();
-            new OpenCoverReportPreprocessor(report, classSearcherFactory, new ClassSearcher(string.Empty)).Execute();
+            
+            new OpenCoverReportPreprocessor(report).Execute();
 
             Assert.AreEqual(15, report.Descendants("File").Count(), "Wrong number of total files.");
 
@@ -65,9 +64,8 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Preprocessing
                 .ToArray();
 
             Assert.AreEqual(17, startupCodeClasses.Length, "Wrong number of auto generated classes.");
-
-            var classSearcherFactory = new ClassSearcherFactory();
-            new OpenCoverReportPreprocessor(report, classSearcherFactory, new ClassSearcher(string.Empty)).Execute();
+            
+            new OpenCoverReportPreprocessor(report).Execute();
 
             var updatedStartupCodeClasses = report.Root
                 .Elements("Modules")

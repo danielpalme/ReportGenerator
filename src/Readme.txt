@@ -59,6 +59,11 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+3.0.1.0
+
+    * Fix: Issue #105: Removed processing of auto properties for OpenCover. Coverage reports generated with newer
+           versions of OpenCover provide the necessary information (SequencePoints).
+
 3.0.0.0
 
     * New: Issue #70: Added coverage indicator to test method selection

@@ -81,7 +81,7 @@ namespace Palmmedia.ReportGenerator.Parser
                 foreach (var item in report.Descendants("CoverageSession"))
                 {
                     Logger.Debug(" " + Resources.PreprocessingReport);
-                    new OpenCoverReportPreprocessor(item, classSearcherFactory, globalClassSearcher).Execute();
+                    new OpenCoverReportPreprocessor(item).Execute();
                     Logger.DebugFormat(" " + Resources.InitiatingParser, "OpenCover");
                     parsers.Add(new OpenCoverParser(item));
                 }
