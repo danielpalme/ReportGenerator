@@ -80,6 +80,7 @@ namespace Palmmedia.ReportGenerator.Reporting.History
 
                     DateTime date = DateTime.ParseExact(document.Root.Attribute("date").Value, "yyyy-MM-dd_HH-mm-ss", CultureInfo.InvariantCulture);
                     string tag = document.Root.Attribute("tag")?.Value;
+                    tag = string.IsNullOrEmpty(tag) ? null : tag;
 
                     foreach (var assemblyElement in document.Root.Elements("assembly"))
                     {

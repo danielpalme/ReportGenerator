@@ -59,6 +59,11 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+3.0.2.0
+
+    * New: Improved CSS (background color of tiny charts)
+    * New: Improved tag handling when parsing history files
+
 3.0.1.0
 
     * Fix: Issue #105: Removed processing of auto properties for OpenCover. Coverage reports generated with newer
