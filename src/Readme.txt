@@ -59,6 +59,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+3.0.3.0
+
+    * Fix: Issue #106: Totals on last entry in chart multiplied
+
 3.0.2.0
 
     * New: Improved CSS (background color of tiny charts)

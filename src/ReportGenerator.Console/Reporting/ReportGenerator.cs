@@ -140,11 +140,6 @@ namespace Palmmedia.ReportGenerator.Reporting
 
                         try
                         {
-                            if (addHistoricCoverage)
-                            {
-                                @class.AddHistoricCoverage(new HistoricCoverage(@class, executionTime, tag));
-                            }
-
                             renderer.CreateClassReport(@class, fileAnalyses);
                         }
                         catch (Exception ex)
@@ -155,6 +150,11 @@ namespace Palmmedia.ReportGenerator.Reporting
                                 renderer.ReportType,
                                 ex.Message);
                         }
+                    }
+
+                    if (addHistoricCoverage)
+                    {
+                        @class.AddHistoricCoverage(new HistoricCoverage(@class, executionTime, tag));
                     }
                 }
             }
