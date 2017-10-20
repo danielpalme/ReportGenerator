@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Palmmedia.ReportGenerator.Common;
 using Palmmedia.ReportGenerator.Logging;
+using Palmmedia.ReportGenerator.Parser.Analysis;
 using Palmmedia.ReportGenerator.Properties;
 using Palmmedia.ReportGenerator.Reporting;
 
@@ -28,6 +29,11 @@ namespace Palmmedia.ReportGenerator
         /// The report file pattern that could not be parsed.
         /// </summary>
         private List<string> failedReportFilePatterns = new List<string>();
+
+        /// <summary>
+        /// The report file pattern that could not be parsed.
+        /// </summary>
+        private IEnumerable<HistoricCoverage> overallHistoricCoverages = new List<HistoricCoverage>();
 
         /// <summary>
         /// Determines whether the verbosity level was successfully parsed during initialization.
@@ -195,6 +201,22 @@ namespace Palmmedia.ReportGenerator
         /// Gets the custom tag (e.g. build number).
         /// </summary>
         public string Tag { get; }
+
+        /// <summary>
+        /// Gets or sets all historic coverage elements.
+        /// </summary>
+        public IEnumerable<HistoricCoverage> OverallHistoricCoverages
+        {
+            get
+            {
+                return this.overallHistoricCoverages;
+            }
+
+            set
+            {
+                this.overallHistoricCoverages = value ?? this.overallHistoricCoverages;
+            }
+        }
 
         /// <summary>
         /// Validates all parameters.

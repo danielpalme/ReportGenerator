@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Palmmedia.ReportGenerator.Parser.Analysis;
 using Palmmedia.ReportGenerator.Properties;
@@ -40,7 +39,7 @@ namespace Palmmedia.ReportGenerator.Reporting
 
             reportRenderer.BeginSummaryReport(this.ReportConfiguration.TargetDirectory, "CoverageHistory.htm", ReportResources.Summary);
 
-            var historicCoverages = this.GetOverallHistoricCoverages(summaryResult.Assemblies.SelectMany(a => a.Classes));
+            var historicCoverages = this.GetOverallHistoricCoverages(this.ReportConfiguration.OverallHistoricCoverages);
             if (historicCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue))
             {
                 reportRenderer.Chart(historicCoverages);
@@ -49,43 +48,6 @@ namespace Palmmedia.ReportGenerator.Reporting
             reportRenderer.CustomSummary(summaryResult.Assemblies, summaryResult.SupportsBranchCoverage);
 
             reportRenderer.SaveSummaryReport(this.ReportConfiguration.TargetDirectory);
-        }
-
-        /// <summary>
-        /// Gets the overall historic coverages from all classes.
-        /// </summary>
-        /// <param name="classes">The classes.</param>
-        /// <returns>
-        /// The overall historic coverages from all classes.
-        /// </returns>
-        private IEnumerable<HistoricCoverage> GetOverallHistoricCoverages(IEnumerable<Class> classes)
-        {
-            var historicCoverages = classes
-                .SelectMany(c => c.HistoricCoverages);
-
-            var executionTimes = historicCoverages
-                .Select(h => h.ExecutionTime)
-                .Distinct();
-
-            var result = new List<HistoricCoverage>();
-
-            foreach (var executionTime in executionTimes)
-            {
-                var historicCoveragesOfExecutionTime = historicCoverages
-                    .Where(h => h.ExecutionTime.Equals(executionTime))
-                    .ToArray();
-
-                result.Add(new HistoricCoverage(executionTime, historicCoveragesOfExecutionTime[0].Tag)
-                {
-                    CoveredLines = historicCoveragesOfExecutionTime.Sum(h => h.CoveredLines),
-                    CoverableLines = historicCoveragesOfExecutionTime.Sum(h => h.CoverableLines),
-                    CoveredBranches = historicCoveragesOfExecutionTime.Sum(h => h.CoveredBranches),
-                    TotalBranches = historicCoveragesOfExecutionTime.Sum(h => h.TotalBranches),
-                    TotalLines = historicCoveragesOfExecutionTime.Sum(h => h.TotalLines)
-                });
-            }
-
-            return result;
         }
     }
 }

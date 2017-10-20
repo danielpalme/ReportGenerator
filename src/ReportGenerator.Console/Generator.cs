@@ -42,12 +42,15 @@ namespace Palmmedia.ReportGenerator
 
             var parser = ParserFactory.CreateParser(reportConfiguration.ReportFiles, reportConfiguration.SourceDirectories);
 
+            var overallHistoricCoverages = new System.Collections.Generic.List<Parser.Analysis.HistoricCoverage>();
             var historyStorage = new MefHistoryStorageFactory().GetHistoryStorage(reportConfiguration);
 
             if (historyStorage != null)
             {
                 new HistoryParser(historyStorage)
-                        .ApplyHistoricCoverage(parser.Assemblies);
+                        .ApplyHistoricCoverage(parser.Assemblies, overallHistoricCoverages);
+
+                reportConfiguration.OverallHistoricCoverages = overallHistoricCoverages;
             }
 
             new Reporting.ReportGenerator(
@@ -56,7 +59,7 @@ namespace Palmmedia.ReportGenerator
                 new DefaultFilter(reportConfiguration.ClassFilters),
                 new DefaultFilter(reportConfiguration.FileFilters),
                 reportConfiguration.ReportBuilderFactory.GetReportBuilders(reportConfiguration))
-                    .CreateReport(reportConfiguration.HistoryDirectory != null, executionTime, reportConfiguration.Tag);
+                    .CreateReport(reportConfiguration.HistoryDirectory != null, overallHistoricCoverages, executionTime, reportConfiguration.Tag);
 
             if (historyStorage != null)
             {

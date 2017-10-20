@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Palmmedia.ReportGenerator.Logging;
+using Palmmedia.ReportGenerator.Parser.Analysis;
 
 namespace Palmmedia.ReportGenerator.Reporting
 {
@@ -52,5 +53,10 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// Gets the custom tag (e.g. build number).
         /// </summary>
         string Tag { get; }
+
+        /// <summary>
+        /// Gets all historic coverage elements.
+        /// </summary>
+        IEnumerable<HistoricCoverage> OverallHistoricCoverages { get; }
     }
 }

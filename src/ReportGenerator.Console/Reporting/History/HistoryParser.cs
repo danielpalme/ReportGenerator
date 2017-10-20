@@ -42,11 +42,17 @@ namespace Palmmedia.ReportGenerator.Reporting.History
         /// Reads all historic coverage files created by <see cref="HistoryReportGenerator" /> and adds the information to all classes.
         /// </summary>
         /// <param name="assemblies">The assemblies.</param>
-        internal void ApplyHistoricCoverage(IEnumerable<Assembly> assemblies)
+        /// <param name="overallHistoricCoverages">A list to which all history elements are added.</param>
+        internal void ApplyHistoricCoverage(IEnumerable<Assembly> assemblies, IList<HistoricCoverage> overallHistoricCoverages)
         {
             if (assemblies == null)
             {
                 throw new ArgumentNullException(nameof(assemblies));
+            }
+
+            if (overallHistoricCoverages == null)
+            {
+                throw new ArgumentNullException(nameof(overallHistoricCoverages));
             }
 
             Logger.Info(Resources.ReadingHistoricReports);
@@ -94,14 +100,6 @@ namespace Palmmedia.ReportGenerator.Reporting.History
 
                         foreach (var classElement in assemblyElement.Elements("class"))
                         {
-                            Class @class = assembly.Classes
-                                .SingleOrDefault(c => c.Name == classElement.Attribute("name").Value);
-
-                            if (@class == null)
-                            {
-                                continue;
-                            }
-
                             HistoricCoverage historicCoverage = new HistoricCoverage(date, tag)
                             {
                                 CoveredLines = int.Parse(classElement.Attribute("coveredlines").Value, CultureInfo.InvariantCulture),
@@ -110,6 +108,21 @@ namespace Palmmedia.ReportGenerator.Reporting.History
                                 CoveredBranches = int.Parse(classElement.Attribute("coveredbranches").Value, CultureInfo.InvariantCulture),
                                 TotalBranches = int.Parse(classElement.Attribute("totalbranches").Value, CultureInfo.InvariantCulture)
                             };
+
+                            overallHistoricCoverages.Add(historicCoverage);
+
+                            if (assembly == null)
+                            {
+                                continue;
+                            }
+
+                            Class @class = assembly.Classes
+                                .SingleOrDefault(c => c.Name == classElement.Attribute("name").Value);
+
+                            if (@class == null)
+                            {
+                                continue;
+                            }
 
                             @class.AddHistoricCoverage(historicCoverage);
                         }

@@ -91,9 +91,10 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// Starts the generation of the report.
         /// </summary>
         /// <param name="addHistoricCoverage">if set to <c>true</c> historic coverage information is added to classes.</param>
+        /// <param name="overallHistoricCoverages"></param>
         /// <param name="executionTime">The execution time.</param>
         /// <param name="tag">The custom tag (e.g. build number).</param>
-        internal void CreateReport(bool addHistoricCoverage, DateTime executionTime, string tag)
+        internal void CreateReport(bool addHistoricCoverage, List<HistoricCoverage> overallHistoricCoverages, DateTime executionTime, string tag)
         {
             var filteredAssemblies = this.parser.Assemblies
                 .Where(a => this.assemblyFilter.IsElementIncludedInReport(a.Name))
@@ -134,10 +135,17 @@ namespace Palmmedia.ReportGenerator.Reporting
                         @class.Assembly.ShortName,
                         @class.Name);
 
+                    var fileAnalyses = @class.Files.Select(f => f.AnalyzeFile()).ToArray();
+
+                    if (addHistoricCoverage)
+                    {
+                        var historicCoverage = new HistoricCoverage(@class, executionTime, tag);
+                        @class.AddHistoricCoverage(historicCoverage);
+                        overallHistoricCoverages.Add(historicCoverage);
+                    }
+
                     foreach (var renderer in this.renderers)
                     {
-                        var fileAnalyses = @class.Files.Select(f => f.AnalyzeFile()).ToArray();
-
                         try
                         {
                             renderer.CreateClassReport(@class, fileAnalyses);
@@ -150,11 +158,6 @@ namespace Palmmedia.ReportGenerator.Reporting
                                 renderer.ReportType,
                                 ex.Message);
                         }
-                    }
-
-                    if (addHistoricCoverage)
-                    {
-                        @class.AddHistoricCoverage(new HistoricCoverage(@class, executionTime, tag));
                     }
                 }
             }

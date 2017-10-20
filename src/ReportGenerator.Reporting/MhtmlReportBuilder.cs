@@ -224,6 +224,8 @@ namespace Palmmedia.ReportGenerator.Reporting
             /// </summary>
             public VerbosityLevel VerbosityLevel => this.reportConfiguration.VerbosityLevel;
 
+            public IEnumerable<HistoricCoverage> OverallHistoricCoverages => this.reportConfiguration.OverallHistoricCoverages;
+
             /// <summary>
             /// Gets the custom tag (e.g. build number).
             /// </summary>

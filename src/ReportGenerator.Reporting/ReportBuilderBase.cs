@@ -204,7 +204,7 @@ namespace Palmmedia.ReportGenerator.Reporting
 
             reportRenderer.FinishTable();
 
-            var historicCoverages = this.GetOverallHistoricCoverages(summaryResult.Assemblies.SelectMany(a => a.Classes));
+            var historicCoverages = this.GetOverallHistoricCoverages(this.ReportConfiguration.OverallHistoricCoverages);
             if (historicCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue))
             {
                 reportRenderer.Header(ReportResources.History);
@@ -253,18 +253,15 @@ namespace Palmmedia.ReportGenerator.Reporting
         public abstract void CreateSummaryReport(SummaryResult summaryResult);
 
         /// <summary>
-        /// Gets the overall historic coverages from all classes.
+        /// Gets the overall historic coverages from all classes grouped by execution time.
         /// </summary>
-        /// <param name="classes">The classes.</param>
+        /// <param name="overallHistoricCoverages">All historic coverage elements.</param>
         /// <returns>
-        /// The overall historic coverages from all classes.
+        /// The overall historic coverages from all classes grouped by execution time.
         /// </returns>
-        private IEnumerable<HistoricCoverage> GetOverallHistoricCoverages(IEnumerable<Class> classes)
+        protected virtual IEnumerable<HistoricCoverage> GetOverallHistoricCoverages(IEnumerable<HistoricCoverage> overallHistoricCoverages)
         {
-            var historicCoverages = classes
-                .SelectMany(c => c.HistoricCoverages);
-
-            var executionTimes = historicCoverages
+            var executionTimes = overallHistoricCoverages
                 .Select(h => h.ExecutionTime)
                 .Distinct()
                 .OrderBy(e => e);
@@ -273,7 +270,7 @@ namespace Palmmedia.ReportGenerator.Reporting
 
             foreach (var executionTime in executionTimes)
             {
-                var historicCoveragesOfExecutionTime = historicCoverages
+                var historicCoveragesOfExecutionTime = overallHistoricCoverages
                     .Where(h => h.ExecutionTime.Equals(executionTime))
                     .ToArray();
 

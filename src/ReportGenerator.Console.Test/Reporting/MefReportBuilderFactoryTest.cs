@@ -90,6 +90,8 @@ namespace Palmmedia.ReportGeneratorTest.Reporting
 
             public VerbosityLevel VerbosityLevel { get; set; }
 
+            public IEnumerable<HistoricCoverage> OverallHistoricCoverages { get; set; }
+
             public string Tag { get; set; }
         }
     }
