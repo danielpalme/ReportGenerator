@@ -61,6 +61,7 @@ CHANGELOG
 
 3.0.3.0
 
+    * New: Issue #110: Added zoom function to historic charts
     * Fix: Issue #106: Totals on last entry in chart multiplied
 
 3.0.2.0

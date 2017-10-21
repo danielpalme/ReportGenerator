@@ -102,16 +102,41 @@ coverageApp.directive('historyChart', function ($window) {
         restrict: 'A',
         link: function (scope, el, attrs) {
             var chartData = $window[attrs.data];
-            new Chartist.Line('#' + el[0].id, {
+            var options = {
+                axisY: {
+                    type: undefined,
+                    onlyInteger: true
+                },
+                lineSmooth: false,
+                low: 0,
+                high: 100,
+                scaleMinSpace: 20,
+                onlyInteger: true,
+            };
+            var lineChart = new Chartist.Line('#' + el[0].id, {
                 labels: [],
                 series: chartData.series
-                }, {
-                    lineSmooth: false,
-                    low: 0,
-                    high: 100
-                });
+            }, options);
 
             var chart = $(el[0]);
+
+            var toggleZoomButton = chart
+                .append('<div class="toggleZoom"><a href=""><i class="icon-search-plus" /></a></div>')
+                .find('.toggleZoom');
+
+            toggleZoomButton.find('a').on('click', function (event) {
+                event.preventDefault();
+
+                if (options.axisY.type === undefined) {
+                    options.axisY.type = Chartist.AutoScaleAxis;
+                } else {
+                    options.axisY.type = undefined;
+                }
+
+                toggleZoomButton.find('i').toggleClass('icon-search-plus icon-search-minus');
+
+                lineChart.update(null, options);
+            });
 
             var tooltip = chart
               .append('<div class="tooltip"></div>')
