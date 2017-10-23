@@ -93,11 +93,6 @@ namespace Palmmedia.ReportGenerator.Reporting.History
                         Assembly assembly = assemblies
                             .SingleOrDefault(a => a.Name == assemblyElement.Attribute("name").Value);
 
-                        if (assembly == null)
-                        {
-                            continue;
-                        }
-
                         foreach (var classElement in assemblyElement.Elements("class"))
                         {
                             HistoricCoverage historicCoverage = new HistoricCoverage(date, tag)

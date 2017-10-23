@@ -24,8 +24,8 @@
 
   <!-- Version, adjust before build -->
   <PropertyGroup>
-    <Version>3.0.3-beta1</Version>
-    <VersionShort>3.0.3-beta1</VersionShort>
+    <Version>3.0.3-beta2</Version>
+    <VersionShort>3.0.3-beta2</VersionShort>
   </PropertyGroup>
   
   <!-- Tools -->
