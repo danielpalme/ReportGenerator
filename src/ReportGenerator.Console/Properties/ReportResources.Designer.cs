@@ -97,6 +97,15 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assembly.
+        /// </summary>
+        public static string Assembly2 {
+            get {
+                return ResourceManager.GetString("Assembly2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Blocks covered.
         /// </summary>
         public static string BlocksCovered {
@@ -165,6 +174,15 @@ namespace Palmmedia.ReportGenerator.Properties {
         public static string Class {
             get {
                 return ResourceManager.GetString("Class", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Class.
+        /// </summary>
+        public static string Class2 {
+            get {
+                return ResourceManager.GetString("Class2", resourceCulture);
             }
         }
         
@@ -367,7 +385,7 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to History.
+        ///   Looks up a localized string similar to Coverage History.
         /// </summary>
         public static string History {
             get {
@@ -462,6 +480,15 @@ namespace Palmmedia.ReportGenerator.Properties {
         public static string Parser {
             get {
                 return ResourceManager.GetString("Parser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Risk Hotspots.
+        /// </summary>
+        public static string RiskHotspots {
+            get {
+                return ResourceManager.GetString("RiskHotspots", resourceCulture);
             }
         }
         

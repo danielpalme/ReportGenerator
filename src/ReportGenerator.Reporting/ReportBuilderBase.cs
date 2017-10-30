@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using Palmmedia.ReportGenerator.Parser.Analysis;
 using Palmmedia.ReportGenerator.Properties;
+using Palmmedia.ReportGenerator.Reporting.CodeAnalysis;
 using Palmmedia.ReportGenerator.Reporting.Rendering;
 
 namespace Palmmedia.ReportGenerator.Reporting
@@ -211,7 +212,34 @@ namespace Palmmedia.ReportGenerator.Reporting
                 reportRenderer.Chart(historicCoverages);
             }
 
-            reportRenderer.Header(ReportResources.Assemblies);
+            var summableMetrics = summaryResult.Assemblies
+                .SelectMany(a => a.Classes)
+                .SelectMany(c => c.MethodMetrics)
+                .SelectMany(m => m.Metrics)
+                .Where(m => m.MetricType == MetricType.Sumable)
+                .GroupBy(m => m.Name)
+                .Select(g => new Metric(g.Key, g.First().ExplanationUrl, MetricType.Sumable, g.Sum(m => m.Value)))
+                .ToArray();
+
+            if (summableMetrics.Length > 0)
+            {
+                reportRenderer.Header(ReportResources.Metrics);
+
+                var methodMetric = new MethodMetric(ReportResources.Total, summableMetrics);
+                reportRenderer.BeginMetricsTable(methodMetric);
+                reportRenderer.MetricsRow(methodMetric);
+
+                reportRenderer.FinishTable();
+            }
+
+            var hotspots = RiskHotspotsAnalysis.DetectHotspotsByMetricName(summaryResult.Assemblies);
+            if (hotspots.Any())
+            {
+                reportRenderer.Header(ReportResources.RiskHotspots);
+                reportRenderer.RiskHotspots(hotspots);
+            }
+
+            reportRenderer.Header(ReportResources.Coverage3);
 
             if (summaryResult.Assemblies.Any())
             {
@@ -235,6 +263,7 @@ namespace Palmmedia.ReportGenerator.Reporting
             }
 
             reportRenderer.CustomSummary(summaryResult.Assemblies, summaryResult.SupportsBranchCoverage);
+
             reportRenderer.AddFooter();
             reportRenderer.SaveSummaryReport(this.ReportConfiguration.TargetDirectory);
         }

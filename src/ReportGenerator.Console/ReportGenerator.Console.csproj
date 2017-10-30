@@ -87,6 +87,7 @@
     <Compile Include="Parser\Analysis\CodeElement.cs" />
     <Compile Include="Parser\Analysis\HistoricCoverage.cs" />
     <Compile Include="Parser\Analysis\CodeElementType.cs" />
+    <Compile Include="Parser\Analysis\MetricType.cs" />
     <Compile Include="Parser\Analysis\SummaryResult.cs" />
     <Compile Include="Parser\Analysis\LineAnalysis.cs" />
     <Compile Include="Parser\Analysis\TestMethod.cs" />

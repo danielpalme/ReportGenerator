@@ -59,8 +59,9 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
-3.0.3.0
+3.1.0.0
 
+    * New: Issue #102: Added risk hotspot analysis based on metrics
     * New: Issue #110: Added zoom function to historic charts
     * Fix: Issue #106: Totals on last entry in chart multiplied
 

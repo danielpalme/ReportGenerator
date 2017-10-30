@@ -78,6 +78,7 @@ namespace Palmmedia.ReportGenerator.Parser
                     metrics.Add(new Metric(
                         ReportResources.Coverage,
                         ParserBase.CodeCoverageUri,
+                        MetricType.Percentage,
                         Math.Round(decimal.Parse(lineRate.Value, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero)));
                 }
 
@@ -88,6 +89,7 @@ namespace Palmmedia.ReportGenerator.Parser
                     metrics.Add(new Metric(
                         ReportResources.BranchCoverage,
                         ParserBase.CodeCoverageUri,
+                        MetricType.Percentage,
                         Math.Round(decimal.Parse(branchRate.Value, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero)));
                 }
 
@@ -100,7 +102,8 @@ namespace Palmmedia.ReportGenerator.Parser
                         new Metric(
                         ReportResources.CyclomaticComplexity,
                         ParserBase.CyclomaticComplexityUri,
-                         Math.Round(decimal.Parse(cyclomaticComplexityAttribute.Value, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero)));
+                        MetricType.CodeQuality,
+                        Math.Round(decimal.Parse(cyclomaticComplexityAttribute.Value, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero)));
                 }
 
                 @class.AddMethodMetric(new MethodMetric(methodName, metrics));

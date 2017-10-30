@@ -148,6 +148,7 @@ namespace Palmmedia.ReportGenerator.Reporting
 
             return result;
         }
+
         /// <summary>
         /// Filters the historic coverages (equal elements are removed).
         /// </summary>

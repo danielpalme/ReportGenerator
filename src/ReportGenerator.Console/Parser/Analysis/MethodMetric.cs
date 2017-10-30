@@ -25,7 +25,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// Initializes a new instance of the <see cref="MethodMetric"/> class.
         /// </summary>
         /// <param name="name">The name.</param>
-        internal MethodMetric(string name)
+        public MethodMetric(string name)
         {
             if (name == null)
             {
@@ -40,7 +40,7 @@ namespace Palmmedia.ReportGenerator.Parser.Analysis
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="metrics">The metrics.</param>
-        internal MethodMetric(string name, IEnumerable<Metric> metrics)
+        public MethodMetric(string name, IEnumerable<Metric> metrics)
         {
             this.Name = name;
             this.AddMetrics(metrics);

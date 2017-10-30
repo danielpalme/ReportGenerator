@@ -33,29 +33,6 @@ namespace Palmmedia.ReportGenerator.Common
         }
 
         /// <summary>
-        /// Creates a <see cref="Queue&lt;T&gt;"/> from an <see cref="IEnumerable&lt;T&gt;"/>.
-        /// </summary>
-        /// <typeparam name="T">The type.</typeparam>
-        /// <param name="input">The input.</param>
-        /// <returns>A <see cref="Queue&lt;T&gt;"/>.</returns>
-        internal static Queue<T> ToQueue<T>(this IEnumerable<T> input)
-        {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
-
-            var result = new Queue<T>();
-
-            foreach (var item in input)
-            {
-                result.Enqueue(item);
-            }
-
-            return result;
-        }
-
-        /// <summary>
         /// Determines whether a <see cref="XElement"/> has an <see cref="XAttribute"/> with the given value..
         /// </summary>
         /// <param name="element">The <see cref="XElement"/>.</param>

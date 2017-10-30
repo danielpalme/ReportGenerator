@@ -91,7 +91,7 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// Starts the generation of the report.
         /// </summary>
         /// <param name="addHistoricCoverage">if set to <c>true</c> historic coverage information is added to classes.</param>
-        /// <param name="overallHistoricCoverages"></param>
+        /// <param name="overallHistoricCoverages">All historic coverage elements.</param>
         /// <param name="executionTime">The execution time.</param>
         /// <param name="tag">The custom tag (e.g. build number).</param>
         internal void CreateReport(bool addHistoricCoverage, List<HistoricCoverage> overallHistoricCoverages, DateTime executionTime, string tag)

@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Palmmedia.ReportGenerator.Parser.Analysis;
 using Palmmedia.ReportGenerator.Properties;
+using Palmmedia.ReportGenerator.Reporting.CodeAnalysis;
 
 namespace Palmmedia.ReportGenerator.Reporting.Rendering
 {
@@ -400,7 +401,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                 }
                 else
                 {
-                    this.reportTextWriter.Write("<th>{0} <a href=\"{1}\"><i class=\"icon-info-circled\"></a></th>", WebUtility.HtmlEncode(met.Name), WebUtility.HtmlEncode(met.ExplanationUrl.OriginalString));
+                    this.reportTextWriter.Write("<th>{0} <a href=\"{1}\"><i class=\"icon-info-circled\"></i></a></th>", WebUtility.HtmlEncode(met.Name), WebUtility.HtmlEncode(met.ExplanationUrl.OriginalString));
                 }
             }
 
@@ -579,7 +580,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         }
 
         /// <summary>
-        /// Charts the specified historic coverages.
+        /// Renderes a chart with the given historic coverages.
         /// </summary>
         /// <param name="historicCoverages">The historic coverages.</param>
         public void Chart(IEnumerable<HistoricCoverage> historicCoverages)
@@ -626,6 +627,82 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             this.javaScriptContent.AppendLine();
             this.javaScriptContent.AppendLine("};");
             this.javaScriptContent.AppendLine();
+        }
+
+        /// <summary>
+        /// Summary of risk hotspots
+        /// </summary>
+        /// <param name="riskHotspots">The risk hotspots.</param>
+        public void RiskHotspots(IEnumerable<RiskHotspot> riskHotspots)
+        {
+            var codeQualityMetrics = riskHotspots.First().MethodMetric.Metrics
+                .Where(m => m.MetricType == MetricType.CodeQuality)
+                .ToArray();
+
+            this.reportTextWriter.WriteLine("<table class=\"overview table-fixed\">");
+
+            this.reportTextWriter.WriteLine("<colgroup>");
+            this.reportTextWriter.WriteLine("<col />");
+            this.reportTextWriter.WriteLine("<col />");
+            this.reportTextWriter.WriteLine("<col />");
+
+            foreach (var met in codeQualityMetrics)
+            {
+                this.reportTextWriter.WriteLine("<col class=\"column105\" />");
+            }
+
+            this.reportTextWriter.WriteLine("</colgroup>");
+
+            this.reportTextWriter.Write("<thead><tr>");
+
+            this.reportTextWriter.WriteLine("<th>{0}</th>", WebUtility.HtmlEncode(ReportResources.Assembly2));
+            this.reportTextWriter.WriteLine("<th>{0}</th>", WebUtility.HtmlEncode(ReportResources.Class2));
+            this.reportTextWriter.WriteLine("<th>{0}</th>", WebUtility.HtmlEncode(ReportResources.Method));
+
+            foreach (var metric in codeQualityMetrics)
+            {
+                if (metric.ExplanationUrl == null)
+                {
+                    this.reportTextWriter.WriteLine("<th class=\"right\">{0}</th>", WebUtility.HtmlEncode(metric.Name));
+                }
+                else
+                {
+                    this.reportTextWriter.WriteLine("<th class=\"right\">{0} <a href=\"{1}\"><i class=\"icon-info-circled\"></i></a></th>", WebUtility.HtmlEncode(metric.Name), WebUtility.HtmlEncode(metric.ExplanationUrl.OriginalString));
+                }
+            }
+
+            this.reportTextWriter.WriteLine("</tr></thead>");
+
+            this.reportTextWriter.WriteLine("<tbody>");
+
+            foreach (var riskHotspot in riskHotspots.OrderByDescending(r => r.StatusMetrics.Where(m => m.Exceeded).Max(m => m.Metric.Value)).Take(20))
+            {
+                string filenameColumn = riskHotspot.Class.Name;
+
+                if (!this.onlySummary)
+                {
+                    filenameColumn = string.Format(
+                        CultureInfo.InvariantCulture,
+                        "<a href=\"{0}\">{1}</a>",
+                        WebUtility.HtmlEncode(GetClassReportFilename(riskHotspot.Assembly.ShortName, riskHotspot.Class.Name)),
+                        WebUtility.HtmlEncode(riskHotspot.Class.Name));
+                }
+
+                this.reportTextWriter.WriteLine("<tr>");
+                this.reportTextWriter.WriteLine("<td>{0}</td>", WebUtility.HtmlEncode(riskHotspot.Assembly.ShortName));
+                this.reportTextWriter.WriteLine("<td>{0}</td>", filenameColumn);
+                this.reportTextWriter.WriteLine("<td>{0}</td>", WebUtility.HtmlEncode(riskHotspot.MethodMetric.ShortName));
+
+                foreach (var statusMetric in riskHotspot.StatusMetrics)
+                {
+                    this.reportTextWriter.WriteLine("<td class=\"right {0}\">{1}</td>", statusMetric.Exceeded ? "lightred" : "lightgreen", statusMetric.Metric.Value.ToString(CultureInfo.InvariantCulture));
+                }
+
+                this.reportTextWriter.WriteLine("</tr>");
+            }
+
+            this.reportTextWriter.WriteLine("</tbody>");
+            this.reportTextWriter.WriteLine("</table>");
         }
 
         /// <summary>
@@ -982,7 +1059,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             ms.Write(lineBreak, 0, lineBreak.Length);
 
             using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
-    "Palmmedia.ReportGenerator.Reporting.Rendering.resources.chartist.min.js"))
+        "Palmmedia.ReportGenerator.Reporting.Rendering.resources.chartist.min.js"))
             {
                 stream.CopyTo(ms);
             }
@@ -991,7 +1068,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
 
             // Required for rendering charts in IE 9
             using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
-    "Palmmedia.ReportGenerator.Reporting.Rendering.resources.matchMedia.js"))
+        "Palmmedia.ReportGenerator.Reporting.Rendering.resources.matchMedia.js"))
             {
                 stream.CopyTo(ms);
             }

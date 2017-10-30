@@ -45,11 +45,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BadgeReportBuilder.cs" />
+    <Compile Include="CodeAnalysis\MetricStatus.cs" />
     <Compile Include="CsvSummaryReportBuilder.cs" />
     <Compile Include="HtmlInlineCssAndJavaScriptReportBuilder.cs" />
     <Compile Include="MhtmlReportBuilder.cs" />
     <Compile Include="HtmlChartReportBuilder.cs" />
     <Compile Include="PngChartReportBuilder.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="CodeAnalysis\RiskHotspot.cs" />
+    <Compile Include="CodeAnalysis\RiskHotspotsAnalysis.cs" />
     <Compile Include="TextSummaryReportBuilder.cs" />
     <Compile Include="XmlReportBuilder.cs" />
     <Compile Include="XmlSummaryReportBuilder.cs" />
@@ -96,6 +104,13 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Rendering\resources\matchMedia.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

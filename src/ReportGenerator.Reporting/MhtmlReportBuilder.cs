@@ -224,6 +224,9 @@ namespace Palmmedia.ReportGenerator.Reporting
             /// </summary>
             public VerbosityLevel VerbosityLevel => this.reportConfiguration.VerbosityLevel;
 
+            /// <summary>
+            /// Gets all historic coverage elements.
+            /// </summary>
             public IEnumerable<HistoricCoverage> OverallHistoricCoverages => this.reportConfiguration.OverallHistoricCoverages;
 
             /// <summary>

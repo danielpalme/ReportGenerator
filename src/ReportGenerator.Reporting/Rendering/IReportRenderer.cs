@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Palmmedia.ReportGenerator.Parser.Analysis;
+using Palmmedia.ReportGenerator.Reporting.CodeAnalysis;
 
 namespace Palmmedia.ReportGenerator.Reporting.Rendering
 {
@@ -141,10 +142,16 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         void FinishTable();
 
         /// <summary>
-        /// Charts the specified historic coverages.
+        /// Renderes a chart with the given historic coverages.
         /// </summary>
         /// <param name="historicCoverages">The historic coverages.</param>
         void Chart(IEnumerable<HistoricCoverage> historicCoverages);
+
+        /// <summary>
+        /// Summary of risk hotspots
+        /// </summary>
+        /// <param name="riskHotspots">The risk hotspots.</param>
+        void RiskHotspots(IEnumerable<RiskHotspot> riskHotspots);
 
         /// <summary>
         /// Adds the footer to the report.

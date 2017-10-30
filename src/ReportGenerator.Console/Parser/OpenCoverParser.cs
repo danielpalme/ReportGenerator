@@ -106,14 +106,17 @@ namespace Palmmedia.ReportGenerator.Parser
                     new Metric(
                         ReportResources.CyclomaticComplexity,
                         ParserBase.CyclomaticComplexityUri,
+                        MetricType.CodeQuality,
                         methodGroup.Max(m => int.Parse(m.Attribute("cyclomaticComplexity").Value, CultureInfo.InvariantCulture))),
                     new Metric(
                         ReportResources.SequenceCoverage,
                         ParserBase.CodeCoverageUri,
+                        MetricType.Percentage,
                         methodGroup.Max(m => decimal.Parse(m.Attribute("sequenceCoverage").Value, CultureInfo.InvariantCulture))),
                     new Metric(
                         ReportResources.BranchCoverage,
                         ParserBase.CodeCoverageUri,
+                        MetricType.Percentage,
                         methodGroup.Max(m => decimal.Parse(m.Attribute("branchCoverage").Value, CultureInfo.InvariantCulture)))
                 };
 
@@ -126,6 +129,7 @@ namespace Palmmedia.ReportGenerator.Parser
                         new Metric(
                         ReportResources.NPathComplexity,
                         ParserBase.NPathComplexityUri,
+                        MetricType.CodeQuality,
                         npathComplexityAttributes.Max(a => int.Parse(a.Value, CultureInfo.InvariantCulture))));
                 }
 
@@ -135,6 +139,7 @@ namespace Palmmedia.ReportGenerator.Parser
                     metrics.Add(new Metric(
                         ReportResources.CrapScore,
                         ParserBase.CrapScoreUri,
+                        MetricType.CodeQuality,
                         crapScoreAttributes.Max(a => decimal.Parse(a.Value, CultureInfo.InvariantCulture))));
                 }
 

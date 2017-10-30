@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using Palmmedia.ReportGenerator.Parser.Analysis;
+using Palmmedia.ReportGenerator.Reporting.CodeAnalysis;
 
 namespace Palmmedia.ReportGenerator.Reporting.Rendering
 {
@@ -228,10 +229,18 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         }
 
         /// <summary>
-        /// Charts the specified historic coverages.
+        /// Renderes a chart with the given historic coverages.
         /// </summary>
         /// <param name="historicCoverages">The historic coverages.</param>
         public void Chart(IEnumerable<HistoricCoverage> historicCoverages)
+        {
+        }
+
+        /// <summary>
+        /// Summary of risk hotspots
+        /// </summary>
+        /// <param name="riskHotspots">The risk hotspots.</param>
+        public void RiskHotspots(IEnumerable<RiskHotspot> riskHotspots)
         {
         }
 

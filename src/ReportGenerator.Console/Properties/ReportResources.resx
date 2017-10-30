@@ -220,7 +220,7 @@
     <value>Grouping:</value>
   </data>
   <data name="History" xml:space="preserve">
-    <value>History</value>
+    <value>Coverage History</value>
   </data>
   <data name="Line" xml:space="preserve">
     <value>Line</value>
@@ -281,5 +281,14 @@
   </data>
   <data name="Tag" xml:space="preserve">
     <value>Tag:</value>
+  </data>
+  <data name="RiskHotspots" xml:space="preserve">
+    <value>Risk Hotspots</value>
+  </data>
+  <data name="Assembly2" xml:space="preserve">
+    <value>Assembly</value>
+  </data>
+  <data name="Class2" xml:space="preserve">
+    <value>Class</value>
   </data>
 </root>

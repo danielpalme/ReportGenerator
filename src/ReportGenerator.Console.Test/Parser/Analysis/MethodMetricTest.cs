@@ -29,7 +29,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Analysis
         public void AddMetric_AddSingleMetric_MetricIsStored()
         {
             MethodMetric sut = new MethodMetric("Test");
-            var metric = new Metric("Metric1", null, 10);
+            var metric = new Metric("Metric1", null, MetricType.CodeQuality, 10);
 
             sut.AddMetric(metric);
 
@@ -43,9 +43,9 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Analysis
         [TestMethod]
         public void Merge_MergeMethodMetric_MetricsAreStored()
         {
-            var metric1 = new Metric("Metric1", null, 10);
-            var metric2 = new Metric("Metric1", null, 15);
-            var metric3 = new Metric("Metric2", null, 20);
+            var metric1 = new Metric("Metric1", null, MetricType.CodeQuality, 10);
+            var metric2 = new Metric("Metric1", null, MetricType.CodeQuality, 15);
+            var metric3 = new Metric("Metric2", null, MetricType.CodeQuality, 20);
 
             MethodMetric sut = new MethodMetric("Test", new[] { metric1 });
             var methodMetricToMerge = new MethodMetric("Test", new[] { metric2, metric3 });
