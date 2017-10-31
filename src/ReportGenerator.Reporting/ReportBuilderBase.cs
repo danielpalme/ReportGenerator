@@ -262,7 +262,7 @@ namespace Palmmedia.ReportGenerator.Reporting
                 reportRenderer.Paragraph(ReportResources.NoCoveredAssemblies);
             }
 
-            reportRenderer.CustomSummary(summaryResult.Assemblies, summaryResult.SupportsBranchCoverage);
+            reportRenderer.CustomSummary(summaryResult.Assemblies, hotspots, summaryResult.SupportsBranchCoverage);
 
             reportRenderer.AddFooter();
             reportRenderer.SaveSummaryReport(this.ReportConfiguration.TargetDirectory);

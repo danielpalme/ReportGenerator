@@ -80,8 +80,9 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// Adds custom summary elements to the report.
         /// </summary>
         /// <param name="assemblies">The assemblies.</param>
+        /// <param name="riskHotspots">The risk hotspots.</param>
         /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
-        void CustomSummary(IEnumerable<Assembly> assemblies, bool branchCoverageAvailable);
+        void CustomSummary(IEnumerable<Assembly> assemblies, IEnumerable<RiskHotspot> riskHotspots, bool branchCoverageAvailable);
 
         /// <summary>
         /// Adds a metrics table to the report.

@@ -50,7 +50,9 @@ namespace Palmmedia.ReportGenerator.Reporting.CodeAnalysis
                 }
             }
 
-            return riskHotspots;
+            return riskHotspots
+                .OrderByDescending(r => r.StatusMetrics.Where(m => m.Exceeded).Max(m => m.Metric.Value))
+                .ToList();
         }
     }
 }

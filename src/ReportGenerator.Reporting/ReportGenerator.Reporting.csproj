@@ -90,7 +90,7 @@
     <EmbeddedResource Include="Rendering\resources\react.min.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rendering\resources\customReactComponents.js" />
+    <EmbeddedResource Include="Rendering\resources\coverageTableReactComponents.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Rendering\resources\react.modified.min.js" />
@@ -111,6 +111,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Rendering\resources\riskHotspotTableReactComponents.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

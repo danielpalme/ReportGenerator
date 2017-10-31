@@ -2,20 +2,24 @@
 function SummaryViewCtrl($scope, $window) {
     var self = this;
 
-    $scope.filteringEnabled = false;
+    $scope.coverageTableFilteringEnabled = false;
     $scope.assemblies = [];
     $scope.branchCoverageAvailable = branchCoverageAvailable;
 
-    $scope.enableFiltering = function () {
+    $scope.riskHotspots = riskHotspots;
+    $scope.riskHotspotMetrics = riskHotspotMetrics;
+
+    $scope.enableCoverageTableFiltering = function () {
         console.log("Enabling filtering");
 
         $scope.assemblies = assemblies;
-        $scope.filteringEnabled = true;
+        $scope.coverageTableFilteringEnabled = true;
     };
 
     self.initialize = function () {
         var i, l, numberOfClasses;
 
+        // State is persisted in history. If API or history not available in browser reenable
         if ($window.history === undefined || $window.history.replaceState === undefined || $window.history.state === null) {
             numberOfClasses = 0;
 
@@ -30,7 +34,7 @@ function SummaryViewCtrl($scope, $window) {
             console.log("Number of classes (filtering enabled): " + numberOfClasses);
         }
 
-        $scope.enableFiltering();
+        $scope.enableCoverageTableFiltering();
     };
 
     self.initialize();
@@ -80,7 +84,25 @@ var coverageApp = angular.module('coverageApp', []);
 coverageApp.controller('SummaryViewCtrl', SummaryViewCtrl);
 coverageApp.controller('DetailViewCtrl', DetailViewCtrl);
 
-coverageApp.directive('reactiveTable', function () {
+coverageApp.directive('reactiveRiskHotspotTable', function () {
+    return {
+        restrict: 'A',
+        scope: {
+            riskHotspots: '=',
+            riskHotspotMetrics: '='
+        },
+        link: function (scope, el, attrs) {
+            scope.$watchCollection('riskHotspots', function (newValue, oldValue) {
+                React.renderComponent(
+                    RiskHotspotsComponent({ riskHotspots: newValue, riskHotspotMetrics: scope.riskHotspotMetrics }),
+                    el[0]);
+            });
+        }
+    };
+});
+
+
+coverageApp.directive('reactiveCoverageTable', function () {
     return {
         restrict: 'A',
         scope: {

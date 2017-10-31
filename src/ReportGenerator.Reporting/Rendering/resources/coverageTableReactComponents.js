@@ -310,7 +310,7 @@ var AssemblyComponent = React.createClass({
         result.sort(function (left, right) {
             return left.name === right.name ? 0 : (left.name < right.name ? smaller : bigger);
         });
-
+        
         for (i = 0, l = result.length; i < l; i++) {
             result[i].changeSorting(sortby, sortorder === 'asc');
         }
@@ -338,8 +338,8 @@ var AssemblyComponent = React.createClass({
     getInitialState: function () {
         var state, collapseState;
 
-        if (window.history !== undefined && window.history.replaceState !== undefined && window.history.state !== null) {
-            state = angular.copy(window.history.state);
+        if (window.history !== undefined && window.history.replaceState !== undefined && window.history.state !== null && window.history.state.coverageTableHistoryState !== undefined) {
+            state = angular.copy(window.history.state.coverageTableHistoryState);
             collapseState = state.assemblies;
         } else {
             state = {
@@ -353,7 +353,7 @@ var AssemblyComponent = React.createClass({
             };
         }
 
-        state.assemblies = this.getAssemblies(this.props.assemblies, state.grouping, state.filter, state.sortby, state.sortorder);
+        state.assemblies = this.getAssemblies(this.props.assemblies, state.grouping, state.sortby, state.sortorder);
 
         if (collapseState !== undefined) {
             this.restoreCollapseState(collapseState, state.assemblies);
@@ -445,12 +445,19 @@ var AssemblyComponent = React.createClass({
     },
     render: function () {
         if (window.history !== undefined && window.history.replaceState !== undefined) {
-            var historyState, i;
-            historyState = angular.copy(this.state);
+            var coverageTableHistoryState, globalState, i;
+            coverageTableHistoryState = angular.copy(this.state);
 
-            historyState.assemblies = this.extractCollapseState(historyState.assemblies);
+            coverageTableHistoryState.assemblies = this.extractCollapseState(coverageTableHistoryState.assemblies);
 
-            window.history.replaceState(historyState, null);
+            if (window.history.state !== null) {
+                globalState = angular.copy(window.history.state);
+            } else {
+                globalState = {};
+            }
+
+            globalState.coverageTableHistoryState = coverageTableHistoryState;
+            window.history.replaceState(globalState, null);
         }
 
         return (

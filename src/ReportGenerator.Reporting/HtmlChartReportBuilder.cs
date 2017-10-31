@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Palmmedia.ReportGenerator.Parser.Analysis;
 using Palmmedia.ReportGenerator.Properties;
+using Palmmedia.ReportGenerator.Reporting.CodeAnalysis;
 using Palmmedia.ReportGenerator.Reporting.Rendering;
 
 namespace Palmmedia.ReportGenerator.Reporting
@@ -45,7 +47,7 @@ namespace Palmmedia.ReportGenerator.Reporting
                 reportRenderer.Chart(historicCoverages);
             }
 
-            reportRenderer.CustomSummary(summaryResult.Assemblies, summaryResult.SupportsBranchCoverage);
+            reportRenderer.CustomSummary(summaryResult.Assemblies, new List<RiskHotspot>(), summaryResult.SupportsBranchCoverage);
 
             reportRenderer.SaveSummaryReport(this.ReportConfiguration.TargetDirectory);
         }
