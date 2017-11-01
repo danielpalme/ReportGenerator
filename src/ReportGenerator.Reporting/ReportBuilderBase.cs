@@ -216,9 +216,9 @@ namespace Palmmedia.ReportGenerator.Reporting
                 .SelectMany(a => a.Classes)
                 .SelectMany(c => c.MethodMetrics)
                 .SelectMany(m => m.Metrics)
-                .Where(m => m.MetricType == MetricType.Sumable)
+                .Where(m => m.MetricType == MetricType.CoverageAbsolute)
                 .GroupBy(m => m.Name)
-                .Select(g => new Metric(g.Key, g.First().ExplanationUrl, MetricType.Sumable, g.Sum(m => m.Value)))
+                .Select(g => new Metric(g.Key, g.First().ExplanationUrl, MetricType.CoverageAbsolute, g.Sum(m => m.Value)))
                 .ToArray();
 
             if (summableMetrics.Length > 0)

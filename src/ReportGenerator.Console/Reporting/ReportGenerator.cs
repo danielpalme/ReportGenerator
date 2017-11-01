@@ -94,7 +94,8 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// <param name="overallHistoricCoverages">All historic coverage elements.</param>
         /// <param name="executionTime">The execution time.</param>
         /// <param name="tag">The custom tag (e.g. build number).</param>
-        internal void CreateReport(bool addHistoricCoverage, List<HistoricCoverage> overallHistoricCoverages, DateTime executionTime, string tag)
+        /// <returns>The filters assemblies.</returns>
+        internal IEnumerable<Assembly> CreateReport(bool addHistoricCoverage, List<HistoricCoverage> overallHistoricCoverages, DateTime executionTime, string tag)
         {
             var filteredAssemblies = this.parser.Assemblies
                 .Where(a => this.assemblyFilter.IsElementIncludedInReport(a.Name))
@@ -179,6 +180,8 @@ namespace Palmmedia.ReportGenerator.Reporting
                         ex.Message);
                 }
             }
+
+            return filteredAssemblies;
         }
     }
 }

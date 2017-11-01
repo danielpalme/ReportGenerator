@@ -53,7 +53,7 @@ namespace Palmmedia.ReportGenerator
                 reportConfiguration.OverallHistoricCoverages = overallHistoricCoverages;
             }
 
-            new Reporting.ReportGenerator(
+            var filteredAssemblies = new Reporting.ReportGenerator(
                 parser,
                 new DefaultFilter(reportConfiguration.AssemblyFilters),
                 new DefaultFilter(reportConfiguration.ClassFilters),
@@ -64,7 +64,7 @@ namespace Palmmedia.ReportGenerator
             if (historyStorage != null)
             {
                 new HistoryReportGenerator(historyStorage)
-                        .CreateReport(parser.Assemblies, executionTime, reportConfiguration.Tag);
+                        .CreateReport(filteredAssemblies, executionTime, reportConfiguration.Tag);
             }
 
             stopWatch.Stop();

@@ -24,8 +24,8 @@
 
   <!-- Version, adjust before build -->
   <PropertyGroup>
-    <Version>3.1.0-beta2</Version>
-    <VersionShort>3.1.0-beta2</VersionShort>
+    <Version>3.1.0-beta3</Version>
+    <VersionShort>3.1.0-beta3</VersionShort>
   </PropertyGroup>
   
   <!-- Tools -->
@@ -36,7 +36,9 @@
   </PropertyGroup>
   
   <Target Name="Clean">
-    <RemoveDir Directories="target" />    
+    <RemoveDir Directories="target\bin" />
+    <RemoveDir Directories="target\packages" />
+    <RemoveDir Directories="target\reports\coverage" />
   </Target>
 
   <Target Name="Compile">
@@ -62,7 +64,7 @@
       <CoverageFiles Include="target\reports\coverage\coverage.xml" />
     </ItemGroup>
 
-    <ReportGenerator ReportFiles="@(CoverageFiles)" ReportTypes="Html;Badges" TargetDirectory="target\reports\coverage\HTML" HistoryDirectory="target\reports\coverage\history" />
+    <ReportGenerator ReportFiles="@(CoverageFiles)" ReportTypes="Html;Badges" TargetDirectory="target\reports\coverage" HistoryDirectory="target\reports\coveragehistory" />
   </Target>
 
   <Target Name="Deploy" DependsOnTargets="Clean; Compile; Report;">
@@ -78,11 +80,11 @@ target\bin\Release\LICENSE.txt;
 target\bin\Release\Readme.txt;" />
     </ItemGroup>    
 
-    <Zip Files="@(ZipFileContent)" WorkingDirectory="$(MSBuildThisFileDirectory)target\bin\Release" ZipFileName="target\ReportGenerator_$(Version).zip" ZipLevel="9" />
+    <Zip Files="@(ZipFileContent)" WorkingDirectory="$(MSBuildThisFileDirectory)target\bin\Release" ZipFileName="target\packages\ReportGenerator_$(Version).zip" ZipLevel="9" />
 
-    <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\ReportGenerator.nuspec -OutputDirectory target -Version $(Version)" />
+    <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\ReportGenerator.nuspec -OutputDirectory target\packages -Version $(Version)" />
 
-    <Exec Command="powershell -Command [Environment]::SetEnvironmentVariable('ChecksumOfZip', (Get-FileHash .\target\ReportGenerator_$(Version).zip -Algorithm SHA256).Hash, 'User')" />
+    <Exec Command="powershell -Command [Environment]::SetEnvironmentVariable('ChecksumOfZip', (Get-FileHash .\target\packages\ReportGenerator_$(Version).zip -Algorithm SHA256).Hash, 'User')" />
      <PropertyGroup>
          <ChecksumOfZip>$([System.Environment]::GetEnvironmentVariable('ChecksumOfZip', System.EnvironmentVariableTarget.User))</ChecksumOfZip>
     </PropertyGroup>
@@ -91,11 +93,11 @@ target\bin\Release\Readme.txt;" />
     <Copy SourceFiles="Deployment\chocolatey\tools\chocolateyInstall.ps1.tmp" DestinationFiles="Deployment\chocolatey\tools\chocolateyInstall.ps1" />
     <FileUpdate Files="Deployment\chocolatey\tools\chocolateyInstall.ps1" Regex="\[\[version\]\]" ReplacementText="$(Version)" />
     <FileUpdate Files="Deployment\chocolatey\tools\chocolateyInstall.ps1" Regex="\[\[checksum\]\]" ReplacementText="$(ChecksumOfZip)" />
-    <Exec Command="$(ChocolateyCommandLine) pack Deployment\chocolatey\reportgenerator.portable.nuspec --outputdirectory=target --version=$(Version)" />
+    <Exec Command="$(ChocolateyCommandLine) pack Deployment\chocolatey\reportgenerator.portable.nuspec --outputdirectory=target\packages --version=$(Version)" />
     <Delete Files="Deployment\chocolatey\tools\chocolateyInstall.ps1" />
   </Target>
       
   <Target Name="Publish" DependsOnTargets="Deploy">
-    <Exec Command="$(NuGetCommandLine) push .\target\ReportGenerator.$(VersionShort).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
+    <Exec Command="$(NuGetCommandLine) push .\target\packages\ReportGenerator.$(VersionShort).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
   </Target> 
 </Project>

@@ -78,7 +78,7 @@ namespace Palmmedia.ReportGenerator.Parser
                     metrics.Add(new Metric(
                         ReportResources.Coverage,
                         ParserBase.CodeCoverageUri,
-                        MetricType.Percentage,
+                        MetricType.CoveragePercentual,
                         Math.Round(decimal.Parse(lineRate.Value, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero)));
                 }
 
@@ -89,7 +89,7 @@ namespace Palmmedia.ReportGenerator.Parser
                     metrics.Add(new Metric(
                         ReportResources.BranchCoverage,
                         ParserBase.CodeCoverageUri,
-                        MetricType.Percentage,
+                        MetricType.CoveragePercentual,
                         Math.Round(decimal.Parse(branchRate.Value, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero)));
                 }
 

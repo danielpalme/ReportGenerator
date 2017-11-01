@@ -177,11 +177,8 @@ var RiskHotspotsSearchBar = React.createClass({
             filterElements.push(React.DOM.div(null));
         }
 
-        if (this.props.totalNumberOfRiskHotspots > 0) {
-            numberOptions.push(React.DOM.option({ value: 10 }, 10));
-        }
-
         if (this.props.totalNumberOfRiskHotspots > 10) {
+            numberOptions.push(React.DOM.option({ value: 10 }, 10));
             numberOptions.push(React.DOM.option({ value: 20 }, 20));
         }
 

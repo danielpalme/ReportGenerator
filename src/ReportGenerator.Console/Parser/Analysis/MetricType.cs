@@ -8,16 +8,16 @@
         /// <summary>
         /// Percentual value (e.g. line coverage).
         /// </summary>
-        Percentage,
+        CoveragePercentual,
+
+        /// <summary>
+        /// A sumable metric (e.g. number of covered/uncovered blocks).
+        /// </summary>
+        CoverageAbsolute,
 
         /// <summary>
         /// Code quality indicator (e.g. cyclomatic complexity).
         /// </summary>
         CodeQuality,
-
-        /// <summary>
-        /// A sumable metric (e.g. number of covered/uncovered blocks).
-        /// </summary>
-        Sumable
     }
 }

@@ -203,12 +203,12 @@ namespace Palmmedia.ReportGenerator.Parser
                     new Metric(
                         ReportResources.BlocksCovered,
                         ParserBase.CodeCoverageUri,
-                        MetricType.Sumable,
+                        MetricType.CoverageAbsolute,
                         int.Parse(method.Attribute("blocks_covered").Value, CultureInfo.InvariantCulture)),
                     new Metric(
                         ReportResources.BlocksNotCovered,
                         ParserBase.CodeCoverageUri,
-                        MetricType.Sumable,
+                        MetricType.CoverageAbsolute,
                         int.Parse(method.Attribute("blocks_not_covered").Value, CultureInfo.InvariantCulture))
                 };
 

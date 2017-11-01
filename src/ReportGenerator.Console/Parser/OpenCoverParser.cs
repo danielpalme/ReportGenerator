@@ -111,12 +111,12 @@ namespace Palmmedia.ReportGenerator.Parser
                     new Metric(
                         ReportResources.SequenceCoverage,
                         ParserBase.CodeCoverageUri,
-                        MetricType.Percentage,
+                        MetricType.CoveragePercentual,
                         methodGroup.Max(m => decimal.Parse(m.Attribute("sequenceCoverage").Value, CultureInfo.InvariantCulture))),
                     new Metric(
                         ReportResources.BranchCoverage,
                         ParserBase.CodeCoverageUri,
-                        MetricType.Percentage,
+                        MetricType.CoveragePercentual,
                         methodGroup.Max(m => decimal.Parse(m.Attribute("branchCoverage").Value, CultureInfo.InvariantCulture)))
                 };
 
