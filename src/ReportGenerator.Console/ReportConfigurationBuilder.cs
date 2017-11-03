@@ -70,6 +70,7 @@ namespace Palmmedia.ReportGenerator
             var fileFilters = new string[] { };
             string verbosityLevel = null;
             string tag = null;
+            bool includeImplicitBranches = false;
 
             string value = null;
 
@@ -131,6 +132,11 @@ namespace Palmmedia.ReportGenerator
                 tag = value;
             }
 
+            if (namedArguments.ContainsKey("INCLUDEIMPLICITBRANCHES"))
+            {
+                includeImplicitBranches = true;
+            }
+
             return new ReportConfiguration(
                 this.reportBuilderFactory,
                 reportFilePatterns,
@@ -142,7 +148,8 @@ namespace Palmmedia.ReportGenerator
                 classFilters,
                 fileFilters,
                 verbosityLevel,
-                tag);
+                tag,
+                includeImplicitBranches);
         }
 
         /// <summary>

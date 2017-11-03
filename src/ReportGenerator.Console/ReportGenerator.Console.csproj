@@ -95,6 +95,8 @@
     <Compile Include="Parser\DynamicCodeCoverageParser.cs" />
     <Compile Include="Parser\DotCoverParser.cs" />
     <Compile Include="Parser\CoberturaParser.cs" />
+    <Compile Include="Parser\IParserOptions.cs" />
+    <Compile Include="Parser\ParserOptions.cs" />
     <Compile Include="Parser\Preprocessing\DynamicCodeCoverageReportPreprocessor.cs" />
     <Compile Include="Parser\Preprocessing\DotCoverReportPreprocessor.cs" />
     <Compile Include="Parser\Preprocessing\CoberturaReportPreprocessor.cs" />

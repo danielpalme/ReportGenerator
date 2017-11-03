@@ -54,6 +54,7 @@ namespace Palmmedia.ReportGenerator
         /// <param name="fileFilters">The file filters.</param>
         /// <param name="verbosityLevel">The verbosity level.</param>
         /// <param name="tag">The custom tag (e.g. build number).</param>
+        /// <param name="includeImplicitBranches">Option to include implicit branches while calculating branch coverage.</param>
         public ReportConfiguration(
             IReportBuilderFactory reportBuilderFactory,
             IEnumerable<string> reportFilePatterns,
@@ -65,7 +66,8 @@ namespace Palmmedia.ReportGenerator
             IEnumerable<string> classFilters,
             IEnumerable<string> fileFilters,
             string verbosityLevel,
-            string tag)
+            string tag, 
+            bool includeImplicitBranches = false)
         {
             if (reportBuilderFactory == null)
             {
@@ -145,6 +147,7 @@ namespace Palmmedia.ReportGenerator
             }
 
             this.Tag = tag;
+            this.IncludeImplicitBranches = includeImplicitBranches;
         }
 
         /// <summary>
@@ -217,6 +220,11 @@ namespace Palmmedia.ReportGenerator
                 this.overallHistoricCoverages = value ?? this.overallHistoricCoverages;
             }
         }
+
+        /// <summary>
+        /// Option to include implicit branches while calculating branch coverage.
+        /// </summary>
+        public bool IncludeImplicitBranches { get; set; }
 
         /// <summary>
         /// Validates all parameters.

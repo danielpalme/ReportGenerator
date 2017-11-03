@@ -40,7 +40,12 @@ namespace Palmmedia.ReportGenerator
             stopWatch.Start();
             DateTime executionTime = DateTime.Now;
 
-            var parser = ParserFactory.CreateParser(reportConfiguration.ReportFiles, reportConfiguration.SourceDirectories);
+            var parserOptions = new ParserOptions()
+            {
+                ImplicitBranchCoverage = reportConfiguration.IncludeImplicitBranches
+            };
+
+            var parser = ParserFactory.CreateParser(reportConfiguration.ReportFiles, reportConfiguration.SourceDirectories, parserOptions);
 
             var overallHistoricCoverages = new System.Collections.Generic.List<Parser.Analysis.HistoricCoverage>();
             var historyStorage = new MefHistoryStorageFactory().GetHistoryStorage(reportConfiguration);
