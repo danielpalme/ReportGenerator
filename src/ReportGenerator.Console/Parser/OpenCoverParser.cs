@@ -48,7 +48,7 @@ namespace Palmmedia.ReportGenerator.Parser
         /// </summary>
         /// <param name="report">The report file as XContainer.</param>
         /// <param name="parserOptions">Options related to how the report is parsed.</param>
-        internal OpenCoverParser(XContainer report, IParserOptions parserOptions)
+        internal OpenCoverParser(XContainer report, IParserOptions parserOptions = null)
         {
             if (report == null)
             {
@@ -160,18 +160,17 @@ namespace Palmmedia.ReportGenerator.Parser
         {
             var result = new Dictionary<int, ICollection<Branch>>();
 
-            if (parserOptions != null && parserOptions.ImplicitBranchCoverage)
-            {
-                AddBranchPointsForImplicitBranches(methods);
-            }
-
             var branchPoints = methods
                 .Elements("BranchPoints")
-                .Elements("BranchPoint")
-                .ToArray();
+                .Elements("BranchPoint").ToList();
+
+            if (parserOptions != null && parserOptions.ImplicitBranchCoverage)
+            {
+                AddBranchPointsForImplicitBranches(methods, branchPoints);
+            }
 
             // OpenCover supports this since version 4.5.3207
-            if (branchPoints.Length == 0 || branchPoints[0].Attribute("sl") == null)
+            if (branchPoints.Count() == 0 || branchPoints.First().Attribute("sl") == null)
             {
                 return result;
             }
@@ -225,22 +224,31 @@ namespace Palmmedia.ReportGenerator.Parser
             return result;
         }
 
-        private static void AddBranchPointsForImplicitBranches(XElement[] methods)
+        /// <summary>
+        /// Adds branch points for implicit branches (i.e. methods with no branches as such, have some code to be touched).
+        /// </summary>
+        /// <param name="methods">Method nodes</param>
+        /// <param name="branchPointsCollection">The collection of branch points.</param>
+        private static void AddBranchPointsForImplicitBranches(XElement[] methods, IList<XElement> branchPointsCollection)
         {
             var validMethods = methods.Where(m => m.Element("FileRef") != null && 
                                                   !m.Element("BranchPoints").HasElements);
 
-            foreach (var validaMethod in validMethods)
+            foreach (var method in validMethods)
             {
-                var fileId = validaMethod.Element("FileRef").Attribute("uid").Value;
+                var fileId = method.Element("FileRef").Attribute("uid").Value;
 
                 string vc = "0";
 
-                if (validaMethod.XPathSelectElement("/SequencePoints/SequencePoint[@vc = '1']") != null)
+                // if any sequence point has visited status, consider that branch visited status for the implicit branch.
+                if (method.XPathSelectElement("./SequencePoints/SequencePoint[@vc = '1']") != null)
                 {
                     vc = "1";
                 }
 
+                // to link branch by line, pick the line number of first sequence point (i.e. first line of the method).
+                var firstSeqPoint = method.XPathSelectElement("./SequencePoints/SequencePoint");
+                var sl = (firstSeqPoint != null) ? firstSeqPoint.Attribute("sl").Value : "0";
                 var newBranchPoint = new XElement("BranchPoint", 
                     new XAttribute("vc", vc),
                     new XAttribute("fileid", fileId),
@@ -249,9 +257,9 @@ namespace Palmmedia.ReportGenerator.Parser
                     new XAttribute("ordinal", "0"),
                     new XAttribute("offset", "0"),
                     new XAttribute("offsetend", "0"),
-                    new XAttribute("sl", "0"));
+                    new XAttribute("sl", sl));
 
-                validaMethod.Element("BranchPoints").Add(newBranchPoint);
+                branchPointsCollection.Add(newBranchPoint);
             }
         }
 

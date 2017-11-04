@@ -132,9 +132,9 @@ namespace Palmmedia.ReportGenerator
                 tag = value;
             }
 
-            if (namedArguments.ContainsKey("INCLUDEIMPLICITBRANCHES"))
+            if (namedArguments.TryGetValue("INCLUDEIMPLICITBRANCHES", out value))
             {
-                includeImplicitBranches = true;
+                includeImplicitBranches = Convert.ToBoolean(value);
             }
 
             return new ReportConfiguration(
@@ -185,6 +185,7 @@ namespace Palmmedia.ReportGenerator
             Console.WriteLine("    " + Help.Parameters8);
             Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "    " + Help.Parameters9, string.Join("|", Enum.GetNames(typeof(VerbosityLevel)))));
             Console.WriteLine("    " + Help.Parameters10);
+            Console.WriteLine("    " + Help.Parameter11);
 
             Console.WriteLine();
             Console.WriteLine(Help.Explanations);
@@ -203,6 +204,7 @@ namespace Palmmedia.ReportGenerator
             Console.WriteLine("    " + Help.Explanations12);
             Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "    " + Help.VerbosityValues, string.Join(", ", Enum.GetNames(typeof(VerbosityLevel)))));
             Console.WriteLine("    " + Help.Explanations13);
+            Console.WriteLine("    " + Help.Explaination14);
 
             Console.WriteLine();
             Console.WriteLine(Help.DefaultValues);
@@ -211,6 +213,7 @@ namespace Palmmedia.ReportGenerator
             Console.WriteLine("   -classfilters:+*");
             Console.WriteLine("   -filefilters:+*");
             Console.WriteLine("   -verbosity:" + VerbosityLevel.Verbose);
+            Console.WriteLine("   --includeimplicitbranches:" + "false");
 
             Console.WriteLine();
             Console.WriteLine(Help.Examples);
@@ -219,6 +222,8 @@ namespace Palmmedia.ReportGenerator
             Console.WriteLine("   \"-reports:coverage1.xml;coverage2.xml\" \"-targetdir:report\"");
             Console.WriteLine("   \"-reports:coverage.xml\" \"-targetdir:C:\\report\" -reporttypes:Latex \"-sourcedirs:C:\\MyProject\"");
             Console.WriteLine("   \"-reports:coverage.xml\" \"-targetdir:C:\\report\" \"-sourcedirs:C:\\MyProject1;C:\\MyProject2\" \"-assemblyfilters:+Included;-Excluded.*\"");
+
+            Console.WriteLine();
         }
     }
 }
