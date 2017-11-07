@@ -240,8 +240,8 @@ namespace Palmmedia.ReportGenerator.Parser
 
                 string vc = "0";
 
-                // if any sequence point has visited status, consider that branch visited status for the implicit branch.
-                if (method.XPathSelectElement("./SequencePoints/SequencePoint[@vc = '1']") != null)
+                // if any sequence point has non-zero visited count, consider that branch visited status for the implicit branch.
+                if (method.XPathSelectElement("./SequencePoints/SequencePoint[@vc != '0']") != null)
                 {
                     vc = "1";
                 }
