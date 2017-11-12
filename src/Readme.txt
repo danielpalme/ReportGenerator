@@ -64,7 +64,7 @@ CHANGELOG
     * New: Issue #102: Added risk hotspot analysis based on metrics
     * New: Issue #110: Added zoom function to historic charts
     * Fix: Issue #106: Totals on last entry in chart multiplied
-    * Fix: Issue #103: Escaping of backslash in Windows path
+    * Fix: Issue #113: Escaping of backslash in Windows path
 
 3.0.2.0
 
