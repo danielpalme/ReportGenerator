@@ -336,7 +336,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             foreach (var assembly in assemblies)
             {
                 this.javaScriptContent.AppendLine("  {");
-                this.javaScriptContent.AppendFormat("    \"name\": \"{0}\",", assembly.Name);
+                this.javaScriptContent.AppendFormat("    \"name\": \"{0}\",", assembly.Name.Replace(@"\", @"\\"));
                 this.javaScriptContent.AppendLine();
                 this.javaScriptContent.AppendLine("    \"classes\": [");
 
@@ -352,7 +352,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                     }
 
                     this.javaScriptContent.Append("      { ");
-                    this.javaScriptContent.AppendFormat("\"name\": \"{0}\",", @class.Name);
+                    this.javaScriptContent.AppendFormat("\"name\": \"{0}\",", @class.Name.Replace(@"\", @"\\"));
                     this.javaScriptContent.AppendFormat(
                         " \"reportPath\": \"{0}\",",
                         this.onlySummary ? string.Empty : GetClassReportFilename(@class.Assembly.ShortName, @class.Name));
