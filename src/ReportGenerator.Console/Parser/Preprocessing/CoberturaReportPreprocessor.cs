@@ -38,6 +38,15 @@ namespace Palmmedia.ReportGenerator.Parser.Preprocessing
                 return;
             }
 
+            // Issue 115: https://stackoverflow.com/questions/19909008/path-combine-does-not-add-directory-separator-after-drive-letter 
+            for (int i = 0; i < sources.Length; i++)
+            {
+                if (sources[i].Length == 2 && sources[i][1] == ':')
+                {
+                    sources[i] = sources[i] + System.IO.Path.DirectorySeparatorChar;
+                }
+            }
+
             var classes = this.report.Descendants("package")
                 .Elements("classes")
                 .Elements("class")

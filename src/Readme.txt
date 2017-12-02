@@ -65,6 +65,7 @@ CHANGELOG
     * New: Issue #110: Added zoom function to historic charts
     * Fix: Issue #106: Totals on last entry in chart multiplied
     * Fix: Issue #113: Escaping of backslash in Windows path
+    * Fix: Issue #115: Cobertura path problem when source path is drive letter
 
 3.0.2.0
 
