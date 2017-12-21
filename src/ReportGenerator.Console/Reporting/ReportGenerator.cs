@@ -106,16 +106,24 @@ namespace Palmmedia.ReportGenerator.Reporting
                     {
                         if (classFilter.IsElementIncludedInReport(@class.Name))
                         {
-                            newAssembly.AddClass(@class);
+                            // If all files are removed by filters, then the whole class gets removed/not added
+                            bool hasFiles = @class.Files.Any();
+
                             foreach (var file in @class.Files.Where(f => !this.fileFilter.IsElementIncludedInReport(f.Path)))
                             {
                                 @class.RemoveFile(file);
+                            }
+
+                            if (!hasFiles || @class.Files.Any())
+                            {
+                                newAssembly.AddClass(@class);
                             }
                         }
                     }
 
                     return newAssembly;
-                });
+                })
+                .ToArray();
 
             int numberOfClasses = filteredAssemblies.Sum(a => a.Classes.Count());
 

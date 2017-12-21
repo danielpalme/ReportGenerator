@@ -59,6 +59,11 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+3.1.1.0
+
+
+    * Fix: Issue #117: Improved file filters (classes get removed if all files are removed)
+
 3.1.0.0
 
     * New: Issue #102: Added risk hotspot analysis based on metrics
