@@ -115,8 +115,8 @@ A MSBuild task also exists:
 </Project>
 ```
 
-AxoCover:
-With the Visual Studio Plugin [AxoCover](https://github.com/axodox/AxoCover) you can get good test integration and you can generate a HTML report with a single click:
+AxoCover:  
+With the Visual Studio Plugin [AxoCover](https://github.com/axodox/AxoCover) you can get good test integration and you are able to generate a HTML report with a single click:
 Download in [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=axodox1.AxoCover)
 
 ## Resources
