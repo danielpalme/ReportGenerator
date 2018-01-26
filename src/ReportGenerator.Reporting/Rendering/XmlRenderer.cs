@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using Palmmedia.ReportGenerator.Parser.Analysis;
+using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Reporting.CodeAnalysis;
 
 namespace Palmmedia.ReportGenerator.Reporting.Rendering
@@ -24,6 +24,16 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// The report builder.
         /// </summary>
         private XmlWriter reportTextWriter;
+
+        /// <summary>
+        /// Gets a value indicating whether renderer support rendering of charts.
+        /// </summary>
+        public bool SupportsCharts => false;
+
+        /// <summary>
+        /// Gets a value indicating whether renderer support rendering risk hotspots.
+        /// </summary>
+        public bool SupportsRiskHotsSpots => false;
 
         /// <summary>
         /// Begins the summary report.
@@ -118,14 +128,6 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         }
 
         /// <summary>
-        /// Adds a metrics table to the report.
-        /// </summary>
-        /// <param name="metric">The metric.</param>
-        public void BeginMetricsTable(MethodMetric metric)
-        {
-        }
-
-        /// <summary>
         /// Adds a file analysis table to the report.
         /// </summary>
         /// <param name="headers">The headers.</param>
@@ -170,22 +172,28 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         }
 
         /// <summary>
-        /// Adds the given metric values to the report.
+        /// Adds metrics to the report
         /// </summary>
-        /// <param name="metric">The metric.</param>
-        public void MetricsRow(MethodMetric metric)
+        /// <param name="methodMetrics">The method metrics.</param>
+        public void MetricsTable(IEnumerable<MethodMetric> methodMetrics)
         {
-            if (metric == null)
+            if (methodMetrics == null)
             {
-                throw new ArgumentNullException(nameof(metric));
+                throw new ArgumentNullException(nameof(methodMetrics));
             }
 
-            this.reportTextWriter.WriteStartElement(XmlRenderer.ReplaceNonLetterChars(metric.ShortName));
-
-            foreach (var m in metric.Metrics)
+            foreach (var methodMetric in methodMetrics)
             {
-                this.reportTextWriter.WriteStartElement(XmlRenderer.ReplaceNonLetterChars(m.Name));
-                this.reportTextWriter.WriteValue(m.Value.ToString(CultureInfo.InvariantCulture));
+                this.reportTextWriter.WriteStartElement("Element");
+                this.reportTextWriter.WriteAttributeString("name", XmlRenderer.ReplaceNonLetterChars(methodMetric.ShortName));
+
+                foreach (var m in methodMetric.Metrics)
+                {
+                    this.reportTextWriter.WriteStartElement(XmlRenderer.ReplaceNonLetterChars(m.Name));
+                    this.reportTextWriter.WriteValue(m.Value.ToString(CultureInfo.InvariantCulture));
+                    this.reportTextWriter.WriteEndElement();
+                }
+
                 this.reportTextWriter.WriteEndElement();
             }
 

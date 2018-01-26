@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
-using Palmmedia.ReportGenerator.Parser.Analysis;
-using Palmmedia.ReportGenerator.Properties;
+using Palmmedia.ReportGenerator.Core.Parser.Analysis;
+using Palmmedia.ReportGenerator.Core.Properties;
+using Palmmedia.ReportGenerator.Core.Reporting;
+using SixLabors.Fonts;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Png;
 
 namespace Palmmedia.ReportGenerator.Reporting
 {
     /// <summary>
     /// Creates badges in SVG format.
     /// </summary>
-    [Export(typeof(IReportBuilder))]
     public class BadgeReportBuilder : IReportBuilder
     {
         /// <summary>
@@ -152,7 +152,12 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// <value>
         /// The report configuration.
         /// </value>
-        public IReportConfiguration ReportConfiguration { get; set; }
+        public IReportContext ReportContext { get; set; }
+
+        /// <summary>
+        /// Gets a value indicating whether class reports can be generated in parallel.
+        /// </summary>
+        public bool SupportsParallelClassReportExecution => true;
 
         /// <summary>
         /// Creates a class report.
@@ -177,29 +182,29 @@ namespace Palmmedia.ReportGenerator.Reporting
             if (summaryResult.CoverageQuota.HasValue)
             {
                 File.WriteAllText(
-                    Path.Combine(this.ReportConfiguration.TargetDirectory, "badge_linecoverage.svg"),
+                    Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_linecoverage.svg"),
                     this.CreateSvgBadge(summaryResult, true, false));
 
                 File.WriteAllBytes(
-                    Path.Combine(this.ReportConfiguration.TargetDirectory, "badge_linecoverage.png"),
+                    Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_linecoverage.png"),
                     this.CreatePngBadge(summaryResult, true));
             }
 
             if (summaryResult.BranchCoverageQuota.HasValue)
             {
                 File.WriteAllText(
-                    Path.Combine(this.ReportConfiguration.TargetDirectory, "badge_branchcoverage.svg"),
+                    Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_branchcoverage.svg"),
                     this.CreateSvgBadge(summaryResult, false, true));
 
                 File.WriteAllBytes(
-                    Path.Combine(this.ReportConfiguration.TargetDirectory, "badge_branchcoverage.png"),
+                    Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_branchcoverage.png"),
                     this.CreatePngBadge(summaryResult, false));
             }
 
             if (summaryResult.CoverageQuota.HasValue && summaryResult.BranchCoverageQuota.HasValue)
             {
                 File.WriteAllText(
-                    Path.Combine(this.ReportConfiguration.TargetDirectory, "badge_combined.svg"),
+                    Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_combined.svg"),
                     this.CreateSvgBadge(summaryResult, true, true));
             }
         }
@@ -221,7 +226,7 @@ namespace Palmmedia.ReportGenerator.Reporting
                 ReportResources.CodeCoverage,
                 includeLineCoverage ? string.Format(LineCoverageSymbol, lineCoverageClass) : string.Empty,
                 includeBranchCoverage ? string.Format(BranchCoverageSymbol, branchCoverageClass) : string.Empty,
-                string.Format("{0} {1} {2}", ReportResources.GeneratedBy, typeof(IReportBuilder).Assembly.GetName().Name, typeof(IReportBuilder).Assembly.GetName().Version),
+                $"{ReportResources.GeneratedBy} ReportGenerator {typeof(IReportBuilder).Assembly.GetName().Version}",
                 ReportResources.Coverage3,
                 includeLineCoverage ? string.Format(CoverageText, lineCoverageClass, summaryResult.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture)) : string.Empty,
                 includeBranchCoverage ? string.Format(CoverageText, branchCoverageClass, summaryResult.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)) : string.Empty,
@@ -241,22 +246,13 @@ namespace Palmmedia.ReportGenerator.Reporting
             string text = (lineCoverage ? summaryResult.CoverageQuota.Value : summaryResult.BranchCoverageQuota.Value).ToString(CultureInfo.InvariantCulture) + "%";
 
             using (var ms = new MemoryStream(Convert.FromBase64String(template)))
-            using (Image image = Bitmap.FromStream(ms))
-            using (Graphics g = Graphics.FromImage(image))
-            using (Font font = new Font("Verdana", 8, FontStyle.Regular, GraphicsUnit.Point))
+            using (var image = Image.Load<Rgba32>(ms))
             using (MemoryStream output = new MemoryStream())
             {
-                Rectangle rect = new Rectangle(112, 0, 155, 20);
+                var font = SystemFonts.CreateFont("Verdana", 11, FontStyle.Regular);
+                image.Mutate(ctx => ctx.DrawText(text, font, Rgba32.White, new SixLabors.Primitives.PointF(112, 2)));
 
-                StringFormat stringFormat = new StringFormat()
-                {
-                    Alignment = StringAlignment.Near,
-                    LineAlignment = StringAlignment.Center
-                };
-
-                g.DrawString(text, font, Brushes.White, rect, stringFormat);
-
-                image.Save(output, ImageFormat.Png);
+                image.Save(output, new PngEncoder());
                 return output.ToArray();
             }
         }

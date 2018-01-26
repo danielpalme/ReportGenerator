@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Text;
-using Palmmedia.ReportGenerator.Parser.Analysis;
+using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Reporting.Rendering;
 
 namespace Palmmedia.ReportGenerator.Reporting
@@ -9,7 +8,6 @@ namespace Palmmedia.ReportGenerator.Reporting
     /// <summary>
     /// Creates report in HTML format.
     /// </summary>
-    [Export(typeof(IReportBuilder))]
     public class HtmlReportBuilder : ReportBuilderBase
     {
         /// <summary>
@@ -24,6 +22,11 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// The report format.
         /// </value>
         public override string ReportType => "Html";
+
+        /// <summary>
+        /// Gets a value indicating whether class reports can be generated in parallel.
+        /// </summary>
+        public override bool SupportsParallelClassReportExecution => true;
 
         /// <summary>
         /// Creates a class report.

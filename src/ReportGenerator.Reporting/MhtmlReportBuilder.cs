@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using Palmmedia.ReportGenerator.Logging;
-using Palmmedia.ReportGenerator.Parser.Analysis;
+using Palmmedia.ReportGenerator.Core.Logging;
+using Palmmedia.ReportGenerator.Core.Parser.Analysis;
+using Palmmedia.ReportGenerator.Core.Reporting;
 
 namespace Palmmedia.ReportGenerator.Reporting
 {
     /// <summary>
     /// Creates MHTML which is a container for the complete HTML report.
     /// </summary>
-    [System.ComponentModel.Composition.Export(typeof(IReportBuilder))]
     public class MhtmlReportBuilder : IReportBuilder
     {
         /// <summary>
@@ -17,9 +17,9 @@ namespace Palmmedia.ReportGenerator.Reporting
         private readonly IReportBuilder htmlReportBuilder = new HtmlReportBuilder();
 
         /// <summary>
-        /// The report configuration.
+        /// The report context.
         /// </summary>
-        private IReportConfiguration reportConfiguration;
+        private IReportContext reportContext;
 
         /// <summary>
         /// The temporary HTML report target directory.
@@ -35,23 +35,30 @@ namespace Palmmedia.ReportGenerator.Reporting
         public string ReportType => "MHtml";
 
         /// <summary>
-        /// Gets or sets the report configuration.
+        /// Gets a value indicating whether class reports can be generated in parallel.
+        /// </summary>
+        public bool SupportsParallelClassReportExecution => true;
+
+        /// <summary>
+        /// Gets or sets the report context.
         /// </summary>
         /// <value>
-        /// The report configuration.
+        /// The report context.
         /// </value>
-        public IReportConfiguration ReportConfiguration
+        public IReportContext ReportContext
         {
             get
             {
-                return this.reportConfiguration;
+                return this.reportContext;
             }
 
             set
             {
-                this.reportConfiguration = value;
-                this.htmlReportTargetDirectory = Path.Combine(value.TargetDirectory, "tmphtml");
-                this.htmlReportBuilder.ReportConfiguration = new HtmlReportBuilderReportConfiguration(value, this.htmlReportTargetDirectory);
+                this.reportContext = value;
+                this.htmlReportTargetDirectory = Path.Combine(value.ReportConfiguration.TargetDirectory, "tmphtml");
+                this.htmlReportBuilder.ReportContext = new HtmlReportBuilderReportContext(
+                    new HtmlReportBuilderReportConfiguration(value.ReportConfiguration, this.htmlReportTargetDirectory),
+                    value.OverallHistoricCoverages);
             }
         }
 
@@ -123,7 +130,7 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// </summary>
         private void CreateMhtmlFile()
         {
-            using (var writer = new StreamWriter(new FileStream(Path.Combine(this.ReportConfiguration.TargetDirectory, "Summary.mht"), FileMode.Create)))
+            using (var writer = new StreamWriter(new FileStream(Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "Summary.mht"), FileMode.Create)))
             {
                 writer.WriteLine("MIME-Version: 1.0");
                 writer.WriteLine("Content-Type: multipart/related;");
@@ -152,7 +159,7 @@ namespace Palmmedia.ReportGenerator.Reporting
 
                 file = "combined.js";
                 content = File.ReadAllText(Path.Combine(this.htmlReportTargetDirectory, file));
-                content = content.Replace(", \"reportPath\" : \"", ", \"reportPath\" : \"file:///");
+                content = content.Replace(", \"reportPath\": \"", ", \"reportPath\" : \"file:///");
                 WriteFile(writer, file, "application/javascript", content);
 
                 file = "report.css";
@@ -161,6 +168,33 @@ namespace Palmmedia.ReportGenerator.Reporting
 
                 writer.Write("------=_NextPart_000_0000_01D23618.54EBCBE0--");
             }
+        }
+
+        /// <summary>
+        /// Wraps another <see cref="IReportConfiguration"/> but makes it possible to override the target directory.
+        /// </summary>
+        private class HtmlReportBuilderReportContext : IReportContext
+        {
+            /// <summary>
+            /// Initializes a new instance of the <see cref="HtmlReportBuilderReportContext"/> class.
+            /// </summary>
+            /// <param name="reportConfiguration">The configuration options.</param>
+            /// <param name="overallHistoricCoverages">The historic coverage elements.</param>
+            public HtmlReportBuilderReportContext(IReportConfiguration reportConfiguration, IReadOnlyCollection<HistoricCoverage> overallHistoricCoverages)
+            {
+                this.ReportConfiguration = reportConfiguration;
+                this.OverallHistoricCoverages = overallHistoricCoverages;
+            }
+
+            /// <summary>
+            /// Gets the configuration options.
+            /// </summary>
+            public IReportConfiguration ReportConfiguration { get; }
+
+            /// <summary>
+            /// Gets the historic coverage elements.
+            /// </summary>
+            public IReadOnlyCollection<HistoricCoverage> OverallHistoricCoverages { get; }
         }
 
         /// <summary>
@@ -185,6 +219,11 @@ namespace Palmmedia.ReportGenerator.Reporting
             }
 
             /// <summary>
+            /// Gets the files containing coverage information.
+            /// </summary>
+            public IReadOnlyCollection<string> ReportFiles => this.reportConfiguration.ReportFiles;
+
+            /// <summary>
             /// Gets the target directory.
             /// </summary>
             public string TargetDirectory { get; private set; }
@@ -197,27 +236,22 @@ namespace Palmmedia.ReportGenerator.Reporting
             /// <summary>
             /// Gets the type of the report.
             /// </summary>
-            public IEnumerable<string> ReportTypes => this.reportConfiguration.ReportTypes;
-
-            /// <summary>
-            /// Gets the source directories.
-            /// </summary>
-            public IEnumerable<string> SourceDirectories => this.reportConfiguration.SourceDirectories;
+            public IReadOnlyCollection<string> ReportTypes => this.reportConfiguration.ReportTypes;
 
             /// <summary>
             /// Gets the assembly filters.
             /// </summary>
-            public IEnumerable<string> AssemblyFilters => this.reportConfiguration.AssemblyFilters;
+            public IReadOnlyCollection<string> AssemblyFilters => this.reportConfiguration.AssemblyFilters;
 
             /// <summary>
             /// Gets the class filters.
             /// </summary>
-            public IEnumerable<string> ClassFilters => this.reportConfiguration.ClassFilters;
+            public IReadOnlyCollection<string> ClassFilters => this.reportConfiguration.ClassFilters;
 
             /// <summary>
             /// Gets the file filters.
             /// </summary>
-            public IEnumerable<string> FileFilters => this.reportConfiguration.FileFilters;
+            public IReadOnlyCollection<string> FileFilters => this.reportConfiguration.FileFilters;
 
             /// <summary>
             /// Gets the verbosity level.
@@ -225,14 +259,19 @@ namespace Palmmedia.ReportGenerator.Reporting
             public VerbosityLevel VerbosityLevel => this.reportConfiguration.VerbosityLevel;
 
             /// <summary>
-            /// Gets all historic coverage elements.
-            /// </summary>
-            public IEnumerable<HistoricCoverage> OverallHistoricCoverages => this.reportConfiguration.OverallHistoricCoverages;
-
-            /// <summary>
             /// Gets the custom tag (e.g. build number).
             /// </summary>
             public string Tag => this.reportConfiguration.Tag;
+
+            /// <summary>
+            /// Gets the invalid file patters supplied by the user.
+            /// </summary>
+            public IReadOnlyCollection<string> InvalidReportFilePatterns => this.reportConfiguration.InvalidReportFilePatterns;
+
+            /// <summary>
+            /// Gets a value indicating whether the verbosity level was successfully parsed during initialization.
+            /// </summary>
+            public bool VerbosityLevelValid => this.reportConfiguration.VerbosityLevelValid;
         }
     }
 }

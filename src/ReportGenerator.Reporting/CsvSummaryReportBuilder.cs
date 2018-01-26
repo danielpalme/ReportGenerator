@@ -4,15 +4,15 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Palmmedia.ReportGenerator.Parser.Analysis;
-using Palmmedia.ReportGenerator.Properties;
+using Palmmedia.ReportGenerator.Core.Parser.Analysis;
+using Palmmedia.ReportGenerator.Core.Properties;
+using Palmmedia.ReportGenerator.Core.Reporting;
 
 namespace Palmmedia.ReportGenerator.Reporting
 {
     /// <summary>
     /// Creates summary report in CSV format (no reports for classes are generated).
     /// </summary>
-    [System.ComponentModel.Composition.Export(typeof(IReportBuilder))]
     public class CsvSummaryReportBuilder : IReportBuilder
     {
         /// <summary>
@@ -29,7 +29,12 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// <value>
         /// The report configuration.
         /// </value>
-        public IReportConfiguration ReportConfiguration { get; set; }
+        public IReportContext ReportContext { get; set; }
+
+        /// <summary>
+        /// Gets a value indicating whether class reports can be generated in parallel.
+        /// </summary>
+        public bool SupportsParallelClassReportExecution => true;
 
         /// <summary>
         /// Creates a class report.
@@ -51,7 +56,7 @@ namespace Palmmedia.ReportGenerator.Reporting
                 throw new ArgumentNullException(nameof(summaryResult));
             }
 
-            string targetPath = Path.Combine(this.ReportConfiguration.TargetDirectory, "Summary.csv");
+            string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "Summary.csv");
 
             using (var reportTextWriter = new StreamWriter(new FileStream(targetPath, FileMode.Create), Encoding.UTF8))
             {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using Palmmedia.ReportGenerator.Parser.Analysis;
+using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Reporting.Rendering;
 
 namespace Palmmedia.ReportGenerator.Reporting
@@ -9,7 +8,6 @@ namespace Palmmedia.ReportGenerator.Reporting
     /// <summary>
     /// Creates report in Latex format.
     /// </summary>
-    [Export(typeof(IReportBuilder))]
     public class LatexReportBuilder : ReportBuilderBase, IDisposable
     {
         /// <summary>
@@ -24,6 +22,11 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// The type of the report.
         /// </value>
         public override string ReportType => "Latex";
+
+        /// <summary>
+        /// Gets a value indicating whether class reports can be generated in parallel.
+        /// </summary>
+        public override bool SupportsParallelClassReportExecution => false;
 
         /// <summary>
         /// Creates a class report.

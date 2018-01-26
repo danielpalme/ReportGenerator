@@ -256,7 +256,7 @@ th { text-align: left; }
     background-repeat: no-repeat;
     background-size: contain;
     padding-left: 15px;
-    height: 1em;
+    height: 0.9em;
     display: inline-block;
     position: relative;
     top: 3px;
@@ -266,7 +266,7 @@ th { text-align: left; }
     background-repeat: no-repeat;
     background-size: contain;
     padding-left: 15px;
-    height: 1em;
+    height: 0.9em;
     display: inline-block;
     position: relative;
     top: 3px;
@@ -276,7 +276,7 @@ th { text-align: left; }
     background-repeat: no-repeat;
     background-size: contain;
     padding-left: 15px;
-    height: 1em;
+    height: 0.9em;
     display: inline-block;
     position: relative;
     top: 3px;
@@ -286,7 +286,7 @@ th { text-align: left; }
     background-repeat: no-repeat;
     background-size: contain;
     padding-left: 15px;
-    height: 1em;
+    height: 0.9em;
     display: inline-block;
 }
 .icon-plus {
@@ -294,7 +294,7 @@ th { text-align: left; }
     background-repeat: no-repeat;
     background-size: contain;
     padding-left: 15px;
-    height: 1em;
+    height: 0.9em;
     display: inline-block;
     position: relative;
     top: 3px;
@@ -304,7 +304,7 @@ th { text-align: left; }
     background-repeat: no-repeat;
     background-size: contain;
     padding-left: 15px;
-    height: 1em;
+    height: 0.9em;
     display: inline-block;
     position: relative;
     top: 3px;
@@ -314,7 +314,7 @@ th { text-align: left; }
     background-repeat: no-repeat;
     background-size: contain;
     padding-left: 20px;
-    height: 1em;
+    height: 0.9em;
     display: inline-block;
 }
 .icon-fork {
@@ -322,7 +322,7 @@ th { text-align: left; }
     background-repeat: no-repeat;
     background-size: contain;
     padding-left: 20px;
-    height: 1em;
+    height: 0.9em;
     display: inline-block;
 }
 .icon-cube {
@@ -330,7 +330,7 @@ th { text-align: left; }
     background-repeat: no-repeat;
     background-size: contain;
     padding-left: 20px;
-    height: 1em;
+    height: 0.9em;
     display: inline-block;
 }
 .icon-search-plus {
@@ -338,7 +338,7 @@ th { text-align: left; }
     background-repeat: no-repeat;
     background-size: contain;
     padding-left: 20px;
-    height: 1em;
+    height: 0.9em;
     display: inline-block;
 }
 .icon-search-minus {
@@ -346,6 +346,6 @@ th { text-align: left; }
     background-repeat: no-repeat;
     background-size: contain;
     padding-left: 20px;
-    height: 1em;
+    height: 0.9em;
     display: inline-block;
 }

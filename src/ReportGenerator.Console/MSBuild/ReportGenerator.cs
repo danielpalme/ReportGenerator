@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using Palmmedia.ReportGenerator.Reporting;
+using Palmmedia.ReportGenerator.Core;
 
 namespace Palmmedia.ReportGenerator.MSBuild
 {
@@ -44,14 +44,6 @@ namespace Palmmedia.ReportGenerator.MSBuild
         /// </summary>
         /// <value>The types of the report.</value>
         public ITaskItem[] ReportTypes { get; set; }
-
-        /// <summary>
-        /// Gets or sets the source directories. Optional directories which contain the corresponding source code. The source files are used if coverage report contains classes without path information.
-        /// </summary>
-        /// <value>
-        /// The source directories.
-        /// </value>
-        public ITaskItem[] SourceDirectories { get; set; }
 
         /// <summary>
         /// Gets or sets the assembly filters (old property).
@@ -118,13 +110,11 @@ namespace Palmmedia.ReportGenerator.MSBuild
 
             ITaskItem[] assemblyFilters = this.AssemblyFilters ?? this.Filters;
 
-            ReportConfiguration configuration = new ReportConfiguration(
-                new MefReportBuilderFactory(),
+            var configuration = new ReportConfiguration(
                 this.ReportFiles == null ? Enumerable.Empty<string>() : this.ReportFiles.Select(r => r.ItemSpec),
                 this.TargetDirectory,
                 this.HistoryDirectory,
                 reportTypes,
-                this.SourceDirectories == null ? Enumerable.Empty<string>() : this.SourceDirectories.Select(r => r.ItemSpec),
                 assemblyFilters == null ? Enumerable.Empty<string>() : assemblyFilters.Select(r => r.ItemSpec),
                 this.ClassFilters == null ? Enumerable.Empty<string>() : this.ClassFilters.Select(r => r.ItemSpec),
                 this.FileFilters == null ? Enumerable.Empty<string>() : this.FileFilters.Select(r => r.ItemSpec),

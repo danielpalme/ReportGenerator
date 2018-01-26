@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Palmmedia.ReportGenerator.Parser.Analysis;
-using Palmmedia.ReportGenerator.Properties;
+using Palmmedia.ReportGenerator.Core.Parser.Analysis;
+using Palmmedia.ReportGenerator.Core.Properties;
 using Palmmedia.ReportGenerator.Reporting.CodeAnalysis;
 using Palmmedia.ReportGenerator.Reporting.Rendering;
 
@@ -11,7 +11,6 @@ namespace Palmmedia.ReportGenerator.Reporting
     /// <summary>
     /// Creates HTML with chart component only (no reports for classes are generated).
     /// </summary>
-    [System.ComponentModel.Composition.Export(typeof(IReportBuilder))]
     public class HtmlChartReportBuilder : HtmlSummaryReportBuilder
     {
         /// <summary>
@@ -39,9 +38,9 @@ namespace Palmmedia.ReportGenerator.Reporting
                 throw new ArgumentNullException(nameof(summaryResult));
             }
 
-            reportRenderer.BeginSummaryReport(this.ReportConfiguration.TargetDirectory, "CoverageHistory.htm", ReportResources.Summary);
+            reportRenderer.BeginSummaryReport(this.ReportContext.ReportConfiguration.TargetDirectory, "CoverageHistory.htm", ReportResources.Summary);
 
-            var historicCoverages = this.GetOverallHistoricCoverages(this.ReportConfiguration.OverallHistoricCoverages);
+            var historicCoverages = this.GetOverallHistoricCoverages(this.ReportContext.OverallHistoricCoverages);
             if (historicCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue))
             {
                 reportRenderer.Chart(historicCoverages);
@@ -49,7 +48,7 @@ namespace Palmmedia.ReportGenerator.Reporting
 
             reportRenderer.CustomSummary(summaryResult.Assemblies, new List<RiskHotspot>(), summaryResult.SupportsBranchCoverage);
 
-            reportRenderer.SaveSummaryReport(this.ReportConfiguration.TargetDirectory);
+            reportRenderer.SaveSummaryReport(this.ReportContext.ReportConfiguration.TargetDirectory);
         }
     }
 }

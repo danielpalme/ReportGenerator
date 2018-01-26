@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Palmmedia.ReportGenerator.Parser.Analysis;
+using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Reporting.CodeAnalysis;
 
 namespace Palmmedia.ReportGenerator.Reporting.Rendering
@@ -9,6 +9,16 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
     /// </summary>
     public interface IReportRenderer
     {
+        /// <summary>
+        /// Gets a value indicating whether renderer support rendering of charts.
+        /// </summary>
+        bool SupportsCharts { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether renderer support rendering risk hotspots.
+        /// </summary>
+        bool SupportsRiskHotsSpots { get; }
+
         /// <summary>
         /// Begins the summary report.
         /// </summary>
@@ -85,12 +95,6 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         void CustomSummary(IEnumerable<Assembly> assemblies, IEnumerable<RiskHotspot> riskHotspots, bool branchCoverageAvailable);
 
         /// <summary>
-        /// Adds a metrics table to the report.
-        /// </summary>
-        /// <param name="metric">The metric.</param>
-        void BeginMetricsTable(MethodMetric metric);
-
-        /// <summary>
         /// Adds a file analysis table to the report.
         /// </summary>
         /// <param name="headers">The headers.</param>
@@ -125,10 +129,10 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         void SummaryClass(Class @class, bool branchCoverageAvailable);
 
         /// <summary>
-        /// Adds the given metric values to the report.
+        /// Adds metrics to the report
         /// </summary>
-        /// <param name="metric">The metric.</param>
-        void MetricsRow(MethodMetric metric);
+        /// <param name="methodMetrics">The method metrics.</param>
+        void MetricsTable(IEnumerable<MethodMetric> methodMetrics);
 
         /// <summary>
         /// Adds the coverage information of a single line of a file to the report.

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Palmmedia.ReportGenerator.Parser.Analysis;
-using Palmmedia.ReportGenerator.Properties;
+using Palmmedia.ReportGenerator.Core.Parser.Analysis;
+using Palmmedia.ReportGenerator.Core.Properties;
+using Palmmedia.ReportGenerator.Core.Reporting;
 using Palmmedia.ReportGenerator.Reporting.CodeAnalysis;
 using Palmmedia.ReportGenerator.Reporting.Rendering;
 
@@ -28,7 +29,12 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// <value>
         /// The report configuration.
         /// </value>
-        public IReportConfiguration ReportConfiguration { get; set; }
+        public IReportContext ReportContext { get; set; }
+
+        /// <summary>
+        /// Gets a value indicating whether class reports can be generated in parallel.
+        /// </summary>
+        public abstract bool SupportsParallelClassReportExecution { get; }
 
         /// <summary>
         /// Creates a class report.
@@ -53,7 +59,7 @@ namespace Palmmedia.ReportGenerator.Reporting
                 throw new ArgumentNullException(nameof(fileAnalyses));
             }
 
-            reportRenderer.BeginClassReport(this.ReportConfiguration.TargetDirectory, @class.Assembly.ShortName, @class.Name);
+            reportRenderer.BeginClassReport(this.ReportContext.ReportConfiguration.TargetDirectory, @class.Assembly.ShortName, @class.Name);
 
             reportRenderer.Header(ReportResources.Summary);
 
@@ -74,17 +80,20 @@ namespace Palmmedia.ReportGenerator.Reporting
                 reportRenderer.KeyValueRow(ReportResources.BranchCoverage2, branchCoverage.Value.ToString(CultureInfo.InvariantCulture) + "%");
             }
 
-            if (this.ReportConfiguration.Tag != null)
+            if (this.ReportContext.ReportConfiguration.Tag != null)
             {
-                reportRenderer.KeyValueRow(ReportResources.Tag, this.ReportConfiguration.Tag);
+                reportRenderer.KeyValueRow(ReportResources.Tag, this.ReportContext.ReportConfiguration.Tag);
             }
 
             reportRenderer.FinishTable();
 
-            if (@class.HistoricCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue))
+            if (reportRenderer.SupportsCharts)
             {
-                reportRenderer.Header(ReportResources.History);
-                reportRenderer.Chart(@class.HistoricCoverages);
+                if (@class.HistoricCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue))
+                {
+                    reportRenderer.Header(ReportResources.History);
+                    reportRenderer.Chart(@class.HistoricCoverages);
+                }
             }
 
             var metrics = @class.MethodMetrics;
@@ -92,15 +101,7 @@ namespace Palmmedia.ReportGenerator.Reporting
             if (metrics.Any())
             {
                 reportRenderer.Header(ReportResources.Metrics);
-
-                reportRenderer.BeginMetricsTable(metrics.First());
-
-                foreach (var metric in metrics)
-                {
-                    reportRenderer.MetricsRow(metric);
-                }
-
-                reportRenderer.FinishTable();
+                reportRenderer.MetricsTable(metrics);
             }
 
             reportRenderer.Header(ReportResources.Files);
@@ -156,7 +157,7 @@ namespace Palmmedia.ReportGenerator.Reporting
                 reportRenderer.TestMethods(testMethods, fileAnalyses, codeElementsByFileIndex);
             }
 
-            reportRenderer.SaveClassReport(this.ReportConfiguration.TargetDirectory, @class.Assembly.ShortName, @class.Name);
+            reportRenderer.SaveClassReport(this.ReportContext.ReportConfiguration.TargetDirectory, @class.Assembly.ShortName, @class.Name);
         }
 
         /// <summary>
@@ -176,7 +177,7 @@ namespace Palmmedia.ReportGenerator.Reporting
                 throw new ArgumentNullException(nameof(summaryResult));
             }
 
-            reportRenderer.BeginSummaryReport(this.ReportConfiguration.TargetDirectory, null, ReportResources.Summary);
+            reportRenderer.BeginSummaryReport(this.ReportContext.ReportConfiguration.TargetDirectory, null, ReportResources.Summary);
             reportRenderer.Header(ReportResources.Summary);
 
             reportRenderer.BeginKeyValueTable();
@@ -198,18 +199,21 @@ namespace Palmmedia.ReportGenerator.Reporting
                 reportRenderer.KeyValueRow(ReportResources.BranchCoverage2, branchCoverage.Value.ToString(CultureInfo.InvariantCulture) + "%");
             }
 
-            if (this.ReportConfiguration.Tag != null)
+            if (this.ReportContext.ReportConfiguration.Tag != null)
             {
-                reportRenderer.KeyValueRow(ReportResources.Tag, this.ReportConfiguration.Tag);
+                reportRenderer.KeyValueRow(ReportResources.Tag, this.ReportContext.ReportConfiguration.Tag);
             }
 
             reportRenderer.FinishTable();
 
-            var historicCoverages = this.GetOverallHistoricCoverages(this.ReportConfiguration.OverallHistoricCoverages);
-            if (historicCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue))
+            if (reportRenderer.SupportsCharts)
             {
-                reportRenderer.Header(ReportResources.History);
-                reportRenderer.Chart(historicCoverages);
+                var historicCoverages = this.GetOverallHistoricCoverages(this.ReportContext.OverallHistoricCoverages);
+                if (historicCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue))
+                {
+                    reportRenderer.Header(ReportResources.History);
+                    reportRenderer.Chart(historicCoverages);
+                }
             }
 
             var summableMetrics = summaryResult.Assemblies
@@ -226,17 +230,18 @@ namespace Palmmedia.ReportGenerator.Reporting
                 reportRenderer.Header(ReportResources.Metrics);
 
                 var methodMetric = new MethodMetric(ReportResources.Total, summableMetrics);
-                reportRenderer.BeginMetricsTable(methodMetric);
-                reportRenderer.MetricsRow(methodMetric);
-
-                reportRenderer.FinishTable();
+                reportRenderer.MetricsTable(new[] { methodMetric });
             }
 
             var hotspots = RiskHotspotsAnalysis.DetectHotspotsByMetricName(summaryResult.Assemblies);
-            if (hotspots.Any())
+
+            if (reportRenderer.SupportsRiskHotsSpots)
             {
-                reportRenderer.Header(ReportResources.RiskHotspots);
-                reportRenderer.RiskHotspots(hotspots);
+                if (hotspots.Any())
+                {
+                    reportRenderer.Header(ReportResources.RiskHotspots);
+                    reportRenderer.RiskHotspots(hotspots);
+                }
             }
 
             reportRenderer.Header(ReportResources.Coverage3);
@@ -265,7 +270,7 @@ namespace Palmmedia.ReportGenerator.Reporting
             reportRenderer.CustomSummary(summaryResult.Assemblies, hotspots, summaryResult.SupportsBranchCoverage);
 
             reportRenderer.AddFooter();
-            reportRenderer.SaveSummaryReport(this.ReportConfiguration.TargetDirectory);
+            reportRenderer.SaveSummaryReport(this.ReportContext.ReportConfiguration.TargetDirectory);
         }
 
         /// <summary>

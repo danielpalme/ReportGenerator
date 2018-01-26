@@ -4,8 +4,9 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Palmmedia.ReportGenerator.Parser.Analysis;
-using Palmmedia.ReportGenerator.Properties;
+using Palmmedia.ReportGenerator.Core.Parser.Analysis;
+using Palmmedia.ReportGenerator.Core.Properties;
+using Palmmedia.ReportGenerator.Core.Reporting;
 using Palmmedia.ReportGenerator.Reporting.CodeAnalysis;
 
 namespace Palmmedia.ReportGenerator.Reporting.Rendering
@@ -20,13 +21,14 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// <summary>
         /// The head of each generated Latex file.
         /// </summary>
-        private const string LatexStart = @"\documentclass[a4paper,10pt]{{article}}
-\usepackage[paper=a4paper,left=20mm,right=20mm,top=20mm,bottom=20mm]{{geometry}}
+        private const string LatexStart = @"\documentclass[a4paper,landscape,10pt]{{article}}
+\usepackage[paper=a4paper,landscape,left=20mm,right=20mm,top=20mm,bottom=20mm]{{geometry}}
 \usepackage{{longtable}}
 \usepackage{{fancyhdr}}
 \usepackage[pdftex]{{color}}
 \usepackage{{colortbl}}
 \definecolor{{green}}{{rgb}}{{0,1,0.12}}
+\definecolor{{orange}}{{rgb}}{{0.97,0.65,0.12}}
 \definecolor{{red}}{{rgb}}{{1,0,0}}
 \definecolor{{gray}}{{rgb}}{{0.86,0.86,0.86}}
 
@@ -44,13 +46,13 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             ]{{hyperref}}
 
 \hypersetup{{pdftitle={{{0}}},
-            pdfauthor={{{1} - {2}}}
+            pdfauthor={{ReportGenerator - {1}}}
            }}
 
 \pagestyle{{fancy}}
 \fancyhead[LE,LO]{{\leftmark}}
 \fancyhead[R]{{\thepage}}
-\fancyfoot[C]{{{1} - {2}}}
+\fancyfoot[C]{{ReportGenerator - {1}}}
 
 \begin{{document}}
 
@@ -79,6 +81,16 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         private Stream summaryReportStream, classReportStream;
 
         /// <summary>
+        /// Gets a value indicating whether renderer support rendering of charts.
+        /// </summary>
+        public bool SupportsCharts => false;
+
+        /// <summary>
+        /// Gets a value indicating whether renderer support rendering of charts.
+        /// </summary>
+        public bool SupportsRiskHotsSpots => true;
+
+        /// <summary>
         /// Begins the summary report.
         /// </summary>
         /// <param name="targetDirectory">The target directory.</param>
@@ -93,7 +105,6 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                 CultureInfo.InvariantCulture,
                 LatexStart,
                 EscapeLatexChars(ReportResources.CoverageReport),
-                typeof(IReportBuilder).Assembly.GetName().Name,
                 typeof(IReportBuilder).Assembly.GetName().Version);
 
             this.reportTextWriter.WriteLine(start);
@@ -189,7 +200,34 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
         public void BeginSummaryTable(bool branchCoverageAvailable)
         {
-            this.reportTextWriter.WriteLine(@"\begin{longtable}[l]{ll}");
+            this.reportTextWriter.Write(@"\begin{longtable}[l]{|l|r|r|r|r|r|");
+
+            if (branchCoverageAvailable)
+            {
+                this.reportTextWriter.Write("r|");
+            }
+
+            this.reportTextWriter.WriteLine("}");
+            this.reportTextWriter.WriteLine(@"\hline");
+
+            this.reportTextWriter.Write(
+                "\\textbf{{{0}}} & \\textbf{{{1}}} & \\textbf{{{2}}} & \\textbf{{{3}}} & \\textbf{{{4}}} & \\textbf{{{5}}}",
+                EscapeLatexChars(ReportResources.Name),
+                EscapeLatexChars(ReportResources.Covered),
+                EscapeLatexChars(ReportResources.Uncovered),
+                EscapeLatexChars(ReportResources.Coverable),
+                EscapeLatexChars(ReportResources.Total),
+                EscapeLatexChars(ReportResources.Coverage));
+
+            if (branchCoverageAvailable)
+            {
+                this.reportTextWriter.Write(
+                    " & \\textbf{{{0}}}",
+                    EscapeLatexChars(ReportResources.BranchCoverage));
+            }
+
+            this.reportTextWriter.WriteLine(@"\\");
+            this.reportTextWriter.WriteLine(@"\hline");
         }
 
         /// <summary>
@@ -200,26 +238,6 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
         public void CustomSummary(IEnumerable<Assembly> assemblies, IEnumerable<RiskHotspot> riskHotspots, bool branchCoverageAvailable)
         {
-        }
-
-        /// <summary>
-        /// Adds a metrics table to the report.
-        /// </summary>
-        /// <param name="metric">The metric.</param>
-        public void BeginMetricsTable(MethodMetric metric)
-        {
-            if (metric == null)
-            {
-                throw new ArgumentNullException(nameof(metric));
-            }
-
-            string columns = "|l|" + string.Join("|", metric.Metrics.Select(m => "l")) + "|";
-
-            this.reportTextWriter.WriteLine(@"\begin{longtable}[l]{" + columns + "}");
-            this.reportTextWriter.WriteLine(@"\hline");
-            this.reportTextWriter.Write(@"\textbf{" + EscapeLatexChars(ReportResources.Method) + "} & " + string.Join(" & ", metric.Metrics.Select(m => @"\textbf{" + EscapeLatexChars(m.Name) + "}")));
-            this.reportTextWriter.WriteLine(@"\\");
-            this.reportTextWriter.WriteLine(@"\hline");
         }
 
         /// <summary>
@@ -268,26 +286,45 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         }
 
         /// <summary>
-        /// Adds the given metric values to the report.
+        /// Adds metrics to the report
         /// </summary>
-        /// <param name="metric">The metric.</param>
-        public void MetricsRow(MethodMetric metric)
+        /// <param name="methodMetrics">The method metrics.</param>
+        public void MetricsTable(IEnumerable<MethodMetric> methodMetrics)
         {
-            if (metric == null)
+            if (methodMetrics == null)
             {
-                throw new ArgumentNullException(nameof(metric));
+                throw new ArgumentNullException(nameof(methodMetrics));
             }
 
-            string metrics = string.Join(" & ", metric.Metrics.Select(m => m.Value.ToString(CultureInfo.InvariantCulture)));
+            var firstMethodMetric = methodMetrics.First();
+            int numberOfTables = (int)Math.Ceiling((double)firstMethodMetric.Metrics.Count() / 5);
 
-            string row = string.Format(
-                CultureInfo.InvariantCulture,
-                @"\textbf{{{0}}} & {1}\\",
-                EscapeLatexChars(ShortenString(metric.ShortName, 20)),
-                metrics);
+            for (int i = 0; i < numberOfTables; i++)
+            {
+                string columns = "|l|" + string.Join("|", firstMethodMetric.Metrics.Skip(i * 5).Take(5).Select(m => "r")) + "|";
 
-            this.reportTextWriter.WriteLine(row);
-            this.reportTextWriter.WriteLine(@"\hline");
+                this.reportTextWriter.WriteLine(@"\begin{longtable}[l]{" + columns + "}");
+                this.reportTextWriter.WriteLine(@"\hline");
+                this.reportTextWriter.Write(@"\textbf{" + EscapeLatexChars(ReportResources.Method) + "} & " + string.Join(" & ", firstMethodMetric.Metrics.Skip(i * 5).Take(5).Select(m => @"\textbf{" + EscapeLatexChars(m.Name) + "}")));
+                this.reportTextWriter.WriteLine(@"\\");
+                this.reportTextWriter.WriteLine(@"\hline");
+
+                foreach (var methodMetric in methodMetrics)
+                {
+                    string metrics = string.Join(" & ", methodMetric.Metrics.Skip(i * 5).Take(5).Select(m => m.Value.ToString(CultureInfo.InvariantCulture)));
+
+                    string row = string.Format(
+                        CultureInfo.InvariantCulture,
+                        @"\textbf{{{0}}} & {1}\\",
+                        EscapeLatexChars(ShortenString(methodMetric.ShortName, 20)),
+                        metrics);
+
+                    this.reportTextWriter.WriteLine(row);
+                    this.reportTextWriter.WriteLine(@"\hline");
+                }
+
+                this.reportTextWriter.WriteLine(@"\end{longtable}");
+            }
         }
 
         /// <summary>
@@ -307,7 +344,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
                 .Replace(((char)9).ToString(), "  ") // replace tab
                 .Replace("~", " "); // replace '~' since this used for the \verb command
 
-            formattedLine = ShortenString(formattedLine);
+            formattedLine = ShortenString(formattedLine, 120);
             formattedLine = XmlRenderer.ReplaceInvalidXmlChars(formattedLine);
 
             string lineVisitStatus;
@@ -361,6 +398,58 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
         /// <param name="riskHotspots">The risk hotspots.</param>
         public void RiskHotspots(IEnumerable<RiskHotspot> riskHotspots)
         {
+            if (riskHotspots == null)
+            {
+                throw new ArgumentNullException(nameof(riskHotspots));
+            }
+
+            var codeQualityMetrics = riskHotspots.First().MethodMetric.Metrics
+                .Where(m => m.MetricType == MetricType.CodeQuality)
+                .ToArray();
+
+            string columns = "|l|l|l|" + string.Join("|", codeQualityMetrics.Select(m => "r")) + "|";
+
+            this.reportTextWriter.WriteLine(@"\begin{longtable}[l]{" + columns + "}");
+            this.reportTextWriter.WriteLine(@"\hline");
+            this.reportTextWriter.Write(
+                "\\textbf{{{0}}} & \\textbf{{{1}}} & \\textbf{{{2}}}",
+                EscapeLatexChars(ReportResources.Assembly2),
+                EscapeLatexChars(ReportResources.Class2),
+                EscapeLatexChars(ReportResources.Method));
+
+            foreach (var metric in codeQualityMetrics)
+            {
+                this.reportTextWriter.Write(" & \\textbf{{{0}}}", EscapeLatexChars(metric.Name));
+            }
+
+            this.reportTextWriter.WriteLine(@"\\");
+            this.reportTextWriter.WriteLine(@"\hline");
+
+            foreach (var riskHotspot in riskHotspots)
+            {
+                this.reportTextWriter.Write(
+                    "{0} & {1} & {2}",
+                    EscapeLatexChars(riskHotspot.Assembly.ShortName),
+                    EscapeLatexChars(riskHotspot.Class.Name),
+                    EscapeLatexChars(riskHotspot.MethodMetric.ShortName));
+
+                foreach (var statusMetric in riskHotspot.StatusMetrics)
+                {
+                    if (statusMetric.Exceeded)
+                    {
+                        this.reportTextWriter.Write(" & \\textcolor{{red}}{{{0}}}", statusMetric.Metric.Value.ToString(CultureInfo.InvariantCulture));
+                    }
+                    else
+                    {
+                        this.reportTextWriter.Write(" & {0}", statusMetric.Metric.Value.ToString(CultureInfo.InvariantCulture));
+                    }
+                }
+
+                this.reportTextWriter.WriteLine(@"\\");
+                this.reportTextWriter.WriteLine(@"\hline");
+            }
+
+            this.reportTextWriter.WriteLine(@"\end{longtable}");
         }
 
         /// <summary>
@@ -377,11 +466,28 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
 
             string row = string.Format(
                 CultureInfo.InvariantCulture,
-                @"\textbf{{{0}}} & \textbf{{{1}}}\\",
+                @"\textbf{{{0}}} & \textbf{{{1}}} & \textbf{{{2}}} & \textbf{{{3}}} & \textbf{{{4}}} & \textbf{{{5}}}",
                 EscapeLatexChars(assembly.Name),
+                assembly.CoveredLines,
+                assembly.CoverableLines - assembly.CoveredLines,
+                assembly.CoverableLines,
+                assembly.TotalLines.GetValueOrDefault(),
                 assembly.CoverageQuota.HasValue ? assembly.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + @"\%" : string.Empty);
 
-            this.reportTextWriter.WriteLine(row);
+            this.reportTextWriter.Write(row);
+
+            if (branchCoverageAvailable)
+            {
+                row = string.Format(
+                    CultureInfo.InvariantCulture,
+                    @" & \textbf{{{0}}}",
+                    assembly.BranchCoverageQuota.HasValue ? assembly.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + @"\%" : string.Empty);
+
+                this.reportTextWriter.Write(row);
+            }
+
+            this.reportTextWriter.WriteLine(@"\\");
+            this.reportTextWriter.WriteLine(@"\hline");
         }
 
         /// <summary>
@@ -398,11 +504,28 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
 
             string row = string.Format(
                 CultureInfo.InvariantCulture,
-                @"{0} & {1}\\",
+                @"{0} & {1} & {2} & {3} & {4} & {5}",
                 EscapeLatexChars(@class.Name),
+                @class.CoveredLines,
+                @class.CoverableLines - @class.CoveredLines,
+                @class.CoverableLines,
+                @class.TotalLines.GetValueOrDefault(),
                 @class.CoverageQuota.HasValue ? @class.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + @"\%" : string.Empty);
 
-            this.reportTextWriter.WriteLine(row);
+            this.reportTextWriter.Write(row);
+
+            if (branchCoverageAvailable)
+            {
+                row = string.Format(
+                    CultureInfo.InvariantCulture,
+                    @" & {0}",
+                    @class.BranchCoverageQuota.HasValue ? @class.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + @"\%" : string.Empty);
+
+                this.reportTextWriter.Write(row);
+            }
+
+            this.reportTextWriter.WriteLine(@"\\");
+            this.reportTextWriter.WriteLine(@"\hline");
         }
 
         /// <summary>

@@ -1,4 +1,4 @@
-﻿using Palmmedia.ReportGenerator.Parser.Analysis;
+﻿using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 
 namespace Palmmedia.ReportGenerator.Reporting.CodeAnalysis
 {
