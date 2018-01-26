@@ -271,7 +271,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
 
             this.reportTextWriter.WriteLine("<div data-ng-if=\"!coverageTableFilteringEnabled\">");
             this.reportTextWriter.WriteLine(
-                "<div class=\"ng-hide customizebox\" data-ng-show=\"true\"><input data-ng-click=\"enableFiltering()\" value=\"{0}\" title=\"{1}\" type=\"submit\" /></div>",
+                "<div class=\"ng-hide customizebox\" data-ng-show=\"true\"><input data-ng-click=\"enableCoverageTableFiltering()\" value=\"{0}\" title=\"{1}\" type=\"submit\" /></div>",
                 WebUtility.HtmlEncode(ReportResources.ShowCustomizeBox),
                 WebUtility.HtmlEncode(ReportResources.ShowCustomizeBoxHelp));
             this.reportTextWriter.WriteLine("</div>");

@@ -59,6 +59,11 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+3.1.2.0
+
+
+    * Fix: Issue #119: Fixed behavior of 'Enable filtering' button
+
 3.1.1.0
 
 
