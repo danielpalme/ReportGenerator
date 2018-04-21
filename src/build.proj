@@ -20,12 +20,12 @@
   
   <!-- Imported MSBuild tasks -->
   <UsingTask TaskName="ReportGenerator" AssemblyFile="target\bin\Release\ReportGenerator.exe" />
-  <Import Project="$(UserProfile)\.nuget\packages\msbuildtasks\1.5.0.235\tools\MSBuild.Community.Tasks.Targets" /> 
+  <UsingTask TaskName="Zip" AssemblyFile="$(UserProfile)\.nuget\packages\msbuildtasks\1.5.0.235\tools\MSBuild.Community.Tasks.dll" /> 
 
   <!-- Version, adjust before build -->
   <PropertyGroup>
-    <Version>4.0.0-alpha2</Version>
-    <VersionShort>4.0.0-alpha2</VersionShort>
+    <Version>4.0.0-alpha3</Version>
+    <VersionShort>4.0.0-alpha3</VersionShort>
   </PropertyGroup>
   
   <!-- Tools -->

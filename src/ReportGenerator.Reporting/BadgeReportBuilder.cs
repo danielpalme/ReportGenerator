@@ -249,8 +249,8 @@ namespace Palmmedia.ReportGenerator.Reporting
             using (var image = Image.Load<Rgba32>(ms))
             using (MemoryStream output = new MemoryStream())
             {
-                var font = SystemFonts.CreateFont("Verdana", 11, FontStyle.Regular);
-                image.Mutate(ctx => ctx.DrawText(text, font, Rgba32.White, new SixLabors.Primitives.PointF(112, 2)));
+                var font = SystemFonts.CreateFont("Arial", 12, FontStyle.Regular);
+                image.Mutate(ctx => ctx.DrawText(text, font, Rgba32.White, new SixLabors.Primitives.PointF(113, 1)));
 
                 image.Save(output, new PngEncoder());
                 return output.ToArray();
