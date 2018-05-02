@@ -14,125 +14,24 @@
     <summary />
     <language>en-US</language>
     <tags>Code Coverage Reporting Testing TDD Utility</tags>
+    <packageTypes>
+      <packageType name="DotnetCliTool" />
+    </packageTypes>
   </metadata>
   <files>
-    <file src="..\..\target\bin\Release\Microsoft.Win32.Primitives.dll" target="tools" />
-    <file src="..\..\target\bin\Release\netstandard.dll" target="tools" />
-    <file src="..\..\target\bin\Release\ReportGenerator.Core.deps.json" target="tools" />
-    <file src="..\..\target\bin\Release\ReportGenerator.Core.dll" target="tools" />
-    <file src="..\..\target\bin\Release\ReportGenerator.deps.json" target="tools" />
-    <file src="..\..\target\bin\Release\ReportGenerator.dll" target="tools" />
+  <file src="..\..\target\bin\Release\dotnet-ReportGenerator.deps.json" target="lib\netcoreapp2.0\" />
+    <file src="..\..\target\bin\Release\dotnet-ReportGenerator.runtimeconfig.json" target="lib\netcoreapp2.0\" />
+    <file src="..\..\target\bin\Release\dotnet-ReportGenerator.dll" target="lib\netcoreapp2.0\" />
+    <file src="..\..\target\bin\Release\ReportGenerator.Core.deps.json" target="lib\netcoreapp2.0\" />
+    <file src="..\..\target\bin\Release\ReportGenerator.Core.dll" target="lib\netcoreapp2.0\" />
+    <file src="..\..\target\bin\Release\ReportGenerator.Reporting.deps.json" target="lib\netcoreapp2.0\" />
+    <file src="..\..\target\bin\Release\ReportGenerator.Reporting.dll" target="lib\netcoreapp2.0\" />
     <file src="..\..\target\bin\Release\ReportGenerator.exe" target="tools" />
     <file src="..\..\target\bin\Release\ReportGenerator.exe.config" target="tools" />
+    <file src="..\..\target\bin\Release\ReportGenerator.Core.deps.json" target="tools" />
+    <file src="..\..\target\bin\Release\ReportGenerator.Core.dll" target="tools" />
     <file src="..\..\target\bin\Release\ReportGenerator.Reporting.deps.json" target="tools" />
     <file src="..\..\target\bin\Release\ReportGenerator.Reporting.dll" target="tools" />
-    <file src="..\..\target\bin\Release\ReportGenerator.runtimeconfig.json" target="tools" />
-    <file src="..\..\target\bin\Release\SixLabors.Core.dll" target="tools" />
-    <file src="..\..\target\bin\Release\SixLabors.Fonts.dll" target="tools" />
-    <file src="..\..\target\bin\Release\SixLabors.ImageSharp.dll" target="tools" />
-    <file src="..\..\target\bin\Release\SixLabors.ImageSharp.Drawing.dll" target="tools" />
-    <file src="..\..\target\bin\Release\SixLabors.Shapes.dll" target="tools" />
-    <file src="..\..\target\bin\Release\SixLabors.Shapes.Text.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.AppContext.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Buffers.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Collections.Concurrent.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Collections.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Collections.Immutable.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Collections.NonGeneric.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Collections.Specialized.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.ComponentModel.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.ComponentModel.EventBasedAsync.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.ComponentModel.Primitives.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.ComponentModel.TypeConverter.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Console.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Data.Common.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Diagnostics.Contracts.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Diagnostics.Debug.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Diagnostics.FileVersionInfo.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Diagnostics.Process.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Diagnostics.StackTrace.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Diagnostics.TextWriterTraceListener.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Diagnostics.Tools.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Diagnostics.TraceSource.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Diagnostics.Tracing.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Drawing.Primitives.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Dynamic.Runtime.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Globalization.Calendars.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Globalization.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Globalization.Extensions.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.IO.Compression.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.IO.Compression.ZipFile.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.IO.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.IO.FileSystem.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.IO.FileSystem.DriveInfo.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.IO.FileSystem.Primitives.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.IO.FileSystem.Watcher.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.IO.IsolatedStorage.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.IO.MemoryMappedFiles.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.IO.Pipes.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.IO.UnmanagedMemoryStream.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Linq.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Linq.Expressions.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Linq.Parallel.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Linq.Queryable.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Memory.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Net.Http.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Net.NameResolution.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Net.NetworkInformation.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Net.Ping.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Net.Primitives.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Net.Requests.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Net.Security.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Net.Sockets.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Net.WebHeaderCollection.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Net.WebSockets.Client.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Net.WebSockets.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Numerics.Vectors.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.ObjectModel.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Reflection.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Reflection.Extensions.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Reflection.Primitives.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Resources.Reader.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Resources.ResourceManager.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Resources.Writer.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Runtime.CompilerServices.Unsafe.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Runtime.CompilerServices.VisualC.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Runtime.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Runtime.Extensions.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Runtime.Handles.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Runtime.InteropServices.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Runtime.InteropServices.RuntimeInformation.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Runtime.Numerics.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Runtime.Serialization.Formatters.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Runtime.Serialization.Json.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Runtime.Serialization.Primitives.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Runtime.Serialization.Xml.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Security.Claims.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Security.Cryptography.Algorithms.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Security.Cryptography.Csp.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Security.Cryptography.Encoding.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Security.Cryptography.Primitives.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Security.Cryptography.X509Certificates.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Security.Principal.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Security.SecureString.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Text.Encoding.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Text.Encoding.Extensions.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Text.RegularExpressions.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Threading.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Threading.Overlapped.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Threading.Tasks.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Threading.Tasks.Parallel.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Threading.Thread.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Threading.ThreadPool.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Threading.Timer.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.ValueTuple.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Xml.ReaderWriter.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Xml.XDocument.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Xml.XmlDocument.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Xml.XmlSerializer.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Xml.XPath.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Xml.XPath.XDocument.dll" target="tools" />
-    <file src="..\..\target\bin\Release\System.Xml.XPath.XmlDocument.dll" target="tools" />
     <file src="..\..\target\bin\Release\LICENSE.txt" target="LICENSE.txt" />
     <file src="..\..\target\bin\Release\Readme.txt" target="Readme.txt" />
   </files>
