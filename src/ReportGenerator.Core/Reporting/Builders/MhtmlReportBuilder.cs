@@ -2,9 +2,8 @@
 using System.IO;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
-using Palmmedia.ReportGenerator.Core.Reporting;
 
-namespace Palmmedia.ReportGenerator.Reporting
+namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 {
     /// <summary>
     /// Creates MHTML which is a container for the complete HTML report.

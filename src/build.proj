@@ -98,6 +98,7 @@
     <Zip Files="@(ZipFileContent)" WorkingDirectory="$(MSBuildThisFileDirectory)target\bin\Release" ZipFileName="target\packages\ReportGenerator_$(Version).zip" ZipLevel="9" />
 
     <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\ReportGenerator.nuspec -OutputDirectory target\packages -Version $(Version)" />
+    <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\ReportGenerator.Core.nuspec -OutputDirectory target\packages -Version $(Version)" />
 
     <Exec Command="powershell -Command [Environment]::SetEnvironmentVariable('ChecksumOfZip', (Get-FileHash .\target\packages\ReportGenerator_$(Version).zip -Algorithm SHA256).Hash, 'User')" />
      <PropertyGroup>
@@ -114,5 +115,6 @@
       
   <Target Name="Publish" DependsOnTargets="Deploy">
     <Exec Command="$(NuGetCommandLine) push .\target\packages\ReportGenerator.$(VersionShort).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
+    <Exec Command="$(NuGetCommandLine) push .\target\packages\ReportGenerator.Core.$(VersionShort).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
   </Target> 
 </Project>

@@ -8,10 +8,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Properties;
-using Palmmedia.ReportGenerator.Core.Reporting;
-using Palmmedia.ReportGenerator.Reporting.CodeAnalysis;
+using Palmmedia.ReportGenerator.Core.Reporting.CodeAnalysis;
 
-namespace Palmmedia.ReportGenerator.Reporting.Rendering
+namespace Palmmedia.ReportGenerator.Core.Reporting.Rendering
 {
     /// <summary>
     /// HTML report renderer.
@@ -1070,7 +1069,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             var ms = new MemoryStream();
 
             using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
-                "Palmmedia.ReportGenerator.Reporting.Rendering.resources.custom.css"))
+                "Palmmedia.ReportGenerator.Core.Reporting.Rendering.resources.custom.css"))
             {
                 stream.CopyTo(ms);
             }
@@ -1080,7 +1079,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             ms.Write(lineBreak, 0, lineBreak.Length);
 
             using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
-                "Palmmedia.ReportGenerator.Reporting.Rendering.resources.chartist.min.css"))
+                "Palmmedia.ReportGenerator.Core.Reporting.Rendering.resources.chartist.min.css"))
             {
                 stream.CopyTo(ms);
             }
@@ -1099,7 +1098,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             var ms = new MemoryStream();
 
             using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
-                "Palmmedia.ReportGenerator.Reporting.Rendering.resources.jquery-1.11.2.min.js"))
+                "Palmmedia.ReportGenerator.Core.Reporting.Rendering.resources.jquery-1.11.2.min.js"))
             {
                 stream.CopyTo(ms);
             }
@@ -1108,7 +1107,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             ms.Write(lineBreak, 0, lineBreak.Length);
 
             using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
-                "Palmmedia.ReportGenerator.Reporting.Rendering.resources.angular.min.js"))
+                "Palmmedia.ReportGenerator.Core.Reporting.Rendering.resources.angular.min.js"))
             {
                 stream.CopyTo(ms);
             }
@@ -1116,7 +1115,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             ms.Write(lineBreak, 0, lineBreak.Length);
 
             using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
-                "Palmmedia.ReportGenerator.Reporting.Rendering.resources.react.modified.min.js"))
+                "Palmmedia.ReportGenerator.Core.Reporting.Rendering.resources.react.modified.min.js"))
             {
                 stream.CopyTo(ms);
             }
@@ -1124,7 +1123,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             ms.Write(lineBreak, 0, lineBreak.Length);
 
             using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
-                "Palmmedia.ReportGenerator.Reporting.Rendering.resources.chartist.min.js"))
+                "Palmmedia.ReportGenerator.Core.Reporting.Rendering.resources.chartist.min.js"))
             {
                 stream.CopyTo(ms);
             }
@@ -1133,7 +1132,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
 
             // Required for rendering charts in IE 9
             using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
-                "Palmmedia.ReportGenerator.Reporting.Rendering.resources.matchMedia.js"))
+                "Palmmedia.ReportGenerator.Core.Reporting.Rendering.resources.matchMedia.js"))
             {
                 stream.CopyTo(ms);
             }
@@ -1204,7 +1203,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             ms.Write(lineBreak, 0, lineBreak.Length);
 
             using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
-                "Palmmedia.ReportGenerator.Reporting.Rendering.resources.riskHotspotTableReactComponents.js"))
+                "Palmmedia.ReportGenerator.Core.Reporting.Rendering.resources.riskHotspotTableReactComponents.js"))
             {
                 stream.CopyTo(ms);
             }
@@ -1213,7 +1212,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             ms.Write(lineBreak, 0, lineBreak.Length);
 
             using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
-                "Palmmedia.ReportGenerator.Reporting.Rendering.resources.coverageTableReactComponents.js"))
+                "Palmmedia.ReportGenerator.Core.Reporting.Rendering.resources.coverageTableReactComponents.js"))
             {
                 stream.CopyTo(ms);
             }
@@ -1222,7 +1221,7 @@ namespace Palmmedia.ReportGenerator.Reporting.Rendering
             ms.Write(lineBreak, 0, lineBreak.Length);
 
             using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
-                "Palmmedia.ReportGenerator.Reporting.Rendering.resources.customAngularApp.js"))
+                "Palmmedia.ReportGenerator.Core.Reporting.Rendering.resources.customAngularApp.js"))
             {
                 stream.CopyTo(ms);
             }

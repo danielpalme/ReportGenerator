@@ -74,7 +74,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
                 else
                 {
                     var nonDefaultParsers = reportBuilderGroup
-                        .Where(r => r.GetType().Assembly.GetName().Name != "ReportGenerator.Reporting")
+                        .Where(r => r.GetType().Assembly.GetName().Name != "ReportGenerator.Core")
                         .ToArray();
 
                     foreach (var reportBuilder in nonDefaultParsers)

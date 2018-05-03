@@ -68,14 +68,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sub", "sub", "{2EE13C01-721
 		Testprojects\Java\Project\test\sub\Sub.java = Testprojects\Java\Project\test\sub\Sub.java
 	EndProjectSection
 EndProject
-
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportGenerator.Core", "ReportGenerator.Core\ReportGenerator.Core.csproj", "{8DBCF22A-18A3-4A50-899D-8AF6ED9975D0}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportGenerator.Reporting", "ReportGenerator.Reporting\ReportGenerator.Reporting.csproj", "{E8D06DFE-D4E3-4CA3-9164-9EC2EC88F15D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportGenerator.Core.Test", "ReportGenerator.Core.Test\ReportGenerator.Core.Test.csproj", "{C65D4ED2-5C0C-4ECA-A8FD-DF9C25297F9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportGenerator.Console.NetCore", "ReportGenerator.Console.NetCore\ReportGenerator.Console.NetCore.csproj", "{C6110743-B7C9-4D1D-B210-3601E5A380F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportGenerator.Console.NetCore", "ReportGenerator.Console.NetCore\ReportGenerator.Console.NetCore.csproj", "{C6110743-B7C9-4D1D-B210-3601E5A380F4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportGenerator.Console.Net", "ReportGenerator.Console\ReportGenerator.Console.Net.csproj", "{19A59768-9410-440D-A857-A1B5D44787B8}"
 EndProject
@@ -97,10 +94,6 @@ Global
 		{8DBCF22A-18A3-4A50-899D-8AF6ED9975D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DBCF22A-18A3-4A50-899D-8AF6ED9975D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DBCF22A-18A3-4A50-899D-8AF6ED9975D0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E8D06DFE-D4E3-4CA3-9164-9EC2EC88F15D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E8D06DFE-D4E3-4CA3-9164-9EC2EC88F15D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E8D06DFE-D4E3-4CA3-9164-9EC2EC88F15D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E8D06DFE-D4E3-4CA3-9164-9EC2EC88F15D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C65D4ED2-5C0C-4ECA-A8FD-DF9C25297F9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C65D4ED2-5C0C-4ECA-A8FD-DF9C25297F9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C65D4ED2-5C0C-4ECA-A8FD-DF9C25297F9D}.Release|Any CPU.ActiveCfg = Release|Any CPU

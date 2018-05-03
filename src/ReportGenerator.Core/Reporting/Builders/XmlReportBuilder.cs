@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
-using Palmmedia.ReportGenerator.Reporting.Rendering;
+using Palmmedia.ReportGenerator.Core.Reporting.Rendering;
 
-namespace Palmmedia.ReportGenerator.Reporting
+namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 {
     /// <summary>
-    /// Creates summary report in Latex format (no reports for classes are generated).
+    /// Creates report in XML format.
     /// </summary>
-    public class LatexSummaryReportBuilder : ReportBuilderBase
+    public class XmlReportBuilder : ReportBuilderBase
     {
         /// <summary>
         /// Gets the report type.
@@ -15,7 +15,7 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// <value>
         /// The report format.
         /// </value>
-        public override string ReportType => "LatexSummary";
+        public override string ReportType => "Xml";
 
         /// <summary>
         /// Gets a value indicating whether class reports can be generated in parallel.
@@ -29,6 +29,7 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// <param name="fileAnalyses">The file analyses that correspond to the class.</param>
         public override void CreateClassReport(Class @class, IEnumerable<FileAnalysis> fileAnalyses)
         {
+            this.CreateClassReport(new XmlRenderer(), @class, fileAnalyses);
         }
 
         /// <summary>
@@ -37,10 +38,7 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// <param name="summaryResult">The summary result.</param>
         public override void CreateSummaryReport(SummaryResult summaryResult)
         {
-            using (var renderer = new LatexRenderer())
-            {
-                this.CreateSummaryReport(renderer, summaryResult);
-            }
+            this.CreateSummaryReport(new XmlRenderer(), summaryResult);
         }
     }
 }

@@ -6,9 +6,8 @@ using System.Linq;
 using System.Text;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Properties;
-using Palmmedia.ReportGenerator.Core.Reporting;
 
-namespace Palmmedia.ReportGenerator.Reporting
+namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 {
     /// <summary>
     /// Creates summary report in Text format (no reports for classes are generated).

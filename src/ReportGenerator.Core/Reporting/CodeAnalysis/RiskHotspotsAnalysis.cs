@@ -3,7 +3,7 @@ using System.Linq;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Properties;
 
-namespace Palmmedia.ReportGenerator.Reporting.CodeAnalysis
+namespace Palmmedia.ReportGenerator.Core.Reporting.CodeAnalysis
 {
     /// <summary>
     /// Analyses the method metrics for risk hotspots based on exceeded thresholds.
