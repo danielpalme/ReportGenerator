@@ -1,6 +1,6 @@
 ﻿using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 
-namespace Palmmedia.ReportGenerator.Reporting.CodeAnalysis
+namespace Palmmedia.ReportGenerator.Core.Reporting.CodeAnalysis
 {
     /// <summary>
     /// Represents the status of a metric.

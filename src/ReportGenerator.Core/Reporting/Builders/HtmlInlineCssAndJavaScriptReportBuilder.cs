@@ -1,21 +1,27 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
-using Palmmedia.ReportGenerator.Reporting.Rendering;
+using Palmmedia.ReportGenerator.Core.Reporting.Rendering;
 
-namespace Palmmedia.ReportGenerator.Reporting
+namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 {
     /// <summary>
-    /// Creates report in XML format.
+    /// Creates report in HTML format.
     /// </summary>
-    public class XmlReportBuilder : ReportBuilderBase
+    public class HtmlInlineCssAndJavaScriptReportBuilder : ReportBuilderBase
     {
+        /// <summary>
+        /// Contains report specific JavaScript content.
+        /// </summary>
+        private readonly StringBuilder javaScriptContent = new StringBuilder();
+
         /// <summary>
         /// Gets the report type.
         /// </summary>
         /// <value>
         /// The report format.
         /// </value>
-        public override string ReportType => "Xml";
+        public override string ReportType => "HtmlInline";
 
         /// <summary>
         /// Gets a value indicating whether class reports can be generated in parallel.
@@ -29,7 +35,10 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// <param name="fileAnalyses">The file analyses that correspond to the class.</param>
         public override void CreateClassReport(Class @class, IEnumerable<FileAnalysis> fileAnalyses)
         {
-            this.CreateClassReport(new XmlRenderer(), @class, fileAnalyses);
+            using (var renderer = new HtmlRenderer(false, true, this.javaScriptContent))
+            {
+                this.CreateClassReport(renderer, @class, fileAnalyses);
+            }
         }
 
         /// <summary>
@@ -38,7 +47,10 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// <param name="summaryResult">The summary result.</param>
         public override void CreateSummaryReport(SummaryResult summaryResult)
         {
-            this.CreateSummaryReport(new XmlRenderer(), summaryResult);
+            using (var renderer = new HtmlRenderer(false, true, this.javaScriptContent))
+            {
+                this.CreateSummaryReport(renderer, summaryResult);
+            }
         }
     }
 }

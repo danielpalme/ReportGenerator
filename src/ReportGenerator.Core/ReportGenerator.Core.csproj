@@ -4,8 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Palmmedia.ReportGenerator.Core</RootNamespace>
     <OutputType>Exe</OutputType>
-    <StartupObject>Palmmedia.ReportGenerator.Core.Program</StartupObject>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <AssemblyName>ReportGenerator.Core</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
     <FileVersion>4.0.0.0</FileVersion>
   </PropertyGroup>
@@ -22,6 +23,34 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <OutputPath>..\target\bin\Release\</OutputPath>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Reporting\Rendering\resources\angular.min.js" />
+    <None Remove="Reporting\Rendering\resources\chartist.min.css" />
+    <None Remove="Reporting\Rendering\resources\chartist.min.js" />
+    <None Remove="Reporting\Rendering\resources\coverageTableReactComponents.js" />
+    <None Remove="Reporting\Rendering\resources\custom.css" />
+    <None Remove="Reporting\Rendering\resources\customAngularApp.js" />
+    <None Remove="Reporting\Rendering\resources\jquery-1.11.2.min.js" />
+    <None Remove="Reporting\Rendering\resources\matchMedia.js" />
+    <None Remove="Reporting\Rendering\resources\react.min.js" />
+    <None Remove="Reporting\Rendering\resources\react.modified.min.js" />
+    <None Remove="Reporting\Rendering\resources\riskHotspotTableReactComponents.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Reporting\Rendering\resources\angular.min.js" />
+    <EmbeddedResource Include="Reporting\Rendering\resources\chartist.min.css" />
+    <EmbeddedResource Include="Reporting\Rendering\resources\chartist.min.js" />
+    <EmbeddedResource Include="Reporting\Rendering\resources\coverageTableReactComponents.js" />
+    <EmbeddedResource Include="Reporting\Rendering\resources\custom.css" />
+    <EmbeddedResource Include="Reporting\Rendering\resources\customAngularApp.js" />
+    <EmbeddedResource Include="Reporting\Rendering\resources\jquery-1.11.2.min.js" />
+    <EmbeddedResource Include="Reporting\Rendering\resources\matchMedia.js" />
+    <EmbeddedResource Include="Reporting\Rendering\resources\react.min.js" />
+    <EmbeddedResource Include="Reporting\Rendering\resources\react.modified.min.js" />
+    <EmbeddedResource Include="Reporting\Rendering\resources\riskHotspotTableReactComponents.js" />
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Properties\Help.Designer.cs">
@@ -54,6 +83,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta0002" />
   </ItemGroup>
 
 </Project>

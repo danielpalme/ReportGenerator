@@ -4,12 +4,11 @@ using System.Globalization;
 using System.IO;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Properties;
-using Palmmedia.ReportGenerator.Core.Reporting;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Png;
 
-namespace Palmmedia.ReportGenerator.Reporting
+namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 {
     /// <summary>
     /// Creates badges in SVG format.

@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
-using Palmmedia.ReportGenerator.Reporting.CodeAnalysis;
+using Palmmedia.ReportGenerator.Core.Reporting.CodeAnalysis;
 
-namespace Palmmedia.ReportGenerator.Reporting.Rendering
+namespace Palmmedia.ReportGenerator.Core.Reporting.Rendering
 {
     /// <summary>
     /// XML report renderer.

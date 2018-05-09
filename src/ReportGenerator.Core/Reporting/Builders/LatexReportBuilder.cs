@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
-using Palmmedia.ReportGenerator.Reporting.Rendering;
+using Palmmedia.ReportGenerator.Core.Reporting.Rendering;
 
-namespace Palmmedia.ReportGenerator.Reporting
+namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 {
     /// <summary>
     /// Creates report in Latex format.

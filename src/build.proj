@@ -45,6 +45,7 @@
 
   <Target Name="Compile">
     <MSBuild Projects="ReportGenerator.sln" Targets="Restore;Build" Properties="Configuration=Release" />
+    <Exec Command="dotnet publish -c Release" WorkingDirectory="ReportGenerator.Console.NetCore" />
     <RemoveDir Directories="bin" />
     <RemoveDir Directories="obj" />
   </Target>
@@ -60,33 +61,33 @@
     </ItemGroup>
 
     <ReportGenerator ReportFiles="@(CoverageFiles)" ReportTypes="Html;Badges" TargetDirectory="target\reports\coverage" HistoryDirectory="target\reports\coveragehistory" />
-    
+
     <MakeDir Directories="target\reports\coverage" />
-    <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HTML -targetdir:target\samplereports\HTML_NetFull -historydir:target\samplereports\HTML_NetFull\history" />
-    <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HTMLSummary -targetdir:target\samplereports\HTMLSummary_NetFull -historydir:target\samplereports\HTMLSummary_NetFull\history" />
-    <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HTMLInline -targetdir:target\samplereports\HTMLInline_NetFull -historydir:target\samplereports\HTMLInline_NetFull\history" />
-    <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HTMLChart -targetdir:target\samplereports\HTMLChart_NetFull -historydir:target\samplereports\HTMLChart_NetFull\history" />
-    <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:MHTML -targetdir:target\samplereports\MHTML_NetFull -historydir:target\samplereports\MHTML_NetFull\history" />
-    <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:XML -targetdir:target\samplereports\XML_NetFull -historydir:target\samplereports\XML_NetFull\history" />
-    <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:XMLSummary -targetdir:target\samplereports\XMLSummary_NetFull -historydir:target\samplereports\XMLSummary_NetFull\history" />
-    <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:Latex -targetdir:target\samplereports\Latex_NetFull -historydir:target\samplereports\Latex_NetFull\history" />
-    <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:LatexSummary -targetdir:target\samplereports\LatexSummary_NetFull -historydir:target\samplereports\LatexSummary_NetFull\history" />
-    <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:TextSummary -targetdir:target\samplereports\TextSummary_NetFull -historydir:target\samplereports\TextSummary_NetFull\history" />
-    <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:CsvSummary -targetdir:target\samplereports\CsvSummary_NetFull -historydir:target\samplereports\CsvSummary_NetFull\history" />
-    <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:Badges -targetdir:target\samplereports\Badges_NetFull -historydir:target\samplereports\Badges_NetFull\history" />
-    
-    <Exec Command="dotnet target\bin\Release\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HTML -targetdir:target\samplereports\HTML_NetCore -historydir:target\samplereports\HTML_NetCore\history" />
-    <Exec Command="dotnet target\bin\Release\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HTMLSummary -targetdir:target\samplereports\HTMLSummary_NetCore -historydir:target\samplereports\HTMLSummary_NetCore\history" />
-    <Exec Command="dotnet target\bin\Release\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HTMLInline -targetdir:target\samplereports\HTMLInline_NetCore -historydir:target\samplereports\HTMLInline_NetCore\history" />
-    <Exec Command="dotnet target\bin\Release\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HTMLChart -targetdir:target\samplereports\HTMLChart_NetCore -historydir:target\samplereports\HTMLChart_NetCore\history" />
-    <Exec Command="dotnet target\bin\Release\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:MHTML -targetdir:target\samplereports\MHTML_NetCore -historydir:target\samplereports\MHTML_NetCore\history" />
-    <Exec Command="dotnet target\bin\Release\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:XML -targetdir:target\samplereports\XML_NetCore -historydir:target\samplereports\XML_NetCore\history" />
-    <Exec Command="dotnet target\bin\Release\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:XMLSummary -targetdir:target\samplereports\XMLSummary_NetCore -historydir:target\samplereports\XMLSummary_NetCore\history" />
-    <Exec Command="dotnet target\bin\Release\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:Latex -targetdir:target\samplereports\Latex_NetCore -historydir:target\samplereports\Latex_NetCore\history" />
-    <Exec Command="dotnet target\bin\Release\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:LatexSummary -targetdir:target\samplereports\LatexSummary_NetCore -historydir:target\samplereports\LatexSummary_NetCore\history" />
-    <Exec Command="dotnet target\bin\Release\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:TextSummary -targetdir:target\samplereports\TextSummary_NetCore -historydir:target\samplereports\TextSummary_NetCore\history" />
-    <Exec Command="dotnet target\bin\Release\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:CsvSummary -targetdir:target\samplereports\CsvSummary_NetCore -historydir:target\samplereports\CsvSummary_NetCore\history" />
-    <Exec Command="dotnet target\bin\Release\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:Badges -targetdir:target\samplereports\Badges_NetCore -historydir:target\samplereports\Badges_NetCore\history" />
+      <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HTML -targetdir:target\samplereports\HTML_NetFull -historydir:target\samplereports\HTML_NetFull\history" />
+      <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HTMLSummary -targetdir:target\samplereports\HTMLSummary_NetFull -historydir:target\samplereports\HTMLSummary_NetFull\history" />
+      <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HTMLInline -targetdir:target\samplereports\HTMLInline_NetFull -historydir:target\samplereports\HTMLInline_NetFull\history" />
+      <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HTMLChart -targetdir:target\samplereports\HTMLChart_NetFull -historydir:target\samplereports\HTMLChart_NetFull\history" />
+      <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:MHTML -targetdir:target\samplereports\MHTML_NetFull -historydir:target\samplereports\MHTML_NetFull\history" />
+      <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:XML -targetdir:target\samplereports\XML_NetFull -historydir:target\samplereports\XML_NetFull\history" />
+      <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:XMLSummary -targetdir:target\samplereports\XMLSummary_NetFull -historydir:target\samplereports\XMLSummary_NetFull\history" />
+      <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:Latex -targetdir:target\samplereports\Latex_NetFull -historydir:target\samplereports\Latex_NetFull\history" />
+      <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:LatexSummary -targetdir:target\samplereports\LatexSummary_NetFull -historydir:target\samplereports\LatexSummary_NetFull\history" />
+      <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:TextSummary -targetdir:target\samplereports\TextSummary_NetFull -historydir:target\samplereports\TextSummary_NetFull\history" />
+      <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:CsvSummary -targetdir:target\samplereports\CsvSummary_NetFull -historydir:target\samplereports\CsvSummary_NetFull\history" />
+      <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:Badges -targetdir:target\samplereports\Badges_NetFull -historydir:target\samplereports\Badges_NetFull\history" />
+      
+      <Exec Command="dotnet target\bin\Release\netcoreapp2.0\publish\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HTML -targetdir:target\samplereports\HTML_NetCore -historydir:target\samplereports\HTML_NetCore\history" />
+      <Exec Command="dotnet target\bin\Release\netcoreapp2.0\publish\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HTMLSummary -targetdir:target\samplereports\HTMLSummary_NetCore -historydir:target\samplereports\HTMLSummary_NetCore\history" />
+      <Exec Command="dotnet target\bin\Release\netcoreapp2.0\publish\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HTMLInline -targetdir:target\samplereports\HTMLInline_NetCore -historydir:target\samplereports\HTMLInline_NetCore\history" />
+      <Exec Command="dotnet target\bin\Release\netcoreapp2.0\publish\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HTMLChart -targetdir:target\samplereports\HTMLChart_NetCore -historydir:target\samplereports\HTMLChart_NetCore\history" />
+      <Exec Command="dotnet target\bin\Release\netcoreapp2.0\publish\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:MHTML -targetdir:target\samplereports\MHTML_NetCore -historydir:target\samplereports\MHTML_NetCore\history" />
+      <Exec Command="dotnet target\bin\Release\netcoreapp2.0\publish\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:XML -targetdir:target\samplereports\XML_NetCore -historydir:target\samplereports\XML_NetCore\history" />
+      <Exec Command="dotnet target\bin\Release\netcoreapp2.0\publish\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:XMLSummary -targetdir:target\samplereports\XMLSummary_NetCore -historydir:target\samplereports\XMLSummary_NetCore\history" />
+      <Exec Command="dotnet target\bin\Release\netcoreapp2.0\publish\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:Latex -targetdir:target\samplereports\Latex_NetCore -historydir:target\samplereports\Latex_NetCore\history" />
+      <Exec Command="dotnet target\bin\Release\netcoreapp2.0\publish\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:LatexSummary -targetdir:target\samplereports\LatexSummary_NetCore -historydir:target\samplereports\LatexSummary_NetCore\history" />
+      <Exec Command="dotnet target\bin\Release\netcoreapp2.0\publish\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:TextSummary -targetdir:target\samplereports\TextSummary_NetCore -historydir:target\samplereports\TextSummary_NetCore\history" />
+      <Exec Command="dotnet target\bin\Release\netcoreapp2.0\publish\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:CsvSummary -targetdir:target\samplereports\CsvSummary_NetCore -historydir:target\samplereports\CsvSummary_NetCore\history" />
+      <Exec Command="dotnet target\bin\Release\netcoreapp2.0\publish\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:Badges -targetdir:target\samplereports\Badges_NetCore -historydir:target\samplereports\Badges_NetCore\history" />
   </Target>
 
   <Target Name="Deploy" DependsOnTargets="Clean; Compile; Report;">
@@ -98,6 +99,8 @@
     <Zip Files="@(ZipFileContent)" WorkingDirectory="$(MSBuildThisFileDirectory)target\bin\Release" ZipFileName="target\packages\ReportGenerator_$(Version).zip" ZipLevel="9" />
 
     <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\ReportGenerator.nuspec -OutputDirectory target\packages -Version $(Version)" />
+    <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\ReportGenerator.Core.nuspec -OutputDirectory target\packages -Version $(Version)" />
+    <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\dotnet-reportgenerator.nuspec -OutputDirectory target\packages -Version $(Version)" />
 
     <Exec Command="powershell -Command [Environment]::SetEnvironmentVariable('ChecksumOfZip', (Get-FileHash .\target\packages\ReportGenerator_$(Version).zip -Algorithm SHA256).Hash, 'User')" />
      <PropertyGroup>
@@ -114,5 +117,7 @@
       
   <Target Name="Publish" DependsOnTargets="Deploy">
     <Exec Command="$(NuGetCommandLine) push .\target\packages\ReportGenerator.$(VersionShort).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
+    <Exec Command="$(NuGetCommandLine) push .\target\packages\ReportGenerator.Core.$(VersionShort).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
+    <Exec Command="$(NuGetCommandLine) push .\target\packages\dotnet-reportgenerator.$(VersionShort).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
   </Target> 
 </Project>

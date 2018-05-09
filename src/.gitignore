@@ -10,3 +10,4 @@
 *.Cache
 bin
 obj
+.DS_Store

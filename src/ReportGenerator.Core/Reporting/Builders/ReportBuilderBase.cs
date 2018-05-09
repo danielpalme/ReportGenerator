@@ -4,11 +4,10 @@ using System.Globalization;
 using System.Linq;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Properties;
-using Palmmedia.ReportGenerator.Core.Reporting;
-using Palmmedia.ReportGenerator.Reporting.CodeAnalysis;
-using Palmmedia.ReportGenerator.Reporting.Rendering;
+using Palmmedia.ReportGenerator.Core.Reporting.CodeAnalysis;
+using Palmmedia.ReportGenerator.Core.Reporting.Rendering;
 
-namespace Palmmedia.ReportGenerator.Reporting
+namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 {
     /// <summary>
     /// Implementation of <see cref="IReportBuilder"/> that uses <see cref="IReportRenderer"/> to create reports.

@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
-using Palmmedia.ReportGenerator.Reporting.Rendering;
+using Palmmedia.ReportGenerator.Core.Reporting.Rendering;
 
-namespace Palmmedia.ReportGenerator.Reporting
+namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 {
     /// <summary>
-    /// Creates summary report in XML format (no reports for classes are generated).
+    /// Creates summary report in HTML format (no reports for classes are generated).
     /// </summary>
-    public class XmlSummaryReportBuilder : ReportBuilderBase
+    public class HtmlSummaryReportBuilder : ReportBuilderBase
     {
         /// <summary>
         /// Gets the report type.
@@ -15,7 +16,7 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// <value>
         /// The report format.
         /// </value>
-        public override string ReportType => "XmlSummary";
+        public override string ReportType => "HtmlSummary";
 
         /// <summary>
         /// Gets a value indicating whether class reports can be generated in parallel.
@@ -37,7 +38,10 @@ namespace Palmmedia.ReportGenerator.Reporting
         /// <param name="summaryResult">The summary result.</param>
         public override void CreateSummaryReport(SummaryResult summaryResult)
         {
-            this.CreateSummaryReport(new XmlRenderer(), summaryResult);
+            using (var renderer = new HtmlRenderer(true, true, new StringBuilder()))
+            {
+                this.CreateSummaryReport(renderer, summaryResult);
+            }
         }
     }
 }
