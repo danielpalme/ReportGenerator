@@ -24,8 +24,6 @@ The following [output formats](https://github.com/danielpalme/ReportGenerator/wi
 * [Cobertura](https://github.com/cobertura/cobertura)
 * Mono ([mprof-report](https://www.mono-project.com/docs/debug+profile/profile/profiler/#analyzing-the-profile-data)) 
 
-Also available as **NuGet** package: https://www.nuget.org/packages/ReportGenerator/
-
 Additional information about *ReportGenerator* can be found under [Resources](#resources).
 
 Author: Daniel Palme  
@@ -90,15 +88,14 @@ Examples:
    "-reports:coverage.xml" "-targetdir:C:\report" "-assemblyfilters:+Included;-Excluded.*"
 ```
 
-**.NET Framework**
-```
- ReportGenerator.exe "-reports:coverage.xml" "-targetdir:C:\report"
-```
+## Available packages
 
-**.NET Core**
-```
- dotnet ReportGenerator.dll "-reports:coverage.xml" "-targetdir:C:\report"
-```
+|**Package**|**Platfoms**|**Installation/Usage**|
+|:----------|:-----------|:---------------------|
+|[ReportGenerator](https://www.nuget.org/packages/ReportGenerator)|.NET Core 2.0<br/>.NET Framework 4.7|Use this package if your project is based on .NET Framework or .NET Core and you want to use *ReportGenerator* via the command line or a build script.<br/><br/>**Usage**<br/>```$(UserProfile)\.nuget\packages\reportgenerator\x.y.z\tools\net47\ReportGenerator.exe [options]```<br/><br/>```dotnet $(UserProfile).nuget\packages\reportgenerator\x.y.z\tools\netcoreapp2.0\ReportGenerator.dll [options]```|
+|[dotnet-reportgenerator-cli](https://www.nuget.org/packages/dotnet-reportgenerator-cli)|.NET Core 2.0|Use this package if your project is based on .NET Core and you want to use *ReportGenerator* as a 'DotnetCliTool'.<br/><br/>**Installation**<br/>Add `<DotNetCliToolReference Include="dotnet-reportgenerator-cli" Version="x.y.z" />` to your project file.<br/><br/>**Usage**<br/>```dotnet reportgenerator [options]```|
+|[dotnet-reportgenerator-globaltool](https://www.nuget.org/packages/dotnet-reportgenerator-globaltool)|.NET Core 2.1|Use this package if your project is based on .NET Core and you want to use *ReportGenerator* as a (global) 'DotnetTool'.<br/><br/>**Installation**<br/>```dotnet tool install -g dotnet-reportgenerator-globaltool```<br/>```dotnet tool install dotnet-reportgenerator-globaltool --tool-path tools```<br/><br/>**Usage**<br/>```reportgenerator [options]```<br/>```tools\reportgenerator.exe [options]```|
+|[ReportGenerator.Core](https://www.nuget.org/packages/ReportGenerator.Core)|.NET Standard|Use this package if you want to write a custom **plugin** for *ReportGenerator* or if you want to call/execute *ReportGenerator* within your code base.<br/><br/>**Plugin development**<br/>[Custom reports](https://github.com/danielpalme/ReportGenerator/wiki/Custom-reports)<br/>[Custom history storage](https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage)|
 
 **MSBuild**  
 A MSBuild task also exists:

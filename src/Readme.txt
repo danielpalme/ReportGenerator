@@ -39,9 +39,6 @@ NCover (tested version 1.5.8, other versions may not work)
 Cobertura
 Mono (mprof-report)
 
-Also available as NuGet package:
-https://www.nuget.org/packages/ReportGenerator/
-
 =======================================================================
 
 LICENSE
