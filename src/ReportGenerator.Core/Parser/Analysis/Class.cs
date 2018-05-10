@@ -15,11 +15,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         private readonly List<CodeFile> files = new List<CodeFile>();
 
         /// <summary>
-        /// The method metrics of the class.
-        /// </summary>
-        private readonly List<MethodMetric> methodMetrics = new List<MethodMetric>();
-
-        /// <summary>
         /// List of historic coverage information.
         /// </summary>
         private readonly List<HistoricCoverage> historicCoverages = new List<HistoricCoverage>();
@@ -66,12 +61,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// </summary>
         /// <value>The files.</value>
         public IEnumerable<CodeFile> Files => this.files.OrderBy(f => f.Path);
-
-        /// <summary>
-        /// Gets the method metrics.
-        /// </summary>
-        /// <value>The method metrics.</value>
-        public IEnumerable<MethodMetric> MethodMetrics => this.methodMetrics;
 
         /// <summary>
         /// Gets the historic coverage information.
@@ -196,15 +185,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         }
 
         /// <summary>
-        /// Adds the given method metric.
-        /// </summary>
-        /// <param name="methodMetric">The method metric.</param>
-        internal void AddMethodMetric(MethodMetric methodMetric)
-        {
-            this.methodMetrics.Add(methodMetric);
-        }
-
-        /// <summary>
         /// Adds the given historic coverage.
         /// </summary>
         /// <param name="historicCoverage">The historic coverage.</param>
@@ -231,19 +211,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
             else if (@class.coverageQuota.HasValue)
             {
                 this.CoverageQuota = @class.coverageQuota.Value;
-            }
-
-            foreach (var methodMetric in @class.methodMetrics)
-            {
-                var existingMethodMetric = this.methodMetrics.FirstOrDefault(m => m.Name == methodMetric.Name);
-                if (existingMethodMetric != null)
-                {
-                    existingMethodMetric.Merge(methodMetric);
-                }
-                else
-                {
-                    this.AddMethodMetric(methodMetric);
-                }
             }
 
             foreach (var file in @class.files)

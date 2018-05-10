@@ -66,6 +66,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                     m => string.Format(CultureInfo.InvariantCulture, "{0}({1})", m.Groups["MethodName"].Value, m.Groups["Arguments"].Value.Length > 0 ? "..." : string.Empty));
 
         /// <summary>
+        /// Gets the line number.
+        /// </summary>
+        /// <value>
+        /// The line number.
+        /// </value>
+        public int? Line { get; internal set; }
+
+        /// <summary>
         /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
         /// </summary>
         /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
@@ -81,7 +89,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
             else
             {
                 var methodMetric = (MethodMetric)obj;
-                return methodMetric.Name.Equals(this.Name);
+                return methodMetric.Name.Equals(this.Name) && methodMetric.Line == this.Line;
             }
         }
 
@@ -91,7 +99,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
         /// </returns>
-        public override int GetHashCode() => this.Name.GetHashCode();
+        public override int GetHashCode() => this.Name.GetHashCode() + this.Line.GetHashCode();
 
         /// <summary>
         /// Adds the given metric.

@@ -44,27 +44,6 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Analysis
         /// A test for Merge
         /// </summary>
         [Fact]
-        public void Merge_MergeClassWithOneFileAndOneMethodMetric_FileIsStored()
-        {
-            var assembly = new Assembly("C:\\test\\TestAssembly.dll");
-            var sut = new Class("Test", assembly);
-            var classToMerge = new Class("Test", assembly);
-            var file = new CodeFile("C:\\temp\\Program.cs", new int[0], new LineVisitStatus[0]);
-            var methodMetric = new MethodMetric("Test");
-            classToMerge.AddFile(file);
-            classToMerge.AddMethodMetric(methodMetric);
-            sut.Merge(classToMerge);
-
-            Assert.Equal(file, sut.Files.First());
-            Assert.Single(sut.Files);
-            Assert.Equal(methodMetric, sut.MethodMetrics.First());
-            Assert.Single(sut.MethodMetrics);
-        }
-
-        /// <summary>
-        /// A test for Merge
-        /// </summary>
-        [Fact]
         public void Merge_MergeClassWithCoverageQuota_FileIsStored()
         {
             var assembly = new Assembly("C:\\test\\TestAssembly.dll");

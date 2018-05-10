@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Properties;
-using Palmmedia.ReportGenerator.Core.Reporting;
 using Palmmedia.ReportGenerator.Core.Reporting.CodeAnalysis;
 
 namespace Palmmedia.ReportGenerator.Core.Reporting.Rendering
@@ -283,6 +282,22 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Rendering
                 string.Join(@"\\", files.Select(f => EscapeLatexChars(f))));
 
             this.reportTextWriter.WriteLine(row);
+        }
+
+        /// <summary>
+        /// Adds metrics to the report
+        /// </summary>
+        /// <param name="class">The class.</param>
+        public void MetricsTable(Class @class)
+        {
+            if (@class == null)
+            {
+                throw new ArgumentNullException(nameof(@class));
+            }
+
+            var methodMetrics = @class.Files.SelectMany(f => f.MethodMetrics);
+
+            this.MetricsTable(methodMetrics);
         }
 
         /// <summary>

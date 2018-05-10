@@ -49,6 +49,24 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Analysis
         /// A test for Merge
         /// </summary>
         [Fact]
+        public void Merge_MergeOneMethodMetric_MethodMetricIsStored()
+        {
+            var sut = new CodeFile("C:\\temp\\Program.cs", new int[] { -1, -1, -1, 0, 0, 0, 1, 1, 1 }, new LineVisitStatus[] { LineVisitStatus.NotCoverable, LineVisitStatus.NotCoverable, LineVisitStatus.NotCoverable, LineVisitStatus.NotCovered, LineVisitStatus.NotCovered, LineVisitStatus.NotCovered, LineVisitStatus.Covered, LineVisitStatus.Covered, LineVisitStatus.Covered });
+            var methodMetric = new MethodMetric("Test");
+            sut.AddMethodMetric(methodMetric);
+
+            var codeFileToMerge = new CodeFile("C:\\temp\\Program.cs", new int[] { -1, 0, 1, -1, 0, 1, -1, 0, 1, -1, 0, 1 }, new LineVisitStatus[] { LineVisitStatus.NotCoverable, LineVisitStatus.NotCovered, LineVisitStatus.Covered, LineVisitStatus.NotCoverable, LineVisitStatus.NotCovered, LineVisitStatus.Covered, LineVisitStatus.NotCoverable, LineVisitStatus.NotCovered, LineVisitStatus.Covered, LineVisitStatus.NotCoverable, LineVisitStatus.NotCovered, LineVisitStatus.Covered });
+
+            sut.Merge(codeFileToMerge);
+
+            Assert.Equal(methodMetric, sut.MethodMetrics.First());
+            Assert.Single(sut.MethodMetrics);
+        }
+
+        /// <summary>
+        /// A test for Merge
+        /// </summary>
+        [Fact]
         public void Merge_CodeFileToMergeHasNoBranches_BranchCoverageInformationIsUpdated()
         {
             var branches = new Dictionary<int, ICollection<Branch>>()

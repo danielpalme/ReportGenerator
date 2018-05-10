@@ -131,6 +131,12 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Rendering
         /// <summary>
         /// Adds metrics to the report
         /// </summary>
+        /// <param name="class">The class.</param>
+        void MetricsTable(Class @class);
+
+        /// <summary>
+        /// Adds metrics to the report
+        /// </summary>
         /// <param name="methodMetrics">The method metrics.</param>
         void MetricsTable(IEnumerable<MethodMetric> methodMetrics);
 

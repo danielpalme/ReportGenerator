@@ -129,7 +129,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [Fact]
         public void MethodMetricsTest()
         {
-            var metrics = assemblies.Single(a => a.Name == "test.exe").Classes.Single(c => c.Name == "Test.TestClass").MethodMetrics;
+            var metrics = assemblies.Single(a => a.Name == "test.exe").Classes.Single(c => c.Name == "Test.TestClass").Files.Single(f => f.Path == "C:\\temp\\TestClass.cs").MethodMetrics;
 
             Assert.Equal(2, metrics.Count());
             Assert.Equal("SampleFunction()", metrics.First().Name);
@@ -140,7 +140,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             Assert.Equal("Blocks not covered", metrics.First().Metrics.ElementAt(1).Name);
             Assert.Equal(4, metrics.First().Metrics.ElementAt(1).Value);
 
-            metrics = assemblies.Single(a => a.Name == "test.exe").Classes.Single(c => c.Name == "Test.AsyncClass").MethodMetrics;
+            metrics = assemblies.Single(a => a.Name == "test.exe").Classes.Single(c => c.Name == "Test.AsyncClass").Files.Single(f => f.Path == "C:\\temp\\AsyncClass.cs").MethodMetrics;
 
             Assert.Single(metrics);
             Assert.Equal("SendAsync()", metrics.First().Name);

@@ -49,16 +49,19 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.CodeAnalysis
             {
                 foreach (var clazz in assembly.Classes)
                 {
-                    foreach (var methodMetric in clazz.MethodMetrics)
+                    foreach (var file in clazz.Files)
                     {
-                        var statusMetrics = methodMetric.Metrics
+                        foreach (var methodMetric in file.MethodMetrics)
+                        {
+                            var statusMetrics = methodMetric.Metrics
                             .Where(m => m.MetricType == MetricType.CodeQuality)
                             .Select(m => new MetricStatus(m, ThresholdsByMetricName.TryGetValue(m.Name, out threshold) && m.Value > threshold))
                             .ToArray();
 
-                        if (statusMetrics.Any(m => m.Exceeded))
-                        {
-                            riskHotspots.Add(new RiskHotspot(assembly, clazz, methodMetric, statusMetrics));
+                            if (statusMetrics.Any(m => m.Exceeded))
+                            {
+                                riskHotspots.Add(new RiskHotspot(assembly, clazz, methodMetric, statusMetrics));
+                            }
                         }
                     }
                 }

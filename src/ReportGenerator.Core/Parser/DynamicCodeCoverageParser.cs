@@ -127,8 +127,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .Where(m => m.Elements("ranges").Elements("range").Any(r => r.Attribute("source_id").Value == fileId))
                 .ToArray();
 
-            SetMethodMetrics(methods, @class);
-
             var linesOfFile = methods
                 .Elements("ranges")
                 .Elements("range")
@@ -172,6 +170,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             var codeFile = new CodeFile(filePath, coverage, lineVisitStatus);
 
+            SetMethodMetrics(codeFile, methods);
             SetCodeElements(codeFile, methods);
 
             return codeFile;
@@ -180,11 +179,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <summary>
         /// Extracts the metrics from the given <see cref="XElement">XElements</see>.
         /// </summary>
-        /// <param name="methods">The methods.</param>
-        /// <param name="class">The class.</param>
-        private static void SetMethodMetrics(IEnumerable<XElement> methods, Class @class)
+        /// <param name="codeFile">The code file.</param>
+        /// <param name="methodsOfFile">The methods of the file.</param>
+        private static void SetMethodMetrics(CodeFile codeFile, IEnumerable<XElement> methodsOfFile)
         {
-            foreach (var method in methods)
+            foreach (var method in methodsOfFile)
             {
                 string methodName = method.Attribute("name").Value;
 
@@ -212,7 +211,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         int.Parse(method.Attribute("blocks_not_covered").Value, CultureInfo.InvariantCulture))
                 };
 
-                @class.AddMethodMetric(new MethodMetric(methodName, metrics));
+                codeFile.AddMethodMetric(new MethodMetric(methodName, metrics));
             }
         }
 

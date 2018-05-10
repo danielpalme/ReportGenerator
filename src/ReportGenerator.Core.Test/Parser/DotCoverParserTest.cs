@@ -137,7 +137,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [Fact]
         public void MethodMetricsTest()
         {
-            Assert.Empty(assemblies.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.TestClass").MethodMetrics);
+            Assert.Empty(assemblies.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.TestClass").Files.Single(f => f.Path == "C:\\temp\\TestClass.cs").MethodMetrics);
         }
 
         /// <summary>

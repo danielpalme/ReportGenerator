@@ -84,11 +84,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <summary>
         /// Extracts the metrics from the given <see cref="XElement">XElements</see>.
         /// </summary>
-        /// <param name="methods">The methods.</param>
-        /// <param name="class">The class.</param>
-        private static void SetMethodMetrics(IEnumerable<XElement> methods, Class @class)
+        /// <param name="codeFile">The code file.</param>
+        /// <param name="methodsOfFile">The methods of the file.</param>
+        private static void SetMethodMetrics(CodeFile codeFile, IEnumerable<XElement> methodsOfFile)
         {
-            foreach (var methodGroup in methods.GroupBy(m => m.Element("Name").Value))
+            foreach (var methodGroup in methodsOfFile.GroupBy(m => m.Element("Name").Value))
             {
                 var method = methodGroup.First();
 
@@ -143,7 +143,18 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         crapScoreAttributes.Max(a => decimal.Parse(a.Value, CultureInfo.InvariantCulture))));
                 }
 
-                @class.AddMethodMetric(new MethodMetric(ExtractMethodName(methodGroup.Key), metrics));
+                var methodMetric = new MethodMetric(ExtractMethodName(methodGroup.Key), metrics);
+                var seqpnt = method
+                    .Elements("SequencePoints")
+                    .Elements("SequencePoint")
+                    .FirstOrDefault();
+
+                if (seqpnt != null)
+                {
+                    methodMetric.Line = int.Parse(seqpnt.Attribute("sl").Value, CultureInfo.InvariantCulture);
+                }
+
+                codeFile.AddMethodMetric(methodMetric);
             }
         }
 
@@ -387,12 +398,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .Elements("Method")
                 .ToArray();
 
-            var methodsOfFile = methods
-                .Where(m => m.Element("FileRef") != null && fileIds.Contains(m.Element("FileRef").Attribute("uid").Value))
-                .ToArray();
-
-            SetMethodMetrics(methodsOfFile, @class);
-
             var seqpntsOfFile = methods
                 .Elements("SequencePoints")
                 .Elements("SequencePoint")
@@ -507,6 +512,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 }
             }
 
+            var methodsOfFile = methods
+                .Where(m => m.Element("FileRef") != null && fileIds.Contains(m.Element("FileRef").Attribute("uid").Value))
+                .ToArray();
+
+            SetMethodMetrics(codeFile, methodsOfFile);
             SetCodeElements(codeFile, methodsOfFile);
 
             return codeFile;

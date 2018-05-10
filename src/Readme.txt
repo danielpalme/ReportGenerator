@@ -57,6 +57,7 @@ CHANGELOG
 
     * New: Issue #112: Added support for .NET Core
     * New: Issue #126: Usage of multiple cores during report generation
+    * New: Issue #131: Linked method metric names to code location
     * Fix: Issue #127: Fixed coverage calculation for NCover
     * New: Improved Latex and XML reports
     * Change: Dropped support for PartCover

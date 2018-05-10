@@ -66,9 +66,12 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Analysis
             var target1 = new MethodMetric("Test");
             var target2 = new MethodMetric("Test");
             var target3 = new MethodMetric("Other");
+            var target4 = new MethodMetric("Test") { Line = 3 };
 
             Assert.True(target1.Equals(target2), "Objects are not equal");
             Assert.False(target1.Equals(target3), "Objects are equal");
+            Assert.False(target1.Equals(target4), "Objects are equal");
+            Assert.True(target4.Equals(target4), "Objects are not equal");
             Assert.False(target1.Equals(null), "Objects are equal");
             Assert.False(target1.Equals(new object()), "Objects are equal");
         }

@@ -24,6 +24,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         private readonly IDictionary<TestMethod, CoverageByTrackedMethod> lineCoveragesByTestMethod = new Dictionary<TestMethod, CoverageByTrackedMethod>();
 
         /// <summary>
+        /// The method metrics of the class.
+        /// </summary>
+        private readonly List<MethodMetric> methodMetrics = new List<MethodMetric>();
+
+        /// <summary>
         /// The code elements..
         /// </summary>
         private readonly HashSet<CodeElement> codeElements = new HashSet<CodeElement>();
@@ -105,6 +110,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// The test methods.
         /// </value>
         public IEnumerable<TestMethod> TestMethods => this.lineCoveragesByTestMethod.Keys;
+
+        /// <summary>
+        /// Gets the method metrics.
+        /// </summary>
+        /// <value>The method metrics.</value>
+        public IEnumerable<MethodMetric> MethodMetrics => this.methodMetrics;
 
         /// <summary>
         /// Gets the code elements.
@@ -227,6 +238,15 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
             {
                 this.lineCoveragesByTestMethod[testMethod] = MergeCoverageByTrackedMetho(existingTrackedMethodCoverage, trackedMethodCoverage);
             }
+        }
+
+        /// <summary>
+        /// Adds the given method metric.
+        /// </summary>
+        /// <param name="methodMetric">The method metric.</param>
+        internal void AddMethodMetric(MethodMetric methodMetric)
+        {
+            this.methodMetrics.Add(methodMetric);
         }
 
         /// <summary>
@@ -393,6 +413,19 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                 else
                 {
                     this.lineCoveragesByTestMethod[lineCoverageByTestMethod.Key] = MergeCoverageByTrackedMetho(existingTrackedMethodCoverage, lineCoverageByTestMethod.Value);
+                }
+            }
+
+            foreach (var methodMetric in file.methodMetrics)
+            {
+                var existingMethodMetric = this.methodMetrics.FirstOrDefault(m => m.Equals(methodMetric));
+                if (existingMethodMetric != null)
+                {
+                    existingMethodMetric.Merge(methodMetric);
+                }
+                else
+                {
+                    this.AddMethodMetric(methodMetric);
                 }
             }
 

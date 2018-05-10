@@ -61,11 +61,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <summary>
         /// Extracts the metrics from the given <see cref="XElement">XElements</see>.
         /// </summary>
-        /// <param name="methods">The methods.</param>
-        /// <param name="class">The class.</param>
-        private static void SetMethodMetrics(IEnumerable<XElement> methods, Class @class)
+        /// <param name="codeFile">The code file.</param>
+        /// <param name="methodsOfFile">The methods of the file.</param>
+        private static void SetMethodMetrics(CodeFile codeFile, IEnumerable<XElement> methodsOfFile)
         {
-            foreach (var method in methods)
+            foreach (var method in methodsOfFile)
             {
                 string methodName = method.Attribute("name").Value + method.Attribute("signature").Value;
 
@@ -106,7 +106,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         Math.Round(decimal.Parse(cyclomaticComplexityAttribute.Value, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero)));
                 }
 
-                @class.AddMethodMetric(new MethodMetric(methodName, metrics));
+                codeFile.AddMethodMetric(new MethodMetric(methodName, metrics));
             }
         }
 
@@ -256,13 +256,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                             || c.Attribute("name").Value.StartsWith(@class.Name + "$", StringComparison.Ordinal))
                 .ToArray();
 
-            var methodsOfFile = classes
-                .Elements("methods")
-                .Elements("method")
-                .ToArray();
-
-            SetMethodMetrics(methodsOfFile, @class);
-
             var lines = classes.Elements("lines")
                 .Elements("line")
                 .ToArray();
@@ -308,8 +301,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 }
             }
 
+            var methodsOfFile = classes
+                .Elements("methods")
+                .Elements("method")
+                .ToArray();
+
             var codeFile = new CodeFile(filePath, coverage, lineVisitStatus, branches);
 
+            SetMethodMetrics(codeFile, methodsOfFile);
             SetCodeElements(codeFile, methodsOfFile);
 
             return codeFile;

@@ -95,12 +95,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 }
             }
 
-            var metrics = @class.MethodMetrics;
-
-            if (metrics.Any())
+            if (@class.Files.Any(f => f.MethodMetrics.Any()))
             {
                 reportRenderer.Header(ReportResources.Metrics);
-                reportRenderer.MetricsTable(metrics);
+                reportRenderer.MetricsTable(@class);
             }
 
             reportRenderer.Header(ReportResources.Files);
@@ -217,7 +215,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             var summableMetrics = summaryResult.Assemblies
                 .SelectMany(a => a.Classes)
-                .SelectMany(c => c.MethodMetrics)
+                .SelectMany(c => c.Files)
+                .SelectMany(f => f.MethodMetrics)
                 .SelectMany(m => m.Metrics)
                 .Where(m => m.MetricType == MetricType.CoverageAbsolute)
                 .GroupBy(m => m.Name)

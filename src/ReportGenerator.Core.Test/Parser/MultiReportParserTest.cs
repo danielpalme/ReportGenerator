@@ -192,7 +192,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [Fact]
         public void MethodMetricsTest()
         {
-            var metrics = assembliesWithoutPreprocessing.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.TestClass").MethodMetrics;
+            var metrics = assembliesWithoutPreprocessing.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.TestClass").Files.Single(f => f.Path == "C:\\temp\\TestClass.cs").MethodMetrics;
 
             Assert.Equal(2, metrics.Count());
             Assert.Equal("System.Void Test.TestClass::SampleFunction()", metrics.First().Name);
@@ -209,7 +209,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             Assert.Equal("Crap Score", metrics.First().Metrics.ElementAt(4).Name);
             Assert.Equal(3.14M, metrics.First().Metrics.ElementAt(4).Value);
 
-            metrics = assembliesWithoutPreprocessing.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.AsyncClass").MethodMetrics;
+            metrics = assembliesWithoutPreprocessing.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.AsyncClass").Files.Single(f => f.Path == "C:\\temp\\AsyncClass.cs").MethodMetrics;
 
             Assert.Single(metrics);
             Assert.Equal("SendAsync()", metrics.First().Name);
@@ -225,7 +225,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             var multiReportParser = ParserFactory.CreateParser(new string[] { filePath });
             Assert.IsType<MultiReportParser>(multiReportParser);
 
-            var metrics = multiReportParser.Assemblies.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.TestClass").MethodMetrics;
+            var metrics = multiReportParser.Assemblies.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.TestClass").Files.Single(f => f.Path == "C:\\temp\\TestClass.cs").MethodMetrics;
 
             Assert.Equal(2, metrics.Count());
             Assert.Equal("System.Void Test.TestClass::SampleFunction()", metrics.First().Name);

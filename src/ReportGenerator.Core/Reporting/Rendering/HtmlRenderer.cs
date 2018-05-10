@@ -495,6 +495,76 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Rendering
         /// <summary>
         /// Adds metrics to the report
         /// </summary>
+        /// <param name="class">The class.</param>
+        public void MetricsTable(Class @class)
+        {
+            if (@class == null)
+            {
+                throw new ArgumentNullException(nameof(@class));
+            }
+
+            var firstMethodMetric = @class.Files.SelectMany(f => f.MethodMetrics).First();
+
+            this.reportTextWriter.WriteLine("<table class=\"overview table-fixed\">");
+            this.reportTextWriter.Write("<thead><tr>");
+
+            this.reportTextWriter.Write("<th>{0}</th>", WebUtility.HtmlEncode(ReportResources.Method));
+
+            foreach (var met in firstMethodMetric.Metrics)
+            {
+                if (met.ExplanationUrl == null)
+                {
+                    this.reportTextWriter.Write("<th>{0}</th>", WebUtility.HtmlEncode(met.Name));
+                }
+                else
+                {
+                    this.reportTextWriter.Write("<th>{0} <a href=\"{1}\"><i class=\"icon-info-circled\"></i></a></th>", WebUtility.HtmlEncode(met.Name), WebUtility.HtmlEncode(met.ExplanationUrl.OriginalString));
+                }
+            }
+
+            this.reportTextWriter.WriteLine("</tr></thead>");
+            this.reportTextWriter.WriteLine("<tbody>");
+
+            int fileIndex = 0;
+
+            foreach (var file in @class.Files)
+            {
+                foreach (var methodMetric in file.MethodMetrics)
+                {
+                    this.reportTextWriter.Write("<tr>");
+
+                    if (methodMetric.Line.HasValue)
+                    {
+                        this.reportTextWriter.Write(
+                            "<td title=\"{0}\"><a href=\"#file{1}_line{2}\" data-ng-click=\"navigateToHash('#file{1}_line{2}')\">{3}</a></td>",
+                            WebUtility.HtmlEncode(methodMetric.Name),
+                            fileIndex,
+                            methodMetric.Line,
+                            WebUtility.HtmlEncode(methodMetric.ShortName));
+                    }
+                    else
+                    {
+                        this.reportTextWriter.Write("<td title=\"{0}\">{1}</td>", WebUtility.HtmlEncode(methodMetric.Name), WebUtility.HtmlEncode(methodMetric.ShortName));
+                    }
+
+                    foreach (var metricValue in methodMetric.Metrics.Select(m => m.Value))
+                    {
+                        this.reportTextWriter.Write("<td>{0}</td>", metricValue.ToString(CultureInfo.InvariantCulture));
+                    }
+
+                    this.reportTextWriter.WriteLine("</tr>");
+                }
+
+                fileIndex++;
+            }
+
+            this.reportTextWriter.WriteLine("</tbody>");
+            this.reportTextWriter.WriteLine("</table>");
+        }
+
+        /// <summary>
+        /// Adds metrics to the report
+        /// </summary>
         /// <param name="methodMetrics">The method metrics.</param>
         public void MetricsTable(IEnumerable<MethodMetric> methodMetrics)
         {

@@ -120,7 +120,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [Fact]
         public void MethodMetricsTest()
         {
-            var metrics = assemblies.Single(a => a.Name == "Test.exe").Classes.Single(c => c.Name == "Test.TestClass").MethodMetrics;
+            var metrics = assemblies.Single(a => a.Name == "Test.exe").Classes.Single(c => c.Name == "Test.TestClass").Files.Single(f => f.Path == "C:\\temp\\TestClass.cs").MethodMetrics;
 
             Assert.Equal(2, metrics.Count());
             Assert.Equal("SampleFunction()", metrics.First().Name);
