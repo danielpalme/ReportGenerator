@@ -46,6 +46,7 @@
   <Target Name="Compile">
     <MSBuild Projects="ReportGenerator.sln" Targets="Restore;Build" Properties="Configuration=Release" />
     <Exec Command="dotnet publish -c Release" WorkingDirectory="ReportGenerator.Console.NetCore" />
+    <Exec Command="dotnet publish -c Release" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
     <RemoveDir Directories="bin" />
     <RemoveDir Directories="obj" />
   </Target>
@@ -100,7 +101,8 @@
 
     <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\ReportGenerator.nuspec -OutputDirectory target\packages -Version $(Version)" />
     <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\ReportGenerator.Core.nuspec -OutputDirectory target\packages -Version $(Version)" />
-    <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\dotnet-reportgenerator.nuspec -OutputDirectory target\packages -Version $(Version)" />
+    <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\dotnet-reportgenerator-cli.nuspec -OutputDirectory target\packages -Version $(Version)" />
+    <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\dotnet-reportgenerator-globaltool.nuspec -OutputDirectory target\packages -Version $(Version)" />
 
     <Exec Command="powershell -Command [Environment]::SetEnvironmentVariable('ChecksumOfZip', (Get-FileHash .\target\packages\ReportGenerator_$(Version).zip -Algorithm SHA256).Hash, 'User')" />
      <PropertyGroup>
@@ -118,6 +120,7 @@
   <Target Name="Publish" DependsOnTargets="Deploy">
     <Exec Command="$(NuGetCommandLine) push .\target\packages\ReportGenerator.$(VersionShort).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
     <Exec Command="$(NuGetCommandLine) push .\target\packages\ReportGenerator.Core.$(VersionShort).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
-    <Exec Command="$(NuGetCommandLine) push .\target\packages\dotnet-reportgenerator.$(VersionShort).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
+    <Exec Command="$(NuGetCommandLine) push .\target\packages\dotnet-reportgenerator-cli.$(VersionShort).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
+    <Exec Command="$(NuGetCommandLine) push .\target\packages\dotnet-reportgenerator-globaltool.$(VersionShort).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
   </Target> 
 </Project>

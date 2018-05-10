@@ -76,7 +76,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportGenerator.Console.Net
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportGenerator.Console.Net", "ReportGenerator.Console\ReportGenerator.Console.Net.csproj", "{19A59768-9410-440D-A857-A1B5D44787B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportGenerator.DotnetCliTool", "ReportGenerator.DotnetCliTool\ReportGenerator.DotnetCliTool.csproj", "{4C5489D8-077A-49A8-8042-1E6844D48185}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportGenerator.DotnetCliTool", "ReportGenerator.DotnetCliTool\ReportGenerator.DotnetCliTool.csproj", "{4C5489D8-077A-49A8-8042-1E6844D48185}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportGenerator.DotnetGlobalTool", "ReportGenerator.DotnetGlobalTool\ReportGenerator.DotnetGlobalTool.csproj", "{B697EF09-935C-482A-89BB-78D9E8BBB387}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -112,6 +114,10 @@ Global
 		{4C5489D8-077A-49A8-8042-1E6844D48185}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C5489D8-077A-49A8-8042-1E6844D48185}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C5489D8-077A-49A8-8042-1E6844D48185}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B697EF09-935C-482A-89BB-78D9E8BBB387}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B697EF09-935C-482A-89BB-78D9E8BBB387}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B697EF09-935C-482A-89BB-78D9E8BBB387}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B697EF09-935C-482A-89BB-78D9E8BBB387}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

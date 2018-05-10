@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>dotnet-reportgenerator</id>
+    <id>dotnet-reportgenerator-cli</id>
     <version>4.0.0.0</version>
     <title />
     <authors>Daniel Palme</authors>
@@ -28,7 +28,8 @@
   <files>
     <file src="..\..\target\bin\Release\LICENSE.txt" target="LICENSE.txt" />
     <file src="..\..\target\bin\Release\Readme.txt" target="Readme.txt" />
-
+    
+    <!-- NetCoreApp2.0 ('lib\netcoreapp2.0' directory) -->
     <file src="..\..\target\bin\Release\netcoreapp2.0\ReportGenerator.Core.dll" target="lib\netcoreapp2.0" />
     <file src="..\..\target\bin\Release\netcoreapp2.0\dotnet-reportgenerator.deps.json" target="lib\netcoreapp2.0\dotnet-reportgenerator.deps.json" />
     <file src="..\..\target\bin\Release\netcoreapp2.0\dotnet-reportgenerator.dll" target="lib\netcoreapp2.0\dotnet-reportgenerator.dll" />
