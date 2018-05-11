@@ -21,6 +21,7 @@
   <!-- Imported MSBuild tasks -->
   <UsingTask TaskName="ReportGenerator" AssemblyFile="target\bin\Release\ReportGenerator.exe" />
   <UsingTask TaskName="Zip" AssemblyFile="$(UserProfile)\.nuget\packages\msbuildtasks\1.5.0.235\tools\MSBuild.Community.Tasks.dll" /> 
+  <UsingTask TaskName="FileUpdate" AssemblyFile="$(UserProfile)\.nuget\packages\msbuildtasks\1.5.0.235\tools\MSBuild.Community.Tasks.dll" /> 
 
   <!-- Version, adjust before build -->
   <PropertyGroup>
@@ -93,11 +94,21 @@
 
   <Target Name="Deploy" DependsOnTargets="Clean; Compile; Report;">
     <ItemGroup>
-      <ZipFileContent Include="target\bin\Release\*" Exclude="target\bin\Release\xunit*;target\bin\Release\*dev.json;target\bin\Release\*.Test*;target\bin\Release\Castle.Core.dll
-;target\bin\Release\Microsoft.DotNet.PlatformAbstractions.dll;target\bin\Release\Microsoft.Extensions.DependencyModel.dll;target\bin\Release\Microsoft.VisualStudio.CodeCoverage.Shim.dll;target\bin\Release\Moq.dll;target\bin\Release\Newtonsoft.Json.dll;target\bin\Release\testhost.dll;target\bin\Release\*.pdb" />
-    </ItemGroup>    
-
-    <Zip Files="@(ZipFileContent)" WorkingDirectory="$(MSBuildThisFileDirectory)target\bin\Release" ZipFileName="target\packages\ReportGenerator_$(Version).zip" ZipLevel="9" />
+      <ZipFileContentBase Include="target\bin\Release\LICENSE.txt;target\bin\Release\Readme.txt" />
+      <ZipFileContentNet47 Include="target\bin\Release\Microsoft.Win32.Primitives.dll;target\bin\Release\netstandard.dll;target\bin\Release\ReportGenerator.Core.dll;target\bin\Release\ReportGenerator.exe;target\bin\Release\ReportGenerator.exe.config;target\bin\Release\SixLabors.*.dll;target\bin\Release\System.*.dll" />
+      <ZipFileContentNetCore Include="target\bin\Release\netcoreapp2.0\publish\**\*.*"/>
+    </ItemGroup>
+    <MakeDir Directories="tmpzip" />
+    <MakeDir Directories="tmpzip\net47" />
+    <MakeDir Directories="tmpzip\netcoreapp2.0" />
+    <Copy SourceFiles="@(ZipFileContentBase)" DestinationFolder="tmpzip" /> 
+    <Copy SourceFiles="@(ZipFileContentNet47)" DestinationFolder="tmpzip\net47" /> 
+    <Copy SourceFiles="@(ZipFileContentNetCore)" DestinationFolder="tmpzip\netcoreapp2.0\%(RecursiveDir)" /> 
+   <ItemGroup>
+      <ZipFileContent Include="tmpzip\**\*.*"/>
+    </ItemGroup> 
+    <Zip Files="@(ZipFileContent)" WorkingDirectory="$(MSBuildThisFileDirectory)tmpzip" ZipFileName="target\packages\ReportGenerator_$(Version).zip" ZipLevel="9" />
+    <RemoveDir Directories="tmpzip" />  
 
     <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\ReportGenerator.nuspec -OutputDirectory target\packages -Version $(Version)" />
     <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\ReportGenerator.Core.nuspec -OutputDirectory target\packages -Version $(Version)" />

@@ -29,7 +29,9 @@ dotnet $(UserProfile)\.nuget\packages\reportgenerator\x.y.z\tools\netcoreapp2.0\
     <!-- .NET 4.7 ('tools\netcoreapp2.0' directory) -->
     <file src="..\..\target\bin\Release\netcoreapp2.0\publish\**\*.*" target="tools\netcoreapp2.0" />
     
-    <!-- .NET 4.7 ('tools\net47' directory) -->
+    <!-- .NET 4.7 ('tools\net47' directory) -->    
+    <file src="..\..\target\bin\Release\Microsoft.Win32.Primitives.dll" target="tools\net47" />
+    <file src="..\..\target\bin\Release\netstandard.dll" target="tools\net47" />
     <file src="..\..\target\bin\Release\ReportGenerator.Core.dll" target="tools\net47" />
     <file src="..\..\target\bin\Release\ReportGenerator.exe" target="tools\net47" />
     <file src="..\..\target\bin\Release\ReportGenerator.exe.config" target="tools\net47" />
