@@ -15,12 +15,14 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.CodeAnalysis
         /// <param name="class">The class.</param>
         /// <param name="methodMetric">The method metric.</param>
         /// <param name="statusMetrics">The metric with status.</param>
-        public RiskHotspot(Assembly assembly, Class @class, MethodMetric methodMetric, IEnumerable<MetricStatus> statusMetrics)
+        /// <param name="fileIndex">The index of the corresponding file within the classes files.</param>
+        public RiskHotspot(Assembly assembly, Class @class, MethodMetric methodMetric, IEnumerable<MetricStatus> statusMetrics, int fileIndex)
         {
             this.Assembly = assembly;
             this.Class = @class;
             this.MethodMetric = methodMetric;
             this.StatusMetrics = statusMetrics;
+            this.FileIndex = fileIndex;
         }
 
         /// <summary>
@@ -42,5 +44,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.CodeAnalysis
         /// Gets the metric with status.
         /// </summary>
         public IEnumerable<MetricStatus> StatusMetrics { get; }
+
+        /// <summary>
+        /// Gets the index of the corresponding file within the classes files.
+        /// </summary>
+        public int FileIndex { get; }
     }
 }

@@ -49,6 +49,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.CodeAnalysis
             {
                 foreach (var clazz in assembly.Classes)
                 {
+                    int fileIndex = 0;
+
                     foreach (var file in clazz.Files)
                     {
                         foreach (var methodMetric in file.MethodMetrics)
@@ -60,9 +62,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.CodeAnalysis
 
                             if (statusMetrics.Any(m => m.Exceeded))
                             {
-                                riskHotspots.Add(new RiskHotspot(assembly, clazz, methodMetric, statusMetrics));
+                                riskHotspots.Add(new RiskHotspot(assembly, clazz, methodMetric, statusMetrics, fileIndex));
                             }
                         }
+
+                        fileIndex++;
                     }
                 }
             }

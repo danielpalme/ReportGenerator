@@ -297,18 +297,25 @@ var RiskHotspotsTableHeader = React.createClass({
 
 var RiskHotspotRow = React.createClass({
     render: function () {
-        var tds, nameElement, metrics;
+        var tds, nameElement, methodElement;
 
         if (this.props.riskHotspot.reportPath === '') {
             nameElement = React.DOM.span(null, this.props.riskHotspot.class);
+            methodElement = this.props.riskHotspot.methodShortName;
         } else {
             nameElement = React.DOM.a({ href: this.props.riskHotspot.reportPath }, this.props.riskHotspot.class);
+
+            if (this.props.riskHotspot.line !== null) {
+                methodElement = React.DOM.a({ href: this.props.riskHotspot.reportPath + '#file' + this.props.riskHotspot.fileIndex + '_line' + this.props.riskHotspot.line }, this.props.riskHotspot.methodShortName)
+            } else {
+                methodElement = this.props.riskHotspot.methodShortName;
+            }
         }
 
         tds = [
             React.DOM.td(null, this.props.riskHotspot.assembly),
             React.DOM.td(null, nameElement),
-            React.DOM.td(null, this.props.riskHotspot.method)
+            React.DOM.td({ title: this.props.riskHotspot.methodName }, methodElement)
         ];
 
         for (i = 0, l = this.props.riskHotspot.metrics.length; i < l; i++) {
