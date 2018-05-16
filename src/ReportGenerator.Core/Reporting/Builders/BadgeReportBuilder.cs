@@ -183,10 +183,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 File.WriteAllText(
                     Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_linecoverage.svg"),
                     this.CreateSvgBadge(summaryResult, true, false));
-
-                File.WriteAllBytes(
-                    Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_linecoverage.png"),
-                    this.CreatePngBadge(summaryResult, true));
             }
 
             if (summaryResult.BranchCoverageQuota.HasValue)
@@ -194,10 +190,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 File.WriteAllText(
                     Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_branchcoverage.svg"),
                     this.CreateSvgBadge(summaryResult, false, true));
-
-                File.WriteAllBytes(
-                    Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_branchcoverage.png"),
-                    this.CreatePngBadge(summaryResult, false));
             }
 
             if (summaryResult.CoverageQuota.HasValue && summaryResult.BranchCoverageQuota.HasValue)
@@ -205,6 +197,20 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 File.WriteAllText(
                     Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_combined.svg"),
                     this.CreateSvgBadge(summaryResult, true, true));
+            }
+
+            if (summaryResult.CoverageQuota.HasValue)
+            {
+                File.WriteAllBytes(
+                    Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_linecoverage.png"),
+                    this.CreatePngBadge(summaryResult, true));
+            }
+
+            if (summaryResult.BranchCoverageQuota.HasValue)
+            {
+                File.WriteAllBytes(
+                    Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_branchcoverage.png"),
+                    this.CreatePngBadge(summaryResult, false));
             }
         }
 
