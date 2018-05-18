@@ -59,6 +59,7 @@ CHANGELOG
     * New: Issue #126: Usage of multiple cores during report generation
     * New: Issue #131: Linked method metric names to code location
     * Fix: Issue #127: Fixed coverage calculation for NCover
+    * Fix: Issue #133: Empty Risk Hotspots section when no risk hotspot exists
     * New: Improved Latex and XML reports
     * Change: Dropped support for PartCover
 

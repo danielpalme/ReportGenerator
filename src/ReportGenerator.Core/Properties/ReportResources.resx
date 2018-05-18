@@ -294,4 +294,7 @@
   <data name="Top" xml:space="preserve">
     <value>Top:</value>
   </data>
+  <data name="NoRiskHotspots" xml:space="preserve">
+    <value>No risk hotspots found.</value>
+  </data>
 </root>

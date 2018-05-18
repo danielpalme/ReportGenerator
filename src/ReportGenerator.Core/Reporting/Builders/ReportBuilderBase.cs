@@ -231,14 +231,22 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 reportRenderer.MetricsTable(new[] { methodMetric });
             }
 
-            var hotspots = RiskHotspotsAnalysis.DetectHotspotsByMetricName(summaryResult.Assemblies);
+            var hotspotAnlysisResult = RiskHotspotsAnalysis.PerformRiskHotspotAnalysis(summaryResult.Assemblies);
 
             if (reportRenderer.SupportsRiskHotsSpots)
             {
-                if (hotspots.Any())
+                if (hotspotAnlysisResult.CodeCodeQualityMetricsAvailable)
                 {
                     reportRenderer.Header(ReportResources.RiskHotspots);
-                    reportRenderer.RiskHotspots(hotspots);
+
+                    if (hotspotAnlysisResult.RiskHotspots.Count > 0)
+                    {
+                        reportRenderer.RiskHotspots(hotspotAnlysisResult.RiskHotspots);
+                    }
+                    else
+                    {
+                        reportRenderer.Paragraph(ReportResources.NoRiskHotspots);
+                    }
                 }
             }
 
@@ -265,7 +273,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 reportRenderer.Paragraph(ReportResources.NoCoveredAssemblies);
             }
 
-            reportRenderer.CustomSummary(summaryResult.Assemblies, hotspots, summaryResult.SupportsBranchCoverage);
+            reportRenderer.CustomSummary(summaryResult.Assemblies, hotspotAnlysisResult.RiskHotspots, summaryResult.SupportsBranchCoverage);
 
             reportRenderer.AddFooter();
             reportRenderer.SaveSummaryReport(this.ReportContext.ReportConfiguration.TargetDirectory);

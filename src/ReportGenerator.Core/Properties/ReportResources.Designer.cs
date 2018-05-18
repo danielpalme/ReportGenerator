@@ -466,6 +466,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No risk hotspots found..
+        /// </summary>
+        public static string NoRiskHotspots {
+            get {
+                return ResourceManager.GetString("NoRiskHotspots", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to NPath complexity.
         /// </summary>
         public static string NPathComplexity {

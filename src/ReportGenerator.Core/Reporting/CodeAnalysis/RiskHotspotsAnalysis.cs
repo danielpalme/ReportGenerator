@@ -40,10 +40,12 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.CodeAnalysis
         /// </summary>
         /// <param name="assemblies">The assemblies.</param>
         /// <returns>The risk hotspots.</returns>
-        public static IEnumerable<RiskHotspot> DetectHotspotsByMetricName(IEnumerable<Assembly> assemblies)
+        public static RiskHotsptAnalysisResult PerformRiskHotspotAnalysis(IEnumerable<Assembly> assemblies)
         {
             var riskHotspots = new List<RiskHotspot>();
             decimal threshold = -1;
+
+            bool codeCodeQualityMetricsAvailable = false;
 
             foreach (var assembly in assemblies)
             {
@@ -55,10 +57,14 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.CodeAnalysis
                     {
                         foreach (var methodMetric in file.MethodMetrics)
                         {
-                            var statusMetrics = methodMetric.Metrics
-                            .Where(m => m.MetricType == MetricType.CodeQuality)
-                            .Select(m => new MetricStatus(m, ThresholdsByMetricName.TryGetValue(m.Name, out threshold) && m.Value > threshold))
-                            .ToArray();
+                            var codeCodeQualityMetrics = methodMetric.Metrics
+                                .Where(m => m.MetricType == MetricType.CodeQuality);
+
+                            codeCodeQualityMetricsAvailable |= codeCodeQualityMetrics.Any();
+
+                            var statusMetrics = codeCodeQualityMetrics
+                                .Select(m => new MetricStatus(m, ThresholdsByMetricName.TryGetValue(m.Name, out threshold) && m.Value > threshold))
+                                .ToArray();
 
                             if (statusMetrics.Any(m => m.Exceeded))
                             {
@@ -71,9 +77,13 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.CodeAnalysis
                 }
             }
 
-            return riskHotspots
+            var result = new RiskHotsptAnalysisResult(
+                riskHotspots
                 .OrderByDescending(r => r.StatusMetrics.Where(m => m.Exceeded).Max(m => m.Metric.Value))
-                .ToList();
+                .ToList(),
+                codeCodeQualityMetricsAvailable);
+
+            return result;
         }
     }
 }
