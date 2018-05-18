@@ -47,13 +47,14 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Analysis
         {
             var sut = new Assembly("C:\\test\\TestAssembly.dll");
             var assemblyToMerge = new Assembly("C:\\test\\TestAssembly.dll");
-            var @class = new Class("Test", sut);
+            var @class = new Class("Test", assemblyToMerge);
             assemblyToMerge.AddClass(@class);
 
             sut.Merge(assemblyToMerge);
 
             Assert.Equal(@class, sut.Classes.First());
             Assert.Single(sut.Classes);
+            Assert.Same(sut.Classes.First().Assembly, sut);
         }
 
         /// <summary>

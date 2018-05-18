@@ -54,7 +54,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// Gets the assembly.
         /// </summary>
         /// <value>The assembly.</value>
-        public Assembly Assembly { get; }
+        public Assembly Assembly { get; internal set; }
 
         /// <summary>
         /// Gets the files.

@@ -157,6 +157,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                 else
                 {
                     this.AddClass(@class);
+                    @class.Assembly = this;
                 }
             }
         }
