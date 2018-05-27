@@ -280,7 +280,7 @@ var RiskHotspotsTableHeader = React.createClass({
 
         for (i = 0, l = this.props.riskHotspotMetrics.length; i < l; i++) {
             metricClass = this.props.sortby !== '' &&this.props.sortby == i ? (this.props.sortorder === 'desc' ? 'icon-up-dir_active' : 'icon-down-dir_active') : 'icon-down-dir';
-            ths.push(React.DOM.th({ className: 'right' },
+            ths.push(React.DOM.th(null,
                 React.DOM.a(
                     { href: '', 'data-metric': i, onClick: function (event) { this.sortingChangedHandler(event, $(event.nativeEvent.target).closest('a')[0].getAttribute('data-metric')); }.bind(this) },
                     React.DOM.i({ className: metricClass }),
@@ -319,7 +319,7 @@ var RiskHotspotRow = React.createClass({
         ];
 
         for (i = 0, l = this.props.riskHotspot.metrics.length; i < l; i++) {
-            tds.push(React.DOM.td({ className: this.props.riskHotspot.metrics[i].exceeded ? 'lightred' : 'lightgreen' },
+            tds.push(React.DOM.td({ className: this.props.riskHotspot.metrics[i].exceeded ? 'lightred right' : 'lightgreen right' },
                 this.props.riskHotspot.metrics[i].value));
         }
 

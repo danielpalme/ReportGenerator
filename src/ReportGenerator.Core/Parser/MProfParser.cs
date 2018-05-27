@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -27,22 +28,20 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         private static Regex lambdaMethodNameRegex = new Regex("<.*>.+__", RegexOptions.Compiled);
 
         /// <summary>
-        /// The methods of the processed report.
+        /// Parses the given XML report.
         /// </summary>
-        private XElement[] methods;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MProfParser"/> class.
-        /// </summary>
-        /// <param name="report">The report file as XContainer.</param>
-        internal MProfParser(XContainer report)
+        /// <param name="report">The XML report</param>
+        /// <returns>The parser result.</returns>
+        public override ParserResult Parse(XContainer report)
         {
             if (report == null)
             {
                 throw new ArgumentNullException(nameof(report));
             }
 
-            this.methods = report.Descendants("method").ToArray();
+            var assemblies = new ConcurrentBag<Assembly>();
+
+            var methods = report.Descendants("method").ToArray();
 
             var assemblyNames = report.Descendants("assembly")
                 .Select(a => a.Attribute("name").Value)
@@ -50,9 +49,116 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .OrderBy(a => a)
                 .ToArray();
 
-            Parallel.ForEach(assemblyNames, assemblyName => this.AddAssembly(this.ProcessAssembly(assemblyName)));
+            Parallel.ForEach(assemblyNames, assemblyName => assemblies.Add(ProcessAssembly(methods, assemblyName)));
 
-            this.methods = null;
+            var result = new ParserResult(assemblies.OrderBy(a => a.Name).ToList(), false, this.ToString());
+            return result;
+        }
+
+        /// <summary>
+        /// Processes the given assembly.
+        /// </summary>
+        /// <param name="methods">The methods.</param>
+        /// <param name="assemblyName">Name of the assembly.</param>
+        /// <returns>The <see cref="Assembly"/>.</returns>
+        private static Assembly ProcessAssembly(XElement[] methods, string assemblyName)
+        {
+            Logger.DebugFormat("  " + Resources.CurrentAssembly, assemblyName);
+
+            var classNames = methods
+                .Where(m => m.Attribute("assembly").Value.Equals(assemblyName))
+                .Select(m => m.Attribute("class").Value)
+                .Where(c => !c.Contains(".`1c__") && c != "`1")
+                .Distinct()
+                .OrderBy(name => name)
+                .ToArray();
+
+            var assembly = new Assembly(assemblyName);
+
+            Parallel.ForEach(classNames, className => assembly.AddClass(ProcessClass(methods, assembly, className)));
+
+            return assembly;
+        }
+
+        /// <summary>
+        /// Processes the given class.
+        /// </summary>
+        /// <param name="methods">The methods.</param>
+        /// <param name="assembly">The assembly.</param>
+        /// <param name="className">Name of the class.</param>
+        /// <returns>The <see cref="Class"/>.</returns>
+        private static Class ProcessClass(XElement[] methods, Assembly assembly, string className)
+        {
+            var @class = new Class(className, assembly);
+
+            var filesOfClass = methods
+                .Where(m => m.Attribute("assembly").Value.Equals(assembly.Name))
+                .Where(m => m.Attribute("class").Value.Equals(@class.Name, StringComparison.Ordinal))
+                .Where(m => m.Attribute("filename").Value.Length > 0)
+                .Select(m => m.Attribute("filename").Value)
+                .Distinct()
+                .ToArray();
+
+            foreach (var file in filesOfClass)
+            {
+                @class.AddFile(ProcessFile(methods, @class, file));
+            }
+
+            return @class;
+        }
+
+        /// <summary>
+        /// Processes the file.
+        /// </summary>
+        /// <param name="methods">The methods.</param>
+        /// <param name="class">The class.</param>
+        /// <param name="filePath">The file path.</param>
+        /// <returns>The <see cref="CodeFile"/>.</returns>
+        private static CodeFile ProcessFile(XElement[] methods, Class @class, string filePath)
+        {
+            var methodsOfFile = methods
+                .Where(m => m.Attribute("assembly").Value.Equals(@class.Assembly.Name))
+                .Where(m => m.Attribute("class").Value.Equals(@class.Name, StringComparison.Ordinal))
+                .Where(m => m.Attribute("filename").Value.Equals(filePath))
+                .Distinct()
+                .ToArray();
+
+            var linesOfFile = methodsOfFile
+                .Elements("statement")
+                .Select(l => new
+                {
+                    LineNumber = int.Parse(l.Attribute("line").Value, CultureInfo.InvariantCulture),
+                    Visits = int.Parse(l.Attribute("counter").Value, CultureInfo.InvariantCulture)
+                })
+                .OrderBy(l => l.LineNumber)
+                .ToArray();
+
+            int[] coverage = new int[] { };
+            LineVisitStatus[] lineVisitStatus = new LineVisitStatus[] { };
+
+            if (linesOfFile.Length > 0)
+            {
+                coverage = new int[linesOfFile[linesOfFile.LongLength - 1].LineNumber + 1];
+                lineVisitStatus = new LineVisitStatus[linesOfFile[linesOfFile.LongLength - 1].LineNumber + 1];
+
+                for (int i = 0; i < coverage.Length; i++)
+                {
+                    coverage[i] = -1;
+                }
+
+                foreach (var line in linesOfFile)
+                {
+                    int visits = line.Visits > 0 ? 1 : 0;
+                    coverage[line.LineNumber] = coverage[line.LineNumber] == -1 ? visits : Math.Min(coverage[line.LineNumber] + visits, 1);
+                    lineVisitStatus[line.LineNumber] = lineVisitStatus[line.LineNumber] == LineVisitStatus.Covered || line.Visits > 0 ? LineVisitStatus.Covered : LineVisitStatus.NotCovered;
+                }
+            }
+
+            var codeFile = new CodeFile(filePath, coverage, lineVisitStatus);
+
+            SetCodeElements(codeFile, methodsOfFile);
+
+            return codeFile;
         }
 
         /// <summary>
@@ -90,109 +196,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     codeFile.AddCodeElement(new CodeElement(methodName, type, line));
                 }
             }
-        }
-
-        /// <summary>
-        /// Processes the given assembly.
-        /// </summary>
-        /// <param name="assemblyName">Name of the assembly.</param>
-        /// <returns>The <see cref="Assembly"/>.</returns>
-        private Assembly ProcessAssembly(string assemblyName)
-        {
-            Logger.DebugFormat("  " + Resources.CurrentAssembly, assemblyName);
-
-            var classNames = this.methods
-                .Where(m => m.Attribute("assembly").Value.Equals(assemblyName))
-                .Select(m => m.Attribute("class").Value)
-                .Where(c => !c.Contains(".`1c__") && c != "`1")
-                .Distinct()
-                .OrderBy(name => name)
-                .ToArray();
-
-            var assembly = new Assembly(assemblyName);
-
-            Parallel.ForEach(classNames, className => assembly.AddClass(this.ProcessClass(assembly, className)));
-
-            return assembly;
-        }
-
-        /// <summary>
-        /// Processes the given class.
-        /// </summary>
-        /// <param name="assembly">The assembly.</param>
-        /// <param name="className">Name of the class.</param>
-        /// <returns>The <see cref="Class"/>.</returns>
-        private Class ProcessClass(Assembly assembly, string className)
-        {
-            var @class = new Class(className, assembly);
-
-            var filesOfClass = this.methods
-                .Where(m => m.Attribute("assembly").Value.Equals(assembly.Name))
-                .Where(m => m.Attribute("class").Value.Equals(@class.Name, StringComparison.Ordinal))
-                .Where(m => m.Attribute("filename").Value.Length > 0)
-                .Select(m => m.Attribute("filename").Value)
-                .Distinct()
-                .ToArray();
-
-            foreach (var file in filesOfClass)
-            {
-                @class.AddFile(this.ProcessFile(@class, file));
-            }
-
-            return @class;
-        }
-
-        /// <summary>
-        /// Processes the file.
-        /// </summary>
-        /// <param name="class">The class.</param>
-        /// <param name="filePath">The file path.</param>
-        /// <returns>The <see cref="CodeFile"/>.</returns>
-        private CodeFile ProcessFile(Class @class, string filePath)
-        {
-            var methods = this.methods
-                .Where(m => m.Attribute("assembly").Value.Equals(@class.Assembly.Name))
-                .Where(m => m.Attribute("class").Value.Equals(@class.Name, StringComparison.Ordinal))
-                .Where(m => m.Attribute("filename").Value.Equals(filePath))
-                .Distinct()
-                .ToArray();
-
-            var linesOfFile = methods
-                .Elements("statement")
-                .Select(l => new
-                {
-                    LineNumber = int.Parse(l.Attribute("line").Value, CultureInfo.InvariantCulture),
-                    Visits = int.Parse(l.Attribute("counter").Value, CultureInfo.InvariantCulture)
-                })
-                .OrderBy(l => l.LineNumber)
-                .ToArray();
-
-            int[] coverage = new int[] { };
-            LineVisitStatus[] lineVisitStatus = new LineVisitStatus[] { };
-
-            if (linesOfFile.Length > 0)
-            {
-                coverage = new int[linesOfFile[linesOfFile.LongLength - 1].LineNumber + 1];
-                lineVisitStatus = new LineVisitStatus[linesOfFile[linesOfFile.LongLength - 1].LineNumber + 1];
-
-                for (int i = 0; i < coverage.Length; i++)
-                {
-                    coverage[i] = -1;
-                }
-
-                foreach (var line in linesOfFile)
-                {
-                    int visits = line.Visits > 0 ? 1 : 0;
-                    coverage[line.LineNumber] = coverage[line.LineNumber] == -1 ? visits : Math.Min(coverage[line.LineNumber] + visits, 1);
-                    lineVisitStatus[line.LineNumber] = lineVisitStatus[line.LineNumber] == LineVisitStatus.Covered || line.Visits > 0 ? LineVisitStatus.Covered : LineVisitStatus.NotCovered;
-                }
-            }
-
-            var codeFile = new CodeFile(filePath, coverage, lineVisitStatus);
-
-            SetCodeElements(codeFile, methods);
-
-            return codeFile;
         }
     }
 }

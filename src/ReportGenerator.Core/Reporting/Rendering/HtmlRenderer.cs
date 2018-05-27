@@ -801,11 +801,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Rendering
             {
                 if (metric.ExplanationUrl == null)
                 {
-                    this.reportTextWriter.WriteLine("<th class=\"right\">{0}</th>", WebUtility.HtmlEncode(metric.Name));
+                    this.reportTextWriter.WriteLine("<th>{0}</th>", WebUtility.HtmlEncode(metric.Name));
                 }
                 else
                 {
-                    this.reportTextWriter.WriteLine("<th class=\"right\">{0} <a href=\"{1}\"><i class=\"icon-info-circled\"></i></a></th>", WebUtility.HtmlEncode(metric.Name), WebUtility.HtmlEncode(metric.ExplanationUrl.OriginalString));
+                    this.reportTextWriter.WriteLine("<th>{0} <a href=\"{1}\"><i class=\"icon-info-circled\"></i></a></th>", WebUtility.HtmlEncode(metric.Name), WebUtility.HtmlEncode(metric.ExplanationUrl.OriginalString));
                 }
             }
 
@@ -847,7 +847,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Rendering
 
                 foreach (var statusMetric in riskHotspot.StatusMetrics)
                 {
-                    this.reportTextWriter.WriteLine("<td class=\"right {0}\">{1}</td>", statusMetric.Exceeded ? "lightred" : "lightgreen", statusMetric.Metric.Value.ToString(CultureInfo.InvariantCulture));
+                    this.reportTextWriter.WriteLine("<td class=\"{0} right\">{1}</td>", statusMetric.Exceeded ? "lightred" : "lightgreen", statusMetric.Metric.Value.ToString(CultureInfo.InvariantCulture));
                 }
 
                 this.reportTextWriter.WriteLine("</tr>");

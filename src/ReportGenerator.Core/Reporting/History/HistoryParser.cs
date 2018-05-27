@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
+using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Properties;
@@ -69,7 +70,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.History
             }
             catch (Exception ex)
             {
-                Logger.ErrorFormat(" " + Resources.ErrorDuringReadingHistoricReports, ex.Message);
+                Logger.ErrorFormat(" " + Resources.ErrorDuringReadingHistoricReports, ex.GetExceptionMessageForDisplay());
                 return;
             }
 
@@ -125,7 +126,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.History
                 }
                 catch (Exception ex)
                 {
-                    Logger.ErrorFormat(" " + Resources.ErrorDuringReadingHistoricReport, file, ex.Message);
+                    Logger.ErrorFormat(" " + Resources.ErrorDuringReadingHistoricReport, file, ex.GetExceptionMessageForDisplay());
                 }
             }
         }

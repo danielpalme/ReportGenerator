@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -32,39 +33,164 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         private static Regex compilerGeneratedMethodNameRegex = new Regex(@"^.*<(?<CompilerGeneratedName>.+)>.+__.+!MoveNext\(\)!.+$", RegexOptions.Compiled);
 
         /// <summary>
-        /// The module elements of the report.
+        /// Parses the given XML report.
         /// </summary>
-        private XElement[] modules;
-
-        /// <summary>
-        /// The file elements of the report.
-        /// </summary>
-        private XElement[] files;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="VisualStudioParser"/> class.
-        /// </summary>
-        /// <param name="report">The report file as XContainer.</param>
-        internal VisualStudioParser(XContainer report)
+        /// <param name="report">The XML report</param>
+        /// <returns>The parser result.</returns>
+        public override ParserResult Parse(XContainer report)
         {
             if (report == null)
             {
                 throw new ArgumentNullException(nameof(report));
             }
 
-            this.modules = report.Descendants("Module").ToArray();
-            this.files = report.Descendants("SourceFileNames").ToArray();
+            var assemblies = new ConcurrentBag<Assembly>();
 
-            var assemblyNames = this.modules
+            var modules = report.Descendants("Module").ToArray();
+            var files = report.Descendants("SourceFileNames").ToArray();
+
+            var assemblyNames = modules
                 .Select(m => m.Element("ModuleName").Value)
                 .Distinct()
                 .OrderBy(a => a)
                 .ToArray();
 
-            Parallel.ForEach(assemblyNames, assemblyName => this.AddAssembly(this.ProcessAssembly(assemblyName)));
+            Parallel.ForEach(assemblyNames, assemblyName => assemblies.Add(ProcessAssembly(modules, files, assemblyName)));
 
-            this.modules = null;
-            this.files = null;
+            var result = new ParserResult(assemblies.OrderBy(a => a.Name).ToList(), false, this.ToString());
+            return result;
+        }
+
+        /// <summary>
+        /// Processes the given assembly.
+        /// </summary>
+        /// <param name="modules">The modules.</param>
+        /// <param name="files">The files.</param>
+        /// <param name="assemblyName">Name of the assembly.</param>
+        /// <returns>The <see cref="Assembly"/>.</returns>
+        private static Assembly ProcessAssembly(XElement[] modules, XElement[] files, string assemblyName)
+        {
+            Logger.DebugFormat("  " + Resources.CurrentAssembly, assemblyName);
+
+            var classNames = modules
+                .Where(m => m.Element("ModuleName").Value.Equals(assemblyName))
+                .Elements("NamespaceTable")
+                .Elements("Class")
+                .Elements("ClassName")
+                .Where(c => !c.Value.Contains("<>")
+                    && !c.Value.StartsWith("$", StringComparison.OrdinalIgnoreCase))
+                .Select(c =>
+                {
+                    string fullname = c.Value;
+                    int nestedClassSeparatorIndex = fullname.IndexOf('.');
+                    fullname = nestedClassSeparatorIndex > -1 ? fullname.Substring(0, nestedClassSeparatorIndex) : fullname;
+                    return c.Parent.Parent.Element("NamespaceName").Value + "." + fullname;
+                })
+                .Distinct()
+                .OrderBy(name => name)
+                .ToArray();
+
+            var assembly = new Assembly(assemblyName);
+
+            Parallel.ForEach(classNames, className => assembly.AddClass(ProcessClass(modules, files, assembly, className)));
+
+            return assembly;
+        }
+
+        /// <summary>
+        /// Processes the given class.
+        /// </summary>
+        /// <param name="modules">The modules.</param>
+        /// <param name="files">The files.</param>
+        /// <param name="assembly">The assembly.</param>
+        /// <param name="className">Name of the class.</param>
+        /// <returns>The <see cref="Class"/>.</returns>
+        private static Class ProcessClass(XElement[] modules, XElement[] files, Assembly assembly, string className)
+        {
+            var fileIdsOfClass = modules
+                .Where(m => m.Element("ModuleName").Value.Equals(assembly.Name))
+                .Elements("NamespaceTable")
+                .Elements("Class")
+                .Where(c => (c.Parent.Element("NamespaceName").Value + "." + c.Element("ClassName").Value).Equals(className, StringComparison.Ordinal)
+                            || (c.Parent.Element("NamespaceName").Value + "." + c.Element("ClassName").Value).StartsWith(className + ".", StringComparison.Ordinal))
+                .Elements("Method")
+                .Elements("Lines")
+                .Elements("SourceFileID")
+                .Select(m => m.Value)
+                .Distinct();
+
+            var @class = new Class(className, assembly);
+
+            foreach (var fileId in fileIdsOfClass)
+            {
+                string file = files.First(f => f.Element("SourceFileID").Value == fileId).Element("SourceFileName").Value;
+                @class.AddFile(ProcessFile(modules, fileId, @class, file));
+            }
+
+            return @class;
+        }
+
+        /// <summary>
+        /// Processes the file.
+        /// </summary>
+        /// <param name="modules">The modules.</param>
+        /// <param name="fileId">The file id.</param>
+        /// <param name="class">The class.</param>
+        /// <param name="filePath">The file path.</param>
+        /// <returns>The <see cref="CodeFile"/>.</returns>
+        private static CodeFile ProcessFile(XElement[] modules, string fileId, Class @class, string filePath)
+        {
+            var methods = modules
+                .Where(m => m.Element("ModuleName").Value.Equals(@class.Assembly.Name))
+                .Elements("NamespaceTable")
+                .Elements("Class")
+                .Where(c => (c.Parent.Element("NamespaceName").Value + "." + c.Element("ClassName").Value).Equals(@class.Name, StringComparison.Ordinal)
+                            || (c.Parent.Element("NamespaceName").Value + "." + c.Element("ClassName").Value).StartsWith(@class.Name + ".", StringComparison.Ordinal))
+                .Elements("Method")
+                .Where(m => m.Elements("Lines").Elements("SourceFileID").Any(s => s.Value == fileId))
+                .ToArray();
+
+            var linesOfFile = methods
+                .Elements("Lines")
+                .Select(l => new
+                {
+                    LineNumberStart = int.Parse(l.Element("LnStart").Value, CultureInfo.InvariantCulture),
+                    LineNumberEnd = int.Parse(l.Element("LnEnd").Value, CultureInfo.InvariantCulture),
+                    Coverage = int.Parse(l.Element("Coverage").Value, CultureInfo.InvariantCulture)
+                })
+                .OrderBy(seqpnt => seqpnt.LineNumberEnd)
+                .ToArray();
+
+            int[] coverage = new int[] { };
+            LineVisitStatus[] lineVisitStatus = new LineVisitStatus[] { };
+
+            if (linesOfFile.Length > 0)
+            {
+                coverage = new int[linesOfFile[linesOfFile.LongLength - 1].LineNumberEnd + 1];
+                lineVisitStatus = new LineVisitStatus[linesOfFile[linesOfFile.LongLength - 1].LineNumberEnd + 1];
+
+                for (int i = 0; i < coverage.Length; i++)
+                {
+                    coverage[i] = -1;
+                }
+
+                foreach (var seqpnt in linesOfFile)
+                {
+                    for (int lineNumber = seqpnt.LineNumberStart; lineNumber <= seqpnt.LineNumberEnd; lineNumber++)
+                    {
+                        int visits = seqpnt.Coverage < 2 ? 1 : 0;
+                        coverage[lineNumber] = coverage[lineNumber] == -1 ? visits : Math.Min(coverage[lineNumber] + visits, 1);
+                        lineVisitStatus[lineNumber] = lineVisitStatus[lineNumber] == LineVisitStatus.Covered || visits > 0 ? LineVisitStatus.Covered : LineVisitStatus.NotCovered;
+                    }
+                }
+            }
+
+            var codeFile = new CodeFile(filePath, coverage, lineVisitStatus);
+
+            SetMethodMetrics(codeFile, methods);
+            SetCodeElements(codeFile, methods);
+
+            return codeFile;
         }
 
         /// <summary>
@@ -164,133 +290,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             }
 
             return methodName;
-        }
-
-        /// <summary>
-        /// Processes the given assembly.
-        /// </summary>
-        /// <param name="assemblyName">Name of the assembly.</param>
-        /// <returns>The <see cref="Assembly"/>.</returns>
-        private Assembly ProcessAssembly(string assemblyName)
-        {
-            Logger.DebugFormat("  " + Resources.CurrentAssembly, assemblyName);
-
-            var classNames = this.modules
-                .Where(m => m.Element("ModuleName").Value.Equals(assemblyName))
-                .Elements("NamespaceTable")
-                .Elements("Class")
-                .Elements("ClassName")
-                .Where(c => !c.Value.Contains("<>")
-                    && !c.Value.StartsWith("$", StringComparison.OrdinalIgnoreCase))
-                .Select(c =>
-                {
-                    string fullname = c.Value;
-                    int nestedClassSeparatorIndex = fullname.IndexOf('.');
-                    fullname = nestedClassSeparatorIndex > -1 ? fullname.Substring(0, nestedClassSeparatorIndex) : fullname;
-                    return c.Parent.Parent.Element("NamespaceName").Value + "." + fullname;
-                })
-                .Distinct()
-                .OrderBy(name => name)
-                .ToArray();
-
-            var assembly = new Assembly(assemblyName);
-
-            Parallel.ForEach(classNames, className => assembly.AddClass(this.ProcessClass(assembly, className)));
-
-            return assembly;
-        }
-
-        /// <summary>
-        /// Processes the given class.
-        /// </summary>
-        /// <param name="assembly">The assembly.</param>
-        /// <param name="className">Name of the class.</param>
-        /// <returns>The <see cref="Class"/>.</returns>
-        private Class ProcessClass(Assembly assembly, string className)
-        {
-            var fileIdsOfClass = this.modules
-                .Where(m => m.Element("ModuleName").Value.Equals(assembly.Name))
-                .Elements("NamespaceTable")
-                .Elements("Class")
-                .Where(c => (c.Parent.Element("NamespaceName").Value + "." + c.Element("ClassName").Value).Equals(className, StringComparison.Ordinal)
-                            || (c.Parent.Element("NamespaceName").Value + "." + c.Element("ClassName").Value).StartsWith(className + ".", StringComparison.Ordinal))
-                .Elements("Method")
-                .Elements("Lines")
-                .Elements("SourceFileID")
-                .Select(m => m.Value)
-                .Distinct();
-
-            var @class = new Class(className, assembly);
-
-            foreach (var fileId in fileIdsOfClass)
-            {
-                string file = this.files.First(f => f.Element("SourceFileID").Value == fileId).Element("SourceFileName").Value;
-                @class.AddFile(this.ProcessFile(fileId, @class, file));
-            }
-
-            return @class;
-        }
-
-        /// <summary>
-        /// Processes the file.
-        /// </summary>
-        /// <param name="fileId">The file id.</param>
-        /// <param name="class">The class.</param>
-        /// <param name="filePath">The file path.</param>
-        /// <returns>The <see cref="CodeFile"/>.</returns>
-        private CodeFile ProcessFile(string fileId, Class @class, string filePath)
-        {
-            var methods = this.modules
-                .Where(m => m.Element("ModuleName").Value.Equals(@class.Assembly.Name))
-                .Elements("NamespaceTable")
-                .Elements("Class")
-                .Where(c => (c.Parent.Element("NamespaceName").Value + "." + c.Element("ClassName").Value).Equals(@class.Name, StringComparison.Ordinal)
-                            || (c.Parent.Element("NamespaceName").Value + "." + c.Element("ClassName").Value).StartsWith(@class.Name + ".", StringComparison.Ordinal))
-                .Elements("Method")
-                .Where(m => m.Elements("Lines").Elements("SourceFileID").Any(s => s.Value == fileId))
-                .ToArray();
-
-            var linesOfFile = methods
-                .Elements("Lines")
-                .Select(l => new
-                {
-                    LineNumberStart = int.Parse(l.Element("LnStart").Value, CultureInfo.InvariantCulture),
-                    LineNumberEnd = int.Parse(l.Element("LnEnd").Value, CultureInfo.InvariantCulture),
-                    Coverage = int.Parse(l.Element("Coverage").Value, CultureInfo.InvariantCulture)
-                })
-                .OrderBy(seqpnt => seqpnt.LineNumberEnd)
-                .ToArray();
-
-            int[] coverage = new int[] { };
-            LineVisitStatus[] lineVisitStatus = new LineVisitStatus[] { };
-
-            if (linesOfFile.Length > 0)
-            {
-                coverage = new int[linesOfFile[linesOfFile.LongLength - 1].LineNumberEnd + 1];
-                lineVisitStatus = new LineVisitStatus[linesOfFile[linesOfFile.LongLength - 1].LineNumberEnd + 1];
-
-                for (int i = 0; i < coverage.Length; i++)
-                {
-                    coverage[i] = -1;
-                }
-
-                foreach (var seqpnt in linesOfFile)
-                {
-                    for (int lineNumber = seqpnt.LineNumberStart; lineNumber <= seqpnt.LineNumberEnd; lineNumber++)
-                    {
-                        int visits = seqpnt.Coverage < 2 ? 1 : 0;
-                        coverage[lineNumber] = coverage[lineNumber] == -1 ? visits : Math.Min(coverage[lineNumber] + visits, 1);
-                        lineVisitStatus[lineNumber] = lineVisitStatus[lineNumber] == LineVisitStatus.Covered || visits > 0 ? LineVisitStatus.Covered : LineVisitStatus.NotCovered;
-                    }
-                }
-            }
-
-            var codeFile = new CodeFile(filePath, coverage, lineVisitStatus);
-
-            SetMethodMetrics(codeFile, methods);
-            SetCodeElements(codeFile, methods);
-
-            return codeFile;
         }
     }
 }

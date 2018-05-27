@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
@@ -23,7 +24,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
         /// <summary>
         /// The parser to use.
         /// </summary>
-        private readonly IParser parser;
+        private readonly ParserResult parserResult;
 
         /// <summary>
         /// The renderers.
@@ -48,43 +49,18 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
         /// <summary>
         /// Initializes a new instance of the <see cref="ReportGenerator" /> class.
         /// </summary>
-        /// <param name="parser">The IParser to use.</param>
+        /// <param name="parserResult">The parser result to use.</param>
         /// <param name="assemblyFilter">The assembly filter.</param>
         /// <param name="classFilter">The class filter.</param>
         /// <param name="fileFilter">The file filter.</param>
         /// <param name="renderers">The renderers.</param>
-        internal ReportGenerator(IParser parser, IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter, IEnumerable<IReportBuilder> renderers)
+        internal ReportGenerator(ParserResult parserResult, IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter, IEnumerable<IReportBuilder> renderers)
         {
-            if (parser == null)
-            {
-                throw new ArgumentNullException(nameof(parser));
-            }
-
-            if (assemblyFilter == null)
-            {
-                throw new ArgumentNullException(nameof(assemblyFilter));
-            }
-
-            if (classFilter == null)
-            {
-                throw new ArgumentNullException(nameof(classFilter));
-            }
-
-            if (fileFilter == null)
-            {
-                throw new ArgumentNullException(nameof(fileFilter));
-            }
-
-            if (renderers == null)
-            {
-                throw new ArgumentNullException(nameof(renderers));
-            }
-
-            this.parser = parser;
-            this.assemblyFilter = assemblyFilter;
-            this.classFilter = classFilter;
-            this.fileFilter = fileFilter;
-            this.renderers = renderers;
+            this.parserResult = parserResult ?? throw new ArgumentNullException(nameof(parserResult));
+            this.assemblyFilter = assemblyFilter ?? throw new ArgumentNullException(nameof(assemblyFilter));
+            this.classFilter = classFilter ?? throw new ArgumentNullException(nameof(classFilter));
+            this.fileFilter = fileFilter ?? throw new ArgumentNullException(nameof(fileFilter));
+            this.renderers = renderers ?? throw new ArgumentNullException(nameof(renderers));
         }
 
         /// <summary>
@@ -97,7 +73,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
         /// <returns>The filters assemblies.</returns>
         internal IEnumerable<Assembly> CreateReport(bool addHistoricCoverage, List<HistoricCoverage> overallHistoricCoverages, DateTime executionTime, string tag)
         {
-            var filteredAssemblies = this.parser.Assemblies
+            var filteredAssemblies = this.parserResult.Assemblies
                 .Where(a => this.assemblyFilter.IsElementIncludedInReport(a.Name))
                 .Select(a =>
                 {
@@ -172,14 +148,14 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
                                             "  " + Resources.ErrorDuringRenderingClassReport,
                                             @class.Name,
                                             renderer.ReportType,
-                                            ex.Message);
+                                            ex.GetExceptionMessageForDisplay());
                                     }
                                 });
                         });
             }
 
             Logger.Debug(" " + Resources.CreatingSummary);
-            SummaryResult summaryResult = new SummaryResult(filteredAssemblies, this.parser.ToString(), this.parser.SupportsBranchCoverage);
+            SummaryResult summaryResult = new SummaryResult(filteredAssemblies, this.parserResult.ParserName, this.parserResult.SupportsBranchCoverage);
 
             foreach (var renderer in this.renderers)
             {
@@ -192,7 +168,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
                     Logger.ErrorFormat(
                         "  " + Resources.ErrorDuringRenderingSummaryReport,
                         renderer.ReportType,
-                        ex.Message);
+                        ex.GetExceptionMessageForDisplay());
                 }
             }
 

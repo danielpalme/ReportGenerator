@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using Palmmedia.ReportGenerator.Core.Parser.Analysis;
+using System.Xml.Linq;
 
 namespace Palmmedia.ReportGenerator.Core.Parser
 {
     /// <summary>
-    /// Base class for the <see cref="IParser"/> implementations.
+    /// Base class for the parser implementations.
     /// </summary>
-    internal abstract class ParserBase : IParser
+    internal abstract class ParserBase
     {
         /// <summary>
         /// The cyclomatic complexity URI.
@@ -32,23 +29,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         protected static readonly Uri CrapScoreUri = new Uri("https://googletesting.blogspot.de/2011/02/this-code-is-crap.html");
 
         /// <summary>
-        /// The assemblies found in the report.
+        /// Parses the given XML report.
         /// </summary>
-        private ConcurrentBag<Assembly> assemblies = new ConcurrentBag<Assembly>();
-
-        /// <summary>
-        /// Gets the assemblies that have been found in the report.
-        /// </summary>
-        /// <value>The assemblies.</value>
-        public IEnumerable<Assembly> Assemblies => this.assemblies.OrderBy(a => a.Name);
-
-        /// <summary>
-        /// Gets a value indicating whether the used parser supports branch coverage.
-        /// </summary>
-        /// <value>
-        /// <c>true</c> if used parser supports branch coverage; otherwise, <c>false</c>.
-        /// </value>
-        public virtual bool SupportsBranchCoverage => false;
+        /// <param name="report">The XML report</param>
+        /// <returns>The parser result.</returns>
+        public abstract ParserResult Parse(XContainer report);
 
         /// <summary>
         /// Returns a <see cref="System.String"/> that represents this instance.
@@ -57,14 +42,5 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// A <see cref="System.String"/> that represents this instance.
         /// </returns>
         public override string ToString() => this.GetType().Name;
-
-        /// <summary>
-        /// Adds the given assembly.
-        /// </summary>
-        /// <param name="assembly">The assembly.</param>
-        protected internal void AddAssembly(Assembly assembly)
-        {
-            this.assemblies.Add(assembly);
-        }
     }
 }

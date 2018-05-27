@@ -1,4 +1,5 @@
 ﻿using System;
+using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser;
 using Palmmedia.ReportGenerator.Core.Properties;
@@ -55,7 +56,7 @@ namespace Palmmedia.ReportGenerator.Core
                 stopWatch.Start();
                 DateTime executionTime = DateTime.Now;
 
-                var parser = ParserFactory.CreateParser(reportContext.ReportConfiguration.ReportFiles);
+                var parserResult = ParserFactory.ParseFiles(reportContext.ReportConfiguration.ReportFiles);
 
                 var overallHistoricCoverages = new System.Collections.Generic.List<Parser.Analysis.HistoricCoverage>();
                 var historyStorage = new HistoryStorageFactory(pluginLoader).GetHistoryStorage(reportContext.ReportConfiguration);
@@ -63,13 +64,13 @@ namespace Palmmedia.ReportGenerator.Core
                 if (historyStorage != null)
                 {
                     new HistoryParser(historyStorage)
-                            .ApplyHistoricCoverage(parser.Assemblies, overallHistoricCoverages);
+                            .ApplyHistoricCoverage(parserResult.Assemblies, overallHistoricCoverages);
 
                     reportContext.OverallHistoricCoverages = overallHistoricCoverages;
                 }
 
                 var filteredAssemblies = new Reporting.ReportGenerator(
-                    parser,
+                    parserResult,
                     new DefaultFilter(reportContext.ReportConfiguration.AssemblyFilters),
                     new DefaultFilter(reportContext.ReportConfiguration.ClassFilters),
                     new DefaultFilter(reportContext.ReportConfiguration.FileFilters),
@@ -89,7 +90,7 @@ namespace Palmmedia.ReportGenerator.Core
             }
             catch (Exception ex)
             {
-                Logger.Error(ex.Message);
+                Logger.Error(ex.GetExceptionMessageForDisplay());
 
 #if DEBUG
                 if (System.Diagnostics.Debugger.IsAttached)

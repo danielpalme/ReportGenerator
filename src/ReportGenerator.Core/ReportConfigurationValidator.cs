@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Properties;
 using Palmmedia.ReportGenerator.Core.Reporting;
@@ -82,7 +83,7 @@ namespace Palmmedia.ReportGenerator.Core
                 }
                 catch (Exception ex)
                 {
-                    Logger.ErrorFormat(Resources.TargetDirectoryCouldNotBeCreated, reportConfiguration.TargetDirectory, ex.Message);
+                    Logger.ErrorFormat(Resources.TargetDirectoryCouldNotBeCreated, reportConfiguration.TargetDirectory, ex.GetExceptionMessageForDisplay());
                     result &= false;
                 }
             }
@@ -95,7 +96,7 @@ namespace Palmmedia.ReportGenerator.Core
                 }
                 catch (Exception ex)
                 {
-                    Logger.ErrorFormat(Resources.HistoryDirectoryCouldNotBeCreated, reportConfiguration.HistoryDirectory, ex.Message);
+                    Logger.ErrorFormat(Resources.HistoryDirectoryCouldNotBeCreated, reportConfiguration.HistoryDirectory, ex.GetExceptionMessageForDisplay());
                     result &= false;
                 }
             }

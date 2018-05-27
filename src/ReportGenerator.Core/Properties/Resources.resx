@@ -157,7 +157,7 @@
     <value>Error during reading historic reports: {0}</value>
   </data>
   <data name="ErrorDuringReadingReport" xml:space="preserve">
-    <value>Error during reading report '{0}': {1}</value>
+    <value>Error during reading report '{0}' (Size: {1}): {2}</value>
   </data>
   <data name="ErrorDuringRenderingClassReport" xml:space="preserve">
     <value>Error during rendering report for class '{0}' (Report type: '{1}'): {2}</value>
@@ -207,6 +207,9 @@
   </data>
   <data name="LoadingReport" xml:space="preserve">
     <value>Loading report '{0}'</value>
+  </data>
+  <data name="MultipleErrors" xml:space="preserve">
+    <value>Multiple errors</value>
   </data>
   <data name="NoAssembliesHaveBeenCovered" xml:space="preserve">
     <value>No assemblies have been covered.</value>

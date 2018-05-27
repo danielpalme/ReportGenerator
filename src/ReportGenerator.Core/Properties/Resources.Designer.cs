@@ -178,7 +178,7 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error during reading report &apos;{0}&apos;: {1}.
+        ///   Looks up a localized string similar to Error during reading report &apos;{0}&apos; (Size: {1}): {2}.
         /// </summary>
         internal static string ErrorDuringReadingReport {
             get {
@@ -328,6 +328,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         internal static string LoadingReport {
             get {
                 return ResourceManager.GetString("LoadingReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Multiple errors.
+        /// </summary>
+        internal static string MultipleErrors {
+            get {
+                return ResourceManager.GetString("MultipleErrors", resourceCulture);
             }
         }
         

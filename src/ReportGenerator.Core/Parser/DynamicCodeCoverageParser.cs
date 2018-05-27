@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -32,21 +33,27 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         private static Regex compilerGeneratedMethodNameRegex = new Regex(@"^.*<(?<CompilerGeneratedName>.+)>.+__.+$", RegexOptions.Compiled);
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DynamicCodeCoverageParser"/> class.
+        /// Parses the given XML report.
         /// </summary>
-        /// <param name="report">The report file as XContainer.</param>
-        internal DynamicCodeCoverageParser(XContainer report)
+        /// <param name="report">The XML report</param>
+        /// <returns>The parser result.</returns>
+        public override ParserResult Parse(XContainer report)
         {
             if (report == null)
             {
                 throw new ArgumentNullException(nameof(report));
             }
 
-            var modules = report.Descendants("module")
-                .OrderBy(m => m.Attribute("name").Value)
-                .ToArray();
+            var assemblies = new ConcurrentBag<Assembly>();
 
-            Parallel.ForEach(modules, assembly => this.AddAssembly(ProcessAssembly(assembly)));
+            var modules = report.Descendants("module")
+              .OrderBy(m => m.Attribute("name").Value)
+              .ToArray();
+
+            Parallel.ForEach(modules, module => assemblies.Add(ProcessAssembly(module)));
+
+            var result = new ParserResult(assemblies.OrderBy(a => a.Name).ToList(), false, this.ToString());
+            return result;
         }
 
         /// <summary>

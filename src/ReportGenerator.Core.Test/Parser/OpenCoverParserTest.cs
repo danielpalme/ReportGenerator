@@ -20,23 +20,23 @@ namespace Palmmedia.ReportGeneratorTest.Parser
 
         private static readonly string FilePath2 = Path.Combine(FileManager.GetCSharpReportDirectory(), "OpenCoverWithTrackedMethods.xml");
 
-        private static IEnumerable<Assembly> assembliesWithoutPreprocessing;
+        private ParserResult parserResultWithoutPreprocessing;
 
-        private static IEnumerable<Assembly> assembliesWithPreprocessing;
+        private ParserResult parserResultWithPreprocessing;
 
-        private static IEnumerable<Assembly> assembliesWithTrackedMethods;
+        private ParserResult parserResultWithTrackedMethods;
 
         public OpenCoverParserTest()
         {
-            assembliesWithoutPreprocessing = new OpenCoverParser(XDocument.Load(FilePath1)).Assemblies;
+            this.parserResultWithoutPreprocessing = new OpenCoverParser().Parse(XDocument.Load(FilePath1));
 
             var report = XDocument.Load(FilePath1);
             new OpenCoverReportPreprocessor(report).Execute();
-            assembliesWithPreprocessing = new OpenCoverParser(report).Assemblies;
+            this.parserResultWithPreprocessing = new OpenCoverParser().Parse(report);
 
             report = XDocument.Load(FilePath2);
             new OpenCoverReportPreprocessor(report).Execute();
-            assembliesWithTrackedMethods = new OpenCoverParser(report).Assemblies;
+            this.parserResultWithTrackedMethods = new OpenCoverParser().Parse(report);
         }
 
         /// <summary>
@@ -45,7 +45,9 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [Fact]
         public void SupportsBranchCoverage()
         {
-            Assert.True(new OpenCoverParser(XDocument.Load(FilePath1)).SupportsBranchCoverage);
+            Assert.True(this.parserResultWithoutPreprocessing.SupportsBranchCoverage);
+            Assert.True(this.parserResultWithPreprocessing.SupportsBranchCoverage);
+            Assert.True(this.parserResultWithTrackedMethods.SupportsBranchCoverage);
         }
 
         /// <summary>
@@ -54,7 +56,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [Fact]
         public void NumberOfLineVisitsTest_WithoutPreprocessing()
         {
-            var fileAnalysis = GetFileAnalysis(assembliesWithoutPreprocessing, "Test.TestClass", "C:\\temp\\TestClass.cs");
+            var fileAnalysis = GetFileAnalysis(this.parserResultWithoutPreprocessing.Assemblies, "Test.TestClass", "C:\\temp\\TestClass.cs");
             Assert.Equal(1, fileAnalysis.Lines.Single(l => l.LineNumber == 9).LineVisits);
             Assert.Equal(1, fileAnalysis.Lines.Single(l => l.LineNumber == 10).LineVisits);
             Assert.Equal(1, fileAnalysis.Lines.Single(l => l.LineNumber == 11).LineVisits);
@@ -63,7 +65,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             Assert.Equal(0, fileAnalysis.Lines.Single(l => l.LineNumber == 23).LineVisits);
             Assert.Equal(0, fileAnalysis.Lines.Single(l => l.LineNumber == 31).LineVisits);
 
-            fileAnalysis = GetFileAnalysis(assembliesWithoutPreprocessing, "Test.TestClass2", "C:\\temp\\TestClass2.cs");
+            fileAnalysis = GetFileAnalysis(this.parserResultWithoutPreprocessing.Assemblies, "Test.TestClass2", "C:\\temp\\TestClass2.cs");
             Assert.Equal(3, fileAnalysis.Lines.Single(l => l.LineNumber == 13).LineVisits);
             Assert.Equal(0, fileAnalysis.Lines.Single(l => l.LineNumber == 15).LineVisits);
             Assert.Equal(0, fileAnalysis.Lines.Single(l => l.LineNumber == 19).LineVisits);
@@ -77,15 +79,15 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             Assert.Equal(1, fileAnalysis.Lines.Single(l => l.LineNumber == 54).CoveredBranches.Value);
             Assert.Equal(2, fileAnalysis.Lines.Single(l => l.LineNumber == 54).TotalBranches.Value);
 
-            fileAnalysis = GetFileAnalysis(assembliesWithoutPreprocessing, "Test.PartialClass", "C:\\temp\\PartialClass.cs");
+            fileAnalysis = GetFileAnalysis(this.parserResultWithoutPreprocessing.Assemblies, "Test.PartialClass", "C:\\temp\\PartialClass.cs");
             Assert.Equal(1, fileAnalysis.Lines.Single(l => l.LineNumber == 9).LineVisits);
             Assert.Equal(0, fileAnalysis.Lines.Single(l => l.LineNumber == 14).LineVisits);
 
-            fileAnalysis = GetFileAnalysis(assembliesWithoutPreprocessing, "Test.PartialClass", "C:\\temp\\PartialClass2.cs");
+            fileAnalysis = GetFileAnalysis(this.parserResultWithoutPreprocessing.Assemblies, "Test.PartialClass", "C:\\temp\\PartialClass2.cs");
             Assert.Equal(1, fileAnalysis.Lines.Single(l => l.LineNumber == 9).LineVisits);
             Assert.Equal(0, fileAnalysis.Lines.Single(l => l.LineNumber == 14).LineVisits);
 
-            fileAnalysis = GetFileAnalysis(assembliesWithoutPreprocessing, "Test.ClassWithExcludes", "C:\\temp\\ClassWithExcludes.cs");
+            fileAnalysis = GetFileAnalysis(this.parserResultWithoutPreprocessing.Assemblies, "Test.ClassWithExcludes", "C:\\temp\\ClassWithExcludes.cs");
             Assert.Equal(-1, fileAnalysis.Lines.Single(l => l.LineNumber == 9).LineVisits);
             Assert.Equal(-1, fileAnalysis.Lines.Single(l => l.LineNumber == 19).LineVisits);
         }
@@ -96,7 +98,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [Fact]
         public void NumberOfLineVisitsTest_WithPreprocessing()
         {
-            var fileAnalysis = GetFileAnalysis(assembliesWithPreprocessing, "Test.TestClass", "C:\\temp\\TestClass.cs");
+            var fileAnalysis = GetFileAnalysis(this.parserResultWithPreprocessing.Assemblies, "Test.TestClass", "C:\\temp\\TestClass.cs");
             Assert.Equal(1, fileAnalysis.Lines.Single(l => l.LineNumber == 9).LineVisits);
             Assert.Equal(1, fileAnalysis.Lines.Single(l => l.LineNumber == 10).LineVisits);
             Assert.Equal(1, fileAnalysis.Lines.Single(l => l.LineNumber == 11).LineVisits);
@@ -105,7 +107,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             Assert.Equal(0, fileAnalysis.Lines.Single(l => l.LineNumber == 23).LineVisits);
             Assert.Equal(0, fileAnalysis.Lines.Single(l => l.LineNumber == 31).LineVisits);
 
-            fileAnalysis = GetFileAnalysis(assembliesWithPreprocessing, "Test.TestClass2", "C:\\temp\\TestClass2.cs");
+            fileAnalysis = GetFileAnalysis(this.parserResultWithPreprocessing.Assemblies, "Test.TestClass2", "C:\\temp\\TestClass2.cs");
             Assert.Equal(3, fileAnalysis.Lines.Single(l => l.LineNumber == 13).LineVisits);
             Assert.Equal(0, fileAnalysis.Lines.Single(l => l.LineNumber == 15).LineVisits);
             Assert.Equal(0, fileAnalysis.Lines.Single(l => l.LineNumber == 19).LineVisits);
@@ -119,15 +121,15 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             Assert.Equal(1, fileAnalysis.Lines.Single(l => l.LineNumber == 54).CoveredBranches.Value);
             Assert.Equal(2, fileAnalysis.Lines.Single(l => l.LineNumber == 54).TotalBranches.Value);
 
-            fileAnalysis = GetFileAnalysis(assembliesWithPreprocessing, "Test.PartialClass", "C:\\temp\\PartialClass.cs");
+            fileAnalysis = GetFileAnalysis(this.parserResultWithPreprocessing.Assemblies, "Test.PartialClass", "C:\\temp\\PartialClass.cs");
             Assert.Equal(1, fileAnalysis.Lines.Single(l => l.LineNumber == 9).LineVisits);
             Assert.Equal(0, fileAnalysis.Lines.Single(l => l.LineNumber == 14).LineVisits);
 
-            fileAnalysis = GetFileAnalysis(assembliesWithPreprocessing, "Test.PartialClass", "C:\\temp\\PartialClass2.cs");
+            fileAnalysis = GetFileAnalysis(this.parserResultWithPreprocessing.Assemblies, "Test.PartialClass", "C:\\temp\\PartialClass2.cs");
             Assert.Equal(1, fileAnalysis.Lines.Single(l => l.LineNumber == 9).LineVisits);
             Assert.Equal(0, fileAnalysis.Lines.Single(l => l.LineNumber == 14).LineVisits);
 
-            fileAnalysis = GetFileAnalysis(assembliesWithPreprocessing, "Test.ClassWithExcludes", "C:\\temp\\ClassWithExcludes.cs");
+            fileAnalysis = GetFileAnalysis(this.parserResultWithPreprocessing.Assemblies, "Test.ClassWithExcludes", "C:\\temp\\ClassWithExcludes.cs");
             Assert.Equal(-1, fileAnalysis.Lines.Single(l => l.LineNumber == 9).LineVisits);
             Assert.Equal(-1, fileAnalysis.Lines.Single(l => l.LineNumber == 19).LineVisits);
         }
@@ -138,7 +140,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [Fact]
         public void NumberOfLineVisitsTest_WithTrackedMethods()
         {
-            var fileAnalysis = GetFileAnalysis(assembliesWithTrackedMethods, "Test.PartialClass", "C:\\temp\\PartialClass.cs");
+            var fileAnalysis = GetFileAnalysis(this.parserResultWithTrackedMethods.Assemblies, "Test.PartialClass", "C:\\temp\\PartialClass.cs");
 
             var line = fileAnalysis.Lines.Single(l => l.LineNumber == 9);
 
@@ -155,7 +157,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [Fact]
         public void LineVisitStatusTest_WithTrackedMethods()
         {
-            var fileAnalysis = GetFileAnalysis(assembliesWithTrackedMethods, "Test.TestClass", "C:\\temp\\TestClass.cs");
+            var fileAnalysis = GetFileAnalysis(this.parserResultWithTrackedMethods.Assemblies, "Test.TestClass", "C:\\temp\\TestClass.cs");
 
             var line = fileAnalysis.Lines.Single(l => l.LineNumber == 1);
 
@@ -196,7 +198,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [Fact]
         public void NumberOfFilesTest()
         {
-            Assert.Equal(15, assembliesWithoutPreprocessing.SelectMany(a => a.Classes).SelectMany(a => a.Files).Distinct().Count());
+            Assert.Equal(15, this.parserResultWithoutPreprocessing.Assemblies.SelectMany(a => a.Classes).SelectMany(a => a.Files).Distinct().Count());
         }
 
         /// <summary>
@@ -205,8 +207,8 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [Fact]
         public void FilesOfClassTest()
         {
-            Assert.Single(assembliesWithoutPreprocessing.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.TestClass").Files);
-            Assert.Equal(2, assembliesWithoutPreprocessing.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.PartialClass").Files.Count());
+            Assert.Single(this.parserResultWithoutPreprocessing.Assemblies.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.TestClass").Files);
+            Assert.Equal(2, this.parserResultWithoutPreprocessing.Assemblies.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.PartialClass").Files.Count());
         }
 
         /// <summary>
@@ -215,7 +217,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [Fact]
         public void ClassesInAssemblyTest()
         {
-            Assert.Equal(17, assembliesWithoutPreprocessing.SelectMany(a => a.Classes).Count());
+            Assert.Equal(17, this.parserResultWithoutPreprocessing.Assemblies.SelectMany(a => a.Classes).Count());
         }
 
         /// <summary>
@@ -224,7 +226,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [Fact]
         public void AssembliesTest()
         {
-            Assert.Single(assembliesWithoutPreprocessing);
+            Assert.Single(this.parserResultWithoutPreprocessing.Assemblies);
         }
 
         /// <summary>
@@ -233,7 +235,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [Fact]
         public void GetCoverableLinesOfClassTest()
         {
-            Assert.Equal(4, assembliesWithoutPreprocessing.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.AbstractClass").CoverableLines);
+            Assert.Equal(4, this.parserResultWithoutPreprocessing.Assemblies.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.AbstractClass").CoverableLines);
         }
 
         /// <summary>
@@ -242,7 +244,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [Fact]
         public void GetCoverageQuotaOfClassTest()
         {
-            Assert.Equal(66.6m, assembliesWithoutPreprocessing.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.PartialClassWithAutoProperties").CoverageQuota);
+            Assert.Equal(66.6m, this.parserResultWithoutPreprocessing.Assemblies.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.PartialClassWithAutoProperties").CoverageQuota);
         }
 
         /// <summary>
@@ -251,7 +253,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [Fact]
         public void MethodMetricsTest()
         {
-            var metrics = assembliesWithoutPreprocessing.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.TestClass").Files.Single(f => f.Path == "C:\\temp\\TestClass.cs").MethodMetrics;
+            var metrics = this.parserResultWithoutPreprocessing.Assemblies.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.TestClass").Files.Single(f => f.Path == "C:\\temp\\TestClass.cs").MethodMetrics;
 
             Assert.Equal(2, metrics.Count());
             Assert.Equal("System.Void Test.TestClass::SampleFunction()", metrics.First().Name);
@@ -268,7 +270,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             Assert.Equal("Crap Score", metrics.First().Metrics.ElementAt(4).Name);
             Assert.Equal(3.14M, metrics.First().Metrics.ElementAt(4).Value);
 
-            metrics = assembliesWithoutPreprocessing.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.AsyncClass").Files.Single(f => f.Path == "C:\\temp\\AsyncClass.cs").MethodMetrics;
+            metrics = this.parserResultWithoutPreprocessing.Assemblies.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.AsyncClass").Files.Single(f => f.Path == "C:\\temp\\AsyncClass.cs").MethodMetrics;
 
             Assert.Single(metrics);
             Assert.Equal("SendAsync()", metrics.First().Name);
@@ -280,16 +282,16 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [Fact]
         public void CodeElementsTest()
         {
-            var codeElements = GetFile(assembliesWithPreprocessing, "Test.TestClass", "C:\\temp\\TestClass.cs").CodeElements;
+            var codeElements = GetFile(this.parserResultWithPreprocessing.Assemblies, "Test.TestClass", "C:\\temp\\TestClass.cs").CodeElements;
             Assert.Equal(2, codeElements.Count());
 
-            codeElements = GetFile(assembliesWithPreprocessing, "Test.PartialClass", "C:\\temp\\PartialClass.cs").CodeElements;
+            codeElements = GetFile(this.parserResultWithPreprocessing.Assemblies, "Test.PartialClass", "C:\\temp\\PartialClass.cs").CodeElements;
             Assert.Equal(4, codeElements.Count());
 
-            codeElements = GetFile(assembliesWithPreprocessing, "Test.TestClass2", "C:\\temp\\TestClass2.cs").CodeElements;
+            codeElements = GetFile(this.parserResultWithPreprocessing.Assemblies, "Test.TestClass2", "C:\\temp\\TestClass2.cs").CodeElements;
             Assert.Equal(10, codeElements.Count());
 
-            codeElements = GetFile(assembliesWithPreprocessing, "Test.AsyncClass", "C:\\temp\\AsyncClass.cs").CodeElements;
+            codeElements = GetFile(this.parserResultWithPreprocessing.Assemblies, "Test.AsyncClass", "C:\\temp\\AsyncClass.cs").CodeElements;
             Assert.Single(codeElements);
             Assert.Equal("SendAsync()", codeElements.First().Name);
         }
