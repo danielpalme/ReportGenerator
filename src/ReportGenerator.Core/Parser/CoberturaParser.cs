@@ -220,35 +220,56 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                 if (lineRate != null)
                 {
+                    decimal? value = null;
+
+                    if (!"NaN".Equals(lineRate.Value, StringComparison.OrdinalIgnoreCase))
+                    {
+                        value = Math.Round(decimal.Parse(lineRate.Value, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero);
+                    }
+
                     metrics.Add(new Metric(
                         ReportResources.Coverage,
                         ParserBase.CodeCoverageUri,
                         MetricType.CoveragePercentual,
-                        Math.Round(decimal.Parse(lineRate.Value, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero)));
+                        value));
                 }
 
                 var branchRate = method.Attribute("branch-rate");
 
                 if (branchRate != null)
                 {
+                    decimal? value = null;
+
+                    if (!"NaN".Equals(branchRate.Value, StringComparison.OrdinalIgnoreCase))
+                    {
+                        value = Math.Round(decimal.Parse(branchRate.Value, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero);
+                    }
+
                     metrics.Add(new Metric(
                         ReportResources.BranchCoverage,
                         ParserBase.CodeCoverageUri,
                         MetricType.CoveragePercentual,
-                        Math.Round(decimal.Parse(branchRate.Value, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero)));
+                        value));
                 }
 
                 var cyclomaticComplexityAttribute = method.Attribute("complexity");
 
                 if (cyclomaticComplexityAttribute != null)
                 {
+                    decimal? value = null;
+
+                    if (!"NaN".Equals(cyclomaticComplexityAttribute.Value, StringComparison.OrdinalIgnoreCase))
+                    {
+                        value = Math.Round(decimal.Parse(cyclomaticComplexityAttribute.Value, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero);
+                    }
+
                     metrics.Insert(
                         0,
                         new Metric(
                         ReportResources.CyclomaticComplexity,
                         ParserBase.CyclomaticComplexityUri,
                         MetricType.CodeQuality,
-                        Math.Round(decimal.Parse(cyclomaticComplexityAttribute.Value, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero)));
+                        value));
                 }
 
                 codeFile.AddMethodMetric(new MethodMetric(methodName, metrics));

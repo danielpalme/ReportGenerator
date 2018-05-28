@@ -44,7 +44,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Analysis
         /// A test for Merge
         /// </summary>
         [Fact]
-        public void Merge_MergeClassWithCoverageQuota_FileIsStored()
+        public void Merge_MergeClassWithCoverageQuota_CoverageQuotaApplied()
         {
             var assembly = new Assembly("C:\\test\\TestAssembly.dll");
             var sut = new Class("Test", assembly);

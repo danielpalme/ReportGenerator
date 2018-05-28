@@ -326,7 +326,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Rendering
 
                 foreach (var methodMetric in methodMetrics)
                 {
-                    string metrics = string.Join(" & ", methodMetric.Metrics.Skip(i * 5).Take(5).Select(m => m.Value.ToString(CultureInfo.InvariantCulture)));
+                    string metrics = string.Join(" & ", methodMetric.Metrics.Skip(i * 5).Take(5).Select(m => m.Value.HasValue ? m.Value.Value.ToString(CultureInfo.InvariantCulture) : "-"));
 
                     string row = string.Format(
                         CultureInfo.InvariantCulture,
@@ -452,11 +452,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Rendering
                 {
                     if (statusMetric.Exceeded)
                     {
-                        this.reportTextWriter.Write(" & \\textcolor{{red}}{{{0}}}", statusMetric.Metric.Value.ToString(CultureInfo.InvariantCulture));
+                        this.reportTextWriter.Write(" & \\textcolor{{red}}{{{0}}}", statusMetric.Metric.Value.HasValue ? statusMetric.Metric.Value.Value.ToString(CultureInfo.InvariantCulture) : "-");
                     }
                     else
                     {
-                        this.reportTextWriter.Write(" & {0}", statusMetric.Metric.Value.ToString(CultureInfo.InvariantCulture));
+                        this.reportTextWriter.Write(" & {0}", statusMetric.Metric.Value.HasValue ? statusMetric.Metric.Value.Value.ToString(CultureInfo.InvariantCulture) : "-");
                     }
                 }
 

@@ -8,9 +8,9 @@
 	<packages>
 		<package name="test" line-rate="0.7272727272727273" branch-rate="0.25" complexity="1.4615384615384615">
 			<classes>
-				<class name="test.AbstractClass" filename="test/AbstractClass.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
+				<class name="test.AbstractClass" filename="test/AbstractClass.java" line-rate="1.0" branch-rate="1.0" complexity="NaN">
 					<methods>
-						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="0">
+						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="NaN">
 							<lines>
 								<line number="3" hits="2" branch="false"/>
 								<line number="4" hits="2" branch="false"/>

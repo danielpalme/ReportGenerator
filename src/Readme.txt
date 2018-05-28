@@ -60,6 +60,7 @@ CHANGELOG
     * New: Issue #131: Linked method metric names to code location
     * Fix: Issue #127: Fixed coverage calculation for NCover
     * Fix: Issue #133: Empty Risk Hotspots section when no risk hotspot exists
+    * Fix: Issue #135: Handling of NaN in metrics of Cobertura files
     * New: Improved Latex and XML reports
     * Change: Dropped support for PartCover
 

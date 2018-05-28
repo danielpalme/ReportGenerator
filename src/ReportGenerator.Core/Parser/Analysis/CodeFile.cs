@@ -236,7 +236,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
             }
             else
             {
-                this.lineCoveragesByTestMethod[testMethod] = MergeCoverageByTrackedMetho(existingTrackedMethodCoverage, trackedMethodCoverage);
+                this.lineCoveragesByTestMethod[testMethod] = MergeCoverageByTrackedMethod(existingTrackedMethodCoverage, trackedMethodCoverage);
             }
         }
 
@@ -412,7 +412,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                 }
                 else
                 {
-                    this.lineCoveragesByTestMethod[lineCoverageByTestMethod.Key] = MergeCoverageByTrackedMetho(existingTrackedMethodCoverage, lineCoverageByTestMethod.Value);
+                    this.lineCoveragesByTestMethod[lineCoverageByTestMethod.Key] = MergeCoverageByTrackedMethod(existingTrackedMethodCoverage, lineCoverageByTestMethod.Value);
                 }
             }
 
@@ -474,7 +474,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <param name="existingTrackedMethodCoverage">The existing tracked method coverage.</param>
         /// <param name="lineCoverageByTestMethod">The new line coverage by test method.</param>
         /// <returns>The merged tracked method coverage.</returns>
-        private static CoverageByTrackedMethod MergeCoverageByTrackedMetho(CoverageByTrackedMethod existingTrackedMethodCoverage, CoverageByTrackedMethod lineCoverageByTestMethod)
+        private static CoverageByTrackedMethod MergeCoverageByTrackedMethod(CoverageByTrackedMethod existingTrackedMethodCoverage, CoverageByTrackedMethod lineCoverageByTestMethod)
         {
             // Resize coverage array if neccessary
             if (lineCoverageByTestMethod.Coverage.LongLength > existingTrackedMethodCoverage.Coverage.LongLength)

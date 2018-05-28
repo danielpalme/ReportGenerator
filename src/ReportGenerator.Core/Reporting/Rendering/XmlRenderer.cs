@@ -206,7 +206,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Rendering
                 foreach (var m in methodMetric.Metrics)
                 {
                     this.reportTextWriter.WriteStartElement(XmlRenderer.ReplaceNonLetterChars(m.Name));
-                    this.reportTextWriter.WriteValue(m.Value.ToString(CultureInfo.InvariantCulture));
+                    if (m.Value.HasValue)
+                    {
+                        this.reportTextWriter.WriteValue(m.Value.Value.ToString(CultureInfo.InvariantCulture));
+                    }
+
                     this.reportTextWriter.WriteEndElement();
                 }
 

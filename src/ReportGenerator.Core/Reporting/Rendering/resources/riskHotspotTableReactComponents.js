@@ -320,7 +320,7 @@ var RiskHotspotRow = React.createClass({
 
         for (i = 0, l = this.props.riskHotspot.metrics.length; i < l; i++) {
             tds.push(React.DOM.td({ className: this.props.riskHotspot.metrics[i].exceeded ? 'lightred right' : 'lightgreen right' },
-                this.props.riskHotspot.metrics[i].value));
+                this.props.riskHotspot.metrics[i].value === null ? '-' : this.props.riskHotspot.metrics[i].value));
         }
 
         return (

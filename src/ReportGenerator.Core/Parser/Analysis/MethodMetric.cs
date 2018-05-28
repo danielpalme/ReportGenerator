@@ -135,7 +135,17 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                 var existingMetric = this.metrics.FirstOrDefault(m => m.Name == metric.Name);
                 if (existingMetric != null)
                 {
-                    existingMetric.Value = Math.Max(existingMetric.Value, metric.Value);
+                    if (existingMetric.Value.HasValue)
+                    {
+                        if (metric.Value.HasValue)
+                        {
+                            existingMetric.Value = Math.Max(existingMetric.Value.Value, metric.Value.Value);
+                        }
+                    }
+                    else
+                    {
+                        existingMetric.Value = metric.Value;
+                    }
                 }
                 else
                 {

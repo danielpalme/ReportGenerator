@@ -42,19 +42,40 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Analysis
         [Fact]
         public void Merge_MergeMethodMetric_MetricsAreStored()
         {
-            var metric1 = new Metric("Metric1", null, MetricType.CodeQuality, 10);
-            var metric2 = new Metric("Metric1", null, MetricType.CodeQuality, 15);
-            var metric3 = new Metric("Metric2", null, MetricType.CodeQuality, 20);
+            var metric1_1 = new Metric("Metric1", null, MetricType.CodeQuality, 10);
+            var metric1_2 = new Metric("Metric1", null, MetricType.CodeQuality, 15);
+            var metric2 = new Metric("Metric2", null, MetricType.CodeQuality, 20);
+            var metric3_1 = new Metric("Metric3", null, MetricType.CodeQuality, null);
+            var metric3_2 = new Metric("Metric3", null, MetricType.CodeQuality, null);
+            var metric4_1 = new Metric("Metric4", null, MetricType.CodeQuality, null);
+            var metric4_2 = new Metric("Metric4", null, MetricType.CodeQuality, 10);
+            var metric5_1 = new Metric("Metric5", null, MetricType.CodeQuality, 30);
+            var metric5_2 = new Metric("Metric5", null, MetricType.CodeQuality, null);
 
-            MethodMetric sut = new MethodMetric("Test", new[] { metric1 });
-            var methodMetricToMerge = new MethodMetric("Test", new[] { metric2, metric3 });
+            MethodMetric sut = new MethodMetric("Test", new[] { metric1_1, metric3_1, metric4_1, metric5_1 });
+            var methodMetricToMerge = new MethodMetric("Test", new[] { metric1_2, metric2, metric3_2, metric4_2, metric5_2 });
 
             sut.Merge(methodMetricToMerge);
 
-            Assert.Equal(2, sut.Metrics.Count());
-            Assert.Equal(metric1, sut.Metrics.First());
+            Assert.Equal(5, sut.Metrics.Count());
+            Assert.Equal(metric1_1, sut.Metrics.First());
             Assert.Equal(15, sut.Metrics.First().Value);
-            Assert.Equal(metric3, sut.Metrics.ElementAt(1));
+
+            var metric = sut.Metrics.Single(m => m.Name == "Metric2");
+            Assert.Equal(metric2, metric);
+            Assert.Equal(20, metric.Value);
+
+            metric = sut.Metrics.Single(m => m.Name == "Metric3");
+            Assert.Equal(metric3_1, metric);
+            Assert.Null(metric.Value);
+
+            metric = sut.Metrics.Single(m => m.Name == "Metric4");
+            Assert.Equal(metric4_1, metric);
+            Assert.Equal(10, metric.Value);
+
+            metric = sut.Metrics.Single(m => m.Name == "Metric5");
+            Assert.Equal(metric5_1, metric);
+            Assert.Equal(30, metric.Value);
         }
 
         /// <summary>

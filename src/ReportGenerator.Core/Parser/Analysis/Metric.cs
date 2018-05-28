@@ -14,14 +14,9 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <param name="explanationUrl">The explanation url.</param>
         /// <param name="metricType">The type of the metric.</param>
         /// <param name="value">The value.</param>
-        public Metric(string name, Uri explanationUrl, MetricType metricType, decimal value)
+        public Metric(string name, Uri explanationUrl, MetricType metricType, decimal? value)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-
-            this.Name = name;
+            this.Name = name ?? throw new ArgumentNullException(nameof(name));
             this.ExplanationUrl = explanationUrl;
             this.MetricType = metricType;
             this.Value = value;
@@ -45,6 +40,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <summary>
         /// Gets the value.
         /// </summary>
-        public decimal Value { get; internal set; }
+        public decimal? Value { get; internal set; }
     }
 }
