@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
+using Palmmedia.ReportGenerator.Core.Parser.Filtering;
 using Palmmedia.ReportGenerator.Core.Properties;
 
 namespace Palmmedia.ReportGenerator.Core.Parser
@@ -28,6 +29,16 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         private static Regex lambdaMethodNameRegex = new Regex("<.*>.+__", RegexOptions.Compiled);
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="MProfParser" /> class.
+        /// </summary>
+        /// <param name="assemblyFilter">The assembly filter.</param>
+        /// <param name="classFilter">The class filter.</param>
+        /// <param name="fileFilter">The file filter.</param>
+        internal MProfParser(IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter) : base(assemblyFilter, classFilter, fileFilter)
+        {
+        }
+
+        /// <summary>
         /// Parses the given XML report.
         /// </summary>
         /// <param name="report">The XML report</param>
@@ -46,10 +57,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             var assemblyNames = report.Descendants("assembly")
                 .Select(a => a.Attribute("name").Value)
                 .Distinct()
+                .Where(a => this.AssemblyFilter.IsElementIncludedInReport(a))
                 .OrderBy(a => a)
                 .ToArray();
 
-            Parallel.ForEach(assemblyNames, assemblyName => assemblies.Add(ProcessAssembly(methods, assemblyName)));
+            Parallel.ForEach(assemblyNames, assemblyName => assemblies.Add(this.ProcessAssembly(methods, assemblyName)));
 
             var result = new ParserResult(assemblies.OrderBy(a => a.Name).ToList(), false, this.ToString());
             return result;
@@ -61,7 +73,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="methods">The methods.</param>
         /// <param name="assemblyName">Name of the assembly.</param>
         /// <returns>The <see cref="Assembly"/>.</returns>
-        private static Assembly ProcessAssembly(XElement[] methods, string assemblyName)
+        private Assembly ProcessAssembly(XElement[] methods, string assemblyName)
         {
             Logger.DebugFormat("  " + Resources.CurrentAssembly, assemblyName);
 
@@ -70,12 +82,13 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .Select(m => m.Attribute("class").Value)
                 .Where(c => !c.Contains(".`1c__") && c != "`1")
                 .Distinct()
+                .Where(c => this.ClassFilter.IsElementIncludedInReport(c))
                 .OrderBy(name => name)
                 .ToArray();
 
             var assembly = new Assembly(assemblyName);
 
-            Parallel.ForEach(classNames, className => assembly.AddClass(ProcessClass(methods, assembly, className)));
+            Parallel.ForEach(classNames, className => this.ProcessClass(methods, assembly, className));
 
             return assembly;
         }
@@ -86,25 +99,32 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="methods">The methods.</param>
         /// <param name="assembly">The assembly.</param>
         /// <param name="className">Name of the class.</param>
-        /// <returns>The <see cref="Class"/>.</returns>
-        private static Class ProcessClass(XElement[] methods, Assembly assembly, string className)
+        private void ProcessClass(XElement[] methods, Assembly assembly, string className)
         {
-            var @class = new Class(className, assembly);
-
             var filesOfClass = methods
                 .Where(m => m.Attribute("assembly").Value.Equals(assembly.Name))
-                .Where(m => m.Attribute("class").Value.Equals(@class.Name, StringComparison.Ordinal))
+                .Where(m => m.Attribute("class").Value.Equals(className, StringComparison.Ordinal))
                 .Where(m => m.Attribute("filename").Value.Length > 0)
                 .Select(m => m.Attribute("filename").Value)
                 .Distinct()
                 .ToArray();
 
-            foreach (var file in filesOfClass)
-            {
-                @class.AddFile(ProcessFile(methods, @class, file));
-            }
+            var filteredFilesOfClass = filesOfClass
+                .Where(f => this.FileFilter.IsElementIncludedInReport(f))
+                .ToArray();
 
-            return @class;
+            // If all files are removed by filters, then the whole class is omitted
+            if (filesOfClass.Length == 0 || filteredFilesOfClass.Length > 0)
+            {
+                var @class = new Class(className, assembly);
+
+                foreach (var file in filteredFilesOfClass)
+                {
+                    @class.AddFile(ProcessFile(methods, @class, file));
+                }
+
+                assembly.AddClass(@class);
+            }
         }
 
         /// <summary>

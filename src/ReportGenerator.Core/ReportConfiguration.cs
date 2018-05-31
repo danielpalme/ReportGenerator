@@ -50,11 +50,6 @@ namespace Palmmedia.ReportGenerator.Core
                 throw new ArgumentNullException(nameof(reportFilePatterns));
             }
 
-            if (targetDirectory == null)
-            {
-                throw new ArgumentNullException(nameof(targetDirectory));
-            }
-
             if (reportTypes == null)
             {
                 throw new ArgumentNullException(nameof(reportTypes));
@@ -87,7 +82,7 @@ namespace Palmmedia.ReportGenerator.Core
                 }
             }
 
-            this.TargetDirectory = targetDirectory;
+            this.TargetDirectory = targetDirectory ?? throw new ArgumentNullException(nameof(targetDirectory));
             this.HistoryDirectory = historyDirectory;
 
             if (reportTypes.Any())

@@ -20,18 +20,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <param name="shortName">The short name.</param>
         internal TestMethod(string name, string shortName)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-
-            if (shortName == null)
-            {
-                throw new ArgumentNullException(nameof(shortName));
-            }
-
-            this.Name = name;
-            this.ShortName = shortName;
+            this.Name = name ?? throw new ArgumentNullException(nameof(name));
+            this.ShortName = shortName ?? throw new ArgumentNullException(nameof(shortName));
             this.Id = Interlocked.Increment(ref counter);
         }
 

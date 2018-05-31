@@ -15,12 +15,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <param name="line">The line number.</param>
         internal CodeElement(string name, CodeElementType type, int line)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-
-            this.Name = name;
+            this.Name = name ?? throw new ArgumentNullException(nameof(name));
             this.CodeElementType = type;
             this.Line = line;
         }

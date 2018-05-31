@@ -31,18 +31,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <param name="assembly">The assembly.</param>
         internal Class(string name, Assembly assembly)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-
-            if (assembly == null)
-            {
-                throw new ArgumentNullException(nameof(assembly));
-            }
-
-            this.Name = name;
-            this.Assembly = assembly;
+            this.Name = name ?? throw new ArgumentNullException(nameof(name));
+            this.Assembly = assembly ?? throw new ArgumentNullException(nameof(assembly));
         }
 
         /// <summary>
@@ -173,15 +163,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         internal void AddFile(CodeFile codeFile)
         {
             this.files.Add(codeFile);
-        }
-
-        /// <summary>
-        /// Removes the given file.
-        /// </summary>
-        /// <param name="codeFile">The code file.</param>
-        internal void RemoveFile(CodeFile codeFile)
-        {
-            this.files.Remove(codeFile);
         }
 
         /// <summary>

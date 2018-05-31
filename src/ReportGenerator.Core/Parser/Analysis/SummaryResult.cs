@@ -17,18 +17,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <param name="supportsBranchCoverage">if set to <c>true</c> the used parser supports branch coverage.</param>
         internal SummaryResult(IEnumerable<Assembly> assemblies, string usedParser, bool supportsBranchCoverage)
         {
-            if (assemblies == null)
-            {
-                throw new ArgumentNullException(nameof(assemblies));
-            }
-
-            if (usedParser == null)
-            {
-                throw new ArgumentNullException(nameof(usedParser));
-            }
-
-            this.Assemblies = assemblies;
-            this.UsedParser = usedParser;
+            this.Assemblies = assemblies ?? throw new ArgumentNullException(nameof(assemblies));
+            this.UsedParser = usedParser ?? throw new ArgumentNullException(nameof(usedParser));
             this.SupportsBranchCoverage = supportsBranchCoverage;
         }
 

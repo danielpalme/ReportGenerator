@@ -5,6 +5,7 @@ using System.Linq;
 using System.Xml.Linq;
 using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
+using Palmmedia.ReportGenerator.Core.Parser.Filtering;
 using Palmmedia.ReportGenerator.Core.Parser.Preprocessing;
 using Palmmedia.ReportGenerator.Core.Properties;
 
@@ -13,12 +14,40 @@ namespace Palmmedia.ReportGenerator.Core.Parser
     /// <summary>
     /// Initiates the corresponding parser to the given report file.
     /// </summary>
-    internal static class ParserFactory
+    internal class CoverageReportParser
     {
         /// <summary>
         /// The Logger.
         /// </summary>
-        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(ParserFactory));
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(CoverageReportParser));
+
+        /// <summary>
+        /// The assembly filter.
+        /// </summary>
+        private readonly IFilter assemblyFilter;
+
+        /// <summary>
+        /// The class filter.
+        /// </summary>
+        private readonly IFilter classFilter;
+
+        /// <summary>
+        /// The file filter.
+        /// </summary>
+        private readonly IFilter fileFilter;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CoverageReportParser" /> class.
+        /// </summary>
+        /// <param name="assemblyFilter">The assembly filter.</param>
+        /// <param name="classFilter">The class filter.</param>
+        /// <param name="fileFilter">The file filter.</param>
+        internal CoverageReportParser(IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter)
+        {
+            this.assemblyFilter = assemblyFilter ?? throw new ArgumentNullException(nameof(assemblyFilter));
+            this.classFilter = classFilter ?? throw new ArgumentNullException(nameof(classFilter));
+            this.fileFilter = fileFilter ?? throw new ArgumentNullException(nameof(fileFilter));
+        }
 
         /// <summary>
         /// Tries to initiate the correct parsers for the given reports.
@@ -27,7 +56,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <returns>
         /// The IParser instance.
         /// </returns>
-        internal static ParserResult ParseFiles(IEnumerable<string> reportFiles)
+        internal ParserResult ParseFiles(IEnumerable<string> reportFiles)
         {
             if (reportFiles == null)
             {
@@ -38,7 +67,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             foreach (var report in reportFiles)
             {
-                ParseFile(report, result);
+                this.ParseFile(report, result);
             }
 
             return result;
@@ -50,7 +79,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// </summary>
         /// <param name="reportFile">The report file to parse.</param>
         /// <param name="result">The current parser result.</param>
-        private static void ParseFile(string reportFile, ParserResult result)
+        private void ParseFile(string reportFile, ParserResult result)
         {
             XContainer report = null;
             try
@@ -66,7 +95,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         new OpenCoverReportPreprocessor(item).Execute();
                         Logger.DebugFormat(" " + Resources.InitiatingParser, "OpenCover");
 
-                        var newResult = new OpenCoverParser().Parse(item);
+                        var newResult = new OpenCoverParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
                         result.Merge(newResult);
                     }
                 }
@@ -78,7 +107,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         new DotCoverReportPreprocessor(item).Execute();
                         Logger.DebugFormat(" " + Resources.InitiatingParser, "dotCover");
 
-                        var newResult = new DotCoverParser().Parse(item);
+                        var newResult = new DotCoverParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
                         result.Merge(newResult);
                     }
                 }
@@ -94,7 +123,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         {
                             Logger.DebugFormat(" " + Resources.InitiatingParser, "NCover");
 
-                            var newResult = new NCoverParser().Parse(item);
+                            var newResult = new NCoverParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
                             result.Merge(newResult);
                         }
                         else if (item.Attributes().Count() > 1)
@@ -103,14 +132,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                             new CoberturaReportPreprocessor(item).Execute();
                             Logger.DebugFormat(" " + Resources.InitiatingParser, "Cobertura");
 
-                            var newResult = new CoberturaParser().Parse(item);
+                            var newResult = new CoberturaParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
                             result.Merge(newResult);
                         }
                         else
                         {
                             Logger.DebugFormat(" " + Resources.InitiatingParser, "mprof");
 
-                            var newResult = new MProfParser().Parse(item);
+                            var newResult = new MProfParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
                             result.Merge(newResult);
                         }
                     }
@@ -122,7 +151,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         Logger.DebugFormat(" " + Resources.InitiatingParser, "Visual Studio");
                         new VisualStudioReportPreprocessor(item).Execute();
 
-                        var newResult = new VisualStudioParser().Parse(item);
+                        var newResult = new VisualStudioParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
                         result.Merge(newResult);
                     }
                 }
@@ -135,7 +164,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                             Logger.DebugFormat(" " + Resources.InitiatingParser, "Dynamic Code Coverage");
                             new DynamicCodeCoverageReportPreprocessor(item).Execute();
 
-                            var newResult = new DynamicCodeCoverageParser().Parse(item);
+                            var newResult = new DynamicCodeCoverageParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
                             result.Merge(newResult);
                         }
                     }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
+using Palmmedia.ReportGenerator.Core.Parser.Filtering;
 using Palmmedia.ReportGenerator.Core.Properties;
 
 namespace Palmmedia.ReportGenerator.Core.Parser
@@ -20,6 +21,17 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// The Logger.
         /// </summary>
         private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(CoberturaParser));
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CoberturaParser" /> class.
+        /// </summary>
+        /// <param name="assemblyFilter">The assembly filter.</param>
+        /// <param name="classFilter">The class filter.</param>
+        /// <param name="fileFilter">The file filter.</param>
+        internal CoberturaParser(IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter)
+            : base(assemblyFilter, classFilter, fileFilter)
+        {
+        }
 
         /// <summary>
         /// Parses the given XML report.
@@ -41,36 +53,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             var assemblyNames = modules
                 .Select(m => m.Attribute("name").Value)
                 .Distinct()
+                .Where(a => this.AssemblyFilter.IsElementIncludedInReport(a))
                 .OrderBy(a => a)
                 .ToArray();
 
-            Parallel.ForEach(assemblyNames, assemblyName => assemblies.Add(ProcessAssembly(modules, assemblyName)));
+            Parallel.ForEach(assemblyNames, assemblyName => assemblies.Add(this.ProcessAssembly(modules, assemblyName)));
 
             var result = new ParserResult(assemblies.OrderBy(a => a.Name).ToList(), true, this.ToString());
             return result;
-        }
-
-        /// <summary>
-        /// Extracts the methods/properties of the given <see cref="XElement">XElements</see>.
-        /// </summary>
-        /// <param name="codeFile">The code file.</param>
-        /// <param name="methodsOfFile">The methods of the file.</param>
-        private static void SetCodeElements(CodeFile codeFile, IEnumerable<XElement> methodsOfFile)
-        {
-            foreach (var method in methodsOfFile)
-            {
-                string methodName = method.Attribute("name").Value + method.Attribute("signature").Value;
-
-                var line = method.Elements("lines")
-                    .Elements("line")
-                    .FirstOrDefault();
-
-                if (line != null)
-                {
-                    int lineNumber = int.Parse(line.Attribute("number").Value, CultureInfo.InvariantCulture);
-                    codeFile.AddCodeElement(new CodeElement(methodName, CodeElementType.Method, lineNumber));
-                }
-            }
         }
 
         /// <summary>
@@ -79,7 +69,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="modules">The modules.</param>
         /// <param name="assemblyName">Name of the assembly.</param>
         /// <returns>The <see cref="Assembly"/>.</returns>
-        private static Assembly ProcessAssembly(XElement[] modules, string assemblyName)
+        private Assembly ProcessAssembly(XElement[] modules, string assemblyName)
         {
             Logger.DebugFormat("  " + Resources.CurrentAssembly, assemblyName);
 
@@ -90,12 +80,13 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .Select(c => c.Attribute("name").Value)
                 .Where(c => !c.Contains("$"))
                 .Distinct()
+                .Where(c => this.ClassFilter.IsElementIncludedInReport(c))
                 .OrderBy(name => name)
                 .ToArray();
 
             var assembly = new Assembly(assemblyName);
 
-            Parallel.ForEach(classNames, className => assembly.AddClass(ProcessClass(modules, assembly, className)));
+            Parallel.ForEach(classNames, className => this.ProcessClass(modules, assembly, className));
 
             return assembly;
         }
@@ -106,8 +97,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="modules">The modules.</param>
         /// <param name="assembly">The assembly.</param>
         /// <param name="className">Name of the class.</param>
-        /// <returns>The <see cref="Class"/>.</returns>
-        private static Class ProcessClass(XElement[] modules, Assembly assembly, string className)
+        private void ProcessClass(XElement[] modules, Assembly assembly, string className)
         {
             var files = modules
                 .Where(m => m.Attribute("name").Value.Equals(assembly.Name))
@@ -118,14 +108,22 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .Distinct()
                 .ToArray();
 
-            var @class = new Class(className, assembly);
+            var filteredFiles = files
+                .Where(f => this.FileFilter.IsElementIncludedInReport(f))
+                .ToArray();
 
-            foreach (var file in files)
+            // If all files are removed by filters, then the whole class is omitted
+            if (files.Length == 0 || filteredFiles.Length > 0)
             {
-                @class.AddFile(ProcessFile(modules, @class, file));
-            }
+                var @class = new Class(className, assembly);
 
-            return @class;
+                foreach (var file in filteredFiles)
+                {
+                    @class.AddFile(ProcessFile(modules, @class, file));
+                }
+
+                assembly.AddClass(@class);
+            }
         }
 
         /// <summary>
@@ -273,6 +271,29 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 }
 
                 codeFile.AddMethodMetric(new MethodMetric(methodName, metrics));
+            }
+        }
+
+        /// <summary>
+        /// Extracts the methods/properties of the given <see cref="XElement">XElements</see>.
+        /// </summary>
+        /// <param name="codeFile">The code file.</param>
+        /// <param name="methodsOfFile">The methods of the file.</param>
+        private static void SetCodeElements(CodeFile codeFile, IEnumerable<XElement> methodsOfFile)
+        {
+            foreach (var method in methodsOfFile)
+            {
+                string methodName = method.Attribute("name").Value + method.Attribute("signature").Value;
+
+                var line = method.Elements("lines")
+                    .Elements("line")
+                    .FirstOrDefault();
+
+                if (line != null)
+                {
+                    int lineNumber = int.Parse(line.Attribute("number").Value, CultureInfo.InvariantCulture);
+                    codeFile.AddCodeElement(new CodeElement(methodName, CodeElementType.Method, lineNumber));
+                }
             }
         }
 

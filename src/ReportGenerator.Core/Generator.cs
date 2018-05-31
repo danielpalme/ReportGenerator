@@ -2,6 +2,7 @@
 using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser;
+using Palmmedia.ReportGenerator.Core.Parser.Filtering;
 using Palmmedia.ReportGenerator.Core.Properties;
 using Palmmedia.ReportGenerator.Core.Reporting;
 using Palmmedia.ReportGenerator.Core.Reporting.History;
@@ -56,7 +57,11 @@ namespace Palmmedia.ReportGenerator.Core
                 stopWatch.Start();
                 DateTime executionTime = DateTime.Now;
 
-                var parserResult = ParserFactory.ParseFiles(reportContext.ReportConfiguration.ReportFiles);
+                var parserResult = new CoverageReportParser(
+                    new DefaultFilter(reportContext.ReportConfiguration.AssemblyFilters),
+                    new DefaultFilter(reportContext.ReportConfiguration.ClassFilters),
+                    new DefaultFilter(reportContext.ReportConfiguration.FileFilters))
+                        .ParseFiles(reportContext.ReportConfiguration.ReportFiles);
 
                 var overallHistoricCoverages = new System.Collections.Generic.List<Parser.Analysis.HistoricCoverage>();
                 var historyStorage = new HistoryStorageFactory(pluginLoader).GetHistoryStorage(reportContext.ReportConfiguration);
@@ -69,18 +74,15 @@ namespace Palmmedia.ReportGenerator.Core
                     reportContext.OverallHistoricCoverages = overallHistoricCoverages;
                 }
 
-                var filteredAssemblies = new Reporting.ReportGenerator(
+                new Reporting.ReportGenerator(
                     parserResult,
-                    new DefaultFilter(reportContext.ReportConfiguration.AssemblyFilters),
-                    new DefaultFilter(reportContext.ReportConfiguration.ClassFilters),
-                    new DefaultFilter(reportContext.ReportConfiguration.FileFilters),
                     reportBuilderFactory.GetReportBuilders(reportContext))
                         .CreateReport(reportContext.ReportConfiguration.HistoryDirectory != null, overallHistoricCoverages, executionTime, reportContext.ReportConfiguration.Tag);
 
                 if (historyStorage != null)
                 {
                     new HistoryReportGenerator(historyStorage)
-                            .CreateReport(filteredAssemblies, executionTime, reportContext.ReportConfiguration.Tag);
+                            .CreateReport(parserResult.Assemblies, executionTime, reportContext.ReportConfiguration.Tag);
                 }
 
                 stopWatch.Stop();

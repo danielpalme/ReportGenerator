@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Palmmedia.ReportGenerator.Core.Reporting
+namespace Palmmedia.ReportGenerator.Core.Parser.Filtering
 {
     /// <summary>
     /// Default implementation of <see cref="IFilter"/>.

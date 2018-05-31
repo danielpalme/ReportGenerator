@@ -71,11 +71,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <param name="branches">The branches.</param>
         internal CodeFile(string path, int[] lineCoverage, LineVisitStatus[] lineVisitStatus, IDictionary<int, ICollection<Branch>> branches)
         {
-            if (path == null)
-            {
-                throw new ArgumentNullException(nameof(path));
-            }
-
             if (lineCoverage == null)
             {
                 throw new ArgumentNullException(nameof(lineCoverage));
@@ -91,7 +86,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                 throw new ArgumentException("Length of 'lineCoverage' and 'lineVisitStatus' must match", nameof(lineVisitStatus));
             }
 
-            this.Path = path;
+            this.Path = path ?? throw new ArgumentNullException(nameof(path));
             this.lineCoverage = lineCoverage;
             this.lineVisitStatus = lineVisitStatus;
             this.branches = branches;

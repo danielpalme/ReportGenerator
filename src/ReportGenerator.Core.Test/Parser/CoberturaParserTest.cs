@@ -2,8 +2,10 @@
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using Moq;
 using Palmmedia.ReportGenerator.Core.Parser;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
+using Palmmedia.ReportGenerator.Core.Parser.Filtering;
 using Palmmedia.ReportGenerator.Core.Parser.Preprocessing;
 using Xunit;
 
@@ -22,9 +24,12 @@ namespace Palmmedia.ReportGeneratorTest.Parser
 
         public CoberturaParserTest()
         {
+            var filterMock = new Mock<IFilter>();
+            filterMock.Setup(f => f.IsElementIncludedInReport(It.IsAny<string>())).Returns(true);
+
             var report = XDocument.Load(FilePath1);
             new CoberturaReportPreprocessor(report).Execute();
-            this.parserResult = new CoberturaParser().Parse(report);
+            this.parserResult = new CoberturaParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(report);
         }
 
         /// <summary>

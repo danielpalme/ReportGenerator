@@ -32,34 +32,13 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
         private readonly IEnumerable<IReportBuilder> renderers;
 
         /// <summary>
-        /// The assembly filter.
-        /// </summary>
-        private readonly IFilter assemblyFilter;
-
-        /// <summary>
-        /// The class filter.
-        /// </summary>
-        private readonly IFilter classFilter;
-
-        /// <summary>
-        /// The file filter.
-        /// </summary>
-        private readonly IFilter fileFilter;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ReportGenerator" /> class.
         /// </summary>
         /// <param name="parserResult">The parser result to use.</param>
-        /// <param name="assemblyFilter">The assembly filter.</param>
-        /// <param name="classFilter">The class filter.</param>
-        /// <param name="fileFilter">The file filter.</param>
         /// <param name="renderers">The renderers.</param>
-        internal ReportGenerator(ParserResult parserResult, IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter, IEnumerable<IReportBuilder> renderers)
+        internal ReportGenerator(ParserResult parserResult, IEnumerable<IReportBuilder> renderers)
         {
             this.parserResult = parserResult ?? throw new ArgumentNullException(nameof(parserResult));
-            this.assemblyFilter = assemblyFilter ?? throw new ArgumentNullException(nameof(assemblyFilter));
-            this.classFilter = classFilter ?? throw new ArgumentNullException(nameof(classFilter));
-            this.fileFilter = fileFilter ?? throw new ArgumentNullException(nameof(fileFilter));
             this.renderers = renderers ?? throw new ArgumentNullException(nameof(renderers));
         }
 
@@ -70,38 +49,9 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
         /// <param name="overallHistoricCoverages">All historic coverage elements.</param>
         /// <param name="executionTime">The execution time.</param>
         /// <param name="tag">The custom tag (e.g. build number).</param>
-        /// <returns>The filters assemblies.</returns>
-        internal IEnumerable<Assembly> CreateReport(bool addHistoricCoverage, List<HistoricCoverage> overallHistoricCoverages, DateTime executionTime, string tag)
+        internal void CreateReport(bool addHistoricCoverage, List<HistoricCoverage> overallHistoricCoverages, DateTime executionTime, string tag)
         {
-            var filteredAssemblies = this.parserResult.Assemblies
-                .Where(a => this.assemblyFilter.IsElementIncludedInReport(a.Name))
-                .Select(a =>
-                {
-                    var newAssembly = new Assembly(a.Name);
-                    foreach (var @class in a.Classes)
-                    {
-                        if (classFilter.IsElementIncludedInReport(@class.Name))
-                        {
-                            // If all files are removed by filters, then the whole class gets removed/not added
-                            bool hasFiles = @class.Files.Any();
-
-                            foreach (var file in @class.Files.Where(f => !this.fileFilter.IsElementIncludedInReport(f.Path)))
-                            {
-                                @class.RemoveFile(file);
-                            }
-
-                            if (!hasFiles || @class.Files.Any())
-                            {
-                                newAssembly.AddClass(@class);
-                            }
-                        }
-                    }
-
-                    return newAssembly;
-                })
-                .ToArray();
-
-            int numberOfClasses = filteredAssemblies.Sum(a => a.Classes.Count());
+            int numberOfClasses = this.parserResult.Assemblies.Sum(a => a.Classes.Count());
 
             Logger.InfoFormat(Resources.AnalyzingClasses, numberOfClasses);
 
@@ -109,7 +59,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
 
             int degreeOfParallelism = this.renderers.All(r => r.SupportsParallelClassReportExecution) ? Environment.ProcessorCount : 1;
 
-            foreach (var assembly in filteredAssemblies)
+            foreach (var assembly in this.parserResult.Assemblies)
             {
                 Parallel.ForEach(
                         assembly.Classes,
@@ -155,7 +105,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
             }
 
             Logger.Debug(" " + Resources.CreatingSummary);
-            SummaryResult summaryResult = new SummaryResult(filteredAssemblies, this.parserResult.ParserName, this.parserResult.SupportsBranchCoverage);
+            SummaryResult summaryResult = new SummaryResult(this.parserResult.Assemblies, this.parserResult.ParserName, this.parserResult.SupportsBranchCoverage);
 
             foreach (var renderer in this.renderers)
             {
@@ -171,8 +121,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
                         ex.GetExceptionMessageForDisplay());
                 }
             }
-
-            return filteredAssemblies;
         }
     }
 }

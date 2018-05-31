@@ -31,12 +31,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.History
         /// <param name="historyStorage">The history storage.</param>
         internal HistoryParser(IHistoryStorage historyStorage)
         {
-            if (historyStorage == null)
-            {
-                throw new ArgumentNullException(nameof(historyStorage));
-            }
-
-            this.historyStorage = historyStorage;
+            this.historyStorage = historyStorage ?? throw new ArgumentNullException(nameof(historyStorage));
         }
 
         /// <summary>
