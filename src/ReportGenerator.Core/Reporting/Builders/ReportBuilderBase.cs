@@ -5,7 +5,7 @@ using System.Linq;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Properties;
 using Palmmedia.ReportGenerator.Core.Reporting.CodeAnalysis;
-using Palmmedia.ReportGenerator.Core.Reporting.Rendering;
+using Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering;
 
 namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 {

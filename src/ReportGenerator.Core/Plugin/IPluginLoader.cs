@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Palmmedia.ReportGenerator.Core.Reporting
+namespace Palmmedia.ReportGenerator.Core.Plugin
 {
     /// <summary>
     /// Interface for loading plugins at runtime.

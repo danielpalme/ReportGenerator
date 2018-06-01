@@ -6,7 +6,7 @@ using System.Reflection;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Properties;
 
-namespace Palmmedia.ReportGenerator.Core.Reporting
+namespace Palmmedia.ReportGenerator.Core.Plugin
 {
     /// <summary>
     /// Load plugins at runtime by scanning all DLLs via reflection.

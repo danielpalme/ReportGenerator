@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Palmmedia.ReportGenerator.Core.Reporting
+namespace Palmmedia.ReportGenerator.Core.Plugin
 {
     /// <summary>
     /// Helper class for unblocking files.

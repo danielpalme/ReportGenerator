@@ -3,6 +3,7 @@ using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser;
 using Palmmedia.ReportGenerator.Core.Parser.Filtering;
+using Palmmedia.ReportGenerator.Core.Plugin;
 using Palmmedia.ReportGenerator.Core.Properties;
 using Palmmedia.ReportGenerator.Core.Reporting;
 using Palmmedia.ReportGenerator.Core.Reporting.History;

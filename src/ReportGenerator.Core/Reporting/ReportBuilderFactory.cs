@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Palmmedia.ReportGenerator.Core.Logging;
+using Palmmedia.ReportGenerator.Core.Plugin;
 using Palmmedia.ReportGenerator.Core.Properties;
 
 namespace Palmmedia.ReportGenerator.Core.Reporting

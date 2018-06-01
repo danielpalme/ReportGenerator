@@ -3,6 +3,7 @@ using System.Linq;
 using Palmmedia.ReportGenerator.Core;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
+using Palmmedia.ReportGenerator.Core.Plugin;
 using Palmmedia.ReportGenerator.Core.Reporting;
 using Xunit;
 

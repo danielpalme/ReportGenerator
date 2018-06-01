@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Palmmedia.ReportGenerator.Core.Plugin;
 using Palmmedia.ReportGenerator.Core.Reporting;
 
 namespace Palmmedia.ReportGenerator.Core

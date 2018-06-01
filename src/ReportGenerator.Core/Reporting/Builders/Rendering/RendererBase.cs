@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Palmmedia.ReportGenerator.Core.Reporting.Rendering
+namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 {
     /// <summary>
     /// Base class for the <see cref="IReportRenderer"/> implementations.

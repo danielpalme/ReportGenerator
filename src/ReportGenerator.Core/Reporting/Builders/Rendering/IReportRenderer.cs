@@ -2,7 +2,7 @@
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Reporting.CodeAnalysis;
 
-namespace Palmmedia.ReportGenerator.Core.Reporting.Rendering
+namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 {
     /// <summary>
     /// Interface for report renderers.
