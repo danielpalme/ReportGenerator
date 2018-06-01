@@ -121,7 +121,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             {
                 var @class = new Class(className, assembly);
 
-                foreach (var file in filesOfClass)
+                foreach (var file in filteredFilesOfClass)
                 {
                     @class.AddFile(ProcessFile(modules, @class, file));
                 }
