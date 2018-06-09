@@ -64,6 +64,8 @@ namespace Palmmedia.ReportGenerator.Core
                     new DefaultFilter(reportContext.ReportConfiguration.FileFilters))
                         .ParseFiles(reportContext.ReportConfiguration.ReportFiles);
 
+                Logger.DebugFormat(Resources.ReportParsingTook, stopWatch.ElapsedMilliseconds / 1000d);
+
                 var overallHistoricCoverages = new System.Collections.Generic.List<Parser.Analysis.HistoricCoverage>();
                 var historyStorage = new HistoryStorageFactory(pluginLoader).GetHistoryStorage(reportContext.ReportConfiguration);
 

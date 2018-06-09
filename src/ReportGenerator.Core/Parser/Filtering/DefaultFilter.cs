@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -17,12 +16,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Filtering
         /// <summary>
         /// The include filters.
         /// </summary>
-        private readonly IEnumerable<string> includeFilters;
+        private readonly Regex[] includeFilters;
 
         /// <summary>
         /// The exclude filters.
         /// </summary>
-        private readonly IEnumerable<string> excludeFilters;
+        private readonly Regex[] excludeFilters;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultFilter"/> class.
@@ -37,15 +36,20 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Filtering
 
             this.excludeFilters = filters
                 .Where(f => f.StartsWith("-", StringComparison.OrdinalIgnoreCase))
-                .Select(f => CreateFilterRegex(f));
+                .Select(f => CreateFilterRegex(f))
+                .ToArray();
 
             this.includeFilters = filters
                 .Where(f => f.StartsWith("+", StringComparison.OrdinalIgnoreCase))
-                .Select(f => CreateFilterRegex(f));
+                .Select(f => CreateFilterRegex(f))
+                .ToArray();
 
-            if (!this.includeFilters.Any())
+            if (this.includeFilters.Length == 0)
             {
-                this.includeFilters = Enumerable.Repeat(CreateFilterRegex("+*"), 1);
+                this.includeFilters = new[]
+                {
+                    CreateFilterRegex("+*")
+                };
             }
         }
 
@@ -58,13 +62,13 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Filtering
         /// </returns>
         public bool IsElementIncludedInReport(string name)
         {
-            if (this.excludeFilters.Any(f => Regex.IsMatch(name, f)))
+            if (this.excludeFilters.Any(f => f.IsMatch(name)))
             {
                 return false;
             }
             else
             {
-                return this.includeFilters.Any(f => Regex.IsMatch(name, f));
+                return this.includeFilters.Any(f => f.IsMatch(name));
             }
         }
 
@@ -74,14 +78,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Filtering
         /// </summary>
         /// <param name="filter">The filter.</param>
         /// <returns>The regular expression.</returns>
-        private static string CreateFilterRegex(string filter)
+        private static Regex CreateFilterRegex(string filter)
         {
             filter = filter.Substring(1);
             filter = filter.Replace("*", "$$$*");
             filter = Regex.Escape(filter);
             filter = filter.Replace(@"\$\$\$\*", ".*");
 
-            return string.Format(CultureInfo.InvariantCulture, "^{0}$", filter);
+            return new Regex($"^{filter}$", RegexOptions.Compiled);
         }
     }
 }

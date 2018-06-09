@@ -404,6 +404,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Coverage report parsing took {0:f1} seconds.
+        /// </summary>
+        internal static string ReportParsingTook {
+            get {
+                return ResourceManager.GetString("ReportParsingTook", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Several custom history storages exist. Please ensure that only one custom storage exists..
         /// </summary>
         internal static string SeveralCustomHistoryStorages {

@@ -232,6 +232,9 @@
   <data name="ReportGenerationTook" xml:space="preserve">
     <value>Report generation took {0:f1} seconds</value>
   </data>
+  <data name="ReportParsingTook" xml:space="preserve">
+    <value>Coverage report parsing took {0:f1} seconds</value>
+  </data>
   <data name="SeveralCustomHistoryStorages" xml:space="preserve">
     <value>Several custom history storages exist. Please ensure that only one custom storage exists.</value>
   </data>
