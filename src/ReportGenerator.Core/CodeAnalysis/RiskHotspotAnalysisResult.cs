@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Palmmedia.ReportGenerator.Core.Reporting.CodeAnalysis
+namespace Palmmedia.ReportGenerator.Core.CodeAnalysis
 {
     /// <summary>
     /// The result of the risk hotspot analysis.
     /// </summary>
-    public class RiskHotsptAnalysisResult
+    public class RiskHotspotAnalysisResult
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="RiskHotsptAnalysisResult"/> class.
+        /// Initializes a new instance of the <see cref="RiskHotspotAnalysisResult"/> class.
         /// </summary>
         /// <param name="riskHotspots">The risk hotspots.</param>
         /// <param name="codeCodeQualityMetricsAvailable">Indicates whether any code quality metrics exists.</param>
-        public RiskHotsptAnalysisResult(IReadOnlyCollection<RiskHotspot> riskHotspots, bool codeCodeQualityMetricsAvailable)
+        public RiskHotspotAnalysisResult(IReadOnlyCollection<RiskHotspot> riskHotspots, bool codeCodeQualityMetricsAvailable)
         {
             this.RiskHotspots = riskHotspots ?? throw new ArgumentNullException(nameof(riskHotspots));
             this.CodeCodeQualityMetricsAvailable = codeCodeQualityMetricsAvailable;

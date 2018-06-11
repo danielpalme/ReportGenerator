@@ -3,44 +3,38 @@ using System.Linq;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Properties;
 
-namespace Palmmedia.ReportGenerator.Core.Reporting.CodeAnalysis
+namespace Palmmedia.ReportGenerator.Core.CodeAnalysis
 {
     /// <summary>
     /// Analyses the method metrics for risk hotspots based on exceeded thresholds.
     /// </summary>
-    internal static class RiskHotspotsAnalysis
+    internal class RiskHotspotsAnalyzer : IRiskHotspotsAnalyzer
     {
-        /// <summary>
-        /// Threshold for cylomatic complexity.
-        /// </summary>
-        private const decimal MetricThresholdForCyclomaticComplexity = 15;
-
-        /// <summary>
-        /// Threshold for crap score.
-        /// </summary>
-        private const decimal MetricThresholdForCrapScore = 30;
-
-        /// <summary>
-        /// Threshold for NPath complexity.
-        /// </summary>
-        private const decimal MetricThresholdForNPathComplexity = 200;
-
         /// <summary>
         /// The thresholds of the various metrics.
         /// </summary>
-        private static readonly Dictionary<string, decimal> ThresholdsByMetricName = new Dictionary<string, decimal>()
-        {
-            { ReportResources.CyclomaticComplexity, MetricThresholdForCyclomaticComplexity },
-            { ReportResources.NPathComplexity, MetricThresholdForNPathComplexity },
-            { ReportResources.CrapScore, MetricThresholdForCrapScore }
-        };
+        private readonly Dictionary<string, decimal> thresholdsByMetricName;
 
         /// <summary>
-        /// Determines the risk hotspots in the code base.
+        /// Initializes a new instance of the <see cref="RiskHotspotsAnalyzer"/> class.
         /// </summary>
-        /// <param name="assemblies">The assemblies.</param>
-        /// <returns>The risk hotspots.</returns>
-        public static RiskHotsptAnalysisResult PerformRiskHotspotAnalysis(IEnumerable<Assembly> assemblies)
+        /// <param name="riskHotspotsAnalysisThresholds">The metric thresholds.</param>
+        public RiskHotspotsAnalyzer(RiskHotspotsAnalysisThresholds riskHotspotsAnalysisThresholds)
+        {
+            this.thresholdsByMetricName = new Dictionary<string, decimal>()
+            {
+                { ReportResources.CyclomaticComplexity, riskHotspotsAnalysisThresholds.MetricThresholdForCyclomaticComplexity },
+                { ReportResources.NPathComplexity, riskHotspotsAnalysisThresholds.MetricThresholdForNPathComplexity },
+                { ReportResources.CrapScore, riskHotspotsAnalysisThresholds.MetricThresholdForCrapScore }
+            };
+        }
+
+        /// <summary>
+        /// Performs a risk hotspot analysis on the given assemblies.
+        /// </summary>
+        /// <param name="assemblies">The assemlies to analyze.</param>
+        /// <returns>The risk hotspot analysis result.</returns>
+        public RiskHotspotAnalysisResult PerformRiskHotspotAnalysis(IEnumerable<Assembly> assemblies)
         {
             var riskHotspots = new List<RiskHotspot>();
             decimal threshold = -1;
@@ -63,7 +57,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.CodeAnalysis
                             codeCodeQualityMetricsAvailable |= codeCodeQualityMetrics.Any();
 
                             var statusMetrics = codeCodeQualityMetrics
-                                .Select(m => new MetricStatus(m, ThresholdsByMetricName.TryGetValue(m.Name, out threshold) && m.Value > threshold))
+                                .Select(m => new MetricStatus(m, this.thresholdsByMetricName.TryGetValue(m.Name, out threshold) && m.Value > threshold))
                                 .ToArray();
 
                             if (statusMetrics.Any(m => m.Exceeded))
@@ -77,7 +71,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.CodeAnalysis
                 }
             }
 
-            var result = new RiskHotsptAnalysisResult(
+            var result = new RiskHotspotAnalysisResult(
                 riskHotspots
                 .OrderByDescending(r => r.StatusMetrics.Where(m => m.Exceeded).Max(m => m.Metric.Value))
                 .ToList(),

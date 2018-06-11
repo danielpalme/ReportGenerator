@@ -1,4 +1,7 @@
 ﻿using System;
+using System.IO;
+using Microsoft.Extensions.Configuration;
+using Palmmedia.ReportGenerator.Core.CodeAnalysis;
 using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser;
@@ -66,6 +69,9 @@ namespace Palmmedia.ReportGenerator.Core
 
                 Logger.DebugFormat(Resources.ReportParsingTook, stopWatch.ElapsedMilliseconds / 1000d);
 
+                reportContext.RiskHotspotAnalysisResult = new RiskHotspotsAnalyzer(this.GetRiskHotspotsAnalysisThresholds())
+                    .PerformRiskHotspotAnalysis(parserResult.Assemblies);
+
                 var overallHistoricCoverages = new System.Collections.Generic.List<Parser.Analysis.HistoricCoverage>();
                 var historyStorage = new HistoryStorageFactory(pluginLoader).GetHistoryStorage(reportContext.ReportConfiguration);
 
@@ -106,6 +112,25 @@ namespace Palmmedia.ReportGenerator.Core
 
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Get the <see cref="RiskHotspotsAnalysisThresholds"/> with configured thresholds applied.
+        /// </summary>
+        /// <returns>The <see cref="RiskHotspotsAnalysisThresholds"/>.</returns>
+        private RiskHotspotsAnalysisThresholds GetRiskHotspotsAnalysisThresholds()
+        {
+            var result = new RiskHotspotsAnalysisThresholds();
+
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(new FileInfo(this.GetType().Assembly.Location).DirectoryName)
+                .AddJsonFile("appsettings.json")
+                .AddCommandLine(Environment.GetCommandLineArgs());
+
+            var configuration = builder.Build();
+            configuration.GetSection("riskHotspotsAnalysisThresholds").Bind(result);
+
+            return result;
         }
     }
 }

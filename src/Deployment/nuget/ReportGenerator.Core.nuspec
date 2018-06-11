@@ -22,7 +22,11 @@ https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage</desc
     <tags>Code Coverage Reporting Testing TDD Utility</tags>
     <repository type="git" url="https://github.com/danielpalme/ReportGenerator.git" />
     <dependencies>
-      <dependency id="SixLabors.ImageSharp.Drawing" version="1.0.0-beta0002" />
+      <dependency id="Microsoft.Extensions.Configuration" version="2.1.0" />
+      <dependency id="Microsoft.Extensions.Configuration.Binder" version="2.1.0" />
+      <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="2.1.0" />
+      <dependency id="Microsoft.Extensions.Configuration.Json" version="2.1.0" />
+      <dependency id="SixLabors.ImageSharp.Drawing" version="1.0.0-beta0004" />
     </dependencies>
   </metadata>
   <files>

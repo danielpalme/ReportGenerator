@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Palmmedia.ReportGenerator.Core.CodeAnalysis;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 
 namespace Palmmedia.ReportGenerator.Core.Reporting
@@ -12,6 +13,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
         /// Gets the configuration options.
         /// </summary>
         IReportConfiguration ReportConfiguration { get; }
+
+        /// <summary>
+        /// Gets the risk hotspot analysis result.
+        /// </summary>
+        RiskHotspotAnalysisResult RiskHotspotAnalysisResult { get; }
 
         /// <summary>
         /// Gets the historic coverage elements.

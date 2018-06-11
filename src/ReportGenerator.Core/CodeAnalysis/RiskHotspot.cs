@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 
-namespace Palmmedia.ReportGenerator.Core.Reporting.CodeAnalysis
+namespace Palmmedia.ReportGenerator.Core.CodeAnalysis
 {
     /// <summary>
     /// Represents a risk hotspot.

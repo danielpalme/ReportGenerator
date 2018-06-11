@@ -7,6 +7,9 @@ using Palmmedia.ReportGenerator.Core.Properties;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Png;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
+using SixLabors.ImageSharp.Processing.Text;
 
 namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 {
@@ -255,7 +258,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             using (MemoryStream output = new MemoryStream())
             {
                 var font = SystemFonts.CreateFont("Arial", 12, FontStyle.Regular);
-                image.Mutate(ctx => ctx.DrawText(text, font, Rgba32.White, new SixLabors.Primitives.PointF(113, 1)));
+                image.Mutate(ctx => ctx.DrawText(text, font, Rgba32.White, new SixLabors.Primitives.PointF(113, 5)));
 
                 image.Save(output, new PngEncoder());
                 return output.ToArray();

@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Linq;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Properties;
-using Palmmedia.ReportGenerator.Core.Reporting.CodeAnalysis;
 using Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering;
 
 namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
@@ -231,17 +230,15 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 reportRenderer.MetricsTable(new[] { methodMetric });
             }
 
-            var hotspotAnlysisResult = RiskHotspotsAnalysis.PerformRiskHotspotAnalysis(summaryResult.Assemblies);
-
             if (reportRenderer.SupportsRiskHotsSpots)
             {
-                if (hotspotAnlysisResult.CodeCodeQualityMetricsAvailable)
+                if (this.ReportContext.RiskHotspotAnalysisResult.CodeCodeQualityMetricsAvailable)
                 {
                     reportRenderer.Header(ReportResources.RiskHotspots);
 
-                    if (hotspotAnlysisResult.RiskHotspots.Count > 0)
+                    if (this.ReportContext.RiskHotspotAnalysisResult.RiskHotspots.Count > 0)
                     {
-                        reportRenderer.RiskHotspots(hotspotAnlysisResult.RiskHotspots);
+                        reportRenderer.RiskHotspots(this.ReportContext.RiskHotspotAnalysisResult.RiskHotspots);
                     }
                     else
                     {
@@ -273,7 +270,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 reportRenderer.Paragraph(ReportResources.NoCoveredAssemblies);
             }
 
-            reportRenderer.CustomSummary(summaryResult.Assemblies, hotspotAnlysisResult.RiskHotspots, summaryResult.SupportsBranchCoverage);
+            reportRenderer.CustomSummary(summaryResult.Assemblies, this.ReportContext.RiskHotspotAnalysisResult.RiskHotspots, summaryResult.SupportsBranchCoverage);
 
             reportRenderer.AddFooter();
             reportRenderer.SaveSummaryReport(this.ReportContext.ReportConfiguration.TargetDirectory);
