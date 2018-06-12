@@ -37,6 +37,9 @@ namespace Palmmedia.ReportGenerator.Core.Plugin
             {
                 try
                 {
+                    // Unblock files, this prevents FileLoadException (e.g. if file was extracted from a ZIP archive)
+                    FileUnblocker.Unblock(file);
+
                     var assembly = Assembly.LoadFrom(file);
 
                     var pluginTypes = assembly.GetExportedTypes()
@@ -56,7 +59,10 @@ namespace Palmmedia.ReportGenerator.Core.Plugin
                 }
                 catch (Exception)
                 {
-                    Logger.Error(string.Format(Resources.FailedToLoadPlugins, file));
+                    if (!file.Contains("ReportGenerator.Core.Test.dll") && !file.Contains("xunit.runner"))
+                    {
+                        Logger.Error(string.Format(Resources.FailedToLoadPlugins, file));
+                    }
                 }
             }
 
