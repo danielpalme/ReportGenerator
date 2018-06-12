@@ -61,6 +61,7 @@ CHANGELOG
     * Fix: Issue #127: Fixed coverage calculation for NCover
     * Fix: Issue #133: Empty Risk Hotspots section when no risk hotspot exists
     * Fix: Issue #135: Handling of NaN in metrics of Cobertura files
+    * Fix: Issue #136: Changed branch handling in Cobertura parser
     * New: Improved Latex and XML reports
     * Change: Dropped support for PartCover
 

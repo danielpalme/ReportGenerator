@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Palmmedia.ReportGenerator.Core.Logging;
@@ -21,6 +22,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// The Logger.
         /// </summary>
         private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(CoberturaParser));
+
+        /// <summary>
+        /// Regex to analyze the branch coverage of a line element.
+        /// </summary>
+        private static Regex branchCoverageRegex = new Regex("\\((?<NumberOfCoveredBranches>\\d+)/(?<NumberOfTotalBranches>\\d+)\\)$", RegexOptions.Compiled);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CoberturaParser" /> class.
@@ -306,43 +312,34 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         {
             var result = new Dictionary<int, ICollection<Branch>>();
 
-            var branchPoints = lines
-                .Elements("conditions")
-                .Elements("condition")
-                .ToArray();
-
-            foreach (var branchPoint in branchPoints)
+            foreach (var line in lines)
             {
-                int lineNumber = int.Parse(branchPoint.Parent.Parent.Attribute("number").Value, CultureInfo.InvariantCulture);
-
-                string identifier = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "{0}_{1}",
-                    lineNumber,
-                    branchPoint.Attribute("number").Value);
-
-                var branch = new Branch(
-                    branchPoint.Attribute("coverage").Value.Equals("0%") ? 0 : 1,
-                    identifier);
-
-                ICollection<Branch> branches = null;
-                if (result.TryGetValue(lineNumber, out branches))
+                if (line.Attribute("branch").Value != "true")
                 {
-                    HashSet<Branch> branchesHashset = (HashSet<Branch>)branches;
-                    if (branchesHashset.Contains(branch))
-                    {
-                        // Not perfect for performance, but Hashset has no GetElement method
-                        branchesHashset.First(b => b.Equals(branch)).BranchVisits += branch.BranchVisits;
-                    }
-                    else
-                    {
-                        branches.Add(branch);
-                    }
+                    continue;
                 }
-                else
+
+                var match = branchCoverageRegex.Match(line.Attribute("condition-coverage").Value);
+
+                if (match.Success)
                 {
-                    branches = new HashSet<Branch>();
-                    branches.Add(branch);
+                    int lineNumber = int.Parse(line.Attribute("number").Value, CultureInfo.InvariantCulture);
+
+                    int numberOfCoveredBranches = int.Parse(match.Groups["NumberOfCoveredBranches"].Value, CultureInfo.InvariantCulture);
+                    int numberOfTotalBranches = int.Parse(match.Groups["NumberOfTotalBranches"].Value, CultureInfo.InvariantCulture);
+
+                    var branches = new HashSet<Branch>();
+
+                    for (int i = 0; i < numberOfTotalBranches; i++)
+                    {
+                        string identifier = string.Format(
+                            CultureInfo.InvariantCulture,
+                            "{0}_{1}",
+                            lineNumber,
+                            i);
+
+                        branches.Add(new Branch(i < numberOfCoveredBranches ? 1 : 0, identifier));
+                    }
 
                     result.Add(lineNumber, branches);
                 }
