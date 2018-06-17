@@ -8,6 +8,7 @@ It is also possible to pass one XML file containing several reports to *ReportGe
 
 The following [output formats](https://github.com/danielpalme/ReportGenerator/wiki/Output-formats) are supported by *ReportGenerator*:
 * HTML, HTMLSummary, HTMLInline, HTMLChart, [MHTML](https://en.wikipedia.org/wiki/MHTML)
+* Cobertura
 * XML, XMLSummary
 * Latex, LatexSummary
 * TextSummary
@@ -61,7 +62,7 @@ Explanations:
                       semicolon). Wildcards are allowed.
    Targetdirectory:   The directory where the generated report should be saved.
    Reporttypes:       The output formats and scope (separated by semicolon).
-                      Values: Badges, CsvSummary, Html, HtmlChart, HtmlSummary, Latex, LatexSummary, MHtml,
+                      Values: Badges, Cobertura, CsvSummary, Html, HtmlChart, HtmlSummary, Latex, LatexSummary, MHtml,
                               PngChart, TextSummary, Xml, XmlSummary
    History directory: Optional directory for storing persistent coverage information.
                       Can be used in future reports to show coverage evolution.

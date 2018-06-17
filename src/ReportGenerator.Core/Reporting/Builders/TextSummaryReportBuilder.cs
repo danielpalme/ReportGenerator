@@ -23,10 +23,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         public string ReportType => "TextSummary";
 
         /// <summary>
-        /// Gets or sets the report configuration.
+        /// Gets or sets the report context.
         /// </summary>
         /// <value>
-        /// The report configuration.
+        /// The report context.
         /// </value>
         public IReportContext ReportContext { get; set; }
 

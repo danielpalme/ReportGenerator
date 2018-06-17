@@ -89,7 +89,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         }
 
         /// <summary>
-        /// Gets the coverage quota of the class.
+        /// Gets the coverage quota.
         /// </summary>
         /// <value>The coverage quota.</value>
         public decimal? CoverageQuota => (this.CoverableLines == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)this.CoveredLines / (double)this.CoverableLines) / 10;
@@ -111,7 +111,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         public int? TotalBranches => this.Assemblies.Sum(f => f.TotalBranches);
 
         /// <summary>
-        /// Gets the branch coverage quota of the class.
+        /// Gets the branch coverage quota.
         /// </summary>
         /// <value>The branch coverage quota.</value>
         public decimal? BranchCoverageQuota => (this.TotalBranches == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)this.CoveredBranches / (double)this.TotalBranches) / 10;

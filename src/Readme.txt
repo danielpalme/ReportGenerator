@@ -23,6 +23,7 @@ It is also possible to pass one XML file containing several reports to ReportGen
 The following output formats are supported by ReportGenerator:
 
 -HTML, HTMLSummary, HTMLInline, HTMLChart, MHTML
+-Cobertura
 -XML, XMLSummary
 -Latex, LatexSummary
 -TextSummary
@@ -58,11 +59,12 @@ CHANGELOG
     * New: Issue #112: Added support for .NET Core
     * New: Issue #126: Usage of multiple cores during report generation
     * New: Issue #131: Linked method metric names to code location
+    * New: Improved Latex and XML reports
+    * New: Added Coberatura as output format
     * Fix: Issue #127: Fixed coverage calculation for NCover
     * Fix: Issue #133: Empty Risk Hotspots section when no risk hotspot exists
     * Fix: Issue #135: Handling of NaN in metrics of Cobertura files
     * Fix: Issue #136: Changed branch handling in Cobertura parser
-    * New: Improved Latex and XML reports
     * Change: Dropped support for PartCover
 
 3.1.1.0

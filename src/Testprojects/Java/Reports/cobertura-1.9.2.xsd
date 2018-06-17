@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- The schema for the Cobertura 1.8/1.9 result file -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://com.github.sanity4j/namespace/cobertura-1.9.2" xmlns:cobertura192="http://com.github.sanity4j/namespace/cobertura-1.9.2">
+	<xs:element name="class">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="cobertura192:methods"/>
+				<xs:element ref="cobertura192:lines"/>
+			</xs:sequence>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+			<xs:attribute name="filename" type="xs:string" use="required"/>
+			<xs:attribute name="line-rate" type="xs:decimal" use="required"/>
+			<xs:attribute name="branch-rate" type="xs:decimal" use="required"/>
+			<xs:attribute name="complexity" type="xs:decimal" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="classes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="cobertura192:class" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="coverage">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="cobertura192:sources"/>
+				<xs:element ref="cobertura192:packages"/>
+			</xs:sequence>
+
+            <!-- These are optional to allow backward compatability with 1.9 and 1.8 -->
+            <xs:attribute name="lines-covered" type="xs:long" use="optional"/>
+            <xs:attribute name="lines-valid" type="xs:long" use="optional"/>
+            <xs:attribute name="branches-covered" type="xs:long" use="optional"/>
+            <xs:attribute name="branches-valid" type="xs:long" use="optional"/>
+            <xs:attribute name="complexity" type="xs:decimal" use="optional"/>
+
+            <xs:attribute name="line-rate" type="xs:decimal" use="required"/>
+			<xs:attribute name="branch-rate" type="xs:decimal" use="required"/>
+			<xs:attribute name="version" type="xs:string" use="required"/>
+			<xs:attribute name="timestamp" type="xs:long" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="line">
+		<xs:complexType>
+			<xs:choice>
+				<xs:element ref="cobertura192:conditions" minOccurs="0"/>
+			</xs:choice>
+			<xs:attribute name="number" type="xs:short" use="required"/>
+			<xs:attribute name="hits" type="xs:int" use="required"/>
+			<xs:attribute name="branch" type="xs:boolean" use="required"/>
+			<xs:attribute name="condition-coverage" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="lines">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="cobertura192:line"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="condition">
+		<xs:complexType>
+			<xs:attribute name="number" type="xs:short" use="required"/>
+			<xs:attribute name="type" type="xs:string" use="required"/>
+			<xs:attribute name="coverage" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="conditions">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="cobertura192:condition"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="method">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="cobertura192:lines"/>
+			</xs:sequence>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+			<xs:attribute name="signature" type="xs:string" use="required"/>
+			<xs:attribute name="line-rate" type="xs:decimal" use="required"/>
+			<xs:attribute name="branch-rate" type="xs:NMTOKEN" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="methods">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="cobertura192:method"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="package">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="cobertura192:classes"/>
+			</xs:sequence>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+			<xs:attribute name="line-rate" type="xs:decimal" use="required"/>
+			<xs:attribute name="branch-rate" type="xs:decimal" use="required"/>
+			<xs:attribute name="complexity" type="xs:decimal" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="packages">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="cobertura192:package" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="sources" type="xs:string"/>
+</xs:schema>
