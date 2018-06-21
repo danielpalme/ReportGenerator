@@ -82,12 +82,17 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
                 foreach (var line in fileAnalysis.Lines)
                 {
+                    if (line.LineVisitStatus == LineVisitStatus.NotCoverable)
+                    {
+                        continue;
+                    }
+
                     bool hasBranch = line.TotalBranches.GetValueOrDefault() > 0;
 
                     var lineElement = new XElement(
                         "line",
                         new XAttribute("number", line.LineNumber),
-                        new XAttribute("hits", line.LineVisitStatus != LineVisitStatus.NotCoverable ? line.LineVisits.ToString(CultureInfo.InvariantCulture) : "0"),
+                        new XAttribute("hits", line.LineVisits.ToString(CultureInfo.InvariantCulture)),
                         new XAttribute("branch", hasBranch ? "true" : "false"));
 
                     if (hasBranch)
