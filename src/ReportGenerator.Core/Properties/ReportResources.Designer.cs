@@ -169,6 +169,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Changes only.
+        /// </summary>
+        public static string ChangesOnly {
+            get {
+                return ResourceManager.GetString("ChangesOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Class:.
         /// </summary>
         public static string Class {
@@ -210,6 +219,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         public static string CollapseAll {
             get {
                 return ResourceManager.GetString("CollapseAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compare with:.
+        /// </summary>
+        public static string CompareHistory {
+            get {
+                return ResourceManager.GetString("CompareHistory", resourceCulture);
             }
         }
         
@@ -309,6 +327,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         public static string CyclomaticComplexity {
             get {
                 return ResourceManager.GetString("CyclomaticComplexity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string Date {
+            get {
+                return ResourceManager.GetString("Date", resourceCulture);
             }
         }
         

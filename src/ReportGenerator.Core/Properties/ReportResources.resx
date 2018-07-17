@@ -297,4 +297,13 @@
   <data name="NoRiskHotspots" xml:space="preserve">
     <value>No risk hotspots found.</value>
   </data>
+  <data name="CompareHistory" xml:space="preserve">
+    <value>Compare with:</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="ChangesOnly" xml:space="preserve">
+    <value>Changes only</value>
+  </data>
 </root>

@@ -31,13 +31,14 @@ th { text-align: left; }
 .overview th a { color: #000; }
 .overview tr.namespace a { margin-left: 15px; }
 .overview td { border: solid 1px #c1c1c1; border-collapse: collapse; padding: 2px 5px 2px 5px; }
+div.currenthistory { margin: -2px -5px 0 -5px; padding: 2px 5px 2px 5px; height: 16px; }
 .coverage { border: solid 1px #c1c1c1; border-collapse: collapse; font-size: 5px; height: 10px; }
 .coverage td { padding: 0; border: none; }
 .stripped tr:nth-child(2n+1) { background-color: #F3F3F3; }
 
 .customizebox { font-size: 0.75em; margin-bottom: 7px; }
-.customizebox div { width: 33.33%; display: inline-block; }
-.customizebox input { font-size: 0.8em; width: 150px; }
+.customizebox>div { width: 25%; display: inline-block; }
+.customizebox div.right input { font-size: 0.8em; width: 150px; }
 #namespaceslider { width: 200px; display: inline-block; margin-left: 8px; }
 
 .percentagebarundefined {
@@ -111,6 +112,7 @@ th { text-align: left; }
 .lightorange { background-color: #FFEFD5; }
 .gray { background-color: #dcdcdc; }
 .lightgray { color: #888888; }
+.lightgraybg { background-color: #dadada; }
 
 .toggleZoom { text-align:right; }
 
@@ -122,6 +124,7 @@ th { text-align: left; }
 .ct-chart .ct-series.ct-series-b .ct-line, .ct-chart .ct-series.ct-series-b .ct-point { stroke: #1c2298 !important;}
 
 .tinylinecoveragechart, .tinybranchcoveragechart { background-color: #fff; margin-left: -3px; float: left; border: solid 1px #c1c1c1; width: 30px; height: 18px; }
+.historiccoverageoffset { margin-top: 7px; }
 
 .tinylinecoveragechart .ct-line, .tinybranchcoveragechart .ct-line { stroke-width: 1px !important; }
 .tinybranchcoveragechart .ct-series.ct-series-a .ct-line { stroke: #1c2298 !important; }

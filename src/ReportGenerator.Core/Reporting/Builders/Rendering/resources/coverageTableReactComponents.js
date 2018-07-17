@@ -46,6 +46,8 @@ function ClassViewModel(serializedClass) {
     self.totalBranches = serializedClass.totalBranches;
     self.lineCoverageHistory = serializedClass.lineCoverageHistory;
     self.branchCoverageHistory = serializedClass.branchCoverageHistory;
+    self.historicCoverages = serializedClass.historicCoverages;
+    self.currentHistoricCoverageData = null;
 
     if (serializedClass.coverableLines === 0) {
         if (isNaN(serializedClass.methodCoverage)) {
@@ -71,8 +73,40 @@ function ClassViewModel(serializedClass) {
         self.branchCoveragePercent = self.branchCoverage + '%';
     }
 
-    self.visible = function (filter) {
-        return filter === '' || self.name.toLowerCase().indexOf(filter) > -1;
+    self.updateCurrentHistoricCoverageData = function (historicCoverageExecutionTime) {
+        var i, l;
+
+        self.currentHistoricCoverageData = null;
+
+        if (historicCoverageExecutionTime !== '') {
+            for (i = 0, l = self.historicCoverages.length; i < l; i++) {
+
+                if (self.historicCoverages[i].executionTime === historicCoverageExecutionTime) {
+                    self.currentHistoricCoverageData = self.historicCoverages[i];
+                    break;
+                }
+            }
+        }
+    };
+
+    self.visible = function (filter, historicCoverageChangesOnly) {
+        if (filter !== '' && self.name.toLowerCase().indexOf(filter) === -1) {
+            return false;
+        }
+
+        if (historicCoverageChangesOnly && self.currentHistoricCoverageData !== null) {
+            if (self.coveredLines === self.currentHistoricCoverageData.coveredLines
+                && self.coveredLines === self.currentHistoricCoverageData.coveredLines
+                && self.uncoveredLines === self.currentHistoricCoverageData.uncoveredLines
+                && self.coverableLines === self.currentHistoricCoverageData.coverableLines
+                && self.totalLines === self.currentHistoricCoverageData.totalLines
+                && self.coveredBranches === self.currentHistoricCoverageData.coveredBranches
+                && self.totalBranches === self.currentHistoricCoverageData.totalBranches) {
+                return false;
+            }
+        }
+
+        return true;
     };
 }
 
@@ -109,7 +143,7 @@ function CodeElementViewModel(name, parent) {
         return roundNumber(100 * self.coveredBranches / self.totalBranches, 1);
     };
 
-    self.visible = function (filter) {
+    self.visible = function (filter, historicCoverageChangesOnly) {
         var i, l;
         for (i = 0, l = self.subelements.length; i < l; i++) {
             if (self.subelements[i].visible(filter)) {
@@ -177,6 +211,14 @@ function CodeElementViewModel(name, parent) {
             if (element.isNamespace) {
                 element.expand();
             }
+        }
+    };
+
+    self.updateCurrentHistoricCoverageData = function (historicCoverageExecutionTime) {
+        var i, l;
+
+        for (i = 0, l = self.subelements.length; i < l; i++) {
+            self.subelements[i].updateCurrentHistoricCoverageData(historicCoverageExecutionTime);
         }
     };
 
@@ -345,6 +387,8 @@ var AssemblyComponent = React.createClass({
             state = {
                 grouping: '0',
                 groupingMaximum: this.getGroupingMaximum(this.props.assemblies),
+                historicCoverageExecutionTime: '',
+                historicCoverageChangesOnly: false,
                 filter: '',
                 sortby: 'name',
                 sortorder: 'asc',
@@ -354,6 +398,11 @@ var AssemblyComponent = React.createClass({
         }
 
         state.assemblies = this.getAssemblies(this.props.assemblies, state.grouping, state.sortby, state.sortorder);
+
+        var i, l;
+        for (i = 0, l = state.assemblies.length; i < l; i++) {
+            state.assemblies[i].updateCurrentHistoricCoverageData(state.historicCoverageExecutionTime);
+        }
 
         if (collapseState !== undefined) {
             this.restoreCollapseState(collapseState, state.assemblies);
@@ -390,6 +439,23 @@ var AssemblyComponent = React.createClass({
         var assemblies = this.getAssemblies(this.props.assemblies, grouping, this.state.sortby, this.state.sortorder);
         this.setState({ grouping: grouping, assemblies: assemblies });
     },
+    updateHistoricCoverageExecutionTime: function (historicCoverageExecutionTime) {
+        console.log("Updating historic coverage execution time: " + historicCoverageExecutionTime);
+        var i, l;
+        for (i = 0, l = this.state.assemblies.length; i < l; i++) {
+            this.state.assemblies[i].updateCurrentHistoricCoverageData(historicCoverageExecutionTime);
+        }
+
+        this.setState({
+            historicCoverageExecutionTime: historicCoverageExecutionTime,
+            assemblies: this.state.assemblies
+        });
+    },
+    updateHistoricCoverageChangesOnly: function (historicCoverageChangesOnly) {
+        console.log("Updating historic coverage changes only: " + historicCoverageChangesOnly);
+
+        this.setState({ historicCoverageChangesOnly: historicCoverageChangesOnly });
+    },
     updateFilter: function (filter) {
         filter = filter.toLowerCase();
 
@@ -423,7 +489,7 @@ var AssemblyComponent = React.createClass({
             }
         } catch (e) {
             // This can only happen if assembly structure was changed.
-            // That means the complete report was updated in the background and the reloaded in the same tab/window.
+            // That means the complete report was updated in the background and was reloaded in the same tab/window.
             console.log("Restoring of collapse state failed.");
         }
     },
@@ -465,13 +531,20 @@ var AssemblyComponent = React.createClass({
                 SearchBar({
                     groupingMaximum: this.state.groupingMaximum,
                     grouping: this.state.grouping,
+                    historicCoverageExecutionTime: this.state.historicCoverageExecutionTime,
+                    historicCoverageChangesOnly: this.state.historicCoverageChangesOnly,
                     filter: this.state.filter,
                     collapseAll: this.collapseAll,
                     expandAll: this.expandAll,
                     updateGrouping: this.updateGrouping,
-                    updateFilter: this.updateFilter
+                    updateHistoricCoverageExecutionTime: this.updateHistoricCoverageExecutionTime,
+                    updateHistoricCoverageChangesOnly: this.updateHistoricCoverageChangesOnly,
+                    updateFilter: this.updateFilter,
+                    historicCoverageExecutionTimes: this.props.historicCoverageExecutionTimes
                 }),
                 AssemblyTable({
+                    historicCoverageExecutionTime: this.state.historicCoverageExecutionTime,
+                    historicCoverageChangesOnly: this.state.historicCoverageChangesOnly,
                     filter: this.state.filter,
                     assemblies: this.state.assemblies,
                     sortby: this.state.sortby,
@@ -496,6 +569,12 @@ var SearchBar = React.createClass({
     groupingChangedHandler: function () {
         this.props.updateGrouping(this.refs.groupingInput.getDOMNode().value);
     },
+    historicCoverageExecutionTimeChanged: function () {
+        this.props.updateHistoricCoverageExecutionTime(this.refs.historicCoverageExecutionTimesSelect.getDOMNode().value);
+    },
+    historicCoverageChangesOnlyChanged: function () {
+        this.props.updateHistoricCoverageChangesOnly(this.refs.historicCoverageChangesOnlyCheckbox.getDOMNode().checked);
+    },
     filterChangedHandler: function () {
         this.props.updateFilter(this.refs.filterInput.getDOMNode().value);
     },
@@ -506,6 +585,36 @@ var SearchBar = React.createClass({
             groupingDescription = translations.noGrouping;
         } else if (this.props.grouping === '0') {
             groupingDescription = translations.byAssembly;
+        }
+
+        var historicCoverageExecutionTimesSelectContainer;
+
+        if (this.props.historicCoverageExecutionTimes.length > 1) {
+            var historicCoverageExecutionTimeOptions = [React.DOM.option({ value: '' }, translations.date)], i, l;
+            for (i = 0, l = this.props.historicCoverageExecutionTimes.length; i < l; i++) {
+                historicCoverageExecutionTimeOptions.push(React.DOM.option({
+                    value: this.props.historicCoverageExecutionTimes[i]
+                }, this.props.historicCoverageExecutionTimes[i]));
+            }
+
+            historicCoverageExecutionTimesSelectContainer = React.DOM.div({ className: 'center' },
+                React.DOM.div({ className: 'center' },
+                    React.DOM.span(null, translations.compareHistory + ' '),
+                    React.DOM.select({
+                        ref: 'historicCoverageExecutionTimesSelect',
+                        value: this.props.historicCoverageExecutionTime,
+                        onChange: this.historicCoverageExecutionTimeChanged
+                    }, historicCoverageExecutionTimeOptions)),
+                React.DOM.div(null,
+                    this.props.historicCoverageExecutionTime ? React.DOM.label(null, 
+                        React.DOM.input({
+                            type: 'checkbox',
+                            ref: 'historicCoverageChangesOnlyCheckbox',
+                            defaultChecked: this.props.historicCoverageChangesOnly,
+                            onChange: this.historicCoverageChangesOnlyChanged
+                        }), translations.changesOnly) : null));
+        } else {
+            historicCoverageExecutionTimesSelectContainer = React.DOM.div({ className: 'center' });
         }
 
         return (
@@ -527,6 +636,7 @@ var SearchBar = React.createClass({
                         value: this.props.grouping,
                         onChange: this.groupingChangedHandler
                     })),
+                historicCoverageExecutionTimesSelectContainer,
                 React.DOM.div({ className: 'right' },
                     React.DOM.span(null, translations.filter + ' '),
                     React.DOM.input({
@@ -544,7 +654,7 @@ var AssemblyTable = React.createClass({
     renderAllChilds: function (result, currentElement) {
         var i, l;
 
-        if (currentElement.visible(this.props.filter)) {
+        if (currentElement.visible(this.props.filter, this.props.historicCoverageChangesOnly, this.props.historicCoverageExecutionTime)) {
             if (currentElement.isNamespace) {
                 result.push(AssemblyRow({ assembly: currentElement,
                     branchCoverageAvailable: this.props.branchCoverageAvailable,
@@ -559,6 +669,7 @@ var AssemblyTable = React.createClass({
             } else {
                 result.push(ClassRow({
                     clazz: currentElement,
+                    historicCoverageExecutionTime: this.props.historicCoverageExecutionTime,
                     branchCoverageAvailable: this.props.branchCoverageAvailable
                 }));
             }
@@ -717,8 +828,17 @@ var AssemblyRow = React.createClass({
 });
 
 var ClassRow = React.createClass({
+    getClassName: function (current, history) {
+        if (current > history) {
+            return 'lightgreen';
+        } else if (current < history) {
+            return 'lightred';
+        } else {
+            return 'lightgraybg';
+        }
+    },
     render: function () {
-        var nameElement, greenHidden, redHidden, grayHidden, coverageTable, branchGreenHidden, branchRedHidden, branchGrayHidden, branchCoverageTable;
+        var nameElement, greenHidden, redHidden, grayHidden, i, l, coverageTable, branchGreenHidden, branchRedHidden, branchGrayHidden, branchCoverageTable;
 
         if (this.props.clazz.reportPath === '') {
             nameElement = React.DOM.span(null, this.props.clazz.name);
@@ -753,27 +873,37 @@ var ClassRow = React.createClass({
         return (
             React.DOM.tr({ className: this.props.clazz.parent.parent !== null ? 'namespace' : null },
                 React.DOM.td(null, nameElement),
-                React.DOM.td({ className: 'right' }, this.props.clazz.coveredLines),
-                React.DOM.td({ className: 'right' }, this.props.clazz.uncoveredLines),
-                React.DOM.td({ className: 'right' }, this.props.clazz.coverableLines),
-                React.DOM.td({ className: 'right' }, this.props.clazz.totalLines),
+                React.DOM.td({ className: 'right' },
+                    this.props.clazz.currentHistoricCoverageData ? React.DOM.div({ className: 'currenthistory ' + this.getClassName(this.props.clazz.coveredLines, this.props.clazz.currentHistoricCoverageData.coveredLines) }, this.props.clazz.coveredLines) : this.props.clazz.coveredLines,
+                    this.props.clazz.currentHistoricCoverageData ? React.DOM.div({ title: this.props.historicCoverageExecutionTime }, this.props.clazz.currentHistoricCoverageData.coveredLines) : null),
+                React.DOM.td({ className: 'right' },
+                    this.props.clazz.currentHistoricCoverageData ? React.DOM.div({ className: 'currenthistory ' + this.getClassName(this.props.clazz.currentHistoricCoverageData.uncoveredLines, this.props.clazz.uncoveredLines) }, this.props.clazz.uncoveredLines) : this.props.clazz.uncoveredLines,
+                    this.props.clazz.currentHistoricCoverageData ? React.DOM.div({ title: this.props.historicCoverageExecutionTime }, this.props.clazz.currentHistoricCoverageData.uncoveredLines) : null),
+                React.DOM.td({ className: 'right' },
+                    this.props.clazz.currentHistoricCoverageData ? React.DOM.div({ className: 'currenthistory' }, this.props.clazz.coverableLines) : this.props.clazz.coverableLines,
+                    this.props.clazz.currentHistoricCoverageData ? React.DOM.div({ title: this.props.historicCoverageExecutionTime }, this.props.clazz.currentHistoricCoverageData.coverableLines) : null),
+                React.DOM.td({ className: 'right' },
+                    this.props.clazz.currentHistoricCoverageData ? React.DOM.div({ className: 'currenthistory' }, this.props.clazz.totalLines) : this.props.clazz.totalLines,
+                    this.props.clazz.currentHistoricCoverageData ? React.DOM.div({ title: this.props.historicCoverageExecutionTime }, this.props.clazz.currentHistoricCoverageData.totalLines) : null),
                 React.DOM.td({ className: 'right', title: this.props.clazz.coverageTitle },
                     CoverageHistoryChart({
                         historicCoverage: this.props.clazz.lineCoverageHistory,
-                        cssClass: 'tinylinecoveragechart',
+                        cssClass: 'tinylinecoveragechart' + (this.props.clazz.currentHistoricCoverageData ? ' historiccoverageoffset' : ''),
                         title: translations.history + ": " + translations.coverage,
                         id: 'chart' + createRandomId(8)
                     }),
-                    this.props.clazz.coveragePercent),
+                    this.props.clazz.currentHistoricCoverageData ? React.DOM.div({ className: 'currenthistory ' + this.getClassName(this.props.clazz.coverage, this.props.clazz.currentHistoricCoverageData.coverageQuota) }, this.props.clazz.coveragePercent) : this.props.clazz.coveragePercent,
+                    this.props.clazz.currentHistoricCoverageData ? React.DOM.div({ title: this.props.historicCoverageExecutionTime }, this.props.clazz.currentHistoricCoverageData.coverageQuota + '%') : null),
                 React.DOM.td(null, coverageTable),
                 this.props.branchCoverageAvailable ? React.DOM.td({ className: 'right' },
                     CoverageHistoryChart({
                         historicCoverage: this.props.clazz.branchCoverageHistory,
-                        cssClass: 'tinybranchcoveragechart',
+                        cssClass: 'tinybranchcoveragechart' + (this.props.clazz.currentHistoricCoverageData ? ' historiccoverageoffset' : ''),
                         title: translations.history + ": " + translations.branchCoverage,
                         id: 'chart' + createRandomId(8)
                     }),
-                    this.props.clazz.branchCoveragePercent) : null,
+                    this.props.clazz.currentHistoricCoverageData ? React.DOM.div({ className: 'currenthistory ' + this.getClassName(this.props.clazz.branchCoverage, this.props.clazz.currentHistoricCoverageData.branchCoverageQuota) }, this.props.clazz.branchCoveragePercent) : this.props.clazz.branchCoveragePercent,
+                    this.props.clazz.currentHistoricCoverageData ? React.DOM.div({ title: this.props.historicCoverageExecutionTime }, this.props.clazz.currentHistoricCoverageData.branchCoverageQuota + '%') : null) : null,
                 this.props.branchCoverageAvailable ? React.DOM.td(null, branchCoverageTable) : null)
         );
     }

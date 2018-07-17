@@ -61,6 +61,7 @@ CHANGELOG
     * New: Issue #131: Linked method metric names to code location
     * New: Improved Latex and XML reports
     * New: Added Coberatura as output format
+    * New: Issue #141: Compare with historic coverage
     * Fix: Issue #127: Fixed coverage calculation for NCover
     * Fix: Issue #133: Empty Risk Hotspots section when no risk hotspot exists
     * Fix: Issue #135: Handling of NaN in metrics of Cobertura files
@@ -95,7 +96,7 @@ CHANGELOG
     * New: Issue #99: Added new command line parameter "-tag" to add a custom text to reports and historic charts
     * New: Issue #101: Added stripped rows on summary table
     * Change: Dropped support for legacy command line parameters
-    * Change: Change 'IReportBuilder' interface which is used for custom reports
+    * Change: Changed 'IReportBuilder' interface which is used for custom reports
 
 2.5.11.0
 

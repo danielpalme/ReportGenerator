@@ -4,6 +4,7 @@ function SummaryViewCtrl($scope, $window) {
 
     $scope.coverageTableFilteringEnabled = false;
     $scope.assemblies = [];
+    $scope.historicCoverageExecutionTimes = [];
     $scope.branchCoverageAvailable = branchCoverageAvailable;
 
     $scope.riskHotspots = riskHotspots;
@@ -13,6 +14,7 @@ function SummaryViewCtrl($scope, $window) {
         console.log("Enabling filtering");
 
         $scope.assemblies = assemblies;
+        $scope.historicCoverageExecutionTimes = historicCoverageExecutionTimes;
         $scope.coverageTableFilteringEnabled = true;
     };
 
@@ -107,12 +109,13 @@ coverageApp.directive('reactiveCoverageTable', function () {
         restrict: 'A',
         scope: {
             assemblies: '=',
+            historicCoverageExecutionTimes: '=',
             branchCoverageAvailable: '='
         },
         link: function (scope, el, attrs) {
             scope.$watchCollection('assemblies', function (newValue, oldValue) {
                 React.renderComponent(
-                    AssemblyComponent({ assemblies: newValue, branchCoverageAvailable: scope.branchCoverageAvailable }),
+                    AssemblyComponent({ assemblies: newValue, historicCoverageExecutionTimes: scope.historicCoverageExecutionTimes, branchCoverageAvailable: scope.branchCoverageAvailable }),
                     el[0]);
             });
         }
