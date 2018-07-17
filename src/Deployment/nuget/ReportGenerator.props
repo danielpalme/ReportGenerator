@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
-  <UsingTask TaskName="ReportGenerator" AssemblyFile="$(MSBuildThisFileDirectory)\..\tools\ReportGenerator.exe" />
+  <PropertyGroup>
+    <ReportGeneratorAssembly>$(MSBuildThisFileDirectory)\..\tools\ReportGenerator.exe</ReportGeneratorAssembly>
+  </PropertyGroup>
+  <UsingTask TaskName="ReportGenerator" AssemblyFile="$(ReportGeneratorAssembly)" />
 </Project>
