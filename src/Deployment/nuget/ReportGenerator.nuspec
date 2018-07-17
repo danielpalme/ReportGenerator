@@ -25,5 +25,6 @@
     <file src="..\..\target\bin\Release\ReportGenerator.Reporting.XML" target="tools" />
     <file src="..\..\target\bin\Release\LICENSE.txt" target="LICENSE.txt" />
     <file src="..\..\target\bin\Release\Readme.txt" target="Readme.txt" />
+    <file src=".\ReportGenerator.props" target="build" />
   </files>
 </package>
