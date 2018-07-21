@@ -426,7 +426,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 this.javaScriptContent.Append("var historicCoverageExecutionTimes = [");
                 int historicCoverageExecutionTimesCounter = 0;
 
-                foreach (var item in historicCoverageExecutionTimes.OrderByDescending(i => i).Take(100).ToList())
+                foreach (var item in historicCoverageExecutionTimes.OrderByDescending(i => i).Skip(1).Take(100).ToList())
                 {
                     if (historicCoverageExecutionTimesCounter++ > 0)
                     {

@@ -589,7 +589,7 @@ var SearchBar = React.createClass({
 
         var historicCoverageExecutionTimesSelectContainer;
 
-        if (this.props.historicCoverageExecutionTimes.length > 1) {
+        if (this.props.historicCoverageExecutionTimes.length > 0) {
             var historicCoverageExecutionTimeOptions = [React.DOM.option({ value: '' }, translations.date)], i, l;
             for (i = 0, l = this.props.historicCoverageExecutionTimes.length; i < l; i++) {
                 historicCoverageExecutionTimeOptions.push(React.DOM.option({
