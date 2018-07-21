@@ -59,7 +59,7 @@ namespace Palmmedia.ReportGenerator.Core.Plugin
                 }
                 catch (Exception)
                 {
-                    if (!file.Contains("ReportGenerator.Core.Test.dll") && !file.Contains("xunit.runner"))
+                    if (!file.Contains("ReportGenerator.Core.Test.dll") && !file.Contains("System.Runtime.") && !file.Contains("xunit.runner"))
                     {
                         Logger.Error(string.Format(Resources.FailedToLoadPlugins, file));
                     }

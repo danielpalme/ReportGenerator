@@ -28,6 +28,7 @@ dotnet reportgenerator [options]</description>
     </packageTypes>
     <dependencies>
       <group targetFramework=".NETCoreApp2.0">
+        <dependency id="Microsoft.Build.Utilities.Core" version="15.7.179" />
         <dependency id="Microsoft.Extensions.Configuration" version="2.1.0" />
         <dependency id="Microsoft.Extensions.Configuration.Binder" version="2.1.0" />
         <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="2.1.0" />

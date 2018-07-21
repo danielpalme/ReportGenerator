@@ -25,8 +25,8 @@
 
   <!-- Version, adjust before build -->
   <PropertyGroup>
-    <Version>4.0.0-alpha13</Version>
-    <VersionShort>4.0.0-alpha13</VersionShort>
+    <Version>4.0.0-rc1</Version>
+    <VersionShort>4.0.0-rc1</VersionShort>
   </PropertyGroup>
   
   <!-- Tools -->
@@ -95,7 +95,7 @@
   <Target Name="Deploy" DependsOnTargets="Clean; Compile; Report;">
     <ItemGroup>
       <ZipFileContentBase Include="target\bin\Release\LICENSE.txt;target\bin\Release\Readme.txt" />
-      <ZipFileContentNet47 Include="target\bin\Release\appsettings.json;target\bin\Release\Microsoft.Extensions*.dll;target\bin\Release\Microsoft.Win32.Primitives.dll;target\bin\Release\netstandard.dll;target\bin\Release\ReportGenerator.Core.dll;target\bin\Release\ReportGenerator.exe;target\bin\Release\ReportGenerator.exe.config;target\bin\Release\SixLabors.*.dll;target\bin\Release\System.*.dll" />
+      <ZipFileContentNet47 Include="target\bin\Release\appsettings.json;target\bin\Release\Microsoft.Build.*.dll;target\bin\Release\Microsoft.Extensions*.dll;target\bin\Release\Microsoft.Win32.Primitives.dll;target\bin\Release\netstandard.dll;target\bin\Release\ReportGenerator.Core.dll;target\bin\Release\ReportGenerator.exe;target\bin\Release\ReportGenerator.exe.config;target\bin\Release\SixLabors.*.dll;target\bin\Release\System.*.dll" />
       <ZipFileContentNetCore Include="target\bin\Release\netcoreapp2.0\publish\**\*.*"/>
     </ItemGroup>
     <MakeDir Directories="tmpzip" />

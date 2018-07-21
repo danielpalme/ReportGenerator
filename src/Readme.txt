@@ -59,6 +59,7 @@ CHANGELOG
     * New: Issue #112: Added support for .NET Core
     * New: Issue #126: Usage of multiple cores during report generation
     * New: Issue #131: Linked method metric names to code location
+    * New: Issue #143: Added MSBuild task definition to the NuGet package
     * New: Improved Latex and XML reports
     * New: Added Coberatura as output format
     * New: Issue #141: Compare with historic coverage
