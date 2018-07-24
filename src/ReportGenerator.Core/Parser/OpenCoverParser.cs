@@ -141,6 +141,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                             || c.Element("FullName").Value.StartsWith(className + "/", StringComparison.Ordinal))
                 .Elements("Methods")
                 .Elements("Method")
+                .Where(m => m.Attribute("skippedDueTo") == null)
                 .ToArray();
 
             var fileIdsOfClassInSequencePoints = methods

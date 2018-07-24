@@ -18,7 +18,7 @@ The following [output formats](https://github.com/danielpalme/ReportGenerator/wi
 
 **Compatibility:**
 * [OpenCover](https://github.com/OpenCover/opencover) ([Nuget](https://www.nuget.org/packages/OpenCover))  
-  OpenCover format is also supported by [Coverlet](https://github.com/tonerdo/coverlet/) and [altcover](https://github.com/SteveGilham/altcover)
+  OpenCover format is also supported by [coverlet](https://github.com/tonerdo/coverlet/) and [altcover](https://github.com/SteveGilham/altcover)
 * [dotCover](https://www.jetbrains.com/dotcover/help/dotCover__Console_Runner_Commands.html) ([Nuget](https://www.nuget.org/packages/JetBrains.dotCover.CommandLineTools/), /ReportType=DetailedXML)
 * Visual Studio ([vstest.console.exe](https://github.com/danielpalme/ReportGenerator/wiki/Visual-Studio-Coverage-Tools#vstestconsoleexe), [CodeCoverage.exe](https://github.com/danielpalme/ReportGenerator/wiki/Visual-Studio-Coverage-Tools#codecoverageexe))
 * [NCover](https://www.ncover.com/info/download) (tested version 1.5.8, other versions may not work)

@@ -82,21 +82,6 @@ namespace Palmmedia.ReportGenerator.Core
                 }
             }
 
-            //while (this.reportFiles.Count < 500)
-            //{
-            //    foreach (var reportFilePattern in reportFilePatterns)
-            //    {
-            //        try
-            //        {
-            //            this.reportFiles.AddRange(FileSearch.GetFiles(reportFilePattern));
-            //        }
-            //        catch (Exception)
-            //        {
-            //            this.invalidReportFilePatterns.Add(reportFilePattern);
-            //        }
-            //    }
-            //}
-
             this.TargetDirectory = targetDirectory ?? throw new ArgumentNullException(nameof(targetDirectory));
             this.HistoryDirectory = historyDirectory;
 
