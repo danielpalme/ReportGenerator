@@ -26,9 +26,9 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 \usepackage{{fancyhdr}}
 \usepackage[pdftex]{{color}}
 \usepackage{{colortbl}}
-\definecolor{{green}}{{rgb}}{{0,1,0.12}}
+\definecolor{{green}}{{rgb}}{{0.04,0.68,0.04}}
 \definecolor{{orange}}{{rgb}}{{0.97,0.65,0.12}}
-\definecolor{{red}}{{rgb}}{{1,0,0}}
+\definecolor{{red}}{{rgb}}{{0.75,0.04,0.04}}
 \definecolor{{gray}}{{rgb}}{{0.86,0.86,0.86}}
 
 \usepackage[pdftex,

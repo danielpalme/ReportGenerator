@@ -46,56 +46,56 @@ div.currenthistory { margin: -2px -5px 0 -5px; padding: 2px 5px 2px 5px; height:
     padding-left: 3px;
 }
 .percentagebar0 {
-    border-left: 2px solid #f00;
+    border-left: 2px solid #c10909;
     padding-left: 3px;
 }
 .percentagebar10 {
     border-left: 2px solid;
-    border-image: linear-gradient(to bottom, #f00 90%, #00ff21 90%, #00ff21 100%) 1;
+    border-image: linear-gradient(to bottom, #c10909 90%, #0aad0a 90%, #0aad0a 100%) 1;
     padding-left: 3px;
 }
 .percentagebar20 {
     border-left: 2px solid;
-    border-image: linear-gradient(to bottom, #f00 80%, #00ff21 80%, #00ff21 100%) 1;
+    border-image: linear-gradient(to bottom, #c10909 80%, #0aad0a 80%, #0aad0a 100%) 1;
     padding-left: 3px;
 }
 .percentagebar30 {
     border-left: 2px solid;
-    border-image: linear-gradient(to bottom, #f00 70%, #00ff21 70%, #00ff21 100%) 1;
+    border-image: linear-gradient(to bottom, #c10909 70%, #0aad0a 70%, #0aad0a 100%) 1;
     padding-left: 3px;
 }
 .percentagebar40 {
     border-left: 2px solid;
-    border-image: linear-gradient(to bottom, #f00 60%, #00ff21 60%, #00ff21 100%) 1;
+    border-image: linear-gradient(to bottom, #c10909 60%, #0aad0a 60%, #0aad0a 100%) 1;
     padding-left: 3px;
 }
 .percentagebar50 {
     border-left: 2px solid;
-    border-image: linear-gradient(to bottom, #f00 50%, #00ff21 50%, #00ff21 100%) 1;
+    border-image: linear-gradient(to bottom, #c10909 50%, #0aad0a 50%, #0aad0a 100%) 1;
     padding-left: 3px;
 }
 .percentagebar60 {
     border-left: 2px solid;
-    border-image: linear-gradient(to bottom, #f00 40%, #00ff21 40%, #00ff21 100%) 1;
+    border-image: linear-gradient(to bottom, #c10909 40%, #0aad0a 40%, #0aad0a 100%) 1;
     padding-left: 3px;
 }
 .percentagebar70 {
     border-left: 2px solid;
-    border-image: linear-gradient(to bottom, #f00 30%, #00ff21 30%, #00ff21 100%) 1;
+    border-image: linear-gradient(to bottom, #c10909 30%, #0aad0a 30%, #0aad0a 100%) 1;
     padding-left: 3px;
 }
 .percentagebar80 {
     border-left: 2px solid;
-    border-image: linear-gradient(to bottom, #f00 20%, #00ff21 20%, #00ff21 100%) 1;
+    border-image: linear-gradient(to bottom, #c10909 20%, #0aad0a 20%, #0aad0a 100%) 1;
     padding-left: 3px;
 }
 .percentagebar90 {
     border-left: 2px solid;
-    border-image: linear-gradient(to bottom, #f00 10%, #00ff21 10%, #00ff21 100%) 1;
+    border-image: linear-gradient(to bottom, #c10909 10%, #0aad0a 10%, #0aad0a 100%) 1;
     padding-left: 3px;
 }
 .percentagebar100 {
-    border-left: 2px solid #00ff21;
+    border-left: 2px solid #0aad0a;
     padding-left: 3px;
 }
 
@@ -104,9 +104,9 @@ div.currenthistory { margin: -2px -5px 0 -5px; padding: 2px 5px 2px 5px; height:
 .center { text-align: center; }
 .rightmargin  { padding-right: 8px; }
 .leftmargin { padding-left: 5px; }
-.green { background-color: #00ff21; }
+.green { background-color: #0aad0a; }
 .lightgreen { background-color: #dcf4dc; }
-.red { background-color: #f00; }
+.red { background-color: #c10909; }
 .lightred { background-color: #f7dede; }
 .orange { background-color: #FFA500; }
 .lightorange { background-color: #FFEFD5; }

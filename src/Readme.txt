@@ -63,6 +63,7 @@ CHANGELOG
     * New: Improved Latex and XML reports
     * New: Added Coberatura as output format
     * New: Issue #141: Compare with historic coverage
+    * New: Issue #151: Reduced color brightness
     * Fix: Issue #127: Fixed coverage calculation for NCover
     * Fix: Issue #133: Empty Risk Hotspots section when no risk hotspot exists
     * Fix: Issue #135: Handling of NaN in metrics of Cobertura files
