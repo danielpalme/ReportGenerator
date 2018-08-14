@@ -19,7 +19,7 @@
     </section>
     <div class="container" style="padding-top: 100px">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-7">
                 <form>
                     <h3>Environment</h3>
                     <div class="radio" ng-repeat="environment in environments track by environment.name">
@@ -57,6 +57,7 @@
                     <br/>
 
                     <h3>Report types</h3>
+                    <div class="alert alert-info">Download <a href="https://danielpalme.github.io/ReportGenerator/resources/SampleReports.zip">sample reports</a></div>
                     <div class="checkbox" ng-repeat="reporttype in reporttypes track by reporttype.name">
                         <label>
                             <input type="checkbox" ng-model="reporttype.checked" /> <b>{{reporttype.name }}</b><br/>
@@ -126,18 +127,32 @@
                     </div>
                 </form>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <div class="hidden-md hidden-lg">
                     <h3>Instructions</h3>
                     Install <a ng-href="{{selectedpackage.url}}" target="_blank">{{selectedpackage.name}}</a>
-                    
+                    <br />
+                    <br />
+                    <div ng-repeat="installoption in selectedpackage.installoptions track by installoption.tool">
+                        <b>{{installoption.tool}}</b><br/>
+                        <div ng-if="installoption.hint">{{installoption.hint}}</div>
+                        <pre>{{installoption.command}}</pre>
+                    </div>
+                    <br />
                     <h4>Usage</h4>
                     <pre>{{getUsage()}}</pre>
                 </div>
                 <div class="hidden-xs hidden-sm" style="position: fixed;">
                     <h3>Instructions</h3>
                     Install <a ng-href="{{selectedpackage.url}}" target="_blank">{{selectedpackage.name}}</a>
-
+                    <br />
+                    <br />
+                    <div ng-repeat="installoption in selectedpackage.installoptions track by installoption.tool">
+                        <b>{{installoption.tool}}</b><br/>
+                        <div ng-if="installoption.hint">{{installoption.hint}}</div>
+                        <pre>{{installoption.command}}</pre>
+                    </div>
+                    <br />
                     <h4>Usage</h4>
                     <pre>{{getUsage()}}</pre>
                 </div>
@@ -158,21 +173,34 @@
                     url: 'https://www.nuget.org/packages/ReportGenerator', 
                     runtimes: '.NET Framework;.NET Core', 
                     description: 'Use this package if your project is based on .NET Framework or .NET Core and you want to use ReportGenerator via the command line or a build script.',
-                    executables: ['$(UserProfile)\\.nuget\\packages\\reportgenerator\\x.y.z\\tools\\net47\\ReportGenerator.exe', 'dotnet $(UserProfile)\\.nuget\\packages\\reportgenerator\\x.y.z\\tools\\netcoreapp2.0\\ReportGenerator.dll']
+                    installoptions: [
+                        { tool: 'Package Manager', command: 'Install-Package ReportGenerator -Version x.y.z' },
+                        { tool: '.NET CLI', command: 'dotnet add package ReportGenerator --version x.y.z' }
+                    ],
+                    executables: [
+                        { runtime: '.NET Framework', tool: '$(UserProfile)\\.nuget\\packages\\reportgenerator\\x.y.z\\tools\\net47\\ReportGenerator.exe' },
+                        { runtime: '.NET Core', tool: 'dotnet $(UserProfile)\\.nuget\\packages\\reportgenerator\\x.y.z\\tools\\netcoreapp2.0\\ReportGenerator.dll' }
+                    ]
                 },
                 { 
                     name: 'dotnet-reportgenerator-cli', 
                     url: 'https://www.nuget.org/packages/dotnet-reportgenerator-cli', 
                     runtimes: '.NET Core', 
                     description: 'Use this package if your project is based on .NET Core and you want to use ReportGenerator as a \'DotnetCliTool\'.',
-                    executables: ['dotnet reportgenerator']
+                    installoptions: [
+                        { tool: 'Manual', hint: 'Add the following element to your project file:', command: '<DotNetCliToolReference Include="dotnet-reportgenerator-cli" Version="x.y.z" />' }
+                    ],
+                    executables: [{ runtime: '.NET Core', tool: 'dotnet reportgenerator' }]
                 },
                 { 
                     name: 'dotnet-reportgenerator-globaltool',
                     url: 'https://www.nuget.org/packages/dotnet-reportgenerator-globaltool', 
                     runtimes: '.NET Core', 
                     description: 'Use this package if your project is based on .NET Core and you want to use ReportGenerator as a (global) \'DotnetTool\'.',
-                    executables: ['reportgenerator']
+                    installoptions: [
+                        { tool: '.NET CLI', command: 'dotnet tool install --global dotnet-reportgenerator-globaltool --version x.y.z' }
+                    ],
+                    executables: [{ runtime: '.NET Core', tool: 'reportgenerator' }]
                 }
             ];
             $scope.verbosities = ['Verbose', 'Info', 'Warning', 'Error', 'Off'];
@@ -187,6 +215,7 @@
                 { name: 'HTMLInline', description: 'Same as HTML but CSS and JavaScript is included in every HTML page. This results in larger file sizes, but can be useful for integration into build servers like VSTS, since they may block referenced CSS and JavaScript files.', checked: false  },
                 { name: 'HTMLChart', description: 'Creates a single HTML file containing a chart with historic coverage information.', checked: false },
                 { name: 'MHTML', description: 'Same as HTML but packaged into a single MHTML file.', checked: false },
+                { name: 'Cobertura', description: 'Creates a XML file in Cobertura format. This format integrates with tools like VSTS or Jenkins.', checked: false },
                 { name: 'XML', description: 'Creates a XML file containing a summary for all classes and detailed reports for each class.', checked: false },
                 { name: 'XMLSummary', description: 'Creates a single XML file containing a summary for all classes.', checked: false },
                 { name: 'Latex', description: 'Creates a single TEX file containing a summary for all classes and detailed reports for each class.', checked: false },
@@ -352,11 +381,15 @@
                 var result = '';
 
                 for (var i = 0; i < $scope.selectedpackage.executables.length; i++) {
-                    if (i > 0) {
+                    if ($scope.selectedpackage.executables[i].runtime !== $scope.selectedenvironment.name) {
+                        continue;
+                    }
+
+                    if (result.length > 0) {
                         result += '\r\n\r\n';
                     }
                     
-                    result += $scope.selectedpackage.executables[i];
+                    result += $scope.selectedpackage.executables[i].tool;
                     result += '\r\n';
                     result += commandLineParameters;
                 }

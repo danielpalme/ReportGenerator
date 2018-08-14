@@ -6,7 +6,7 @@ The reports do not only show the coverage quota, but also include the source cod
 *ReportGenerator* supports merging several reports into one.
 It is also possible to pass one XML file containing several reports to *ReportGenerator* (e.g. a build log file).
 
-The following [output formats](https://github.com/danielpalme/ReportGenerator/wiki/Output-formats) are supported by *ReportGenerator*:
+The following [output formats](https://github.com/danielpalme/ReportGenerator/wiki/Output-formats) are supported by *ReportGenerator* ([Download sample reports](https://danielpalme.github.io/ReportGenerator/resources/SampleReports.zip)):
 * HTML, HTMLSummary, HTMLInline, HTMLChart, [MHTML](https://en.wikipedia.org/wiki/MHTML)
 * Cobertura
 * XML, XMLSummary
@@ -43,7 +43,9 @@ Badges in SVG and PNG format can be generated if `-reporttypes:Badges` is used:
 
 ## Usage
 *ReportGenerator* is a commandline tool which works with full .NET Framework and .NET Core.  
-It requires the following parameters:
+Use the online [configuration tool](https://danielpalme.github.io/ReportGenerator/usage.html) to get started quickly.
+
+*ReportGenerator* requires the following parameters:
 
 ```
 Parameters:
