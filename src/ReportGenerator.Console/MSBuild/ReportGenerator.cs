@@ -102,6 +102,11 @@ namespace Palmmedia.ReportGenerator.MSBuild
         public string Tag { get; set; }
 
         /// <summary>
+        /// Option to include implicit branches while calculating branch coverage.
+        /// </summary>
+        private bool includeImplicitBranches = false;
+
+        /// <summary>
         /// When overridden in a derived class, executes the task.
         /// </summary>
         /// <returns>
@@ -129,7 +134,9 @@ namespace Palmmedia.ReportGenerator.MSBuild
                 this.ClassFilters == null ? Enumerable.Empty<string>() : this.ClassFilters.Select(r => r.ItemSpec),
                 this.FileFilters == null ? Enumerable.Empty<string>() : this.FileFilters.Select(r => r.ItemSpec),
                 this.VerbosityLevel,
-                this.Tag);
+                this.Tag,
+                this.includeImplicitBranches
+                );
 
             return new Generator().GenerateReport(configuration);
         }

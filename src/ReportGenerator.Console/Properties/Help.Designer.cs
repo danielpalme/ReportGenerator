@@ -19,7 +19,7 @@ namespace Palmmedia.ReportGenerator.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Help {
@@ -79,6 +79,15 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Include Implicit Branches: Option to specify whether implicit brances are to be considered while reporting branch coverage..
+        /// </summary>
+        internal static string Explaination14 {
+            get {
+                return ResourceManager.GetString("Explaination14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Explanations:.
         /// </summary>
         internal static string Explanations {
@@ -124,7 +133,7 @@ namespace Palmmedia.ReportGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Optional tag or build version..
+        ///   Looks up a localized string similar to Tag:                Optional tag or build version..
         /// </summary>
         internal static string Explanations13 {
             get {
@@ -201,6 +210,15 @@ namespace Palmmedia.ReportGenerator.Properties {
         internal static string Explanations9 {
             get {
                 return ResourceManager.GetString("Explanations9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [[&quot;]-includeimplicitbranches:&lt;true/false&gt;[&quot;]].
+        /// </summary>
+        internal static string Parameter11 {
+            get {
+                return ResourceManager.GetString("Parameter11", resourceCulture);
             }
         }
         

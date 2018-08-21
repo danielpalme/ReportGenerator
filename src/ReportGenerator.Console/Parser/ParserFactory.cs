@@ -24,10 +24,11 @@ namespace Palmmedia.ReportGenerator.Parser
         /// </summary>
         /// <param name="reportFiles">The report files to parse.</param>
         /// <param name="sourceDirectories">The source directories.</param>
+        /// <param name="parserOptions">Options for parser.</param>
         /// <returns>
         /// The IParser instance.
         /// </returns>
-        internal static IParser CreateParser(IEnumerable<string> reportFiles, IEnumerable<string> sourceDirectories)
+        internal static IParser CreateParser(IEnumerable<string> reportFiles, IEnumerable<string> sourceDirectories, IParserOptions parserOptions = null)
         {
             if (reportFiles == null)
             {
@@ -41,7 +42,7 @@ namespace Palmmedia.ReportGenerator.Parser
 
             foreach (var report in reportFiles)
             {
-                foreach (var parser in GetParsersOfFile(report, classSearcherFactory, globalClassSearcher))
+                foreach (var parser in GetParsersOfFile(report, classSearcherFactory, globalClassSearcher, parserOptions))
                 {
                     multiReportParser.AddParser(parser);
                 }
@@ -57,10 +58,11 @@ namespace Palmmedia.ReportGenerator.Parser
         /// <param name="reportFile">The report file to parse.</param>
         /// <param name="classSearcherFactory">The class searcher factory.</param>
         /// <param name="globalClassSearcher">The global class searcher.</param>
+        /// <param name="parserOptions">Options for parser.</param>
         /// <returns>
         /// The IParser instances or an empty list if no matching parser has been found.
         /// </returns>
-        private static IEnumerable<IParser> GetParsersOfFile(string reportFile, ClassSearcherFactory classSearcherFactory, ClassSearcher globalClassSearcher)
+        private static IEnumerable<IParser> GetParsersOfFile(string reportFile, ClassSearcherFactory classSearcherFactory, ClassSearcher globalClassSearcher, IParserOptions parserOptions)
         {
             var parsers = new List<IParser>();
 
@@ -83,7 +85,7 @@ namespace Palmmedia.ReportGenerator.Parser
                     Logger.Debug(" " + Resources.PreprocessingReport);
                     new OpenCoverReportPreprocessor(item).Execute();
                     Logger.DebugFormat(" " + Resources.InitiatingParser, "OpenCover");
-                    parsers.Add(new OpenCoverParser(item));
+                    parsers.Add(new OpenCoverParser(item, parserOptions));
                 }
             }
             else if (report.Descendants("Root").Where(e => e.Attribute("ReportType") != null && e.Attribute("ReportType").Value == "DetailedXml").Any())

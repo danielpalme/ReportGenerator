@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Xml.XPath;
 using Palmmedia.ReportGenerator.Common;
 using Palmmedia.ReportGenerator.Logging;
 using Palmmedia.ReportGenerator.Parser.Analysis;
@@ -46,7 +47,8 @@ namespace Palmmedia.ReportGenerator.Parser
         /// Initializes a new instance of the <see cref="OpenCoverParser"/> class.
         /// </summary>
         /// <param name="report">The report file as XContainer.</param>
-        internal OpenCoverParser(XContainer report)
+        /// <param name="parserOptions">Options related to how the report is parsed.</param>
+        internal OpenCoverParser(XContainer report, IParserOptions parserOptions = null)
         {
             if (report == null)
             {
@@ -66,7 +68,7 @@ namespace Palmmedia.ReportGenerator.Parser
                 .OrderBy(a => a)
                 .ToArray();
 
-            Parallel.ForEach(assemblyNames, assemblyName => this.AddAssembly(this.ProcessAssembly(assemblyName)));
+            Parallel.ForEach(assemblyNames, assemblyName => this.AddAssembly(this.ProcessAssembly(assemblyName, parserOptions)));
 
             this.modules = null;
             this.files = null;
@@ -152,18 +154,23 @@ namespace Palmmedia.ReportGenerator.Parser
         /// </summary>
         /// <param name="methods">The methods.</param>
         /// <param name="fileIds">The file ids of the class.</param>
+        /// <param name="parserOptions">Options related to how the coverage is calculated.</param>
         /// <returns>The branches by line number.</returns>
-        private static Dictionary<int, ICollection<Branch>> GetBranches(XElement[] methods, HashSet<string> fileIds)
+        private static Dictionary<int, ICollection<Branch>> GetBranches(XElement[] methods, HashSet<string> fileIds, IParserOptions parserOptions)
         {
             var result = new Dictionary<int, ICollection<Branch>>();
 
             var branchPoints = methods
                 .Elements("BranchPoints")
-                .Elements("BranchPoint")
-                .ToArray();
+                .Elements("BranchPoint").ToList();
+
+            if (parserOptions != null && parserOptions.ImplicitBranchCoverage)
+            {
+                AddBranchPointsForImplicitBranches(methods, branchPoints);
+            }
 
             // OpenCover supports this since version 4.5.3207
-            if (branchPoints.Length == 0 || branchPoints[0].Attribute("sl") == null)
+            if (branchPoints.Count() == 0 || branchPoints.First().Attribute("sl") == null)
             {
                 return result;
             }
@@ -215,6 +222,45 @@ namespace Palmmedia.ReportGenerator.Parser
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Adds branch points for implicit branches (i.e. methods with no branches as such, have some code to be touched).
+        /// </summary>
+        /// <param name="methods">Method nodes</param>
+        /// <param name="branchPointsCollection">The collection of branch points.</param>
+        private static void AddBranchPointsForImplicitBranches(XElement[] methods, IList<XElement> branchPointsCollection)
+        {
+            var validMethods = methods.Where(m => m.Element("FileRef") != null && 
+                                                  !m.Element("BranchPoints").HasElements);
+
+            foreach (var method in validMethods)
+            {
+                var fileId = method.Element("FileRef").Attribute("uid").Value;
+
+                string vc = "0";
+
+                // if any sequence point has non-zero visited count, consider that branch visited status for the implicit branch.
+                if (method.XPathSelectElement("./SequencePoints/SequencePoint[@vc != '0']") != null)
+                {
+                    vc = "1";
+                }
+
+                // to link branch by line, pick the line number of first sequence point (i.e. first line of the method).
+                var firstSeqPoint = method.XPathSelectElement("./SequencePoints/SequencePoint");
+                var sl = (firstSeqPoint != null) ? firstSeqPoint.Attribute("sl").Value : "0";
+                var newBranchPoint = new XElement("BranchPoint", 
+                    new XAttribute("vc", vc),
+                    new XAttribute("fileid", fileId),
+                    new XAttribute("uspid", "0"),
+                    new XAttribute("path", "0"),
+                    new XAttribute("ordinal", "0"),
+                    new XAttribute("offset", "0"),
+                    new XAttribute("offsetend", "0"),
+                    new XAttribute("sl", sl));
+
+                branchPointsCollection.Add(newBranchPoint);
+            }
         }
 
         /// <summary>
@@ -278,8 +324,9 @@ namespace Palmmedia.ReportGenerator.Parser
         /// Processes the given assembly.
         /// </summary>
         /// <param name="assemblyName">Name of the assembly.</param>
+        /// <param name="parserOptions">Options related to parsing.</param>
         /// <returns>The <see cref="Assembly"/>.</returns>
-        private Assembly ProcessAssembly(string assemblyName)
+        private Assembly ProcessAssembly(string assemblyName, IParserOptions parserOptions)
         {
             Logger.DebugFormat("  " + Resources.CurrentAssembly, assemblyName);
 
@@ -308,7 +355,7 @@ namespace Palmmedia.ReportGenerator.Parser
 
             var assembly = new Assembly(assemblyName);
 
-            Parallel.ForEach(classNames, className => assembly.AddClass(this.ProcessClass(fileIdsByFilename, assembly, className)));
+            Parallel.ForEach(classNames, className => assembly.AddClass(this.ProcessClass(fileIdsByFilename, assembly, className, parserOptions)));
 
             return assembly;
         }
@@ -319,8 +366,9 @@ namespace Palmmedia.ReportGenerator.Parser
         /// <param name="fileIdsByFilename">Dictionary containing the file ids by filename.</param>
         /// <param name="assembly">The assembly.</param>
         /// <param name="className">Name of the class.</param>
+        /// <param name="parserOptions">Options related to the parsing.</param>
         /// <returns>The <see cref="Class"/>.</returns>
-        private Class ProcessClass(Dictionary<string, HashSet<string>> fileIdsByFilename, Assembly assembly, string className)
+        private Class ProcessClass(Dictionary<string, HashSet<string>> fileIdsByFilename, Assembly assembly, string className, IParserOptions parserOptions)
         {
             var methods = this.modules
                 .Where(m => m.Element("ModuleName").Value.Equals(assembly.Name))
@@ -360,7 +408,7 @@ namespace Palmmedia.ReportGenerator.Parser
 
             foreach (var file in filesOfClass)
             {
-                @class.AddFile(this.ProcessFile(fileIdsByFilename[file], @class, file));
+                @class.AddFile(this.ProcessFile(fileIdsByFilename[file], @class, file, parserOptions));
             }
 
             @class.CoverageQuota = this.GetCoverageQuotaOfClass(assembly, className);
@@ -374,8 +422,9 @@ namespace Palmmedia.ReportGenerator.Parser
         /// <param name="fileIds">The file ids of the class.</param>
         /// <param name="class">The class.</param>
         /// <param name="filePath">The file path.</param>
+        /// <param name="parserOptions">options related to how coverage is calculated.</param>
         /// <returns>The <see cref="CodeFile"/>.</returns>
-        private CodeFile ProcessFile(HashSet<string> fileIds, Class @class, string filePath)
+        private CodeFile ProcessFile(HashSet<string> fileIds, Class @class, string filePath, IParserOptions parserOptions)
         {
             var methods = this.modules
                 .Where(m => m.Element("ModuleName").Value.Equals(@class.Assembly.Name))
@@ -416,7 +465,7 @@ namespace Palmmedia.ReportGenerator.Parser
                 .OrderBy(seqpnt => seqpnt.LineNumberEnd)
                 .ToArray();
 
-            var branches = GetBranches(methods, fileIds);
+            var branches = GetBranches(methods, fileIds, parserOptions);
 
             var coverageByTrackedMethod = seqpntsOfFile
                 .SelectMany(s => s.TrackedMethodRefs)

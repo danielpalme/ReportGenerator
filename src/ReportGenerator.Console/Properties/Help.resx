@@ -123,6 +123,9 @@
   <data name="Examples" xml:space="preserve">
     <value>Examples:</value>
   </data>
+  <data name="Explaination14" xml:space="preserve">
+    <value>Include Implicit Branches: Option to specify whether implicit brances are to be considered while reporting branch coverage.</value>
+  </data>
   <data name="Explanations" xml:space="preserve">
     <value>Explanations:</value>
   </data>
@@ -164,6 +167,9 @@
   </data>
   <data name="Explanations9" xml:space="preserve">
     <value>Class Filters:      Optional list of classes that should be included or excluded in the report.</value>
+  </data>
+  <data name="Parameter11" xml:space="preserve">
+    <value>[["]-includeimplicitbranches:&lt;true/false&gt;["]]</value>
   </data>
   <data name="Parameters" xml:space="preserve">
     <value>Parameters:</value>
