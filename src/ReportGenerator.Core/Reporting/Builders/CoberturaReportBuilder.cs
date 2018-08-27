@@ -125,18 +125,24 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             {
                 if (this.packageElementsByName.TryGetValue(assembly.Name, out XElement packageElement))
                 {
-                    packageElement.Add(new XAttribute("line-rate", assembly.CoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)));
-                    packageElement.Add(new XAttribute("branch-rate", assembly.BranchCoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)));
+                    double packageLineRate = assembly.CoverableLines == 0 ? 1 : assembly.CoveredLines / (double)assembly.CoverableLines;
+                    double packageBranchRate = assembly.TotalBranches.GetValueOrDefault() == 0 ? 1 : assembly.CoveredBranches.GetValueOrDefault() / (double)assembly.TotalBranches.GetValueOrDefault();
+
+                    packageElement.Add(new XAttribute("line-rate", packageLineRate.ToString(CultureInfo.InvariantCulture)));
+                    packageElement.Add(new XAttribute("branch-rate", packageBranchRate.ToString(CultureInfo.InvariantCulture)));
                     packageElement.Add(new XAttribute("complexity", "NaN"));
                 }
             }
 
+            double lineRate = summaryResult.CoverableLines == 0 ? 1 : summaryResult.CoveredLines / (double)summaryResult.CoverableLines;
+            double branchRate = summaryResult.TotalBranches.GetValueOrDefault() == 0 ? 1 : summaryResult.CoveredBranches.GetValueOrDefault() / (double)summaryResult.TotalBranches.GetValueOrDefault();
+
             var rootElement = new XElement("coverage");
 
-            rootElement.Add(new XAttribute("line-rate", summaryResult.CoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)));
-            rootElement.Add(new XAttribute("branch-rate", summaryResult.BranchCoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)));
+            rootElement.Add(new XAttribute("line-rate", lineRate.ToString(CultureInfo.InvariantCulture)));
+            rootElement.Add(new XAttribute("branch-rate", branchRate.ToString(CultureInfo.InvariantCulture)));
             rootElement.Add(new XAttribute("lines-covered", summaryResult.CoveredLines.ToString(CultureInfo.InvariantCulture)));
-            rootElement.Add(new XAttribute("lines-valid", summaryResult.TotalLines.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)));
+            rootElement.Add(new XAttribute("lines-valid", summaryResult.CoverableLines.ToString(CultureInfo.InvariantCulture)));
             rootElement.Add(new XAttribute("branches-covered", summaryResult.CoveredBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)));
             rootElement.Add(new XAttribute("branches-valid", summaryResult.TotalBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)));
             rootElement.Add(new XAttribute("complexity", "NaN"));
