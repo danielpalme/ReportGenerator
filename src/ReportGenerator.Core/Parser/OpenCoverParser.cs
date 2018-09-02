@@ -102,14 +102,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .Where(m => m.Element("ModuleName").Value.Equals(assemblyName))
                 .Elements("Classes")
                 .Elements("Class")
-                .Where(c => !c.Element("FullName").Value.Contains("<")
-                    && c.Attribute("skippedDueTo") == null)
+                .Where(c => c.Attribute("skippedDueTo") == null)
                 .Select(c =>
                     {
                         string fullname = c.Element("FullName").Value;
                         int nestedClassSeparatorIndex = fullname.IndexOf('/');
                         return nestedClassSeparatorIndex > -1 ? fullname.Substring(0, nestedClassSeparatorIndex) : fullname;
                     })
+                .Where(name => !name.Contains("<"))
                 .Distinct()
                 .Where(c => this.ClassFilter.IsElementIncludedInReport(c))
                 .OrderBy(name => name)
