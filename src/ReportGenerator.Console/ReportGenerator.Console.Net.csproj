@@ -74,7 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Build.Utilities.Core">
-      <Version>15.7.179</Version>
+      <Version>15.8.166</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

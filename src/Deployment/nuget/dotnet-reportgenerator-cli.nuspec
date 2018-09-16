@@ -28,11 +28,11 @@ dotnet reportgenerator [options]</description>
     </packageTypes>
     <dependencies>
       <group targetFramework=".NETCoreApp2.0">
-        <dependency id="Microsoft.Build.Utilities.Core" version="15.7.179" />
-        <dependency id="Microsoft.Extensions.Configuration" version="2.1.0" />
-        <dependency id="Microsoft.Extensions.Configuration.Binder" version="2.1.0" />
-        <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="2.1.0" />
-        <dependency id="Microsoft.Extensions.Configuration.Json" version="2.1.0" />
+        <dependency id="Microsoft.Build.Utilities.Core" version="15.8.166" />
+        <dependency id="Microsoft.Extensions.Configuration" version="2.1.1" />
+        <dependency id="Microsoft.Extensions.Configuration.Binder" version="2.1.1" />
+        <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="2.1.1" />
+        <dependency id="Microsoft.Extensions.Configuration.Json" version="2.1.1" />
         <dependency id="SixLabors.ImageSharp.Drawing" version="1.0.0-beta0004" />
         <dependency id="Microsoft.NETCore.App" version="2.0.0" exclude="Build,Analyzers" />
       </group>
