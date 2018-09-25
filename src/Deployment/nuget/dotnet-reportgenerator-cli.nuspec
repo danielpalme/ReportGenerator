@@ -18,7 +18,7 @@ Use this package if your project is based on .NET Core and you want to use Repor
 Installation:
 Add the following element to your project file:
 &lt;ItemGroup&gt;
-&nbsp;&nbsp;&lt;DotNetCliToolReference Include="dotnet-reportgenerator-cli" Version="x.y.z" /&gt;
+&lt;DotNetCliToolReference Include="dotnet-reportgenerator-cli" Version="x.y.z" /&gt;
 &lt;/ItemGroup&gt;
 
 Usage:
