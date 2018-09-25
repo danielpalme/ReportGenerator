@@ -16,7 +16,10 @@
 Use this package if your project is based on .NET Core and you want to use ReportGenerator as a 'DotnetCliTool'.
 
 Installation:
-Add &lt;DotNetCliToolReference Include="dotnet-reportgenerator-cli" Version="x.y.z" /&gt; to your project file.
+Add the following element to your project file:
+&lt;ItemGroup&gt;
+&nbsp;&nbsp;&lt;DotNetCliToolReference Include="dotnet-reportgenerator-cli" Version="x.y.z" /&gt;
+&lt;/ItemGroup&gt;
 
 Usage:
 dotnet reportgenerator [options]</description>
@@ -28,6 +31,7 @@ dotnet reportgenerator [options]</description>
     </packageTypes>
     <dependencies>
       <group targetFramework=".NETCoreApp2.0">
+        <dependency id="McMaster.NETCore.Plugins" version="0.1.1" />
         <dependency id="Microsoft.Build.Utilities.Core" version="15.8.166" />
         <dependency id="Microsoft.Extensions.Configuration" version="2.1.1" />
         <dependency id="Microsoft.Extensions.Configuration.Binder" version="2.1.1" />
@@ -45,6 +49,7 @@ dotnet reportgenerator [options]</description>
     <!-- NetCoreApp2.0 ('lib\netcoreapp2.0' directory) -->
     <file src="..\..\target\bin\Release\netcoreapp2.0\appsettings.json" target="lib\netcoreapp2.0" />
     <file src="..\..\target\bin\Release\netcoreapp2.0\ReportGenerator.Core.dll" target="lib\netcoreapp2.0" />
+    <file src="..\..\target\bin\Release\netcoreapp2.0\ReportGenerator.DotnetCorePluginLoader.dll" target="lib\netcoreapp2.0" />
     <file src="..\..\target\bin\Release\netcoreapp2.0\dotnet-reportgenerator.deps.json" target="lib\netcoreapp2.0\dotnet-reportgenerator.deps.json" />
     <file src="..\..\target\bin\Release\netcoreapp2.0\dotnet-reportgenerator.dll" target="lib\netcoreapp2.0\dotnet-reportgenerator.dll" />
     <file src="..\..\target\bin\Release\netcoreapp2.0\dotnet-reportgenerator.runtimeconfig.json" target="lib\netcoreapp2.0\dotnet-reportgenerator.runtimeconfig.json" />

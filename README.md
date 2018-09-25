@@ -53,6 +53,7 @@ Parameters:
     ["]-targetdir:<target directory>["]
     [["]-reporttypes:<Html|HtmlSummary|...>[;<Html|HtmlSummary|...>]["]]
     [["]-historydir:<history directory>["]]
+    [["]-plugins:<plugin>[;<plugin>][;<plugin>]["]]
     [["]-assemblyfilters:<(+|-)filter>[;<(+|-)filter>][;<(+|-)filter>]["]]
     [["]-classfilters:<(+|-)filter>[;<(+|-)filter>][;<(+|-)filter>]["]]
     [["]-filefilters:<(+|-)filter>[;<(+|-)filter>][;<(+|-)filter>]["]]
@@ -68,6 +69,7 @@ Explanations:
                               PngChart, TextSummary, Xml, XmlSummary
    History directory: Optional directory for storing persistent coverage information.
                       Can be used in future reports to show coverage evolution.
+   Plugins:           Optional plugin files for custom reports or custom history storage (separated by semicolon). 
    Assembly Filters:  Optional list of assemblies that should be included or excluded in the report.
    Class Filters:     Optional list of classes that should be included or excluded in the report.
    File Filters:      Optional list of files that should be included or excluded in the report.
@@ -87,7 +89,7 @@ Default values:
 Examples:
    "-reports:coverage.xml" "-targetdir:C:\report"
    "-reports:target\*\*.xml" "-targetdir:C:\report" -reporttypes:Latex;HtmlSummary -tag:v1.4.5
-   "-reports:coverage1.xml;coverage2.xml" "-targetdir:report"
+   "-reports:coverage1.xml;coverage2.xml" "-targetdir:report" -plugins:CustomReports.dll
    "-reports:coverage.xml" "-targetdir:C:\report" "-assemblyfilters:+Included;-Excluded.*"
 ```
 
@@ -111,7 +113,7 @@ A MSBuild task also exists:
     <CoverageFiles Include="OpenCover.xml" />
   </ItemGroup>
   <Target Name="Coverage">
-    <ReportGenerator ReportFiles="@(CoverageFiles)" TargetDirectory="report" ReportTypes="Html;Latex" HistoryDirectory="history" AssemblyFilters="+Include;-Excluded" VerbosityLevel="Verbose" />
+    <ReportGenerator ReportFiles="@(CoverageFiles)" TargetDirectory="report" ReportTypes="Html;Latex" HistoryDirectory="history" Plugins="CustomReports.dll" AssemblyFilters="+Include;-Excluded" VerbosityLevel="Verbose" />
   </Target>
 </Project>
 ```

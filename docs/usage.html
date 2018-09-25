@@ -72,6 +72,19 @@
                     </div>
                     <br/>
 
+                    <h3>Plugins</h3>
+                    <div class="alert alert-info">Optional plugin files for <a href="https://github.com/danielpalme/ReportGenerator/wiki/Custom-reports">custom reports</a> or <a href="https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage">custom history storage</a>.</div>
+                    <div class="form-group" ng-repeat="plugin in plugins track by $index">
+                        <div ng-class="{ 'input-group': $index > 0}">
+                            <input type="text" class="form-control" placeholder="The path of the plugin" ng-model="plugins[$index]" required />
+                            <span class="input-group-addon" ng-click="removePlugin($index)" ng-if="$index > 0"><a href=""><i class="fa fa-trash text-danger"></i></a></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <a href="" ng-click="addPlugin()" class="text-info"><i class="fa fa-plus-circle"></i> Add plugin</a>
+                    </div>
+                    <br/>
+
                     <h3>Assembly filters</h3>
                     <div class="alert alert-info">Optional list of <b>assemblies</b> that should be included or excluded in the report. 
                         <br/>Exclusion filters take precedence over inclusion filters.     
@@ -188,7 +201,7 @@
                     runtimes: '.NET Core', 
                     description: 'Use this package if your project is based on .NET Core and you want to use ReportGenerator as a \'DotnetCliTool\'.',
                     installoptions: [
-                        { tool: 'Manual', hint: 'Add the following element to your project file:', command: '<DotNetCliToolReference Include="dotnet-reportgenerator-cli" Version="x.y.z" />' }
+                        { tool: 'Manual', hint: 'Add the following element to your project file:', command: '<ItemGroup>\r\n  <DotNetCliToolReference Include="dotnet-reportgenerator-cli" Version="x.y.z" />\r\n</ItemGroup>' }
                     ],
                     executables: [{ runtime: '.NET Core', tool: 'dotnet reportgenerator' }]
                 },
@@ -212,10 +225,10 @@
             $scope.reporttypes = [ 
                 { name: 'HTML', description: 'The default output format. Creates a summary overview (index.htm) and detailed reports for each class.', checked: true },
                 { name: 'HTMLSummary', description: 'Creates a single HTML file (summary.htm) without links.', checked: false  },
-                { name: 'HTMLInline', description: 'Same as HTML but CSS and JavaScript is included in every HTML page. This results in larger file sizes, but can be useful for integration into build servers like VSTS, since they may block referenced CSS and JavaScript files.', checked: false  },
+                { name: 'HTMLInline', description: 'Same as HTML but CSS and JavaScript is included in every HTML page. This results in larger file sizes, but can be useful for integration into build servers like Azure DevOps (VSTS), since they may block referenced CSS and JavaScript files.', checked: false  },
                 { name: 'HTMLChart', description: 'Creates a single HTML file containing a chart with historic coverage information.', checked: false },
                 { name: 'MHTML', description: 'Same as HTML but packaged into a single MHTML file.', checked: false },
-                { name: 'Cobertura', description: 'Creates a XML file in Cobertura format. This format integrates with tools like VSTS or Jenkins.', checked: false },
+                { name: 'Cobertura', description: 'Creates a XML file in Cobertura format. This format integrates with tools like Azure DevOps (VSTS) or Jenkins.', checked: false },
                 { name: 'XML', description: 'Creates a XML file containing a summary for all classes and detailed reports for each class.', checked: false },
                 { name: 'XMLSummary', description: 'Creates a single XML file containing a summary for all classes.', checked: false },
                 { name: 'Latex', description: 'Creates a single TEX file containing a summary for all classes and detailed reports for each class.', checked: false },
@@ -225,6 +238,7 @@
                 { name: 'Badges', description: 'Creates three SVG and two PNG files that show line and/or branch coverage information.', checked: false }
             ];
             $scope.historydir = null;
+            $scope.plugins = [];
             $scope.assemblyfilters = [];
             $scope.classfilters = [];
             $scope.filefilters = [];
@@ -236,6 +250,14 @@
             
             $scope.removeReport = function(index) {
                 $scope.reports.splice(index, 1);
+            }
+
+            $scope.addPlugin = function() {
+                $scope.plugins.push(null);
+            }
+            
+            $scope.removePlugin = function(index) {
+                $scope.plugins.splice(index, 1);
             }
 
             $scope.addAssemblyFilter = function() {
@@ -306,6 +328,25 @@
                     result += '\r\n';
                     result += '"-historydir:';
                     result += $scope.historydir;
+                    result += '"';  
+                }
+                
+                if ($scope.plugins.length > 0) {
+                    result += '\r\n';
+                    result += '"-plugins:';
+
+                    for (var i = 0; i < $scope.plugins.length; i++) {
+                        if ($scope.plugins[i] === null || $scope.plugins[i] === undefined || $scope.plugins[i].length === 0) {
+                            continue;
+                        }
+
+                        if (i > 0) {
+                            result += ';';
+                        }
+                        
+                        result += $scope.plugins[i];
+                    }
+
                     result += '"';  
                 }
 

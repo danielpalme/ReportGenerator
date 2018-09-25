@@ -78,7 +78,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportGenerator.Console.Net
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportGenerator.DotnetCliTool", "ReportGenerator.DotnetCliTool\ReportGenerator.DotnetCliTool.csproj", "{4C5489D8-077A-49A8-8042-1E6844D48185}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportGenerator.DotnetGlobalTool", "ReportGenerator.DotnetGlobalTool\ReportGenerator.DotnetGlobalTool.csproj", "{B697EF09-935C-482A-89BB-78D9E8BBB387}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportGenerator.DotnetGlobalTool", "ReportGenerator.DotnetGlobalTool\ReportGenerator.DotnetGlobalTool.csproj", "{B697EF09-935C-482A-89BB-78D9E8BBB387}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportGenerator.DotnetCorePluginLoader", "ReportGenerator.DotnetCorePluginLoader\ReportGenerator.DotnetCorePluginLoader.csproj", "{E3CA3149-7810-4E0C-9CF8-97E39DFDD5AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -118,6 +120,10 @@ Global
 		{B697EF09-935C-482A-89BB-78D9E8BBB387}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B697EF09-935C-482A-89BB-78D9E8BBB387}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B697EF09-935C-482A-89BB-78D9E8BBB387}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3CA3149-7810-4E0C-9CF8-97E39DFDD5AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3CA3149-7810-4E0C-9CF8-97E39DFDD5AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3CA3149-7810-4E0C-9CF8-97E39DFDD5AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3CA3149-7810-4E0C-9CF8-97E39DFDD5AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

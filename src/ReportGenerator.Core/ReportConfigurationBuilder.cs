@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
 using System.Text.RegularExpressions;
-using Palmmedia.ReportGenerator.Core.Logging;
-using Palmmedia.ReportGenerator.Core.Properties;
-using Palmmedia.ReportGenerator.Core.Reporting;
 
 namespace Palmmedia.ReportGenerator.Core
 {
@@ -16,21 +10,6 @@ namespace Palmmedia.ReportGenerator.Core
     /// </summary>
     internal class ReportConfigurationBuilder
     {
-        /// <summary>
-        /// The report builder factory.
-        /// </summary>
-        private readonly IReportBuilderFactory reportBuilderFactory;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ReportConfigurationBuilder"/> class.
-        /// </summary>
-        /// <param name="reportBuilderFactory">The report builder factory.</param>
-        internal ReportConfigurationBuilder(
-            IReportBuilderFactory reportBuilderFactory)
-        {
-            this.reportBuilderFactory = reportBuilderFactory ?? throw new ArgumentNullException(nameof(reportBuilderFactory));
-        }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ReportConfiguration"/> class.
         /// </summary>
@@ -59,7 +38,7 @@ namespace Palmmedia.ReportGenerator.Core
             string targetDirectory = string.Empty;
             string historyDirectory = null;
             var reportTypes = new string[] { };
-            var sourceDirectories = new string[] { };
+            var plugins = new string[] { };
             var assemblyFilters = new string[] { };
             var classFilters = new string[] { };
             var fileFilters = new string[] { };
@@ -92,9 +71,9 @@ namespace Palmmedia.ReportGenerator.Core
                 reportTypes = new[] { value };
             }
 
-            if (namedArguments.TryGetValue("SOURCEDIRS", out value))
+            if (namedArguments.TryGetValue("PLUGINS", out value))
             {
-                sourceDirectories = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                plugins = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             }
 
             if (namedArguments.TryGetValue("ASSEMBLYFILTERS", out value))
@@ -131,76 +110,12 @@ namespace Palmmedia.ReportGenerator.Core
                 targetDirectory,
                 historyDirectory,
                 reportTypes,
+                plugins,
                 assemblyFilters,
                 classFilters,
                 fileFilters,
                 verbosityLevel,
                 tag);
-        }
-
-        /// <summary>
-        /// Shows the help of the program.
-        /// </summary>
-        internal void ShowHelp()
-        {
-            var availableReportTypes = this.reportBuilderFactory.GetAvailableReportTypes();
-
-            Console.WriteLine();
-            Console.WriteLine("ReportGenerator " + typeof(ReportConfigurationBuilder).Assembly.GetName().Version);
-
-            AssemblyCopyrightAttribute assemblyCopyrightAttribute = typeof(ReportConfigurationBuilder).Assembly
-                .GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false)
-                .Cast<AssemblyCopyrightAttribute>()
-                .FirstOrDefault();
-
-            if (assemblyCopyrightAttribute != null)
-            {
-                Console.WriteLine(assemblyCopyrightAttribute.Copyright);
-            }
-
-            Console.WriteLine();
-            Console.WriteLine(Help.Parameters);
-            Console.WriteLine("    " + Help.Parameters1);
-            Console.WriteLine("    " + Help.Parameters2);
-            Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "    " + Help.Parameters3, string.Join("|", availableReportTypes.Take(3).Union(new[] { "..." }))));
-            Console.WriteLine("    " + Help.Parameters5);
-            Console.WriteLine("    " + Help.Parameters6);
-            Console.WriteLine("    " + Help.Parameters7);
-            Console.WriteLine("    " + Help.Parameters8);
-            Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "    " + Help.Parameters9, string.Join("|", Enum.GetNames(typeof(VerbosityLevel)))));
-            Console.WriteLine("    " + Help.Parameters10);
-
-            Console.WriteLine();
-            Console.WriteLine(Help.Explanations);
-            Console.WriteLine("    " + Help.Explanations1);
-            Console.WriteLine("    " + Help.Explanations2);
-            Console.WriteLine("    " + Help.Explanations3);
-            Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "    " + Help.ReportTypeValues, string.Join(", ", availableReportTypes)));
-            Console.WriteLine("    " + Help.Explanations5);
-            Console.WriteLine("    " + Help.Explanations6);
-            Console.WriteLine("    " + Help.Explanations7);
-            Console.WriteLine("    " + Help.Explanations8);
-            Console.WriteLine("    " + Help.Explanations9);
-            Console.WriteLine("    " + Help.Explanations10);
-            Console.WriteLine("    " + Help.Explanations11);
-            Console.WriteLine("    " + Help.Explanations12);
-            Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "    " + Help.VerbosityValues, string.Join(", ", Enum.GetNames(typeof(VerbosityLevel)))));
-            Console.WriteLine("    " + Help.Explanations13);
-
-            Console.WriteLine();
-            Console.WriteLine(Help.DefaultValues);
-            Console.WriteLine("   -reporttypes:Html");
-            Console.WriteLine("   -assemblyfilters:+*");
-            Console.WriteLine("   -classfilters:+*");
-            Console.WriteLine("   -filefilters:+*");
-            Console.WriteLine("   -verbosity:" + VerbosityLevel.Verbose);
-
-            Console.WriteLine();
-            Console.WriteLine(Help.Examples);
-            Console.WriteLine("   \"-reports:coverage.xml\" \"-targetdir:C:\\report\"");
-            Console.WriteLine("   \"-reports:target\\*\\*.xml\" \"-targetdir:C:\\report\" -reporttypes:Latex;HtmlSummary -tag:v1.4.5");
-            Console.WriteLine("   \"-reports:coverage1.xml;coverage2.xml\" \"-targetdir:report\"");
-            Console.WriteLine("   \"-reports:coverage.xml\" \"-targetdir:C:\\report\" \"-assemblyfilters:+Included;-Excluded.*\"");
         }
     }
 }

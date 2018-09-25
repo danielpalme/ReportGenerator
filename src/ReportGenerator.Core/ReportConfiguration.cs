@@ -29,6 +29,7 @@ namespace Palmmedia.ReportGenerator.Core
         /// <param name="targetDirectory">The target directory.</param>
         /// <param name="historyDirectory">The history directory.</param>
         /// <param name="reportTypes">The report types.</param>
+        /// <param name="plugins">The plugins.</param>
         /// <param name="assemblyFilters">The assembly filters.</param>
         /// <param name="classFilters">The class filters.</param>
         /// <param name="fileFilters">The file filters.</param>
@@ -39,6 +40,7 @@ namespace Palmmedia.ReportGenerator.Core
             string targetDirectory,
             string historyDirectory,
             IEnumerable<string> reportTypes,
+            IEnumerable<string> plugins,
             IEnumerable<string> assemblyFilters,
             IEnumerable<string> classFilters,
             IEnumerable<string> fileFilters,
@@ -53,6 +55,11 @@ namespace Palmmedia.ReportGenerator.Core
             if (reportTypes == null)
             {
                 throw new ArgumentNullException(nameof(reportTypes));
+            }
+
+            if (plugins == null)
+            {
+                throw new ArgumentNullException(nameof(plugins));
             }
 
             if (assemblyFilters == null)
@@ -94,6 +101,7 @@ namespace Palmmedia.ReportGenerator.Core
                 this.ReportTypes = new[] { "Html" };
             }
 
+            this.Plugins = plugins.ToList();
             this.AssemblyFilters = assemblyFilters.ToList();
             this.ClassFilters = classFilters.ToList();
             this.FileFilters = fileFilters.ToList();
@@ -131,6 +139,11 @@ namespace Palmmedia.ReportGenerator.Core
         /// Gets the type of the report.
         /// </summary>
         public IReadOnlyCollection<string> ReportTypes { get; }
+
+        /// <summary>
+        /// Gets the plugins.
+        /// </summary>
+        public IReadOnlyCollection<string> Plugins { get; }
 
         /// <summary>
         /// Gets the assembly filters.

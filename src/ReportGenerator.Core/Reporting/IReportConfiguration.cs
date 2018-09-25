@@ -29,6 +29,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
         IReadOnlyCollection<string> ReportTypes { get; }
 
         /// <summary>
+        /// Gets the plugins.
+        /// </summary>
+        IReadOnlyCollection<string> Plugins { get; }
+
+        /// <summary>
         /// Gets the assembly filters.
         /// </summary>
         IReadOnlyCollection<string> AssemblyFilters { get; }

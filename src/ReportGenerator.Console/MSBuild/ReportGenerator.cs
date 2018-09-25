@@ -46,6 +46,14 @@ namespace Palmmedia.ReportGenerator.MSBuild
         public ITaskItem[] ReportTypes { get; set; }
 
         /// <summary>
+        /// Gets or sets the plugins.
+        /// </summary>
+        /// <value>
+        /// The plugins.
+        /// </value>
+        public ITaskItem[] Plugins { get; set; }
+
+        /// <summary>
         /// Gets or sets the assembly filters (old property).
         /// </summary>
         /// <value>
@@ -115,6 +123,7 @@ namespace Palmmedia.ReportGenerator.MSBuild
                 this.TargetDirectory,
                 this.HistoryDirectory,
                 reportTypes,
+                this.Plugins == null ? Enumerable.Empty<string>() : this.Plugins.Select(r => r.ItemSpec),
                 assemblyFilters == null ? Enumerable.Empty<string>() : assemblyFilters.Select(r => r.ItemSpec),
                 this.ClassFilters == null ? Enumerable.Empty<string>() : this.ClassFilters.Select(r => r.ItemSpec),
                 this.FileFilters == null ? Enumerable.Empty<string>() : this.FileFilters.Select(r => r.ItemSpec),

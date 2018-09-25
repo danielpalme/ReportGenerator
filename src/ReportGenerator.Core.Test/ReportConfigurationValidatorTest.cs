@@ -29,6 +29,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 "C:\\temp",
                 null,
                 new[] { "Latex", "Xml", "Html" },
+                new string[] { },
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
                 new[] { "+Test3", "-Test3" },
@@ -48,6 +49,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 "C:\\temp",
                 null,
                 new[] { "Latex" },
+                new string[] { },
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
                 new string[] { },
@@ -67,6 +69,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 "C:\\temp",
                 null,
                 new[] { "Latex" },
+                new string[] { },
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
                 new string[] { },
@@ -86,6 +89,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 string.Empty,
                 null,
                 new[] { "Latex" },
+                new string[] { },
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
                 new string[] { },
@@ -105,6 +109,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 "C:\\temp:?$",
                 null,
                 new[] { "Latex" },
+                new string[] { },
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
                 new string[] { },
@@ -124,6 +129,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 "C:\\temp",
                 "C:\\temp:?$",
                 new[] { "Latex" },
+                new string[] { },
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
                 new string[] { },
@@ -143,6 +149,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 "C:\\temp",
                 null,
                 new[] { "DoesNotExist" },
+                new string[] { },
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
                 new string[] { },
@@ -162,8 +169,29 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 @"C:\\temp",
                 null,
                 new[] { "Latex" },
+                new string[] { },
                 new[] { "Test" },
                 new[] { "Test2" },
+                new[] { "Test3" },
+                VerbosityLevel.Info.ToString(),
+                null);
+
+            var sut = new ReportConfigurationValidator(this.reportBuilderFactoryMock.Object);
+
+            Assert.False(sut.Validate(configuration));
+        }
+
+        [Fact]
+        public void Validate_InvalidPlugin_ValidationFails()
+        {
+            var configuration = new ReportConfiguration(
+                new[] { ReportPath },
+                @"C:\\temp",
+                null,
+                new[] { "Latex" },
+                new string[] { "notexistingplugin.dll" },
+                new[] { "+Test", "-Test" },
+                new[] { "+Test2", "-Test2" },
                 new string[] { },
                 VerbosityLevel.Info.ToString(),
                 null);

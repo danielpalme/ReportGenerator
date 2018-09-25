@@ -25,6 +25,7 @@ namespace Palmmedia.ReportGeneratorTest
                 new string[] { },
                 new string[] { },
                 new string[] { },
+                new string[] { },
                 null,
                 null);
 
@@ -51,6 +52,7 @@ namespace Palmmedia.ReportGeneratorTest
                 "C:\\temp",
                 null,
                 new[] { "Latex", "Xml", "Html" },
+                new string[] { "ReportGenerator.Core.Test.dll" },
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
                 new[] { "+Test3", "-Test3" },
@@ -62,6 +64,7 @@ namespace Palmmedia.ReportGeneratorTest
             Assert.Contains("Latex", configuration.ReportTypes);
             Assert.Contains("Xml", configuration.ReportTypes);
             Assert.Contains("Html", configuration.ReportTypes);
+            Assert.Contains("ReportGenerator.Core.Test.dll", configuration.Plugins);
             Assert.Contains("+Test", configuration.AssemblyFilters);
             Assert.Contains("-Test", configuration.AssemblyFilters);
             Assert.Contains("+Test2", configuration.ClassFilters);
@@ -86,6 +89,7 @@ namespace Palmmedia.ReportGeneratorTest
                 "C:\\temp",
                 "C:\\temp\\historic",
                 new string[] { },
+                new string[] { "notexistingplugin.dll" },
                 new string[] { },
                 new string[] { },
                 new string[] { },
@@ -96,6 +100,7 @@ namespace Palmmedia.ReportGeneratorTest
             Assert.Equal("C:\\temp", configuration.TargetDirectory);
             Assert.Equal("C:\\temp\\historic", configuration.HistoryDirectory);
             Assert.Contains("Html", configuration.ReportTypes);
+            Assert.Contains("notexistingplugin.dll", configuration.Plugins);
             Assert.Empty(configuration.AssemblyFilters);
             Assert.Empty(configuration.ClassFilters);
             Assert.Equal(VerbosityLevel.Verbose, configuration.VerbosityLevel);

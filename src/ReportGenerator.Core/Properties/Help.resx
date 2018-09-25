@@ -141,6 +141,9 @@
   <data name="Explanations13" xml:space="preserve">
     <value>Tag:                Optional tag or build version.</value>
   </data>
+  <data name="Explanations14" xml:space="preserve">
+    <value>Plugins:            Optional plugin files for custom reports or custom history storage (separated by semicolon).</value>
+  </data>
   <data name="Explanations2" xml:space="preserve">
     <value>Target directory:   The directory where the generated report should be saved.</value>
   </data>
@@ -170,6 +173,9 @@
   </data>
   <data name="Parameters10" xml:space="preserve">
     <value>[["]-tag:&lt;tag&gt;["]]</value>
+  </data>
+  <data name="Parameters11" xml:space="preserve">
+    <value>[["]-plugins:&lt;plugin&gt;[;&lt;plugin&gt;][;&lt;plugin&gt;]["]]</value>
   </data>
   <data name="Parameters2" xml:space="preserve">
     <value>["]-targetdir:&lt;target directory&gt;["]</value>

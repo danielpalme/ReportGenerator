@@ -1,9 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
-using Moq;
 using Palmmedia.ReportGenerator.Core;
 using Palmmedia.ReportGenerator.Core.Logging;
-using Palmmedia.ReportGenerator.Core.Reporting;
 using Xunit;
 
 namespace Palmmedia.ReportGeneratorTest
@@ -21,7 +19,7 @@ namespace Palmmedia.ReportGeneratorTest
 
         public ReportConfigurationBuilderTest()
         {
-            this.reportConfigurationBuilder = new ReportConfigurationBuilder(new Mock<IReportBuilderFactory>().Object);
+            this.reportConfigurationBuilder = new ReportConfigurationBuilder();
         }
 
         [Fact]

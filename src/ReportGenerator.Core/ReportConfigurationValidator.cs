@@ -53,6 +53,15 @@ namespace Palmmedia.ReportGenerator.Core
                 result &= false;
             }
 
+            foreach (var file in reportConfiguration.Plugins)
+            {
+                if (!File.Exists(file))
+                {
+                    Logger.ErrorFormat(Resources.NotExistingPlugin, file);
+                    result &= false;
+                }
+            }
+
             if (!reportConfiguration.ReportFiles.Any())
             {
                 Logger.Error(Resources.NoReportFiles);

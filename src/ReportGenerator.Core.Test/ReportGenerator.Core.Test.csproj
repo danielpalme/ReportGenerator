@@ -35,6 +35,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ReportGenerator.Core\ReportGenerator.Core.csproj" />
+    <ProjectReference Include="..\ReportGenerator.DotnetCorePluginLoader\ReportGenerator.DotnetCorePluginLoader.csproj" />
   </ItemGroup>
 
 </Project>

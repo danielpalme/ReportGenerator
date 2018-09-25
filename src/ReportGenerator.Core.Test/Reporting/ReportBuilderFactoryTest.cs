@@ -14,14 +14,24 @@ namespace Palmmedia.ReportGeneratorTest.Reporting
         [Fact]
         public void GetAvailableReportTypes_AllReportTypesReturned()
         {
-            var factory = new ReportBuilderFactory(new ReflectionPluginLoader());
-            Assert.True(factory.GetAvailableReportTypes().Count() > 6, "Not all default report builders available.");
+            var plugins = new List<string>()
+            {
+                typeof(ReportBuilderFactoryTest).Assembly.Location
+            };
+
+            var factory = new ReportBuilderFactory(new ReflectionPluginLoader(plugins));
+            Assert.True(factory.GetAvailableReportTypes().Count() > 12, "Not all default report builders available.");
         }
 
         [Fact]
         public void GetReportBuilders_DefaultReportBuilderReturned()
         {
-            var factory = new ReportBuilderFactory(new ReflectionPluginLoader());
+            var plugins = new List<string>()
+            {
+                typeof(ReportBuilderFactoryTest).Assembly.Location
+            };
+
+            var factory = new ReportBuilderFactory(new ReflectionPluginLoader(plugins));
 
             var reportContext = new ReportContext(new ReportConfiguration() { TargetDirectory = "C:\\temp", ReportTypes = new[] { "Html" } });
             var reportBuilders = factory.GetReportBuilders(reportContext);
@@ -30,7 +40,7 @@ namespace Palmmedia.ReportGeneratorTest.Reporting
             reportContext = new ReportContext(new ReportConfiguration() { TargetDirectory = "C:\\temp", ReportTypes = new[] { "Latex" } });
             reportBuilders = factory.GetReportBuilders(reportContext);
             Assert.Single(reportBuilders);
-            Assert.Equal(typeof(AdditionalLatexReportBuilder), reportBuilders.First().GetType());
+            Assert.Equal(typeof(AdditionalLatexReportBuilder).FullName, reportBuilders.First().GetType().FullName);
         }
 
         public class AdditionalLatexReportBuilder : IReportBuilder
@@ -82,6 +92,8 @@ namespace Palmmedia.ReportGeneratorTest.Reporting
             public IReadOnlyCollection<string> InvalidReportFilePatterns { get; set; }
 
             public IReadOnlyCollection<string> ReportTypes { get; set; }
+
+            public IReadOnlyCollection<string> Plugins { get; set; }
 
             public IReadOnlyCollection<string> SourceDirectories { get; set; }
 

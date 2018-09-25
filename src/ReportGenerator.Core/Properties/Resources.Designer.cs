@@ -368,6 +368,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The plugin &apos;{0}&apos; does not exist..
+        /// </summary>
+        internal static string NotExistingPlugin {
+            get {
+                return ResourceManager.GetString("NotExistingPlugin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The report file &apos;{0}&apos; does not exist..
         /// </summary>
         internal static string NotExistingReportFile {

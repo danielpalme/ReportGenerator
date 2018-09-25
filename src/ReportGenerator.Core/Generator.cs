@@ -38,7 +38,7 @@ namespace Palmmedia.ReportGenerator.Core
             try
             {
                 var reportContext = new ReportContext(reportConfiguration);
-                var pluginLoader = new ReflectionPluginLoader();
+                var pluginLoader = new ReflectionPluginLoader(reportConfiguration.Plugins);
 
                 IReportBuilderFactory reportBuilderFactory = new ReportBuilderFactory(pluginLoader);
 
@@ -102,6 +102,7 @@ namespace Palmmedia.ReportGenerator.Core
             catch (Exception ex)
             {
                 Logger.Error(ex.GetExceptionMessageForDisplay());
+                Logger.Error(ex.StackTrace);
 
 #if DEBUG
                 if (System.Diagnostics.Debugger.IsAttached)

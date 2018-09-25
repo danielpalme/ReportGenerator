@@ -133,6 +133,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Plugins:            Optional plugin files for custom reports or custom history storage (separated by semicolon)..
+        /// </summary>
+        internal static string Explanations14 {
+            get {
+                return ResourceManager.GetString("Explanations14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Target directory:   The directory where the generated report should be saved..
         /// </summary>
         internal static string Explanations2 {
@@ -219,6 +228,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         internal static string Parameters10 {
             get {
                 return ResourceManager.GetString("Parameters10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [[&quot;]-plugins:&lt;plugin&gt;[;&lt;plugin&gt;][;&lt;plugin&gt;][&quot;]].
+        /// </summary>
+        internal static string Parameters11 {
+            get {
+                return ResourceManager.GetString("Parameters11", resourceCulture);
             }
         }
         

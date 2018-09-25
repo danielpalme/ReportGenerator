@@ -17,16 +17,19 @@ namespace Palmmedia.ReportGenerator.Core
         /// <returns>Return code indicating success/failure.</returns>
         public static int Main(string[] args)
         {
-            var reportConfigurationBuilder = new ReportConfigurationBuilder(new ReportBuilderFactory(new ReflectionPluginLoader()));
+            args = args.Select(a => a.EndsWith("\"", StringComparison.OrdinalIgnoreCase) ? a.TrimEnd('\"') + "\\" : a).ToArray();
+
+            var reportConfigurationBuilder = new ReportConfigurationBuilder();
+            ReportConfiguration configuration = reportConfigurationBuilder.Create(args);
+
             if (args.Length < 2)
             {
-                reportConfigurationBuilder.ShowHelp();
+                var help = new Help(new ReportBuilderFactory(new ReflectionPluginLoader(configuration.Plugins)));
+                help.ShowHelp();
+
                 return 1;
             }
 
-            args = args.Select(a => a.EndsWith("\"", StringComparison.OrdinalIgnoreCase) ? a.TrimEnd('\"') + "\\" : a).ToArray();
-
-            ReportConfiguration configuration = reportConfigurationBuilder.Create(args);
             return new Generator().GenerateReport(configuration) ? 0 : 1;
         }
     }
