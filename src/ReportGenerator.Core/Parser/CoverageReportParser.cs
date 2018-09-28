@@ -56,7 +56,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <returns>
         /// The IParser instance.
         /// </returns>
-        internal ParserResult ParseFiles(IEnumerable<string> reportFiles)
+        internal ParserResult ParseFiles(IReadOnlyCollection<string> reportFiles)
         {
             if (reportFiles == null)
             {
@@ -65,8 +65,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             var result = new ParserResult();
 
+            int counter = 0;
+
             foreach (var report in reportFiles)
             {
+                Logger.InfoFormat(Resources.LoadingReport, report, ++counter, reportFiles.Count);
                 this.ParseFile(report, result);
             }
 
@@ -84,7 +87,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             XContainer report = null;
             try
             {
-                Logger.InfoFormat(Resources.LoadingReport, reportFile);
                 report = XDocument.Load(reportFile);
 
                 if (report.Descendants("CoverageSession").Any())
@@ -173,7 +175,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             catch (Exception ex) when (!(ex is UnsupportedParserException))
             {
                 Logger.ErrorFormat(" " + Resources.ErrorDuringReadingReport, reportFile, GetHumanReadableFileSize(reportFile), ex.GetExceptionMessageForDisplay());
-                return;
             }
         }
 

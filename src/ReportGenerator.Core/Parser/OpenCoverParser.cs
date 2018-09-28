@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -57,7 +56,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 throw new ArgumentNullException(nameof(report));
             }
 
-            var assemblies = new ConcurrentBag<Assembly>();
+            var assemblies = new List<Assembly>();
 
             var modules = report.Descendants("Module")
                 .Where(m => m.Attribute("skippedDueTo") == null)
@@ -73,7 +72,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .OrderBy(a => a)
                 .ToArray();
 
-            Parallel.ForEach(assemblyNames, assemblyName => assemblies.Add(this.ProcessAssembly(modules, files, trackedMethods, assemblyName)));
+            foreach (var assemblyName in assemblyNames)
+            {
+                assemblies.Add(this.ProcessAssembly(modules, files, trackedMethods, assemblyName));
+            }
 
             var result = new ParserResult(assemblies.OrderBy(a => a.Name).ToList(), true, this.ToString());
             return result;

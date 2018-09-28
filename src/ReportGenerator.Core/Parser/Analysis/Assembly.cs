@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,9 +10,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
     public class Assembly
     {
         /// <summary>
+        /// Lock object for accessing 'classes'.
+        /// </summary>
+        private readonly object classesLock = new object();
+
+        /// <summary>
         /// List of classes in assembly.
         /// </summary>
-        private readonly ConcurrentBag<Class> classes = new ConcurrentBag<Class>();
+        private readonly List<Class> classes = new List<Class>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Assembly"/> class.
@@ -127,7 +131,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <param name="class">The class to add.</param>
         internal void AddClass(Class @class)
         {
-            this.classes.Add(@class);
+            lock (this.classesLock)
+            {
+                this.classes.Add(@class);
+            }
         }
 
         /// <summary>

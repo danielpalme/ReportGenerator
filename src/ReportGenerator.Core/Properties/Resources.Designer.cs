@@ -323,7 +323,7 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Loading report &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Loading report &apos;{0}&apos; {1}/{2}.
         /// </summary>
         internal static string LoadingReport {
             get {

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -55,14 +54,17 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 throw new ArgumentNullException(nameof(report));
             }
 
-            var assemblies = new ConcurrentBag<Assembly>();
+            var assemblies = new List<Assembly>();
 
             var modules = report.Descendants("module")
               .Where(m => this.AssemblyFilter.IsElementIncludedInReport(m.Attribute("name").Value))
               .OrderBy(m => m.Attribute("name").Value)
               .ToArray();
 
-            Parallel.ForEach(modules, module => assemblies.Add(this.ProcessAssembly(module)));
+            foreach (var module in modules)
+            {
+                assemblies.Add(this.ProcessAssembly(module));
+            }
 
             var result = new ParserResult(assemblies.OrderBy(a => a.Name).ToList(), false, this.ToString());
             return result;
