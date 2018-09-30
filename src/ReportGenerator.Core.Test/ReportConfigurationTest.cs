@@ -20,6 +20,7 @@ namespace Palmmedia.ReportGeneratorTest
             var configuration = new ReportConfiguration(
                 new[] { ReportPath },
                 "C:\\temp",
+                new string[] { },
                 "C:\\temp\\historic",
                 new string[] { },
                 new string[] { },
@@ -42,6 +43,7 @@ namespace Palmmedia.ReportGeneratorTest
 
             Assert.True(configuration.VerbosityLevelValid);
             Assert.Equal(0, configuration.InvalidReportFilePatterns.Count);
+            Assert.Equal(0, configuration.SourceDirectories.Count);
         }
 
         [Fact]
@@ -50,6 +52,7 @@ namespace Palmmedia.ReportGeneratorTest
             var configuration = new ReportConfiguration(
                 new[] { ReportPath },
                 "C:\\temp",
+                new string[] { "C:\\source" },
                 null,
                 new[] { "Latex", "Xml", "Html" },
                 new string[] { "ReportGenerator.Core.Test.dll" },
@@ -61,6 +64,7 @@ namespace Palmmedia.ReportGeneratorTest
 
             Assert.Contains(ReportPath, configuration.ReportFiles);
             Assert.Equal("C:\\temp", configuration.TargetDirectory);
+            Assert.Contains("C:\\source", configuration.SourceDirectories);
             Assert.Contains("Latex", configuration.ReportTypes);
             Assert.Contains("Xml", configuration.ReportTypes);
             Assert.Contains("Html", configuration.ReportTypes);
@@ -87,6 +91,7 @@ namespace Palmmedia.ReportGeneratorTest
             var configuration = new ReportConfiguration(
                 new[] { ReportPath, "\t" },
                 "C:\\temp",
+                new string[] { },
                 "C:\\temp\\historic",
                 new string[] { },
                 new string[] { "notexistingplugin.dll" },

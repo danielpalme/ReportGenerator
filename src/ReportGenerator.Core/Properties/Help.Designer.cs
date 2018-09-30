@@ -97,7 +97,7 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to File Filters:       Optional list of files that should be included or excluded in the report..
+        ///   Looks up a localized string similar to File filters:       Optional list of files that should be included or excluded in the report..
         /// </summary>
         internal static string Explanations10 {
             get {
@@ -142,6 +142,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Source directories: Optional directories which contain the corresponding source code (separated by semicolon)..
+        /// </summary>
+        internal static string Explanations15 {
+            get {
+                return ResourceManager.GetString("Explanations15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Target directory:   The directory where the generated report should be saved..
         /// </summary>
         internal static string Explanations2 {
@@ -151,7 +160,7 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reporttypes:        The output formats and scope (separated by semicolon)..
+        ///   Looks up a localized string similar to Report types:       The output formats and scope (separated by semicolon)..
         /// </summary>
         internal static string Explanations3 {
             get {
@@ -160,7 +169,7 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to                     The source files are used if coverage report contains classes without path information..
+        ///   Looks up a localized string similar to                     The source directories are used if coverage report contains classes without path information..
         /// </summary>
         internal static string Explanations5 {
             get {
@@ -187,7 +196,7 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Assembly Filters:   Optional list of assemblies that should be included or excluded in the report..
+        ///   Looks up a localized string similar to Assembly filters:   Optional list of assemblies that should be included or excluded in the report..
         /// </summary>
         internal static string Explanations8 {
             get {
@@ -196,7 +205,7 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Class Filters:      Optional list of classes that should be included or excluded in the report..
+        ///   Looks up a localized string similar to Class filters:      Optional list of classes that should be included or excluded in the report..
         /// </summary>
         internal static string Explanations9 {
             get {
@@ -237,6 +246,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         internal static string Parameters11 {
             get {
                 return ResourceManager.GetString("Parameters11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [[&quot;]-sourcedirs:&lt;directory&gt;[;&lt;directory&gt;][;&lt;directory&gt;][&quot;]].
+        /// </summary>
+        internal static string Parameters12 {
+            get {
+                return ResourceManager.GetString("Parameters12", resourceCulture);
             }
         }
         

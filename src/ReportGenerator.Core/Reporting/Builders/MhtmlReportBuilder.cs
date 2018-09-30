@@ -237,6 +237,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             public string TargetDirectory { get; private set; }
 
             /// <summary>
+            /// Gets the source directories.
+            /// </summary>
+            public IReadOnlyCollection<string> SourceDirectories => this.reportConfiguration.SourceDirectories;
+
+            /// <summary>
             /// Gets the history directory.
             /// </summary>
             public string HistoryDirectory => this.reportConfiguration.TargetDirectory;

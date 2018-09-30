@@ -130,7 +130,7 @@
     <value>Reports:            The coverage reports that should be parsed (separated by semicolon). Wildcards are allowed.</value>
   </data>
   <data name="Explanations10" xml:space="preserve">
-    <value>File Filters:       Optional list of files that should be included or excluded in the report.</value>
+    <value>File filters:       Optional list of files that should be included or excluded in the report.</value>
   </data>
   <data name="Explanations11" xml:space="preserve">
     <value>                    Exclusion filters take precedence over inclusion filters. Wildcards are allowed.</value>
@@ -144,14 +144,17 @@
   <data name="Explanations14" xml:space="preserve">
     <value>Plugins:            Optional plugin files for custom reports or custom history storage (separated by semicolon).</value>
   </data>
+  <data name="Explanations15" xml:space="preserve">
+    <value>Source directories: Optional directories which contain the corresponding source code (separated by semicolon).</value>
+  </data>
   <data name="Explanations2" xml:space="preserve">
     <value>Target directory:   The directory where the generated report should be saved.</value>
   </data>
   <data name="Explanations3" xml:space="preserve">
-    <value>Reporttypes:        The output formats and scope (separated by semicolon).</value>
+    <value>Report types:       The output formats and scope (separated by semicolon).</value>
   </data>
   <data name="Explanations5" xml:space="preserve">
-    <value>                    The source files are used if coverage report contains classes without path information.</value>
+    <value>                    The source directories are used if coverage report contains classes without path information.</value>
   </data>
   <data name="Explanations6" xml:space="preserve">
     <value>History directory:  Optional directory for storing persistent coverage information.</value>
@@ -160,10 +163,10 @@
     <value>                    Can be used in future reports to show coverage evolution.</value>
   </data>
   <data name="Explanations8" xml:space="preserve">
-    <value>Assembly Filters:   Optional list of assemblies that should be included or excluded in the report.</value>
+    <value>Assembly filters:   Optional list of assemblies that should be included or excluded in the report.</value>
   </data>
   <data name="Explanations9" xml:space="preserve">
-    <value>Class Filters:      Optional list of classes that should be included or excluded in the report.</value>
+    <value>Class filters:      Optional list of classes that should be included or excluded in the report.</value>
   </data>
   <data name="Parameters" xml:space="preserve">
     <value>Parameters:</value>
@@ -176,6 +179,9 @@
   </data>
   <data name="Parameters11" xml:space="preserve">
     <value>[["]-plugins:&lt;plugin&gt;[;&lt;plugin&gt;][;&lt;plugin&gt;]["]]</value>
+  </data>
+  <data name="Parameters12" xml:space="preserve">
+    <value>[["]-sourcedirs:&lt;directory&gt;[;&lt;directory&gt;][;&lt;directory&gt;]["]]</value>
   </data>
   <data name="Parameters2" xml:space="preserve">
     <value>["]-targetdir:&lt;target directory&gt;["]</value>

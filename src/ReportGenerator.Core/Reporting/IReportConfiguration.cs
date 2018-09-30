@@ -19,6 +19,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
         string TargetDirectory { get; }
 
         /// <summary>
+        /// Gets the source directories.
+        /// </summary>
+        IReadOnlyCollection<string> SourceDirectories { get; }
+
+        /// <summary>
         /// Gets the history directory.
         /// </summary>
         string HistoryDirectory { get; }

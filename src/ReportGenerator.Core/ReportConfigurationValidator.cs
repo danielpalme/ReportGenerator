@@ -110,6 +110,15 @@ namespace Palmmedia.ReportGenerator.Core
                 }
             }
 
+            foreach (var sourceDirectory in reportConfiguration.SourceDirectories)
+            {
+                if (!Directory.Exists(sourceDirectory))
+                {
+                    Logger.ErrorFormat(Resources.SourceDirectoryDoesNotExist, sourceDirectory);
+                    result &= false;
+                }
+            }
+
             var availableReportTypes = this.reportBuilderFactory.GetAvailableReportTypes();
 
             foreach (var reportType in reportConfiguration.ReportTypes)

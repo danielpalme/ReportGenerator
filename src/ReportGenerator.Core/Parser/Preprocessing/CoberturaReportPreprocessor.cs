@@ -10,25 +10,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
     internal class CoberturaReportPreprocessor
     {
         /// <summary>
-        /// The report file as XContainer.
-        /// </summary>
-        private readonly XContainer report;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CoberturaReportPreprocessor"/> class.
-        /// </summary>
-        /// <param name="report">The report.</param>
-        internal CoberturaReportPreprocessor(XContainer report)
-        {
-            this.report = report;
-        }
-
-        /// <summary>
         /// Executes the preprocessing of the report.
         /// </summary>
-        internal void Execute()
+        /// <param name="report">The report.</param>
+        internal void Execute(XContainer report)
         {
-            var sources = this.report.Descendants("sources")
+            var sources = report.Descendants("sources")
                 .Elements("source")
                 .Select(s => s.Value)
                 .ToArray();
@@ -38,7 +25,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
                 return;
             }
 
-            var classes = this.report.Descendants("package")
+            var classes = report.Descendants("package")
                 .Elements("classes")
                 .Elements("class")
                 .ToArray();

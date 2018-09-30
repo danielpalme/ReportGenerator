@@ -27,6 +27,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
             var configuration = new ReportConfiguration(
                 new[] { ReportPath },
                 "C:\\temp",
+                new string[] { },
                 null,
                 new[] { "Latex", "Xml", "Html" },
                 new string[] { },
@@ -47,6 +48,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
             var configuration = new ReportConfiguration(
                 new string[] { },
                 "C:\\temp",
+                new string[] { },
                 null,
                 new[] { "Latex" },
                 new string[] { },
@@ -67,6 +69,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
             var configuration = new ReportConfiguration(
                 new[] { "123.xml" },
                 "C:\\temp",
+                new string[] { },
                 null,
                 new[] { "Latex" },
                 new string[] { },
@@ -87,6 +90,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
             var configuration = new ReportConfiguration(
                 new[] { ReportPath },
                 string.Empty,
+                new string[] { },
                 null,
                 new[] { "Latex" },
                 new string[] { },
@@ -107,9 +111,31 @@ namespace Palmmedia.ReportGenerator.Core.Test
             var configuration = new ReportConfiguration(
                 new[] { ReportPath },
                 "C:\\temp:?$",
+                new string[] { },
                 null,
                 new[] { "Latex" },
                 new string[] { },
+                new[] { "+Test", "-Test" },
+                new[] { "+Test2", "-Test2" },
+                new string[] { },
+                VerbosityLevel.Info.ToString(),
+                null);
+
+            var sut = new ReportConfigurationValidator(this.reportBuilderFactoryMock.Object);
+
+            Assert.False(sut.Validate(configuration));
+        }
+
+        [Fact]
+        public void Validate_InvalidSourceDirectory_ValidationFails()
+        {
+            var configuration = new ReportConfiguration(
+                new[] { ReportPath },
+                @"C:\\temp",
+                new string[] { "C:\\doesnotexist" },
+                null,
+                new[] { "Latex" },
+                new string[] { "notexistingplugin.dll" },
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
                 new string[] { },
@@ -127,6 +153,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
             var configuration = new ReportConfiguration(
                 new[] { ReportPath },
                 "C:\\temp",
+                new string[] { },
                 "C:\\temp:?$",
                 new[] { "Latex" },
                 new string[] { },
@@ -147,6 +174,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
             var configuration = new ReportConfiguration(
                 new[] { ReportPath },
                 "C:\\temp",
+                new string[] { },
                 null,
                 new[] { "DoesNotExist" },
                 new string[] { },
@@ -167,6 +195,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
             var configuration = new ReportConfiguration(
                 new[] { ReportPath },
                 @"C:\\temp",
+                new string[] { },
                 null,
                 new[] { "Latex" },
                 new string[] { },
@@ -187,6 +216,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
             var configuration = new ReportConfiguration(
                 new[] { ReportPath },
                 @"C:\\temp",
+                new string[] { },
                 null,
                 new[] { "Latex" },
                 new string[] { "notexistingplugin.dll" },

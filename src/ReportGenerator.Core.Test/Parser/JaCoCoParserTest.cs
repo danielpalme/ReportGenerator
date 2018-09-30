@@ -12,24 +12,24 @@ using Xunit;
 namespace Palmmedia.ReportGeneratorTest.Parser
 {
     /// <summary>
-    /// This is a test class for CoberturaParser and is intended
-    /// to contain all CoberturaParser Unit Tests
+    /// This is a test class for JaCoCoParser and is intended
+    /// to contain all JaCoCoParser Unit Tests
     /// </summary>
     [Collection("FileManager")]
-    public class CoberturaParserTest
+    public class JaCoCoParserTest
     {
-        private static readonly string FilePath1 = Path.Combine(FileManager.GetJavaReportDirectory(), "Cobertura2.1.1.xml");
+        private static readonly string FilePath1 = Path.Combine(FileManager.GetJavaReportDirectory(), "JaCoCo0.8.3.xml");
 
         private ParserResult parserResult;
 
-        public CoberturaParserTest()
+        public JaCoCoParserTest()
         {
             var filterMock = new Mock<IFilter>();
             filterMock.Setup(f => f.IsElementIncludedInReport(It.IsAny<string>())).Returns(true);
 
             var report = XDocument.Load(FilePath1);
-            new CoberturaReportPreprocessor().Execute(report);
-            this.parserResult = new CoberturaParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(report);
+            new JaCoCoReportPreprocessor(new[] { "C:\\temp" }).Execute(report);
+            this.parserResult = new JaCoCoParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(report);
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [Fact]
         public void NumberOfLineVisitsTest()
         {
-            var fileAnalysis = GetFileAnalysis(this.parserResult.Assemblies, "test.TestClass", "C:\\temp\\test\\TestClass.java");
+            var fileAnalysis = GetFileAnalysis(this.parserResult.Assemblies, "test/TestClass", "C:\\temp\\test\\TestClass.java");
             Assert.Equal(1, fileAnalysis.Lines.Single(l => l.LineNumber == 15).LineVisits);
             Assert.Equal(1, fileAnalysis.Lines.Single(l => l.LineNumber == 17).LineVisits);
             Assert.Equal(0, fileAnalysis.Lines.Single(l => l.LineNumber == 20).LineVisits);
@@ -60,7 +60,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [Fact]
         public void LineVisitStatusTest()
         {
-            var fileAnalysis = GetFileAnalysis(this.parserResult.Assemblies, "test.TestClass", "C:\\temp\\test\\TestClass.java");
+            var fileAnalysis = GetFileAnalysis(this.parserResult.Assemblies, "test/TestClass", "C:\\temp\\test\\TestClass.java");
 
             var line = fileAnalysis.Lines.Single(l => l.LineNumber == 1);
             Assert.Equal(LineVisitStatus.NotCoverable, line.LineVisitStatus);
@@ -90,8 +90,8 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [Fact]
         public void FilesOfClassTest()
         {
-            Assert.Single(this.parserResult.Assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "test.TestClass").Files);
-            Assert.Single(this.parserResult.Assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "test.GenericClass").Files);
+            Assert.Single(this.parserResult.Assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "test/TestClass").Files);
+            Assert.Single(this.parserResult.Assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "test/GenericClass").Files);
         }
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [Fact]
         public void GetCoverableLinesOfClassTest()
         {
-            Assert.Equal(3, this.parserResult.Assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "test.AbstractClass").CoverableLines);
+            Assert.Equal(3, this.parserResult.Assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "test/AbstractClass").CoverableLines);
         }
 
         /// <summary>
@@ -127,18 +127,16 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [Fact]
         public void MethodMetricsTest()
         {
-            var metrics = this.parserResult.Assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "test.TestClass").Files.Single(f => f.Path == "C:\\temp\\test\\TestClass.java").MethodMetrics;
+            var metrics = this.parserResult.Assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "test/TestClass").Files.Single(f => f.Path == "C:\\temp\\test\\TestClass.java").MethodMetrics;
 
             Assert.Equal(4, metrics.Count());
-            Assert.Equal("<init>()V", metrics.First().Name);
-            Assert.Equal(3, metrics.First().Metrics.Count());
+            Assert.Equal("<init>()V", metrics.ElementAt(2).Name);
+            Assert.Equal(2, metrics.ElementAt(2).Metrics.Count());
 
-            Assert.Equal("Cyclomatic complexity", metrics.First().Metrics.ElementAt(0).Name);
-            Assert.Equal(0, metrics.First().Metrics.ElementAt(0).Value);
-            Assert.Equal("Line coverage", metrics.First().Metrics.ElementAt(1).Name);
-            Assert.Equal(1.0M, metrics.First().Metrics.ElementAt(1).Value);
-            Assert.Equal("Branch coverage", metrics.First().Metrics.ElementAt(2).Name);
-            Assert.Equal(1.0M, metrics.First().Metrics.ElementAt(2).Value);
+            Assert.Equal("Line coverage", metrics.ElementAt(2).Metrics.ElementAt(0).Name);
+            Assert.Equal(1.0M, metrics.ElementAt(2).Metrics.ElementAt(1).Value);
+            Assert.Equal("Branch coverage", metrics.ElementAt(2).Metrics.ElementAt(1).Name);
+            Assert.Equal(1.0M, metrics.ElementAt(2).Metrics.ElementAt(1).Value);
         }
 
         /// <summary>
@@ -147,7 +145,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
         [Fact]
         public void CodeElementsTest()
         {
-            var codeElements = GetFile(this.parserResult.Assemblies, "test.TestClass", "C:\\temp\\test\\TestClass.java").CodeElements;
+            var codeElements = GetFile(this.parserResult.Assemblies, "test/TestClass", "C:\\temp\\test\\TestClass.java").CodeElements;
             Assert.Equal(4, codeElements.Count());
         }
 

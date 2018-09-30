@@ -23,7 +23,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Preprocessing
         {
             XDocument report = XDocument.Load(FilePath);
 
-            new CoberturaReportPreprocessor(report).Execute();
+            new CoberturaReportPreprocessor().Execute(report);
 
             var filesPaths = report.Root
                 .Elements("packages")

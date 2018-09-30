@@ -35,7 +35,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Preprocessing
 
             Assert.Equal(14, startupCodeClasses.Length);
 
-            new DotCoverReportPreprocessor(report).Execute();
+            new DotCoverReportPreprocessor().Execute(report);
 
             var updatedStartupCodeClasses = report.Root
                 .Elements("Assembly")

@@ -10,25 +10,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
     internal class DynamicCodeCoverageReportPreprocessor
     {
         /// <summary>
-        /// The report file as XContainer.
-        /// </summary>
-        private readonly XContainer report;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DynamicCodeCoverageReportPreprocessor"/> class.
-        /// </summary>
-        /// <param name="report">The report.</param>
-        internal DynamicCodeCoverageReportPreprocessor(XContainer report)
-        {
-            this.report = report;
-        }
-
-        /// <summary>
         /// Executes the preprocessing of the report.
         /// </summary>
-        internal void Execute()
+        /// <param name="report">The report.</param>
+        internal void Execute(XContainer report)
         {
-            foreach (var module in this.report.Descendants("module").ToArray())
+            foreach (var module in report.Descendants("module").ToArray())
             {
                 ApplyClassNameToStartupCodeElements(module);
             }

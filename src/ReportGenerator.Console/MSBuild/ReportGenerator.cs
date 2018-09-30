@@ -46,6 +46,14 @@ namespace Palmmedia.ReportGenerator.MSBuild
         public ITaskItem[] ReportTypes { get; set; }
 
         /// <summary>
+        /// Gets or sets the source directories. Optional directories which contain the corresponding source code. The source files are used if coverage report contains classes without path information.
+        /// </summary>
+        /// <value>
+        /// The source directories.
+        /// </value>
+        public ITaskItem[] SourceDirectories { get; set; }
+
+        /// <summary>
         /// Gets or sets the plugins.
         /// </summary>
         /// <value>
@@ -121,6 +129,7 @@ namespace Palmmedia.ReportGenerator.MSBuild
             var configuration = new ReportConfiguration(
                 this.ReportFiles == null ? Enumerable.Empty<string>() : this.ReportFiles.Select(r => r.ItemSpec),
                 this.TargetDirectory,
+                this.SourceDirectories == null ? Enumerable.Empty<string>() : this.SourceDirectories.Select(r => r.ItemSpec),
                 this.HistoryDirectory,
                 reportTypes,
                 this.Plugins == null ? Enumerable.Empty<string>() : this.Plugins.Select(r => r.ItemSpec),

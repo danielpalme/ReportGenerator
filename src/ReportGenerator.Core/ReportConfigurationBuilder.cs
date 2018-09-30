@@ -36,6 +36,7 @@ namespace Palmmedia.ReportGenerator.Core
 
             var reportFilePatterns = new string[] { };
             string targetDirectory = string.Empty;
+            var sourceDirectories = new string[] { };
             string historyDirectory = null;
             var reportTypes = new string[] { };
             var plugins = new string[] { };
@@ -55,6 +56,11 @@ namespace Palmmedia.ReportGenerator.Core
             if (namedArguments.TryGetValue("TARGETDIR", out value))
             {
                 targetDirectory = value;
+            }
+
+            if (namedArguments.TryGetValue("SOURCEDIRS", out value))
+            {
+                sourceDirectories = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             }
 
             if (namedArguments.TryGetValue("HISTORYDIR", out value))
@@ -108,6 +114,7 @@ namespace Palmmedia.ReportGenerator.Core
             return new ReportConfiguration(
                 reportFilePatterns,
                 targetDirectory,
+                sourceDirectories,
                 historyDirectory,
                 reportTypes,
                 plugins,

@@ -36,11 +36,11 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             this.parserResultWithoutPreprocessing = new OpenCoverParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(XDocument.Load(FilePath1));
 
             var report = XDocument.Load(FilePath1);
-            new OpenCoverReportPreprocessor(report).Execute();
+            new OpenCoverReportPreprocessor().Execute(report);
             this.parserResultWithPreprocessing = new OpenCoverParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(report);
 
             report = XDocument.Load(FilePath2);
-            new OpenCoverReportPreprocessor(report).Execute();
+            new OpenCoverReportPreprocessor().Execute(report);
             this.parserResultWithTrackedMethods = new OpenCoverParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(report);
         }
 

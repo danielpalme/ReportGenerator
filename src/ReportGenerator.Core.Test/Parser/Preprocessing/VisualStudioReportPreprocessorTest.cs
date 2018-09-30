@@ -32,7 +32,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Preprocessing
 
             Assert.Equal(15, startupCodeClasses.Length);
 
-            new VisualStudioReportPreprocessor(report).Execute();
+            new VisualStudioReportPreprocessor().Execute(report);
 
             var updatedStartupCodeClasses = report.Root
                 .Elements("Module")

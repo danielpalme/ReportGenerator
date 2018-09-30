@@ -33,7 +33,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Preprocessing
 
             Assert.Equal(15, startupCodeFunctions.Length);
 
-            new DynamicCodeCoverageReportPreprocessor(report).Execute();
+            new DynamicCodeCoverageReportPreprocessor().Execute(report);
 
             var updatedStartupCodeFunctions = report.Root
                 .Elements("modules")

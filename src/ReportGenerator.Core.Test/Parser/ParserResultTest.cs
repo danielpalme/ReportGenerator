@@ -33,11 +33,11 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             this.parserResultWithoutPreprocessing.Merge(new OpenCoverParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(XDocument.Load(FilePath)));
 
             var report = XDocument.Load(FilePath);
-            new OpenCoverReportPreprocessor(report).Execute();
+            new OpenCoverReportPreprocessor().Execute(report);
             this.parserResultWithPreprocessing = new OpenCoverParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(report);
 
             report = XDocument.Load(FilePath);
-            new OpenCoverReportPreprocessor(report).Execute();
+            new OpenCoverReportPreprocessor().Execute(report);
             this.parserResultWithPreprocessing.Merge(new OpenCoverParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(report));
         }
 
@@ -217,7 +217,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             filterMock.Setup(f => f.IsElementIncludedInReport(It.IsAny<string>())).Returns(true);
 
             string filePath = Path.Combine(FileManager.GetCSharpReportDirectory(), "MultiOpenCover.xml");
-            var parserResult = new CoverageReportParser(filterMock.Object, filterMock.Object, filterMock.Object).ParseFiles(new string[] { filePath });
+            var parserResult = new CoverageReportParser(new string[0], filterMock.Object, filterMock.Object, filterMock.Object).ParseFiles(new string[] { filePath });
 
             var metrics = parserResult.Assemblies
                 .Single(a => a.Name == "Test").Classes
@@ -247,7 +247,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser
             filterMock.Setup(f => f.IsElementIncludedInReport(It.IsAny<string>())).Returns(true);
 
             string filePath = Path.Combine(FileManager.GetCSharpReportDirectory(), "MultiOpenCover.xml");
-            var parserResult = new CoverageReportParser(filterMock.Object, filterMock.Object, filterMock.Object).ParseFiles(new string[] { filePath });
+            var parserResult = new CoverageReportParser(new string[0], filterMock.Object, filterMock.Object, filterMock.Object).ParseFiles(new string[] { filePath });
 
             var fileAnalysis = GetFileAnalysis(parserResult.Assemblies, "Test.TestClass2", "C:\\temp\\TestClass2.cs");
 

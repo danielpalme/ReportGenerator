@@ -11,25 +11,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
     internal class DotCoverReportPreprocessor
     {
         /// <summary>
-        /// The report file as XContainer.
-        /// </summary>
-        private readonly XContainer report;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DotCoverReportPreprocessor"/> class.
-        /// </summary>
-        /// <param name="report">The report.</param>
-        internal DotCoverReportPreprocessor(XContainer report)
-        {
-            this.report = report;
-        }
-
-        /// <summary>
         /// Executes the preprocessing of the report.
         /// </summary>
-        internal void Execute()
+        /// <param name="report">The report.</param>
+        internal void Execute(XContainer report)
         {
-            foreach (var module in this.report.Descendants("Assembly").ToArray())
+            foreach (var module in report.Descendants("Assembly").ToArray())
             {
                 MoveStartupCodeElementsToParentType(module);
             }

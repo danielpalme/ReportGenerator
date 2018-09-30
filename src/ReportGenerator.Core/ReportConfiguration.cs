@@ -27,6 +27,7 @@ namespace Palmmedia.ReportGenerator.Core
         /// </summary>
         /// <param name="reportFilePatterns">The report file patterns.</param>
         /// <param name="targetDirectory">The target directory.</param>
+        /// <param name="sourceDirectories">The source directories.</param>
         /// <param name="historyDirectory">The history directory.</param>
         /// <param name="reportTypes">The report types.</param>
         /// <param name="plugins">The plugins.</param>
@@ -38,6 +39,7 @@ namespace Palmmedia.ReportGenerator.Core
         public ReportConfiguration(
             IEnumerable<string> reportFilePatterns,
             string targetDirectory,
+            IEnumerable<string> sourceDirectories,
             string historyDirectory,
             IEnumerable<string> reportTypes,
             IEnumerable<string> plugins,
@@ -50,6 +52,11 @@ namespace Palmmedia.ReportGenerator.Core
             if (reportFilePatterns == null)
             {
                 throw new ArgumentNullException(nameof(reportFilePatterns));
+            }
+
+            if (sourceDirectories == null)
+            {
+                throw new ArgumentNullException(nameof(sourceDirectories));
             }
 
             if (reportTypes == null)
@@ -92,6 +99,8 @@ namespace Palmmedia.ReportGenerator.Core
             this.TargetDirectory = targetDirectory ?? throw new ArgumentNullException(nameof(targetDirectory));
             this.HistoryDirectory = historyDirectory;
 
+            this.SourceDirectories = sourceDirectories.ToList();
+
             if (reportTypes.Any())
             {
                 this.ReportTypes = reportTypes.ToList();
@@ -129,6 +138,11 @@ namespace Palmmedia.ReportGenerator.Core
         /// Gets the target directory.
         /// </summary>
         public string TargetDirectory { get; }
+
+        /// <summary>
+        /// Gets the source directories.
+        /// </summary>
+        public IReadOnlyCollection<string> SourceDirectories { get; }
 
         /// <summary>
         /// Gets the history directory.

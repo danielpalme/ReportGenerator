@@ -25,7 +25,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Preprocessing
         {
             XDocument report = XDocument.Load(CSharpFilePath);
 
-            new OpenCoverReportPreprocessor(report).Execute();
+            new OpenCoverReportPreprocessor().Execute(report);
 
             Assert.Equal(15, report.Descendants("File").Count());
 
@@ -64,7 +64,7 @@ namespace Palmmedia.ReportGeneratorTest.Parser.Preprocessing
 
             Assert.Equal(17, startupCodeClasses.Length);
 
-            new OpenCoverReportPreprocessor(report).Execute();
+            new OpenCoverReportPreprocessor().Execute(report);
 
             var updatedStartupCodeClasses = report.Root
                 .Elements("Modules")

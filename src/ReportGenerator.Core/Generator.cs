@@ -62,6 +62,7 @@ namespace Palmmedia.ReportGenerator.Core
                 DateTime executionTime = DateTime.Now;
 
                 var parserResult = new CoverageReportParser(
+                    reportConfiguration.SourceDirectories,
                     new DefaultFilter(reportContext.ReportConfiguration.AssemblyFilters),
                     new DefaultFilter(reportContext.ReportConfiguration.ClassFilters),
                     new DefaultFilter(reportContext.ReportConfiguration.FileFilters))
