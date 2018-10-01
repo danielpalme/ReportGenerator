@@ -88,7 +88,7 @@ namespace Palmmedia.ReportGenerator.Core
             {
                 try
                 {
-                    this.reportFiles.AddRange(FileSearch.GetFiles(reportFilePattern));
+                    this.reportFiles.AddRange(GlobbingFileSearch.GetFiles(reportFilePattern));
                 }
                 catch (Exception)
                 {

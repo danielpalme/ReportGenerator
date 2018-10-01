@@ -8,7 +8,7 @@ namespace Palmmedia.ReportGenerator.Core.Common
     /// <summary>
     /// Searches files based on file pattern with support for wildcards.
     /// </summary>
-    internal static class FileSearch
+    internal static class WildCardFileSearch
     {
         /// <summary>
         /// Gets the files matching the given file pattern..

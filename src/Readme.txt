@@ -66,6 +66,7 @@ CHANGELOG
     * New: Issue #141: Compare with historic coverage
     * New: Issue #151: Reduced color brightness
     * New: Issue #160: Added JaCoCo support
+    * New: Issue #161: Added globbing support for 'reports' command line parameter
     * Fix: Issue #127: Fixed coverage calculation for NCover
     * Fix: Issue #133: Empty Risk Hotspots section when no risk hotspot exists
     * Fix: Issue #135: Handling of NaN in metrics of Cobertura files

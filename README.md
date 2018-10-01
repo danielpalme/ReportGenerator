@@ -64,7 +64,7 @@ Parameters:
 
 Explanations:
    Reports:            The coverage reports that should be parsed (separated by semicolon).
-                       Wildcards are allowed.
+                       Globbing is supported.
    Target directory:   The directory where the generated report should be saved.
    Report types:       The output formats and scope (separated by semicolon).
                        Values: Badges, Cobertura, CsvSummary, Html, HtmlChart, HtmlSummary, Latex, LatexSummary, MHtml,

@@ -127,7 +127,7 @@
     <value>Explanations:</value>
   </data>
   <data name="Explanations1" xml:space="preserve">
-    <value>Reports:            The coverage reports that should be parsed (separated by semicolon). Wildcards are allowed.</value>
+    <value>Reports:            The coverage reports that should be parsed (separated by semicolon). Globbing is supported.</value>
   </data>
   <data name="Explanations10" xml:space="preserve">
     <value>File filters:       Optional list of files that should be included or excluded in the report.</value>

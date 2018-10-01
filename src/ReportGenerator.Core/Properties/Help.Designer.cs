@@ -88,7 +88,7 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reports:            The coverage reports that should be parsed (separated by semicolon). Wildcards are allowed..
+        ///   Looks up a localized string similar to Reports:            The coverage reports that should be parsed (separated by semicolon). Globbing is supported..
         /// </summary>
         internal static string Explanations1 {
             get {

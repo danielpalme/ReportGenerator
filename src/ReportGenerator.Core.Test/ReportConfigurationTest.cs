@@ -114,7 +114,7 @@ namespace Palmmedia.ReportGeneratorTest
             Assert.NotNull(configuration.ClassFilters);
 
             Assert.False(configuration.VerbosityLevelValid);
-            Assert.Equal(1, configuration.InvalidReportFilePatterns.Count);
+            Assert.Equal(0, configuration.InvalidReportFilePatterns.Count);
         }
     }
 }
