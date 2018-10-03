@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,9 +9,32 @@ namespace Palmmedia.ReportGenerator.Core.Common
 {
     /// <summary>
     /// Finds files and directories by matching their path names against a pattern.
+    /// Implementation based on https://github.com/mganss/Glob.cs
     /// </summary>
     internal class Glob
     {
+        private static readonly char[] GlobCharacters = "*?[]{}".ToCharArray();
+
+        private static Dictionary<string, RegexOrString> regexOrStringCache = new Dictionary<string, RegexOrString>();
+
+        private static HashSet<char> regexSpecialChars = new HashSet<char>(new[] { '[', '\\', '^', '$', '.', '|', '?', '*', '+', '(', ')' });
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Glob"/> class.
+        /// </summary>
+        public Glob()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Glob"/> class.
+        /// </summary>
+        /// <param name="pattern">The pattern to be matched. See <see cref="Pattern"/> for syntax.</param>
+        public Glob(string pattern)
+        {
+            this.Pattern = pattern;
+        }
+
         /// <summary>
         /// Gets or sets a value indicating the pattern to match file and directory names against.
         /// The pattern can contain the following special characters:
@@ -42,46 +64,49 @@ namespace Palmmedia.ReportGenerator.Core.Common
         public string Pattern { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating an action to be performed when an error occurs during pattern matching.
-        /// </summary>
-        public Action<string> ErrorLog { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether exceptions that occur during matching should be rethrown. Default is false.
-        /// </summary>
-        public bool ThrowOnError { get; set; }
-
-        /// <summary>
         /// Gets or sets a value indicating whether case should be ignored in file and directory names. Default is true.
         /// </summary>
-        public bool IgnoreCase { get; set; }
+        public bool IgnoreCase { get; set; } = true;
 
         /// <summary>
-        /// Gets or sets a value indicating whether only directories should be matched. Default is false.
+        /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
-        public bool DirectoriesOnly { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Regex"/> objects should be cached. Default is true.
-        /// </summary>
-        public bool CacheRegexes { get; set; }
-
-        /// <summary>
-        /// Creates a new instance.
-        /// </summary>
-        public Glob()
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
+        public override string ToString()
         {
-            IgnoreCase = true;
-            CacheRegexes = true;
+            return this.Pattern;
         }
 
         /// <summary>
-        /// Creates a new instance.
+        /// Returns a hash code for this instance.
         /// </summary>
-        /// <param name="pattern">The pattern to be matched. See <see cref="Pattern"/> for syntax.</param>
-        public Glob(string pattern)
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
+        /// </returns>
+        public override int GetHashCode()
         {
-            Pattern = pattern;
+            return this.Pattern.GetHashCode();
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public override bool Equals(object obj)
+        {
+            // Check for null and compare run-time types.
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            var g = (Glob)obj;
+            return this.Pattern == g.Pattern;
         }
 
         /// <summary>
@@ -90,7 +115,7 @@ namespace Palmmedia.ReportGenerator.Core.Common
         /// <returns>The matched path names</returns>
         public IEnumerable<string> ExpandNames()
         {
-            return Expand(Pattern, DirectoriesOnly).Select(f => f.FullName);
+            return this.Expand(this.Pattern, false).Select(f => f.FullName);
         }
 
         /// <summary>
@@ -99,54 +124,19 @@ namespace Palmmedia.ReportGenerator.Core.Common
         /// <returns>The matched <see cref="FileSystemInfo"/> objects</returns>
         public IEnumerable<FileSystemInfo> Expand()
         {
-            return Expand(Pattern, DirectoriesOnly);
+            return this.Expand(this.Pattern, false);
         }
-
-        private class RegexOrString
-        {
-            public Regex Regex { get; set; }
-            public string Pattern { get; set; }
-            public bool IgnoreCase { get; set; }
-
-            public RegexOrString(string pattern, string rawString, bool ignoreCase, bool compileRegex)
-            {
-                IgnoreCase = ignoreCase;
-
-                try
-                {
-                    Regex = new Regex(pattern, RegexOptions.CultureInvariant | (ignoreCase ? RegexOptions.IgnoreCase : 0)
-                        | (compileRegex ? RegexOptions.Compiled : 0));
-                    Pattern = pattern;
-                }
-                catch
-                {
-                    Pattern = rawString;
-                }
-            }
-
-            public bool IsMatch(string input)
-            {
-                if (Regex != null) return Regex.IsMatch(input);
-                return Pattern.Equals(input, IgnoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
-            }
-        }
-
-        private static ConcurrentDictionary<string, RegexOrString> RegexOrStringCache = new ConcurrentDictionary<string, RegexOrString>();
 
         private RegexOrString CreateRegexOrString(string pattern)
         {
-            if (!CacheRegexes) return new RegexOrString(GlobToRegex(pattern), pattern, IgnoreCase, compileRegex: false);
-
-            if (!RegexOrStringCache.TryGetValue(pattern, out RegexOrString regexOrString))
+            if (!regexOrStringCache.TryGetValue(pattern, out RegexOrString regexOrString))
             {
-                regexOrString = new RegexOrString(GlobToRegex(pattern), pattern, IgnoreCase, compileRegex: true);
-                RegexOrStringCache[pattern] = regexOrString;
+                regexOrString = new RegexOrString(GlobToRegex(pattern), pattern, this.IgnoreCase, compileRegex: true);
+                regexOrStringCache[pattern] = regexOrString;
             }
 
             return regexOrString;
         }
-
-        private static readonly char[] GlobCharacters = "*?[]{}".ToCharArray();
 
         private IEnumerable<FileSystemInfo> Expand(string path, bool dirOnly)
         {
@@ -157,64 +147,39 @@ namespace Palmmedia.ReportGenerator.Core.Common
 
             // stop looking if there are no more glob characters in the path.
             // but only if ignoring case because FileSystemInfo.Exists always ignores case.
-            if (IgnoreCase && path.IndexOfAny(GlobCharacters) < 0)
+            if (this.IgnoreCase && path.IndexOfAny(GlobCharacters) < 0)
             {
                 FileSystemInfo fsi = null;
                 bool exists = false;
 
-                try
+                fsi = dirOnly ? (FileSystemInfo)new DirectoryInfo(path) : new FileInfo(path);
+                exists = fsi.Exists;
+
+                if (exists)
                 {
-                    fsi = dirOnly ? (FileSystemInfo)new DirectoryInfo(path) : new FileInfo(path);
-                    exists = fsi.Exists;
-                }
-                catch (Exception)
-                {
-                    if (ThrowOnError) throw;
+                    yield return fsi;
                 }
 
-                if (exists) yield return fsi;
                 yield break;
             }
 
-            string parent = null;
-
-            try
-            {
-                parent = Path.GetDirectoryName(path);
-            }
-            catch (Exception)
-            {
-                if (ThrowOnError) throw;
-                yield break;
-            }
+            string parent = Path.GetDirectoryName(path);
 
             if (parent == null)
             {
-                DirectoryInfo dir = null;
+                DirectoryInfo dir = new DirectoryInfo(path);
 
-                try
+                if (dir != null)
                 {
-                    dir = new DirectoryInfo(path);
-                }
-                catch (Exception)
-                {
-                    if (ThrowOnError) throw;
+                    yield return dir;
                 }
 
-                if (dir != null) yield return dir;
                 yield break;
             }
 
-            if (parent == "")
+            if (parent == string.Empty)
             {
-                try
-                {
-                    parent = Directory.GetCurrentDirectory();
-                }
-                catch (Exception)
-                {
-                    if (ThrowOnError) throw;
-                }
+                parent = Directory.GetCurrentDirectory();
             }
 
             var child = Path.GetFileName(path);
@@ -225,7 +190,7 @@ namespace Palmmedia.ReportGenerator.Core.Common
             {
                 foreach (var group in Ungroup(path))
                 {
-                    foreach (var item in Expand(group, dirOnly))
+                    foreach (var item in this.Expand(group, dirOnly))
                     {
                         yield return item;
                     }
@@ -236,7 +201,7 @@ namespace Palmmedia.ReportGenerator.Core.Common
 
             if (child == "**")
             {
-                foreach (DirectoryInfo dir in Expand(parent, true).DistinctBy(d => d.FullName).Cast<DirectoryInfo>())
+                foreach (DirectoryInfo dir in this.Expand(parent, true).DistinctBy(d => d.FullName).Cast<DirectoryInfo>())
                 {
                     yield return dir;
 
@@ -249,21 +214,11 @@ namespace Palmmedia.ReportGenerator.Core.Common
                 yield break;
             }
 
-            var childRegexes = Ungroup(child).Select(s => CreateRegexOrString(s)).ToList();
+            var childRegexes = Ungroup(child).Select(s => this.CreateRegexOrString(s)).ToList();
 
-            foreach (DirectoryInfo parentDir in Expand(parent, true).DistinctBy(d => d.FullName).Cast<DirectoryInfo>())
+            foreach (DirectoryInfo parentDir in this.Expand(parent, true).DistinctBy(d => d.FullName).Cast<DirectoryInfo>())
             {
-                IEnumerable<FileSystemInfo> fileSystemEntries;
-
-                try
-                {
-                    fileSystemEntries = dirOnly ? parentDir.EnumerateDirectories() : parentDir.EnumerateFileSystemInfos();
-                }
-                catch (Exception)
-                {
-                    if (ThrowOnError) throw;
-                    continue;
-                }
+                IEnumerable<FileSystemInfo> fileSystemEntries = dirOnly ? parentDir.EnumerateDirectories() : parentDir.EnumerateFileSystemInfos();
 
                 foreach (var fileSystemEntry in fileSystemEntries)
                 {
@@ -273,12 +228,17 @@ namespace Palmmedia.ReportGenerator.Core.Common
                     }
                 }
 
-                if (childRegexes.Any(r => r.Pattern == @"^\.\.$")) yield return parentDir.Parent ?? parentDir;
-                if (childRegexes.Any(r => r.Pattern == @"^\.$")) yield return parentDir;
+                if (childRegexes.Any(r => r.Pattern == @"^\.\.$"))
+                {
+                    yield return parentDir.Parent ?? parentDir;
+                }
+
+                if (childRegexes.Any(r => r.Pattern == @"^\.$"))
+                {
+                    yield return parentDir;
+                }
             }
         }
-
-        private static HashSet<char> RegexSpecialChars = new HashSet<char>(new[] { '[', '\\', '^', '$', '.', '|', '?', '*', '+', '(', ')' });
 
         private static string GlobToRegex(string glob)
         {
@@ -291,7 +251,11 @@ namespace Palmmedia.ReportGenerator.Core.Common
             {
                 if (characterClass)
                 {
-                    if (c == ']') characterClass = false;
+                    if (c == ']')
+                    {
+                        characterClass = false;
+                    }
+
                     regex.Append(c);
                     continue;
                 }
@@ -309,7 +273,11 @@ namespace Palmmedia.ReportGenerator.Core.Common
                         regex.Append(c);
                         break;
                     default:
-                        if (RegexSpecialChars.Contains(c)) regex.Append('\\');
+                        if (regexSpecialChars.Contains(c))
+                        {
+                            regex.Append('\\');
+                        }
+
                         regex.Append(c);
                         break;
                 }
@@ -330,8 +298,8 @@ namespace Palmmedia.ReportGenerator.Core.Common
 
             var level = 0;
             var option = new StringBuilder();
-            var prefix = "";
-            var postfix = "";
+            var prefix = string.Empty;
+            var postfix = string.Empty;
             var options = new List<string>();
 
             for (int i = 0; i < path.Length; i++)
@@ -378,7 +346,8 @@ namespace Palmmedia.ReportGenerator.Core.Common
                 }
             }
 
-            if (level > 0) // invalid grouping
+            // invalid grouping
+            if (level > 0)
             {
                 yield return path;
                 yield break;
@@ -394,44 +363,6 @@ namespace Palmmedia.ReportGenerator.Core.Common
                     yield return s;
                 }
             }
-        }
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
-        {
-            return Pattern;
-        }
-
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
-        public override int GetHashCode()
-        {
-            return Pattern.GetHashCode();
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
-        /// <returns>
-        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            //Check for null and compare run-time types.
-            if (obj == null || GetType() != obj.GetType()) return false;
-
-            var g = (Glob)obj;
-            return Pattern == g.Pattern;
         }
 
         private static IEnumerable<DirectoryInfo> GetDirectories(DirectoryInfo root)
@@ -457,11 +388,48 @@ namespace Palmmedia.ReportGenerator.Core.Common
                 }
             }
         }
+
+        private class RegexOrString
+        {
+            public RegexOrString(string pattern, string rawString, bool ignoreCase, bool compileRegex)
+            {
+                this.IgnoreCase = ignoreCase;
+
+                try
+                {
+                    this.Regex = new Regex(
+                        pattern,
+                        RegexOptions.CultureInvariant | (ignoreCase ? RegexOptions.IgnoreCase : 0) | (compileRegex ? RegexOptions.Compiled : 0));
+                    this.Pattern = pattern;
+                }
+                catch
+                {
+                    this.Pattern = rawString;
+                }
+            }
+
+            public Regex Regex { get; set; }
+
+            public string Pattern { get; set; }
+
+            public bool IgnoreCase { get; set; }
+
+            public bool IsMatch(string input)
+            {
+                if (this.Regex != null)
+                {
+                    return this.Regex.IsMatch(input);
+                }
+
+                return this.Pattern.Equals(input, this.IgnoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
+            }
+        }
     }
 
     internal static class Extensions
     {
-        internal static IEnumerable<TSource> DistinctBy<TSource, TKey>(this IEnumerable<TSource> source,
+        internal static IEnumerable<TSource> DistinctBy<TSource, TKey>(
+            this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector)
         {
             var knownKeys = new HashSet<TKey>();
