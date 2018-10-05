@@ -2,7 +2,7 @@
 using System.Linq;
 using Xunit;
 
-namespace Palmmedia.ReportGeneratorTest
+namespace Palmmedia.ReportGenerator.Core.Test
 {
     public class FileManager
     {

@@ -24,11 +24,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         public override string ReportType => "Html";
 
         /// <summary>
-        /// Gets a value indicating whether class reports can be generated in parallel.
-        /// </summary>
-        public override bool SupportsParallelClassReportExecution => true;
-
-        /// <summary>
         /// Creates a class report.
         /// </summary>
         /// <param name="class">The class.</param>

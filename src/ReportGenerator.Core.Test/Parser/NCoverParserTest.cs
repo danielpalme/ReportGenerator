@@ -8,7 +8,7 @@ using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Parser.Filtering;
 using Xunit;
 
-namespace Palmmedia.ReportGeneratorTest.Parser
+namespace Palmmedia.ReportGenerator.Core.Test.Parser
 {
     /// <summary>
     /// This is a test class for NCoverParser and is intended

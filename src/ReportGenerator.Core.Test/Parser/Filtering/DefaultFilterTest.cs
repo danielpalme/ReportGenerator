@@ -1,7 +1,7 @@
 ﻿using Palmmedia.ReportGenerator.Core.Parser.Filtering;
 using Xunit;
 
-namespace Palmmedia.ReportGeneratorTest.Parser.Filtering
+namespace Palmmedia.ReportGenerator.Core.Test.Parser.Filtering
 {
     /// <summary>
     /// This is a test class for DefaultFilter and is intended

@@ -25,11 +25,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
         IReportContext ReportContext { get; set; }
 
         /// <summary>
-        /// Gets a value indicating whether class reports can be generated in parallel.
-        /// </summary>
-        bool SupportsParallelClassReportExecution { get; }
-
-        /// <summary>
         /// Creates a class report.
         /// </summary>
         /// <param name="class">The class.</param>

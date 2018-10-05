@@ -3,7 +3,7 @@ using System.Linq;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Xunit;
 
-namespace Palmmedia.ReportGeneratorTest.Parser.Analysis
+namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
 {
     /// <summary>
     /// This is a test class for CodeFile and is intended

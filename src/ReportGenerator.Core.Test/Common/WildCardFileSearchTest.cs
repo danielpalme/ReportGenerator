@@ -4,7 +4,7 @@ using System.Linq;
 using Palmmedia.ReportGenerator.Core.Common;
 using Xunit;
 
-namespace Palmmedia.ReportGeneratorTest.Common
+namespace Palmmedia.ReportGenerator.Core.Test.Common
 {
     /// <summary>
     /// This is a test class for FileSearch and is intended

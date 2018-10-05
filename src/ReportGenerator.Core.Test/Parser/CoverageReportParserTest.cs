@@ -4,7 +4,7 @@ using Palmmedia.ReportGenerator.Core.Parser;
 using Palmmedia.ReportGenerator.Core.Parser.Filtering;
 using Xunit;
 
-namespace Palmmedia.ReportGeneratorTest.Parser
+namespace Palmmedia.ReportGenerator.Core.Test.Parser
 {
     /// <summary>
     /// This is a test class for CoverageReportParser and is intended

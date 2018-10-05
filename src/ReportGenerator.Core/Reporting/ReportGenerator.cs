@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
@@ -57,51 +56,46 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
 
             int counter = 0;
 
-            int degreeOfParallelism = this.renderers.All(r => r.SupportsParallelClassReportExecution) ? Environment.ProcessorCount : 1;
-
             foreach (var assembly in this.parserResult.Assemblies)
             {
-                Parallel.ForEach(
-                        assembly.Classes,
-                        new ParallelOptions() { MaxDegreeOfParallelism = degreeOfParallelism },
-                        @class =>
+                foreach (var @class in assembly.Classes)
+                {
+                    counter++;
+
+                    Logger.DebugFormat(
+                        " " + Resources.CreatingReport,
+                        counter,
+                        numberOfClasses,
+                        @class.Assembly.ShortName,
+                        @class.Name);
+
+                    var fileAnalyses = @class.Files.Select(f => f.AnalyzeFile()).ToArray();
+
+                    if (addHistoricCoverage)
+                    {
+                        var historicCoverage = new HistoricCoverage(@class, executionTime, tag);
+                        @class.AddHistoricCoverage(historicCoverage);
+                        overallHistoricCoverages.Add(historicCoverage);
+                    }
+
+                    Parallel.ForEach(
+                        this.renderers,
+                        renderer =>
                         {
-                            Interlocked.Increment(ref counter);
-
-                            Logger.DebugFormat(
-                                " " + Resources.CreatingReport,
-                                counter,
-                                numberOfClasses,
-                                @class.Assembly.ShortName,
-                                @class.Name);
-
-                            var fileAnalyses = @class.Files.Select(f => f.AnalyzeFile()).ToArray();
-
-                            if (addHistoricCoverage)
+                            try
                             {
-                                var historicCoverage = new HistoricCoverage(@class, executionTime, tag);
-                                @class.AddHistoricCoverage(historicCoverage);
-                                overallHistoricCoverages.Add(historicCoverage);
+                                renderer.CreateClassReport(@class, fileAnalyses);
                             }
-
-                            Parallel.ForEach(
-                                this.renderers,
-                                renderer =>
-                                {
-                                    try
-                                    {
-                                        renderer.CreateClassReport(@class, fileAnalyses);
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        Logger.ErrorFormat(
-                                            "  " + Resources.ErrorDuringRenderingClassReport,
-                                            @class.Name,
-                                            renderer.ReportType,
-                                            ex.GetExceptionMessageForDisplay());
-                                    }
-                                });
+                            catch (Exception ex)
+                            {
+                                Logger.ErrorFormat(
+                                    "  " + Resources.ErrorDuringRenderingClassReport,
+                                    @class.Name,
+                                    renderer.ReportType,
+                                    ex.GetExceptionMessageForDisplay());
+                            }
                         });
+                }
             }
 
             Logger.Debug(" " + Resources.CreatingSummary);

@@ -7,7 +7,7 @@ using Palmmedia.ReportGenerator.Core.Plugin;
 using Palmmedia.ReportGenerator.Core.Reporting;
 using Xunit;
 
-namespace Palmmedia.ReportGeneratorTest.Reporting
+namespace Palmmedia.ReportGenerator.Core.Test.Reporting
 {
     public class ReportBuilderFactoryTest
     {
@@ -60,8 +60,6 @@ namespace Palmmedia.ReportGeneratorTest.Reporting
             /// The report context.
             /// </value>
             public IReportContext ReportContext { get; set; }
-
-            public bool SupportsParallelClassReportExecution => true;
 
             /// <summary>
             /// Creates a class report.

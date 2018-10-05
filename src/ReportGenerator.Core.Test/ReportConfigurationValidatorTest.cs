@@ -2,7 +2,6 @@
 using Moq;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Reporting;
-using Palmmedia.ReportGeneratorTest;
 using Xunit;
 
 namespace Palmmedia.ReportGenerator.Core.Test

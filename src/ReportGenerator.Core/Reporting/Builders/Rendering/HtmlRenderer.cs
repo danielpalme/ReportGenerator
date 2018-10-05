@@ -342,154 +342,151 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 throw new ArgumentNullException(nameof(riskHotspots));
             }
 
-            lock (this.javaScriptContent)
+            this.javaScriptContent.AppendLine("var assemblies = [");
+
+            var historicCoverageExecutionTimes = new HashSet<DateTime>();
+
+            foreach (var assembly in assemblies)
             {
-                this.javaScriptContent.AppendLine("var assemblies = [");
+                this.javaScriptContent.AppendLine("  {");
+                this.javaScriptContent.AppendFormat("    \"name\": \"{0}\",", assembly.Name.Replace(@"\", @"\\"));
+                this.javaScriptContent.AppendLine();
+                this.javaScriptContent.AppendLine("    \"classes\": [");
 
-                var historicCoverageExecutionTimes = new HashSet<DateTime>();
-
-                foreach (var assembly in assemblies)
+                foreach (var @class in assembly.Classes)
                 {
-                    this.javaScriptContent.AppendLine("  {");
-                    this.javaScriptContent.AppendFormat("    \"name\": \"{0}\",", assembly.Name.Replace(@"\", @"\\"));
-                    this.javaScriptContent.AppendLine();
-                    this.javaScriptContent.AppendLine("    \"classes\": [");
+                    var historicCoverages = this.FilterHistoricCoverages(@class.HistoricCoverages, 10);
 
-                    foreach (var @class in assembly.Classes)
+                    var lineCoverageHistory = "[" + string.Join(",", historicCoverages.Select(h => h.CoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture))) + "]";
+                    var branchCoverageHistory = "[]";
+                    if (historicCoverages.Any(h => h.BranchCoverageQuota.HasValue))
                     {
-                        var historicCoverages = this.FilterHistoricCoverages(@class.HistoricCoverages, 10);
+                        branchCoverageHistory = "[" + string.Join(",", historicCoverages.Select(h => h.BranchCoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture))) + "]";
+                    }
 
-                        var lineCoverageHistory = "[" + string.Join(",", historicCoverages.Select(h => h.CoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture))) + "]";
-                        var branchCoverageHistory = "[]";
-                        if (historicCoverages.Any(h => h.BranchCoverageQuota.HasValue))
+                    var historicCoveragesSb = new StringBuilder();
+                    int historicCoveragesCounter = 0;
+                    historicCoveragesSb.Append("[");
+                    foreach (var historicCoverage in @class.HistoricCoverages)
+                    {
+                        historicCoverageExecutionTimes.Add(historicCoverage.ExecutionTime);
+
+                        if (historicCoveragesCounter++ > 0)
                         {
-                            branchCoverageHistory = "[" + string.Join(",", historicCoverages.Select(h => h.BranchCoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture))) + "]";
+                            historicCoveragesSb.Append(", ");
                         }
 
-                        var historicCoveragesSb = new StringBuilder();
-                        int historicCoveragesCounter = 0;
-                        historicCoveragesSb.Append("[");
-                        foreach (var historicCoverage in @class.HistoricCoverages)
-                        {
-                            historicCoverageExecutionTimes.Add(historicCoverage.ExecutionTime);
-
-                            if (historicCoveragesCounter++ > 0)
-                            {
-                                historicCoveragesSb.Append(", ");
-                            }
-
-                            historicCoveragesSb.AppendFormat(
-                                "{{ \"executionTime\": \"{0} - {1}\", \"coveredLines\": {2}, \"uncoveredLines\": {3}, \"coverableLines\": {4}, \"totalLines\": {5}, \"coverageQuota\": {6}, \"coveredBranches\": {7}, \"totalBranches\": {8}, \"branchCoverageQuota\": {9} }}",
-                                historicCoverage.ExecutionTime.ToShortDateString(),
-                                historicCoverage.ExecutionTime.ToLongTimeString(),
-                                historicCoverage.CoveredLines.ToString(CultureInfo.InvariantCulture),
-                                (historicCoverage.CoverableLines - historicCoverage.CoveredLines).ToString(CultureInfo.InvariantCulture),
-                                historicCoverage.CoverableLines.ToString(CultureInfo.InvariantCulture),
-                                historicCoverage.TotalLines.ToString(CultureInfo.InvariantCulture),
-                                historicCoverage.CoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture),
-                                historicCoverage.CoveredBranches.ToString(CultureInfo.InvariantCulture),
-                                historicCoverage.TotalBranches.ToString(CultureInfo.InvariantCulture),
-                                historicCoverage.BranchCoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
-                        }
-
-                        historicCoveragesSb.Append("]");
-
-                        this.javaScriptContent.Append("      { ");
-                        this.javaScriptContent.AppendFormat("\"name\": \"{0}\",", @class.Name.Replace(@"\", @"\\"));
-                        this.javaScriptContent.AppendFormat(
-                            " \"reportPath\": \"{0}\",",
-                            this.onlySummary ? string.Empty : GetClassReportFilename(@class.Assembly.ShortName, @class.Name));
-                        this.javaScriptContent.AppendFormat(" \"coveredLines\": {0},", @class.CoveredLines);
-                        this.javaScriptContent.AppendFormat(" \"uncoveredLines\": {0},", @class.CoverableLines - @class.CoveredLines);
-                        this.javaScriptContent.AppendFormat(" \"coverableLines\": {0},", @class.CoverableLines);
-                        this.javaScriptContent.AppendFormat(" \"totalLines\": {0},", @class.TotalLines.GetValueOrDefault());
-                        this.javaScriptContent.AppendFormat(" \"coverageType\": \"{0}\",", @class.CoverageType);
-                        this.javaScriptContent.AppendFormat(
-                            " \"methodCoverage\": {0},",
-                            @class.CoverageType == CoverageType.MethodCoverage && @class.CoverageQuota.HasValue ? @class.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : "\"-\"");
-                        this.javaScriptContent.AppendFormat(" \"coveredBranches\": {0},", @class.CoveredBranches.GetValueOrDefault());
-                        this.javaScriptContent.AppendFormat(" \"totalBranches\": {0},", @class.TotalBranches.GetValueOrDefault());
-                        this.javaScriptContent.AppendFormat(" \"lineCoverageHistory\": {0},", lineCoverageHistory);
-                        this.javaScriptContent.AppendFormat(" \"branchCoverageHistory\": {0},", branchCoverageHistory);
-                        this.javaScriptContent.AppendFormat(" \"historicCoverages\": {0}", historicCoveragesSb.ToString());
-
-                        this.javaScriptContent.AppendLine(" },");
+                        historicCoveragesSb.AppendFormat(
+                            "{{ \"executionTime\": \"{0} - {1}\", \"coveredLines\": {2}, \"uncoveredLines\": {3}, \"coverableLines\": {4}, \"totalLines\": {5}, \"coverageQuota\": {6}, \"coveredBranches\": {7}, \"totalBranches\": {8}, \"branchCoverageQuota\": {9} }}",
+                            historicCoverage.ExecutionTime.ToShortDateString(),
+                            historicCoverage.ExecutionTime.ToLongTimeString(),
+                            historicCoverage.CoveredLines.ToString(CultureInfo.InvariantCulture),
+                            (historicCoverage.CoverableLines - historicCoverage.CoveredLines).ToString(CultureInfo.InvariantCulture),
+                            historicCoverage.CoverableLines.ToString(CultureInfo.InvariantCulture),
+                            historicCoverage.TotalLines.ToString(CultureInfo.InvariantCulture),
+                            historicCoverage.CoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture),
+                            historicCoverage.CoveredBranches.ToString(CultureInfo.InvariantCulture),
+                            historicCoverage.TotalBranches.ToString(CultureInfo.InvariantCulture),
+                            historicCoverage.BranchCoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
                     }
 
-                    this.javaScriptContent.AppendLine("    ]},");
+                    historicCoveragesSb.Append("]");
+
+                    this.javaScriptContent.Append("      { ");
+                    this.javaScriptContent.AppendFormat("\"name\": \"{0}\",", @class.Name.Replace(@"\", @"\\"));
+                    this.javaScriptContent.AppendFormat(
+                        " \"reportPath\": \"{0}\",",
+                        this.onlySummary ? string.Empty : GetClassReportFilename(@class.Assembly.ShortName, @class.Name));
+                    this.javaScriptContent.AppendFormat(" \"coveredLines\": {0},", @class.CoveredLines);
+                    this.javaScriptContent.AppendFormat(" \"uncoveredLines\": {0},", @class.CoverableLines - @class.CoveredLines);
+                    this.javaScriptContent.AppendFormat(" \"coverableLines\": {0},", @class.CoverableLines);
+                    this.javaScriptContent.AppendFormat(" \"totalLines\": {0},", @class.TotalLines.GetValueOrDefault());
+                    this.javaScriptContent.AppendFormat(" \"coverageType\": \"{0}\",", @class.CoverageType);
+                    this.javaScriptContent.AppendFormat(
+                        " \"methodCoverage\": {0},",
+                        @class.CoverageType == CoverageType.MethodCoverage && @class.CoverageQuota.HasValue ? @class.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : "\"-\"");
+                    this.javaScriptContent.AppendFormat(" \"coveredBranches\": {0},", @class.CoveredBranches.GetValueOrDefault());
+                    this.javaScriptContent.AppendFormat(" \"totalBranches\": {0},", @class.TotalBranches.GetValueOrDefault());
+                    this.javaScriptContent.AppendFormat(" \"lineCoverageHistory\": {0},", lineCoverageHistory);
+                    this.javaScriptContent.AppendFormat(" \"branchCoverageHistory\": {0},", branchCoverageHistory);
+                    this.javaScriptContent.AppendFormat(" \"historicCoverages\": {0}", historicCoveragesSb.ToString());
+
+                    this.javaScriptContent.AppendLine(" },");
                 }
 
-                this.javaScriptContent.AppendLine("];");
-
-                this.javaScriptContent.AppendLine();
-
-                this.javaScriptContent.Append("var historicCoverageExecutionTimes = [");
-                int historicCoverageExecutionTimesCounter = 0;
-
-                foreach (var item in historicCoverageExecutionTimes.OrderByDescending(i => i).Skip(1).Take(100).ToList())
-                {
-                    if (historicCoverageExecutionTimesCounter++ > 0)
-                    {
-                        this.javaScriptContent.Append(", ");
-                    }
-
-                    this.javaScriptContent.AppendFormat("\"{0} - {1}\"", item.ToShortDateString(), item.ToLongTimeString());
-                }
-
-                this.javaScriptContent.AppendLine("];");
-
-                this.javaScriptContent.AppendLine();
-
-                this.javaScriptContent.AppendLine("var riskHotspotMetrics = [");
-
-                if (riskHotspots.Any())
-                {
-                    foreach (var metric in riskHotspots.First().StatusMetrics)
-                    {
-                        this.javaScriptContent.Append("      { ");
-                        this.javaScriptContent.AppendFormat("\"name\": \"{0}\",", metric.Metric.Name);
-                        this.javaScriptContent.AppendFormat(" \"explanationUrl\": \"{0}\"", metric.Metric.ExplanationUrl);
-                        this.javaScriptContent.AppendLine(" },");
-                    }
-                }
-
-                this.javaScriptContent.AppendLine("];");
-
-                this.javaScriptContent.AppendLine();
-
-                this.javaScriptContent.AppendLine("var riskHotspots = [");
-
-                foreach (var riskHotspot in riskHotspots)
-                {
-                    this.javaScriptContent.AppendLine("  {");
-                    this.javaScriptContent.AppendFormat("    \"assembly\": \"{0}\",", riskHotspot.Assembly.ShortName);
-                    this.javaScriptContent.AppendFormat(" \"class\": \"{0}\",", riskHotspot.Class.Name);
-                    this.javaScriptContent.AppendFormat(" \"reportPath\": \"{0}\",", this.onlySummary ? string.Empty : GetClassReportFilename(riskHotspot.Assembly.ShortName, riskHotspot.Class.Name));
-                    this.javaScriptContent.AppendFormat(" \"methodName\": \"{0}\",", riskHotspot.MethodMetric.Name);
-                    this.javaScriptContent.AppendFormat(" \"methodShortName\": \"{0}\",", riskHotspot.MethodMetric.ShortName);
-                    this.javaScriptContent.AppendFormat(" \"fileIndex\": {0},", riskHotspot.FileIndex);
-                    this.javaScriptContent.AppendFormat(" \"line\": {0},", !this.onlySummary && riskHotspot.MethodMetric.Line.HasValue ? riskHotspot.MethodMetric.Line.Value.ToString(CultureInfo.InvariantCulture) : "null");
-                    this.javaScriptContent.AppendLine();
-                    this.javaScriptContent.AppendLine("    \"metrics\": [");
-
-                    foreach (var metric in riskHotspot.StatusMetrics)
-                    {
-                        this.javaScriptContent.Append("      { ");
-                        this.javaScriptContent.AppendFormat("\"value\": {0},", metric.Metric.Value.HasValue ? metric.Metric.Value.Value.ToString(CultureInfo.InvariantCulture) : "null");
-                        this.javaScriptContent.AppendFormat(" \"exceeded\": {0}", metric.Exceeded.ToString().ToLowerInvariant());
-                        this.javaScriptContent.AppendLine(" },");
-                    }
-
-                    this.javaScriptContent.AppendLine("    ]},");
-                }
-
-                this.javaScriptContent.AppendLine("];");
-
-                this.javaScriptContent.AppendLine();
-
-                this.javaScriptContent.AppendLine("var branchCoverageAvailable = " + branchCoverageAvailable.ToString().ToLowerInvariant() + ";");
-                this.javaScriptContent.AppendLine();
+                this.javaScriptContent.AppendLine("    ]},");
             }
+
+            this.javaScriptContent.AppendLine("];");
+
+            this.javaScriptContent.AppendLine();
+
+            this.javaScriptContent.Append("var historicCoverageExecutionTimes = [");
+            int historicCoverageExecutionTimesCounter = 0;
+
+            foreach (var item in historicCoverageExecutionTimes.OrderByDescending(i => i).Skip(1).Take(100).ToList())
+            {
+                if (historicCoverageExecutionTimesCounter++ > 0)
+                {
+                    this.javaScriptContent.Append(", ");
+                }
+
+                this.javaScriptContent.AppendFormat("\"{0} - {1}\"", item.ToShortDateString(), item.ToLongTimeString());
+            }
+
+            this.javaScriptContent.AppendLine("];");
+
+            this.javaScriptContent.AppendLine();
+
+            this.javaScriptContent.AppendLine("var riskHotspotMetrics = [");
+
+            if (riskHotspots.Any())
+            {
+                foreach (var metric in riskHotspots.First().StatusMetrics)
+                {
+                    this.javaScriptContent.Append("      { ");
+                    this.javaScriptContent.AppendFormat("\"name\": \"{0}\",", metric.Metric.Name);
+                    this.javaScriptContent.AppendFormat(" \"explanationUrl\": \"{0}\"", metric.Metric.ExplanationUrl);
+                    this.javaScriptContent.AppendLine(" },");
+                }
+            }
+
+            this.javaScriptContent.AppendLine("];");
+
+            this.javaScriptContent.AppendLine();
+
+            this.javaScriptContent.AppendLine("var riskHotspots = [");
+
+            foreach (var riskHotspot in riskHotspots)
+            {
+                this.javaScriptContent.AppendLine("  {");
+                this.javaScriptContent.AppendFormat("    \"assembly\": \"{0}\",", riskHotspot.Assembly.ShortName);
+                this.javaScriptContent.AppendFormat(" \"class\": \"{0}\",", riskHotspot.Class.Name);
+                this.javaScriptContent.AppendFormat(" \"reportPath\": \"{0}\",", this.onlySummary ? string.Empty : GetClassReportFilename(riskHotspot.Assembly.ShortName, riskHotspot.Class.Name));
+                this.javaScriptContent.AppendFormat(" \"methodName\": \"{0}\",", riskHotspot.MethodMetric.Name);
+                this.javaScriptContent.AppendFormat(" \"methodShortName\": \"{0}\",", riskHotspot.MethodMetric.ShortName);
+                this.javaScriptContent.AppendFormat(" \"fileIndex\": {0},", riskHotspot.FileIndex);
+                this.javaScriptContent.AppendFormat(" \"line\": {0},", !this.onlySummary && riskHotspot.MethodMetric.Line.HasValue ? riskHotspot.MethodMetric.Line.Value.ToString(CultureInfo.InvariantCulture) : "null");
+                this.javaScriptContent.AppendLine();
+                this.javaScriptContent.AppendLine("    \"metrics\": [");
+
+                foreach (var metric in riskHotspot.StatusMetrics)
+                {
+                    this.javaScriptContent.Append("      { ");
+                    this.javaScriptContent.AppendFormat("\"value\": {0},", metric.Metric.Value.HasValue ? metric.Metric.Value.Value.ToString(CultureInfo.InvariantCulture) : "null");
+                    this.javaScriptContent.AppendFormat(" \"exceeded\": {0}", metric.Exceeded.ToString().ToLowerInvariant());
+                    this.javaScriptContent.AppendLine(" },");
+                }
+
+                this.javaScriptContent.AppendLine("    ]},");
+            }
+
+            this.javaScriptContent.AppendLine("];");
+
+            this.javaScriptContent.AppendLine();
+
+            this.javaScriptContent.AppendLine("var branchCoverageAvailable = " + branchCoverageAvailable.ToString().ToLowerInvariant() + ";");
+            this.javaScriptContent.AppendLine();
         }
 
         /// <summary>
@@ -795,22 +792,19 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     string.Format(CultureInfo.InvariantCulture, "<br />{0} {1}", WebUtility.HtmlEncode(ReportResources.TotalLines), h.TotalLines),
                     h.Tag != null ? string.Format(CultureInfo.InvariantCulture, "<br />{0} {1}", WebUtility.HtmlEncode(ReportResources.Tag), h.Tag) : string.Empty));
 
-            lock (this.javaScriptContent)
-            {
-                this.javaScriptContent.AppendFormat("var historyChartData{0} = {{", id);
-                this.javaScriptContent.AppendLine();
-                this.javaScriptContent.AppendFormat(
-                    "    \"series\" : [{0}],",
-                    string.Join(",", series));
-                this.javaScriptContent.AppendLine();
+            this.javaScriptContent.AppendFormat("var historyChartData{0} = {{", id);
+            this.javaScriptContent.AppendLine();
+            this.javaScriptContent.AppendFormat(
+                "    \"series\" : [{0}],",
+                string.Join(",", series));
+            this.javaScriptContent.AppendLine();
 
-                this.javaScriptContent.AppendFormat(
-                     "    \"tooltips\" : [{0}]",
-                     string.Join(",", toolTips));
-                this.javaScriptContent.AppendLine();
-                this.javaScriptContent.AppendLine("};");
-                this.javaScriptContent.AppendLine();
-            }
+            this.javaScriptContent.AppendFormat(
+                 "    \"tooltips\" : [{0}]",
+                 string.Join(",", toolTips));
+            this.javaScriptContent.AppendLine();
+            this.javaScriptContent.AppendLine("};");
+            this.javaScriptContent.AppendLine();
         }
 
         /// <summary>
@@ -1122,28 +1116,22 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             if (!FileNameByClass.TryGetValue(key, out fileName))
             {
-                lock (FileNameByClass)
+                string shortClassName = className.Substring(className.LastIndexOf('.') + 1);
+                fileName = RendererBase.ReplaceInvalidPathChars(assemblyName + "_" + shortClassName) + ".htm";
+
+                if (FileNameByClass.Values.Any(v => v.Equals(fileName, StringComparison.OrdinalIgnoreCase)))
                 {
-                    if (!FileNameByClass.TryGetValue(key, out fileName))
+                    int counter = 2;
+
+                    do
                     {
-                        string shortClassName = className.Substring(className.LastIndexOf('.') + 1);
-                        fileName = RendererBase.ReplaceInvalidPathChars(assemblyName + "_" + shortClassName) + ".htm";
-
-                        if (FileNameByClass.Values.Any(v => v.Equals(fileName, StringComparison.OrdinalIgnoreCase)))
-                        {
-                            int counter = 2;
-
-                            do
-                            {
-                                fileName = RendererBase.ReplaceInvalidPathChars(assemblyName + "_" + shortClassName + counter) + ".htm";
-                                counter++;
-                            }
-                            while (FileNameByClass.Values.Any(v => v.Equals(fileName, StringComparison.OrdinalIgnoreCase)));
-                        }
-
-                        FileNameByClass.Add(key, fileName);
+                        fileName = RendererBase.ReplaceInvalidPathChars(assemblyName + "_" + shortClassName + counter) + ".htm";
+                        counter++;
                     }
+                    while (FileNameByClass.Values.Any(v => v.Equals(fileName, StringComparison.OrdinalIgnoreCase)));
                 }
+
+                FileNameByClass.Add(key, fileName);
             }
 
             return fileName;
@@ -1278,11 +1266,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             ms.Write(lineBreak, 0, lineBreak.Length);
             ms.Write(lineBreak, 0, lineBreak.Length);
 
-            lock (this.javaScriptContent)
-            {
-                byte[] assembliesText = Encoding.UTF8.GetBytes(this.javaScriptContent.ToString());
-                ms.Write(assembliesText, 0, assembliesText.Length);
-            }
+            byte[] assembliesText = Encoding.UTF8.GetBytes(this.javaScriptContent.ToString());
+            ms.Write(assembliesText, 0, assembliesText.Length);
 
             ms.Write(lineBreak, 0, lineBreak.Length);
 

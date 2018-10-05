@@ -4,7 +4,7 @@ using System.Xml.Linq;
 using Palmmedia.ReportGenerator.Core.Parser.Preprocessing;
 using Xunit;
 
-namespace Palmmedia.ReportGeneratorTest.Parser.Preprocessing
+namespace Palmmedia.ReportGenerator.Core.Test.Parser.Preprocessing
 {
     /// <summary>
     /// This is a test class for CoberturaReportPreprocessor and is intended

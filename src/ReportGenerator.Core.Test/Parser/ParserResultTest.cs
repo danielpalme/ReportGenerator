@@ -9,7 +9,7 @@ using Palmmedia.ReportGenerator.Core.Parser.Filtering;
 using Palmmedia.ReportGenerator.Core.Parser.Preprocessing;
 using Xunit;
 
-namespace Palmmedia.ReportGeneratorTest.Parser
+namespace Palmmedia.ReportGenerator.Core.Test.Parser
 {
     /// <summary>
     /// This is a test class for MultiReportParser and is intended

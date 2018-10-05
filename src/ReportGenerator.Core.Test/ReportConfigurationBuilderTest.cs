@@ -1,10 +1,9 @@
 ﻿using System.IO;
 using System.Linq;
-using Palmmedia.ReportGenerator.Core;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Xunit;
 
-namespace Palmmedia.ReportGeneratorTest
+namespace Palmmedia.ReportGenerator.Core.Test
 {
     /// <summary>
     /// This is a test class for ReportConfigurationBuilder and is intended

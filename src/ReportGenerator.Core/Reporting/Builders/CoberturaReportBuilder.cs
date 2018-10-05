@@ -27,11 +27,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         public string ReportType => "Cobertura";
 
         /// <summary>
-        /// Gets a value indicating whether class reports can be generated in parallel.
-        /// </summary>
-        public bool SupportsParallelClassReportExecution => false;
-
-        /// <summary>
         /// Gets or sets the report context.
         /// </summary>
         /// <value>
