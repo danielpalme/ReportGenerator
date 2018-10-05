@@ -1119,13 +1119,22 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 string shortClassName = className.Substring(className.LastIndexOf('.') + 1);
                 fileName = RendererBase.ReplaceInvalidPathChars(assemblyName + "_" + shortClassName) + ".htm";
 
+                if (fileName.Length > 100)
+                {
+                    string firstPart = fileName.Substring(0, 50);
+                    string lastPart = fileName.Substring(fileName.Length - 45, 45);
+
+                    fileName = firstPart + lastPart;
+                }
+
                 if (FileNameByClass.Values.Any(v => v.Equals(fileName, StringComparison.OrdinalIgnoreCase)))
                 {
                     int counter = 2;
+                    string fileNameWithoutExtension = fileName.Substring(0, fileName.Length - 4);
 
                     do
                     {
-                        fileName = RendererBase.ReplaceInvalidPathChars(assemblyName + "_" + shortClassName + counter) + ".htm";
+                        fileName = fileNameWithoutExtension + counter + ".htm";
                         counter++;
                     }
                     while (FileNameByClass.Values.Any(v => v.Equals(fileName, StringComparison.OrdinalIgnoreCase)));
