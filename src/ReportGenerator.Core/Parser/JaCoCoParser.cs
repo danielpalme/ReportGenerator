@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Palmmedia.ReportGenerator.Core.Logging;
@@ -20,6 +21,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// The Logger.
         /// </summary>
         private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(JaCoCoParser));
+
+        /// <summary>
+        /// Regex to extract short method name.
+        /// </summary>
+        private static Regex methodRegex = new Regex(@"^(?<MethodName>.+)\((?<Arguments>.*)\).*$", RegexOptions.Compiled);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JaCoCoParser" /> class.
@@ -204,12 +210,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         {
             foreach (var method in methodsOfFile)
             {
-                string methodName = method.Attribute("name").Value + method.Attribute("desc").Value;
+                string fullName = method.Attribute("name").Value + method.Attribute("desc").Value;
 
-                if (methodName.StartsWith("lambda$"))
+                if (fullName.StartsWith("lambda$"))
                 {
                     continue;
                 }
+
+                string shortName = methodRegex.Replace(fullName, m => string.Format(CultureInfo.InvariantCulture, "{0}({1})", m.Groups["MethodName"].Value, m.Groups["Arguments"].Value.Length > 0 ? "..." : string.Empty));
 
                 var metrics = new List<Metric>();
 
@@ -227,7 +235,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         ReportResources.Coverage,
                         ParserBase.CodeCoverageUri,
                         MetricType.CoveragePercentual,
-                        total == 0 ? 1m : Math.Round(covered / total, 2, MidpointRounding.AwayFromZero)));
+                        total == 0 ? (decimal?)null : Math.Round(covered / total, 2, MidpointRounding.AwayFromZero)));
                 }
                 else
                 {
@@ -258,10 +266,13 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         ReportResources.BranchCoverage,
                         ParserBase.CodeCoverageUri,
                         MetricType.CoveragePercentual,
-                        1m));
+                        null));
                 }
 
-                codeFile.AddMethodMetric(new MethodMetric(methodName, metrics));
+                var methodMetric = new MethodMetric(fullName, shortName, metrics);
+                methodMetric.Line = int.Parse(method.Attribute("line").Value, CultureInfo.InvariantCulture);
+
+                codeFile.AddMethodMetric(methodMetric);
             }
         }
 

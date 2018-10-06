@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using Palmmedia.ReportGenerator.Core;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Xunit;
 
@@ -114,7 +113,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
             Assert.NotNull(configuration.ClassFilters);
 
             Assert.False(configuration.VerbosityLevelValid);
-            Assert.Equal(0, configuration.InvalidReportFilePatterns.Count);
+            Assert.Equal(1, configuration.InvalidReportFilePatterns.Count);
         }
     }
 }

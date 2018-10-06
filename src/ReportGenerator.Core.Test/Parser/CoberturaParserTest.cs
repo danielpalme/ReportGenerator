@@ -130,7 +130,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
             var metrics = this.parserResult.Assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "test.TestClass").Files.Single(f => f.Path == "C:\\temp\\test\\TestClass.java").MethodMetrics;
 
             Assert.Equal(4, metrics.Count());
-            Assert.Equal("<init>()V", metrics.First().Name);
+            Assert.Equal("<init>()V", metrics.First().FullName);
             Assert.Equal(3, metrics.First().Metrics.Count());
 
             Assert.Equal("Cyclomatic complexity", metrics.First().Metrics.ElementAt(0).Name);

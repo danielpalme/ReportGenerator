@@ -55,7 +55,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Common
         [Fact]
         public void GetFiles_UncPath_NoFilesFound()
         {
-            var files = GlobbingFileSearch.GetFiles(@"\\DoesNotExist\*.xml").ToArray();
+            var files = GlobbingFileSearch.GetFiles(@"\\UncPath\DoesNotExist\*.xml").ToArray();
             Assert.Empty(files);
         }
     }

@@ -33,6 +33,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         private static Regex compilerGeneratedMethodNameRegex = new Regex(@"^.*<(?<CompilerGeneratedName>.+)>.+__.+!MoveNext\(\)!.+$", RegexOptions.Compiled);
 
         /// <summary>
+        /// Regex to extract short method name.
+        /// </summary>
+        private static Regex methodRegex = new Regex(@"^(?<MethodName>.+)\((?<Arguments>.*)\).*$", RegexOptions.Compiled);
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="VisualStudioParser" /> class.
         /// </summary>
         /// <param name="assemblyFilter">The assembly filter.</param>
@@ -230,17 +235,18 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         {
             foreach (var method in methodsOfFile)
             {
-                string methodName = method.Element("MethodName").Value;
+                string fullName = method.Element("MethodName").Value;
 
                 // Exclude properties and lambda expressions
-                if (methodName.StartsWith("get_", StringComparison.Ordinal)
-                    || methodName.StartsWith("set_", StringComparison.Ordinal)
-                    || lambdaMethodNameRegex.IsMatch(methodName))
+                if (fullName.StartsWith("get_", StringComparison.Ordinal)
+                    || fullName.StartsWith("set_", StringComparison.Ordinal)
+                    || lambdaMethodNameRegex.IsMatch(fullName))
                 {
                     continue;
                 }
 
-                methodName = ExtractMethodName(methodName, method.Element("MethodKeyName").Value);
+                fullName = ExtractMethodName(fullName, method.Element("MethodKeyName").Value);
+                string shortName = methodRegex.Replace(fullName, m => string.Format(CultureInfo.InvariantCulture, "{0}({1})", m.Groups["MethodName"].Value, m.Groups["Arguments"].Value.Length > 0 ? "..." : string.Empty));
 
                 var metrics = new[]
                 {
@@ -256,7 +262,19 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         int.Parse(method.Element("BlocksNotCovered").Value, CultureInfo.InvariantCulture))
                 };
 
-                codeFile.AddMethodMetric(new MethodMetric(methodName, metrics));
+                var methodMetric = new MethodMetric(fullName, shortName, metrics);
+
+                var seqpnt = method
+                    .Elements("Lines")
+                    .Elements("LnStart")
+                    .FirstOrDefault();
+
+                if (seqpnt != null)
+                {
+                    methodMetric.Line = int.Parse(seqpnt.Value, CultureInfo.InvariantCulture);
+                }
+
+                codeFile.AddMethodMetric(methodMetric);
             }
         }
 

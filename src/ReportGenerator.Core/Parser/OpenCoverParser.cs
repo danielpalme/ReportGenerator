@@ -34,6 +34,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         private static Regex compilerGeneratedMethodNameRegex = new Regex(@"<(?<CompilerGeneratedName>.+)>.+__.+::MoveNext\(\)$", RegexOptions.Compiled);
 
         /// <summary>
+        /// Regex to extract short method name.
+        /// </summary>
+        private static Regex methodRegex = new Regex(@"^.*::(?<MethodName>.+)\((?<Arguments>.*)\)$", RegexOptions.Compiled);
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="OpenCoverParser" /> class.
         /// </summary>
         /// <param name="assemblyFilter">The assembly filter.</param>
@@ -387,7 +392,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         crapScoreAttributes.Max(a => decimal.Parse(a.Value, CultureInfo.InvariantCulture))));
                 }
 
-                var methodMetric = new MethodMetric(ExtractMethodName(methodGroup.Key), metrics);
+                string fullName = ExtractMethodName(methodGroup.Key);
+                string shortName = methodRegex.Replace(fullName, m => string.Format(CultureInfo.InvariantCulture, "{0}({1})", m.Groups["MethodName"].Value, m.Groups["Arguments"].Value.Length > 0 ? "..." : string.Empty));
+
+                var methodMetric = new MethodMetric(fullName, shortName, metrics);
+
                 var seqpnt = method
                     .Elements("SequencePoints")
                     .Elements("SequencePoint")

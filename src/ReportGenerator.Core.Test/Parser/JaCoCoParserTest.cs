@@ -130,13 +130,13 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
             var metrics = this.parserResult.Assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "test/TestClass").Files.Single(f => f.Path == "C:\\temp\\test\\TestClass.java").MethodMetrics;
 
             Assert.Equal(4, metrics.Count());
-            Assert.Equal("<init>()V", metrics.ElementAt(2).Name);
+            Assert.Equal("<init>()V", metrics.ElementAt(2).FullName);
             Assert.Equal(2, metrics.ElementAt(2).Metrics.Count());
 
             Assert.Equal("Line coverage", metrics.ElementAt(2).Metrics.ElementAt(0).Name);
-            Assert.Equal(1.0M, metrics.ElementAt(2).Metrics.ElementAt(1).Value);
+            Assert.Equal(1.0M, metrics.ElementAt(2).Metrics.ElementAt(0).Value);
             Assert.Equal("Branch coverage", metrics.ElementAt(2).Metrics.ElementAt(1).Name);
-            Assert.Equal(1.0M, metrics.ElementAt(2).Metrics.ElementAt(1).Value);
+            Assert.Null(metrics.ElementAt(2).Metrics.ElementAt(1).Value);
         }
 
         /// <summary>

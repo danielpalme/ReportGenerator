@@ -124,7 +124,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
             var metrics = this.parserResult.Assemblies.Single(a => a.Name == "test.exe").Classes.Single(c => c.Name == "Test.TestClass").Files.Single(f => f.Path == "C:\\temp\\TestClass.cs").MethodMetrics;
 
             Assert.Equal(2, metrics.Count());
-            Assert.Equal("SampleFunction()", metrics.First().Name);
+            Assert.Equal("SampleFunction()", metrics.First().FullName);
             Assert.Equal(2, metrics.First().Metrics.Count());
 
             Assert.Equal("Blocks covered", metrics.First().Metrics.ElementAt(0).Name);

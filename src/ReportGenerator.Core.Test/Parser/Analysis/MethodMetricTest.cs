@@ -16,9 +16,10 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
         [Fact]
         public void Constructor()
         {
-            MethodMetric sut = new MethodMetric("Test");
+            MethodMetric sut = new MethodMetric("Test", "Test2", Enumerable.Empty<Metric>());
 
-            Assert.Equal("Test", sut.Name);
+            Assert.Equal("Test", sut.FullName);
+            Assert.Equal("Test2", sut.ShortName);
         }
 
         /// <summary>
@@ -27,7 +28,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
         [Fact]
         public void AddMetric_AddSingleMetric_MetricIsStored()
         {
-            MethodMetric sut = new MethodMetric("Test");
+            MethodMetric sut = new MethodMetric("Test", "Test", Enumerable.Empty<Metric>());
             var metric = new Metric("Metric1", null, MetricType.CodeQuality, 10);
 
             sut.AddMetric(metric);
@@ -52,8 +53,8 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
             var metric5_1 = new Metric("Metric5", null, MetricType.CodeQuality, 30);
             var metric5_2 = new Metric("Metric5", null, MetricType.CodeQuality, null);
 
-            MethodMetric sut = new MethodMetric("Test", new[] { metric1_1, metric3_1, metric4_1, metric5_1 });
-            var methodMetricToMerge = new MethodMetric("Test", new[] { metric1_2, metric2, metric3_2, metric4_2, metric5_2 });
+            MethodMetric sut = new MethodMetric("Test", "Test", new[] { metric1_1, metric3_1, metric4_1, metric5_1 });
+            var methodMetricToMerge = new MethodMetric("Test", "Test", new[] { metric1_2, metric2, metric3_2, metric4_2, metric5_2 });
 
             sut.Merge(methodMetricToMerge);
 
@@ -84,10 +85,11 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
         [Fact]
         public void MethodMetric_Equals()
         {
-            var target1 = new MethodMetric("Test");
-            var target2 = new MethodMetric("Test");
-            var target3 = new MethodMetric("Other");
-            var target4 = new MethodMetric("Test") { Line = 3 };
+            var target1 = new MethodMetric("Test", "Test", Enumerable.Empty<Metric>());
+            var target2 = new MethodMetric("Test", "Test", Enumerable.Empty<Metric>());
+            var target3 = new MethodMetric("Other", "Other", Enumerable.Empty<Metric>());
+            var target4 = new MethodMetric("Test", "Test", Enumerable.Empty<Metric>())
+            { Line = 3 };
 
             Assert.True(target1.Equals(target2), "Objects are not equal");
             Assert.False(target1.Equals(target3), "Objects are equal");

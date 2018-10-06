@@ -28,6 +28,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         private static Regex branchCoverageRegex = new Regex("\\((?<NumberOfCoveredBranches>\\d+)/(?<NumberOfTotalBranches>\\d+)\\)$", RegexOptions.Compiled);
 
         /// <summary>
+        /// Regex to extract short method name.
+        /// </summary>
+        private static Regex methodRegex = new Regex(@"^(?<MethodName>.+)\((?<Arguments>.*)\).*$", RegexOptions.Compiled);
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="CoberturaParser" /> class.
         /// </summary>
         /// <param name="assemblyFilter">The assembly filter.</param>
@@ -218,7 +223,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         {
             foreach (var method in methodsOfFile)
             {
-                string methodName = method.Attribute("name").Value + method.Attribute("signature").Value;
+                string fullName = method.Attribute("name").Value + method.Attribute("signature").Value;
+                string shortName = methodRegex.Replace(fullName, m => string.Format(CultureInfo.InvariantCulture, "{0}({1})", m.Groups["MethodName"].Value, m.Groups["Arguments"].Value.Length > 0 ? "..." : string.Empty));
 
                 var metrics = new List<Metric>();
 
@@ -278,7 +284,19 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         value));
                 }
 
-                codeFile.AddMethodMetric(new MethodMetric(methodName, metrics));
+                var methodMetric = new MethodMetric(fullName, shortName, metrics);
+
+                var line = method
+                    .Elements("lines")
+                    .Elements("line")
+                    .FirstOrDefault();
+
+                if (line != null)
+                {
+                    methodMetric.Line = int.Parse(line.Attribute("number").Value, CultureInfo.InvariantCulture);
+                }
+
+                codeFile.AddMethodMetric(methodMetric);
             }
         }
 

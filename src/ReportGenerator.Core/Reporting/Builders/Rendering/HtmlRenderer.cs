@@ -463,7 +463,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 this.javaScriptContent.AppendFormat("    \"assembly\": \"{0}\",", riskHotspot.Assembly.ShortName);
                 this.javaScriptContent.AppendFormat(" \"class\": \"{0}\",", riskHotspot.Class.Name);
                 this.javaScriptContent.AppendFormat(" \"reportPath\": \"{0}\",", this.onlySummary ? string.Empty : GetClassReportFilename(riskHotspot.Assembly.ShortName, riskHotspot.Class.Name));
-                this.javaScriptContent.AppendFormat(" \"methodName\": \"{0}\",", riskHotspot.MethodMetric.Name);
+                this.javaScriptContent.AppendFormat(" \"methodName\": \"{0}\",", riskHotspot.MethodMetric.FullName);
                 this.javaScriptContent.AppendFormat(" \"methodShortName\": \"{0}\",", riskHotspot.MethodMetric.ShortName);
                 this.javaScriptContent.AppendFormat(" \"fileIndex\": {0},", riskHotspot.FileIndex);
                 this.javaScriptContent.AppendFormat(" \"line\": {0},", !this.onlySummary && riskHotspot.MethodMetric.Line.HasValue ? riskHotspot.MethodMetric.Line.Value.ToString(CultureInfo.InvariantCulture) : "null");
@@ -585,14 +585,14 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     {
                         this.reportTextWriter.Write(
                             "<td title=\"{0}\"><a href=\"#file{1}_line{2}\" data-ng-click=\"navigateToHash('#file{1}_line{2}')\">{3}</a></td>",
-                            WebUtility.HtmlEncode(methodMetric.Name),
+                            WebUtility.HtmlEncode(methodMetric.FullName),
                             fileIndex,
                             methodMetric.Line,
                             WebUtility.HtmlEncode(methodMetric.ShortName));
                     }
                     else
                     {
-                        this.reportTextWriter.Write("<td title=\"{0}\">{1}</td>", WebUtility.HtmlEncode(methodMetric.Name), WebUtility.HtmlEncode(methodMetric.ShortName));
+                        this.reportTextWriter.Write("<td title=\"{0}\">{1}</td>", WebUtility.HtmlEncode(methodMetric.FullName), WebUtility.HtmlEncode(methodMetric.ShortName));
                     }
 
                     foreach (var metricValue in methodMetric.Metrics.Select(m => m.Value))
@@ -647,7 +647,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             {
                 this.reportTextWriter.Write("<tr>");
 
-                this.reportTextWriter.Write("<td title=\"{0}\">{1}</td>", WebUtility.HtmlEncode(methodMetric.Name), WebUtility.HtmlEncode(methodMetric.ShortName));
+                this.reportTextWriter.Write("<td title=\"{0}\">{1}</td>", WebUtility.HtmlEncode(methodMetric.FullName), WebUtility.HtmlEncode(methodMetric.ShortName));
 
                 foreach (var metricValue in methodMetric.Metrics.Select(m => m.Value))
                 {
@@ -876,7 +876,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 {
                     this.reportTextWriter.Write(
                         "<td title=\"{0}\"><a href=\"{1}#file{2}_line{3}\">{4}</a></td>",
-                        WebUtility.HtmlEncode(riskHotspot.MethodMetric.Name),
+                        WebUtility.HtmlEncode(riskHotspot.MethodMetric.FullName),
                         WebUtility.HtmlEncode(GetClassReportFilename(riskHotspot.Assembly.ShortName, riskHotspot.Class.Name)),
                         riskHotspot.FileIndex,
                         riskHotspot.MethodMetric.Line,
@@ -884,7 +884,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 }
                 else
                 {
-                    this.reportTextWriter.Write("<td title=\"{0}\">{1}</td>", WebUtility.HtmlEncode(riskHotspot.MethodMetric.Name), WebUtility.HtmlEncode(riskHotspot.MethodMetric.ShortName));
+                    this.reportTextWriter.Write("<td title=\"{0}\">{1}</td>", WebUtility.HtmlEncode(riskHotspot.MethodMetric.FullName), WebUtility.HtmlEncode(riskHotspot.MethodMetric.ShortName));
                 }
 
                 foreach (var statusMetric in riskHotspot.StatusMetrics)

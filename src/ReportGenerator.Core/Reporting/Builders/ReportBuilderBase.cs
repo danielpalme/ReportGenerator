@@ -221,7 +221,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             {
                 reportRenderer.Header(ReportResources.Metrics);
 
-                var methodMetric = new MethodMetric(ReportResources.Total, summableMetrics);
+                var methodMetric = new MethodMetric(ReportResources.Total, ReportResources.Total, summableMetrics);
                 reportRenderer.MetricsTable(new[] { methodMetric });
             }
 

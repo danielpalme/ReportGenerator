@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
 {
@@ -12,11 +10,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
     public class MethodMetric
     {
         /// <summary>
-        /// Regex to analyze/split a method name.
-        /// </summary>
-        private const string MethodRegex = @"^.*::(?<MethodName>.+)\((?<Arguments>.*)\)$";
-
-        /// <summary>
         /// List of metrics.
         /// </summary>
         private readonly List<Metric> metrics = new List<Metric>();
@@ -25,19 +18,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// Initializes a new instance of the <see cref="MethodMetric"/> class.
         /// </summary>
         /// <param name="name">The name.</param>
-        public MethodMetric(string name)
-        {
-            this.Name = name ?? throw new ArgumentNullException(nameof(name));
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MethodMetric"/> class.
-        /// </summary>
-        /// <param name="name">The name.</param>
         /// <param name="metrics">The metrics.</param>
-        public MethodMetric(string name, IEnumerable<Metric> metrics)
+        public MethodMetric(string fullName, string shortName, IEnumerable<Metric> metrics)
         {
-            this.Name = name;
+            this.FullName = fullName;
+            this.ShortName = shortName;
             this.AddMetrics(metrics);
         }
 
@@ -47,18 +32,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         public IEnumerable<Metric> Metrics => this.metrics;
 
         /// <summary>
-        /// Gets the name of the method.
+        /// Gets the full name of the method.
         /// </summary>
-        public string Name { get; }
+        public string FullName { get; }
 
         /// <summary>
-        /// Gets the short name of the method (method arguments are omitted).
+        /// Gets the name of the method.
         /// </summary>
-        /// <value>The short name of the method.</value>
-        public string ShortName => Regex.Replace(
-                    this.Name,
-                    MethodRegex,
-                    m => string.Format(CultureInfo.InvariantCulture, "{0}({1})", m.Groups["MethodName"].Value, m.Groups["Arguments"].Value.Length > 0 ? "..." : string.Empty));
+        public string ShortName { get; }
 
         /// <summary>
         /// Gets the line number.
@@ -84,7 +65,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
             else
             {
                 var methodMetric = (MethodMetric)obj;
-                return methodMetric.Name.Equals(this.Name) && methodMetric.Line == this.Line;
+                return methodMetric.FullName.Equals(this.FullName) && methodMetric.Line == this.Line;
             }
         }
 
@@ -94,7 +75,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
         /// </returns>
-        public override int GetHashCode() => this.Name.GetHashCode() + this.Line.GetHashCode();
+        public override int GetHashCode() => this.FullName.GetHashCode() + this.Line.GetHashCode();
 
         /// <summary>
         /// Adds the given metric.

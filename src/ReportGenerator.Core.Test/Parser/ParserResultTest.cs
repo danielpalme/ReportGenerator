@@ -187,7 +187,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
             var metrics = this.parserResultWithoutPreprocessing.Assemblies.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.TestClass").Files.Single(f => f.Path == "C:\\temp\\TestClass.cs").MethodMetrics;
 
             Assert.Equal(2, metrics.Count());
-            Assert.Equal("System.Void Test.TestClass::SampleFunction()", metrics.First().Name);
+            Assert.Equal("System.Void Test.TestClass::SampleFunction()", metrics.First().FullName);
             Assert.Equal(5, metrics.First().Metrics.Count());
 
             Assert.Equal("Cyclomatic complexity", metrics.First().Metrics.ElementAt(0).Name);
@@ -204,7 +204,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
             metrics = this.parserResultWithoutPreprocessing.Assemblies.Single(a => a.Name == "Test").Classes.Single(c => c.Name == "Test.AsyncClass").Files.Single(f => f.Path == "C:\\temp\\AsyncClass.cs").MethodMetrics;
 
             Assert.Single(metrics);
-            Assert.Equal("SendAsync()", metrics.First().Name);
+            Assert.Equal("SendAsync()", metrics.First().FullName);
         }
 
         /// <summary>
@@ -226,7 +226,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
                 .MethodMetrics;
 
             Assert.Equal(2, metrics.Count());
-            Assert.Equal("System.Void Test.TestClass::SampleFunction()", metrics.First().Name);
+            Assert.Equal("System.Void Test.TestClass::SampleFunction()", metrics.First().FullName);
             Assert.Equal(3, metrics.First().Metrics.Count());
 
             Assert.Equal("Cyclomatic complexity", metrics.First().Metrics.ElementAt(0).Name);
