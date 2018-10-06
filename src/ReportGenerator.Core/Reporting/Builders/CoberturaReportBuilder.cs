@@ -55,54 +55,55 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             foreach (var fileAnalysis in fileAnalyses)
             {
-                int fileCoveredLines = fileAnalysis.Lines.Count(l => l.LineVisits > 0);
-                int fileTotalLines = fileAnalysis.Lines.Count(l => l.LineVisits >= 0);
-
-                int fileCoveredBranches = fileAnalysis.Lines.Sum(l => l.CoveredBranches.GetValueOrDefault());
-                int fileTotalBranches = fileAnalysis.Lines.Sum(l => l.TotalBranches.GetValueOrDefault());
-
-                double lineRate = fileTotalLines == 0 ? 1 : fileCoveredLines / (double)fileTotalLines;
-                double branchRate = fileTotalBranches == 0 ? 1 : fileCoveredBranches / (double)fileTotalBranches;
-
                 var classElement = new XElement(
                     "class",
-                    new XElement("methods"),
                     new XAttribute("name", @class.Name),
-                    new XAttribute("filename", fileAnalysis.Path),
-                    new XAttribute("line-rate", lineRate.ToString(CultureInfo.InvariantCulture)),
-                    new XAttribute("branch-rate", branchRate.ToString(CultureInfo.InvariantCulture)),
-                    new XAttribute("complexity", "NaN"));
+                    new XAttribute("filename", fileAnalysis.Path));
+
+                var methodsElement = new XElement("methods");
+
+                foreach (var file in @class.Files)
+                {
+                    if (file.Path == fileAnalysis.Path)
+                    {
+                        foreach (var codeElement in file.CodeElements)
+                        {
+                            int index = codeElement.Name.LastIndexOf('(');
+
+                            var methodElement = new XElement(
+                                "method",
+                                new XAttribute("name", index == -1 ? codeElement.Name : codeElement.Name.Substring(0, index)),
+                                new XAttribute("signature", index == -1 ? string.Empty : codeElement.Name.Substring(index)));
+
+                            this.AddLineElements(
+                                methodElement,
+                                fileAnalysis.Lines.Skip(codeElement.FirstLine - 1).Take(codeElement.LastLine - codeElement.FirstLine + 1),
+                                out double methodLineRate,
+                                out double methodBranchRate);
+
+                            methodElement.Add(new XAttribute("line-rate", methodLineRate.ToString(CultureInfo.InvariantCulture)));
+                            methodElement.Add(new XAttribute("branch-rate", methodBranchRate.ToString(CultureInfo.InvariantCulture)));
+
+                            methodsElement.Add(methodElement);
+                        }
+
+                        break;
+                    }
+                }
+
+                classElement.Add(methodsElement);
 
                 var linesElement = new XElement("lines");
 
-                foreach (var line in fileAnalysis.Lines)
-                {
-                    if (line.LineVisitStatus == LineVisitStatus.NotCoverable)
-                    {
-                        continue;
-                    }
+                this.AddLineElements(
+                    linesElement,
+                    fileAnalysis.Lines,
+                    out double lineRate,
+                    out double branchRate);
 
-                    bool hasBranch = line.TotalBranches.GetValueOrDefault() > 0;
-
-                    var lineElement = new XElement(
-                        "line",
-                        new XAttribute("number", line.LineNumber),
-                        new XAttribute("hits", line.LineVisits.ToString(CultureInfo.InvariantCulture)),
-                        new XAttribute("branch", hasBranch ? "true" : "false"));
-
-                    if (hasBranch)
-                    {
-                        int visitedBranches = line.CoveredBranches.GetValueOrDefault();
-                        int totalBranches = line.TotalBranches.GetValueOrDefault();
-
-                        double coverage = visitedBranches / (double)totalBranches;
-                        lineElement.Add(new XAttribute(
-                            "condition-coverage",
-                            string.Format("{0}% ({1}/{2})", Math.Round(coverage * 100, MidpointRounding.AwayFromZero), visitedBranches, totalBranches)));
-                    }
-
-                    linesElement.Add(lineElement);
-                }
+                classElement.Add(new XAttribute("line-rate", lineRate.ToString(CultureInfo.InvariantCulture)));
+                classElement.Add(new XAttribute("branch-rate", branchRate.ToString(CultureInfo.InvariantCulture)));
+                classElement.Add(new XAttribute("complexity", "NaN"));
 
                 classElement.Add(linesElement);
 
@@ -159,6 +160,57 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             result.AddFirst(new XDocumentType("coverage", null, "http://cobertura.sourceforge.net/xml/coverage-04.dtd", null));
 
             result.Save(Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "Cobertura.xml"));
+        }
+
+        private void AddLineElements(XElement parent, IEnumerable<LineAnalysis> lines, out double lineRate, out double branchRate)
+        {
+            int coveredLines = 0;
+            int totalLines = 0;
+
+            int coveredBranches = 0;
+            int totalBranches = 0;
+
+            foreach (var line in lines)
+            {
+                if (line.LineVisitStatus == LineVisitStatus.NotCoverable)
+                {
+                    continue;
+                }
+
+                totalLines++;
+
+                if (line.LineVisits > 0)
+                {
+                    coveredLines++;
+                }
+
+                bool hasBranch = line.TotalBranches.GetValueOrDefault() > 0;
+
+                var lineElement = new XElement(
+                    "line",
+                    new XAttribute("number", line.LineNumber),
+                    new XAttribute("hits", line.LineVisits.ToString(CultureInfo.InvariantCulture)),
+                    new XAttribute("branch", hasBranch ? "true" : "false"));
+
+                if (hasBranch)
+                {
+                    int visitedBranchesLine = line.CoveredBranches.GetValueOrDefault();
+                    int totalBranchesLine = line.TotalBranches.GetValueOrDefault();
+
+                    coveredBranches += visitedBranchesLine;
+                    totalBranches += totalBranchesLine;
+
+                    double coverage = visitedBranchesLine / (double)totalBranchesLine;
+                    lineElement.Add(new XAttribute(
+                        "condition-coverage",
+                        string.Format("{0}% ({1}/{2})", Math.Round(coverage * 100, MidpointRounding.AwayFromZero), visitedBranchesLine, totalBranchesLine)));
+                }
+
+                parent.Add(lineElement);
+            }
+
+            lineRate = totalLines == 0 ? 1 : coveredLines / (double)totalLines;
+            branchRate = totalBranches == 0 ? 1 : coveredBranches / (double)totalBranches;
         }
     }
 }

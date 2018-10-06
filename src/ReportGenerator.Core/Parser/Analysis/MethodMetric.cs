@@ -17,7 +17,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <summary>
         /// Initializes a new instance of the <see cref="MethodMetric"/> class.
         /// </summary>
-        /// <param name="name">The name.</param>
+        /// <param name="fullName">The full method name.</param>
+        /// <param name="shortName">The short method name.</param>
         /// <param name="metrics">The metrics.</param>
         public MethodMetric(string fullName, string shortName, IEnumerable<Metric> metrics)
         {

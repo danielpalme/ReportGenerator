@@ -208,14 +208,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     methodName = methodName.Substring(4);
                 }
 
-                var firstLine = method
+                var lineNumbers = method
                     .Elements("statement")
-                    .FirstOrDefault();
+                    .Select(l => int.Parse(l.Attribute("line").Value, CultureInfo.InvariantCulture))
+                    .ToArray();
 
-                if (firstLine != null)
+                if (lineNumbers.Length > 0)
                 {
-                    int line = int.Parse(firstLine.Attribute("line").Value, CultureInfo.InvariantCulture);
-                    codeFile.AddCodeElement(new CodeElement(methodName, type, line));
+                    codeFile.AddCodeElement(new CodeElement(methodName, type, lineNumbers.Min(), lineNumbers.Max()));
                 }
             }
         }

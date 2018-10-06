@@ -142,7 +142,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 int fileIndex = 0;
                 foreach (var file in @class.Files)
                 {
-                    codeElementsByFileIndex.Add(fileIndex++, file.CodeElements.OrderBy(c => c.Line));
+                    codeElementsByFileIndex.Add(fileIndex++, file.CodeElements.OrderBy(c => c.FirstLine));
                 }
 
                 reportRenderer.TestMethods(testMethods, fileAnalyses, codeElementsByFileIndex);

@@ -508,15 +508,19 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     methodName = methodName.Substring(4);
                 }
 
-                var seqpnt = method
+                var seqpnts = method
                     .Elements("SequencePoints")
                     .Elements("SequencePoint")
-                    .FirstOrDefault();
+                    .Select(seqpnt => new
+                    {
+                        LineNumberStart = int.Parse(seqpnt.Attribute("sl").Value, CultureInfo.InvariantCulture),
+                        LineNumberEnd = seqpnt.Attribute("el") != null ? int.Parse(seqpnt.Attribute("el").Value, CultureInfo.InvariantCulture) : int.Parse(seqpnt.Attribute("sl").Value, CultureInfo.InvariantCulture)
+                    })
+                    .ToArray();
 
-                if (seqpnt != null)
+                if (seqpnts.Length > 0)
                 {
-                    int line = int.Parse(seqpnt.Attribute("sl").Value, CultureInfo.InvariantCulture);
-                    codeFile.AddCodeElement(new CodeElement(methodName, type, line));
+                    codeFile.AddCodeElement(new CodeElement(methodName, type, seqpnts.Min(s => s.LineNumberStart), seqpnts.Max(s => s.LineNumberEnd)));
                 }
             }
         }

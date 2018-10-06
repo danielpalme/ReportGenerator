@@ -12,12 +12,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="type">The <see cref="Analysis.CodeElementType"/>.</param>
-        /// <param name="line">The line number.</param>
-        internal CodeElement(string name, CodeElementType type, int line)
+        /// <param name="firstLine">The number of the first line.</param>
+        /// <param name="lastLine">The number of the last line.</param>
+        internal CodeElement(string name, CodeElementType type, int firstLine, int lastLine)
         {
             this.Name = name ?? throw new ArgumentNullException(nameof(name));
             this.CodeElementType = type;
-            this.Line = line;
+            this.FirstLine = firstLine;
+            this.LastLine = lastLine;
         }
 
         /// <summary>
@@ -37,12 +39,20 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         public CodeElementType CodeElementType { get; }
 
         /// <summary>
-        /// Gets the line number.
+        /// Gets the number of the first line.
         /// </summary>
         /// <value>
-        /// The line number.
+        /// The number of the first line.
         /// </value>
-        public int Line { get; }
+        public int FirstLine { get; }
+
+        /// <summary>
+        /// Gets the number of the last line.
+        /// </summary>
+        /// <value>
+        /// The number of the last line.
+        /// </value>
+        public int LastLine { get; }
 
         /// <summary>
         /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
@@ -60,7 +70,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
             else
             {
                 var codeElement = (CodeElement)obj;
-                return this.Name.Equals(codeElement.Name) && this.Line == codeElement.Line;
+                return this.Name.Equals(codeElement.Name) && this.FirstLine == codeElement.FirstLine;
             }
         }
 
@@ -70,6 +80,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
         /// </returns>
-        public override int GetHashCode() => this.Name.GetHashCode() + this.Line.GetHashCode();
+        public override int GetHashCode() => this.Name.GetHashCode() + this.FirstLine.GetHashCode();
     }
 }

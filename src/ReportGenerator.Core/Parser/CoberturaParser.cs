@@ -310,15 +310,16 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             foreach (var method in methodsOfFile)
             {
                 string methodName = method.Attribute("name").Value + method.Attribute("signature").Value;
+                methodName = methodRegex.Replace(methodName, m => string.Format(CultureInfo.InvariantCulture, "{0}({1})", m.Groups["MethodName"].Value, m.Groups["Arguments"].Value));
 
-                var line = method.Elements("lines")
+                var lines = method.Elements("lines")
                     .Elements("line")
-                    .FirstOrDefault();
+                    .Select(line => int.Parse(line.Attribute("number").Value, CultureInfo.InvariantCulture))
+                    .ToArray();
 
-                if (line != null)
+                if (lines.Length > 0)
                 {
-                    int lineNumber = int.Parse(line.Attribute("number").Value, CultureInfo.InvariantCulture);
-                    codeFile.AddCodeElement(new CodeElement(methodName, CodeElementType.Method, lineNumber));
+                    codeFile.AddCodeElement(new CodeElement(methodName, CodeElementType.Method, lines.Min(), lines.Max()));
                 }
             }
         }
@@ -334,7 +335,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             foreach (var line in lines)
             {
-                if (line.Attribute("branch").Value != "true")
+                if (!line.Attribute("branch").Value.Equals("true", StringComparison.OrdinalIgnoreCase))
                 {
                     continue;
                 }

@@ -230,7 +230,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                         this.reportTextWriter.WriteLine(
                             "<a href=\"#file{0}_line{1}\" data-ng-click=\"navigateToHash('#file{0}_line{1}')\" title=\"{2}\"><i class=\"icon-{3}\"></i>{2}</a><br />",
                             item.Key,
-                            codeElement.Line,
+                            codeElement.FirstLine,
                             WebUtility.HtmlEncode(codeElement.Name),
                             codeElement.CodeElementType == CodeElementType.Method ? "cube" : "wrench");
                     }

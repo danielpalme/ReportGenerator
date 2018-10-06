@@ -292,9 +292,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     continue;
                 }
 
+                methodName = methodRegex.Replace(methodName, m => string.Format(CultureInfo.InvariantCulture, "{0}({1})", m.Groups["MethodName"].Value, m.Groups["Arguments"].Value));
+
                 int lineNumber = int.Parse(method.Attribute("line").Value, CultureInfo.InvariantCulture);
 
-                codeFile.AddCodeElement(new CodeElement(methodName, CodeElementType.Method, lineNumber));
+                codeFile.AddCodeElement(new CodeElement(methodName, CodeElementType.Method, lineNumber, lineNumber));
             }
         }
 

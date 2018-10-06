@@ -303,15 +303,18 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     methodName = methodName.Substring(4);
                 }
 
-                var seqpnt = method
+                var seqpnts = method
                     .Elements("Lines")
-                    .Elements("LnStart")
-                    .FirstOrDefault();
+                    .Select(l => new
+                    {
+                        LineNumberStart = int.Parse(l.Element("LnStart").Value, CultureInfo.InvariantCulture),
+                        LineNumberEnd = int.Parse(l.Element("LnEnd").Value, CultureInfo.InvariantCulture)
+                    })
+                    .ToArray();
 
-                if (seqpnt != null)
+                if (seqpnts.Length > 0)
                 {
-                    int line = int.Parse(seqpnt.Value, CultureInfo.InvariantCulture);
-                    codeFile.AddCodeElement(new CodeElement(methodName, type, line));
+                    codeFile.AddCodeElement(new CodeElement(methodName, type, seqpnts.Min(s => s.LineNumberStart), seqpnts.Max(s => s.LineNumberEnd)));
                 }
             }
         }
