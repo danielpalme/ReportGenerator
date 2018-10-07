@@ -324,7 +324,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 this.reportTextWriter.WriteLine(@"\\");
                 this.reportTextWriter.WriteLine(@"\hline");
 
-                foreach (var methodMetric in methodMetrics)
+                foreach (var methodMetric in methodMetrics.OrderBy(c => c.Line))
                 {
                     string metrics = string.Join(" & ", methodMetric.Metrics.Skip(i * 5).Take(5).Select(m => m.Value.HasValue ? m.Value.Value.ToString(CultureInfo.InvariantCulture) : "-"));
 

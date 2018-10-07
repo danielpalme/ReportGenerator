@@ -198,7 +198,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 throw new ArgumentNullException(nameof(methodMetrics));
             }
 
-            foreach (var methodMetric in methodMetrics)
+            foreach (var methodMetric in methodMetrics.OrderBy(c => c.Line))
             {
                 this.reportTextWriter.WriteStartElement("Element");
                 this.reportTextWriter.WriteAttributeString("name", XmlRenderer.ReplaceNonLetterChars(methodMetric.ShortName));

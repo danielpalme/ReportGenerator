@@ -577,7 +577,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             foreach (var file in @class.Files)
             {
-                foreach (var methodMetric in file.MethodMetrics)
+                foreach (var methodMetric in file.MethodMetrics.OrderBy(c => c.Line))
                 {
                     this.reportTextWriter.Write("<tr>");
 
