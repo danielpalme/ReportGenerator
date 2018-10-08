@@ -137,6 +137,7 @@ coverageApp.directive('historyChart', function ($window) {
                 high: 100,
                 scaleMinSpace: 20,
                 onlyInteger: true,
+                fullWidth: true
             };
             var lineChart = new Chartist.Line('#' + el[0].id, {
                 labels: [],

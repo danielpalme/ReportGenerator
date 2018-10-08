@@ -768,21 +768,134 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 throw new ArgumentNullException(nameof(historicCoverages));
             }
 
+            var filteredHistoricCoverages = this.FilterHistoricCoverages(historicCoverages, 100);
+
+            int numberOfLines = filteredHistoricCoverages.Count;
+
+            if (numberOfLines == 1)
+            {
+                numberOfLines = 2;
+            }
+
+            double totalWidth = 1445 - 50;
+            double width = totalWidth / (numberOfLines - 1);
+
+            decimal totalHeight = 115 - 15;
+
+            this.reportTextWriter.WriteLine("<noscript>");
+            this.reportTextWriter.WriteLine("<div class=\"ct-chart\">");
+            this.reportTextWriter.WriteLine("<svg xmlns:ct=\"http://gionkunz.github.com/chartist-js/ct\" width=\"100%\" height=\"150\" class=\"ct-chart-line\" style=\"width: 100%; height: 150px\">");
+            this.reportTextWriter.WriteLine("<g class=\"ct-grids\">");
+            this.reportTextWriter.WriteLine("<line y1=\"115\" y2=\"115\" x1=\"50\" x2=\"1445\" class=\"ct-grid ct-vertical\"></line>");
+            this.reportTextWriter.WriteLine("<line y1=\"90\" y2=\"90\" x1=\"50\" x2=\"1445\" class=\"ct-grid ct-vertical\"></line>");
+            this.reportTextWriter.WriteLine("<line y1=\"65\" y2=\"65\" x1=\"50\" x2=\"1445\" class=\"ct-grid ct-vertical\"></line>");
+            this.reportTextWriter.WriteLine("<line y1=\"40\" y2=\"40\" x1=\"50\" x2=\"1445\" class=\"ct-grid ct-vertical\"></line>");
+            this.reportTextWriter.WriteLine("<line y1=\"15\" y2=\"15\" x1=\"50\" x2=\"1445\" class=\"ct-grid ct-vertical\"></line>");
+
+            for (int i = 0; i < numberOfLines; i++)
+            {
+                this.reportTextWriter.WriteLine("<line x1=\"{0}\" x2=\"{0}\" y1=\"15\" y2=\"115\" class=\"ct-grid ct-horizontal\"></line>", (50 + (i * width)).ToString(CultureInfo.InvariantCulture));
+            }
+
+            this.reportTextWriter.WriteLine("</g>");
+
+            this.reportTextWriter.WriteLine("<g>");
+            this.reportTextWriter.WriteLine("<g class=\"ct-series ct-series-a\">");
+            this.reportTextWriter.Write("<path d=\"");
+
+            int counter = 0;
+            foreach (var historicCoverage in filteredHistoricCoverages)
+            {
+                string x = (50 + (counter * width)).ToString(CultureInfo.InvariantCulture);
+                string y = (15 + (((100 - historicCoverage.CoverageQuota.GetValueOrDefault()) * totalHeight) / 100)).ToString(CultureInfo.InvariantCulture);
+
+                this.reportTextWriter.Write("{0}{1},{2}", counter == 0 ? "M" : "L", x, y);
+
+                counter++;
+            }
+
+            this.reportTextWriter.WriteLine("\" class=\"ct-line\"></path>");
+
+            counter = 0;
+            foreach (var historicCoverage in filteredHistoricCoverages)
+            {
+                string x = (50 + (counter * width)).ToString(CultureInfo.InvariantCulture);
+                string y = (15 + (((100 - historicCoverage.CoverageQuota.GetValueOrDefault()) * totalHeight) / 100)).ToString(CultureInfo.InvariantCulture);
+                this.reportTextWriter.WriteLine("<line x1=\"{0}\" y1=\"{1}\" x2=\"{0}\" y2=\"{1}\" class=\"ct-point\" ct:value=\"{2}\"></line>", x, y, historicCoverage.CoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
+
+                counter++;
+            }
+
+            this.reportTextWriter.WriteLine("</g>");
+
+            if (filteredHistoricCoverages.Any(h => h.BranchCoverageQuota.HasValue))
+            {
+                this.reportTextWriter.WriteLine("<g class=\"ct-series ct-series-b\">");
+                this.reportTextWriter.Write("<path d=\"");
+
+                counter = 0;
+                foreach (var historicCoverage in filteredHistoricCoverages)
+                {
+                    string x = (50 + (counter * width)).ToString(CultureInfo.InvariantCulture);
+                    string y = (15 + (((100 - historicCoverage.BranchCoverageQuota.GetValueOrDefault()) * totalHeight) / 100)).ToString(CultureInfo.InvariantCulture);
+
+                    this.reportTextWriter.Write("{0}{1},{2}", counter == 0 ? "M" : "L", x, y);
+
+                    counter++;
+                }
+
+                this.reportTextWriter.WriteLine("\" class=\"ct-line\"></path>");
+
+                counter = 0;
+                foreach (var historicCoverage in filteredHistoricCoverages)
+                {
+                    string x = (50 + (counter * width)).ToString(CultureInfo.InvariantCulture);
+                    string y = (15 + (((100 - historicCoverage.BranchCoverageQuota.GetValueOrDefault()) * totalHeight) / 100)).ToString(CultureInfo.InvariantCulture);
+                    this.reportTextWriter.WriteLine("<line x1=\"{0}\" y1=\"{1}\" x2=\"{0}\" y2=\"{1}\" class=\"ct-point\" ct:value=\"{2}\"></line>", x, y, historicCoverage.BranchCoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
+
+                    counter++;
+                }
+
+                this.reportTextWriter.WriteLine("</g>");
+            }
+
+            this.reportTextWriter.WriteLine("</g>");
+
+            this.reportTextWriter.WriteLine("<g class=\"ct-labels\">");
+            this.reportTextWriter.WriteLine("<foreignObject style=\"overflow: visible;\" y=\"90\" x=\"10\" height=\"25\" width=\"30\">");
+            this.reportTextWriter.WriteLine("<span class=\"ct-label ct-vertical ct-start\" xmlns=\"http://www.w3.org/2000/xmlns/\" style=\"height: 25px; width: 30px;\">0</span>");
+            this.reportTextWriter.WriteLine("</foreignObject>");
+            this.reportTextWriter.WriteLine("<foreignObject style=\"overflow: visible;\" y=\"65\" x=\"10\" height=\"25\" width=\"30\">");
+            this.reportTextWriter.WriteLine("<span class=\"ct-label ct-vertical ct-start\" xmlns=\"http://www.w3.org/2000/xmlns/\" style=\"height: 25px; width: 30px;\">25</span>");
+            this.reportTextWriter.WriteLine("</foreignObject>");
+            this.reportTextWriter.WriteLine("<foreignObject style=\"overflow: visible;\" y=\"40\" x=\"10\" height=\"25\" width=\"30\">");
+            this.reportTextWriter.WriteLine("<span class=\"ct-label ct-vertical ct-start\" xmlns=\"http://www.w3.org/2000/xmlns/\" style=\"height: 25px; width: 30px;\">50</span>");
+            this.reportTextWriter.WriteLine("</foreignObject>");
+            this.reportTextWriter.WriteLine("<foreignObject style=\"overflow: visible;\" y=\"15\" x=\"10\" height=\"25\" width=\"30\">");
+            this.reportTextWriter.WriteLine("<span class=\"ct-label ct-vertical ct-start\" xmlns=\"http://www.w3.org/2000/xmlns/\" style=\"height: 25px; width: 30px;\">75</span>");
+            this.reportTextWriter.WriteLine("</foreignObject>");
+            this.reportTextWriter.WriteLine("<foreignObject style=\"overflow: visible;\" y=\"-15\" x=\"10\" height=\"30\" width=\"30\">");
+            this.reportTextWriter.WriteLine("<span class=\"ct-label ct-vertical ct-start\" xmlns=\"http://www.w3.org/2000/xmlns/\" style=\"height: 30px; width: 30px;\">100</span>");
+            this.reportTextWriter.WriteLine("</foreignObject>");
+            this.reportTextWriter.WriteLine("</g>");
+
+            this.reportTextWriter.WriteLine("</svg>");
+            this.reportTextWriter.WriteLine("</div>");
+            this.reportTextWriter.WriteLine("</noscript>");
+
             string id = Guid.NewGuid().ToString("N");
 
             this.reportTextWriter.WriteLine("<div id=\"mainHistoryChart\" class=\"ct-chart\" data-history-chart data-data=\"historyChartData{0}\"></div>", id);
 
-            historicCoverages = this.FilterHistoricCoverages(historicCoverages, 100);
-
             var series = new List<string>();
-            series.Add("[" + string.Join(",", historicCoverages.Select(h => h.CoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture))) + "]");
+            series.Add("[" + string.Join(",", filteredHistoricCoverages.Select(h => h.CoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture))) + "]");
 
-            if (historicCoverages.Any(h => h.BranchCoverageQuota.HasValue))
+            if (filteredHistoricCoverages.Any(h => h.BranchCoverageQuota.HasValue))
             {
-                series.Add("[" + string.Join(",", historicCoverages.Select(h => h.BranchCoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture))) + "]");
+                series.Add("[" + string.Join(",", filteredHistoricCoverages.Select(h => h.BranchCoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture))) + "]");
             }
 
-            var toolTips = historicCoverages.Select(h =>
+            var toolTips = filteredHistoricCoverages.Select(h =>
                 string.Format(
                     "'<h3>{0} - {1}</h3>{2}{3}{4}{5}'",
                     h.ExecutionTime.ToShortDateString(),
@@ -1415,7 +1528,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="historicCoverages">The historic coverages.</param>
         /// <param name="maximum">The maximum.</param>
         /// <returns>The filtered historic coverages.</returns>
-        private IEnumerable<HistoricCoverage> FilterHistoricCoverages(IEnumerable<HistoricCoverage> historicCoverages, int maximum)
+        private List<HistoricCoverage> FilterHistoricCoverages(IEnumerable<HistoricCoverage> historicCoverages, int maximum)
         {
             var result = new List<HistoricCoverage>();
 
