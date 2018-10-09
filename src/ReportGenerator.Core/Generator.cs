@@ -37,6 +37,8 @@ namespace Palmmedia.ReportGenerator.Core
 
             try
             {
+                var configuration = this.GetConfiguration();
+
                 var reportContext = new ReportContext(reportConfiguration);
                 var pluginLoader = new ReflectionPluginLoader(reportConfiguration.Plugins);
 
@@ -61,6 +63,9 @@ namespace Palmmedia.ReportGenerator.Core
                 stopWatch.Start();
                 DateTime executionTime = DateTime.Now;
 
+                var settings = new Settings();
+                configuration.GetSection("settings").Bind(settings);
+
                 var parserResult = new CoverageReportParser(
                     reportConfiguration.SourceDirectories,
                     new DefaultFilter(reportContext.ReportConfiguration.AssemblyFilters),
@@ -70,7 +75,10 @@ namespace Palmmedia.ReportGenerator.Core
 
                 Logger.DebugFormat(Resources.ReportParsingTook, stopWatch.ElapsedMilliseconds / 1000d);
 
-                reportContext.RiskHotspotAnalysisResult = new RiskHotspotsAnalyzer(this.GetRiskHotspotsAnalysisThresholds())
+                var riskHotspotsAnalysisThresholds = new RiskHotspotsAnalysisThresholds();
+                configuration.GetSection("riskHotspotsAnalysisThresholds").Bind(riskHotspotsAnalysisThresholds);
+
+                reportContext.RiskHotspotAnalysisResult = new RiskHotspotsAnalyzer(riskHotspotsAnalysisThresholds)
                     .PerformRiskHotspotAnalysis(parserResult.Assemblies);
 
                 var overallHistoricCoverages = new System.Collections.Generic.List<Parser.Analysis.HistoricCoverage>();
@@ -78,7 +86,7 @@ namespace Palmmedia.ReportGenerator.Core
 
                 if (historyStorage != null)
                 {
-                    new HistoryParser(historyStorage)
+                    new HistoryParser(historyStorage, settings.MaximumNumberOfHistoricCoverageFiles)
                             .ApplyHistoricCoverage(parserResult.Assemblies, overallHistoricCoverages);
 
                     reportContext.OverallHistoricCoverages = overallHistoricCoverages;
@@ -117,22 +125,17 @@ namespace Palmmedia.ReportGenerator.Core
         }
 
         /// <summary>
-        /// Get the <see cref="RiskHotspotsAnalysisThresholds"/> with configured thresholds applied.
+        /// Get the <see cref="IConfigurationRoot"/>.
         /// </summary>
-        /// <returns>The <see cref="RiskHotspotsAnalysisThresholds"/>.</returns>
-        private RiskHotspotsAnalysisThresholds GetRiskHotspotsAnalysisThresholds()
+        private IConfigurationRoot GetConfiguration()
         {
-            var result = new RiskHotspotsAnalysisThresholds();
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(new FileInfo(this.GetType().Assembly.Location).DirectoryName)
                 .AddJsonFile("appsettings.json")
                 .AddCommandLine(Environment.GetCommandLineArgs());
 
-            var configuration = builder.Build();
-            configuration.GetSection("riskHotspotsAnalysisThresholds").Bind(result);
-
-            return result;
+            return builder.Build();
         }
     }
 }

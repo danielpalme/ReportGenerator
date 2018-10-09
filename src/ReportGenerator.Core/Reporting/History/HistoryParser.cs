@@ -26,12 +26,19 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.History
         private readonly IHistoryStorage historyStorage;
 
         /// <summary>
+        /// The maximum number of historic coverage files that get parsed.
+        /// </summary>
+        private int maximumNumberOfHistoricCoverageFiles;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="HistoryParser" /> class.
         /// </summary>
         /// <param name="historyStorage">The history storage.</param>
-        internal HistoryParser(IHistoryStorage historyStorage)
+        /// <param name="maximumNumberOfHistoricCoverageFiles">The maximum number of historic coverage files that get parsed.</param>
+        internal HistoryParser(IHistoryStorage historyStorage, int maximumNumberOfHistoricCoverageFiles)
         {
             this.historyStorage = historyStorage ?? throw new ArgumentNullException(nameof(historyStorage));
+            this.maximumNumberOfHistoricCoverageFiles = maximumNumberOfHistoricCoverageFiles;
         }
 
         /// <summary>
@@ -59,7 +66,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.History
             {
                 files = this.historyStorage.GetHistoryFilePaths()
                     .OrderByDescending(f => f)
-                    .Take(Settings.MaximumOfHistoricCoverageFiles)
+                    .Take(this.maximumNumberOfHistoricCoverageFiles)
                     .Reverse()
                     .ToArray();
             }
