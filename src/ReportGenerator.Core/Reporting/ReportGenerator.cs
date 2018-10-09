@@ -99,7 +99,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
             }
 
             Logger.Debug(" " + Resources.CreatingSummary);
-            SummaryResult summaryResult = new SummaryResult(this.parserResult.Assemblies, this.parserResult.ParserName, this.parserResult.SupportsBranchCoverage);
+            SummaryResult summaryResult = new SummaryResult(this.parserResult.Assemblies, this.parserResult.ParserName, this.parserResult.SupportsBranchCoverage, this.parserResult.SourceDirectories);
 
             foreach (var renderer in this.renderers)
             {

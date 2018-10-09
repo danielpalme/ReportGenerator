@@ -145,7 +145,14 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             rootElement.Add(new XAttribute("version", 0));
             rootElement.Add(new XAttribute("timestamp", ((long)(DateTime.Now - new DateTime(1970, 1, 1)).TotalSeconds).ToString(CultureInfo.InvariantCulture)));
 
-            rootElement.Add(new XElement("sources"));
+            var sourcesElement = new XElement("sources");
+
+            foreach (var sourceDirectory in summaryResult.SourceDirectories)
+            {
+                sourcesElement.Add(new XElement("source", sourceDirectory));
+            }
+
+            rootElement.Add(sourcesElement);
 
             var packagesElement = new XElement("packages");
 

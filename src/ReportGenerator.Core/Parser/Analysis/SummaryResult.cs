@@ -15,11 +15,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <param name="assemblies">The assemblies.</param>
         /// <param name="usedParser">The used parser.</param>
         /// <param name="supportsBranchCoverage">if set to <c>true</c> the used parser supports branch coverage.</param>
-        internal SummaryResult(IEnumerable<Assembly> assemblies, string usedParser, bool supportsBranchCoverage)
+        internal SummaryResult(IReadOnlyCollection<Assembly> assemblies, string usedParser, bool supportsBranchCoverage, IReadOnlyCollection<string> sourceDirectories)
         {
             this.Assemblies = assemblies ?? throw new ArgumentNullException(nameof(assemblies));
             this.UsedParser = usedParser ?? throw new ArgumentNullException(nameof(usedParser));
             this.SupportsBranchCoverage = supportsBranchCoverage;
+            this.SourceDirectories = sourceDirectories ?? throw new ArgumentNullException(nameof(sourceDirectories));
         }
 
         /// <summary>
@@ -28,7 +29,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <value>
         /// The assemblies.
         /// </value>
-        public IEnumerable<Assembly> Assemblies { get; }
+        public IReadOnlyCollection<Assembly> Assemblies { get; }
 
         /// <summary>
         /// Gets the used parser.
@@ -45,6 +46,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <c>true</c> if used parser supports branch coverage; otherwise, <c>false</c>.
         /// </value>
         public bool SupportsBranchCoverage { get; }
+
+        /// <summary>
+        /// Gets the source directories.
+        /// </summary>
+        /// <value>
+        /// The source directories.
+        /// </value>
+        public IReadOnlyCollection<string> SourceDirectories { get; }
 
         /// <summary>
         /// Gets the number of covered lines.

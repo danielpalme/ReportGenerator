@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using Moq;
 using Palmmedia.ReportGenerator.Core.Parser;
 using Palmmedia.ReportGenerator.Core.Parser.Filtering;
@@ -40,36 +41,46 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         public void ParseFiles_SingleReportFileWithSingleReport_CorrectParserIsReturned()
         {
             string filePath = Path.Combine(FileManager.GetCSharpReportDirectory(), "NCover1.5.8.xml");
-            string parserName = new CoverageReportParser(new string[0], this.filterMock.Object, this.filterMock.Object, this.filterMock.Object).ParseFiles(new string[] { filePath }).ParserName;
-            Assert.Equal("NCoverParser", parserName);
+            var parserResult = new CoverageReportParser(new string[] { "C:\\somedirectory" }, this.filterMock.Object, this.filterMock.Object, this.filterMock.Object).ParseFiles(new string[] { filePath });
+            Assert.Equal("NCoverParser", parserResult.ParserName);
+            Assert.Equal(0, parserResult.SourceDirectories.Count);
 
             filePath = Path.Combine(FileManager.GetCSharpReportDirectory(), "OpenCover.xml");
-            parserName = new CoverageReportParser(new string[0], this.filterMock.Object, this.filterMock.Object, this.filterMock.Object).ParseFiles(new string[] { filePath }).ParserName;
-            Assert.Equal("OpenCoverParser", parserName);
+            parserResult = new CoverageReportParser(new string[] { "C:\\somedirectory" }, this.filterMock.Object, this.filterMock.Object, this.filterMock.Object).ParseFiles(new string[] { filePath });
+            Assert.Equal("OpenCoverParser", parserResult.ParserName);
+            Assert.Equal(0, parserResult.SourceDirectories.Count);
 
             filePath = Path.Combine(FileManager.GetCSharpReportDirectory(), "dotCover.xml");
-            parserName = new CoverageReportParser(new string[0], this.filterMock.Object, this.filterMock.Object, this.filterMock.Object).ParseFiles(new string[] { filePath }).ParserName;
-            Assert.Equal("DotCoverParser", parserName);
+            parserResult = new CoverageReportParser(new string[] { "C:\\somedirectory" }, this.filterMock.Object, this.filterMock.Object, this.filterMock.Object).ParseFiles(new string[] { filePath });
+            Assert.Equal("DotCoverParser", parserResult.ParserName);
+            Assert.Equal(0, parserResult.SourceDirectories.Count);
 
             filePath = Path.Combine(FileManager.GetCSharpReportDirectory(), "VisualStudio2010.coveragexml");
-            parserName = new CoverageReportParser(new string[0], this.filterMock.Object, this.filterMock.Object, this.filterMock.Object).ParseFiles(new string[] { filePath }).ParserName;
-            Assert.Equal("VisualStudioParser", parserName);
+            parserResult = new CoverageReportParser(new string[] { "C:\\somedirectory" }, this.filterMock.Object, this.filterMock.Object, this.filterMock.Object).ParseFiles(new string[] { filePath });
+            Assert.Equal("VisualStudioParser", parserResult.ParserName);
+            Assert.Equal(0, parserResult.SourceDirectories.Count);
 
             filePath = Path.Combine(FileManager.GetCSharpReportDirectory(), "DynamicCodeCoverage.xml");
-            parserName = new CoverageReportParser(new string[0], this.filterMock.Object, this.filterMock.Object, this.filterMock.Object).ParseFiles(new string[] { filePath }).ParserName;
-            Assert.Equal("DynamicCodeCoverageParser", parserName);
+            parserResult = new CoverageReportParser(new string[] { "C:\\somedirectory" }, this.filterMock.Object, this.filterMock.Object, this.filterMock.Object).ParseFiles(new string[] { filePath });
+            Assert.Equal("DynamicCodeCoverageParser", parserResult.ParserName);
+            Assert.Equal(0, parserResult.SourceDirectories.Count);
 
             filePath = Path.Combine(FileManager.GetCSharpReportDirectory(), "mprof-report.xml");
-            parserName = new CoverageReportParser(new string[0], this.filterMock.Object, this.filterMock.Object, this.filterMock.Object).ParseFiles(new string[] { filePath }).ParserName;
-            Assert.Equal("MProfParser", parserName);
+            parserResult = new CoverageReportParser(new string[] { "C:\\somedirectory" }, this.filterMock.Object, this.filterMock.Object, this.filterMock.Object).ParseFiles(new string[] { filePath });
+            Assert.Equal("MProfParser", parserResult.ParserName);
+            Assert.Equal(0, parserResult.SourceDirectories.Count);
 
             filePath = Path.Combine(FileManager.GetJavaReportDirectory(), "Cobertura2.1.1.xml");
-            parserName = new CoverageReportParser(new string[0], this.filterMock.Object, this.filterMock.Object, this.filterMock.Object).ParseFiles(new string[] { filePath }).ParserName;
-            Assert.Equal("CoberturaParser", parserName);
+            parserResult = new CoverageReportParser(new string[] { "C:\\somedirectory" }, this.filterMock.Object, this.filterMock.Object, this.filterMock.Object).ParseFiles(new string[] { filePath });
+            Assert.Equal("CoberturaParser", parserResult.ParserName);
+            Assert.Equal(1, parserResult.SourceDirectories.Count);
+            Assert.Equal("C:/temp", parserResult.SourceDirectories.First());
 
             filePath = Path.Combine(FileManager.GetJavaReportDirectory(), "JaCoCo0.8.3.xml");
-            parserName = new CoverageReportParser(new string[0], this.filterMock.Object, this.filterMock.Object, this.filterMock.Object).ParseFiles(new string[] { filePath }).ParserName;
-            Assert.Equal("JaCoCoParser", parserName);
+            parserResult = new CoverageReportParser(new string[] { "C:\\somedirectory" }, this.filterMock.Object, this.filterMock.Object, this.filterMock.Object).ParseFiles(new string[] { filePath });
+            Assert.Equal("JaCoCoParser", parserResult.ParserName);
+            Assert.Equal(1, parserResult.SourceDirectories.Count);
+            Assert.Equal("C:\\somedirectory", parserResult.SourceDirectories.First());
         }
 
         /// <summary>

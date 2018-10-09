@@ -83,6 +83,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             }
 
             var result = new ParserResult(assemblies.OrderBy(a => a.Name).ToList(), true, this.ToString());
+
+            foreach (var sourceElement in report.Elements("sources").Elements("source"))
+            {
+                result.AddSourceDirectory(sourceElement.Value);
+            }
+
             return result;
         }
 

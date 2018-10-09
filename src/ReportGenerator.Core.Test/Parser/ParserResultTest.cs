@@ -58,6 +58,28 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         }
 
         /// <summary>
+        /// A test for SourceDirectories
+        /// </summary>
+        [Fact]
+        public void SourceDirectories()
+        {
+            var parserResult1 = new ParserResult();
+            Assert.Equal(0, parserResult1.SourceDirectories.Count);
+
+            parserResult1.AddSourceDirectory("C:\\temp1");
+            parserResult1.AddSourceDirectory("C:\\temp2");
+            Assert.Equal(2, parserResult1.SourceDirectories.Count);
+
+            var parserResult2 = new ParserResult();
+            parserResult2.AddSourceDirectory("C:\\temp2");
+            parserResult2.AddSourceDirectory("C:\\temp3");
+            Assert.Equal(2, parserResult1.SourceDirectories.Count);
+
+            parserResult1.Merge(parserResult2);
+            Assert.Equal(3, parserResult1.SourceDirectories.Count);
+        }
+
+        /// <summary>
         /// A test for NumberOfLineVisits
         /// </summary>
         [Fact]

@@ -23,6 +23,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         private readonly List<Assembly> assemblies;
 
         /// <summary>
+        /// The source directories.
+        /// </summary>
+        private readonly HashSet<string> sourceDirectories = new HashSet<string>();
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ParserResult"/> class.
         /// </summary>
         public ParserResult()
@@ -58,6 +63,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// </summary>
         /// <value>The assemblies.</value>
         public IReadOnlyCollection<Assembly> Assemblies => this.assemblies;
+
+        /// <summary>
+        /// Gets the source directories.
+        /// </summary>
+        /// <value>The source directories.</value>
+        public IReadOnlyCollection<string> SourceDirectories => this.sourceDirectories;
 
         /// <summary>
         /// Gets a value indicating whether the used parser supports branch coverage.
@@ -99,6 +110,15 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         }
 
         /// <summary>
+        /// Adds the given source directory.
+        /// </summary>
+        /// <param name="directory">The directory to add.</param>
+        public void AddSourceDirectory(string directory)
+        {
+            this.sourceDirectories.Add(directory);
+        }
+
+        /// <summary>
         /// Merges the given parser result with the current instance.
         /// </summary>
         /// <param name="parserResult">The parser result to merge.</param>
@@ -116,6 +136,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 {
                     this.assemblies.Add(assembly);
                 }
+            }
+
+            foreach (var directory in parserResult.sourceDirectories)
+            {
+                this.sourceDirectories.Add(directory);
             }
 
             this.assemblies.Sort((x, y) => x.Name.CompareTo(y.Name));

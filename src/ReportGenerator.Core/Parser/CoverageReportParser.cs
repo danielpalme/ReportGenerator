@@ -129,6 +129,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         Logger.DebugFormat(" " + Resources.InitiatingParser, "JaCoCo");
 
                         var newResult = new JaCoCoParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
+
+                        foreach (var sourceDirectory in this.sourceDirectories)
+                        {
+                            newResult.AddSourceDirectory(sourceDirectory);
+                        }
+
                         result.Merge(newResult);
                     }
                 }
