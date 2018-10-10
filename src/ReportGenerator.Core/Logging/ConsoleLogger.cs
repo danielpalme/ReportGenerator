@@ -8,6 +8,11 @@ namespace Palmmedia.ReportGenerator.Core.Logging
     internal class ConsoleLogger : ILogger
     {
         /// <summary>
+        /// Lock object.
+        /// </summary>
+        private readonly object lockObject = new object();
+
+        /// <summary>
         /// Gets or sets the verbosity level.
         /// </summary>
         public VerbosityLevel VerbosityLevel { get; set; }
@@ -20,7 +25,10 @@ namespace Palmmedia.ReportGenerator.Core.Logging
         {
             if (this.VerbosityLevel < VerbosityLevel.Info)
             {
-                Console.WriteLine(message);
+                lock (this.lockObject)
+                {
+                    Console.WriteLine(message);
+                }
             }
         }
 
@@ -33,7 +41,10 @@ namespace Palmmedia.ReportGenerator.Core.Logging
         {
             if (this.VerbosityLevel < VerbosityLevel.Info)
             {
-                Console.WriteLine(format, args);
+                lock (this.lockObject)
+                {
+                    Console.WriteLine(format, args);
+                }
             }
         }
 
@@ -45,7 +56,10 @@ namespace Palmmedia.ReportGenerator.Core.Logging
         {
             if (this.VerbosityLevel < VerbosityLevel.Warning)
             {
-                Console.WriteLine(message);
+                lock (this.lockObject)
+                {
+                    Console.WriteLine(message);
+                }
             }
         }
 
@@ -58,7 +72,10 @@ namespace Palmmedia.ReportGenerator.Core.Logging
         {
             if (this.VerbosityLevel < VerbosityLevel.Warning)
             {
-                Console.WriteLine(format, args);
+                lock (this.lockObject)
+                {
+                    Console.WriteLine(format, args);
+                }
             }
         }
 
@@ -70,9 +87,12 @@ namespace Palmmedia.ReportGenerator.Core.Logging
         {
             if (this.VerbosityLevel < VerbosityLevel.Error)
             {
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine(message);
-                Console.ResetColor();
+                lock (this.lockObject)
+                {
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.WriteLine(message);
+                    Console.ResetColor();
+                }
             }
         }
 
@@ -85,9 +105,12 @@ namespace Palmmedia.ReportGenerator.Core.Logging
         {
             if (this.VerbosityLevel < VerbosityLevel.Error)
             {
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine(format, args);
-                Console.ResetColor();
+                lock (this.lockObject)
+                {
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.WriteLine(format, args);
+                    Console.ResetColor();
+                }
             }
         }
 
@@ -99,9 +122,12 @@ namespace Palmmedia.ReportGenerator.Core.Logging
         {
             if (this.VerbosityLevel < VerbosityLevel.Off)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(message);
-                Console.ResetColor();
+                lock (this.lockObject)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(message);
+                    Console.ResetColor();
+                }
             }
         }
 
@@ -114,9 +140,12 @@ namespace Palmmedia.ReportGenerator.Core.Logging
         {
             if (this.VerbosityLevel < VerbosityLevel.Off)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(format, args);
-                Console.ResetColor();
+                lock (this.lockObject)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(format, args);
+                    Console.ResetColor();
+                }
             }
         }
     }

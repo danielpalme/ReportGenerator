@@ -67,6 +67,7 @@ namespace Palmmedia.ReportGenerator.Core
                 configuration.GetSection("settings").Bind(settings);
 
                 var parserResult = new CoverageReportParser(
+                    settings.NumberOfReportsParsedInParallel,
                     reportConfiguration.SourceDirectories,
                     new DefaultFilter(reportContext.ReportConfiguration.AssemblyFilters),
                     new DefaultFilter(reportContext.ReportConfiguration.ClassFilters),
