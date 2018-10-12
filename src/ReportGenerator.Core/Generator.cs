@@ -128,9 +128,9 @@ namespace Palmmedia.ReportGenerator.Core
         /// <summary>
         /// Get the <see cref="IConfigurationRoot"/>.
         /// </summary>
+        /// <returns>The configuration.</returns>
         private IConfigurationRoot GetConfiguration()
         {
-
             var builder = new ConfigurationBuilder()
                 .SetBasePath(new FileInfo(this.GetType().Assembly.Location).DirectoryName)
                 .AddJsonFile("appsettings.json")

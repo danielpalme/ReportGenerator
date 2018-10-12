@@ -782,26 +782,26 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             decimal totalHeight = 115 - 15;
 
-            this.reportTextWriter.WriteLine("<noscript>");
-            this.reportTextWriter.WriteLine("<div class=\"ct-chart\">");
-            this.reportTextWriter.WriteLine("<svg xmlns:ct=\"http://gionkunz.github.com/chartist-js/ct\" width=\"100%\" height=\"150\" class=\"ct-chart-line\" style=\"width: 100%; height: 150px\">");
-            this.reportTextWriter.WriteLine("<g class=\"ct-grids\">");
-            this.reportTextWriter.WriteLine("<line y1=\"115\" y2=\"115\" x1=\"50\" x2=\"1445\" class=\"ct-grid ct-vertical\"></line>");
-            this.reportTextWriter.WriteLine("<line y1=\"90\" y2=\"90\" x1=\"50\" x2=\"1445\" class=\"ct-grid ct-vertical\"></line>");
-            this.reportTextWriter.WriteLine("<line y1=\"65\" y2=\"65\" x1=\"50\" x2=\"1445\" class=\"ct-grid ct-vertical\"></line>");
-            this.reportTextWriter.WriteLine("<line y1=\"40\" y2=\"40\" x1=\"50\" x2=\"1445\" class=\"ct-grid ct-vertical\"></line>");
-            this.reportTextWriter.WriteLine("<line y1=\"15\" y2=\"15\" x1=\"50\" x2=\"1445\" class=\"ct-grid ct-vertical\"></line>");
+            var sb = new StringBuilder();
+            sb.AppendLine("<div class=\"ct-chart\">");
+            sb.AppendLine("<svg xmlns:ct=\"http://gionkunz.github.com/chartist-js/ct\" width=\"100%\" height=\"150\" class=\"ct-chart-line\" style=\"width: 100%; height: 150px\">");
+            sb.AppendLine("<g class=\"ct-grids\">");
+            sb.AppendLine("<line y1=\"115\" y2=\"115\" x1=\"50\" x2=\"1445\" class=\"ct-grid ct-vertical\"></line>");
+            sb.AppendLine("<line y1=\"90\" y2=\"90\" x1=\"50\" x2=\"1445\" class=\"ct-grid ct-vertical\"></line>");
+            sb.AppendLine("<line y1=\"65\" y2=\"65\" x1=\"50\" x2=\"1445\" class=\"ct-grid ct-vertical\"></line>");
+            sb.AppendLine("<line y1=\"40\" y2=\"40\" x1=\"50\" x2=\"1445\" class=\"ct-grid ct-vertical\"></line>");
+            sb.AppendLine("<line y1=\"15\" y2=\"15\" x1=\"50\" x2=\"1445\" class=\"ct-grid ct-vertical\"></line>");
 
             for (int i = 0; i < numberOfLines; i++)
             {
-                this.reportTextWriter.WriteLine("<line x1=\"{0}\" x2=\"{0}\" y1=\"15\" y2=\"115\" class=\"ct-grid ct-horizontal\"></line>", (50 + (i * width)).ToString(CultureInfo.InvariantCulture));
+                sb.AppendFormat("<line x1=\"{0}\" x2=\"{0}\" y1=\"15\" y2=\"115\" class=\"ct-grid ct-horizontal\"></line>", (50 + (i * width)).ToString(CultureInfo.InvariantCulture));
             }
 
-            this.reportTextWriter.WriteLine("</g>");
+            sb.AppendLine("</g>");
 
-            this.reportTextWriter.WriteLine("<g>");
-            this.reportTextWriter.WriteLine("<g class=\"ct-series ct-series-a\">");
-            this.reportTextWriter.Write("<path d=\"");
+            sb.AppendLine("<g>");
+            sb.AppendLine("<g class=\"ct-series ct-series-a\">");
+            sb.Append("<path d=\"");
 
             int counter = 0;
             foreach (var historicCoverage in filteredHistoricCoverages)
@@ -809,29 +809,29 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 string x = (50 + (counter * width)).ToString(CultureInfo.InvariantCulture);
                 string y = (15 + (((100 - historicCoverage.CoverageQuota.GetValueOrDefault()) * totalHeight) / 100)).ToString(CultureInfo.InvariantCulture);
 
-                this.reportTextWriter.Write("{0}{1},{2}", counter == 0 ? "M" : "L", x, y);
+                sb.AppendFormat("{0}{1},{2}", counter == 0 ? "M" : "L", x, y);
 
                 counter++;
             }
 
-            this.reportTextWriter.WriteLine("\" class=\"ct-line\"></path>");
+            sb.AppendLine("\" class=\"ct-line\"></path>");
 
             counter = 0;
             foreach (var historicCoverage in filteredHistoricCoverages)
             {
                 string x = (50 + (counter * width)).ToString(CultureInfo.InvariantCulture);
                 string y = (15 + (((100 - historicCoverage.CoverageQuota.GetValueOrDefault()) * totalHeight) / 100)).ToString(CultureInfo.InvariantCulture);
-                this.reportTextWriter.WriteLine("<line x1=\"{0}\" y1=\"{1}\" x2=\"{0}\" y2=\"{1}\" class=\"ct-point\" ct:value=\"{2}\"></line>", x, y, historicCoverage.CoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
+                sb.AppendFormat("<line x1=\"{0}\" y1=\"{1}\" x2=\"{0}\" y2=\"{1}\" class=\"ct-point\" ct:value=\"{2}\"></line>", x, y, historicCoverage.CoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
 
                 counter++;
             }
 
-            this.reportTextWriter.WriteLine("</g>");
+            sb.AppendLine("</g>");
 
             if (filteredHistoricCoverages.Any(h => h.BranchCoverageQuota.HasValue))
             {
-                this.reportTextWriter.WriteLine("<g class=\"ct-series ct-series-b\">");
-                this.reportTextWriter.Write("<path d=\"");
+                sb.AppendLine("<g class=\"ct-series ct-series-b\">");
+                sb.Append("<path d=\"");
 
                 counter = 0;
                 foreach (var historicCoverage in filteredHistoricCoverages)
@@ -839,53 +839,52 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     string x = (50 + (counter * width)).ToString(CultureInfo.InvariantCulture);
                     string y = (15 + (((100 - historicCoverage.BranchCoverageQuota.GetValueOrDefault()) * totalHeight) / 100)).ToString(CultureInfo.InvariantCulture);
 
-                    this.reportTextWriter.Write("{0}{1},{2}", counter == 0 ? "M" : "L", x, y);
+                    sb.AppendFormat("{0}{1},{2}", counter == 0 ? "M" : "L", x, y);
 
                     counter++;
                 }
 
-                this.reportTextWriter.WriteLine("\" class=\"ct-line\"></path>");
+                sb.AppendLine("\" class=\"ct-line\"></path>");
 
                 counter = 0;
                 foreach (var historicCoverage in filteredHistoricCoverages)
                 {
                     string x = (50 + (counter * width)).ToString(CultureInfo.InvariantCulture);
                     string y = (15 + (((100 - historicCoverage.BranchCoverageQuota.GetValueOrDefault()) * totalHeight) / 100)).ToString(CultureInfo.InvariantCulture);
-                    this.reportTextWriter.WriteLine("<line x1=\"{0}\" y1=\"{1}\" x2=\"{0}\" y2=\"{1}\" class=\"ct-point\" ct:value=\"{2}\"></line>", x, y, historicCoverage.BranchCoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
+                    sb.AppendFormat("<line x1=\"{0}\" y1=\"{1}\" x2=\"{0}\" y2=\"{1}\" class=\"ct-point\" ct:value=\"{2}\"></line>", x, y, historicCoverage.BranchCoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
 
                     counter++;
                 }
 
-                this.reportTextWriter.WriteLine("</g>");
+                sb.AppendLine("</g>");
             }
 
-            this.reportTextWriter.WriteLine("</g>");
+            sb.AppendLine("</g>");
 
-            this.reportTextWriter.WriteLine("<g class=\"ct-labels\">");
-            this.reportTextWriter.WriteLine("<foreignObject style=\"overflow: visible;\" y=\"90\" x=\"10\" height=\"25\" width=\"30\">");
-            this.reportTextWriter.WriteLine("<span class=\"ct-label ct-vertical ct-start\" xmlns=\"http://www.w3.org/2000/xmlns/\" style=\"height: 25px; width: 30px;\">0</span>");
-            this.reportTextWriter.WriteLine("</foreignObject>");
-            this.reportTextWriter.WriteLine("<foreignObject style=\"overflow: visible;\" y=\"65\" x=\"10\" height=\"25\" width=\"30\">");
-            this.reportTextWriter.WriteLine("<span class=\"ct-label ct-vertical ct-start\" xmlns=\"http://www.w3.org/2000/xmlns/\" style=\"height: 25px; width: 30px;\">25</span>");
-            this.reportTextWriter.WriteLine("</foreignObject>");
-            this.reportTextWriter.WriteLine("<foreignObject style=\"overflow: visible;\" y=\"40\" x=\"10\" height=\"25\" width=\"30\">");
-            this.reportTextWriter.WriteLine("<span class=\"ct-label ct-vertical ct-start\" xmlns=\"http://www.w3.org/2000/xmlns/\" style=\"height: 25px; width: 30px;\">50</span>");
-            this.reportTextWriter.WriteLine("</foreignObject>");
-            this.reportTextWriter.WriteLine("<foreignObject style=\"overflow: visible;\" y=\"15\" x=\"10\" height=\"25\" width=\"30\">");
-            this.reportTextWriter.WriteLine("<span class=\"ct-label ct-vertical ct-start\" xmlns=\"http://www.w3.org/2000/xmlns/\" style=\"height: 25px; width: 30px;\">75</span>");
-            this.reportTextWriter.WriteLine("</foreignObject>");
-            this.reportTextWriter.WriteLine("<foreignObject style=\"overflow: visible;\" y=\"-15\" x=\"10\" height=\"30\" width=\"30\">");
-            this.reportTextWriter.WriteLine("<span class=\"ct-label ct-vertical ct-start\" xmlns=\"http://www.w3.org/2000/xmlns/\" style=\"height: 30px; width: 30px;\">100</span>");
-            this.reportTextWriter.WriteLine("</foreignObject>");
-            this.reportTextWriter.WriteLine("</g>");
+            sb.AppendLine("<g class=\"ct-labels\">");
+            sb.AppendLine("<foreignObject style=\"overflow: visible;\" y=\"90\" x=\"10\" height=\"25\" width=\"30\">");
+            sb.AppendLine("<span class=\"ct-label ct-vertical ct-start\" xmlns=\"http://www.w3.org/2000/xmlns/\" style=\"height: 25px; width: 30px;\">0</span>");
+            sb.AppendLine("</foreignObject>");
+            sb.AppendLine("<foreignObject style=\"overflow: visible;\" y=\"65\" x=\"10\" height=\"25\" width=\"30\">");
+            sb.AppendLine("<span class=\"ct-label ct-vertical ct-start\" xmlns=\"http://www.w3.org/2000/xmlns/\" style=\"height: 25px; width: 30px;\">25</span>");
+            sb.AppendLine("</foreignObject>");
+            sb.AppendLine("<foreignObject style=\"overflow: visible;\" y=\"40\" x=\"10\" height=\"25\" width=\"30\">");
+            sb.AppendLine("<span class=\"ct-label ct-vertical ct-start\" xmlns=\"http://www.w3.org/2000/xmlns/\" style=\"height: 25px; width: 30px;\">50</span>");
+            sb.AppendLine("</foreignObject>");
+            sb.AppendLine("<foreignObject style=\"overflow: visible;\" y=\"15\" x=\"10\" height=\"25\" width=\"30\">");
+            sb.AppendLine("<span class=\"ct-label ct-vertical ct-start\" xmlns=\"http://www.w3.org/2000/xmlns/\" style=\"height: 25px; width: 30px;\">75</span>");
+            sb.AppendLine("</foreignObject>");
+            sb.AppendLine("<foreignObject style=\"overflow: visible;\" y=\"-15\" x=\"10\" height=\"30\" width=\"30\">");
+            sb.AppendLine("<span class=\"ct-label ct-vertical ct-start\" xmlns=\"http://www.w3.org/2000/xmlns/\" style=\"height: 30px; width: 30px;\">100</span>");
+            sb.AppendLine("</foreignObject>");
+            sb.AppendLine("</g>");
 
-            this.reportTextWriter.WriteLine("</svg>");
-            this.reportTextWriter.WriteLine("</div>");
-            this.reportTextWriter.WriteLine("</noscript>");
+            sb.AppendLine("</svg>");
+            sb.AppendLine("</div>");
 
             string id = Guid.NewGuid().ToString("N");
 
-            this.reportTextWriter.WriteLine("<div id=\"mainHistoryChart\" class=\"ct-chart\" data-history-chart data-data=\"historyChartData{0}\"></div>", id);
+            this.reportTextWriter.WriteLine("<div id=\"mainHistoryChart\" class=\"ct-chart\" data-history-chart data-data=\"historyChartData{0}\">{1}</div>", id, sb.ToString());
 
             var series = new List<string>();
             series.Add("[" + string.Join(",", filteredHistoricCoverages.Select(h => h.CoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture))) + "]");

@@ -15,6 +15,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <param name="assemblies">The assemblies.</param>
         /// <param name="usedParser">The used parser.</param>
         /// <param name="supportsBranchCoverage">if set to <c>true</c> the used parser supports branch coverage.</param>
+        /// <param name="sourceDirectories">The source directories.</param>
         internal SummaryResult(IReadOnlyCollection<Assembly> assemblies, string usedParser, bool supportsBranchCoverage, IReadOnlyCollection<string> sourceDirectories)
         {
             this.Assemblies = assemblies ?? throw new ArgumentNullException(nameof(assemblies));

@@ -129,7 +129,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 throw;
             }
 
-
             return result;
         }
 

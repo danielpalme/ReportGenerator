@@ -144,7 +144,7 @@ coverageApp.directive('historyChart', function ($window) {
                 series: chartData.series
             }, options);
 
-            var chart = $(el[0]);
+            var chart = $(el[0]).empty();
 
             var toggleZoomButton = chart
                 .append('<div class="toggleZoom"><a href=""><i class="icon-search-plus" /></a></div>')
