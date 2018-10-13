@@ -43,12 +43,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
         /// <param name="report">The report.</param>
         internal void Execute(XContainer report)
         {
-            if (this.sourceDirectories.Count == 0)
-            {
-                Logger.Warn("  " + Resources.NoSouceDirectories);
-                return;
-            }
-
             var modules = report.Descendants("package")
                 .ToArray();
 
