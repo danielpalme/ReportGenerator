@@ -191,7 +191,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 {
                     coverage[line.LineNumber] = line.CoveredInstructions > 0 ? 1 : 0;
 
-                    bool partiallyCovered = line.MissedBranches > 0;
+                    bool partiallyCovered = line.MissedInstructions > 0;
 
                     LineVisitStatus statusOfLine = line.CoveredInstructions > 0 ? (partiallyCovered ? LineVisitStatus.PartiallyCovered : LineVisitStatus.Covered) : LineVisitStatus.NotCovered;
                     lineVisitStatus[line.LineNumber] = statusOfLine;
