@@ -326,7 +326,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
                 foreach (var methodMetric in methodMetrics.OrderBy(c => c.Line))
                 {
-                    string metrics = string.Join(" & ", methodMetric.Metrics.Skip(i * 5).Take(5).Select(m => m.Value.HasValue ? m.Value.Value.ToString(CultureInfo.InvariantCulture) : "-"));
+                    string metrics = string.Join(" & ", methodMetric.Metrics.Skip(i * 5).Take(5).Select(m => string.Format("{0}{1}", m.Value.HasValue ? m.Value.Value.ToString(CultureInfo.InvariantCulture) : "-", m.Value.HasValue && m.MetricType == MetricType.CoveragePercentual ? "\\%" : string.Empty)));
 
                     string row = string.Format(
                         CultureInfo.InvariantCulture,

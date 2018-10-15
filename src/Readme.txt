@@ -76,6 +76,7 @@ CHANGELOG
     * Fix: Issue #157: OpenCover parser ignores classes with only async methods
     * Fix: Issue #164: HTML reports contain history chart as inline SVG to show chart when JS is disabled
     * Fix: Issue #165: Limited report files path lengths
+    * Fix: Issue #169: Improved formatting of percentual metrics
     * Change: Dropped support for PartCover
 
 3.1.1.0

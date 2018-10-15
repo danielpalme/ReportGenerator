@@ -595,9 +595,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                         this.reportTextWriter.Write("<td title=\"{0}\">{1}</td>", WebUtility.HtmlEncode(methodMetric.FullName), WebUtility.HtmlEncode(methodMetric.ShortName));
                     }
 
-                    foreach (var metricValue in methodMetric.Metrics.Select(m => m.Value))
+                    foreach (var metricValue in methodMetric.Metrics)
                     {
-                        this.reportTextWriter.Write("<td>{0}</td>", metricValue.HasValue ? metricValue.Value.ToString(CultureInfo.InvariantCulture) : "-");
+                        this.reportTextWriter.Write("<td>{0}{1}</td>",
+                            metricValue.Value.HasValue ? metricValue.Value.Value.ToString(CultureInfo.InvariantCulture) : "-",
+                            metricValue.Value.HasValue && metricValue.MetricType == MetricType.CoveragePercentual ? "%" : string.Empty);
                     }
 
                     this.reportTextWriter.WriteLine("</tr>");

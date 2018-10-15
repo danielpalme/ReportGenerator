@@ -235,7 +235,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         ReportResources.Coverage,
                         ParserBase.CodeCoverageUri,
                         MetricType.CoveragePercentual,
-                        total == 0 ? (decimal?)null : Math.Round(covered / total, 2, MidpointRounding.AwayFromZero)));
+                        total == 0 ? (decimal?)null : Math.Round((100 * covered) / total, 2, MidpointRounding.AwayFromZero)));
                 }
                 else
                 {
@@ -257,7 +257,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         ReportResources.BranchCoverage,
                         ParserBase.CodeCoverageUri,
                         MetricType.CoveragePercentual,
-                        total == 0 ? 1m : Math.Round(covered / total, 2, MidpointRounding.AwayFromZero)));
+                        total == 0 ? (decimal?)null : Math.Round((100 * covered) / total, 2, MidpointRounding.AwayFromZero)));
                 }
                 else
                 {
