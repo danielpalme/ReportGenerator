@@ -134,7 +134,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
             Assert.Equal(2, metrics.ElementAt(2).Metrics.Count());
 
             Assert.Equal("Line coverage", metrics.ElementAt(2).Metrics.ElementAt(0).Name);
-            Assert.Equal(1.0M, metrics.ElementAt(2).Metrics.ElementAt(0).Value);
+            Assert.Equal(100.0M, metrics.ElementAt(2).Metrics.ElementAt(0).Value);
             Assert.Equal("Branch coverage", metrics.ElementAt(2).Metrics.ElementAt(1).Name);
             Assert.Null(metrics.ElementAt(2).Metrics.ElementAt(1).Value);
         }
