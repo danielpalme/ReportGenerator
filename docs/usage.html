@@ -68,7 +68,7 @@
                     <h3>History directory</h3>
                     <div class="alert alert-info">Optional directory for storing <b>persistent</b> coverage information. Choose a directory which does not get deleted between builds.<br/>Required to show the history chart in the HTML reports.</div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="The history directory." ng-model="historydir" />
+                        <input type="text" class="form-control" placeholder="The history directory." ng-model="historydir" ng-required="(reporttypes | filter: { checked: true, requiresHistoryDir: true }).length > 0" />
                     </div>
                     <br/>
 
@@ -223,19 +223,20 @@
             $scope.reports = ['OpenCover.xml'];
             $scope.targetdir = 'coveragereport';
             $scope.reporttypes = [ 
-                { name: 'HTML', description: 'The default output format. Creates a summary overview (index.htm) and detailed reports for each class.', checked: true },
-                { name: 'HTMLSummary', description: 'Creates a single HTML file (summary.htm) without links.', checked: false  },
-                { name: 'HTMLInline', description: 'Same as HTML but CSS and JavaScript is included in every HTML page. This results in larger file sizes, but can be useful for integration into build servers like Azure DevOps (VSTS), since they may block referenced CSS and JavaScript files.', checked: false  },
-                { name: 'HTMLChart', description: 'Creates a single HTML file containing a chart with historic coverage information.', checked: false },
-                { name: 'MHTML', description: 'Same as HTML but packaged into a single MHTML file.', checked: false },
-                { name: 'Cobertura', description: 'Creates a XML file in Cobertura format. This format integrates with tools like Azure DevOps (VSTS) or Jenkins.', checked: false },
-                { name: 'XML', description: 'Creates a XML file containing a summary for all classes and detailed reports for each class.', checked: false },
-                { name: 'XMLSummary', description: 'Creates a single XML file containing a summary for all classes.', checked: false },
-                { name: 'Latex', description: 'Creates a single TEX file containing a summary for all classes and detailed reports for each class.', checked: false },
-                { name: 'LatexSummary', description: 'Creates a single TEX file containing a summary for all classes.', checked: false },
-                { name: 'TextSummary', description: 'Creates a single TXT file containing coverage information per class.', checked: false },
-                { name: 'CsvSummary', description: 'Creates a single CSV file containing coverage information per class.', checked: false },
-                { name: 'Badges', description: 'Creates three SVG and two PNG files that show line and/or branch coverage information.', checked: false }
+                { name: 'HTML', description: 'The default output format. Creates a summary overview (index.htm) and detailed reports for each class.', requiresHistoryDir: false, checked: true },
+                { name: 'HTMLSummary', description: 'Creates a single HTML file (summary.htm) without links.', requiresHistoryDir: false, checked: false  },
+                { name: 'HTMLInline', description: 'Same as HTML but CSS and JavaScript is included in every HTML page. This results in larger file sizes, but can be useful for integration into build servers like Azure DevOps (VSTS), since they may block referenced CSS and JavaScript files.', requiresHistoryDir: false, checked: false  },
+                { name: 'HTMLChart', description: 'Creates a single HTML file containing a chart with historic coverage information.', requiresHistoryDir: true, checked: false },
+                { name: 'MHTML', description: 'Same as HTML but packaged into a single MHTML file.', requiresHistoryDir: false, checked: false },
+                { name: 'Cobertura', description: 'Creates a XML file in Cobertura format. This format integrates with tools like Azure DevOps (VSTS) or Jenkins.', requiresHistoryDir: false, checked: false },
+                { name: 'XML', description: 'Creates a XML file containing a summary for all classes and detailed reports for each class.', requiresHistoryDir: false, checked: false },
+                { name: 'XMLSummary', description: 'Creates a single XML file containing a summary for all classes.', requiresHistoryDir: false, checked: false },
+                { name: 'Latex', description: 'Creates a single TEX file containing a summary for all classes and detailed reports for each class.', requiresHistoryDir: false, checked: false },
+                { name: 'LatexSummary', description: 'Creates a single TEX file containing a summary for all classes.', requiresHistoryDir: false, checked: false },
+                { name: 'TextSummary', description: 'Creates a single TXT file containing coverage information per class.', requiresHistoryDir: false, checked: false },
+                { name: 'CsvSummary', description: 'Creates a single CSV file containing coverage information per class.', requiresHistoryDir: false, checked: false },
+                { name: 'PngChart', description: 'Creates a single PNG file containing a chart with historic coverage information.', requiresHistoryDir: true, checked: false },
+                { name: 'Badges', description: 'Creates three SVG and two PNG files that show line and/or branch coverage information.', requiresHistoryDir: false, checked: false }
             ];
             $scope.historydir = null;
             $scope.plugins = [];

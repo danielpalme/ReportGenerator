@@ -28,6 +28,7 @@ The following output formats are supported by ReportGenerator:
 -Latex, LatexSummary
 -TextSummary
 -CsvSummary
+-PngChart
 -Badges
 -Custom formats (https://github.com/danielpalme/ReportGenerator/wiki/Custom-reports)
 

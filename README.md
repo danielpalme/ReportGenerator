@@ -13,6 +13,7 @@ The following [output formats](https://github.com/danielpalme/ReportGenerator/wi
 * Latex, LatexSummary
 * TextSummary
 * CsvSummary
+* PngChart
 * Badges
 * [Custom reports](https://github.com/danielpalme/ReportGenerator/wiki/Custom-reports)
 

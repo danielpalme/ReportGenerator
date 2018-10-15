@@ -95,11 +95,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
                 var linesElement = new XElement("lines");
 
-                this.AddLineElements(
-                    linesElement,
-                    fileAnalysis.Lines,
-                    out double lineRate,
-                    out double branchRate);
+                this.AddLineElements(linesElement, fileAnalysis.Lines, out double lineRate, out double branchRate);
 
                 classElement.Add(new XAttribute("line-rate", lineRate.ToString(CultureInfo.InvariantCulture)));
                 classElement.Add(new XAttribute("branch-rate", branchRate.ToString(CultureInfo.InvariantCulture)));
@@ -169,6 +165,13 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             result.Save(Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "Cobertura.xml"));
         }
 
+        /// <summary>
+        /// Adds the lines to the given parent element.
+        /// </summary>
+        /// <param name="parent">The parent element.</param>
+        /// <param name="lines">The lines to add.</param>
+        /// <param name="lineRate">The line rate.</param>
+        /// <param name="branchRate">The branch rate.</param>
         private void AddLineElements(XElement parent, IEnumerable<LineAnalysis> lines, out double lineRate, out double branchRate)
         {
             int coveredLines = 0;
