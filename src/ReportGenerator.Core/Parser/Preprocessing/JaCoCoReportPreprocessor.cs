@@ -43,6 +43,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
         /// <param name="report">The report.</param>
         internal void Execute(XContainer report)
         {
+            if (this.sourceDirectories.Count == 0)
+            {
+                Logger.Warn("  " + Resources.NoSouceDirectories);
+            }
+
             var modules = report.Descendants("package")
                 .ToArray();
 
@@ -82,6 +87,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
             fileName = fileName
                 .Replace('\\', Path.DirectorySeparatorChar)
                 .Replace('/', Path.DirectorySeparatorChar);
+
             if (!Path.IsPathRooted(fileName))
             {
                 var path = this.sourceDirectories
