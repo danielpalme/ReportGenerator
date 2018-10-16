@@ -43,12 +43,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
         /// <param name="report">The report.</param>
         internal void Execute(XContainer report)
         {
-            if (this.sourceDirectories.Count == 0)
-            {
-                Logger.Warn("  " + Resources.NoSouceDirectories);
-                return;
-            }
-
             var modules = report.Descendants("package")
                 .ToArray();
 
@@ -85,24 +79,25 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
         /// <returns>The full path of the file.</returns>
         private string GetFullFilePath(string moduleName, string fileName)
         {
-            if (this.sourceDirectories.Count == 1)
+            fileName = fileName
+                .Replace('\\', Path.DirectorySeparatorChar)
+                .Replace('/', Path.DirectorySeparatorChar);
+            if (!Path.IsPathRooted(fileName))
             {
-                return Path.Combine(this.sourceDirectories[0], moduleName, fileName)
+                var path = this.sourceDirectories
+                    .SelectMany(sourceDirectory => new[] {
+                        Path.Combine(sourceDirectory, fileName),
+                        Path.Combine(sourceDirectory, moduleName, fileName)
+                    })
+                    .Select(p => p
                         .Replace('\\', Path.DirectorySeparatorChar)
-                        .Replace('/', Path.DirectorySeparatorChar);
-            }
-            else
-            {
-                foreach (var sourceDirectory in this.sourceDirectories)
-                {
-                    string path = Path.Combine(sourceDirectory, moduleName, fileName)
-                        .Replace('\\', Path.DirectorySeparatorChar)
-                        .Replace('/', Path.DirectorySeparatorChar);
+                        .Replace('/', Path.DirectorySeparatorChar)
+                    )
+                    .FirstOrDefault(p => File.Exists(p));
 
-                    if (File.Exists(path))
-                    {
-                        return path;
-                    }
+                if (!string.IsNullOrEmpty(path))
+                {
+                    return path;
                 }
             }
 

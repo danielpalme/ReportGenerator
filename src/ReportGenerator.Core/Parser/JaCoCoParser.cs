@@ -164,10 +164,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .Select(line => new JaCoCoLineCoverage()
                 {
                     LineNumber = int.Parse(line.Attribute("nr").Value, CultureInfo.InvariantCulture),
-                    MissedInstructions = int.Parse(line.Attribute("mi").Value, CultureInfo.InvariantCulture),
-                    CoveredInstructions = int.Parse(line.Attribute("ci").Value, CultureInfo.InvariantCulture),
-                    MissedBranches = int.Parse(line.Attribute("mb").Value, CultureInfo.InvariantCulture),
-                    CoveredBranches = int.Parse(line.Attribute("cb").Value, CultureInfo.InvariantCulture)
+                    MissedInstructions = int.Parse(line.Attribute("mi")?.Value ?? "0", CultureInfo.InvariantCulture),
+                    CoveredInstructions = int.Parse(line.Attribute("ci")?.Value ?? "0", CultureInfo.InvariantCulture),
+                    MissedBranches = int.Parse(line.Attribute("mb")?.Value ?? "0", CultureInfo.InvariantCulture),
+                    CoveredBranches = int.Parse(line.Attribute("cb")?.Value ?? "0", CultureInfo.InvariantCulture)
                 })
                 .OrderBy(seqpnt => seqpnt.LineNumber)
                 .ToArray();
@@ -191,7 +191,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 {
                     coverage[line.LineNumber] = line.CoveredInstructions > 0 ? 1 : 0;
 
-                    bool partiallyCovered = line.MissedBranches > 0;
+                    bool partiallyCovered = line.MissedInstructions > 0;
 
                     LineVisitStatus statusOfLine = line.CoveredInstructions > 0 ? (partiallyCovered ? LineVisitStatus.PartiallyCovered : LineVisitStatus.Covered) : LineVisitStatus.NotCovered;
                     lineVisitStatus[line.LineNumber] = statusOfLine;
@@ -270,7 +270,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 }
 
                 var methodMetric = new MethodMetric(fullName, shortName, metrics);
-                methodMetric.Line = int.Parse(method.Attribute("line").Value, CultureInfo.InvariantCulture);
+                methodMetric.Line = method.Attribute("line") != null ? int.Parse(method.Attribute("line").Value, CultureInfo.InvariantCulture) : default(int?);
 
                 codeFile.AddMethodMetric(methodMetric);
             }
@@ -294,7 +294,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                 methodName = methodRegex.Replace(methodName, m => string.Format(CultureInfo.InvariantCulture, "{0}({1})", m.Groups["MethodName"].Value, m.Groups["Arguments"].Value));
 
-                int lineNumber = int.Parse(method.Attribute("line").Value, CultureInfo.InvariantCulture);
+                int lineNumber = int.Parse(method.Attribute("line")?.Value ?? "0", CultureInfo.InvariantCulture);
 
                 codeFile.AddCodeElement(new CodeElement(methodName, CodeElementType.Method, lineNumber, lineNumber));
             }
