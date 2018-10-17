@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSharp", "CSharp", "{B27F2C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{792589C7-7E2C-4C31-9FB3-A64F85BDF826}"
 	ProjectSection(SolutionItems) = preProject
+		Testprojects\CSharp\Reports\Cobertura_altcover.xml = Testprojects\CSharp\Reports\Cobertura_altcover.xml
+		Testprojects\CSharp\Reports\Cobertura_coverlet.xml = Testprojects\CSharp\Reports\Cobertura_coverlet.xml
 		Testprojects\CSharp\Reports\dotCover.xml = Testprojects\CSharp\Reports\dotCover.xml
 		Testprojects\CSharp\Reports\DynamicCodeCoverage.xml = Testprojects\CSharp\Reports\DynamicCodeCoverage.xml
 		Testprojects\CSharp\Reports\mprof-report.xml = Testprojects\CSharp\Reports\mprof-report.xml
@@ -18,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{7925
 		Testprojects\CSharp\Reports\MultiVisualStudio2010.coveragexml = Testprojects\CSharp\Reports\MultiVisualStudio2010.coveragexml
 		Testprojects\CSharp\Reports\NCover1.5.8.xml = Testprojects\CSharp\Reports\NCover1.5.8.xml
 		Testprojects\CSharp\Reports\OpenCover.xml = Testprojects\CSharp\Reports\OpenCover.xml
+		Testprojects\CSharp\Reports\OpenCover_altcover.xml = Testprojects\CSharp\Reports\OpenCover_altcover.xml
+		Testprojects\CSharp\Reports\OpenCover_coverlet.xml = Testprojects\CSharp\Reports\OpenCover_coverlet.xml
 		Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml = Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml
 		Testprojects\CSharp\Reports\Partcover2.2.xml = Testprojects\CSharp\Reports\Partcover2.2.xml
 		Testprojects\CSharp\Reports\Partcover2.3.0.35109.xml = Testprojects\CSharp\Reports\Partcover2.3.0.35109.xml
