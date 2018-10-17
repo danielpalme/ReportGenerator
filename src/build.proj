@@ -2,13 +2,13 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Deploy">
   <ItemGroup>
     <PackageReference Include="chocolatey">
-      <Version>0.10.8</Version>
+      <Version>0.10.11</Version>
     </PackageReference>
     <PackageReference Include="MSBuildTasks">
       <Version>1.5.0.235</Version>
     </PackageReference>
     <PackageReference Include="NuGet.CommandLine">
-      <Version>4.5.1</Version>
+      <Version>4.7.1</Version>
     </PackageReference>
     <PackageReference Include="OpenCover">
       <Version>4.6.519</Version>
@@ -25,16 +25,16 @@
 
   <!-- Version, adjust before build -->
   <PropertyGroup>
-    <Version>4.0.0-rc11</Version>
-    <VersionShort>4.0.0-rc11</VersionShort>
+    <Version>4.0.0-rc12</Version>
+    <VersionShort>4.0.0-rc12</VersionShort>
   </PropertyGroup>
   
   <!-- Tools -->
   <PropertyGroup>
     <DotNet>C:\Program Files\dotnet\dotnet.exe</DotNet>
     <OpenCover>$(UserProfile)\.nuget\packages\opencover\4.6.519\tools\OpenCover.Console.exe</OpenCover>
-    <NuGetCommandLine>$(UserProfile)\.nuget\packages\nuget.commandline\4.5.1\tools\NuGet.exe</NuGetCommandLine>
-    <ChocolateyCommandLine>$(UserProfile)\.nuget\packages\chocolatey\0.10.8\tools\chocolateyInstall\choco.exe</ChocolateyCommandLine>
+    <NuGetCommandLine>$(UserProfile)\.nuget\packages\nuget.commandline\4.7.1\tools\NuGet.exe</NuGetCommandLine>
+    <ChocolateyCommandLine>$(UserProfile)\.nuget\packages\chocolatey\0.10.11\tools\chocolateyInstall\choco.exe</ChocolateyCommandLine>
   </PropertyGroup>
   
   <Target Name="Clean">
@@ -62,7 +62,7 @@
       <CoverageFiles Include="target\reports\coverage\coverage.xml" />
     </ItemGroup>
 
-    <ReportGenerator ReportFiles="@(CoverageFiles)" ReportTypes="Html;Badges" TargetDirectory="target\reports\coverage" AssemblyFilters="-Moq" HistoryDirectory="target\reports\coveragehistory" />
+    <ReportGenerator ReportFiles="@(CoverageFiles)" ReportTypes="Html;Badges" TargetDirectory="target\reports\coverage" AssemblyFilters="-Moq" HistoryDirectory="target\reports\coveragehistory" VerbosityLevel="Warning" />
 
     <MakeDir Directories="target\reports\coverage" />
       <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HTML -targetdir:target\samplereports\HTML_NetFull -historydir:target\samplereports\HTML_NetFull\history -verbosity:Warning" />

@@ -57,7 +57,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
     }
 
     [CollectionDefinition("FileManager")]
-    public class FileManagerCollection : ICollectionFixture<FileManager>
+    public class FileManagerCollection : ICollectionFixture<FileManager>, ICollectionFixture<LimitedVerbosityFixture>
     {
         // This class has no code, and is never created. Its purpose is simply
         // to be the place to apply [CollectionDefinition] and all the
