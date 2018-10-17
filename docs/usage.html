@@ -37,7 +37,7 @@
                     </div>
 
                     <h3>Reports</h3>
-                    <div class="alert alert-info">Path to the coverage report(s) that should be parsed.<br/>Wildcards are allowed.</div>
+                    <div class="alert alert-info">Path to the coverage report(s) that should be parsed.<br/>Globbing is supported.</div>
                     <div class="form-group" ng-repeat="report in reports track by $index">
                         <div ng-class="{ 'input-group': $index > 0}">
                             <input type="text" class="form-control" placeholder="The path of the coverage file" ng-model="reports[$index]" required />
