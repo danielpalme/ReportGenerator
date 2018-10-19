@@ -28,7 +28,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Common
         public void GetFiles_SingleDirectory_XmlFilesFound()
         {
             var files = GlobbingFileSearch.GetFiles(Path.Combine(FileManager.GetCSharpReportDirectory(), "*.xml")).ToArray();
-            Assert.Equal(16, files.Length);
+            Assert.Equal(20, files.Length);
         }
 
         [Fact]

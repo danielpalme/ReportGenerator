@@ -25,8 +25,8 @@
 
   <!-- Version, adjust before build -->
   <PropertyGroup>
-    <Version>4.0.0-rc12</Version>
-    <VersionShort>4.0.0-rc12</VersionShort>
+    <Version>4.0.0.0</Version>
+    <VersionShort>4.0.0</VersionShort>
   </PropertyGroup>
   
   <!-- Tools -->
@@ -77,6 +77,7 @@
       <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:LatexSummary -targetdir:target\samplereports\LatexSummary_NetFull -historydir:target\samplereports\LatexSummary_NetFull\history -verbosity:Warning" />
       <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:TextSummary -targetdir:target\samplereports\TextSummary_NetFull -historydir:target\samplereports\TextSummary_NetFull\history -verbosity:Warning" />
       <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:CsvSummary -targetdir:target\samplereports\CsvSummary_NetFull -historydir:target\samplereports\CsvSummary_NetFull\history -verbosity:Warning" />
+      <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:PngChart -targetdir:target\samplereports\PngChart_NetFull -historydir:target\samplereports\PngChart_NetFull\history -verbosity:Warning" />
       <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:Badges -targetdir:target\samplereports\Badges_NetFull -historydir:target\samplereports\Badges_NetFull\history -verbosity:Warning" />
       
       <Exec Command="dotnet target\bin\Release\netcoreapp2.0\publish\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HTML -targetdir:target\samplereports\HTML_NetCore -historydir:target\samplereports\HTML_NetCore\history -verbosity:Warning" />
@@ -91,6 +92,7 @@
       <Exec Command="dotnet target\bin\Release\netcoreapp2.0\publish\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:LatexSummary -targetdir:target\samplereports\LatexSummary_NetCore -historydir:target\samplereports\LatexSummary_NetCore\history -verbosity:Warning" />
       <Exec Command="dotnet target\bin\Release\netcoreapp2.0\publish\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:TextSummary -targetdir:target\samplereports\TextSummary_NetCore -historydir:target\samplereports\TextSummary_NetCore\history -verbosity:Warning" />
       <Exec Command="dotnet target\bin\Release\netcoreapp2.0\publish\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:CsvSummary -targetdir:target\samplereports\CsvSummary_NetCore -historydir:target\samplereports\CsvSummary_NetCore\history -verbosity:Warning" />
+      <Exec Command="dotnet target\bin\Release\netcoreapp2.0\publish\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:PngChart -targetdir:target\samplereports\PngChart_NetCore -historydir:target\samplereports\PngChart_NetCore\history -verbosity:Warning" />
       <Exec Command="dotnet target\bin\Release\netcoreapp2.0\publish\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:Badges -targetdir:target\samplereports\Badges_NetCore -historydir:target\samplereports\Badges_NetCore\history -verbosity:Warning" />
   </Target>
 
