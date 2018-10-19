@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using Palmmedia.ReportGenerator.Reporting;
+using Palmmedia.ReportGenerator.Core;
 
 namespace Palmmedia.ReportGenerator.MSBuild
 {
@@ -52,6 +52,14 @@ namespace Palmmedia.ReportGenerator.MSBuild
         /// The source directories.
         /// </value>
         public ITaskItem[] SourceDirectories { get; set; }
+
+        /// <summary>
+        /// Gets or sets the plugins.
+        /// </summary>
+        /// <value>
+        /// The plugins.
+        /// </value>
+        public ITaskItem[] Plugins { get; set; }
 
         /// <summary>
         /// Gets or sets the assembly filters (old property).
@@ -118,13 +126,13 @@ namespace Palmmedia.ReportGenerator.MSBuild
 
             ITaskItem[] assemblyFilters = this.AssemblyFilters ?? this.Filters;
 
-            ReportConfiguration configuration = new ReportConfiguration(
-                new MefReportBuilderFactory(),
+            var configuration = new ReportConfiguration(
                 this.ReportFiles == null ? Enumerable.Empty<string>() : this.ReportFiles.Select(r => r.ItemSpec),
                 this.TargetDirectory,
+                this.SourceDirectories == null ? Enumerable.Empty<string>() : this.SourceDirectories.Select(r => r.ItemSpec),
                 this.HistoryDirectory,
                 reportTypes,
-                this.SourceDirectories == null ? Enumerable.Empty<string>() : this.SourceDirectories.Select(r => r.ItemSpec),
+                this.Plugins == null ? Enumerable.Empty<string>() : this.Plugins.Select(r => r.ItemSpec),
                 assemblyFilters == null ? Enumerable.Empty<string>() : assemblyFilters.Select(r => r.ItemSpec),
                 this.ClassFilters == null ? Enumerable.Empty<string>() : this.ClassFilters.Select(r => r.ItemSpec),
                 this.FileFilters == null ? Enumerable.Empty<string>() : this.FileFilters.Select(r => r.ItemSpec),

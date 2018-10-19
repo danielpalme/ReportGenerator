@@ -1,6 +1,6 @@
 ﻿<project name="JaCoCo" xmlns:jacoco="antlib:org.jacoco.ant">
     <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
-        <classpath path="CoverageTools/JaCoCo/jacoco-0.7.7/jacocoant.jar" />
+        <classpath path="CoverageTools/JaCoCo/jacoco-0.8.3/jacocoant.jar" />
     </taskdef>
 	
 	<jacoco:coverage>
@@ -26,6 +26,6 @@
 		</structure>
 				
 		<!--html destdir="Java/Reports"/-->		
-		<xml destfile="Java/Reports/JaCoCo0.7.7.xml"/>
+		<xml destfile="Java/Reports/JaCoCo0.8.3.xml"/>
 	</jacoco:report>
 </project>

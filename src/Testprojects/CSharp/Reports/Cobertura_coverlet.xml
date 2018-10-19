@@ -1,0 +1,760 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<coverage line-rate="0,665" branch-rate="0,812" version="1.9" timestamp="1539804059" lines-covered="125" lines-valid="188" branches-covered="13" branches-valid="16">
+  <sources>
+    <source>C:\temp\</source>
+  </sources>
+  <packages>
+    <package name="Test" line-rate="0,665" branch-rate="0,812" complexity="0">
+      <classes>
+        <class name="Test.AbstractClass" filename="AbstractClass.cs" line-rate="1" branch-rate="0" complexity="0">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="0">
+              <lines>
+                <line number="7" hits="4" branch="False" />
+                <line number="8" hits="4" branch="False" />
+                <line number="9" hits="4" branch="False" />
+                <line number="10" hits="4" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="7" hits="4" branch="False" />
+            <line number="8" hits="4" branch="False" />
+            <line number="9" hits="4" branch="False" />
+            <line number="10" hits="4" branch="False" />
+          </lines>
+        </class>
+        <class name="Test.AbstractClass_SampleImpl1" filename="AbstractClass.cs" line-rate="0,5" branch-rate="0" complexity="0">
+          <methods>
+            <method name="Method1" signature="()" line-rate="0" branch-rate="0">
+              <lines>
+                <line number="26" hits="0" branch="False" />
+                <line number="27" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Method2" signature="()" line-rate="0" branch-rate="0">
+              <lines>
+                <line number="31" hits="0" branch="False" />
+                <line number="32" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="0">
+              <lines>
+                <line number="20" hits="2" branch="False" />
+                <line number="21" hits="2" branch="False" />
+                <line number="22" hits="2" branch="False" />
+                <line number="23" hits="2" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="26" hits="0" branch="False" />
+            <line number="27" hits="0" branch="False" />
+            <line number="31" hits="0" branch="False" />
+            <line number="32" hits="0" branch="False" />
+            <line number="20" hits="2" branch="False" />
+            <line number="21" hits="2" branch="False" />
+            <line number="22" hits="2" branch="False" />
+            <line number="23" hits="2" branch="False" />
+          </lines>
+        </class>
+        <class name="Test.AbstractClass_SampleImpl2" filename="AbstractClass.cs" line-rate="0,5" branch-rate="0" complexity="0">
+          <methods>
+            <method name="Method1" signature="()" line-rate="0" branch-rate="0">
+              <lines>
+                <line number="45" hits="0" branch="False" />
+                <line number="46" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Method2" signature="()" line-rate="0" branch-rate="0">
+              <lines>
+                <line number="50" hits="0" branch="False" />
+                <line number="51" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="0">
+              <lines>
+                <line number="39" hits="2" branch="False" />
+                <line number="40" hits="2" branch="False" />
+                <line number="41" hits="2" branch="False" />
+                <line number="42" hits="2" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="45" hits="0" branch="False" />
+            <line number="46" hits="0" branch="False" />
+            <line number="50" hits="0" branch="False" />
+            <line number="51" hits="0" branch="False" />
+            <line number="39" hits="2" branch="False" />
+            <line number="40" hits="2" branch="False" />
+            <line number="41" hits="2" branch="False" />
+            <line number="42" hits="2" branch="False" />
+          </lines>
+        </class>
+        <class name="Test.AnalyzerTestClass" filename="AnalyzerTestClass.cs" line-rate="0" branch-rate="0" complexity="0">
+          <methods>
+            <method name="DoSomething" signature="(System.String,System.String[],System.Guid,System.Collections.Generic.IEnumerable`1&lt;System.String&gt;,System.Collections.Generic.IList`1&lt;System.String&gt;,System.Decimal,System.Int32,System.Int64,System.Collections.Generic.Dictionary`2&lt;System.String,System.Int32&gt;,System.Int32&amp;,System.Single,System.Double,System.Boolean,System.Byte,System.Char,System.Object,System.SByte,System.Int16,System.UInt32,System.UInt64,System.UInt16)" line-rate="0" branch-rate="0">
+              <lines>
+                <line number="35" hits="0" branch="False" />
+                <line number="36" hits="0" branch="False" />
+                <line number="37" hits="0" branch="False" />
+                <line number="38" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="GenericMethod" signature="(T1,T2,System.Int32)" line-rate="0" branch-rate="0">
+              <lines>
+                <line number="41" hits="0" branch="False" />
+                <line number="42" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_AutoProperty" signature="()" line-rate="0" branch-rate="0">
+              <lines>
+                <line number="44" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="0">
+              <lines>
+                <line number="8" hits="0" branch="False" />
+                <line number="9" hits="0" branch="False" />
+                <line number="10" hits="0" branch="False" />
+                <line number="11" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="35" hits="0" branch="False" />
+            <line number="36" hits="0" branch="False" />
+            <line number="37" hits="0" branch="False" />
+            <line number="38" hits="0" branch="False" />
+            <line number="41" hits="0" branch="False" />
+            <line number="42" hits="0" branch="False" />
+            <line number="44" hits="0" branch="False" />
+            <line number="8" hits="0" branch="False" />
+            <line number="9" hits="0" branch="False" />
+            <line number="10" hits="0" branch="False" />
+            <line number="11" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="Test.AsyncClass/&lt;SendAsync&gt;d__0" filename="AsyncClass.cs" line-rate="1" branch-rate="1" complexity="0">
+          <methods>
+            <method name="MoveNext" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="10" hits="2" branch="False" />
+                <line number="11" hits="2" branch="False" />
+                <line number="12" hits="2" branch="True" condition-coverage="100% (1/1)">
+                  <conditions>
+                    <condition number="79" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="13" hits="2" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="10" hits="2" branch="False" />
+            <line number="11" hits="2" branch="False" />
+            <line number="12" hits="2" branch="True" condition-coverage="100% (1/1)">
+              <conditions>
+                <condition number="79" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="13" hits="2" branch="False" />
+          </lines>
+        </class>
+        <class name="Test.ClassWithExcludes" filename="ClassWithExcludes.cs" line-rate="1" branch-rate="0" complexity="0">
+          <methods>
+            <method name="get_IncludedProperty" signature="()" line-rate="1" branch-rate="0">
+              <lines>
+                <line number="6" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="get_ExcludedProperty" signature="()" line-rate="1" branch-rate="0">
+              <lines>
+                <line number="9" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="IncludedMethod" signature="()" line-rate="1" branch-rate="0">
+              <lines>
+                <line number="12" hits="2" branch="False" />
+                <line number="13" hits="2" branch="False" />
+                <line number="14" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="ExcludedMethod" signature="()" line-rate="1" branch-rate="0">
+              <lines>
+                <line number="18" hits="2" branch="False" />
+                <line number="19" hits="2" branch="False" />
+                <line number="20" hits="2" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="6" hits="2" branch="False" />
+            <line number="9" hits="2" branch="False" />
+            <line number="12" hits="2" branch="False" />
+            <line number="13" hits="2" branch="False" />
+            <line number="14" hits="2" branch="False" />
+            <line number="18" hits="2" branch="False" />
+            <line number="19" hits="2" branch="False" />
+            <line number="20" hits="2" branch="False" />
+          </lines>
+        </class>
+        <class name="Test.CodeContract_Contract" filename="CodeContract_Contract.cs" line-rate="0" branch-rate="0" complexity="0">
+          <methods>
+            <method name="Calculate" signature="(System.Int32)" line-rate="0" branch-rate="0">
+              <lines>
+                <line number="10" hits="0" branch="False" />
+                <line number="11" hits="0" branch="False" />
+                <line number="13" hits="0" branch="False" />
+                <line number="14" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="10" hits="0" branch="False" />
+            <line number="11" hits="0" branch="False" />
+            <line number="13" hits="0" branch="False" />
+            <line number="14" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="Test.CodeContract_Target" filename="CodeContract_Target.cs" line-rate="1" branch-rate="1" complexity="0">
+          <methods>
+            <method name="Calculate" signature="(System.Int32)" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="7" hits="4" branch="False" />
+                <line number="8" hits="4" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="7" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="9" hits="2" branch="False" />
+                <line number="10" hits="2" branch="False" />
+                <line number="13" hits="2" branch="False" />
+                <line number="14" hits="2" branch="False" />
+                <line number="16" hits="4" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="7" hits="4" branch="False" />
+            <line number="8" hits="4" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="7" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="9" hits="2" branch="False" />
+            <line number="10" hits="2" branch="False" />
+            <line number="13" hits="2" branch="False" />
+            <line number="14" hits="2" branch="False" />
+            <line number="16" hits="4" branch="False" />
+          </lines>
+        </class>
+        <class name="Test.AbstractGenericClass`2" filename="GenericClass.cs" line-rate="0" branch-rate="0" complexity="0">
+          <methods>
+            <method name="PostProcess" signature="(Test.ISomeObjectInterface`2&lt;TModel,TState&gt;)" line-rate="0" branch-rate="0">
+              <lines>
+                <line number="12" hits="0" branch="False" />
+                <line number="13" hits="0" branch="False" />
+                <line number="14" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="12" hits="0" branch="False" />
+            <line number="13" hits="0" branch="False" />
+            <line number="14" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="Test.GenericClass`2" filename="GenericClass.cs" line-rate="1" branch-rate="0" complexity="0">
+          <methods>
+            <method name="Process" signature="(Test.ISomeObjectInterface`2&lt;TModel,TState&gt;)" line-rate="1" branch-rate="0">
+              <lines>
+                <line number="22" hits="2" branch="False" />
+                <line number="23" hits="2" branch="False" />
+                <line number="24" hits="2" branch="False" />
+                <line number="25" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="PostProcess" signature="(Test.ISomeObjectInterface`2&lt;TModel,TState&gt;)" line-rate="1" branch-rate="0">
+              <lines>
+                <line number="28" hits="2" branch="False" />
+                <line number="29" hits="2" branch="False" />
+                <line number="30" hits="2" branch="False" />
+                <line number="31" hits="2" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="22" hits="2" branch="False" />
+            <line number="23" hits="2" branch="False" />
+            <line number="24" hits="2" branch="False" />
+            <line number="25" hits="2" branch="False" />
+            <line number="28" hits="2" branch="False" />
+            <line number="29" hits="2" branch="False" />
+            <line number="30" hits="2" branch="False" />
+            <line number="31" hits="2" branch="False" />
+          </lines>
+        </class>
+        <class name="Test.SomeClass" filename="NotMatchingFileName.cs" line-rate="1" branch-rate="0" complexity="0">
+          <methods>
+            <method name="get_Property1" signature="()" line-rate="1" branch-rate="0">
+              <lines>
+                <line number="6" hits="2" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="6" hits="2" branch="False" />
+          </lines>
+        </class>
+        <class name="Test.PartialClass" filename="PartialClass.cs" line-rate="0,562" branch-rate="0,5" complexity="0">
+          <methods>
+            <method name="ExecutedMethod_1" signature="()" line-rate="1" branch-rate="0">
+              <lines>
+                <line number="8" hits="2" branch="False" />
+                <line number="9" hits="2" branch="False" />
+                <line number="10" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="UnExecutedMethod_1" signature="()" line-rate="0" branch-rate="0">
+              <lines>
+                <line number="13" hits="0" branch="False" />
+                <line number="14" hits="0" branch="False" />
+                <line number="15" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_SomeProperty" signature="()" line-rate="0" branch-rate="0">
+              <lines>
+                <line number="21" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="set_SomeProperty" signature="(System.Int32)" line-rate="0,667" branch-rate="0,5">
+              <lines>
+                <line number="24" hits="2" branch="False" />
+                <line number="25" hits="2" branch="True" condition-coverage="50% (1/2)">
+                  <conditions>
+                    <condition number="7" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="26" hits="2" branch="False" />
+                <line number="27" hits="2" branch="False" />
+                <line number="28" hits="2" branch="False" />
+                <line number="30" hits="0" branch="False" />
+                <line number="31" hits="0" branch="False" />
+                <line number="32" hits="0" branch="False" />
+                <line number="33" hits="2" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="8" hits="2" branch="False" />
+            <line number="9" hits="2" branch="False" />
+            <line number="10" hits="2" branch="False" />
+            <line number="13" hits="0" branch="False" />
+            <line number="14" hits="0" branch="False" />
+            <line number="15" hits="0" branch="False" />
+            <line number="21" hits="0" branch="False" />
+            <line number="24" hits="2" branch="False" />
+            <line number="25" hits="2" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="7" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="26" hits="2" branch="False" />
+            <line number="27" hits="2" branch="False" />
+            <line number="28" hits="2" branch="False" />
+            <line number="30" hits="0" branch="False" />
+            <line number="31" hits="0" branch="False" />
+            <line number="32" hits="0" branch="False" />
+            <line number="33" hits="2" branch="False" />
+          </lines>
+        </class>
+        <class name="Test.PartialClass" filename="PartialClass2.cs" line-rate="0,5" branch-rate="0" complexity="0">
+          <methods>
+            <method name="ExecutedMethod_2" signature="()" line-rate="1" branch-rate="0">
+              <lines>
+                <line number="8" hits="2" branch="False" />
+                <line number="9" hits="2" branch="False" />
+                <line number="10" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="UnExecutedMethod_2" signature="()" line-rate="0" branch-rate="0">
+              <lines>
+                <line number="13" hits="0" branch="False" />
+                <line number="14" hits="0" branch="False" />
+                <line number="15" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="8" hits="2" branch="False" />
+            <line number="9" hits="2" branch="False" />
+            <line number="10" hits="2" branch="False" />
+            <line number="13" hits="0" branch="False" />
+            <line number="14" hits="0" branch="False" />
+            <line number="15" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="Test.PartialClassWithAutoProperties" filename="PartialClassWithAutoProperties.cs" line-rate="1" branch-rate="0" complexity="0">
+          <methods>
+            <method name="get_Property1" signature="()" line-rate="1" branch-rate="0">
+              <lines>
+                <line number="6" hits="2" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="6" hits="2" branch="False" />
+          </lines>
+        </class>
+        <class name="Test.PartialClassWithAutoProperties" filename="PartialClassWithAutoProperties2.cs" line-rate="0,5" branch-rate="0" complexity="0">
+          <methods>
+            <method name="get_Property2" signature="()" line-rate="1" branch-rate="0">
+              <lines>
+                <line number="6" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="get_ExpressionBodiedProperty" signature="()" line-rate="0" branch-rate="0">
+              <lines>
+                <line number="8" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="6" hits="2" branch="False" />
+            <line number="8" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="Test.Program" filename="Program.cs" line-rate="0,88" branch-rate="0" complexity="0">
+          <methods>
+            <method name="Main" signature="(System.String[])" line-rate="0,88" branch-rate="0">
+              <lines>
+                <line number="10" hits="2" branch="False" />
+                <line number="11" hits="2" branch="False" />
+                <line number="13" hits="2" branch="False" />
+                <line number="14" hits="2" branch="False" />
+                <line number="16" hits="2" branch="False" />
+                <line number="17" hits="2" branch="False" />
+                <line number="18" hits="2" branch="False" />
+                <line number="20" hits="2" branch="False" />
+                <line number="21" hits="2" branch="False" />
+                <line number="23" hits="2" branch="False" />
+                <line number="25" hits="2" branch="False" />
+                <line number="26" hits="2" branch="False" />
+                <line number="28" hits="2" branch="False" />
+                <line number="29" hits="2" branch="False" />
+                <line number="31" hits="2" branch="False" />
+                <line number="33" hits="2" branch="False" />
+                <line number="34" hits="2" branch="False" />
+                <line number="36" hits="2" branch="False" />
+                <line number="39" hits="2" branch="False" />
+                <line number="40" hits="2" branch="False" />
+                <line number="41" hits="2" branch="False" />
+                <line number="42" hits="0" branch="False" />
+                <line number="43" hits="0" branch="False" />
+                <line number="44" hits="0" branch="False" />
+                <line number="45" hits="2" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="10" hits="2" branch="False" />
+            <line number="11" hits="2" branch="False" />
+            <line number="13" hits="2" branch="False" />
+            <line number="14" hits="2" branch="False" />
+            <line number="16" hits="2" branch="False" />
+            <line number="17" hits="2" branch="False" />
+            <line number="18" hits="2" branch="False" />
+            <line number="20" hits="2" branch="False" />
+            <line number="21" hits="2" branch="False" />
+            <line number="23" hits="2" branch="False" />
+            <line number="25" hits="2" branch="False" />
+            <line number="26" hits="2" branch="False" />
+            <line number="28" hits="2" branch="False" />
+            <line number="29" hits="2" branch="False" />
+            <line number="31" hits="2" branch="False" />
+            <line number="33" hits="2" branch="False" />
+            <line number="34" hits="2" branch="False" />
+            <line number="36" hits="2" branch="False" />
+            <line number="39" hits="2" branch="False" />
+            <line number="40" hits="2" branch="False" />
+            <line number="41" hits="2" branch="False" />
+            <line number="42" hits="0" branch="False" />
+            <line number="43" hits="0" branch="False" />
+            <line number="44" hits="0" branch="False" />
+            <line number="45" hits="2" branch="False" />
+          </lines>
+        </class>
+        <class name="Test.Program/EchoHandler" filename="Program.cs" line-rate="1" branch-rate="0" complexity="0">
+          <methods>
+            <method name="SendAsync" signature="(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)" line-rate="1" branch-rate="0">
+              <lines>
+                <line number="65" hits="2" branch="False" />
+                <line number="66" hits="2" branch="False" />
+                <line number="67" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.Net.Http.HttpResponseMessage)" line-rate="1" branch-rate="0">
+              <lines>
+                <line number="59" hits="2" branch="False" />
+                <line number="60" hits="2" branch="False" />
+                <line number="61" hits="2" branch="False" />
+                <line number="62" hits="2" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="65" hits="2" branch="False" />
+            <line number="66" hits="2" branch="False" />
+            <line number="67" hits="2" branch="False" />
+            <line number="59" hits="2" branch="False" />
+            <line number="60" hits="2" branch="False" />
+            <line number="61" hits="2" branch="False" />
+            <line number="62" hits="2" branch="False" />
+          </lines>
+        </class>
+        <class name="Test.Program/&lt;CallAsyncMethod&gt;d__1" filename="Program.cs" line-rate="1" branch-rate="1" complexity="0">
+          <methods>
+            <method name="MoveNext" signature="()" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="48" hits="2" branch="False" />
+                <line number="49" hits="2" branch="False" />
+                <line number="50" hits="2" branch="False" />
+                <line number="51" hits="2" branch="False" />
+                <line number="52" hits="2" branch="True" condition-coverage="100% (1/1)">
+                  <conditions>
+                    <condition number="114" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="53" hits="2" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="48" hits="2" branch="False" />
+            <line number="49" hits="2" branch="False" />
+            <line number="50" hits="2" branch="False" />
+            <line number="51" hits="2" branch="False" />
+            <line number="52" hits="2" branch="True" condition-coverage="100% (1/1)">
+              <conditions>
+                <condition number="114" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="53" hits="2" branch="False" />
+          </lines>
+        </class>
+        <class name="Test.TestClass" filename="TestClass.cs" line-rate="0,8" branch-rate="0,5" complexity="0">
+          <methods>
+            <method name="SampleFunction" signature="()" line-rate="0,8" branch-rate="0,5">
+              <lines>
+                <line number="8" hits="2" branch="False" />
+                <line number="9" hits="2" branch="False" />
+                <line number="10" hits="2" branch="False" />
+                <line number="11" hits="2" branch="False" />
+                <line number="12" hits="2" branch="False" />
+                <line number="14" hits="2" branch="False" />
+                <line number="15" hits="2" branch="False" />
+                <line number="17" hits="2" branch="True" condition-coverage="50% (2/4)">
+                  <conditions>
+                    <condition number="34" type="jump" coverage="50%" />
+                    <condition number="45" type="jump" coverage="50%" />
+                  </conditions>
+                </line>
+                <line number="18" hits="2" branch="False" />
+                <line number="19" hits="2" branch="False" />
+                <line number="20" hits="2" branch="False" />
+                <line number="22" hits="0" branch="False" />
+                <line number="23" hits="0" branch="False" />
+                <line number="24" hits="0" branch="False" />
+                <line number="25" hits="2" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="8" hits="2" branch="False" />
+            <line number="9" hits="2" branch="False" />
+            <line number="10" hits="2" branch="False" />
+            <line number="11" hits="2" branch="False" />
+            <line number="12" hits="2" branch="False" />
+            <line number="14" hits="2" branch="False" />
+            <line number="15" hits="2" branch="False" />
+            <line number="17" hits="2" branch="True" condition-coverage="50% (2/4)">
+              <conditions>
+                <condition number="34" type="jump" coverage="50%" />
+                <condition number="45" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="18" hits="2" branch="False" />
+            <line number="19" hits="2" branch="False" />
+            <line number="20" hits="2" branch="False" />
+            <line number="22" hits="0" branch="False" />
+            <line number="23" hits="0" branch="False" />
+            <line number="24" hits="0" branch="False" />
+            <line number="25" hits="2" branch="False" />
+          </lines>
+        </class>
+        <class name="Test.TestClass/NestedClass" filename="TestClass.cs" line-rate="0" branch-rate="0" complexity="0">
+          <methods>
+            <method name="SampleFunction" signature="()" line-rate="0" branch-rate="0">
+              <lines>
+                <line number="30" hits="0" branch="False" />
+                <line number="31" hits="0" branch="False" />
+                <line number="32" hits="0" branch="False" />
+                <line number="33" hits="0" branch="False" />
+                <line number="34" hits="0" branch="False" />
+                <line number="35" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="30" hits="0" branch="False" />
+            <line number="31" hits="0" branch="False" />
+            <line number="32" hits="0" branch="False" />
+            <line number="33" hits="0" branch="False" />
+            <line number="34" hits="0" branch="False" />
+            <line number="35" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="Test.TestClass2" filename="TestClass2.cs" line-rate="0,632" branch-rate="1" complexity="0">
+          <methods>
+            <method name="get_ExecutedProperty" signature="()" line-rate="1" branch-rate="0">
+              <lines>
+                <line number="13" hits="6" branch="False" />
+              </lines>
+            </method>
+            <method name="get_UnExecutedProperty" signature="()" line-rate="0" branch-rate="0">
+              <lines>
+                <line number="15" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ExecutedMethod" signature="()" line-rate="1" branch-rate="0">
+              <lines>
+                <line number="30" hits="2" branch="False" />
+                <line number="31" hits="2" branch="False" />
+                <line number="32" hits="2" branch="False" />
+                <line number="33" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="UnExecutedMethod" signature="()" line-rate="0" branch-rate="0">
+              <lines>
+                <line number="36" hits="0" branch="False" />
+                <line number="37" hits="0" branch="False" />
+                <line number="38" hits="0" branch="False" />
+                <line number="39" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SampleFunction" signature="(System.String)" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="42" hits="2" branch="False" />
+                <line number="43" hits="2" branch="False" />
+                <line number="45" hits="10" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="39" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="47" hits="22" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="107" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="48" hits="8" branch="False" />
+                <line number="49" hits="8" branch="False" />
+                <line number="50" hits="8" branch="False" />
+                <line number="52" hits="2" branch="False" />
+                <line number="54" hits="8" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="180" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="55" hits="2" branch="False" />
+                <line number="56" hits="2" branch="False" />
+                <line number="57" hits="2" branch="False" />
+                <line number="58" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="DoSomething" signature="(System.String,System.String[],System.Guid,System.Collections.Generic.IEnumerable`1&lt;System.String&gt;,System.Collections.Generic.IList`1&lt;System.String&gt;,System.Decimal,System.Int32,System.Collections.Generic.Dictionary`2&lt;System.String,System.Int32&gt;,System.Int32&amp;,System.Single,System.Double,System.Boolean,System.Byte,System.Char,System.Object,System.SByte,System.Int16,System.UInt32,System.UInt64,System.UInt16)" line-rate="0" branch-rate="0">
+              <lines>
+                <line number="80" hits="0" branch="False" />
+                <line number="81" hits="0" branch="False" />
+                <line number="82" hits="0" branch="False" />
+                <line number="83" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="()" line-rate="0,167" branch-rate="0">
+              <lines>
+                <line number="11" hits="4" branch="False" />
+                <line number="17" hits="0" branch="False" />
+                <line number="18" hits="0" branch="False" />
+                <line number="19" hits="0" branch="False" />
+                <line number="20" hits="0" branch="False" />
+                <line number="21" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String)" line-rate="1" branch-rate="0">
+              <lines>
+                <line number="23" hits="4" branch="False" />
+                <line number="24" hits="4" branch="False" />
+                <line number="25" hits="4" branch="False" />
+                <line number="26" hits="4" branch="False" />
+                <line number="27" hits="4" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="13" hits="6" branch="False" />
+            <line number="15" hits="0" branch="False" />
+            <line number="30" hits="2" branch="False" />
+            <line number="31" hits="2" branch="False" />
+            <line number="32" hits="2" branch="False" />
+            <line number="33" hits="2" branch="False" />
+            <line number="36" hits="0" branch="False" />
+            <line number="37" hits="0" branch="False" />
+            <line number="38" hits="0" branch="False" />
+            <line number="39" hits="0" branch="False" />
+            <line number="42" hits="2" branch="False" />
+            <line number="43" hits="2" branch="False" />
+            <line number="45" hits="10" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="39" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="47" hits="22" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="107" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="48" hits="8" branch="False" />
+            <line number="49" hits="8" branch="False" />
+            <line number="50" hits="8" branch="False" />
+            <line number="52" hits="2" branch="False" />
+            <line number="54" hits="8" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="180" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="55" hits="2" branch="False" />
+            <line number="56" hits="2" branch="False" />
+            <line number="57" hits="2" branch="False" />
+            <line number="58" hits="2" branch="False" />
+            <line number="80" hits="0" branch="False" />
+            <line number="81" hits="0" branch="False" />
+            <line number="82" hits="0" branch="False" />
+            <line number="83" hits="0" branch="False" />
+            <line number="11" hits="4" branch="False" />
+            <line number="17" hits="0" branch="False" />
+            <line number="18" hits="0" branch="False" />
+            <line number="19" hits="0" branch="False" />
+            <line number="20" hits="0" branch="False" />
+            <line number="21" hits="0" branch="False" />
+            <line number="23" hits="4" branch="False" />
+            <line number="24" hits="4" branch="False" />
+            <line number="25" hits="4" branch="False" />
+            <line number="26" hits="4" branch="False" />
+            <line number="27" hits="4" branch="False" />
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>

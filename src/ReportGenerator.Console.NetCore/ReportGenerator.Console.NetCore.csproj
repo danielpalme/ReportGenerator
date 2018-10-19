@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <ApplicationIcon>ProgramIcon.ico</ApplicationIcon>
+    <AssemblyName>ReportGenerator</AssemblyName>
+    <RootNamespace>Palmmedia.ReportGenerator</RootNamespace>
+    <StartupObject>Palmmedia.ReportGenerator.Console.NetCore.Program</StartupObject>
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
+    <FileVersion>4.0.0.0</FileVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\target\bin\Debug\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\target\bin\Release\</OutputPath>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <None Remove="ProgramIcon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ProgramIcon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ReportGenerator.Core\ReportGenerator.Core.csproj" />
+    <ProjectReference Include="..\ReportGenerator.DotnetCorePluginLoader\ReportGenerator.DotnetCorePluginLoader.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "ReportGenerator.Console.NetCore": {
+      "commandName": "Project"
+    }
+  }
+}
