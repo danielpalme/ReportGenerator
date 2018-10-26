@@ -38,8 +38,9 @@ namespace Palmmedia.ReportGenerator.Core
             try
             {
                 var configuration = this.GetConfiguration();
-
                 var reportContext = new ReportContext(reportConfiguration);
+                configuration.GetSection("settings").Bind(reportContext.Settings);
+
                 var pluginLoader = new ReflectionPluginLoader(reportConfiguration.Plugins);
 
                 IReportBuilderFactory reportBuilderFactory = new ReportBuilderFactory(pluginLoader);
@@ -63,11 +64,8 @@ namespace Palmmedia.ReportGenerator.Core
                 stopWatch.Start();
                 DateTime executionTime = DateTime.Now;
 
-                var settings = new Settings();
-                configuration.GetSection("settings").Bind(settings);
-
                 var parserResult = new CoverageReportParser(
-                    settings.NumberOfReportsParsedInParallel,
+                    reportContext.Settings.NumberOfReportsParsedInParallel,
                     reportConfiguration.SourceDirectories,
                     new DefaultFilter(reportContext.ReportConfiguration.AssemblyFilters),
                     new DefaultFilter(reportContext.ReportConfiguration.ClassFilters),
@@ -87,7 +85,7 @@ namespace Palmmedia.ReportGenerator.Core
 
                 if (historyStorage != null)
                 {
-                    new HistoryParser(historyStorage, settings.MaximumNumberOfHistoricCoverageFiles)
+                    new HistoryParser(historyStorage, reportContext.Settings.MaximumNumberOfHistoricCoverageFiles)
                             .ApplyHistoricCoverage(parserResult.Assemblies, overallHistoricCoverages);
 
                     reportContext.OverallHistoricCoverages = overallHistoricCoverages;

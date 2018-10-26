@@ -261,7 +261,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// Renderes a chart with the given historic coverages.
         /// </summary>
         /// <param name="historicCoverages">The historic coverages.</param>
-        public void Chart(IEnumerable<HistoricCoverage> historicCoverages)
+        /// <param name="renderPngFallBackImage">Indicates whether PNG images are rendered as a fallback</param>
+        public void Chart(IEnumerable<HistoricCoverage> historicCoverages, bool renderPngFallBackImage)
         {
         }
 

@@ -85,7 +85,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 if (@class.HistoricCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue))
                 {
                     reportRenderer.Header(ReportResources.History);
-                    reportRenderer.Chart(@class.HistoricCoverages);
+                    reportRenderer.Chart(@class.HistoricCoverages, this.ReportContext.Settings.RenderPngFallBackImagesForHistoryCharts);
                 }
             }
 
@@ -203,7 +203,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 if (historicCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue))
                 {
                     reportRenderer.Header(ReportResources.History);
-                    reportRenderer.Chart(historicCoverages);
+                    reportRenderer.Chart(historicCoverages, this.ReportContext.Settings.RenderPngFallBackImagesForHistoryCharts);
                 }
             }
 

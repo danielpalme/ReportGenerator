@@ -597,7 +597,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
                     foreach (var metricValue in methodMetric.Metrics)
                     {
-                        this.reportTextWriter.Write("<td>{0}{1}</td>",
+                        this.reportTextWriter.Write(
+                            "<td>{0}{1}</td>",
                             metricValue.Value.HasValue ? metricValue.Value.Value.ToString(CultureInfo.InvariantCulture) : "-",
                             metricValue.Value.HasValue && metricValue.MetricType == MetricType.CoveragePercentual ? "%" : string.Empty);
                     }
@@ -763,7 +764,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// Renderes a chart with the given historic coverages.
         /// </summary>
         /// <param name="historicCoverages">The historic coverages.</param>
-        public void Chart(IEnumerable<HistoricCoverage> historicCoverages)
+        /// <param name="renderPngFallBackImage">Indicates whether PNG images are rendered as a fallback</param>
+        public void Chart(IEnumerable<HistoricCoverage> historicCoverages, bool renderPngFallBackImage)
         {
             if (historicCoverages == null)
             {
@@ -774,12 +776,21 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             string id = Guid.NewGuid().ToString("N");
 
-            byte[] pngHistory = PngHistoryChartRenderer.RenderHistoryChart(filteredHistoricCoverages);
+            if (renderPngFallBackImage)
+            {
+                byte[] pngHistory = PngHistoryChartRenderer.RenderHistoryChart(filteredHistoricCoverages);
 
-            this.reportTextWriter.WriteLine(
-                "<div id=\"mainHistoryChart\" class=\"ct-chart\" data-history-chart data-data=\"historyChartData{0}\"><img src=\"data:image/png;base64,{1}\" /></div>",
-                id,
-                Convert.ToBase64String(pngHistory));
+                this.reportTextWriter.WriteLine(
+                    "<div id=\"mainHistoryChart\" class=\"ct-chart\" data-history-chart data-data=\"historyChartData{0}\"><img src=\"data:image/png;base64,{1}\" /></div>",
+                    id,
+                    Convert.ToBase64String(pngHistory));
+            }
+            else
+            {
+                this.reportTextWriter.WriteLine(
+                    "<div id=\"mainHistoryChart\" class=\"ct-chart\" data-history-chart data-data=\"historyChartData{0}\"></div>",
+                    id);
+            }
 
             var series = new List<string>();
             series.Add("[" + string.Join(",", filteredHistoricCoverages.Select(h => h.CoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture))) + "]");

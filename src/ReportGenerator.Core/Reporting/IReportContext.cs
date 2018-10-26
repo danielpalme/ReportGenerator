@@ -15,6 +15,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
         IReportConfiguration ReportConfiguration { get; }
 
         /// <summary>
+        /// Gets the settings.
+        /// </summary>
+        Settings Settings { get; }
+
+        /// <summary>
         /// Gets the risk hotspot analysis result.
         /// </summary>
         RiskHotspotAnalysisResult RiskHotspotAnalysisResult { get; }

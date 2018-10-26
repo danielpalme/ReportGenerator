@@ -3,7 +3,7 @@
     /// <summary>
     /// Global settings.
     /// </summary>
-    internal class Settings
+    public class Settings
     {
         /// <summary>
         /// Gets or sets the number reports that are parsed and processed in parallel.
@@ -14,5 +14,12 @@
         /// Gets or sets the maximum number of historic coverage files that get parsed.
         /// </summary>
         public int MaximumNumberOfHistoricCoverageFiles { get; set; } = 100;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether PNG images are rendered as a fallback for history charts.
+        /// Those images get displayed if JavaScript is disabled.
+        /// Rendering of the images takes quite a lot of time.
+        /// </summary>
+        public bool RenderPngFallBackImagesForHistoryCharts { get; set; } = false;
     }
 }

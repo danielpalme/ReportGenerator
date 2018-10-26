@@ -91,14 +91,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
             if (!Path.IsPathRooted(fileName))
             {
                 var path = this.sourceDirectories
-                    .SelectMany(sourceDirectory => new[] {
+                    .SelectMany(sourceDirectory => new[]
+                    {
                         Path.Combine(sourceDirectory, fileName),
                         Path.Combine(sourceDirectory, moduleName, fileName)
                     })
                     .Select(p => p
                         .Replace('\\', Path.DirectorySeparatorChar)
-                        .Replace('/', Path.DirectorySeparatorChar)
-                    )
+                        .Replace('/', Path.DirectorySeparatorChar))
                     .FirstOrDefault(p => File.Exists(p));
 
                 if (!string.IsNullOrEmpty(path))

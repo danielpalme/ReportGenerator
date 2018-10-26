@@ -56,6 +56,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.0.1.0
+
+    * Fix: Issue #170: Made PNG fallback images optional for better performance (see: #164)
+
 4.0.0.0
 
     * New: Issue #112: Added support for .NET Core

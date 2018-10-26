@@ -53,6 +53,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 this.htmlReportTargetDirectory = Path.Combine(value.ReportConfiguration.TargetDirectory, "tmphtml");
                 this.htmlReportBuilder.ReportContext = new HtmlReportBuilderReportContext(
                     new HtmlReportBuilderReportConfiguration(value.ReportConfiguration, this.htmlReportTargetDirectory),
+                    value.Settings,
                     value.RiskHotspotAnalysisResult,
                     value.OverallHistoricCoverages);
             }
@@ -175,11 +176,13 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             /// Initializes a new instance of the <see cref="HtmlReportBuilderReportContext"/> class.
             /// </summary>
             /// <param name="reportConfiguration">The configuration options.</param>
+            /// <param name="settings">The settings.</param>
             /// <param name="riskHotspotAnalysisResult">The risk hotspot analysis result.</param>
             /// <param name="overallHistoricCoverages">The historic coverage elements.</param>
-            public HtmlReportBuilderReportContext(IReportConfiguration reportConfiguration, RiskHotspotAnalysisResult riskHotspotAnalysisResult, IReadOnlyCollection<HistoricCoverage> overallHistoricCoverages)
+            public HtmlReportBuilderReportContext(IReportConfiguration reportConfiguration, Settings settings, RiskHotspotAnalysisResult riskHotspotAnalysisResult, IReadOnlyCollection<HistoricCoverage> overallHistoricCoverages)
             {
                 this.ReportConfiguration = reportConfiguration;
+                this.Settings = settings;
                 this.RiskHotspotAnalysisResult = riskHotspotAnalysisResult;
                 this.OverallHistoricCoverages = overallHistoricCoverages;
             }
@@ -188,6 +191,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             /// Gets the configuration options.
             /// </summary>
             public IReportConfiguration ReportConfiguration { get; }
+
+            /// <summary>
+            /// Gets the settings.
+            /// </summary>
+            public Settings Settings { get; }
 
             /// <summary>
             /// Gets or sets the risk hotspot analysis result.

@@ -43,7 +43,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             var historicCoverages = this.GetOverallHistoricCoverages(this.ReportContext.OverallHistoricCoverages);
             if (historicCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue))
             {
-                reportRenderer.Chart(historicCoverages);
+                reportRenderer.Chart(historicCoverages, this.ReportContext.Settings.RenderPngFallBackImagesForHistoryCharts);
             }
 
             reportRenderer.CustomSummary(summaryResult.Assemblies, new List<RiskHotspot>(), summaryResult.SupportsBranchCoverage);
