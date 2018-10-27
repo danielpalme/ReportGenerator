@@ -109,13 +109,20 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                         }
                     }
 
-                    var font = SystemFonts.CreateFont("Arial", 11, FontStyle.Regular);
-                    var textGraphicsOptions = new TextGraphicsOptions() { HorizontalAlignment = HorizontalAlignment.Right };
-                    ctx.DrawText(textGraphicsOptions, "100", font, Rgba32.Gray, new PointF(38, 5));
-                    ctx.DrawText(textGraphicsOptions, "75", font, Rgba32.Gray, new PointF(38, 30));
-                    ctx.DrawText(textGraphicsOptions, "50", font, Rgba32.Gray, new PointF(38, 55));
-                    ctx.DrawText(textGraphicsOptions, "25", font, Rgba32.Gray, new PointF(38, 80));
-                    ctx.DrawText(textGraphicsOptions, "0", font, Rgba32.Gray, new PointF(38, 105));
+                    try
+                    {
+                        var font = SystemFonts.CreateFont("Arial", 11, FontStyle.Regular);
+                        var textGraphicsOptions = new TextGraphicsOptions() { HorizontalAlignment = HorizontalAlignment.Right };
+                        ctx.DrawText(textGraphicsOptions, "100", font, Rgba32.Gray, new PointF(38, 5));
+                        ctx.DrawText(textGraphicsOptions, "75", font, Rgba32.Gray, new PointF(38, 30));
+                        ctx.DrawText(textGraphicsOptions, "50", font, Rgba32.Gray, new PointF(38, 55));
+                        ctx.DrawText(textGraphicsOptions, "25", font, Rgba32.Gray, new PointF(38, 80));
+                        ctx.DrawText(textGraphicsOptions, "0", font, Rgba32.Gray, new PointF(38, 105));
+                    }
+                    catch (SixLabors.Fonts.Exceptions.FontFamilyNotFoundException)
+                    {
+                        // Font 'Arial' may not be present on Linux
+                    }
                 });
 
                 image.Save(output, new PngEncoder());

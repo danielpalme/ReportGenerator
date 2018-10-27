@@ -1,4 +1,8 @@
 /.vs
+/AzureDevopsTask/ReportGenerator/node_modules
+/AzureDevopsTask/ReportGenerator/tools
+/AzureDevopsTask/ReportGenerator/reportgenerator.js
+/AzureDevopsTask/*.vsix
 /TestResults
 /Testprojects/CoverageTools
 /Testprojects/TestResults

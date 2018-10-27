@@ -776,7 +776,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             string id = Guid.NewGuid().ToString("N");
 
-            if (renderPngFallBackImage)
+            if (renderPngFallBackImage || this.inlineCssAndJavaScript)
             {
                 byte[] pngHistory = PngHistoryChartRenderer.RenderHistoryChart(filteredHistoricCoverages);
 

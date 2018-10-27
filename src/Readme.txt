@@ -56,6 +56,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.0.2.0
+
+    * Fix: Issue #164: PNG fallback included in HtmlInline report
+
 4.0.1.0
 
     * Fix: Issue #170: Made PNG fallback images optional for better performance (see: #164)
