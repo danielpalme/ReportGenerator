@@ -2,8 +2,9 @@
     "manifestVersion": 1,
     "id": "reportgenerator",
     "name": "ReportGenerator",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "publisher": "Palmmedia",
+    "public": true,
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
@@ -13,18 +14,43 @@
     "categories": [
         "Build and release"
     ],
+    "tags": ["Code Coverage", "Reporting", "Testing", "TDD"],
+    "screenshots": [
+        {
+            "path": "img/screenshot1.png"
+        },
+        {
+            "path": "img/screenshot2.png"
+        }
+    ],
     "icons": {
         "default": "icon.png"
     },
     "files": [
         {
             "path": "ReportGenerator"
+        },
+        {
+          "path": "img",
+          "addressable": true
         }
     ],
+    "content": {
+        "details": {
+            "path": "README.md"
+        }
+    },
     "links": {
+        "getstarted": {
+            "uri": "https://danielpalme.github.io/ReportGenerator/usage.html"
+        },
         "source": {
             "uri": "https://github.com/danielpalme/ReportGenerator"
         }
+    },
+    "repository": {
+        "type": "git",
+        "uri": "https://github.com/danielpalme/ReportGenerator"
     },
     "contributions": [
         {
