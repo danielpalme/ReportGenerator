@@ -30,6 +30,7 @@
     <None Remove="Reporting\Builders\Rendering\resources\chartist.min.js" />
     <None Remove="Reporting\Builders\Rendering\resources\coverageTableReactComponents.js" />
     <None Remove="Reporting\Builders\Rendering\resources\custom.css" />
+    <None Remove="Reporting\Builders\Rendering\resources\custom-azurepipelines.css" />
     <None Remove="Reporting\Builders\Rendering\resources\customAngularApp.js" />
     <None Remove="Reporting\Builders\Rendering\resources\jquery-1.11.2.min.js" />
     <None Remove="Reporting\Builders\Rendering\resources\matchMedia.js" />
@@ -44,6 +45,7 @@
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\chartist.min.js" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\coverageTableReactComponents.js" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom.css" />
+    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom-azurepipelines.css" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\customAngularApp.js" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\jquery-1.11.2.min.js" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\matchMedia.js" />

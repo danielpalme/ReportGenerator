@@ -70,6 +70,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// The report builder.
         /// </summary>
         private TextWriter reportTextWriter;
+        private string cssFile = "custom.css";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HtmlRenderer" /> class.
@@ -77,11 +78,16 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="onlySummary">if set to <c>true</c> only a summary report is created (no class reports).</param>
         /// <param name="inlineCssAndJavaScript">if set to <c>true</c> CSS and JavaScript is included into the HTML instead of seperate files.</param>
         /// <param name="javaScriptContent">StringBuilder used to collect report specific JavaScript.</param>
-        internal HtmlRenderer(bool onlySummary, bool inlineCssAndJavaScript, StringBuilder javaScriptContent)
+        internal HtmlRenderer(bool onlySummary, bool inlineCssAndJavaScript, StringBuilder javaScriptContent, string cssFile = "")
         {
             this.onlySummary = onlySummary;
             this.inlineCssAndJavaScript = inlineCssAndJavaScript;
             this.javaScriptContent = javaScriptContent;
+
+            if (!String.IsNullOrEmpty(cssFile))
+            {
+                this.cssFile = cssFile;
+            }
         }
 
         /// <summary>
@@ -1222,7 +1228,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             var ms = new MemoryStream();
 
             using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
-                "Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering.resources.custom.css"))
+                $"Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering.resources.{this.cssFile}"))
             {
                 stream.CopyTo(ms);
             }
