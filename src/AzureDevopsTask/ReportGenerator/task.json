@@ -39,9 +39,9 @@
             "name": "reporttypes",
             "type": "string",
             "label": "Report types",
-            "defaultValue": "Html",
+            "defaultValue": "AzurePipelines",
             "required": false,
-            "helpMarkDown": "The output formats and scope (separated by semicolon) Values: Badges, Cobertura, CsvSummary, Html, HtmlChart, HtmlSummary, Latex, LatexSummary, MHtml, PngChart, TextSummary, Xml, XmlSummary"
+            "helpMarkDown": "The output formats and scope (separated by semicolon) Values: AzurePipelines, Badges, Cobertura, CsvSummary, Html, HtmlChart, HtmlSummary, Latex, LatexSummary, MHtml, PngChart, TextSummary, Xml, XmlSummary"
         },
         {
             "name": "sourcedirs",
