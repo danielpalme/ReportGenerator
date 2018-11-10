@@ -7,8 +7,8 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <AssemblyName>ReportGenerator.Core</AssemblyName>
-    <AssemblyVersion>4.0.2.0</AssemblyVersion>
-    <FileVersion>4.0.2.0</FileVersion>
+    <AssemblyVersion>4.0.3.0</AssemblyVersion>
+    <FileVersion>4.0.3.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup><!-- Required to capture code coverage with OpenCover -->
@@ -30,6 +30,7 @@
     <None Remove="Reporting\Builders\Rendering\resources\chartist.min.js" />
     <None Remove="Reporting\Builders\Rendering\resources\coverageTableReactComponents.js" />
     <None Remove="Reporting\Builders\Rendering\resources\custom.css" />
+    <None Remove="Reporting\Builders\Rendering\resources\custom-azurepipelines.css" />
     <None Remove="Reporting\Builders\Rendering\resources\customAngularApp.js" />
     <None Remove="Reporting\Builders\Rendering\resources\jquery-1.11.2.min.js" />
     <None Remove="Reporting\Builders\Rendering\resources\matchMedia.js" />
@@ -44,6 +45,7 @@
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\chartist.min.js" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\coverageTableReactComponents.js" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom.css" />
+    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom-azurepipelines.css" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\customAngularApp.js" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\jquery-1.11.2.min.js" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\matchMedia.js" />

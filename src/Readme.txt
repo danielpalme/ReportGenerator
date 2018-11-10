@@ -22,7 +22,7 @@ It is also possible to pass one XML file containing several reports to ReportGen
 
 The following output formats are supported by ReportGenerator:
 
--HTML, HTMLSummary, HTMLInline, HTMLChart, MHTML
+-HTML, HTMLSummary, HTMLInline, HtmlInline_AzurePipelines, HTMLChart, MHTML
 -Cobertura
 -XML, XMLSummary
 -Latex, LatexSummary
@@ -55,6 +55,10 @@ For further details take a look at LICENSE.txt.
 =======================================================================
 
 CHANGELOG
+
+4.0.3.0
+
+    * Fix: Issue #173: New report type with AzurePipelines specific CSS
 
 4.0.2.0
 

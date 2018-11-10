@@ -226,6 +226,7 @@
                 { name: 'HTML', description: 'The default output format. Creates a summary overview (index.htm) and detailed reports for each class.', requiresHistoryDir: false, checked: true },
                 { name: 'HTMLSummary', description: 'Creates a single HTML file (summary.htm) without links.', requiresHistoryDir: false, checked: false  },
                 { name: 'HTMLInline', description: 'Same as HTML but CSS and JavaScript is included in every HTML page. This results in larger file sizes, but can be useful for integration into build servers like Azure DevOps (VSTS), since they may block referenced CSS and JavaScript files.', requiresHistoryDir: false, checked: false  },
+                { name: 'HtmlInline_AzurePipelines', description: 'Same as HTMLInline but with modified CSS that matches the look and feel of Azure Pipelines.', requiresHistoryDir: false, checked: false },
                 { name: 'HTMLChart', description: 'Creates a single HTML file containing a chart with historic coverage information.', requiresHistoryDir: true, checked: false },
                 { name: 'MHTML', description: 'Same as HTML but packaged into a single MHTML file.', requiresHistoryDir: false, checked: false },
                 { name: 'Cobertura', description: 'Creates a XML file in Cobertura format. This format integrates with tools like Azure DevOps (VSTS) or Jenkins.', requiresHistoryDir: false, checked: false },
