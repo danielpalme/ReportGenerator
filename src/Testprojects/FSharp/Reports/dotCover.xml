@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Root CoveredStatements="36" TotalStatements="56" CoveragePercent="64" ReportType="DetailedXml" DotCoverVersion="2016.2">
+<Root CoveredStatements="35" TotalStatements="54" CoveragePercent="65" ReportType="DetailedXml" DotCoverVersion="2018.2.3">
   <FileIndices>
     <File Index="1" Name="C:\temp\Module1.fs" ChecksumAlgorithm="MD5" Checksum="FD4305B710589A02450E52CEC282368A" />
     <File Index="2" Name="C:\temp\Program.fs" ChecksumAlgorithm="MD5" Checksum="85C90A9BFBDC3E8A58375E222D8DC993" />
   </FileIndices>
-  <Assembly Name="Test" CoveredStatements="36" TotalStatements="56" CoveragePercent="64">
-    <Namespace Name="&lt;StartupCode$Test&gt;" CoveredStatements="19" TotalStatements="34" CoveragePercent="56">
-      <Type Name="$Module1" CoveredStatements="19" TotalStatements="34" CoveragePercent="56">
+  <Assembly Name="Test" CoveredStatements="35" TotalStatements="54" CoveragePercent="65">
+    <Namespace Name="&lt;StartupCode$Test&gt;" CoveredStatements="18" TotalStatements="32" CoveragePercent="56">
+      <Type Name="$Module1" CoveredStatements="18" TotalStatements="32" CoveragePercent="56">
         <Type Name="-cctor@23" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
           <Method Name="Invoke(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs):System.Void" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
             <Statement FileIndex="1" Line="23" Column="129" EndLine="23" EndColumn="146" Covered="True" />
@@ -24,10 +24,9 @@
             <Statement FileIndex="1" Line="45" Column="17" EndLine="45" EndColumn="67" Covered="False" />
           </Method>
         </Type>
-        <Type Name="trackMouseChanged@14" CoveredStatements="5" TotalStatements="6" CoveragePercent="83">
-          <Method Name="Invoke(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs):Microsoft.FSharp.Core.Unit" CoveredStatements="5" TotalStatements="6" CoveragePercent="83">
+        <Type Name="trackMouseChanged@14" CoveredStatements="4" TotalStatements="5" CoveragePercent="80">
+          <Method Name="Invoke(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs):Microsoft.FSharp.Core.Unit" CoveredStatements="4" TotalStatements="5" CoveragePercent="80">
             <Statement FileIndex="1" Line="14" Column="13" EndLine="14" EndColumn="49" Covered="True" />
-            <Statement FileIndex="1" Line="15" Column="17" EndLine="15" EndColumn="45" Covered="True" />
             <Statement FileIndex="1" Line="18" Column="13" EndLine="18" EndColumn="44" Covered="True" />
             <Statement FileIndex="1" Line="19" Column="13" EndLine="20" EndColumn="21" Covered="True" />
             <Statement FileIndex="1" Line="20" Column="22" EndLine="20" EndColumn="54" Covered="True" />
@@ -54,10 +53,9 @@
             <Statement FileIndex="1" Line="20" Column="30" EndLine="20" EndColumn="39" Covered="True" />
           </Method>
         </Type>
-        <Type Name="trackMouseChanged@42-5" CoveredStatements="0" TotalStatements="6" CoveragePercent="0">
-          <Method Name="Invoke(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs):Microsoft.FSharp.Core.Unit" CoveredStatements="0" TotalStatements="6" CoveragePercent="0">
+        <Type Name="trackMouseChanged@42-5" CoveredStatements="0" TotalStatements="5" CoveragePercent="0">
+          <Method Name="Invoke(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs):Microsoft.FSharp.Core.Unit" CoveredStatements="0" TotalStatements="5" CoveragePercent="0">
             <Statement FileIndex="1" Line="42" Column="13" EndLine="42" EndColumn="49" Covered="False" />
-            <Statement FileIndex="1" Line="43" Column="17" EndLine="43" EndColumn="45" Covered="False" />
             <Statement FileIndex="1" Line="46" Column="13" EndLine="46" EndColumn="44" Covered="False" />
             <Statement FileIndex="1" Line="47" Column="13" EndLine="48" EndColumn="21" Covered="False" />
             <Statement FileIndex="1" Line="48" Column="22" EndLine="48" EndColumn="54" Covered="False" />

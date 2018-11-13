@@ -13,7 +13,7 @@
     "version": {
         "Major": 1,
         "Minor": 0,
-        "Patch": 3
+        "Patch": 6
     },
     "instanceNameFormat": "ReportGenerator",
     "groups": [
@@ -103,7 +103,7 @@
             "name": "tag",
             "type": "string",
             "label": "Tag",
-            "defaultValue": "$(build.buildnumber)_#(build.buildid)",
+            "defaultValue": "$(build.buildnumber)_#$(build.buildid)",
             "required": false,
             "helpMarkDown": "Optional tag or build version."
         }
