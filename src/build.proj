@@ -10,9 +10,6 @@
     <PackageReference Include="NuGet.CommandLine">
       <Version>4.7.1</Version>
     </PackageReference>
-    <PackageReference Include="OpenCover">
-      <Version>4.6.519</Version>
-    </PackageReference>
   </ItemGroup>
   
   <!-- Required to support command " msbuild .\build.proj /t:restore" -->
@@ -31,8 +28,6 @@
   
   <!-- Tools -->
   <PropertyGroup>
-    <DotNet>C:\Program Files\dotnet\dotnet.exe</DotNet>
-    <OpenCover>$(UserProfile)\.nuget\packages\opencover\4.6.519\tools\OpenCover.Console.exe</OpenCover>
     <NuGetCommandLine>$(UserProfile)\.nuget\packages\nuget.commandline\4.7.1\tools\NuGet.exe</NuGetCommandLine>
     <ChocolateyCommandLine>$(UserProfile)\.nuget\packages\chocolatey\0.10.11\tools\chocolateyInstall\choco.exe</ChocolateyCommandLine>
   </PropertyGroup>
@@ -51,15 +46,14 @@
     <RemoveDir Directories="bin" />
     <RemoveDir Directories="obj" />
   </Target>
-
   <Target Name="Test" DependsOnTargets="Clean; Compile">
     <MakeDir Directories="target\reports\coverage" />
-    <Exec Command="$(OpenCover) -register:user &quot;-target:$(DotNet)&quot; &quot;-targetargs:test --no-build -c Release&quot; -output:..\target\reports\coverage\coverage.xml -returntargetcode -coverbytest:* -mergebyhash -oldstyle" WorkingDirectory="ReportGenerator.Core.Test" />
+    <Exec Command="dotnet test --no-build -c Release /p:AltCover=true /p:AltCoverXmlReport=..\target\reports\coverage\coverage.opencover.xml" WorkingDirectory="ReportGenerator.Core.Test" />
   </Target>
   
   <Target Name="Report" DependsOnTargets="Test">
     <ItemGroup>
-      <CoverageFiles Include="target\reports\coverage\coverage.xml" />
+      <CoverageFiles Include="target\reports\coverage\coverage.opencover.xml" />
     </ItemGroup>
 
     <ReportGenerator ReportFiles="@(CoverageFiles)" ReportTypes="Html;Badges" TargetDirectory="target\reports\coverage" AssemblyFilters="-Moq" HistoryDirectory="target\reports\coveragehistory" VerbosityLevel="Warning" />

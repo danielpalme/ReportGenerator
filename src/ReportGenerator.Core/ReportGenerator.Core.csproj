@@ -11,11 +11,6 @@
     <FileVersion>4.0.4.0</FileVersion>
   </PropertyGroup>
 
-  <PropertyGroup><!-- Required to capture code coverage with OpenCover -->
-    <DebugType>full</DebugType>
-    <DebugSymbols>True</DebugSymbols>
-  </PropertyGroup>
-  
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>..\target\bin\Debug\</OutputPath>
   </PropertyGroup>

@@ -8,6 +8,8 @@ namespace Palmmedia.ReportGenerator.Core.Test
     {
         private const string TEMPDIRECTORY = @"C:\temp";
 
+        private static string filesDirectory;
+
         public FileManager()
         {
             if (!Directory.Exists(TEMPDIRECTORY))
@@ -51,8 +53,24 @@ namespace Palmmedia.ReportGenerator.Core.Test
 
         internal static string GetFilesDirectory()
         {
-            var baseDirectory = new DirectoryInfo(System.Reflection.Assembly.GetExecutingAssembly().Location).Parent.Parent.Parent.Parent.FullName;
-            return Path.Combine(baseDirectory, "Testprojects");
+            if (filesDirectory == null)
+            {
+                var currentDirectory = new DirectoryInfo(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+                while (true)
+                {
+                    currentDirectory = currentDirectory.Parent;
+                    string directory = Path.Combine(currentDirectory.FullName, "Testprojects");
+
+                    if (Directory.Exists(directory))
+                    {
+                        filesDirectory = directory;
+                        break;
+                    }
+                }
+            }
+
+            return filesDirectory;
         }
     }
 
