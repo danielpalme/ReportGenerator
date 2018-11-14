@@ -31,16 +31,26 @@ steps:
     projects: '$(Parameters.TestProjects)'
     arguments: '--configuration $(BuildConfiguration) --no-build /p:AltCover=true /p:AltCoverXmlReport=..\target\reports\coverage\coverage.opencover.xml'
 
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+  inputs:
+    SourceFolder: '$(build.sourcesdirectory)'
+    Contents: '**'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
+
 - task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@1
   displayName: ReportGenerator
   inputs:
-    reports: target\reports\coverage\coverage.opencover.xml
-    targetdir: target\reports\coverage
+    reports: '$(build.sourcesdirectory)\target\reports\coverage\coverage.opencover.xml'
+    targetdir: '$(build.sourcesdirectory)\target\reports\coverage'
     reporttypes: 'HtmlInline_AzurePipelines;Cobertura'
 
 - task: PublishCodeCoverageResults@1
   displayName: 'Publish code coverage results'
   inputs:
     codeCoverageTool: Cobertura
-    summaryFileLocation: 'target\reports\coverage\Cobertura.xml'
-    reportDirectory: 'target\reports\coverage'
+    summaryFileLocation: '$(build.sourcesdirectory)\target\reports\coverage\Cobertura.xml'
+    reportDirectory: '$(build.sourcesdirectory)\target\reports\coverage'
