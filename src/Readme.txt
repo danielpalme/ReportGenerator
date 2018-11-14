@@ -56,6 +56,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.0.4.0
+
+    * Fix: Issue #176: Fixed font problem with AzurePipelines
+
 4.0.3.0
 
     * Fix: Issue #173: New report type with AzurePipelines specific CSS

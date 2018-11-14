@@ -25,8 +25,8 @@
 
   <!-- Version, adjust before build -->
   <PropertyGroup>
-    <Version>4.0.3.0</Version>
-    <VersionShort>4.0.3</VersionShort>
+    <Version>4.0.4.0</Version>
+    <VersionShort>4.0.4</VersionShort>
   </PropertyGroup>
   
   <!-- Tools -->
@@ -104,21 +104,33 @@
       <ZipFileContentNet47 Include="target\bin\Release\appsettings.json;target\bin\Release\Microsoft.Build.*.dll;target\bin\Release\Microsoft.Extensions*.dll;target\bin\Release\Microsoft.Win32.Primitives.dll;target\bin\Release\Newtonsoft.Json.dll;target\bin\Release\netstandard.dll;target\bin\Release\ReportGenerator.Core.dll;target\bin\Release\ReportGenerator.exe;target\bin\Release\ReportGenerator.exe.config;target\bin\Release\SixLabors.*.dll;target\bin\Release\System.*.dll" />
       <ZipFileContentNetCore Include="target\bin\Release\netcoreapp2.0\publish\**\*.*"/>
     </ItemGroup>
+
+    <!-- ZIP -->
     <MakeDir Directories="tmpzip" />
     <MakeDir Directories="tmpzip\net47" />
     <MakeDir Directories="tmpzip\netcoreapp2.0" />
     <Copy SourceFiles="@(ZipFileContentBase)" DestinationFolder="tmpzip" /> 
     <Copy SourceFiles="@(ZipFileContentNet47)" DestinationFolder="tmpzip\net47" /> 
-    <Copy SourceFiles="@(ZipFileContentNetCore)" DestinationFolder="tmpzip\netcoreapp2.0\%(RecursiveDir)" /> 
+    <Copy SourceFiles="@(ZipFileContentNetCore)" DestinationFolder="tmpzip\netcoreapp2.0\%(RecursiveDir)" />
    <ItemGroup>
       <ZipFileContent Include="tmpzip\**\*.*"/>
     </ItemGroup> 
     <Zip Files="@(ZipFileContent)" WorkingDirectory="$(MSBuildThisFileDirectory)tmpzip" ZipFileName="target\packages\ReportGenerator_$(Version).zip" ZipLevel="9" />
     <RemoveDir Directories="tmpzip" />  
 
+    <!-- AzureDevopsTask -->
+    <RemoveDir Directories="AzureDevopsTask\ReportGenerator\tools\netcoreapp2.0" />  
+    <MakeDir Directories="AzureDevopsTask\ReportGenerator\tools\netcoreapp2.0" />
+    <Copy SourceFiles="@(ZipFileContentNetCore)" DestinationFolder="AzureDevopsTask\ReportGenerator\tools\netcoreapp2.0\%(RecursiveDir)" /> 
+    <Exec Command="tsc" WorkingDirectory="AzureDevopsTask\ReportGenerator" />
+    <Exec Command="tfx extension create --manifest-globs vss-extension.json --output-path ..\target\packages" WorkingDirectory="AzureDevopsTask" />
+
+    <!-- Nuget -->
     <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\ReportGenerator.nuspec -OutputDirectory target\packages -Version $(Version)" />
     <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\ReportGenerator.Core.nuspec -OutputDirectory target\packages -Version $(Version)" />
     <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\dotnet-reportgenerator-cli.nuspec -OutputDirectory target\packages -Version $(Version)" />
+    
+    <!-- Chocolatey -->
     <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\dotnet-reportgenerator-globaltool.nuspec -OutputDirectory target\packages -Version $(Version)" />
 
     <Exec Command="powershell -Command [Environment]::SetEnvironmentVariable('ChecksumOfZip', (Get-FileHash .\target\packages\ReportGenerator_$(Version).zip -Algorithm SHA256).Hash, 'User')" />
