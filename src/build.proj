@@ -46,6 +46,7 @@
     <RemoveDir Directories="bin" />
     <RemoveDir Directories="obj" />
   </Target>
+
   <Target Name="Test" DependsOnTargets="Clean; Compile">
     <MakeDir Directories="target\reports\coverage" />
     <Exec Command="dotnet test --no-build -c Release /p:AltCover=true /p:AltCoverXmlReport=..\target\reports\coverage\coverage.opencover.xml" WorkingDirectory="ReportGenerator.Core.Test" />

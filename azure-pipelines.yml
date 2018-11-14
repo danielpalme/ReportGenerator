@@ -31,6 +31,16 @@ steps:
     projects: '$(Parameters.TestProjects)'
     arguments: '--configuration $(BuildConfiguration) --no-build /p:AltCover=true /p:AltCoverXmlReport=target\reports\coverage\coverage.opencover.xml'
 
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+  inputs:
+    SourceFolder: '$(build.sourcesdirectory)'
+    Contents: '**'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
+  
 - task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@1
   displayName: ReportGenerator
   inputs:
