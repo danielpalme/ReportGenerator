@@ -38,19 +38,9 @@ steps:
     targetdir: 'src\target\reports\coverage'
     reporttypes: 'HtmlInline_AzurePipelines;Cobertura'
 
-- task: CopyFiles@2
-  displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
-  inputs:
-    SourceFolder: '$(build.sourcesdirectory)'
-    Contents: '**'
-    TargetFolder: '$(build.artifactstagingdirectory)'
-
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: drop'
-
 - task: PublishCodeCoverageResults@1
   displayName: 'Publish code coverage results'
   inputs:
     codeCoverageTool: Cobertura
-    summaryFileLocation: 'target\reports\coverage\Cobertura.xml'
-    reportDirectory: 'target\reports\coverage'
+    summaryFileLocation: '$(build.sourcesdirectory)\src\target\reports\coverage\Cobertura.xml'
+    reportDirectory: '$(build.sourcesdirectory)\src\target\reports\coverage'
