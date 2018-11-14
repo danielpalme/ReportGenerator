@@ -29,4 +29,21 @@ steps:
   inputs:
     command: test
     projects: '$(Parameters.TestProjects)'
-    arguments: '--configuration $(BuildConfiguration)'
+    arguments: '--configuration $(BuildConfiguration) --no-build /p:AltCover=true /p:AltCoverXmlReport=target\reports\coverage\coverage.opencover.xml'
+
+steps:
+- task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@1
+  displayName: ReportGenerator
+  inputs:
+    reports: target\reports\coverage\coverage.opencover.xml
+    targetdir: target\reports\coverage
+    reporttypes: 'HtmlInline_AzurePipelines;Cobertura'
+
+steps:
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage results
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: 'target\reports\coverage\Cobertura.xml'
+    reportDirectory: 'target\reports\coverage'
+
