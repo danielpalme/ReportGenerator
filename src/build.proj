@@ -49,7 +49,7 @@
 
   <Target Name="Test" DependsOnTargets="Clean; Compile">
     <MakeDir Directories="target\reports\coverage" />
-    <Exec Command="dotnet test --no-build -c Release /p:AltCover=true /p:AltCoverXmlReport=..\target\reports\coverage\coverage.opencover.xml" WorkingDirectory="ReportGenerator.Core.Test" />
+    <Exec Command="dotnet test --no-build -c Release /p:AltCover=true /p:AltCoverXmlReport=..\target\reports\coverage\coverage.opencover.xml /p:AltCoverCallContext=[Fact]" WorkingDirectory="ReportGenerator.Core.Test" />
   </Target>
   
   <Target Name="Report" DependsOnTargets="Test">

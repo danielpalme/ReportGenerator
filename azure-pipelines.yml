@@ -29,7 +29,7 @@ steps:
   inputs:
     command: test
     projects: '$(Parameters.TestProjects)'
-    arguments: '--configuration $(BuildConfiguration) --no-build /p:AltCover=true /p:AltCoverXmlReport=..\target\reports\coverage\coverage.opencover.xml'
+    arguments: '--configuration $(BuildConfiguration) --no-build /p:AltCover=true /p:AltCoverCallContext=[Fact] /p:AltCoverXmlReport=..\target\reports\coverage\coverage.opencover.xml'
 
 - task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@1
   displayName: ReportGenerator

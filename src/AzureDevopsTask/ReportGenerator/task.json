@@ -13,7 +13,7 @@
     "version": {
         "Major": 1,
         "Minor": 0,
-        "Patch": 10
+        "Patch": 12
     },
     "instanceNameFormat": "ReportGenerator",
     "groups": [
@@ -39,7 +39,7 @@
             "name": "reporttypes",
             "type": "string",
             "label": "Report types",
-            "defaultValue": "HtmlInline_AzurePipelines",
+            "defaultValue": "HtmlInline_AzurePipelines;Cobertura",
             "required": false,
             "helpMarkDown": "The output formats and scope (separated by semicolon) Values: Badges, Cobertura, CsvSummary, Html, HtmlChart, HtmlInline, HtmlInline_AzurePipelines, HtmlSummary, Latex, LatexSummary, MHtml, PngChart, TextSummary, Xml, XmlSummary"
         },
@@ -93,9 +93,16 @@
         },
         {
             "name": "verbosity",
-            "type": "string",
+            "type": "pickList",
             "label": "Verbosity",
             "defaultValue": "Verbose",
+            "options": {
+                 "Verbose": "Verbose",
+                 "Info": "Info",
+                 "Warning": "Warning",
+                 "Error": "Error",
+                 "Off": "Off"
+              },
             "required": false,
             "helpMarkDown": "The verbosity level of the log messages. Values: Verbose, Info, Warning, Error, Off"
         },
