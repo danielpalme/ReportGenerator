@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Palmmedia.ReportGenerator.Core.CodeAnalysis;
+using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Properties;
 
@@ -15,6 +16,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
     /// </summary>
     internal class LatexRenderer : RendererBase, IReportRenderer, IDisposable
     {
+        /// <summary>
+        /// The Logger.
+        /// </summary>
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(LatexRenderer));
+
         #region Latex Snippets
 
         /// <summary>
@@ -560,6 +566,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             Stream combinedReportStream = null;
 
             string targetPath = Path.Combine(targetDirectory, "Summary.tex");
+
+            Logger.DebugFormat("  " + Resources.WritingReportFile, targetPath);
 
             combinedReportStream = new FileStream(targetPath, FileMode.Create);
 

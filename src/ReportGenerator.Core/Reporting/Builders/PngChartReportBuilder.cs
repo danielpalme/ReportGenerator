@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
+using Palmmedia.ReportGenerator.Core.Properties;
 using Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering;
 
 namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
@@ -12,6 +14,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
     /// </summary>
     public class PngChartReportBuilder : IReportBuilder
     {
+        /// <summary>
+        /// The Logger.
+        /// </summary>
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(PngChartReportBuilder));
+
         /// <summary>
         /// Gets the report type.
         /// </summary>
@@ -55,7 +62,12 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             if (filteredHistoricCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue))
             {
                 byte[] image = PngHistoryChartRenderer.RenderHistoryChart(filteredHistoricCoverages);
-                File.WriteAllBytes(Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "CoverageHistory.png"), image);
+
+                string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "CoverageHistory.png");
+
+                Logger.DebugFormat("  " + Resources.WritingReportFile, targetPath);
+
+                File.WriteAllBytes(targetPath, image);
             }
         }
 

@@ -7,6 +7,7 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using Palmmedia.ReportGenerator.Core.CodeAnalysis;
+using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Properties;
 
@@ -45,6 +46,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         private const string CssLink = "<link rel=\"stylesheet\" type=\"text/css\" href=\"report.css\" />";
 
         #endregion
+
+        /// <summary>
+        /// The Logger.
+        /// </summary>
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(HtmlRenderer));
 
         /// <summary>
         /// Dictionary containing the filenames of the class reports by class.
@@ -1400,6 +1406,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="targetPath">The target path.</param>
         private void CreateTextWriter(string targetPath)
         {
+            Logger.DebugFormat("  " + Resources.WritingReportFile, targetPath);
+
             this.reportTextWriter = new StreamWriter(new FileStream(targetPath, FileMode.Create));
         }
 

@@ -483,5 +483,14 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
                 return ResourceManager.GetString("UnknownVerbosityLevel", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Writing report file &apos;{0}&apos;.
+        /// </summary>
+        internal static string WritingReportFile {
+            get {
+                return ResourceManager.GetString("WritingReportFile", resourceCulture);
+            }
+        }
     }
 }

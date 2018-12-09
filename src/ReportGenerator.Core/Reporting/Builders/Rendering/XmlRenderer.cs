@@ -6,7 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using Palmmedia.ReportGenerator.Core.CodeAnalysis;
+using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
+using Palmmedia.ReportGenerator.Core.Properties;
 
 namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 {
@@ -15,6 +17,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
     /// </summary>
     internal class XmlRenderer : RendererBase, IReportRenderer
     {
+        /// <summary>
+        /// The Logger.
+        /// </summary>
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(XmlRenderer));
+
         /// <summary>
         /// Indicates that the current node representing an assembly has to be closed before adding further elements.
         /// </summary>
@@ -362,6 +369,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="targetPath">The target path.</param>
         private void CreateXmlWriter(string targetPath)
         {
+            Logger.DebugFormat("  " + Resources.WritingReportFile, targetPath);
+
             var xmlWriterSettings = new XmlWriterSettings()
             {
                 Encoding = Encoding.UTF8,

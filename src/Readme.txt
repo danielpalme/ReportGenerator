@@ -58,7 +58,8 @@ CHANGELOG
 
 4.0.5.0
 
-    * Fix: Issue #184: Fixed problem with training slashes in paths
+    * New: Issue #183: Logging path information of generated files
+    * Fix: Issue #184: Fixed problem with trailing slashes in paths
 
 4.0.4.0
 

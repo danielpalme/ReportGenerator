@@ -4,7 +4,9 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
+using Palmmedia.ReportGenerator.Core.Properties;
 
 namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 {
@@ -13,6 +15,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
     /// </summary>
     public class CoberturaReportBuilder : IReportBuilder
     {
+        /// <summary>
+        /// The Logger.
+        /// </summary>
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(CoberturaReportBuilder));
+
         /// <summary>
         /// Package elements by assembly name.
         /// </summary>
@@ -162,7 +169,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             XDocument result = new XDocument(new XDeclaration("1.0", null, null), rootElement);
             result.AddFirst(new XDocumentType("coverage", null, "http://cobertura.sourceforge.net/xml/coverage-04.dtd", null));
 
-            result.Save(Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "Cobertura.xml"));
+            string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "Cobertura.xml");
+
+            Logger.DebugFormat("  " + Resources.WritingReportFile, targetPath);
+
+            result.Save(targetPath);
         }
 
         /// <summary>

@@ -259,4 +259,7 @@
   <data name="UnknownVerbosityLevel" xml:space="preserve">
     <value>Unknown verbosity level.</value>
   </data>
+  <data name="WritingReportFile" xml:space="preserve">
+    <value>Writing report file '{0}'</value>
+  </data>
 </root>

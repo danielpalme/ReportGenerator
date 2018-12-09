@@ -3,6 +3,7 @@ using System.IO;
 using Palmmedia.ReportGenerator.Core.CodeAnalysis;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
+using Palmmedia.ReportGenerator.Core.Properties;
 
 namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 {
@@ -11,6 +12,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
     /// </summary>
     public class MhtmlReportBuilder : IReportBuilder
     {
+        /// <summary>
+        /// The Logger.
+        /// </summary>
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(MhtmlReportBuilder));
+
         /// <summary>
         /// The <see cref="HtmlReportBuilder"/>.
         /// </summary>
@@ -127,7 +133,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// </summary>
         private void CreateMhtmlFile()
         {
-            using (var writer = new StreamWriter(new FileStream(Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "Summary.mht"), FileMode.Create)))
+            string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "Summary.mht");
+
+            Logger.DebugFormat("  " + Resources.WritingReportFile, targetPath);
+
+            using (var writer = new StreamWriter(new FileStream(targetPath, FileMode.Create)))
             {
                 writer.WriteLine("MIME-Version: 1.0");
                 writer.WriteLine("Content-Type: multipart/related;");

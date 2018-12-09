@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Properties;
 using SixLabors.Fonts;
@@ -18,6 +19,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
     /// </summary>
     public class BadgeReportBuilder : IReportBuilder
     {
+        /// <summary>
+        /// The Logger.
+        /// </summary>
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(BadgeReportBuilder));
+
         /// <summary>
         /// The SVG template.
         /// </summary>
@@ -178,36 +184,56 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             if (summaryResult.CoverageQuota.HasValue)
             {
+                string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_linecoverage.svg");
+
+                Logger.DebugFormat("  " + Resources.WritingReportFile, targetPath);
+
                 File.WriteAllText(
-                    Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_linecoverage.svg"),
+                    targetPath,
                     this.CreateSvgBadge(summaryResult, true, false));
             }
 
             if (summaryResult.BranchCoverageQuota.HasValue)
             {
+                string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_branchcoverage.svg");
+
+                Logger.DebugFormat("  " + Resources.WritingReportFile, targetPath);
+
                 File.WriteAllText(
-                    Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_branchcoverage.svg"),
+                    targetPath,
                     this.CreateSvgBadge(summaryResult, false, true));
             }
 
             if (summaryResult.CoverageQuota.HasValue && summaryResult.BranchCoverageQuota.HasValue)
             {
+                string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_combined.svg");
+
+                Logger.DebugFormat("  " + Resources.WritingReportFile, targetPath);
+
                 File.WriteAllText(
-                    Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_combined.svg"),
+                    targetPath,
                     this.CreateSvgBadge(summaryResult, true, true));
             }
 
             if (summaryResult.CoverageQuota.HasValue)
             {
+                string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_linecoverage.png");
+
+                Logger.DebugFormat("  " + Resources.WritingReportFile, targetPath);
+
                 File.WriteAllBytes(
-                    Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_linecoverage.png"),
+                    targetPath,
                     this.CreatePngBadge(summaryResult, true));
             }
 
             if (summaryResult.BranchCoverageQuota.HasValue)
             {
+                string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_branchcoverage.png");
+
+                Logger.DebugFormat("  " + Resources.WritingReportFile, targetPath);
+
                 File.WriteAllBytes(
-                    Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_branchcoverage.png"),
+                    targetPath,
                     this.CreatePngBadge(summaryResult, false));
             }
         }

@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Properties;
 
@@ -14,6 +15,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
     /// </summary>
     public class CsvSummaryReportBuilder : IReportBuilder
     {
+        /// <summary>
+        /// The Logger.
+        /// </summary>
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(CsvSummaryReportBuilder));
+
         /// <summary>
         /// Gets the report type.
         /// </summary>
@@ -51,6 +57,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             }
 
             string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "Summary.csv");
+
+            Logger.DebugFormat("  " + Resources.WritingReportFile, targetPath);
 
             using (var reportTextWriter = new StreamWriter(new FileStream(targetPath, FileMode.Create), Encoding.UTF8))
             {
