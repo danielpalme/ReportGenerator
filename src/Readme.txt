@@ -56,6 +56,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.0.5.0
+
+    * Fix: Issue #184: Fixed problem with training slashes in paths
+
 4.0.4.0
 
     * Fix: Issue #176: Fixed font problem with AzurePipelines

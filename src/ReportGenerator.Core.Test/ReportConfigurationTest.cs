@@ -20,7 +20,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 new[] { ReportPath },
                 "C:\\temp",
                 new string[] { },
-                "C:\\temp\\historic",
+                "C:\\temp\\historic\\",
                 new string[] { },
                 new string[] { },
                 new string[] { },
@@ -50,8 +50,8 @@ namespace Palmmedia.ReportGenerator.Core.Test
         {
             var configuration = new ReportConfiguration(
                 new[] { ReportPath },
-                "C:\\temp",
-                new string[] { "C:\\source" },
+                "C:\\temp\\",
+                new string[] { "C:\\source/" },
                 null,
                 new[] { "Latex", "Xml", "Html" },
                 new string[] { "ReportGenerator.Core.Test.dll" },
