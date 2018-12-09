@@ -16,11 +16,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
     /// </summary>
     internal class LatexRenderer : RendererBase, IReportRenderer, IDisposable
     {
-        /// <summary>
-        /// The Logger.
-        /// </summary>
-        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(LatexRenderer));
-
         #region Latex Snippets
 
         /// <summary>
@@ -69,6 +64,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         private const string LatexEnd = @"\end{document}";
 
         #endregion
+
+        /// <summary>
+        /// The Logger.
+        /// </summary>
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(LatexRenderer));
 
         /// <summary>
         /// The current report text writer.
