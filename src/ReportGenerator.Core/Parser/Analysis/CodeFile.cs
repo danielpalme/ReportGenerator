@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Properties;
 
@@ -259,83 +261,68 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <returns>The analysis result.</returns>
         internal FileAnalysis AnalyzeFile()
         {
-            if (!System.IO.File.Exists(this.Path))
+            string error = null;
+            string[] lines = this.LoadFile(out error);
+
+            if (error != null)
             {
-                string error = string.Format(CultureInfo.InvariantCulture, " " + Resources.FileDoesNotExist, this.Path);
                 Logger.Error(error);
                 return new FileAnalysis(this.Path, error);
             }
 
-            try
+            this.TotalLines = lines.Length;
+
+            int currentLineNumber = 0;
+
+            var result = new FileAnalysis(this.Path);
+            ICollection<Branch> branchesOfLine = null;
+
+            foreach (var line in lines)
             {
-                string[] lines = System.IO.File.ReadAllLines(this.Path);
+                currentLineNumber++;
+                int visits = this.lineCoverage.Length > currentLineNumber ? this.lineCoverage[currentLineNumber] : -1;
+                LineVisitStatus lineVisitStatus = this.lineVisitStatus.Length > currentLineNumber ? this.lineVisitStatus[currentLineNumber] : LineVisitStatus.NotCoverable;
 
-                this.TotalLines = lines.Length;
-
-                int currentLineNumber = 0;
-
-                var result = new FileAnalysis(this.Path);
-                ICollection<Branch> branchesOfLine = null;
-
-                foreach (var line in lines)
-                {
-                    currentLineNumber++;
-                    int visits = this.lineCoverage.Length > currentLineNumber ? this.lineCoverage[currentLineNumber] : -1;
-                    LineVisitStatus lineVisitStatus = this.lineVisitStatus.Length > currentLineNumber ? this.lineVisitStatus[currentLineNumber] : LineVisitStatus.NotCoverable;
-
-                    var lineCoverageByTestMethod = this.lineCoveragesByTestMethod
-                        .ToDictionary(
-                        l => l.Key,
-                        l =>
+                var lineCoverageByTestMethod = this.lineCoveragesByTestMethod
+                    .ToDictionary(
+                    l => l.Key,
+                    l =>
+                    {
+                        if (l.Value.Coverage.Length > currentLineNumber)
                         {
-                            if (l.Value.Coverage.Length > currentLineNumber)
-                            {
-                                return new ShortLineAnalysis(l.Value.Coverage[currentLineNumber], l.Value.LineVisitStatus[currentLineNumber]);
-                            }
-                            else
-                            {
-                                return new ShortLineAnalysis(-1, LineVisitStatus.NotCoverable);
-                            }
-                        });
+                            return new ShortLineAnalysis(l.Value.Coverage[currentLineNumber], l.Value.LineVisitStatus[currentLineNumber]);
+                        }
+                        else
+                        {
+                            return new ShortLineAnalysis(-1, LineVisitStatus.NotCoverable);
+                        }
+                    });
 
-                    if (this.branches != null && this.branches.TryGetValue(currentLineNumber, out branchesOfLine))
-                    {
-                        result.AddLineAnalysis(
-                            new LineAnalysis(
-                                visits,
-                                lineVisitStatus,
-                                lineCoverageByTestMethod,
-                                currentLineNumber,
-                                line.TrimEnd(),
-                                branchesOfLine.Count(b => b.BranchVisits > 0),
-                                branchesOfLine.Count));
-                    }
-                    else
-                    {
-                        result.AddLineAnalysis(
-                            new LineAnalysis(
-                                visits,
-                                lineVisitStatus,
-                                lineCoverageByTestMethod,
-                                currentLineNumber,
-                                line.TrimEnd()));
-                    }
+                if (this.branches != null && this.branches.TryGetValue(currentLineNumber, out branchesOfLine))
+                {
+                    result.AddLineAnalysis(
+                        new LineAnalysis(
+                            visits,
+                            lineVisitStatus,
+                            lineCoverageByTestMethod,
+                            currentLineNumber,
+                            line.TrimEnd(),
+                            branchesOfLine.Count(b => b.BranchVisits > 0),
+                            branchesOfLine.Count));
                 }
+                else
+                {
+                    result.AddLineAnalysis(
+                        new LineAnalysis(
+                            visits,
+                            lineVisitStatus,
+                            lineCoverageByTestMethod,
+                            currentLineNumber,
+                            line.TrimEnd()));
+                }
+            }
 
-                return result;
-            }
-            catch (IOException ex)
-            {
-                string error = string.Format(CultureInfo.InvariantCulture, " " + Resources.ErrorDuringReadingFile, this.Path, ex.Message);
-                Logger.Error(error);
-                return new FileAnalysis(this.Path, error);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                string error = string.Format(CultureInfo.InvariantCulture, " " + Resources.ErrorDuringReadingFile, this.Path, ex.Message);
-                Logger.Error(error);
-                return new FileAnalysis(this.Path, error);
-            }
+            return result;
         }
 
         /// <summary>
@@ -518,6 +505,47 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
             }
 
             return existingTrackedMethodCoverage;
+        }
+
+        /// <summary>
+        /// Loads the file from disk or via HTTP and returns the content.
+        /// </summary>
+        /// <param name="error">Error message if file reading failed, otherwise <code>null</code>.</param>
+        /// <returns><code>null</code> if an error occurs, otherwise the lines of the file.</returns>
+        private string[] LoadFile(out string error)
+        {
+            try
+            {
+                if (this.Path.StartsWith("http://") || this.Path.StartsWith("https://"))
+                {
+                    using (HttpClient client = new HttpClient())
+                    {
+                        string content = client.GetStringAsync(this.Path).Result;
+                        string[] lines = content.Split('\n').Select(l => l.TrimEnd('\r')).ToArray();
+
+                        error = null;
+                        return lines;
+                    }
+                }
+                else
+                {
+                    if (!File.Exists(this.Path))
+                    {
+                        error = string.Format(CultureInfo.InvariantCulture, " " + Resources.FileDoesNotExist, this.Path);
+                        return null;
+                    }
+
+                    string[] lines = File.ReadAllLines(this.Path);
+
+                    error = null;
+                    return lines;
+                }
+            }
+            catch (Exception ex)
+            {
+                error = string.Format(CultureInfo.InvariantCulture, " " + Resources.ErrorDuringReadingFile, this.Path, ex.GetExceptionMessageForDisplay());
+                return null;
+            }
         }
     }
 }

@@ -58,6 +58,7 @@ CHANGELOG
 
 4.0.5.0
 
+    * New: Issue #180: Added support for remote SourceLink source files
     * New: Issue #183: Logging path information of generated files
     * Fix: Issue #184: Fixed problem with trailing slashes in paths
 
