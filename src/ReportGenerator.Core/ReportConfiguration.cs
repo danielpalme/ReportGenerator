@@ -96,10 +96,10 @@ namespace Palmmedia.ReportGenerator.Core
                 }
             }
 
-            this.TargetDirectory = targetDirectory?.TrimEnd('\\', '/') ?? throw new ArgumentNullException(nameof(targetDirectory));
-            this.HistoryDirectory = historyDirectory?.TrimEnd('\\', '/');
+            this.TargetDirectory = targetDirectory ?? throw new ArgumentNullException(nameof(targetDirectory));
+            this.HistoryDirectory = historyDirectory;
 
-            this.SourceDirectories = sourceDirectories.Select(s => s.TrimEnd('\\', '/')).ToList();
+            this.SourceDirectories = sourceDirectories.ToList();
 
             if (reportTypes.Any())
             {
