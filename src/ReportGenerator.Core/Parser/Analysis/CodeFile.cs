@@ -21,6 +21,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(CodeFile));
 
         /// <summary>
+        /// The HttpClient to retrieve remote files.
+        /// </summary>
+        private static readonly HttpClient HttpClient = new HttpClient();
+
+        /// <summary>
         /// The line coverage by test method.
         /// </summary>
         private readonly IDictionary<TestMethod, CoverageByTrackedMethod> lineCoveragesByTestMethod = new Dictionary<TestMethod, CoverageByTrackedMethod>();
@@ -518,14 +523,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
             {
                 if (this.Path.StartsWith("http://") || this.Path.StartsWith("https://"))
                 {
-                    using (HttpClient client = new HttpClient())
-                    {
-                        string content = client.GetStringAsync(this.Path).Result;
-                        string[] lines = content.Split('\n').Select(l => l.TrimEnd('\r')).ToArray();
+                    string content = HttpClient.GetStringAsync(this.Path).Result;
+                    string[] lines = content.Split('\n').Select(l => l.TrimEnd('\r')).ToArray();
 
-                        error = null;
-                        return lines;
-                    }
+                    error = null;
+                    return lines;
                 }
                 else
                 {
