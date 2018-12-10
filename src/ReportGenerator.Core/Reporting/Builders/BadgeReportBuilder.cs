@@ -186,7 +186,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             {
                 string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_linecoverage.svg");
 
-                Logger.DebugFormat("  " + Resources.WritingReportFile, targetPath);
+                Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
 
                 File.WriteAllText(
                     targetPath,
@@ -197,7 +197,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             {
                 string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_branchcoverage.svg");
 
-                Logger.DebugFormat("  " + Resources.WritingReportFile, targetPath);
+                Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
 
                 File.WriteAllText(
                     targetPath,
@@ -208,7 +208,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             {
                 string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_combined.svg");
 
-                Logger.DebugFormat("  " + Resources.WritingReportFile, targetPath);
+                Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
 
                 File.WriteAllText(
                     targetPath,
@@ -219,7 +219,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             {
                 string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_linecoverage.png");
 
-                Logger.DebugFormat("  " + Resources.WritingReportFile, targetPath);
+                Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
 
                 File.WriteAllBytes(
                     targetPath,
@@ -230,7 +230,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             {
                 string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_branchcoverage.png");
 
-                Logger.DebugFormat("  " + Resources.WritingReportFile, targetPath);
+                Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
 
                 File.WriteAllBytes(
                     targetPath,

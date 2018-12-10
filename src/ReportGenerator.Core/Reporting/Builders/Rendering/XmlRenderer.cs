@@ -51,6 +51,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         public void BeginSummaryReport(string targetDirectory, string fileName, string title)
         {
             string targetPath = Path.Combine(targetDirectory, "Summary.xml");
+
+            Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
             this.CreateXmlWriter(targetPath);
 
             this.reportTextWriter.WriteStartElement("CoverageReport");
@@ -76,6 +78,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         public void BeginClassReport(string targetDirectory, string assemblyName, string className)
         {
             string targetPath = Path.Combine(targetDirectory, ReplaceInvalidPathChars(assemblyName + "_" + className) + ".xml");
+
+            Logger.DebugFormat("  " + Resources.WritingReportFile, targetPath);
             this.CreateXmlWriter(targetPath);
 
             this.reportTextWriter.WriteStartElement("CoverageReport");
@@ -369,8 +373,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="targetPath">The target path.</param>
         private void CreateXmlWriter(string targetPath)
         {
-            Logger.DebugFormat("  " + Resources.WritingReportFile, targetPath);
-
             var xmlWriterSettings = new XmlWriterSettings()
             {
                 Encoding = Encoding.UTF8,

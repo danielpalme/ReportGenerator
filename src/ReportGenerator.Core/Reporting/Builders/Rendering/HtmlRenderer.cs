@@ -122,6 +122,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 targetPath = Path.Combine(targetDirectory, fileName);
             }
 
+            Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
             this.CreateTextWriter(targetPath);
 
             using (var cssStream = this.GetCombinedCss())
@@ -142,9 +143,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="className">Name of the class.</param>
         public void BeginClassReport(string targetDirectory, string assemblyName, string className)
         {
-            string fileName = GetClassReportFilename(assemblyName, className);
+            string targetPath = GetClassReportFilename(assemblyName, className);
 
-            this.CreateTextWriter(Path.Combine(targetDirectory, fileName));
+            Logger.DebugFormat("  " + Resources.WritingReportFile, targetPath);
+            this.CreateTextWriter(Path.Combine(targetDirectory, targetPath));
+
             using (var cssStream = this.GetCombinedCss())
             {
                 string style = this.inlineCssAndJavaScript ?
@@ -1406,8 +1409,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="targetPath">The target path.</param>
         private void CreateTextWriter(string targetPath)
         {
-            Logger.DebugFormat("  " + Resources.WritingReportFile, targetPath);
-
             this.reportTextWriter = new StreamWriter(new FileStream(targetPath, FileMode.Create));
         }
 

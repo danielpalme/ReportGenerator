@@ -567,7 +567,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             string targetPath = Path.Combine(targetDirectory, "Summary.tex");
 
-            Logger.DebugFormat("  " + Resources.WritingReportFile, targetPath);
+            Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
 
             combinedReportStream = new FileStream(targetPath, FileMode.Create);
 

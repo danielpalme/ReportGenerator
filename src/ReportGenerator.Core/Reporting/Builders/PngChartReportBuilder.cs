@@ -65,7 +65,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
                 string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "CoverageHistory.png");
 
-                Logger.DebugFormat("  " + Resources.WritingReportFile, targetPath);
+                Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
 
                 File.WriteAllBytes(targetPath, image);
             }
