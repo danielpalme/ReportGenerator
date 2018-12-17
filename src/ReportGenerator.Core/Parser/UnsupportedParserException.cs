@@ -19,7 +19,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// Initializes a new instance of the <see cref="UnsupportedParserException"/> class.
         /// </summary>
         /// <param name="message">The message.</param>
-        public UnsupportedParserException(string message) : base(message)
+        public UnsupportedParserException(string message)
+            : base(message)
         {
         }
 
@@ -28,7 +29,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="inner">The inner exception.</param>
-        public UnsupportedParserException(string message, Exception inner) : base(message, inner)
+        public UnsupportedParserException(string message, Exception inner)
+            : base(message, inner)
         {
         }
     }

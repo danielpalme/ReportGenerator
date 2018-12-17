@@ -9,7 +9,7 @@ namespace Palmmedia.ReportGenerator.Core.Common
 {
     /// <summary>
     /// Finds files and directories by matching their path names against a pattern.
-    /// Implementation based on https://github.com/mganss/Glob.cs
+    /// Implementation based on https://github.com/mganss/Glob.cs.
     /// </summary>
     internal class Glob
     {
@@ -69,10 +69,10 @@ namespace Palmmedia.ReportGenerator.Core.Common
         public bool IgnoreCase { get; set; } = true;
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         public override string ToString()
         {
@@ -91,16 +91,16 @@ namespace Palmmedia.ReportGenerator.Core.Common
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// Determines whether the specified <see cref="object" />, is equal to this instance.
         /// </summary>
-        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
         /// <returns>
-        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public override bool Equals(object obj)
         {
             // Check for null and compare run-time types.
-            if (obj == null || GetType() != obj.GetType())
+            if (obj == null || this.GetType() != obj.GetType())
             {
                 return false;
             }
@@ -112,7 +112,7 @@ namespace Palmmedia.ReportGenerator.Core.Common
         /// <summary>
         /// Performs a pattern match.
         /// </summary>
-        /// <returns>The matched path names</returns>
+        /// <returns>The matched path names.</returns>
         public IEnumerable<string> ExpandNames()
         {
             return this.Expand(this.Pattern, false).Select(f => f.FullName);
@@ -121,7 +121,7 @@ namespace Palmmedia.ReportGenerator.Core.Common
         /// <summary>
         /// Performs a pattern match.
         /// </summary>
-        /// <returns>The matched <see cref="FileSystemInfo"/> objects</returns>
+        /// <returns>The matched <see cref="FileSystemInfo"/> objects.</returns>
         public IEnumerable<FileSystemInfo> Expand()
         {
             return this.Expand(this.Pattern, false);
@@ -315,7 +315,11 @@ namespace Palmmedia.ReportGenerator.Core.Common
                             prefix = option.ToString();
                             option.Clear();
                         }
-                        else option.Append(c);
+                        else
+                        {
+                            option.Append(c);
+                        }
+
                         break;
                     case ',':
                         if (level == 1)
@@ -323,7 +327,11 @@ namespace Palmmedia.ReportGenerator.Core.Common
                             options.Add(option.ToString());
                             option.Clear();
                         }
-                        else option.Append(c);
+                        else
+                        {
+                            option.Append(c);
+                        }
+
                         break;
                     case '}':
                         level--;
@@ -332,7 +340,11 @@ namespace Palmmedia.ReportGenerator.Core.Common
                             options.Add(option.ToString());
                             break;
                         }
-                        else option.Append(c);
+                        else
+                        {
+                            option.Append(c);
+                        }
+
                         break;
                     default:
                         option.Append(c);

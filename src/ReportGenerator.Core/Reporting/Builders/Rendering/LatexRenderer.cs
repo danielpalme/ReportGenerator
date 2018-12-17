@@ -76,14 +76,24 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         private TextWriter reportTextWriter;
 
         /// <summary>
-        /// The report text writers for the summary and the classes report.
+        /// The report text writer for the summary report.
         /// </summary>
-        private TextWriter summaryReportTextWriter, classReportTextWriter;
+        private TextWriter summaryReportTextWriter;
 
         /// <summary>
-        /// The underlying streams for the summary and the classes report.
+        /// The report text writer for the classes report.
         /// </summary>
-        private Stream summaryReportStream, classReportStream;
+        private TextWriter classReportTextWriter;
+
+        /// <summary>
+        /// The underlying stream for the summary report.
+        /// </summary>
+        private Stream summaryReportStream;
+
+        /// <summary>
+        /// The underlying stream for the classes report.
+        /// </summary>
+        private Stream classReportStream;
 
         /// <summary>
         /// Gets a value indicating whether renderer support rendering of charts.
@@ -291,7 +301,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         }
 
         /// <summary>
-        /// Adds metrics to the report
+        /// Adds metrics to the report.
         /// </summary>
         /// <param name="class">The class.</param>
         public void MetricsTable(Class @class)
@@ -307,7 +317,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         }
 
         /// <summary>
-        /// Adds metrics to the report
+        /// Adds metrics to the report.
         /// </summary>
         /// <param name="methodMetrics">The method metrics.</param>
         public void MetricsTable(IEnumerable<MethodMetric> methodMetrics)
@@ -409,13 +419,13 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// Renderes a chart with the given historic coverages.
         /// </summary>
         /// <param name="historicCoverages">The historic coverages.</param>
-        /// <param name="renderPngFallBackImage">Indicates whether PNG images are rendered as a fallback</param>
+        /// <param name="renderPngFallBackImage">Indicates whether PNG images are rendered as a fallback.</param>
         public void Chart(IEnumerable<HistoricCoverage> historicCoverages, bool renderPngFallBackImage)
         {
         }
 
         /// <summary>
-        /// Summary of risk hotspots
+        /// Summary of risk hotspots.
         /// </summary>
         /// <param name="riskHotspots">The risk hotspots.</param>
         public void RiskHotspots(IEnumerable<RiskHotspot> riskHotspots)
@@ -619,7 +629,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         }
 
         /// <summary>
-        /// Releases unmanaged and - optionally - managed resources
+        /// Releases unmanaged and - optionally - managed resources.
         /// </summary>
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)

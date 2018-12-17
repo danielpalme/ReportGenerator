@@ -28,13 +28,13 @@ namespace Palmmedia.ReportGenerator.Core.MSBuild
         public ITaskItem[] ReportFiles { get; set; }
 
         /// <summary>
-        /// Gets or sets the directory the report will be created in. This must be a directory, not a file. If the directory does not exist, it is created automatically. 
+        /// Gets or sets the directory the report will be created in. This must be a directory, not a file. If the directory does not exist, it is created automatically.
         /// </summary>
         [Required]
         public string TargetDirectory { get; set; }
 
         /// <summary>
-        /// Gets or sets the directory the historic data will be created in. This must be a directory, not a file. If the directory does not exist, it is created automatically. 
+        /// Gets or sets the directory the historic data will be created in. This must be a directory, not a file. If the directory does not exist, it is created automatically.
         /// </summary>
         public string HistoryDirectory { get; set; }
 

@@ -102,7 +102,7 @@ namespace Palmmedia.ReportGenerator.Core.Plugin
         }
 
         /// <summary>
-        /// Initializes the <see cref="IAssemblyLoader"/> based on the runtime (.NET full framework vs. .NET Core)
+        /// Initializes the <see cref="IAssemblyLoader"/> based on the runtime (.NET full framework vs. .NET Core).
         /// </summary>
         /// <returns>The <see cref="IAssemblyLoader"/>.</returns>
         private IAssemblyLoader CreateAssemblyLoader()

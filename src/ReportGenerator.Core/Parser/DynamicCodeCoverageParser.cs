@@ -43,14 +43,15 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="assemblyFilter">The assembly filter.</param>
         /// <param name="classFilter">The class filter.</param>
         /// <param name="fileFilter">The file filter.</param>
-        internal DynamicCodeCoverageParser(IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter) : base(assemblyFilter, classFilter, fileFilter)
+        internal DynamicCodeCoverageParser(IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter)
+            : base(assemblyFilter, classFilter, fileFilter)
         {
         }
 
         /// <summary>
         /// Parses the given XML report.
         /// </summary>
-        /// <param name="report">The XML report</param>
+        /// <param name="report">The XML report.</param>
         /// <returns>The parser result.</returns>
         public override ParserResult Parse(XContainer report)
         {

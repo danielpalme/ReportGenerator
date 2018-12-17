@@ -557,7 +557,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         }
 
         /// <summary>
-        /// Adds metrics to the report
+        /// Adds metrics to the report.
         /// </summary>
         /// <param name="class">The class.</param>
         public void MetricsTable(Class @class)
@@ -630,7 +630,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         }
 
         /// <summary>
-        /// Adds metrics to the report
+        /// Adds metrics to the report.
         /// </summary>
         /// <param name="methodMetrics">The method metrics.</param>
         public void MetricsTable(IEnumerable<MethodMetric> methodMetrics)
@@ -780,7 +780,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// Renderes a chart with the given historic coverages.
         /// </summary>
         /// <param name="historicCoverages">The historic coverages.</param>
-        /// <param name="renderPngFallBackImage">Indicates whether PNG images are rendered as a fallback</param>
+        /// <param name="renderPngFallBackImage">Indicates whether PNG images are rendered as a fallback.</param>
         public void Chart(IEnumerable<HistoricCoverage> historicCoverages, bool renderPngFallBackImage)
         {
             if (historicCoverages == null)
@@ -842,7 +842,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         }
 
         /// <summary>
-        /// Summary of risk hotspots
+        /// Summary of risk hotspots.
         /// </summary>
         /// <param name="riskHotspots">The risk hotspots.</param>
         public void RiskHotspots(IEnumerable<RiskHotspot> riskHotspots)
@@ -1066,7 +1066,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         }
 
         /// <summary>
-        /// Releases unmanaged and - optionally - managed resources
+        /// Releases unmanaged and - optionally - managed resources.
         /// </summary>
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)

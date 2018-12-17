@@ -104,7 +104,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                         foreach (var parserResult in this.ParseFile(report))
                         {
-                            lock (mergeLock)
+                            lock (this.mergeLock)
                             {
                                 result.Merge(parserResult);
                             }
@@ -271,7 +271,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// </summary>
         /// <param name="fileName">The name of the file.</param>
         /// <returns>The file size.</returns>
-        private static String GetHumanReadableFileSize(string fileName)
+        private static string GetHumanReadableFileSize(string fileName)
         {
             try
             {
