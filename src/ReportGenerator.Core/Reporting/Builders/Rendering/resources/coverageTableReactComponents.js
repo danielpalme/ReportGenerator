@@ -89,19 +89,38 @@ function ClassViewModel(serializedClass) {
         }
     };
 
-    self.visible = function (filter, historicCoverageChangesOnly) {
+    self.visible = function (filter, historicCoverageFilter) {
         if (filter !== '' && self.name.toLowerCase().indexOf(filter) === -1) {
             return false;
         }
 
-        if (historicCoverageChangesOnly && self.currentHistoricCoverageData !== null) {
+        if (historicCoverageFilter === '' || self.currentHistoricCoverageData === null) {
+            return true;
+        }
+
+        if (historicCoverageFilter === 'allChanges') {
             if (self.coveredLines === self.currentHistoricCoverageData.coveredLines
-                && self.coveredLines === self.currentHistoricCoverageData.coveredLines
                 && self.uncoveredLines === self.currentHistoricCoverageData.uncoveredLines
                 && self.coverableLines === self.currentHistoricCoverageData.coverableLines
                 && self.totalLines === self.currentHistoricCoverageData.totalLines
                 && self.coveredBranches === self.currentHistoricCoverageData.coveredBranches
                 && self.totalBranches === self.currentHistoricCoverageData.totalBranches) {
+                return false;
+            }
+        } else if (historicCoverageFilter === 'lineCoverageIncreaseOnly') {
+            if (self.coveredLines <= self.currentHistoricCoverageData.coveredLines) {
+                return false;
+            }
+        } else if (historicCoverageFilter === 'lineCoverageDecreaseOnly') {
+            if (self.coveredLines >= self.currentHistoricCoverageData.coveredLines) {
+                return false;
+            }
+        } else if (historicCoverageFilter === 'branchCoverageIncreaseOnly') {
+            if (self.coveredBranches <= self.currentHistoricCoverageData.coveredBranches) {
+                return false;
+            }
+        } else if (historicCoverageFilter === 'branchCoverageDecreaseOnly') {
+            if (self.coveredBranches >= self.currentHistoricCoverageData.coveredBranches) {
                 return false;
             }
         }
@@ -143,7 +162,7 @@ function CodeElementViewModel(name, parent) {
         return roundNumber(100 * self.coveredBranches / self.totalBranches, 1);
     };
 
-    self.visible = function (filter, historicCoverageChangesOnly) {
+    self.visible = function (filter, historicCoverageFilter) {
         var i, l;
         for (i = 0, l = self.subelements.length; i < l; i++) {
             if (self.subelements[i].visible(filter)) {
@@ -388,7 +407,7 @@ var AssemblyComponent = React.createClass({
                 grouping: '0',
                 groupingMaximum: this.getGroupingMaximum(this.props.assemblies),
                 historicCoverageExecutionTime: '',
-                historicCoverageChangesOnly: false,
+                historicCoverageFilter: '',
                 filter: '',
                 sortby: 'name',
                 sortorder: 'asc',
@@ -451,10 +470,10 @@ var AssemblyComponent = React.createClass({
             assemblies: this.state.assemblies
         });
     },
-    updateHistoricCoverageChangesOnly: function (historicCoverageChangesOnly) {
-        console.log("Updating historic coverage changes only: " + historicCoverageChangesOnly);
+    updateHistoricCoverageFilter: function (historicCoverageFilter) {
+        console.log("Updating historic coverage filter: " + historicCoverageFilter);
 
-        this.setState({ historicCoverageChangesOnly: historicCoverageChangesOnly });
+        this.setState({ historicCoverageFilter: historicCoverageFilter });
     },
     updateFilter: function (filter) {
         filter = filter.toLowerCase();
@@ -532,19 +551,20 @@ var AssemblyComponent = React.createClass({
                     groupingMaximum: this.state.groupingMaximum,
                     grouping: this.state.grouping,
                     historicCoverageExecutionTime: this.state.historicCoverageExecutionTime,
-                    historicCoverageChangesOnly: this.state.historicCoverageChangesOnly,
+                    historicCoverageFilter: this.state.historicCoverageFilter,
                     filter: this.state.filter,
                     collapseAll: this.collapseAll,
                     expandAll: this.expandAll,
+                    branchCoverageAvailable: this.state.branchCoverageAvailable,
                     updateGrouping: this.updateGrouping,
                     updateHistoricCoverageExecutionTime: this.updateHistoricCoverageExecutionTime,
-                    updateHistoricCoverageChangesOnly: this.updateHistoricCoverageChangesOnly,
+                    updateHistoricCoverageFilter: this.updateHistoricCoverageFilter,
                     updateFilter: this.updateFilter,
                     historicCoverageExecutionTimes: this.props.historicCoverageExecutionTimes
                 }),
                 AssemblyTable({
                     historicCoverageExecutionTime: this.state.historicCoverageExecutionTime,
-                    historicCoverageChangesOnly: this.state.historicCoverageChangesOnly,
+                    historicCoverageFilter: this.state.historicCoverageFilter,
                     filter: this.state.filter,
                     assemblies: this.state.assemblies,
                     sortby: this.state.sortby,
@@ -572,8 +592,8 @@ var SearchBar = React.createClass({
     historicCoverageExecutionTimeChanged: function () {
         this.props.updateHistoricCoverageExecutionTime(this.refs.historicCoverageExecutionTimesSelect.getDOMNode().value);
     },
-    historicCoverageChangesOnlyChanged: function () {
-        this.props.updateHistoricCoverageChangesOnly(this.refs.historicCoverageChangesOnlyCheckbox.getDOMNode().checked);
+    historicCoverageFilterChanged: function () {
+        this.props.updateHistoricCoverageFilter(this.refs.historicCoverageFilterSelect.getDOMNode().value);
     },
     filterChangedHandler: function () {
         this.props.updateFilter(this.refs.filterInput.getDOMNode().value);
@@ -597,6 +617,22 @@ var SearchBar = React.createClass({
                 }, this.props.historicCoverageExecutionTimes[i]));
             }
 
+            var historicCoverageFilterSelectOptions = [
+                React.DOM.option({ value: '' }, translations.filter),
+                React.DOM.option({ value: 'allChanges' }, translations.allChanges),
+                React.DOM.option({ value: 'lineCoverageIncreaseOnly' }, translations.lineCoverageIncreaseOnly),
+                React.DOM.option({ value: 'lineCoverageDecreaseOnly' }, translations.lineCoverageDecreaseOnly)
+            ];
+
+            if (this.props.branchCoverageAvailable) {
+                historicCoverageFilterSelectOptions.push(React.DOM.option({
+                    value: 'branchCoverageIncreaseOnly'
+                }, translations.branchCoverageIncreaseOnly));
+                historicCoverageFilterSelectOptions.push(React.DOM.option({
+                    value: 'branchCoverageDecreaseOnly'
+                }, translations.branchCoverageDecreaseOnly));
+            }
+
             historicCoverageExecutionTimesSelectContainer = React.DOM.div({ className: 'center' },
                 React.DOM.div({ className: 'center' },
                     React.DOM.span(null, translations.compareHistory + ' '),
@@ -605,14 +641,13 @@ var SearchBar = React.createClass({
                         value: this.props.historicCoverageExecutionTime,
                         onChange: this.historicCoverageExecutionTimeChanged
                     }, historicCoverageExecutionTimeOptions)),
+                React.DOM.br(),
                 React.DOM.div(null,
-                    this.props.historicCoverageExecutionTime ? React.DOM.label(null, 
-                        React.DOM.input({
-                            type: 'checkbox',
-                            ref: 'historicCoverageChangesOnlyCheckbox',
-                            defaultChecked: this.props.historicCoverageChangesOnly,
-                            onChange: this.historicCoverageChangesOnlyChanged
-                        }), translations.changesOnly) : null));
+                    this.props.historicCoverageExecutionTime ? React.DOM.select({
+                        ref: 'historicCoverageFilterSelect',
+                        value: this.props.historicCoverageFilter,
+                        onChange: this.historicCoverageFilterChanged
+                    }, historicCoverageFilterSelectOptions) : null));
         } else {
             historicCoverageExecutionTimesSelectContainer = React.DOM.div({ className: 'center' });
         }
@@ -654,7 +689,7 @@ var AssemblyTable = React.createClass({
     renderAllChilds: function (result, currentElement) {
         var i, l;
 
-        if (currentElement.visible(this.props.filter, this.props.historicCoverageChangesOnly, this.props.historicCoverageExecutionTime)) {
+        if (currentElement.visible(this.props.filter, this.props.historicCoverageFilter, this.props.historicCoverageExecutionTime)) {
             if (currentElement.isNamespace) {
                 result.push(AssemblyRow({ assembly: currentElement,
                     branchCoverageAvailable: this.props.branchCoverageAvailable,

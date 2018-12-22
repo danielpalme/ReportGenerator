@@ -70,6 +70,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All changes.
+        /// </summary>
+        public static string AllChanges {
+            get {
+                return ResourceManager.GetString("AllChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assemblies.
         /// </summary>
         public static string Assemblies {
@@ -142,6 +151,24 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Branch coverage: Decrease only.
+        /// </summary>
+        public static string BranchCoverageDecreaseOnly {
+            get {
+                return ResourceManager.GetString("BranchCoverageDecreaseOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Branch coverage: Increase only.
+        /// </summary>
+        public static string BranchCoverageIncreaseOnly {
+            get {
+                return ResourceManager.GetString("BranchCoverageIncreaseOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Branches.
         /// </summary>
         public static string Branches {
@@ -165,15 +192,6 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         public static string ByNamespace {
             get {
                 return ResourceManager.GetString("ByNamespace", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Changes only.
-        /// </summary>
-        public static string ChangesOnly {
-            get {
-                return ResourceManager.GetString("ChangesOnly", resourceCulture);
             }
         }
         
@@ -426,6 +444,24 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         public static string Line {
             get {
                 return ResourceManager.GetString("Line", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Line coverage: Decrease only.
+        /// </summary>
+        public static string LineCoverageDecreaseOnly {
+            get {
+                return ResourceManager.GetString("LineCoverageDecreaseOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Line coverage: Increase only.
+        /// </summary>
+        public static string LineCoverageIncreaseOnly {
+            get {
+                return ResourceManager.GetString("LineCoverageIncreaseOnly", resourceCulture);
             }
         }
         

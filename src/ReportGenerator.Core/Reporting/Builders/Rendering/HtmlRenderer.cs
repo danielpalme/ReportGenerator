@@ -1364,7 +1364,15 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             sb.AppendLine(",");
             sb.AppendFormat("'date': '{0}'", WebUtility.HtmlEncode(ReportResources.Date));
             sb.AppendLine(",");
-            sb.AppendFormat("'changesOnly': '{0}'", WebUtility.HtmlEncode(ReportResources.ChangesOnly));
+            sb.AppendFormat("'allChanges': '{0}'", WebUtility.HtmlEncode(ReportResources.AllChanges));
+            sb.AppendLine(",");
+            sb.AppendFormat("'lineCoverageIncreaseOnly': '{0}'", WebUtility.HtmlEncode(ReportResources.LineCoverageIncreaseOnly));
+            sb.AppendLine(",");
+            sb.AppendFormat("'lineCoverageDecreaseOnly': '{0}'", WebUtility.HtmlEncode(ReportResources.LineCoverageDecreaseOnly));
+            sb.AppendLine(",");
+            sb.AppendFormat("'branchCoverageIncreaseOnly': '{0}'", WebUtility.HtmlEncode(ReportResources.BranchCoverageIncreaseOnly));
+            sb.AppendLine(",");
+            sb.AppendFormat("'branchCoverageDecreaseOnly': '{0}'", WebUtility.HtmlEncode(ReportResources.BranchCoverageDecreaseOnly));
             sb.AppendLine();
             sb.AppendLine("};");
 

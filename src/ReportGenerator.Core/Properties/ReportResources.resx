@@ -303,7 +303,19 @@
   <data name="Date" xml:space="preserve">
     <value>Date</value>
   </data>
-  <data name="ChangesOnly" xml:space="preserve">
-    <value>Changes only</value>
+  <data name="AllChanges" xml:space="preserve">
+    <value>All changes</value>
+  </data>
+  <data name="BranchCoverageDecreaseOnly" xml:space="preserve">
+    <value>Branch coverage: Decrease only</value>
+  </data>
+  <data name="BranchCoverageIncreaseOnly" xml:space="preserve">
+    <value>Branch coverage: Increase only</value>
+  </data>
+  <data name="LineCoverageDecreaseOnly" xml:space="preserve">
+    <value>Line coverage: Decrease only</value>
+  </data>
+  <data name="LineCoverageIncreaseOnly" xml:space="preserve">
+    <value>Line coverage: Increase only</value>
   </data>
 </root>
