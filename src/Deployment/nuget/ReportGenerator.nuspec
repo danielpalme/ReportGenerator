@@ -6,7 +6,7 @@
     <title />
     <authors>Daniel Palme</authors>
     <owners />
-    <licenseUrl>https://raw.githubusercontent.com/danielpalme/ReportGenerator/master/LICENSE.txt</licenseUrl>
+    <license type="expression">Apache-2.0</license>
     <projectUrl>https://github.com/danielpalme/ReportGenerator</projectUrl>
     <iconUrl>http://danielpalme.github.io/ReportGenerator/resources/logo_512.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
