@@ -61,6 +61,7 @@ CHANGELOG
     * New: Issue #180: Added support for remote SourceLink source files
     * New: Issue #183: Logging path information of generated files
     * New: Issue #185: Added filtering options for coverage history comparision
+    * New: Optimized JavaScript code (reduced file size of inline reports)
 
 4.0.4.0
 

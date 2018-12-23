@@ -31,7 +31,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 <link href=""data:image/png;base64,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"" rel=""icon"" type=""image/x-icon"" />
 <title>{0} - {1}</title>
 {2}
-</head><body data-ng-controller=""{3}""><div class=""container""><div class=""containerleft"">";
+</head><body{3}><div class=""container""><div class=""containerleft"">";
 
         /// <summary>
         /// The end of each generated HTML file.
@@ -83,17 +83,21 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         private TextWriter reportTextWriter;
 
         /// <summary>
+        /// Indicates that that a class report is created (not the summary page).
+        /// </summary>
+        private bool classReport;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="HtmlRenderer" /> class.
         /// </summary>
         /// <param name="onlySummary">if set to <c>true</c> only a summary report is created (no class reports).</param>
         /// <param name="inlineCssAndJavaScript">if set to <c>true</c> CSS and JavaScript is included into the HTML instead of seperate files.</param>
-        /// <param name="javaScriptContent">StringBuilder used to collect report specific JavaScript.</param>
         /// <param name="cssFileResource">Optional CSS file resource.</param>
-        internal HtmlRenderer(bool onlySummary, bool inlineCssAndJavaScript, StringBuilder javaScriptContent, string cssFileResource = "custom.css")
+        internal HtmlRenderer(bool onlySummary, bool inlineCssAndJavaScript, string cssFileResource = "custom.css")
         {
             this.onlySummary = onlySummary;
             this.inlineCssAndJavaScript = inlineCssAndJavaScript;
-            this.javaScriptContent = javaScriptContent;
+            this.javaScriptContent = new StringBuilder();
             this.cssFileResource = cssFileResource;
         }
 
@@ -131,7 +135,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     "<style TYPE=\"text/css\">" + new StreamReader(cssStream).ReadToEnd() + "</style>"
                     : CssLink;
 
-                this.reportTextWriter.WriteLine(HtmlStart, WebUtility.HtmlEncode(title), WebUtility.HtmlEncode(ReportResources.CoverageReport), style, "SummaryViewCtrl");
+                this.reportTextWriter.WriteLine(HtmlStart, WebUtility.HtmlEncode(title), WebUtility.HtmlEncode(ReportResources.CoverageReport), style, " data-ng-controller=\"SummaryViewCtrl\"");
             }
         }
 
@@ -143,6 +147,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="className">Name of the class.</param>
         public void BeginClassReport(string targetDirectory, string assemblyName, string className)
         {
+            this.classReport = true;
+
             string targetPath = GetClassReportFilename(assemblyName, className);
 
             Logger.DebugFormat("  " + Resources.WritingReportFile, targetPath);
@@ -154,7 +160,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     "<style TYPE=\"text/css\">" + new StreamReader(cssStream).ReadToEnd() + "</style>"
                     : CssLink;
 
-                this.reportTextWriter.WriteLine(HtmlStart, WebUtility.HtmlEncode(className), WebUtility.HtmlEncode(ReportResources.CoverageReport), style, "DetailViewCtrl");
+                this.reportTextWriter.WriteLine(HtmlStart, WebUtility.HtmlEncode(className), WebUtility.HtmlEncode(ReportResources.CoverageReport), style, null);
             }
         }
 
@@ -207,7 +213,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 }
 
                 this.reportTextWriter.WriteLine(
-                    "<label class=\"percentagebar{0}\" title=\"{1}{2}\"><input type=\"radio\" name=\"method\" value=\"AllTestMethods\" data-ng-change=\"switchTestMethod('AllTestMethods')\" data-ng-model=\"selectedTestMethod\" />{2}</label>",
+                    "<label class=\"percentagebar{0}\" title=\"{1}{2}\"><input type=\"radio\" name=\"method\" value=\"AllTestMethods\" class=\"switchtestmethod\" checked=\"checked\" />{2}</label>",
                     coverage.HasValue ? coverageRounded.ToString() : "undefined",
                     coverage.HasValue ? ReportResources.Coverage2 + " " + coverage.Value.ToString(CultureInfo.InvariantCulture) + "% - " : string.Empty,
                     WebUtility.HtmlEncode(ReportResources.All));
@@ -226,7 +232,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     }
 
                     this.reportTextWriter.WriteLine(
-                        "<br /><label class=\"percentagebar{0}\" title=\"{1}{2}\"><input type=\"radio\" name=\"method\" value=\"M{3}\" data-ng-change=\"switchTestMethod('M{3}')\" data-ng-model=\"selectedTestMethod\" />{4}</label>",
+                        "<br /><label class=\"percentagebar{0}\" title=\"{1}{2}\"><input type=\"radio\" name=\"method\" value=\"M{3}\" class=\"switchtestmethod\" />{4}</label>",
                         coverage.HasValue ? coverageRounded.ToString() : "undefined",
                         coverage.HasValue ? ReportResources.Coverage2 + " " + coverage.Value.ToString(CultureInfo.InvariantCulture) + "% - " : string.Empty,
                         WebUtility.HtmlEncode(testMethod.Name),
@@ -244,7 +250,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     foreach (var codeElement in item.Value)
                     {
                         this.reportTextWriter.WriteLine(
-                            "<a href=\"#file{0}_line{1}\" data-ng-click=\"navigateToHash('#file{0}_line{1}')\" title=\"{2}\"><i class=\"icon-{3}\"></i>{2}</a><br />",
+                            "<a href=\"#file{0}_line{1}\" class=\"navigatetohash\" title=\"{2}\"><i class=\"icon-{3}\"></i>{2}</a><br />",
                             item.Key,
                             codeElement.FirstLine,
                             WebUtility.HtmlEncode(codeElement.Name),
@@ -356,6 +362,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             if (riskHotspots == null)
             {
                 throw new ArgumentNullException(nameof(riskHotspots));
+            }
+
+            if (this.classReport)
+            {
+                return;
             }
 
             this.javaScriptContent.AppendLine("var assemblies = [");
@@ -548,7 +559,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="files">The files.</param>
         public void KeyValueRow(string key, IEnumerable<string> files)
         {
-            string value = string.Join("<br />", files.Select(v => string.Format(CultureInfo.InvariantCulture, "<a href=\"#{0}\" data-ng-click=\"navigateToHash('#{0}')\">{1}</a>", WebUtility.HtmlEncode(ReplaceNonLetterChars(v)), WebUtility.HtmlEncode(v))));
+            string value = string.Join("<br />", files.Select(v => string.Format(CultureInfo.InvariantCulture, "<a href=\"#{0}\" class=\"navigatetohash\">{1}</a>", WebUtility.HtmlEncode(ReplaceNonLetterChars(v)), WebUtility.HtmlEncode(v))));
 
             this.reportTextWriter.WriteLine(
                 "<tr><th>{0}</th><td>{1}</td></tr>",
@@ -600,7 +611,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     if (methodMetric.Line.HasValue)
                     {
                         this.reportTextWriter.Write(
-                            "<td title=\"{0}\"><a href=\"#file{1}_line{2}\" data-ng-click=\"navigateToHash('#file{1}_line{2}')\">{3}</a></td>",
+                            "<td title=\"{0}\"><a href=\"#file{1}_line{2}\" class=\"navigatetohash\">{3}</a></td>",
                             WebUtility.HtmlEncode(methodMetric.FullName),
                             fileIndex,
                             methodMetric.Line,
@@ -797,14 +808,14 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 byte[] pngHistory = PngHistoryChartRenderer.RenderHistoryChart(filteredHistoricCoverages);
 
                 this.reportTextWriter.WriteLine(
-                    "<div id=\"mainHistoryChart\" class=\"ct-chart\" data-history-chart data-data=\"historyChartData{0}\"><img src=\"data:image/png;base64,{1}\" /></div>",
+                    "<div class=\"historychart ct-chart\" data-data=\"historyChartData{0}\"><img src=\"data:image/png;base64,{1}\" /></div>",
                     id,
                     Convert.ToBase64String(pngHistory));
             }
             else
             {
                 this.reportTextWriter.WriteLine(
-                    "<div id=\"mainHistoryChart\" class=\"ct-chart\" data-history-chart data-data=\"historyChartData{0}\"></div>",
+                    "<div class=\"historychart ct-chart\" data-data=\"historyChartData{0}\"></div>",
                     id);
             }
 
@@ -826,19 +837,17 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     string.Format(CultureInfo.InvariantCulture, "<br />{0} {1}", WebUtility.HtmlEncode(ReportResources.TotalLines), h.TotalLines),
                     h.Tag != null ? string.Format(CultureInfo.InvariantCulture, "<br />{0} {1}", WebUtility.HtmlEncode(ReportResources.Tag), h.Tag) : string.Empty));
 
-            this.javaScriptContent.AppendFormat("var historyChartData{0} = {{", id);
-            this.javaScriptContent.AppendLine();
-            this.javaScriptContent.AppendFormat(
+            this.reportTextWriter.WriteLine("<script type=\"text/javascript\">/* <![CDATA[ */ ");
+
+            this.reportTextWriter.WriteLine("var historyChartData{0} = {{", id);
+            this.reportTextWriter.WriteLine(
                 "    \"series\" : [{0}],",
                 string.Join(",", series));
-            this.javaScriptContent.AppendLine();
-
-            this.javaScriptContent.AppendFormat(
+            this.reportTextWriter.WriteLine(
                  "    \"tooltips\" : [{0}]",
                  string.Join(",", toolTips));
-            this.javaScriptContent.AppendLine();
-            this.javaScriptContent.AppendLine("};");
-            this.javaScriptContent.AppendLine();
+            this.reportTextWriter.WriteLine("};");
+            this.reportTextWriter.WriteLine(" /* ]]> */ </script>");
         }
 
         /// <summary>
@@ -1054,6 +1063,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         public void SaveClassReport(string targetDirectory, string assemblyName, string className)
         {
             this.SaveReport();
+
+            if (!this.inlineCssAndJavaScript)
+            {
+                this.SaveJavaScript(targetDirectory);
+            }
         }
 
         /// <summary>
@@ -1218,7 +1232,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="targetDirectory">The target directory.</param>
         private void SaveJavaScript(string targetDirectory)
         {
-            string targetPath = Path.Combine(targetDirectory, "combined.js");
+            string targetPath = Path.Combine(targetDirectory, this.classReport ? "class.js" : "main.js");
 
             using (var fs = new FileStream(targetPath, FileMode.Create))
             {
@@ -1264,15 +1278,32 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <returns>The combined javascript.</returns>
         private Stream GetCombinedJavascript()
         {
+            byte[] lineBreak = Encoding.UTF8.GetBytes(Environment.NewLine);
+
             var ms = new MemoryStream();
 
             using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
-                "Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering.resources.jquery-1.11.2.min.js"))
+                "Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering.resources.chartist.min.js"))
             {
                 stream.CopyTo(ms);
             }
 
-            byte[] lineBreak = Encoding.UTF8.GetBytes(Environment.NewLine);
+            ms.Write(lineBreak, 0, lineBreak.Length);
+            ms.Write(lineBreak, 0, lineBreak.Length);
+
+            using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
+                "Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering.resources.custom.js"))
+            {
+                stream.CopyTo(ms);
+            }
+
+            if (this.classReport)
+            {
+                ms.Position = 0;
+                return ms;
+            }
+
+            ms.Write(lineBreak, 0, lineBreak.Length);
             ms.Write(lineBreak, 0, lineBreak.Length);
 
             using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
@@ -1285,23 +1316,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
                 "Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering.resources.react.modified.min.js"))
-            {
-                stream.CopyTo(ms);
-            }
-
-            ms.Write(lineBreak, 0, lineBreak.Length);
-
-            using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
-                "Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering.resources.chartist.min.js"))
-            {
-                stream.CopyTo(ms);
-            }
-
-            ms.Write(lineBreak, 0, lineBreak.Length);
-
-            // Required for rendering charts in IE 9
-            using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
-                "Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering.resources.matchMedia.js"))
             {
                 stream.CopyTo(ms);
             }
@@ -1407,7 +1421,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             }
 
             ms.Position = 0;
-
             return ms;
         }
 
@@ -1438,7 +1451,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// </summary>
         private void FinishReport()
         {
-            string javascript = "<script type=\"text/javascript\" src=\"combined.js\"></script>";
+            string javascript = $"<script type=\"text/javascript\" src=\"{(this.classReport ? "class" : "main")}.js\"></script>";
 
             if (this.inlineCssAndJavaScript)
             {

@@ -30,9 +30,8 @@
     <None Remove="Reporting\Builders\Rendering\resources\coverageTableReactComponents.js" />
     <None Remove="Reporting\Builders\Rendering\resources\custom.css" />
     <None Remove="Reporting\Builders\Rendering\resources\custom-azurepipelines.css" />
+    <None Remove="Reporting\Builders\Rendering\resources\custom.js" />
     <None Remove="Reporting\Builders\Rendering\resources\customAngularApp.js" />
-    <None Remove="Reporting\Builders\Rendering\resources\jquery-1.11.2.min.js" />
-    <None Remove="Reporting\Builders\Rendering\resources\matchMedia.js" />
     <None Remove="Reporting\Builders\Rendering\resources\react.min.js" />
     <None Remove="Reporting\Builders\Rendering\resources\react.modified.min.js" />
     <None Remove="Reporting\Builders\Rendering\resources\riskHotspotTableReactComponents.js" />
@@ -45,9 +44,8 @@
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\coverageTableReactComponents.js" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom.css" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom-azurepipelines.css" />
+    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom.js" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\customAngularApp.js" />
-    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\jquery-1.11.2.min.js" />
-    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\matchMedia.js" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\react.min.js" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\react.modified.min.js" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\riskHotspotTableReactComponents.js" />

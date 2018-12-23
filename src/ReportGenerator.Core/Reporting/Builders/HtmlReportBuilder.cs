@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering;
 
@@ -10,11 +9,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
     /// </summary>
     public class HtmlReportBuilder : ReportBuilderBase
     {
-        /// <summary>
-        /// Contains report specific JavaScript content.
-        /// </summary>
-        private readonly StringBuilder javaScriptContent = new StringBuilder();
-
         /// <summary>
         /// Gets the report type.
         /// </summary>
@@ -30,7 +24,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <param name="fileAnalyses">The file analyses that correspond to the class.</param>
         public override void CreateClassReport(Class @class, IEnumerable<FileAnalysis> fileAnalyses)
         {
-            using (var renderer = new HtmlRenderer(false, false, this.javaScriptContent))
+            using (var renderer = new HtmlRenderer(false, false))
             {
                 this.CreateClassReport(renderer, @class, fileAnalyses);
             }
@@ -42,7 +36,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <param name="summaryResult">The summary result.</param>
         public override void CreateSummaryReport(SummaryResult summaryResult)
         {
-            using (var renderer = new HtmlRenderer(false, false, this.javaScriptContent))
+            using (var renderer = new HtmlRenderer(false, false))
             {
                 this.CreateSummaryReport(renderer, summaryResult);
             }

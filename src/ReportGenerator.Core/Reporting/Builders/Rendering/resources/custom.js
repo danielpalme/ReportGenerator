@@ -1,0 +1,142 @@
+var i, l;
+
+/* Navigate to hash without browser history entry */
+var navigateToHash = function () {
+    if (window.history !== undefined && window.history.replaceState !== undefined) {
+        window.history.replaceState(undefined, undefined, this.getAttribute("href"));
+    }
+};
+
+var hashLinks = document.getElementsByClassName('navigatetohash');
+for (i = 0, l = hashLinks.length; i < l; i++) {
+    hashLinks[i].addEventListener('click', navigateToHash);
+}
+
+/* Switch test method */
+var switchTestMethod = function () {
+    var method = this.getAttribute("value");
+    console.log("Selected test method: " + method);
+
+    var lines, i, l, coverageData, lineAnalysis, cells;
+
+    lines = document.querySelectorAll('.lineAnalysis tr');
+
+    for (i = 1, l = lines.length; i < l; i++) {
+        coverageData = JSON.parse(lines[i].getAttribute('data-coverage').replace(/'/g, '"'));
+        lineAnalysis = coverageData[method];
+        cells = lines[i].querySelectorAll('td');
+        if (lineAnalysis === null) {
+            lineAnalysis = coverageData.AllTestMethods;
+            if (lineAnalysis.LVS !== 'gray') {
+                cells[0].setAttribute('class', 'red');
+                cells[1].innerText = cells[1].textContent = '0';
+                cells[4].setAttribute('class', 'lightred');
+            }
+        } else {
+            cells[0].setAttribute('class', lineAnalysis.LVS);
+            cells[1].innerText = cells[1].textContent = lineAnalysis.VC;
+            cells[4].setAttribute('class', 'light' + lineAnalysis.LVS);
+        }
+    }
+};
+
+var testMethods = document.getElementsByClassName('switchtestmethod');
+for (i = 0, l = testMethods.length; i < l; i++) {
+    testMethods[i].addEventListener('change', switchTestMethod);
+}
+
+
+/* History charts */
+var renderChart = function (chart) {
+    // Remove current children (e.g. PNG placeholder)
+    while (chart.firstChild) {
+        chart.firstChild.remove();
+    }
+
+    var chartData = window[chart.getAttribute('data-data')];
+    var options = {
+        axisY: {
+            type: undefined,
+            onlyInteger: true
+        },
+        lineSmooth: false,
+        low: 0,
+        high: 100,
+        scaleMinSpace: 20,
+        onlyInteger: true,
+        fullWidth: true
+    };
+    var lineChart = new Chartist.Line(chart, {
+        labels: [],
+        series: chartData.series
+    }, options);
+
+    /* Zoom */
+    var zoomButtonDiv = document.createElement("div");
+    zoomButtonDiv.className = "toggleZoom";
+    var zoomButtonLink = document.createElement("a");
+    zoomButtonLink.setAttribute("href", "");
+    var zoomButtonText = document.createElement("i");
+    zoomButtonText.className = "icon-search-plus";
+
+    zoomButtonLink.appendChild(zoomButtonText);
+    zoomButtonDiv.appendChild(zoomButtonLink);
+
+    chart.appendChild(zoomButtonDiv);
+
+    zoomButtonDiv.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        if (options.axisY.type === undefined) {
+            options.axisY.type = Chartist.AutoScaleAxis;
+            zoomButtonText.className = "icon-search-minus";
+        } else {
+            options.axisY.type = undefined;
+            zoomButtonText.className = "icon-search-plus";
+        }
+
+        lineChart.update(null, options);
+    });
+
+    var tooltip = document.createElement("div");
+    tooltip.className = "tooltip";
+
+    chart.appendChild(tooltip);
+
+    /* Tooltips */
+    var showToolTip = function () {
+        var point = this;
+        var index = [].slice.call(chart.getElementsByClassName('ct-point')).indexOf(point);
+
+        tooltip.innerHTML = chartData.tooltips[index % chartData.tooltips.length];
+        tooltip.style.display = 'block';
+    };
+
+    var moveToolTip = function (event) {
+        var box = chart.getBoundingClientRect();
+        var left = event.pageX - box.left - window.pageXOffset;
+        var top = event.pageY - box.top - window.pageYOffset;
+
+        tooltip.style.left = left - tooltip.offsetWidth / 2 - 5 + 'px';
+        tooltip.style.top = top - tooltip.offsetHeight - 40 + 'px';
+    };
+
+    var hideToolTip = function () {
+        tooltip.style.display = 'none';
+    };
+
+    chart.addEventListener('mousemove', moveToolTip);
+
+    lineChart.on('created', function () {
+        var chartPoints = chart.getElementsByClassName('ct-point');
+        for (i = 0, l = chartPoints.length; i < l; i++) {
+            chartPoints[i].addEventListener('mousemove', showToolTip);
+            chartPoints[i].addEventListener('mouseout', hideToolTip);
+        }
+    });
+};
+
+var charts = document.getElementsByClassName('historychart');
+for (i = 0, l = charts.length; i < l; i++) {
+    renderChart(charts[i]);
+}

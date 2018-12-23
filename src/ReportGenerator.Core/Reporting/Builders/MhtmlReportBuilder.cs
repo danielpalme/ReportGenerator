@@ -123,7 +123,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         private static string AddFilePrefixForCssAndJavaScript(string content)
         {
             content = content.Replace("<link rel=\"stylesheet\" type=\"text/css\" href=\"report.css\" />", "<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///report.css\" />");
-            content = content.Replace("<script type=\"text/javascript\" src=\"combined.js\"></script>", "<script type=\"text/javascript\" src=\"file:///combined.js\"></script>");
+            content = content.Replace("<script type=\"text/javascript\" src=\"main.js\"></script>", "<script type=\"text/javascript\" src=\"file:///main.js\"></script>");
+            content = content.Replace("<script type=\"text/javascript\" src=\"class.js\"></script>", "<script type=\"text/javascript\" src=\"file:///class.js\"></script>");
 
             return content;
         }
@@ -164,10 +165,17 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                     WriteFile(writer, file, "text/html", content);
                 }
 
-                file = "combined.js";
+                file = "main.js";
                 content = File.ReadAllText(Path.Combine(this.htmlReportTargetDirectory, file));
                 content = content.Replace(", \"reportPath\": \"", ", \"reportPath\" : \"file:///");
                 WriteFile(writer, file, "application/javascript", content);
+
+                file = "class.js";
+                if (File.Exists(Path.Combine(this.htmlReportTargetDirectory, file)))
+                {
+                    content = File.ReadAllText(Path.Combine(this.htmlReportTargetDirectory, file));
+                    WriteFile(writer, file, "application/javascript", content);
+                }
 
                 file = "report.css";
                 content = File.ReadAllText(Path.Combine(this.htmlReportTargetDirectory, file));

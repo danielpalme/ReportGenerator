@@ -22,8 +22,8 @@
 
   <!-- Version, adjust before build -->
   <PropertyGroup>
-    <Version>4.0.5-rc2</Version>
-    <VersionShort>4.0.5-rc2</VersionShort>
+    <Version>4.0.5-rc3</Version>
+    <VersionShort>4.0.5-rc3</VersionShort>
   </PropertyGroup>
   
   <!-- Tools -->
