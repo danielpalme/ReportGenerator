@@ -8,7 +8,7 @@
       <Version>1.5.0.235</Version>
     </PackageReference>
     <PackageReference Include="NuGet.CommandLine">
-      <Version>4.7.1</Version>
+      <Version>4.9.2</Version>
     </PackageReference>
   </ItemGroup>
   
@@ -28,7 +28,7 @@
   
   <!-- Tools -->
   <PropertyGroup>
-    <NuGetCommandLine>$(UserProfile)\.nuget\packages\nuget.commandline\4.7.1\tools\NuGet.exe</NuGetCommandLine>
+    <NuGetCommandLine>$(UserProfile)\.nuget\packages\nuget.commandline\4.9.2\tools\NuGet.exe</NuGetCommandLine>
     <ChocolateyCommandLine>$(UserProfile)\.nuget\packages\chocolatey\0.10.11\tools\chocolateyInstall\choco.exe</ChocolateyCommandLine>
   </PropertyGroup>
   
