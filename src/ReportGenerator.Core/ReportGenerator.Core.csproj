@@ -24,31 +24,25 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Reporting\Builders\Rendering\resources\angular.min.js" />
     <None Remove="Reporting\Builders\Rendering\resources\chartist.min.css" />
     <None Remove="Reporting\Builders\Rendering\resources\chartist.min.js" />
-    <None Remove="Reporting\Builders\Rendering\resources\coverageTableReactComponents.js" />
     <None Remove="Reporting\Builders\Rendering\resources\custom.css" />
     <None Remove="Reporting\Builders\Rendering\resources\custom-azurepipelines.css" />
     <None Remove="Reporting\Builders\Rendering\resources\custom.js" />
-    <None Remove="Reporting\Builders\Rendering\resources\customAngularApp.js" />
-    <None Remove="Reporting\Builders\Rendering\resources\react.min.js" />
-    <None Remove="Reporting\Builders\Rendering\resources\react.modified.min.js" />
-    <None Remove="Reporting\Builders\Rendering\resources\riskHotspotTableReactComponents.js" />
+    <None Remove="Reporting\Builders\Rendering\resources\main.js" />
+    <None Remove="Reporting\Builders\Rendering\resources\polyfills.js" />
+    <None Remove="Reporting\Builders\Rendering\resources\runtime.js" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\angular.min.js" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\chartist.min.css" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\chartist.min.js" />
-    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\coverageTableReactComponents.js" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom.css" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom-azurepipelines.css" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom.js" />
-    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\customAngularApp.js" />
-    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\react.min.js" />
-    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\react.modified.min.js" />
-    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\riskHotspotTableReactComponents.js" />
+    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\main.js" />
+    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\polyfills.js" />
+    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\runtime.js" />
   </ItemGroup>
 
   <ItemGroup>

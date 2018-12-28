@@ -574,24 +574,6 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable filtering.
-        /// </summary>
-        public static string ShowCustomizeBox {
-            get {
-                return ResourceManager.GetString("ShowCustomizeBox", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This may take some time since the report contains many classes..
-        /// </summary>
-        public static string ShowCustomizeBoxHelp {
-            get {
-                return ResourceManager.GetString("ShowCustomizeBoxHelp", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Summary.
         /// </summary>
         public static string Summary {

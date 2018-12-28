@@ -225,27 +225,38 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 reportRenderer.MetricsTable(new[] { methodMetric });
             }
 
-            if (reportRenderer.SupportsRiskHotsSpots)
+            if (reportRenderer.SupportsRiskHotsSpots
+                && this.ReportContext.RiskHotspotAnalysisResult.CodeCodeQualityMetricsAvailable)
             {
-                if (this.ReportContext.RiskHotspotAnalysisResult.CodeCodeQualityMetricsAvailable)
-                {
-                    reportRenderer.Header(ReportResources.RiskHotspots);
+                reportRenderer.Header(ReportResources.RiskHotspots);
 
-                    if (this.ReportContext.RiskHotspotAnalysisResult.RiskHotspots.Count > 0)
-                    {
-                        reportRenderer.RiskHotspots(this.ReportContext.RiskHotspotAnalysisResult.RiskHotspots);
-                    }
-                    else
-                    {
-                        reportRenderer.Paragraph(ReportResources.NoRiskHotspots);
-                    }
+                if (this.ReportContext.RiskHotspotAnalysisResult.RiskHotspots.Count > 0)
+                {
+                    reportRenderer.BeginRiskHotspots();
+                    reportRenderer.RiskHotspots(this.ReportContext.RiskHotspotAnalysisResult.RiskHotspots);
+                    reportRenderer.FinishRiskHotspots();
                 }
+                else
+                {
+                    // Angular element has to be present
+                    reportRenderer.BeginRiskHotspots();
+                    reportRenderer.FinishRiskHotspots();
+
+                    reportRenderer.Paragraph(ReportResources.NoRiskHotspots);
+                }
+            }
+            else
+            {
+                // Angular element has to be present
+                reportRenderer.BeginRiskHotspots();
+                reportRenderer.FinishRiskHotspots();
             }
 
             reportRenderer.Header(ReportResources.Coverage3);
 
             if (summaryResult.Assemblies.Any())
             {
+                reportRenderer.BeginSummaryTable();
                 reportRenderer.BeginSummaryTable(summaryResult.SupportsBranchCoverage);
 
                 foreach (var assembly in summaryResult.Assemblies)
@@ -259,9 +270,14 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 }
 
                 reportRenderer.FinishTable();
+                reportRenderer.FinishSummaryTable();
             }
             else
             {
+                // Angular element has to be present
+                reportRenderer.BeginSummaryTable();
+                reportRenderer.FinishSummaryTable();
+
                 reportRenderer.Paragraph(ReportResources.NoCoveredAssemblies);
             }
 

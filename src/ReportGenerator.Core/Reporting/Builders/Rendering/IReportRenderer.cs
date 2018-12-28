@@ -81,6 +81,16 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         void BeginKeyValueTable();
 
         /// <summary>
+        /// Start of risk summary table section.
+        /// </summary>
+        void BeginSummaryTable();
+
+        /// <summary>
+        /// End of risk summary table section.
+        /// </summary>
+        void FinishSummaryTable();
+
+        /// <summary>
         /// Adds a summary table to the report.
         /// </summary>
         /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
@@ -160,7 +170,17 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         void Chart(IEnumerable<HistoricCoverage> historicCoverages, bool renderPngFallBackImage);
 
         /// <summary>
-        /// Summary of risk hotspots
+        /// Start of risk hotspots section.
+        /// </summary>
+        void BeginRiskHotspots();
+
+        /// <summary>
+        /// End of risk hotspots section.
+        /// </summary>
+        void FinishRiskHotspots();
+
+        /// <summary>
+        /// Summary of risk hotspots.
         /// </summary>
         /// <param name="riskHotspots">The risk hotspots.</param>
         void RiskHotspots(IEnumerable<RiskHotspot> riskHotspots);

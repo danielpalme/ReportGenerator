@@ -60,8 +60,9 @@ CHANGELOG
 
     * New: Issue #180: Added support for remote SourceLink source files
     * New: Issue #183: Logging path information of generated files
-    * New: Issue #185: Added filtering options for coverage history comparision
+    * New: Issue #188: Added filtering options for coverage history comparision
     * New: Optimized JavaScript code (reduced file size of inline reports)
+    * Fix: Issue #116, #185: Improved performance of summary page
 
 4.0.4.0
 

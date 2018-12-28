@@ -252,12 +252,6 @@
   <data name="SequenceCoverage" xml:space="preserve">
     <value>Sequence coverage</value>
   </data>
-  <data name="ShowCustomizeBox" xml:space="preserve">
-    <value>Enable filtering</value>
-  </data>
-  <data name="ShowCustomizeBoxHelp" xml:space="preserve">
-    <value>This may take some time since the report contains many classes.</value>
-  </data>
   <data name="Summary" xml:space="preserve">
     <value>Summary</value>
   </data>
