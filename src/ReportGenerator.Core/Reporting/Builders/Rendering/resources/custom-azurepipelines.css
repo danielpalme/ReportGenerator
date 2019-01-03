@@ -29,7 +29,7 @@ th { text-align: left; }
 ansi
 .overview thead th { background-color: #fff; }
 .overview th a { color: #000; }
-.overview tr.namespace a { margin-left: 15px; }
+.overview tr.namespace a { margin-left: 15px; display: block; }
 .overview td { border: solid 1px #c1c1c1; border-collapse: collapse; padding: 5px 4px 5px 4px; }
 .overview tr:hover { background: #f4f4f4 }
 div.currenthistory { margin: -2px -5px 0 -5px; padding: 5px 4px 5px 4px; height: 16px; }
@@ -145,6 +145,7 @@ div.currenthistory { margin: -2px -5px 0 -5px; padding: 5px 4px 5px 4px; height:
 .column105 { width: 105px; }
 .column112 { width: 112px; }
 .column135 { width: 135px; }
+.column150 { width: 150px; }
 
 .covered0 { width: 0px; }
 .covered1 { width: 1px; }
