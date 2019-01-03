@@ -304,6 +304,42 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Covered ({0} visits{1}).
+        /// </summary>
+        public static string CoverageTooltip_Covered {
+            get {
+                return ResourceManager.GetString("CoverageTooltip_Covered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not coverable.
+        /// </summary>
+        public static string CoverageTooltip_NotCoverable {
+            get {
+                return ResourceManager.GetString("CoverageTooltip_NotCoverable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not covered ({0} visits{1}).
+        /// </summary>
+        public static string CoverageTooltip_NotCovered {
+            get {
+                return ResourceManager.GetString("CoverageTooltip_NotCovered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Partially covered ({0} visits{1}).
+        /// </summary>
+        public static string CoverageTooltip_PartiallyCovered {
+            get {
+                return ResourceManager.GetString("CoverageTooltip_PartiallyCovered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Covered.
         /// </summary>
         public static string Covered {
@@ -318,6 +354,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         public static string CoveredBranches {
             get {
                 return ResourceManager.GetString("CoveredBranches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Covered branches:.
+        /// </summary>
+        public static string CoveredBranches2 {
+            get {
+                return ResourceManager.GetString("CoveredBranches2", resourceCulture);
             }
         }
         
@@ -547,6 +592,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to of.
+        /// </summary>
+        public static string Of {
+            get {
+                return ResourceManager.GetString("Of", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Parser:.
         /// </summary>
         public static string Parser {
@@ -615,6 +669,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         public static string Total {
             get {
                 return ResourceManager.GetString("Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total branches:.
+        /// </summary>
+        public static string TotalBranches {
+            get {
+                return ResourceManager.GetString("TotalBranches", resourceCulture);
             }
         }
         

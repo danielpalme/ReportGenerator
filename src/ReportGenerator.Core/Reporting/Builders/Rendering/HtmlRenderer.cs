@@ -287,12 +287,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         {
             this.reportTextWriter.WriteLine("<table class=\"overview table-fixed\">");
             this.reportTextWriter.WriteLine("<colgroup>");
-            this.reportTextWriter.WriteLine("<col class=\"column135\" />");
+            this.reportTextWriter.WriteLine("<col class=\"column150\" />");
             this.reportTextWriter.WriteLine("<col />");
             this.reportTextWriter.WriteLine("</colgroup>");
             this.reportTextWriter.WriteLine("<tbody>");
         }
-
 
         /// <summary>
         /// Start of risk summary table section.
@@ -725,20 +724,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             string lineVisitStatus = ConvertToCssClass(analysis.LineVisitStatus, false);
 
-            string title = null;
-            if (analysis.CoveredBranches.HasValue && analysis.TotalBranches.HasValue && analysis.TotalBranches.Value > 0)
-            {
-                title = string.Format(WebUtility.HtmlEncode(ReportResources.CoveredBranches), analysis.CoveredBranches, analysis.TotalBranches);
-            }
-
-            if (title != null)
-            {
-                this.reportTextWriter.Write("<tr title=\"{0}\" data-coverage=\"{{", title);
-            }
-            else
-            {
-                this.reportTextWriter.Write("<tr data-coverage=\"{");
-            }
+            this.reportTextWriter.Write("<tr title=\"{0}\" data-coverage=\"{{", WebUtility.HtmlEncode(GetTooltip(analysis)));
 
             this.reportTextWriter.Write(
                 "'AllTestMethods': {{'VC': '{0}', 'LVS': '{1}'}}",
@@ -767,7 +753,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 fileIndex,
                 analysis.LineNumber);
 
-            if (title != null)
+            if (analysis.CoveredBranches.HasValue && analysis.TotalBranches.HasValue && analysis.TotalBranches.Value > 0)
             {
                 int branchCoverage = (int)(100 * (double)analysis.CoveredBranches.Value / analysis.TotalBranches.Value);
                 branchCoverage -= branchCoverage % 10;
@@ -1169,6 +1155,33 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     return lightcolor ? "lightorange" : "orange";
                 default:
                     return lightcolor ? "lightgray" : "gray";
+            }
+        }
+
+        private static string GetTooltip(LineAnalysis analysis)
+        {
+            string branchRate = string.Empty;
+
+            if (analysis.CoveredBranches.HasValue && analysis.TotalBranches.HasValue && analysis.TotalBranches.Value > 0)
+            {
+                branchRate = ", " + string.Format(ReportResources.CoveredBranches, analysis.CoveredBranches, analysis.TotalBranches);
+            }
+
+            if (analysis.LineVisitStatus == LineVisitStatus.Covered)
+            {
+                return string.Format(ReportResources.CoverageTooltip_Covered, analysis.LineVisits, branchRate);
+            }
+            else if (analysis.LineVisitStatus == LineVisitStatus.PartiallyCovered)
+            {
+                return string.Format(ReportResources.CoverageTooltip_PartiallyCovered, analysis.LineVisits, branchRate);
+            }
+            else if (analysis.LineVisitStatus == LineVisitStatus.NotCovered)
+            {
+                return string.Format(ReportResources.CoverageTooltip_NotCovered, analysis.LineVisits, branchRate);
+            }
+            else
+            {
+                return ReportResources.CoverageTooltip_NotCoverable;
             }
         }
 

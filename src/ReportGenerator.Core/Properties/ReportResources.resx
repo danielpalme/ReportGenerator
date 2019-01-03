@@ -183,9 +183,6 @@
   <data name="Covered" xml:space="preserve">
     <value>Covered</value>
   </data>
-  <data name="CoveredBranches" xml:space="preserve">
-    <value>{0} of {1} branches are covered</value>
-  </data>
   <data name="CoveredLines" xml:space="preserve">
     <value>Covered lines:</value>
   </data>
@@ -311,5 +308,29 @@
   </data>
   <data name="LineCoverageIncreaseOnly" xml:space="preserve">
     <value>Line coverage: Increase only</value>
+  </data>
+  <data name="CoveredBranches2" xml:space="preserve">
+    <value>Covered branches:</value>
+  </data>
+  <data name="TotalBranches" xml:space="preserve">
+    <value>Total branches:</value>
+  </data>
+  <data name="CoverageTooltip_Covered" xml:space="preserve">
+    <value>Covered ({0} visits{1})</value>
+  </data>
+  <data name="CoverageTooltip_NotCoverable" xml:space="preserve">
+    <value>Not coverable</value>
+  </data>
+  <data name="CoverageTooltip_NotCovered" xml:space="preserve">
+    <value>Not covered ({0} visits{1})</value>
+  </data>
+  <data name="CoverageTooltip_PartiallyCovered" xml:space="preserve">
+    <value>Partially covered ({0} visits{1})</value>
+  </data>
+  <data name="CoveredBranches" xml:space="preserve">
+    <value>{0} of {1} branches are covered</value>
+  </data>
+  <data name="Of" xml:space="preserve">
+    <value>of</value>
   </data>
 </root>

@@ -64,13 +64,19 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             reportRenderer.KeyValueRow(ReportResources.UncoveredLines, (@class.CoverableLines - @class.CoveredLines).ToString(CultureInfo.InvariantCulture));
             reportRenderer.KeyValueRow(ReportResources.CoverableLines, @class.CoverableLines.ToString(CultureInfo.InvariantCulture));
             reportRenderer.KeyValueRow(ReportResources.TotalLines, @class.TotalLines.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
-            reportRenderer.KeyValueRow(ReportResources.Coverage2, @class.CoverageQuota.HasValue ? @class.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
+            reportRenderer.KeyValueRow(ReportResources.Coverage2, @class.CoverageQuota.HasValue ? $"{@class.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}% ({@class.CoveredLines.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {@class.TotalLines.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)})" : string.Empty);
 
-            decimal? branchCoverage = @class.BranchCoverageQuota;
-
-            if (branchCoverage.HasValue)
+            if (@class.CoveredBranches.HasValue && @class.TotalBranches.HasValue)
             {
-                reportRenderer.KeyValueRow(ReportResources.BranchCoverage2, branchCoverage.Value.ToString(CultureInfo.InvariantCulture) + "%");
+                reportRenderer.KeyValueRow(ReportResources.CoveredBranches2, @class.CoveredBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
+                reportRenderer.KeyValueRow(ReportResources.TotalBranches, @class.TotalBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
+
+                decimal? branchCoverage = @class.BranchCoverageQuota;
+
+                if (branchCoverage.HasValue)
+                {
+                    reportRenderer.KeyValueRow(ReportResources.BranchCoverage2, $"{branchCoverage.Value.ToString(CultureInfo.InvariantCulture)}% ({@class.CoveredBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {@class.TotalBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)})");
+                }
             }
 
             if (this.ReportContext.ReportConfiguration.Tag != null)
@@ -181,13 +187,19 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             reportRenderer.KeyValueRow(ReportResources.UncoveredLines, (summaryResult.CoverableLines - summaryResult.CoveredLines).ToString(CultureInfo.InvariantCulture));
             reportRenderer.KeyValueRow(ReportResources.CoverableLines, summaryResult.CoverableLines.ToString(CultureInfo.InvariantCulture));
             reportRenderer.KeyValueRow(ReportResources.TotalLines, summaryResult.TotalLines.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
-            reportRenderer.KeyValueRow(ReportResources.Coverage2, summaryResult.CoverageQuota.HasValue ? summaryResult.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
+            reportRenderer.KeyValueRow(ReportResources.Coverage2, summaryResult.CoverageQuota.HasValue ? $"{summaryResult.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}% ({summaryResult.CoveredLines.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {summaryResult.TotalLines.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)})" : string.Empty);
 
-            decimal? branchCoverage = summaryResult.BranchCoverageQuota;
-
-            if (branchCoverage.HasValue)
+            if (summaryResult.CoveredBranches.HasValue && summaryResult.TotalBranches.HasValue)
             {
-                reportRenderer.KeyValueRow(ReportResources.BranchCoverage2, branchCoverage.Value.ToString(CultureInfo.InvariantCulture) + "%");
+                reportRenderer.KeyValueRow(ReportResources.CoveredBranches2, summaryResult.CoveredBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
+                reportRenderer.KeyValueRow(ReportResources.TotalBranches, summaryResult.TotalBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
+
+                decimal? branchCoverage = summaryResult.BranchCoverageQuota;
+
+                if (branchCoverage.HasValue)
+                {
+                    reportRenderer.KeyValueRow(ReportResources.BranchCoverage2, $"{branchCoverage.Value.ToString(CultureInfo.InvariantCulture)}% ({summaryResult.CoveredBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {summaryResult.TotalBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)})");
+                }
             }
 
             if (this.ReportContext.ReportConfiguration.Tag != null)
