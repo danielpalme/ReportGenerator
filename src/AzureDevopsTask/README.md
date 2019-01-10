@@ -6,7 +6,7 @@ Blog: [www.palmmedia.de](http://www.palmmedia.de)
 Twitter: [@danielpalme](https://twitter.com/danielpalme)  
 
 ## Usage
-To learn how to use *ReportGenerator* have a look the:
+To learn how to use *ReportGenerator* have a look at the:
 * [Usage Guide](https://danielpalme.github.io/ReportGenerator/usage.html)
 * [Command line parameters](https://github.com/danielpalme/ReportGenerator/#usage)
 
