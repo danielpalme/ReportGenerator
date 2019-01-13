@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1395740166958" clover="3.2.2">
+   <project timestamp="1395740164188" name="groovy-clover-sample project 1.0-SNAPSHOT">
+      <metrics conditionals="0" methods="1" classes="1" files="1" packages="1" coveredstatements="1" complexity="1" loc="15" ncloc="0" coveredmethods="1" coveredconditionals="0" statements="1" coveredelements="2" elements="2"/>
+      <package name="org.sonar">
+         <metrics classes="1" methods="1" conditionals="0" files="1" ncloc="0" coveredstatements="1" coveredmethods="1" complexity="1" coveredconditionals="0" statements="1" loc="15" coveredelements="2" elements="2"/>
+        <!-- Path is relative for IT : clover generates absolute path -->
+         <file name="Example.groovy" path="src/main/groovy/org/sonar/Example.groovy">
+            <metrics classes="1" methods="1" conditionals="0" ncloc="0" coveredstatements="1" coveredmethods="1" complexity="1" coveredconditionals="0" statements="1" loc="15" coveredelements="2" elements="2"/>
+            <class name="Example">
+               <metrics methods="1" conditionals="0" coveredstatements="1" coveredmethods="1" complexity="1" coveredconditionals="0" statements="1" coveredelements="2" elements="2"/>
+            </class>
+            <line num="8" count="4" visibility="public" complexity="1" type="method" signature="show() : def"/>
+            <line num="9" count="4" type="stmt"/>
+         </file>
+      </package>
+   </project>
+   <testproject timestamp="1395740164188" name="groovy-clover-sample project 1.0-SNAPSHOT">
+      <metrics conditionals="0" methods="2" classes="2" files="2" packages="1" coveredstatements="2" complexity="2" loc="37" ncloc="0" coveredmethods="2" coveredconditionals="0" statements="2" coveredelements="4" elements="4"/>
+      <package name="org.sonar">
+         <metrics classes="2" methods="2" conditionals="0" files="2" ncloc="0" coveredstatements="2" coveredmethods="2" complexity="2" coveredconditionals="0" statements="2" loc="37" coveredelements="4" elements="4"/>
+        <!-- Path is relative for IT : clover generates absolute path -->
+         <file name="HelperTest.groovy" path="src/test/groovy/org/sonar/HelperTest.groovy">
+            <metrics classes="1" methods="1" conditionals="0" ncloc="0" coveredstatements="1" coveredmethods="1" complexity="1" coveredconditionals="0" statements="1" loc="19" coveredelements="2" elements="2"/>
+            <class name="HelperTest">
+               <metrics conditionals="0" methods="1" coveredstatements="1" complexity="1" testpasses="2" testruns="2" coveredmethods="1" coveredconditionals="0" statements="1" testfailures="0" coveredelements="2" testduration="0.04" elements="2"/>
+            </class>
+            <line num="16" testsuccess="true" count="2" visibility="public" complexity="1" type="method" testduration="0.02" signature="testHelp() : void"/>
+            <line num="17" count="2" type="stmt"/>
+         </file>
+        <!-- Path is relative for IT : clover generates absolute path -->
+        <file name="ExampleTest.groovy" path="src/test/groovy/org/sonar/ExampleTest.groovy">
+            <metrics classes="1" methods="1" conditionals="0" ncloc="0" coveredstatements="1" coveredmethods="1" complexity="1" coveredconditionals="0" statements="1" loc="18" coveredelements="2" elements="2"/>
+            <class name="ExampleTest">
+               <metrics conditionals="0" methods="1" coveredstatements="1" complexity="1" testpasses="2" testruns="2" coveredmethods="1" coveredconditionals="0" statements="1" testfailures="0" coveredelements="2" testduration="0.003" elements="2"/>
+            </class>
+            <line num="15" testsuccess="true" count="2" visibility="public" complexity="1" type="method" testduration="0.001" signature="testShow() : void"/>
+            <line num="16" count="2" type="stmt"/>
+         </file>
+      </package>
+   </testproject>
+</coverage>

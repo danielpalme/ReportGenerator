@@ -359,7 +359,7 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No source directories supplied for JaCoCo report.
+        ///   Looks up a localized string similar to No source directories supplied for &apos;{0}&apos; coverage file.
         /// </summary>
         internal static string NoSouceDirectories {
             get {

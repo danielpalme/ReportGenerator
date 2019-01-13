@@ -54,6 +54,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project", "Project", "{F02B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{654FDEDF-31DE-47E4-A02E-F42DB1ACC722}"
 	ProjectSection(SolutionItems) = preProject
+		Testprojects\Java\Reports\Clover_OpenClover4.3.1.xml = Testprojects\Java\Reports\Clover_OpenClover4.3.1.xml
 		Testprojects\Java\Reports\Cobertura2.1.1.xml = Testprojects\Java\Reports\Cobertura2.1.1.xml
 		Testprojects\Java\Reports\JaCoCo0.7.7.xml = Testprojects\Java\Reports\JaCoCo0.7.7.xml
 		Testprojects\Java\Reports\JaCoCo0.8.3.xml = Testprojects\Java\Reports\JaCoCo0.8.3.xml
@@ -87,6 +88,13 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportGenerator.DotnetGlobalTool", "ReportGenerator.DotnetGlobalTool\ReportGenerator.DotnetGlobalTool.csproj", "{B697EF09-935C-482A-89BB-78D9E8BBB387}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportGenerator.DotnetCorePluginLoader", "ReportGenerator.DotnetCorePluginLoader\ReportGenerator.DotnetCorePluginLoader.csproj", "{E3CA3149-7810-4E0C-9CF8-97E39DFDD5AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other", "Other", "{0974779A-F37F-41B1-895B-DF1C98781D52}"
+	ProjectSection(SolutionItems) = preProject
+		Testprojects\Other\Clover_Groovy.xml = Testprojects\Other\Clover_Groovy.xml
+		Testprojects\Other\Clover_Istanbul.xml = Testprojects\Other\Clover_Istanbul.xml
+		Testprojects\Other\Cobertura_Istanbul.xml = Testprojects\Other\Cobertura_Istanbul.xml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -212,6 +212,21 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                         yield return new NCoverParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
                     }
+                    else if (item.Attribute("clover") != null)
+                    {
+                        Logger.Debug(" " + Resources.PreprocessingReport);
+                        new CloverReportPreprocessor(this.sourceDirectories).Execute(item);
+                        Logger.DebugFormat(" " + Resources.InitiatingParser, "Clover");
+
+                        var result = new CloverParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
+
+                        foreach (var sourceDirectory in this.sourceDirectories)
+                        {
+                            result.AddSourceDirectory(sourceDirectory);
+                        }
+
+                        yield return result;
+                    }
                     else if (item.Attributes().Count() > 1)
                     {
                         Logger.Debug(" " + Resources.PreprocessingReport);

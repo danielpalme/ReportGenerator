@@ -81,6 +81,12 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
             Assert.Equal("JaCoCoParser", parserResult.ParserName);
             Assert.Equal(1, parserResult.SourceDirectories.Count);
             Assert.Equal("C:\\somedirectory", parserResult.SourceDirectories.First());
+
+            filePath = Path.Combine(FileManager.GetJavaReportDirectory(), "Clover_OpenClover4.3.1.xml");
+            parserResult = new CoverageReportParser(1, new string[] { "C:\\somedirectory" }, this.filterMock.Object, this.filterMock.Object, this.filterMock.Object).ParseFiles(new string[] { filePath });
+            Assert.Equal("CloverParser", parserResult.ParserName);
+            Assert.Equal(1, parserResult.SourceDirectories.Count);
+            Assert.Equal("C:\\somedirectory", parserResult.SourceDirectories.First());
         }
 
         /// <summary>

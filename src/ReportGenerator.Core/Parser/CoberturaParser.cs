@@ -56,7 +56,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <summary>
         /// Parses the given XML report.
         /// </summary>
-        /// <param name="report">The XML report</param>
+        /// <param name="report">The XML report.</param>
         /// <returns>The parser result.</returns>
         public override ParserResult Parse(XContainer report)
         {

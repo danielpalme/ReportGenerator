@@ -218,7 +218,7 @@
     <value>No report files specified.</value>
   </data>
   <data name="NoSouceDirectories" xml:space="preserve">
-    <value>No source directories supplied for JaCoCo report</value>
+    <value>No source directories supplied for '{0}' coverage file</value>
   </data>
   <data name="NoTargetDirectory" xml:space="preserve">
     <value>No target directory specified.</value>
