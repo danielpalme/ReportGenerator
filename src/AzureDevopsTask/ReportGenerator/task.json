@@ -41,7 +41,7 @@
             "label": "Report types",
             "defaultValue": "HtmlInline_AzurePipelines;Cobertura",
             "required": false,
-            "helpMarkDown": "The output formats and scope (separated by semicolon) Values: Badges, Cobertura, CsvSummary, Html, HtmlChart, HtmlInline, HtmlInline_AzurePipelines, HtmlSummary, Latex, LatexSummary, MHtml, PngChart, TextSummary, Xml, XmlSummary"
+            "helpMarkDown": "The output formats and scope (separated by semicolon) Values: Badges, Cobertura, CsvSummary, Html, HtmlChart, HtmlInline, HtmlInline_AzurePipelines, HtmlSummary, Latex, LatexSummary, MHtml, PngChart, SonarQube, TextSummary, Xml, XmlSummary"
         },
         {
             "name": "sourcedirs",

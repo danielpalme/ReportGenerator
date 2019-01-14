@@ -59,7 +59,8 @@ CHANGELOG
 
 4.0.6.0
 
-    * New: Issue #193: Added support for Clover
+    * New: Issue #193: Added support for Clover input format
+    * New: Issue #194: Added support for SonarQube output format
 
 4.0.5.0
 
