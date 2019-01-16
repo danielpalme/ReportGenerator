@@ -43,13 +43,21 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
         /// <param name="report">The report.</param>
         internal void Execute(XContainer report)
         {
+            var files = report.Descendants("package").Elements("file").ToArray();
+
             if (this.sourceDirectories.Count == 0)
             {
-                Logger.Warn("  " + string.Format(Resources.NoSouceDirectories, "Clover"));
+                foreach (var file in files)
+                {
+                    if (!Path.IsPathRooted(file.Attribute("path").Value))
+                    {
+                        Logger.Warn("  " + string.Format(Resources.NoSouceDirectories, "Clover"));
+                        return;
+                    }
+                }
+
                 return;
             }
-
-            var files = report.Descendants("package").Elements("file").ToArray();
 
             foreach (var file in files)
             {
