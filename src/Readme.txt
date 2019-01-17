@@ -24,6 +24,7 @@ The following output formats are supported by ReportGenerator:
 
 -HTML, HTMLSummary, HTMLInline, HtmlInline_AzurePipelines, HTMLChart, MHTML
 -Cobertura
+-SonarQube
 -XML, XMLSummary
 -Latex, LatexSummary
 -TextSummary
@@ -56,6 +57,10 @@ For further details take a look at LICENSE.txt.
 =======================================================================
 
 CHANGELOG
+
+4.0.6.0
+
+    * New: Issue #196: Local caching of remote files
 
 4.0.6.0
 

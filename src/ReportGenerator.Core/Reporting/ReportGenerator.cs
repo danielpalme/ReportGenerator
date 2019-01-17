@@ -6,6 +6,7 @@ using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
+using Palmmedia.ReportGenerator.Core.Parser.FileReading;
 using Palmmedia.ReportGenerator.Core.Properties;
 
 namespace Palmmedia.ReportGenerator.Core.Reporting
@@ -21,6 +22,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
         private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(ReportGenerator));
 
         /// <summary>
+        /// The file reader to use.
+        /// </summary>
+        private readonly IFileReader fileReader;
+
+        /// <summary>
         /// The parser to use.
         /// </summary>
         private readonly ParserResult parserResult;
@@ -33,10 +39,12 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
         /// <summary>
         /// Initializes a new instance of the <see cref="ReportGenerator" /> class.
         /// </summary>
+        /// <param name="fileReader">The file reader.</param>
         /// <param name="parserResult">The parser result to use.</param>
         /// <param name="renderers">The renderers.</param>
-        internal ReportGenerator(ParserResult parserResult, IEnumerable<IReportBuilder> renderers)
+        internal ReportGenerator(IFileReader fileReader, ParserResult parserResult, IEnumerable<IReportBuilder> renderers)
         {
+            this.fileReader = fileReader ?? throw new ArgumentNullException(nameof(fileReader));
             this.parserResult = parserResult ?? throw new ArgumentNullException(nameof(parserResult));
             this.renderers = renderers ?? throw new ArgumentNullException(nameof(renderers));
         }
@@ -69,7 +77,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
                         @class.Assembly.ShortName,
                         @class.Name);
 
-                    var fileAnalyses = @class.Files.Select(f => f.AnalyzeFile()).ToArray();
+                    var fileAnalyses = @class.Files.Select(f => f.AnalyzeFile(this.fileReader)).ToArray();
 
                     if (addHistoricCoverage)
                     {

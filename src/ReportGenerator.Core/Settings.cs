@@ -21,5 +21,10 @@
         /// Rendering of the images takes quite a lot of time.
         /// </summary>
         public bool RenderPngFallBackImagesForHistoryCharts { get; set; } = false;
+
+        /// <summary>
+        /// Gets or sets the caching duration of code files that are downloaded from remote servers in minutes.
+        /// </summary>
+        public int CachingDuringOfRemoteFilesInMinutes { get; set; } = 7 * 24 * 60;
     }
 }

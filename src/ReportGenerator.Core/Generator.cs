@@ -5,6 +5,7 @@ using Palmmedia.ReportGenerator.Core.CodeAnalysis;
 using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser;
+using Palmmedia.ReportGenerator.Core.Parser.FileReading;
 using Palmmedia.ReportGenerator.Core.Parser.Filtering;
 using Palmmedia.ReportGenerator.Core.Plugin;
 using Palmmedia.ReportGenerator.Core.Properties;
@@ -92,6 +93,7 @@ namespace Palmmedia.ReportGenerator.Core
                 }
 
                 new Reporting.ReportGenerator(
+                    new CachingFileReader(reportContext.Settings.CachingDuringOfRemoteFilesInMinutes),
                     parserResult,
                     reportBuilderFactory.GetReportBuilders(reportContext))
                         .CreateReport(reportContext.ReportConfiguration.HistoryDirectory != null, overallHistoricCoverages, executionTime, reportContext.ReportConfiguration.Tag);

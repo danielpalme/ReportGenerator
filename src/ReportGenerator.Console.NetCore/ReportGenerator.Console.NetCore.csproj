@@ -7,8 +7,8 @@
     <AssemblyName>ReportGenerator</AssemblyName>
     <RootNamespace>Palmmedia.ReportGenerator</RootNamespace>
     <StartupObject>Palmmedia.ReportGenerator.Console.NetCore.Program</StartupObject>
-    <AssemblyVersion>4.0.6.0</AssemblyVersion>
-    <FileVersion>4.0.6.0</FileVersion>
+    <AssemblyVersion>4.0.7.0</AssemblyVersion>
+    <FileVersion>4.0.7.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

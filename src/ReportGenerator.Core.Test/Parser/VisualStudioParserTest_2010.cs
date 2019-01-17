@@ -5,6 +5,7 @@ using System.Xml.Linq;
 using Moq;
 using Palmmedia.ReportGenerator.Core.Parser;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
+using Palmmedia.ReportGenerator.Core.Parser.FileReading;
 using Palmmedia.ReportGenerator.Core.Parser.Filtering;
 using Xunit;
 
@@ -162,6 +163,6 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
                 .Single(a => a.Name == "Test.exe").Classes
                 .Single(c => c.Name == className).Files
                 .Single(f => f.Path == fileName)
-                .AnalyzeFile();
+                .AnalyzeFile(new CachingFileReader(0));
     }
 }

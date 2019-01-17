@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Net.Http;
-using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
-using Palmmedia.ReportGenerator.Core.Properties;
+using Palmmedia.ReportGenerator.Core.Parser.FileReading;
 
 namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
 {
@@ -19,11 +15,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// The Logger.
         /// </summary>
         private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(CodeFile));
-
-        /// <summary>
-        /// The HttpClient to retrieve remote files.
-        /// </summary>
-        private static readonly HttpClient HttpClient = new HttpClient();
 
         /// <summary>
         /// The line coverage by test method.
@@ -263,11 +254,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <summary>
         /// Performs the analysis of the source file.
         /// </summary>
+        /// <param name="fileReader">The file reader.</param>
         /// <returns>The analysis result.</returns>
-        internal FileAnalysis AnalyzeFile()
+        internal FileAnalysis AnalyzeFile(IFileReader fileReader)
         {
             string error = null;
-            string[] lines = this.LoadFile(out error);
+            string[] lines = fileReader.LoadFile(this.Path, out error);
 
             if (error != null)
             {
@@ -510,44 +502,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
             }
 
             return existingTrackedMethodCoverage;
-        }
-
-        /// <summary>
-        /// Loads the file from disk or via HTTP and returns the content.
-        /// </summary>
-        /// <param name="error">Error message if file reading failed, otherwise <code>null</code>.</param>
-        /// <returns><code>null</code> if an error occurs, otherwise the lines of the file.</returns>
-        private string[] LoadFile(out string error)
-        {
-            try
-            {
-                if (this.Path.StartsWith("http://") || this.Path.StartsWith("https://"))
-                {
-                    string content = HttpClient.GetStringAsync(this.Path).Result;
-                    string[] lines = content.Split('\n').Select(l => l.TrimEnd('\r')).ToArray();
-
-                    error = null;
-                    return lines;
-                }
-                else
-                {
-                    if (!File.Exists(this.Path))
-                    {
-                        error = string.Format(CultureInfo.InvariantCulture, " " + Resources.FileDoesNotExist, this.Path);
-                        return null;
-                    }
-
-                    string[] lines = File.ReadAllLines(this.Path);
-
-                    error = null;
-                    return lines;
-                }
-            }
-            catch (Exception ex)
-            {
-                error = string.Format(CultureInfo.InvariantCulture, " " + Resources.ErrorDuringReadingFile, this.Path, ex.GetExceptionMessageForDisplay());
-                return null;
-            }
         }
     }
 }
