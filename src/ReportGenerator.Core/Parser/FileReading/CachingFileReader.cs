@@ -11,7 +11,8 @@ using Palmmedia.ReportGenerator.Core.Properties;
 namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
 {
     /// <summary>
-    /// Interface for file access.
+    /// File reader with caching.
+    /// Local files are read from disk. Remote files get downloaded and cached for a given period of time.
     /// </summary>
     internal class CachingFileReader : IFileReader
     {
