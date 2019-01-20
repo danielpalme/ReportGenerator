@@ -52,7 +52,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <summary>
         /// Parses the given XML report.
         /// </summary>
-        /// <param name="report">The XML report</param>
+        /// <param name="report">The XML report.</param>
         /// <returns>The parser result.</returns>
         public override ParserResult Parse(XContainer report)
         {
@@ -379,7 +379,9 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         ReportResources.NPathComplexity,
                         ParserBase.NPathComplexityUri,
                         MetricType.CodeQuality,
-                        npathComplexityAttributes.Max(a => int.Parse(a.Value, CultureInfo.InvariantCulture))));
+                        npathComplexityAttributes
+                            .Select(a => int.Parse(a.Value, CultureInfo.InvariantCulture))
+                            .Max(a => a < 0 ? int.MaxValue : a)));
                 }
 
                 var crapScoreAttributes = methodGroup.Select(m => m.Attribute("crapScore")).Where(a => a != null).ToArray();
