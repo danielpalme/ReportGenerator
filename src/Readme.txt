@@ -58,7 +58,12 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
-4.0.6.0
+4.0.8.0
+
+    * Fix: Issue #199: Handling of negative NPath complexity values (integer overflow)
+    * Fix: Issue #201: Set architecture to AnyCPU (64-bit preferred)
+
+4.0.7.0
 
     * New: Issue #196: Local caching of remote files
 
