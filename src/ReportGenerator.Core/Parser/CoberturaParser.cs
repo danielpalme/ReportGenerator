@@ -375,7 +375,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             foreach (var line in lines)
             {
-                if (!line.Attribute("branch").Value.Equals("true", StringComparison.OrdinalIgnoreCase))
+                if (line.Attribute("branch") == null || !line.Attribute("branch").Value.Equals("true", StringComparison.OrdinalIgnoreCase))
                 {
                     continue;
                 }

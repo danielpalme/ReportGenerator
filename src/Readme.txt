@@ -58,6 +58,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.0.9.0
+
+    * Fix: Issue #202: Attribute 'branch' is no longer required in Cobertura files
+
 4.0.8.0
 
     * Fix: Issue #199: Handling of negative NPath complexity values (integer overflow)
