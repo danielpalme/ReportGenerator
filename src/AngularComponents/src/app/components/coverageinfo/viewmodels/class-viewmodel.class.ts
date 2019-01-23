@@ -78,19 +78,23 @@ export class ClassViewModel extends ElementBase {
                 return false;
             }
         } else if (historicCoverageFilter === "lineCoverageIncreaseOnly") {
-            if (this.coveredLines <= this.currentHistoricCoverage.cl) {
+            let coverage: number = this.coverage;
+            if (isNaN(coverage) || coverage <= this.currentHistoricCoverage.lcq) {
                 return false;
             }
         } else if (historicCoverageFilter === "lineCoverageDecreaseOnly") {
-            if (this.coveredLines >= this.currentHistoricCoverage.cl) {
+            let coverage: number = this.coverage;
+            if (isNaN(coverage) || coverage >= this.currentHistoricCoverage.lcq) {
                 return false;
             }
         } else if (historicCoverageFilter === "branchCoverageIncreaseOnly") {
-            if (this.coveredBranches <= this.currentHistoricCoverage.cb) {
+            let branchCoverage: number = this.branchCoverage;
+            if (isNaN(branchCoverage) || branchCoverage <= this.currentHistoricCoverage.bcq) {
                 return false;
             }
         } else if (historicCoverageFilter === "branchCoverageDecreaseOnly") {
-            if (this.coveredBranches >= this.currentHistoricCoverage.cb) {
+            let branchCoverage: number = this.branchCoverage;
+            if (isNaN(branchCoverage) || branchCoverage >= this.currentHistoricCoverage.bcq) {
                 return false;
             }
         }
