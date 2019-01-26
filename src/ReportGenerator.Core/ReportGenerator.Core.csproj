@@ -7,8 +7,8 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <AssemblyName>ReportGenerator.Core</AssemblyName>
-    <AssemblyVersion>4.0.9.0</AssemblyVersion>
-    <FileVersion>4.0.9.0</FileVersion>
+    <AssemblyVersion>4.0.10.0</AssemblyVersion>
+    <FileVersion>4.0.10.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -26,6 +26,7 @@
   <ItemGroup>
     <None Remove="Reporting\Builders\Rendering\resources\chartist.min.css" />
     <None Remove="Reporting\Builders\Rendering\resources\chartist.min.js" />
+    <None Remove="Reporting\Builders\Rendering\resources\custom-azurepipelines_dark.css" />
     <None Remove="Reporting\Builders\Rendering\resources\custom.css" />
     <None Remove="Reporting\Builders\Rendering\resources\custom-azurepipelines.css" />
     <None Remove="Reporting\Builders\Rendering\resources\custom.js" />
@@ -37,6 +38,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\chartist.min.css" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\chartist.min.js" />
+    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom-azurepipelines_dark.css" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom.css" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom-azurepipelines.css" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom.js" />

@@ -78,6 +78,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         private readonly string cssFileResource;
 
         /// <summary>
+        /// Optional additional CSS file resource.
+        /// </summary>
+        private readonly string additionalCssFileResource;
+
+        /// <summary>
         /// The report builder.
         /// </summary>
         private TextWriter reportTextWriter;
@@ -93,12 +98,14 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="onlySummary">if set to <c>true</c> only a summary report is created (no class reports).</param>
         /// <param name="inlineCssAndJavaScript">if set to <c>true</c> CSS and JavaScript is included into the HTML instead of seperate files.</param>
         /// <param name="cssFileResource">Optional CSS file resource.</param>
-        internal HtmlRenderer(bool onlySummary, bool inlineCssAndJavaScript, string cssFileResource = "custom.css")
+        /// <param name="additionalCssFileResource">Optional additional CSS file resource.</param>
+        internal HtmlRenderer(bool onlySummary, bool inlineCssAndJavaScript, string cssFileResource = "custom.css", string additionalCssFileResource = null)
         {
             this.onlySummary = onlySummary;
             this.inlineCssAndJavaScript = inlineCssAndJavaScript;
             this.javaScriptContent = new StringBuilder();
             this.cssFileResource = cssFileResource;
+            this.additionalCssFileResource = additionalCssFileResource;
         }
 
         /// <summary>
@@ -1295,6 +1302,21 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             byte[] lineBreak = Encoding.UTF8.GetBytes(Environment.NewLine);
             ms.Write(lineBreak, 0, lineBreak.Length);
             ms.Write(lineBreak, 0, lineBreak.Length);
+
+            if (this.additionalCssFileResource != null)
+            {
+                ms.Write(lineBreak, 0, lineBreak.Length);
+                ms.Write(lineBreak, 0, lineBreak.Length);
+
+                using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
+                    $"Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering.resources.{this.additionalCssFileResource}"))
+                {
+                    stream.CopyTo(ms);
+                }
+
+                ms.Write(lineBreak, 0, lineBreak.Length);
+                ms.Write(lineBreak, 0, lineBreak.Length);
+            }
 
             using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
                 "Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering.resources.chartist.min.css"))

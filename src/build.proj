@@ -22,8 +22,8 @@
 
   <!-- Version, adjust before build -->
   <PropertyGroup>
-    <Version>4.0.9.0</Version>
-    <VersionShort>4.0.9</VersionShort>
+    <Version>4.0.10.0</Version>
+    <VersionShort>4.0.10</VersionShort>
   </PropertyGroup>
   
   <!-- Tools -->
@@ -64,6 +64,7 @@
       <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HTMLSummary -targetdir:target\samplereports\HTMLSummary_NetFull -historydir:target\samplereports\HTMLSummary_NetFull\history -verbosity:Warning" />
       <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HTMLInline -targetdir:target\samplereports\HTMLInline_NetFull -historydir:target\samplereports\HTMLInline_NetFull\history -verbosity:Warning" />
       <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HTMLInline_AzurePipelines -targetdir:target\samplereports\HTMLInline_AzurePipelines_NetFull -historydir:target\samplereports\HTMLInline_AzurePipelines_NetFull\history -verbosity:Warning" />
+      <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HtmlInline_AzurePipelines_Dark -targetdir:target\samplereports\HtmlInline_AzurePipelines_Dark_NetFull -historydir:target\samplereports\HtmlInline_AzurePipelines_Dark_NetFull\history -verbosity:Warning" />
       <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HTMLChart -targetdir:target\samplereports\HTMLChart_NetFull -historydir:target\samplereports\HTMLChart_NetFull\history -verbosity:Warning" />
       <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:MHTML -targetdir:target\samplereports\MHTML_NetFull -historydir:target\samplereports\MHTML_NetFull\history -verbosity:Warning" />
       <Exec Command="target\bin\Release\ReportGenerator.exe -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:Cobertura -targetdir:target\samplereports\Cobertura_NetFull -historydir:target\samplereports\Cobertura_NetFull\history -verbosity:Warning" />
@@ -81,6 +82,7 @@
       <Exec Command="dotnet target\bin\Release\netcoreapp2.0\publish\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HTMLSummary -targetdir:target\samplereports\HTMLSummary_NetCore -historydir:target\samplereports\HTMLSummary_NetCore\history -verbosity:Warning" />
       <Exec Command="dotnet target\bin\Release\netcoreapp2.0\publish\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HTMLInline -targetdir:target\samplereports\HTMLInline_NetCore -historydir:target\samplereports\HTMLInline_NetCore\history -verbosity:Warning" />
       <Exec Command="dotnet target\bin\Release\netcoreapp2.0\publish\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HTMLInline_AzurePipelines -targetdir:target\samplereports\HTMLInline_AzurePipelines_NetCore -historydir:target\samplereports\HTMLInline_AzurePipelines_NetCore\history -verbosity:Warning" />
+      <Exec Command="dotnet target\bin\Release\netcoreapp2.0\publish\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HtmlInline_AzurePipelines_Dark -targetdir:target\samplereports\HtmlInline_AzurePipelines_Dark_NetCore -historydir:target\samplereports\HtmlInline_AzurePipelines_Dark_NetCore\history -verbosity:Warning" />
       <Exec Command="dotnet target\bin\Release\netcoreapp2.0\publish\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:HTMLChart -targetdir:target\samplereports\HTMLChart_NetCore -historydir:target\samplereports\HTMLChart_NetCore\history -verbosity:Warning" />
       <Exec Command="dotnet target\bin\Release\netcoreapp2.0\publish\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:MHTML -targetdir:target\samplereports\MHTML_NetCore -historydir:target\samplereports\MHTML_NetCore\history -verbosity:Warning" />
       <Exec Command="dotnet target\bin\Release\netcoreapp2.0\publish\ReportGenerator.dll -reports:Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml -reporttypes:Cobertura -targetdir:target\samplereports\Cobertura_NetCore -historydir:target\samplereports\Cobertura_NetCore\history -verbosity:Warning" />

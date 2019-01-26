@@ -22,7 +22,7 @@ It is also possible to pass one XML file containing several reports to ReportGen
 
 The following output formats are supported by ReportGenerator:
 
--HTML, HTMLSummary, HTMLInline, HtmlInline_AzurePipelines, HTMLChart, MHTML
+-HTML, HTMLSummary, HTMLInline, HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Dark, HTMLChart, MHTML
 -Cobertura
 -SonarQube
 -XML, XMLSummary
@@ -57,6 +57,10 @@ For further details take a look at LICENSE.txt.
 =======================================================================
 
 CHANGELOG
+
+4.0.10.0
+
+    * New: Issue #203: Dark theme for Azure DevOps
 
 4.0.9.0
 

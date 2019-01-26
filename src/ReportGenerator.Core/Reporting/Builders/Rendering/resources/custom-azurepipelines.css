@@ -5,7 +5,7 @@ h1:first-of-type { margin-top: 0; }
 h2 { font-size: 1.0em; font-weight: bold; margin: 10px 0 15px 0; padding: 0; }
 h3 { font-size: 1.0em; font-weight: bold; margin: 0 0 10px 0; padding: 0; display: inline-block; }
 a { color: #0078D4; text-decoration: none; }
-a:hover { color: #000; text-decoration: none; }
+a:hover { color: #000; text-decoration: underline; }
 
 .container { margin: auto; background-color: #fff; display: table;  height: 100%; }
 .containerleft { display: table-cell; padding: 0 20px 20px 20px; }
@@ -32,8 +32,13 @@ ansi
 .overview tr.namespace a { margin-left: 15px; display: block; }
 .overview td { border: solid 1px #c1c1c1; border-collapse: collapse; padding: 5px 4px 5px 4px; }
 .overview tr:hover { background: #f4f4f4 }
-div.currenthistory { margin: -2px -5px 0 -5px; padding: 5px 4px 5px 4px; height: 16px; }
-.coverage { border: solid 1px #c1c1c1; border-collapse: collapse; font-size: 5px; height: 10px; }
+div.currenthistory { margin: -6px -5px 0 -5px; padding: 2px 4px 6px 4px; height: 16px; }
+.coverage {
+    border: solid 1px #c1c1c1;
+    border-collapse: collapse;
+    font-size: 5px;
+    height: 10px;
+}
 .coverage td { padding: 0; border: none; }
 
 .customizebox { font-size: 0.75em; margin-bottom: 7px; }

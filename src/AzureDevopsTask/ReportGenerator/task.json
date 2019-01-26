@@ -13,7 +13,7 @@
     "version": {
         "Major": 1,
         "Minor": 0,
-        "Patch": 18
+        "Patch": 19
     },
     "instanceNameFormat": "ReportGenerator",
     "groups": [
@@ -41,7 +41,7 @@
             "label": "Report types",
             "defaultValue": "HtmlInline_AzurePipelines;Cobertura",
             "required": false,
-            "helpMarkDown": "The output formats and scope (separated by semicolon) Values: Badges, Cobertura, CsvSummary, Html, HtmlChart, HtmlInline, HtmlInline_AzurePipelines, HtmlSummary, Latex, LatexSummary, MHtml, PngChart, SonarQube, TextSummary, Xml, XmlSummary"
+            "helpMarkDown": "The output formats and scope (separated by semicolon) Values: Badges, Cobertura, CsvSummary, Html, HtmlChart, HtmlInline, HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Dark, HtmlSummary, Latex, LatexSummary, MHtml, PngChart, SonarQube, TextSummary, Xml, XmlSummary"
         },
         {
             "name": "sourcedirs",
