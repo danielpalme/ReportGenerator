@@ -40,6 +40,16 @@ dotnet reportgenerator [options]</description>
         <dependency id="SixLabors.ImageSharp.Drawing" version="1.0.0-beta0004" />
         <dependency id="Microsoft.NETCore.App" version="2.0.0" exclude="Build,Analyzers" />
       </group>
+      <group targetFramework=".NETCoreApp3.0">
+        <dependency id="McMaster.NETCore.Plugins" version="0.1.1" />
+        <dependency id="Microsoft.Build.Utilities.Core" version="15.8.166" />
+        <dependency id="Microsoft.Extensions.Configuration" version="2.1.1" />
+        <dependency id="Microsoft.Extensions.Configuration.Binder" version="2.1.1" />
+        <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="2.1.1" />
+        <dependency id="Microsoft.Extensions.Configuration.Json" version="2.1.1" />
+        <dependency id="SixLabors.ImageSharp.Drawing" version="1.0.0-beta0004" />
+        <dependency id="Microsoft.NETCore.App" version="3.0.0" exclude="Build,Analyzers" />
+      </group>
     </dependencies>
   </metadata>
   <files>
@@ -53,5 +63,13 @@ dotnet reportgenerator [options]</description>
     <file src="..\..\target\bin\Release\netcoreapp2.0\dotnet-reportgenerator.deps.json" target="lib\netcoreapp2.0\dotnet-reportgenerator.deps.json" />
     <file src="..\..\target\bin\Release\netcoreapp2.0\dotnet-reportgenerator.dll" target="lib\netcoreapp2.0\dotnet-reportgenerator.dll" />
     <file src="..\..\target\bin\Release\netcoreapp2.0\dotnet-reportgenerator.runtimeconfig.json" target="lib\netcoreapp2.0\dotnet-reportgenerator.runtimeconfig.json" />
+    
+    <!-- NetCoreApp3.0 ('lib\netcoreapp3.0' directory) -->
+    <file src="..\..\target\bin\Release\netcoreapp3.0\appsettings.json" target="lib\netcoreapp3.0" />
+    <file src="..\..\target\bin\Release\netcoreapp3.0\ReportGenerator.Core.dll" target="lib\netcoreapp3.0" />
+    <file src="..\..\target\bin\Release\netcoreapp3.0\ReportGenerator.DotnetCorePluginLoader.dll" target="lib\netcoreapp3.0" />
+    <file src="..\..\target\bin\Release\netcoreapp3.0\dotnet-reportgenerator.deps.json" target="lib\netcoreapp3.0\dotnet-reportgenerator.deps.json" />
+    <file src="..\..\target\bin\Release\netcoreapp3.0\dotnet-reportgenerator.dll" target="lib\netcoreapp3.0\dotnet-reportgenerator.dll" />
+    <file src="..\..\target\bin\Release\netcoreapp3.0\dotnet-reportgenerator.runtimeconfig.json" target="lib\netcoreapp3.0\dotnet-reportgenerator.runtimeconfig.json" />
   </files>
 </package>
