@@ -137,6 +137,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         public int? TotalLines { get; private set; }
 
         /// <summary>
+        /// Gets line coverage information for this file.
+        /// </summary>
+        public int[] LineCoverage => this.lineCoverage;
+
+        /// <summary>
         /// Gets the number of covered branches.
         /// </summary>
         /// <value>

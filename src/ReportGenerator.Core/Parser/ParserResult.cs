@@ -10,7 +10,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
     /// <summary>
     /// The result on a <see cref="ParserBase"/>.
     /// </summary>
-    internal class ParserResult
+    public class ParserResult
     {
         /// <summary>
         /// The name of the parser or the merged parsers.
