@@ -11,7 +11,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Filtering
     /// The assembly is excluded if at least one exclude filter matches its name.
     /// Exclusion filters take precedence over inclusion filters. Wildcards are allowed in filters.
     /// </summary>
-    internal class DefaultFilter : IFilter
+    public class DefaultFilter : IFilter
     {
         /// <summary>
         /// The include filters.
@@ -27,7 +27,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Filtering
         /// Initializes a new instance of the <see cref="DefaultFilter"/> class.
         /// </summary>
         /// <param name="filters">The filters.</param>
-        internal DefaultFilter(IEnumerable<string> filters)
+        public DefaultFilter(IEnumerable<string> filters)
         {
             if (filters == null)
             {
