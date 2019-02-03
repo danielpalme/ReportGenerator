@@ -46,6 +46,7 @@ steps:
     reports: 'src\target\reports\coverage\coverage.opencover.xml'
     targetdir: 'src\target\reports\coverage'
     reporttypes: 'HtmlInline_AzurePipelines;Cobertura'
+    assemblyfilters: '-xunit*'
 
 - task: PublishCodeCoverageResults@1
   displayName: 'Publish code coverage results'
