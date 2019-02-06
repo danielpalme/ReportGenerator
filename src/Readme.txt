@@ -58,9 +58,14 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.0.11.0
+
+    * Fix: Fixed icons on collapse all / expand all
+
 4.0.10.0
 
     * New: Issue #203: Dark theme for Azure DevOps
+    * New: Issue #205: DotnetCliTool Nuget package: Added support for .NET Core 3.0
 
 4.0.9.0
 

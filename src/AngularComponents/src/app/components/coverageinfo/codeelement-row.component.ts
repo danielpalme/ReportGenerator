@@ -23,5 +23,7 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
 export class CodeElementRow {
     @Input() element: CodeElementViewModel = null;
 
+    @Input() collapsed: boolean = false;
+
     @Input() branchCoverageAvailable: boolean = false;
 }
