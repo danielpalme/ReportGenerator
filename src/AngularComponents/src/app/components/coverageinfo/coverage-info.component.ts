@@ -108,6 +108,7 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
             <tr *ngIf="element.visible(settings.filter, settings.historyComparisionType)"
               codeelement-row
               [element]="element"
+              [collapsed]="element.collapsed"
               [branchCoverageAvailable]="branchCoverageAvailable">
             </tr>
             <ng-container *ngFor="let clazz of element.classes">
@@ -125,6 +126,7 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
                <tr class="namespace"
                  codeelement-row
                  [element]="subElement"
+                 [collapsed]="subElement.collapsed"
                  [branchCoverageAvailable]="branchCoverageAvailable">
                 </tr>
                 <ng-container *ngFor="let clazz of subElement.classes">

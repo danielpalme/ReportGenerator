@@ -58,6 +58,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.0.11.0
+
+    * Fix: Fixed icons on collapse all / expand all
+
 4.0.10.0
 
     * New: Issue #203: Dark theme for Azure DevOps
