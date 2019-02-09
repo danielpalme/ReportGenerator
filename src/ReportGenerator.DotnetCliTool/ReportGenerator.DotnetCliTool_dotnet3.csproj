@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <ApplicationIcon>ProgramIcon.ico</ApplicationIcon>
     <AssemblyName>dotnet-reportgenerator</AssemblyName>
     <RootNamespace>Palmmedia.ReportGenerator</RootNamespace>

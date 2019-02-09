@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.0;netcoreapp3.0</TargetFrameworks>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <RootNamespace>ReportGenerator.DotnetCorePluginLoader</RootNamespace>
     <AssemblyVersion>4.0.11.0</AssemblyVersion>
     <FileVersion>4.0.11.0</FileVersion>
