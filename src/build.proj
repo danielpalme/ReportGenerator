@@ -22,8 +22,8 @@
 
   <!-- Version, adjust before build -->
   <PropertyGroup>
-    <Version>4.0.11-netcore3-p2-01</Version>
-    <VersionShort>4.0.11-netcore3-p2-01</VersionShort>
+    <Version>4.0.11-netcore3-p2-02</Version>
+    <VersionShort>4.0.11-netcore3-p2-02</VersionShort>
   </PropertyGroup>
   
   <!-- Tools -->

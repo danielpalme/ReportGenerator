@@ -48,7 +48,7 @@ dotnet reportgenerator [options]</description>
         <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="2.1.1" />
         <dependency id="Microsoft.Extensions.Configuration.Json" version="2.1.1" />
         <dependency id="SixLabors.ImageSharp.Drawing" version="1.0.0-beta0004" />
-        <dependency id="Microsoft.NETCore.App" version="3.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.NETCore.App" version="3.0.0-preview-27324-5" exclude="Build,Analyzers" />
       </group>
     </dependencies>
   </metadata>
