@@ -214,6 +214,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Cobertura report is not well formed. The &lt;packages&gt; element should contain &lt;package&gt; elements and not &lt;class&gt; elements..
+        /// </summary>
+        internal static string ErrorInvalidCoberturaReport {
+            get {
+                return ResourceManager.GetString("ErrorInvalidCoberturaReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PartCover is no longer supported. If you want to generate coverage reports based on PartCover, please use version 3.x of ReportGenerator..
         /// </summary>
         internal static string ErrorPartCover {

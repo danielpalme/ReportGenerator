@@ -70,6 +70,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             var modules = report.Descendants("package")
               .ToArray();
 
+            if (modules.Length == 0)
+            {
+                if (report.Descendants("packages").Elements("class").Any())
+                {
+                    Logger.Error("  " + Resources.ErrorInvalidCoberturaReport);
+                }
+            }
+
             var assemblyNames = modules
                 .Select(m => m.Attribute("name").Value)
                 .Distinct()
