@@ -1206,7 +1206,17 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             if (!FileNameByClass.TryGetValue(key, out fileName))
             {
-                string shortClassName = className.Substring(className.LastIndexOf('.') + 1);
+                string shortClassName = null;
+
+                if (className.EndsWith(".js", StringComparison.OrdinalIgnoreCase))
+                {
+                    shortClassName = className.Substring(0, className.LastIndexOf('.'));
+                }
+                else
+                {
+                    shortClassName = className.Substring(className.LastIndexOf('.') + 1);
+                }
+
                 fileName = RendererBase.ReplaceInvalidPathChars(assemblyName + "_" + shortClassName) + ".htm";
 
                 if (fileName.Length > 100)

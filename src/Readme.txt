@@ -60,7 +60,7 @@ CHANGELOG
 
 4.0.12.0
 
-    * Fix: Issue #209: Added warning if Cobertura file is invalid
+    * Fix: Issue #192, #209: Parsing of invalid Cobertura files
 
 4.0.11.0
 
