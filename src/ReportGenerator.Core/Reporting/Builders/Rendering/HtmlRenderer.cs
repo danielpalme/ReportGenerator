@@ -220,7 +220,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 }
 
                 this.reportTextWriter.WriteLine(
-                    "<label class=\"percentagebar{0}\" title=\"{1}{2}\"><input type=\"radio\" name=\"method\" value=\"AllTestMethods\" class=\"switchtestmethod\" checked=\"checked\" />{2}</label>",
+                    "<label id=\"AllTestMethods\" class=\"testmethod percentagebar{0}\" title=\"{1}{2}\"><input type=\"radio\" name=\"method\" value=\"AllTestMethods\" class=\"switchtestmethod\" checked=\"checked\" />{2}</label>",
                     coverage.HasValue ? coverageRounded.ToString() : "undefined",
                     coverage.HasValue ? ReportResources.Coverage2 + " " + coverage.Value.ToString(CultureInfo.InvariantCulture) + "% - " : string.Empty,
                     WebUtility.HtmlEncode(ReportResources.All));
@@ -239,7 +239,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     }
 
                     this.reportTextWriter.WriteLine(
-                        "<br /><label class=\"percentagebar{0}\" title=\"{1}{2}\"><input type=\"radio\" name=\"method\" value=\"M{3}\" class=\"switchtestmethod\" />{4}</label>",
+                        "<br /><label id=\"M{3}\" class=\"testmethod percentagebar{0}\" title=\"{1}{2}\"><input type=\"radio\" name=\"method\" value=\"M{3}\" class=\"switchtestmethod\" />{4}</label>",
                         coverage.HasValue ? coverageRounded.ToString() : "undefined",
                         coverage.HasValue ? ReportResources.Coverage2 + " " + coverage.Value.ToString(CultureInfo.InvariantCulture) + "% - " : string.Empty,
                         WebUtility.HtmlEncode(testMethod.Name),
@@ -731,7 +731,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             string lineVisitStatus = ConvertToCssClass(analysis.LineVisitStatus, false);
 
-            this.reportTextWriter.Write("<tr title=\"{0}\" data-coverage=\"{{", WebUtility.HtmlEncode(GetTooltip(analysis)));
+            this.reportTextWriter.Write(
+                "<tr class=\"{0}\" title=\"{1}\" data-coverage=\"{{",
+                analysis.LineVisitStatus > LineVisitStatus.NotCoverable ? "coverableline" : string.Empty,
+                WebUtility.HtmlEncode(GetTooltip(analysis)));
 
             this.reportTextWriter.Write(
                 "'AllTestMethods': {{'VC': '{0}', 'LVS': '{1}'}}",

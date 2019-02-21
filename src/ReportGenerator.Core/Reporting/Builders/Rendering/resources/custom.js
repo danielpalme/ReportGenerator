@@ -25,7 +25,7 @@ var switchTestMethod = function () {
         coverageData = JSON.parse(lines[i].getAttribute('data-coverage').replace(/'/g, '"'));
         lineAnalysis = coverageData[method];
         cells = lines[i].querySelectorAll('td');
-        if (lineAnalysis === null) {
+        if (lineAnalysis === undefined) {
             lineAnalysis = coverageData.AllTestMethods;
             if (lineAnalysis.LVS !== 'gray') {
                 cells[0].setAttribute('class', 'red');
@@ -45,6 +45,32 @@ for (i = 0, l = testMethods.length; i < l; i++) {
     testMethods[i].addEventListener('change', switchTestMethod);
 }
 
+/* Highlight test method by line */
+var highlightTestMethods = function () {
+    var lineAnalysis;
+    var coverageData = JSON.parse(this.getAttribute('data-coverage').replace(/'/g, '"'));
+    var testMethods = document.getElementsByClassName('testmethod');
+
+    for (i = 0, l = testMethods.length; i < l; i++) {
+        lineAnalysis = coverageData[testMethods[i].id];
+        if (lineAnalysis === undefined) {
+            testMethods[i].className = testMethods[i].className.replace(/\s*light.+/g, "");
+        } else {
+            testMethods[i].className += ' light' + lineAnalysis.LVS;
+        }
+    }
+};
+var unhighlightTestMethods = function () {
+    var testMethods = document.getElementsByClassName('testmethod');
+    for (i = 0, l = testMethods.length; i < l; i++) {
+        testMethods[i].className = testMethods[i].className.replace(/\s*light.+/g, "");
+    }
+};
+var coverableLines = document.getElementsByClassName('coverableline');
+for (i = 0, l = coverableLines.length; i < l; i++) {
+    coverableLines[i].addEventListener('mouseenter', highlightTestMethods);
+    coverableLines[i].addEventListener('mouseleave', unhighlightTestMethods);
+}
 
 /* History charts */
 var renderChart = function (chart) {

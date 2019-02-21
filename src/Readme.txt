@@ -60,6 +60,7 @@ CHANGELOG
 
 4.0.13.0
 
+    * New: Issue #207: Highlighting of test methods by line coverage
     * Fix: Issue #212: Fixed name of SonarQube file
 
 4.0.12.0
