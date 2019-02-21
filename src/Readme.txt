@@ -58,6 +58,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.0.13.0
+
+    * Fix: Issue #212: Fixed name of SonarQube file
+
 4.0.12.0
 
     * Fix: Issue #192, #209: Parsing of invalid Cobertura files
