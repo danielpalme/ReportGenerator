@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Parser.Filtering;
@@ -155,7 +156,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 {
                     LineNumberStart = int.Parse(seqpnt.Attribute("line").Value, CultureInfo.InvariantCulture),
                     LineNumberEnd = int.Parse(seqpnt.Attribute("endline").Value, CultureInfo.InvariantCulture),
-                    Visits = int.Parse(seqpnt.Attribute("visitcount").Value, CultureInfo.InvariantCulture)
+                    Visits = seqpnt.Attribute("visitcount").Value.ParseLargeInteger()
                 })
                 .OrderBy(seqpnt => seqpnt.LineNumberEnd)
                 .ToArray();

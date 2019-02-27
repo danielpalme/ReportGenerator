@@ -217,12 +217,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 {
                     LineNumberStart = int.Parse(seqpnt.Attribute("sl").Value, CultureInfo.InvariantCulture),
                     LineNumberEnd = seqpnt.Attribute("el") != null ? int.Parse(seqpnt.Attribute("el").Value, CultureInfo.InvariantCulture) : int.Parse(seqpnt.Attribute("sl").Value, CultureInfo.InvariantCulture),
-                    Visits = int.Parse(seqpnt.Attribute("vc").Value, CultureInfo.InvariantCulture),
+                    Visits = seqpnt.Attribute("vc").Value.ParseLargeInteger(),
                     TrackedMethodRefs = seqpnt.Elements("TrackedMethodRefs")
                         .Elements("TrackedMethodRef")
                         .Select(t => new
                         {
-                            Visits = int.Parse(t.Attribute("vc").Value, CultureInfo.InvariantCulture),
+                            Visits = t.Attribute("vc").Value.ParseLargeInteger(),
                             TrackedMethodId = t.Attribute("uid").Value
                         })
                 })

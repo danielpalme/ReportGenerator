@@ -61,6 +61,7 @@ CHANGELOG
 4.0.14.0
 
     * Fix: Issue #213: Correct usage of source directories in Cobertura
+    * Fix: Issue #216: Handling of large coverage numbers
 
 4.0.13.0
 
