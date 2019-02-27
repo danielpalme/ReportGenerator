@@ -77,7 +77,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
                     foreach (var source in sources)
                     {
                         var fileNameAttribute = @class.Attribute("filename");
-                        string path = Path.Combine(sources[0], fileNameAttribute.Value)
+                        string path = Path.Combine(source, fileNameAttribute.Value)
                             .Replace('\\', Path.DirectorySeparatorChar)
                             .Replace('/', Path.DirectorySeparatorChar);
 

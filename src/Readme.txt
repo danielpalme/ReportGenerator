@@ -58,6 +58,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.0.14.0
+
+    * Fix: Issue #213: Correct usage of source directories in Cobertura
+
 4.0.13.0
 
     * New: Issue #207: Highlighting of test methods by line coverage
