@@ -39,6 +39,7 @@ steps:
   displayName: 'dotnet publish Console.NetCore'
   inputs:
     command: publish
+    publishWebProjects: false
     arguments: '-c $(BuildConfiguration)'
     zipAfterPublish: false
     modifyOutputPath: false
@@ -48,6 +49,7 @@ steps:
   displayName: 'dotnet publish DotnetGlobalTool'
   inputs:
     command: publish
+    publishWebProjects: false
     arguments: '-c $(BuildConfiguration)'
     zipAfterPublish: false
     modifyOutputPath: false
