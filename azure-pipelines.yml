@@ -36,6 +36,24 @@ steps:
     configuration: '$(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
+  displayName: 'dotnet publish Console.NetCore'
+  inputs:
+    command: publish
+    arguments: '-c $(BuildConfiguration)'
+    zipAfterPublish: false
+    modifyOutputPath: false
+    workingDirectory: src/ReportGenerator.Console.NetCore
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish DotnetGlobalTool'
+  inputs:
+    command: publish
+    arguments: '-c $(BuildConfiguration)'
+    zipAfterPublish: false
+    modifyOutputPath: false
+    workingDirectory: src/ReportGenerator.DotnetGlobalTool
+
+- task: DotNetCoreCLI@2
   displayName: Test
   inputs:
     command: test
