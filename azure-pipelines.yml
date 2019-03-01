@@ -10,6 +10,8 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  version: '4.0.14.0'
+  versionShort: '4.0.14'
 
 steps:
 - task: DotNetCoreCLI@2
@@ -54,3 +56,51 @@ steps:
     codeCoverageTool: Cobertura
     summaryFileLocation: '$(build.sourcesdirectory)\src\target\reports\coverage\Cobertura.xml'
     reportDirectory: '$(build.sourcesdirectory)\src\target\reports\coverage'
+
+- task: CopyFiles@2
+  displayName: 'Prepare ZIP release: Basicfiles'
+  inputs:
+    SourceFolder: src/target/bin/Release
+    Contents: |
+     LICENSE.txt
+     Readme.txt
+    TargetFolder: tmpzip
+
+- task: CopyFiles@2
+  displayName: 'Prepare ZIP release: Net47'
+  inputs:
+    SourceFolder: src/target/bin/Release
+    Contents: |
+     target/bin/Release/appsettings.json
+     target/bin/Release/Microsoft.Build.*.dll
+     target/bin/Release/Microsoft.Extensions*.dll
+     target/bin/Release/Microsoft.Win32.Primitives.dll
+     target/bin/Release/Newtonsoft.Json.dll
+     target/bin/Release/netstandard.dll
+     target/bin/Release/ReportGenerator.Core.dll
+     target/bin/Release/ReportGenerator.exe
+     target/bin/Release/ReportGenerator.exe.config
+     target/bin/Release/SixLabors.*.dll
+     target/bin/Release/System.*.dll
+    TargetFolder: tmpzip/net47
+
+- task: CopyFiles@2
+  displayName: 'Prepare ZIP release: NetCore'
+  inputs:
+    SourceFolder: src/target/bin/Release/netcoreapp2.0/publish
+    Contents: '**\*.*'
+    TargetFolder: tmpzip/netcoreapp2.0
+
+- task: ArchiveFiles@2
+  displayName: 'Pack ZIP release'
+  inputs:
+    rootFolderOrFile: tmpzip
+    includeRootFolder: false
+    archiveFile: '$(Build.ArtifactStagingDirectory)/ReportGenerator_$(Version).zip'
+
+- task: NuGetCommand@2
+  displayName: 'NuGet pack'
+  inputs:
+    command: pack
+    packagesToPack: 'src/Deployment/nuget/*.nuspec'
+    toolPackage: true
