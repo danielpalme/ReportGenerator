@@ -91,17 +91,17 @@ steps:
   inputs:
     SourceFolder: src/target/bin/Release
     Contents: |
-     target/bin/Release/appsettings.json
-     target/bin/Release/Microsoft.Build.*.dll
-     target/bin/Release/Microsoft.Extensions*.dll
-     target/bin/Release/Microsoft.Win32.Primitives.dll
-     target/bin/Release/Newtonsoft.Json.dll
-     target/bin/Release/netstandard.dll
-     target/bin/Release/ReportGenerator.Core.dll
-     target/bin/Release/ReportGenerator.exe
-     target/bin/Release/ReportGenerator.exe.config
-     target/bin/Release/SixLabors.*.dll
-     target/bin/Release/System.*.dll
+     appsettings.json
+     Microsoft.Build.*.dll
+     Microsoft.Extensions*.dll
+     Microsoft.Win32.Primitives.dll
+     Newtonsoft.Json.dll
+     netstandard.dll
+     ReportGenerator.Core.dll
+     ReportGenerator.exe
+     ReportGenerator.exe.config
+     SixLabors.*.dll
+     System.*.dll
     TargetFolder: tmpzip/net47
 
 - task: CopyFiles@2
@@ -123,4 +123,3 @@ steps:
   inputs:
     command: pack
     packagesToPack: 'src/Deployment/nuget/*.nuspec'
-    toolPackage: true
