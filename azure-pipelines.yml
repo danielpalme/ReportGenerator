@@ -12,6 +12,7 @@ variables:
   buildConfiguration: 'Release'
   version: '4.0.14'
 
+# Prepare
 steps:
 - task: DotNetCoreCLI@2
   displayName: 'dotnet info'
@@ -28,6 +29,7 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
+# Build
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
@@ -54,6 +56,7 @@ steps:
     modifyOutputPath: false
     workingDirectory: src/ReportGenerator.DotnetGlobalTool
 
+# Run tests and create coverage report
 - task: DotNetCoreCLI@2
   displayName: Test
   inputs:
@@ -75,6 +78,38 @@ steps:
     codeCoverageTool: Cobertura
     summaryFileLocation: '$(build.sourcesdirectory)\src\target\reports\coverage\Cobertura.xml'
     reportDirectory: '$(build.sourcesdirectory)\src\target\reports\coverage'
+
+# Create artifacts
+- task: CopyFiles@2
+  displayName: 'Prepare VSIX release: NetCore'
+  inputs:
+    SourceFolder: src/target/bin/Release/netcoreapp2.0/publish
+    Contents: '**/*.*'
+    TargetFolder: src/AzureDevopsTask/ReportGenerator/tools/netcoreapp2.0/%(RecursiveDir)
+
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    workingDir: src/AzureDevopsTask/ReportGenerator
+    verbose: false
+
+- task: BatchScript@1
+  displayName: 'Prepare VSIX release: Compile TypeScript'
+  inputs:
+    filename: tsc
+    workingFolder: src/AzureDevopsTask/ReportGenerator
+
+- task: BatchScript@1
+  displayName: 'Prepare VSIX release: Install TFS Cross Platform Command Line Interface (tfx-cli)'
+  inputs:
+    filename: npm i -g tfx-cli
+    workingFolder: src/AzureDevopsTask
+
+- task: BatchScript@1
+  displayName: 'Prepare VSIX release: Install TFS Cross Platform Command Line Interface (tfx-cli)'
+  inputs:
+    filename: tfx extension create --manifest-globs vss-extension.json --output-path $(Build.ArtifactStagingDirectory)/vsix
+    workingFolder: src/AzureDevopsTask
 
 - task: CopyFiles@2
   displayName: 'Prepare ZIP release: Basicfiles'
@@ -115,13 +150,14 @@ steps:
   inputs:
     rootFolderOrFile: tmpzip
     includeRootFolder: false
-    archiveFile: '$(Build.ArtifactStagingDirectory)/ReportGenerator_$(Version).zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/zip/ReportGenerator_$(Version).zip'
 
 - task: NuGetCommand@2
   displayName: 'NuGet pack'
   inputs:
     command: pack
     packagesToPack: 'src/Deployment/nuget/*.nuspec'
+    packDestination: '$(Build.ArtifactStagingDirectory)/nuget'
 
 - task: gep13.chocolatey-azuredevops.chocolatey-azuredevops.ChocolateyCommand@0
   displayName: 'Chocolatey pack'
@@ -129,7 +165,9 @@ steps:
     packWorkingDirectory: src/Deployment/chocolatey
     packNuspecFileName: reportgenerator.portable.nuspec
     packVersion: $(Version)
+    packOutputDirectory: '$(Build.ArtifactStagingDirectory)/chocolatey'
 
+# Publish artifacts
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: packages'
   inputs:
