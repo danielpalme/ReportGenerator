@@ -93,17 +93,21 @@ steps:
     workingDir: src/AzureDevopsTask/ReportGenerator
     verbose: false
 
-- task: BatchScript@1
+- task: Npm@1
   displayName: 'Prepare VSIX release: Install TFS Cross Platform Command Line Interface (tfx-cli)'
   inputs:
-    filename: npm i -g tfx-cli
-    workingFolder: src/AzureDevopsTask
+    command: custom
+    workingDir: src/AzureDevopsTask/ReportGenerator
+    verbose: false
+    customCommand: 'install -g tfx-cli'
 
-- task: BatchScript@1
+- task: Npm@1
   displayName: 'Prepare VSIX release: Install TypeScript'
   inputs:
-    filename: npm install -g typescript
-    workingFolder: src/AzureDevopsTask
+    command: custom
+    workingDir: src/AzureDevopsTask/ReportGenerator
+    verbose: false
+    customCommand: 'install -g typescript'
 
 - task: BatchScript@1
   displayName: 'Prepare VSIX release: Compile TypeScript'
