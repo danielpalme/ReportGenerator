@@ -10,8 +10,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  version: '4.0.14.0'
-  versionShort: '4.0.14'
+  version: '4.0.14'
 
 steps:
 - task: DotNetCoreCLI@2
@@ -108,7 +107,7 @@ steps:
   displayName: 'Prepare ZIP release: NetCore'
   inputs:
     SourceFolder: src/target/bin/Release/netcoreapp2.0/publish
-    Contents: '**\*.*'
+    Contents: '**/*.*'
     TargetFolder: tmpzip/netcoreapp2.0
 
 - task: ArchiveFiles@2
@@ -123,3 +122,15 @@ steps:
   inputs:
     command: pack
     packagesToPack: 'src/Deployment/nuget/*.nuspec'
+
+- task: gep13.chocolatey-azuredevops.chocolatey-azuredevops.ChocolateyCommand@0
+  displayName: 'Chocolatey pack'
+  inputs:
+    packWorkingDirectory: src/Deployment/chocolatey
+    packNuspecFileName: reportgenerator.portable.nuspec
+    packVersion: $(Version)
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: packages'
+  inputs:
+    ArtifactName: packages

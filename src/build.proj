@@ -22,8 +22,7 @@
 
   <!-- Version, adjust before build -->
   <PropertyGroup>
-    <Version>4.0.14.0</Version>
-    <VersionShort>4.0.14</VersionShort>
+    <Version>4.0.14</Version>
   </PropertyGroup>
   
   <!-- Tools -->
@@ -60,7 +59,7 @@
     <ReportGenerator ReportFiles="@(CoverageFiles)" ReportTypes="Html;Badges" TargetDirectory="target\reports\coverage" AssemblyFilters="-Moq;-xunit*" HistoryDirectory="target\reports\coveragehistory" VerbosityLevel="Warning" />
   </Target>
 
-  <Target Name="Deploy" DependsOnTargets="Clean; Compile; Report;">
+  <Target Name="Deploy" DependsOnTargets="">
     <ItemGroup>
       <ZipFileContentBase Include="target\bin\Release\LICENSE.txt;target\bin\Release\Readme.txt" />
       <ZipFileContentNet47 Include="target\bin\Release\appsettings.json;target\bin\Release\Microsoft.Build.*.dll;target\bin\Release\Microsoft.Extensions*.dll;target\bin\Release\Microsoft.Win32.Primitives.dll;target\bin\Release\Newtonsoft.Json.dll;target\bin\Release\netstandard.dll;target\bin\Release\ReportGenerator.Core.dll;target\bin\Release\ReportGenerator.exe;target\bin\Release\ReportGenerator.exe.config;target\bin\Release\SixLabors.*.dll;target\bin\Release\System.*.dll" />
@@ -94,23 +93,17 @@
     <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\dotnet-reportgenerator-globaltool.nuspec -OutputDirectory target\packages -Version $(Version)" />
     
     <!-- Chocolatey -->
-    <Exec Command="powershell -Command [Environment]::SetEnvironmentVariable('ChecksumOfZip', (Get-FileHash .\target\packages\ReportGenerator_$(Version).zip -Algorithm SHA256).Hash, 'User')" />
-     <PropertyGroup>
-         <ChecksumOfZip>$([System.Environment]::GetEnvironmentVariable('ChecksumOfZip', System.EnvironmentVariableTarget.User))</ChecksumOfZip>
-    </PropertyGroup>
-    <Exec Command="powershell -Command [Environment]::SetEnvironmentVariable('ChecksumOfZip', $null, 'User')" />
-
-    <Copy SourceFiles="Deployment\chocolatey\tools\chocolateyInstall.ps1.tmp" DestinationFiles="Deployment\chocolatey\tools\chocolateyInstall.ps1" />
-    <FileUpdate Files="Deployment\chocolatey\tools\chocolateyInstall.ps1" Regex="\[\[version\]\]" ReplacementText="$(Version)" />
-    <FileUpdate Files="Deployment\chocolatey\tools\chocolateyInstall.ps1" Regex="\[\[checksum\]\]" ReplacementText="$(ChecksumOfZip)" />
     <Exec Command="$(ChocolateyCommandLine) pack Deployment\chocolatey\reportgenerator.portable.nuspec --outputdirectory=target\packages --version=$(Version)" />
-    <Delete Files="Deployment\chocolatey\tools\chocolateyInstall.ps1" />
   </Target>
       
   <Target Name="Publish" DependsOnTargets="Deploy">
-    <Exec Command="$(NuGetCommandLine) push .\target\packages\ReportGenerator.$(VersionShort).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
-    <Exec Command="$(NuGetCommandLine) push .\target\packages\ReportGenerator.Core.$(VersionShort).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
-    <Exec Command="$(NuGetCommandLine) push .\target\packages\dotnet-reportgenerator-cli.$(VersionShort).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
-    <Exec Command="$(NuGetCommandLine) push .\target\packages\dotnet-reportgenerator-globaltool.$(VersionShort).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
+    <!-- Nuget -->
+    <Exec Command="$(NuGetCommandLine) push .\target\packages\ReportGenerator.$(Version).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
+    <Exec Command="$(NuGetCommandLine) push .\target\packages\ReportGenerator.Core.$(Version).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
+    <Exec Command="$(NuGetCommandLine) push .\target\packages\dotnet-reportgenerator-cli.$(Version).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
+    <Exec Command="$(NuGetCommandLine) push .\target\packages\dotnet-reportgenerator-globaltool.$(Version).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
+    
+    <!-- Chocolatey -->
+    <Exec Command="$(ChocolateyCommandLine) push .\target\packages\reportgenerator.portable.$(Version).nupkg --apikey $(ChocolateyApiKey) --source https://push.chocolatey.org/" />
   </Target> 
 </Project>

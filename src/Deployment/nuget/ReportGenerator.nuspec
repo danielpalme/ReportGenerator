@@ -29,7 +29,7 @@ dotnet $(UserProfile)\.nuget\packages\reportgenerator\x.y.z\tools\netcoreapp2.0\
     <!-- MSBuild *.props file -->
     <file src="ReportGenerator.props" target="build\netstandard2.0" />
 
-    <!-- .NET 4.7 ('tools\netcoreapp2.0' directory) -->
+    <!-- NetCoreApp2.0 ('tools\netcoreapp2.0' directory) -->
     <file src="..\..\target\bin\Release\netcoreapp2.0\publish\**\*.*" target="tools\netcoreapp2.0" />
     
     <!-- .NET 4.7 ('tools\net47' directory) -->
