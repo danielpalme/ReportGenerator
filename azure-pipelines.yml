@@ -88,16 +88,10 @@ steps:
     TargetFolder: src/AzureDevopsTask/ReportGenerator/tools/netcoreapp2.0/%(RecursiveDir)
 
 - task: Npm@1
-  displayName: 'npm install'
+  displayName: 'Prepare VSIX release: npm install'
   inputs:
     workingDir: src/AzureDevopsTask/ReportGenerator
     verbose: false
-
-- task: BatchScript@1
-  displayName: 'Prepare VSIX release: Compile TypeScript'
-  inputs:
-    filename: tsc
-    workingFolder: src/AzureDevopsTask/ReportGenerator
 
 - task: BatchScript@1
   displayName: 'Prepare VSIX release: Install TFS Cross Platform Command Line Interface (tfx-cli)'
@@ -106,7 +100,19 @@ steps:
     workingFolder: src/AzureDevopsTask
 
 - task: BatchScript@1
-  displayName: 'Prepare VSIX release: Install TFS Cross Platform Command Line Interface (tfx-cli)'
+  displayName: 'Prepare VSIX release: Install TypeScript'
+  inputs:
+    filename: npm install -g typescript
+    workingFolder: src/AzureDevopsTask
+
+- task: BatchScript@1
+  displayName: 'Prepare VSIX release: Compile TypeScript'
+  inputs:
+    filename: tsc
+    workingFolder: src/AzureDevopsTask/ReportGenerator
+
+- task: BatchScript@1
+  displayName: 'Create VSIX release'
   inputs:
     filename: tfx extension create --manifest-globs vss-extension.json --output-path $(Build.ArtifactStagingDirectory)/vsix
     workingFolder: src/AzureDevopsTask
