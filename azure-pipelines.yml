@@ -102,18 +102,12 @@ steps:
     customCommand: 'install -g tfx-cli'
 
 - task: Npm@1
-  displayName: 'Prepare VSIX release: Install TypeScript'
+  displayName: 'Prepare VSIX release: Compile TypeScript'
   inputs:
     command: custom
     workingDir: src/AzureDevopsTask/ReportGenerator
     verbose: false
-    customCommand: 'install -g typescript'
-
-- task: BatchScript@1
-  displayName: 'Prepare VSIX release: Compile TypeScript'
-  inputs:
-    filename: tsc
-    workingFolder: src/AzureDevopsTask/ReportGenerator
+    customCommand: 'run tsc --'
 
 - task: BatchScript@1
   displayName: 'Create VSIX release'
