@@ -85,7 +85,7 @@ steps:
   inputs:
     SourceFolder: src/target/bin/Release/netcoreapp2.0/publish
     Contents: '**/*.*'
-    TargetFolder: src/AzureDevopsTask/ReportGenerator/tools/netcoreapp2.0/%(RecursiveDir)
+    TargetFolder: src/AzureDevopsTask/ReportGenerator/tools/netcoreapp2.0
 
 - task: Npm@1
   displayName: 'Prepare VSIX release: Install TFS Cross Platform Command Line Interface (tfx-cli)'
