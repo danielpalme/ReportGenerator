@@ -107,6 +107,13 @@ steps:
     verbose: false
     customCommand: 'run tsc --'
 
+- task: CopyFiles@2
+  displayName: 'Prepare VSIX release: '
+  inputs:
+    SourceFolder: src/AzureDevopsTask
+    Contents: extension-manifest.json
+    TargetFolder: $(Build.ArtifactStagingDirectory)/vsix
+
 - task: Npm@1
   displayName: 'Create VSIX release'
   inputs:
