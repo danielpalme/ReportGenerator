@@ -163,6 +163,9 @@ steps:
     packagesToPack: 'src/Deployment/nuget/*.nuspec'
     packDestination: '$(Build.ArtifactStagingDirectory)/nuget'
 
+- script: 'mkdir $(Build.ArtifactStagingDirectory)/chocolatey'
+  displayName: 'Prepare Chocolatey pack'
+
 - task: gep13.chocolatey-azuredevops.chocolatey-azuredevops.ChocolateyCommand@0
   displayName: 'Chocolatey pack'
   inputs:
