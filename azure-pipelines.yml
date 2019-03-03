@@ -113,7 +113,7 @@ steps:
     command: custom
     workingDir: src/AzureDevopsTask
     verbose: false
-    customCommand: 'run tfx -- extension create --manifest-globs vss-extension.json --output-path $(Build.ArtifactStagingDirectory)/vsix
+    customCommand: 'run tfx -- extension create --manifest-globs vss-extension.json --output-path $(Build.ArtifactStagingDirectory)/vsix'
 
 - task: CopyFiles@2
   displayName: 'Prepare ZIP release: Basicfiles'
