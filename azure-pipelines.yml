@@ -90,7 +90,7 @@ steps:
 - task: Npm@1
   displayName: 'Prepare VSIX release: Install TFS Cross Platform Command Line Interface (tfx-cli)'
   inputs:
-    workingDir: src/AzureDevopsTask/ReportGenerator
+    workingDir: src/AzureDevopsTask
     verbose: false
 
 - task: Npm@1
