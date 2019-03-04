@@ -7,8 +7,8 @@
     <AssemblyName>dotnet-reportgenerator</AssemblyName>
     <RootNamespace>Palmmedia.ReportGenerator</RootNamespace>
     <StartupObject>Palmmedia.ReportGenerator.DotnetCliTool.Program</StartupObject>
-    <AssemblyVersion>4.0.14.0</AssemblyVersion>
-    <FileVersion>4.0.14.0</FileVersion>
+    <AssemblyVersion>4.0.15.0</AssemblyVersion>
+    <FileVersion>4.0.15.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
