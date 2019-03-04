@@ -60,6 +60,10 @@ CHANGELOG
 
 4.0.14.0
 
+    * Fix: Issue #219: Fixed errors in Cobertura reports (not compliant with DTD)
+
+4.0.14.0
+
     * Fix: Issue #213: Correct usage of source directories in Cobertura
     * Fix: Issue #216: Handling of large coverage numbers
 
