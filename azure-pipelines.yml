@@ -111,7 +111,9 @@ steps:
   displayName: 'Prepare VSIX release: '
   inputs:
     SourceFolder: src/AzureDevopsTask
-    Contents: extension-manifest.json
+    Contents: |
+      extension-manifest.json
+      README.md
     TargetFolder: $(Build.ArtifactStagingDirectory)/vsix
 
 - task: Npm@1
