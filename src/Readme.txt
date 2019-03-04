@@ -58,8 +58,9 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
-4.0.14.0
+4.0.15.0
 
+    * Fix: Issue #218: Removed unnecessary trailing zeros in metrics
     * Fix: Issue #219: Fixed errors in Cobertura reports (not compliant with DTD)
 
 4.0.14.0

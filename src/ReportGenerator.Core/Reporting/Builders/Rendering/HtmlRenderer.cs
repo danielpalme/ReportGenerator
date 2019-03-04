@@ -514,7 +514,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 foreach (var metric in riskHotspot.StatusMetrics)
                 {
                     this.javaScriptContent.Append("      { ");
-                    this.javaScriptContent.AppendFormat("\"value\": {0},", metric.Metric.Value.HasValue ? metric.Metric.Value.Value.ToString(CultureInfo.InvariantCulture) : "null");
+                    this.javaScriptContent.AppendFormat("\"value\": {0},", metric.Metric.Value.HasValue ? metric.Metric.Value.Value.ToString("0.##", CultureInfo.InvariantCulture) : "null");
                     this.javaScriptContent.AppendFormat(" \"exceeded\": {0}", metric.Exceeded.ToString().ToLowerInvariant());
                     this.javaScriptContent.AppendLine(" },");
                 }
@@ -640,7 +640,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     {
                         this.reportTextWriter.Write(
                             "<td>{0}{1}</td>",
-                            metricValue.Value.HasValue ? metricValue.Value.Value.ToString(CultureInfo.InvariantCulture) : "-",
+                            metricValue.Value.HasValue ? metricValue.Value.Value.ToString("0.##", CultureInfo.InvariantCulture) : "-",
                             metricValue.Value.HasValue && metricValue.MetricType == MetricType.CoveragePercentual ? "%" : string.Empty);
                     }
 
@@ -695,7 +695,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
                 foreach (var metricValue in methodMetric.Metrics.Select(m => m.Value))
                 {
-                    this.reportTextWriter.Write("<td>{0}</td>", metricValue.HasValue ? metricValue.Value.ToString(CultureInfo.InvariantCulture) : "-");
+                    this.reportTextWriter.Write("<td>{0}</td>", metricValue.HasValue ? metricValue.Value.ToString("0.##", CultureInfo.InvariantCulture) : "-");
                 }
 
                 this.reportTextWriter.WriteLine("</tr>");
@@ -953,7 +953,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     this.reportTextWriter.WriteLine(
                         "<td class=\"{0} right\">{1}</td>",
                         statusMetric.Exceeded ? "lightred" : "lightgreen",
-                        statusMetric.Metric.Value.HasValue ? statusMetric.Metric.Value.Value.ToString(CultureInfo.InvariantCulture) : "-");
+                        statusMetric.Metric.Value.HasValue ? statusMetric.Metric.Value.Value.ToString("0.##", CultureInfo.InvariantCulture) : "-");
                 }
 
                 this.reportTextWriter.WriteLine("</tr>");
