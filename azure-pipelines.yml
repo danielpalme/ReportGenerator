@@ -162,6 +162,7 @@ steps:
     command: pack
     packagesToPack: 'src/Deployment/nuget/*.nuspec'
     packDestination: '$(Build.ArtifactStagingDirectory)/nuget'
+    buildProperties: 'version=$(Version)'
 
 - script: 'mkdir $(Build.ArtifactStagingDirectory)\chocolatey'
   displayName: 'Prepare Chocolatey pack'
