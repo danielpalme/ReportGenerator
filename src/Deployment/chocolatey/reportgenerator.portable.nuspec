@@ -22,6 +22,7 @@
   <files>
     <file src="..\..\target\bin\Release\LICENSE.txt" target="LICENSE.txt" />
     <file src="..\..\target\bin\Release\Readme.txt" target="Readme.txt" />
+    <file src="VERIFICATION.txt" target="tools\VERIFICATION.txt" />
 
     <!-- NetCoreApp2.0 ('tools\netcoreapp2.0' directory) -->
     <file src="..\..\target\bin\Release\netcoreapp2.0\publish\**\*.*" target="tools\netcoreapp2.0" />
