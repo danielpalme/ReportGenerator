@@ -30,28 +30,16 @@ dotnet reportgenerator [options]</description>
       <packageType name="DotnetCliTool" />
     </packageTypes>
     <dependencies>
-      <group targetFramework=".NETCoreApp2.0">
-        <dependency id="McMaster.NETCore.Plugins" version="0.1.1" />
-        <dependency id="Microsoft.Build.Utilities.Core" version="15.8.166" />
-        <dependency id="Microsoft.Extensions.Configuration" version="2.1.1" />
-        <dependency id="Microsoft.Extensions.Configuration.Binder" version="2.1.1" />
-        <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="2.1.1" />
-        <dependency id="Microsoft.Extensions.Configuration.Json" version="2.1.1" />
-        <dependency id="SixLabors.ImageSharp.Drawing" version="1.0.0-beta0004" />
-        <dependency id="Microsoft.NETCore.App" version="2.0.0" exclude="Build,Analyzers" />
+      <group targetFramework=".NETCoreApp2.1">
+        <dependency id="Microsoft.NETCore.App" version="2.1.0" exclude="Build,Analyzers" />
       </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="..\..\target\bin\Release\LICENSE.txt" target="LICENSE.txt" />
-    <file src="..\..\target\bin\Release\Readme.txt" target="Readme.txt" />
-    
-    <!-- NetCoreApp2.0 ('lib\netcoreapp2.0' directory) -->
-    <file src="..\..\target\bin\Release\netcoreapp2.0\appsettings.json" target="lib\netcoreapp2.0" />
-    <file src="..\..\target\bin\Release\netcoreapp2.0\ReportGenerator.Core.dll" target="lib\netcoreapp2.0" />
-    <file src="..\..\target\bin\Release\netcoreapp2.0\ReportGenerator.DotnetCorePluginLoader.dll" target="lib\netcoreapp2.0" />
-    <file src="..\..\target\bin\Release\netcoreapp2.0\dotnet-reportgenerator.deps.json" target="lib\netcoreapp2.0\dotnet-reportgenerator.deps.json" />
-    <file src="..\..\target\bin\Release\netcoreapp2.0\dotnet-reportgenerator.dll" target="lib\netcoreapp2.0\dotnet-reportgenerator.dll" />
-    <file src="..\..\target\bin\Release\netcoreapp2.0\dotnet-reportgenerator.runtimeconfig.json" target="lib\netcoreapp2.0\dotnet-reportgenerator.runtimeconfig.json" />
+    <file src="..\..\..\LICENSE.txt" target="LICENSE.txt" />
+    <file src="..\..\Readme.txt" target="Readme.txt" />
+
+    <!-- NetCoreApp2.1 ('lib\netcoreapp2.0' directory), Version 2.1 is copied to directory 2.0 to fix #224 -->
+    <file src="..\..\ReportGenerator.DotnetCliTool\bin\Release\netcoreapp2.1\publish\**\*.*" target="lib\netcoreapp2.0" />
   </files>
 </package>

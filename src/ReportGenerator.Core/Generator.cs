@@ -131,12 +131,24 @@ namespace Palmmedia.ReportGenerator.Core
         /// <returns>The configuration.</returns>
         private IConfigurationRoot GetConfiguration()
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(new FileInfo(this.GetType().Assembly.Location).DirectoryName)
-                .AddJsonFile("appsettings.json")
-                .AddCommandLine(Environment.GetCommandLineArgs());
+            try
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(new FileInfo(this.GetType().Assembly.Location).DirectoryName)
+                    .AddJsonFile("appsettings.json")
+                    .AddCommandLine(Environment.GetCommandLineArgs());
 
-            return builder.Build();
+                return builder.Build();
+            }
+            catch (FileLoadException)
+            {
+                // This can happen when excuted within MSBuild (dotnet msbuild): JSON configuration gets ignored
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(new FileInfo(this.GetType().Assembly.Location).DirectoryName)
+                    .AddCommandLine(Environment.GetCommandLineArgs());
+
+                return builder.Build();
+            }
         }
     }
 }

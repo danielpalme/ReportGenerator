@@ -30,11 +30,11 @@ tools\reportgenerator.exe [options]</description>
     </packageTypes>
   </metadata>
   <files>
-    <file src="..\..\target\bin\Release\LICENSE.txt" target="LICENSE.txt" />
-    <file src="..\..\target\bin\Release\Readme.txt" target="Readme.txt" />
+    <file src="..\..\..\LICENSE.txt" target="LICENSE.txt" />
+    <file src="..\..\Readme.txt" target="Readme.txt" />
 
     <!-- NetCoreApp2.1 ('tools\netcoreapp2.1' directory) -->
-    <file src="..\..\target\bin\Release\netcoreapp2.1\publish\**\*.*" target="tools\netcoreapp2.1\any" />
+    <file src="..\..\ReportGenerator.DotnetGlobalTool\bin\Release\netcoreapp2.1\publish\**\*.*" target="tools\netcoreapp2.1\any" />
     <file src="DotnetToolSettings.xml" target="tools\netcoreapp2.1\any" />
   </files>
 </package>

@@ -58,6 +58,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.1.0.0
+
+    * Fix: Issue #224: Fixed badge generation in CLI tool
+
 4.0.15.0
 
     * Fix: Issue #218: Removed unnecessary trailing zeros in metrics

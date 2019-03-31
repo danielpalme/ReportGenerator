@@ -10,7 +10,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  version: '4.0.15'
+  version: '4.1.0'
 
 # Prepare
 steps:
@@ -37,14 +37,34 @@ steps:
     configuration: '$(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
-  displayName: 'dotnet publish Console.NetCore'
+  displayName: 'dotnet publish Console.NetCore 2.0'
+  inputs:
+    command: publish
+    publishWebProjects: false
+    arguments: '-c $(BuildConfiguration) -f netcoreapp2.0'
+    zipAfterPublish: false
+    modifyOutputPath: false
+    workingDirectory: src/ReportGenerator.Console.NetCore
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish Console.NetCore 2.1'
+  inputs:
+    command: publish
+    publishWebProjects: false
+    arguments: '-c $(BuildConfiguration) -f netcoreapp2.1'
+    zipAfterPublish: false
+    modifyOutputPath: false
+    workingDirectory: src/ReportGenerator.Console.NetCore
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish Console.DotnetCliTool'
   inputs:
     command: publish
     publishWebProjects: false
     arguments: '-c $(BuildConfiguration)'
     zipAfterPublish: false
     modifyOutputPath: false
-    workingDirectory: src/ReportGenerator.Console.NetCore
+    workingDirectory: src/ReportGenerator.Console.DotnetCliTool
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish DotnetGlobalTool'
@@ -83,9 +103,9 @@ steps:
 - task: CopyFiles@2
   displayName: 'Prepare VSIX release: NetCore'
   inputs:
-    SourceFolder: src/target/bin/Release/netcoreapp2.0/publish
+    SourceFolder: src/ReportGenerator.Console.NetCore/Release/netcoreapp2.1/publish
     Contents: '**/*.*'
-    TargetFolder: src/AzureDevopsTask/ReportGenerator/tools/netcoreapp2.0
+    TargetFolder: src/AzureDevopsTask/ReportGenerator/tools/netcoreapp2.1
 
 - task: Npm@1
   displayName: 'Prepare VSIX release: Install TFS Cross Platform Command Line Interface (tfx-cli)'
@@ -118,7 +138,7 @@ steps:
 - task: CopyFiles@2
   displayName: 'Prepare ZIP release: Basicfiles'
   inputs:
-    SourceFolder: src/target/bin/Release
+    SourceFolder: src/ReportGenerator.Console/bin/Release
     Contents: |
      LICENSE.txt
      Readme.txt
@@ -127,27 +147,27 @@ steps:
 - task: CopyFiles@2
   displayName: 'Prepare ZIP release: Net47'
   inputs:
-    SourceFolder: src/target/bin/Release
+    SourceFolder: src/ReportGenerator.Console/bin/Release
     Contents: |
      appsettings.json
-     Microsoft.Build.*.dll
-     Microsoft.Extensions*.dll
-     Microsoft.Win32.Primitives.dll
-     Newtonsoft.Json.dll
-     netstandard.dll
-     ReportGenerator.Core.dll
+     *.dll
      ReportGenerator.exe
      ReportGenerator.exe.config
-     SixLabors.*.dll
-     System.*.dll
     TargetFolder: tmpzip/net47
 
 - task: CopyFiles@2
-  displayName: 'Prepare ZIP release: NetCore'
+  displayName: 'Prepare ZIP release: NetCore 2.0'
   inputs:
-    SourceFolder: src/target/bin/Release/netcoreapp2.0/publish
+    SourceFolder: src/ReportGenerator.Console.NetCore/Release/netcoreapp2.0/publish
     Contents: '**/*.*'
     TargetFolder: tmpzip/netcoreapp2.0
+
+- task: CopyFiles@2
+  displayName: 'Prepare ZIP release: NetCore 2.1'
+  inputs:
+    SourceFolder: src/ReportGenerator.Console.NetCore/Release/netcoreapp2.1/publish
+    Contents: '**/*.*'
+    TargetFolder: tmpzip/netcoreapp2.1
 
 - task: ArchiveFiles@2
   displayName: 'Pack ZIP release'
