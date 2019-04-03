@@ -90,12 +90,12 @@ steps:
     projects: '$(Parameters.TestProjects)'
     arguments: '--configuration $(BuildConfiguration) --no-build /p:AltCover=true /p:AltCoverForce=true /p:AltCoverCallContext=[Fact] /p:AltCoverXmlReport=..\target\reports\coverage\coverage.opencover.xml'
 
-- task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@1
+- task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@4
   displayName: ReportGenerator
   inputs:
     reports: 'src\target\reports\coverage\coverage.opencover.xml'
     targetdir: 'src\target\reports\coverage'
-    reporttypes: 'HtmlInline_AzurePipelines;Cobertura'
+    reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
     assemblyfilters: '-xunit*'
 
 - task: PublishCodeCoverageResults@1
