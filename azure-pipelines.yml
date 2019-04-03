@@ -67,7 +67,7 @@ steps:
   inputs:
     command: publish
     publishWebProjects: false
-    arguments: '-c $(BuildConfiguration)'
+    arguments: '-c $(BuildConfiguration) -f netcoreapp2.1'
     zipAfterPublish: false
     modifyOutputPath: false
     workingDirectory: src/ReportGenerator.Console.DotnetCliTool
@@ -77,7 +77,7 @@ steps:
   inputs:
     command: publish
     publishWebProjects: false
-    arguments: '-c $(BuildConfiguration)'
+    arguments: '-c $(BuildConfiguration) -f netcoreapp2.1'
     zipAfterPublish: false
     modifyOutputPath: false
     workingDirectory: src/ReportGenerator.DotnetGlobalTool
