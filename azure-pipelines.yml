@@ -63,21 +63,21 @@ steps:
     workingDirectory: src/ReportGenerator.Console.NetCore
 
 - task: DotNetCoreCLI@2
-  displayName: 'dotnet publish Console.DotnetCliTool'
+  displayName: 'dotnet publish ReportGenerator.DotnetCliTool'
   inputs:
     command: publish
     publishWebProjects: false
-    arguments: '-c $(BuildConfiguration) -f netcoreapp2.1'
+    arguments: '-c $(BuildConfiguration)'
     zipAfterPublish: false
     modifyOutputPath: false
-    workingDirectory: src/ReportGenerator.Console.DotnetCliTool
+    workingDirectory: src/ReportGenerator.DotnetCliTool
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish DotnetGlobalTool'
   inputs:
     command: publish
     publishWebProjects: false
-    arguments: '-c $(BuildConfiguration) -f netcoreapp2.1'
+    arguments: '-c $(BuildConfiguration)'
     zipAfterPublish: false
     modifyOutputPath: false
     workingDirectory: src/ReportGenerator.DotnetGlobalTool
