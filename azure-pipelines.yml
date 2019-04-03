@@ -109,7 +109,7 @@ steps:
 - task: CopyFiles@2
   displayName: 'Prepare VSIX release: NetCore'
   inputs:
-    SourceFolder: src/ReportGenerator.Console.NetCore/Release/netcoreapp2.1/publish
+    SourceFolder: src/ReportGenerator.Console.NetCore/bin/Release/netcoreapp2.1/publish
     Contents: '**/*.*'
     TargetFolder: src/AzureDevopsTask/ReportGenerator/tools/netcoreapp2.1
 
@@ -164,14 +164,14 @@ steps:
 - task: CopyFiles@2
   displayName: 'Prepare ZIP release: NetCore 2.0'
   inputs:
-    SourceFolder: src/ReportGenerator.Console.NetCore/Release/netcoreapp2.0/publish
+    SourceFolder: src/ReportGenerator.Console.NetCore/bin/Release/netcoreapp2.0/publish
     Contents: '**/*.*'
     TargetFolder: tmpzip/netcoreapp2.0
 
 - task: CopyFiles@2
   displayName: 'Prepare ZIP release: NetCore 2.1'
   inputs:
-    SourceFolder: src/ReportGenerator.Console.NetCore/Release/netcoreapp2.1/publish
+    SourceFolder: src/ReportGenerator.Console.NetCore/bin/Release/netcoreapp2.1/publish
     Contents: '**/*.*'
     TargetFolder: tmpzip/netcoreapp2.1
 
