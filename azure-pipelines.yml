@@ -31,6 +31,12 @@ steps:
     command: custom
     custom: '--info'
 
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet version'
+  inputs:
+    command: custom
+    custom: '--version'
+
 - task: NuGetToolInstaller@0
   displayName: 'Use NuGet 4.9.3'
   inputs:
