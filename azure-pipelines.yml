@@ -14,6 +14,17 @@ variables:
 
 # Prepare
 steps:
+
+- task: DotNetCoreInstaller@0
+  displayName: 'Use .NET Core sdk 2.2.105'
+  inputs:
+    version: 2.2.105
+
+- task: DotNetCoreInstaller@0
+  displayName: 'Use .NET Core sdk 3.0.100-preview3-010431'
+  inputs:
+    version: 3.0.100-preview3-010431
+
 - task: DotNetCoreCLI@2
   displayName: 'dotnet info'
   inputs:
