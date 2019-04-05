@@ -40,20 +40,24 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 "-targetdir:c:\\temp\\target"
             };
 
-            Assert.True(Program.NormalizeArgs(args)[0] == "\"-reports:abc.xml\"");
-            Assert.True(Program.NormalizeArgs(args)[1] == "\"-targetdir:c:\\temp\\target\"");
+            var normalizedArgs = Program.NormalizeArgs(args);
+
+            Assert.True(normalizedArgs[0] == "-reports:abc.xml");
+            Assert.True(normalizedArgs[1] == "-targetdir:c:\\temp\\target");
         }
 
         [Fact]
         public void ValidateNormalizeArgsForLinux(){
             var args = new[]
             {
-                "\"-reports:abc.xml\"",
-                "\"-targetdir:/temp\""
+                "\"-reports:/tmp/**/coverage.xml\"",
+                "\"-targetdir:/tmp\""
             };
 
-            Assert.True(Program.NormalizeArgs(args)[0] == "\"-reports:abc.xml\"");
-            Assert.True(Program.NormalizeArgs(args)[1] == "\"-targetdir:/temp\"");
+            var normalizedArgs = Program.NormalizeArgs(args);
+
+            Assert.True(normalizedArgs[0] == "-reports:/tmp/**/coverage.xml");
+            Assert.True(normalizedArgs[1] == "-targetdir:/tmp");
         }
 
         public IEnumerator<object[]> GetEnumerator()

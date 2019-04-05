@@ -1,8 +1,5 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 using Palmmedia.ReportGenerator.Core.Plugin;
 using Palmmedia.ReportGenerator.Core.Reporting;
 
@@ -20,9 +17,7 @@ namespace Palmmedia.ReportGenerator.Core
         /// <returns>Return code indicating success/failure.</returns>
         public static int Main(string[] args)
         {
-            Task.Delay(10000).Wait();
-
-            args = NormalizeArgs(args); 
+            args = NormalizeArgs(args);
 
             var reportConfigurationBuilder = new ReportConfigurationBuilder();
             ReportConfiguration configuration = reportConfigurationBuilder.Create(args);
@@ -39,7 +34,7 @@ namespace Palmmedia.ReportGenerator.Core
         }
 
         public static string[] NormalizeArgs(string[] args){
-            return args.Select(a => a.EndsWith("\"", StringComparison.OrdinalIgnoreCase) ? a.TrimEnd('\"') : a).ToArray();
+            return args.Select(a => a.Replace(@"""", string.Empty)).ToArray();
         }
     }
 }
