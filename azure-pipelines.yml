@@ -20,23 +20,6 @@ steps:
     command: custom
     custom: '--info'
 
-- task: DotNetCoreInstaller@0
-  displayName: 'Use .NET Core sdk 3.0.100-preview3-010431'
-  inputs:
-    version: 3.0.100-preview3-010431
-
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet info'
-  inputs:
-    command: custom
-    custom: '--info'
-
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet version'
-  inputs:
-    command: custom
-    custom: '--version'
-
 - task: NuGetToolInstaller@0
   displayName: 'Use NuGet 4.9.3'
   inputs:
@@ -86,6 +69,25 @@ steps:
 - script: 'copy global_dotnet3.json global.json'
   workingDirectory: 'src/ReportGenerator.DotnetCliTool'
   displayName: 'Copy global.json'
+
+- task: DotNetCoreInstaller@0
+  displayName: 'Use .NET Core sdk 3.0.100-preview3-010431'
+  inputs:
+    version: 3.0.100-preview3-010431
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet info'
+  inputs:
+    command: custom
+    custom: '--info'
+    workingDirectory: src/ReportGenerator.DotnetCliTool
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet version'
+  inputs:
+    command: custom
+    custom: '--version'
+    workingDirectory: src/ReportGenerator.DotnetCliTool
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish ReportGenerator.DotnetCliTool'
