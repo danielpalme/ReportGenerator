@@ -87,7 +87,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <param name="summaryResult">The summary result.</param>
         public void CreateSummaryReport(SummaryResult summaryResult)
         {
-            string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "SonarCube.xml");
+            string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "SonarQube.xml");
 
             Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
 

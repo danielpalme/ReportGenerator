@@ -220,7 +220,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 }
 
                 this.reportTextWriter.WriteLine(
-                    "<label class=\"percentagebar{0}\" title=\"{1}{2}\"><input type=\"radio\" name=\"method\" value=\"AllTestMethods\" class=\"switchtestmethod\" checked=\"checked\" />{2}</label>",
+                    "<label id=\"AllTestMethods\" class=\"testmethod percentagebar{0}\" title=\"{1}{2}\"><input type=\"radio\" name=\"method\" value=\"AllTestMethods\" class=\"switchtestmethod\" checked=\"checked\" />{2}</label>",
                     coverage.HasValue ? coverageRounded.ToString() : "undefined",
                     coverage.HasValue ? ReportResources.Coverage2 + " " + coverage.Value.ToString(CultureInfo.InvariantCulture) + "% - " : string.Empty,
                     WebUtility.HtmlEncode(ReportResources.All));
@@ -239,7 +239,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     }
 
                     this.reportTextWriter.WriteLine(
-                        "<br /><label class=\"percentagebar{0}\" title=\"{1}{2}\"><input type=\"radio\" name=\"method\" value=\"M{3}\" class=\"switchtestmethod\" />{4}</label>",
+                        "<br /><label id=\"M{3}\" class=\"testmethod percentagebar{0}\" title=\"{1}{2}\"><input type=\"radio\" name=\"method\" value=\"M{3}\" class=\"switchtestmethod\" />{4}</label>",
                         coverage.HasValue ? coverageRounded.ToString() : "undefined",
                         coverage.HasValue ? ReportResources.Coverage2 + " " + coverage.Value.ToString(CultureInfo.InvariantCulture) + "% - " : string.Empty,
                         WebUtility.HtmlEncode(testMethod.Name),
@@ -514,7 +514,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 foreach (var metric in riskHotspot.StatusMetrics)
                 {
                     this.javaScriptContent.Append("      { ");
-                    this.javaScriptContent.AppendFormat("\"value\": {0},", metric.Metric.Value.HasValue ? metric.Metric.Value.Value.ToString(CultureInfo.InvariantCulture) : "null");
+                    this.javaScriptContent.AppendFormat("\"value\": {0},", metric.Metric.Value.HasValue ? metric.Metric.Value.Value.ToString("0.##", CultureInfo.InvariantCulture) : "null");
                     this.javaScriptContent.AppendFormat(" \"exceeded\": {0}", metric.Exceeded.ToString().ToLowerInvariant());
                     this.javaScriptContent.AppendLine(" },");
                 }
@@ -640,7 +640,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     {
                         this.reportTextWriter.Write(
                             "<td>{0}{1}</td>",
-                            metricValue.Value.HasValue ? metricValue.Value.Value.ToString(CultureInfo.InvariantCulture) : "-",
+                            metricValue.Value.HasValue ? metricValue.Value.Value.ToString("0.##", CultureInfo.InvariantCulture) : "-",
                             metricValue.Value.HasValue && metricValue.MetricType == MetricType.CoveragePercentual ? "%" : string.Empty);
                     }
 
@@ -695,7 +695,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
                 foreach (var metricValue in methodMetric.Metrics.Select(m => m.Value))
                 {
-                    this.reportTextWriter.Write("<td>{0}</td>", metricValue.HasValue ? metricValue.Value.ToString(CultureInfo.InvariantCulture) : "-");
+                    this.reportTextWriter.Write("<td>{0}</td>", metricValue.HasValue ? metricValue.Value.ToString("0.##", CultureInfo.InvariantCulture) : "-");
                 }
 
                 this.reportTextWriter.WriteLine("</tr>");
@@ -731,7 +731,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             string lineVisitStatus = ConvertToCssClass(analysis.LineVisitStatus, false);
 
-            this.reportTextWriter.Write("<tr title=\"{0}\" data-coverage=\"{{", WebUtility.HtmlEncode(GetTooltip(analysis)));
+            this.reportTextWriter.Write(
+                "<tr class=\"{0}\" title=\"{1}\" data-coverage=\"{{",
+                analysis.LineVisitStatus > LineVisitStatus.NotCoverable ? "coverableline" : string.Empty,
+                WebUtility.HtmlEncode(GetTooltip(analysis)));
 
             this.reportTextWriter.Write(
                 "'AllTestMethods': {{'VC': '{0}', 'LVS': '{1}'}}",
@@ -950,7 +953,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     this.reportTextWriter.WriteLine(
                         "<td class=\"{0} right\">{1}</td>",
                         statusMetric.Exceeded ? "lightred" : "lightgreen",
-                        statusMetric.Metric.Value.HasValue ? statusMetric.Metric.Value.Value.ToString(CultureInfo.InvariantCulture) : "-");
+                        statusMetric.Metric.Value.HasValue ? statusMetric.Metric.Value.Value.ToString("0.##", CultureInfo.InvariantCulture) : "-");
                 }
 
                 this.reportTextWriter.WriteLine("</tr>");
@@ -1206,7 +1209,17 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             if (!FileNameByClass.TryGetValue(key, out fileName))
             {
-                string shortClassName = className.Substring(className.LastIndexOf('.') + 1);
+                string shortClassName = null;
+
+                if (className.EndsWith(".js", StringComparison.OrdinalIgnoreCase))
+                {
+                    shortClassName = className.Substring(0, className.LastIndexOf('.'));
+                }
+                else
+                {
+                    shortClassName = className.Substring(className.LastIndexOf('.') + 1);
+                }
+
                 fileName = RendererBase.ReplaceInvalidPathChars(assemblyName + "_" + shortClassName) + ".htm";
 
                 if (fileName.Length > 100)

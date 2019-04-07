@@ -77,19 +77,23 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                         {
                             int index = codeElement.Name.LastIndexOf('(');
 
+                            var methodLinesElement = new XElement("lines");
+
                             var methodElement = new XElement(
                                 "method",
                                 new XAttribute("name", index == -1 ? codeElement.Name : codeElement.Name.Substring(0, index)),
-                                new XAttribute("signature", index == -1 ? string.Empty : codeElement.Name.Substring(index)));
+                                new XAttribute("signature", index == -1 ? string.Empty : codeElement.Name.Substring(index)),
+                                methodLinesElement);
 
                             this.AddLineElements(
-                                methodElement,
+                                methodLinesElement,
                                 fileAnalysis.Lines.Skip(codeElement.FirstLine - 1).Take(codeElement.LastLine - codeElement.FirstLine + 1),
                                 out double methodLineRate,
                                 out double methodBranchRate);
 
                             methodElement.Add(new XAttribute("line-rate", methodLineRate.ToString(CultureInfo.InvariantCulture)));
                             methodElement.Add(new XAttribute("branch-rate", methodBranchRate.ToString(CultureInfo.InvariantCulture)));
+                            methodElement.Add(new XAttribute("complexity", "NaN"));
 
                             methodsElement.Add(methodElement);
                         }

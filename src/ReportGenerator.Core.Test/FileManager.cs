@@ -22,6 +22,10 @@ namespace Palmmedia.ReportGenerator.Core.Test
             {
                 Directory.CreateDirectory(javaDir);
             }
+            if (!Directory.Exists(Path.Combine(javaDir, "sub")))
+            {
+                Directory.CreateDirectory(Path.Combine(javaDir, "sub"));
+            }
 
             var files = new DirectoryInfo(GetCSharpCodeDirectory()).GetFiles("*.cs")
                 .Concat(new DirectoryInfo(GetFSharpCodeDirectory()).GetFiles("*.fs"));
@@ -36,6 +40,12 @@ namespace Palmmedia.ReportGenerator.Core.Test
             foreach (var fileInfo in files)
             {
                 File.Copy(fileInfo.FullName, Path.Combine(javaDir, fileInfo.Name), true);
+            }
+
+            files = new DirectoryInfo(Path.Combine(GetJavaCodeDirectory(), "test", "sub")).GetFiles("*.java");
+            foreach (var fileInfo in files)
+            {
+                File.Copy(fileInfo.FullName, Path.Combine(javaDir, "sub", fileInfo.Name), true);
             }
         }
 

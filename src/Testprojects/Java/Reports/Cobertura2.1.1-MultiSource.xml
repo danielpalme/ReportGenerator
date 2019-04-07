@@ -1,0 +1,217 @@
+﻿<?xml version="1.0"?>
+<!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
+
+<coverage line-rate="0.6666666666666666" branch-rate="0.25" lines-covered="24" lines-valid="36" branches-covered="1" branches-valid="4" complexity="1.4285714285714286" version="2.1.1" timestamp="1477409499473">
+	<sources>
+		<source>--dummy</source>
+		<source>C:/temp</source>
+	</sources>
+	<packages>
+		<package name="test" line-rate="0.7272727272727273" branch-rate="0.25" complexity="1.4615384615384615">
+			<classes>
+				<class name="test.AbstractClass" filename="test/AbstractClass.java" line-rate="1.0" branch-rate="1.0" complexity="NaN">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="NaN">
+							<lines>
+								<line number="3" hits="2" branch="false"/>
+								<line number="4" hits="2" branch="false"/>
+								<line number="5" hits="2" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="3" hits="2" branch="false"/>
+						<line number="4" hits="2" branch="false"/>
+						<line number="5" hits="2" branch="false"/>
+					</lines>
+				</class>
+				<class name="test.AbstractClass_SampleImpl1" filename="test/AbstractClass_SampleImpl1.java" line-rate="0.6" branch-rate="1.0" complexity="1.6666666666666667">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="3" hits="1" branch="false"/>
+								<line number="4" hits="1" branch="false"/>
+								<line number="5" hits="1" branch="false"/>
+							</lines>
+						</method>
+						<method name="Method1" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="8" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="Method2" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="12" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="3" hits="1" branch="false"/>
+						<line number="4" hits="1" branch="false"/>
+						<line number="5" hits="1" branch="false"/>
+						<line number="8" hits="0" branch="false"/>
+						<line number="12" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="test.AbstractClass_SampleImpl2" filename="test/AbstractClass_SampleImpl2.java" line-rate="0.6" branch-rate="1.0" complexity="1.6666666666666667">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="3" hits="1" branch="false"/>
+								<line number="4" hits="1" branch="false"/>
+								<line number="5" hits="1" branch="false"/>
+							</lines>
+						</method>
+						<method name="Method1" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="8" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="Method2" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="12" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="3" hits="1" branch="false"/>
+						<line number="4" hits="1" branch="false"/>
+						<line number="5" hits="1" branch="false"/>
+						<line number="8" hits="0" branch="false"/>
+						<line number="12" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="test.GenericClass" filename="test/GenericClass.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="2" hits="1" branch="false"/>
+							</lines>
+						</method>
+						<method name="Process" signature="(Ljava/lang/Object;Ljava/lang/Object;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="4" hits="1" branch="false"/>
+								<line number="5" hits="1" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="2" hits="1" branch="false"/>
+						<line number="4" hits="1" branch="false"/>
+						<line number="5" hits="1" branch="false"/>
+					</lines>
+				</class>
+				<class name="test.Program" filename="test/Program.java" line-rate="0.8333333333333334" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="2" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="main" signature="([Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="5" hits="1" branch="false"/>
+								<line number="7" hits="1" branch="false"/>
+								<line number="9" hits="1" branch="false"/>
+								<line number="10" hits="1" branch="false"/>
+								<line number="11" hits="1" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="2" hits="0" branch="false"/>
+						<line number="5" hits="1" branch="false"/>
+						<line number="7" hits="1" branch="false"/>
+						<line number="9" hits="1" branch="false"/>
+						<line number="10" hits="1" branch="false"/>
+						<line number="11" hits="1" branch="false"/>
+					</lines>
+				</class>
+				<class name="test.TestClass" filename="test/TestClass.java" line-rate="0.875" branch-rate="0.25" complexity="2.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="4" hits="1" branch="false"/>
+							</lines>
+						</method>
+						<method name="SampleFunction" signature="()V" line-rate="0.8571428571428571" branch-rate="0.25" complexity="0">
+							<lines>
+								<line number="7" hits="1" branch="false"/>
+								<line number="12" hits="1" branch="false"/>
+								<line number="13" hits="1" branch="false"/>
+								<line number="15" hits="1" branch="true" condition-coverage="25% (1/4)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+										<condition number="1" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="17" hits="1" branch="false"/>
+								<line number="20" hits="0" branch="false"/>
+								<line number="26" hits="1" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="4" hits="1" branch="false"/>
+						<line number="7" hits="1" branch="false"/>
+						<line number="12" hits="1" branch="false"/>
+						<line number="13" hits="1" branch="false"/>
+						<line number="15" hits="1" branch="true" condition-coverage="25% (1/4)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+								<condition number="1" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="17" hits="1" branch="false"/>
+						<line number="20" hits="0" branch="false"/>
+						<line number="26" hits="1" branch="false"/>
+					</lines>
+				</class>
+				<class name="test.TestClass$NestedClass" filename="test/TestClass.java" line-rate="0.0" branch-rate="1.0" complexity="2.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="(Ltest/TestClass;)V" line-rate="0.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="28" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="SampleFunction" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="30" hits="0" branch="false"/>
+								<line number="34" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="28" hits="0" branch="false"/>
+						<line number="30" hits="0" branch="false"/>
+						<line number="34" hits="0" branch="false"/>
+					</lines>
+				</class>
+			</classes>
+		</package>
+		<package name="test.sub" line-rate="0.0" branch-rate="1.0" complexity="1.0">
+			<classes>
+				<class name="test.sub.Sub" filename="test/sub/Sub.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="3" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="SampleFunction" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="5" hits="0" branch="false"/>
+								<line number="9" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="3" hits="0" branch="false"/>
+						<line number="5" hits="0" branch="false"/>
+						<line number="9" hits="0" branch="false"/>
+					</lines>
+				</class>
+			</classes>
+		</package>
+	</packages>
+</coverage>

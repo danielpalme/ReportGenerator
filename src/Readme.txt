@@ -58,6 +58,33 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.1.1.0
+
+    * Fix: Issue #225: Improved arguments parsing for Linux
+
+4.1.0.0
+
+    * Fix: Issue #224: Fixed badge generation in CLI tool
+
+4.0.15.0
+
+    * Fix: Issue #218: Removed unnecessary trailing zeros in metrics
+    * Fix: Issue #219: Fixed errors in Cobertura reports (not compliant with DTD)
+
+4.0.14.0
+
+    * Fix: Issue #213: Correct usage of source directories in Cobertura
+    * Fix: Issue #216: Handling of large coverage numbers
+
+4.0.13.0
+
+    * New: Issue #207: Highlighting of test methods by line coverage
+    * Fix: Issue #212: Fixed name of SonarQube file
+
+4.0.12.0
+
+    * Fix: Issue #192, #209: Parsing of invalid Cobertura files
+
 4.0.11.0
 
     * Fix: Fixed icons on collapse all / expand all

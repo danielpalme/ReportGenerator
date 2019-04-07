@@ -1,1 +1,0 @@
-dotnet publish -c Release ReportGenerator.DotnetCliTool_dotnet3.csproj

@@ -7,16 +7,8 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <AssemblyName>ReportGenerator.Core</AssemblyName>
-    <AssemblyVersion>4.0.11.0</AssemblyVersion>
-    <FileVersion>4.0.11.0</FileVersion>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>..\target\bin\Debug\</OutputPath>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>..\target\bin\Release\</OutputPath>
+    <AssemblyVersion>4.1.1.0</AssemblyVersion>
+    <FileVersion>4.1.1.0</FileVersion>
   </PropertyGroup>
     
   <PropertyGroup>
@@ -81,13 +73,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="15.8.166" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="15.9.20" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
     <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta0004" />
-    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta009">
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.1-rc.114">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>

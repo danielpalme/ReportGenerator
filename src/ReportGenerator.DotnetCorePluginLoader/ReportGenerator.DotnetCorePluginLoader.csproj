@@ -2,16 +2,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <RootNamespace>ReportGenerator.DotnetCorePluginLoader</RootNamespace>
-    <AssemblyVersion>4.0.11.0</AssemblyVersion>
-    <FileVersion>4.0.11.0</FileVersion>
-  </PropertyGroup>
-  
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>..\target\bin\Debug\</OutputPath>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>..\target\bin\Release\</OutputPath>
+    <AssemblyVersion>4.1.1.0</AssemblyVersion>
+    <FileVersion>4.1.1.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

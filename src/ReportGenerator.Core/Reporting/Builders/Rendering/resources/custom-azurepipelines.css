@@ -12,7 +12,7 @@ a:hover { color: #000; text-decoration: underline; }
 .containerright { border-left: solid 1px #EAEAEA; display: table-cell; width: 340px; min-width: 340px; background-color: #fff; height: 100%; }
 .containerrightfixed { position: fixed; padding: 0 20px 20px 20px; width: 300px; overflow-y: auto; height: 100%; top: 0; bottom: 0; }
 .containerrightfixed h1 { background-color: rgba(248,248,248,1); }
-.containerrightfixed label, .containerright a { white-space: nowrap; overflow: hidden; display: inline-block; max-width: 300px; text-overflow: ellipsis; }
+.containerrightfixed label, .containerright a { white-space: nowrap; overflow: hidden; display: inline-block; width: 100%; max-width: 300px; text-overflow: ellipsis; }
 .containerright a { margin-bottom: 3px; }
 
 @media screen and (max-width:1200px){ 

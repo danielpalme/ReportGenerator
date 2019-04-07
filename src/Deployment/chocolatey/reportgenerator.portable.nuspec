@@ -20,6 +20,20 @@
     <tags>Code Coverage Reporting Testing TDD Utility</tags>
   </metadata>
   <files>
-    <file src="tools\chocolateyInstall.ps1" target="tools" />
+    <file src="..\..\..\LICENSE.txt" target="LICENSE.txt" />
+    <file src="..\..\Readme.txt" target="Readme.txt" />
+    <file src="VERIFICATION.txt" target="tools\VERIFICATION.txt" />
+
+    <!-- NetCoreApp2.0 ('tools\netcoreapp2.0' directory) -->
+    <file src="..\..\ReportGenerator.Console.NetCore\bin\Release\netcoreapp2.0\publish\**\*.*" target="tools\netcoreapp2.0" />
+
+    <!-- NetCoreApp2.1 ('tools\netcoreapp2.1' directory) -->
+    <file src="..\..\ReportGenerator.Console.NetCore\bin\Release\netcoreapp2.1\publish\**\*.*" target="tools\netcoreapp2.1" />
+    
+    <!-- .NET 4.7 ('tools\net47' directory) -->
+    <file src="..\..\ReportGenerator.Console\bin\Release\appsettings.json" target="tools\net47" />
+    <file src="..\..\ReportGenerator.Console\bin\Release\*.dll" target="tools\net47" />
+    <file src="..\..\ReportGenerator.Console\bin\Release\ReportGenerator.exe" target="tools\net47" />
+    <file src="..\..\ReportGenerator.Console\bin\Release\ReportGenerator.exe.config" target="tools\net47" />
   </files>
 </package>
