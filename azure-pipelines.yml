@@ -83,7 +83,6 @@ steps:
     modifyOutputPath: false
     workingDirectory: src/ReportGenerator.DotnetCliTool
 
-steps:
 - script: 'copy global_dotnet3.json global.json'
   workingDirectory: 'src/ReportGenerator.DotnetCliTool'
   displayName: 'Copy global.json'
@@ -98,7 +97,6 @@ steps:
     modifyOutputPath: false
     workingDirectory: src/ReportGenerator.DotnetCliTool
 
-steps:
 - script: 'rm global.json'
   workingDirectory: 'src/ReportGenerator.DotnetCliTool'
   displayName: 'Delete global.json'
