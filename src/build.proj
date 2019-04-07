@@ -100,7 +100,7 @@
     <RemoveDir Directories="AzureDevopsTask\ReportGenerator\tools\netcoreapp2.1" />  
     <MakeDir Directories="AzureDevopsTask\ReportGenerator\tools\netcoreapp2.1" />
     <Copy SourceFiles="@(ZipFileContentNetCore21)" DestinationFolder="AzureDevopsTask\ReportGenerator\tools\netcoreapp2.1\%(RecursiveDir)" /> 
-    <Exec Command="tsc" WorkingDirectory="AzureDevopsTask\ReportGenerator" />
+    <Exec Command="npm run tsc --" WorkingDirectory="AzureDevopsTask\ReportGenerator" />
     <Exec Command="tfx extension create --manifest-globs vss-extension.json --output-path ..\target\packages" WorkingDirectory="AzureDevopsTask" />
 
     <!-- Nuget -->
