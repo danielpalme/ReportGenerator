@@ -32,6 +32,34 @@ namespace Palmmedia.ReportGenerator.Core.Test
             });
         }
 
+        [Fact]
+        public void ValidateNormalizeArgsForWindows(){
+            var args = new[]
+            {
+                "-reports:abc.xml",
+                "-targetdir:c:\\temp\\target"
+            };
+
+            var normalizedArgs = Program.NormalizeArgs(args);
+
+            Assert.True(normalizedArgs[0] == "-reports:abc.xml");
+            Assert.True(normalizedArgs[1] == "-targetdir:c:\\temp\\target");
+        }
+
+        [Fact]
+        public void ValidateNormalizeArgsForLinux(){
+            var args = new[]
+            {
+                "\"-reports:/tmp/**/coverage.xml\"",
+                "\"-targetdir:/tmp\""
+            };
+
+            var normalizedArgs = Program.NormalizeArgs(args);
+
+            Assert.True(normalizedArgs[0] == "-reports:/tmp/**/coverage.xml");
+            Assert.True(normalizedArgs[1] == "-targetdir:/tmp");
+        }
+
         public IEnumerator<object[]> GetEnumerator()
         {
             var reportBuilderFactory = new ReportBuilderFactory(new ReflectionPluginLoader(new List<string>()));

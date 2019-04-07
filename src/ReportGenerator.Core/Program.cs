@@ -17,7 +17,7 @@ namespace Palmmedia.ReportGenerator.Core
         /// <returns>Return code indicating success/failure.</returns>
         public static int Main(string[] args)
         {
-            args = args.Select(a => a.EndsWith("\"", StringComparison.OrdinalIgnoreCase) ? a.TrimEnd('\"') + "\\" : a).ToArray();
+            args = NormalizeArgs(args);
 
             var reportConfigurationBuilder = new ReportConfigurationBuilder();
             ReportConfiguration configuration = reportConfigurationBuilder.Create(args);
@@ -31,6 +31,10 @@ namespace Palmmedia.ReportGenerator.Core
             }
 
             return new Generator().GenerateReport(configuration) ? 0 : 1;
+        }
+
+        public static string[] NormalizeArgs(string[] args){
+            return args.Select(a => a.Replace(@"""", string.Empty)).ToArray();
         }
     }
 }

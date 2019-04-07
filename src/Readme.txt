@@ -58,6 +58,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.1.1.0
+
+    * Fix: Issue #225: Improved arguments parsing for Linux
+
 4.1.0.0
 
     * Fix: Issue #224: Fixed badge generation in CLI tool
@@ -84,6 +88,7 @@ CHANGELOG
 4.0.11.0
 
     * Fix: Fixed icons on collapse all / expand all
+
 4.0.10.0
 
     * New: Issue #203: Dark theme for Azure DevOps
