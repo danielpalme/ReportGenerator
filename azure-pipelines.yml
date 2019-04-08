@@ -229,7 +229,7 @@ steps:
     Contents: '**/*.*'
     TargetFolder: tmpzip/netcoreapp2.1
 
-    - task: CopyFiles@2
+- task: CopyFiles@2
   displayName: 'Prepare ZIP release: NetCore 3.0'
   inputs:
     SourceFolder: src/ReportGenerator.Console.NetCore/bin/Release/netcoreapp3.0/publish
