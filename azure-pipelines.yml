@@ -91,7 +91,7 @@ steps:
   inputs:
     command: publish
     publishWebProjects: false
-    arguments: '-c $(BuildConfiguration) -f netcoreapp2.1 ReportGenerator.Console.NetCore_dotnet3.csproj'
+    arguments: '-c $(BuildConfiguration) ReportGenerator.Console.NetCore_dotnet3.csproj'
     zipAfterPublish: false
     modifyOutputPath: false
     workingDirectory: src/ReportGenerator.Console.NetCore
