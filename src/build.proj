@@ -60,10 +60,18 @@
     <Exec Command="dotnet publish -c Release ReportGenerator.DotnetCliTool_dotnet3.csproj" WorkingDirectory="ReportGenerator.DotnetCliTool" />
     <Delete Files="ReportGenerator.DotnetCliTool\global.json" />
 
-    <Exec Command="dotnet publish -c Release -f netcoreapp2.0" WorkingDirectory="ReportGenerator.Console.NetCore" />
-    <Exec Command="dotnet publish -c Release -f netcoreapp2.1" WorkingDirectory="ReportGenerator.Console.NetCore" />
+    <Exec Command="dotnet publish -c Release -f netcoreapp2.0 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
+    <Exec Command="dotnet publish -c Release -f netcoreapp2.1 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
 
-    <Exec Command="dotnet publish -c Release" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
+    <Copy SourceFiles="ReportGenerator.Console.NetCore\global_dotnet3.json" DestinationFiles="ReportGenerator.Console.NetCore\global.json" /> 
+    <Exec Command="dotnet publish -c Release ReportGenerator.Console.NetCore_dotnet3.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
+    <Delete Files="ReportGenerator.Console.NetCore\global.json" />
+
+    <Exec Command="dotnet publish -c Release ReportGenerator.DotnetGlobalTool.csproj" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
+
+    <Copy SourceFiles="ReportGenerator.DotnetGlobalTool\global_dotnet3.json" DestinationFiles="ReportGenerator.DotnetGlobalTool\global.json" /> 
+    <Exec Command="dotnet publish -c Release ReportGenerator.DotnetGlobalTool_dotnet3.csproj" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
+    <Delete Files="ReportGenerator.DotnetGlobalTool\global.json" />
 
     <RemoveDir Directories="bin" />
     <RemoveDir Directories="obj" />
@@ -88,6 +96,7 @@
       <ZipFileContentNet47 Include="ReportGenerator.Console\bin\Release\appsettings.json;ReportGenerator.Console\bin\Release\*.dll;ReportGenerator.Console\bin\Release\ReportGenerator.exe;ReportGenerator.Console\bin\Release\ReportGenerator.exe.config" />
       <ZipFileContentNetCore20 Include="ReportGenerator.Console.NetCore\bin\Release\netcoreapp2.0\publish\**\*.*"/>
       <ZipFileContentNetCore21 Include="ReportGenerator.Console.NetCore\bin\Release\netcoreapp2.1\publish\**\*.*"/>
+      <ZipFileContentNetCore30 Include="ReportGenerator.Console.NetCore\bin\Release\netcoreapp3.0\publish\**\*.*"/>
     </ItemGroup>
 
     <!-- ZIP -->
@@ -98,6 +107,7 @@
     <Copy SourceFiles="@(ZipFileContentNet47)" DestinationFolder="tmpzip\net47" /> 
     <Copy SourceFiles="@(ZipFileContentNetCore20)" DestinationFolder="tmpzip\netcoreapp2.0\%(RecursiveDir)" />
     <Copy SourceFiles="@(ZipFileContentNetCore21)" DestinationFolder="tmpzip\netcoreapp2.1\%(RecursiveDir)" />
+    <Copy SourceFiles="@(ZipFileContentNetCore30)" DestinationFolder="tmpzip\netcoreapp3.0\%(RecursiveDir)" />
    <ItemGroup>
       <ZipFileContent Include="tmpzip\**\*.*"/>
     </ItemGroup> 

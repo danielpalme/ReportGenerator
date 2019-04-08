@@ -29,6 +29,9 @@
 
     <!-- NetCoreApp2.1 ('tools\netcoreapp2.1' directory) -->
     <file src="..\..\ReportGenerator.Console.NetCore\bin\Release\netcoreapp2.1\publish\**\*.*" target="tools\netcoreapp2.1" />
+
+    <!-- NetCoreApp3.0 ('tools\netcoreapp3.0' directory) -->
+    <file src="..\..\ReportGenerator.Console.NetCore\bin\Release\netcoreapp3.0\publish\**\*.*" target="tools\netcoreapp3.0" />
     
     <!-- .NET 4.7 ('tools\net47' directory) -->
     <file src="..\..\ReportGenerator.Console\bin\Release\appsettings.json" target="tools\net47" />

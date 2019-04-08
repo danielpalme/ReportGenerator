@@ -33,9 +33,9 @@ dotnet reportgenerator [options]</description>
       <group targetFramework=".NETCoreApp2.1">
         <dependency id="Microsoft.NETCore.App" version="2.1.0" exclude="Build,Analyzers" />
       </group>
-      <group targetFramework=".NETCoreApp3.0">
-        <dependency id="Microsoft.NETCore.App" version="3.0.0" exclude="Build,Analyzers" />
-      </group>
+      <!-- <group targetFramework=".NETCoreApp3.0">
+        <dependency id="Microsoft.NETCore.App" version="3.0.0-preview3" exclude="Build,Analyzers" />
+      </group> -->
     </dependencies>
   </metadata>
   <files>
@@ -46,6 +46,6 @@ dotnet reportgenerator [options]</description>
     <file src="..\..\ReportGenerator.DotnetCliTool\bin\Release\netcoreapp2.1\publish\**\*.*" target="lib\netcoreapp2.0" />
 
     <!-- NetCoreApp3.0 ('lib\netcoreapp3.0' directory) -->
-    <file src="..\..\ReportGenerator.DotnetCliTool\bin\Release\netcoreapp3.0\publish\**\*.*" target="lib\netcoreapp3.0" />
+    <!-- <file src="..\..\ReportGenerator.DotnetCliTool\bin\Release\netcoreapp3.0\publish\**\*.*" target="lib\netcoreapp3.0" /> -->
   </files>
 </package>
