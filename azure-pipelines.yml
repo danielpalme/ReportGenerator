@@ -76,6 +76,29 @@ steps:
     modifyOutputPath: false
     workingDirectory: src/ReportGenerator.DotnetGlobalTool
 
+# Run tests and create coverage report
+- task: DotNetCoreCLI@2
+  displayName: Test
+  inputs:
+    command: test
+    projects: '$(Parameters.TestProjects)'
+    arguments: '--configuration $(BuildConfiguration) --no-build /p:AltCover=true /p:AltCoverForce=true /p:AltCoverCallContext=[Fact] /p:AltCoverXmlReport=..\target\reports\coverage\coverage.opencover.xml'
+
+- task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@4
+  displayName: ReportGenerator
+  inputs:
+    reports: 'src\target\reports\coverage\coverage.opencover.xml'
+    targetdir: 'src\target\reports\coverage'
+    reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
+    assemblyfilters: '-xunit*'
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage results'
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: '$(build.sourcesdirectory)\src\target\reports\coverage\Cobertura.xml'
+    reportDirectory: '$(build.sourcesdirectory)\src\target\reports\coverage'
+
 # Build .NET Core 3.0
 - task: DotNetCoreInstaller@0
   displayName: 'Use .NET Core sdk 3.0.100-preview3-010431'
@@ -135,29 +158,6 @@ steps:
 - script: 'rm global.json'
   workingDirectory: 'src/ReportGenerator.DotnetGlobalTool'
   displayName: 'Delete global.json'
-
-# Run tests and create coverage report
-- task: DotNetCoreCLI@2
-  displayName: Test
-  inputs:
-    command: test
-    projects: '$(Parameters.TestProjects)'
-    arguments: '--configuration $(BuildConfiguration) --no-build /p:AltCover=true /p:AltCoverForce=true /p:AltCoverCallContext=[Fact] /p:AltCoverXmlReport=..\target\reports\coverage\coverage.opencover.xml'
-
-- task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@4
-  displayName: ReportGenerator
-  inputs:
-    reports: 'src\target\reports\coverage\coverage.opencover.xml'
-    targetdir: 'src\target\reports\coverage'
-    reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
-    assemblyfilters: '-xunit*'
-
-- task: PublishCodeCoverageResults@1
-  displayName: 'Publish code coverage results'
-  inputs:
-    codeCoverageTool: Cobertura
-    summaryFileLocation: '$(build.sourcesdirectory)\src\target\reports\coverage\Cobertura.xml'
-    reportDirectory: '$(build.sourcesdirectory)\src\target\reports\coverage'
 
 # Create artifacts
 - task: CopyFiles@2
