@@ -58,6 +58,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         private static readonly Dictionary<string, string> FileNameByClass = new Dictionary<string, string>();
 
         /// <summary>
+        /// Indicates that JavaScript was generated.
+        /// </summary>
+        private static bool javaScriptGenerated;
+
+        /// <summary>
         /// Indicates that only a summary report is created (no class reports).
         /// </summary>
         private readonly bool onlySummary;
@@ -1082,9 +1087,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         {
             this.SaveReport();
 
-            if (!this.inlineCssAndJavaScript)
+            if (!this.inlineCssAndJavaScript && !javaScriptGenerated)
             {
                 this.SaveJavaScript(targetDirectory);
+                javaScriptGenerated = true;
             }
         }
 

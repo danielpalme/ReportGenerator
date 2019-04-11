@@ -58,6 +58,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.1.2.0
+
+    * Fix: Issue #227: Performance improvement - class.js is generated only once
+
 4.1.1.0
 
     * Fix: Issue #225: Improved arguments parsing for Linux

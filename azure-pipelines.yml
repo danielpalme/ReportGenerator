@@ -10,7 +10,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  version: '4.1.1'
+  version: '4.1.2'
 
 # Prepare
 steps:
