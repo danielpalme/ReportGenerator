@@ -137,6 +137,20 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         public int? TotalLines { get; private set; }
 
         /// <summary>
+        /// Gets covered code elements
+        /// </summary>
+        public IEnumerable<CodeElement> CoveredCodeElements
+        {
+            get
+            {
+                return this.CodeElements.Where(
+                    x => lineCoverage.Skip(x.FirstLine)
+                        .Take(x.LastLine - x.FirstLine + 1)
+                        .Any(y => y > 0));
+            }
+        }
+
+        /// <summary>
         /// Gets the number of covered branches.
         /// </summary>
         /// <value>
