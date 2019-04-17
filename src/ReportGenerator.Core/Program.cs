@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Palmmedia.ReportGenerator.Core.Plugin;
 using Palmmedia.ReportGenerator.Core.Reporting;
 
@@ -33,7 +32,8 @@ namespace Palmmedia.ReportGenerator.Core
             return new Generator().GenerateReport(configuration) ? 0 : 1;
         }
 
-        public static string[] NormalizeArgs(string[] args){
+        public static string[] NormalizeArgs(string[] args)
+        {
             return args.Select(a => a.Replace(@"""", string.Empty)).ToArray();
         }
     }

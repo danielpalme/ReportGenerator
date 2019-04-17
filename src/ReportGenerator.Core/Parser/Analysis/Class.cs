@@ -129,6 +129,22 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         public decimal? BranchCoverageQuota => (this.TotalBranches == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)this.CoveredBranches / (double)this.TotalBranches) / 10;
 
         /// <summary>
+        /// Gets the number of covered code elements.
+        /// </summary>
+        /// <value>
+        /// The number of covered code elements.
+        /// </value>
+        public int CoveredCodeElements => this.files.Sum(f => f.CoveredCodeElements);
+
+        /// <summary>
+        /// Gets the number of total code elements.
+        /// </summary>
+        /// <value>
+        /// The number of total code elements.
+        /// </value>
+        public int TotalCodeElements => this.files.Sum(f => f.TotalCodeElements);
+
+        /// <summary>
         /// Determines whether the specified <see cref="object"/> is equal to this instance.
         /// </summary>
         /// <param name="obj">The <see cref="object"/> to compare with this instance.</param>

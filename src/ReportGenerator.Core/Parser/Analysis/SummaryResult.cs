@@ -125,5 +125,21 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// </summary>
         /// <value>The branch coverage quota.</value>
         public decimal? BranchCoverageQuota => (this.TotalBranches == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)this.CoveredBranches / (double)this.TotalBranches) / 10;
+
+        /// <summary>
+        /// Gets the number of covered code elements.
+        /// </summary>
+        /// <value>
+        /// The number of covered code elements.
+        /// </value>
+        public int CoveredCodeElements => this.Assemblies.Sum(f => f.CoveredCodeElements);
+
+        /// <summary>
+        /// Gets the number of total code elements.
+        /// </summary>
+        /// <value>
+        /// The number of total code elements.
+        /// </value>
+        public int TotalCodeElements => this.Assemblies.Sum(f => f.TotalCodeElements);
     }
 }
