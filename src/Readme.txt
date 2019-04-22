@@ -59,6 +59,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.1.4.0
+
+    * Fix: Issue #115: Cobertura path problem when source path is drive letter
+
 4.1.3.0
 
     * New: Issue #228: New report type 'TeamCitySummary'

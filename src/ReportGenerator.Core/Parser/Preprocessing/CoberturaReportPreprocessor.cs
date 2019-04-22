@@ -47,6 +47,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
             var sources = report.Descendants("sources")
                 .Elements("source")
                 .Select(s => s.Value)
+                .Select(s => s.EndsWith(":") ? s + Path.DirectorySeparatorChar : s) // Issue: #115
                 .ToArray();
 
             if (sources.Length == 0)
