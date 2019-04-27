@@ -27,6 +27,7 @@ The following output formats are supported by ReportGenerator:
 -SonarQube
 -XML, XMLSummary
 -Latex, LatexSummary
+-TeamCitySummary
 -TextSummary
 -CsvSummary
 -PngChart
@@ -57,6 +58,18 @@ For further details take a look at LICENSE.txt.
 =======================================================================
 
 CHANGELOG
+
+4.1.4.0
+
+    * Fix: Issue #115: Cobertura path problem when source path is drive letter
+
+4.1.3.0
+
+    * New: Issue #228: New report type 'TeamCitySummary'
+
+4.1.2.0
+
+    * Fix: Issue #227: Performance improvement - class.js is generated only once
 
 4.1.1.0
 

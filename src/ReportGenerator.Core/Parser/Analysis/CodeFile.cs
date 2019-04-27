@@ -156,6 +156,31 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         }
 
         /// <summary>
+        /// Gets the number of covered code elements.
+        /// </summary>
+        /// <value>
+        /// The number of covered code elements.
+        /// </value>
+        public int CoveredCodeElements
+        {
+            get
+            {
+                return this.CodeElements.Count(
+                    x => this.lineCoverage.Skip(x.FirstLine)
+                        .Take(x.LastLine - x.FirstLine + 1)
+                        .Any(y => y > 0));
+            }
+        }
+
+        /// <summary>
+        /// Gets the number of total code elements.
+        /// </summary>
+        /// <value>
+        /// The number of total code elements.
+        /// </value>
+        public int TotalCodeElements => this.codeElements.Count;
+
+        /// <summary>
         /// Gets the number of total branches.
         /// </summary>
         /// <value>

@@ -10,7 +10,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  version: '4.1.1'
+  version: '4.1.4'
 
 # Prepare
 steps:
@@ -101,9 +101,9 @@ steps:
 
 # Build .NET Core 3.0
 - task: DotNetCoreInstaller@0
-  displayName: 'Use .NET Core sdk 3.0.100-preview3-010431'
+  displayName: 'Use .NET Core sdk 3.0.100-preview4-011223'
   inputs:
-    version: 3.0.100-preview3-010431
+    version: 3.0.100-preview4-011223
 
 - script: 'copy global_dotnet3.json global.json'
   workingDirectory: 'src/ReportGenerator.Console.NetCore'
@@ -121,24 +121,6 @@ steps:
 
 - script: 'rm global.json'
   workingDirectory: 'src/ReportGenerator.Console.NetCore'
-  displayName: 'Delete global.json'
-
-- script: 'copy global_dotnet3.json global.json'
-  workingDirectory: 'src/ReportGenerator.DotnetCliTool'
-  displayName: 'Copy global.json'
-
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet publish ReportGenerator.DotnetCliTool 3.0'
-  inputs:
-    command: publish
-    publishWebProjects: false
-    arguments: '-c $(BuildConfiguration) ReportGenerator.DotnetCliTool_dotnet3.csproj'
-    zipAfterPublish: false
-    modifyOutputPath: false
-    workingDirectory: src/ReportGenerator.DotnetCliTool
-
-- script: 'rm global.json'
-  workingDirectory: 'src/ReportGenerator.DotnetCliTool'
   displayName: 'Delete global.json'
 
 - script: 'copy global_dotnet3.json global.json'

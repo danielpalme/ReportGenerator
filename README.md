@@ -57,8 +57,8 @@ Explanations:
    Target directory:   The directory where the generated report should be saved.
    Report types:       The output formats and scope (separated by semicolon).
                        Values: Badges, Cobertura, CsvSummary, Html, HtmlChart, HtmlInline,
-                       HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Dark,
-                       HtmlSummary, Latex, LatexSummary, MHtml, PngChart, SonarQube, TextSummary, Xml, XmlSummary
+                       HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Dark, HtmlSummary, Latex, 
+                       LatexSummary, MHtml, PngChart, SonarQube, TeamCitySummary, TextSummary, Xml, XmlSummary
    Source directories: Optional directories which contain the corresponding source code (separated by semicolon).
                        The source directories are used if coverage report contains classes without path information.
    History directory:  Optional directory for storing persistent coverage information.

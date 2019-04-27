@@ -44,8 +44,5 @@ dotnet reportgenerator [options]</description>
 
     <!-- NetCoreApp2.1 ('lib\netcoreapp2.0' directory), Version 2.1 is copied to directory 2.0 to fix #224 -->
     <file src="..\..\ReportGenerator.DotnetCliTool\bin\Release\netcoreapp2.1\publish\**\*.*" target="lib\netcoreapp2.0" />
-
-    <!-- NetCoreApp3.0 ('lib\netcoreapp3.0' directory) -->
-    <!-- <file src="..\..\ReportGenerator.DotnetCliTool\bin\Release\netcoreapp3.0\publish\**\*.*" target="lib\netcoreapp3.0" /> -->
   </files>
 </package>
