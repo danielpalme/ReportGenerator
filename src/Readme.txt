@@ -59,6 +59,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.1.5.0
+
+    * Fix: Issue #232: Allow roll-forward to .NET Core 3.0 if 2.x is not installed
+
 4.1.4.0
 
     * Fix: Issue #115: Cobertura path problem when source path is drive letter
