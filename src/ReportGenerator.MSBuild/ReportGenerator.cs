@@ -1,8 +1,9 @@
 ﻿using System.Linq;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
+using Palmmedia.ReportGenerator.Core;
 
-namespace Palmmedia.ReportGenerator.Core.MSBuild
+namespace Palmmedia.ReportGenerator.MSBuild
 {
     /// <summary>
     /// MSBuild Task for generating reports.
@@ -10,12 +11,14 @@ namespace Palmmedia.ReportGenerator.Core.MSBuild
     /// <example>
     /// &lt;?xml version="1.0" encoding="utf-8"?&gt;<br/>
     /// &lt;Project DefaultTargets="Coverage" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0"&gt;<br/>
-    ///   &lt;UsingTask TaskName="ReportGenerator" AssemblyFile="ReportGenerator.exe" /&gt;<br/>
     ///   &lt;ItemGroup&gt;<br/>
-    ///       &lt;CoverageFiles Include="partcover.xml" /&gt;<br/>
+    ///       &lt;PackageReference Include="ReportGenerator" Version="x.y.z" /&gt;<br/>
+    ///   &lt;/ItemGroup&gt;<br/>
+    ///   &lt;ItemGroup&gt;<br/>
+    ///       &lt;CoverageFiles Include="OpenCover.xml" /&gt;<br/>
     ///   &lt;/ItemGroup&gt;<br/>
     ///   &lt;Target Name="Coverage"&gt;<br/>
-    ///     &lt;ReportGenerator ReportFiles="@(CoverageFiles)" TargetDirectory="report" ReportTypes="Html" /&gt;<br/>
+    ///     &lt;ReportGenerator ReportFiles="@(CoverageFiles)" TargetDirectory="report" ReportTypes="Html;Latex" HistoryDirectory="history" Plugins="CustomReports.dll" AssemblyFilters="+Include;-Excluded" VerbosityLevel="Verbose" /&gt;<br/>
     ///   &lt;/Target&gt;<br/>
     /// &lt;/Project&gt;
     /// </example>

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSharp", "CSharp", "{B27F2CDF-8E01-4D2C-9A26-972F02A0EFB6}"
 EndProject
@@ -96,6 +96,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other", "Other", "{0974779A
 		Testprojects\Other\Cobertura_Istanbul.xml = Testprojects\Other\Cobertura_Istanbul.xml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportGenerator.MSBuild", "ReportGenerator.MSBuild\ReportGenerator.MSBuild.csproj", "{E0AC1EE8-82A3-41EE-BD42-44659CDBD333}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -138,6 +140,10 @@ Global
 		{E3CA3149-7810-4E0C-9CF8-97E39DFDD5AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3CA3149-7810-4E0C-9CF8-97E39DFDD5AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3CA3149-7810-4E0C-9CF8-97E39DFDD5AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0AC1EE8-82A3-41EE-BD42-44659CDBD333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0AC1EE8-82A3-41EE-BD42-44659CDBD333}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0AC1EE8-82A3-41EE-BD42-44659CDBD333}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0AC1EE8-82A3-41EE-BD42-44659CDBD333}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

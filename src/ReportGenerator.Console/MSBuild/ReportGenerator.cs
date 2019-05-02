@@ -13,7 +13,7 @@ namespace Palmmedia.ReportGenerator.MSBuild
     /// &lt;Project DefaultTargets="Coverage" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0"&gt;<br/>
     ///   &lt;UsingTask TaskName="ReportGenerator" AssemblyFile="ReportGenerator.exe" /&gt;<br/>
     ///   &lt;ItemGroup&gt;<br/>
-    ///       &lt;CoverageFiles Include="partcover.xml" /&gt;<br/>
+    ///       &lt;CoverageFiles Include="OpenCover.xml" /&gt;<br/>
     ///   &lt;/ItemGroup&gt;<br/>
     ///   &lt;Target Name="Coverage"&gt;<br/>
     ///     &lt;ReportGenerator ReportFiles="@(CoverageFiles)" TargetDirectory="report" ReportTypes="Html" /&gt;<br/>
