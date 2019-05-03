@@ -62,6 +62,7 @@ CHANGELOG
 4.1.5.0
 
     * New: Moved MSBuild task to separate assembly
+    * Fix: Issue #234: Made CoverageReportParser class public
     * Fix: Issue #232: Allow roll-forward to .NET Core 3.0 if 2.x is not installed
 
 4.1.4.0

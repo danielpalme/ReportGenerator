@@ -4,7 +4,7 @@
     /// Interface to filter assemblies and classes based on their name during report generation.
     /// This can be used to include only a subset of all assemblies/classes in the report.
     /// </summary>
-    internal interface IFilter
+    public interface IFilter
     {
         /// <summary>
         /// Determines whether the given element should be included in the report.

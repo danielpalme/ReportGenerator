@@ -16,7 +16,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
     /// <summary>
     /// Initiates the corresponding parser to the given report file.
     /// </summary>
-    internal class CoverageReportParser
+    public class CoverageReportParser
     {
         /// <summary>
         /// The Logger.
@@ -61,7 +61,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="assemblyFilter">The assembly filter.</param>
         /// <param name="classFilter">The class filter.</param>
         /// <param name="fileFilter">The file filter.</param>
-        internal CoverageReportParser(int numberOfReportsParsedInParallel, IEnumerable<string> sourceDirectories, IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter)
+        public CoverageReportParser(int numberOfReportsParsedInParallel, IEnumerable<string> sourceDirectories, IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter)
         {
             this.numberOfReportsParsedInParallel = Math.Max(1, numberOfReportsParsedInParallel);
             this.sourceDirectories = sourceDirectories ?? throw new ArgumentNullException(nameof(sourceDirectories));
@@ -77,7 +77,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <returns>
         /// The IParser instance.
         /// </returns>
-        internal ParserResult ParseFiles(IReadOnlyCollection<string> reportFiles)
+        public ParserResult ParseFiles(IReadOnlyCollection<string> reportFiles)
         {
             if (reportFiles == null)
             {
