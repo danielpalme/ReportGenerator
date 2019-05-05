@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.FileReading;
@@ -135,6 +136,16 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// </summary>
         /// <value>The number of total lines.</value>
         public int? TotalLines { get; private set; }
+
+        /// <summary>
+        /// Gets line coverage information by line number for this file.
+        /// </summary>
+        public ReadOnlyCollection<int> LineCoverage => Array.AsReadOnly(this.lineCoverage);
+
+        /// <summary>
+        /// Gets line visit status by line number for this file.
+        /// </summary>
+        public ReadOnlyCollection<LineVisitStatus> LineVisitStatus => Array.AsReadOnly(this.lineVisitStatus);
 
         /// <summary>
         /// Gets the number of covered branches.
@@ -303,7 +314,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
             {
                 currentLineNumber++;
                 int visits = this.lineCoverage.Length > currentLineNumber ? this.lineCoverage[currentLineNumber] : -1;
-                LineVisitStatus lineVisitStatus = this.lineVisitStatus.Length > currentLineNumber ? this.lineVisitStatus[currentLineNumber] : LineVisitStatus.NotCoverable;
+                LineVisitStatus lineVisitStatus = this.lineVisitStatus.Length > currentLineNumber ? this.lineVisitStatus[currentLineNumber] : Analysis.LineVisitStatus.NotCoverable;
 
                 var lineCoverageByTestMethod = this.lineCoveragesByTestMethod
                     .ToDictionary(
@@ -316,7 +327,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                         }
                         else
                         {
-                            return new ShortLineAnalysis(-1, LineVisitStatus.NotCoverable);
+                            return new ShortLineAnalysis(-1, Analysis.LineVisitStatus.NotCoverable);
                         }
                     });
 

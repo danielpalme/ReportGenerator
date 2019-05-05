@@ -98,73 +98,123 @@ export class CodeElementViewModel extends ElementBase {
         }
     }
 
-    changeSorting(sortBy: string, ascending: boolean): void {
+    static sortCodeElementViewModels(elements: CodeElementViewModel[], sortBy: string, ascending: boolean): void {
         let smaller: number = ascending ? -1 : 1;
         let bigger: number = ascending ? 1 : -1;
 
         if (sortBy === "name") {
-            this.subElements.sort(function (left: CodeElementViewModel, right: CodeElementViewModel): number {
+            elements.sort(function (left: CodeElementViewModel, right: CodeElementViewModel): number {
                 return left.name === right.name ? 0 : (left.name < right.name ? smaller : bigger);
             });
+        } else if (sortBy === "covered") {
+            elements.sort(function (left: CodeElementViewModel, right: CodeElementViewModel): number {
+                return left.coveredLines === right.coveredLines ?
+                    0 :
+                    (left.coveredLines < right.coveredLines ? smaller : bigger);
+            });
+        } else if (sortBy === "uncovered") {
+            elements.sort(function (left: CodeElementViewModel, right: CodeElementViewModel): number {
+                return left.uncoveredLines === right.uncoveredLines ?
+                    0
+                    : (left.uncoveredLines < right.uncoveredLines ? smaller : bigger);
+            });
+        } else if (sortBy === "coverable") {
+            elements.sort(function (left: CodeElementViewModel, right: CodeElementViewModel): number {
+                return left.coverableLines === right.coverableLines ?
+                    0
+                    : (left.coverableLines < right.coverableLines ? smaller : bigger);
+            });
+        } else if (sortBy === "total") {
+            elements.sort(function (left: CodeElementViewModel, right: CodeElementViewModel): number {
+                return left.totalLines === right.totalLines ?
+                    0 
+                    : (left.totalLines < right.totalLines ? smaller : bigger);
+            });
+        } else if (sortBy === "coverage") {
+            elements.sort(function (left: CodeElementViewModel, right: CodeElementViewModel): number {
+                if (left.coverage === right.coverage) {
+                    return 0;
+                } else if (isNaN(left.coverage)) {
+                    return smaller;
+                } else if (isNaN(right.coverage)) {
+                    return bigger;
+                } else {
+                    return left.coverage < right.coverage ? smaller : bigger;
+                }
+            });
+        } else if (sortBy === "branchcoverage") {
+            elements.sort(function (left: CodeElementViewModel, right: CodeElementViewModel): number {
+                if (left.branchCoverage === right.branchCoverage) {
+                    return 0;
+                } else if (isNaN(left.branchCoverage)) {
+                    return smaller;
+                } else if (isNaN(right.branchCoverage)) {
+                    return bigger;
+                } else {
+                    return left.branchCoverage < right.branchCoverage ? smaller : bigger;
+                }
+            });
+        }
+    }
 
+    changeSorting(sortBy: string, ascending: boolean): void {
+       CodeElementViewModel.sortCodeElementViewModels(this.subElements, sortBy, ascending);
+
+        let smaller: number = ascending ? -1 : 1;
+        let bigger: number = ascending ? 1 : -1;
+
+        if (sortBy === "name") {
             this.classes.sort(function (left: ClassViewModel, right: ClassViewModel): number {
                 return left.name === right.name ? 0 : (left.name < right.name ? smaller : bigger);
             });
-        } else {
-            // code elements / namespaces are resorted ASC by name if other sort columns than "name" is selected
-            this.subElements.sort(function (left: CodeElementViewModel, right: CodeElementViewModel): number {
-                return left.name === right.name ? 0 : (left.name < right.name ? -1 : 1);
+        } else if (sortBy === "covered") {
+            this.classes.sort(function (left: ClassViewModel, right: ClassViewModel): number {
+                return left.coveredLines === right.coveredLines ?
+                        0
+                        : (left.coveredLines < right.coveredLines ? smaller : bigger);
             });
-
-            if (sortBy === "covered") {
-                this.classes.sort(function (left: ClassViewModel, right: ClassViewModel): number {
-                    return left.coveredLines === right.coveredLines ?
-                            0
-                            : (left.coveredLines < right.coveredLines ? smaller : bigger);
-                });
-            } else if (sortBy === "uncovered") {
-                this.classes.sort(function (left: ClassViewModel, right: ClassViewModel): number {
-                    return left.uncoveredLines === right.uncoveredLines ?
-                            0
-                            : (left.uncoveredLines < right.uncoveredLines ? smaller : bigger);
-                });
-            } else if (sortBy === "coverable") {
-                this.classes.sort(function (left: ClassViewModel, right: ClassViewModel): number {
-                    return left.coverableLines === right.coverableLines ?
-                            0
-                            : (left.coverableLines < right.coverableLines ? smaller : bigger);
-                });
-            } else if (sortBy === "total") {
-                this.classes.sort(function (left: ClassViewModel, right: ClassViewModel): number {
-                    return left.totalLines === right.totalLines ?
-                            0
-                            : (left.totalLines < right.totalLines ? smaller : bigger);
-                });
-            } else if (sortBy === "coverage") {
-                this.classes.sort(function (left: ClassViewModel, right: ClassViewModel): number {
-                    if (left.coverage === right.coverage) {
-                        return 0;
-                    } else if (isNaN(left.coverage)) {
-                        return smaller;
-                    } else if (isNaN(right.coverage)) {
-                        return bigger;
-                    } else {
-                        return left.coverage < right.coverage ? smaller : bigger;
-                    }
-                });
-            } else if (sortBy === "branchcoverage") {
-                this.classes.sort(function (left: ClassViewModel, right: ClassViewModel): number {
-                    if (left.branchCoverage === right.branchCoverage) {
-                        return 0;
-                    } else if (isNaN(left.branchCoverage)) {
-                        return smaller;
-                    } else if (isNaN(right.branchCoverage)) {
-                        return bigger;
-                    } else {
-                        return left.branchCoverage < right.branchCoverage ? smaller : bigger;
-                    }
-                });
-            }
+        } else if (sortBy === "uncovered") {
+            this.classes.sort(function (left: ClassViewModel, right: ClassViewModel): number {
+                return left.uncoveredLines === right.uncoveredLines ?
+                        0
+                        : (left.uncoveredLines < right.uncoveredLines ? smaller : bigger);
+            });
+        } else if (sortBy === "coverable") {
+            this.classes.sort(function (left: ClassViewModel, right: ClassViewModel): number {
+                return left.coverableLines === right.coverableLines ?
+                        0
+                        : (left.coverableLines < right.coverableLines ? smaller : bigger);
+            });
+        } else if (sortBy === "total") {
+            this.classes.sort(function (left: ClassViewModel, right: ClassViewModel): number {
+                return left.totalLines === right.totalLines ?
+                        0
+                        : (left.totalLines < right.totalLines ? smaller : bigger);
+            });
+        } else if (sortBy === "coverage") {
+            this.classes.sort(function (left: ClassViewModel, right: ClassViewModel): number {
+                if (left.coverage === right.coverage) {
+                    return 0;
+                } else if (isNaN(left.coverage)) {
+                    return smaller;
+                } else if (isNaN(right.coverage)) {
+                    return bigger;
+                } else {
+                    return left.coverage < right.coverage ? smaller : bigger;
+                }
+            });
+        } else if (sortBy === "branchcoverage") {
+            this.classes.sort(function (left: ClassViewModel, right: ClassViewModel): number {
+                if (left.branchCoverage === right.branchCoverage) {
+                    return 0;
+                } else if (isNaN(left.branchCoverage)) {
+                    return smaller;
+                } else if (isNaN(right.branchCoverage)) {
+                    return bigger;
+                } else {
+                    return left.branchCoverage < right.branchCoverage ? smaller : bigger;
+                }
+            });
         }
 
         for (let i: number = 0; i < this.subElements.length; i++) {

@@ -272,6 +272,8 @@ export class CoverageInfoComponent {
         return left.name === right.name ? 0 : (left.name < right.name ? smaller : bigger);
     });
 
+    CodeElementViewModel.sortCodeElementViewModels(codeElements, this.settings.sortBy, this.settings.sortOrder === "asc");
+
     for (let i: number = 0; i < codeElements.length; i++) {
       codeElements[i].changeSorting(this.settings.sortBy, this.settings.sortOrder === "asc");
     }
@@ -324,6 +326,8 @@ export class CoverageInfoComponent {
     this.settings.sortBy = sortBy;
 
     console.log(`Updating sort column: '${this.settings.sortBy}' (${this.settings.sortOrder})`);
+    CodeElementViewModel.sortCodeElementViewModels(this.codeElements, this.settings.sortBy, this.settings.sortOrder === "asc");
+
     for (let i: number = 0; i < this.codeElements.length; i++) {
       this.codeElements[i].changeSorting(this.settings.sortBy, this.settings.sortOrder === "asc");
     }
