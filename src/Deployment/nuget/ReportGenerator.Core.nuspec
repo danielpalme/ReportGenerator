@@ -22,7 +22,6 @@ https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage</desc
     <tags>Code Coverage Reporting Testing TDD Utility</tags>
     <repository type="git" url="https://github.com/danielpalme/ReportGenerator.git" />
     <dependencies>
-      <dependency id="Microsoft.Build.Utilities.Core" version="15.9.20" />
       <dependency id="Microsoft.Extensions.Configuration" version="2.1.1" />
       <dependency id="Microsoft.Extensions.Configuration.Binder" version="2.1.1" />
       <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="2.1.1" />
