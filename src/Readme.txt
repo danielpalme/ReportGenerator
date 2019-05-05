@@ -64,6 +64,7 @@ CHANGELOG
     * New: Moved MSBuild task to separate assembly
     * Fix: Issue #234: Made CoverageReportParser class public
     * Fix: Issue #232: Allow roll-forward to .NET Core 3.0 if 2.x is not installed
+    * Fix: Issue #235: Improved nested class handling for Cobertura
 
 4.1.4.0
 

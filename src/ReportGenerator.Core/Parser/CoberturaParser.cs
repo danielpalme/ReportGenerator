@@ -107,8 +107,13 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .Where(m => m.Attribute("name").Value.Equals(assemblyName))
                 .Elements("classes")
                 .Elements("class")
-                .Select(c => c.Attribute("name").Value)
-                .Where(c => !c.Contains("$") && !c.Contains("/<"))
+                .Select(c =>
+                {
+                    string fullname = c.Attribute("name").Value;
+                    int nestedClassSeparatorIndex = fullname.IndexOf('/');
+                    return nestedClassSeparatorIndex > -1 ? fullname.Substring(0, nestedClassSeparatorIndex) : fullname;
+                })
+                .Where(name => !name.Contains("$") && !name.Contains("<"))
                 .Distinct()
                 .Where(c => this.ClassFilter.IsElementIncludedInReport(c))
                 .OrderBy(name => name)
