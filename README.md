@@ -108,8 +108,6 @@ A MSBuild task also exists:
 </Project>
 ```
 
-
-
 ## Supported input and output file formats
 *ReportGenerator* supports several input and output formats.  
 The wiki explains the different [output formats](https://github.com/danielpalme/ReportGenerator/wiki/Output-formats) or you can download [sample reports](https://danielpalme.github.io/ReportGenerator/resources/SampleReports.zip) of all formats.  
