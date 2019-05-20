@@ -61,6 +61,7 @@ CHANGELOG
 4.1.6.0
 
     * New: Issue #239: Added link back to the summary page
+    * New: Issue #242: Added option to remove risk hotspots section
 
 4.1.5.0
 

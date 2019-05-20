@@ -11,6 +11,11 @@ namespace Palmmedia.ReportGenerator.Core.CodeAnalysis
     internal class RiskHotspotsAnalyzer : IRiskHotspotsAnalyzer
     {
         /// <summary>
+        /// Indicates whether risk hotspots should be disabled or not.
+        /// </summary>
+        private readonly bool disabled;
+
+        /// <summary>
         /// The thresholds of the various metrics.
         /// </summary>
         private readonly Dictionary<string, decimal> thresholdsByMetricName;
@@ -21,6 +26,8 @@ namespace Palmmedia.ReportGenerator.Core.CodeAnalysis
         /// <param name="riskHotspotsAnalysisThresholds">The metric thresholds.</param>
         public RiskHotspotsAnalyzer(RiskHotspotsAnalysisThresholds riskHotspotsAnalysisThresholds)
         {
+            this.disabled = riskHotspotsAnalysisThresholds.DisableRiskHotspots;
+
             this.thresholdsByMetricName = new Dictionary<string, decimal>()
             {
                 { ReportResources.CyclomaticComplexity, riskHotspotsAnalysisThresholds.MetricThresholdForCyclomaticComplexity },
@@ -37,6 +44,12 @@ namespace Palmmedia.ReportGenerator.Core.CodeAnalysis
         public RiskHotspotAnalysisResult PerformRiskHotspotAnalysis(IEnumerable<Assembly> assemblies)
         {
             var riskHotspots = new List<RiskHotspot>();
+
+            if (this.disabled)
+            {
+                return new RiskHotspotAnalysisResult(riskHotspots, false);
+            }
+
             decimal threshold = -1;
 
             bool codeCodeQualityMetricsAvailable = false;
