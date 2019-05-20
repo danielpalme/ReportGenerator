@@ -58,6 +58,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.1.6.0
+
+    * New: Issue #239: Added link back to the summary page
+
 4.1.5.0
 
     * New: Moved MSBuild task to separate assembly

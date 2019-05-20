@@ -54,7 +54,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             reportRenderer.BeginClassReport(this.ReportContext.ReportConfiguration.TargetDirectory, @class.Assembly.ShortName, @class.Name);
 
-            reportRenderer.Header(ReportResources.Summary);
+            reportRenderer.HeaderWithBackLink(ReportResources.Summary);
 
             reportRenderer.BeginKeyValueTable();
             reportRenderer.KeyValueRow(ReportResources.Class, @class.Name);

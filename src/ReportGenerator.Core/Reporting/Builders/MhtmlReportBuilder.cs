@@ -162,6 +162,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                     file = reportFile.Substring(reportFile.LastIndexOf(Path.DirectorySeparatorChar) + 1);
                     content = File.ReadAllText(reportFile);
                     content = AddFilePrefixForCssAndJavaScript(content);
+                    content = content.Replace("<a href=\"index.htm\">", "<a href=\"file:///index.htm\">");
                     WriteFile(writer, file, "text/html", content);
                 }
 
