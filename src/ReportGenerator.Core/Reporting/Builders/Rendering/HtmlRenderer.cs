@@ -16,7 +16,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
     /// <summary>
     /// HTML report renderer.
     /// </summary>
-    internal class HtmlRenderer : RendererBase, IReportRenderer, IDisposable
+    public class HtmlRenderer : RendererBase, IReportRenderer, IDisposable
     {
         #region HTML Snippets
 
@@ -104,7 +104,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="inlineCssAndJavaScript">if set to <c>true</c> CSS and JavaScript is included into the HTML instead of seperate files.</param>
         /// <param name="cssFileResource">Optional CSS file resource.</param>
         /// <param name="additionalCssFileResource">Optional additional CSS file resource.</param>
-        internal HtmlRenderer(bool onlySummary, bool inlineCssAndJavaScript, string cssFileResource = "custom.css", string additionalCssFileResource = null)
+        public HtmlRenderer(bool onlySummary, bool inlineCssAndJavaScript, string cssFileResource = "custom.css", string additionalCssFileResource = null)
         {
             this.onlySummary = onlySummary;
             this.inlineCssAndJavaScript = inlineCssAndJavaScript;
