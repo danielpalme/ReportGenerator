@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Palmmedia.ReportGenerator.Core.CodeAnalysis;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Reporting;
@@ -19,9 +20,11 @@ namespace Palmmedia.ReportGenerator.Core
         /// Initializes a new instance of the <see cref="ReportContext"/> class.
         /// </summary>
         /// <param name="reportConfiguration">The configuration options.</param>
-        internal ReportContext(IReportConfiguration reportConfiguration)
+        /// <param name="settings">The settings.</param>
+        internal ReportContext(IReportConfiguration reportConfiguration, Settings settings)
         {
-            this.ReportConfiguration = reportConfiguration;
+            this.ReportConfiguration = reportConfiguration ?? throw new ArgumentNullException(nameof(reportConfiguration));
+            this.Settings = settings ?? throw new ArgumentNullException(nameof(settings));
         }
 
         /// <summary>
@@ -32,7 +35,7 @@ namespace Palmmedia.ReportGenerator.Core
         /// <summary>
         /// Gets the settings.
         /// </summary>
-        public Settings Settings { get; } = new Settings();
+        public Settings Settings { get; }
 
         /// <summary>
         /// Gets or sets the risk hotspot analysis result.

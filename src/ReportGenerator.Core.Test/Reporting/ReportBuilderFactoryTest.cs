@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Palmmedia.ReportGenerator.Core;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Plugin;
@@ -33,11 +32,11 @@ namespace Palmmedia.ReportGenerator.Core.Test.Reporting
 
             var factory = new ReportBuilderFactory(new ReflectionPluginLoader(plugins));
 
-            var reportContext = new ReportContext(new ReportConfiguration() { TargetDirectory = "C:\\temp", ReportTypes = new[] { "Html" } });
+            var reportContext = new ReportContext(new ReportConfiguration() { TargetDirectory = "C:\\temp", ReportTypes = new[] { "Html" } }, new Settings());
             var reportBuilders = factory.GetReportBuilders(reportContext);
             Assert.Single(reportBuilders);
 
-            reportContext = new ReportContext(new ReportConfiguration() { TargetDirectory = "C:\\temp", ReportTypes = new[] { "Latex" } });
+            reportContext = new ReportContext(new ReportConfiguration() { TargetDirectory = "C:\\temp", ReportTypes = new[] { "Latex" } }, new Settings());
             reportBuilders = factory.GetReportBuilders(reportContext);
             Assert.Single(reportBuilders);
             Assert.Equal(typeof(AdditionalLatexReportBuilder).FullName, reportBuilders.First().GetType().FullName);

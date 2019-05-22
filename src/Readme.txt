@@ -58,6 +58,12 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.1.7.0
+
+    * Fix: Issue #242: Improved option to remove risk hotspots section
+    * Fix: Issue #243, #244: Made SummaryResult class public
+    * Fix: Issue #245, #246: Improved nested class handling for Cobertura
+
 4.1.6.0
 
     * New: Issue #239: Added link back to the summary page
