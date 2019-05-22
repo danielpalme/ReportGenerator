@@ -6,11 +6,6 @@
     public class RiskHotspotsAnalysisThresholds
     {
         /// <summary>
-        /// Gets or sets a value indicating whether risk hotspots should be disabled or not.
-        /// </summary>
-        public bool DisableRiskHotspots { get; set; } = false;
-
-        /// <summary>
         /// Gets or sets the threshold for cylomatic complexity.
         /// </summary>
         public decimal MetricThresholdForCyclomaticComplexity { get; set; } = 15;

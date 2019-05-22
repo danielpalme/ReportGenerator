@@ -78,7 +78,7 @@ namespace Palmmedia.ReportGenerator.Core
                 var riskHotspotsAnalysisThresholds = new RiskHotspotsAnalysisThresholds();
                 configuration.GetSection("riskHotspotsAnalysisThresholds").Bind(riskHotspotsAnalysisThresholds);
 
-                reportContext.RiskHotspotAnalysisResult = new RiskHotspotsAnalyzer(riskHotspotsAnalysisThresholds)
+                reportContext.RiskHotspotAnalysisResult = new RiskHotspotsAnalyzer(riskHotspotsAnalysisThresholds, reportContext.Settings.DisableRiskHotspots)
                     .PerformRiskHotspotAnalysis(parserResult.Assemblies);
 
                 var overallHistoricCoverages = new System.Collections.Generic.List<Parser.Analysis.HistoricCoverage>();

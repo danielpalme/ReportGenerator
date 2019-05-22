@@ -24,9 +24,10 @@ namespace Palmmedia.ReportGenerator.Core.CodeAnalysis
         /// Initializes a new instance of the <see cref="RiskHotspotsAnalyzer"/> class.
         /// </summary>
         /// <param name="riskHotspotsAnalysisThresholds">The metric thresholds.</param>
-        public RiskHotspotsAnalyzer(RiskHotspotsAnalysisThresholds riskHotspotsAnalysisThresholds)
+        /// <param name="disableRiskHotspots">Indicates whether risk hotspots should be disabled or not.</param>
+        public RiskHotspotsAnalyzer(RiskHotspotsAnalysisThresholds riskHotspotsAnalysisThresholds, bool disableRiskHotspots)
         {
-            this.disabled = riskHotspotsAnalysisThresholds.DisableRiskHotspots;
+            this.disabled = disableRiskHotspots;
 
             this.thresholdsByMetricName = new Dictionary<string, decimal>()
             {
