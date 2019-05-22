@@ -6,6 +6,8 @@ h2 { font-size: 1.0em; font-weight: bold; margin: 10px 0 15px 0; padding: 0; }
 h3 { font-size: 1.0em; font-weight: bold; margin: 0 0 10px 0; padding: 0; display: inline-block; }
 a { color: #c00; text-decoration: none; }
 a:hover { color: #000; text-decoration: none; }
+h1 a { color: #fff; background-color: #949494; display: inline-block; margin: -12px 5px -10px -10px; padding: 10px; border-right: 1px solid #fff; }
+h1 a:hover { background-color: #ccc; }
 
 .container { margin: auto; max-width: 1500px; width: 90%; background-color: #fff; display: table; box-shadow: 0 0 60px #7d7d7d; height: 100%; }
 .containerleft { display: table-cell; padding: 0 20px 20px 20px; }

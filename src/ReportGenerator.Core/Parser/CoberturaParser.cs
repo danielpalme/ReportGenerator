@@ -140,7 +140,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .Elements("class")
                 .Where(c => c.Attribute("name").Value.Equals(className)
                     || c.Attribute("name").Value.StartsWith(className + "$", StringComparison.Ordinal)
-                    || c.Attribute("name").Value.StartsWith(className + "/<", StringComparison.Ordinal))
+                    || c.Attribute("name").Value.StartsWith(className + "/", StringComparison.Ordinal))
                 .Select(c => c.Attribute("filename").Value)
                 .Distinct()
                 .ToArray();
@@ -178,7 +178,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .Elements("class")
                 .Where(c => c.Attribute("name").Value.Equals(@class.Name)
                             || c.Attribute("name").Value.StartsWith(@class.Name + "$", StringComparison.Ordinal)
-                            || c.Attribute("name").Value.StartsWith(@class.Name + "/<", StringComparison.Ordinal))
+                            || c.Attribute("name").Value.StartsWith(@class.Name + "/", StringComparison.Ordinal))
                 .ToArray();
 
             var lines = classes.Elements("lines")

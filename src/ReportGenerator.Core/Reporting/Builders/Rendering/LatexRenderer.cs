@@ -163,6 +163,15 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         }
 
         /// <summary>
+        /// Adds a header to the report.
+        /// </summary>
+        /// <param name="text">The text.</param>
+        public void HeaderWithBackLink(string text)
+        {
+            this.Header(text);
+        }
+
+        /// <summary>
         /// Adds the test methods to the report.
         /// </summary>
         /// <param name="testMethods">The test methods.</param>

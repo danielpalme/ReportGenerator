@@ -11,6 +11,7 @@
     input, select { background-color: #292827; color: #fff; border: 1px solid #fff; }
     a { color: #fff; color: rgba(255, 255, 255, 0.95); }
     a:hover { color: #0078d4; }
+    h1 a { background-color: #4a4846; }
     .gray { background-color: #484747; }
     .lightgray { color: #ebebeb; }
     .lightgraybg { background-color: #474747; }

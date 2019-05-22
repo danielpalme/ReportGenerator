@@ -26,5 +26,10 @@
         /// Gets or sets the caching duration of code files that are downloaded from remote servers in minutes.
         /// </summary>
         public int CachingDuringOfRemoteFilesInMinutes { get; set; } = 7 * 24 * 60;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether risk hotspots should be disabled or not.
+        /// </summary>
+        public bool DisableRiskHotspots { get; set; } = false;
     }
 }

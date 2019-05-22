@@ -10,7 +10,8 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  version: '4.1.5'
+  disable.coverage.autogenerate: 'true'
+  version: '4.1.7'
 
 # Prepare
 steps:
