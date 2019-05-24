@@ -14,7 +14,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
     /// File reader with caching.
     /// Local files are read from disk. Remote files get downloaded and cached for a given period of time.
     /// </summary>
-    internal class CachingFileReader : IFileReader
+    public class CachingFileReader : IFileReader
     {
         /// <summary>
         /// The HttpClient to retrieve remote files.

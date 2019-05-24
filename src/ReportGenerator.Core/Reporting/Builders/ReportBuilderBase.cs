@@ -237,31 +237,34 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 reportRenderer.MetricsTable(new[] { methodMetric });
             }
 
-            if (reportRenderer.SupportsRiskHotsSpots
-                && this.ReportContext.RiskHotspotAnalysisResult.CodeCodeQualityMetricsAvailable)
+            if (this.ReportContext.RiskHotspotAnalysisResult != null)
             {
-                reportRenderer.Header(ReportResources.RiskHotspots);
-
-                if (this.ReportContext.RiskHotspotAnalysisResult.RiskHotspots.Count > 0)
+                if (reportRenderer.SupportsRiskHotsSpots
+                    && this.ReportContext.RiskHotspotAnalysisResult.CodeCodeQualityMetricsAvailable)
                 {
-                    reportRenderer.BeginRiskHotspots();
-                    reportRenderer.RiskHotspots(this.ReportContext.RiskHotspotAnalysisResult.RiskHotspots);
-                    reportRenderer.FinishRiskHotspots();
+                    reportRenderer.Header(ReportResources.RiskHotspots);
+
+                    if (this.ReportContext.RiskHotspotAnalysisResult.RiskHotspots.Count > 0)
+                    {
+                        reportRenderer.BeginRiskHotspots();
+                        reportRenderer.RiskHotspots(this.ReportContext.RiskHotspotAnalysisResult.RiskHotspots);
+                        reportRenderer.FinishRiskHotspots();
+                    }
+                    else
+                    {
+                        // Angular element has to be present
+                        reportRenderer.BeginRiskHotspots();
+                        reportRenderer.FinishRiskHotspots();
+
+                        reportRenderer.Paragraph(ReportResources.NoRiskHotspots);
+                    }
                 }
                 else
                 {
                     // Angular element has to be present
                     reportRenderer.BeginRiskHotspots();
                     reportRenderer.FinishRiskHotspots();
-
-                    reportRenderer.Paragraph(ReportResources.NoRiskHotspots);
                 }
-            }
-            else
-            {
-                // Angular element has to be present
-                reportRenderer.BeginRiskHotspots();
-                reportRenderer.FinishRiskHotspots();
             }
 
             reportRenderer.Header(ReportResources.Coverage3);

@@ -9,7 +9,7 @@ namespace Palmmedia.ReportGenerator.Core
     /// <summary>
     /// The context containing configuration and runtime information of the current execution.
     /// </summary>
-    internal class ReportContext : IReportContext
+    public class ReportContext : IReportContext
     {
         /// <summary>
         /// The historic coverage elements.
@@ -21,7 +21,7 @@ namespace Palmmedia.ReportGenerator.Core
         /// </summary>
         /// <param name="reportConfiguration">The configuration options.</param>
         /// <param name="settings">The settings.</param>
-        internal ReportContext(IReportConfiguration reportConfiguration, Settings settings)
+        public ReportContext(IReportConfiguration reportConfiguration, Settings settings)
         {
             this.ReportConfiguration = reportConfiguration ?? throw new ArgumentNullException(nameof(reportConfiguration));
             this.Settings = settings ?? throw new ArgumentNullException(nameof(settings));

@@ -3,7 +3,7 @@
     /// <summary>
     /// Interface for file access.
     /// </summary>
-    internal interface IFileReader
+    public interface IFileReader
     {
         /// <summary>
         /// Loads the file with the given path.
