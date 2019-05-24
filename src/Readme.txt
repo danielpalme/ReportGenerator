@@ -58,6 +58,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.1.8.0
+
+    * Fix: Issue #239: Improved link back to the summary page for Azure DevOps
+
 4.1.7.0
 
     * Fix: Issue #242: Improved option to remove risk hotspots section

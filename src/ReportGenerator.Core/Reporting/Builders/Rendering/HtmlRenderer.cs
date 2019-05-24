@@ -191,7 +191,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="text">The text.</param>
         public void HeaderWithBackLink(string text)
         {
-            this.reportTextWriter.WriteLine("<h1><a href=\"index.htm\">&#x2B60;</a> {0}</h1>", WebUtility.HtmlEncode(text));
+            // Azure DevOps removes the <meta charset="utf-8" /> tag and can't render the '⭠' char. Since JavaScript is also blocked, '<' is used and replaced if JavaScript is active.
+            this.reportTextWriter.WriteLine("<h1><a href=\"index.htm\" id=\"backlink\">&lt;</a> {0}</h1><script>document.getElementById('backlink').innerHTML = '&#x2B60;';</script>", WebUtility.HtmlEncode(text));
         }
 
         /// <summary>
