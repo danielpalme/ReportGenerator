@@ -237,7 +237,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 reportRenderer.MetricsTable(new[] { methodMetric });
             }
 
-            if (reportRenderer.SupportsRiskHotsSpots
+            if (this.ReportContext.RiskHotspotAnalysisResult != null
+                && reportRenderer.SupportsRiskHotsSpots
                 && this.ReportContext.RiskHotspotAnalysisResult.CodeCodeQualityMetricsAvailable)
             {
                 reportRenderer.Header(ReportResources.RiskHotspots);
