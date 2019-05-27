@@ -11,7 +11,7 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   disable.coverage.autogenerate: 'true'
-  version: '4.1.8'
+  version: '4.1.9'
 
 # Prepare
 steps:
