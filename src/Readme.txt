@@ -61,6 +61,7 @@ CHANGELOG
 4.1.9.0
 
     * New: Issue #247: Added new overloads to GenerateReports
+    * Fix: Issue #250: Fixed backlink symbol for Firefox
 
 4.1.8.0
 
