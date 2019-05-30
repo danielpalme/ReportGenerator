@@ -23,6 +23,24 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Metric"/> class.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="explanationUrl">The explanation url.</param>
+        /// <param name="metricType">The type of the metric.</param>
+        /// <param name="value">The value.</param>
+        public Metric(string name, Uri explanationUrl, MetricType metricType, decimal? value, MetricMergeOrder mergeOrder)
+            : this(name, explanationUrl, metricType, value)
+        {
+            this.MergeOrder = mergeOrder;
+        }
+
+        /// <summary>
+        /// Gets the merge order.
+        /// </summary>
+        public MetricMergeOrder MergeOrder { get; }
+
+        /// <summary>
         /// Gets the name.
         /// </summary>
         public string Name { get; }

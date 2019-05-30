@@ -258,7 +258,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         ReportResources.BlocksNotCovered,
                         ParserBase.CodeCoverageUri,
                         MetricType.CoverageAbsolute,
-                        int.Parse(method.Attribute("blocks_not_covered").Value, CultureInfo.InvariantCulture))
+                        int.Parse(method.Attribute("blocks_not_covered").Value, CultureInfo.InvariantCulture),
+                        MetricMergeOrder.LowerIsBetter)
                 };
 
                 var methodMetric = new MethodMetric(fullName, shortName, metrics);

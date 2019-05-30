@@ -253,7 +253,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
             Assert.Equal(3, metrics.First().Metrics.Count());
 
             Assert.Equal("Cyclomatic complexity", metrics.First().Metrics.ElementAt(0).Name);
-            Assert.Equal(111, metrics.First().Metrics.ElementAt(0).Value);
+            Assert.Equal(3, metrics.First().Metrics.ElementAt(0).Value);
             Assert.Equal("Sequence coverage", metrics.First().Metrics.ElementAt(1).Name);
             Assert.Equal(222, metrics.First().Metrics.ElementAt(1).Value);
             Assert.Equal("Branch coverage", metrics.First().Metrics.ElementAt(2).Name);

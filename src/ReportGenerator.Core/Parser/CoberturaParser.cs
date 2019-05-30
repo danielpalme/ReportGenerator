@@ -313,7 +313,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         ReportResources.CyclomaticComplexity,
                         ParserBase.CyclomaticComplexityUri,
                         MetricType.CodeQuality,
-                        value));
+                        value,
+                        MetricMergeOrder.LowerIsBetter));
                 }
 
                 var methodMetric = new MethodMetric(fullName, shortName, metrics);

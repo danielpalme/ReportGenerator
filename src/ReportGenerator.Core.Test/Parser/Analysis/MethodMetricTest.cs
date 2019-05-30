@@ -52,13 +52,15 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
             var metric4_2 = new Metric("Metric4", null, MetricType.CodeQuality, 10);
             var metric5_1 = new Metric("Metric5", null, MetricType.CodeQuality, 30);
             var metric5_2 = new Metric("Metric5", null, MetricType.CodeQuality, null);
+            var metric6_1 = new Metric("Metric6", null, MetricType.CodeQuality, 50, MetricMergeOrder.LowerIsBetter);
+            var metric6_2 = new Metric("Metric6", null, MetricType.CodeQuality, 40, MetricMergeOrder.LowerIsBetter);
 
-            MethodMetric sut = new MethodMetric("Test", "Test", new[] { metric1_1, metric3_1, metric4_1, metric5_1 });
-            var methodMetricToMerge = new MethodMetric("Test", "Test", new[] { metric1_2, metric2, metric3_2, metric4_2, metric5_2 });
+            MethodMetric sut = new MethodMetric("Test", "Test", new[] { metric1_1, metric3_1, metric4_1, metric5_1, metric6_1 });
+            var methodMetricToMerge = new MethodMetric("Test", "Test", new[] { metric1_2, metric2, metric3_2, metric4_2, metric5_2, metric6_2 });
 
             sut.Merge(methodMetricToMerge);
 
-            Assert.Equal(5, sut.Metrics.Count());
+            Assert.Equal(6, sut.Metrics.Count());
             Assert.Equal(metric1_1, sut.Metrics.First());
             Assert.Equal(15, sut.Metrics.First().Value);
 
@@ -77,6 +79,10 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
             metric = sut.Metrics.Single(m => m.Name == "Metric5");
             Assert.Equal(metric5_1, metric);
             Assert.Equal(30, metric.Value);
+
+            metric = sut.Metrics.Single(m => m.Name == "Metric6");
+            Assert.Equal(metric6_1, metric);
+            Assert.Equal(40, metric.Value);
         }
 
         /// <summary>

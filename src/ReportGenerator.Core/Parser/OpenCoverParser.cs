@@ -356,7 +356,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         ReportResources.CyclomaticComplexity,
                         ParserBase.CyclomaticComplexityUri,
                         MetricType.CodeQuality,
-                        methodGroup.Max(m => int.Parse(m.Attribute("cyclomaticComplexity").Value, CultureInfo.InvariantCulture))),
+                        methodGroup.Max(m => int.Parse(m.Attribute("cyclomaticComplexity").Value, CultureInfo.InvariantCulture)),
+                        MetricMergeOrder.LowerIsBetter),
                     new Metric(
                         ReportResources.SequenceCoverage,
                         ParserBase.CodeCoverageUri,
@@ -381,7 +382,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         MetricType.CodeQuality,
                         npathComplexityAttributes
                             .Select(a => int.Parse(a.Value, CultureInfo.InvariantCulture))
-                            .Max(a => a < 0 ? int.MaxValue : a)));
+                            .Max(a => a < 0 ? int.MaxValue : a),
+                        MetricMergeOrder.LowerIsBetter));
                 }
 
                 var crapScoreAttributes = methodGroup.Select(m => m.Attribute("crapScore")).Where(a => a != null).ToArray();
@@ -391,7 +393,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         ReportResources.CrapScore,
                         ParserBase.CrapScoreUri,
                         MetricType.CodeQuality,
-                        crapScoreAttributes.Max(a => decimal.Parse(a.Value, CultureInfo.InvariantCulture))));
+                        crapScoreAttributes.Max(a => decimal.Parse(a.Value, CultureInfo.InvariantCulture)),
+                        MetricMergeOrder.LowerIsBetter));
                 }
 
                 string fullName = ExtractMethodName(methodGroup.Key);
