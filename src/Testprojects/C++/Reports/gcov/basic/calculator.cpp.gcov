@@ -1,0 +1,15 @@
+        -:    0:Source:sub/calculator.cpp
+        -:    0:Graph:main.gcno
+        -:    0:Data:main.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        2:    1:int Add(int a,int b){
+        2:    2:  if (a > b)
+        -:    3:  {
+        1:    4:      return a + b;
+        -:    5:  }
+        -:    6:  else
+        -:    7:  {
+        1:    8:    return 42;
+        -:    9:  }
+        -:   10:}

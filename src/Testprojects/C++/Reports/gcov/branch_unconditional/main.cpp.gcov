@@ -1,0 +1,44 @@
+        -:    0:Source:main.cpp
+        -:    0:Graph:main.gcno
+        -:    0:Data:main.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include "sub/calculator.cpp"
+        -:    2:
+function _Z15GreatestOfThreeiii called 1 returned 100% blocks executed 57%
+        1:    3:int GreatestOfThree(int a,int b,int c){
+        1:    4:  if((a>b) && (a>c)){
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+branch  2 never executed
+branch  3 never executed
+    #####:    5:    return a;
+unconditional  0 never executed
+        -:    6:   }
+        1:    7:   else if(b>c){
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    #####:    8:    return b;
+unconditional  0 never executed
+        -:    9:   }
+        -:   10:  else{
+        1:   11:    return c;
+unconditional  0 taken 1
+        -:   12:  }
+        -:   13: return 0;
+        -:   14:}
+        -:   15:
+        -:   16:
+function main called 1 returned 100% blocks executed 100%
+        1:   17:int main()
+        -:   18:{
+        1:   19:  GreatestOfThree(1,2,3);
+call    0 returned 1
+        1:   20:  Add(3,1);
+call    0 returned 1
+        1:   21:  Add(1,3);
+call    0 returned 1
+        1:   22: return 0;
+unconditional  0 taken 1
+        -:   23:
+        -:   24:}
