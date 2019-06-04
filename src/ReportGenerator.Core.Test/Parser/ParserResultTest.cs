@@ -49,12 +49,12 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         public void SupportsBranchCoverage()
         {
             var parserResult = new ParserResult();
-            Assert.True(parserResult.SupportsBranchCoverage);
+            Assert.False(parserResult.SupportsBranchCoverage);
 
             parserResult = new ParserResult(new List<Assembly>(), false, "Test");
             Assert.False(parserResult.SupportsBranchCoverage);
 
-            parserResult.Merge(new ParserResult());
+            parserResult.Merge(new ParserResult(new List<Assembly>(), true, "Test"));
             Assert.True(parserResult.SupportsBranchCoverage);
         }
 
