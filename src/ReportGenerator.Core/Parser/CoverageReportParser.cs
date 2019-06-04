@@ -100,9 +100,13 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                     try
                     {
-                        var report = XDocument.Load(reportFile);
+                        string line1 = File.ReadLines(reportFile).First();
 
-                        foreach (var parserResult in this.ParseFile(report))
+                        IEnumerable<ParserResult> parserResults = line1.Trim().StartsWith("<")
+                            ? this.ParseXmlFile(XDocument.Load(reportFile))
+                            : this.ParseTextFile(File.ReadAllLines(reportFile));
+
+                        foreach (var parserResult in parserResults)
                         {
                             lock (this.mergeLock)
                             {
@@ -133,12 +137,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         }
 
         /// <summary>
-        /// Tries to initiate the correct parsers for the given report. The result is merged into the given result.
+        /// Tries to initiate the correct parsers for the given XML report. The result is merged into the given result.
         /// The report may contain several reports. For every report an extra parser is initiated.
         /// </summary>
         /// <param name="report">The report file to parse.</param>
         /// <returns>The parser result.</returns>
-        private IEnumerable<ParserResult> ParseFile(XContainer report)
+        private IEnumerable<ParserResult> ParseXmlFile(XContainer report)
         {
             if (report.Descendants("PartCoverReport").Any())
             {
@@ -277,6 +281,27 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 }
 
                 yield break;
+            }
+        }
+
+        /// <summary>
+        /// Tries to initiate the correct parsers for the given text based report. The result is merged into the given result.
+        /// The report may contain several reports. For every report an extra parser is initiated.
+        /// </summary>
+        /// <param name="lines">The file's lines.</param>
+        /// <returns>The parser result.</returns>
+        private IEnumerable<ParserResult> ParseTextFile(string[] lines)
+        {
+            if (lines.Length == 0)
+            {
+                yield break;
+            }
+
+            if (lines[0].StartsWith("TN:"))
+            {
+                Logger.DebugFormat(" " + Resources.InitiatingParser, "LCov");
+
+                yield return new LCovParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(lines);
             }
         }
 

@@ -1,5 +1,5 @@
 TN:
-SF:C:\temp\calculator.cpp
+SF:C:\temp\sub\calculator.cpp
 DA:1,2
 DA:2,2
 DA:4,1
@@ -7,7 +7,7 @@ DA:8,1
 LF:4
 LH:4
 end_of_record
-SF:/home/daniel/Backup/gcov/main.cpp
+SF:C:\temp\main.cpp
 FN:3,_Z15GreatestOfThreeiii
 FN:17,main
 FNDA:1,_Z15GreatestOfThreeiii
