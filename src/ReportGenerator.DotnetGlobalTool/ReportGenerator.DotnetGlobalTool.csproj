@@ -7,8 +7,8 @@
     <AssemblyName>ReportGenerator</AssemblyName>
     <RootNamespace>Palmmedia.ReportGenerator</RootNamespace>
     <StartupObject>Palmmedia.ReportGenerator.DotnetGlobalTool.Program</StartupObject>
-    <AssemblyVersion>4.1.9.0</AssemblyVersion>
-    <FileVersion>4.1.9.0</FileVersion>
+    <AssemblyVersion>4.1.10.0</AssemblyVersion>
+    <FileVersion>4.1.10.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
