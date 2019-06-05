@@ -58,6 +58,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.1.10.0
+
+    * Fix: Issue #251: DynamicCodeCoverage: Fixed handling of lines with number 15732480
+
 4.1.9.0
 
     * New: Issue #247: Added new overloads to GenerateReports

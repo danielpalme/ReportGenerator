@@ -179,6 +179,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             var linesOfFile = methods
                 .Elements("ranges")
                 .Elements("range")
+                .Where(l => l.Attribute("start_line").Value != "15732480")
                 .Select(l => new
                 {
                     LineNumberStart = int.Parse(l.Attribute("start_line").Value, CultureInfo.InvariantCulture),
@@ -306,6 +307,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 var seqpnts = method
                     .Elements("ranges")
                     .Elements("range")
+                    .Where(l => l.Attribute("start_line").Value != "15732480")
                     .Select(l => new
                     {
                         LineNumberStart = int.Parse(l.Attribute("start_line").Value, CultureInfo.InvariantCulture),
