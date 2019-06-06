@@ -45,7 +45,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
         {
             if (this.sourceDirectories.Count == 0)
             {
-                Logger.Warn("  " + string.Format(Resources.NoSouceDirectories, "JaCoCo"));
+                Logger.Warn("  " + string.Format(Resources.NoSourceDirectories, "JaCoCo"));
                 return;
             }
 
