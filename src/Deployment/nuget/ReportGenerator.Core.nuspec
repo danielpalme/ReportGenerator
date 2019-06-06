@@ -35,6 +35,10 @@ https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage</desc
 
     <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.deps.json" target="lib\netstandard2.0\" />
     <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.dll" target="lib\netstandard2.0\" />
+
+	<!-- See #253: Required to execute -->
+    <file src="..\..\ReportGenerator.Core\bin\Release\appsettings.json" target="lib\netstandard2.0\" />
+    <file src="..\..\ReportGenerator.DotnetCorePluginLoader\bin\Release\netcoreapp2.0\ReportGenerator.DotnetCorePluginLoader.dll" target="lib\netstandard2.0\" />
   </files>
 </package>
 
