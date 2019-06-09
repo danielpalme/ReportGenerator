@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Parser.Filtering;
 
@@ -12,7 +14,20 @@ namespace Palmmedia.ReportGenerator.Core.Parser
     /// </summary>
     internal class GCovParser : ParserBase
     {
-        public const string StartOfFirstLine = "        -:    0:Source:";
+        /// <summary>
+        /// Text content in first line.
+        /// </summary>
+        public const string SourceElementInFirstLine = "0:Source:";
+
+        /// <summary>
+        /// Regex to analyze if a line contains line coverage data.
+        /// </summary>
+        private static Regex lineCoverageRegex = new Regex("\\s*(?<Visits>-|#####|=====|\\d+):\\s*(?<LineNumber>[1-9]\\d*):.*", RegexOptions.Compiled);
+
+        /// <summary>
+        /// Regex to analyze if a line contains branch coverage data.
+        /// </summary>
+        private static Regex branchCoverageRegex = new Regex("branch\\s*(?<Number>\\d+)\\s*(?:taken\\s*(?<Visits>\\d+)|never\\sexecuted?)", RegexOptions.Compiled);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GCovParser" /> class.
@@ -56,7 +71,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
         private void ProcessClass(Assembly assembly, string[] lines)
         {
-            string fileName = lines[0].Substring(GCovParser.StartOfFirstLine.Length);
+            string fileName = lines[0].Substring(lines[0].IndexOf(SourceElementInFirstLine) + GCovParser.SourceElementInFirstLine.Length);
 
             if (!this.FileFilter.IsElementIncludedInReport(fileName))
             {
@@ -72,124 +87,126 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             var @class = new Class(fileName, assembly);
 
-            this.ProcessClass(@class, fileName, lines);
+            this.ProcessCoverage(@class, fileName, lines);
 
             assembly.AddClass(@class);
         }
 
-        private void ProcessClass(Class @class, string fileName, string[] lines)
+        private void ProcessCoverage(Class @class, string fileName, string[] lines)
         {
-            //var codeElements = new List<CodeElement>();
-            //int maxiumLineNumber = -1;
-            //var visitsByLine = new Dictionary<int, int>();
+            var codeElements = new List<CodeElement>();
+            int maxiumLineNumber = -1;
+            var visitsByLine = new Dictionary<int, int>();
 
-            //var branchesByLineNumber = new Dictionary<int, ICollection<Branch>>();
+            var branchesByLineNumber = new Dictionary<int, ICollection<Branch>>();
 
-            //while (true)
-            //{
-            //    string line = lines[currentLine];
+            foreach (var line in lines)
+            {
+                var match = lineCoverageRegex.Match(line);
 
-            //    if (line == "end_of_record")
-            //    {
-            //        break;
-            //    }
+                if (match.Success)
+                {
+                    int lineNumber = int.Parse(match.Groups["LineNumber"].Value, CultureInfo.InvariantCulture);
+                    maxiumLineNumber = Math.Max(maxiumLineNumber, lineNumber);
 
-            //    currentLine++;
+                    string visitsText = match.Groups["Visits"].Value;
 
-            //    if (line.StartsWith("FN:"))
-            //    {
-            //        line = line.Substring(3);
-            //        int lineNumber = int.Parse(line.Substring(0, line.IndexOf(',')), CultureInfo.InvariantCulture);
-            //        string name = line.Substring(line.IndexOf(',') + 1);
-            //        codeElements.Add(new CodeElement(name, CodeElementType.Method, lineNumber, lineNumber));
-            //    }
-            //    else if (line.StartsWith("BRDA:"))
-            //    {
-            //        line = line.Substring(5);
-            //        string[] tokens = line.Split(',');
-            //        int lineNumber = int.Parse(tokens[0], CultureInfo.InvariantCulture);
+                    if (visitsText != "-")
+                    {
+                        int visits = 0;
 
-            //        var branch = new Branch(
-            //            "-".Equals(tokens[3]) ? 0 : int.Parse(tokens[3], CultureInfo.InvariantCulture),
-            //            $"{tokens[0]}_{tokens[1]}_{tokens[2]}");
+                        if (visitsText != "#####" && visitsText != "=====")
+                        {
+                            visits = int.Parse(visitsText, CultureInfo.InvariantCulture);
+                        }
 
-            //        ICollection<Branch> branches = null;
-            //        if (branchesByLineNumber.TryGetValue(lineNumber, out branches))
-            //        {
-            //            HashSet<Branch> branchesHashset = (HashSet<Branch>)branches;
-            //            if (branchesHashset.Contains(branch))
-            //            {
-            //                // Not perfect for performance, but Hashset has no GetElement method
-            //                branchesHashset.First(b => b.Equals(branch)).BranchVisits += branch.BranchVisits;
-            //            }
-            //            else
-            //            {
-            //                branches.Add(branch);
-            //            }
-            //        }
-            //        else
-            //        {
-            //            branches = new HashSet<Branch>();
-            //            branches.Add(branch);
+                        if (visitsByLine.ContainsKey(lineNumber))
+                        {
+                            visitsByLine[lineNumber] += visits;
+                        }
+                        else
+                        {
+                            visitsByLine[lineNumber] = visits;
+                        }
+                    }
+                }
+                else
+                {
+                    match = branchCoverageRegex.Match(line);
 
-            //            branchesByLineNumber.Add(lineNumber, branches);
-            //        }
-            //    }
-            //    else if (line.StartsWith("DA:"))
-            //    {
-            //        line = line.Substring(3);
-            //        int lineNumber = int.Parse(line.Substring(0, line.IndexOf(',')), CultureInfo.InvariantCulture);
-            //        int visits = int.Parse(line.Substring(line.IndexOf(',') + 1));
+                    if (match.Success)
+                    {
+                        var branch = new Branch(
+                            match.Groups["Visits"].Success ? int.Parse(match.Groups["Visits"].Value, CultureInfo.InvariantCulture) : 0,
+                            match.Groups["Number"].Value);
 
-            //        maxiumLineNumber = Math.Max(maxiumLineNumber, lineNumber);
+                        ICollection<Branch> branches = null;
+                        if (branchesByLineNumber.TryGetValue(maxiumLineNumber, out branches))
+                        {
+                            HashSet<Branch> branchesHashset = (HashSet<Branch>)branches;
+                            if (branchesHashset.Contains(branch))
+                            {
+                                // Not perfect for performance, but Hashset has no GetElement method
+                                branchesHashset.First(b => b.Equals(branch)).BranchVisits += branch.BranchVisits;
+                            }
+                            else
+                            {
+                                branches.Add(branch);
+                            }
+                        }
+                        else
+                        {
+                            branches = new HashSet<Branch>();
+                            branches.Add(branch);
 
-            //        if (visitsByLine.ContainsKey(lineNumber))
-            //        {
-            //            visitsByLine[lineNumber] += visits;
-            //        }
-            //        else
-            //        {
-            //            visitsByLine[lineNumber] = visits;
-            //        }
-            //    }
-            //}
+                            branchesByLineNumber.Add(maxiumLineNumber, branches);
+                        }
+                    }
+                    else if (line.StartsWith("function "))
+                    {
+                        string name = line.Substring(9, line.IndexOf(' ', 9) - 9);
 
-            //int[] coverage = new int[maxiumLineNumber + 1];
-            //LineVisitStatus[] lineVisitStatus = new LineVisitStatus[maxiumLineNumber + 1];
+                        codeElements.Add(new CodeElement(name, CodeElementType.Method, maxiumLineNumber + 1, maxiumLineNumber + 1));
+                    }
+                }
+            }
 
-            //for (int i = 0; i < coverage.Length; i++)
-            //{
-            //    coverage[i] = -1;
-            //}
+            int[] coverage = new int[maxiumLineNumber + 1];
+            LineVisitStatus[] lineVisitStatus = new LineVisitStatus[maxiumLineNumber + 1];
 
-            //foreach (var kv in visitsByLine)
-            //{
-            //    coverage[kv.Key] = kv.Value;
+            for (int i = 0; i < coverage.Length; i++)
+            {
+                coverage[i] = -1;
+            }
 
-            //    if (lineVisitStatus[kv.Key] != LineVisitStatus.Covered)
-            //    {
-            //        bool partiallyCovered = false;
+            foreach (var kv in visitsByLine)
+            {
+                coverage[kv.Key] = kv.Value;
 
-            //        ICollection<Branch> branchesOfLine = null;
+                if (lineVisitStatus[kv.Key] != LineVisitStatus.Covered)
+                {
+                    bool partiallyCovered = false;
 
-            //        if (branchesByLineNumber.TryGetValue(kv.Key, out branchesOfLine))
-            //        {
-            //            partiallyCovered = branchesOfLine.Any(b => b.BranchVisits == 0);
-            //        }
+                    ICollection<Branch> branchesOfLine = null;
 
-            //        LineVisitStatus statusOfLine = kv.Value > 0 ? (partiallyCovered ? LineVisitStatus.PartiallyCovered : LineVisitStatus.Covered) : LineVisitStatus.NotCovered;
-            //        lineVisitStatus[kv.Key] = (LineVisitStatus)Math.Max((int)lineVisitStatus[kv.Key], (int)statusOfLine);
-            //    }
-            //}
+                    if (branchesByLineNumber.TryGetValue(kv.Key, out branchesOfLine))
+                    {
+                        partiallyCovered = branchesOfLine.Any(b => b.BranchVisits == 0);
+                    }
 
-            //var file = new CodeFile(fileName, coverage, lineVisitStatus, branchesByLineNumber);
+                    LineVisitStatus statusOfLine = kv.Value > 0 ? (partiallyCovered ? LineVisitStatus.PartiallyCovered : LineVisitStatus.Covered) : LineVisitStatus.NotCovered;
+                    lineVisitStatus[kv.Key] = (LineVisitStatus)Math.Max((int)lineVisitStatus[kv.Key], (int)statusOfLine);
+                }
+            }
 
-            //foreach (var codeElement in codeElements)
-            //{
-            //    file.AddCodeElement(codeElement);
-            //}
+            var file = new CodeFile(fileName, coverage, lineVisitStatus, branchesByLineNumber);
 
-            //@class.AddFile(file);
+            foreach (var codeElement in codeElements)
+            {
+                file.AddCodeElement(codeElement);
+            }
+
+            @class.AddFile(file);
         }
     }
 }

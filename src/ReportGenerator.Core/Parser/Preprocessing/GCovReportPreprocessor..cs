@@ -58,9 +58,9 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
                 return;
             }
 
-            string fileName = lines[0].Substring(GCovParser.StartOfFirstLine.Length);
+            string fileName = lines[0].Substring(lines[0].IndexOf(GCovParser.SourceElementInFirstLine) + GCovParser.SourceElementInFirstLine.Length);
 
-            lines[0] = GCovParser.StartOfFirstLine + this.GetFullFilePath(fileName);
+            lines[0] = GCovParser.SourceElementInFirstLine + this.GetFullFilePath(fileName);
         }
 
         /// <summary>

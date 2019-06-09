@@ -301,7 +301,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                 yield return new LCovParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(lines);
             }
-            else if (lines[0].StartsWith("        -:    0:Source:"))
+            else if (lines[0].Contains(GCovParser.SourceElementInFirstLine))
             {
                 Logger.Debug(" " + Resources.PreprocessingReport);
                 new GCovReportPreprocessor(this.sourceDirectories).Execute(lines);
