@@ -53,7 +53,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// </summary>
         /// <param name="report">The XML report.</param>
         /// <returns>The parser result.</returns>
-        public override ParserResult Parse(XContainer report)
+        public ParserResult Parse(XContainer report)
         {
             if (report == null)
             {
@@ -179,6 +179,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             var linesOfFile = methods
                 .Elements("ranges")
                 .Elements("range")
+                .Where(l => l.Attribute("start_line").Value != "15732480")
                 .Select(l => new
                 {
                     LineNumberStart = int.Parse(l.Attribute("start_line").Value, CultureInfo.InvariantCulture),
@@ -258,7 +259,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         ReportResources.BlocksNotCovered,
                         ParserBase.CodeCoverageUri,
                         MetricType.CoverageAbsolute,
-                        int.Parse(method.Attribute("blocks_not_covered").Value, CultureInfo.InvariantCulture))
+                        int.Parse(method.Attribute("blocks_not_covered").Value, CultureInfo.InvariantCulture),
+                        MetricMergeOrder.LowerIsBetter)
                 };
 
                 var methodMetric = new MethodMetric(fullName, shortName, metrics);
@@ -305,6 +307,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 var seqpnts = method
                     .Elements("ranges")
                     .Elements("range")
+                    .Where(l => l.Attribute("start_line").Value != "15732480")
                     .Select(l => new
                     {
                         LineNumberStart = int.Parse(l.Attribute("start_line").Value, CultureInfo.InvariantCulture),

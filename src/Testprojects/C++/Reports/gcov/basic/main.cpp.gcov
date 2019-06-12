@@ -1,0 +1,29 @@
+        -:    0:Source:main.cpp
+        -:    0:Graph:main.gcno
+        -:    0:Data:main.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include "sub/calculator.cpp"
+        -:    2:
+        1:    3:int GreatestOfThree(int a,int b,int c){
+        1:    4:  if((a>b) && (a>c)){
+    #####:    5:    return a;
+        -:    6:   }
+        1:    7:   else if(b>c){
+    #####:    8:    return b;
+        -:    9:   }
+        -:   10:  else{
+        1:   11:    return c;
+        -:   12:  }
+        -:   13: return 0;
+        -:   14:}
+        -:   15:
+        -:   16:
+        1:   17:int main()
+        -:   18:{
+        1:   19:  GreatestOfThree(1,2,3);
+        1:   20:  Add(3,1);
+        1:   21:  Add(1,3);
+        1:   22: return 0;
+        -:   23:
+        -:   24:}

@@ -28,7 +28,8 @@ namespace Palmmedia.ReportGenerator.Core.Test
             }
 
             var files = new DirectoryInfo(GetCSharpCodeDirectory()).GetFiles("*.cs")
-                .Concat(new DirectoryInfo(GetFSharpCodeDirectory()).GetFiles("*.fs"));
+                .Concat(new DirectoryInfo(GetFSharpCodeDirectory()).GetFiles("*.fs"))
+                .Concat(new DirectoryInfo(GetCPlusPlusCodeDirectory()).GetFiles("*.cpp"));
 
             foreach (var fileInfo in files)
             {
@@ -55,11 +56,15 @@ namespace Palmmedia.ReportGenerator.Core.Test
 
         internal static string GetJavaReportDirectory() => Path.Combine(GetFilesDirectory(), "Java", "Reports");
 
+        internal static string GetCPlusPlusReportDirectory() => Path.Combine(GetFilesDirectory(), "C++", "Reports");
+
         internal static string GetCSharpCodeDirectory() => Path.Combine(GetFilesDirectory(), "CSharp", "Project");
 
         internal static string GetFSharpCodeDirectory() => Path.Combine(GetFilesDirectory(), "FSharp", "Project");
 
         internal static string GetJavaCodeDirectory() => Path.Combine(GetFilesDirectory(), "Java", "Project");
+
+        internal static string GetCPlusPlusCodeDirectory() => Path.Combine(GetFilesDirectory(), "C++", "Projects");
 
         internal static string GetFilesDirectory()
         {

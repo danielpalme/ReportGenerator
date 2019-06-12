@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Microsoft.Extensions.Configuration;
 using Palmmedia.ReportGenerator.Core.CodeAnalysis;
@@ -25,7 +26,7 @@ namespace Palmmedia.ReportGenerator.Core
         private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(Program));
 
         /// <summary>
-        /// Executes the report generation.
+        /// Generates a report using given configuration.
         /// </summary>
         /// <param name="reportConfiguration">The report configuration.</param>
         /// <returns><c>true</c> if report was generated successfully; otherwise <c>false</c>.</returns>
@@ -65,7 +66,7 @@ namespace Palmmedia.ReportGenerator.Core
         }
 
         /// <summary>
-        /// Executes the report generation.
+        /// Generates a report using given configuration.
         /// </summary>
         /// <param name="reportConfiguration">The report configuration.</param>
         /// <param name="settings">The settings.</param>
@@ -93,16 +94,13 @@ namespace Palmmedia.ReportGenerator.Core
 
             try
             {
-                var reportContext = new ReportContext(reportConfiguration, settings);
-
                 var pluginLoader = new ReflectionPluginLoader(reportConfiguration.Plugins);
-
                 IReportBuilderFactory reportBuilderFactory = new ReportBuilderFactory(pluginLoader);
 
                 // Set log level before validation is performed
-                LoggerFactory.VerbosityLevel = reportContext.ReportConfiguration.VerbosityLevel;
+                LoggerFactory.VerbosityLevel = reportConfiguration.VerbosityLevel;
 
-                if (!new ReportConfigurationValidator(reportBuilderFactory).Validate(reportContext.ReportConfiguration))
+                if (!new ReportConfigurationValidator(reportBuilderFactory).Validate(reportConfiguration))
                 {
 #if DEBUG
                     if (System.Diagnostics.Debugger.IsAttached)
@@ -116,43 +114,22 @@ namespace Palmmedia.ReportGenerator.Core
 
                 var stopWatch = new System.Diagnostics.Stopwatch();
                 stopWatch.Start();
-                DateTime executionTime = DateTime.Now;
 
                 var parserResult = new CoverageReportParser(
-                    reportContext.Settings.NumberOfReportsParsedInParallel,
+                    settings.NumberOfReportsParsedInParallel,
                     reportConfiguration.SourceDirectories,
-                    new DefaultFilter(reportContext.ReportConfiguration.AssemblyFilters),
-                    new DefaultFilter(reportContext.ReportConfiguration.ClassFilters),
-                    new DefaultFilter(reportContext.ReportConfiguration.FileFilters))
-                        .ParseFiles(reportContext.ReportConfiguration.ReportFiles);
+                    new DefaultFilter(reportConfiguration.AssemblyFilters),
+                    new DefaultFilter(reportConfiguration.ClassFilters),
+                    new DefaultFilter(reportConfiguration.FileFilters))
+                        .ParseFiles(reportConfiguration.ReportFiles);
 
                 Logger.DebugFormat(Resources.ReportParsingTook, stopWatch.ElapsedMilliseconds / 1000d);
 
-                reportContext.RiskHotspotAnalysisResult = new RiskHotspotsAnalyzer(riskHotspotsAnalysisThresholds, reportContext.Settings.DisableRiskHotspots)
-                    .PerformRiskHotspotAnalysis(parserResult.Assemblies);
-
-                var overallHistoricCoverages = new System.Collections.Generic.List<Parser.Analysis.HistoricCoverage>();
-                var historyStorage = new HistoryStorageFactory(pluginLoader).GetHistoryStorage(reportContext.ReportConfiguration);
-
-                if (historyStorage != null)
-                {
-                    new HistoryParser(historyStorage, reportContext.Settings.MaximumNumberOfHistoricCoverageFiles)
-                            .ApplyHistoricCoverage(parserResult.Assemblies, overallHistoricCoverages);
-
-                    reportContext.OverallHistoricCoverages = overallHistoricCoverages;
-                }
-
-                new Reporting.ReportGenerator(
-                    new CachingFileReader(reportContext.Settings.CachingDuringOfRemoteFilesInMinutes),
-                    parserResult,
-                    reportBuilderFactory.GetReportBuilders(reportContext))
-                        .CreateReport(reportContext.ReportConfiguration.HistoryDirectory != null, overallHistoricCoverages, executionTime, reportContext.ReportConfiguration.Tag);
-
-                if (historyStorage != null)
-                {
-                    new HistoryReportGenerator(historyStorage)
-                            .CreateReport(parserResult.Assemblies, executionTime, reportContext.ReportConfiguration.Tag);
-                }
+                this.GenerateReport(
+                    reportConfiguration,
+                    settings,
+                    riskHotspotsAnalysisThresholds,
+                    parserResult);
 
                 stopWatch.Stop();
                 Logger.InfoFormat(Resources.ReportGenerationTook, stopWatch.ElapsedMilliseconds / 1000d);
@@ -172,6 +149,103 @@ namespace Palmmedia.ReportGenerator.Core
 #endif
 
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// Executes the report generation.
+        /// </summary>
+        /// <param name="reportConfiguration">The report configuration.</param>
+        /// <param name="parserResult">The parser result generated by <see cref="CoverageReportParser"/>.</param>
+        public void GenerateReport(
+            IReportConfiguration reportConfiguration,
+            ParserResult parserResult)
+        {
+            if (reportConfiguration == null)
+            {
+                throw new ArgumentNullException(nameof(reportConfiguration));
+            }
+
+            if (parserResult == null)
+            {
+                throw new ArgumentNullException(nameof(parserResult));
+            }
+
+            var configuration = this.GetConfiguration();
+
+            var settings = new Settings();
+            configuration.GetSection("settings").Bind(settings);
+
+            var riskHotspotsAnalysisThresholds = new RiskHotspotsAnalysisThresholds();
+            configuration.GetSection("riskHotspotsAnalysisThresholds").Bind(riskHotspotsAnalysisThresholds);
+
+            this.GenerateReport(reportConfiguration, settings, riskHotspotsAnalysisThresholds, parserResult);
+        }
+
+        /// <summary>
+        /// Executes the report generation.
+        /// </summary>
+        /// <param name="reportConfiguration">The report configuration.</param>
+        /// <param name="settings">The settings.</param>
+        /// <param name="riskHotspotsAnalysisThresholds">The risk hotspots analysis thresholds.</param>
+        /// <param name="parserResult">The parser result generated by <see cref="CoverageReportParser"/>.</param>
+        public void GenerateReport(
+            IReportConfiguration reportConfiguration,
+            Settings settings,
+            RiskHotspotsAnalysisThresholds riskHotspotsAnalysisThresholds,
+            ParserResult parserResult)
+        {
+            if (reportConfiguration == null)
+            {
+                throw new ArgumentNullException(nameof(reportConfiguration));
+            }
+
+            if (settings == null)
+            {
+                throw new ArgumentNullException(nameof(settings));
+            }
+
+            if (riskHotspotsAnalysisThresholds == null)
+            {
+                throw new ArgumentNullException(nameof(riskHotspotsAnalysisThresholds));
+            }
+
+            if (parserResult == null)
+            {
+                throw new ArgumentNullException(nameof(parserResult));
+            }
+
+            var reportContext = new ReportContext(reportConfiguration, settings);
+
+            var pluginLoader = new ReflectionPluginLoader(reportConfiguration.Plugins);
+            IReportBuilderFactory reportBuilderFactory = new ReportBuilderFactory(pluginLoader);
+
+            reportContext.RiskHotspotAnalysisResult = new RiskHotspotsAnalyzer(riskHotspotsAnalysisThresholds, settings.DisableRiskHotspots)
+                .PerformRiskHotspotAnalysis(parserResult.Assemblies);
+
+            var overallHistoricCoverages = new List<Parser.Analysis.HistoricCoverage>();
+            var historyStorage = new HistoryStorageFactory(pluginLoader).GetHistoryStorage(reportConfiguration);
+
+            if (historyStorage != null)
+            {
+                new HistoryParser(historyStorage, settings.MaximumNumberOfHistoricCoverageFiles)
+                    .ApplyHistoricCoverage(parserResult.Assemblies, overallHistoricCoverages);
+
+                reportContext.OverallHistoricCoverages = overallHistoricCoverages;
+            }
+
+            DateTime executionTime = DateTime.Now;
+
+            new Reporting.ReportGenerator(
+                new CachingFileReader(settings.CachingDuringOfRemoteFilesInMinutes),
+                parserResult,
+                reportBuilderFactory.GetReportBuilders(reportContext))
+                    .CreateReport(reportConfiguration.HistoryDirectory != null, overallHistoricCoverages, executionTime, reportConfiguration.Tag);
+
+            if (historyStorage != null)
+            {
+                new HistoryReportGenerator(historyStorage)
+                    .CreateReport(parserResult.Assemblies, executionTime, reportConfiguration.Tag);
             }
         }
 

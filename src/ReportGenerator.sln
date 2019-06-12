@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{7925
 		Testprojects\CSharp\Reports\Cobertura_coverlet.xml = Testprojects\CSharp\Reports\Cobertura_coverlet.xml
 		Testprojects\CSharp\Reports\dotCover.xml = Testprojects\CSharp\Reports\dotCover.xml
 		Testprojects\CSharp\Reports\DynamicCodeCoverage.xml = Testprojects\CSharp\Reports\DynamicCodeCoverage.xml
+		Testprojects\CSharp\Reports\lcov.info = Testprojects\CSharp\Reports\lcov.info
 		Testprojects\CSharp\Reports\mprof-report.xml = Testprojects\CSharp\Reports\mprof-report.xml
 		Testprojects\CSharp\Reports\MultiDynamicCodeCoverage.xml = Testprojects\CSharp\Reports\MultiDynamicCodeCoverage.xml
 		Testprojects\CSharp\Reports\MultiNCover1.5.8.xml = Testprojects\CSharp\Reports\MultiNCover1.5.8.xml
@@ -96,7 +97,51 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other", "Other", "{0974779A
 		Testprojects\Other\Cobertura_Istanbul.xml = Testprojects\Other\Cobertura_Istanbul.xml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportGenerator.MSBuild", "ReportGenerator.MSBuild\ReportGenerator.MSBuild.csproj", "{E0AC1EE8-82A3-41EE-BD42-44659CDBD333}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportGenerator.MSBuild", "ReportGenerator.MSBuild\ReportGenerator.MSBuild.csproj", "{E0AC1EE8-82A3-41EE-BD42-44659CDBD333}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "C++", "C++", "{A839B41D-2D86-4249-A429-4999F12ACB17}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project", "Project", "{BE7ECDD1-2395-45D2-A888-B10B0E8454D8}"
+	ProjectSection(SolutionItems) = preProject
+		Testprojects\C++\Projects\build.sh = Testprojects\C++\Projects\build.sh
+		Testprojects\C++\Projects\main.cpp = Testprojects\C++\Projects\main.cpp
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{1368829B-AD9B-4EB4-B2CA-0B8E3F081B27}"
+	ProjectSection(SolutionItems) = preProject
+		Testprojects\C++\Reports\lcov.info = Testprojects\C++\Reports\lcov.info
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sub", "sub", "{2C05E64E-C7E2-4D33-B7B6-14A317ECC35D}"
+	ProjectSection(SolutionItems) = preProject
+		Testprojects\C++\Projects\sub\calculator.cpp = Testprojects\C++\Projects\sub\calculator.cpp
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gcov", "gcov", "{0AB95F76-AA76-40B2-81E9-AE42550BDB26}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "basic", "basic", "{44E0824E-6846-4E9B-B27E-8A26A004EBA2}"
+	ProjectSection(SolutionItems) = preProject
+		Testprojects\C++\Reports\gcov\basic\calculator.cpp.gcov = Testprojects\C++\Reports\gcov\basic\calculator.cpp.gcov
+		Testprojects\C++\Reports\gcov\basic\main.cpp.gcov = Testprojects\C++\Reports\gcov\basic\main.cpp.gcov
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "branch_counts", "branch_counts", "{DF7C180A-CE3E-41CE-B088-5345779C548B}"
+	ProjectSection(SolutionItems) = preProject
+		Testprojects\C++\Reports\gcov\branch_counts\calculator.cpp.gcov = Testprojects\C++\Reports\gcov\branch_counts\calculator.cpp.gcov
+		Testprojects\C++\Reports\gcov\branch_counts\main.cpp.gcov = Testprojects\C++\Reports\gcov\branch_counts\main.cpp.gcov
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "branch_probabilities", "branch_probabilities", "{9EE7E19D-250E-48A9-A9B9-455B5534D91C}"
+	ProjectSection(SolutionItems) = preProject
+		Testprojects\C++\Reports\gcov\branch_probabilities\calculator.cpp.gcov = Testprojects\C++\Reports\gcov\branch_probabilities\calculator.cpp.gcov
+		Testprojects\C++\Reports\gcov\branch_probabilities\main.cpp.gcov = Testprojects\C++\Reports\gcov\branch_probabilities\main.cpp.gcov
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "branch_unconditional", "branch_unconditional", "{83869904-851E-487E-8817-9FF24C11E53C}"
+	ProjectSection(SolutionItems) = preProject
+		Testprojects\C++\Reports\gcov\branch_unconditional\calculator.cpp.gcov = Testprojects\C++\Reports\gcov\branch_unconditional\calculator.cpp.gcov
+		Testprojects\C++\Reports\gcov\branch_unconditional\main.cpp.gcov = Testprojects\C++\Reports\gcov\branch_unconditional\main.cpp.gcov
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -157,6 +202,14 @@ Global
 		{654FDEDF-31DE-47E4-A02E-F42DB1ACC722} = {89813866-CE17-47E5-BCA3-4740F8624BA5}
 		{1749EF69-D43F-4874-8290-8134B80D65E5} = {F02BAC2E-AD05-4AE9-B37B-A6B7CA732FBA}
 		{2EE13C01-7211-44B6-81A7-7D02DD7C1B3F} = {1749EF69-D43F-4874-8290-8134B80D65E5}
+		{BE7ECDD1-2395-45D2-A888-B10B0E8454D8} = {A839B41D-2D86-4249-A429-4999F12ACB17}
+		{1368829B-AD9B-4EB4-B2CA-0B8E3F081B27} = {A839B41D-2D86-4249-A429-4999F12ACB17}
+		{2C05E64E-C7E2-4D33-B7B6-14A317ECC35D} = {BE7ECDD1-2395-45D2-A888-B10B0E8454D8}
+		{0AB95F76-AA76-40B2-81E9-AE42550BDB26} = {1368829B-AD9B-4EB4-B2CA-0B8E3F081B27}
+		{44E0824E-6846-4E9B-B27E-8A26A004EBA2} = {0AB95F76-AA76-40B2-81E9-AE42550BDB26}
+		{DF7C180A-CE3E-41CE-B088-5345779C548B} = {0AB95F76-AA76-40B2-81E9-AE42550BDB26}
+		{9EE7E19D-250E-48A9-A9B9-455B5534D91C} = {0AB95F76-AA76-40B2-81E9-AE42550BDB26}
+		{83869904-851E-487E-8817-9FF24C11E53C} = {0AB95F76-AA76-40B2-81E9-AE42550BDB26}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2D015F29-27FC-43DD-91EE-3E5BA880F7D2}

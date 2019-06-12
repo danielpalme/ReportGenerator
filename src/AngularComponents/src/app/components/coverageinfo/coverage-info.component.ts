@@ -91,7 +91,7 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
                 [ngClass]="{'icon-up-dir_active': settings.sortBy === 'total' && settings.sortOrder === 'desc',
                 'icon-down-dir_active': settings.sortBy === 'total' && settings.sortOrder === 'asc',
                 'icon-down-dir': settings.sortBy !== 'total'}"></i>{{translations.total}}</a></th>
-            <th class="center" colspan="2" *ngIf="branchCoverageAvailable">
+            <th class="center" colspan="2">
                 <a href="#" (click)="updateSorting('coverage', $event)"><i class="icon-down-dir"
                   [ngClass]="{'icon-up-dir_active': settings.sortBy === 'coverage' && settings.sortOrder === 'desc',
                   'icon-down-dir_active': settings.sortBy === 'coverage' && settings.sortOrder === 'asc',

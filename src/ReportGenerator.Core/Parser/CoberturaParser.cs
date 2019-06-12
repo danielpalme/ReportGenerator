@@ -59,7 +59,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// </summary>
         /// <param name="report">The XML report.</param>
         /// <returns>The parser result.</returns>
-        public override ParserResult Parse(XContainer report)
+        public ParserResult Parse(XContainer report)
         {
             if (report == null)
             {
@@ -313,7 +313,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         ReportResources.CyclomaticComplexity,
                         ParserBase.CyclomaticComplexityUri,
                         MetricType.CodeQuality,
-                        value));
+                        value,
+                        MetricMergeOrder.LowerIsBetter));
                 }
 
                 var methodMetric = new MethodMetric(fullName, shortName, metrics);

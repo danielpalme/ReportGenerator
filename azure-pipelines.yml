@@ -4,14 +4,14 @@
 # https://docs.microsoft.com/azure/devops/pipelines/apps/windows/dot-net
 
 pool:
-  vmImage: 'VS2017-Win2016'
+  vmImage: 'windows-2019'
 
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   disable.coverage.autogenerate: 'true'
-  version: '4.1.7'
+  version: '4.2.0'
 
 # Prepare
 steps:
@@ -20,6 +20,29 @@ steps:
   inputs:
     command: custom
     custom: '--info'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet version'
+  inputs:
+    command: custom
+    custom: '--version'
+
+- task: DotNetCoreInstaller@0
+  displayName: 'Use .NET Core SDK 2.2.300'
+  inputs:
+    version: 2.2.300
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet info'
+  inputs:
+    command: custom
+    custom: '--info'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet version'
+  inputs:
+    command: custom
+    custom: '--version'
 
 - task: NuGetToolInstaller@0
   displayName: 'Use NuGet 4.9.3'
@@ -102,9 +125,9 @@ steps:
 
 # Build .NET Core 3.0
 - task: DotNetCoreInstaller@0
-  displayName: 'Use .NET Core sdk 3.0.100-preview4-011223'
+  displayName: 'Use .NET Core SDK 3.0.100-preview6-012264'
   inputs:
-    version: 3.0.100-preview4-011223
+    version: 3.0.100-preview6-012264
 
 - script: 'copy global_dotnet3.json global.json'
   workingDirectory: 'src/ReportGenerator.Console.NetCore'

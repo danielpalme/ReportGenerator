@@ -33,7 +33,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         public ParserResult()
         {
             this.assemblies = new List<Assembly>();
-            this.SupportsBranchCoverage = true;
+            this.SupportsBranchCoverage = false;
             this.parserNames = new List<string>();
         }
 

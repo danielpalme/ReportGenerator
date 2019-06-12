@@ -1,0 +1,436 @@
+TN:
+SF:C:\temp\AnalyzerTestClass.cs
+FN:46,System.String Test.AnalyzerTestClass::get_AutoProperty()
+FN:46,System.Void Test.AnalyzerTestClass::set_AutoProperty(System.String)
+FN:9,System.Void Test.AnalyzerTestClass::.ctor()
+FN:37,System.String Test.AnalyzerTestClass::DoSomething(System.String,System.String[],System.Guid,System.Collections.Generic.IEnumerable`1<System.String>,System.Collections.Generic.IList`1<System.String>,System.Decimal,System.Int32,System.Int64,System.Collections.Generic.Dictionary`2<System.String,System.Int32>,System.Int32&,System.Single,System.Double,System.Boolean,System.Byte,System.Char,System.Object,System.SByte,System.Int16,System.UInt32,System.UInt64,System.UInt16,ICSharpCode.NRefactory.PatternMatching.INode)
+FN:43,System.Void Test.AnalyzerTestClass::GenericMethod(T1,T2,System.Int32)
+FNDA:0,System.String Test.AnalyzerTestClass::get_AutoProperty()
+FNDA:0,System.Void Test.AnalyzerTestClass::set_AutoProperty(System.String)
+FNDA:0,System.Void Test.AnalyzerTestClass::.ctor()
+FNDA:0,System.String Test.AnalyzerTestClass::DoSomething(System.String,System.String[],System.Guid,System.Collections.Generic.IEnumerable`1<System.String>,System.Collections.Generic.IList`1<System.String>,System.Decimal,System.Int32,System.Int64,System.Collections.Generic.Dictionary`2<System.String,System.Int32>,System.Int32&,System.Single,System.Double,System.Boolean,System.Byte,System.Char,System.Object,System.SByte,System.Int16,System.UInt32,System.UInt64,System.UInt16,ICSharpCode.NRefactory.PatternMatching.INode)
+FNDA:0,System.Void Test.AnalyzerTestClass::GenericMethod(T1,T2,System.Int32)
+FNF:5
+FNH:0
+BRF:0
+BRH:0
+DA:46,0
+DA:46,0
+DA:9,0
+DA:10,0
+DA:11,0
+DA:12,0
+DA:37,0
+DA:38,0
+DA:39,0
+DA:40,0
+DA:43,0
+DA:44,0
+LH:0
+LF:12
+end_of_record
+SF:C:\temp\AsyncClass.cs
+FN:10,System.Void Test.AsyncClass/<SendAsync>d__0::MoveNext()
+FNDA:1,System.Void Test.AsyncClass/<SendAsync>d__0::MoveNext()
+FNF:1
+FNH:1
+BRF:0
+BRH:0
+DA:10,1
+DA:11,1
+DA:12,1
+DA:13,1
+LH:4
+LF:4
+end_of_record
+SF:C:\temp\ClassWithExcludes.cs
+FN:6,System.String Test.ClassWithExcludes::get_IncludedProperty()
+FN:6,System.Void Test.ClassWithExcludes::set_IncludedProperty(System.String)
+FN:12,System.Void Test.ClassWithExcludes::IncludedMethod()
+FNDA:0,System.String Test.ClassWithExcludes::get_IncludedProperty()
+FNDA:1,System.Void Test.ClassWithExcludes::set_IncludedProperty(System.String)
+FNDA:1,System.Void Test.ClassWithExcludes::IncludedMethod()
+FNF:6
+FNH:2
+BRF:0
+BRH:0
+DA:6,0
+DA:6,1
+DA:12,1
+DA:13,1
+DA:14,1
+LH:4
+LF:5
+end_of_record
+SF:C:\temp\CodeContract_Contract.cs
+FN:10,System.Int32 Test.CodeContract_Contract::Calculate(System.Int32)
+FNDA:0,System.Int32 Test.CodeContract_Contract::Calculate(System.Int32)
+FNF:1
+FNH:0
+BRF:0
+BRH:0
+DA:10,0
+DA:11,0
+DA:13,0
+DA:14,0
+LH:0
+LF:4
+end_of_record
+SF:C:\temp\CodeContract_Target.cs
+FN:7,System.Int32 Test.CodeContract_Target::Calculate(System.Int32)
+FNDA:2,System.Int32 Test.CodeContract_Target::Calculate(System.Int32)
+FNF:1
+FNH:1
+BRDA:8,43,0,1
+BRDA:8,43,1,1
+BRF:2
+BRH:2
+DA:7,2
+DA:8,2
+DA:9,1
+DA:10,1
+DA:13,1
+DA:14,1
+DA:16,2
+LH:7
+LF:7
+end_of_record
+SF:C:\temp\GenericClass.cs
+FN:12,System.Boolean Test.AbstractGenericClass`2::PostProcess(Test.ISomeObjectInterface`2<TModel,TState>)
+FN:22,System.Boolean Test.GenericClass`2::Process(Test.ISomeObjectInterface`2<TModel,TState>)
+FN:28,System.Boolean Test.GenericClass`2::PostProcess(Test.ISomeObjectInterface`2<TModel,TState>)
+FNDA:0,System.Boolean Test.AbstractGenericClass`2::PostProcess(Test.ISomeObjectInterface`2<TModel,TState>)
+FNDA:1,System.Boolean Test.GenericClass`2::Process(Test.ISomeObjectInterface`2<TModel,TState>)
+FNDA:1,System.Boolean Test.GenericClass`2::PostProcess(Test.ISomeObjectInterface`2<TModel,TState>)
+FNF:3
+FNH:2
+BRF:0
+BRH:0
+DA:12,0
+DA:13,0
+DA:14,0
+DA:22,1
+DA:23,1
+DA:24,1
+DA:25,1
+DA:28,1
+DA:29,1
+DA:30,1
+DA:31,1
+LH:8
+LF:11
+end_of_record
+SF:C:\temp\NotMatchingFileName.cs
+FN:6,System.String Test.SomeClass::get_Property1()
+FN:6,System.Void Test.SomeClass::set_Property1(System.String)
+FNDA:0,System.String Test.SomeClass::get_Property1()
+FNDA:1,System.Void Test.SomeClass::set_Property1(System.String)
+FNF:2
+FNH:1
+BRF:0
+BRH:0
+DA:6,0
+DA:6,1
+LH:1
+LF:2
+end_of_record
+SF:C:\temp\PartialClassWithAutoProperties2.cs
+FN:6,System.String Test.PartialClassWithAutoProperties::get_Property2()
+FN:6,System.Void Test.PartialClassWithAutoProperties::set_Property2(System.String)
+FN:8,System.String Test.PartialClassWithAutoProperties::get_ExpressionBodiedProperty()
+FNDA:0,System.String Test.PartialClassWithAutoProperties::get_Property2()
+FNDA:1,System.Void Test.PartialClassWithAutoProperties::set_Property2(System.String)
+FNDA:0,System.String Test.PartialClassWithAutoProperties::get_ExpressionBodiedProperty()
+FNF:3
+FNH:1
+BRF:0
+BRH:0
+DA:6,0
+DA:6,1
+DA:8,0
+LH:1
+LF:3
+end_of_record
+SF:C:\temp\PartialClassWithAutoProperties.cs
+FN:6,System.String Test.PartialClassWithAutoProperties::get_Property1()
+FN:6,System.Void Test.PartialClassWithAutoProperties::set_Property1(System.String)
+FNDA:0,System.String Test.PartialClassWithAutoProperties::get_Property1()
+FNDA:1,System.Void Test.PartialClassWithAutoProperties::set_Property1(System.String)
+FNF:2
+FNH:1
+BRF:0
+BRH:0
+DA:6,0
+DA:6,1
+LH:1
+LF:2
+end_of_record
+SF:C:\temp\PartialClass2.cs
+FN:8,System.Void Test.PartialClass::ExecutedMethod_2()
+FN:13,System.Void Test.PartialClass::UnExecutedMethod_2()
+FNDA:1,System.Void Test.PartialClass::ExecutedMethod_2()
+FNDA:0,System.Void Test.PartialClass::UnExecutedMethod_2()
+FNF:2
+FNH:1
+BRF:0
+BRH:0
+DA:8,1
+DA:9,1
+DA:10,1
+DA:13,0
+DA:14,0
+DA:15,0
+LH:3
+LF:6
+end_of_record
+SF:C:\temp\PartialClass.cs
+FN:21,System.Int32 Test.PartialClass::get_SomeProperty()
+FN:24,System.Void Test.PartialClass::set_SomeProperty(System.Int32)
+FN:8,System.Void Test.PartialClass::ExecutedMethod_1()
+FN:13,System.Void Test.PartialClass::UnExecutedMethod_1()
+FNDA:0,System.Int32 Test.PartialClass::get_SomeProperty()
+FNDA:1,System.Void Test.PartialClass::set_SomeProperty(System.Int32)
+FNDA:1,System.Void Test.PartialClass::ExecutedMethod_1()
+FNDA:0,System.Void Test.PartialClass::UnExecutedMethod_1()
+FNF:4
+FNH:2
+BRDA:25,81,0,1
+BRDA:25,81,1,-
+BRF:2
+BRH:1
+DA:21,0
+DA:21,0
+DA:21,0
+DA:24,1
+DA:25,1
+DA:26,1
+DA:27,1
+DA:28,1
+DA:30,0
+DA:31,0
+DA:32,0
+DA:33,1
+DA:8,1
+DA:9,1
+DA:10,1
+DA:13,0
+DA:14,0
+DA:15,0
+LH:9
+LF:18
+end_of_record
+SF:C:\temp\Program.cs
+FN:12,System.Void Test.Program::Main(System.String[])
+FN:51,System.Void Test.Program::CSharp_ExecuteTest1()
+FN:57,System.Void Test.Program::CSharp_ExecuteTest2()
+FN:73,System.Void Test.Program/EchoHandler::.ctor(System.Net.Http.HttpResponseMessage)
+FN:79,System.Threading.Tasks.Task`1<System.Net.Http.HttpResponseMessage> Test.Program/EchoHandler::SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+FN:62,System.Void Test.Program/<CallAsyncMethod>d__3::MoveNext()
+FNDA:1,System.Void Test.Program::Main(System.String[])
+FNDA:0,System.Void Test.Program::CSharp_ExecuteTest1()
+FNDA:0,System.Void Test.Program::CSharp_ExecuteTest2()
+FNDA:1,System.Void Test.Program/EchoHandler::.ctor(System.Net.Http.HttpResponseMessage)
+FNDA:1,System.Threading.Tasks.Task`1<System.Net.Http.HttpResponseMessage> Test.Program/EchoHandler::SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+FNDA:1,System.Void Test.Program/<CallAsyncMethod>d__3::MoveNext()
+FNF:6
+FNH:4
+BRF:0
+BRH:0
+DA:12,1
+DA:13,1
+DA:15,1
+DA:16,1
+DA:18,1
+DA:19,1
+DA:20,1
+DA:22,1
+DA:23,1
+DA:25,1
+DA:27,1
+DA:28,1
+DA:30,1
+DA:31,1
+DA:33,1
+DA:35,1
+DA:36,1
+DA:38,1
+DA:41,1
+DA:42,1
+DA:43,1
+DA:44,0
+DA:45,0
+DA:46,0
+DA:47,1
+DA:51,0
+DA:52,0
+DA:53,0
+DA:57,0
+DA:58,0
+DA:59,0
+DA:73,1
+DA:74,1
+DA:75,1
+DA:76,1
+DA:79,1
+DA:80,1
+DA:81,1
+DA:62,1
+DA:63,1
+DA:64,1
+DA:65,1
+DA:66,1
+DA:67,1
+LH:35
+LF:44
+end_of_record
+SF:C:\temp\AbstractClass.cs
+FN:7,System.Void Test.AbstractClass::.ctor()
+FN:20,System.Void Test.AbstractClass_SampleImpl1::.ctor()
+FN:26,System.Void Test.AbstractClass_SampleImpl1::Method1()
+FN:31,System.Void Test.AbstractClass_SampleImpl1::Method2()
+FN:39,System.Void Test.AbstractClass_SampleImpl2::.ctor()
+FN:45,System.Void Test.AbstractClass_SampleImpl2::Method1()
+FN:50,System.Void Test.AbstractClass_SampleImpl2::Method2()
+FNDA:2,System.Void Test.AbstractClass::.ctor()
+FNDA:1,System.Void Test.AbstractClass_SampleImpl1::.ctor()
+FNDA:0,System.Void Test.AbstractClass_SampleImpl1::Method1()
+FNDA:0,System.Void Test.AbstractClass_SampleImpl1::Method2()
+FNDA:1,System.Void Test.AbstractClass_SampleImpl2::.ctor()
+FNDA:0,System.Void Test.AbstractClass_SampleImpl2::Method1()
+FNDA:0,System.Void Test.AbstractClass_SampleImpl2::Method2()
+FNF:7
+FNH:3
+BRF:0
+BRH:0
+DA:7,2
+DA:8,2
+DA:9,2
+DA:10,2
+DA:20,1
+DA:21,1
+DA:22,1
+DA:23,1
+DA:26,0
+DA:27,0
+DA:31,0
+DA:32,0
+DA:39,1
+DA:40,1
+DA:41,1
+DA:42,1
+DA:45,0
+DA:46,0
+DA:50,0
+DA:51,0
+LH:12
+LF:20
+end_of_record
+SF:C:\temp\TestClass.cs
+FN:8,System.Void Test.TestClass::SampleFunction()
+FN:30,System.Void Test.TestClass/NestedClass::SampleFunction()
+FNDA:1,System.Void Test.TestClass::SampleFunction()
+FNDA:0,System.Void Test.TestClass/NestedClass::SampleFunction()
+FNF:2
+FNH:1
+BRDA:17,181,0,1
+BRDA:17,181,1,-
+BRF:2
+BRH:1
+DA:8,1
+DA:9,1
+DA:14,1
+DA:15,1
+DA:17,1
+DA:18,1
+DA:19,1
+DA:20,1
+DA:22,0
+DA:23,0
+DA:24,0
+DA:25,1
+DA:30,0
+DA:31,0
+DA:35,0
+LH:9
+LF:15
+end_of_record
+SF:C:\temp\TestClass2.cs
+FN:13,System.String Test.TestClass2::get_ExecutedProperty()
+FN:13,System.Void Test.TestClass2::set_ExecutedProperty(System.String)
+FN:15,System.String Test.TestClass2::get_UnExecutedProperty()
+FN:15,System.Void Test.TestClass2::set_UnExecutedProperty(System.String)
+FN:11,System.Void Test.TestClass2::.ctor()
+FN:11,System.Void Test.TestClass2::.ctor(System.String)
+FN:30,System.Void Test.TestClass2::ExecutedMethod()
+FN:36,System.Void Test.TestClass2::UnExecutedMethod()
+FN:42,System.Void Test.TestClass2::SampleFunction(System.String)
+FN:80,System.String Test.TestClass2::DoSomething(System.String,System.String[],System.Guid,System.Collections.Generic.IEnumerable`1<System.String>,System.Collections.Generic.IList`1<System.String>,System.Decimal,System.Int32,System.Collections.Generic.Dictionary`2<System.String,System.Int32>,System.Int32&,System.Single,System.Double,System.Boolean,System.Byte,System.Char,System.Object,System.SByte,System.Int16,System.UInt32,System.UInt64,System.UInt16)
+FN:54,System.Boolean Test.TestClass2/<>c__DisplayClass14_0::<SampleFunction>b__1(System.String)
+FN:45,System.Int32 Test.TestClass2/<>c::<SampleFunction>b__14_0(System.Int32)
+FNDA:1,System.String Test.TestClass2::get_ExecutedProperty()
+FNDA:2,System.Void Test.TestClass2::set_ExecutedProperty(System.String)
+FNDA:0,System.String Test.TestClass2::get_UnExecutedProperty()
+FNDA:0,System.Void Test.TestClass2::set_UnExecutedProperty(System.String)
+FNDA:0,System.Void Test.TestClass2::.ctor()
+FNDA:2,System.Void Test.TestClass2::.ctor(System.String)
+FNDA:1,System.Void Test.TestClass2::ExecutedMethod()
+FNDA:0,System.Void Test.TestClass2::UnExecutedMethod()
+FNDA:1,System.Void Test.TestClass2::SampleFunction(System.String)
+FNDA:0,System.String Test.TestClass2::DoSomething(System.String,System.String[],System.Guid,System.Collections.Generic.IEnumerable`1<System.String>,System.Collections.Generic.IList`1<System.String>,System.Decimal,System.Int32,System.Collections.Generic.Dictionary`2<System.String,System.Int32>,System.Int32&,System.Single,System.Double,System.Boolean,System.Byte,System.Char,System.Object,System.SByte,System.Int16,System.UInt32,System.UInt64,System.UInt16)
+FNDA:3,System.Boolean Test.TestClass2/<>c__DisplayClass14_0::<SampleFunction>b__1(System.String)
+FNDA:4,System.Int32 Test.TestClass2/<>c::<SampleFunction>b__14_0(System.Int32)
+FNF:12
+FNH:7
+BRDA:54,232,0,1
+BRDA:54,232,1,-
+BRF:2
+BRH:1
+DA:13,1
+DA:13,2
+DA:15,0
+DA:15,0
+DA:11,0
+DA:17,0
+DA:18,0
+DA:19,0
+DA:20,0
+DA:21,0
+DA:11,2
+DA:23,2
+DA:24,2
+DA:25,2
+DA:26,2
+DA:27,2
+DA:30,1
+DA:31,1
+DA:32,1
+DA:33,1
+DA:36,0
+DA:37,0
+DA:38,0
+DA:39,0
+DA:42,1
+DA:43,1
+DA:45,1
+DA:47,1
+DA:47,1
+DA:47,4
+DA:48,4
+DA:49,4
+DA:50,4
+DA:47,5
+DA:52,1
+DA:54,1
+DA:55,1
+DA:56,1
+DA:57,1
+DA:58,1
+DA:80,0
+DA:81,0
+DA:82,0
+DA:83,0
+DA:54,3
+DA:45,4
+LH:30
+LF:46
+end_of_record

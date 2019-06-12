@@ -51,7 +51,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
                 {
                     if (!Path.IsPathRooted(file.Attribute("path").Value))
                     {
-                        Logger.Warn("  " + string.Format(Resources.NoSouceDirectories, "Clover"));
+                        Logger.Warn("  " + string.Format(Resources.NoSourceDirectories, "Clover"));
                         return;
                     }
                 }

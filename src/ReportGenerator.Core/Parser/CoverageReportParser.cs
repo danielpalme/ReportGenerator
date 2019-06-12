@@ -100,9 +100,13 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                     try
                     {
-                        var report = XDocument.Load(reportFile);
+                        string line1 = File.ReadLines(reportFile).First();
 
-                        foreach (var parserResult in this.ParseFile(report))
+                        IEnumerable<ParserResult> parserResults = line1.Trim().StartsWith("<")
+                            ? this.ParseXmlFile(XDocument.Load(reportFile))
+                            : this.ParseTextFile(File.ReadAllLines(reportFile));
+
+                        foreach (var parserResult in parserResults)
                         {
                             lock (this.mergeLock)
                             {
@@ -133,12 +137,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         }
 
         /// <summary>
-        /// Tries to initiate the correct parsers for the given report. The result is merged into the given result.
+        /// Tries to initiate the correct parsers for the given XML report. The result is merged into the given result.
         /// The report may contain several reports. For every report an extra parser is initiated.
         /// </summary>
         /// <param name="report">The report file to parse.</param>
         /// <returns>The parser result.</returns>
-        private IEnumerable<ParserResult> ParseFile(XContainer report)
+        private IEnumerable<ParserResult> ParseXmlFile(XContainer report)
         {
             if (report.Descendants("PartCoverReport").Any())
             {
@@ -153,8 +157,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 {
                     Logger.Debug(" " + Resources.PreprocessingReport);
                     new OpenCoverReportPreprocessor().Execute(item);
-                    Logger.DebugFormat(" " + Resources.InitiatingParser, "OpenCover");
 
+                    Logger.DebugFormat(" " + Resources.InitiatingParser, "OpenCover");
                     yield return new OpenCoverParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
                 }
 
@@ -169,8 +173,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 {
                     Logger.Debug(" " + Resources.PreprocessingReport);
                     new DotCoverReportPreprocessor().Execute(item);
-                    Logger.DebugFormat(" " + Resources.InitiatingParser, "dotCover");
 
+                    Logger.DebugFormat(" " + Resources.InitiatingParser, "dotCover");
                     yield return new DotCoverParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
                 }
 
@@ -185,8 +189,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 {
                     Logger.Debug(" " + Resources.PreprocessingReport);
                     new JaCoCoReportPreprocessor(this.sourceDirectories).Execute(item);
-                    Logger.DebugFormat(" " + Resources.InitiatingParser, "JaCoCo");
 
+                    Logger.DebugFormat(" " + Resources.InitiatingParser, "JaCoCo");
                     var result = new JaCoCoParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
 
                     foreach (var sourceDirectory in this.sourceDirectories)
@@ -209,15 +213,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     if (item.Attribute("profilerVersion") != null)
                     {
                         Logger.DebugFormat(" " + Resources.InitiatingParser, "NCover");
-
                         yield return new NCoverParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
                     }
                     else if (item.Attribute("clover") != null)
                     {
                         Logger.Debug(" " + Resources.PreprocessingReport);
                         new CloverReportPreprocessor(this.sourceDirectories).Execute(item);
-                        Logger.DebugFormat(" " + Resources.InitiatingParser, "Clover");
 
+                        Logger.DebugFormat(" " + Resources.InitiatingParser, "Clover");
                         var result = new CloverParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
 
                         foreach (var sourceDirectory in this.sourceDirectories)
@@ -231,14 +234,13 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     {
                         Logger.Debug(" " + Resources.PreprocessingReport);
                         new CoberturaReportPreprocessor().Execute(item);
-                        Logger.DebugFormat(" " + Resources.InitiatingParser, "Cobertura");
 
+                        Logger.DebugFormat(" " + Resources.InitiatingParser, "Cobertura");
                         yield return new CoberturaParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
                     }
                     else
                     {
                         Logger.DebugFormat(" " + Resources.InitiatingParser, "mprof");
-
                         yield return new MProfParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
                     }
                 }
@@ -277,6 +279,42 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 }
 
                 yield break;
+            }
+        }
+
+        /// <summary>
+        /// Tries to initiate the correct parsers for the given text based report. The result is merged into the given result.
+        /// The report may contain several reports. For every report an extra parser is initiated.
+        /// </summary>
+        /// <param name="lines">The file's lines.</param>
+        /// <returns>The parser result.</returns>
+        private IEnumerable<ParserResult> ParseTextFile(string[] lines)
+        {
+            if (lines.Length == 0)
+            {
+                yield break;
+            }
+
+            if (lines[0].StartsWith("TN:"))
+            {
+                Logger.DebugFormat(" " + Resources.InitiatingParser, "LCov");
+
+                yield return new LCovParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(lines);
+            }
+            else if (lines[0].Contains(GCovParser.SourceElementInFirstLine))
+            {
+                Logger.Debug(" " + Resources.PreprocessingReport);
+                new GCovReportPreprocessor(this.sourceDirectories).Execute(lines);
+
+                Logger.DebugFormat(" " + Resources.InitiatingParser, "GCov");
+                var result = new GCovParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(lines);
+
+                foreach (var sourceDirectory in this.sourceDirectories)
+                {
+                    result.AddSourceDirectory(sourceDirectory);
+                }
+
+                yield return result;
             }
         }
 

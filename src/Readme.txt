@@ -58,6 +58,24 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.2.0.0
+
+    * New: Added support for gcov and lcov
+
+4.1.10.0
+
+    * Fix: Issue #251: DynamicCodeCoverage: Fixed handling of lines with number 15732480
+
+4.1.9.0
+
+    * New: Issue #247: Added new overloads to GenerateReports
+    * Fix: Issue #248: Improved merging of metrics (use minimum for certain metrics)
+    * Fix: Issue #250: Fixed backlink symbol for Firefox
+
+4.1.8.0
+
+    * Fix: Issue #239: Improved link back to the summary page for Azure DevOps
+
 4.1.7.0
 
     * Fix: Issue #242: Improved option to remove risk hotspots section

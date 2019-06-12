@@ -191,7 +191,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="text">The text.</param>
         public void HeaderWithBackLink(string text)
         {
-            this.reportTextWriter.WriteLine("<h1><a href=\"index.htm\">&#x2B60;</a> {0}</h1>", WebUtility.HtmlEncode(text));
+            this.reportTextWriter.WriteLine("<h1><a href=\"index.htm\">&lt;</a> {0}</h1>", WebUtility.HtmlEncode(text));
         }
 
         /// <summary>
@@ -1226,13 +1226,21 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             {
                 string shortClassName = null;
 
-                if (className.EndsWith(".js", StringComparison.OrdinalIgnoreCase))
+                if (assemblyName == "Default" && className.Contains(Path.DirectorySeparatorChar))
                 {
-                    shortClassName = className.Substring(0, className.LastIndexOf('.'));
+                    assemblyName = className.Substring(0, className.LastIndexOf(Path.DirectorySeparatorChar));
+                    shortClassName = className.Substring(className.LastIndexOf(Path.DirectorySeparatorChar) + 1);
                 }
                 else
                 {
-                    shortClassName = className.Substring(className.LastIndexOf('.') + 1);
+                    if (className.EndsWith(".js", StringComparison.OrdinalIgnoreCase))
+                    {
+                        shortClassName = className.Substring(0, className.LastIndexOf('.'));
+                    }
+                    else
+                    {
+                        shortClassName = className.Substring(className.LastIndexOf('.') + 1);
+                    }
                 }
 
                 fileName = RendererBase.ReplaceInvalidPathChars(assemblyName + "_" + shortClassName) + ".htm";

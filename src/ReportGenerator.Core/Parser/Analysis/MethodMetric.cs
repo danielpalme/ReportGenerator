@@ -116,7 +116,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                     {
                         if (metric.Value.HasValue)
                         {
-                            existingMetric.Value = Math.Max(existingMetric.Value.Value, metric.Value.Value);
+                            if (metric.MergeOrder == MetricMergeOrder.HigherIsBetter)
+                            {
+                                existingMetric.Value = Math.Max(existingMetric.Value.Value, metric.Value.Value);
+                            }
+                            else
+                            {
+                                existingMetric.Value = Math.Min(existingMetric.Value.Value, metric.Value.Value);
+                            }
                         }
                     }
                     else

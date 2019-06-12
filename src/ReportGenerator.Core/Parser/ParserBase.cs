@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Xml.Linq;
 using Palmmedia.ReportGenerator.Core.Parser.Filtering;
 
 namespace Palmmedia.ReportGenerator.Core.Parser
@@ -58,17 +57,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         protected IFilter FileFilter { get; }
 
         /// <summary>
-        /// Parses the given XML report.
-        /// </summary>
-        /// <param name="report">The XML report</param>
-        /// <returns>The parser result.</returns>
-        public abstract ParserResult Parse(XContainer report);
-
-        /// <summary>
-        /// Returns a <see cref="System.String"/> that represents this instance.
+        /// Returns a <see cref="string"/> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String"/> that represents this instance.
+        /// A <see cref="string"/> that represents this instance.
         /// </returns>
         public override string ToString() => this.GetType().Name;
     }

@@ -53,7 +53,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// </summary>
         /// <param name="report">The XML report.</param>
         /// <returns>The parser result.</returns>
-        public override ParserResult Parse(XContainer report)
+        public ParserResult Parse(XContainer report)
         {
             if (report == null)
             {
@@ -260,7 +260,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         ReportResources.BlocksNotCovered,
                         ParserBase.CodeCoverageUri,
                         MetricType.CoverageAbsolute,
-                        int.Parse(method.Element("BlocksNotCovered").Value, CultureInfo.InvariantCulture))
+                        int.Parse(method.Element("BlocksNotCovered").Value, CultureInfo.InvariantCulture),
+                        MetricMergeOrder.LowerIsBetter)
                 };
 
                 var methodMetric = new MethodMetric(fullName, shortName, metrics);

@@ -49,12 +49,12 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         public void SupportsBranchCoverage()
         {
             var parserResult = new ParserResult();
-            Assert.True(parserResult.SupportsBranchCoverage);
+            Assert.False(parserResult.SupportsBranchCoverage);
 
             parserResult = new ParserResult(new List<Assembly>(), false, "Test");
             Assert.False(parserResult.SupportsBranchCoverage);
 
-            parserResult.Merge(new ParserResult());
+            parserResult.Merge(new ParserResult(new List<Assembly>(), true, "Test"));
             Assert.True(parserResult.SupportsBranchCoverage);
         }
 
@@ -253,7 +253,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
             Assert.Equal(3, metrics.First().Metrics.Count());
 
             Assert.Equal("Cyclomatic complexity", metrics.First().Metrics.ElementAt(0).Name);
-            Assert.Equal(111, metrics.First().Metrics.ElementAt(0).Value);
+            Assert.Equal(3, metrics.First().Metrics.ElementAt(0).Value);
             Assert.Equal("Sequence coverage", metrics.First().Metrics.ElementAt(1).Name);
             Assert.Equal(222, metrics.First().Metrics.ElementAt(1).Value);
             Assert.Equal("Branch coverage", metrics.First().Metrics.ElementAt(2).Name);
