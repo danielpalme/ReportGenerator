@@ -87,6 +87,17 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
             Assert.Equal("CloverParser", parserResult.ParserName);
             Assert.Equal(1, parserResult.SourceDirectories.Count);
             Assert.Equal("C:\\somedirectory", parserResult.SourceDirectories.First());
+
+            filePath = Path.Combine(FileManager.GetCSharpReportDirectory(), "lcov.info");
+            parserResult = new CoverageReportParser(1, new string[] { "C:\\somedirectory" }, this.filterMock.Object, this.filterMock.Object, this.filterMock.Object).ParseFiles(new string[] { filePath });
+            Assert.Equal("LCovParser", parserResult.ParserName);
+            Assert.Equal(0, parserResult.SourceDirectories.Count);
+
+            filePath = Path.Combine(FileManager.GetCPlusPlusReportDirectory(), "gcov", "basic", "main.cpp.gcov");
+            parserResult = new CoverageReportParser(1, new string[] { "C:\\somedirectory" }, this.filterMock.Object, this.filterMock.Object, this.filterMock.Object).ParseFiles(new string[] { filePath });
+            Assert.Equal("GCovParser", parserResult.ParserName);
+            Assert.Equal(1, parserResult.SourceDirectories.Count);
+            Assert.Equal("C:\\somedirectory", parserResult.SourceDirectories.First());
         }
 
         /// <summary>

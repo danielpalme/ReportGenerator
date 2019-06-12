@@ -58,6 +58,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.2.0.0
+
+    * New: Added support for gcov and lcov
+
 4.1.10.0
 
     * Fix: Issue #251: DynamicCodeCoverage: Fixed handling of lines with number 15732480
