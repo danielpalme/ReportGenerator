@@ -23,20 +23,20 @@ https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage</desc
     <repository type="git" url="https://github.com/danielpalme/ReportGenerator.git" />
     <dependencies>
       <group targetFramework="netstandard2.0">
-        <dependency id="Microsoft.Extensions.Configuration" version="2.1.1" />
-        <dependency id="Microsoft.Extensions.Configuration.Binder" version="2.1.1" />
-        <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="2.1.1" />
-        <dependency id="Microsoft.Extensions.Configuration.Json" version="2.1.1" />
+        <dependency id="Microsoft.Extensions.Configuration" version="2.2.0" />
+        <dependency id="Microsoft.Extensions.Configuration.Binder" version="2.2.0" />
+        <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="2.2.0" />
+        <dependency id="Microsoft.Extensions.Configuration.Json" version="2.2.0" />
         <dependency id="SixLabors.ImageSharp.Drawing" version="1.0.0-beta0004" />
       </group>
 
       <group targetFramework="netcoreapp">
-        <dependency id="Microsoft.Extensions.Configuration" version="2.1.1" />
-        <dependency id="Microsoft.Extensions.Configuration.Binder" version="2.1.1" />
-        <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="2.1.1" />
-        <dependency id="Microsoft.Extensions.Configuration.Json" version="2.1.1" />
+        <dependency id="Microsoft.Extensions.Configuration" version="2.2.0" />
+        <dependency id="Microsoft.Extensions.Configuration.Binder" version="2.2.0" />
+        <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="2.2.0" />
+        <dependency id="Microsoft.Extensions.Configuration.Json" version="2.2.0" />
         <dependency id="SixLabors.ImageSharp.Drawing" version="1.0.0-beta0004" />
-        <dependency id="McMaster.NETCore.Plugins" version="0.1.1" />
+        <dependency id="McMaster.NETCore.Plugins" version="0.2.4" />
       </group>
     </dependencies>
   </metadata>
