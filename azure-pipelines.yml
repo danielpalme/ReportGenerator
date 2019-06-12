@@ -21,12 +21,6 @@ steps:
     command: custom
     custom: '--info'
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet version'
-  inputs:
-    command: custom
-    custom: '--version'
-
 - task: DotNetCoreInstaller@0
   displayName: 'Use .NET Core SDK 2.2.300'
   inputs:
