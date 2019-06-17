@@ -58,6 +58,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.2.1.0
+
+    * Fix: Issue #255: Improved performance of Cobertura parser
+
 4.2.0.0
 
     * New: Added support for gcov and lcov
