@@ -16,10 +16,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
     /// <summary>
     /// HTML report renderer.
     /// </summary>
-    internal class HtmlRenderer : RendererBase, IReportRenderer, IDisposable
+    internal class HtmlRenderer : IReportRenderer, IDisposable
     {
-        #region HTML Snippets
-
         /// <summary>
         /// The head of each generated HTML file.
         /// </summary>
@@ -44,8 +42,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// The link to the static CSS file.
         /// </summary>
         private const string CssLink = "<link rel=\"stylesheet\" type=\"text/css\" href=\"report.css\" />";
-
-        #endregion
 
         /// <summary>
         /// The Logger.
@@ -117,11 +113,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// Gets a value indicating whether renderer support rendering of charts.
         /// </summary>
         public bool SupportsCharts => true;
-
-        /// <summary>
-        /// Gets a value indicating whether renderer support rendering of charts.
-        /// </summary>
-        public bool SupportsRiskHotsSpots => true;
 
         /// <summary>
         /// Begins the summary report.
@@ -289,7 +280,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="path">The path of the file.</param>
         public void File(string path)
         {
-            this.reportTextWriter.WriteLine("<h2 id=\"{0}\">{1}</h2>", WebUtility.HtmlEncode(HtmlRenderer.ReplaceNonLetterChars(path)), WebUtility.HtmlEncode(path));
+            this.reportTextWriter.WriteLine("<h2 id=\"{0}\">{1}</h2>", WebUtility.HtmlEncode(StringHelper.ReplaceNonLetterChars(path)), WebUtility.HtmlEncode(path));
         }
 
         /// <summary>
@@ -587,7 +578,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="files">The files.</param>
         public void KeyValueRow(string key, IEnumerable<string> files)
         {
-            string value = string.Join("<br />", files.Select(v => string.Format(CultureInfo.InvariantCulture, "<a href=\"#{0}\" class=\"navigatetohash\">{1}</a>", WebUtility.HtmlEncode(ReplaceNonLetterChars(v)), WebUtility.HtmlEncode(v))));
+            string value = string.Join("<br />", files.Select(v => string.Format(CultureInfo.InvariantCulture, "<a href=\"#{0}\" class=\"navigatetohash\">{1}</a>", WebUtility.HtmlEncode(StringHelper.ReplaceNonLetterChars(v)), WebUtility.HtmlEncode(v))));
 
             this.reportTextWriter.WriteLine(
                 "<tr><th>{0}</th><td>{1}</td></tr>",
@@ -1243,7 +1234,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     }
                 }
 
-                fileName = RendererBase.ReplaceInvalidPathChars(assemblyName + "_" + shortClassName) + ".htm";
+                fileName = StringHelper.ReplaceInvalidPathChars(assemblyName + "_" + shortClassName) + ".htm";
 
                 if (fileName.Length > 100)
                 {

@@ -14,10 +14,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
     /// <summary>
     /// Latex report renderer.
     /// </summary>
-    internal class LatexRenderer : RendererBase, IReportRenderer, IDisposable
+    internal class LatexRenderer : IReportRenderer, IDisposable
     {
-        #region Latex Snippets
-
         /// <summary>
         /// The head of each generated Latex file.
         /// </summary>
@@ -63,8 +61,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// </summary>
         private const string LatexEnd = @"\end{document}";
 
-        #endregion
-
         /// <summary>
         /// The Logger.
         /// </summary>
@@ -99,11 +95,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// Gets a value indicating whether renderer support rendering of charts.
         /// </summary>
         public bool SupportsCharts => false;
-
-        /// <summary>
-        /// Gets a value indicating whether renderer support rendering of charts.
-        /// </summary>
-        public bool SupportsRiskHotsSpots => true;
 
         /// <summary>
         /// Begins the summary report.
@@ -399,7 +390,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 .Replace("~", " "); // replace '~' since this used for the \verb command
 
             formattedLine = ShortenString(formattedLine, 120);
-            formattedLine = XmlRenderer.ReplaceInvalidXmlChars(formattedLine);
+            formattedLine = StringHelper.ReplaceInvalidXmlChars(formattedLine);
 
             string lineVisitStatus;
 

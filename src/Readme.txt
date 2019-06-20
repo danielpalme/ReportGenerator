@@ -43,6 +43,8 @@ Cobertura
 JaCoCo
 Clover
 Mono (mprof-report)
+gcov
+lcov
 
 =======================================================================
 
@@ -57,6 +59,10 @@ For further details take a look at LICENSE.txt.
 =======================================================================
 
 CHANGELOG
+
+4.2.2.0
+
+    * Fix: Issue #256: Improved XML report
 
 4.2.1.0
 

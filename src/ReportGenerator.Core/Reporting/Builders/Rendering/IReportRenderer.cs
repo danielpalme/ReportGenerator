@@ -15,11 +15,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         bool SupportsCharts { get; }
 
         /// <summary>
-        /// Gets a value indicating whether renderer support rendering risk hotspots.
-        /// </summary>
-        bool SupportsRiskHotsSpots { get; }
-
-        /// <summary>
         /// Begins the summary report.
         /// </summary>
         /// <param name="targetDirectory">The target directory.</param>
