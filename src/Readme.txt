@@ -60,6 +60,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.2.3.0
+
+    * Fix: Issue #259: Improved tooltip position in charts
+
 4.2.2.0
 
     * Fix: Issue #256: Improved XML report
