@@ -391,6 +391,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.javaScriptContent.AppendLine("var assemblies = [");
 
             var historicCoverageExecutionTimes = new HashSet<DateTime>();
+            var tagsByBistoricCoverageExecutionTime = new Dictionary<DateTime, string>();
 
             foreach (var assembly in assemblies)
             {
@@ -416,6 +417,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     foreach (var historicCoverage in @class.HistoricCoverages)
                     {
                         historicCoverageExecutionTimes.Add(historicCoverage.ExecutionTime);
+                        tagsByBistoricCoverageExecutionTime[historicCoverage.ExecutionTime] = historicCoverage.Tag;
 
                         if (historicCoveragesCounter++ > 0)
                         {
@@ -477,7 +479,13 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     this.javaScriptContent.Append(", ");
                 }
 
-                this.javaScriptContent.AppendFormat("\"{0} - {1}\"", item.ToShortDateString(), item.ToLongTimeString());
+                string tag = tagsByBistoricCoverageExecutionTime[item];
+                this.javaScriptContent.AppendFormat(
+                    "\"{0} - {1}{2}{3}\"",
+                    item.ToShortDateString(),
+                    item.ToLongTimeString(),
+                    string.IsNullOrEmpty(tag) ? string.Empty : " - ",
+                    tag);
             }
 
             this.javaScriptContent.AppendLine("];");

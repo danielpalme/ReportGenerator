@@ -60,6 +60,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.2.4.0
+
+    * Fix: Issue #260: Added tag to comparision selection
+
 4.2.3.0
 
     * Fix: Issue #259: Improved tooltip position in charts
