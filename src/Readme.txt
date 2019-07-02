@@ -62,6 +62,7 @@ CHANGELOG
 
 4.2.4.0
 
+    * Fix: Issue #117: Improved file filters (classes get removed if all files are removed)
     * Fix: Issue #260: Added tag to comparision selection
 
 4.2.3.0

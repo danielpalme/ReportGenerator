@@ -44,6 +44,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Filtering
                 .Select(f => CreateFilterRegex(f))
                 .ToArray();
 
+            this.HasCustomFilters = this.excludeFilters.Length > 0 || this.includeFilters.Length > 0;
+
             if (this.includeFilters.Length == 0)
             {
                 this.includeFilters = new[]
@@ -52,6 +54,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Filtering
                 };
             }
         }
+
+        /// <summary>
+        /// Gets a value indicating whether custom filter are applied.
+        /// </summary>
+        /// <returns>
+        ///   <c>true</c> if custom filter are applied; otherwise, <c>false</c>.
+        /// </returns>
+        public bool HasCustomFilters { get; }
 
         /// <summary>
         /// Determines whether the given element should be included in the report.

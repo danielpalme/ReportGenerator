@@ -145,7 +145,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .ToArray();
 
             // If all files are removed by filters, then the whole class is omitted
-            if (files.Length == 0 || filteredFiles.Length > 0)
+            if ((files.Length == 0 && !this.FileFilter.HasCustomFilters) || filteredFiles.Length > 0)
             {
                 var @class = new Class(className, assembly);
 

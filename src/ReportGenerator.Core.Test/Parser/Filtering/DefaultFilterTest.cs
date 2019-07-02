@@ -15,6 +15,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Filtering
             IFilter filter = new DefaultFilter(new string[] { });
 
             Assert.True(filter.IsElementIncludedInReport("Test"), "Element is expected to be included.");
+            Assert.False(filter.HasCustomFilters);
         }
 
         [Fact]
@@ -23,6 +24,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Filtering
             IFilter filter = new DefaultFilter(new[] { "+Test" });
 
             Assert.True(filter.IsElementIncludedInReport("Test"), "Element is expected to be included.");
+            Assert.True(filter.HasCustomFilters);
         }
 
         [Fact]
@@ -31,6 +33,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Filtering
             IFilter filter = new DefaultFilter(new[] { "+Test" });
 
             Assert.False(filter.IsElementIncludedInReport("Test123"), "Element is expected to be excluded.");
+            Assert.True(filter.HasCustomFilters);
         }
 
         [Fact]
@@ -40,6 +43,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Filtering
 
             Assert.True(filter.IsElementIncludedInReport("Test"), "Element is expected to be included.");
             Assert.True(filter.IsElementIncludedInReport("Test123"), "Element is expected to be included.");
+            Assert.True(filter.HasCustomFilters);
         }
 
         [Fact]
@@ -49,6 +53,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Filtering
 
             Assert.False(filter.IsElementIncludedInReport("PrefixTest"), "Element is expected to be included.");
             Assert.False(filter.IsElementIncludedInReport("PrefixTest123"), "Element is expected to be included.");
+            Assert.True(filter.HasCustomFilters);
         }
 
         [Fact]
@@ -57,6 +62,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Filtering
             IFilter filter = new DefaultFilter(new[] { "+Test", "-SomeExclude" });
 
             Assert.True(filter.IsElementIncludedInReport("Test"), "Element is expected to be included.");
+            Assert.True(filter.HasCustomFilters);
         }
 
         [Fact]
@@ -65,6 +71,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Filtering
             IFilter filter = new DefaultFilter(new[] { "+Test", "-Test" });
 
             Assert.False(filter.IsElementIncludedInReport("Test"), "Element is expected to be excluded.");
+            Assert.True(filter.HasCustomFilters);
         }
 
         [Fact]
@@ -74,6 +81,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Filtering
 
             Assert.True(filter.IsElementIncludedInReport("Test"), "Element is expected to be included.");
             Assert.True(filter.IsElementIncludedInReport("Test123"), "Element is expected to be included.");
+            Assert.True(filter.HasCustomFilters);
         }
 
         [Fact]
@@ -83,6 +91,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Filtering
 
             Assert.False(filter.IsElementIncludedInReport("Test"), "Element is expected to be included.");
             Assert.False(filter.IsElementIncludedInReport("PrefixTest123"), "Element is expected to be included.");
+            Assert.True(filter.HasCustomFilters);
         }
     }
 }
