@@ -8,7 +8,7 @@ ReportGenerator
 <div align="center">
 
 [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/danielpalme/ReportGenerator/master/LICENSE.txt)
-[![Build Status](https://danielpalme.visualstudio.com/ReportGenerator/_apis/build/status/danielpalme.ReportGenerator?branchName=master)](https://danielpalme.visualstudio.com/ReportGenerator/_build/latest?definitionId=3)
+[![Build Status](https://dev.azure.com/danielpalme/ReportGenerator/_apis/build/status/danielpalme.ReportGenerator?branchName=master)](https://dev.azure.com/danielpalme/ReportGenerator/_build/latest?definitionId=3&branchName=master)
 ![Coverage](https://img.shields.io/azure-devops/coverage/danielpalme/ReportGenerator/3.svg)
 
 </div>
