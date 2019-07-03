@@ -5,6 +5,7 @@
 ReportGenerator
 </h1>
 
+<b align="center">Powerful code coverage visualization</b>
 <div align="center">
 
 [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/danielpalme/ReportGenerator/master/LICENSE.txt)
