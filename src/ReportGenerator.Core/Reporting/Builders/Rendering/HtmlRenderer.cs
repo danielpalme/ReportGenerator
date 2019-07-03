@@ -425,9 +425,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                         }
 
                         historicCoveragesSb.AppendFormat(
-                            "{{ \"et\": \"{0} - {1}\", \"cl\": {2}, \"ucl\": {3}, \"cal\": {4}, \"tl\": {5}, \"lcq\": {6}, \"cb\": {7}, \"tb\": {8}, \"bcq\": {9} }}",
+                            "{{ \"et\": \"{0} - {1}{2}{3}\", \"cl\": {4}, \"ucl\": {5}, \"cal\": {6}, \"tl\": {7}, \"lcq\": {8}, \"cb\": {9}, \"tb\": {10}, \"bcq\": {11} }}",
                             historicCoverage.ExecutionTime.ToShortDateString(),
                             historicCoverage.ExecutionTime.ToLongTimeString(),
+                            string.IsNullOrEmpty(historicCoverage.Tag) ? string.Empty : " - ",
+                            historicCoverage.Tag,
                             historicCoverage.CoveredLines.ToString(CultureInfo.InvariantCulture),
                             (historicCoverage.CoverableLines - historicCoverage.CoveredLines).ToString(CultureInfo.InvariantCulture),
                             historicCoverage.CoverableLines.ToString(CultureInfo.InvariantCulture),
