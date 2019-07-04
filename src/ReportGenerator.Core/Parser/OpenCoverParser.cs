@@ -1,15 +1,16 @@
+using Palmmedia.ReportGenerator.Core.Common;
+using Palmmedia.ReportGenerator.Core.Logging;
+using Palmmedia.ReportGenerator.Core.Parser.Analysis;
+using Palmmedia.ReportGenerator.Core.Parser.Filtering;
+using Palmmedia.ReportGenerator.Core.Properties;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Palmmedia.ReportGenerator.Core.Common;
-using Palmmedia.ReportGenerator.Core.Logging;
-using Palmmedia.ReportGenerator.Core.Parser.Analysis;
-using Palmmedia.ReportGenerator.Core.Parser.Filtering;
-using Palmmedia.ReportGenerator.Core.Properties;
 
 namespace Palmmedia.ReportGenerator.Core.Parser
 {
@@ -38,6 +39,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// </summary>
         private static Regex methodRegex = new Regex(@"^.*::(?<MethodName>.+)\((?<Arguments>.*)\)$", RegexOptions.Compiled);
 
+        private static ConcurrentDictionary<string, string> s_MethodNameMap = new ConcurrentDictionary<string, string>();
+
         /// <summary>
         /// Initializes a new instance of the <see cref="OpenCoverParser" /> class.
         /// </summary>
@@ -54,7 +57,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// </summary>
         /// <param name="report">The XML report.</param>
         /// <returns>The parser result.</returns>
-        public ParserResult Parse(XContainer report)
+        public ParserResult Parse(XContainer report, int maxDegreeOfParallism)
         {
             if (report == null)
             {
@@ -79,7 +82,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             foreach (var assemblyName in assemblyNames)
             {
-                assemblies.Add(this.ProcessAssembly(modules, files, trackedMethods, assemblyName));
+                assemblies.Add(this.ProcessAssembly(modules, files, trackedMethods, assemblyName, maxDegreeOfParallism));
             }
 
             var result = new ParserResult(assemblies.OrderBy(a => a.Name).ToList(), true, this.ToString());
@@ -93,8 +96,9 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="files">The files.</param>
         /// <param name="trackedMethods">The tracked methods.</param>
         /// <param name="assemblyName">Name of the assembly.</param>
+        /// <param name="maxDegreeOfParallism"></param>
         /// <returns>The <see cref="Assembly"/>.</returns>
-        private Assembly ProcessAssembly(XElement[] modules, XElement[] files, IDictionary<string, string> trackedMethods, string assemblyName)
+        private Assembly ProcessAssembly(XElement[] modules, XElement[] files, IDictionary<string, string> trackedMethods, string assemblyName, int maxDegreeOfParallism)
         {
             Logger.DebugFormat("  " + Resources.CurrentAssembly, assemblyName);
 
@@ -124,7 +128,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             var assembly = new Assembly(assemblyName);
 
-            Parallel.ForEach(classNames, className => this.ProcessClass(modules, files, trackedMethods, fileIdsByFilename, assembly, className));
+            Parallel.ForEach(classNames, new ParallelOptions { MaxDegreeOfParallelism = maxDegreeOfParallism }, className => this.ProcessClass(modules, files, trackedMethods, fileIdsByFilename, assembly, className));
 
             return assembly;
         }
@@ -424,8 +428,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <returns>The branches by line number.</returns>
         private static Dictionary<int, ICollection<Branch>> GetBranches(XElement[] methods, HashSet<string> fileIds)
         {
-            var result = new Dictionary<int, ICollection<Branch>>();
-
             var branchPoints = methods
                 .Elements("BranchPoints")
                 .Elements("BranchPoint")
@@ -434,9 +436,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             // OpenCover supports this since version 4.5.3207
             if (branchPoints.Length == 0 || branchPoints[0].Attribute("sl") == null)
             {
-                return result;
+                return new Dictionary<int, ICollection<Branch>>();
             }
 
+            var result = new Dictionary<int, Dictionary<string, Branch>>();
             foreach (var branchPoint in branchPoints)
             {
                 if (branchPoint.Attribute("fileid") != null
@@ -455,35 +458,29 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     branchPoint.Attribute("path").Value,
                     branchPoint.Attribute("offset").Value,
                     branchPoint.Attribute("offsetend").Value);
+                int vc = int.Parse(branchPoint.Attribute("vc").Value, CultureInfo.InvariantCulture);
 
-                var branch = new Branch(
-                    int.Parse(branchPoint.Attribute("vc").Value, CultureInfo.InvariantCulture),
-                    identifier);
-
-                ICollection<Branch> branches = null;
-                if (result.TryGetValue(lineNumber, out branches))
+                if (result.TryGetValue(lineNumber, out var branches))
                 {
-                    HashSet<Branch> branchesHashset = (HashSet<Branch>)branches;
-                    if (branchesHashset.Contains(branch))
+
+                    if (branches.TryGetValue(identifier, out var found))
                     {
-                        // Not perfect for performance, but Hashset has no GetElement method
-                        branchesHashset.First(b => b.Equals(branch)).BranchVisits += branch.BranchVisits;
+                        found.BranchVisits += found.BranchVisits;
                     }
                     else
                     {
-                        branches.Add(branch);
+                        branches.Add(identifier, new Branch(vc, identifier));
                     }
                 }
                 else
                 {
-                    branches = new HashSet<Branch>();
-                    branches.Add(branch);
-
+                    branches = new Dictionary<string, Branch>();
+                    branches.Add(identifier, new Branch(vc, identifier));
                     result.Add(lineNumber, branches);
                 }
             }
 
-            return result;
+            return result.ToDictionary(k => k.Key, v => (ICollection<Branch>)v.Value.Values.ToHashSet());
         }
 
         /// <summary>
@@ -537,18 +534,23 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <returns>The method name.</returns>
         private static string ExtractMethodName(string methodName)
         {
-            // Quick check before expensive regex is called
-            if (methodName.EndsWith("::MoveNext()"))
+            if (!s_MethodNameMap.TryGetValue(methodName, out var fullName))
             {
-                Match match = compilerGeneratedMethodNameRegex.Match(methodName);
-
-                if (match.Success)
+                // Quick check before expensive regex is called
+                if (methodName.EndsWith("::MoveNext()"))
                 {
-                    methodName = match.Groups["CompilerGeneratedName"].Value + "()";
+                    Match match = compilerGeneratedMethodNameRegex.Match(methodName);
+
+                    if (match.Success)
+                    {
+                        methodName = match.Groups["CompilerGeneratedName"].Value + "()";
+                    }
                 }
+                fullName = methodName;
+                s_MethodNameMap.TryAdd(methodName, fullName);
             }
 
-            return methodName;
+            return fullName;
         }
 
         /// <summary>

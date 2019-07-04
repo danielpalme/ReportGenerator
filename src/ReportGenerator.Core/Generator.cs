@@ -114,9 +114,11 @@ namespace Palmmedia.ReportGenerator.Core
 
                 var stopWatch = new System.Diagnostics.Stopwatch();
                 stopWatch.Start();
-
+                Logger.Info($"{nameof(settings.NumberOfReportsParsedInParallel)}={settings.NumberOfReportsParsedInParallel}");
+                Logger.Info($"{nameof(settings.NumberOfReportsMergedInParallel)}={settings.NumberOfReportsMergedInParallel}");
                 var parserResult = new CoverageReportParser(
                     settings.NumberOfReportsParsedInParallel,
+                    settings.NumberOfReportsMergedInParallel,
                     reportConfiguration.SourceDirectories,
                     new DefaultFilter(reportConfiguration.AssemblyFilters),
                     new DefaultFilter(reportConfiguration.ClassFilters),

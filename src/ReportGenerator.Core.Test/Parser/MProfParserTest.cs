@@ -28,7 +28,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
             filterMock.Setup(f => f.IsElementIncludedInReport(It.IsAny<string>())).Returns(true);
 
             var report = XDocument.Load(FilePath);
-            this.parserResult = new MProfParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(report);
+            this.parserResult = new MProfParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(report, -1);
         }
 
         /// <summary>

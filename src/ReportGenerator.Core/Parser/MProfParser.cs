@@ -43,8 +43,9 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// Parses the given XML report.
         /// </summary>
         /// <param name="report">The XML report.</param>
+        /// <param name="innerMaxDegreeOfParallism">The max degree of parallism for the class iteration foreach loop</param>
         /// <returns>The parser result.</returns>
-        public ParserResult Parse(XContainer report)
+        public ParserResult Parse(XContainer report, int innerMaxDegreeOfParallism)
         {
             if (report == null)
             {
@@ -64,7 +65,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             foreach (var assemblyName in assemblyNames)
             {
-                assemblies.Add(this.ProcessAssembly(methods, assemblyName));
+                assemblies.Add(this.ProcessAssembly(methods, assemblyName, innerMaxDegreeOfParallism));
             }
 
             var result = new ParserResult(assemblies.OrderBy(a => a.Name).ToList(), false, this.ToString());
@@ -76,8 +77,9 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// </summary>
         /// <param name="methods">The methods.</param>
         /// <param name="assemblyName">Name of the assembly.</param>
+        /// <param name="innerMaxDegreeOfParallism">The max degree of parallism for the class iteration foreach loop</param>
         /// <returns>The <see cref="Assembly"/>.</returns>
-        private Assembly ProcessAssembly(XElement[] methods, string assemblyName)
+        private Assembly ProcessAssembly(XElement[] methods, string assemblyName, int innerMaxDegreeOfParallism)
         {
             Logger.DebugFormat("  " + Resources.CurrentAssembly, assemblyName);
 
@@ -92,7 +94,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             var assembly = new Assembly(assemblyName);
 
-            Parallel.ForEach(classNames, className => this.ProcessClass(methods, assembly, className));
+            Parallel.ForEach(classNames, new ParallelOptions { MaxDegreeOfParallelism = innerMaxDegreeOfParallism }, className => this.ProcessClass(methods, assembly, className));
 
             return assembly;
         }
