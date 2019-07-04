@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace Palmmedia.ReportGenerator.Core.Parser
@@ -226,13 +227,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             long totalMemory = PerformanceInfo.GetTotalMemoryInMiB();
             decimal percentFree = ((decimal)availableMemory / (decimal)totalMemory) * 100;
             Logger.Info($"Available memory {percentFree:0.00} %");
-            if (percentFree < 20 &&
-                !this.garbageCollectionInProgress)
+            if (percentFree < 20)
             {
-                Logger.Info("Garbage collection forced.");
-                this.garbageCollectionInProgress = true;
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
+                if (!this.garbageCollectionInProgress)
+                {
+                    Logger.Info("Garbage collection forced.");
+                    this.garbageCollectionInProgress = true;
+                    GC.Collect();
+                }
             }
             else
             {
