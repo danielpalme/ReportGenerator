@@ -116,9 +116,11 @@ namespace Palmmedia.ReportGenerator.Core
                 stopWatch.Start();
                 Logger.Info($"{nameof(settings.NumberOfReportsParsedInParallel)}={settings.NumberOfReportsParsedInParallel}");
                 Logger.Info($"{nameof(settings.NumberOfReportsMergedInParallel)}={settings.NumberOfReportsMergedInParallel}");
+                Logger.Info($"{nameof(settings.NumberOfReportsReadInMemoryInParallel)}={settings.NumberOfReportsReadInMemoryInParallel}");
                 var parserResult = new CoverageReportParser(
                     settings.NumberOfReportsParsedInParallel,
                     settings.NumberOfReportsMergedInParallel,
+                    settings.NumberOfReportsReadInMemoryInParallel,
                     reportConfiguration.SourceDirectories,
                     new DefaultFilter(reportConfiguration.AssemblyFilters),
                     new DefaultFilter(reportConfiguration.ClassFilters),
@@ -126,7 +128,7 @@ namespace Palmmedia.ReportGenerator.Core
                         .ParseFiles(reportConfiguration.ReportFiles);
 
                 Logger.DebugFormat(Resources.ReportParsingTook, stopWatch.ElapsedMilliseconds / 1000d);
-
+                Console.ReadLine();
                 this.GenerateReport(
                     reportConfiguration,
                     settings,
