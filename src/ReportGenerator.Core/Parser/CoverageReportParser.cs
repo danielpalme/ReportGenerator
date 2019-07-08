@@ -129,7 +129,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                             parserConsumer.Add(this.CreateFileParserProducer(filesContentCollection, parserResults, reportFiles.Count));
                         }
                         Task.WaitAll(parserConsumer.Concat(new[] { fileContentProducer }).ToArray());
-                        List<long> average = parserConsumer.Select(t => t.Result).ToList();
+                        List<long> average = parserConsumer.Select(t => t.Result).Where(t => t != 0).ToList();
                         long overallAverage = average.Sum() / average.Count;
                         Logger.Info($"Overall average of parsing time is {overallAverage / 1000d:f1} seconds");
                         Logger.Info($"Overall average of loading files into memory is {fileContentProducer.Result / 1000d:f1} seconds");
@@ -263,7 +263,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                             Logger.ErrorFormat(" " + Resources.ErrorDuringReadingReport, reportFile, GetHumanReadableFileSize(reportFile), ex.GetExceptionMessageForDisplay());
                         }
                     }
-                    return average /= count;
+                    return count > 0 ? average / count : 0;
                 }
                 finally
                 {
