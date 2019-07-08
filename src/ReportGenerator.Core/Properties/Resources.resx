@@ -193,7 +193,7 @@
     <value>Failed to load file '{0}'. Errors:
 {1}</value>
   </data>
-  <data name="FinisedLoadingReport" xml:space="preserve">
+  <data name="FinishedLoadingReport" xml:space="preserve">
     <value>Finished loading report '{0}' {1}/{2} in memory in {3:f1} seconds</value>
   </data>
   <data name="HistoryDirectoryCouldNotBeCreated" xml:space="preserve">

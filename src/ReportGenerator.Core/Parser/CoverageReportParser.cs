@@ -177,7 +177,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         collection.Add(new Tuple<string, string>(reportFile, File.ReadAllText(reportFile)));
                         stopWatch.Stop();
                         Interlocked.Exchange(ref average, average += stopWatch.ElapsedMilliseconds);
-                        Logger.InfoFormat(Resources.FinisedLoadingReport, reportFile, number, reportFiles.Count, stopWatch.ElapsedMilliseconds / 1000d);
+                        Logger.InfoFormat(Resources.FinishedLoadingReport, reportFile, number, reportFiles.Count, stopWatch.ElapsedMilliseconds / 1000d);
                     });
                 }
                 finally

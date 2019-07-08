@@ -128,7 +128,7 @@ namespace Palmmedia.ReportGenerator.Core
                         .ParseFiles(reportConfiguration.ReportFiles);
 
                 Logger.DebugFormat(Resources.ReportParsingTook, stopWatch.ElapsedMilliseconds / 1000d);
-                Console.ReadLine();
+
                 this.GenerateReport(
                     reportConfiguration,
                     settings,

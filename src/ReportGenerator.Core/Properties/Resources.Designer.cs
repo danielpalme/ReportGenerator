@@ -289,9 +289,9 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Finished loading report &apos;{0}&apos; {1}/{2} in memory in {3:f1} seconds.
         /// </summary>
-        internal static string FinisedLoadingReport {
+        internal static string FinishedLoadingReport {
             get {
-                return ResourceManager.GetString("FinisedLoadingReport", resourceCulture);
+                return ResourceManager.GetString("FinishedLoadingReport", resourceCulture);
             }
         }
         
