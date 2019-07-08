@@ -130,9 +130,15 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         }
                         Task.WaitAll(parserConsumer.Concat(new[] { fileContentProducer }).ToArray());
                         List<long> average = parserConsumer.Select(t => t.Result).Where(t => t != 0).ToList();
-                        long overallAverage = average.Sum() / average.Count;
-                        Logger.Info($"Overall average of parsing time is {overallAverage / 1000d:f1} seconds");
-                        Logger.Info($"Overall average of loading files into memory is {fileContentProducer.Result / 1000d:f1} seconds");
+                        if (average.Any())
+                        {
+                            long overallAverage = average.Sum() / average.Count;
+                            Logger.Info($"Overall average of parsing time is {overallAverage / 1000d:f1} seconds");
+                        }
+                        if (fileContentProducer.Result != 0)
+                        {
+                            Logger.Info($"Overall average of loading files into memory is {fileContentProducer.Result / 1000d:f1} seconds");
+                        }
                         parserResults.CompleteAdding();
                         Task.WaitAll(mergeConsumers.ToArray());
                     }
@@ -166,18 +172,22 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             return Task.Factory.StartNew(() =>
             {
                 long average = 0;
+                int count = 0;
                 try
                 {
                     Parallel.ForEach(reportFiles, new ParallelOptions { MaxDegreeOfParallelism = this.numberOfReportsReadOnMemoryInParallel }, reportFile =>
                     {
-                        int number = Interlocked.Increment(ref this.fileParserCount);
-                        Logger.InfoFormat(Resources.LoadingReport, reportFile, number, reportFiles.Count);
-                        Stopwatch stopWatch = new Stopwatch();
-                        stopWatch.Start();
-                        collection.Add(new Tuple<string, string>(reportFile, File.ReadAllText(reportFile)));
-                        stopWatch.Stop();
-                        Interlocked.Exchange(ref average, average += stopWatch.ElapsedMilliseconds);
-                        Logger.InfoFormat(Resources.FinishedLoadingReport, reportFile, number, reportFiles.Count, stopWatch.ElapsedMilliseconds / 1000d);
+                        if (File.Exists(reportFile))
+                        {
+                            int number = Interlocked.Increment(ref this.fileParserCount);
+                            Logger.InfoFormat(Resources.LoadingReport, reportFile, number, reportFiles.Count);
+                            Stopwatch stopWatch = new Stopwatch();
+                            stopWatch.Start();
+                            collection.Add(new Tuple<string, string>(reportFile, File.ReadAllText(reportFile)));
+                            stopWatch.Stop();
+                            Interlocked.Exchange(ref average, average += stopWatch.ElapsedMilliseconds);
+                            Logger.InfoFormat(Resources.FinishedLoadingReport, reportFile, number, reportFiles.Count, stopWatch.ElapsedMilliseconds / 1000d);
+                        }
                     });
                 }
                 finally
@@ -185,7 +195,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     Logger.Info($"Finished loading files in memory...");
                     collection.CompleteAdding();
                 }
-                return average / reportFiles.Count;
+                return this.fileParserCount > 0 ? average / this.fileParserCount : 0;
             });
         }
 
