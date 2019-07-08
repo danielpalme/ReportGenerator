@@ -193,6 +193,9 @@
     <value>Failed to load file '{0}'. Errors:
 {1}</value>
   </data>
+  <data name="FinisedLoadingReport" xml:space="preserve">
+    <value>Finished loading report '{0}' {1}/{2} in memory in {3:f1} seconds</value>
+  </data>
   <data name="HistoryDirectoryCouldNotBeCreated" xml:space="preserve">
     <value>The history directory '{0}' could not be created: {1}</value>
   </data>
@@ -209,7 +212,7 @@
     <value>The filter '{0}' is invalid. Filters must start with '+' or '-'.</value>
   </data>
   <data name="LoadingReport" xml:space="preserve">
-    <value>Loading report '{0}' {1}/{2}</value>
+    <value>Loading report '{0}' {1}/{2} in memory</value>
   </data>
   <data name="MultipleErrors" xml:space="preserve">
     <value>Multiple errors</value>

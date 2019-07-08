@@ -30,7 +30,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
 
             var report = XDocument.Load(FilePath1);
             new CloverReportPreprocessor(new[] { "C:\\temp" }).Execute(report);
-            this.parserResult = new CloverParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(report, -1);
+            this.parserResult = new CloverParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(report);
         }
 
         /// <summary>

@@ -53,9 +53,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// Parses the given XML report.
         /// </summary>
         /// <param name="report">The XML report.</param>
-        /// <param name="innerMaxDegreeOfParallism">The max degree of parallism for the class iteration foreach loop</param>
         /// <returns>The parser result.</returns>
-        public ParserResult Parse(XContainer report, int innerMaxDegreeOfParallism)
+        public ParserResult Parse(XContainer report)
         {
             if (report == null)
             {
@@ -76,7 +75,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             foreach (var assemblyName in assemblyNames)
             {
-                assemblies.Add(this.ProcessAssembly(modules, assemblyName, innerMaxDegreeOfParallism));
+                assemblies.Add(this.ProcessAssembly(modules, assemblyName));
             }
 
             var result = new ParserResult(assemblies.OrderBy(a => a.Name).ToList(), true, this.ToString());
@@ -94,9 +93,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// </summary>
         /// <param name="modules">The modules.</param>
         /// <param name="assemblyName">Name of the assembly.</param>
-        /// <param name="innerMaxDegreeOfParallism">The max degree of parallism for the class iteration foreach loop</param>
         /// <returns>The <see cref="Assembly"/>.</returns>
-        private Assembly ProcessAssembly(XElement[] modules, string assemblyName, int innerMaxDegreeOfParallism)
+        private Assembly ProcessAssembly(XElement[] modules, string assemblyName)
         {
             Logger.DebugFormat("  " + Resources.CurrentAssembly, assemblyName);
 
@@ -118,7 +116,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             var assembly = new Assembly(assemblyName);
 
-            Parallel.ForEach(classNames, new ParallelOptions { MaxDegreeOfParallelism = innerMaxDegreeOfParallism }, className => this.ProcessClass(modules, assembly, className));
+            Parallel.ForEach(classNames, className => this.ProcessClass(modules, assembly, className));
 
             return assembly;
         }

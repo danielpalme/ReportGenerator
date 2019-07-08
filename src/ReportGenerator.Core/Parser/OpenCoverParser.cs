@@ -57,7 +57,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// </summary>
         /// <param name="report">The XML report.</param>
         /// <returns>The parser result.</returns>
-        public ParserResult Parse(XContainer report, int maxDegreeOfParallism)
+        public ParserResult Parse(XContainer report)
         {
             if (report == null)
             {
@@ -82,7 +82,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             foreach (var assemblyName in assemblyNames)
             {
-                assemblies.Add(this.ProcessAssembly(modules, files, trackedMethods, assemblyName, maxDegreeOfParallism));
+                assemblies.Add(this.ProcessAssembly(modules, files, trackedMethods, assemblyName));
             }
 
             var result = new ParserResult(assemblies.OrderBy(a => a.Name).ToList(), true, this.ToString());
@@ -96,9 +96,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="files">The files.</param>
         /// <param name="trackedMethods">The tracked methods.</param>
         /// <param name="assemblyName">Name of the assembly.</param>
-        /// <param name="maxDegreeOfParallism"></param>
         /// <returns>The <see cref="Assembly"/>.</returns>
-        private Assembly ProcessAssembly(XElement[] modules, XElement[] files, IDictionary<string, string> trackedMethods, string assemblyName, int maxDegreeOfParallism)
+        private Assembly ProcessAssembly(XElement[] modules, XElement[] files, IDictionary<string, string> trackedMethods, string assemblyName)
         {
             Logger.DebugFormat("  " + Resources.CurrentAssembly, assemblyName);
 
@@ -128,7 +127,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             var assembly = new Assembly(assemblyName);
 
-            Parallel.ForEach(classNames, new ParallelOptions { MaxDegreeOfParallelism = maxDegreeOfParallism }, className => this.ProcessClass(modules, files, trackedMethods, fileIdsByFilename, assembly, className));
+            Parallel.ForEach(classNames, className => this.ProcessClass(modules, files, trackedMethods, fileIdsByFilename, assembly, className));
 
             return assembly;
         }

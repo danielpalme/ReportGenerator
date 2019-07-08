@@ -52,9 +52,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// Parses the given XML report.
         /// </summary>
         /// <param name="report">The XML report.</param>
-        /// <param name="innerMaxDegreeOfParallism">The max degree of parallism for the class iteration foreach loop</param>
         /// <returns>The parser result.</returns>
-        public ParserResult Parse(XContainer report, int innerMaxDegreeOfParallism)
+        public ParserResult Parse(XContainer report)
         {
             if (report == null)
             {
@@ -70,7 +69,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             foreach (var module in modules)
             {
-                assemblies.Add(this.ProcessAssembly(module, innerMaxDegreeOfParallism));
+                assemblies.Add(this.ProcessAssembly(module));
             }
 
             var result = new ParserResult(assemblies.OrderBy(a => a.Name).ToList(), false, this.ToString());
@@ -81,9 +80,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// Processes the given assembly.
         /// </summary>
         /// <param name="module">The module.</param>
-        /// <param name="innerMaxDegreeOfParallism">The max degree of parallism for the class iteration foreach loop</param>
         /// <returns>The <see cref="Assembly"/>.</returns>
-        private Assembly ProcessAssembly(XElement module, int innerMaxDegreeOfParallism)
+        private Assembly ProcessAssembly(XElement module)
         {
             string assemblyName = module.Attribute("name").Value;
 
@@ -107,7 +105,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             var assembly = new Assembly(assemblyName);
 
-            Parallel.ForEach(classNames, new ParallelOptions { MaxDegreeOfParallelism = innerMaxDegreeOfParallism }, className => this.ProcessClass(module, assembly, className));
+            Parallel.ForEach(classNames, className => this.ProcessClass(module, assembly, className));
 
             return assembly;
         }

@@ -27,7 +27,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
             var filterMock = new Mock<IFilter>();
             filterMock.Setup(f => f.IsElementIncludedInReport(It.IsAny<string>())).Returns(true);
 
-            this.parserResult = new DotCoverParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(XDocument.Load(FilePath1), -1);
+            this.parserResult = new DotCoverParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(XDocument.Load(FilePath1));
         }
 
         /// <summary>
