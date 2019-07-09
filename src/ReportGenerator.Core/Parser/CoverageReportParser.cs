@@ -172,11 +172,15 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             return Task.Factory.StartNew(() =>
             {
                 long average = 0;
-                int count = 0;
                 try
                 {
-                    Parallel.ForEach(reportFiles, new ParallelOptions { MaxDegreeOfParallelism = this.numberOfReportsReadOnMemoryInParallel }, reportFile =>
+                    foreach (string reportFile in reportFiles)
                     {
+                        while (collection.Count > this.numberOfReportsReadOnMemoryInParallel)
+                        {
+                            Thread.Sleep(TimeSpan.FromSeconds(1));
+                            Logger.Warn($"Waiting for parser because file content queue already contains {collection.Count} items.");
+                        }
                         if (File.Exists(reportFile))
                         {
                             int number = Interlocked.Increment(ref this.fileParserCount);
@@ -187,8 +191,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                             stopWatch.Stop();
                             Interlocked.Exchange(ref average, average += stopWatch.ElapsedMilliseconds);
                             Logger.InfoFormat(Resources.FinishedLoadingReport, reportFile, number, reportFiles.Count, stopWatch.ElapsedMilliseconds / 1000d);
-                        }
-                    });
+                        }                        
+                    }
                 }
                 finally
                 {
