@@ -142,7 +142,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// </summary>
         /// <param name="report">The report file to parse.</param>
         /// <returns>The parser result.</returns>
-        private IEnumerable<ParserResult> ParseXmlFile(XContainer report)
+        private IEnumerable<ParserResult> ParseXmlFile(XDocument report)
         {
             if (report.Descendants("PartCoverReport").Any())
             {
@@ -204,7 +204,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 yield break;
             }
 
-            elements = report.Descendants("coverage").ToArray();
+            var ns = report.Root.GetDefaultNamespace();
+            elements = report.Descendants(ns + "coverage").ToArray();
 
             if (elements.Length > 0)
             {

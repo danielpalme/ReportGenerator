@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <RootNamespace>ReportGenerator.DotnetCorePluginLoader</RootNamespace>
-    <AssemblyVersion>4.2.5.0</AssemblyVersion>
-    <FileVersion>4.2.5.0</FileVersion>
+    <AssemblyVersion>4.2.6.0</AssemblyVersion>
+    <FileVersion>4.2.6.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
