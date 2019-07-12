@@ -129,6 +129,9 @@
   <data name="AnalyzingClasses" xml:space="preserve">
     <value>Analyzing {0} classes</value>
   </data>
+  <data name="Arguments" xml:space="preserve">
+    <value>Arguments</value>
+  </data>
   <data name="CreatingHistoryReport" xml:space="preserve">
     <value>Creating history report</value>
   </data>

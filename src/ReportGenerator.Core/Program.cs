@@ -1,5 +1,7 @@
 ﻿using System.Linq;
+using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Plugin;
+using Palmmedia.ReportGenerator.Core.Properties;
 using Palmmedia.ReportGenerator.Core.Reporting;
 
 namespace Palmmedia.ReportGenerator.Core
@@ -10,6 +12,11 @@ namespace Palmmedia.ReportGenerator.Core
     public class Program
     {
         /// <summary>
+        /// The Logger.
+        /// </summary>
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(Program));
+
+        /// <summary>
         /// The main method.
         /// </summary>
         /// <param name="args">The command line arguments.</param>
@@ -17,6 +24,13 @@ namespace Palmmedia.ReportGenerator.Core
         public static int Main(string[] args)
         {
             args = NormalizeArgs(args);
+
+            Logger.Debug(Resources.Arguments);
+
+            foreach (var arg in args)
+            {
+                Logger.Debug(" " + arg);
+            }
 
             var reportConfigurationBuilder = new ReportConfigurationBuilder();
             ReportConfiguration configuration = reportConfigurationBuilder.Create(args);
