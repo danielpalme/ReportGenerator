@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using Microsoft.Extensions.Configuration;
 using Palmmedia.ReportGenerator.Core.CodeAnalysis;
@@ -112,11 +113,16 @@ namespace Palmmedia.ReportGenerator.Core
                     return false;
                 }
 
-                var stopWatch = new System.Diagnostics.Stopwatch();
-                stopWatch.Start();
+                Logger.Debug(Resources.Settings);
+                Logger.Debug(" " + JsonSerializer.ToJsonString(settings));
+                Logger.Debug(" " + JsonSerializer.ToJsonString(riskHotspotsAnalysisThresholds));
+
+                var stopWatch = Stopwatch.StartNew();
 
                 var parserResult = new CoverageReportParser(
                     settings.NumberOfReportsParsedInParallel,
+                    settings.NumberOfReportsMergedInParallel,
+                    settings.NumberOfReportsReadInMemoryInParallel,
                     reportConfiguration.SourceDirectories,
                     new DefaultFilter(reportConfiguration.AssemblyFilters),
                     new DefaultFilter(reportConfiguration.ClassFilters),

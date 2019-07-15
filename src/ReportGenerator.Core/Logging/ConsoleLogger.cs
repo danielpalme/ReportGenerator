@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Concurrent;
+using System.Threading;
 
 namespace Palmmedia.ReportGenerator.Core.Logging
 {
@@ -7,11 +9,6 @@ namespace Palmmedia.ReportGenerator.Core.Logging
     /// </summary>
     internal class ConsoleLogger : ILogger
     {
-        /// <summary>
-        /// Lock object.
-        /// </summary>
-        private readonly object lockObject = new object();
-
         /// <summary>
         /// Gets or sets the verbosity level.
         /// </summary>
@@ -25,10 +22,7 @@ namespace Palmmedia.ReportGenerator.Core.Logging
         {
             if (this.VerbosityLevel < VerbosityLevel.Info)
             {
-                lock (this.lockObject)
-                {
-                    Console.WriteLine(message);
-                }
+                this.WriteLine(message, ConsoleColor.White);
             }
         }
 
@@ -41,10 +35,7 @@ namespace Palmmedia.ReportGenerator.Core.Logging
         {
             if (this.VerbosityLevel < VerbosityLevel.Info)
             {
-                lock (this.lockObject)
-                {
-                    Console.WriteLine(format, args);
-                }
+                this.WriteLine(ConsoleColor.White, format, args);
             }
         }
 
@@ -56,10 +47,7 @@ namespace Palmmedia.ReportGenerator.Core.Logging
         {
             if (this.VerbosityLevel < VerbosityLevel.Warning)
             {
-                lock (this.lockObject)
-                {
-                    Console.WriteLine(message);
-                }
+                this.WriteLine(message, ConsoleColor.White);
             }
         }
 
@@ -72,10 +60,7 @@ namespace Palmmedia.ReportGenerator.Core.Logging
         {
             if (this.VerbosityLevel < VerbosityLevel.Warning)
             {
-                lock (this.lockObject)
-                {
-                    Console.WriteLine(format, args);
-                }
+                this.WriteLine(ConsoleColor.White, format, args);
             }
         }
 
@@ -87,12 +72,7 @@ namespace Palmmedia.ReportGenerator.Core.Logging
         {
             if (this.VerbosityLevel < VerbosityLevel.Error)
             {
-                lock (this.lockObject)
-                {
-                    Console.ForegroundColor = ConsoleColor.Magenta;
-                    Console.WriteLine(message);
-                    Console.ResetColor();
-                }
+                this.WriteLine(message, ConsoleColor.Magenta);
             }
         }
 
@@ -105,12 +85,7 @@ namespace Palmmedia.ReportGenerator.Core.Logging
         {
             if (this.VerbosityLevel < VerbosityLevel.Error)
             {
-                lock (this.lockObject)
-                {
-                    Console.ForegroundColor = ConsoleColor.Magenta;
-                    Console.WriteLine(format, args);
-                    Console.ResetColor();
-                }
+                this.WriteLine(ConsoleColor.Magenta, format, args);
             }
         }
 
@@ -122,12 +97,7 @@ namespace Palmmedia.ReportGenerator.Core.Logging
         {
             if (this.VerbosityLevel < VerbosityLevel.Off)
             {
-                lock (this.lockObject)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(message);
-                    Console.ResetColor();
-                }
+                this.WriteLine(message, ConsoleColor.Red);
             }
         }
 
@@ -140,12 +110,69 @@ namespace Palmmedia.ReportGenerator.Core.Logging
         {
             if (this.VerbosityLevel < VerbosityLevel.Off)
             {
-                lock (this.lockObject)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(format, args);
-                    Console.ResetColor();
-                }
+                this.WriteLine(ConsoleColor.Red, format, args);
+            }
+        }
+
+        /// <summary>
+        /// Write a message to the console.
+        /// </summary>
+        /// <param name="consoleColor">The color of the console to write the text with.</param>
+        /// <param name="format">The template string.</param>
+        /// <param name="args">The argument for the template string.</param>
+        private void WriteLine(ConsoleColor consoleColor, string format, params object[] args)
+        {
+            NonBlockingConsole.WriteLine(string.Format($"{DateTime.Now:s}: {format}", args), consoleColor);
+        }
+
+        /// <summary>
+        /// Write a message to the console.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="consoleColor">The color of the console to write the text with.</param>
+        private void WriteLine(string message, ConsoleColor consoleColor)
+        {
+            NonBlockingConsole.WriteLine($"{DateTime.Now:s}: {message}", consoleColor);
+        }
+
+        /// <summary>
+        /// The non blocking console class.
+        /// </summary>
+        private static class NonBlockingConsole
+        {
+            /// <summary>
+            /// Queue containing the log messages.
+            /// </summary>
+            private static readonly BlockingCollection<Tuple<string, ConsoleColor>> Queue = new BlockingCollection<Tuple<string, ConsoleColor>>();
+
+            /// <summary>
+            /// Initializes static members of the <see cref="NonBlockingConsole"/> class.
+            /// </summary>
+            static NonBlockingConsole()
+            {
+                var thread = new Thread(
+                    () =>
+                    {
+                        while (true)
+                        {
+                            var item = Queue.Take();
+                            Console.ForegroundColor = item.Item2;
+                            Console.WriteLine(item.Item1);
+                            Console.ResetColor();
+                        }
+                    });
+                thread.IsBackground = true;
+                thread.Start();
+            }
+
+            /// <summary>
+            /// Write the message to the console in a non blocking manner.
+            /// </summary>
+            /// <param name="message">The message.</param>
+            /// <param name="color">The color of the console to write the text with.</param>
+            public static void WriteLine(string message, ConsoleColor color)
+            {
+                Queue.Add(new Tuple<string, ConsoleColor>(message, color));
             }
         }
     }

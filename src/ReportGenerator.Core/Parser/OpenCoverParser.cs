@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -37,6 +38,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// Regex to extract short method name.
         /// </summary>
         private static Regex methodRegex = new Regex(@"^.*::(?<MethodName>.+)\((?<Arguments>.*)\)$", RegexOptions.Compiled);
+
+        /// <summary>
+        /// Cache for method names.
+        /// </summary>
+        private static ConcurrentDictionary<string, string> methodNameMap = new ConcurrentDictionary<string, string>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OpenCoverParser" /> class.
@@ -424,8 +430,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <returns>The branches by line number.</returns>
         private static Dictionary<int, ICollection<Branch>> GetBranches(XElement[] methods, HashSet<string> fileIds)
         {
-            var result = new Dictionary<int, ICollection<Branch>>();
-
             var branchPoints = methods
                 .Elements("BranchPoints")
                 .Elements("BranchPoint")
@@ -434,9 +438,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             // OpenCover supports this since version 4.5.3207
             if (branchPoints.Length == 0 || branchPoints[0].Attribute("sl") == null)
             {
-                return result;
+                return new Dictionary<int, ICollection<Branch>>();
             }
 
+            var result = new Dictionary<int, Dictionary<string, Branch>>();
             foreach (var branchPoint in branchPoints)
             {
                 if (branchPoint.Attribute("fileid") != null
@@ -455,35 +460,28 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     branchPoint.Attribute("path").Value,
                     branchPoint.Attribute("offset").Value,
                     branchPoint.Attribute("offsetend").Value);
+                int vc = int.Parse(branchPoint.Attribute("vc").Value, CultureInfo.InvariantCulture);
 
-                var branch = new Branch(
-                    int.Parse(branchPoint.Attribute("vc").Value, CultureInfo.InvariantCulture),
-                    identifier);
-
-                ICollection<Branch> branches = null;
-                if (result.TryGetValue(lineNumber, out branches))
+                if (result.TryGetValue(lineNumber, out var branches))
                 {
-                    HashSet<Branch> branchesHashset = (HashSet<Branch>)branches;
-                    if (branchesHashset.Contains(branch))
+                    if (branches.TryGetValue(identifier, out var found))
                     {
-                        // Not perfect for performance, but Hashset has no GetElement method
-                        branchesHashset.First(b => b.Equals(branch)).BranchVisits += branch.BranchVisits;
+                        found.BranchVisits += found.BranchVisits;
                     }
                     else
                     {
-                        branches.Add(branch);
+                        branches.Add(identifier, new Branch(vc, identifier));
                     }
                 }
                 else
                 {
-                    branches = new HashSet<Branch>();
-                    branches.Add(branch);
-
+                    branches = new Dictionary<string, Branch>();
+                    branches.Add(identifier, new Branch(vc, identifier));
                     result.Add(lineNumber, branches);
                 }
             }
 
-            return result;
+            return result.ToDictionary(k => k.Key, v => (ICollection<Branch>)v.Value.Values.ToHashSet());
         }
 
         /// <summary>
@@ -537,18 +535,24 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <returns>The method name.</returns>
         private static string ExtractMethodName(string methodName)
         {
-            // Quick check before expensive regex is called
-            if (methodName.EndsWith("::MoveNext()"))
+            if (!methodNameMap.TryGetValue(methodName, out var fullName))
             {
-                Match match = compilerGeneratedMethodNameRegex.Match(methodName);
-
-                if (match.Success)
+                // Quick check before expensive regex is called
+                if (methodName.EndsWith("::MoveNext()"))
                 {
-                    methodName = match.Groups["CompilerGeneratedName"].Value + "()";
+                    Match match = compilerGeneratedMethodNameRegex.Match(methodName);
+
+                    if (match.Success)
+                    {
+                        methodName = match.Groups["CompilerGeneratedName"].Value + "()";
+                    }
                 }
+
+                fullName = methodName;
+                methodNameMap.TryAdd(methodName, fullName);
             }
 
-            return methodName;
+            return fullName;
         }
 
         /// <summary>

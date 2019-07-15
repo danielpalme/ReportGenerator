@@ -296,6 +296,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Finished loading report &apos;{0}&apos; {1}/{2} in memory in {3:f1} seconds.
+        /// </summary>
+        internal static string FinishedLoadingReport {
+            get {
+                return ResourceManager.GetString("FinishedLoadingReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The history directory &apos;{0}&apos; could not be created: {1}.
         /// </summary>
         internal static string HistoryDirectoryCouldNotBeCreated {
@@ -341,7 +350,7 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Loading report &apos;{0}&apos; {1}/{2}.
+        ///   Looks up a localized string similar to Loading report &apos;{0}&apos; {1}/{2} in memory.
         /// </summary>
         internal static string LoadingReport {
             get {
@@ -445,6 +454,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         internal static string ReportParsingTook {
             get {
                 return ResourceManager.GetString("ReportParsingTook", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
             }
         }
         
