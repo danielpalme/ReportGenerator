@@ -60,6 +60,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.2.10.0
+
+    * Fix: Issue #269: Improved lcov support for Flutter
+
 4.2.9.0
 
     * Fix: Issue #84: Improved parameter handling in Azure DevOps extension
