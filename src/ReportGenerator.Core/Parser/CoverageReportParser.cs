@@ -394,7 +394,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 yield break;
             }
 
-            if (lines[0].StartsWith("TN:"))
+            if (lines[0].StartsWith("TN:") || lines[0].StartsWith("SF:"))
             {
                 Logger.DebugFormat(" " + Resources.InitiatingParser, "LCov");
 
