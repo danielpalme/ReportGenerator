@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Palmmedia.ReportGenerator.Core.CodeAnalysis;
 using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
@@ -12,6 +9,9 @@ using Palmmedia.ReportGenerator.Core.Plugin;
 using Palmmedia.ReportGenerator.Core.Properties;
 using Palmmedia.ReportGenerator.Core.Reporting;
 using Palmmedia.ReportGenerator.Core.Reporting.History;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Palmmedia.ReportGenerator.Core
 {
@@ -116,11 +116,9 @@ namespace Palmmedia.ReportGenerator.Core
                 stopWatch.Start();
                 Logger.Info($"{nameof(settings.NumberOfReportsParsedInParallel)}={settings.NumberOfReportsParsedInParallel}");
                 Logger.Info($"{nameof(settings.NumberOfReportsMergedInParallel)}={settings.NumberOfReportsMergedInParallel}");
-                Logger.Info($"{nameof(settings.NumberOfReportsReadInMemoryInParallel)}={settings.NumberOfReportsReadInMemoryInParallel}");
                 var parserResult = new CoverageReportParser(
                     settings.NumberOfReportsParsedInParallel,
                     settings.NumberOfReportsMergedInParallel,
-                    settings.NumberOfReportsReadInMemoryInParallel,
                     reportConfiguration.SourceDirectories,
                     new DefaultFilter(reportConfiguration.AssemblyFilters),
                     new DefaultFilter(reportConfiguration.ClassFilters),

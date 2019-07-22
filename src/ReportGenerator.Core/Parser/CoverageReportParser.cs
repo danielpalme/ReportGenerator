@@ -7,11 +7,11 @@ using Palmmedia.ReportGenerator.Core.Properties;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace Palmmedia.ReportGenerator.Core.Parser
@@ -35,11 +35,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// The number reports that are merged in parallel.
         /// </summary>
         private readonly int numberOfReportsMergedInParallel;
-
-        /// <summary>
-        /// The number reports that are read in memory in parallel.
-        /// </summary>
-        private readonly int numberOfReportsReadOnMemoryInParallel;
 
         /// <summary>
         /// The source directories.
@@ -67,11 +62,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         private int mergeCount;
 
         /// <summary>
-        /// The current file parser count.
-        /// </summary>
-        private int fileParserCount;
-
-        /// <summary>
         /// Indicates weather a garbage colleciton is in progress or not.
         /// </summary>
         private volatile bool garbageCollectionInProgress;
@@ -81,16 +71,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// </summary>
         /// <param name="numberOfReportsParsedInParallel">The number reports that are parsed and processed in parallel.</param>
         /// <param name="numberOfReportsMergedInParallel">The number reports that are merged in parallel.</param>
-        /// <param name="numberOfReportsReadOnMemoryInParallel">The number reports that are read in memory in parallel.</param>
         /// <param name="sourceDirectories">The source directories.</param>
         /// <param name="assemblyFilter">The assembly filter.</param>
         /// <param name="classFilter">The class filter.</param>
         /// <param name="fileFilter">The file filter.</param>
-        public CoverageReportParser(int numberOfReportsParsedInParallel, int numberOfReportsMergedInParallel, int numberOfReportsReadOnMemoryInParallel, IEnumerable<string> sourceDirectories, IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter)
+        public CoverageReportParser(int numberOfReportsParsedInParallel, int numberOfReportsMergedInParallel, IEnumerable<string> sourceDirectories, IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter)
         {
             this.numberOfReportsParsedInParallel = Math.Max(1, numberOfReportsParsedInParallel);
             this.numberOfReportsMergedInParallel = Math.Max(1, numberOfReportsMergedInParallel);
-            this.numberOfReportsReadOnMemoryInParallel = Math.Max(1, numberOfReportsReadOnMemoryInParallel);
             this.sourceDirectories = sourceDirectories ?? throw new ArgumentNullException(nameof(sourceDirectories));
             this.assemblyFilter = assemblyFilter ?? throw new ArgumentNullException(nameof(assemblyFilter));
             this.classFilter = classFilter ?? throw new ArgumentNullException(nameof(classFilter));
@@ -111,31 +99,18 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 throw new ArgumentNullException(nameof(reportFiles));
             }
 
-            List<Task<ParserResult>> mergeConsumers = new List<Task<ParserResult>>();
-            List<Task<long>> parserConsumer = new List<Task<long>>();
+            List<Task<ParserResult>> consumers = new List<Task<ParserResult>>();
+
             try
             {
-                using (BlockingCollection<Tuple<string, string>> filesContentCollection = new BlockingCollection<Tuple<string, string>>(int.MaxValue))
+                using (BlockingCollection<ParserResult> blockingCollection = new BlockingCollection<ParserResult>())
                 {
-                    using (BlockingCollection<ParserResult> parserResults = new BlockingCollection<ParserResult>())
+                    foreach (var item in Enumerable.Range(0, this.numberOfReportsMergedInParallel))
                     {
-                        Task<long> fileContentProducer = this.CreateFileReadProducer(reportFiles, filesContentCollection);
-                        foreach (var item in Enumerable.Range(0, this.numberOfReportsMergedInParallel))
-                        {
-                            mergeConsumers.Add(this.CreateConsumer(parserResults));
-                        }
-                        foreach (var item in Enumerable.Range(0, this.numberOfReportsParsedInParallel))
-                        {
-                            parserConsumer.Add(this.CreateFileParserProducer(filesContentCollection, parserResults, reportFiles.Count));
-                        }
-                        Task.WaitAll(parserConsumer.Concat(new[] { fileContentProducer }).ToArray());
-                        List<long> average = parserConsumer.Select(t => t.Result).Where(t => t != 0).ToList();
-                        long overallAverage = average.Sum() / average.Count;
-                        Logger.Info($"Overall average of parsing time is {overallAverage / 1000d:f1} seconds");
-                        Logger.Info($"Overall average of loading files into memory is {fileContentProducer.Result / 1000d:f1} seconds");
-                        parserResults.CompleteAdding();
-                        Task.WaitAll(mergeConsumers.ToArray());
+                        consumers.Add(CreateConsumer(blockingCollection));
                     }
+                    Task producer = this.CreateProducer(reportFiles, blockingCollection);
+                    Task.WaitAll(consumers.Concat(new[] { producer }).ToArray());
                 }
             }
             catch (AggregateException ae)
@@ -152,41 +127,13 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 throw;
             }
 
-            List<ParserResult> results = mergeConsumers.Select(t => t.Result).ToList();
+            List<ParserResult> results = consumers.Select(t => t.Result).ToList();
             ParserResult finalResult = results.First();
             foreach (ParserResult toBeMerged in results.Skip(1))
             {
                 this.MergeResults(finalResult, toBeMerged);
             }
             return finalResult;
-        }
-
-        private Task<long> CreateFileReadProducer(IReadOnlyCollection<string> reportFiles, BlockingCollection<Tuple<string, string>> collection)
-        {
-            return Task.Factory.StartNew(() =>
-            {
-                long average = 0;
-                try
-                {
-                    Parallel.ForEach(reportFiles, new ParallelOptions { MaxDegreeOfParallelism = this.numberOfReportsReadOnMemoryInParallel }, reportFile =>
-                    {
-                        int number = Interlocked.Increment(ref this.fileParserCount);
-                        Logger.InfoFormat(Resources.LoadingReport, reportFile, number, reportFiles.Count);
-                        Stopwatch stopWatch = new Stopwatch();
-                        stopWatch.Start();
-                        collection.Add(new Tuple<string, string>(reportFile, File.ReadAllText(reportFile)));
-                        stopWatch.Stop();
-                        Interlocked.Exchange(ref average, average += stopWatch.ElapsedMilliseconds);
-                        Logger.InfoFormat(Resources.FinishedLoadingReport, reportFile, number, reportFiles.Count, stopWatch.ElapsedMilliseconds / 1000d);
-                    });
-                }
-                finally
-                {
-                    Logger.Info($"Finished loading files in memory...");
-                    collection.CompleteAdding();
-                }
-                return average / reportFiles.Count;
-            });
         }
 
         /// <summary>
@@ -224,50 +171,47 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <summary>
         /// Creates the producer which parses the files in parallel and creates parser results out of it.
         /// </summary>
-        /// <param name="fileContentCollection">The blocking collection to get the file content from.</param>
+        /// <param name="reportFiles">The files to parse.</param>
         /// <param name="collection">The block collection to add the parsed results to.</param>
-        /// <param name="fileCount">The overall file count.</param>
         /// <returns>The Task.</returns>
-        private Task<long> CreateFileParserProducer(BlockingCollection<Tuple<string, string>> fileContentCollection, BlockingCollection<ParserResult> collection, int fileCount)
+        private Task CreateProducer(IReadOnlyCollection<string> reportFiles, BlockingCollection<ParserResult> collection)
         {
             return Task.Factory.StartNew(() =>
             {
                 try
                 {
-                    int count = 0;
-                    long average = 0;
-                    foreach (Tuple<string, string> content in fileContentCollection.GetConsumingEnumerable())
+                    int counter = 0;
+                    Parallel.ForEach(
+                    reportFiles,
+                    new ParallelOptions { MaxDegreeOfParallelism = this.numberOfReportsParsedInParallel },
+                    reportFile =>
                     {
-                        string reportFile = content.Item1;
-                        string fileContent = content.Item2;
+                        int number = Interlocked.Increment(ref counter);
+                        Logger.InfoFormat(Resources.LoadingReport, reportFile, number, reportFiles.Count);
                         try
                         {
-                            Logger.Info($"Start parsing content of {reportFile}...");
-                            Stopwatch stopWatch = new Stopwatch();
-                            stopWatch.Start();
-                            IEnumerable<ParserResult> parserResults = fileContent.Trim().StartsWith("<")
-                                ? this.ParseXmlFile(XDocument.Parse(fileContent))
-                                : this.ParseTextFile(fileContent.Split(new[] { Environment.NewLine }, StringSplitOptions.None)).ToList();
+                            string line1 = File.ReadLines(reportFile).First();
+
+                            IEnumerable<ParserResult> parserResults = line1.Trim().StartsWith("<")
+                                ? this.ParseXmlFile(XDocument.Load(reportFile))
+                                : this.ParseTextFile(File.ReadAllLines(reportFile)).ToList();
                             foreach (ParserResult parserResult in parserResults)
                             {
                                 collection.Add(parserResult);
                             }
-                            stopWatch.Stop();
-                            count++;
-                            average += stopWatch.ElapsedMilliseconds;
-                            Logger.Info($"Finished parsing content of {reportFile} in {stopWatch.ElapsedMilliseconds / 1000d:f1} seconds...");
+                            Logger.Info($"Finished parsing {reportFile}...");
                             this.CheckForGarbageCollection();
                         }
                         catch (Exception ex) when (!(ex is UnsupportedParserException))
                         {
                             Logger.ErrorFormat(" " + Resources.ErrorDuringReadingReport, reportFile, GetHumanReadableFileSize(reportFile), ex.GetExceptionMessageForDisplay());
                         }
-                    }
-                    return count > 0 ? average / count : 0;
+                    });
                 }
                 finally
                 {
-                    Logger.Info($"Parsing of {fileCount} files completed.");
+                    Logger.Info($"Parsing of {reportFiles.Count} files completed.");
+                    collection.CompleteAdding();
                 }
             });
         }
