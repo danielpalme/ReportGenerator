@@ -14,7 +14,7 @@
   <PropertyGroup>
     <CodeAnalysisRuleSet>stylecop.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-
+    
   <ItemGroup>
     <None Remove="Reporting\Builders\Rendering\resources\chartist.min.css" />
     <None Remove="Reporting\Builders\Rendering\resources\chartist.min.js" />
@@ -86,6 +86,9 @@
 
   <ItemGroup>
     <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="App.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

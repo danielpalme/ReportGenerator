@@ -2,7 +2,6 @@
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Filtering;
 using Palmmedia.ReportGenerator.Core.Parser.Preprocessing;
-using Palmmedia.ReportGenerator.Core.Performance;
 using Palmmedia.ReportGenerator.Core.Properties;
 using System;
 using System.Collections.Concurrent;
@@ -62,11 +61,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         private int mergeCount;
 
         /// <summary>
-        /// Indicates weather a garbage colleciton is in progress or not.
-        /// </summary>
-        private volatile bool garbageCollectionInProgress;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CoverageReportParser" /> class.
         /// </summary>
         /// <param name="numberOfReportsParsedInParallel">The number reports that are parsed and processed in parallel.</param>
@@ -107,7 +101,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 {
                     foreach (var item in Enumerable.Range(0, this.numberOfReportsMergedInParallel))
                     {
-                        consumers.Add(CreateConsumer(blockingCollection));
+                        consumers.Add(this.CreateConsumer(blockingCollection));
                     }
                     Task producer = this.CreateProducer(reportFiles, blockingCollection);
                     Task.WaitAll(consumers.Concat(new[] { producer }).ToArray());
@@ -193,14 +187,13 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                             string line1 = File.ReadLines(reportFile).First();
 
                             IEnumerable<ParserResult> parserResults = line1.Trim().StartsWith("<")
-                                ? this.ParseXmlFile(XDocument.Load(reportFile))
+                                ? this.ParseXmlFile(reportFile)
                                 : this.ParseTextFile(File.ReadAllLines(reportFile)).ToList();
                             foreach (ParserResult parserResult in parserResults)
                             {
                                 collection.Add(parserResult);
                             }
                             Logger.Info($"Finished parsing {reportFile}...");
-                            this.CheckForGarbageCollection();
                         }
                         catch (Exception ex) when (!(ex is UnsupportedParserException))
                         {
@@ -217,28 +210,28 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         }
 
         /// <summary>
-        /// Forces garbage collection if the system runs out of memory. This is because when running
-        /// in parallel the garbage collection sometimes misses to collect garbage and due to that
-        /// a out of memory exception is thrown which leads the application to be killed.
+        /// Load elements in memory balanced manner.
         /// </summary>
-        private void CheckForGarbageCollection()
+        /// <param name="filePath">The filepath of the covergae file to load.</param>
+        /// <param name="elementName">The name of the elemens to load.</param>
+        /// <returns>The elements matchig the name.</returns>
+        private IEnumerable<XElement> GetXElements(string filePath, string elementName)
         {
-            long availableMemory = PerformanceInfo.GetPhysicalAvailableMemoryInMiB();
-            long totalMemory = PerformanceInfo.GetTotalMemoryInMiB();
-            decimal percentFree = ((decimal)availableMemory / (decimal)totalMemory) * 100;
-            Logger.Info($"Available memory {percentFree:0.00} %");
-            if (percentFree < 20)
+            var readerSettings = new XmlReaderSettings() { DtdProcessing = DtdProcessing.Parse, XmlResolver = null };
+            using (XmlReader reader = XmlReader.Create(filePath, readerSettings))
             {
-                if (!this.garbageCollectionInProgress)
+                while (reader.Read())
                 {
-                    Logger.Info("Garbage collection forced.");
-                    this.garbageCollectionInProgress = true;
-                    GC.Collect();
+                    if (reader.NodeType == XmlNodeType.Element &&
+                        reader.Name == elementName)
+                    {
+                        XElement element = XNode.ReadFrom(reader) as XElement;
+                        if (element != null)
+                        {
+                            yield return element;
+                        }
+                    }
                 }
-            }
-            else
-            {
-                this.garbageCollectionInProgress = false;
             }
         }
 
@@ -246,16 +239,16 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// Tries to initiate the correct parsers for the given XML report. The result is merged into the given result.
         /// The report may contain several reports. For every report an extra parser is initiated.
         /// </summary>
-        /// <param name="report">The report file to parse.</param>
+        /// <param name="filePath">The report file path to parse.</param>
         /// <returns>The parser result.</returns>
-        private IEnumerable<ParserResult> ParseXmlFile(XContainer report)
+        private IEnumerable<ParserResult> ParseXmlFile(string filePath)
         {
-            if (report.Descendants("PartCoverReport").Any())
+            if (this.GetXElements(filePath, "PartCoverReport").Any())
             {
                 throw new UnsupportedParserException(Resources.ErrorPartCover);
             }
 
-            var elements = report.Descendants("CoverageSession").ToArray();
+            var elements = this.GetXElements(filePath, "CoverageSession").ToArray();
 
             if (elements.Length > 0)
             {
@@ -271,7 +264,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 yield break;
             }
 
-            elements = report.Descendants("Root").Where(e => e.Attribute("ReportType") != null && e.Attribute("ReportType").Value == "DetailedXml").ToArray();
+            elements = this.GetXElements(filePath, "Root").Where(e => e.Attribute("ReportType") != null && e.Attribute("ReportType").Value == "DetailedXml").ToArray();
 
             if (elements.Length > 0)
             {
@@ -287,7 +280,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 yield break;
             }
 
-            elements = report.Descendants("report").Where(e => e.Attribute("name") != null).ToArray();
+            elements = this.GetXElements(filePath, "report").Where(e => e.Attribute("name") != null).ToArray();
 
             if (elements.Length > 0)
             {
@@ -310,7 +303,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 yield break;
             }
 
-            elements = report.Descendants("coverage").ToArray();
+            elements = this.GetXElements(filePath, "coverage").ToArray();
 
             if (elements.Length > 0)
             {
@@ -354,7 +347,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 yield break;
             }
 
-            elements = report.Descendants("CoverageDSPriv").ToArray();
+            elements = this.GetXElements(filePath, "CoverageDSPriv").ToArray();
 
             if (elements.Length > 0)
             {
@@ -369,7 +362,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 yield break;
             }
 
-            elements = report.Descendants("results").ToArray();
+            elements = this.GetXElements(filePath, "results").ToArray();
 
             if (elements.Length > 0)
             {
