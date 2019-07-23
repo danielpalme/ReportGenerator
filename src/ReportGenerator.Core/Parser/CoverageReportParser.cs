@@ -115,8 +115,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     {
                         throw e;
                     }
-
-                    Console.WriteLine(e.StackTrace);
                 }
                 throw;
             }
