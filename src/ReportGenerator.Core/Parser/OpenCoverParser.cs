@@ -80,9 +80,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .OrderBy(a => a)
                 .ToArray();
 
+            var assemblyModules = assemblyNames.
+                ToDictionary(
+                    k => k, 
+                    v => modules.Where(t => t.Element("ModuleName").Value.Equals(v)).ToArray());
+
             foreach (var assemblyName in assemblyNames)
             {
-                assemblies.Add(this.ProcessAssembly(modules, files, trackedMethods, assemblyName));
+                assemblies.Add(this.ProcessAssembly(assemblyModules, files, trackedMethods, assemblyName));
             }
 
             var result = new ParserResult(assemblies.OrderBy(a => a.Name).ToList(), true, this.ToString());
@@ -92,24 +97,22 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <summary>
         /// Processes the given assembly.
         /// </summary>
-        /// <param name="modules">The modules.</param>
+        /// <param name="assemblyModules">The modules belonging to a assembly name.</param>
         /// <param name="files">The files.</param>
         /// <param name="trackedMethods">The tracked methods.</param>
         /// <param name="assemblyName">Name of the assembly.</param>
         /// <returns>The <see cref="Assembly"/>.</returns>
-        private Assembly ProcessAssembly(XElement[] modules, XElement[] files, IDictionary<string, string> trackedMethods, string assemblyName)
+        private Assembly ProcessAssembly(IDictionary<string, XElement[]> assemblyModules, XElement[] files, IDictionary<string, string> trackedMethods, string assemblyName)
         {
             Logger.DebugFormat("  " + Resources.CurrentAssembly, assemblyName);
 
-            var fileIdsByFilename = modules
-                .Where(m => m.Element("ModuleName").Value.Equals(assemblyName))
+            var fileIdsByFilename = assemblyModules[assemblyName]
                 .Elements("Files")
                 .Elements("File")
                 .GroupBy(f => f.Attribute("fullPath").Value, f => f.Attribute("uid").Value)
                 .ToDictionary(g => g.Key, g => g.ToHashSet());
 
-            var classNames = modules
-                .Where(m => m.Element("ModuleName").Value.Equals(assemblyName))
+            var classNames = assemblyModules[assemblyName]
                 .Elements("Classes")
                 .Elements("Class")
                 .Where(c => c.Attribute("skippedDueTo") == null)
@@ -127,7 +130,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             var assembly = new Assembly(assemblyName);
 
-            Parallel.ForEach(classNames, className => this.ProcessClass(modules, files, trackedMethods, fileIdsByFilename, assembly, className));
+            Parallel.ForEach(classNames, className => this.ProcessClass(assemblyModules, files, trackedMethods, fileIdsByFilename, assembly, className));
 
             return assembly;
         }
@@ -135,16 +138,15 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <summary>
         /// Processes the given class.
         /// </summary>
-        /// <param name="modules">The modules.</param>
+        /// <param name="assemblyModules">The modules belonging to a assembly name.</param>
         /// <param name="files">The files.</param>
         /// <param name="trackedMethods">The tracked methods.</param>
         /// <param name="fileIdsByFilename">Dictionary containing the file ids by filename.</param>
         /// <param name="assembly">The assembly.</param>
         /// <param name="className">Name of the class.</param>
-        private void ProcessClass(XElement[] modules, XElement[] files, IDictionary<string, string> trackedMethods, Dictionary<string, HashSet<string>> fileIdsByFilename, Assembly assembly, string className)
+        private void ProcessClass(IDictionary<string, XElement[]> assemblyModules, XElement[] files, IDictionary<string, string> trackedMethods, Dictionary<string, HashSet<string>> fileIdsByFilename, Assembly assembly, string className)
         {
-            var methods = modules
-                .Where(m => m.Element("ModuleName").Value.Equals(assembly.Name))
+            var methods = assemblyModules[assembly.Name]
                 .Elements("Classes")
                 .Elements("Class")
                 .Where(c => c.Element("FullName").Value.Equals(className)
@@ -157,15 +159,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             var fileIdsOfClassInSequencePoints = methods
                 .Elements("SequencePoints")
                 .Elements("SequencePoint")
-                .Where(seqpnt => seqpnt.Attribute("fileid") != null
-                                 && seqpnt.Attribute("fileid").Value != "0")
-                .Select(seqpnt => seqpnt.Attribute("fileid").Value)
+                .Select(seqpnt => seqpnt.Attribute("fileid")?.Value)
+                .Where(seqpnt => seqpnt != null && seqpnt != "0")
                 .ToArray();
 
             // Only required for backwards compatibility, older versions of OpenCover did not apply fileid for partial classes
             var fileIdsOfClassInFileRef = methods
-                .Where(m => m.Element("FileRef") != null)
-                .Select(m => m.Element("FileRef").Attribute("uid").Value)
+                .Select(m => m.Element("FileRef")?.Attribute("uid").Value)
+                .Where(m => m != null)
                 .ToArray();
 
             var fileIdsOfClass = fileIdsOfClassInSequencePoints
