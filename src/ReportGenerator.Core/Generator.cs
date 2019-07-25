@@ -230,7 +230,7 @@ namespace Palmmedia.ReportGenerator.Core
 
             if (historyStorage != null)
             {
-                new HistoryParser(historyStorage, settings.MaximumNumberOfHistoricCoverageFiles)
+                new HistoryParser(historyStorage, settings.MaximumNumberOfHistoricCoverageFiles, settings.NumberOfReportsParsedInParallel)
                     .ApplyHistoricCoverage(parserResult.Assemblies, overallHistoricCoverages);
 
                 reportContext.OverallHistoricCoverages = overallHistoricCoverages;

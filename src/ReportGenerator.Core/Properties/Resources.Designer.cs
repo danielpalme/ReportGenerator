@@ -294,7 +294,7 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
                 return ResourceManager.GetString("FileReflectionLoadError", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Finished loading report &apos;{0}&apos; {1}/{2} in memory in {3:f1} seconds.
         /// </summary>
@@ -303,7 +303,7 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
                 return ResourceManager.GetString("FinishedLoadingReport", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to The history directory &apos;{0}&apos; could not be created: {1}.
         /// </summary>
@@ -418,6 +418,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         internal static string NotExistingReportFile {
             get {
                 return ResourceManager.GetString("NotExistingReportFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parsing historic file &apos;{0}&apos;.
+        /// </summary>
+        internal static string ParseHistoricFile {
+            get {
+                return ResourceManager.GetString("ParseHistoricFile", resourceCulture);
             }
         }
         

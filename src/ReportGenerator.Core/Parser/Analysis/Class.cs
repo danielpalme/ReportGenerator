@@ -25,6 +25,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         private decimal? coverageQuota;
 
         /// <summary>
+        /// The object to lock the class add.
+        /// </summary>
+        private object m_lock = new object();
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Class"/> class.
         /// </summary>
         /// <param name="name">The name of the class.</param>
@@ -187,7 +192,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <param name="historicCoverage">The historic coverage.</param>
         internal void AddHistoricCoverage(HistoricCoverage historicCoverage)
         {
-            this.historicCoverages.Add(historicCoverage);
+            lock (m_lock)
+            {
+                this.historicCoverages.Add(historicCoverage);
+            }
         }
 
         /// <summary>
