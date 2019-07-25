@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -54,7 +55,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.History
         /// </summary>
         /// <param name="assemblies">The assemblies.</param>
         /// <param name="overallHistoricCoverages">A list to which all history elements are added.</param>
-        internal void ApplyHistoricCoverage(IEnumerable<Assembly> assemblies, IList<HistoricCoverage> overallHistoricCoverages)
+        internal void ApplyHistoricCoverage(IEnumerable<Assembly> assemblies, List<HistoricCoverage> overallHistoricCoverages)
         {
             if (assemblies == null)
             {
@@ -84,7 +85,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.History
                 Logger.ErrorFormat(" " + Resources.ErrorDuringReadingHistoricReports, ex.GetExceptionMessageForDisplay());
                 return;
             }
-
+            var classes = assemblies.SelectMany(t => t.Classes).ToDictionary(k => this.GetFullClassName(k.Assembly.Name, k.Name), v => v);
             Parallel.ForEach(
                 files,
                 new ParallelOptions {MaxDegreeOfParallelism = this.numberOfReportsParsedInParallel},
@@ -98,40 +99,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.History
                         DateTime date = DateTime.ParseExact(document.Root.Attribute("date").Value, "yyyy-MM-dd_HH-mm-ss", CultureInfo.InvariantCulture);
                         string tag = document.Root.Attribute("tag")?.Value;
                         tag = string.IsNullOrEmpty(tag) ? null : tag;
-
-                        foreach (var assemblyElement in document.Root.Elements("assembly"))
+                        var historicCoverages = this.ParseHistoricFile(classes, document, date, tag);
+                        lock (locker)
                         {
-                            Assembly assembly = assemblies.SingleOrDefault(a => a.Name == assemblyElement.Attribute("name").Value);
-
-                            foreach (var classElement in assemblyElement.Elements("class"))
-                            {
-                                HistoricCoverage historicCoverage = new HistoricCoverage(date, tag)
-                                {
-                                    CoveredLines = int.Parse(classElement.Attribute("coveredlines").Value, CultureInfo.InvariantCulture),
-                                    CoverableLines = int.Parse(classElement.Attribute("coverablelines").Value, CultureInfo.InvariantCulture),
-                                    TotalLines = int.Parse(classElement.Attribute("totallines").Value, CultureInfo.InvariantCulture),
-                                    CoveredBranches = int.Parse(classElement.Attribute("coveredbranches").Value, CultureInfo.InvariantCulture),
-                                    TotalBranches = int.Parse(classElement.Attribute("totalbranches").Value, CultureInfo.InvariantCulture)
-                                };
-                                lock (locker)
-                                {
-                                    overallHistoricCoverages.Add(historicCoverage);
-                                }
-
-                                if (assembly == null)
-                                {
-                                    continue;
-                                }
-
-                                Class @class = assembly.Classes.SingleOrDefault(c => c.Name == classElement.Attribute("name").Value);
-
-                                if (@class == null)
-                                {
-                                    continue;
-                                }
-
-                                @class.AddHistoricCoverage(historicCoverage);
-                            }
+                            overallHistoricCoverages.AddRange(historicCoverages);
                         }
                     }
                     catch (Exception ex)
@@ -139,6 +110,37 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.History
                         Logger.ErrorFormat(" " + Resources.ErrorDuringReadingHistoricReport, file, ex.GetExceptionMessageForDisplay());
                     }
                 });
+        }
+
+        private IEnumerable<HistoricCoverage> ParseHistoricFile(IDictionary<string, Class> classes, XDocument document, DateTime date, string tag)
+        {
+            ConcurrentBag<HistoricCoverage> historicCoverages = new ConcurrentBag<HistoricCoverage>();
+            Parallel.ForEach(document.Root.Elements("assembly").ToArray(), assemblyElement =>
+            {
+                string assemblyName = assemblyElement.Attribute("name").Value;
+                foreach (var classElement in assemblyElement.Elements("class"))
+                {
+                    HistoricCoverage historicCoverage = new HistoricCoverage(date, tag)
+                    {
+                        CoveredLines = int.Parse(classElement.Attribute("coveredlines").Value, CultureInfo.InvariantCulture),
+                        CoverableLines = int.Parse(classElement.Attribute("coverablelines").Value, CultureInfo.InvariantCulture),
+                        TotalLines = int.Parse(classElement.Attribute("totallines").Value, CultureInfo.InvariantCulture),
+                        CoveredBranches = int.Parse(classElement.Attribute("coveredbranches").Value, CultureInfo.InvariantCulture),
+                        TotalBranches = int.Parse(classElement.Attribute("totalbranches").Value, CultureInfo.InvariantCulture)
+                    };
+                    historicCoverages.Add(historicCoverage);
+                    if (classes.TryGetValue(this.GetFullClassName(assemblyName, classElement.Attribute("name").Value), out var @class))
+                    {
+                        @class.AddHistoricCoverage(historicCoverage);
+                    }
+                }
+            });
+            return historicCoverages;
+        }
+
+        private string GetFullClassName(string assemblyName, string className)
+        {
+            return $"{assemblyName}+{className}";
         }
 
         private XDocument LoadXDocument(string file)
