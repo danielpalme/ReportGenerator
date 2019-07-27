@@ -5,8 +5,8 @@
     <RootNamespace>Palmmedia.ReportGenerator.MSBuild</RootNamespace>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <AssemblyVersion>4.2.10.0</AssemblyVersion>
-    <FileVersion>4.2.10.0</FileVersion>
+    <AssemblyVersion>4.2.11.0</AssemblyVersion>
+    <FileVersion>4.2.11.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
