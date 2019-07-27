@@ -62,6 +62,7 @@ CHANGELOG
 
 4.2.11.0
 
+    * Fix: Issue #268: Reduced file name length for XML report files
     * Fix: Issue #270: Improved file pattern verification
 
 4.2.10.0

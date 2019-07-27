@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -19,6 +20,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// The Logger.
         /// </summary>
         private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(XmlReportBuilder));
+
+        /// <summary>
+        /// Dictionary containing the filenames of the class reports by class.
+        /// </summary>
+        private static readonly Dictionary<string, string> FileNameByClass = new Dictionary<string, string>();
 
         /// <summary>
         /// Gets the report type.
@@ -134,11 +140,73 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             string targetPath = Path.Combine(
                 this.ReportContext.ReportConfiguration.TargetDirectory,
-                StringHelper.ReplaceInvalidPathChars(@class.Assembly.Name + "_" + @class.Name) + ".xml");
+                GetClassReportFilename(@class.Assembly.Name, @class.Name));
 
             Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
 
             result.Save(targetPath);
+        }
+
+        /// <summary>
+        /// Gets the file name of the report file for the given class.
+        /// </summary>
+        /// <param name="assemblyName">Name of the assembly.</param>
+        /// <param name="className">Name of the class.</param>
+        /// <returns>The file name.</returns>
+        private static string GetClassReportFilename(string assemblyName, string className)
+        {
+            string key = assemblyName + "_" + className;
+
+            string fileName = null;
+
+            if (!FileNameByClass.TryGetValue(key, out fileName))
+            {
+                string shortClassName = null;
+
+                if (assemblyName == "Default" && className.Contains(Path.DirectorySeparatorChar))
+                {
+                    assemblyName = className.Substring(0, className.LastIndexOf(Path.DirectorySeparatorChar));
+                    shortClassName = className.Substring(className.LastIndexOf(Path.DirectorySeparatorChar) + 1);
+                }
+                else
+                {
+                    if (className.EndsWith(".js", StringComparison.OrdinalIgnoreCase))
+                    {
+                        shortClassName = className.Substring(0, className.LastIndexOf('.'));
+                    }
+                    else
+                    {
+                        shortClassName = className.Substring(className.LastIndexOf('.') + 1);
+                    }
+                }
+
+                fileName = StringHelper.ReplaceInvalidPathChars(assemblyName + "_" + shortClassName) + ".xml";
+
+                if (fileName.Length > 100)
+                {
+                    string firstPart = fileName.Substring(0, 50);
+                    string lastPart = fileName.Substring(fileName.Length - 45, 45);
+
+                    fileName = firstPart + lastPart;
+                }
+
+                if (FileNameByClass.Values.Any(v => v.Equals(fileName, StringComparison.OrdinalIgnoreCase)))
+                {
+                    int counter = 2;
+                    string fileNameWithoutExtension = fileName.Substring(0, fileName.Length - 4);
+
+                    do
+                    {
+                        fileName = fileNameWithoutExtension + counter + ".xml";
+                        counter++;
+                    }
+                    while (FileNameByClass.Values.Any(v => v.Equals(fileName, StringComparison.OrdinalIgnoreCase)));
+                }
+
+                FileNameByClass.Add(key, fileName);
+            }
+
+            return fileName;
         }
     }
 }
