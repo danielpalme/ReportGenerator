@@ -60,6 +60,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.2.11.0
+
+    * Fix: Issue #270: Improved file pattern verification
+
 4.2.10.0
 
     * Fix: Issue #269: Improved lcov support for Flutter

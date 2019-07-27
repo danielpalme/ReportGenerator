@@ -88,7 +88,13 @@ namespace Palmmedia.ReportGenerator.Core
             {
                 try
                 {
+                    int initialCount = this.reportFiles.Count;
                     this.reportFiles.AddRange(GlobbingFileSearch.GetFiles(reportFilePattern));
+
+                    if (initialCount == this.reportFiles.Count)
+                    {
+                        this.invalidReportFilePatterns.Add(reportFilePattern);
+                    }
                 }
                 catch (Exception)
                 {
