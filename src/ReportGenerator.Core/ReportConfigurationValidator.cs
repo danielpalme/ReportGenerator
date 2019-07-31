@@ -41,17 +41,22 @@ namespace Palmmedia.ReportGenerator.Core
         /// </returns>
         internal bool Validate(IReportConfiguration reportConfiguration)
         {
-            bool result = true;
-
             if (reportConfiguration.InvalidReportFilePatterns.Count > 0)
             {
                 foreach (var failedReportFilePattern in reportConfiguration.InvalidReportFilePatterns)
                 {
-                    Logger.ErrorFormat(Resources.FailedReportFilePattern, failedReportFilePattern);
+                    if (failedReportFilePattern.Contains("*"))
+                    {
+                        Logger.WarnFormat(Resources.FailedReportFilePattern, failedReportFilePattern);
+                    }
+                    else
+                    {
+                        Logger.WarnFormat(Resources.FailedReportFile, failedReportFilePattern);
+                    }
                 }
-
-                result &= false;
             }
+
+            bool result = true;
 
             foreach (var file in reportConfiguration.Plugins)
             {
