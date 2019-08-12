@@ -15,7 +15,7 @@ namespace Palmmedia.ReportGenerator.Core
         /// <summary>
         /// The report files.
         /// </summary>
-        private HashSet<string> reportFiles = new HashSet<string>();
+        private List<string> reportFiles = new List<string>();
 
         /// <summary>
         /// The report file pattern that could not be parsed.
@@ -84,6 +84,8 @@ namespace Palmmedia.ReportGenerator.Core
                 throw new ArgumentNullException(nameof(fileFilters));
             }
 
+            var seen = new HashSet<string>();
+
             foreach (var reportFilePattern in reportFilePatterns)
             {
                 try
@@ -94,7 +96,10 @@ namespace Palmmedia.ReportGenerator.Core
                     {
                         foreach (var file in files)
                         {
-                            this.reportFiles.Add(file);
+                            if (seen.Add(f))
+		            {
+				this.reportFiles.Add(file);
+                            }
                         }
                     }
                     else
