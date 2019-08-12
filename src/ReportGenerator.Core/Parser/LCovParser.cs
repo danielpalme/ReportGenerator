@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Parser.Filtering;
 
@@ -145,7 +146,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 {
                     line = line.Substring(3);
                     int lineNumber = int.Parse(line.Substring(0, line.IndexOf(',')), CultureInfo.InvariantCulture);
-                    int visits = int.Parse(line.Substring(line.IndexOf(',') + 1));
+                    int visits = line.Substring(line.IndexOf(',') + 1).ParseLargeInteger();
 
                     maxiumLineNumber = Math.Max(maxiumLineNumber, lineNumber);
 

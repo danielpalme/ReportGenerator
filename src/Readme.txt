@@ -60,6 +60,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.2.15.0
+
+    * Fix: Issue #273: Handling of large coverage numbers
+
 4.2.13.0
 
     * Fix: Issue #271: Prevented file parsing multiple times
