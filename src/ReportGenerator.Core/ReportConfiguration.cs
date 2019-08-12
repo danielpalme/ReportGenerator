@@ -96,9 +96,9 @@ namespace Palmmedia.ReportGenerator.Core
                     {
                         foreach (var file in files)
                         {
-                        	if (seen.Add(f))
-		                    {
-                                this.reportFiles.Add(file);
+                            if (seen.Add(f))
+		            {
+				this.reportFiles.Add(file);
                             }
                         }
                     }
