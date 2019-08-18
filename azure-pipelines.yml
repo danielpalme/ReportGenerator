@@ -119,9 +119,9 @@ steps:
 
 # Build .NET Core 3.0
 - task: DotNetCoreInstaller@0
-  displayName: 'Use .NET Core SDK 3.0.100-preview6-012264'
+  displayName: 'Use .NET Core SDK 3.0.100-preview8-013656'
   inputs:
-    version: 3.0.100-preview6-012264
+    version: 3.0.100-preview8-013656
 
 - script: 'copy global_dotnet3.json global.json'
   workingDirectory: 'src/ReportGenerator.Console.NetCore'
