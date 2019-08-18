@@ -22,9 +22,9 @@ steps:
     custom: '--info'
 
 - task: DotNetCoreInstaller@0
-  displayName: 'Use .NET Core SDK 2.2.300'
+  displayName: 'Use .NET Core SDK 2.2.401'
   inputs:
-    version: 2.2.300
+    version: 2.2.401
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet info'
@@ -100,7 +100,7 @@ steps:
   inputs:
     command: test
     projects: 'src\ReportGenerator.Core.Test\ReportGenerator.Core.Test.csproj'
-    arguments: '--configuration $(BuildConfiguration) --no-build /p:AltCover=true /p:AltCoverForce=true /p:AltCoverCallContext=[Fact] /p:AltCoverXmlReport=..\target\reports\coverage\coverage.opencover.xml'
+    arguments: '--configuration $(BuildConfiguration) --no-build /p:CollectCoverage=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=opencover%2ccobertura /p:CoverletOutput=../target/reports/coverage/'
 
 - task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@4
   displayName: ReportGenerator
@@ -114,7 +114,7 @@ steps:
   displayName: 'Publish code coverage results'
   inputs:
     codeCoverageTool: Cobertura
-    summaryFileLocation: '$(build.sourcesdirectory)\src\target\reports\coverage\Cobertura.xml'
+    summaryFileLocation: '$(build.sourcesdirectory)\src\target\reports\coverage\coverage.cobertura.xml'
     reportDirectory: '$(build.sourcesdirectory)\src\target\reports\coverage'
 
 # Build .NET Core 3.0
