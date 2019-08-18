@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Parser.Filtering;
 
@@ -117,7 +118,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                         if (visitsText != "#####" && visitsText != "=====")
                         {
-                            visits = int.Parse(visitsText, CultureInfo.InvariantCulture);
+                            visits = visitsText.ParseLargeInteger();
                         }
 
                         if (visitsByLine.ContainsKey(lineNumber))
@@ -137,7 +138,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     if (match.Success)
                     {
                         var branch = new Branch(
-                            match.Groups["Visits"].Success ? int.Parse(match.Groups["Visits"].Value, CultureInfo.InvariantCulture) : 0,
+                            match.Groups["Visits"].Success ? match.Groups["Visits"].Value.ParseLargeInteger() : 0,
                             match.Groups["Number"].Value);
 
                         ICollection<Branch> branches = null;

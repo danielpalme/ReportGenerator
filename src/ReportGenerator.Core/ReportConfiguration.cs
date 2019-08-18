@@ -84,11 +84,28 @@ namespace Palmmedia.ReportGenerator.Core
                 throw new ArgumentNullException(nameof(fileFilters));
             }
 
+            var seen = new HashSet<string>();
+
             foreach (var reportFilePattern in reportFilePatterns)
             {
                 try
                 {
-                    this.reportFiles.AddRange(GlobbingFileSearch.GetFiles(reportFilePattern));
+                    var files = GlobbingFileSearch.GetFiles(reportFilePattern);
+
+                    if (files.Any())
+                    {
+                        foreach (var file in files)
+                        {
+                            if (seen.Add(file))
+                            {
+                                this.reportFiles.Add(file);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        this.invalidReportFilePatterns.Add(reportFilePattern);
+                    }
                 }
                 catch (Exception)
                 {

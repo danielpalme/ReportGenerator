@@ -241,7 +241,16 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The report file pattern &apos;{0}&apos; is invalid..
+        ///   Looks up a localized string similar to The report file &apos;{0}&apos; is invalid. File does not exist..
+        /// </summary>
+        internal static string FailedReportFile {
+            get {
+                return ResourceManager.GetString("FailedReportFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The report file pattern &apos;{0}&apos; is invalid. No matching files found..
         /// </summary>
         internal static string FailedReportFilePattern {
             get {

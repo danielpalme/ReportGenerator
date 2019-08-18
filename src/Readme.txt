@@ -60,6 +60,27 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.2.15.0
+
+    * Fix: Issue #273: Handling of large coverage numbers
+
+4.2.13.0
+
+    * Fix: Issue #271: Prevented file parsing multiple times
+
+4.2.12.0
+
+    * Fix: Issue #270: Improved file pattern verification
+
+4.2.11.0
+
+    * Fix: Issue #268: Reduced file name length for XML report files
+    * Fix: Issue #270: Improved file pattern verification
+
+4.2.10.0
+
+    * Fix: Issue #269: Improved lcov support for Flutter
+
 4.2.9.0
 
     * Fix: Issue #84: Improved parameter handling in Azure DevOps extension

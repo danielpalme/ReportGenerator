@@ -177,8 +177,11 @@
   <data name="ErrorPartCover" xml:space="preserve">
     <value>PartCover is no longer supported. If you want to generate coverage reports based on PartCover, please use version 3.x of ReportGenerator.</value>
   </data>
+  <data name="FailedReportFile" xml:space="preserve">
+    <value>The report file '{0}' is invalid. File does not exist.</value>
+  </data>
   <data name="FailedReportFilePattern" xml:space="preserve">
-    <value>The report file pattern '{0}' is invalid.</value>
+    <value>The report file pattern '{0}' is invalid. No matching files found.</value>
   </data>
   <data name="FailedToInstantiatePlugin" xml:space="preserve">
     <value>Failed to instantiateplugin class '{0}'.</value>
