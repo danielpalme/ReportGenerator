@@ -63,9 +63,9 @@
 
   <Target Name="Test" DependsOnTargets="Clean; Compile">
     <MakeDir Directories="target\reports\coverage" />
-    <Exec Command="dotnet test --no-build -c Release /p:AltCover=true /p:AltCoverForce=true /p:AltCoverXmlReport=..\target\reports\coverage\coverage.opencover.xml /p:AltCoverCallContext=[Fact]" WorkingDirectory="ReportGenerator.Core.Test" />
+    <Exec Command="dotnet test --no-build -c Release /p:CollectCoverage=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=\&quot;opencover,cobertura\&quot; /p:CoverletOutput=../target/reports/coverage/" WorkingDirectory="ReportGenerator.Core.Test" />
   </Target>
-  
+
   <Target Name="Report" DependsOnTargets="Test">
     <ItemGroup>
       <CoverageFiles Include="target\reports\coverage\coverage.opencover.xml" />
