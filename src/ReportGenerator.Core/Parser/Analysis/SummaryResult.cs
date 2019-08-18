@@ -150,5 +150,20 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// The number of total code elements.
         /// </value>
         public int TotalCodeElements => this.Assemblies.Sum(f => f.TotalCodeElements);
+
+        /// <summary>
+        /// Gets all sumable metrics.
+        /// </summary>
+        /// <value>The sumable metrics.</value>
+        public IReadOnlyCollection<Metric> SumableMetrics =>
+            this.Assemblies
+                .SelectMany(a => a.Classes)
+                .SelectMany(c => c.Files)
+                .SelectMany(f => f.MethodMetrics)
+                .SelectMany(m => m.Metrics)
+                .Where(m => m.MetricType == MetricType.CoverageAbsolute)
+                .GroupBy(m => m.Name)
+                .Select(g => new Metric(g.Key, g.First().ExplanationUrl, MetricType.CoverageAbsolute, g.Sum(m => m.Value)))
+                .ToList();
     }
 }

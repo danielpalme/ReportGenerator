@@ -4,7 +4,7 @@
 =                           ReportGenerator                           =
 =                    Generation of coverage reports                   =
 =                                                                     =
-=                       http://www.palmmedia.de                       =
+=                       https://www.palmmedia.de                      =
 =                                                                     =
 =                                                                     =
 =======================================================================

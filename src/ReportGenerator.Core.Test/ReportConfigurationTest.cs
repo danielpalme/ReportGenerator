@@ -84,11 +84,11 @@ namespace Palmmedia.ReportGenerator.Core.Test
             Assert.Equal(0, configuration.InvalidReportFilePatterns.Count);
         }
 
-        [Fact(Skip = "Invalid chars in directory do not cause an exception any more")]
+        [Fact]
         public void InitByConstructor_InvalidValues()
         {
             var configuration = new ReportConfiguration(
-                new[] { ReportPath, "\t?<>" },
+                new[] { ReportPath, "\t?<>", "C:\\temp\\DoesNotExist.xml" },
                 "C:\\temp",
                 new string[] { },
                 "C:\\temp\\historic",
@@ -113,7 +113,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
             Assert.NotNull(configuration.ClassFilters);
 
             Assert.False(configuration.VerbosityLevelValid);
-            Assert.Equal(1, configuration.InvalidReportFilePatterns.Count);
+            Assert.Equal(2, configuration.InvalidReportFilePatterns.Count);
         }
     }
 }

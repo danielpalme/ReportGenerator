@@ -39,11 +39,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         private static Regex branchCoverageRegex = new Regex("\\((?<NumberOfCoveredBranches>\\d+)/(?<NumberOfTotalBranches>\\d+)\\)$", RegexOptions.Compiled);
 
         /// <summary>
-        /// Regex to extract short method name.
-        /// </summary>
-        private static Regex methodRegex = new Regex(@"^(?<MethodName>.+)\((?<Arguments>.*)\).*$", RegexOptions.Compiled);
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CoberturaParser" /> class.
         /// </summary>
         /// <param name="assemblyFilter">The assembly filter.</param>
@@ -150,7 +145,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .ToArray();
 
             // If all files are removed by filters, then the whole class is omitted
-            if (files.Length == 0 || filteredFiles.Length > 0)
+            if ((files.Length == 0 && !this.FileFilter.HasCustomFilters) || filteredFiles.Length > 0)
             {
                 var @class = new Class(className, assembly);
 
@@ -251,12 +246,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 string fullName = method.Attribute("name").Value + method.Attribute("signature").Value;
                 fullName = ExtractMethodName(fullName, method.Parent.Parent.Attribute("name").Value);
 
-                if (lambdaMethodNameRegex.IsMatch(fullName))
+                if (fullName.Contains("__") && lambdaMethodNameRegex.IsMatch(fullName))
                 {
                     continue;
                 }
 
-                string shortName = methodRegex.Replace(fullName, m => string.Format(CultureInfo.InvariantCulture, "{0}({1})", m.Groups["MethodName"].Value, m.Groups["Arguments"].Value.Length > 0 ? "..." : string.Empty));
+                string shortName = GetShortMethodName(fullName);
 
                 var metrics = new List<Metric>();
 
@@ -329,13 +324,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     methodMetric.Line = int.Parse(line.Attribute("number").Value, CultureInfo.InvariantCulture);
                 }
 
-                /* If cobertura file is merged from different files, a class and therefore method can exist several times.
-                 * The first result is used. */
-                if (codeFile.MethodMetrics.Any(m => m.Equals(methodMetric)))
-                {
-                    continue;
-                }
-
                 codeFile.AddMethodMetric(methodMetric);
             }
         }
@@ -352,21 +340,21 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 string methodName = method.Attribute("name").Value + method.Attribute("signature").Value;
                 methodName = ExtractMethodName(methodName, method.Parent.Parent.Attribute("name").Value);
 
-                if (lambdaMethodNameRegex.IsMatch(methodName))
+                if (methodName.Contains("__") && lambdaMethodNameRegex.IsMatch(methodName))
                 {
                     continue;
                 }
 
-                methodName = methodRegex.Replace(methodName, m => string.Format(CultureInfo.InvariantCulture, "{0}({1})", m.Groups["MethodName"].Value, m.Groups["Arguments"].Value));
+                methodName = GetShortMethodName(methodName);
 
                 var lines = method.Elements("lines")
-                    .Elements("line")
-                    .Select(line => int.Parse(line.Attribute("number").Value, CultureInfo.InvariantCulture))
-                    .ToArray();
+                    .Elements("line");
 
-                if (lines.Length > 0)
+                if (lines.Any())
                 {
-                    codeFile.AddCodeElement(new CodeElement(methodName, CodeElementType.Method, lines.Min(), lines.Max()));
+                    int firstLine = int.Parse(lines.First().Attribute("number").Value, CultureInfo.InvariantCulture);
+                    int lastLine = int.Parse(lines.Last().Attribute("number").Value, CultureInfo.InvariantCulture);
+                    codeFile.AddCodeElement(new CodeElement(methodName, CodeElementType.Method, firstLine, lastLine));
                 }
             }
         }
@@ -448,6 +436,21 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             }
 
             return methodName;
+        }
+
+        private static string GetShortMethodName(string fullName)
+        {
+            int indexOpen = fullName.IndexOf('(');
+
+            if (indexOpen <= 0)
+            {
+                return fullName;
+            }
+
+            int indexClose = fullName.IndexOf(')');
+            string signature = indexClose - indexOpen > 1 ? "(...)" : "()";
+
+            return $"{fullName.Substring(0, indexOpen)}{signature}";
         }
     }
 }

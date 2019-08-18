@@ -11,7 +11,7 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   disable.coverage.autogenerate: 'true'
-  version: '4.2.0'
+  version: '4.2.15'
 
 # Prepare
 steps:
@@ -99,7 +99,7 @@ steps:
   displayName: Test
   inputs:
     command: test
-    projects: '$(Parameters.TestProjects)'
+    projects: 'src\ReportGenerator.Core.Test\ReportGenerator.Core.Test.csproj'
     arguments: '--configuration $(BuildConfiguration) --no-build /p:AltCover=true /p:AltCoverForce=true /p:AltCoverCallContext=[Fact] /p:AltCoverXmlReport=..\target\reports\coverage\coverage.opencover.xml'
 
 - task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@4

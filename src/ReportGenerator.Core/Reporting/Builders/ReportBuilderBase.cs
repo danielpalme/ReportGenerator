@@ -219,26 +219,17 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 }
             }
 
-            var summableMetrics = summaryResult.Assemblies
-                .SelectMany(a => a.Classes)
-                .SelectMany(c => c.Files)
-                .SelectMany(f => f.MethodMetrics)
-                .SelectMany(m => m.Metrics)
-                .Where(m => m.MetricType == MetricType.CoverageAbsolute)
-                .GroupBy(m => m.Name)
-                .Select(g => new Metric(g.Key, g.First().ExplanationUrl, MetricType.CoverageAbsolute, g.Sum(m => m.Value)))
-                .ToArray();
+            var sumableMetrics = summaryResult.SumableMetrics;
 
-            if (summableMetrics.Length > 0)
+            if (sumableMetrics.Count > 0)
             {
                 reportRenderer.Header(ReportResources.Metrics);
 
-                var methodMetric = new MethodMetric(ReportResources.Total, ReportResources.Total, summableMetrics);
+                var methodMetric = new MethodMetric(ReportResources.Total, ReportResources.Total, sumableMetrics);
                 reportRenderer.MetricsTable(new[] { methodMetric });
             }
 
             if (this.ReportContext.RiskHotspotAnalysisResult != null
-                && reportRenderer.SupportsRiskHotsSpots
                 && this.ReportContext.RiskHotspotAnalysisResult.CodeCodeQualityMetricsAvailable)
             {
                 reportRenderer.Header(ReportResources.RiskHotspots);

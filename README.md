@@ -5,10 +5,13 @@
 ReportGenerator
 </h1>
 
-<div align="center">
 
+<div align="center">
+    
+<b>Powerful code coverage visualization</b>
+    
 [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/danielpalme/ReportGenerator/master/LICENSE.txt)
-[![Build Status](https://danielpalme.visualstudio.com/ReportGenerator/_apis/build/status/danielpalme.ReportGenerator?branchName=master)](https://danielpalme.visualstudio.com/ReportGenerator/_build/latest?definitionId=3)
+[![Build Status](https://dev.azure.com/danielpalme/ReportGenerator/_apis/build/status/danielpalme.ReportGenerator?branchName=master)](https://dev.azure.com/danielpalme/ReportGenerator/_build/latest?definitionId=3&branchName=master)
 ![Coverage](https://img.shields.io/azure-devops/coverage/danielpalme/ReportGenerator/3.svg)
 
 </div>
@@ -37,7 +40,7 @@ Use the online [configuration tool](https://danielpalme.github.io/ReportGenerato
 |[dotnet-reportgenerator-cli](https://www.nuget.org/packages/dotnet-reportgenerator-cli)<br/><br/>[![Nuget](https://img.shields.io/nuget/v/dotnet-reportgenerator-cli.svg)![Nuget](https://img.shields.io/nuget/dt/dotnet-reportgenerator-cli.svg)](https://www.nuget.org/packages/dotnet-reportgenerator-cli)|.NET Core 2.0|Use this package if your project is based on *.NET Core* and you want to use *ReportGenerator* as a 'DotnetCliTool'.<br/><br/>**Installation**<br/>Add `<DotNetCliToolReference Include="dotnet-reportgenerator-cli" Version="x.y.z" />` to your project file.<br/><br/>**Usage**<br/>```dotnet reportgenerator [options]```|
 |[dotnet-reportgenerator-globaltool](https://www.nuget.org/packages/dotnet-reportgenerator-globaltool)<br/><br/>[![Nuget](https://img.shields.io/nuget/v/dotnet-reportgenerator-globaltool.svg)![Nuget](https://img.shields.io/nuget/dt/dotnet-reportgenerator-globaltool.svg)](https://www.nuget.org/packages/dotnet-reportgenerator-globaltool)|.NET Core 2.1|Use this package if your project is based on *.NET Core* and you want to use *ReportGenerator* as a (global) 'DotnetTool'.<br/><br/>**Installation**<br/>```dotnet tool install -g dotnet-reportgenerator-globaltool```<br/>```dotnet tool install dotnet-reportgenerator-globaltool --tool-path tools```<br/><br/>**Usage**<br/>```reportgenerator [options]```<br/>```tools\reportgenerator.exe [options]```|
 |[ReportGenerator.Core](https://www.nuget.org/packages/ReportGenerator.Core)<br/><br/>[![Nuget](https://img.shields.io/nuget/v/ReportGenerator.Core.svg)![Nuget](https://img.shields.io/nuget/dt/ReportGenerator.Core.svg)](https://www.nuget.org/packages/ReportGenerator.Core)|.NET Standard 2.0|Use this package if you want to write a custom **plugin** for *ReportGenerator* or if you want to call/execute *ReportGenerator* within your code base.<br/><br/>**Plugin development**<br/>[Custom reports](https://github.com/danielpalme/ReportGenerator/wiki/Custom-reports)<br/>[Custom history storage](https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage)|
-|[Azure Devops extension](https://marketplace.visualstudio.com/items?itemName=Palmmedia.reportgenerator)<br/><br/>[![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/Palmmedia.reportgenerator.svg)![Visual Studio Marketplace Installs - Azure DevOps Extension](https://img.shields.io/visual-studio-marketplace/azure-devops/installs/total/Palmmedia.reportgenerator.svg)](https://marketplace.visualstudio.com/items?itemName=Palmmedia.reportgenerator)|.NET Core 2.1| Add the Azure Devops extension to your build pipeline.<br />[Learn more](https://github.com/danielpalme/ReportGenerator/wiki/Integration#azure-devops-extension)|
+|[Azure DevOps extension](https://marketplace.visualstudio.com/items?itemName=Palmmedia.reportgenerator)<br/><br/>[![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/Palmmedia.reportgenerator.svg)![Visual Studio Marketplace Installs - Azure DevOps Extension](https://img.shields.io/visual-studio-marketplace/azure-devops/installs/total/Palmmedia.reportgenerator.svg)](https://marketplace.visualstudio.com/items?itemName=Palmmedia.reportgenerator)|.NET Core 2.1| Add the Azure DevOps extension to your build pipeline.<br />[Learn more](https://github.com/danielpalme/ReportGenerator/wiki/Integration#azure-devops-extension)|
 
 ### Usage / Command line parameters
 ```
@@ -130,10 +133,10 @@ Badges in SVG and PNG format can be generated if `-reporttypes:Badges` is used:
 ## Resources
 
 ### Links
-* http://www.palmmedia.de/Blog/2017/12/6/reportgenerator-new-release-with-risk-hotspots-analysis
-* http://www.palmmedia.de/Blog/2016/11/6/reportgenerator-new-release-with-enhanced-html-report-and-cobertura-support
-* http://www.palmmedia.de/Blog/2015/1/27/reportgenerator-new-beta-with-historytrend-charts
-* http://www.palmmedia.de/Blog/2012/4/29/reportgenerator-new-release-with-more-advanced-report-preprocessing
+* https://www.palmmedia.de/Blog/2017/12/6/reportgenerator-new-release-with-risk-hotspots-analysis
+* https://www.palmmedia.de/Blog/2016/11/6/reportgenerator-new-release-with-enhanced-html-report-and-cobertura-support
+* https://www.palmmedia.de/Blog/2015/1/27/reportgenerator-new-beta-with-historytrend-charts
+* https://www.palmmedia.de/Blog/2012/4/29/reportgenerator-new-release-with-more-advanced-report-preprocessing
 
 ### Download statistics
 ![Nuget](https://img.shields.io/nuget/dt/ReportGenerator.svg?label=ReportGenerator%40nuget)
@@ -148,5 +151,5 @@ Badges in SVG and PNG format can be generated if `-reporttypes:Badges` is used:
 ## Contact
 
 Author: Daniel Palme  
-Blog: [www.palmmedia.de](http://www.palmmedia.de)  
+Blog: [www.palmmedia.de](https://www.palmmedia.de)  
 Twitter: [@danielpalme](https://twitter.com/danielpalme)  

@@ -25,7 +25,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <summary>
         /// The method metrics of the class.
         /// </summary>
-        private readonly List<MethodMetric> methodMetrics = new List<MethodMetric>();
+        private readonly HashSet<MethodMetric> methodMetrics = new HashSet<MethodMetric>();
 
         /// <summary>
         /// The code elements..

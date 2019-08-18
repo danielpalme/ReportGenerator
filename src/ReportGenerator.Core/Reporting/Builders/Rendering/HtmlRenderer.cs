@@ -16,10 +16,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
     /// <summary>
     /// HTML report renderer.
     /// </summary>
-    internal class HtmlRenderer : RendererBase, IReportRenderer, IDisposable
+    internal class HtmlRenderer : IReportRenderer, IDisposable
     {
-        #region HTML Snippets
-
         /// <summary>
         /// The head of each generated HTML file.
         /// </summary>
@@ -44,8 +42,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// The link to the static CSS file.
         /// </summary>
         private const string CssLink = "<link rel=\"stylesheet\" type=\"text/css\" href=\"report.css\" />";
-
-        #endregion
 
         /// <summary>
         /// The Logger.
@@ -117,11 +113,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// Gets a value indicating whether renderer support rendering of charts.
         /// </summary>
         public bool SupportsCharts => true;
-
-        /// <summary>
-        /// Gets a value indicating whether renderer support rendering of charts.
-        /// </summary>
-        public bool SupportsRiskHotsSpots => true;
 
         /// <summary>
         /// Begins the summary report.
@@ -289,7 +280,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="path">The path of the file.</param>
         public void File(string path)
         {
-            this.reportTextWriter.WriteLine("<h2 id=\"{0}\">{1}</h2>", WebUtility.HtmlEncode(HtmlRenderer.ReplaceNonLetterChars(path)), WebUtility.HtmlEncode(path));
+            this.reportTextWriter.WriteLine("<h2 id=\"{0}\">{1}</h2>", WebUtility.HtmlEncode(StringHelper.ReplaceNonLetterChars(path)), WebUtility.HtmlEncode(path));
         }
 
         /// <summary>
@@ -400,6 +391,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.javaScriptContent.AppendLine("var assemblies = [");
 
             var historicCoverageExecutionTimes = new HashSet<DateTime>();
+            var tagsByBistoricCoverageExecutionTime = new Dictionary<DateTime, string>();
 
             foreach (var assembly in assemblies)
             {
@@ -425,6 +417,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     foreach (var historicCoverage in @class.HistoricCoverages)
                     {
                         historicCoverageExecutionTimes.Add(historicCoverage.ExecutionTime);
+                        tagsByBistoricCoverageExecutionTime[historicCoverage.ExecutionTime] = historicCoverage.Tag;
 
                         if (historicCoveragesCounter++ > 0)
                         {
@@ -432,9 +425,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                         }
 
                         historicCoveragesSb.AppendFormat(
-                            "{{ \"et\": \"{0} - {1}\", \"cl\": {2}, \"ucl\": {3}, \"cal\": {4}, \"tl\": {5}, \"lcq\": {6}, \"cb\": {7}, \"tb\": {8}, \"bcq\": {9} }}",
+                            "{{ \"et\": \"{0} - {1}{2}{3}\", \"cl\": {4}, \"ucl\": {5}, \"cal\": {6}, \"tl\": {7}, \"lcq\": {8}, \"cb\": {9}, \"tb\": {10}, \"bcq\": {11} }}",
                             historicCoverage.ExecutionTime.ToShortDateString(),
                             historicCoverage.ExecutionTime.ToLongTimeString(),
+                            string.IsNullOrEmpty(historicCoverage.Tag) ? string.Empty : " - ",
+                            historicCoverage.Tag,
                             historicCoverage.CoveredLines.ToString(CultureInfo.InvariantCulture),
                             (historicCoverage.CoverableLines - historicCoverage.CoveredLines).ToString(CultureInfo.InvariantCulture),
                             historicCoverage.CoverableLines.ToString(CultureInfo.InvariantCulture),
@@ -486,7 +481,13 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     this.javaScriptContent.Append(", ");
                 }
 
-                this.javaScriptContent.AppendFormat("\"{0} - {1}\"", item.ToShortDateString(), item.ToLongTimeString());
+                string tag = tagsByBistoricCoverageExecutionTime[item];
+                this.javaScriptContent.AppendFormat(
+                    "\"{0} - {1}{2}{3}\"",
+                    item.ToShortDateString(),
+                    item.ToLongTimeString(),
+                    string.IsNullOrEmpty(tag) ? string.Empty : " - ",
+                    tag);
             }
 
             this.javaScriptContent.AppendLine("];");
@@ -587,7 +588,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="files">The files.</param>
         public void KeyValueRow(string key, IEnumerable<string> files)
         {
-            string value = string.Join("<br />", files.Select(v => string.Format(CultureInfo.InvariantCulture, "<a href=\"#{0}\" class=\"navigatetohash\">{1}</a>", WebUtility.HtmlEncode(ReplaceNonLetterChars(v)), WebUtility.HtmlEncode(v))));
+            string value = string.Join("<br />", files.Select(v => string.Format(CultureInfo.InvariantCulture, "<a href=\"#{0}\" class=\"navigatetohash\">{1}</a>", WebUtility.HtmlEncode(StringHelper.ReplaceNonLetterChars(v)), WebUtility.HtmlEncode(v))));
 
             this.reportTextWriter.WriteLine(
                 "<tr><th>{0}</th><td>{1}</td></tr>",
@@ -1243,7 +1244,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     }
                 }
 
-                fileName = RendererBase.ReplaceInvalidPathChars(assemblyName + "_" + shortClassName) + ".htm";
+                fileName = StringHelper.ReplaceInvalidPathChars(assemblyName + "_" + shortClassName) + ".htm";
 
                 if (fileName.Length > 100)
                 {

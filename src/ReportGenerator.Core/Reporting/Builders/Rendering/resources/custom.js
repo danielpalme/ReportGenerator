@@ -163,14 +163,28 @@ var renderChart = function (chart) {
         var left = event.pageX - box.left - window.pageXOffset;
         var top = event.pageY - box.top - window.pageYOffset;
 
-        tooltip.style.left = left - tooltip.offsetWidth / 2 - 5 + 'px';
-        tooltip.style.top = top - tooltip.offsetHeight - 40 + 'px';
+        left = left + 20;
+        top = top - tooltip.offsetHeight / 2;
+
+        if (left + tooltip.offsetWidth > box.width) {
+            left -= tooltip.offsetWidth + 40;
+        }
+
+        if (top < 0) {
+            top = 0;
+        }
+
+        if (top + tooltip.offsetHeight > box.height) {
+            top = box.height - tooltip.offsetHeight;
+        }
+
+        tooltip.style.left = left + 'px';
+        tooltip.style.top = top + 'px';
     };
 
     var hideToolTip = function () {
         tooltip.style.display = 'none';
     };
-
     chart.addEventListener('mousemove', moveToolTip);
 
     lineChart.on('created', function () {

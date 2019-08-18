@@ -139,8 +139,7 @@ div.currenthistory { margin: -6px -5px 0 -5px; padding: 2px 4px 6px 4px; height:
 .linecoverage { background-color: #0078D4; width: 10px; height: 8px; border: 1px solid #000; display: inline-block; }
 .branchcoverage { background-color: #1c2298; width: 10px; height: 8px; border: 1px solid #000; display: inline-block; }
 
-.tooltip { position: absolute; display: none; padding: 5px; background: #F4C63D;color: #453D3F; pointer-events: none; z-index: 1; }
-.tooltip:after { content: ""; position: absolute; top: 100%; left: 50%; width: 0; height: 0; margin-left: -15px; border: 15px solid transparent; border-top-color: #F4C63D; }
+.tooltip { position: absolute; display: none; padding: 5px; background: #F4C63D; color: #453D3F; pointer-events: none; z-index: 1; min-width: 250px; }
 
 .column1324 { max-width: 1324px; }
 .column674 { max-width: 674px; }
