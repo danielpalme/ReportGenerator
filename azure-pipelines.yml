@@ -106,7 +106,7 @@ steps:
   inputs:
     command: test
     projects: 'src\ReportGenerator.Core.Test\ReportGenerator.Core.Test.csproj'
-    arguments: '--configuration $(BuildConfiguration) --no-build /p:CollectCoverage=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=\"opencover,cobertura\" /p:CoverletOutput=../target/reports/coverage/'
+    arguments: '--configuration $(BuildConfiguration) --no-build /p:CollectCoverage=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=opencover,cobertura /p:CoverletOutput=../target/reports/coverage/'
 
 - task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@4
   displayName: ReportGenerator
