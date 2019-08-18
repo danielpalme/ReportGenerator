@@ -28,9 +28,9 @@ steps:
     custom: '--version'
 
 - task: DotNetCoreInstaller@0
-  displayName: 'Use .NET Core SDK 2.2.300'
+  displayName: 'Use .NET Core SDK 2.2.401'
   inputs:
-    version: 2.2.300
+    version: 2.2.401
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet info'
