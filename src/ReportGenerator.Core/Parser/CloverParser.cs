@@ -48,7 +48,15 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             var assemblies = new List<Assembly>();
 
             var modules = report.Descendants("package")
-              .ToArray();
+                .Where(p => p.Attribute("name") != null)
+                .ToArray();
+
+            if (modules.Length == 0)
+            {
+                modules = report.Descendants("project")
+                    .Where(p => p.Attribute("name") != null)
+                    .ToArray();
+            }
 
             var assemblyNames = modules
                 .Select(m => m.Attribute("name").Value)
