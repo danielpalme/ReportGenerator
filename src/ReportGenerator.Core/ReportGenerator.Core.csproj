@@ -7,8 +7,8 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <AssemblyName>ReportGenerator.Core</AssemblyName>
-    <AssemblyVersion>4.2.15.0</AssemblyVersion>
-    <FileVersion>4.2.15.0</FileVersion>
+    <AssemblyVersion>4.2.17.0</AssemblyVersion>
+    <FileVersion>4.2.17.0</FileVersion>
   </PropertyGroup>
     
   <PropertyGroup>

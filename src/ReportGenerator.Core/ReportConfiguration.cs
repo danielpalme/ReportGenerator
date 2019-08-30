@@ -134,9 +134,13 @@ namespace Palmmedia.ReportGenerator.Core
 
             if (verbosityLevel != null)
             {
-                VerbosityLevel parsedVerbosityLevel = VerbosityLevel.Verbose;
+                VerbosityLevel parsedVerbosityLevel = VerbosityLevel.Info;
                 this.VerbosityLevelValid = Enum.TryParse<VerbosityLevel>(verbosityLevel, true, out parsedVerbosityLevel);
-                this.VerbosityLevel = parsedVerbosityLevel;
+
+                if (this.VerbosityLevelValid)
+                {
+                    this.VerbosityLevel = parsedVerbosityLevel;
+                }
             }
             else
             {
@@ -194,7 +198,7 @@ namespace Palmmedia.ReportGenerator.Core
         /// <summary>
         /// Gets the verbosity level.
         /// </summary>
-        public VerbosityLevel VerbosityLevel { get; }
+        public VerbosityLevel VerbosityLevel { get; } = VerbosityLevel.Info;
 
         /// <summary>
         /// Gets the custom tag (e.g. build number).
