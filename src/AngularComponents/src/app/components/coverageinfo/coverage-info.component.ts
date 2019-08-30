@@ -178,7 +178,7 @@ export class CoverageInfoComponent {
         restoredFromHistory = true;
         this.settings = JSON.parse(JSON.stringify(this.window.history.state.coverageInfoSettings));
     } else {
-      let groupingMaximum: number = 1;
+      let groupingMaximum: number = 0;
       let assemblies: Assembly[] = (<any>this.window).assemblies;
 
       for (let i: number = 0; i < assemblies.length; i++) {

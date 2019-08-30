@@ -84,7 +84,7 @@ Default values:
    -assemblyfilters:+*
    -classfilters:+*
    -filefilters:+*
-   -verbosity:Verbose
+   -verbosity:Info
 
 Examples:
    "-reports:coverage.xml" "-targetdir:C:\report"
