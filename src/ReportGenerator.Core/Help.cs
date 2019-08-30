@@ -85,7 +85,7 @@ namespace Palmmedia.ReportGenerator.Core
             Console.WriteLine("   -assemblyfilters:+*");
             Console.WriteLine("   -classfilters:+*");
             Console.WriteLine("   -filefilters:+*");
-            Console.WriteLine("   -verbosity:" + VerbosityLevel.Verbose);
+            Console.WriteLine("   -verbosity:" + VerbosityLevel.Info);
 
             Console.WriteLine();
             Console.WriteLine(Properties.Help.Examples);

@@ -13,7 +13,7 @@
     "version": {
         "Major": 4,
         "Minor": 2,
-        "Patch": 16
+        "Patch": 17
     },
     "instanceNameFormat": "ReportGenerator",
     "groups": [
@@ -95,7 +95,7 @@
             "name": "verbosity",
             "type": "pickList",
             "label": "Verbosity",
-            "defaultValue": "Verbose",
+            "defaultValue": "Info",
             "options": {
                  "Verbose": "Verbose",
                  "Info": "Info",
