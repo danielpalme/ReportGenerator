@@ -62,6 +62,7 @@ CHANGELOG
 
 4.2.17.0
 
+    * Fix: Issue #275: Disabled grouping by namespace if no namespace exists
     * Fix: Issue #277: Changed default log level to Info
 
 4.2.16.0
