@@ -35,7 +35,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
             Assert.Contains("Html", configuration.ReportTypes);
             Assert.Empty(configuration.AssemblyFilters);
             Assert.Empty(configuration.ClassFilters);
-            Assert.Equal(VerbosityLevel.Verbose, configuration.VerbosityLevel);
+            Assert.Equal(VerbosityLevel.Info, configuration.VerbosityLevel);
             Assert.NotNull(configuration.ReportFiles);
             Assert.NotNull(configuration.AssemblyFilters);
             Assert.NotNull(configuration.ClassFilters);
@@ -58,7 +58,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
                 new[] { "+Test3", "-Test3" },
-                VerbosityLevel.Info.ToString(),
+                VerbosityLevel.Warning.ToString(),
                 "CustomTag");
 
             Assert.Contains(ReportPath, configuration.ReportFiles);
@@ -74,7 +74,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
             Assert.Contains("-Test2", configuration.ClassFilters);
             Assert.Contains("+Test3", configuration.FileFilters);
             Assert.Contains("-Test3", configuration.FileFilters);
-            Assert.Equal(VerbosityLevel.Info, configuration.VerbosityLevel);
+            Assert.Equal(VerbosityLevel.Warning, configuration.VerbosityLevel);
             Assert.NotNull(configuration.ReportFiles);
             Assert.NotNull(configuration.AssemblyFilters);
             Assert.NotNull(configuration.ClassFilters);
@@ -107,7 +107,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
             Assert.Contains("notexistingplugin.dll", configuration.Plugins);
             Assert.Empty(configuration.AssemblyFilters);
             Assert.Empty(configuration.ClassFilters);
-            Assert.Equal(VerbosityLevel.Verbose, configuration.VerbosityLevel);
+            Assert.Equal(VerbosityLevel.Info, configuration.VerbosityLevel);
             Assert.NotNull(configuration.ReportFiles);
             Assert.NotNull(configuration.AssemblyFilters);
             Assert.NotNull(configuration.ClassFilters);

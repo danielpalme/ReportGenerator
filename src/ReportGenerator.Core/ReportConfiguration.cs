@@ -134,7 +134,7 @@ namespace Palmmedia.ReportGenerator.Core
 
             if (verbosityLevel != null)
             {
-                VerbosityLevel parsedVerbosityLevel = VerbosityLevel.Verbose;
+                VerbosityLevel parsedVerbosityLevel = VerbosityLevel.Info;
                 this.VerbosityLevelValid = Enum.TryParse<VerbosityLevel>(verbosityLevel, true, out parsedVerbosityLevel);
                 this.VerbosityLevel = parsedVerbosityLevel;
             }
