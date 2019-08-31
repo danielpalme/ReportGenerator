@@ -87,25 +87,31 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             Logger.DebugFormat("  " + Resources.CurrentAssembly, assemblyName);
 
-            var classNames = module
+            var classes = module
                 .Elements("functions")
                 .Elements("function")
-                .Select(f => f.Attribute("type_name").Value)
-                .Where(c => !c.Contains("<>")
-                    && !c.StartsWith("$", StringComparison.OrdinalIgnoreCase))
-                .Select(t =>
+                .Select(f => new ClassWithNamespace()
                 {
-                    int nestedClassSeparatorIndex = t.IndexOf('.');
-                    return nestedClassSeparatorIndex > -1 ? t.Substring(0, nestedClassSeparatorIndex) : t;
+                    Namespace = f.Attribute("namespace")?.Value,
+                    ClassName = f.Attribute("type_name").Value
+                })
+                .Where(c => !c.ClassName.Contains("<>")
+                    && !c.ClassName.StartsWith("$", StringComparison.OrdinalIgnoreCase))
+                .Select(c =>
+                {
+                    int nestedClassSeparatorIndex = c.ClassName.IndexOf('.');
+                    c.ClassName = nestedClassSeparatorIndex > -1 ? c.ClassName.Substring(0, nestedClassSeparatorIndex) : c.ClassName;
+                    return c;
                 })
                 .Distinct()
-                .Where(c => this.ClassFilter.IsElementIncludedInReport(c))
-                .OrderBy(name => name)
+                .Where(c => this.ClassFilter.IsElementIncludedInReport(c.ClassName))
+                .OrderBy(c => c.Namespace)
+                .ThenBy(c => c.ClassName)
                 .ToArray();
 
             var assembly = new Assembly(assemblyName);
 
-            Parallel.ForEach(classNames, className => this.ProcessClass(module, assembly, className));
+            Parallel.ForEach(classes, @class => this.ProcessClass(module, assembly, @class));
 
             return assembly;
         }
@@ -115,14 +121,15 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// </summary>
         /// <param name="module">The module.</param>
         /// <param name="assembly">The assembly.</param>
-        /// <param name="className">Name of the class.</param>
-        private void ProcessClass(XElement module, Assembly assembly, string className)
+        /// <param name="classWithNamespace">The class.</param>
+        private void ProcessClass(XElement module, Assembly assembly, ClassWithNamespace classWithNamespace)
         {
             var fileIdsOfClass = module
                 .Elements("functions")
                 .Elements("function")
-                .Where(c => c.Attribute("type_name").Value.Equals(className, StringComparison.Ordinal)
-                            || c.Attribute("type_name").Value.StartsWith(className + ".", StringComparison.Ordinal))
+                .Where(c => c.Attribute("namespace")?.Value == classWithNamespace.Namespace)
+                .Where(c => c.Attribute("type_name").Value.Equals(classWithNamespace.ClassName, StringComparison.Ordinal)
+                            || c.Attribute("type_name").Value.StartsWith(classWithNamespace.ClassName + ".", StringComparison.Ordinal))
                 .Elements("ranges")
                 .Elements("range")
                 .Select(r => r.Attribute("source_id").Value)
@@ -147,11 +154,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             // If all files are removed by filters, then the whole class is omitted
             if ((fileIdsOfClass.Length == 0 && !this.FileFilter.HasCustomFilters) || filteredFilesOfClass.Length > 0)
             {
-                var @class = new Class(className, assembly);
+                var @class = new Class(classWithNamespace.FullName, assembly);
 
                 foreach (var file in filteredFilesOfClass)
                 {
-                    @class.AddFile(ProcessFile(module, file.FileId, @class, file.FilePath));
+                    @class.AddFile(ProcessFile(module, file.FileId, classWithNamespace, file.FilePath));
                 }
 
                 assembly.AddClass(@class);
@@ -163,16 +170,17 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// </summary>
         /// <param name="module">The module.</param>
         /// <param name="fileId">The file id.</param>
-        /// <param name="class">The class.</param>
+        /// <param name="classWithNamespace">The class.</param>
         /// <param name="filePath">The file path.</param>
         /// <returns>The <see cref="CodeFile"/>.</returns>
-        private static CodeFile ProcessFile(XElement module, string fileId, Class @class, string filePath)
+        private static CodeFile ProcessFile(XElement module, string fileId, ClassWithNamespace classWithNamespace, string filePath)
         {
             var methods = module
                 .Elements("functions")
                 .Elements("function")
-                .Where(c => c.Attribute("type_name").Value.Equals(@class.Name, StringComparison.Ordinal)
-                            || c.Attribute("type_name").Value.StartsWith(@class.Name + ".", StringComparison.Ordinal))
+                .Where(c => c.Attribute("namespace")?.Value == classWithNamespace.Namespace)
+                .Where(c => c.Attribute("type_name").Value.Equals(classWithNamespace.ClassName, StringComparison.Ordinal)
+                            || c.Attribute("type_name").Value.StartsWith(classWithNamespace.ClassName + ".", StringComparison.Ordinal))
                 .Where(m => m.Elements("ranges").Elements("range").Any(r => r.Attribute("source_id").Value == fileId))
                 .ToArray();
 
@@ -338,6 +346,40 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             }
 
             return methodName;
+        }
+
+        private class ClassWithNamespace
+        {
+            public string Namespace { get; set; }
+
+            public string ClassName { get; set; }
+
+            public string FullName => this.Namespace == null ? this.ClassName : $"{this.Namespace}.{this.ClassName}";
+
+            public override bool Equals(object obj)
+            {
+                if (obj == null || this.GetType() != obj.GetType())
+                {
+                    return false;
+                }
+
+                ClassWithNamespace cwn = (ClassWithNamespace)obj;
+
+                return cwn.Namespace == this.Namespace
+                    && cwn.ClassName == this.ClassName;
+            }
+
+            public override int GetHashCode()
+            {
+                int result = this.ClassName.GetHashCode();
+
+                if (this.Namespace != null)
+                {
+                    result *= this.Namespace.GetHashCode();
+                }
+
+                return result;
+            }
         }
     }
 }
