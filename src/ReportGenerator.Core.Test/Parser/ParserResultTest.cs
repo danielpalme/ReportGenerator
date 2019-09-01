@@ -240,7 +240,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
             filterMock.Setup(f => f.IsElementIncludedInReport(It.IsAny<string>())).Returns(true);
 
             string filePath = Path.Combine(FileManager.GetCSharpReportDirectory(), "MultiOpenCover.xml");
-            var parserResult = new CoverageReportParser(1, 1, 1, new string[0], filterMock.Object, filterMock.Object, filterMock.Object).ParseFiles(new string[] { filePath });
+            var parserResult = new CoverageReportParser(1, 1, new string[0], filterMock.Object, filterMock.Object, filterMock.Object).ParseFiles(new string[] { filePath });
 
             var metrics = parserResult.Assemblies
                 .Single(a => a.Name == "Test").Classes
@@ -270,7 +270,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
             filterMock.Setup(f => f.IsElementIncludedInReport(It.IsAny<string>())).Returns(true);
 
             string filePath = Path.Combine(FileManager.GetCSharpReportDirectory(), "MultiOpenCover.xml");
-            var parserResult = new CoverageReportParser(1, 1, 1, new string[0], filterMock.Object, filterMock.Object, filterMock.Object).ParseFiles(new string[] { filePath });
+            var parserResult = new CoverageReportParser(1, 1, new string[0], filterMock.Object, filterMock.Object, filterMock.Object).ParseFiles(new string[] { filePath });
 
             var fileAnalysis = GetFileAnalysis(parserResult.Assemblies, "Test.TestClass2", "C:\\temp\\TestClass2.cs");
 

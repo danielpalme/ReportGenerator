@@ -10,6 +10,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
     public class Class
     {
         /// <summary>
+        /// The object to lock the class add.
+        /// </summary>
+        private readonly object historicCoveragesLock = new object();
+
+        /// <summary>
         /// List of files that define this class.
         /// </summary>
         private readonly List<CodeFile> files = new List<CodeFile>();
@@ -187,7 +192,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <param name="historicCoverage">The historic coverage.</param>
         internal void AddHistoricCoverage(HistoricCoverage historicCoverage)
         {
-            this.historicCoverages.Add(historicCoverage);
+            lock (this.historicCoveragesLock)
+            {
+                this.historicCoverages.Add(historicCoverage);
+            }
         }
 
         /// <summary>

@@ -16,11 +16,6 @@
         public int NumberOfReportsMergedInParallel { get; set; } = 1;
 
         /// <summary>
-        /// Gets or sets the number reports that are read in memory in parallel.
-        /// </summary>
-        public int NumberOfReportsReadInMemoryInParallel { get; set; } = 1;
-
-        /// <summary>
         /// Gets or sets the maximum number of historic coverage files that get parsed.
         /// </summary>
         public int MaximumNumberOfHistoricCoverageFiles { get; set; } = 100;

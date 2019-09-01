@@ -46,7 +46,6 @@ namespace Palmmedia.ReportGenerator.Core.Common
                 {
                     if (counter > 0)
                     {
-
                         sb.Append(",");
                     }
 

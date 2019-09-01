@@ -52,6 +52,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// Parses the given XML report.
         /// </summary>
         /// <param name="report">The XML report.</param>
+        /// <param name="innerMaxDegreeOfParallism">The max degree of parallism for the class iteration foreach loop</param>
         /// <returns>The parser result.</returns>
         public ParserResult Parse(XContainer report)
         {
@@ -87,6 +88,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="modules">The modules.</param>
         /// <param name="files">The files.</param>
         /// <param name="assemblyName">Name of the assembly.</param>
+        /// <param name="innerMaxDegreeOfParallism">The max degree of parallism for the class iteration foreach loop</param>
         /// <returns>The <see cref="Assembly"/>.</returns>
         private Assembly ProcessAssembly(XElement[] modules, XElement[] files, string assemblyName)
         {

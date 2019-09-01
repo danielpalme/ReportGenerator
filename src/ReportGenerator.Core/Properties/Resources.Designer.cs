@@ -431,6 +431,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Parsing historic file &apos;{0}&apos;.
+        /// </summary>
+        internal static string ParseHistoricFile {
+            get {
+                return ResourceManager.GetString("ParseHistoricFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Preprocessing report.
         /// </summary>
         internal static string PreprocessingReport {
