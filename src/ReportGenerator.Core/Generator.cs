@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using Microsoft.Extensions.Configuration;
 using Palmmedia.ReportGenerator.Core.CodeAnalysis;
 using Palmmedia.ReportGenerator.Core.Common;
@@ -260,12 +261,16 @@ namespace Palmmedia.ReportGenerator.Core
         /// <returns>The configuration.</returns>
         private IConfigurationRoot GetConfiguration()
         {
+            var args = Environment.GetCommandLineArgs()
+                 .Where(a => !a.StartsWith("-property:"))
+                 .ToArray();
+
             try
             {
                 var builder = new ConfigurationBuilder()
                     .SetBasePath(new FileInfo(this.GetType().Assembly.Location).DirectoryName)
                     .AddJsonFile("appsettings.json")
-                    .AddCommandLine(Environment.GetCommandLineArgs());
+                    .AddCommandLine(args);
 
                 return builder.Build();
             }
@@ -274,7 +279,7 @@ namespace Palmmedia.ReportGenerator.Core
                 // This can happen when excuted within MSBuild (dotnet msbuild): JSON configuration gets ignored
                 var builder = new ConfigurationBuilder()
                     .SetBasePath(new FileInfo(this.GetType().Assembly.Location).DirectoryName)
-                    .AddCommandLine(Environment.GetCommandLineArgs());
+                    .AddCommandLine(args);
 
                 return builder.Build();
             }

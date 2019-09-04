@@ -60,6 +60,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.2.18.0
+
+    * Fix: Issue #279: Improved parameter handling in MSBuild task
+
 4.2.17.0
 
     * Fix: Issue #275: Disabled grouping by namespace if no namespace exists
