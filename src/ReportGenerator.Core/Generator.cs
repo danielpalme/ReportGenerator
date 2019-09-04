@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
@@ -114,15 +113,11 @@ namespace Palmmedia.ReportGenerator.Core
                     return false;
                 }
 
-                Logger.Debug(Resources.Settings);
-                Logger.Debug(" " + JsonSerializer.ToJsonString(settings));
-                Logger.Debug(" " + JsonSerializer.ToJsonString(riskHotspotsAnalysisThresholds));
-
-                var stopWatch = Stopwatch.StartNew();
+                var stopWatch = new System.Diagnostics.Stopwatch();
+                stopWatch.Start();
 
                 var parserResult = new CoverageReportParser(
                     settings.NumberOfReportsParsedInParallel,
-                    settings.NumberOfReportsMergedInParallel,
                     reportConfiguration.SourceDirectories,
                     new DefaultFilter(reportConfiguration.AssemblyFilters),
                     new DefaultFilter(reportConfiguration.ClassFilters),
@@ -234,7 +229,7 @@ namespace Palmmedia.ReportGenerator.Core
 
             if (historyStorage != null)
             {
-                new HistoryParser(historyStorage, settings.MaximumNumberOfHistoricCoverageFiles, settings.NumberOfReportsParsedInParallel)
+                new HistoryParser(historyStorage, settings.MaximumNumberOfHistoricCoverageFiles)
                     .ApplyHistoricCoverage(parserResult.Assemblies, overallHistoricCoverages);
 
                 reportContext.OverallHistoricCoverages = overallHistoricCoverages;
@@ -262,8 +257,8 @@ namespace Palmmedia.ReportGenerator.Core
         private IConfigurationRoot GetConfiguration()
         {
             var args = Environment.GetCommandLineArgs()
-                 .Where(a => !a.StartsWith("-property:"))
-                 .ToArray();
+                .Where(a => !a.StartsWith("-property:"))
+                .ToArray();
 
             try
             {
