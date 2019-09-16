@@ -60,6 +60,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.2.20.0
+
+    * Fix: Issue #281: Improved handling of encoding when parsing files
+
 4.2.19.0
 
     * Fix: Issue #279: Improved parameter handling in MSBuild task
