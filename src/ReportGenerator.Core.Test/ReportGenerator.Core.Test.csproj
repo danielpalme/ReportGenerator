@@ -4,8 +4,8 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <RootNamespace>Palmmedia.ReportGenerator.Core.Test</RootNamespace>
-    <AssemblyVersion>4.2.19.0</AssemblyVersion>
-    <FileVersion>4.2.19.0</FileVersion>
+    <AssemblyVersion>4.2.20.0</AssemblyVersion>
+    <FileVersion>4.2.20.0</FileVersion>
   </PropertyGroup>
   
   <ItemGroup>
@@ -26,6 +26,30 @@
   <ItemGroup>
     <ProjectReference Include="..\ReportGenerator.Core\ReportGenerator.Core.csproj" />
     <ProjectReference Include="..\ReportGenerator.DotnetCorePluginLoader\ReportGenerator.DotnetCorePluginLoader.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Common\Encodings\ansii.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Common\Encodings\ascii.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Common\Encodings\latin1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Common\Encodings\unicode_uft16_be.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Common\Encodings\unicode_uft16_le.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Common\Encodings\utf8.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Common\Encodings\utf8_bom.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

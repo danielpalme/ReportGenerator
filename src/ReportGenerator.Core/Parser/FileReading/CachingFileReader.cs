@@ -98,7 +98,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
                         return null;
                     }
 
-                    string[] lines = File.ReadAllLines(path);
+                    var encoding = FileHelper.GetEncoding(path);
+                    string[] lines = File.ReadAllLines(path, encoding);
 
                     error = null;
                     return lines;
