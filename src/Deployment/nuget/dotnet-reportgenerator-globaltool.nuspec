@@ -36,5 +36,9 @@ tools\reportgenerator.exe [options]</description>
     <!-- NetCoreApp2.1 ('tools\netcoreapp2.1' directory) -->
     <file src="..\..\ReportGenerator.DotnetGlobalTool\bin\Release\netcoreapp2.1\publish\**\*.*" target="tools\netcoreapp2.1\any" />
     <file src="DotnetToolSettings.xml" target="tools\netcoreapp2.1\any" />
+    
+    <!-- NetCoreApp3.0 ('tools\netcoreapp3.0' directory) -->
+    <file src="..\..\ReportGenerator.DotnetGlobalTool\bin\Release\netcoreapp3.0\publish\**\*.*" target="tools\netcoreapp3.0\any" />
+    <file src="DotnetToolSettings.xml" target="tools\netcoreapp3.0\any" />
   </files>
 </package>

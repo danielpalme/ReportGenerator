@@ -11,7 +11,7 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   disable.coverage.autogenerate: 'true'
-  version: '4.2.20'
+  version: '4.3.0-rc1'
 
 # Prepare
 steps:
@@ -20,12 +20,6 @@ steps:
   inputs:
     command: custom
     custom: '--info'
-
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet version'
-  inputs:
-    command: custom
-    custom: '--version'
 
 - task: DotNetCoreInstaller@0
   displayName: 'Use .NET Core SDK 2.2.401'
@@ -65,7 +59,7 @@ steps:
   inputs:
     command: publish
     publishWebProjects: false
-    arguments: '-c $(BuildConfiguration) -f netcoreapp2.0'
+    arguments: '-c $(BuildConfiguration) -f netcoreapp2.0 ReportGenerator.Console.NetCore.csproj'
     zipAfterPublish: false
     modifyOutputPath: false
     workingDirectory: src/ReportGenerator.Console.NetCore
@@ -75,27 +69,27 @@ steps:
   inputs:
     command: publish
     publishWebProjects: false
-    arguments: '-c $(BuildConfiguration) -f netcoreapp2.1'
+    arguments: '-c $(BuildConfiguration) -f netcoreapp2.1 ReportGenerator.Console.NetCore.csproj'
     zipAfterPublish: false
     modifyOutputPath: false
     workingDirectory: src/ReportGenerator.Console.NetCore
 
 - task: DotNetCoreCLI@2
-  displayName: 'dotnet publish ReportGenerator.DotnetCliTool'
+  displayName: 'dotnet publish ReportGenerator.DotnetCliTool 2.1'
   inputs:
     command: publish
     publishWebProjects: false
-    arguments: '-c $(BuildConfiguration)'
+    arguments: '-c $(BuildConfiguration) ReportGenerator.DotnetCliTool.csproj'
     zipAfterPublish: false
     modifyOutputPath: false
     workingDirectory: src/ReportGenerator.DotnetCliTool
 
 - task: DotNetCoreCLI@2
-  displayName: 'dotnet publish DotnetGlobalTool'
+  displayName: 'dotnet publish DotnetGlobalTool 2.1'
   inputs:
     command: publish
     publishWebProjects: false
-    arguments: '-c $(BuildConfiguration)'
+    arguments: '-c $(BuildConfiguration) ReportGenerator.DotnetGlobalTool.csproj'
     zipAfterPublish: false
     modifyOutputPath: false
     workingDirectory: src/ReportGenerator.DotnetGlobalTool
@@ -122,6 +116,48 @@ steps:
     codeCoverageTool: Cobertura
     summaryFileLocation: '$(build.sourcesdirectory)\src\target\reports\coverage\coverage.cobertura.xml'
     reportDirectory: '$(build.sourcesdirectory)\src\target\reports\coverage'
+
+# Build .NET Core 3.0
+- task: DotNetCoreInstaller@0
+  displayName: 'Use .NET Core SDK 3.0.100-rc1-014190'
+  inputs:
+    version: 3.0.100-rc1-014190
+
+- script: 'copy global_dotnet3.json global.json'
+  workingDirectory: 'src/ReportGenerator.Console.NetCore'
+  displayName: 'Copy global.json'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish Console.NetCore 3.0'
+  inputs:
+    command: publish
+    publishWebProjects: false
+    arguments: '-c $(BuildConfiguration) ReportGenerator.Console.NetCore_dotnet3.csproj'
+    zipAfterPublish: false
+    modifyOutputPath: false
+    workingDirectory: src/ReportGenerator.Console.NetCore
+
+- script: 'rm global.json'
+  workingDirectory: 'src/ReportGenerator.Console.NetCore'
+  displayName: 'Delete global.json'
+
+- script: 'copy global_dotnet3.json global.json'
+  workingDirectory: 'src/ReportGenerator.DotnetGlobalTool'
+  displayName: 'Copy global.json'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish DotnetGlobalTool 3.0'
+  inputs:
+    command: publish
+    publishWebProjects: false
+    arguments: '-c $(BuildConfiguration) ReportGenerator.DotnetGlobalTool_dotnet3.csproj'
+    zipAfterPublish: false
+    modifyOutputPath: false
+    workingDirectory: src/ReportGenerator.DotnetGlobalTool
+
+- script: 'rm global.json'
+  workingDirectory: 'src/ReportGenerator.DotnetGlobalTool'
+  displayName: 'Delete global.json'
 
 # Create artifacts
 - task: CopyFiles@2
@@ -192,6 +228,13 @@ steps:
     SourceFolder: src/ReportGenerator.Console.NetCore/bin/Release/netcoreapp2.1/publish
     Contents: '**/*.*'
     TargetFolder: tmpzip/netcoreapp2.1
+
+- task: CopyFiles@2
+  displayName: 'Prepare ZIP release: NetCore 3.0'
+  inputs:
+    SourceFolder: src/ReportGenerator.Console.NetCore/bin/Release/netcoreapp3.0/publish
+    Contents: '**/*.*'
+    TargetFolder: tmpzip/netcoreapp3.0
 
 - task: ArchiveFiles@2
   displayName: 'Pack ZIP release'
