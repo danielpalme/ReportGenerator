@@ -60,6 +60,11 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.3.0.0
+
+    * New: Issue #205: Support for .NET Core 3.0
+    * New: Issue #262: Performance improvements
+
 4.2.20.0
 
     * Fix: Issue #281: Improved handling of encoding when parsing files
