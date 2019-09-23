@@ -11,7 +11,7 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   disable.coverage.autogenerate: 'true'
-  version: '4.3.0-rc1'
+  version: '4.3.0-rc2'
 
 # Prepare
 steps:
@@ -119,9 +119,9 @@ steps:
 
 # Build .NET Core 3.0
 - task: DotNetCoreInstaller@0
-  displayName: 'Use .NET Core SDK 3.0.100-rc1-014190'
+  displayName: 'Use .NET Core SDK 3.0.100'
   inputs:
-    version: 3.0.100-rc1-014190
+    version: 3.0.100
 
 - script: 'copy global_dotnet3.json global.json'
   workingDirectory: 'src/ReportGenerator.Console.NetCore'
