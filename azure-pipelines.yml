@@ -44,9 +44,9 @@ steps:
     custom: '--version'
 
 - task: NuGetToolInstaller@0
-  displayName: 'Use NuGet 4.9.3'
+  displayName: 'Use NuGet 5.3.0'
   inputs:
-    versionSpec: 4.9.3
+    versionSpec: 5.3.0
 
 - task: NuGetCommand@2
   inputs:
