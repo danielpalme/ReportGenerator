@@ -56,22 +56,12 @@
     
     <Exec Command="dotnet publish -c Release ReportGenerator.DotnetCliTool.csproj" WorkingDirectory="ReportGenerator.DotnetCliTool" />
 
-    <Copy SourceFiles="ReportGenerator.DotnetCliTool\global_dotnet3.json" DestinationFiles="ReportGenerator.DotnetCliTool\global.json" /> 
-    <Exec Command="dotnet publish -c Release ReportGenerator.DotnetCliTool_dotnet3.csproj" WorkingDirectory="ReportGenerator.DotnetCliTool" />
-    <Delete Files="ReportGenerator.DotnetCliTool\global.json" />
-
     <Exec Command="dotnet publish -c Release -f netcoreapp2.0 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
     <Exec Command="dotnet publish -c Release -f netcoreapp2.1 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
+    <Exec Command="dotnet publish -c Release -f netcoreapp3.0 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
 
-    <Copy SourceFiles="ReportGenerator.Console.NetCore\global_dotnet3.json" DestinationFiles="ReportGenerator.Console.NetCore\global.json" /> 
-    <Exec Command="dotnet publish -c Release ReportGenerator.Console.NetCore_dotnet3.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
-    <Delete Files="ReportGenerator.Console.NetCore\global.json" />
-
-    <Exec Command="dotnet publish -c Release ReportGenerator.DotnetGlobalTool.csproj" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
-
-    <Copy SourceFiles="ReportGenerator.DotnetGlobalTool\global_dotnet3.json" DestinationFiles="ReportGenerator.DotnetGlobalTool\global.json" /> 
-    <Exec Command="dotnet publish -c Release ReportGenerator.DotnetGlobalTool_dotnet3.csproj" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
-    <Delete Files="ReportGenerator.DotnetGlobalTool\global.json" />
+    <Exec Command="dotnet publish -c Release -f netcoreapp2.1 ReportGenerator.DotnetGlobalTool.csproj" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
+    <Exec Command="dotnet publish -c Release -f netcoreapp3.0 ReportGenerator.DotnetGlobalTool.csproj" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
 
     <RemoveDir Directories="bin" />
     <RemoveDir Directories="obj" />
@@ -90,7 +80,7 @@
     <ReportGenerator ReportFiles="@(CoverageFiles)" ReportTypes="Html;Badges" TargetDirectory="target\reports\coverage" AssemblyFilters="-Moq;-xunit*" HistoryDirectory="target\reports\coveragehistory" VerbosityLevel="Warning" />
   </Target>
 
-  <Target Name="Deploy" DependsOnTargets="Clean; Compile; Reports">
+  <Target Name="Deploy" DependsOnTargets="Clean; Compile; Report">
     <ItemGroup>
       <ZipFileContentBase Include="ReportGenerator.Console\bin\Release\LICENSE.txt;ReportGenerator.Console\bin\Release\Readme.txt" />
       <ZipFileContentNet47 Include="ReportGenerator.Console\bin\Release\appsettings.json;ReportGenerator.Console\bin\Release\*.dll;ReportGenerator.Console\bin\Release\ReportGenerator.exe;ReportGenerator.Console\bin\Release\ReportGenerator.exe.config" />

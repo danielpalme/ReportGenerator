@@ -11,7 +11,7 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   disable.coverage.autogenerate: 'true'
-  version: '4.3.0-rc2'
+  version: '4.3.0-rc3'
 
 # Prepare
 steps:
@@ -25,6 +25,11 @@ steps:
   displayName: 'Use .NET Core SDK 2.2.402'
   inputs:
     version: 2.2.402
+
+- task: DotNetCoreInstaller@0
+  displayName: 'Use .NET Core SDK 3.0.100'
+  inputs:
+    version: 3.0.100
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet info'
@@ -75,6 +80,16 @@ steps:
     workingDirectory: src/ReportGenerator.Console.NetCore
 
 - task: DotNetCoreCLI@2
+  displayName: 'dotnet publish Console.NetCore 3.0'
+  inputs:
+    command: publish
+    publishWebProjects: false
+    arguments: '-c $(BuildConfiguration) -f netcoreapp3.0 ReportGenerator.Console.NetCore.csproj'
+    zipAfterPublish: false
+    modifyOutputPath: false
+    workingDirectory: src/ReportGenerator.Console.NetCore
+
+- task: DotNetCoreCLI@2
   displayName: 'dotnet publish ReportGenerator.DotnetCliTool 2.1'
   inputs:
     command: publish
@@ -89,7 +104,17 @@ steps:
   inputs:
     command: publish
     publishWebProjects: false
-    arguments: '-c $(BuildConfiguration) ReportGenerator.DotnetGlobalTool.csproj'
+    arguments: '-c $(BuildConfiguration) -f netcoreapp2.1 ReportGenerator.DotnetGlobalTool.csproj'
+    zipAfterPublish: false
+    modifyOutputPath: false
+    workingDirectory: src/ReportGenerator.DotnetGlobalTool
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish DotnetGlobalTool 3.0'
+  inputs:
+    command: publish
+    publishWebProjects: false
+    arguments: '-c $(BuildConfiguration) -f netcoreapp3.0 ReportGenerator.DotnetGlobalTool.csproj'
     zipAfterPublish: false
     modifyOutputPath: false
     workingDirectory: src/ReportGenerator.DotnetGlobalTool
@@ -116,48 +141,6 @@ steps:
     codeCoverageTool: Cobertura
     summaryFileLocation: '$(build.sourcesdirectory)\src\target\reports\coverage\coverage.cobertura.xml'
     reportDirectory: '$(build.sourcesdirectory)\src\target\reports\coverage'
-
-# Build .NET Core 3.0
-- task: DotNetCoreInstaller@0
-  displayName: 'Use .NET Core SDK 3.0.100'
-  inputs:
-    version: 3.0.100
-
-- script: 'copy global_dotnet3.json global.json'
-  workingDirectory: 'src/ReportGenerator.Console.NetCore'
-  displayName: 'Copy global.json'
-
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet publish Console.NetCore 3.0'
-  inputs:
-    command: publish
-    publishWebProjects: false
-    arguments: '-c $(BuildConfiguration) ReportGenerator.Console.NetCore_dotnet3.csproj'
-    zipAfterPublish: false
-    modifyOutputPath: false
-    workingDirectory: src/ReportGenerator.Console.NetCore
-
-- script: 'rm global.json'
-  workingDirectory: 'src/ReportGenerator.Console.NetCore'
-  displayName: 'Delete global.json'
-
-- script: 'copy global_dotnet3.json global.json'
-  workingDirectory: 'src/ReportGenerator.DotnetGlobalTool'
-  displayName: 'Copy global.json'
-
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet publish DotnetGlobalTool 3.0'
-  inputs:
-    command: publish
-    publishWebProjects: false
-    arguments: '-c $(BuildConfiguration) ReportGenerator.DotnetGlobalTool_dotnet3.csproj'
-    zipAfterPublish: false
-    modifyOutputPath: false
-    workingDirectory: src/ReportGenerator.DotnetGlobalTool
-
-- script: 'rm global.json'
-  workingDirectory: 'src/ReportGenerator.DotnetGlobalTool'
-  displayName: 'Delete global.json'
 
 # Create artifacts
 - task: CopyFiles@2
