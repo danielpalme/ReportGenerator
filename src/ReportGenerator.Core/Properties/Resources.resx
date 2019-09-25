@@ -177,8 +177,11 @@
   <data name="ErrorPartCover" xml:space="preserve">
     <value>PartCover is no longer supported. If you want to generate coverage reports based on PartCover, please use version 3.x of ReportGenerator.</value>
   </data>
+  <data name="Executable" xml:space="preserve">
+    <value>Executable</value>
+  </data>
   <data name="FailedReportFile" xml:space="preserve">
-    <value>The report file '{0}' is invalid. File does not exist.</value>
+    <value>The report file '{0}' is invalid. File does not exist (Full path: '{1}').</value>
   </data>
   <data name="FailedReportFilePattern" xml:space="preserve">
     <value>The report file pattern '{0}' is invalid. No matching files found.</value>
@@ -276,6 +279,9 @@
   </data>
   <data name="UnknownVerbosityLevel" xml:space="preserve">
     <value>Unknown verbosity level.</value>
+  </data>
+  <data name="WorkingDirectory" xml:space="preserve">
+    <value>Working directory</value>
   </data>
   <data name="WritingReportFile" xml:space="preserve">
     <value>Writing report file '{0}'</value>

@@ -241,7 +241,16 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The report file &apos;{0}&apos; is invalid. File does not exist..
+        ///   Looks up a localized string similar to Executable.
+        /// </summary>
+        internal static string Executable {
+            get {
+                return ResourceManager.GetString("Executable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The report file &apos;{0}&apos; is invalid. File does not exist (Full path: &apos;{1}&apos;)..
         /// </summary>
         internal static string FailedReportFile {
             get {
@@ -535,6 +544,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         internal static string UnknownVerbosityLevel {
             get {
                 return ResourceManager.GetString("UnknownVerbosityLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Working directory.
+        /// </summary>
+        internal static string WorkingDirectory {
+            get {
+                return ResourceManager.GetString("WorkingDirectory", resourceCulture);
             }
         }
         
