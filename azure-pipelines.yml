@@ -11,7 +11,7 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   disable.coverage.autogenerate: 'true'
-  version: '4.3.0-rc2'
+  version: '4.3.0-rc3'
 
 # Prepare
 steps:
@@ -21,9 +21,10 @@ steps:
     command: custom
     custom: '--info'
 
-- task: DotNetCoreInstaller@0
+- task: UseDotNet@2
   displayName: 'Use .NET Core SDK 2.2.402'
   inputs:
+    packageType: sdk
     version: 2.2.402
 
 - task: DotNetCoreCLI@2
@@ -118,9 +119,10 @@ steps:
     reportDirectory: '$(build.sourcesdirectory)\src\target\reports\coverage'
 
 # Build .NET Core 3.0
-- task: DotNetCoreInstaller@0
+- task: UseDotNet@2
   displayName: 'Use .NET Core SDK 3.0.100'
   inputs:
+    packageType: sdk
     version: 3.0.100
 
 - script: 'copy global_dotnet3.json global.json'
