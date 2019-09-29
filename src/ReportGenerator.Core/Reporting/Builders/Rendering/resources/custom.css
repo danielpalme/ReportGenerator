@@ -9,10 +9,10 @@ a:hover { color: #000; text-decoration: none; }
 h1 a { color: #fff; background-color: #949494; display: inline-block; margin: -12px 5px -10px -10px; padding: 10px; border-right: 1px solid #fff; }
 h1 a:hover { background-color: #ccc; }
 
-.container { margin: auto; max-width: 1500px; width: 90%; background-color: #fff; display: table; box-shadow: 0 0 60px #7d7d7d; height: 100%; }
-.containerleft { display: table-cell; padding: 0 20px 20px 20px; }
-.containerright { border-left: solid 1px #6f6f6f; display: table-cell; width: 340px; min-width: 340px; background-color: #e5e5e5; height: 100%; }
-.containerrightfixed { position: fixed; padding: 0 20px 20px 20px; width: 300px; overflow-y: auto; height: 100%; top: 0; bottom: 0; }
+.container { margin: auto; max-width: 1500px; width: 90%; background-color: #fff; display: flex; box-shadow: 0 0 60px #7d7d7d; min-height: 100%; }
+.containerleft { padding: 0 20px 20px 20px; }
+.containerright { width: 340px; min-width: 340px; background-color: #e5e5e5; height: 100%; }
+.containerrightfixed { position: fixed; padding: 0 20px 20px 20px; border-left: solid 1px #6f6f6f; width: 300px; overflow-y: auto; height: 100%; top: 0; bottom: 0; }
 .containerrightfixed h1 { background-color: #c00; }
 .containerrightfixed label, .containerright a { white-space: nowrap; overflow: hidden; display: inline-block; width: 100%; max-width: 300px; text-overflow: ellipsis; }
 .containerright a { margin-bottom: 3px; }
