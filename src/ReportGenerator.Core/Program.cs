@@ -25,11 +25,14 @@ namespace Palmmedia.ReportGenerator.Core
         {
             args = NormalizeArgs(args);
 
-            Logger.Debug(Resources.Arguments);
-
-            foreach (var arg in args)
+            if (!args.Any(a => "-verbosity:off".Equals(a, System.StringComparison.OrdinalIgnoreCase)))
             {
-                Logger.Debug(" " + arg);
+                Logger.Debug(Resources.Arguments);
+
+                foreach (var arg in args)
+                {
+                    Logger.Debug(" " + arg);
+                }
             }
 
             var reportConfigurationBuilder = new ReportConfigurationBuilder();
