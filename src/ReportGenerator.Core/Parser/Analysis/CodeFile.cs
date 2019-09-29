@@ -392,6 +392,39 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                 this.lineVisitStatus = newLineVisitStatus;
             }
 
+            if (file.branches != null)
+            {
+                if (this.branches == null)
+                {
+                    this.branches = new Dictionary<int, ICollection<Branch>>();
+                }
+
+                foreach (var branchByLine in file.branches)
+                {
+                    ICollection<Branch> existingBranches = null;
+
+                    if (this.branches.TryGetValue(branchByLine.Key, out existingBranches))
+                    {
+                        foreach (var branch in branchByLine.Value)
+                        {
+                            Branch existingBranch = existingBranches.FirstOrDefault(b => b.Equals(branch));
+                            if (existingBranch != null)
+                            {
+                                existingBranch.BranchVisits += branch.BranchVisits;
+                            }
+                            else
+                            {
+                                existingBranches.Add(branch);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        this.branches.Add(branchByLine);
+                    }
+                }
+            }
+
             for (long i = 0; i < file.lineCoverage.LongLength; i++)
             {
                 int coverage = this.lineCoverage[i];
@@ -413,6 +446,16 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                 int lineVisitStatus = Math.Max((int)this.lineVisitStatus[i], (int)file.lineVisitStatus[i]);
 
                 this.lineVisitStatus[i] = (LineVisitStatus)lineVisitStatus;
+
+                if (this.lineVisitStatus[i] == Analysis.LineVisitStatus.PartiallyCovered
+                    && this.branches != null
+                    && this.branches.TryGetValue((int)i, out ICollection<Branch> branches))
+                {
+                    if (branches.All(b => b.BranchVisits > 0))
+                    {
+                        this.lineVisitStatus[i] = Analysis.LineVisitStatus.Covered;
+                    }
+                }
             }
 
             foreach (var lineCoverageByTestMethod in file.lineCoveragesByTestMethod)
@@ -447,39 +490,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
             foreach (var codeElement in file.codeElements)
             {
                 this.codeElements.Add(codeElement);
-            }
-
-            if (file.branches != null)
-            {
-                if (this.branches == null)
-                {
-                    this.branches = new Dictionary<int, ICollection<Branch>>();
-                }
-
-                foreach (var branchByLine in file.branches)
-                {
-                    ICollection<Branch> existingBranches = null;
-
-                    if (this.branches.TryGetValue(branchByLine.Key, out existingBranches))
-                    {
-                        foreach (var branch in branchByLine.Value)
-                        {
-                            Branch existingBranch = existingBranches.FirstOrDefault(b => b.Equals(branch));
-                            if (existingBranch != null)
-                            {
-                                existingBranch.BranchVisits += branch.BranchVisits;
-                            }
-                            else
-                            {
-                                existingBranches.Add(branch);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        this.branches.Add(branchByLine);
-                    }
-                }
             }
         }
 

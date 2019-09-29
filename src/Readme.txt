@@ -65,6 +65,7 @@ CHANGELOG
     * New: Issue #205: Support for .NET Core 3.0
     * New: Issue #262: Performance improvements
     * Fix: Issue #283: Improved logging of coverage report paths
+    * Fix: Improved merging of partially covered lines
 
 4.2.20.0
 
