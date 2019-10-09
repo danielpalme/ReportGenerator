@@ -2,7 +2,7 @@
     html { background-color: #292827; color: #fff; }
     h1 { background-color: #252423; color: #fff; }
     .container { background-color: #292827; }
-    .containerright { background-color: #3D3C3C; border-left: solid 1px #515050; }
+    .containerrightfixed { background-color: #3D3C3C; border-left: solid 1px #515050; }
     .containerrightfixed h1 { background-color: #484747; }
     .overview tr:hover { background: #2E2D2C }
     .overview th { background: #292827 }

@@ -24,6 +24,7 @@ The following output formats are supported by ReportGenerator:
 -HTML, HTMLSummary, HTMLInline, HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Dark, HTMLChart, MHTML
 -Cobertura
 -SonarQube
+-lcov
 -XML, XMLSummary
 -Latex, LatexSummary
 -TeamCitySummary
@@ -64,6 +65,10 @@ CHANGELOG
 
     * New: Issue #205: Support for .NET Core 3.0
     * New: Issue #262: Performance improvements
+    * New: Issue #285: Added lcov output format
+    * Fix: Issue #283: Improved logging of coverage report paths
+    * Fix: Issue #284: Fixed layout issue in Google Chrome
+    * Fix: Improved merging of partially covered lines
 
 4.2.20.0
 

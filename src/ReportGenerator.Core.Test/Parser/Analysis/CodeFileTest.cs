@@ -110,6 +110,35 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
         /// A test for Merge
         /// </summary>
         [Fact]
+        public void Merge_AllBranchesCovered_LineVisitStatusUpdated()
+        {
+            var branches = new Dictionary<int, ICollection<Branch>>()
+            {
+                { 1, new List<Branch>() { new Branch(1, "1"), new Branch(0, "2") } },
+                { 2, new List<Branch>() { new Branch(0, "3"), new Branch(0, "4") } }
+            };
+            var sut = new CodeFile("C:\\temp\\Program.cs", new int[] { -1, 1, 0 }, new LineVisitStatus[] { LineVisitStatus.NotCoverable, LineVisitStatus.PartiallyCovered, LineVisitStatus.NotCovered }, branches);
+
+            var branches2 = new Dictionary<int, ICollection<Branch>>()
+            {
+                { 1, new List<Branch>() { new Branch(0, "1"), new Branch(1, "2") } },
+                { 2, new List<Branch>() { new Branch(0, "3"), new Branch(2, "4") } }
+            };
+
+            var codeFileToMerge = new CodeFile("C:\\temp\\Program.cs", new int[] { -1, 1, 0 }, new LineVisitStatus[] { LineVisitStatus.NotCoverable, LineVisitStatus.PartiallyCovered, LineVisitStatus.PartiallyCovered }, branches2);
+
+            sut.Merge(codeFileToMerge);
+
+            Assert.Equal(3, sut.CoveredBranches);
+            Assert.Equal(4, sut.TotalBranches);
+            Assert.Equal(LineVisitStatus.Covered, sut.LineVisitStatus[1]);
+            Assert.Equal(LineVisitStatus.PartiallyCovered, sut.LineVisitStatus[2]);
+        }
+
+        /// <summary>
+        /// A test for Merge
+        /// </summary>
+        [Fact]
         public void Merge_MergeCodeFileWithEqualLengthCoverageArray_CoverageInformationIsUpdated()
         {
             var sut = new CodeFile("C:\\temp\\Program.cs", new int[] { -1, -1, -1, 0, 0, 0, 1, 1, 1 }, new LineVisitStatus[] { LineVisitStatus.NotCoverable, LineVisitStatus.NotCoverable, LineVisitStatus.NotCoverable, LineVisitStatus.NotCovered, LineVisitStatus.NotCovered, LineVisitStatus.NotCovered, LineVisitStatus.Covered, LineVisitStatus.Covered, LineVisitStatus.Covered });

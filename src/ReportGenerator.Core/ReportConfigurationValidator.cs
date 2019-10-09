@@ -51,7 +51,7 @@ namespace Palmmedia.ReportGenerator.Core
                     }
                     else
                     {
-                        Logger.WarnFormat(Resources.FailedReportFile, failedReportFilePattern);
+                        Logger.WarnFormat(Resources.FailedReportFile, failedReportFilePattern, new FileInfo(failedReportFilePattern).FullName);
                     }
                 }
             }
