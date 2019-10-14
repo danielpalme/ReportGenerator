@@ -29,6 +29,15 @@ namespace Palmmedia.ReportGenerator.Core.Logging
         }
 
         /// <summary>
+        /// Configures the inner logger factory.
+        /// </summary>
+        /// <param name="factory">The inner logger factory.</param>
+        public static void Configure(ILoggerFactory factory)
+        {
+            innerFactory = factory ?? throw new ArgumentNullException(nameof(factory));
+        }
+
+        /// <summary>
         /// Initializes the logger for the given type.
         /// </summary>
         /// <param name="type">The type of the class that uses the logger.</param>
