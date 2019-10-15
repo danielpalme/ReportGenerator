@@ -61,6 +61,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.3.1.0
+
+    * Fix: Issue #262: Readded missing API
+
 4.3.0.0
 
     * New: Issue #205: Support for .NET Core 3.0
