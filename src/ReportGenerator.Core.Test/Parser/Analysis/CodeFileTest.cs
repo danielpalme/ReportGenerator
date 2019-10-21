@@ -200,7 +200,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
 
             Assert.Null(sut.TotalLines);
 
-            var fileAnalysis = sut.AnalyzeFile(new CachingFileReader(0));
+            var fileAnalysis = sut.AnalyzeFile(new CachingFileReader(new LocalFileReader(), 0));
 
             Assert.NotNull(fileAnalysis);
             Assert.Null(fileAnalysis.Error);
@@ -235,7 +235,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
             var testMethod = new TestMethod("TestFull", "Test");
             sut.AddCoverageByTestMethod(testMethod, new CoverageByTrackedMethod() { Coverage = new int[] { -2, 2, -1, 0 }, LineVisitStatus = new LineVisitStatus[] { LineVisitStatus.NotCoverable, LineVisitStatus.Covered, LineVisitStatus.NotCoverable, LineVisitStatus.NotCovered } });
 
-            var fileAnalysis = sut.AnalyzeFile(new CachingFileReader(0));
+            var fileAnalysis = sut.AnalyzeFile(new CachingFileReader(new LocalFileReader(), 0));
 
             Assert.Equal(2, fileAnalysis.Lines.First().LineCoverageByTestMethod[testMethod].LineVisits);
             Assert.Equal(LineVisitStatus.Covered, fileAnalysis.Lines.First().LineCoverageByTestMethod[testMethod].LineVisitStatus);
@@ -251,7 +251,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
 
             Assert.Null(sut.TotalLines);
 
-            var fileAnalysis = sut.AnalyzeFile(new CachingFileReader(0));
+            var fileAnalysis = sut.AnalyzeFile(new CachingFileReader(new LocalFileReader(), 0));
 
             Assert.NotNull(fileAnalysis);
             Assert.NotNull(fileAnalysis.Error);
@@ -294,7 +294,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
             Assert.Contains(testMethod, sut.TestMethods);
 
             // using AnalyseFile() to retrieve merged coverage by test method
-            var lineAnalyses = sut.AnalyzeFile(new CachingFileReader(0)).Lines;
+            var lineAnalyses = sut.AnalyzeFile(new CachingFileReader(new LocalFileReader(), 0)).Lines;
             var testMethodCoverage = lineAnalyses.Take(9).Select(l => l.LineCoverageByTestMethod).ToArray();
 
             Assert.True(testMethodCoverage.All(coverage => coverage.ContainsKey(testMethod)), "All lines should be covered by given test method");

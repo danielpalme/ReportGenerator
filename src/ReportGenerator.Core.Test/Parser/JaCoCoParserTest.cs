@@ -159,6 +159,6 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
                 .Single(a => a.Name == "test").Classes
                 .Single(c => c.Name == className).Files
                 .Single(f => f.Path == fileName)
-                .AnalyzeFile(new CachingFileReader(0));
+                .AnalyzeFile(new CachingFileReader(new LocalFileReader(), 0));
     }
 }

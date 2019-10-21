@@ -61,6 +61,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.3.2.0
+
+    * Fix: Issue #290: Directories from command line parameter 'sourcedirs' are now used to determine path of files
+
 4.3.1.0
 
     * Fix: Issue #262: Readded missing API

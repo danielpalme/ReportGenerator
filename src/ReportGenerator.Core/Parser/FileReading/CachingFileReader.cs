@@ -22,6 +22,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
         private static readonly HttpClient HttpClient = new HttpClient();
 
         /// <summary>
+        /// <see cref="IFileReader"/> for loading files from local disk.
+        /// </summary>
+        public readonly IFileReader localFileReader;
+
+        /// <summary>
         /// The caching duration of code files that are downloaded from remote servers in minutes.
         /// </summary>
         private readonly int cachingDuringOfRemoteFilesInMinutes;
@@ -29,9 +34,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
         /// <summary>
         /// Initializes a new instance of the <see cref="CachingFileReader" /> class.
         /// </summary>
+        /// <param name="localFileReader"><see cref="IFileReader"/> for loading files from local disk.</param>
         /// <param name="cachingDuringOfRemoteFilesInMinutes">The caching duration of code files that are downloaded from remote servers in minutes.</param>
-        public CachingFileReader(int cachingDuringOfRemoteFilesInMinutes)
+        public CachingFileReader(IFileReader localFileReader, int cachingDuringOfRemoteFilesInMinutes)
         {
+            this.localFileReader = localFileReader;
             this.cachingDuringOfRemoteFilesInMinutes = cachingDuringOfRemoteFilesInMinutes;
         }
 
@@ -92,17 +99,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
                 }
                 else
                 {
-                    if (!File.Exists(path))
-                    {
-                        error = string.Format(CultureInfo.InvariantCulture, " " + Resources.FileDoesNotExist, path);
-                        return null;
-                    }
-
-                    var encoding = FileHelper.GetEncoding(path);
-                    string[] lines = File.ReadAllLines(path, encoding);
-
-                    error = null;
-                    return lines;
+                    return this.localFileReader.LoadFile(path, out error);
                 }
             }
             catch (Exception ex)

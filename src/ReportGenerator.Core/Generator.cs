@@ -247,7 +247,7 @@ namespace Palmmedia.ReportGenerator.Core
             DateTime executionTime = DateTime.Now;
 
             new Reporting.ReportGenerator(
-                new CachingFileReader(settings.CachingDuringOfRemoteFilesInMinutes),
+                new CachingFileReader(new LocalFileReader(reportConfiguration.SourceDirectories), settings.CachingDuringOfRemoteFilesInMinutes),
                 parserResult,
                 reportBuilderFactory.GetReportBuilders(reportContext))
                     .CreateReport(reportConfiguration.HistoryDirectory != null, overallHistoricCoverages, executionTime, reportConfiguration.Tag);
