@@ -61,6 +61,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.3.3.0
+
+    * Fix: Issue #291: Added support for numbers with exponent in Cobertura report
+
 4.3.2.0
 
     * Fix: Issue #290: Directories from command line parameter 'sourcedirs' are now used to determine path of files
