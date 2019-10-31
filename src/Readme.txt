@@ -61,6 +61,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.3.4.0
+
+    * Fix: Issue #292: Improved handling of Clover format
+
 4.3.3.0
 
     * Fix: Issue #291: Added support for numbers with exponent in Cobertura report

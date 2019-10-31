@@ -317,7 +317,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         Logger.DebugFormat(" " + Resources.InitiatingParser, "NCover");
                         yield return new NCoverParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
                     }
-                    else if (item.Attribute("clover") != null)
+                    else if (item.Attribute("clover") != null || item.Attribute("generated") != null)
                     {
                         Logger.Debug(" " + Resources.PreprocessingReport);
                         new CloverReportPreprocessor(this.sourceDirectories).Execute(item);
