@@ -219,7 +219,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         {
             foreach (var method in methodsOfFile)
             {
-                string methodName = method.Attribute("signature").Value;
+                var signature = method.Attribute("signature");
+
+                if (signature == null)
+                {
+                    continue;
+                }
+
+                string methodName = signature.Value;
                 int lineNumber = int.Parse(method.Attribute("num").Value, CultureInfo.InvariantCulture);
 
                 codeFile.AddCodeElement(new CodeElement(methodName, CodeElementType.Method, lineNumber, lineNumber));
