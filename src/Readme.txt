@@ -61,6 +61,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.3.7.0
+
+    * Fix: Issue #300: Fixed parsing issue for JaCoCo files
+
 4.3.6.0
 
     * Fix: Issue #294: Fixed handling of partial classes for Cobertura coverage files

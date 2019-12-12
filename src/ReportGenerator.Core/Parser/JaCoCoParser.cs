@@ -135,7 +135,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     var codeFile = ProcessFile(modules, @class, file);
 
                     var methodsOfFile = classes
-                        .Where(c => c.Attribute("sourcefilename").Value.Equals(file))
+                        .Where(c => c.Attribute("sourcefilename") != null && c.Attribute("sourcefilename").Value.Equals(file))
                         .Elements("method")
                         .ToArray();
 
