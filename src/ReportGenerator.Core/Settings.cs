@@ -1,4 +1,6 @@
-﻿namespace Palmmedia.ReportGenerator.Core
+﻿using System;
+
+namespace Palmmedia.ReportGenerator.Core
 {
     /// <summary>
     /// Global settings.
@@ -30,7 +32,24 @@
         /// <summary>
         /// Gets or sets the caching duration of code files that are downloaded from remote servers in minutes.
         /// </summary>
-        public int CachingDuringOfRemoteFilesInMinutes { get; set; } = 7 * 24 * 60;
+        public int CachingDurationOfRemoteFilesInMinutes { get; set; } = 7 * 24 * 60;
+
+        /// <summary>
+        /// Gets or sets the caching duration of code files that are downloaded from remote servers in minutes.
+        /// </summary>
+        [Obsolete("Replaced by 'CachingDurationOfRemoteFilesInMinutes'.")]
+        public int CachingDuringOfRemoteFilesInMinutes
+        {
+            get
+            {
+                return this.CachingDurationOfRemoteFilesInMinutes;
+            }
+
+            set
+            {
+                this.CachingDurationOfRemoteFilesInMinutes = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets a value indicating whether risk hotspots should be disabled or not.

@@ -44,6 +44,11 @@ namespace Palmmedia.ReportGenerator.Core.Common
                 int counter = 0;
                 foreach (var property in obj.GetType().GetProperties())
                 {
+                    if (property.GetCustomAttributes(typeof(ObsoleteAttribute), false).Length > 0)
+                    {
+                        continue;
+                    }
+
                     if (counter > 0)
                     {
                         sb.Append(",");

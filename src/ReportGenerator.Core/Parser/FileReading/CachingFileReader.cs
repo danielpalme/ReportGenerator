@@ -24,22 +24,22 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
         /// <summary>
         /// <see cref="IFileReader"/> for loading files from local disk.
         /// </summary>
-        public readonly IFileReader localFileReader;
+        private readonly IFileReader localFileReader;
 
         /// <summary>
         /// The caching duration of code files that are downloaded from remote servers in minutes.
         /// </summary>
-        private readonly int cachingDuringOfRemoteFilesInMinutes;
+        private readonly int cachingDurationOfRemoteFilesInMinutes;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CachingFileReader" /> class.
         /// </summary>
         /// <param name="localFileReader"><see cref="IFileReader"/> for loading files from local disk.</param>
-        /// <param name="cachingDuringOfRemoteFilesInMinutes">The caching duration of code files that are downloaded from remote servers in minutes.</param>
-        public CachingFileReader(IFileReader localFileReader, int cachingDuringOfRemoteFilesInMinutes)
+        /// <param name="cachingDurationOfRemoteFilesInMinutes">The caching duration of code files that are downloaded from remote servers in minutes.</param>
+        public CachingFileReader(IFileReader localFileReader, int cachingDurationOfRemoteFilesInMinutes)
         {
             this.localFileReader = localFileReader;
-            this.cachingDuringOfRemoteFilesInMinutes = cachingDuringOfRemoteFilesInMinutes;
+            this.cachingDurationOfRemoteFilesInMinutes = cachingDurationOfRemoteFilesInMinutes;
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
                         }
 
                         if (File.Exists(cachedFile)
-                            && File.GetLastWriteTime(cachedFile).AddMinutes(this.cachingDuringOfRemoteFilesInMinutes) > DateTime.Now)
+                            && File.GetLastWriteTime(cachedFile).AddMinutes(this.cachingDurationOfRemoteFilesInMinutes) > DateTime.Now)
                         {
                             error = null;
                             string[] cachedLines = File.ReadAllLines(cachedFile);
@@ -84,7 +84,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
 
                     try
                     {
-                        if (this.cachingDuringOfRemoteFilesInMinutes > 0)
+                        if (this.cachingDurationOfRemoteFilesInMinutes > 0)
                         {
                             File.WriteAllLines(cachedFile, lines);
                         }

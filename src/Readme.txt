@@ -61,7 +61,11 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
-4.3.7.0
+4.3.9.0
+
+    * Fix: Issue #302: Fixed spelling error for settings::cachingDuringOfRemoteFilesInMinutes
+
+4.3.8.0
 
     * Fix: Issue #300: Fixed parsing issue for JaCoCo files
 
