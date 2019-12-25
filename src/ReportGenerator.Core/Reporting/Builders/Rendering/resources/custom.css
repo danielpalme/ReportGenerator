@@ -10,7 +10,7 @@ h1 a { color: #fff; background-color: #949494; display: inline-block; margin: -1
 h1 a:hover { background-color: #ccc; }
 
 .container { margin: auto; max-width: 1500px; width: 90%; background-color: #fff; display: flex; box-shadow: 0 0 60px #7d7d7d; min-height: 100%; }
-.containerleft { padding: 0 20px 20px 20px; }
+.containerleft { padding: 0 20px 20px 20px; flex: 1; }
 .containerright { width: 340px; min-width: 340px; background-color: #e5e5e5; height: 100%; }
 .containerrightfixed { position: fixed; padding: 0 20px 20px 20px; border-left: solid 1px #6f6f6f; width: 300px; overflow-y: auto; height: 100%; top: 0; bottom: 0; }
 .containerrightfixed h1 { background-color: #c00; }
@@ -315,7 +315,7 @@ div.currenthistory { margin: -2px -5px 0 -5px; padding: 2px 5px 2px 5px; height:
     top: 3px;
 }
 .icon-wrench {
-    background-image: url(icon_wrench.svg), url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB3aWR0aD0iMTc5MiIgaGVpZ2h0PSIxNzkyIiB2aWV3Qm94PSIwIDAgMTc5MiAxNzkyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxNzkyIiBoZWlnaHQ9IjE3OTIiIHN0eWxlPSJmaWxsOiNlNWU1ZTUiIC8+PHBhdGggZD0iTTQ0OCAxNDcycTAtMjYtMTktNDV0LTQ1LTE5LTQ1IDE5LTE5IDQ1IDE5IDQ1IDQ1IDE5IDQ1LTE5IDE5LTQ1em02NDQtNDIwbC02ODIgNjgycS0zNyAzNy05MCAzNy01MiAwLTkxLTM3bC0xMDYtMTA4cS0zOC0zNi0zOC05MCAwLTUzIDM4LTkxbDY4MS02ODFxMzkgOTggMTE0LjUgMTczLjV0MTczLjUgMTE0LjV6bTYzNC00MzVxMCAzOS0yMyAxMDYtNDcgMTM0LTE2NC41IDIxNy41dC0yNTguNSA4My41cS0xODUgMC0zMTYuNS0xMzEuNXQtMTMxLjUtMzE2LjUgMTMxLjUtMzE2LjUgMzE2LjUtMTMxLjVxNTggMCAxMjEuNSAxNi41dDEwNy41IDQ2LjVxMTYgMTEgMTYgMjh0LTE2IDI4bC0yOTMgMTY5djIyNGwxOTMgMTA3cTUtMyA3OS00OC41dDEzNS41LTgxIDcwLjUtMzUuNXExNSAwIDIzLjUgMTB0OC41IDI1eiIvPjwvc3ZnPg==);
+    background-image: url(icon_wrench.svg), url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB3aWR0aD0iMTc5MiIgaGVpZ2h0PSIxNzkyIiB2aWV3Qm94PSIwIDAgMTc5MiAxNzkyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik00NDggMTQ3MnEwLTI2LTE5LTQ1dC00NS0xOS00NSAxOS0xOSA0NSAxOSA0NSA0NSAxOSA0NS0xOSAxOS00NXptNjQ0LTQyMGwtNjgyIDY4MnEtMzcgMzctOTAgMzctNTIgMC05MS0zN2wtMTA2LTEwOHEtMzgtMzYtMzgtOTAgMC01MyAzOC05MWw2ODEtNjgxcTM5IDk4IDExNC41IDE3My41dDE3My41IDExNC41em02MzQtNDM1cTAgMzktMjMgMTA2LTQ3IDEzNC0xNjQuNSAyMTcuNXQtMjU4LjUgODMuNXEtMTg1IDAtMzE2LjUtMTMxLjV0LTEzMS41LTMxNi41IDEzMS41LTMxNi41IDMxNi41LTEzMS41cTU4IDAgMTIxLjUgMTYuNXQxMDcuNSA0Ni41cTE2IDExIDE2IDI4dC0xNiAyOGwtMjkzIDE2OXYyMjRsMTkzIDEwN3E1LTMgNzktNDguNXQxMzUuNS04MSA3MC41LTM1LjVxMTUgMCAyMy41IDEwdDguNSAyNXoiLz48L3N2Zz4=);
     background-repeat: no-repeat;
     background-size: contain;
     padding-left: 20px;
@@ -331,7 +331,7 @@ div.currenthistory { margin: -2px -5px 0 -5px; padding: 2px 5px 2px 5px; height:
     display: inline-block;
 }
 .icon-cube {
-    background-image: url(icon_cube.svg), url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB3aWR0aD0iMTc5MiIgaGVpZ2h0PSIxNzkyIiB2aWV3Qm94PSIwIDAgMTc5MiAxNzkyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxNzkyIiBoZWlnaHQ9IjE3OTIiIHN0eWxlPSJmaWxsOiNlNWU1ZTUiIC8+PHBhdGggZD0iTTg5NiAxNjI5bDY0MC0zNDl2LTYzNmwtNjQwIDIzM3Y3NTJ6bS02NC04NjVsNjk4LTI1NC02OTgtMjU0LTY5OCAyNTR6bTgzMi0yNTJ2NzY4cTAgMzUtMTggNjV0LTQ5IDQ3bC03MDQgMzg0cS0yOCAxNi02MSAxNnQtNjEtMTZsLTcwNC0zODRxLTMxLTE3LTQ5LTQ3dC0xOC02NXYtNzY4cTAtNDAgMjMtNzN0NjEtNDdsNzA0LTI1NnEyMi04IDQ0LTh0NDQgOGw3MDQgMjU2cTM4IDE0IDYxIDQ3dDIzIDczeiIvPjwvc3ZnPg==);
+    background-image: url(icon_cube.svg), url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB3aWR0aD0iMTc5MiIgaGVpZ2h0PSIxNzkyIiB2aWV3Qm94PSIwIDAgMTc5MiAxNzkyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik04OTYgMTYyOWw2NDAtMzQ5di02MzZsLTY0MCAyMzN2NzUyem0tNjQtODY1bDY5OC0yNTQtNjk4LTI1NC02OTggMjU0em04MzItMjUydjc2OHEwIDM1LTE4IDY1dC00OSA0N2wtNzA0IDM4NHEtMjggMTYtNjEgMTZ0LTYxLTE2bC03MDQtMzg0cS0zMS0xNy00OS00N3QtMTgtNjV2LTc2OHEwLTQwIDIzLTczdDYxLTQ3bDcwNC0yNTZxMjItOCA0NC04dDQ0IDhsNzA0IDI1NnEzOCAxNCA2MSA0N3QyMyA3M3oiLz48L3N2Zz4=);
     background-repeat: no-repeat;
     background-size: contain;
     padding-left: 20px;
