@@ -19,7 +19,7 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ReportResources {
@@ -624,6 +624,42 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         public static string SequenceCoverage {
             get {
                 return ResourceManager.GetString("SequenceCoverage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sponsor.
+        /// </summary>
+        public static string Sponsor {
+            get {
+                return ResourceManager.GetString("Sponsor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Become a sponsor.
+        /// </summary>
+        public static string SponsorTooltip {
+            get {
+                return ResourceManager.GetString("SponsorTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Star.
+        /// </summary>
+        public static string Star {
+            get {
+                return ResourceManager.GetString("Star", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Star on GitHub.
+        /// </summary>
+        public static string StarTooltip {
+            get {
+                return ResourceManager.GetString("StarTooltip", resourceCulture);
             }
         }
         

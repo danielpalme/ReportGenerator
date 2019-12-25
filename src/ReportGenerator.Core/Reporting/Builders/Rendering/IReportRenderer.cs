@@ -54,6 +54,12 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// Adds a header to the report.
         /// </summary>
         /// <param name="text">The text.</param>
+        void HeaderWithGithubLinks(string text);
+
+        /// <summary>
+        /// Adds a header to the report.
+        /// </summary>
+        /// <param name="text">The text.</param>
         void HeaderWithBackLink(string text);
 
         /// <summary>

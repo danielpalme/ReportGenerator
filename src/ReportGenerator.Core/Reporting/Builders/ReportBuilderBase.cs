@@ -175,7 +175,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             }
 
             reportRenderer.BeginSummaryReport(this.ReportContext.ReportConfiguration.TargetDirectory, null, ReportResources.Summary);
-            reportRenderer.Header(ReportResources.Summary);
+            reportRenderer.HeaderWithGithubLinks(ReportResources.Summary);
 
             reportRenderer.BeginKeyValueTable();
             reportRenderer.KeyValueRow(ReportResources.GeneratedOn, DateTime.Now.ToShortDateString() + " - " + DateTime.Now.ToLongTimeString());

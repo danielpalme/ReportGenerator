@@ -11,7 +11,9 @@
     input, select { background-color: #292827; color: #fff; border: 1px solid #fff; }
     a { color: #fff; color: rgba(255, 255, 255, 0.95); }
     a:hover { color: #0078d4; }
-    h1 a { background-color: #4a4846; }
+    h1 a.back { background-color: #4a4846; }
+    h1 a.button { color: #fff; background-color: #565656; border-color: #c1c1c1; }
+    h1 a.button:hover { background-color: #8d8d8d; }
     .gray { background-color: #484747; }
     .lightgray { color: #ebebeb; }
     .lightgraybg { background-color: #474747; }
@@ -54,5 +56,8 @@
     }
     .icon-search-minus {
         background-image: url(icon_search-minus.svg), url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHdpZHRoPSIxNzkyIiBoZWlnaHQ9IjE3OTIiIHZpZXdCb3g9IjAgMCAxNzkyIDE3OTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbD0iI0JGQkZDMCIgZD0iTTEwODggODAwdjY0cTAgMTMtOS41IDIyLjV0LTIyLjUgOS41aC01NzZxLTEzIDAtMjIuNS05LjV0LTkuNS0yMi41di02NHEwLTEzIDkuNS0yMi41dDIyLjUtOS41aDU3NnExMyAwIDIyLjUgOS41dDkuNSAyMi41em0xMjggMzJxMC0xODUtMTMxLjUtMzE2LjV0LTMxNi41LTEzMS41LTMxNi41IDEzMS41LTEzMS41IDMxNi41IDEzMS41IDMxNi41IDMxNi41IDEzMS41IDMxNi41LTEzMS41IDEzMS41LTMxNi41em01MTIgODMycTAgNTMtMzcuNSA5MC41dC05MC41IDM3LjVxLTU0IDAtOTAtMzhsLTM0My0zNDJxLTE3OSAxMjQtMzk5IDEyNC0xNDMgMC0yNzMuNS01NS41dC0yMjUtMTUwLTE1MC0yMjUtNTUuNS0yNzMuNSA1NS41LTI3My41IDE1MC0yMjUgMjI1LTE1MCAyNzMuNS01NS41IDI3My41IDU1LjUgMjI1IDE1MCAxNTAgMjI1IDU1LjUgMjczLjVxMCAyMjAtMTI0IDM5OWwzNDMgMzQzcTM3IDM3IDM3IDkweiIvPjwvc3ZnPg==);
+    }
+    .icon-star {
+        background-image: url(icon_star.svg), url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB3aWR0aD0iMTc5MiIgaGVpZ2h0PSIxNzkyIiB2aWV3Qm94PSIwIDAgMTc5MiAxNzkyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0xNzI4IDY0N3EwIDIyLTI2IDQ4bC0zNjMgMzU0IDg2IDUwMHExIDcgMSAyMCAwIDIxLTEwLjUgMzUuNXQtMzAuNSAxNC41cS0xOSAwLTQwLTEybC00NDktMjM2LTQ0OSAyMzZxLTIyIDEyLTQwIDEyLTIxIDAtMzEuNS0xNC41dC0xMC41LTM1LjVxMC02IDItMjBsODYtNTAwLTM2NC0zNTRxLTI1LTI3LTI1LTQ4IDAtMzcgNTYtNDZsNTAyLTczIDIyNS00NTVxMTktNDEgNDktNDF0NDkgNDFsMjI1IDQ1NSA1MDIgNzNxNTYgOSA1NiA0NnoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=);
     }
 }

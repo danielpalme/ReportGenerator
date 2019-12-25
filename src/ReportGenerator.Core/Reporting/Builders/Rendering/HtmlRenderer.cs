@@ -180,9 +180,24 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// Adds a header to the report.
         /// </summary>
         /// <param name="text">The text.</param>
+        public void HeaderWithGithubLinks(string text)
+        {
+            this.reportTextWriter.WriteLine(
+                "<h1>{0}<a class=\"button\" href=\"https://github.com/danielpalme/ReportGenerator\" title=\"{1}\"><i class=\"icon-star\"></i>{2}</a><a class=\"button\" href=\"https://github.com/sponsors/danielpalme\" title=\"{3}\"><i class=\"icon-sponsor\"></i>{4}</a></h1>",
+                WebUtility.HtmlEncode(text),
+                WebUtility.HtmlEncode(ReportResources.StarTooltip),
+                WebUtility.HtmlEncode(ReportResources.Star),
+                WebUtility.HtmlEncode(ReportResources.SponsorTooltip),
+                WebUtility.HtmlEncode(ReportResources.Sponsor));
+        }
+
+        /// <summary>
+        /// Adds a header to the report.
+        /// </summary>
+        /// <param name="text">The text.</param>
         public void HeaderWithBackLink(string text)
         {
-            this.reportTextWriter.WriteLine("<h1><a href=\"index.htm\">&lt;</a> {0}</h1>", WebUtility.HtmlEncode(text));
+            this.reportTextWriter.WriteLine("<h1><a href=\"index.htm\" class=\"back\">&lt;</a> {0}</h1>", WebUtility.HtmlEncode(text));
         }
 
         /// <summary>

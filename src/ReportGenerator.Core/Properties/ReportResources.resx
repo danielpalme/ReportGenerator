@@ -333,4 +333,16 @@
   <data name="Of" xml:space="preserve">
     <value>of</value>
   </data>
+  <data name="Sponsor" xml:space="preserve">
+    <value>Sponsor</value>
+  </data>
+  <data name="SponsorTooltip" xml:space="preserve">
+    <value>Become a sponsor</value>
+  </data>
+  <data name="Star" xml:space="preserve">
+    <value>Star</value>
+  </data>
+  <data name="StarTooltip" xml:space="preserve">
+    <value>Star on GitHub</value>
+  </data>
 </root>
