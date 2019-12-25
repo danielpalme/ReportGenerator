@@ -21,11 +21,12 @@ ReportGenerator supports merging several reports into one.
 
 The following output formats are supported by ReportGenerator:
 
--HTML, HTMLSummary, HTMLInline, HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Dark, HTMLChart, MHTML
+-Html, HtmlSummary, HtmlInline, HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Dark, HtmlChart, MHtml
 -Cobertura
 -SonarQube
 -lcov
--XML, XMLSummary
+-Xml, XmlSummary
+-JsonSummary
 -Latex, LatexSummary
 -TeamCitySummary
 -TextSummary
@@ -60,6 +61,10 @@ For further details take a look at LICENSE.txt.
 =======================================================================
 
 CHANGELOG
+
+4.4.0.0
+
+    * New: Issue #304: Added new output format JSONSummary
 
 4.3.9.0
 
