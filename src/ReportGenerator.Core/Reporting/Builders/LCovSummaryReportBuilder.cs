@@ -62,6 +62,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             using (var reportTextWriter = new StreamWriter(new FileStream(targetPath, FileMode.Create), Encoding.UTF8))
             {
                 reportTextWriter.WriteLine("TN:");
+                long branchCounter = 0;
 
                 foreach (var assembly in summaryResult.Assemblies)
                 {
@@ -69,12 +70,53 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                     {
                         foreach (var file in @class.Files)
                         {
+                            // SF:<absolute path to the source file>
                             reportTextWriter.WriteLine($"SF:{file.Path}");
 
                             foreach (var codeElement in file.CodeElements)
                             {
+                                // FN:<line number of function start>,<function name>
                                 reportTextWriter.WriteLine($"FN:{codeElement.FirstLine.ToString(CultureInfo.InvariantCulture)},{codeElement.Name}");
                             }
+
+                            foreach (var codeElement in file.CodeElements)
+                            {
+                                if (file.LineCoverage.Count > codeElement.FirstLine)
+                                {
+                                    // FNDA:<execution count>,<function name>
+                                    int coverage = file.LineCoverage[codeElement.FirstLine];
+
+                                    if (coverage < 0)
+                                    {
+                                        coverage = 0;
+                                    }
+
+                                    reportTextWriter.WriteLine($"FNDA:{coverage.ToString(CultureInfo.InvariantCulture)},{codeElement.Name}");
+                                }
+                            }
+
+                            // FNF:<number of functions found>
+                            reportTextWriter.WriteLine($"FNF:{file.TotalCodeElements.ToString(CultureInfo.InvariantCulture)}");
+
+                            // FNH:<number of function hit>
+                            reportTextWriter.WriteLine($"FNH:{file.CoveredCodeElements.ToString(CultureInfo.InvariantCulture)}");
+
+                            foreach (var branchesOfLine in file.BranchesByLine)
+                            {
+                                foreach (var branch in branchesOfLine.Value)
+                                {
+                                    string visits = branch.BranchVisits > 0 ? branch.BranchVisits.ToString(CultureInfo.InvariantCulture) : "-";
+
+                                    // BRDA:<line number>,<block number>,<branch number>,<taken>
+                                    reportTextWriter.WriteLine($"BRDA:{branchesOfLine.Key.ToString(CultureInfo.InvariantCulture)},{branchesOfLine.Key.ToString(CultureInfo.InvariantCulture)},{branchCounter++.ToString(CultureInfo.InvariantCulture)},{visits}");
+                                }
+                            }
+
+                            // BRF:<number of branches found>
+                            reportTextWriter.WriteLine($"BRF:{file.TotalBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)}");
+
+                            // BRH:<number of branches hit>
+                            reportTextWriter.WriteLine($"BRH:{file.CoveredBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)}");
 
                             int coveredLines = 0;
                             int instrumentedLines = 0;
@@ -85,6 +127,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
                                 if (coverage >= 0)
                                 {
+                                    // DA:<line number>,<execution count>[,<checksum>]
                                     reportTextWriter.WriteLine($"DA:{i.ToString(CultureInfo.InvariantCulture)},{coverage.ToString(CultureInfo.InvariantCulture)}");
 
                                     instrumentedLines++;
@@ -96,13 +139,26 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                                 }
                             }
 
-                            // LF:<number of instrumented lines>
-                            reportTextWriter.WriteLine($"LF:{instrumentedLines.ToString(CultureInfo.InvariantCulture)}");
-
                             // LH:<number of lines with a non-zero execution count>
                             reportTextWriter.WriteLine($"LH:{coveredLines.ToString(CultureInfo.InvariantCulture)}");
 
+                            // LF:<number of instrumented lines>
+                            reportTextWriter.WriteLine($"LF:{instrumentedLines.ToString(CultureInfo.InvariantCulture)}");
+
                             reportTextWriter.WriteLine("end_of_record");
+
+                            /*
+                             *        Branch coverage summaries are stored in two lines:
+
+         BRF:<number of branches found>
+         BRH:<number of branches hit>
+BRDA: 8,43,0,1
+BRDA: 8,43,1,1
+BRF: 2
+BRH: 2*/
+
+
+
                         }
                     }
                 }

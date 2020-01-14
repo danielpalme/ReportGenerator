@@ -62,6 +62,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.4.1.0
+
+    * New: Issue #309: Added branch information to lcov output format
+
 4.4.0.0
 
     * New: Issue #304: Added new output format JSONSummary

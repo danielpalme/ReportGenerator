@@ -28,7 +28,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         private readonly HashSet<MethodMetric> methodMetrics = new HashSet<MethodMetric>();
 
         /// <summary>
-        /// The code elements..
+        /// The code elements.
         /// </summary>
         private readonly HashSet<CodeElement> codeElements = new HashSet<CodeElement>();
 
@@ -146,6 +146,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// Gets line visit status by line number for this file.
         /// </summary>
         public ReadOnlyCollection<LineVisitStatus> LineVisitStatus => Array.AsReadOnly(this.lineVisitStatus);
+
+        /// <summary>
+        /// Gets the branches by line number.
+        /// </summary>
+        public IDictionary<int, ICollection<Branch>> BranchesByLine => this.branches ?? new Dictionary<int, ICollection<Branch>>();
 
         /// <summary>
         /// Gets the number of covered branches.
