@@ -146,19 +146,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                             reportTextWriter.WriteLine($"LF:{instrumentedLines.ToString(CultureInfo.InvariantCulture)}");
 
                             reportTextWriter.WriteLine("end_of_record");
-
-                            /*
-                             *        Branch coverage summaries are stored in two lines:
-
-         BRF:<number of branches found>
-         BRH:<number of branches hit>
-BRDA: 8,43,0,1
-BRDA: 8,43,1,1
-BRF: 2
-BRH: 2*/
-
-
-
                         }
                     }
                 }
