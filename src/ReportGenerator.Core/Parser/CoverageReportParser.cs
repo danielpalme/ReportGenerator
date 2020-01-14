@@ -159,9 +159,9 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         {
             Interlocked.Increment(ref this.mergeCount);
             int currentProgress = this.mergeCount;
-            Logger.Info($"Start merge result {currentProgress}");
+            Logger.InfoFormat(Resources.StartingMergingResult, currentProgress);
             result1.Merge(result2);
-            Logger.Info($"Finished merge result {currentProgress}");
+            Logger.InfoFormat(Resources.FinishedMergingResult, currentProgress);
         }
 
         /// <summary>
@@ -196,7 +196,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                                 collection.Add(parserResult);
                             }
 
-                            Logger.Info($"Finished parsing {reportFile}...");
+                            if (!parserResults.Any() && reportFile.EndsWith(".coverage", StringComparison.OrdinalIgnoreCase))
+                            {
+                                Logger.WarnFormat(Resources.ErrorCoverageFormat, reportFile);
+                            }
+
+                            Logger.InfoFormat(Resources.FinishedParsingFile, reportFile, number, reportFiles.Count);
                         }
                         catch (Exception ex) when (!(ex is UnsupportedParserException))
                         {
@@ -206,7 +211,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 }
                 finally
                 {
-                    Logger.Info($"Parsing of {reportFiles.Count} files completed.");
+                    Logger.InfoFormat(Resources.ParsingCompleted, reportFiles.Count);
                     collection.CompleteAdding();
                 }
             });
