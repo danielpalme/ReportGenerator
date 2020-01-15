@@ -59,9 +59,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                 if (line.StartsWith("SF:"))
                 {
-                    string fileName = line.Substring(line.IndexOf(":") + 1)
-                        .Replace('\\', Path.DirectorySeparatorChar)
-                        .Replace('/', Path.DirectorySeparatorChar);
+                    string fileName = line.Substring(line.IndexOf(":") + 1);
+
+                    if (!fileName.StartsWith("http://") && !fileName.StartsWith("https://"))
+                    {
+                        fileName = fileName
+                            .Replace('\\', Path.DirectorySeparatorChar)
+                            .Replace('/', Path.DirectorySeparatorChar);
+                    }
 
                     if (!this.FileFilter.IsElementIncludedInReport(fileName))
                     {

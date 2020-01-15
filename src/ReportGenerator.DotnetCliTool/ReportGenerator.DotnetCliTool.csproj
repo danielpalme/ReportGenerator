@@ -7,8 +7,8 @@
     <AssemblyName>dotnet-reportgenerator</AssemblyName>
     <RootNamespace>Palmmedia.ReportGenerator</RootNamespace>
     <StartupObject>Palmmedia.ReportGenerator.DotnetCliTool.Program</StartupObject>
-    <AssemblyVersion>4.4.1.0</AssemblyVersion>
-    <FileVersion>4.4.1.0</FileVersion>
+    <AssemblyVersion>4.4.2.0</AssemblyVersion>
+    <FileVersion>4.4.2.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

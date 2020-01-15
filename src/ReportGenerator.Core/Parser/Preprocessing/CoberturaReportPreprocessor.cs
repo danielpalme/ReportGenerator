@@ -65,6 +65,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
                 foreach (var @class in classes)
                 {
                     var fileNameAttribute = @class.Attribute("filename");
+
+                    if (fileNameAttribute.Value.StartsWith("http://") || fileNameAttribute.Value.StartsWith("https://"))
+                    {
+                        continue;
+                    }
+
                     string path = Path.Combine(sources[0], fileNameAttribute.Value)
                         .Replace('\\', Path.DirectorySeparatorChar)
                         .Replace('/', Path.DirectorySeparatorChar);
@@ -75,9 +81,15 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
             {
                 foreach (var @class in classes)
                 {
+                    var fileNameAttribute = @class.Attribute("filename");
+
+                    if (fileNameAttribute.Value.StartsWith("http://") || fileNameAttribute.Value.StartsWith("https://"))
+                    {
+                        continue;
+                    }
+
                     foreach (var source in sources)
                     {
-                        var fileNameAttribute = @class.Attribute("filename");
                         string path = Path.Combine(source, fileNameAttribute.Value)
                             .Replace('\\', Path.DirectorySeparatorChar)
                             .Replace('/', Path.DirectorySeparatorChar);

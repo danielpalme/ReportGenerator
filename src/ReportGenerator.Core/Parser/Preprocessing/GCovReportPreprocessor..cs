@@ -70,6 +70,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
         /// <returns>The full path of the file.</returns>
         private string GetFullFilePath(string fileName)
         {
+            if (fileName.StartsWith("http://") || fileName.StartsWith("https://"))
+            {
+                return fileName;
+            }
+
             fileName = fileName
                 .Replace('\\', Path.DirectorySeparatorChar)
                 .Replace('/', Path.DirectorySeparatorChar);
