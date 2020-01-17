@@ -62,6 +62,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.4.3.0
+
+    * Fix: Issue #311: Improved lcov support
+
 4.4.2.0
 
     * Fix: Issue #310: Disabled path normalization for remote files

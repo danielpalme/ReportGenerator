@@ -53,6 +53,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
         private void ProcessAssembly(Assembly assembly, string[] lines)
         {
+            var classesByPath = new Dictionary<string, Class>();
+
             for (int i = 1; i < lines.Length; i++)
             {
                 string line = lines[i];
@@ -84,7 +86,15 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                     this.ProcessClass(@class, fileName, lines, ref i);
 
-                    assembly.AddClass(@class);
+                    if (classesByPath.TryGetValue(fileName, out Class existingClass))
+                    {
+                        existingClass.Merge(@class);
+                    }
+                    else
+                    {
+                        assembly.AddClass(@class);
+                        classesByPath.Add(fileName, @class);
+                    }
                 }
             }
         }
