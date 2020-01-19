@@ -117,7 +117,6 @@ namespace Palmmedia.ReportGenerator.Core
                     return false;
                 }
 
-
                 Logger.Debug(Resources.Settings);
                 Logger.Debug(" " + JsonSerializer.ToJsonString(settings));
                 Logger.Debug(" " + JsonSerializer.ToJsonString(riskHotspotsAnalysisThresholds));

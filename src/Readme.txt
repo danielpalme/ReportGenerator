@@ -62,6 +62,11 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.4.4.0
+
+    * Fix: Upgraded ReportGenerator.Core package for usage with .NET Core 3.x
+    * New: Issue #312: Added more badges
+
 4.4.3.0
 
     * Fix: Issue #311: Improved lcov support

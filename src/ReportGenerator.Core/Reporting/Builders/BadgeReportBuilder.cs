@@ -132,6 +132,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         private const string CoverageTooltip = @"<rect class=""{0}"" x=""90"" y=""0"" width=""65"" height=""20"" fill-opacity=""0""><title>{1}</title></rect>";
 
         /// <summary>
+        /// The SVG template (Shields IO format).
+        /// </summary>
+        private const string ShieldsIoTemplate = @"<svg xmlns=""http://www.w3.org/2000/svg"" xmlns:xlink=""http://www.w3.org/1999/xlink"" width=""{0}"" height=""20""><linearGradient id=""b"" x2=""0"" y2=""100%""><stop offset=""0"" stop-color=""#bbb"" stop-opacity="".1""/><stop offset=""1"" stop-opacity="".1""/></linearGradient><clipPath id=""a""><rect width=""{0}"" height=""20"" rx=""3"" fill=""#fff""/></clipPath><g clip-path=""url(#a)""><path fill=""#555"" d=""M0 0h61v20H0z""/><path fill=""#{1}"" d=""M61 0h{2}v20H61z""/><path fill=""url(#b)"" d=""M0 0h{0}v20H0z""/></g><g fill=""#fff"" text-anchor=""middle"" font-family=""DejaVu Sans,Verdana,Geneva,sans-serif"" font-size=""110""> <text x=""315"" y=""150"" fill=""#010101"" fill-opacity="".3"" transform=""scale(.1)"" textLength=""510"">coverage</text><text x=""315"" y=""140"" transform=""scale(.1)"" textLength=""510"">coverage</text><text x=""{3}"" y=""150"" fill=""#010101"" fill-opacity="".3"" transform=""scale(.1)"" textLength=""{4}"">100%</text><text x=""{3}"" y=""140"" transform=""scale(.1)"" textLength=""{4}"">{5}%</text></g></svg>";
+
+        /// <summary>
         /// The template for line coverage badge in PNG format.
         /// </summary>
         private const string LineCoveragePngTemplate = "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";
@@ -140,6 +145,21 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// The template for branch coverage badge in PNG format.
         /// </summary>
         private const string BranchCoveragePngTemplate = "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";
+
+        /// <summary>
+        /// Colors for ShiedsIo badges.
+        /// </summary>
+        private static readonly Tuple<string, string>[] ShieldIoColors = new[]
+            {
+                Tuple.Create("brightgreen", "4CC61E"),
+                Tuple.Create("green", "97C50F"),
+                Tuple.Create("yellowgreen", "A3A52A"),
+                Tuple.Create("yellow", "D9B226"),
+                Tuple.Create("orange", "E87435"),
+                Tuple.Create("red", "CA553E"),
+                Tuple.Create("lightgrey", "9F9F9F"),
+                Tuple.Create("blue", "0374B5"),
+            };
 
         /// <summary>
         /// The Logger.
@@ -191,6 +211,17 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 File.WriteAllText(
                     targetPath,
                     this.CreateSvgBadge(summaryResult, true, false));
+
+                foreach (var color in ShieldIoColors)
+                {
+                    targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, $"badge_shieldsio_linecoverage_{color.Item1}.svg");
+
+                    Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
+
+                    File.WriteAllText(
+                        targetPath,
+                        this.CreateShieldsIoSvgBadge(summaryResult.CoverageQuota.Value, color.Item2));
+                }
             }
 
             if (summaryResult.BranchCoverageQuota.HasValue)
@@ -202,6 +233,17 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 File.WriteAllText(
                     targetPath,
                     this.CreateSvgBadge(summaryResult, false, true));
+
+                foreach (var color in ShieldIoColors)
+                {
+                    targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, $"badge_shieldsio_branchcoverage_{color.Item1}.svg");
+
+                    Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
+
+                    File.WriteAllText(
+                        targetPath,
+                        this.CreateShieldsIoSvgBadge(summaryResult.BranchCoverageQuota.Value, color.Item2));
+                }
             }
 
             if (summaryResult.CoverageQuota.HasValue && summaryResult.BranchCoverageQuota.HasValue)
@@ -241,7 +283,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <summary>
         /// Renderes the SVG.
         /// </summary>
-        /// <param name="summaryResult">Indicates whether </param>
+        /// <param name="summaryResult">The summary result.</param>
         /// <param name="includeLineCoverage">Indicates whether line coverage should be included.</param>
         /// <param name="includeBranchCoverage">Indicates whether branch coverage should be included.</param>
         /// <returns>The rendered SVG.</returns>
@@ -264,9 +306,31 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         }
 
         /// <summary>
+        /// Renderes the SVG in ShieldsIO format.
+        /// </summary>
+        /// <param name="coverage">The coverage.</param>
+        /// <param name="backgroundColor">The background color.</param>
+        /// <returns>The rendered SVG.</returns>
+        private string CreateShieldsIoSvgBadge(decimal coverage, string backgroundColor)
+        {
+            coverage = Math.Floor(coverage);
+
+            bool wide = coverage >= 100m;
+
+            return string.Format(
+                ShieldsIoTemplate,
+                wide ? "104" : "96",
+                backgroundColor,
+                wide ? "43" : "35",
+                wide ? "815" : "775",
+                wide ? "330" : "250",
+                coverage.ToString(CultureInfo.InvariantCulture));
+        }
+
+        /// <summary>
         /// Renderes the PNG.
         /// </summary>
-        /// <param name="summaryResult">Indicates whether </param>
+        /// <param name="summaryResult">The summary result.</param>
         /// <param name="lineCoverage">Indicates whether line coverage or branch coverage should be displayed.</param>
         /// <returns>The rendered PNG.</returns>
         private byte[] CreatePngBadge(SummaryResult summaryResult, bool lineCoverage)
