@@ -149,6 +149,10 @@ Badges in SVG and PNG format can be generated if `-reporttypes:Badges` is used:
 ![GitHub All Releases](https://img.shields.io/github/downloads/danielpalme/ReportGenerator/total.svg?label=GitHub)
 ![Chocolatey](https://img.shields.io/chocolatey/dt/reportgenerator.portable.svg?label=Chocolatey)
 
+### Trends
+[Nuget downloads](https://nugettrends.com/packages?months=24&ids=ReportGenerator&ids=dotnet-reportgenerator-globaltool&ids=ReportGenerator.Core&ids=dotnet-reportgenerator-cli)  
+[GitHub stars](https://star-history.t9t.io/#danielpalme/ReportGenerator)
+
 ## Contact
 
 Author: Daniel Palme  
