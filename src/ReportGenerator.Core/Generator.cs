@@ -277,7 +277,7 @@ namespace Palmmedia.ReportGenerator.Core
 
                 return builder.Build();
             }
-            catch (FileLoadException)
+            catch (IOException)
             {
                 // This can happen when excuted within MSBuild (dotnet msbuild): JSON configuration gets ignored
                 var builder = new ConfigurationBuilder()

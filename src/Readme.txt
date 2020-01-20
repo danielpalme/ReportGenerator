@@ -62,6 +62,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.4.5.0
+
+    * Fix: Upgraded ReportGenerator.Core package for usage with .NET Core 3.x
+
 4.4.4.0
 
     * Fix: Upgraded ReportGenerator.Core package for usage with .NET Core 3.x
