@@ -25,7 +25,8 @@ namespace Palmmedia.ReportGenerator.Core
         {
             args = NormalizeArgs(args);
 
-            if (!args.Any(a => "-verbosity:off".Equals(a, System.StringComparison.OrdinalIgnoreCase)))
+            if (args.Any(a => "-verbosity:verbose".Equals(a, System.StringComparison.OrdinalIgnoreCase))
+                || !args.Any(a => a.StartsWith("-verbosity:")))
             {
                 Logger.Debug(Resources.Arguments);
 

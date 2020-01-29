@@ -64,6 +64,7 @@ CHANGELOG
 
 4.4.6.0
 
+    * Fix: Issue #307: Removed argument logging for all log levels except 'Verbose'
     * Fix: Issue #316: Improved lcov support
 
 4.4.5.0
