@@ -62,6 +62,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.4.7.0
+
+    * Fix: Issue #320: TeamCitySummary: Corrected reporting of branches
+
 4.4.6.0
 
     * Fix: Issue #307: Removed argument logging for all log levels except 'Verbose'
