@@ -48,7 +48,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 .ToList();
 
             WriteStatistics('S', summaryResult.CoveredLines, summaryResult.CoverableLines);
-            WriteStatistics('B', summaryResult.CoveredBranches.GetValueOrDefault(), summaryResult.TotalBranches.GetValueOrDefault());
+            WriteStatistics('R', summaryResult.CoveredBranches.GetValueOrDefault(), summaryResult.TotalBranches.GetValueOrDefault());
             WriteStatistics('C', allClasses.Count(y => y.CoveredLines > 0), allClasses.Count);
             WriteStatistics('M', summaryResult.CoveredCodeElements, summaryResult.TotalCodeElements);
         }
