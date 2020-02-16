@@ -73,7 +73,7 @@
             "label": "Assembly filters",
             "defaultValue": "+*",
             "required": false,
-            "helpMarkDown": "Optional list of assemblies that should be included or excluded in the report."
+            "helpMarkDown": "Optional list of assemblies that should be included or excluded in the report. Exclusion filters take precedence over inclusion filters. Wildcards are allowed."
         },
         {
             "name": "classfilters",
