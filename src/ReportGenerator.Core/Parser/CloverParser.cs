@@ -230,6 +230,28 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 int lineNumber = int.Parse(method.Attribute("num").Value, CultureInfo.InvariantCulture);
 
                 codeFile.AddCodeElement(new CodeElement(methodName, CodeElementType.Method, lineNumber, lineNumber));
+
+                var complexity = method.Attribute("complexity");
+
+                if (complexity != null)
+                {
+                    var metrics = new List<Metric>()
+                    {
+                        new Metric(
+                            ReportResources.CyclomaticComplexity,
+                            ParserBase.CyclomaticComplexityUri,
+                            MetricType.CodeQuality,
+                            decimal.Parse(complexity.Value, CultureInfo.InvariantCulture),
+                            MetricMergeOrder.LowerIsBetter)
+                    };
+
+                    var methodMetric = new MethodMetric(methodName, methodName, metrics)
+                    {
+                        Line = lineNumber
+                    };
+
+                    codeFile.AddMethodMetric(methodMetric);
+                }
             }
         }
     }

@@ -22,6 +22,7 @@ ReportGenerator supports merging several reports into one.
 The following output formats are supported by ReportGenerator:
 
 -Html, HtmlSummary, HtmlInline, HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Dark, HtmlChart, MHtml
+-Clover
 -Cobertura
 -SonarQube
 -lcov
@@ -61,6 +62,10 @@ For further details take a look at LICENSE.txt.
 =======================================================================
 
 CHANGELOG
+
+4.5.0.0
+
+    * New: Issue #323: Added new output format Clover
 
 4.4.7.0
 
