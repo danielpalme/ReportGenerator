@@ -159,9 +159,9 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         {
             Interlocked.Increment(ref this.mergeCount);
             int currentProgress = this.mergeCount;
-            Logger.InfoFormat(Resources.StartingMergingResult, currentProgress);
+            Logger.DebugFormat(Resources.StartingMergingResult, currentProgress);
             result1.Merge(result2);
-            Logger.InfoFormat(Resources.FinishedMergingResult, currentProgress);
+            Logger.DebugFormat(Resources.FinishedMergingResult, currentProgress);
         }
 
         /// <summary>
@@ -183,7 +183,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     reportFile =>
                     {
                         int number = Interlocked.Increment(ref counter);
-                        Logger.InfoFormat(Resources.LoadingReport, reportFile, number, reportFiles.Count);
+                        Logger.DebugFormat(Resources.LoadingReport, reportFile, number, reportFiles.Count);
                         try
                         {
                             string line1 = File.ReadLines(reportFile).First();
@@ -201,17 +201,17 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                                 Logger.WarnFormat(Resources.ErrorCoverageFormat, reportFile);
                             }
 
-                            Logger.InfoFormat(Resources.FinishedParsingFile, reportFile, number, reportFiles.Count);
+                            Logger.DebugFormat(Resources.FinishedParsingFile, reportFile, number, reportFiles.Count);
                         }
                         catch (Exception ex) when (!(ex is UnsupportedParserException))
                         {
-                            Logger.ErrorFormat(" " + Resources.ErrorDuringReadingReport, reportFile, GetHumanReadableFileSize(reportFile), ex.GetExceptionMessageForDisplay());
+                            Logger.ErrorFormat(Resources.ErrorDuringReadingReport, reportFile, GetHumanReadableFileSize(reportFile), ex.GetExceptionMessageForDisplay());
                         }
                     });
                 }
                 finally
                 {
-                    Logger.InfoFormat(Resources.ParsingCompleted, reportFiles.Count);
+                    Logger.DebugFormat(Resources.ParsingCompleted, reportFiles.Count);
                     collection.CompleteAdding();
                 }
             });
@@ -262,10 +262,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             {
                 foreach (var item in elements)
                 {
-                    Logger.Debug(" " + Resources.PreprocessingReport);
+                    Logger.Debug(Resources.PreprocessingReport);
                     new OpenCoverReportPreprocessor().Execute(item);
 
-                    Logger.DebugFormat(" " + Resources.InitiatingParser, "OpenCover");
+                    Logger.DebugFormat(Resources.InitiatingParser, "OpenCover");
                     yield return new OpenCoverParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
                 }
 
@@ -278,10 +278,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             {
                 foreach (var item in elements)
                 {
-                    Logger.Debug(" " + Resources.PreprocessingReport);
+                    Logger.Debug(Resources.PreprocessingReport);
                     new DotCoverReportPreprocessor().Execute(item);
 
-                    Logger.DebugFormat(" " + Resources.InitiatingParser, "dotCover");
+                    Logger.DebugFormat(Resources.InitiatingParser, "dotCover");
                     yield return new DotCoverParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
                 }
 
@@ -294,10 +294,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             {
                 foreach (var item in elements)
                 {
-                    Logger.Debug(" " + Resources.PreprocessingReport);
+                    Logger.Debug(Resources.PreprocessingReport);
                     new JaCoCoReportPreprocessor(this.sourceDirectories).Execute(item);
 
-                    Logger.DebugFormat(" " + Resources.InitiatingParser, "JaCoCo");
+                    Logger.DebugFormat(Resources.InitiatingParser, "JaCoCo");
                     var result = new JaCoCoParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
 
                     foreach (var sourceDirectory in this.sourceDirectories)
@@ -319,15 +319,15 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 {
                     if (item.Attribute("profilerVersion") != null)
                     {
-                        Logger.DebugFormat(" " + Resources.InitiatingParser, "NCover");
+                        Logger.DebugFormat(Resources.InitiatingParser, "NCover");
                         yield return new NCoverParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
                     }
                     else if (item.Attribute("clover") != null || item.Attribute("generated") != null)
                     {
-                        Logger.Debug(" " + Resources.PreprocessingReport);
+                        Logger.Debug(Resources.PreprocessingReport);
                         new CloverReportPreprocessor(this.sourceDirectories).Execute(item);
 
-                        Logger.DebugFormat(" " + Resources.InitiatingParser, "Clover");
+                        Logger.DebugFormat(Resources.InitiatingParser, "Clover");
                         var result = new CloverParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
 
                         foreach (var sourceDirectory in this.sourceDirectories)
@@ -339,15 +339,15 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     }
                     else if (item.Attributes().Count() > 1)
                     {
-                        Logger.Debug(" " + Resources.PreprocessingReport);
+                        Logger.Debug(Resources.PreprocessingReport);
                         new CoberturaReportPreprocessor().Execute(item);
 
-                        Logger.DebugFormat(" " + Resources.InitiatingParser, "Cobertura");
+                        Logger.DebugFormat(Resources.InitiatingParser, "Cobertura");
                         yield return new CoberturaParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
                     }
                     else
                     {
-                        Logger.DebugFormat(" " + Resources.InitiatingParser, "mprof");
+                        Logger.DebugFormat(Resources.InitiatingParser, "mprof");
                         yield return new MProfParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
                     }
                 }
@@ -361,7 +361,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             {
                 foreach (var item in elements)
                 {
-                    Logger.DebugFormat(" " + Resources.InitiatingParser, "Visual Studio");
+                    Logger.DebugFormat(Resources.InitiatingParser, "Visual Studio");
                     new VisualStudioReportPreprocessor().Execute(item);
 
                     yield return new VisualStudioParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
@@ -378,7 +378,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 {
                     if (item.Element("modules") != null)
                     {
-                        Logger.DebugFormat(" " + Resources.InitiatingParser, "Dynamic Code Coverage");
+                        Logger.DebugFormat(Resources.InitiatingParser, "Dynamic Code Coverage");
                         new DynamicCodeCoverageReportPreprocessor().Execute(item);
 
                         yield return new DynamicCodeCoverageParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
@@ -404,16 +404,16 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             if (lines[0].StartsWith("TN:") || lines[0].StartsWith("SF:"))
             {
-                Logger.DebugFormat(" " + Resources.InitiatingParser, "LCov");
+                Logger.DebugFormat(Resources.InitiatingParser, "LCov");
 
                 yield return new LCovParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(lines);
             }
             else if (lines[0].Contains(GCovParser.SourceElementInFirstLine))
             {
-                Logger.Debug(" " + Resources.PreprocessingReport);
+                Logger.Debug(Resources.PreprocessingReport);
                 new GCovReportPreprocessor(this.sourceDirectories).Execute(lines);
 
-                Logger.DebugFormat(" " + Resources.InitiatingParser, "GCov");
+                Logger.DebugFormat(Resources.InitiatingParser, "GCov");
                 var result = new GCovParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(lines);
 
                 foreach (var sourceDirectory in this.sourceDirectories)

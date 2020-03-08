@@ -206,7 +206,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             {
                 string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_linecoverage.svg");
 
-                Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
+                Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
                 File.WriteAllText(
                     targetPath,
@@ -216,7 +216,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 {
                     targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, $"badge_shieldsio_linecoverage_{color.Item1}.svg");
 
-                    Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
+                    Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
                     File.WriteAllText(
                         targetPath,
@@ -228,7 +228,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             {
                 string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_branchcoverage.svg");
 
-                Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
+                Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
                 File.WriteAllText(
                     targetPath,
@@ -238,7 +238,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 {
                     targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, $"badge_shieldsio_branchcoverage_{color.Item1}.svg");
 
-                    Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
+                    Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
                     File.WriteAllText(
                         targetPath,
@@ -250,7 +250,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             {
                 string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_combined.svg");
 
-                Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
+                Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
                 File.WriteAllText(
                     targetPath,
@@ -261,7 +261,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             {
                 string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_linecoverage.png");
 
-                Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
+                Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
                 File.WriteAllBytes(
                     targetPath,
@@ -272,7 +272,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             {
                 string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_branchcoverage.png");
 
-                Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
+                Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
                 File.WriteAllBytes(
                     targetPath,

@@ -87,7 +87,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         {
             string assemblyName = module.Attribute("name").Value;
 
-            Logger.DebugFormat("  " + Resources.CurrentAssembly, assemblyName);
+            Logger.DebugFormat(Resources.CurrentAssembly, assemblyName);
 
             var classes = module
                 .Elements("functions")

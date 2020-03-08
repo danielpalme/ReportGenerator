@@ -81,7 +81,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <returns>The <see cref="Assembly"/>.</returns>
         private Assembly ProcessAssembly(XElement[] modules, string assemblyName)
         {
-            Logger.DebugFormat("  " + Resources.CurrentAssembly, assemblyName);
+            Logger.DebugFormat(Resources.CurrentAssembly, assemblyName);
 
             var classNames = modules
                 .Where(m => m.Attribute("name").Value.Equals(assemblyName))

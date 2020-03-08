@@ -89,7 +89,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         {
             string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "SonarQube.xml");
 
-            Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
+            Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
             this.document.Save(targetPath);
         }

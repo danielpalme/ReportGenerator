@@ -151,7 +151,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 this.ReportContext.ReportConfiguration.TargetDirectory,
                 "Summary.xml");
 
-            Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
+            Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
             result.Save(targetPath);
         }

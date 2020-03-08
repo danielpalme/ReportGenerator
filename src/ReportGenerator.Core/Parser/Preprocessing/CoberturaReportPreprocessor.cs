@@ -29,7 +29,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
             {
                 if (report.Descendants("packages").Elements("class").Any())
                 {
-                    Logger.Error("  " + Resources.ErrorInvalidCoberturaReport);
+                    Logger.Error(Resources.ErrorInvalidCoberturaReport);
 
                     // Fix malformed report files (See issues: #192, #209)
                     foreach (var packagesElement in report.Descendants("packages").ToArray())

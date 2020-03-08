@@ -66,6 +66,7 @@ CHANGELOG
 4.5.1.0
 
     * New: Issue #324: Removed image urls for HTML inline reports
+    * New: Issue #326: Reduced verbosity of logs for Info level
 
 4.5.0.0
 

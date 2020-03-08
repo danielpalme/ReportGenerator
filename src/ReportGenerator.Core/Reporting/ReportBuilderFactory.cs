@@ -57,7 +57,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
         /// </returns>
         public IEnumerable<IReportBuilder> GetReportBuilders(IReportContext reportContext)
         {
-            Logger.InfoFormat(Resources.InitializingReportBuilders, string.Join(", ", reportContext.ReportConfiguration.ReportTypes));
+            Logger.DebugFormat(Resources.InitializingReportBuilders, string.Join(", ", reportContext.ReportConfiguration.ReportTypes));
 
             var reportBuilders = this.pluginLoader.LoadInstancesOfType<IReportBuilder>()
                 .Where(r => reportContext.ReportConfiguration.ReportTypes.Contains(r.ReportType, StringComparer.OrdinalIgnoreCase))
@@ -85,12 +85,12 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
 
                     if (nonDefaultParsers.Length > 1)
                     {
-                        Logger.WarnFormat(" " + Resources.SeveralCustomReportBuildersWithSameReportType, reportBuilderGroup.Key);
+                        Logger.WarnFormat(Resources.SeveralCustomReportBuildersWithSameReportType, reportBuilderGroup.Key);
                     }
 
                     if (nonDefaultParsers.Length < reportBuilderGroup.Count())
                     {
-                        Logger.WarnFormat(" " + Resources.DefaultReportBuilderReplaced, reportBuilderGroup.Key);
+                        Logger.WarnFormat(Resources.DefaultReportBuilderReplaced, reportBuilderGroup.Key);
                     }
                 }
             }

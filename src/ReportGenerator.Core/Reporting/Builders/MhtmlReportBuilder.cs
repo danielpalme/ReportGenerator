@@ -136,7 +136,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         {
             string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "Summary.mht");
 
-            Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
+            Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
             using (var writer = new StreamWriter(new FileStream(targetPath, FileMode.Create)))
             {

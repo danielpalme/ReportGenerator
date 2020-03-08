@@ -142,7 +142,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 this.ReportContext.ReportConfiguration.TargetDirectory,
                 GetClassReportFilename(@class.Assembly.Name, @class.Name));
 
-            Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
+            Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
             result.Save(targetPath);
         }

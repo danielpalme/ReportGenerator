@@ -129,7 +129,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 targetPath = Path.Combine(targetDirectory, fileName);
             }
 
-            Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
+            Logger.InfoFormat(Resources.WritingReportFile, targetPath);
             this.CreateTextWriter(targetPath);
 
             using (var cssStream = this.GetCombinedCss())
@@ -154,7 +154,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             string targetPath = GetClassReportFilename(assemblyName, className);
 
-            Logger.DebugFormat("  " + Resources.WritingReportFile, targetPath);
+            Logger.DebugFormat(Resources.WritingReportFile, targetPath);
             this.CreateTextWriter(Path.Combine(targetDirectory, targetPath));
 
             using (var cssStream = this.GetCombinedCss())

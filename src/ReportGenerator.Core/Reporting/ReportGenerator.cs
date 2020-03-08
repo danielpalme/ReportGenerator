@@ -60,7 +60,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
         {
             int numberOfClasses = this.parserResult.Assemblies.Sum(a => a.Classes.Count());
 
-            Logger.InfoFormat(Resources.AnalyzingClasses, numberOfClasses);
+            Logger.DebugFormat(Resources.AnalyzingClasses, numberOfClasses);
 
             int counter = 0;
 
@@ -71,7 +71,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
                     counter++;
 
                     Logger.DebugFormat(
-                        " " + Resources.CreatingReport,
+                        Resources.CreatingReport,
                         counter,
                         numberOfClasses,
                         @class.Assembly.ShortName,
@@ -97,7 +97,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
                             catch (Exception ex)
                             {
                                 Logger.ErrorFormat(
-                                    "  " + Resources.ErrorDuringRenderingClassReport,
+                                    Resources.ErrorDuringRenderingClassReport,
                                     @class.Name,
                                     renderer.ReportType,
                                     ex.GetExceptionMessageForDisplay());
@@ -106,7 +106,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
                 }
             }
 
-            Logger.Debug(" " + Resources.CreatingSummary);
+            Logger.Debug(Resources.CreatingSummary);
             SummaryResult summaryResult = new SummaryResult(this.parserResult);
 
             foreach (var renderer in this.renderers)
@@ -118,7 +118,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
                 catch (Exception ex)
                 {
                     Logger.ErrorFormat(
-                        "  " + Resources.ErrorDuringRenderingSummaryReport,
+                        Resources.ErrorDuringRenderingSummaryReport,
                         renderer.ReportType,
                         ex.GetExceptionMessageForDisplay());
                 }

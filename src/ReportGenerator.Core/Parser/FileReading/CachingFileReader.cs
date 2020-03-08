@@ -104,7 +104,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
             }
             catch (Exception ex)
             {
-                error = string.Format(CultureInfo.InvariantCulture, " " + Resources.ErrorDuringReadingFile, path, ex.GetExceptionMessageForDisplay());
+                error = string.Format(CultureInfo.InvariantCulture, Resources.ErrorDuringReadingFile, path, ex.GetExceptionMessageForDisplay());
                 return null;
             }
         }

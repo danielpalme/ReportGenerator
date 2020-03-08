@@ -94,7 +94,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.History
             }
             catch (Exception ex)
             {
-                Logger.ErrorFormat(" " + Resources.ErrorDuringSavingHistoricReport, fileName, ex.GetExceptionMessageForDisplay());
+                Logger.ErrorFormat(Resources.ErrorDuringSavingHistoricReport, fileName, ex.GetExceptionMessageForDisplay());
             }
         }
     }

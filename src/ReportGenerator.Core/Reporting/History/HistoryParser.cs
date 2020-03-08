@@ -82,7 +82,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.History
             }
             catch (Exception ex)
             {
-                Logger.ErrorFormat(" " + Resources.ErrorDuringReadingHistoricReports, ex.GetExceptionMessageForDisplay());
+                Logger.ErrorFormat(Resources.ErrorDuringReadingHistoricReports, ex.GetExceptionMessageForDisplay());
                 return;
             }
 
@@ -94,7 +94,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.History
                 {
                     try
                     {
-                        Logger.InfoFormat(" " + Resources.ParseHistoricFile, file);
+                        Logger.InfoFormat(Resources.ParseHistoricFile, file);
                         var document = this.LoadXDocument(file);
 
                         DateTime date = DateTime.ParseExact(document.Root.Attribute("date").Value, "yyyy-MM-dd_HH-mm-ss", CultureInfo.InvariantCulture);
@@ -108,7 +108,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.History
                     }
                     catch (Exception ex)
                     {
-                        Logger.ErrorFormat(" " + Resources.ErrorDuringReadingHistoricReport, file, ex.GetExceptionMessageForDisplay());
+                        Logger.ErrorFormat(Resources.ErrorDuringReadingHistoricReport, file, ex.GetExceptionMessageForDisplay());
                     }
                 });
         }

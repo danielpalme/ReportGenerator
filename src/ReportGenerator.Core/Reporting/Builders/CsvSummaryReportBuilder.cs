@@ -58,7 +58,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "Summary.csv");
 
-            Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
+            Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
             using (var reportTextWriter = new StreamWriter(new FileStream(targetPath, FileMode.Create), Encoding.UTF8))
             {
