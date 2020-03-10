@@ -56,6 +56,7 @@ Parameters:
     [["]-classfilters:<(+|-)filter>[;<(+|-)filter>][;<(+|-)filter>]["]]
     [["]-filefilters:<(+|-)filter>[;<(+|-)filter>][;<(+|-)filter>]["]]
     [["]-verbosity:<Verbose|Info|Warning|Error|Off>["]]
+    [["]-title:<title>["]]
     [["]-tag:<tag>["]]
 
 Explanations:
@@ -79,6 +80,7 @@ Explanations:
                        Wildcards are allowed.
    Verbosity:          The verbosity level of the log messages.
                        Values: Verbose, Info, Warning, Error, Off
+   Title:              Optional title.
    Tag:                Optional tag or build version.
 
 Default values:
@@ -90,7 +92,7 @@ Default values:
 
 Examples:
    "-reports:coverage.xml" "-targetdir:C:\report"
-   "-reports:target\*\*.xml" "-targetdir:C:\report" -reporttypes:Latex;HtmlSummary -tag:v1.4.5
+   "-reports:target\*\*.xml" "-targetdir:C:\report" -reporttypes:Latex;HtmlSummary -title:IntegrationTest -tag:v1.4.5
    "-reports:coverage1.xml;coverage2.xml" "-targetdir:report" "-sourcedirs:C:\MyProject" -plugins:CustomReports.dll
    "-reports:coverage.xml" "-targetdir:C:\report" "-assemblyfilters:+Included;-Excluded.*"
 ```

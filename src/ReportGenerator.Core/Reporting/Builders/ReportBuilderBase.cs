@@ -52,9 +52,18 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 throw new ArgumentNullException(nameof(fileAnalyses));
             }
 
-            reportRenderer.BeginClassReport(this.ReportContext.ReportConfiguration.TargetDirectory, @class.Assembly.ShortName, @class.Name);
+            string additionalTitle = this.ReportContext.ReportConfiguration.Title != null ? $"{this.ReportContext.ReportConfiguration.Title} - " : null;
 
-            reportRenderer.HeaderWithBackLink(ReportResources.Summary);
+            reportRenderer.BeginClassReport(this.ReportContext.ReportConfiguration.TargetDirectory, @class.Assembly.ShortName, @class.Name, additionalTitle);
+
+            if (this.ReportContext.ReportConfiguration.Title != null)
+            {
+                reportRenderer.HeaderWithBackLink($"{ReportResources.Summary} - {this.ReportContext.ReportConfiguration.Title}");
+            }
+            else
+            {
+                reportRenderer.HeaderWithBackLink(ReportResources.Summary);
+            }
 
             reportRenderer.BeginKeyValueTable();
             reportRenderer.KeyValueRow(ReportResources.Class, @class.Name);
@@ -174,8 +183,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 throw new ArgumentNullException(nameof(summaryResult));
             }
 
-            reportRenderer.BeginSummaryReport(this.ReportContext.ReportConfiguration.TargetDirectory, null, ReportResources.Summary);
-            reportRenderer.HeaderWithGithubLinks(ReportResources.Summary);
+            string title = this.ReportContext.ReportConfiguration.Title != null ? $"{ReportResources.Summary} - {this.ReportContext.ReportConfiguration.Title}" : ReportResources.Summary;
+
+            reportRenderer.BeginSummaryReport(this.ReportContext.ReportConfiguration.TargetDirectory, null, title);
+            reportRenderer.HeaderWithGithubLinks(title);
 
             reportRenderer.BeginKeyValueTable();
             reportRenderer.KeyValueRow(ReportResources.GeneratedOn, DateTime.Now.ToShortDateString() + " - " + DateTime.Now.ToLongTimeString());

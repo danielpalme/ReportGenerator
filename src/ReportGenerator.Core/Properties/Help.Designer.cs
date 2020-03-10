@@ -19,7 +19,7 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Help {
@@ -88,101 +88,128 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reports:            The coverage reports that should be parsed (separated by semicolon). Globbing is supported..
+        ///   Looks up a localized string similar to Assembly filters:   Optional list of assemblies that should be included or excluded in the report..
         /// </summary>
-        internal static string Explanations1 {
+        internal static string Explanations_AssemblyFilters {
             get {
-                return ResourceManager.GetString("Explanations1", resourceCulture);
+                return ResourceManager.GetString("Explanations_AssemblyFilters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Class filters:      Optional list of classes that should be included or excluded in the report..
+        /// </summary>
+        internal static string Explanations_ClassFilters {
+            get {
+                return ResourceManager.GetString("Explanations_ClassFilters", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to File filters:       Optional list of files that should be included or excluded in the report..
         /// </summary>
-        internal static string Explanations10 {
+        internal static string Explanations_FileFilters {
             get {
-                return ResourceManager.GetString("Explanations10", resourceCulture);
+                return ResourceManager.GetString("Explanations_FileFilters", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to                     Exclusion filters take precedence over inclusion filters. Wildcards are allowed..
         /// </summary>
-        internal static string Explanations11 {
+        internal static string Explanations_FiltersCommon {
             get {
-                return ResourceManager.GetString("Explanations11", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Verbosity:          The verbosity level of the log messages..
-        /// </summary>
-        internal static string Explanations12 {
-            get {
-                return ResourceManager.GetString("Explanations12", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tag:                Optional tag or build version..
-        /// </summary>
-        internal static string Explanations13 {
-            get {
-                return ResourceManager.GetString("Explanations13", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Plugins:            Optional plugin files for custom reports or custom history storage (separated by semicolon)..
-        /// </summary>
-        internal static string Explanations14 {
-            get {
-                return ResourceManager.GetString("Explanations14", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Source directories: Optional directories which contain the corresponding source code (separated by semicolon)..
-        /// </summary>
-        internal static string Explanations15 {
-            get {
-                return ResourceManager.GetString("Explanations15", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Target directory:   The directory where the generated report should be saved..
-        /// </summary>
-        internal static string Explanations2 {
-            get {
-                return ResourceManager.GetString("Explanations2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Report types:       The output formats and scope (separated by semicolon)..
-        /// </summary>
-        internal static string Explanations3 {
-            get {
-                return ResourceManager.GetString("Explanations3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to                     The source directories are used if coverage report contains classes without path information..
-        /// </summary>
-        internal static string Explanations5 {
-            get {
-                return ResourceManager.GetString("Explanations5", resourceCulture);
+                return ResourceManager.GetString("Explanations_FiltersCommon", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to History directory:  Optional directory for storing persistent coverage information..
         /// </summary>
-        internal static string Explanations6 {
+        internal static string Explanations_HistoryDirectory {
             get {
-                return ResourceManager.GetString("Explanations6", resourceCulture);
+                return ResourceManager.GetString("Explanations_HistoryDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plugins:            Optional plugin files for custom reports or custom history storage (separated by semicolon)..
+        /// </summary>
+        internal static string Explanations_Plugins {
+            get {
+                return ResourceManager.GetString("Explanations_Plugins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reports:            The coverage reports that should be parsed (separated by semicolon). Globbing is supported..
+        /// </summary>
+        internal static string Explanations_Reports {
+            get {
+                return ResourceManager.GetString("Explanations_Reports", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report types:       The output formats and scope (separated by semicolon)..
+        /// </summary>
+        internal static string Explanations_ReportTypes {
+            get {
+                return ResourceManager.GetString("Explanations_ReportTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Source directories: Optional directories which contain the corresponding source code (separated by semicolon)..
+        /// </summary>
+        internal static string Explanations_SourceDirectories {
+            get {
+                return ResourceManager.GetString("Explanations_SourceDirectories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to                     The source directories are used if coverage report contains classes without path information..
+        /// </summary>
+        internal static string Explanations_SourceDirectories2 {
+            get {
+                return ResourceManager.GetString("Explanations_SourceDirectories2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tag:                Optional tag or build version..
+        /// </summary>
+        internal static string Explanations_Tag {
+            get {
+                return ResourceManager.GetString("Explanations_Tag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target directory:   The directory where the generated report should be saved..
+        /// </summary>
+        internal static string Explanations_TargetDirectory {
+            get {
+                return ResourceManager.GetString("Explanations_TargetDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title:              Optional title..
+        /// </summary>
+        internal static string Explanations_Title {
+            get {
+                return ResourceManager.GetString("Explanations_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verbosity:          The verbosity level of the log messages..
+        /// </summary>
+        internal static string Explanations_Verbosity {
+            get {
+                return ResourceManager.GetString("Explanations_Verbosity", resourceCulture);
             }
         }
         
@@ -196,24 +223,6 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Assembly filters:   Optional list of assemblies that should be included or excluded in the report..
-        /// </summary>
-        internal static string Explanations8 {
-            get {
-                return ResourceManager.GetString("Explanations8", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Class filters:      Optional list of classes that should be included or excluded in the report..
-        /// </summary>
-        internal static string Explanations9 {
-            get {
-                return ResourceManager.GetString("Explanations9", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Parameters:.
         /// </summary>
         internal static string Parameters {
@@ -223,101 +232,110 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [&quot;]-reports:&lt;report&gt;[;&lt;report&gt;][;&lt;report&gt;][&quot;].
-        /// </summary>
-        internal static string Parameters1 {
-            get {
-                return ResourceManager.GetString("Parameters1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [[&quot;]-tag:&lt;tag&gt;[&quot;]].
-        /// </summary>
-        internal static string Parameters10 {
-            get {
-                return ResourceManager.GetString("Parameters10", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [[&quot;]-plugins:&lt;plugin&gt;[;&lt;plugin&gt;][;&lt;plugin&gt;][&quot;]].
-        /// </summary>
-        internal static string Parameters11 {
-            get {
-                return ResourceManager.GetString("Parameters11", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [[&quot;]-sourcedirs:&lt;directory&gt;[;&lt;directory&gt;][;&lt;directory&gt;][&quot;]].
-        /// </summary>
-        internal static string Parameters12 {
-            get {
-                return ResourceManager.GetString("Parameters12", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [&quot;]-targetdir:&lt;target directory&gt;[&quot;].
-        /// </summary>
-        internal static string Parameters2 {
-            get {
-                return ResourceManager.GetString("Parameters2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [[&quot;]-reporttypes:&lt;{0}&gt;[;&lt;{0}&gt;][&quot;]]&quot;.
-        /// </summary>
-        internal static string Parameters3 {
-            get {
-                return ResourceManager.GetString("Parameters3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [[&quot;]-historydir:&lt;history directory&gt;[&quot;]].
-        /// </summary>
-        internal static string Parameters5 {
-            get {
-                return ResourceManager.GetString("Parameters5", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to [[&quot;]-assemblyfilters:&lt;(+|-)filter&gt;[;&lt;(+|-)filter&gt;][;&lt;(+|-)filter&gt;][&quot;]].
         /// </summary>
-        internal static string Parameters6 {
+        internal static string Parameters_AssemblyFilters {
             get {
-                return ResourceManager.GetString("Parameters6", resourceCulture);
+                return ResourceManager.GetString("Parameters_AssemblyFilters", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to [[&quot;]-classfilters:&lt;(+|-)filter&gt;[;&lt;(+|-)filter&gt;][;&lt;(+|-)filter&gt;][&quot;]].
         /// </summary>
-        internal static string Parameters7 {
+        internal static string Parameters_ClassFilters {
             get {
-                return ResourceManager.GetString("Parameters7", resourceCulture);
+                return ResourceManager.GetString("Parameters_ClassFilters", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to [[&quot;]-filefilters:&lt;(+|-)filter&gt;[;&lt;(+|-)filter&gt;][;&lt;(+|-)filter&gt;][&quot;]].
         /// </summary>
-        internal static string Parameters8 {
+        internal static string Parameters_FileFilters {
             get {
-                return ResourceManager.GetString("Parameters8", resourceCulture);
+                return ResourceManager.GetString("Parameters_FileFilters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [[&quot;]-historydir:&lt;history directory&gt;[&quot;]].
+        /// </summary>
+        internal static string Parameters_HistoryDirectory {
+            get {
+                return ResourceManager.GetString("Parameters_HistoryDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [[&quot;]-plugins:&lt;plugin&gt;[;&lt;plugin&gt;][;&lt;plugin&gt;][&quot;]].
+        /// </summary>
+        internal static string Parameters_Plugins {
+            get {
+                return ResourceManager.GetString("Parameters_Plugins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [&quot;]-reports:&lt;report&gt;[;&lt;report&gt;][;&lt;report&gt;][&quot;].
+        /// </summary>
+        internal static string Parameters_Reports {
+            get {
+                return ResourceManager.GetString("Parameters_Reports", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [[&quot;]-reporttypes:&lt;{0}&gt;[;&lt;{0}&gt;][&quot;]]&quot;.
+        /// </summary>
+        internal static string Parameters_ReportTypes {
+            get {
+                return ResourceManager.GetString("Parameters_ReportTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [[&quot;]-sourcedirs:&lt;directory&gt;[;&lt;directory&gt;][;&lt;directory&gt;][&quot;]].
+        /// </summary>
+        internal static string Parameters_SourceDirectories {
+            get {
+                return ResourceManager.GetString("Parameters_SourceDirectories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [[&quot;]-tag:&lt;tag&gt;[&quot;]].
+        /// </summary>
+        internal static string Parameters_Tag {
+            get {
+                return ResourceManager.GetString("Parameters_Tag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [&quot;]-targetdir:&lt;target directory&gt;[&quot;].
+        /// </summary>
+        internal static string Parameters_TargetDirectory {
+            get {
+                return ResourceManager.GetString("Parameters_TargetDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [[&quot;]-title:&lt;title&gt;[&quot;]].
+        /// </summary>
+        internal static string Parameters_Title {
+            get {
+                return ResourceManager.GetString("Parameters_Title", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to [[&quot;]-verbosity:&lt;{0}&gt;[&quot;]].
         /// </summary>
-        internal static string Parameters9 {
+        internal static string Parameters_Verbosity {
             get {
-                return ResourceManager.GetString("Parameters9", resourceCulture);
+                return ResourceManager.GetString("Parameters_Verbosity", resourceCulture);
             }
         }
         

@@ -14,6 +14,7 @@ async function executeReportGenerator(): Promise<number> {
     .arg('-classfilters:' + (tl.getInput('classfilters') || ''))
     .arg('-filefilters:' + (tl.getInput('filefilters') || ''))
     .arg('-verbosity:' + (tl.getInput('verbosity') || ''))
+    .arg('-title:' + (tl.getInput('title') || ''))
     .arg('-tag:' + (tl.getInput('tag') || ''));
 
     return await tool.exec();

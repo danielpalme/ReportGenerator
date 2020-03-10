@@ -126,82 +126,88 @@
   <data name="Explanations" xml:space="preserve">
     <value>Explanations:</value>
   </data>
-  <data name="Explanations1" xml:space="preserve">
-    <value>Reports:            The coverage reports that should be parsed (separated by semicolon). Globbing is supported.</value>
-  </data>
-  <data name="Explanations10" xml:space="preserve">
-    <value>File filters:       Optional list of files that should be included or excluded in the report.</value>
-  </data>
-  <data name="Explanations11" xml:space="preserve">
-    <value>                    Exclusion filters take precedence over inclusion filters. Wildcards are allowed.</value>
-  </data>
-  <data name="Explanations12" xml:space="preserve">
-    <value>Verbosity:          The verbosity level of the log messages.</value>
-  </data>
-  <data name="Explanations13" xml:space="preserve">
-    <value>Tag:                Optional tag or build version.</value>
-  </data>
-  <data name="Explanations14" xml:space="preserve">
-    <value>Plugins:            Optional plugin files for custom reports or custom history storage (separated by semicolon).</value>
-  </data>
-  <data name="Explanations15" xml:space="preserve">
-    <value>Source directories: Optional directories which contain the corresponding source code (separated by semicolon).</value>
-  </data>
-  <data name="Explanations2" xml:space="preserve">
-    <value>Target directory:   The directory where the generated report should be saved.</value>
-  </data>
-  <data name="Explanations3" xml:space="preserve">
-    <value>Report types:       The output formats and scope (separated by semicolon).</value>
-  </data>
-  <data name="Explanations5" xml:space="preserve">
-    <value>                    The source directories are used if coverage report contains classes without path information.</value>
-  </data>
-  <data name="Explanations6" xml:space="preserve">
-    <value>History directory:  Optional directory for storing persistent coverage information.</value>
-  </data>
   <data name="Explanations7" xml:space="preserve">
     <value>                    Can be used in future reports to show coverage evolution.</value>
   </data>
-  <data name="Explanations8" xml:space="preserve">
+  <data name="Explanations_AssemblyFilters" xml:space="preserve">
     <value>Assembly filters:   Optional list of assemblies that should be included or excluded in the report.</value>
   </data>
-  <data name="Explanations9" xml:space="preserve">
+  <data name="Explanations_ClassFilters" xml:space="preserve">
     <value>Class filters:      Optional list of classes that should be included or excluded in the report.</value>
+  </data>
+  <data name="Explanations_FileFilters" xml:space="preserve">
+    <value>File filters:       Optional list of files that should be included or excluded in the report.</value>
+  </data>
+  <data name="Explanations_FiltersCommon" xml:space="preserve">
+    <value>                    Exclusion filters take precedence over inclusion filters. Wildcards are allowed.</value>
+  </data>
+  <data name="Explanations_HistoryDirectory" xml:space="preserve">
+    <value>History directory:  Optional directory for storing persistent coverage information.</value>
+  </data>
+  <data name="Explanations_Plugins" xml:space="preserve">
+    <value>Plugins:            Optional plugin files for custom reports or custom history storage (separated by semicolon).</value>
+  </data>
+  <data name="Explanations_Reports" xml:space="preserve">
+    <value>Reports:            The coverage reports that should be parsed (separated by semicolon). Globbing is supported.</value>
+  </data>
+  <data name="Explanations_ReportTypes" xml:space="preserve">
+    <value>Report types:       The output formats and scope (separated by semicolon).</value>
+  </data>
+  <data name="Explanations_SourceDirectories" xml:space="preserve">
+    <value>Source directories: Optional directories which contain the corresponding source code (separated by semicolon).</value>
+  </data>
+  <data name="Explanations_SourceDirectories2" xml:space="preserve">
+    <value>                    The source directories are used if coverage report contains classes without path information.</value>
+  </data>
+  <data name="Explanations_Tag" xml:space="preserve">
+    <value>Tag:                Optional tag or build version.</value>
+  </data>
+  <data name="Explanations_TargetDirectory" xml:space="preserve">
+    <value>Target directory:   The directory where the generated report should be saved.</value>
+  </data>
+  <data name="Explanations_Title" xml:space="preserve">
+    <value>Title:              Optional title.</value>
+  </data>
+  <data name="Explanations_Verbosity" xml:space="preserve">
+    <value>Verbosity:          The verbosity level of the log messages.</value>
   </data>
   <data name="Parameters" xml:space="preserve">
     <value>Parameters:</value>
   </data>
-  <data name="Parameters1" xml:space="preserve">
-    <value>["]-reports:&lt;report&gt;[;&lt;report&gt;][;&lt;report&gt;]["]</value>
-  </data>
-  <data name="Parameters10" xml:space="preserve">
-    <value>[["]-tag:&lt;tag&gt;["]]</value>
-  </data>
-  <data name="Parameters11" xml:space="preserve">
-    <value>[["]-plugins:&lt;plugin&gt;[;&lt;plugin&gt;][;&lt;plugin&gt;]["]]</value>
-  </data>
-  <data name="Parameters12" xml:space="preserve">
-    <value>[["]-sourcedirs:&lt;directory&gt;[;&lt;directory&gt;][;&lt;directory&gt;]["]]</value>
-  </data>
-  <data name="Parameters2" xml:space="preserve">
-    <value>["]-targetdir:&lt;target directory&gt;["]</value>
-  </data>
-  <data name="Parameters3" xml:space="preserve">
-    <value>[["]-reporttypes:&lt;{0}&gt;[;&lt;{0}&gt;]["]]"</value>
-  </data>
-  <data name="Parameters5" xml:space="preserve">
-    <value>[["]-historydir:&lt;history directory&gt;["]]</value>
-  </data>
-  <data name="Parameters6" xml:space="preserve">
+  <data name="Parameters_AssemblyFilters" xml:space="preserve">
     <value>[["]-assemblyfilters:&lt;(+|-)filter&gt;[;&lt;(+|-)filter&gt;][;&lt;(+|-)filter&gt;]["]]</value>
   </data>
-  <data name="Parameters7" xml:space="preserve">
+  <data name="Parameters_ClassFilters" xml:space="preserve">
     <value>[["]-classfilters:&lt;(+|-)filter&gt;[;&lt;(+|-)filter&gt;][;&lt;(+|-)filter&gt;]["]]</value>
   </data>
-  <data name="Parameters8" xml:space="preserve">
+  <data name="Parameters_FileFilters" xml:space="preserve">
     <value>[["]-filefilters:&lt;(+|-)filter&gt;[;&lt;(+|-)filter&gt;][;&lt;(+|-)filter&gt;]["]]</value>
   </data>
-  <data name="Parameters9" xml:space="preserve">
+  <data name="Parameters_HistoryDirectory" xml:space="preserve">
+    <value>[["]-historydir:&lt;history directory&gt;["]]</value>
+  </data>
+  <data name="Parameters_Plugins" xml:space="preserve">
+    <value>[["]-plugins:&lt;plugin&gt;[;&lt;plugin&gt;][;&lt;plugin&gt;]["]]</value>
+  </data>
+  <data name="Parameters_Reports" xml:space="preserve">
+    <value>["]-reports:&lt;report&gt;[;&lt;report&gt;][;&lt;report&gt;]["]</value>
+  </data>
+  <data name="Parameters_ReportTypes" xml:space="preserve">
+    <value>[["]-reporttypes:&lt;{0}&gt;[;&lt;{0}&gt;]["]]"</value>
+  </data>
+  <data name="Parameters_SourceDirectories" xml:space="preserve">
+    <value>[["]-sourcedirs:&lt;directory&gt;[;&lt;directory&gt;][;&lt;directory&gt;]["]]</value>
+  </data>
+  <data name="Parameters_Tag" xml:space="preserve">
+    <value>[["]-tag:&lt;tag&gt;["]]</value>
+  </data>
+  <data name="Parameters_TargetDirectory" xml:space="preserve">
+    <value>["]-targetdir:&lt;target directory&gt;["]</value>
+  </data>
+  <data name="Parameters_Title" xml:space="preserve">
+    <value>[["]-title:&lt;title&gt;["]]</value>
+  </data>
+  <data name="Parameters_Verbosity" xml:space="preserve">
     <value>[["]-verbosity:&lt;{0}&gt;["]]</value>
   </data>
   <data name="ReportTypeValues" xml:space="preserve">

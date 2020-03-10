@@ -29,6 +29,7 @@ namespace Palmmedia.ReportGenerator.Core
             var classFilters = new string[] { };
             var fileFilters = new string[] { };
             string verbosityLevel = null;
+            string title = null;
             string tag = null;
 
             string value = null;
@@ -91,6 +92,11 @@ namespace Palmmedia.ReportGenerator.Core
                 verbosityLevel = value;
             }
 
+            if (namedArguments.TryGetValue("TITLE", out value))
+            {
+                title = value;
+            }
+
             if (namedArguments.TryGetValue("TAG", out value))
             {
                 tag = value;
@@ -107,7 +113,8 @@ namespace Palmmedia.ReportGenerator.Core
                 classFilters,
                 fileFilters,
                 verbosityLevel,
-                tag);
+                tag,
+                title);
         }
 
         /// <summary>

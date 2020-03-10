@@ -148,7 +148,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="targetDirectory">The target directory.</param>
         /// <param name="assemblyName">Name of the assembly.</param>
         /// <param name="className">Name of the class.</param>
-        public void BeginClassReport(string targetDirectory, string assemblyName, string className)
+        /// <param name="additionalTitle">Additional title.</param>
+        public void BeginClassReport(string targetDirectory, string assemblyName, string className, string additionalTitle)
         {
             this.classReport = true;
 
@@ -163,7 +164,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     "<style TYPE=\"text/css\">" + new StreamReader(cssStream).ReadToEnd() + "</style>"
                     : CssLink;
 
-                this.reportTextWriter.WriteLine(HtmlStart, WebUtility.HtmlEncode(className), WebUtility.HtmlEncode(ReportResources.CoverageReport), style);
+                this.reportTextWriter.WriteLine(HtmlStart, WebUtility.HtmlEncode(className), WebUtility.HtmlEncode(additionalTitle + ReportResources.CoverageReport), style);
             }
         }
 

@@ -65,6 +65,19 @@
                         </label>
                     </div>
 
+                    <h3>Source directories</h3>
+                    <div class="alert alert-info">Optional directories which contain the corresponding source code.<br />The source directories are used if coverage report contains classes without path information.</div>
+                    <div class="form-group" ng-repeat="sourcedir in sourcedirectories track by $index">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="The source directory" ng-model="sourcedirectories[$index]" required />
+                            <span class="input-group-addon" ng-click="removeSourceDirectory($index)"><a href=""><i class="fa fa-trash text-danger"></i></a></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <a href="" ng-click="addSourceDirectory()" class="text-info"><i class="fa fa-plus-circle"></i> Add source directory</a>
+                    </div>
+                    <br/>
+
                     <h3>History directory</h3>
                     <div class="alert alert-info">Optional directory for storing <b>persistent</b> coverage information. Choose a directory which does not get deleted between builds.<br/>Required to show the history chart in the HTML reports.</div>
                     <div class="form-group">
@@ -75,9 +88,9 @@
                     <h3>Plugins</h3>
                     <div class="alert alert-info">Optional plugin files for <a href="https://github.com/danielpalme/ReportGenerator/wiki/Custom-reports">custom reports</a> or <a href="https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage">custom history storage</a>.</div>
                     <div class="form-group" ng-repeat="plugin in plugins track by $index">
-                        <div ng-class="{ 'input-group': $index > 0}">
+                        <div class="input-group">
                             <input type="text" class="form-control" placeholder="The path of the plugin" ng-model="plugins[$index]" required />
-                            <span class="input-group-addon" ng-click="removePlugin($index)" ng-if="$index > 0"><a href=""><i class="fa fa-trash text-danger"></i></a></span>
+                            <span class="input-group-addon" ng-click="removePlugin($index)"><a href=""><i class="fa fa-trash text-danger"></i></a></span>
                         </div>
                     </div>
                     <div class="form-group">
@@ -138,6 +151,18 @@
                     <div class="form-group">
                         <select class="form-control" ng-options="verbosity for verbosity in verbosities track by verbosity" ng-model="selectedverbosity"></select>
                     </div>
+
+                    <h3>Title</h3>
+                    <div class="alert alert-info">Optional title.</div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Title" ng-model="title" />
+                    </div>
+
+                    <h3>Tag</h3>
+                    <div class="alert alert-info">Optional tag or build version.</div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Optional tag or build version" ng-model="tag" />
+                    </div>
                 </form>
             </div>
             <div class="col-md-5">
@@ -177,8 +202,8 @@
         var usageApp = angular.module('usageApp', []);
         usageApp.controller('UsageController', function UsageController($scope) {
             $scope.environments = [
-                { name: '.NET Framework', description: 'The full .NET framework' },
                 { name: '.NET Core', description: '.NET Core' },
+                { name: '.NET Framework', description: 'The full .NET framework' }
             ];
             $scope.packages = [
                 {
@@ -192,7 +217,7 @@
                     ],
                     executables: [
                         { runtime: '.NET Framework', tool: '$(UserProfile)\\.nuget\\packages\\reportgenerator\\x.y.z\\tools\\net47\\ReportGenerator.exe' },
-                        { runtime: '.NET Core', tool: 'dotnet $(UserProfile)\\.nuget\\packages\\reportgenerator\\x.y.z\\tools\\netcoreapp2.1\\ReportGenerator.dll' }
+                        { runtime: '.NET Core', tool: 'dotnet $(UserProfile)\\.nuget\\packages\\reportgenerator\\x.y.z\\tools\\netcoreapp3.0\\ReportGenerator.dll' }
                     ]
                 },
                 { 
@@ -245,12 +270,23 @@
                 { name: 'PngChart', description: 'Creates a single PNG file containing a chart with historic coverage information.', requiresHistoryDir: true, checked: false },
                 { name: 'Badges', description: 'Creates three SVG and two PNG files that show line and/or branch coverage information.', requiresHistoryDir: false, checked: false }
             ];
+            $scope.sourcedirectories = [];
             $scope.historydir = null;
             $scope.plugins = [];
             $scope.assemblyfilters = [];
             $scope.classfilters = [];
             $scope.filefilters = [];
             $scope.selectedverbosity = 'Verbose';
+            $scope.title = '';
+            $scope.tag = '';
+
+            $scope.addSourceDirectory = function() {
+                $scope.sourcedirectories.push(null);
+            }
+
+            $scope.removeSourceDirectory = function(index) {
+                $scope.sourcedirectories.splice(index, 1);
+            }
 
             $scope.addReport = function() {
                 $scope.reports.push(null);
@@ -330,6 +366,25 @@
                     result += '\r\n';
                     result += '-reporttypes:';
                     result += checkedreporttypes;
+                }
+                
+                if ($scope.sourcedirectories.length > 0) {
+                    result += '\r\n';
+                    result += '"-sourcedirs:';
+
+                    for (var i = 0; i < $scope.sourcedirectories.length; i++) {
+                        if ($scope.sourcedirectories[i] === null || $scope.sourcedirectories[i] === undefined || $scope.sourcedirectories[i].length === 0) {
+                            continue;
+                        }
+
+                        if (i > 0) {
+                            result += ';';
+                        }
+                        
+                        result += $scope.sourcedirectories[i];
+                    }
+
+                    result += '"';  
                 }
 
                 if ($scope.historydir !== null && $scope.historydir.length > 0) {
@@ -419,6 +474,32 @@
                     result += '\r\n';
                     result += '-verbosity:';
                     result += $scope.selectedverbosity;
+                }
+
+                if ($scope.title !== '') {
+                    result += '\r\n';
+
+                    if ($scope.title.indexOf(' ') > -1) {
+                        result += '"-title:';
+                        result += $scope.title;
+                        result += '"';
+                    } else {
+                        result += '-title:';
+                        result += $scope.title;
+                    }
+                }
+                
+                if ($scope.tag !== '') {
+                    result += '\r\n';
+
+                    if ($scope.tag.indexOf(' ') > -1) {
+                        result += '"-tag:';
+                        result += $scope.tag;
+                        result += '"';
+                    } else {
+                        result += '-tag:';
+                        result += $scope.tag;
+                    }
                 }
 
                 return result;

@@ -299,6 +299,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             public VerbosityLevel VerbosityLevel => this.reportConfiguration.VerbosityLevel;
 
             /// <summary>
+            /// Gets the custom title.
+            /// </summary>
+            public string Title => this.reportConfiguration.Title;
+
+            /// <summary>
             /// Gets the custom tag (e.g. build number).
             /// </summary>
             public string Tag => this.reportConfiguration.Tag;

@@ -122,7 +122,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="targetDirectory">The target directory.</param>
         /// <param name="assemblyName">Name of the assembly.</param>
         /// <param name="className">Name of the class.</param>
-        public void BeginClassReport(string targetDirectory, string assemblyName, string className)
+        /// <param name="additionalTitle">Additional title.</param>
+        public void BeginClassReport(string targetDirectory, string assemblyName, string className, string additionalTitle)
         {
             if (this.classReportTextWriter == null)
             {

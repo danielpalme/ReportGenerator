@@ -78,6 +78,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 }
             }
 
+            if (this.ReportContext.ReportConfiguration.Title != null)
+            {
+                summaryElement.Add(new XElement("Title", this.ReportContext.ReportConfiguration.Title));
+            }
+
             if (this.ReportContext.ReportConfiguration.Tag != null)
             {
                 summaryElement.Add(new XElement("Tag", this.ReportContext.ReportConfiguration.Tag));

@@ -107,6 +107,14 @@
             "helpMarkDown": "The verbosity level of the log messages. Values: Verbose, Info, Warning, Error, Off"
         },
         {
+            "name": "title",
+            "type": "string",
+            "label": "Title",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Optional title."
+        },
+        {
             "name": "tag",
             "type": "string",
             "label": "Tag",
