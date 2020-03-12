@@ -32,9 +32,9 @@ namespace Palmmedia.ReportGenerator.Core.Common
                     return Convert.ToString(obj, CultureInfo.InvariantCulture);
                 }
             }
-            else if (obj is string)
+            else if (obj is string text)
             {
-                return $"\"{obj}\"";
+                return $"\"{EscapeString(text)}\"";
             }
             else
             {
@@ -68,6 +68,11 @@ namespace Palmmedia.ReportGenerator.Core.Common
             }
         }
 
+        /// <summary>
+        /// Escapes string values.
+        /// </summary>
+        /// <param name="input">The input string.</param>
+        /// <returns>The escaped string.</returns>
         public static string EscapeString(string input)
         {
             bool NeedEscape(string src, int i)
@@ -108,9 +113,9 @@ namespace Palmmedia.ReportGenerator.Core.Common
 
                     start = i + 1;
                 }
-
-                sb.Append(input, start, input.Length - start);
             }
+
+            sb.Append(input, start, input.Length - start);
 
             return sb.ToString();
         }

@@ -63,6 +63,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.5.2.0
+
+    * Fix: Issue #331: Fixed string encoding in JsonSummary
+
 4.5.1.0
 
     * New: Issue #324: Removed image urls for HTML inline reports
