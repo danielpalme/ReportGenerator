@@ -116,9 +116,9 @@ namespace Palmmedia.ReportGenerator.Core.Plugin
 
                 var dotnetCorePluginLoaderAssembly = Assembly.LoadFrom(path);
                 var assemblyLoaderType = dotnetCorePluginLoaderAssembly.GetExportedTypes()
-                        .Where(t => typeof(IAssemblyLoader).IsAssignableFrom(t) && t.IsClass && !t.IsAbstract)
+                        .Where(t => t.FullName == "ReportGenerator.DotnetCorePluginLoader.DotNetCoreAssemblyLoader" && t.IsClass && !t.IsAbstract)
                         .Single();
-                return (IAssemblyLoader)Activator.CreateInstance(assemblyLoaderType);
+                return new ReflectionWrapperAssemblyLoader(Activator.CreateInstance(assemblyLoaderType));
             }
 
             return new DefaultAssemblyLoader();

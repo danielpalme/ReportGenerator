@@ -91,7 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Build.Utilities.Core">
-      <Version>16.0.461</Version>
+      <Version>16.5.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

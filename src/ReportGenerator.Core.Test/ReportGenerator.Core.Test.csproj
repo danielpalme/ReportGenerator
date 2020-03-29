@@ -4,8 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <IsPackable>false</IsPackable>
     <RootNamespace>Palmmedia.ReportGenerator.Core.Test</RootNamespace>
-    <AssemblyVersion>4.5.2.0</AssemblyVersion>
-    <FileVersion>4.5.2.0</FileVersion>
+    <AssemblyVersion>4.5.3.0</AssemblyVersion>
+    <FileVersion>4.5.3.0</FileVersion>
   </PropertyGroup>
   
   <ItemGroup>
@@ -26,6 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ReportGenerator.Core\ReportGenerator.Core.csproj" />
     <ProjectReference Include="..\ReportGenerator.DotnetCorePluginLoader\ReportGenerator.DotnetCorePluginLoader.csproj" />
+    <ProjectReference Include="..\ReportGenerator.MSBuild\ReportGenerator.MSBuild.csproj" />
   </ItemGroup>
 
   <ItemGroup>

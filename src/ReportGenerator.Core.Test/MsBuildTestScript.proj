@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="ReportGenerator">
+  <!-- Imported MSBuild tasks -->
+  <UsingTask TaskName="ReportGenerator" AssemblyFile="..\ReportGenerator.MSBuild\bin\$(Configuration)\ReportGenerator.MSBuild.dll" />
+
+  <Target Name="ReportGenerator">
+    <ItemGroup>
+      <CoverageFiles Include="..\Testprojects\CSharp\Reports\Opencover.xml" />
+    </ItemGroup>
+
+    <ReportGenerator ReportFiles="@(CoverageFiles)" ReportTypes="Html" TargetDirectory="bin\$(Configuration)\report" AssemblyFilters="-Moq;-xunit*" HistoryDirectory="bin\$(Comnfiguration)\history" />
+  </Target>
+</Project>
