@@ -22,10 +22,10 @@ steps:
     custom: '--info'
 
 - task: UseDotNet@2
-  displayName: 'Use .NET Core SDK 3.1.102'
+  displayName: 'Use .NET Core SDK 3.1.201'
   inputs:
     packageType: sdk
-    version: 3.1.102
+    version: 3.1.201
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet info'
