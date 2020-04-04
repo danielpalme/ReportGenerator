@@ -467,7 +467,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 {
                     if (branches.TryGetValue(identifier, out var found))
                     {
-                        found.BranchVisits += found.BranchVisits;
+                        found.BranchVisits += vc;
                     }
                     else
                     {
