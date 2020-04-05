@@ -87,6 +87,22 @@ namespace Palmmedia.ReportGenerator.Core.Test
 
             return filesDirectory;
         }
+
+        internal static string GetTestDirectory()
+        {
+            var currentDirectory = new DirectoryInfo(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+            while (true)
+            {
+                currentDirectory = currentDirectory.Parent;
+                string directory = Path.Combine(currentDirectory.FullName, "ReportGenerator.Core.Test");
+
+                if (Directory.Exists(directory))
+                {
+                    return directory;
+                }
+            }
+        }
     }
 
     [CollectionDefinition("FileManager")]

@@ -6,9 +6,7 @@
   </PropertyGroup>
 
   <!-- Imported MSBuild tasks -->
-  <ItemGroup>
-    <PackageReference Include="ReportGenerator" Version="4.5.2" />
-  </ItemGroup>
+  <UsingTask TaskName="ReportGenerator" AssemblyFile="$(MSBuildThisFileDirectory)..\ReportGenerator.Console.NetCore\bin\$(Configuration)\netcoreapp3.0\ReportGenerator.MSBuild.dll" />
 
   <Target Name="ReportGenerator">
     <ItemGroup>
