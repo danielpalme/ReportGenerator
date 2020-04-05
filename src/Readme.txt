@@ -63,6 +63,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.5.4.0
+
+    * Fix: Issue #336: Fix class-level branch coverage for OpenCover
+
 4.5.3.0
 
     * Fix: Issue #335: Workaround for MSBuild task in .NET Core SDK 3.1.20x
