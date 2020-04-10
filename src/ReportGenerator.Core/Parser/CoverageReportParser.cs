@@ -188,8 +188,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         {
                             string line1 = File.ReadLines(reportFile).First();
 
-                            IEnumerable<ParserResult> parserResults = line1.Trim().StartsWith("<")
-                                ? this.ParseXmlFile(reportFile)
+                            List<ParserResult> parserResults = line1.Trim().StartsWith("<")
+                                ? this.ParseXmlFile(reportFile).ToList()
                                 : this.ParseTextFile(File.ReadAllLines(reportFile)).ToList();
                             foreach (ParserResult parserResult in parserResults)
                             {
@@ -272,7 +272,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 yield break;
             }
 
-            elements = this.GetXElements(filePath, "Root").Where(e => e.Attribute("ReportType") != null && e.Attribute("ReportType").Value == "DetailedXml").ToArray();
+            elements = this.GetXElements(filePath, "Root").Where(e => e.Attribute("ReportType") != null).ToArray();
 
             if (elements.Length > 0)
             {

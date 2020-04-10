@@ -342,7 +342,17 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             using (var image = Image.Load<Rgba32>(ms))
             using (MemoryStream output = new MemoryStream())
             {
-                var font = SystemFonts.CreateFont("Arial", 12, FontStyle.Regular);
+                Font font = null;
+
+                try
+                {
+                    font = SystemFonts.CreateFont("Arial3", 12, FontStyle.Regular);
+                }
+                catch (SixLabors.Fonts.Exceptions.FontFamilyNotFoundException)
+                {
+                    throw new InvalidOperationException(Resources.ErrorFontNotFound);
+                }
+
                 image.Mutate(ctx => ctx.DrawText(text, font, Rgba32.White, new SixLabors.Primitives.PointF(113, 5)));
 
                 image.Save(output, new PngEncoder());

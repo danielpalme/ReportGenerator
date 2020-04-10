@@ -2,6 +2,8 @@
 using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
+using Palmmedia.ReportGenerator.Core.Logging;
+using Palmmedia.ReportGenerator.Core.Properties;
 
 namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
 {
@@ -11,11 +13,34 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
     internal class DotCoverReportPreprocessor
     {
         /// <summary>
+        /// The Logger.
+        /// </summary>
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(DotCoverReportPreprocessor));
+
+        /// <summary>
         /// Executes the preprocessing of the report.
         /// </summary>
         /// <param name="report">The report.</param>
         internal void Execute(XContainer report)
         {
+            //report.Elements()..att
+            //if (report..Attribute("ReportType") != null && report.Attribute("ReportType").Value != "DetailedXml")
+            //{
+
+            //}
+
+            bool statementExists = report.Descendants("Assembly")
+               .Elements("Namespace")
+               .Elements("Type")
+               .Descendants("Method")
+               .Elements("Statement")
+               .Any();
+
+            if (!statementExists)
+            {
+                Logger.Error(Resources.ErrorInvalidDotCoverReport);
+            }
+
             foreach (var module in report.Descendants("Assembly").ToArray())
             {
                 MoveStartupCodeElementsToParentType(module);

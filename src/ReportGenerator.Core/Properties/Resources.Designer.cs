@@ -232,11 +232,29 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Font &apos;Arial&apos; is not available. Therefore only SVG badges can be generated. PNG files are omitted..
+        /// </summary>
+        internal static string ErrorFontNotFound {
+            get {
+                return ResourceManager.GetString("ErrorFontNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The Cobertura report is not well formed. The &lt;packages&gt; element should contain &lt;package&gt; elements and not &lt;class&gt; elements..
         /// </summary>
         internal static string ErrorInvalidCoberturaReport {
             get {
                 return ResourceManager.GetString("ErrorInvalidCoberturaReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The dotCover report does not contain line coverage data. Use the dotCover command line parameter &apos;/ReportType=DetailedXML&apos; to capture line coverage..
+        /// </summary>
+        internal static string ErrorInvalidDotCoverReport {
+            get {
+                return ResourceManager.GetString("ErrorInvalidDotCoverReport", resourceCulture);
             }
         }
         

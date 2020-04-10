@@ -63,6 +63,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.5.5.0
+
+    * Fix: Issue #338: Improved error/warning messages
+
 4.5.4.0
 
     * Fix: Issue #336: Fix class-level branch coverage for OpenCover

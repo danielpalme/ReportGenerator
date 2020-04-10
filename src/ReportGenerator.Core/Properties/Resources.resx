@@ -174,8 +174,14 @@
   <data name="ErrorDuringSavingHistoricReport" xml:space="preserve">
     <value>Error during saving historic report '{0}': {1}</value>
   </data>
+  <data name="ErrorFontNotFound" xml:space="preserve">
+    <value>Font 'Arial' is not available. Therefore only SVG badges can be generated. PNG files are omitted.</value>
+  </data>
   <data name="ErrorInvalidCoberturaReport" xml:space="preserve">
     <value>The Cobertura report is not well formed. The &lt;packages&gt; element should contain &lt;package&gt; elements and not &lt;class&gt; elements.</value>
+  </data>
+  <data name="ErrorInvalidDotCoverReport" xml:space="preserve">
+    <value>The dotCover report does not contain line coverage data. Use the dotCover command line parameter '/ReportType=DetailedXML' to capture line coverage.</value>
   </data>
   <data name="ErrorPartCover" xml:space="preserve">
     <value>PartCover is no longer supported. If you want to generate coverage reports based on PartCover, please use version 3.x of ReportGenerator.</value>
