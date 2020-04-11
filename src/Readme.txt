@@ -66,6 +66,7 @@ CHANGELOG
 4.5.5.0
 
     * Fix: Issue #338: Improved error/warning messages
+    * Fix: Issue #339: Badges are now always genererated with text 'N/A' if not available
 
 4.5.4.0
 

@@ -124,7 +124,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <summary>
         /// The template for the coverage text.
         /// </summary>
-        private const string CoverageText = @"<text class=""{0}"" x=""132.5"" y=""15"" fill=""#010101"" fill-opacity="".3"">{1}%</text><text class=""{0}"" x=""132.5"" y=""14"">{1}%</text>";
+        private const string CoverageText = @"<text class=""{0}"" x=""132.5"" y=""15"" fill=""#010101"" fill-opacity="".3"">{1}%</text><text class=""{0}"" x=""132.5"" y=""14"">{1}</text>";
 
         /// <summary>
         /// The template for the coverage tooltip.
@@ -134,7 +134,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <summary>
         /// The SVG template (Shields IO format).
         /// </summary>
-        private const string ShieldsIoTemplate = @"<svg xmlns=""http://www.w3.org/2000/svg"" xmlns:xlink=""http://www.w3.org/1999/xlink"" width=""{0}"" height=""20""><linearGradient id=""b"" x2=""0"" y2=""100%""><stop offset=""0"" stop-color=""#bbb"" stop-opacity="".1""/><stop offset=""1"" stop-opacity="".1""/></linearGradient><clipPath id=""a""><rect width=""{0}"" height=""20"" rx=""3"" fill=""#fff""/></clipPath><g clip-path=""url(#a)""><path fill=""#555"" d=""M0 0h61v20H0z""/><path fill=""#{1}"" d=""M61 0h{2}v20H61z""/><path fill=""url(#b)"" d=""M0 0h{0}v20H0z""/></g><g fill=""#fff"" text-anchor=""middle"" font-family=""DejaVu Sans,Verdana,Geneva,sans-serif"" font-size=""110""> <text x=""315"" y=""150"" fill=""#010101"" fill-opacity="".3"" transform=""scale(.1)"" textLength=""510"">coverage</text><text x=""315"" y=""140"" transform=""scale(.1)"" textLength=""510"">coverage</text><text x=""{3}"" y=""150"" fill=""#010101"" fill-opacity="".3"" transform=""scale(.1)"" textLength=""{4}"">100%</text><text x=""{3}"" y=""140"" transform=""scale(.1)"" textLength=""{4}"">{5}%</text></g></svg>";
+        private const string ShieldsIoTemplate = @"<svg xmlns=""http://www.w3.org/2000/svg"" xmlns:xlink=""http://www.w3.org/1999/xlink"" width=""{0}"" height=""20""><linearGradient id=""b"" x2=""0"" y2=""100%""><stop offset=""0"" stop-color=""#bbb"" stop-opacity="".1""/><stop offset=""1"" stop-opacity="".1""/></linearGradient><clipPath id=""a""><rect width=""{0}"" height=""20"" rx=""3"" fill=""#fff""/></clipPath><g clip-path=""url(#a)""><path fill=""#555"" d=""M0 0h61v20H0z""/><path fill=""#{1}"" d=""M61 0h{2}v20H61z""/><path fill=""url(#b)"" d=""M0 0h{0}v20H0z""/></g><g fill=""#fff"" text-anchor=""middle"" font-family=""DejaVu Sans,Verdana,Geneva,sans-serif"" font-size=""110""> <text x=""315"" y=""150"" fill=""#010101"" fill-opacity="".3"" transform=""scale(.1)"" textLength=""510"">coverage</text><text x=""315"" y=""140"" transform=""scale(.1)"" textLength=""510"">coverage</text><text x=""{3}"" y=""150"" fill=""#010101"" fill-opacity="".3"" transform=""scale(.1)"" textLength=""{4}"">100%</text><text x=""{3}"" y=""140"" transform=""scale(.1)"" textLength=""{4}"">{5}</text></g></svg>";
 
         /// <summary>
         /// The template for line coverage badge in PNG format.
@@ -202,82 +202,66 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 throw new ArgumentNullException(nameof(summaryResult));
             }
 
-            if (summaryResult.CoverageQuota.HasValue)
+            string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_linecoverage.svg");
+
+            Logger.InfoFormat(Resources.WritingReportFile, targetPath);
+
+            File.WriteAllText(
+                targetPath,
+                this.CreateSvgBadge(summaryResult, true, false));
+
+            foreach (var color in ShieldIoColors)
             {
-                string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_linecoverage.svg");
+                targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, $"badge_shieldsio_linecoverage_{color.Item1}.svg");
 
                 Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
                 File.WriteAllText(
                     targetPath,
-                    this.CreateSvgBadge(summaryResult, true, false));
-
-                foreach (var color in ShieldIoColors)
-                {
-                    targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, $"badge_shieldsio_linecoverage_{color.Item1}.svg");
-
-                    Logger.InfoFormat(Resources.WritingReportFile, targetPath);
-
-                    File.WriteAllText(
-                        targetPath,
-                        this.CreateShieldsIoSvgBadge(summaryResult.CoverageQuota.Value, color.Item2));
-                }
+                    this.CreateShieldsIoSvgBadge(summaryResult.CoverageQuota, color.Item2));
             }
 
-            if (summaryResult.BranchCoverageQuota.HasValue)
+            targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_branchcoverage.svg");
+
+            Logger.InfoFormat(Resources.WritingReportFile, targetPath);
+
+            File.WriteAllText(
+                targetPath,
+                this.CreateSvgBadge(summaryResult, false, true));
+
+            foreach (var color in ShieldIoColors)
             {
-                string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_branchcoverage.svg");
+                targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, $"badge_shieldsio_branchcoverage_{color.Item1}.svg");
 
                 Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
                 File.WriteAllText(
                     targetPath,
-                    this.CreateSvgBadge(summaryResult, false, true));
-
-                foreach (var color in ShieldIoColors)
-                {
-                    targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, $"badge_shieldsio_branchcoverage_{color.Item1}.svg");
-
-                    Logger.InfoFormat(Resources.WritingReportFile, targetPath);
-
-                    File.WriteAllText(
-                        targetPath,
-                        this.CreateShieldsIoSvgBadge(summaryResult.BranchCoverageQuota.Value, color.Item2));
-                }
+                    this.CreateShieldsIoSvgBadge(summaryResult.BranchCoverageQuota, color.Item2));
             }
 
-            if (summaryResult.CoverageQuota.HasValue && summaryResult.BranchCoverageQuota.HasValue)
-            {
-                string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_combined.svg");
+            targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_combined.svg");
 
-                Logger.InfoFormat(Resources.WritingReportFile, targetPath);
+            Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
-                File.WriteAllText(
-                    targetPath,
-                    this.CreateSvgBadge(summaryResult, true, true));
-            }
+            File.WriteAllText(
+                targetPath,
+                this.CreateSvgBadge(summaryResult, true, true));
 
-            if (summaryResult.CoverageQuota.HasValue)
-            {
-                string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_linecoverage.png");
+            targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_linecoverage.png");
 
-                Logger.InfoFormat(Resources.WritingReportFile, targetPath);
+            Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
-                File.WriteAllBytes(
-                    targetPath,
-                    this.CreatePngBadge(summaryResult, true));
-            }
+            File.WriteAllBytes(
+                targetPath,
+                this.CreatePngBadge(summaryResult, true));
+            targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_branchcoverage.png");
 
-            if (summaryResult.BranchCoverageQuota.HasValue)
-            {
-                string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "badge_branchcoverage.png");
+            Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
-                Logger.InfoFormat(Resources.WritingReportFile, targetPath);
-
-                File.WriteAllBytes(
-                    targetPath,
-                    this.CreatePngBadge(summaryResult, false));
-            }
+            File.WriteAllBytes(
+                targetPath,
+                this.CreatePngBadge(summaryResult, false));
         }
 
         /// <summary>
@@ -292,6 +276,19 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             string lineCoverageClass = includeLineCoverage && includeBranchCoverage ? "linecoverage" : string.Empty;
             string branchCoverageClass = includeLineCoverage && includeBranchCoverage ? "branchcoverage" : string.Empty;
 
+            string lineCoverage = "N/A";
+            string branchCoverage = "N/A";
+
+            if (summaryResult.CoverageQuota.HasValue)
+            {
+                lineCoverage = $"{summaryResult.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}%";
+            }
+
+            if (summaryResult.BranchCoverageQuota.HasValue)
+            {
+                branchCoverage = $"{summaryResult.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}%";
+            }
+
             return string.Format(
                 Template,
                 ReportResources.CodeCoverage,
@@ -299,8 +296,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 includeBranchCoverage ? string.Format(BranchCoverageSymbol, branchCoverageClass) : string.Empty,
                 $"{ReportResources.GeneratedBy} ReportGenerator {typeof(IReportBuilder).Assembly.GetName().Version}",
                 ReportResources.Coverage3,
-                includeLineCoverage ? string.Format(CoverageText, lineCoverageClass, summaryResult.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture)) : string.Empty,
-                includeBranchCoverage ? string.Format(CoverageText, branchCoverageClass, summaryResult.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)) : string.Empty,
+                includeLineCoverage ? string.Format(CoverageText, lineCoverageClass, lineCoverage) : string.Empty,
+                includeBranchCoverage ? string.Format(CoverageText, branchCoverageClass, branchCoverage) : string.Empty,
                 includeLineCoverage ? string.Format(CoverageTooltip, lineCoverageClass, ReportResources.Coverage) : string.Empty,
                 includeBranchCoverage ? string.Format(CoverageTooltip, branchCoverageClass, ReportResources.BranchCoverage) : string.Empty);
         }
@@ -311,11 +308,17 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <param name="coverage">The coverage.</param>
         /// <param name="backgroundColor">The background color.</param>
         /// <returns>The rendered SVG.</returns>
-        private string CreateShieldsIoSvgBadge(decimal coverage, string backgroundColor)
+        private string CreateShieldsIoSvgBadge(decimal? coverage, string backgroundColor)
         {
-            coverage = Math.Floor(coverage);
+            string text = "N/A";
+            bool wide = false;
 
-            bool wide = coverage >= 100m;
+            if (coverage.HasValue)
+            {
+                coverage = Math.Floor(coverage.Value);
+                text = $"{coverage.Value.ToString(CultureInfo.InvariantCulture)}%";
+                wide = coverage.Value >= 100m;
+            }
 
             return string.Format(
                 ShieldsIoTemplate,
@@ -324,7 +327,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 wide ? "43" : "35",
                 wide ? "815" : "775",
                 wide ? "330" : "250",
-                coverage.ToString(CultureInfo.InvariantCulture));
+                text);
         }
 
         /// <summary>
@@ -336,7 +339,15 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         private byte[] CreatePngBadge(SummaryResult summaryResult, bool lineCoverage)
         {
             string template = lineCoverage ? LineCoveragePngTemplate : BranchCoveragePngTemplate;
-            string text = (lineCoverage ? summaryResult.CoverageQuota.Value : summaryResult.BranchCoverageQuota.Value).ToString(CultureInfo.InvariantCulture) + "%";
+            string text = "N/A";
+
+            decimal? coverage = lineCoverage ? summaryResult.CoverageQuota : summaryResult.BranchCoverageQuota;
+
+            if (coverage.HasValue)
+            {
+                coverage = Math.Floor(coverage.Value);
+                text = $"{coverage.Value.ToString(CultureInfo.InvariantCulture)}%";
+            }
 
             using (var ms = new MemoryStream(Convert.FromBase64String(template)))
             using (var image = Image.Load<Rgba32>(ms))
