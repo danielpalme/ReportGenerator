@@ -63,6 +63,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.5.6.0
+
+    * Fix: Issue #340: Fixed typo in badges
+
 4.5.5.0
 
     * Fix: Issue #338: Improved error/warning messages

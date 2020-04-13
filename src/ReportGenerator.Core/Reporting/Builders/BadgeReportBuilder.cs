@@ -124,7 +124,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <summary>
         /// The template for the coverage text.
         /// </summary>
-        private const string CoverageText = @"<text class=""{0}"" x=""132.5"" y=""15"" fill=""#010101"" fill-opacity="".3"">{1}%</text><text class=""{0}"" x=""132.5"" y=""14"">{1}</text>";
+        private const string CoverageText = @"<text class=""{0}"" x=""132.5"" y=""15"" fill=""#010101"" fill-opacity="".3"">{1}</text><text class=""{0}"" x=""132.5"" y=""14"">{1}</text>";
 
         /// <summary>
         /// The template for the coverage tooltip.
