@@ -63,6 +63,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.5.8.0
+
+    * Fix: Issue #341: Improved parameter handling in MSBuild task
+
 4.5.6.0
 
     * Fix: Issue #340: Fixed typo in badges

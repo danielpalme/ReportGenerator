@@ -266,6 +266,7 @@ namespace Palmmedia.ReportGenerator.Core
         {
             var args = Environment.GetCommandLineArgs()
                 .Where(a => !a.StartsWith("-property:"))
+                .Where(a => !a.StartsWith("-p:"))
                 .ToArray();
 
             try
