@@ -102,8 +102,8 @@ namespace Palmmedia.ReportGenerator.Core
                 // Set log level before validation is performed
                 LoggerFactory.VerbosityLevel = reportConfiguration.VerbosityLevel;
 
-                Logger.Info($"{Resources.Executable}: {typeof(Program).Assembly.Location}");
-                Logger.Info($"{Resources.WorkingDirectory}: {Directory.GetCurrentDirectory()}");
+                Logger.Debug($"{Resources.Executable}: {typeof(Program).Assembly.Location}");
+                Logger.Debug($"{Resources.WorkingDirectory}: {Directory.GetCurrentDirectory()}");
 
                 if (!new ReportConfigurationValidator(reportBuilderFactory).Validate(reportConfiguration))
                 {
