@@ -157,7 +157,8 @@
     <value>Source directories: Optional directories which contain the corresponding source code (separated by semicolon).</value>
   </data>
   <data name="Explanations_SourceDirectories2" xml:space="preserve">
-    <value>                    The source directories are used if coverage report contains classes without path information.</value>
+    <value>                    The source directories are used if coverage report contains classes without path information.
+                        Globbing is not supported.</value>
   </data>
   <data name="Explanations_Tag" xml:space="preserve">
     <value>Tag:                Optional tag or build version.</value>

@@ -169,7 +169,8 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to                     The source directories are used if coverage report contains classes without path information..
+        ///   Looks up a localized string similar to                     The source directories are used if coverage report contains classes without path information.
+        ///                        Globbing is not supported..
         /// </summary>
         internal static string Explanations_SourceDirectories2 {
             get {
