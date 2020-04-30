@@ -70,6 +70,7 @@ Explanations:
                        TextSummary, Xml, XmlSummary
    Source directories: Optional directories which contain the corresponding source code (separated by semicolon).
                        The source directories are used if coverage report contains classes without path information.
+                       Globbing is not supported.
    History directory:  Optional directory for storing persistent coverage information.
                        Can be used in future reports to show coverage evolution.
    Plugins:            Optional plugin files for custom reports or custom history storage (separated by semicolon). 
