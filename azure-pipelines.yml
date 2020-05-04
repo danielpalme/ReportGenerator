@@ -249,9 +249,12 @@ stages:
   jobs:
   - deployment: Deployment
     environment: 'Deployment'
-    steps:
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet info'
-      inputs:
-        command: custom
-        custom: '--info'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: DotNetCoreCLI@2
+            displayName: 'dotnet info'
+            inputs:
+              command: custom
+              custom: '--info'
