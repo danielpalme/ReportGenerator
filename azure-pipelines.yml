@@ -1,8 +1,3 @@
-# .NET Desktop
-# Build and run tests for .NET Desktop or Windows classic desktop solutions.
-# Add steps that publish symbols, save build artifacts, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/apps/windows/dot-net
-
 pool:
   vmImage: 'windows-latest'
 
@@ -13,237 +8,242 @@ variables:
   disable.coverage.autogenerate: 'true'
   version: '4.5.8'
 
-# Prepare
-steps:
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet info'
-  inputs:
-    command: custom
-    custom: '--info'
+stages:
+- stage: Build
+  jobs:
+  - job: Prepare
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet info'
+      inputs:
+        command: custom
+        custom: '--info'
 
-- task: UseDotNet@2
-  displayName: 'Use .NET Core SDK 3.1.201'
-  inputs:
-    packageType: sdk
-    version: 3.1.201
+    - task: UseDotNet@2
+      displayName: 'Use .NET Core SDK 3.1.201'
+      inputs:
+        packageType: sdk
+        version: 3.1.201
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet info'
-  inputs:
-    command: custom
-    custom: '--info'
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet info'
+      inputs:
+        command: custom
+        custom: '--info'
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet version'
-  inputs:
-    command: custom
-    custom: '--version'
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet version'
+      inputs:
+        command: custom
+        custom: '--version'
 
-- task: NuGetToolInstaller@0
-  displayName: 'Use NuGet 5.3.0'
-  inputs:
-    versionSpec: 5.3.0
+    - task: NuGetToolInstaller@0
+      displayName: 'Use NuGet 5.3.0'
+      inputs:
+        versionSpec: 5.3.0
 
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '$(solution)'
+    - task: NuGetCommand@2
+      inputs:
+        restoreSolution: '$(solution)'
 
-# Build
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+  - job: Compile
+    steps:
+    - task: VSBuild@1
+      inputs:
+        solution: '$(solution)'
+        platform: '$(buildPlatform)'
+        configuration: '$(buildConfiguration)'
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet publish Console.NetCore 2.0'
-  inputs:
-    command: publish
-    publishWebProjects: false
-    arguments: '-c $(BuildConfiguration) -f netcoreapp2.0 ReportGenerator.Console.NetCore.csproj'
-    zipAfterPublish: false
-    modifyOutputPath: false
-    workingDirectory: src/ReportGenerator.Console.NetCore
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet publish Console.NetCore 2.0'
+      inputs:
+        command: publish
+        publishWebProjects: false
+        arguments: '-c $(BuildConfiguration) -f netcoreapp2.0 ReportGenerator.Console.NetCore.csproj'
+        zipAfterPublish: false
+        modifyOutputPath: false
+        workingDirectory: src/ReportGenerator.Console.NetCore
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet publish Console.NetCore 2.1'
-  inputs:
-    command: publish
-    publishWebProjects: false
-    arguments: '-c $(BuildConfiguration) -f netcoreapp2.1 ReportGenerator.Console.NetCore.csproj'
-    zipAfterPublish: false
-    modifyOutputPath: false
-    workingDirectory: src/ReportGenerator.Console.NetCore
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet publish Console.NetCore 2.1'
+      inputs:
+        command: publish
+        publishWebProjects: false
+        arguments: '-c $(BuildConfiguration) -f netcoreapp2.1 ReportGenerator.Console.NetCore.csproj'
+        zipAfterPublish: false
+        modifyOutputPath: false
+        workingDirectory: src/ReportGenerator.Console.NetCore
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet publish Console.NetCore 3.0'
-  inputs:
-    command: publish
-    publishWebProjects: false
-    arguments: '-c $(BuildConfiguration) -f netcoreapp3.0 ReportGenerator.Console.NetCore.csproj'
-    zipAfterPublish: false
-    modifyOutputPath: false
-    workingDirectory: src/ReportGenerator.Console.NetCore
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet publish Console.NetCore 3.0'
+      inputs:
+        command: publish
+        publishWebProjects: false
+        arguments: '-c $(BuildConfiguration) -f netcoreapp3.0 ReportGenerator.Console.NetCore.csproj'
+        zipAfterPublish: false
+        modifyOutputPath: false
+        workingDirectory: src/ReportGenerator.Console.NetCore
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet publish ReportGenerator.DotnetCliTool 2.1'
-  inputs:
-    command: publish
-    publishWebProjects: false
-    arguments: '-c $(BuildConfiguration) ReportGenerator.DotnetCliTool.csproj'
-    zipAfterPublish: false
-    modifyOutputPath: false
-    workingDirectory: src/ReportGenerator.DotnetCliTool
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet publish ReportGenerator.DotnetCliTool 2.1'
+      inputs:
+        command: publish
+        publishWebProjects: false
+        arguments: '-c $(BuildConfiguration) ReportGenerator.DotnetCliTool.csproj'
+        zipAfterPublish: false
+        modifyOutputPath: false
+        workingDirectory: src/ReportGenerator.DotnetCliTool
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet publish DotnetGlobalTool 2.1'
-  inputs:
-    command: publish
-    publishWebProjects: false
-    arguments: '-c $(BuildConfiguration) -f netcoreapp2.1 ReportGenerator.DotnetGlobalTool.csproj'
-    zipAfterPublish: false
-    modifyOutputPath: false
-    workingDirectory: src/ReportGenerator.DotnetGlobalTool
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet publish DotnetGlobalTool 2.1'
+      inputs:
+        command: publish
+        publishWebProjects: false
+        arguments: '-c $(BuildConfiguration) -f netcoreapp2.1 ReportGenerator.DotnetGlobalTool.csproj'
+        zipAfterPublish: false
+        modifyOutputPath: false
+        workingDirectory: src/ReportGenerator.DotnetGlobalTool
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet publish DotnetGlobalTool 3.0'
-  inputs:
-    command: publish
-    publishWebProjects: false
-    arguments: '-c $(BuildConfiguration) -f netcoreapp3.0 ReportGenerator.DotnetGlobalTool.csproj'
-    zipAfterPublish: false
-    modifyOutputPath: false
-    workingDirectory: src/ReportGenerator.DotnetGlobalTool
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet publish DotnetGlobalTool 3.0'
+      inputs:
+        command: publish
+        publishWebProjects: false
+        arguments: '-c $(BuildConfiguration) -f netcoreapp3.0 ReportGenerator.DotnetGlobalTool.csproj'
+        zipAfterPublish: false
+        modifyOutputPath: false
+        workingDirectory: src/ReportGenerator.DotnetGlobalTool
 
-# Run tests and create coverage report
-- task: DotNetCoreCLI@2
-  displayName: Test
-  inputs:
-    command: test
-    projects: 'src\ReportGenerator.Core.Test\ReportGenerator.Core.Test.csproj'
-    arguments: '--configuration $(BuildConfiguration) --no-build /p:CollectCoverage=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=opencover%2ccobertura /p:CoverletOutput=../target/reports/coverage/'
+  - job: Run tests and create coverage report
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: Test
+      inputs:
+        command: test
+        projects: 'src\ReportGenerator.Core.Test\ReportGenerator.Core.Test.csproj'
+        arguments: '--configuration $(BuildConfiguration) --no-build /p:CollectCoverage=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=opencover%2ccobertura /p:CoverletOutput=../target/reports/coverage/'
 
-- task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@4
-  displayName: ReportGenerator
-  inputs:
-    reports: 'src\target\reports\coverage\coverage.opencover.xml'
-    targetdir: 'src\target\reports\coverage'
-    reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
-    assemblyfilters: '-xunit*'
+    - task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@4
+      displayName: ReportGenerator
+      inputs:
+        reports: 'src\target\reports\coverage\coverage.opencover.xml'
+        targetdir: 'src\target\reports\coverage'
+        reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
+        assemblyfilters: '-xunit*'
 
-- task: PublishCodeCoverageResults@1
-  displayName: 'Publish code coverage results'
-  inputs:
-    codeCoverageTool: Cobertura
-    summaryFileLocation: '$(build.sourcesdirectory)\src\target\reports\coverage\coverage.cobertura.xml'
-    reportDirectory: '$(build.sourcesdirectory)\src\target\reports\coverage'
+    - task: PublishCodeCoverageResults@1
+      displayName: 'Publish code coverage results'
+      inputs:
+        codeCoverageTool: Cobertura
+        summaryFileLocation: '$(build.sourcesdirectory)\src\target\reports\coverage\coverage.cobertura.xml'
+        reportDirectory: '$(build.sourcesdirectory)\src\target\reports\coverage'
 
-# Create artifacts
-- task: CopyFiles@2
-  displayName: 'Prepare VSIX release: NetCore'
-  inputs:
-    SourceFolder: src/ReportGenerator.Console.NetCore/bin/Release/netcoreapp2.1/publish
-    Contents: '**/*.*'
-    TargetFolder: src/AzureDevopsTask/ReportGenerator/tools/netcoreapp2.1
+  - job: Create artifacts
+    steps:
+    - task: CopyFiles@2
+      displayName: 'Prepare VSIX release: NetCore'
+      inputs:
+        SourceFolder: src/ReportGenerator.Console.NetCore/bin/Release/netcoreapp2.1/publish
+        Contents: '**/*.*'
+        TargetFolder: src/AzureDevopsTask/ReportGenerator/tools/netcoreapp2.1
 
-- task: Npm@1
-  displayName: 'Prepare VSIX release: Install TFS Cross Platform Command Line Interface (tfx-cli)'
-  inputs:
-    workingDir: src/AzureDevopsTask
-    verbose: false
+    - task: Npm@1
+      displayName: 'Prepare VSIX release: Install TFS Cross Platform Command Line Interface (tfx-cli)'
+      inputs:
+        workingDir: src/AzureDevopsTask
+        verbose: false
 
-- task: Npm@1
-  displayName: 'Prepare VSIX release: npm install'
-  inputs:
-    workingDir: src/AzureDevopsTask/ReportGenerator
-    verbose: false
+    - task: Npm@1
+      displayName: 'Prepare VSIX release: npm install'
+      inputs:
+        workingDir: src/AzureDevopsTask/ReportGenerator
+        verbose: false
 
-- task: Npm@1
-  displayName: 'Prepare VSIX release: Compile TypeScript'
-  inputs:
-    command: custom
-    workingDir: src/AzureDevopsTask/ReportGenerator
-    verbose: false
-    customCommand: 'run tsc --'
+    - task: Npm@1
+      displayName: 'Prepare VSIX release: Compile TypeScript'
+      inputs:
+        command: custom
+        workingDir: src/AzureDevopsTask/ReportGenerator
+        verbose: false
+        customCommand: 'run tsc --'
 
-- task: Npm@1
-  displayName: 'Create VSIX release'
-  inputs:
-    command: custom
-    workingDir: src/AzureDevopsTask
-    verbose: false
-    customCommand: 'run tfx -- extension create --manifest-globs vss-extension.json --output-path $(Build.ArtifactStagingDirectory)/vsix'
+    - task: Npm@1
+      displayName: 'Create VSIX release'
+      inputs:
+        command: custom
+        workingDir: src/AzureDevopsTask
+        verbose: false
+        customCommand: 'run tfx -- extension create --manifest-globs vss-extension.json --output-path $(Build.ArtifactStagingDirectory)/vsix'
 
-- task: CopyFiles@2
-  displayName: 'Prepare ZIP release: Basicfiles'
-  inputs:
-    SourceFolder: src/ReportGenerator.Console/bin/Release
-    Contents: |
-     LICENSE.txt
-     Readme.txt
-    TargetFolder: tmpzip
+    - task: CopyFiles@2
+      displayName: 'Prepare ZIP release: Basicfiles'
+      inputs:
+        SourceFolder: src/ReportGenerator.Console/bin/Release
+        Contents: |
+        LICENSE.txt
+        Readme.txt
+        TargetFolder: tmpzip
 
-- task: CopyFiles@2
-  displayName: 'Prepare ZIP release: Net47'
-  inputs:
-    SourceFolder: src/ReportGenerator.Console/bin/Release
-    Contents: |
-     appsettings.json
-     *.dll
-     ReportGenerator.exe
-     ReportGenerator.exe.config
-    TargetFolder: tmpzip/net47
+    - task: CopyFiles@2
+      displayName: 'Prepare ZIP release: Net47'
+      inputs:
+        SourceFolder: src/ReportGenerator.Console/bin/Release
+        Contents: |
+        appsettings.json
+        *.dll
+        ReportGenerator.exe
+        ReportGenerator.exe.config
+        TargetFolder: tmpzip/net47
 
-- task: CopyFiles@2
-  displayName: 'Prepare ZIP release: NetCore 2.0'
-  inputs:
-    SourceFolder: src/ReportGenerator.Console.NetCore/bin/Release/netcoreapp2.0/publish
-    Contents: '**/*.*'
-    TargetFolder: tmpzip/netcoreapp2.0
+    - task: CopyFiles@2
+      displayName: 'Prepare ZIP release: NetCore 2.0'
+      inputs:
+        SourceFolder: src/ReportGenerator.Console.NetCore/bin/Release/netcoreapp2.0/publish
+        Contents: '**/*.*'
+        TargetFolder: tmpzip/netcoreapp2.0
 
-- task: CopyFiles@2
-  displayName: 'Prepare ZIP release: NetCore 2.1'
-  inputs:
-    SourceFolder: src/ReportGenerator.Console.NetCore/bin/Release/netcoreapp2.1/publish
-    Contents: '**/*.*'
-    TargetFolder: tmpzip/netcoreapp2.1
+    - task: CopyFiles@2
+      displayName: 'Prepare ZIP release: NetCore 2.1'
+      inputs:
+        SourceFolder: src/ReportGenerator.Console.NetCore/bin/Release/netcoreapp2.1/publish
+        Contents: '**/*.*'
+        TargetFolder: tmpzip/netcoreapp2.1
 
-- task: CopyFiles@2
-  displayName: 'Prepare ZIP release: NetCore 3.0'
-  inputs:
-    SourceFolder: src/ReportGenerator.Console.NetCore/bin/Release/netcoreapp3.0/publish
-    Contents: '**/*.*'
-    TargetFolder: tmpzip/netcoreapp3.0
+    - task: CopyFiles@2
+      displayName: 'Prepare ZIP release: NetCore 3.0'
+      inputs:
+        SourceFolder: src/ReportGenerator.Console.NetCore/bin/Release/netcoreapp3.0/publish
+        Contents: '**/*.*'
+        TargetFolder: tmpzip/netcoreapp3.0
 
-- task: ArchiveFiles@2
-  displayName: 'Pack ZIP release'
-  inputs:
-    rootFolderOrFile: tmpzip
-    includeRootFolder: false
-    archiveFile: '$(Build.ArtifactStagingDirectory)/zip/ReportGenerator_$(Version).zip'
+    - task: ArchiveFiles@2
+      displayName: 'Pack ZIP release'
+      inputs:
+        rootFolderOrFile: tmpzip
+        includeRootFolder: false
+        archiveFile: '$(Build.ArtifactStagingDirectory)/zip/ReportGenerator_$(Version).zip'
 
-- task: NuGetCommand@2
-  displayName: 'NuGet pack'
-  inputs:
-    command: pack
-    packagesToPack: 'src/Deployment/nuget/*.nuspec'
-    packDestination: '$(Build.ArtifactStagingDirectory)/nuget'
-    versioningScheme: byEnvVar
-    versionEnvVar: Version
+    - task: NuGetCommand@2
+      displayName: 'NuGet pack'
+      inputs:
+        command: pack
+        packagesToPack: 'src/Deployment/nuget/*.nuspec'
+        packDestination: '$(Build.ArtifactStagingDirectory)/nuget'
+        versioningScheme: byEnvVar
+        versionEnvVar: Version
 
-- script: 'mkdir $(Build.ArtifactStagingDirectory)\chocolatey'
-  displayName: 'Prepare Chocolatey pack'
+    - script: 'mkdir $(Build.ArtifactStagingDirectory)\chocolatey'
+      displayName: 'Prepare Chocolatey pack'
 
-- task: gep13.chocolatey-azuredevops.chocolatey-azuredevops.ChocolateyCommand@0
-  displayName: 'Chocolatey pack'
-  inputs:
-    packWorkingDirectory: src/Deployment/chocolatey
-    packNuspecFileName: reportgenerator.portable.nuspec
-    packVersion: $(Version)
-    packOutputDirectory: '$(Build.ArtifactStagingDirectory)/chocolatey'
+    - task: gep13.chocolatey-azuredevops.chocolatey-azuredevops.ChocolateyCommand@0
+      displayName: 'Chocolatey pack'
+      inputs:
+        packWorkingDirectory: src/Deployment/chocolatey
+        packNuspecFileName: reportgenerator.portable.nuspec
+        packVersion: $(Version)
+        packOutputDirectory: '$(Build.ArtifactStagingDirectory)/chocolatey'
 
-# Publish artifacts
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: packages'
-  inputs:
-    ArtifactName: packages
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: packages'
+      inputs:
+        ArtifactName: packages
