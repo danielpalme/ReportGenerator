@@ -11,7 +11,7 @@ variables:
 stages:
 - stage: Build
   jobs:
-  - job: Prepare
+  - job: Build
     steps:
     - task: DotNetCoreCLI@2
       displayName: 'dotnet info'
@@ -46,8 +46,7 @@ stages:
       inputs:
         restoreSolution: '$(solution)'
 
-  - job: Compile
-    steps:
+    # Compile
     - task: VSBuild@1
       inputs:
         solution: '$(solution)'
@@ -114,8 +113,7 @@ stages:
         modifyOutputPath: false
         workingDirectory: src/ReportGenerator.DotnetGlobalTool
 
-  - job: Run_tests_and_create_coverage_report
-    steps:
+    # Run tests and create coverage report'
     - task: DotNetCoreCLI@2
       displayName: Test
       inputs:
@@ -138,8 +136,7 @@ stages:
         summaryFileLocation: '$(build.sourcesdirectory)\src\target\reports\coverage\coverage.cobertura.xml'
         reportDirectory: '$(build.sourcesdirectory)\src\target\reports\coverage'
 
-  - job: Create_artifacts
-    steps:
+    # Create artifacts
     - task: CopyFiles@2
       displayName: 'Prepare VSIX release: NetCore'
       inputs:
