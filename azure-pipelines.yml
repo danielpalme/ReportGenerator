@@ -180,8 +180,8 @@ stages:
       inputs:
         SourceFolder: src/ReportGenerator.Console/bin/Release
         Contents: |
-        LICENSE.txt
-        Readme.txt
+         LICENSE.txt
+         Readme.txt
         TargetFolder: tmpzip
 
     - task: CopyFiles@2
@@ -189,10 +189,10 @@ stages:
       inputs:
         SourceFolder: src/ReportGenerator.Console/bin/Release
         Contents: |
-        appsettings.json
-        *.dll
-        ReportGenerator.exe
-        ReportGenerator.exe.config
+         appsettings.json
+         *.dll
+         ReportGenerator.exe
+         ReportGenerator.exe.config
         TargetFolder: tmpzip/net47
 
     - task: CopyFiles@2
