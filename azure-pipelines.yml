@@ -244,3 +244,14 @@ stages:
       displayName: 'Publish Artifact: packages'
       inputs:
         ArtifactName: packages
+
+- stage: Deployment
+  jobs:
+  - deployment: Deployment
+    environment: 'Deployment'
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet info'
+      inputs:
+        command: custom
+        custom: '--info'
