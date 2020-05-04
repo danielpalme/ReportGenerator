@@ -2,12 +2,17 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  - group: 'my-var-group' # variable group
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
-  disable.coverage.autogenerate: 'true'
-  version: '4.5.8'
+  - group: 'FtpSettings' # variable group
+  - name: solution
+    value: '**/*.sln'
+  - name: buildPlatform
+    value: 'Any CPU'
+  - name: buildConfiguration
+    value: 'Release'
+  - name: disable.coverage.autogenerate
+    value: 'true'
+  - name: version
+    value: '4.5.8'
 
 stages:
 - stage: Build
