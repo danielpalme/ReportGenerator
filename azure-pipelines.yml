@@ -274,7 +274,7 @@ stages:
               title: 'ReportGenerator_$(Version)'
               releaseNotesSource: inline
               releaseNotesInline: 'This release requires .NET 4.7 or .NET Core 2.x/3.x.'
-              assets: '$(System.DefaultWorkingDirectory)/_danielpalme.ReportGenerator/packages/zip/ReportGenerator_*.zip'
+              assets: '$(System.DefaultWorkingDirectory)/packages/zip/ReportGenerator_*.zip'
             continueOnError: true
 
           - task: FtpUpload@1
@@ -284,7 +284,7 @@ stages:
               serverUrl: '$(ftpHost)'
               username: '$(ftpUser)'
               password: '$(ftpPassword)'
-              rootDirectory: '$(System.DefaultWorkingDirectory)/_danielpalme.ReportGenerator/packages/zip'
+              rootDirectory: '$(System.DefaultWorkingDirectory)/packages/zip'
               filePatterns: 'ReportGenerator_*.zip'
               remoteDirectory: /
               cleanContents: true
@@ -294,7 +294,7 @@ stages:
             displayName: 'NuGet push'
             inputs:
               command: push
-              packagesToPush: '$(System.DefaultWorkingDirectory)/_danielpalme.ReportGenerator/packages/nuget/*.nupkg'
+              packagesToPush: '$(System.DefaultWorkingDirectory)/packages/nuget/*.nupkg'
               nuGetFeedType: external
               publishFeedCredentials: Nuget.org
             continueOnError: true
@@ -309,7 +309,7 @@ stages:
             inputs:
               connectedServiceName: 'Visual Studio Marketplace'
               fileType: vsix
-              vsixFile: '$(System.DefaultWorkingDirectory)/_danielpalme.ReportGenerator/packages/vsix/Palmmedia.reportgenerator-*.vsix'
+              vsixFile: '$(System.DefaultWorkingDirectory)/packages/vsix/Palmmedia.reportgenerator-*.vsix'
               updateTasksVersion: false
             continueOnError: true
 
@@ -318,7 +318,7 @@ stages:
             inputs:
               command: push
               pushOperation: multiple
-              pushWorkingDirectory: '$(System.DefaultWorkingDirectory)/_danielpalme.ReportGenerator/packages/chocolatey'
+              pushWorkingDirectory: '$(System.DefaultWorkingDirectory)/packages/chocolatey'
               chocolateySourceType: stored
               externalEndpoint: Chocolatey
             continueOnError: true
