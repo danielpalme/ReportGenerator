@@ -2,6 +2,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
+  - group: 'my-var-group' # variable group
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
@@ -253,8 +254,66 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: DotNetCoreCLI@2
-            displayName: 'dotnet info'
+          - task: NuGetToolInstaller@0
+            displayName: 'Use NuGet 5.3.0'
             inputs:
-              command: custom
-              custom: '--info'
+              versionSpec: 5.3.0
+
+          - task: GitHubRelease@1
+            displayName: 'GitHub release (create)'
+            inputs:
+              gitHubConnection: Github
+              repositoryName: danielpalme/ReportGenerator
+              tagSource: userSpecifiedTag
+              tag: 'v$(Version)'
+              title: 'ReportGenerator_$(Version)'
+              releaseNotesSource: inline
+              releaseNotesInline: 'This release requires .NET 4.7 or .NET Core 2.x/3.x.'
+              assets: '$(System.DefaultWorkingDirectory)/_danielpalme.ReportGenerator/packages/zip/ReportGenerator_*.zip'
+            continueOnError: true
+
+          - task: FtpUpload@1
+            displayName: 'FTP Upload: ZIP Release'
+            inputs:
+              credentialsOption: inputs
+              serverUrl: '$(ftpHost)'
+              username: '$(ftpUser)'
+              password: '$(ftpPassword)'
+              rootDirectory: '$(System.DefaultWorkingDirectory)/_danielpalme.ReportGenerator/packages/zip'
+              filePatterns: 'ReportGenerator_*.zip'
+              remoteDirectory: /
+              cleanContents: true
+            continueOnError: true
+
+          - task: NuGetCommand@2
+            displayName: 'NuGet push'
+            inputs:
+              command: push
+              packagesToPush: '$(System.DefaultWorkingDirectory)/_danielpalme.ReportGenerator/packages/nuget/*.nupkg'
+              nuGetFeedType: external
+              publishFeedCredentials: Nuget.org
+            continueOnError: true
+
+          - task: ms-devlabs.vsts-developer-tools-build-tasks.tfx-installer-build-task.TfxInstaller@2
+            displayName: 'Use Node CLI for Azure DevOps (tfx-cli): v0.7.x'
+            inputs:
+              version: v0.7.x
+
+          - task: ms-devlabs.vsts-developer-tools-build-tasks.publish-extension-build-task.PublishAzureDevOpsExtension@2
+            displayName: 'Publish Extension'
+            inputs:
+              connectedServiceName: 'Visual Studio Marketplace'
+              fileType: vsix
+              vsixFile: '$(System.DefaultWorkingDirectory)/_danielpalme.ReportGenerator/packages/vsix/Palmmedia.reportgenerator-*.vsix'
+              updateTasksVersion: false
+            continueOnError: true
+
+          - task: gep13.chocolatey-azuredevops.chocolatey-azuredevops.ChocolateyCommand@0
+            displayName: 'Chocolatey push'
+            inputs:
+              command: push
+              pushOperation: multiple
+              pushWorkingDirectory: '$(System.DefaultWorkingDirectory)/_danielpalme.ReportGenerator/packages/chocolatey'
+              chocolateySourceType: stored
+              externalEndpoint: Chocolatey
+            continueOnError: true
