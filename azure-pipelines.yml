@@ -274,7 +274,7 @@ stages:
               title: 'ReportGenerator_$(Version)'
               releaseNotesSource: inline
               releaseNotesInline: 'This release requires .NET 4.7 or .NET Core 2.x/3.x.'
-              assets: 'packages/zip/ReportGenerator_*.zip'
+              assets: '../packages/zip/ReportGenerator_*.zip'
             continueOnError: true
 
           - task: FtpUpload@1
@@ -284,7 +284,7 @@ stages:
               serverUrl: '$(ftpHost)'
               username: '$(ftpUser)'
               password: '$(ftpPassword)'
-              rootDirectory: 'packages/zip'
+              rootDirectory: '../packages/zip'
               filePatterns: 'ReportGenerator_*.zip'
               remoteDirectory: /
               cleanContents: true
@@ -294,7 +294,7 @@ stages:
             displayName: 'NuGet push'
             inputs:
               command: push
-              packagesToPush: 'packages/nuget/*.nupkg'
+              packagesToPush: '../packages/nuget/*.nupkg'
               nuGetFeedType: external
               publishFeedCredentials: Nuget.org
             continueOnError: true
@@ -309,7 +309,7 @@ stages:
             inputs:
               connectedServiceName: 'Visual Studio Marketplace'
               fileType: vsix
-              vsixFile: 'packages/vsix/Palmmedia.reportgenerator-*.vsix'
+              vsixFile: '../packages/vsix/Palmmedia.reportgenerator-*.vsix'
               updateTasksVersion: false
             continueOnError: true
 
@@ -318,7 +318,7 @@ stages:
             inputs:
               command: push
               pushOperation: multiple
-              pushWorkingDirectory: 'packages/chocolatey'
+              pushWorkingDirectory: '../packages/chocolatey'
               chocolateySourceType: stored
               externalEndpoint: Chocolatey
             continueOnError: true
