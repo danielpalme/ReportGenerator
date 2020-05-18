@@ -69,7 +69,7 @@
 
   <Target Name="Test" DependsOnTargets="Clean; Compile">
     <MakeDir Directories="target\reports\coverage" />
-    <Exec Command="dotnet test --no-build ReportGenerator.Core.Test.csproj -c Release /p:CollectCoverage=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=\&quot;opencover,cobertura\&quot; /p:CoverletOutput=../target/reports/coverage/" WorkingDirectory="ReportGenerator.Core.Test" />
+    <Exec Command="dotnet test --no-build ReportGenerator.Core.Test.csproj -c Release /p:CollectCoverage=true /p:DeterministicSourcePaths=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=\&quot;opencover,cobertura\&quot; /p:CoverletOutput=../target/reports/coverage/" WorkingDirectory="ReportGenerator.Core.Test" />
   </Target>
 
   <Target Name="Report" DependsOnTargets="Test">

@@ -1,4 +1,0 @@
-<Project>
-  <!-- Deterministic build workaround -->
-  <Import Project="DeterministicBuild.targets" />
-</Project>
