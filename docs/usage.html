@@ -226,7 +226,7 @@
                     runtimes: '.NET Core', 
                     description: 'Use this package if your project is based on .NET Core and you want to use ReportGenerator as a (global) \'DotnetTool\'.',
                     installoptions: [
-                        { tool: '.NET CLI', command: 'dotnet tool install --global dotnet-reportgenerator-globaltool --version x.y.z' }
+                        { tool: '.NET CLI', command: 'dotnet tool install --global dotnet-reportgenerator-globaltool --version x.y.z\r\n\r\ndotnet tool install dotnet-reportgenerator-globaltool --tool-path tools --version x.y.z\r\n\r\ndotnet new tool-manifest\r\ndotnet tool install dotnet-reportgenerator-globaltool --version x.y.z' }
                     ],
                     executables: [{ runtime: '.NET Core', tool: 'reportgenerator' }]
                 },
