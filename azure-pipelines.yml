@@ -12,7 +12,7 @@ variables:
   - name: disable.coverage.autogenerate
     value: 'true'
   - name: version
-    value: '4.5.8'
+    value: '4.6.0'
 
 stages:
 - stage: Build
