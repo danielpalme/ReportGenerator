@@ -241,7 +241,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 }
 
                 this.reportTextWriter.WriteLine(
-                    "<label id=\"AllTestMethods\" class=\"testmethod percentagebar{0}\" title=\"{1}{2}\"><input type=\"radio\" name=\"method\" value=\"AllTestMethods\" class=\"switchtestmethod\" checked=\"checked\" />{2}</label>",
+                    "<label id=\"AllTestMethods\" class=\"testmethod percentagebar percentagebar{0}\" title=\"{1}{2}\"><input type=\"radio\" name=\"method\" value=\"AllTestMethods\" class=\"switchtestmethod\" checked=\"checked\" />{2}</label>",
                     coverage.HasValue ? coverageRounded.ToString() : "undefined",
                     coverage.HasValue ? ReportResources.Coverage2 + " " + coverage.Value.ToString(CultureInfo.InvariantCulture) + "% - " : string.Empty,
                     WebUtility.HtmlEncode(ReportResources.All));
@@ -260,7 +260,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     }
 
                     this.reportTextWriter.WriteLine(
-                        "<br /><label id=\"M{3}\" class=\"testmethod percentagebar{0}\" title=\"{1}{2}\"><input type=\"radio\" name=\"method\" value=\"M{3}\" class=\"switchtestmethod\" />{4}</label>",
+                        "<br /><label id=\"M{3}\" class=\"testmethod percentagebar percentagebar{0}\" title=\"{1}{2}\"><input type=\"radio\" name=\"method\" value=\"M{3}\" class=\"switchtestmethod\" />{4}</label>",
                         coverage.HasValue ? coverageRounded.ToString() : "undefined",
                         coverage.HasValue ? ReportResources.Coverage2 + " " + coverage.Value.ToString(CultureInfo.InvariantCulture) + "% - " : string.Empty,
                         WebUtility.HtmlEncode(testMethod.Name),
@@ -277,10 +277,37 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 {
                     foreach (var codeElement in item.Value)
                     {
+                        decimal? coverage = null;
+                        int? coverageRounded = null;
+
+                        var fileAnalysis = fileAnalyses.ElementAtOrDefault(item.Key);
+
+                        if (fileAnalysis != null)
+                        {
+                            int coverableLines = fileAnalysis.Lines
+                                .Count(l => l.LineNumber >= codeElement.FirstLine
+                                    && l.LineNumber <= codeElement.LastLine
+                                    && l.LineVisitStatus != LineVisitStatus.NotCoverable);
+                            int coveredLines = fileAnalysis.Lines
+                                .Count(l => l.LineNumber >= codeElement.FirstLine
+                                    && l.LineNumber <= codeElement.LastLine
+                                    && l.LineVisitStatus > LineVisitStatus.NotCovered);
+
+                            coverage = (coverableLines == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)coveredLines / (double)coverableLines) / 10;
+
+                            if (coverage.HasValue)
+                            {
+                                coverageRounded = (int)coverage.Value;
+                                coverageRounded -= coverageRounded % 10;
+                            }
+                        }
+
                         this.reportTextWriter.WriteLine(
-                            "<a href=\"#file{0}_line{1}\" class=\"navigatetohash\" title=\"{2}\"><i class=\"icon-{3}\"></i>{2}</a><br />",
+                            "<a href=\"#file{0}_line{1}\" class=\"navigatetohash percentagebar percentagebar{2}\" title=\"{3}{4}\"><i class=\"icon-{5}\"></i>{4}</a><br />",
                             item.Key,
                             codeElement.FirstLine,
+                            coverage.HasValue ? coverageRounded.ToString() : "undefined",
+                            coverage.HasValue ? ReportResources.Coverage2 + " " + coverage.Value.ToString(CultureInfo.InvariantCulture) + "% - " : string.Empty,
                             WebUtility.HtmlEncode(codeElement.Name),
                             codeElement.CodeElementType == CodeElementType.Method ? "cube" : "wrench");
                     }
@@ -798,7 +825,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             {
                 int branchCoverage = (int)(100 * (double)analysis.CoveredBranches.Value / analysis.TotalBranches.Value);
                 branchCoverage -= branchCoverage % 10;
-                this.reportTextWriter.Write("<td class=\"percentagebar{0}\"><i class=\"icon-fork\"></i></td>", branchCoverage);
+                this.reportTextWriter.Write("<td class=\"percentagebar percentagebar{0}\"><i class=\"icon-fork\"></i></td>", branchCoverage);
             }
             else
             {

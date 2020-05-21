@@ -66,6 +66,7 @@ CHANGELOG
 4.6.0.0
 
     * New: Added Source Link for Nuget package 'ReportGenerator.Core'
+    * New: #348: Added coverage indicator for methods/properties
 
 4.5.8.0
 
