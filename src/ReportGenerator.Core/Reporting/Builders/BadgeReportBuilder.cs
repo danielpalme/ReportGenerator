@@ -7,10 +7,10 @@ using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Properties;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.Formats.Png;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
-using SixLabors.ImageSharp.Processing.Text;
 
 namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 {
@@ -364,7 +364,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                     throw new InvalidOperationException(Resources.ErrorFontNotFound);
                 }
 
-                image.Mutate(ctx => ctx.DrawText(text, font, Rgba32.White, new SixLabors.Primitives.PointF(113, 5)));
+                image.Mutate(ctx => ctx.DrawText(text, font, Color.White, new PointF(113, 3)));
 
                 image.Save(output, new PngEncoder());
                 return output.ToArray();
