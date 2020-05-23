@@ -23,12 +23,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
         /// <param name="report">The report.</param>
         internal void Execute(XContainer report)
         {
-            //report.Elements()..att
-            //if (report..Attribute("ReportType") != null && report.Attribute("ReportType").Value != "DetailedXml")
-            //{
-
-            //}
-
             bool statementExists = report.Descendants("Assembly")
                .Elements("Namespace")
                .Elements("Type")

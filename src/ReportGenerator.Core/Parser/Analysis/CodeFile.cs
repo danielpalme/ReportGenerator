@@ -247,6 +247,42 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         public override int GetHashCode() => this.Path.GetHashCode();
 
         /// <summary>
+        /// Calculates the coverage quota in a given range of lines.
+        /// </summary>
+        /// <param name="firstLine">The first line.</param>
+        /// <param name="lastLine">The last line.</param>
+        /// <returns>The coverage quota or <code>null</code> if not applicable.</returns>
+        internal decimal? CoverageQuota(int firstLine, int lastLine)
+        {
+            if (firstLine < 0
+                || firstLine >= this.lineVisitStatus.Length
+                || lastLine < 0
+                || lastLine >= this.lineVisitStatus.Length
+                || firstLine > lastLine)
+            {
+                return null;
+            }
+
+            int coverableLines = 0;
+            int coveredLines = 0;
+
+            for (int i = firstLine; i <= lastLine; i++)
+            {
+                if (this.lineVisitStatus[i] != Analysis.LineVisitStatus.NotCoverable)
+                {
+                    coverableLines++;
+                }
+
+                if (this.lineVisitStatus[i] > Analysis.LineVisitStatus.NotCovered)
+                {
+                    coveredLines++;
+                }
+            }
+
+            return (coverableLines == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)coveredLines / (double)coverableLines) / 10;
+        }
+
+        /// <summary>
         /// Adds the coverage by test method.
         /// </summary>
         /// <param name="testMethod">The test method.</param>

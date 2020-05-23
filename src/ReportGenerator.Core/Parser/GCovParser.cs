@@ -95,7 +95,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
         private void ProcessCoverage(Class @class, string fileName, string[] lines)
         {
-            var codeElements = new List<CodeElement>();
+            var codeElements = new List<CodeElementBase>();
             int maxiumLineNumber = -1;
             var visitsByLine = new Dictionary<int, int>();
 
@@ -167,7 +167,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     {
                         string name = line.Substring(9, line.IndexOf(' ', 9) - 9);
 
-                        codeElements.Add(new CodeElement(name, CodeElementType.Method, maxiumLineNumber + 1, maxiumLineNumber + 1));
+                        codeElements.Add(new CodeElementBase(name, maxiumLineNumber + 1));
                     }
                 }
             }
@@ -200,14 +200,27 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 }
             }
 
-            var file = new CodeFile(fileName, coverage, lineVisitStatus, branchesByLineNumber);
+            var codeFile = new CodeFile(fileName, coverage, lineVisitStatus, branchesByLineNumber);
 
-            foreach (var codeElement in codeElements)
+            for (int i = 0; i < codeElements.Count; i++)
             {
-                file.AddCodeElement(codeElement);
+                var codeElement = codeElements[i];
+
+                int lastLine = maxiumLineNumber;
+                if (i < codeElements.Count - 1)
+                {
+                    lastLine = codeElements[i + 1].FirstLine - 1;
+                }
+
+                codeFile.AddCodeElement(new CodeElement(
+                    codeElement.Name,
+                    CodeElementType.Method,
+                    codeElement.FirstLine,
+                    lastLine,
+                    codeFile.CoverageQuota(codeElement.FirstLine, lastLine)));
             }
 
-            @class.AddFile(file);
+            @class.AddFile(codeFile);
         }
     }
 }

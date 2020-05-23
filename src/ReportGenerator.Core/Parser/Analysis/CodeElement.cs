@@ -14,12 +14,17 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <param name="type">The <see cref="Analysis.CodeElementType"/>.</param>
         /// <param name="firstLine">The number of the first line.</param>
         /// <param name="lastLine">The number of the last line.</param>
-        internal CodeElement(string name, CodeElementType type, int firstLine, int lastLine)
+        /// <param name="coverageQuota">The coverage quota.</param>
+        internal CodeElement(string name, CodeElementType type, int firstLine, int lastLine, decimal? coverageQuota)
         {
             this.Name = name ?? throw new ArgumentNullException(nameof(name));
             this.CodeElementType = type;
             this.FirstLine = firstLine;
             this.LastLine = lastLine;
+            if (coverageQuota.HasValue)
+            {
+                this.CoverageQuota = Math.Min(100, Math.Max(0, coverageQuota.Value));
+            }
         }
 
         /// <summary>
@@ -53,6 +58,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// The number of the last line.
         /// </value>
         public int LastLine { get; }
+
+        /// <summary>
+        /// Gets the coverage quota of the code element.
+        /// </summary>
+        /// <value>The coverage quota.</value>
+        public decimal? CoverageQuota { get; }
 
         /// <summary>
         /// Determines whether the specified <see cref="object"/> is equal to this instance.

@@ -159,7 +159,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             var codeFile = new CodeFile(fileElement.Attribute("path").Value, coverage, lineVisitStatus, branches);
 
-            SetCodeElements(codeFile, methodsOfFile);
+            SetCodeElements(codeFile, methodsOfFile, coverage.Length - 1);
 
             @class.AddFile(codeFile);
 
@@ -215,8 +215,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// </summary>
         /// <param name="codeFile">The code file.</param>
         /// <param name="methodsOfFile">The methods of the file.</param>
-        private static void SetCodeElements(CodeFile codeFile, IEnumerable<XElement> methodsOfFile)
+        /// <param name="numberOrLines">The number of lines in the file.</param>
+        private static void SetCodeElements(CodeFile codeFile, IEnumerable<XElement> methodsOfFile, int numberOrLines)
         {
+            var codeElements = new List<CodeElementBase>();
+
             foreach (var method in methodsOfFile)
             {
                 var signature = method.Attribute("signature");
@@ -229,7 +232,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 string methodName = signature.Value;
                 int lineNumber = int.Parse(method.Attribute("num").Value, CultureInfo.InvariantCulture);
 
-                codeFile.AddCodeElement(new CodeElement(methodName, CodeElementType.Method, lineNumber, lineNumber));
+                codeElements.Add(new CodeElementBase(methodName, lineNumber));
 
                 var complexity = method.Attribute("complexity");
 
@@ -252,6 +255,24 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                     codeFile.AddMethodMetric(methodMetric);
                 }
+            }
+
+            for (int i = 0; i < codeElements.Count; i++)
+            {
+                var codeElement = codeElements[i];
+
+                int lastLine = numberOrLines;
+                if (i < codeElements.Count - 1)
+                {
+                    lastLine = codeElements[i + 1].FirstLine - 1;
+                }
+
+                codeFile.AddCodeElement(new CodeElement(
+                    codeElement.Name,
+                    CodeElementType.Method,
+                    codeElement.FirstLine,
+                    lastLine,
+                    codeFile.CoverageQuota(codeElement.FirstLine, lastLine)));
             }
         }
     }
