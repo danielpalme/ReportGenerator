@@ -16,7 +16,6 @@ variables:
 
 stages:
 - stage: Build
-  condition: eq(variables['build.sourceBranch'], 'refs/heads/master')
   jobs:
   - job: Build
     steps:
@@ -256,6 +255,7 @@ stages:
         ArtifactName: packages
 
 - stage: Deployment
+  condition: eq(variables['build.sourceBranch'], 'refs/heads/master')
   jobs:
   - deployment: Deployment
     environment: 'Deployment'
