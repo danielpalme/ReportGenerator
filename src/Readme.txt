@@ -65,6 +65,7 @@ CHANGELOG
 
 4.6.0.0
 
+    * New: #210: Strong named all DLLs. Plugins have to be strong named too.
     * New: Added Source Link for Nuget package 'ReportGenerator.Core'
     * New: #348: Added coverage indicator for methods/properties
 
