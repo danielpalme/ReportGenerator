@@ -42,7 +42,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// Parses the given XML report.
         /// </summary>
         /// <param name="report">The XML report.</param>
-        /// <param name="innerMaxDegreeOfParallism">The max degree of parallism for the class iteration foreach loop</param>
         /// <returns>The parser result.</returns>
         public ParserResult Parse(XContainer report)
         {
@@ -77,7 +76,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// </summary>
         /// <param name="modules">The modules.</param>
         /// <param name="assemblyName">Name of the assembly.</param>
-        /// <param name="innerMaxDegreeOfParallism">The max degree of parallism for the class iteration foreach loop</param>
         /// <returns>The <see cref="Assembly"/>.</returns>
         private Assembly ProcessAssembly(XElement[] modules, string assemblyName)
         {
@@ -132,7 +130,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                 foreach (var file in filteredFiles)
                 {
-                    var codeFile = ProcessFile(modules, @class, file);
+                    var codeFile = ProcessFile(modules, @class, file, out int numberOrLines);
 
                     var methodsOfFile = classes
                         .Where(c => c.Attribute("sourcefilename") != null && c.Attribute("sourcefilename").Value.Equals(file))
@@ -140,7 +138,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         .ToArray();
 
                     SetMethodMetrics(codeFile, methodsOfFile);
-                    SetCodeElements(codeFile, methodsOfFile);
+                    SetCodeElements(codeFile, methodsOfFile, numberOrLines);
 
                     @class.AddFile(codeFile);
                 }
@@ -155,8 +153,9 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="modules">The modules.</param>
         /// <param name="class">The class.</param>
         /// <param name="filePath">The file path.</param>
+        /// <param name="numberOrLines">The number of lines in the file.</param>
         /// <returns>The <see cref="CodeFile"/>.</returns>
-        private static CodeFile ProcessFile(XElement[] modules, Class @class, string filePath)
+        private static CodeFile ProcessFile(XElement[] modules, Class @class, string filePath, out int numberOrLines)
         {
             var linesOfFile = modules
                 .Where(m => m.Attribute("name").Value.Equals(@class.Assembly.Name))
@@ -199,6 +198,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     lineVisitStatus[line.LineNumber] = statusOfLine;
                 }
             }
+
+            numberOrLines = coverage.Length - 1;
 
             return new CodeFile(filePath, coverage, lineVisitStatus, branches);
         }
@@ -283,8 +284,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// </summary>
         /// <param name="codeFile">The code file.</param>
         /// <param name="methodsOfFile">The methods of the file.</param>
-        private static void SetCodeElements(CodeFile codeFile, IEnumerable<XElement> methodsOfFile)
+        /// <param name="numberOrLines">The number of lines in the file.</param>
+        private static void SetCodeElements(CodeFile codeFile, IEnumerable<XElement> methodsOfFile, int numberOrLines)
         {
+            var codeElements = new List<CodeElementBase>();
+
             foreach (var method in methodsOfFile)
             {
                 string methodName = method.Attribute("name").Value + method.Attribute("desc").Value;
@@ -298,7 +302,26 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                 int lineNumber = int.Parse(method.Attribute("line")?.Value ?? "0", CultureInfo.InvariantCulture);
 
-                codeFile.AddCodeElement(new CodeElement(methodName, CodeElementType.Method, lineNumber, lineNumber));
+                codeElements.Add(new CodeElementBase(methodName, lineNumber));
+            }
+
+            codeElements.Sort((x, y) => x.FirstLine.CompareTo(y.FirstLine));
+            for (int i = 0; i < codeElements.Count; i++)
+            {
+                var codeElement = codeElements[i];
+
+                int lastLine = numberOrLines;
+                if (i < codeElements.Count - 1)
+                {
+                    lastLine = codeElements[i + 1].FirstLine - 1;
+                }
+
+                codeFile.AddCodeElement(new CodeElement(
+                    codeElement.Name,
+                    CodeElementType.Method,
+                    codeElement.FirstLine,
+                    lastLine,
+                    codeFile.CoverageQuota(codeElement.FirstLine, lastLine)));
             }
         }
 

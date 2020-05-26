@@ -196,10 +196,10 @@
     <value>The report file pattern '{0}' is invalid. No matching files found.</value>
   </data>
   <data name="FailedToInstantiatePlugin" xml:space="preserve">
-    <value>Failed to instantiateplugin class '{0}'.</value>
+    <value>Failed to instantiate plugin class '{0}'.</value>
   </data>
   <data name="FailedToLoadPlugins" xml:space="preserve">
-    <value>Failed to load plugins from '{0}'.</value>
+    <value>Failed to load plugins from '{0}'. Make sure plugin has a strong name.</value>
   </data>
   <data name="FileDoesNotExist" xml:space="preserve">
     <value>File '{0}' does not exist (any more).</value>

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering;
 
@@ -32,9 +33,19 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <param name="summaryResult">The summary result.</param>
         public override void CreateSummaryReport(SummaryResult summaryResult)
         {
-            using (var renderer = new HtmlRenderer(true, true))
+            using (var renderer = new HtmlRenderer(true, HtmlMode.InlineCssAndJavaScript))
             {
                 this.CreateSummaryReport(renderer, summaryResult);
+            }
+
+            string sourcePath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "summary.html");
+
+            if (File.Exists(sourcePath))
+            {
+                File.Copy(
+                    sourcePath,
+                    Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "summary.htm"),
+                    true);
             }
         }
     }

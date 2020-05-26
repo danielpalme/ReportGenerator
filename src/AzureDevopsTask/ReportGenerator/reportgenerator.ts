@@ -20,13 +20,6 @@ async function executeReportGenerator(): Promise<number> {
     return await tool.exec();
 }
 
-function copyHtmIndexToHtmlIndex() {
-    var sourceFile = path.join(tl.getInput('targetdir'), 'index.htm');
-    if (tl.exist(sourceFile)) {
-        tl.cp(sourceFile, path.join(tl.getInput('targetdir'), 'index.html'), '-f');
-    }
-}
-
 async function run() {
     try {
         tl.setResourcePath(path.join( __dirname, 'task.json'));
@@ -36,8 +29,6 @@ async function run() {
         if (code != 0) {
             tl.setResult(tl.TaskResult.Failed, tl.loc('FailedMsg'));
         }
-
-        copyHtmIndexToHtmlIndex();
 
         tl.setResult(tl.TaskResult.Succeeded, tl.loc('SucceedMsg'));
     } catch (e) {

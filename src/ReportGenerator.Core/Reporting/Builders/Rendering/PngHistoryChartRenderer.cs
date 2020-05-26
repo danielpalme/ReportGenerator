@@ -4,15 +4,11 @@ using System.Linq;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Drawing;
+using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.Formats.Png;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
-using SixLabors.ImageSharp.Processing.Drawing;
-using SixLabors.ImageSharp.Processing.Drawing.Brushes;
-using SixLabors.ImageSharp.Processing.Drawing.Pens;
-using SixLabors.ImageSharp.Processing.Text;
-using SixLabors.Primitives;
-using SixLabors.Shapes;
 
 namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 {
@@ -31,12 +27,12 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             using (Image<Rgba32> image = new Image<Rgba32>(1450, 150))
             using (MemoryStream output = new MemoryStream())
             {
-                var grayPen = Pens.Dash(Rgba32.LightGray, 1);
-                var redPen = Pens.Solid(Rgba32.FromHex("cc0000"), 2);
-                var bluePen = Pens.Solid(Rgba32.FromHex("1c2298"), 2);
+                var grayPen = Pens.Dash(Color.LightGray, 1);
+                var redPen = Pens.Solid(Color.ParseHex("cc0000"), 2);
+                var bluePen = Pens.Solid(Color.ParseHex("1c2298"), 2);
 
-                var redBrush = Brushes.Solid(Rgba32.FromHex("cc0000"));
-                var blueBrush = Brushes.Solid(Rgba32.FromHex("1c2298"));
+                var redBrush = Brushes.Solid(Color.ParseHex("cc0000"));
+                var blueBrush = Brushes.Solid(Color.ParseHex("1c2298"));
 
                 int numberOfLines = historicCoverages.Count;
 
@@ -52,7 +48,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
                 image.Mutate(ctx =>
                 {
-                    ctx.Fill(NamedColors<Rgba32>.White);
+                    ctx.Fill(Color.White);
 
                     ctx.DrawLines(grayPen, new PointF(50, 115), new PointF(1445, 115));
                     ctx.DrawLines(grayPen, new PointF(50, 90), new PointF(1445, 90));
@@ -112,12 +108,13 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     try
                     {
                         var font = SystemFonts.CreateFont("Arial", 11, FontStyle.Regular);
-                        var textGraphicsOptions = new TextGraphicsOptions() { HorizontalAlignment = HorizontalAlignment.Right };
-                        ctx.DrawText(textGraphicsOptions, "100", font, Rgba32.Gray, new PointF(38, 5));
-                        ctx.DrawText(textGraphicsOptions, "75", font, Rgba32.Gray, new PointF(38, 30));
-                        ctx.DrawText(textGraphicsOptions, "50", font, Rgba32.Gray, new PointF(38, 55));
-                        ctx.DrawText(textGraphicsOptions, "25", font, Rgba32.Gray, new PointF(38, 80));
-                        ctx.DrawText(textGraphicsOptions, "0", font, Rgba32.Gray, new PointF(38, 105));
+                        var textGraphicsOptions = new TextGraphicsOptions();
+                        textGraphicsOptions.TextOptions.HorizontalAlignment = HorizontalAlignment.Right;
+                        ctx.DrawText(textGraphicsOptions, "100", font, Color.Gray, new PointF(38, 5));
+                        ctx.DrawText(textGraphicsOptions, "75", font, Color.Gray, new PointF(38, 30));
+                        ctx.DrawText(textGraphicsOptions, "50", font, Color.Gray, new PointF(38, 55));
+                        ctx.DrawText(textGraphicsOptions, "25", font, Color.Gray, new PointF(38, 80));
+                        ctx.DrawText(textGraphicsOptions, "0", font, Color.Gray, new PointF(38, 105));
                     }
                     catch (SixLabors.Fonts.Exceptions.FontFamilyNotFoundException)
                     {

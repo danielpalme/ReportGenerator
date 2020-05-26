@@ -318,7 +318,15 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                 if (seqpnts.Length > 0)
                 {
-                    codeFile.AddCodeElement(new CodeElement(methodName, type, seqpnts.Min(s => s.LineNumberStart), seqpnts.Max(s => s.LineNumberEnd)));
+                    int firstLine = seqpnts.Min(s => s.LineNumberStart);
+                    int lastLine = seqpnts.Max(s => s.LineNumberEnd);
+
+                    codeFile.AddCodeElement(new CodeElement(
+                        methodName,
+                        type,
+                        firstLine,
+                        lastLine,
+                        codeFile.CoverageQuota(firstLine, lastLine)));
                 }
             }
         }

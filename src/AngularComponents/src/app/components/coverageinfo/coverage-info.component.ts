@@ -147,6 +147,7 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
 })
 export class CoverageInfoComponent {
   window: Window;
+  queryString: string = "";
 
   historicCoverageExecutionTimes: string[] = [];
   branchCoverageAvailable: boolean = false;
@@ -193,6 +194,12 @@ export class CoverageInfoComponent {
       console.log("Grouping maximum: " + groupingMaximum);
     }
 
+    const startOfQueryString: number = window.location.href.indexOf("?");
+
+    if (startOfQueryString > -1) {
+      this.queryString = window.location.href.substr(startOfQueryString);
+    }
+
     this.updateCoverageInfo();
 
     if (restoredFromHistory) {
@@ -234,7 +241,7 @@ export class CoverageInfoComponent {
             codeElements.push(assemblyElement);
 
             for (let j: number = 0; j < assemblies[i].classes.length; j++) {
-                assemblyElement.insertClass(new ClassViewModel(assemblies[i].classes[j]), null);
+                assemblyElement.insertClass(new ClassViewModel(assemblies[i].classes[j], this.queryString), null);
                 numberOfClasses++;
             }
         }
@@ -244,7 +251,7 @@ export class CoverageInfoComponent {
 
         for (let i: number = 0; i < assemblies.length; i++) {
             for (let j: number = 0; j < assemblies[i].classes.length; j++) {
-                assemblyElement.insertClass(new ClassViewModel(assemblies[i].classes[j]), null);
+                assemblyElement.insertClass(new ClassViewModel(assemblies[i].classes[j], this.queryString), null);
                 numberOfClasses++;
             }
         }
@@ -254,7 +261,7 @@ export class CoverageInfoComponent {
           codeElements.push(assemblyElement);
 
             for (let j: number = 0; j < assemblies[i].classes.length; j++) {
-                assemblyElement.insertClass(new ClassViewModel(assemblies[i].classes[j]), this.settings.grouping);
+                assemblyElement.insertClass(new ClassViewModel(assemblies[i].classes[j], this.queryString), this.settings.grouping);
                 numberOfClasses++;
             }
         }

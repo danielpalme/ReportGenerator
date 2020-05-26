@@ -355,7 +355,13 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 {
                     int firstLine = int.Parse(lines.First().Attribute("number").Value, CultureInfo.InvariantCulture);
                     int lastLine = int.Parse(lines.Last().Attribute("number").Value, CultureInfo.InvariantCulture);
-                    codeFile.AddCodeElement(new CodeElement(methodName, CodeElementType.Method, firstLine, lastLine));
+
+                    codeFile.AddCodeElement(new CodeElement(
+                        methodName,
+                        CodeElementType.Method,
+                        firstLine,
+                        lastLine,
+                        codeFile.CoverageQuota(firstLine, lastLine)));
                 }
             }
         }

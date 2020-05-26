@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering;
 
@@ -24,7 +25,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <param name="fileAnalyses">The file analyses that correspond to the class.</param>
         public override void CreateClassReport(Class @class, IEnumerable<FileAnalysis> fileAnalyses)
         {
-            using (var renderer = new HtmlRenderer(false, true, "custom-azurepipelines.css"))
+            using (var renderer = new HtmlRenderer(false, HtmlMode.InlineCssAndJavaScript, "custom-azurepipelines.css"))
             {
                 this.CreateClassReport(renderer, @class, fileAnalyses);
             }
@@ -36,10 +37,15 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <param name="summaryResult">The summary result.</param>
         public override void CreateSummaryReport(SummaryResult summaryResult)
         {
-            using (var renderer = new HtmlRenderer(false, true, "custom-azurepipelines.css"))
+            using (var renderer = new HtmlRenderer(false, HtmlMode.InlineCssAndJavaScript, "custom-azurepipelines.css"))
             {
                 this.CreateSummaryReport(renderer, summaryResult);
             }
+
+            File.Copy(
+                Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "index.html"),
+                Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "index.htm"),
+                true);
         }
     }
 }

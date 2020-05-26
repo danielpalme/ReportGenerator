@@ -28,7 +28,7 @@ https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage</desc
         <dependency id="Microsoft.Extensions.Configuration.Binder" version="2.2.0" />
         <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="2.2.0" />
         <dependency id="Microsoft.Extensions.Configuration.Json" version="2.2.0" />
-        <dependency id="SixLabors.ImageSharp.Drawing" version="1.0.0-beta0004" />
+        <dependency id="SixLabors.ImageSharp.Drawing" version="1.0.0-beta0008" />
       </group>
 
       <group targetFramework="netcoreapp">
@@ -36,7 +36,7 @@ https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage</desc
         <dependency id="Microsoft.Extensions.Configuration.Binder" version="2.2.0" />
         <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="2.2.0" />
         <dependency id="Microsoft.Extensions.Configuration.Json" version="2.2.0" />
-        <dependency id="SixLabors.ImageSharp.Drawing" version="1.0.0-beta0004" />
+        <dependency id="SixLabors.ImageSharp.Drawing" version="1.0.0-beta0008" />
         <dependency id="McMaster.NETCore.Plugins" version="0.2.4" />
       </group>
     </dependencies>
@@ -49,18 +49,23 @@ https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage</desc
     <!-- Plugin development -->
     <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.deps.json" target="lib\netstandard2.0\" />
     <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.dll" target="lib\netstandard2.0\" />
+    <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.pdb" target="lib\netstandard2.0\" />
 
 	  <!-- Execution .NET Core 2.x (see #253) -->
     <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.deps.json" target="lib\netcoreapp\" />
     <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.dll" target="lib\netcoreapp\" />
+    <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.pdb" target="lib\netcoreapp\" />
     <file src="..\..\ReportGenerator.Core\bin\Release\appsettings.json" target="lib\netcoreapp\" />
     <file src="..\..\ReportGenerator.DotnetCorePluginLoader\bin\Release\netcoreapp2.0\ReportGenerator.DotnetCorePluginLoader.dll" target="lib\netcoreapp\" />
+    <file src="..\..\ReportGenerator.DotnetCorePluginLoader\bin\Release\netcoreapp2.0\ReportGenerator.DotnetCorePluginLoader.pdb" target="lib\netcoreapp\" />
 
-	  <!-- Execution .NET Core 3.x (see https://github.com/tonerdo/coverlet/pull/694) -->
+	  <!-- Execution .NET Core 3.x (see https://github.com/coverlet-coverage/coverlet/pull/694) -->
     <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.deps.json" target="lib\netcoreapp3.0\" />
     <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.dll" target="lib\netcoreapp3.0\" />
+    <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.pdb" target="lib\netcoreapp3.0\" />
     <file src="..\..\ReportGenerator.Core\bin\Release\appsettings.json" target="lib\netcoreapp3.0\" />
     <file src="..\..\ReportGenerator.DotnetCorePluginLoader\bin\Release\netcoreapp2.0\ReportGenerator.DotnetCorePluginLoader.dll" target="lib\netcoreapp3.0\" />
+    <file src="..\..\ReportGenerator.DotnetCorePluginLoader\bin\Release\netcoreapp2.0\ReportGenerator.DotnetCorePluginLoader.pdb" target="lib\netcoreapp3.0\" />
   </files>
 </package>
 

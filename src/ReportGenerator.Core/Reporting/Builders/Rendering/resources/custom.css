@@ -46,62 +46,56 @@ div.currenthistory { margin: -2px -5px 0 -5px; padding: 2px 5px 2px 5px; height:
 .customizebox div.right input { font-size: 0.8em; width: 150px; }
 #namespaceslider { width: 200px; display: inline-block; margin-left: 8px; }
 
+.percentagebar {
+    padding-left: 3px;
+}
+a.percentagebar {
+    padding-left: 6px;
+}
 .percentagebarundefined {
     border-left: 2px solid #fff;
-    padding-left: 3px;
 }
 .percentagebar0 {
     border-left: 2px solid #c10909;
-    padding-left: 3px;
 }
 .percentagebar10 {
     border-left: 2px solid;
     border-image: linear-gradient(to bottom, #c10909 90%, #0aad0a 90%, #0aad0a 100%) 1;
-    padding-left: 3px;
 }
 .percentagebar20 {
     border-left: 2px solid;
     border-image: linear-gradient(to bottom, #c10909 80%, #0aad0a 80%, #0aad0a 100%) 1;
-    padding-left: 3px;
 }
 .percentagebar30 {
     border-left: 2px solid;
     border-image: linear-gradient(to bottom, #c10909 70%, #0aad0a 70%, #0aad0a 100%) 1;
-    padding-left: 3px;
 }
 .percentagebar40 {
     border-left: 2px solid;
     border-image: linear-gradient(to bottom, #c10909 60%, #0aad0a 60%, #0aad0a 100%) 1;
-    padding-left: 3px;
 }
 .percentagebar50 {
     border-left: 2px solid;
     border-image: linear-gradient(to bottom, #c10909 50%, #0aad0a 50%, #0aad0a 100%) 1;
-    padding-left: 3px;
 }
 .percentagebar60 {
     border-left: 2px solid;
     border-image: linear-gradient(to bottom, #c10909 40%, #0aad0a 40%, #0aad0a 100%) 1;
-    padding-left: 3px;
 }
 .percentagebar70 {
     border-left: 2px solid;
     border-image: linear-gradient(to bottom, #c10909 30%, #0aad0a 30%, #0aad0a 100%) 1;
-    padding-left: 3px;
 }
 .percentagebar80 {
     border-left: 2px solid;
     border-image: linear-gradient(to bottom, #c10909 20%, #0aad0a 20%, #0aad0a 100%) 1;
-    padding-left: 3px;
 }
 .percentagebar90 {
     border-left: 2px solid;
     border-image: linear-gradient(to bottom, #c10909 10%, #0aad0a 10%, #0aad0a 100%) 1;
-    padding-left: 3px;
 }
 .percentagebar100 {
     border-left: 2px solid #0aad0a;
-    padding-left: 3px;
 }
 
 .hidden, .ng-hide { display: none; }

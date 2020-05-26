@@ -12,7 +12,7 @@ variables:
   - name: disable.coverage.autogenerate
     value: 'true'
   - name: version
-    value: '4.5.8'
+    value: '4.6.0'
 
 stages:
 - stage: Build
@@ -26,10 +26,10 @@ stages:
         custom: '--info'
 
     - task: UseDotNet@2
-      displayName: 'Use .NET Core SDK 3.1.202'
+      displayName: 'Use .NET Core SDK 3.1.300'
       inputs:
         packageType: sdk
-        version: 3.1.202
+        version: 3.1.300
 
     - task: DotNetCoreCLI@2
       displayName: 'dotnet info'
@@ -49,8 +49,11 @@ stages:
         versionSpec: 5.3.0
 
     - task: NuGetCommand@2
+      displayName: 'NuGet Restore'
       inputs:
         restoreSolution: '$(solution)'
+        feedsToUse: config
+        nugetConfigPath: 'src/NuGet.Config'
 
     # Compile
     - task: VSBuild@1
@@ -125,7 +128,7 @@ stages:
       inputs:
         command: test
         projects: 'src\ReportGenerator.Core.Test\ReportGenerator.Core.Test.csproj'
-        arguments: '--configuration $(BuildConfiguration) --no-build /p:CollectCoverage=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=opencover%2ccobertura /p:CoverletOutput=../target/reports/coverage/'
+        arguments: '--configuration $(BuildConfiguration) --no-build /p:CollectCoverage=true /p:DeterministicSourcePaths=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=opencover%2ccobertura /p:CoverletOutput=../target/reports/coverage/'
 
     - task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@4
       displayName: ReportGenerator
@@ -252,6 +255,7 @@ stages:
         ArtifactName: packages
 
 - stage: Deployment
+  condition: eq(variables['build.sourceBranch'], 'refs/heads/master')
   jobs:
   - deployment: Deployment
     environment: 'Deployment'

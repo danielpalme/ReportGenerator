@@ -295,7 +295,7 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to instantiateplugin class &apos;{0}&apos;..
+        ///   Looks up a localized string similar to Failed to instantiate plugin class &apos;{0}&apos;..
         /// </summary>
         internal static string FailedToInstantiatePlugin {
             get {
@@ -304,7 +304,7 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to load plugins from &apos;{0}&apos;..
+        ///   Looks up a localized string similar to Failed to load plugins from &apos;{0}&apos;. Make sure plugin has a strong name..
         /// </summary>
         internal static string FailedToLoadPlugins {
             get {
