@@ -122,7 +122,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="title">The title.</param>
         public void BeginSummaryReport(string targetDirectory, string fileName, string title)
         {
-            string targetPath = Path.Combine(targetDirectory, this.onlySummary ? "summary.htm" : "index.htm");
+            string targetPath = Path.Combine(targetDirectory, this.onlySummary ? "summary.html" : "index.html");
 
             if (fileName != null)
             {
@@ -198,7 +198,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="text">The text.</param>
         public void HeaderWithBackLink(string text)
         {
-            this.reportTextWriter.WriteLine("<h1><a href=\"index.htm\" class=\"back\">&lt;</a> {0}</h1>", WebUtility.HtmlEncode(text));
+            this.reportTextWriter.WriteLine("<h1><a href=\"index.html\" class=\"back\">&lt;</a> {0}</h1>", WebUtility.HtmlEncode(text));
         }
 
         /// <summary>
@@ -1270,7 +1270,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     }
                 }
 
-                fileName = StringHelper.ReplaceInvalidPathChars(assemblyName + "_" + shortClassName) + ".htm";
+                fileName = StringHelper.ReplaceInvalidPathChars(assemblyName + "_" + shortClassName) + ".html";
 
                 if (fileName.Length > 100)
                 {
@@ -1287,7 +1287,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
                     do
                     {
-                        fileName = fileNameWithoutExtension + counter + ".htm";
+                        fileName = fileNameWithoutExtension + counter + ".html";
                         counter++;
                     }
                     while (FileNameByClass.Values.Any(v => v.Equals(fileName, StringComparison.OrdinalIgnoreCase)));

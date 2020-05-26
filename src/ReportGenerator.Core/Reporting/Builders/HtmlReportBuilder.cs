@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering;
 
@@ -64,6 +65,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             {
                 this.CreateSummaryReport(renderer, summaryResult);
             }
+
+            File.Copy(
+                Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "index.html"),
+                Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "index.htm"),
+                true);
         }
     }
 }

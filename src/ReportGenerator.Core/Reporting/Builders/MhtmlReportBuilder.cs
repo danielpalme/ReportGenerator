@@ -146,15 +146,15 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 writer.WriteLine("\tboundary=\"----=_NextPart_000_0000_01D23618.54EBCBE0\"");
                 writer.WriteLine();
 
-                string file = "index.htm";
+                string file = "index.html";
                 string content = File.ReadAllText(Path.Combine(this.htmlReportTargetDirectory, file));
                 content = AddFilePrefixForCssAndJavaScript(content);
                 content = content.Replace("<tr><td><a href=\"", "<tr><td><a href=\"file:///");
                 WriteFile(writer, file, "text/html", content);
 
-                foreach (var reportFile in Directory.EnumerateFiles(this.htmlReportTargetDirectory, "*.htm"))
+                foreach (var reportFile in Directory.EnumerateFiles(this.htmlReportTargetDirectory, "*.html"))
                 {
-                    if (reportFile.EndsWith("index.htm"))
+                    if (reportFile.EndsWith("index.html"))
                     {
                         continue;
                     }
@@ -162,13 +162,14 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                     file = reportFile.Substring(reportFile.LastIndexOf(Path.DirectorySeparatorChar) + 1);
                     content = File.ReadAllText(reportFile);
                     content = AddFilePrefixForCssAndJavaScript(content);
-                    content = content.Replace("<a href=\"index.htm\">", "<a href=\"file:///index.htm\">");
+                    content = content.Replace("<a href=\"index.html\"", "<a href=\"file:///index.html\"");
                     WriteFile(writer, file, "text/html", content);
                 }
 
                 file = "main.js";
                 content = File.ReadAllText(Path.Combine(this.htmlReportTargetDirectory, file));
-                content = content.Replace(", \"reportPath\": \"", ", \"reportPath\" : \"file:///");
+                content = content.Replace(", \"reportPath\": \"", ", \"reportPath\": \"file:///");
+                content = content.Replace(", \"rp\": \"", ", \"rp\": \"file:///");
                 WriteFile(writer, file, "application/javascript", content);
 
                 file = "class.js";
