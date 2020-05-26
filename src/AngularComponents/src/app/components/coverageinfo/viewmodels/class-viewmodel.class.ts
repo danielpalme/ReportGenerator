@@ -14,10 +14,11 @@ export class ClassViewModel extends ElementBase {
     currentHistoricCoverage: HistoricCoverage = null;
 
     constructor(
-        clazz: Class) {
+        clazz: Class,
+        queryString: string) {
             super();
             this.name = clazz.name;
-            this.reportPath = clazz.rp;
+            this.reportPath = clazz.rp ? clazz.rp + queryString : clazz.rp;
 
             this.coveredLines = clazz.cl;
             this.uncoveredLines = clazz.ucl;

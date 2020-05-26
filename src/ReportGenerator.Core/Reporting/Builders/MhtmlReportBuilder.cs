@@ -20,7 +20,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <summary>
         /// The <see cref="HtmlReportBuilder"/>.
         /// </summary>
-        private readonly IReportBuilder htmlReportBuilder = new HtmlReportBuilder();
+        private readonly IReportBuilder htmlReportBuilder = new HtmlReportBuilder(false);
 
         /// <summary>
         /// The report context.

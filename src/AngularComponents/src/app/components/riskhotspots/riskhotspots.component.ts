@@ -66,9 +66,9 @@ import { RiskHotspotsSettings } from "./data/riskhotspots-settings.class";
         <tbody>
           <tr *ngFor="let riskHotspot of riskHotspots | slice:0:settings.numberOfRiskHotspots">
             <td>{{riskHotspot.assembly}}</td>
-            <td><a [href]="riskHotspot.reportPath">{{riskHotspot.class}}</a></td>
+            <td><a [href]="riskHotspot.reportPath + queryString">{{riskHotspot.class}}</a></td>
             <td [title]="riskHotspot.methodName">
-              <a [href]="riskHotspot.reportPath + '#file' + riskHotspot.fileIndex + '_line' + riskHotspot.line">
+              <a [href]="riskHotspot.reportPath + queryString + '#file' + riskHotspot.fileIndex + '_line' + riskHotspot.line">
                 {{riskHotspot.methodShortName}}
               </a>
             </td>
@@ -83,6 +83,7 @@ import { RiskHotspotsSettings } from "./data/riskhotspots-settings.class";
 })
 export class RiskHotspotsComponent implements OnInit {
   window: Window;
+  queryString: string = "";
 
   riskHotspotMetrics: RiskHotspotMetric[] = [];
   riskHotspots: RiskHotspot[] = [];
@@ -110,6 +111,13 @@ export class RiskHotspotsComponent implements OnInit {
         console.log("Risk hotspots: Restoring from history", this.window.history.state.riskHotspotsSettings);
         this.settings = JSON.parse(JSON.stringify(this.window.history.state.riskHotspotsSettings));
     }
+
+    const startOfQueryString: number = window.location.href.indexOf("?");
+
+    if (startOfQueryString > -1) {
+      this.queryString = window.location.href.substr(startOfQueryString);
+    }
+
     this.updateRiskHotpots();
   }
 

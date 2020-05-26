@@ -64,9 +64,9 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         private readonly bool onlySummary;
 
         /// <summary>
-        /// Indicates that CSS and JavaScript is included into the HTML instead of seperate files.
+        /// Defines how CSS and JavaScript are referenced.
         /// </summary>
-        private readonly bool inlineCssAndJavaScript;
+        private readonly HtmlMode htmlMode;
 
         /// <summary>
         /// Contains report specific JavaScript content.
@@ -97,13 +97,13 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// Initializes a new instance of the <see cref="HtmlRenderer" /> class.
         /// </summary>
         /// <param name="onlySummary">if set to <c>true</c> only a summary report is created (no class reports).</param>
-        /// <param name="inlineCssAndJavaScript">if set to <c>true</c> CSS and JavaScript is included into the HTML instead of seperate files.</param>
+        /// <param name="htmlMode">Defines how CSS and JavaScript are referenced.</param>
         /// <param name="cssFileResource">Optional CSS file resource.</param>
         /// <param name="additionalCssFileResource">Optional additional CSS file resource.</param>
-        internal HtmlRenderer(bool onlySummary, bool inlineCssAndJavaScript, string cssFileResource = "custom.css", string additionalCssFileResource = null)
+        internal HtmlRenderer(bool onlySummary, HtmlMode htmlMode, string cssFileResource = "custom.css", string additionalCssFileResource = null)
         {
             this.onlySummary = onlySummary;
-            this.inlineCssAndJavaScript = inlineCssAndJavaScript;
+            this.htmlMode = htmlMode;
             this.javaScriptContent = new StringBuilder();
             this.cssFileResource = cssFileResource;
             this.additionalCssFileResource = additionalCssFileResource;
@@ -134,8 +134,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             using (var cssStream = this.GetCombinedCss())
             {
-                string style = this.inlineCssAndJavaScript ?
-                    "<style TYPE=\"text/css\">" + new StreamReader(cssStream).ReadToEnd() + "</style>"
+                string style = this.htmlMode == HtmlMode.InlineCssAndJavaScript ?
+                    "<style type=\"text/css\">" + new StreamReader(cssStream).ReadToEnd() + "</style>"
                     : CssLink;
 
                 this.reportTextWriter.WriteLine(HtmlStart, WebUtility.HtmlEncode(title), WebUtility.HtmlEncode(ReportResources.CoverageReport), style);
@@ -160,8 +160,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             using (var cssStream = this.GetCombinedCss())
             {
-                string style = this.inlineCssAndJavaScript ?
-                    "<style TYPE=\"text/css\">" + new StreamReader(cssStream).ReadToEnd() + "</style>"
+                string style = this.htmlMode == HtmlMode.InlineCssAndJavaScript ?
+                    "<style type=\"text/css\">" + new StreamReader(cssStream).ReadToEnd() + "</style>"
                     : CssLink;
 
                 this.reportTextWriter.WriteLine(HtmlStart, WebUtility.HtmlEncode(className), WebUtility.HtmlEncode(additionalTitle + ReportResources.CoverageReport), style);
@@ -848,7 +848,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             string id = Guid.NewGuid().ToString("N");
 
-            if (renderPngFallBackImage || this.inlineCssAndJavaScript)
+            if (renderPngFallBackImage || this.htmlMode == HtmlMode.InlineCssAndJavaScript)
             {
                 byte[] pngHistory = PngHistoryChartRenderer.RenderHistoryChart(filteredHistoricCoverages);
 
@@ -1107,7 +1107,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         {
             this.SaveReport();
 
-            if (!this.inlineCssAndJavaScript)
+            if (this.htmlMode != HtmlMode.InlineCssAndJavaScript)
             {
                 this.SaveCss(targetDirectory);
                 this.SaveJavaScript(targetDirectory);
@@ -1123,7 +1123,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         {
             this.SaveReport();
 
-            if (!this.inlineCssAndJavaScript && !javaScriptGenerated)
+            if (this.htmlMode != HtmlMode.InlineCssAndJavaScript && !javaScriptGenerated)
             {
                 this.SaveJavaScript(targetDirectory);
                 javaScriptGenerated = true;
@@ -1313,7 +1313,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 {
                     cssStream.CopyTo(fs);
 
-                    if (!this.inlineCssAndJavaScript)
+                    if (this.htmlMode != HtmlMode.InlineCssAndJavaScript)
                     {
                         cssStream.Position = 0;
                         string css = new StreamReader(cssStream).ReadToEnd();
@@ -1359,7 +1359,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             void CopyWithFilteredUrls(Stream s)
             {
-                if (!this.inlineCssAndJavaScript)
+                if (this.htmlMode != HtmlMode.InlineCssAndJavaScript)
                 {
                     s.CopyTo(ms);
                     return;
@@ -1570,9 +1570,59 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// </summary>
         private void FinishReport()
         {
-            string javascript = $"<script type=\"text/javascript\" src=\"{(this.classReport ? "class" : "main")}.js\"></script>";
+            string fileName = this.classReport ? "class.js" : "main.js";
 
-            if (this.inlineCssAndJavaScript)
+            string javascript = $"<script type=\"text/javascript\" src=\"{fileName}\"></script>";
+
+            if (this.htmlMode == HtmlMode.ExternalCssAndJavaScriptWithQueryStringHandling)
+            {
+                // #349: Apply query string to referenced CSS and JavaScript files and links
+                javascript = $@"<script type=""text/javascript"">
+/* <![CDATA[ */
+(function() {{
+    var url = window.location.href;
+    var startOfQueryString = url.indexOf('?');
+    var queryString = startOfQueryString > -1 ? url.substr(startOfQueryString) : '';
+
+    if (startOfQueryString > -1) {{
+        var i = 0, href= null;
+        var css = document.getElementsByTagName('link');
+
+        for (i = 0; i < css.length; i++) {{
+            if (css[i].getAttribute('rel') !== 'stylesheet') {{
+            continue;
+            }}
+
+            href = css[i].getAttribute('href');
+
+            if (href) {{
+            css[i].setAttribute('href', href + queryString);
+            }}
+        }}
+
+        var links = document.getElementsByTagName('a');
+
+        for (i = 0; i < links.length; i++) {{
+            href = links[i].getAttribute('href');
+
+            if (href
+                && !href.startsWith('http://')
+                && !href.startsWith('https://')
+                && !href.startsWith('#')
+                && href.indexOf('?') === -1) {{
+            links[i].setAttribute('href', href + queryString);
+            }}
+        }}
+    }}
+
+    var newScript = document.createElement('script');
+    newScript.src = '{fileName}' + queryString;
+    document.getElementsByTagName('body')[0].appendChild(newScript);
+}})();
+/* ]]> */ 
+</script>";
+            }
+            else if (this.htmlMode == HtmlMode.InlineCssAndJavaScript)
             {
                 using (var javaScriptStream = this.GetCombinedJavascript())
                 {

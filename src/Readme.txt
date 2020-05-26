@@ -66,8 +66,9 @@ CHANGELOG
 4.6.0.0
 
     * New: #210: Strong named all DLLs. Plugins have to be strong named too.
-    * New: Added Source Link for Nuget package 'ReportGenerator.Core'
     * New: #348: Added coverage indicator for methods/properties
+    * New: #349: Apply query string to referenced CSS and JavaScript files and links to support SAS tokens (e.g. on blob storage)
+    * New: Added Source Link for Nuget package 'ReportGenerator.Core'
 
 4.5.8.0
 
