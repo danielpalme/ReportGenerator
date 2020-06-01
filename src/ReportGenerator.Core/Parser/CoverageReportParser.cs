@@ -186,9 +186,23 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         Logger.DebugFormat(Resources.LoadingReport, reportFile, number, reportFiles.Count);
                         try
                         {
-                            string line1 = File.ReadLines(reportFile).First();
+                            bool isXml = false;
+                            using (var sr = File.OpenText(reportFile))
+                            {
+                                // We need to read first non-space char in the file
+                                var buf = new char[120];
+                                while (sr.Read(buf, 0, buf.Length) > 0)
+                                {
+                                    string block = new string(buf).TrimStart();
+                                    if (block.Length > 0)
+                                    {
+                                        isXml = block.StartsWith("<");
+                                        break;
+                                    }
+                                }
+                            }
 
-                            List<ParserResult> parserResults = line1.Trim().StartsWith("<")
+                            List<ParserResult> parserResults = isXml
                                 ? this.ParseXmlFile(reportFile).ToList()
                                 : this.ParseTextFile(File.ReadAllLines(reportFile)).ToList();
                             foreach (ParserResult parserResult in parserResults)

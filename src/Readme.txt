@@ -63,6 +63,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.6.1.0
+
+    * Fix: #351: Fixed reading large XML coverage files
+
 4.6.0.0
 
     * New: #210: Strong named all DLLs. Plugins have to be strong named too.
