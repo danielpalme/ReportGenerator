@@ -28,6 +28,11 @@ The reports do not only show the coverage quota, but also include the source cod
 
 </div>
 
+## License
+- ReportGenerator is licensed under the [Apache License, Version 2.0](https://opensource.org/licenses/Apache-2.0)
+- You can support the project by [becoming a sponsor](https://github.com/sponsors/danielpalme).  
+I encourage you to do so, especially if you are using ReportGenerator for commercial projects.
+
 ## Getting started
 *ReportGenerator* is a commandline tool which works with full .NET Framework and .NET Core.  
 Use the online [configuration tool](https://danielpalme.github.io/ReportGenerator/usage.html) to get started quickly.
