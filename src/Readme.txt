@@ -63,6 +63,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.6.2.0
+
+    * Fix: #363: Fixed clover file handling (several branches per line)
+
 4.6.1.0
 
     * Fix: #351: Fixed reading large XML coverage files

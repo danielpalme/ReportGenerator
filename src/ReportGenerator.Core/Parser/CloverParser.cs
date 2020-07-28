@@ -187,24 +187,36 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 int negativeBrancheCovered = int.Parse(line.Attribute("falsecount").Value, CultureInfo.InvariantCulture);
                 int positiveBrancheCovered = int.Parse(line.Attribute("truecount").Value, CultureInfo.InvariantCulture);
 
-                var branches = new HashSet<Branch>();
+                if (result.ContainsKey(lineNumber))
+                {
+                    var branches = result[lineNumber];
 
-                string identifier1 = string.Format(
+                    Branch negativeBranch = branches.First();
+                    Branch positiveBranch = branches.ElementAt(1);
+
+                    negativeBranch.BranchVisits = Math.Max(negativeBrancheCovered > 0 ? 1 : 0, negativeBranch.BranchVisits);
+                    positiveBranch.BranchVisits = Math.Max(positiveBrancheCovered > 0 ? 1 : 0, positiveBranch.BranchVisits);
+                }
+                else
+                {
+                    string identifier1 = string.Format(
                         CultureInfo.InvariantCulture,
                         "{0}_{1}",
                         lineNumber,
                         "0");
 
-                string identifier2 = string.Format(
-                        CultureInfo.InvariantCulture,
-                        "{0}_{1}",
-                        lineNumber,
-                        "1");
+                    string identifier2 = string.Format(
+                            CultureInfo.InvariantCulture,
+                            "{0}_{1}",
+                            lineNumber,
+                            "1");
 
-                branches.Add(new Branch(negativeBrancheCovered > 0 ? 1 : 0, identifier1));
-                branches.Add(new Branch(positiveBrancheCovered > 0 ? 1 : 0, identifier2));
+                    var branches = new HashSet<Branch>();
+                    branches.Add(new Branch(negativeBrancheCovered > 0 ? 1 : 0, identifier1));
+                    branches.Add(new Branch(positiveBrancheCovered > 0 ? 1 : 0, identifier2));
 
-                result.Add(lineNumber, branches);
+                    result.Add(lineNumber, branches);
+                }
             }
 
             return result;
