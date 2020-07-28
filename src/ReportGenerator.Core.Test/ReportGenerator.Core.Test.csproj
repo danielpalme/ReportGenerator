@@ -4,8 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <IsPackable>false</IsPackable>
     <RootNamespace>Palmmedia.ReportGenerator.Core.Test</RootNamespace>
-    <AssemblyVersion>4.6.1.0</AssemblyVersion>
-    <FileVersion>4.6.1.0</FileVersion>
+    <AssemblyVersion>4.6.2.0</AssemblyVersion>
+    <FileVersion>4.6.2.0</FileVersion>
   </PropertyGroup>
   
   <ItemGroup>
