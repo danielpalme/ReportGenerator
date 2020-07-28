@@ -65,6 +65,7 @@ CHANGELOG
 
 4.6.2.0
 
+    * New: Clover: Added classfilter support
     * Fix: #363: Fixed clover file handling (several branches per line)
 
 4.6.1.0

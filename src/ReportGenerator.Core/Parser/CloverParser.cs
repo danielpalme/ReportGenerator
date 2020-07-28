@@ -106,7 +106,21 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="fileElement">The file element.</param>
         private void ProcessFile(Assembly assembly, XElement fileElement)
         {
-            var @class = new Class(fileElement.Attribute("name").Value, assembly);
+            string className = fileElement.Attribute("name").Value;
+
+            int indexOfJava = className.LastIndexOf(".java");
+
+            if (indexOfJava > 0)
+            {
+                className = className.Substring(0, indexOfJava);
+            }
+
+            if (!this.ClassFilter.IsElementIncludedInReport(className))
+            {
+                return;
+            }
+
+            var @class = new Class(className, assembly);
 
             var lines = fileElement.Elements("line")
                 .ToArray();
