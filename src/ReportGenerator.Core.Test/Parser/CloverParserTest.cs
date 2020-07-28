@@ -48,7 +48,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         [Fact]
         public void NumberOfLineVisitsTest()
         {
-            var fileAnalysis = GetFileAnalysis(this.parserResult.Assemblies, "TestClass.java", "C:\\temp\\test\\TestClass.java");
+            var fileAnalysis = GetFileAnalysis(this.parserResult.Assemblies, "TestClass", "C:\\temp\\test\\TestClass.java");
             Assert.Equal(1, fileAnalysis.Lines.Single(l => l.LineNumber == 15).LineVisits);
             Assert.Equal(1, fileAnalysis.Lines.Single(l => l.LineNumber == 17).LineVisits);
             Assert.Equal(0, fileAnalysis.Lines.Single(l => l.LineNumber == 20).LineVisits);
@@ -61,7 +61,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         [Fact]
         public void LineVisitStatusTest()
         {
-            var fileAnalysis = GetFileAnalysis(this.parserResult.Assemblies, "TestClass.java", "C:\\temp\\test\\TestClass.java");
+            var fileAnalysis = GetFileAnalysis(this.parserResult.Assemblies, "TestClass", "C:\\temp\\test\\TestClass.java");
 
             var line = fileAnalysis.Lines.Single(l => l.LineNumber == 1);
             Assert.Equal(LineVisitStatus.NotCoverable, line.LineVisitStatus);
@@ -91,8 +91,8 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         [Fact]
         public void FilesOfClassTest()
         {
-            Assert.Single(this.parserResult.Assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "TestClass.java").Files);
-            Assert.Single(this.parserResult.Assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "GenericClass.java").Files);
+            Assert.Single(this.parserResult.Assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "TestClass").Files);
+            Assert.Single(this.parserResult.Assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "GenericClass").Files);
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         [Fact]
         public void GetCoverableLinesOfClassTest()
         {
-            Assert.Equal(1, this.parserResult.Assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "AbstractClass.java").CoverableLines);
+            Assert.Equal(1, this.parserResult.Assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "AbstractClass").CoverableLines);
         }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         [Fact]
         public void CodeElementsTest()
         {
-            var codeElements = GetFile(this.parserResult.Assemblies, "TestClass.java", "C:\\temp\\test\\TestClass.java").CodeElements;
+            var codeElements = GetFile(this.parserResult.Assemblies, "TestClass", "C:\\temp\\test\\TestClass.java").CodeElements;
             Assert.Equal(2, codeElements.Count());
         }
 
