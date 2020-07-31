@@ -63,6 +63,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.6.3.0
+
+    * New: #364: Added tooltips to show coverage as ratio
+
 4.6.2.0
 
     * New: Clover: Added classfilter support

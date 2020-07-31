@@ -1024,14 +1024,15 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.reportTextWriter.Write("<th class=\"right\">{0}</th>", assembly.TotalLines.GetValueOrDefault());
             this.reportTextWriter.Write(
                 "<th title=\"{0}\" class=\"right\">{1}</th>",
-                assembly.CoverageQuota.HasValue ? CoverageType.LineCoverage.ToString() : string.Empty,
+                assembly.CoverageQuota.HasValue ? $"{CoverageType.LineCoverage}: {assembly.CoveredLines}/{assembly.CoverableLines}" : string.Empty,
                 assembly.CoverageQuota.HasValue ? assembly.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
             this.reportTextWriter.Write("<th>{0}</th>", CreateCoverageTable(assembly.CoverageQuota));
 
             if (branchCoverageAvailable)
             {
                 this.reportTextWriter.Write(
-                "<th class=\"right\">{0}</th>",
+                "<th class=\"right\" title=\"{0}\">{1}</th>",
+                assembly.BranchCoverageQuota.HasValue ? $"{assembly.CoveredBranches}/{assembly.TotalBranches}" : "-",
                 assembly.BranchCoverageQuota.HasValue ? assembly.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
                 this.reportTextWriter.Write("<th>{0}</th>", CreateCoverageTable(assembly.BranchCoverageQuota));
             }
@@ -1070,14 +1071,15 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.reportTextWriter.Write("<td class=\"right\">{0}</td>", @class.TotalLines.GetValueOrDefault());
             this.reportTextWriter.Write(
                 "<td title=\"{0}\" class=\"right\">{1}</td>",
-                @class.CoverageType,
+                @class.CoverageQuota.HasValue ? $"{@class.CoverageType}: {@class.CoveredLines}/{@class.CoverableLines}" : @class.CoverageType.ToString(),
                 @class.CoverageQuota.HasValue ? @class.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
             this.reportTextWriter.Write("<td>{0}</td>", CreateCoverageTable(@class.CoverageQuota));
 
             if (branchCoverageAvailable)
             {
                 this.reportTextWriter.Write(
-                    "<td class=\"right\">{0}</td>",
+                    "<td class=\"right\" title=\"{0}\">{1}</td>",
+                    @class.BranchCoverageQuota.HasValue ? $"{@class.CoveredBranches}/{@class.TotalBranches}" : "-",
                     @class.BranchCoverageQuota.HasValue ? @class.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
                 this.reportTextWriter.Write("<td>{0}</td>", CreateCoverageTable(@class.BranchCoverageQuota));
             }

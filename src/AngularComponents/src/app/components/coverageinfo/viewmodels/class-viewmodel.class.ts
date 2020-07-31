@@ -33,7 +33,10 @@ export class ClassViewModel extends ElementBase {
 
             this.lineCoverageHistory = clazz.lch;
             this.branchCoverageHistory = clazz.bch;
-            this.historicCoverages = clazz.hc;
+
+            clazz.hc.forEach(element => {
+                this.historicCoverages.push(new HistoricCoverage(element))
+            });
     }
 
     get coverage(): number {

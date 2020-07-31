@@ -52,7 +52,7 @@ import { ClassViewModel } from "./viewmodels/class-viewmodel.class";
     {{clazz.totalLines}}
   </ng-container>
 </td>
-<td class="right" [title]="clazz.coverageType">
+<td class="right" [title]="clazz.coverageType + ': ' + clazz.coverageRatioText">
   <div coverage-history-chart [historicCoverages]="clazz.lineCoverageHistory"
     *ngIf="clazz.lineCoverageHistory.length > 1"
     [ngClass]="{'historiccoverageoffset': clazz.currentHistoricCoverage !== null}"
@@ -62,14 +62,14 @@ import { ClassViewModel } from "./viewmodels/class-viewmodel.class";
     <div class="currenthistory {{getClassName(clazz.coverage, clazz.currentHistoricCoverage.lcq)}}">
       {{clazz.coveragePercentage}}
     </div>
-    <div [title]="clazz.currentHistoricCoverage.et">{{clazz.currentHistoricCoverage.lcq}}%</div>
+    <div [title]="clazz.currentHistoricCoverage.et + ': ' + clazz.currentHistoricCoverage.coverageRatioText">{{clazz.currentHistoricCoverage.lcq}}%</div>
   </ng-container>
   <ng-container *ngIf="clazz.currentHistoricCoverage === null">
     {{clazz.coveragePercentage}}
   </ng-container>
 </td>
 <td class="right"><coverage-bar [percentage]="clazz.coverage"></coverage-bar></td>
-<td class="right" *ngIf="branchCoverageAvailable">
+<td class="right" *ngIf="branchCoverageAvailable" [title]="clazz.branchCoverageRatioText">
   <div coverage-history-chart [historicCoverages]="clazz.branchCoverageHistory"
     *ngIf="clazz.branchCoverageHistory.length > 1"
     [ngClass]="{'historiccoverageoffset': clazz.currentHistoricCoverage !== null}"
@@ -79,7 +79,7 @@ import { ClassViewModel } from "./viewmodels/class-viewmodel.class";
     <div class="currenthistory {{getClassName(clazz.branchCoverage, clazz.currentHistoricCoverage.bcq)}}">
       {{clazz.branchCoveragePercentage}}
     </div>
-    <div [title]="clazz.currentHistoricCoverage.et">{{clazz.currentHistoricCoverage.bcq}}%</div>
+    <div [title]="clazz.currentHistoricCoverage.et + ': ' + clazz.currentHistoricCoverage.branchCoverageRatioText">{{clazz.currentHistoricCoverage.bcq}}%</div>
   </ng-container>
   <ng-container *ngIf="clazz.currentHistoricCoverage === null">
     {{clazz.branchCoveragePercentage}}

@@ -12,9 +12,9 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
 <th class="right">{{element.uncoveredLines}}</th>
 <th class="right">{{element.coverableLines}}</th>
 <th class="right">{{element.totalLines}}</th>
-<th class="right">{{element.coveragePercentage}}</th>
+<th class="right" [title]="element.coverageRatioText">{{element.coveragePercentage}}</th>
 <th class="right"><coverage-bar [percentage]="element.coverage"></coverage-bar></th>
-<th class="right" *ngIf="branchCoverageAvailable">{{element.branchCoveragePercentage}}</th>
+<th class="right" *ngIf="branchCoverageAvailable" [title]="element.branchCoverageRatioText">{{element.branchCoveragePercentage}}</th>
 <th class="right" *ngIf="branchCoverageAvailable">
   <coverage-bar [percentage]="element.branchCoverage"></coverage-bar>
 </th>`,

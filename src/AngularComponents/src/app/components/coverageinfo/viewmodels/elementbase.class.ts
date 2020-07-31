@@ -27,6 +27,14 @@ export abstract class ElementBase {
         return this.coverage + "%";
     }
 
+    get coverageRatioText(): string {
+        if (this.coverableLines === 0) {
+            return "-";
+        }
+
+        return this.coveredLines + "/" + this.coverableLines;
+    }
+
     get branchCoverage(): number {
         if (this.totalBranches === 0) {
             return NaN;
@@ -34,13 +42,20 @@ export abstract class ElementBase {
 
         return Helper.roundNumber(100 * this.coveredBranches / this.totalBranches, 1);
     }
-
     get branchCoveragePercentage(): string {
         if (this.totalBranches === 0) {
             return "";
         }
 
         return this.branchCoverage + "%";
+    }
+
+    get branchCoverageRatioText(): string {
+        if (this.totalBranches === 0) {
+            return "-";
+        }
+
+        return this.coveredBranches + "/" + this.totalBranches;
     }
 
     abstract visible(filter: string, historicCoverageFilter: string): boolean;
