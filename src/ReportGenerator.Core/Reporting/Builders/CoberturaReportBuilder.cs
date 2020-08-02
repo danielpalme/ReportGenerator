@@ -145,8 +145,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <param name="summaryResult">The summary result.</param>
         public void CreateSummaryReport(SummaryResult summaryResult)
         {
+            decimal? summaryComplexity = null;
             foreach (var assembly in summaryResult.Assemblies)
             {
+                decimal? assemblyComplexity = null;
                 if (this.packageElementsByName.TryGetValue(assembly.Name, out XElement packageElement))
                 {
                     double packageLineRate = assembly.CoverableLines == 0 ? 1 : assembly.CoveredLines / (double)assembly.CoverableLines;
@@ -154,7 +156,32 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
                     packageElement.Add(new XAttribute("line-rate", packageLineRate.ToString(CultureInfo.InvariantCulture)));
                     packageElement.Add(new XAttribute("branch-rate", packageBranchRate.ToString(CultureInfo.InvariantCulture)));
-                    packageElement.Add(new XAttribute("complexity", "NaN"));
+
+                    foreach (var @class in assembly.Classes)
+                    {
+                        foreach (var file in @class.Files)
+                        {
+                            foreach (var methodMetric in file.MethodMetrics)
+                            {
+                                var metric = methodMetric.Metrics.FirstOrDefault(m =>
+                                m.Name == ReportResources.CyclomaticComplexity
+                                && m.Value.HasValue);
+                                if (metric != null)
+                                {
+                                    if (!assemblyComplexity.HasValue)
+                                    {
+                                        assemblyComplexity = 0;
+                                        summaryComplexity = 0;
+                                    }
+
+                                    assemblyComplexity += metric.Value.Value;
+                                    summaryComplexity += metric.Value.Value;
+                                }
+                            }
+                        }
+                    }
+
+                    packageElement.Add(new XAttribute("complexity", assemblyComplexity.HasValue ? assemblyComplexity.Value.ToString(CultureInfo.InvariantCulture) : "NaN"));
                 }
             }
 
@@ -169,7 +196,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             rootElement.Add(new XAttribute("lines-valid", summaryResult.CoverableLines.ToString(CultureInfo.InvariantCulture)));
             rootElement.Add(new XAttribute("branches-covered", summaryResult.CoveredBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)));
             rootElement.Add(new XAttribute("branches-valid", summaryResult.TotalBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)));
-            rootElement.Add(new XAttribute("complexity", "NaN"));
+            rootElement.Add(new XAttribute("complexity", summaryComplexity.HasValue ? summaryComplexity.Value.ToString(CultureInfo.InvariantCulture) : "NaN"));
             rootElement.Add(new XAttribute("version", 0));
             rootElement.Add(new XAttribute("timestamp", ((long)(DateTime.Now - new DateTime(1970, 1, 1)).TotalSeconds).ToString(CultureInfo.InvariantCulture)));
 
