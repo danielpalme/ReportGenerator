@@ -36,6 +36,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         private readonly int numberOfReportsMergedInParallel;
 
         /// <summary>
+        /// Indicates whether test projects should be included.
+        /// </summary>
+        private readonly bool excludeTestProjects;
+
+        /// <summary>
         /// The source directories.
         /// </summary>
         private readonly IEnumerable<string> sourceDirectories;
@@ -73,6 +78,27 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         {
             this.numberOfReportsParsedInParallel = Math.Max(1, numberOfReportsParsedInParallel);
             this.numberOfReportsMergedInParallel = Math.Max(1, numberOfReportsMergedInParallel);
+            this.sourceDirectories = sourceDirectories ?? throw new ArgumentNullException(nameof(sourceDirectories));
+            this.assemblyFilter = assemblyFilter ?? throw new ArgumentNullException(nameof(assemblyFilter));
+            this.classFilter = classFilter ?? throw new ArgumentNullException(nameof(classFilter));
+            this.fileFilter = fileFilter ?? throw new ArgumentNullException(nameof(fileFilter));
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CoverageReportParser" /> class.
+        /// </summary>
+        /// <param name="numberOfReportsParsedInParallel">The number reports that are parsed and processed in parallel.</param>
+        /// <param name="numberOfReportsMergedInParallel">The number reports that are merged in parallel.</param>
+        /// <param name="excludeTestProjects">Indicates whether test projects should be included.</param>
+        /// <param name="sourceDirectories">The source directories.</param>
+        /// <param name="assemblyFilter">The assembly filter.</param>
+        /// <param name="classFilter">The class filter.</param>
+        /// <param name="fileFilter">The file filter.</param>
+        public CoverageReportParser(int numberOfReportsParsedInParallel, int numberOfReportsMergedInParallel, bool excludeTestProjects, IEnumerable<string> sourceDirectories, IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter)
+        {
+            this.numberOfReportsParsedInParallel = Math.Max(1, numberOfReportsParsedInParallel);
+            this.numberOfReportsMergedInParallel = Math.Max(1, numberOfReportsMergedInParallel);
+            this.excludeTestProjects = excludeTestProjects;
             this.sourceDirectories = sourceDirectories ?? throw new ArgumentNullException(nameof(sourceDirectories));
             this.assemblyFilter = assemblyFilter ?? throw new ArgumentNullException(nameof(assemblyFilter));
             this.classFilter = classFilter ?? throw new ArgumentNullException(nameof(classFilter));
@@ -342,7 +368,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         new CloverReportPreprocessor(this.sourceDirectories).Execute(item);
 
                         Logger.DebugFormat(Resources.InitiatingParser, "Clover");
-                        var result = new CloverParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
+                        var result = new CloverParser(this.assemblyFilter, this.classFilter, this.fileFilter, this.excludeTestProjects).Parse(item);
 
                         foreach (var sourceDirectory in this.sourceDirectories)
                         {

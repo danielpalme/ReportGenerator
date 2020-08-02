@@ -55,5 +55,10 @@ namespace Palmmedia.ReportGenerator.Core
         /// Gets or sets a value indicating whether risk hotspots should be disabled or not.
         /// </summary>
         public bool DisableRiskHotspots { get; set; } = false;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether test projects should be included or not (only for Clover files).
+        /// </summary>
+        public bool ExcludeTestProjects { get; set; } = false;
     }
 }

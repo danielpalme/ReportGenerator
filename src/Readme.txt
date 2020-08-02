@@ -66,6 +66,7 @@ CHANGELOG
 4.6.3.0
 
     * New: #364: Added tooltips to show coverage as ratio
+    * New: #366: Clover: Filtering of test projects (settings:excludeTestProjects=true)
 
 4.6.2.0
 

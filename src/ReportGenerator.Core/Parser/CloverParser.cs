@@ -23,14 +23,32 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(CloverParser));
 
         /// <summary>
+        /// Indicates whether test projects should be included.
+        /// </summary>
+        private readonly bool excludeTestProjects;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="CloverParser" /> class.
         /// </summary>
         /// <param name="assemblyFilter">The assembly filter.</param>
         /// <param name="classFilter">The class filter.</param>
         /// <param name="fileFilter">The file filter.</param>
         internal CloverParser(IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter)
+            : this(assemblyFilter, classFilter, fileFilter, false)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CloverParser" /> class.
+        /// </summary>
+        /// <param name="assemblyFilter">The assembly filter.</param>
+        /// <param name="classFilter">The class filter.</param>
+        /// <param name="fileFilter">The file filter.</param>
+        /// <param name="excludeTestProjects">Indicates whether test projects should be included.</param>
+        internal CloverParser(IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter, bool excludeTestProjects)
             : base(assemblyFilter, classFilter, fileFilter)
         {
+            this.excludeTestProjects = excludeTestProjects;
         }
 
         /// <summary>
@@ -47,8 +65,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             var assemblies = new List<Assembly>();
 
-            var modules = report.Descendants("package")
+            var modules = report
+                .Descendants("package")
                 .Where(p => p.Attribute("name") != null)
+                .Where(p => !this.excludeTestProjects || p.Parent.Name != "testproject")
                 .ToArray();
 
             if (modules.Length == 0)

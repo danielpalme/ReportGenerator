@@ -126,6 +126,7 @@ namespace Palmmedia.ReportGenerator.Core
                 var parserResult = new CoverageReportParser(
                     settings.NumberOfReportsParsedInParallel,
                     settings.NumberOfReportsMergedInParallel,
+                    settings.ExcludeTestProjects,
                     reportConfiguration.SourceDirectories,
                     new DefaultFilter(reportConfiguration.AssemblyFilters),
                     new DefaultFilter(reportConfiguration.ClassFilters),
