@@ -63,6 +63,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.6.4.0
+
+    * New: #366: Added custom settings to Azure DevOps task
+
 4.6.3.0
 
     * New: #364: Added tooltips to show coverage as ratio

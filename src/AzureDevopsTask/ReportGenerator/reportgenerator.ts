@@ -17,6 +17,14 @@ async function executeReportGenerator(): Promise<number> {
     .arg('-title:' + (tl.getInput('title') || ''))
     .arg('-tag:' + (tl.getInput('tag') || ''));
 
+    const customSettings = (tl.getInput('customSettings') || '');
+
+    if (customSettings.length > 0) {
+        customSettings.split(';').forEach(setting => {
+            tool = tool.arg(setting.trim());
+        });
+    }
+
     return await tool.exec();
 }
 

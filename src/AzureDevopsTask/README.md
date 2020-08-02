@@ -10,6 +10,27 @@ To learn how to use *ReportGenerator* have a look at the:
 * [Usage Guide](https://danielpalme.github.io/ReportGenerator/usage.html)
 * [Command line parameters](https://github.com/danielpalme/ReportGenerator/#usage--command-line-parameters)
 
+### YAML example
+```yaml
+
+- task: Palmmedia.reportgenerator.reportgenerator-build-release-task.    - task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@4
+      displayName: ReportGenerator
+      inputs:
+        reports: 'coverage.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
+        targetdir: 'coveragereport' # REQUIRED # The directory where the generated report should be saved.
+        reporttypes: 'HtmlInline_AzurePipelines;Cobertura' # The output formats and scope (separated by semicolon) Values: Badges, Clover, Cobertura, CsvSummary, Html, HtmlChart, HtmlInline, HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Dark, HtmlSummary, JsonSummary, Latex, LatexSummary, lcov, MHtml, PngChart, SonarQube, TeamCitySummary, TextSummary, Xml, XmlSummary
+        sourcedirs: '' # Optional directories which contain the corresponding source code (separated by semicolon). The source directories are used if coverage report contains classes without path information.
+        historydir: '' # Optional directory for storing persistent coverage information. Can be used in future reports to show coverage evolution.
+        plugins: '' # Optional plugin files for custom reports or custom history storage (separated by semicolon).
+        assemblyfilters: '+*' # Optional list of assemblies that should be included or excluded in the report. Exclusion filters take precedence over inclusion filters. Wildcards are allowed.
+        classfilters: '+*' # Optional list of classes that should be included or excluded in the report. Exclusion filters take precedence over inclusion filters. Wildcards are allowed.
+        filefilters: '+*' # Optional list of files that should be included or excluded in the report. Exclusion filters take precedence over inclusion filters. Wildcards are allowed.
+        verbosity: 'Info' # The verbosity level of the log messages. Values: Verbose, Info, Warning, Error, Off
+        title: '' # Optional title.
+        tag: '$(build.buildnumber)_#$(build.buildid)' # Optional tag or build version.
+        customSettings: '' # Optional custom settings (separated by semicolon). See: https://github.com/danielpalme/ReportGenerator/wiki/Settings.
+```
+
 ### Attention
 The [Publish Code Coverage Results](https://github.com/microsoft/azure-pipelines-tasks/tree/master/Tasks/PublishCodeCoverageResultsV1) task from Microsoft regenerates the report with different settings and based on the supplied _Coberatura_ file (see [announcement](https://docs.microsoft.com/en-us/azure/devops/release-notes/2019/sprint-150-update#cobertura-code-coverage-report-updates)). Moreover it does not necessarily use the latest version of _ReportGenerator_.  
 To disable the regeneration of the report, you can use the following environment variable in your build:
