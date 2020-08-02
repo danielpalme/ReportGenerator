@@ -94,7 +94,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
                             methodElement.Add(new XAttribute("line-rate", methodLineRate.ToString(CultureInfo.InvariantCulture)));
                             methodElement.Add(new XAttribute("branch-rate", methodBranchRate.ToString(CultureInfo.InvariantCulture)));
-                            methodElement.Add(new XAttribute("complexity", "NaN"));
 
                             var methodMetrics = file.MethodMetrics.FirstOrDefault(q => q.ShortName == codeElement.Name);
                             if (methodMetrics != null)
@@ -171,6 +170,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                                     if (!assemblyComplexity.HasValue)
                                     {
                                         assemblyComplexity = 0;
+                                    }
+
+                                    if (!summaryComplexity.HasValue)
+                                    {
                                         summaryComplexity = 0;
                                     }
 
