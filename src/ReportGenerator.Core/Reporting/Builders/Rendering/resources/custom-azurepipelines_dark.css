@@ -1,5 +1,6 @@
 @media screen {
     html { background-color: #292827; color: #fff; }
+    body { color: #fff; }
     h1 { background-color: #252423; color: #fff; }
     .container { background-color: #292827; }
     .containerrightfixed { background-color: #3D3C3C; border-left: solid 1px #515050; }

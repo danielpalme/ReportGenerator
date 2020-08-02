@@ -67,6 +67,7 @@ CHANGELOG
 
     * New: #364: Added tooltips to show coverage as ratio
     * New: #366: Clover: Filtering of test projects (settings:excludeTestProjects=true)
+    * Fix: #365: Added dark theme support for Coverage Gutters preview
 
 4.6.2.0
 
