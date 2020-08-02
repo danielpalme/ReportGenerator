@@ -62,6 +62,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             foreach (var fileAnalysis in fileAnalyses)
             {
+                decimal? fileComplexity = null;
                 var classElement = new XElement(
                     "class",
                     new XAttribute("name", @class.Name),
@@ -95,6 +96,26 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                             methodElement.Add(new XAttribute("branch-rate", methodBranchRate.ToString(CultureInfo.InvariantCulture)));
                             methodElement.Add(new XAttribute("complexity", "NaN"));
 
+                            var methodMetrics = file.MethodMetrics.FirstOrDefault(q => q.ShortName == codeElement.Name);
+                            if (methodMetrics != null)
+                            {
+                                var complexityMetric = methodMetrics.Metrics.FirstOrDefault(m => m.Name == ReportResources.CyclomaticComplexity);
+                                if (complexityMetric != null && complexityMetric.Value.HasValue)
+                                {
+                                    if (!fileComplexity.HasValue)
+                                    {
+                                        fileComplexity = 0;
+                                    }
+
+                                    fileComplexity += complexityMetric.Value.Value;
+                                    methodElement.Add(new XAttribute("complexity", complexityMetric.Value.Value.ToString(CultureInfo.InvariantCulture)));
+                                }
+                            }
+                            else
+                            {
+                                methodElement.Add(new XAttribute("complexity", "NaN"));
+                            }
+
                             methodsElement.Add(methodElement);
                         }
 
@@ -110,7 +131,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
                 classElement.Add(new XAttribute("line-rate", lineRate.ToString(CultureInfo.InvariantCulture)));
                 classElement.Add(new XAttribute("branch-rate", branchRate.ToString(CultureInfo.InvariantCulture)));
-                classElement.Add(new XAttribute("complexity", "NaN"));
+                classElement.Add(new XAttribute("complexity", fileComplexity.HasValue ? fileComplexity.Value.ToString(CultureInfo.InvariantCulture) : "NaN"));
 
                 classElement.Add(linesElement);
 
