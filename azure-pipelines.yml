@@ -26,10 +26,10 @@ stages:
         custom: '--info'
 
     - task: UseDotNet@2
-      displayName: 'Use .NET Core SDK 3.1.302'
+      displayName: 'Use .NET Core SDK 3.1.401'
       inputs:
         packageType: sdk
-        version: 3.1.302
+        version: 3.1.401
 
     - task: DotNetCoreCLI@2
       displayName: 'dotnet info'
@@ -52,8 +52,6 @@ stages:
       displayName: 'NuGet Restore'
       inputs:
         restoreSolution: '$(solution)'
-        feedsToUse: config
-        nugetConfigPath: 'src/NuGet.Config'
 
     # Compile
     - task: VSBuild@1
