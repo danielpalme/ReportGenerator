@@ -63,6 +63,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.6.5.0
+
+    * Fix: #371: Fixed order of metrics
+
 4.6.4.0
 
     * New: #366: Added custom settings to Azure DevOps task

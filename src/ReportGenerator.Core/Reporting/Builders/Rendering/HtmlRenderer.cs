@@ -633,14 +633,18 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 throw new ArgumentNullException(nameof(@class));
             }
 
-            var firstMethodMetric = @class.Files.SelectMany(f => f.MethodMetrics).First();
+            var metrics = @class.Files
+                .SelectMany(f => f.MethodMetrics)
+                .SelectMany(m => m.Metrics)
+                .Distinct()
+                .OrderBy(m => m.Name);
 
             this.reportTextWriter.WriteLine("<table class=\"overview table-fixed\">");
             this.reportTextWriter.Write("<thead><tr>");
 
             this.reportTextWriter.Write("<th>{0}</th>", WebUtility.HtmlEncode(ReportResources.Method));
 
-            foreach (var met in firstMethodMetric.Metrics)
+            foreach (var met in metrics)
             {
                 if (met.ExplanationUrl == null)
                 {
@@ -677,12 +681,21 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                         this.reportTextWriter.Write("<td title=\"{0}\">{1}</td>", WebUtility.HtmlEncode(methodMetric.FullName), WebUtility.HtmlEncode(methodMetric.ShortName));
                     }
 
-                    foreach (var metricValue in methodMetric.Metrics)
+                    foreach (var metric in metrics)
                     {
-                        this.reportTextWriter.Write(
+                        var metricValue = methodMetric.Metrics.FirstOrDefault(m => m.Equals(metric));
+
+                        if (metricValue != null)
+                        {
+                            this.reportTextWriter.Write(
                             "<td>{0}{1}</td>",
                             metricValue.Value.HasValue ? metricValue.Value.Value.ToString("0.##", CultureInfo.InvariantCulture) : "-",
                             metricValue.Value.HasValue && metricValue.MetricType == MetricType.CoveragePercentual ? "%" : string.Empty);
+                        }
+                        else
+                        {
+                            this.reportTextWriter.Write("<td>-</td>");
+                        }
                     }
 
                     this.reportTextWriter.WriteLine("</tr>");
@@ -706,14 +719,17 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 throw new ArgumentNullException(nameof(methodMetrics));
             }
 
-            var firstMethodMetric = methodMetrics.First();
+            var metrics = methodMetrics
+                .SelectMany(m => m.Metrics)
+                .Distinct()
+                .OrderBy(m => m.Name);
 
             this.reportTextWriter.WriteLine("<table class=\"overview table-fixed\">");
             this.reportTextWriter.Write("<thead><tr>");
 
             this.reportTextWriter.Write("<th>{0}</th>", WebUtility.HtmlEncode(ReportResources.Method));
 
-            foreach (var met in firstMethodMetric.Metrics)
+            foreach (var met in metrics)
             {
                 if (met.ExplanationUrl == null)
                 {
@@ -734,9 +750,20 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
                 this.reportTextWriter.Write("<td title=\"{0}\">{1}</td>", WebUtility.HtmlEncode(methodMetric.FullName), WebUtility.HtmlEncode(methodMetric.ShortName));
 
-                foreach (var metricValue in methodMetric.Metrics.Select(m => m.Value))
+                foreach (var metric in metrics)
                 {
-                    this.reportTextWriter.Write("<td>{0}</td>", metricValue.HasValue ? metricValue.Value.ToString("0.##", CultureInfo.InvariantCulture) : "-");
+                    var metricValue = methodMetric.Metrics.FirstOrDefault(m => m.Equals(metric));
+
+                    if (metricValue != null)
+                    {
+                        this.reportTextWriter.Write(
+                        "<td>{0}</td>",
+                        metricValue.Value.HasValue ? metricValue.Value.Value.ToString("0.##", CultureInfo.InvariantCulture) : "-");
+                    }
+                    else
+                    {
+                        this.reportTextWriter.Write("<td>-</td>");
+                    }
                 }
 
                 this.reportTextWriter.WriteLine("</tr>");

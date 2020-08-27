@@ -351,28 +351,65 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 throw new ArgumentNullException(nameof(methodMetrics));
             }
 
-            var firstMethodMetric = methodMetrics.First();
-            int numberOfTables = (int)Math.Ceiling((double)firstMethodMetric.Metrics.Count() / 5);
+            var metrics = methodMetrics
+                .SelectMany(m => m.Metrics)
+                .Distinct()
+                .OrderBy(m => m.Name);
+
+            int numberOfTables = (int)Math.Ceiling((double)metrics.Count() / 5);
 
             for (int i = 0; i < numberOfTables; i++)
             {
-                string columns = "|l|" + string.Join("|", firstMethodMetric.Metrics.Skip(i * 5).Take(5).Select(m => "r")) + "|";
+                string columns = "|l|" + string.Join("|", metrics.Skip(i * 5).Take(5).Select(m => "r")) + "|";
 
                 this.reportTextWriter.WriteLine(@"\begin{longtable}[l]{" + columns + "}");
                 this.reportTextWriter.WriteLine(@"\hline");
-                this.reportTextWriter.Write(@"\textbf{" + EscapeLatexChars(ReportResources.Method) + "} & " + string.Join(" & ", firstMethodMetric.Metrics.Skip(i * 5).Take(5).Select(m => @"\textbf{" + EscapeLatexChars(m.Name) + "}")));
+                this.reportTextWriter.Write(@"\textbf{" + EscapeLatexChars(ReportResources.Method) + "} & " + string.Join(" & ", metrics.Skip(i * 5).Take(5).Select(m => @"\textbf{" + EscapeLatexChars(m.Name) + "}")));
                 this.reportTextWriter.WriteLine(@"\\");
                 this.reportTextWriter.WriteLine(@"\hline");
 
                 foreach (var methodMetric in methodMetrics.OrderBy(c => c.Line))
                 {
-                    string metrics = string.Join(" & ", methodMetric.Metrics.Skip(i * 5).Take(5).Select(m => string.Format("{0}{1}", m.Value.HasValue ? m.Value.Value.ToString(CultureInfo.InvariantCulture) : "-", m.Value.HasValue && m.MetricType == MetricType.CoveragePercentual ? "\\%" : string.Empty)));
+                    StringBuilder sb = new StringBuilder();
+                    int counter = 0;
+                    foreach (var metric in metrics.Skip(i * 5).Take(5))
+                    {
+                        if (counter > 0)
+                        {
+                            sb.Append(" & ");
+                        }
+
+                        var metricValue = methodMetric.Metrics.FirstOrDefault(m => m.Equals(metric));
+
+                        if (metricValue != null)
+                        {
+                            if (metricValue.Value.HasValue)
+                            {
+                                sb.Append(metricValue.Value.Value.ToString(CultureInfo.InvariantCulture));
+
+                                if (metricValue.MetricType == MetricType.CoveragePercentual)
+                                {
+                                    sb.Append("\\%");
+                                }
+                            }
+                            else
+                            {
+                                sb.Append("-");
+                            }
+                        }
+                        else
+                        {
+                            sb.Append("-");
+                        }
+
+                        counter++;
+                    }
 
                     string row = string.Format(
                         CultureInfo.InvariantCulture,
                         @"\textbf{{{0}}} & {1}\\",
                         EscapeLatexChars(ShortenString(methodMetric.ShortName, 20)),
-                        metrics);
+                        sb.ToString());
 
                     this.reportTextWriter.WriteLine(row);
                     this.reportTextWriter.WriteLine(@"\hline");
