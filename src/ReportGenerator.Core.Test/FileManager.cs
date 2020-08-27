@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
+using System.Reflection;
 using Xunit;
 
 namespace Palmmedia.ReportGenerator.Core.Test
@@ -88,21 +89,12 @@ namespace Palmmedia.ReportGenerator.Core.Test
             return filesDirectory;
         }
 
-        internal static string GetTestDirectory()
-        {
-            var currentDirectory = new DirectoryInfo(System.Reflection.Assembly.GetExecutingAssembly().Location);
-
-            while (true)
-            {
-                currentDirectory = currentDirectory.Parent;
-                string directory = Path.Combine(currentDirectory.FullName, "ReportGenerator.Core.Test");
-
-                if (Directory.Exists(directory))
-                {
-                    return directory;
-                }
-            }
-        }
+        internal static string GetTestDirectory() => Assembly
+            .GetExecutingAssembly()
+            .GetCustomAttributes<AssemblyMetadataAttribute>()
+            .Where(attr => attr.Key == "ProjectDirectory")
+            .Select(attr => attr.Value)
+            .FirstOrDefault() ?? Directory.GetCurrentDirectory() + @"..\..";
     }
 
     [CollectionDefinition("FileManager")]
