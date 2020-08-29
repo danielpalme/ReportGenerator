@@ -259,6 +259,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;uid&apos; of tracked method &apos;{0}&apos; is not unique. Ignoring tracked methods..
+        /// </summary>
+        internal static string ErrorNotUniqueTrackedMethodUid {
+            get {
+                return ResourceManager.GetString("ErrorNotUniqueTrackedMethodUid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PartCover is no longer supported. If you want to generate coverage reports based on PartCover, please use version 3.x of ReportGenerator..
         /// </summary>
         internal static string ErrorPartCover {

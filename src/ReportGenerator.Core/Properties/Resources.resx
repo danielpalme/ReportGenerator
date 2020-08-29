@@ -183,6 +183,9 @@
   <data name="ErrorInvalidDotCoverReport" xml:space="preserve">
     <value>The dotCover report does not contain line coverage data. Use the dotCover command line parameter '/ReportType=DetailedXML' to capture line coverage.</value>
   </data>
+  <data name="ErrorNotUniqueTrackedMethodUid" xml:space="preserve">
+    <value>The 'uid' of tracked method '{0}' is not unique. Ignoring tracked methods.</value>
+  </data>
   <data name="ErrorPartCover" xml:space="preserve">
     <value>PartCover is no longer supported. If you want to generate coverage reports based on PartCover, please use version 3.x of ReportGenerator.</value>
   </data>

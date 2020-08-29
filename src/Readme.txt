@@ -65,6 +65,7 @@ CHANGELOG
 
 4.6.5.0
 
+    * Fix: #363: Fixed OpenCover file handling (not unique tracked methods)
     * Fix: #371: Fixed order of metrics
 
 4.6.4.0

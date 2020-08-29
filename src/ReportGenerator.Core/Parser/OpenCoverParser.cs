@@ -73,8 +73,26 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .Where(m => m.Attribute("skippedDueTo") == null)
                 .ToArray();
             var files = report.Descendants("File").ToArray();
-            var trackedMethods = report.Descendants("TrackedMethod")
-                .ToDictionary(t => t.Attribute("uid").Value, t => t.Attribute("name").Value);
+
+            var trackedMethods = new Dictionary<string, string>();
+
+            foreach (var trackedMethodElement in report.Descendants("TrackedMethod"))
+            {
+                if (trackedMethods.ContainsKey(trackedMethodElement.Attribute("uid").Value))
+                {
+                    Logger.WarnFormat(
+                        Resources.ErrorNotUniqueTrackedMethodUid,
+                        trackedMethodElement.Attribute("name").Value);
+
+                    trackedMethods.Clear();
+
+                    break;
+                }
+                else
+                {
+                    trackedMethods.Add(trackedMethodElement.Attribute("uid").Value, trackedMethodElement.Attribute("name").Value);
+                }
+            }
 
             var assemblyNames = modules
                 .Select(m => m.Element("ModuleName").Value)
