@@ -25,5 +25,16 @@
         /// Gets the number of line visits.
         /// </summary>
         public int LineVisits { get; }
+
+        /// <summary>
+        /// Returns a <see cref="string" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="string" /> that represents this instance.
+        /// </returns>
+        public override string ToString()
+        {
+            return $"{this.LineVisitStatus}: {this.LineVisits}";
+        }
     }
 }

@@ -27,6 +27,17 @@
         public int BranchVisits { get; internal set; }
 
         /// <summary>
+        /// Returns a <see cref="string" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="string" /> that represents this instance.
+        /// </returns>
+        public override string ToString()
+        {
+            return this.identifier;
+        }
+
+        /// <summary>
         /// Determines whether the specified <see cref="object"/> is equal to this instance.
         /// </summary>
         /// <param name="obj">The <see cref="object"/> to compare with this instance.</param>

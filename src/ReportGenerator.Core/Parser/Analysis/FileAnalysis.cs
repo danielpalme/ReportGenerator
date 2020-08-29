@@ -51,6 +51,17 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         public IEnumerable<LineAnalysis> Lines => this.lineAnalysis;
 
         /// <summary>
+        /// Returns a <see cref="string" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="string" /> that represents this instance.
+        /// </returns>
+        public override string ToString()
+        {
+            return this.Path;
+        }
+
+        /// <summary>
         /// Adds the given line analysis to the file analysis.
         /// </summary>
         /// <param name="lineAnalysis">The line analysis.</param>

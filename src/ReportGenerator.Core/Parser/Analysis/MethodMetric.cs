@@ -51,6 +51,17 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         public int? Line { get; internal set; }
 
         /// <summary>
+        /// Returns a <see cref="string" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="string" /> that represents this instance.
+        /// </returns>
+        public override string ToString()
+        {
+            return this.ShortName;
+        }
+
+        /// <summary>
         /// Determines whether the specified <see cref="object"/> is equal to this instance.
         /// </summary>
         /// <param name="obj">The <see cref="object"/> to compare with this instance.</param>
