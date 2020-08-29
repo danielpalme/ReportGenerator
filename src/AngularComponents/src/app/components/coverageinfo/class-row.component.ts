@@ -69,6 +69,28 @@ import { ClassViewModel } from "./viewmodels/class-viewmodel.class";
   </ng-container>
 </td>
 <td class="right"><coverage-bar [percentage]="clazz.coverage"></coverage-bar></td>
+<td class="right" *ngIf="branchCoverageAvailable">
+  <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
+    <div class="currenthistory {{getClassName(clazz.coveredBranches, clazz.currentHistoricCoverage.cb)}}">
+      {{clazz.coveredBranches}}
+    </div>
+    <div [title]="clazz.currentHistoricCoverage.et">
+      {{clazz.currentHistoricCoverage.cb}}
+    </div>
+  </ng-container>
+  <ng-container *ngIf="clazz.currentHistoricCoverage === null">
+    {{clazz.coveredBranches}}
+  </ng-container>
+</td>
+<td class="right" *ngIf="branchCoverageAvailable">
+  <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
+    <div class="currenthistory">{{clazz.totalBranches}}</div>
+    <div [title]="clazz.currentHistoricCoverage.et">{{clazz.currentHistoricCoverage.tb}}</div>
+  </ng-container>
+  <ng-container *ngIf="clazz.currentHistoricCoverage === null">
+    {{clazz.totalBranches}}
+  </ng-container>
+</td>
 <td class="right" *ngIf="branchCoverageAvailable" [title]="clazz.branchCoverageRatioText">
   <div coverage-history-chart [historicCoverages]="clazz.branchCoverageHistory"
     *ngIf="clazz.branchCoverageHistory.length > 1"

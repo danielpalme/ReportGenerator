@@ -365,6 +365,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             if (branchCoverageAvailable)
             {
+                this.reportTextWriter.WriteLine("<col class=\"column90\" />");
+                this.reportTextWriter.WriteLine("<col class=\"column70\" />");
                 this.reportTextWriter.WriteLine("<col class=\"column60\" />");
                 this.reportTextWriter.WriteLine("<col class=\"column112\" />");
             }
@@ -383,7 +385,9 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             if (branchCoverageAvailable)
             {
                 this.reportTextWriter.Write(
-                "<th class=\"center\" colspan=\"2\">{0}</th>",
+                "<th class=\"right\">{0}</th><th class=\"right\">{1}</th><th class=\"center\" colspan=\"2\">{2}</th>",
+                WebUtility.HtmlEncode(ReportResources.Covered),
+                WebUtility.HtmlEncode(ReportResources.Total),
                 WebUtility.HtmlEncode(ReportResources.BranchCoverage));
             }
 
@@ -1057,6 +1061,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             if (branchCoverageAvailable)
             {
+                this.reportTextWriter.Write("<th class=\"right\">{0}</th>", assembly.CoveredBranches);
+                this.reportTextWriter.Write("<th class=\"right\">{0}</th>", assembly.TotalBranches);
                 this.reportTextWriter.Write(
                 "<th class=\"right\" title=\"{0}\">{1}</th>",
                 assembly.BranchCoverageQuota.HasValue ? $"{assembly.CoveredBranches}/{assembly.TotalBranches}" : "-",
@@ -1104,6 +1110,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             if (branchCoverageAvailable)
             {
+                this.reportTextWriter.Write("<td class=\"right\">{0}</td>", @class.CoveredBranches);
+                this.reportTextWriter.Write("<td class=\"right\">{0}</td>", @class.TotalBranches);
                 this.reportTextWriter.Write(
                     "<td class=\"right\" title=\"{0}\">{1}</td>",
                     @class.BranchCoverageQuota.HasValue ? $"{@class.CoveredBranches}/{@class.TotalBranches}" : "-",

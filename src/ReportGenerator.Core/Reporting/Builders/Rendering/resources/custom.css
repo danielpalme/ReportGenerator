@@ -12,7 +12,7 @@ h1 a.button { color: #000; background-color: #bebebe; margin: -5px 0 0 10px; pad
 h1 a.button:hover { background-color: #ccc; }
 h1 a.button i { position: relative; top: 1px; }
 
-.container { margin: auto; max-width: 1500px; width: 90%; background-color: #fff; display: flex; box-shadow: 0 0 60px #7d7d7d; min-height: 100%; }
+.container { margin: auto; max-width: 1650px; width: 90%; background-color: #fff; display: flex; box-shadow: 0 0 60px #7d7d7d; min-height: 100%; }
 .containerleft { padding: 0 20px 20px 20px; flex: 1; }
 .containerright { width: 340px; min-width: 340px; background-color: #e5e5e5; height: 100%; }
 .containerrightfixed { position: fixed; padding: 0 20px 20px 20px; border-left: solid 1px #6f6f6f; width: 300px; overflow-y: auto; height: 100%; top: 0; bottom: 0; }

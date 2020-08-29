@@ -66,6 +66,8 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
           <col class="column70">
           <col class="column98">
           <col class="column112">
+          <col class="column90" *ngIf="branchCoverageAvailable">
+          <col class="column70" *ngIf="branchCoverageAvailable">
           <col class="column98" *ngIf="branchCoverageAvailable">
           <col class="column112" *ngIf="branchCoverageAvailable">
         </colgroup>
@@ -96,6 +98,14 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
                   [ngClass]="{'icon-up-dir_active': settings.sortBy === 'coverage' && settings.sortOrder === 'desc',
                   'icon-down-dir_active': settings.sortBy === 'coverage' && settings.sortOrder === 'asc',
                   'icon-down-dir': settings.sortBy !== 'coverage'}"></i>{{translations.coverage}}</a></th>
+            <th class="right"><a href="#" (click)="updateSorting('covered_branches', $event)"><i class="icon-down-dir"
+              [ngClass]="{'icon-up-dir_active': settings.sortBy === 'covered_branches' && settings.sortOrder === 'desc',
+              'icon-down-dir_active': settings.sortBy === 'covered_branches' && settings.sortOrder === 'asc',
+              'icon-down-dir': settings.sortBy !== 'covered_branches'}"></i>{{translations.covered}}</a></th>
+            <th class="right"><a href="#" (click)="updateSorting('total_branches', $event)"><i class="icon-down-dir"
+                [ngClass]="{'icon-up-dir_active': settings.sortBy === 'total_branches' && settings.sortOrder === 'desc',
+                'icon-down-dir_active': settings.sortBy === 'total_branches' && settings.sortOrder === 'asc',
+                'icon-down-dir': settings.sortBy !== 'total_branches'}"></i>{{translations.total}}</a></th>
             <th class="center" colspan="2" *ngIf="branchCoverageAvailable">
                 <a href="#" (click)="updateSorting('branchcoverage', $event)"><i class="icon-down-dir"
                   [ngClass]="{'icon-up-dir_active': settings.sortBy === 'branchcoverage' && settings.sortOrder === 'desc',

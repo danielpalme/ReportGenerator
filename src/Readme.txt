@@ -65,6 +65,7 @@ CHANGELOG
 
 4.6.5.0
 
+    * New: #364: Added addtional columns for branch coverage in summary
     * New: #367: Cobertura: Added support for cycolmatic complexity
     * Fix: #363: Fixed OpenCover file handling (not unique tracked methods)
     * Fix: #371: Fixed order of metrics

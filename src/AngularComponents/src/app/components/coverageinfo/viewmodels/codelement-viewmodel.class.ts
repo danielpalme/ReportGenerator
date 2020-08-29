@@ -203,6 +203,18 @@ export class CodeElementViewModel extends ElementBase {
                     return left.coverage < right.coverage ? smaller : bigger;
                 }
             });
+        } else if (sortBy === "covered_branches") {
+            this.classes.sort(function (left: ClassViewModel, right: ClassViewModel): number {
+                return left.coveredBranches === right.coveredBranches ?
+                        0
+                        : (left.coveredBranches < right.coveredBranches ? smaller : bigger);
+            });
+        } else if (sortBy === "total_branches") {
+            this.classes.sort(function (left: ClassViewModel, right: ClassViewModel): number {
+                return left.totalBranches === right.totalBranches ?
+                        0
+                        : (left.totalBranches < right.totalBranches ? smaller : bigger);
+            });
         } else if (sortBy === "branchcoverage") {
             this.classes.sort(function (left: ClassViewModel, right: ClassViewModel): number {
                 if (left.branchCoverage === right.branchCoverage) {
