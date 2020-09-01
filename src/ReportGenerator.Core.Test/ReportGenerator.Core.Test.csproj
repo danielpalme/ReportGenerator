@@ -6,6 +6,7 @@
     <RootNamespace>Palmmedia.ReportGenerator.Core.Test</RootNamespace>
     <AssemblyVersion>4.6.5.0</AssemblyVersion>
     <FileVersion>4.6.5.0</FileVersion>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
   
   <ItemGroup>
@@ -51,6 +52,13 @@
     <None Update="Common\Encodings\utf8_bom.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>ProjectDirectory</_Parameter1>
+      <_Parameter2>$(MSBuildProjectDirectory)</_Parameter2>
+    </AssemblyAttribute>
   </ItemGroup>
 
 </Project>

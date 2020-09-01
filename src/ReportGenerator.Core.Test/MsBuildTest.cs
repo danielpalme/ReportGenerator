@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.IO;
 using Xunit;
 
@@ -30,16 +31,19 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 {
                     found = true;
 
+                    var log = Path.Combine(
+                        Environment.GetEnvironmentVariable("BUILD_ARTIFACTSTAGINGDIRECTORY") ?? FileManager.GetTestDirectory(),
+                        nameof(ExecuteMSBuildScript_NetFull) + ".binlog");
                     var processStartInfo = new ProcessStartInfo(
                         paths[i],
-                        $"MsBuildTestScript.proj /p:Configuration={configuration}")
+                        $"MsBuildTestScript.proj /p:Configuration={configuration} /bl:{log}")
                     {
                         WorkingDirectory = FileManager.GetTestDirectory(),
                         RedirectStandardOutput = true
                     };
 
                     var process = Process.Start(processStartInfo);
-                    process.WaitForExit();
+                    Assert.True(process.WaitForExit(5000));
 
                     Assert.True(0 == process.ExitCode, process.StandardOutput.ReadToEnd());
 
@@ -59,16 +63,19 @@ namespace Palmmedia.ReportGenerator.Core.Test
             configuration = "Debug";
 #endif
 
+            var log = Path.Combine(
+                Environment.GetEnvironmentVariable("BUILD_ARTIFACTSTAGINGDIRECTORY") ?? FileManager.GetTestDirectory(),
+                nameof(ExecuteMSBuildScript_NetCore) + ".binlog");
             var processStartInfo = new ProcessStartInfo(
                 "dotnet",
-                $"msbuild MsBuildTestScript_NetCore.proj /p:Configuration={configuration}")
+                $"msbuild MsBuildTestScript_NetCore.proj /p:Configuration={configuration} /bl:{log}")
             {
                 WorkingDirectory = FileManager.GetTestDirectory(),
                 RedirectStandardOutput = true
             };
 
             var process = Process.Start(processStartInfo);
-            process.WaitForExit();
+            Assert.True(process.WaitForExit(5000));
 
             Assert.True(0 == process.ExitCode, process.StandardOutput.ReadToEnd());
         }
