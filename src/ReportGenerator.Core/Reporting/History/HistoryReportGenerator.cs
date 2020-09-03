@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Text;
+using System.Xml;
 using System.Xml.Linq;
 using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
@@ -87,7 +89,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.History
             {
                 using (var stream = new MemoryStream())
                 {
-                    document.Save(stream);
+                    using (var writer = new XmlTextWriter(stream, new UTF8Encoding(encoderShouldEmitUTF8Identifier: false)))
+                    {
+                        document.Save(writer);
+                    }
                     stream.Position = 0;
                     this.historyStorage.SaveFile(stream, fileName);
                 }
