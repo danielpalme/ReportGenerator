@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Palmmedia.ReportGenerator.Core.CodeAnalysis;
+using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Properties;
@@ -134,7 +136,29 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// </summary>
         private void CreateMhtmlFile()
         {
-            string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "Summary.mht");
+            string targetDirectory = this.ReportContext.ReportConfiguration.TargetDirectory;
+            string htmlReportTargetDirectory = this.htmlReportTargetDirectory;
+
+            if (this.ReportContext.Settings.CreateSubdirectoryForAllReportTypes)
+            {
+                targetDirectory = Path.Combine(targetDirectory, this.ReportType);
+                htmlReportTargetDirectory = Path.Combine(htmlReportTargetDirectory, this.htmlReportBuilder.ReportType);
+
+                if (!Directory.Exists(targetDirectory))
+                {
+                    try
+                    {
+                        Directory.CreateDirectory(targetDirectory);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.ErrorFormat(Resources.TargetDirectoryCouldNotBeCreated, targetDirectory, ex.GetExceptionMessageForDisplay());
+                        return;
+                    }
+                }
+            }
+
+            string targetPath = Path.Combine(targetDirectory, "Summary.mht");
 
             Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
@@ -147,12 +171,12 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 writer.WriteLine();
 
                 string file = "index.html";
-                string content = File.ReadAllText(Path.Combine(this.htmlReportTargetDirectory, file));
+                string content = File.ReadAllText(Path.Combine(htmlReportTargetDirectory, file));
                 content = AddFilePrefixForCssAndJavaScript(content);
                 content = content.Replace("<tr><td><a href=\"", "<tr><td><a href=\"file:///");
                 WriteFile(writer, file, "text/html", content);
 
-                foreach (var reportFile in Directory.EnumerateFiles(this.htmlReportTargetDirectory, "*.html"))
+                foreach (var reportFile in Directory.EnumerateFiles(htmlReportTargetDirectory, "*.html"))
                 {
                     if (reportFile.EndsWith("index.html"))
                     {
@@ -167,20 +191,20 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 }
 
                 file = "main.js";
-                content = File.ReadAllText(Path.Combine(this.htmlReportTargetDirectory, file));
+                content = File.ReadAllText(Path.Combine(htmlReportTargetDirectory, file));
                 content = content.Replace(", \"reportPath\": \"", ", \"reportPath\": \"file:///");
                 content = content.Replace(", \"rp\": \"", ", \"rp\": \"file:///");
                 WriteFile(writer, file, "application/javascript", content);
 
                 file = "class.js";
-                if (File.Exists(Path.Combine(this.htmlReportTargetDirectory, file)))
+                if (File.Exists(Path.Combine(htmlReportTargetDirectory, file)))
                 {
-                    content = File.ReadAllText(Path.Combine(this.htmlReportTargetDirectory, file));
+                    content = File.ReadAllText(Path.Combine(htmlReportTargetDirectory, file));
                     WriteFile(writer, file, "application/javascript", content);
                 }
 
                 file = "report.css";
-                content = File.ReadAllText(Path.Combine(this.htmlReportTargetDirectory, file));
+                content = File.ReadAllText(Path.Combine(htmlReportTargetDirectory, file));
                 WriteFile(writer, file, "text/css", content);
 
                 writer.Write("------=_NextPart_000_0000_01D23618.54EBCBE0--");

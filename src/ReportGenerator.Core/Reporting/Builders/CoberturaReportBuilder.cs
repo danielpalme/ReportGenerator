@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Properties;
@@ -11,7 +12,7 @@ using Palmmedia.ReportGenerator.Core.Properties;
 namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 {
     /// <summary>
-    /// Creates xml report in Cobertura format
+    /// Creates xml report in Cobertura format.
     /// </summary>
     public class CoberturaReportBuilder : IReportBuilder
     {
@@ -229,7 +230,27 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             XDocument result = new XDocument(new XDeclaration("1.0", null, null), rootElement);
             result.AddFirst(new XDocumentType("coverage", null, "http://cobertura.sourceforge.net/xml/coverage-04.dtd", null));
 
-            string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "Cobertura.xml");
+            string targetDirectory = this.ReportContext.ReportConfiguration.TargetDirectory;
+
+            if (this.ReportContext.Settings.CreateSubdirectoryForAllReportTypes)
+            {
+                targetDirectory = Path.Combine(targetDirectory, this.ReportType);
+
+                if (!Directory.Exists(targetDirectory))
+                {
+                    try
+                    {
+                        Directory.CreateDirectory(targetDirectory);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.ErrorFormat(Resources.TargetDirectoryCouldNotBeCreated, targetDirectory, ex.GetExceptionMessageForDisplay());
+                        return;
+                    }
+                }
+            }
+
+            string targetPath = Path.Combine(targetDirectory, "Cobertura.xml");
 
             Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 

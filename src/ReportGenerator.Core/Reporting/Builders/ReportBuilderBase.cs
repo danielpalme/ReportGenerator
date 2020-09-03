@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using Palmmedia.ReportGenerator.Core.Common;
+using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Properties;
 using Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering;
@@ -13,6 +16,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
     /// </summary>
     public abstract class ReportBuilderBase : IReportBuilder
     {
+        /// <summary>
+        /// The Logger.
+        /// </summary>
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(ReportBuilderBase));
+
         /// <summary>
         /// Gets the report type.
         /// </summary>
@@ -54,7 +62,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             string additionalTitle = this.ReportContext.ReportConfiguration.Title != null ? $"{this.ReportContext.ReportConfiguration.Title} - " : null;
 
-            reportRenderer.BeginClassReport(this.ReportContext.ReportConfiguration.TargetDirectory, @class.Assembly.ShortName, @class.Name, additionalTitle);
+            reportRenderer.BeginClassReport(this.CreateTargetDirectory(), @class.Assembly.ShortName, @class.Name, additionalTitle);
 
             if (this.ReportContext.ReportConfiguration.Title != null)
             {
@@ -163,7 +171,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 reportRenderer.TestMethods(testMethods, fileAnalyses, codeElementsByFileIndex);
             }
 
-            reportRenderer.SaveClassReport(this.ReportContext.ReportConfiguration.TargetDirectory, @class.Assembly.ShortName, @class.Name);
+            reportRenderer.SaveClassReport(this.CreateTargetDirectory(), @class.Assembly.ShortName, @class.Name);
         }
 
         /// <summary>
@@ -185,7 +193,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             string title = this.ReportContext.ReportConfiguration.Title != null ? $"{ReportResources.Summary} - {this.ReportContext.ReportConfiguration.Title}" : ReportResources.Summary;
 
-            reportRenderer.BeginSummaryReport(this.ReportContext.ReportConfiguration.TargetDirectory, null, title);
+            reportRenderer.BeginSummaryReport(this.CreateTargetDirectory(), null, title);
             reportRenderer.HeaderWithGithubLinks(title);
 
             reportRenderer.BeginKeyValueTable();
@@ -299,7 +307,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             reportRenderer.CustomSummary(summaryResult.Assemblies, this.ReportContext.RiskHotspotAnalysisResult.RiskHotspots, summaryResult.SupportsBranchCoverage);
 
             reportRenderer.AddFooter();
-            reportRenderer.SaveSummaryReport(this.ReportContext.ReportConfiguration.TargetDirectory);
+            reportRenderer.SaveSummaryReport(this.CreateTargetDirectory());
         }
 
         /// <summary>
@@ -314,6 +322,35 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// </summary>
         /// <param name="summaryResult">The summary result.</param>
         public abstract void CreateSummaryReport(SummaryResult summaryResult);
+
+        /// <summary>
+        /// Creates the target directory.
+        /// </summary>
+        /// <returns>The target directory.</returns>
+        protected string CreateTargetDirectory()
+        {
+            string targetDirectory = this.ReportContext.ReportConfiguration.TargetDirectory;
+
+            if (this.ReportContext.Settings.CreateSubdirectoryForAllReportTypes)
+            {
+                targetDirectory = Path.Combine(targetDirectory, this.ReportType);
+
+                if (!Directory.Exists(targetDirectory))
+                {
+                    try
+                    {
+                        Directory.CreateDirectory(targetDirectory);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.ErrorFormat(Resources.TargetDirectoryCouldNotBeCreated, targetDirectory, ex.GetExceptionMessageForDisplay());
+                        throw;
+                    }
+                }
+            }
+
+            return targetDirectory;
+        }
 
         /// <summary>
         /// Gets the overall historic coverages from all classes grouped by execution time.

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Properties;
@@ -63,7 +64,27 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             {
                 byte[] image = PngHistoryChartRenderer.RenderHistoryChart(filteredHistoricCoverages);
 
-                string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "CoverageHistory.png");
+                string targetDirectory = this.ReportContext.ReportConfiguration.TargetDirectory;
+
+                if (this.ReportContext.Settings.CreateSubdirectoryForAllReportTypes)
+                {
+                    targetDirectory = Path.Combine(targetDirectory, this.ReportType);
+
+                    if (!Directory.Exists(targetDirectory))
+                    {
+                        try
+                        {
+                            Directory.CreateDirectory(targetDirectory);
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.ErrorFormat(Resources.TargetDirectoryCouldNotBeCreated, targetDirectory, ex.GetExceptionMessageForDisplay());
+                            return;
+                        }
+                    }
+                }
+
+                string targetPath = Path.Combine(targetDirectory, "CoverageHistory.png");
 
                 Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 

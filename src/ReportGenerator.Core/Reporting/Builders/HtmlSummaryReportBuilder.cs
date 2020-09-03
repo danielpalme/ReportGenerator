@@ -38,13 +38,15 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 this.CreateSummaryReport(renderer, summaryResult);
             }
 
-            string sourcePath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "summary.html");
+            string targetDirectory = this.CreateTargetDirectory();
+
+            string sourcePath = Path.Combine(targetDirectory, "summary.html");
 
             if (File.Exists(sourcePath))
             {
                 File.Copy(
                     sourcePath,
-                    Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "summary.htm"),
+                    Path.Combine(targetDirectory, "summary.htm"),
                     true);
             }
         }

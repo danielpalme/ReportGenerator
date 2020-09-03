@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Properties;
@@ -153,12 +154,41 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             XDocument result = new XDocument(new XDeclaration("1.0", "utf-8", null), rootElement);
 
             string targetPath = Path.Combine(
-                this.ReportContext.ReportConfiguration.TargetDirectory,
+                this.CreateTargetDirectory(),
                 "Summary.xml");
 
             Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
             result.Save(targetPath);
+        }
+
+        /// <summary>
+        /// Creates the target directory.
+        /// </summary>
+        /// <returns>The target directory.</returns>
+        protected string CreateTargetDirectory()
+        {
+            string targetDirectory = this.ReportContext.ReportConfiguration.TargetDirectory;
+
+            if (this.ReportContext.Settings.CreateSubdirectoryForAllReportTypes)
+            {
+                targetDirectory = Path.Combine(targetDirectory, this.ReportType);
+
+                if (!Directory.Exists(targetDirectory))
+                {
+                    try
+                    {
+                        Directory.CreateDirectory(targetDirectory);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.ErrorFormat(Resources.TargetDirectoryCouldNotBeCreated, targetDirectory, ex.GetExceptionMessageForDisplay());
+                        throw;
+                    }
+                }
+            }
+
+            return targetDirectory;
         }
     }
 }

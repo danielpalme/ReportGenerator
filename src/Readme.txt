@@ -63,6 +63,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.6.6.0
+
+    * New: #379: Added setting to allow saving report types to different directories
+
 4.6.5.0
 
     * New: #364: Added addtional columns for branch coverage in summary

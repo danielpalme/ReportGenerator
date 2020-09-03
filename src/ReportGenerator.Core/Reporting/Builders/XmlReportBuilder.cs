@@ -144,7 +144,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             XDocument result = new XDocument(new XDeclaration("1.0", "utf-8", null), rootElement);
 
             string targetPath = Path.Combine(
-                this.ReportContext.ReportConfiguration.TargetDirectory,
+                this.CreateTargetDirectory(),
                 GetClassReportFilename(@class.Assembly.Name, @class.Name));
 
             Logger.InfoFormat(Resources.WritingReportFile, targetPath);

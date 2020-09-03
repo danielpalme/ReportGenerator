@@ -39,7 +39,9 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 throw new ArgumentNullException(nameof(summaryResult));
             }
 
-            reportRenderer.BeginSummaryReport(this.ReportContext.ReportConfiguration.TargetDirectory, "CoverageHistory.html", ReportResources.Summary);
+            string targetDirectory = this.CreateTargetDirectory();
+
+            reportRenderer.BeginSummaryReport(targetDirectory, "CoverageHistory.html", ReportResources.Summary);
 
             var historicCoverages = this.GetOverallHistoricCoverages(this.ReportContext.OverallHistoricCoverages);
             if (historicCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue))
@@ -49,11 +51,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             reportRenderer.CustomSummary(summaryResult.Assemblies, new List<RiskHotspot>(), summaryResult.SupportsBranchCoverage);
 
-            reportRenderer.SaveSummaryReport(this.ReportContext.ReportConfiguration.TargetDirectory);
+            reportRenderer.SaveSummaryReport(targetDirectory);
 
             File.Copy(
-                Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "CoverageHistory.html"),
-                Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "CoverageHistory.htm"),
+                Path.Combine(targetDirectory, "CoverageHistory.html"),
+                Path.Combine(targetDirectory, "CoverageHistory.htm"),
                 true);
         }
     }
