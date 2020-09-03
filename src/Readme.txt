@@ -66,6 +66,7 @@ CHANGELOG
 4.6.6.0
 
     * New: #379: Added setting to allow saving report types to different directories
+    * New: #380: Removed UTF-8 BOM from all generated XML files
 
 4.6.5.0
 
