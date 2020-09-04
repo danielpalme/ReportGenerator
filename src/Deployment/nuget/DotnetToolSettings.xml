@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <DotNetCliTool Version="1">
   <Commands>
     <Command Name="reportgenerator" EntryPoint="ReportGenerator.dll" Runner="dotnet" />

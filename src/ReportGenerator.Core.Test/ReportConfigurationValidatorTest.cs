@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using Moq;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Reporting;

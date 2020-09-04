@@ -1,4 +1,4 @@
-﻿namespace Palmmedia.ReportGenerator.Core.Parser.Filtering
+namespace Palmmedia.ReportGenerator.Core.Parser.Filtering
 {
     /// <summary>
     /// Interface to filter assemblies and classes based on their name during report generation.

@@ -1,4 +1,4 @@
-﻿using Palmmedia.ReportGenerator.Core.Parser.Filtering;
+using Palmmedia.ReportGenerator.Core.Parser.Filtering;
 using Xunit;
 
 namespace Palmmedia.ReportGenerator.Core.Test.Parser.Filtering

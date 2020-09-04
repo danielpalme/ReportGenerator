@@ -1,4 +1,4 @@
-﻿<project name="JaCoCo" xmlns:jacoco="antlib:org.jacoco.ant">
+<project name="JaCoCo" xmlns:jacoco="antlib:org.jacoco.ant">
     <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
         <classpath path="CoverageTools/JaCoCo/jacoco-0.8.3/jacocoant.jar" />
     </taskdef>

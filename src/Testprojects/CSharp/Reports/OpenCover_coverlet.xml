@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <CoverageSession>
   <Summary numSequencePoints="188" visitedSequencePoints="125" numBranchPoints="188" visitedBranchPoints="125" sequenceCoverage="0,665" branchCoverage="0,665" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" visitedClasses="17" numClasses="21" visitedMethods="27" numMethods="45" />
   <Modules>

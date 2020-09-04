@@ -1,4 +1,4 @@
-﻿namespace Palmmedia.ReportGenerator
+namespace Palmmedia.ReportGenerator
 {
     /// <summary>
     /// Command line access to the ReportBuilder.

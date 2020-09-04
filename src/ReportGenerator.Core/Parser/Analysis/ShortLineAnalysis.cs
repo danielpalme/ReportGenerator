@@ -1,4 +1,4 @@
-﻿namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
+namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
 {
     /// <summary>
     /// Coverage information of a line in a source file.

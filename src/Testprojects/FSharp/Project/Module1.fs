@@ -1,4 +1,4 @@
-﻿namespace ViewModels
+namespace ViewModels
 
 open System.Windows
 open System.Windows.Controls

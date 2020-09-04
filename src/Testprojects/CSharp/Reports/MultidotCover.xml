@@ -1,4 +1,4 @@
-﻿<root>
+<root>
     <Root CoveredStatements="128" TotalStatements="204" CoveragePercent="63" ReportType="DetailedXml" DotCoverVersion="10.0.2">
       <FileIndices>
         <File Index="1" Name="C:\temp\analyzertestclass.cs" />

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading;
 
 namespace Palmmedia.ReportGenerator.Core.Parser.Analysis

@@ -1,4 +1,4 @@
-﻿namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
+namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 {
     /// <summary>
     /// Defines how CSS and JavaScript are referenced.

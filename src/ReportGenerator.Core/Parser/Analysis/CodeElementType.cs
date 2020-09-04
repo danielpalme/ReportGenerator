@@ -1,4 +1,4 @@
-﻿namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
+namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
 {
     /// <summary>
     /// Type of <see cref="CodeElement"/>.

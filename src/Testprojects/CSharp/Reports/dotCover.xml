@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Root CoveredStatements="128" TotalStatements="204" CoveragePercent="63" ReportType="DetailedXml" DotCoverVersion="2018.2.3">
   <FileIndices>
     <File Index="1" Name="C:\temp\AnalyzerTestClass.cs" ChecksumAlgorithm="SHA1" Checksum="279408AA8B3309C5F52E75BB939F209EF2C2C96A" />

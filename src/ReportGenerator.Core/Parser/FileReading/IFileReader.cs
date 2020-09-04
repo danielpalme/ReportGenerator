@@ -1,4 +1,4 @@
-﻿namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
+namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
 {
     /// <summary>
     /// Interface for file access.

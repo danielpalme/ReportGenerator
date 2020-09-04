@@ -1,4 +1,4 @@
-﻿namespace Palmmedia.ReportGenerator.Core.Parser
+namespace Palmmedia.ReportGenerator.Core.Parser
 {
     /// <summary>
     /// Temporar class to create <see cref="Analysis.CodeElement"/> once all required information is available.

@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Xml.Linq;
 using Moq;
 using Palmmedia.ReportGenerator.Core.Parser;

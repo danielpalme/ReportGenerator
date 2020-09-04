@@ -1,4 +1,4 @@
-﻿using Palmmedia.ReportGenerator.Core.Common;
+using Palmmedia.ReportGenerator.Core.Common;
 using Xunit;
 
 namespace Palmmedia.ReportGenerator.Core.Test.Common

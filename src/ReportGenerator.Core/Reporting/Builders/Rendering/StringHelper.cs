@@ -1,4 +1,4 @@
-﻿using System.Text.RegularExpressions;
+using System.Text.RegularExpressions;
 
 namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 {
