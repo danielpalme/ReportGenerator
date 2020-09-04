@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Xml;
 using System.Xml.Linq;
+using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Properties;
@@ -382,11 +385,40 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             XDocument result = new XDocument(new XDeclaration("1.0", "UTF-8", null), rootElement);
 
-            string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "Clover.xml");
+            string targetDirectory = this.ReportContext.ReportConfiguration.TargetDirectory;
+
+            if (this.ReportContext.Settings.CreateSubdirectoryForAllReportTypes)
+            {
+                targetDirectory = Path.Combine(targetDirectory, this.ReportType);
+
+                if (!Directory.Exists(targetDirectory))
+                {
+                    try
+                    {
+                        Directory.CreateDirectory(targetDirectory);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.ErrorFormat(Resources.TargetDirectoryCouldNotBeCreated, targetDirectory, ex.GetExceptionMessageForDisplay());
+                        return;
+                    }
+                }
+            }
+
+            string targetPath = Path.Combine(targetDirectory, "Clover.xml");
 
             Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
-            result.Save(targetPath);
+            XmlWriterSettings settings = new XmlWriterSettings()
+            {
+                Encoding = new UTF8Encoding(false),
+                Indent = true
+            };
+
+            using (XmlWriter writer = XmlWriter.Create(targetPath, settings))
+            {
+                result.Save(writer);
+            }
         }
     }
 }

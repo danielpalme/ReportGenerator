@@ -42,9 +42,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 this.CreateSummaryReport(renderer, summaryResult);
             }
 
+            string targetDirectory = this.CreateTargetDirectory();
+
             File.Copy(
-                Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "index.html"),
-                Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "index.htm"),
+                Path.Combine(targetDirectory, "index.html"),
+                Path.Combine(targetDirectory, "index.htm"),
                 true);
         }
     }

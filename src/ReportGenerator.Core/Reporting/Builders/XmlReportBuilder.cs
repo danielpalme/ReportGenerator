@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Xml;
 using System.Xml.Linq;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
@@ -144,12 +146,21 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             XDocument result = new XDocument(new XDeclaration("1.0", "utf-8", null), rootElement);
 
             string targetPath = Path.Combine(
-                this.ReportContext.ReportConfiguration.TargetDirectory,
+                this.CreateTargetDirectory(),
                 GetClassReportFilename(@class.Assembly.Name, @class.Name));
 
             Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
-            result.Save(targetPath);
+            XmlWriterSettings settings = new XmlWriterSettings()
+            {
+                Encoding = new UTF8Encoding(false),
+                Indent = true
+            };
+
+            using (XmlWriter writer = XmlWriter.Create(targetPath, settings))
+            {
+                result.Save(writer);
+            }
         }
 
         /// <summary>

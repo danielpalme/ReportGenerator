@@ -65,7 +65,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MSBuild\ReportGenerator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -76,6 +75,10 @@
     <ProjectReference Include="..\ReportGenerator.Core\ReportGenerator.Core.csproj">
       <Project>{8dbcf22a-18a3-4a50-899d-8af6ed9975d0}</Project>
       <Name>ReportGenerator.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ReportGenerator.MSBuild\ReportGenerator.MSBuild.csproj">
+      <Project>{e0ac1ee8-82a3-41ee-bd42-44659cdbd333}</Project>
+      <Name>ReportGenerator.MSBuild</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -90,21 +93,8 @@
     <Content Include="ProgramIcon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Build.Utilities.Core">
-      <Version>16.5.0</Version>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.7">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.7 %28x86 and x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="16.5.0" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
