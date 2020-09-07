@@ -1,4 +1,4 @@
-﻿using Palmmedia.ReportGenerator.Core.Logging;
+using Palmmedia.ReportGenerator.Core.Logging;
 
 namespace Palmmedia.ReportGenerator.Core.Test
 {

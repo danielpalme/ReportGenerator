@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Palmmedia.ReportGenerator.Core.Parser.Filtering;
 
 namespace Palmmedia.ReportGenerator.Core.Parser

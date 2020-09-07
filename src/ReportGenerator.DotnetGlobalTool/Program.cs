@@ -1,4 +1,4 @@
-﻿namespace Palmmedia.ReportGenerator.DotnetGlobalTool
+namespace Palmmedia.ReportGenerator.DotnetGlobalTool
 {
     /// <summary>
     /// Command line access to the ReportBuilder.

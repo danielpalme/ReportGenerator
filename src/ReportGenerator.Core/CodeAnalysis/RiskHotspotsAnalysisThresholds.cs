@@ -1,4 +1,4 @@
-﻿namespace Palmmedia.ReportGenerator.Core.CodeAnalysis
+namespace Palmmedia.ReportGenerator.Core.CodeAnalysis
 {
     /// <summary>
     /// Thresholds of the various metrics.

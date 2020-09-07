@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 
 namespace Palmmedia.ReportGenerator.Core.Reporting

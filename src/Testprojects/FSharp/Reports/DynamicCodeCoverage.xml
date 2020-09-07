@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <results>
   <modules>
     <module name="test.exe" path="test.exe" id="5A12DCB4826D9B419B7D42DC1C864D4601000000" block_coverage="59.03" line_coverage="55.93" blocks_covered="85" blocks_not_covered="59" lines_covered="33" lines_partially_covered="3" lines_not_covered="23">

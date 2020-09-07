@@ -1,4 +1,4 @@
-﻿open Microsoft.VisualStudio.TestTools.UnitTesting
+open Microsoft.VisualStudio.TestTools.UnitTesting
 open ViewModels
 
 [<TestClass>]

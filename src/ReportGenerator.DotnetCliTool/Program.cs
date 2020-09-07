@@ -1,4 +1,4 @@
-﻿namespace Palmmedia.ReportGenerator.DotnetCliTool
+namespace Palmmedia.ReportGenerator.DotnetCliTool
 {
     /// <summary>
     /// Command line access to the ReportBuilder.

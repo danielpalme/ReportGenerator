@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Root CoveredStatements="35" TotalStatements="54" CoveragePercent="65" ReportType="DetailedXml" DotCoverVersion="2018.2.3">
   <FileIndices>
     <File Index="1" Name="C:\temp\Module1.fs" ChecksumAlgorithm="MD5" Checksum="FD4305B710589A02450E52CEC282368A" />

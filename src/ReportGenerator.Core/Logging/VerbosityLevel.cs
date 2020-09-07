@@ -1,4 +1,4 @@
-﻿namespace Palmmedia.ReportGenerator.Core.Logging
+namespace Palmmedia.ReportGenerator.Core.Logging
 {
     /// <summary>
     /// Enumeration for the logging verbosity.

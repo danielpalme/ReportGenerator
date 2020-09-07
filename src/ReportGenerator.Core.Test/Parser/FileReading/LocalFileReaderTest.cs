@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using Palmmedia.ReportGenerator.Core.Parser.FileReading;
 using Xunit;
 

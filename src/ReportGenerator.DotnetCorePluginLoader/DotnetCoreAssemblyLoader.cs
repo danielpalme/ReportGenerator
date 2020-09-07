@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using McMaster.NETCore.Plugins;
 using Palmmedia.ReportGenerator.Core.Plugin;
 using Palmmedia.ReportGenerator.Core.Reporting;

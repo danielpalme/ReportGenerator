@@ -1,4 +1,4 @@
-﻿
+
 namespace Test
 {
     public partial class PartialClassWithAutoProperties

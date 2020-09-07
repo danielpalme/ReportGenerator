@@ -1,4 +1,4 @@
-﻿using Palmmedia.ReportGenerator.Core.CodeAnalysis;
+using Palmmedia.ReportGenerator.Core.CodeAnalysis;
 using Palmmedia.ReportGenerator.Core.Parser;
 using Palmmedia.ReportGenerator.Core.Reporting;
 

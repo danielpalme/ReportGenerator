@@ -1,4 +1,4 @@
-﻿namespace Palmmedia.ReportGenerator.Console.NetCore
+namespace Palmmedia.ReportGenerator.Console.NetCore
 {
     /// <summary>
     /// Command line access to the ReportBuilder.

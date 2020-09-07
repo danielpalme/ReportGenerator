@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Plugin;

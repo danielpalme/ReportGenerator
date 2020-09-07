@@ -1,4 +1,4 @@
-﻿
+
 namespace Test
 {
     public class CodeContract_Target : CodeContract_Interface

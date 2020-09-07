@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <CoverageSession xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="4.6.601.0">
   <Summary numSequencePoints="56" visitedSequencePoints="36" numBranchPoints="40" visitedBranchPoints="18" sequenceCoverage="64.29" branchCoverage="45" maxCyclomaticComplexity="2" minCyclomaticComplexity="0" maxCrapScore="6" minCrapScore="0" visitedClasses="11" numClasses="20" visitedMethods="14" numMethods="26" />
   <Modules>
