@@ -11,6 +11,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
     public class HtmlInlineAzurePipelinesReportBuilder : ReportBuilderBase
     {
         /// <summary>
+        /// Dictionary containing the filenames of the class reports by class.
+        /// </summary>
+        private readonly IDictionary<string, string> fileNameByClass = new Dictionary<string, string>();
+
+        /// <summary>
         /// Gets the report type.
         /// </summary>
         /// <value>
@@ -25,7 +30,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <param name="fileAnalyses">The file analyses that correspond to the class.</param>
         public override void CreateClassReport(Class @class, IEnumerable<FileAnalysis> fileAnalyses)
         {
-            using (var renderer = new HtmlRenderer(false, HtmlMode.InlineCssAndJavaScript, "custom-azurepipelines.css"))
+            using (var renderer = new HtmlRenderer(this.fileNameByClass, false, HtmlMode.InlineCssAndJavaScript, "custom-azurepipelines.css"))
             {
                 this.CreateClassReport(renderer, @class, fileAnalyses);
             }
@@ -37,7 +42,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <param name="summaryResult">The summary result.</param>
         public override void CreateSummaryReport(SummaryResult summaryResult)
         {
-            using (var renderer = new HtmlRenderer(false, HtmlMode.InlineCssAndJavaScript, "custom-azurepipelines.css"))
+            using (var renderer = new HtmlRenderer(this.fileNameByClass, false, HtmlMode.InlineCssAndJavaScript, "custom-azurepipelines.css"))
             {
                 this.CreateSummaryReport(renderer, summaryResult);
             }

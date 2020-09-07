@@ -63,6 +63,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.6.7.0
+
+    * Fix: #363: Improved handling of HTML generation (several HTML reports at once)
+
 4.6.6.0
 
     * New: #379: Added setting to allow saving report types to different directories

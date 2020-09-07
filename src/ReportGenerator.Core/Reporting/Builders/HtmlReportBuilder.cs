@@ -16,6 +16,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         private readonly HtmlMode htmlMode;
 
         /// <summary>
+        /// Dictionary containing the filenames of the class reports by class.
+        /// </summary>
+        private readonly IDictionary<string, string> fileNameByClass = new Dictionary<string, string>();
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="HtmlReportBuilder" /> class.
         /// </summary>
         public HtmlReportBuilder()
@@ -41,7 +46,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// </value>
         public override string ReportType => "Html";
 
-
         /// <summary>
         /// Creates a class report.
         /// </summary>
@@ -49,7 +53,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <param name="fileAnalyses">The file analyses that correspond to the class.</param>
         public override void CreateClassReport(Class @class, IEnumerable<FileAnalysis> fileAnalyses)
         {
-            using (var renderer = new HtmlRenderer(false, this.htmlMode))
+            using (var renderer = new HtmlRenderer(this.fileNameByClass, false, this.htmlMode))
             {
                 this.CreateClassReport(renderer, @class, fileAnalyses);
             }
@@ -61,7 +65,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <param name="summaryResult">The summary result.</param>
         public override void CreateSummaryReport(SummaryResult summaryResult)
         {
-            using (var renderer = new HtmlRenderer(false, this.htmlMode))
+            using (var renderer = new HtmlRenderer(this.fileNameByClass, false, this.htmlMode))
             {
                 this.CreateSummaryReport(renderer, summaryResult);
             }

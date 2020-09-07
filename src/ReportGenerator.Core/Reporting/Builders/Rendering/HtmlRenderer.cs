@@ -51,12 +51,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <summary>
         /// Dictionary containing the filenames of the class reports by class.
         /// </summary>
-        private static readonly Dictionary<string, string> FileNameByClass = new Dictionary<string, string>();
-
-        /// <summary>
-        /// Indicates that JavaScript was generated.
-        /// </summary>
-        private static bool javaScriptGenerated;
+        private readonly IDictionary<string, string> fileNameByClass;
 
         /// <summary>
         /// Indicates that only a summary report is created (no class reports).
@@ -84,6 +79,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         private readonly string additionalCssFileResource;
 
         /// <summary>
+        /// Indicates that JavaScript was generated.
+        /// </summary>
+        private bool javaScriptGenerated;
+
+        /// <summary>
         /// The report builder.
         /// </summary>
         private TextWriter reportTextWriter;
@@ -96,12 +96,19 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <summary>
         /// Initializes a new instance of the <see cref="HtmlRenderer" /> class.
         /// </summary>
+        /// <param name="fileNameByClass">Dictionary containing the filenames of the class reports by class.</param>
         /// <param name="onlySummary">if set to <c>true</c> only a summary report is created (no class reports).</param>
         /// <param name="htmlMode">Defines how CSS and JavaScript are referenced.</param>
         /// <param name="cssFileResource">Optional CSS file resource.</param>
         /// <param name="additionalCssFileResource">Optional additional CSS file resource.</param>
-        internal HtmlRenderer(bool onlySummary, HtmlMode htmlMode, string cssFileResource = "custom.css", string additionalCssFileResource = null)
+        internal HtmlRenderer(
+            IDictionary<string, string> fileNameByClass,
+            bool onlySummary,
+            HtmlMode htmlMode,
+            string cssFileResource = "custom.css",
+            string additionalCssFileResource = null)
         {
+            this.fileNameByClass = fileNameByClass;
             this.onlySummary = onlySummary;
             this.htmlMode = htmlMode;
             this.javaScriptContent = new StringBuilder();
@@ -153,7 +160,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         {
             this.classReport = true;
 
-            string targetPath = GetClassReportFilename(assemblyName, className);
+            string targetPath = this.GetClassReportFilename(assemblyName, className);
 
             Logger.DebugFormat(Resources.WritingReportFile, targetPath);
             this.CreateTextWriter(Path.Combine(targetDirectory, targetPath));
@@ -476,7 +483,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     this.javaScriptContent.AppendFormat("\"name\": \"{0}\",", @class.Name.Replace(@"\", @"\\"));
                     this.javaScriptContent.AppendFormat(
                         " \"rp\": \"{0}\",",
-                        this.onlySummary ? string.Empty : GetClassReportFilename(@class.Assembly.ShortName, @class.Name));
+                        this.onlySummary ? string.Empty : this.GetClassReportFilename(@class.Assembly.ShortName, @class.Name));
                     this.javaScriptContent.AppendFormat(" \"cl\": {0},", @class.CoveredLines);
                     this.javaScriptContent.AppendFormat(" \"ucl\": {0},", @class.CoverableLines - @class.CoveredLines);
                     this.javaScriptContent.AppendFormat(" \"cal\": {0},", @class.CoverableLines);
@@ -548,7 +555,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 this.javaScriptContent.AppendLine("  {");
                 this.javaScriptContent.AppendFormat("    \"assembly\": \"{0}\",", riskHotspot.Assembly.ShortName);
                 this.javaScriptContent.AppendFormat(" \"class\": \"{0}\",", riskHotspot.Class.Name);
-                this.javaScriptContent.AppendFormat(" \"reportPath\": \"{0}\",", this.onlySummary ? string.Empty : GetClassReportFilename(riskHotspot.Assembly.ShortName, riskHotspot.Class.Name));
+                this.javaScriptContent.AppendFormat(" \"reportPath\": \"{0}\",", this.onlySummary ? string.Empty : this.GetClassReportFilename(riskHotspot.Assembly.ShortName, riskHotspot.Class.Name));
                 this.javaScriptContent.AppendFormat(" \"methodName\": \"{0}\",", riskHotspot.MethodMetric.FullName);
                 this.javaScriptContent.AppendFormat(" \"methodShortName\": \"{0}\",", riskHotspot.MethodMetric.ShortName);
                 this.javaScriptContent.AppendFormat(" \"fileIndex\": {0},", riskHotspot.FileIndex);
@@ -997,7 +1004,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     filenameColumn = string.Format(
                         CultureInfo.InvariantCulture,
                         "<a href=\"{0}\">{1}</a>",
-                        WebUtility.HtmlEncode(GetClassReportFilename(riskHotspot.Assembly.ShortName, riskHotspot.Class.Name)),
+                        WebUtility.HtmlEncode(this.GetClassReportFilename(riskHotspot.Assembly.ShortName, riskHotspot.Class.Name)),
                         WebUtility.HtmlEncode(riskHotspot.Class.Name));
                 }
 
@@ -1010,7 +1017,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     this.reportTextWriter.Write(
                         "<td title=\"{0}\"><a href=\"{1}#file{2}_line{3}\">{4}</a></td>",
                         WebUtility.HtmlEncode(riskHotspot.MethodMetric.FullName),
-                        WebUtility.HtmlEncode(GetClassReportFilename(riskHotspot.Assembly.ShortName, riskHotspot.Class.Name)),
+                        WebUtility.HtmlEncode(this.GetClassReportFilename(riskHotspot.Assembly.ShortName, riskHotspot.Class.Name)),
                         riskHotspot.FileIndex,
                         riskHotspot.MethodMetric.Line,
                         WebUtility.HtmlEncode(riskHotspot.MethodMetric.ShortName));
@@ -1092,7 +1099,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 filenameColumn = string.Format(
                     CultureInfo.InvariantCulture,
                     "<a href=\"{0}\">{1}</a>",
-                    WebUtility.HtmlEncode(GetClassReportFilename(@class.Assembly.ShortName, @class.Name)),
+                    WebUtility.HtmlEncode(this.GetClassReportFilename(@class.Assembly.ShortName, @class.Name)),
                     WebUtility.HtmlEncode(@class.Name));
             }
 
@@ -1160,10 +1167,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         {
             this.SaveReport();
 
-            if (this.htmlMode != HtmlMode.InlineCssAndJavaScript && !javaScriptGenerated)
+            if (this.htmlMode != HtmlMode.InlineCssAndJavaScript && !this.javaScriptGenerated)
             {
                 this.SaveJavaScript(targetDirectory);
-                javaScriptGenerated = true;
+                this.javaScriptGenerated = true;
             }
         }
 
@@ -1280,13 +1287,13 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="assemblyName">Name of the assembly.</param>
         /// <param name="className">Name of the class.</param>
         /// <returns>The file name.</returns>
-        private static string GetClassReportFilename(string assemblyName, string className)
+        private string GetClassReportFilename(string assemblyName, string className)
         {
             string key = assemblyName + "_" + className;
 
             string fileName = null;
 
-            if (!FileNameByClass.TryGetValue(key, out fileName))
+            if (!this.fileNameByClass.TryGetValue(key, out fileName))
             {
                 string shortClassName = null;
 
@@ -1317,7 +1324,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     fileName = firstPart + lastPart;
                 }
 
-                if (FileNameByClass.Values.Any(v => v.Equals(fileName, StringComparison.OrdinalIgnoreCase)))
+                if (this.fileNameByClass.Values.Any(v => v.Equals(fileName, StringComparison.OrdinalIgnoreCase)))
                 {
                     int counter = 2;
                     string fileNameWithoutExtension = fileName.Substring(0, fileName.Length - 4);
@@ -1327,10 +1334,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                         fileName = fileNameWithoutExtension + counter + ".html";
                         counter++;
                     }
-                    while (FileNameByClass.Values.Any(v => v.Equals(fileName, StringComparison.OrdinalIgnoreCase)));
+                    while (this.fileNameByClass.Values.Any(v => v.Equals(fileName, StringComparison.OrdinalIgnoreCase)));
                 }
 
-                FileNameByClass.Add(key, fileName);
+                this.fileNameByClass.Add(key, fileName);
             }
 
             return fileName;
