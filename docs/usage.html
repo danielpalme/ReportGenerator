@@ -229,16 +229,6 @@
                         { tool: '.NET CLI', command: 'dotnet tool install --global dotnet-reportgenerator-globaltool --version x.y.z\r\n\r\ndotnet tool install dotnet-reportgenerator-globaltool --tool-path tools --version x.y.z\r\n\r\ndotnet new tool-manifest\r\ndotnet tool install dotnet-reportgenerator-globaltool --version x.y.z' }
                     ],
                     executables: [{ runtime: '.NET Core', tool: 'reportgenerator' }]
-                },
-                { 
-                    name: 'dotnet-reportgenerator-cli', 
-                    url: 'https://www.nuget.org/packages/dotnet-reportgenerator-cli', 
-                    runtimes: '.NET Core', 
-                    description: 'Use this package if your project is based on .NET Core 2.x and you want to use ReportGenerator as a \'DotnetCliTool\'.\r\n\r\nWarning:\r\nThis package is intended for .NET Core 2.x. It will not work with .NET Core 3.x.\r\nConsider the dotnet-reportgenerator-globaltool for .NET Core 3.x.',
-                    installoptions: [
-                        { tool: 'Manual', hint: 'Add the following element to your project file:', command: '<ItemGroup>\r\n  <DotNetCliToolReference Include="dotnet-reportgenerator-cli" Version="x.y.z" />\r\n</ItemGroup>' }
-                    ],
-                    executables: [{ runtime: '.NET Core', tool: 'dotnet reportgenerator' }]
                 }
             ];
             $scope.verbosities = ['Verbose', 'Info', 'Warning', 'Error', 'Off'];

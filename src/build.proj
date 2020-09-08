@@ -40,8 +40,6 @@
     <RemoveDir Directories="ReportGenerator.Core\obj" />
     <RemoveDir Directories="ReportGenerator.Core.Test\bin" />
     <RemoveDir Directories="ReportGenerator.Core.Test\obj" />
-    <RemoveDir Directories="ReportGenerator.DotnetCliTool\bin" />
-    <RemoveDir Directories="ReportGenerator.DotnetCliTool\obj" />
     <RemoveDir Directories="ReportGenerator.DotnetCorePluginLoader\bin" />
     <RemoveDir Directories="ReportGenerator.DotnetCorePluginLoader\obj" />
     <RemoveDir Directories="ReportGenerator.DotnetGlobalTool\bin" />
@@ -54,8 +52,6 @@
   <Target Name="Compile">
     <MSBuild Projects="ReportGenerator.sln" Targets="Restore;Build" Properties="Configuration=Release" />
     
-    <Exec Command="dotnet publish -c Release ReportGenerator.DotnetCliTool.csproj" WorkingDirectory="ReportGenerator.DotnetCliTool" />
-
     <Exec Command="dotnet publish -c Release -f netcoreapp2.0 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
     <Exec Command="dotnet publish -c Release -f netcoreapp2.1 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
     <Exec Command="dotnet publish -c Release -f netcoreapp3.0 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
@@ -114,7 +110,6 @@
     <!-- Nuget -->
     <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\ReportGenerator.nuspec -OutputDirectory target\packages -Version $(Version)" />
     <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\ReportGenerator.Core.nuspec -OutputDirectory target\packages -Version $(Version)" />
-    <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\dotnet-reportgenerator-cli.nuspec -OutputDirectory target\packages -Version $(Version)" />
     <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\dotnet-reportgenerator-globaltool.nuspec -OutputDirectory target\packages -Version $(Version)" />
     
     <!-- Chocolatey -->
@@ -125,7 +120,6 @@
     <!-- Nuget -->
     <Exec Command="$(NuGetCommandLine) push .\target\packages\ReportGenerator.$(Version).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
     <Exec Command="$(NuGetCommandLine) push .\target\packages\ReportGenerator.Core.$(Version).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
-    <Exec Command="$(NuGetCommandLine) push .\target\packages\dotnet-reportgenerator-cli.$(Version).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
     <Exec Command="$(NuGetCommandLine) push .\target\packages\dotnet-reportgenerator-globaltool.$(Version).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
     
     <!-- Chocolatey -->

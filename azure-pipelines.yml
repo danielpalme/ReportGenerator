@@ -91,16 +91,6 @@ stages:
         workingDirectory: src/ReportGenerator.Console.NetCore
 
     - task: DotNetCoreCLI@2
-      displayName: 'dotnet publish ReportGenerator.DotnetCliTool 2.1'
-      inputs:
-        command: publish
-        publishWebProjects: false
-        arguments: '-c $(BuildConfiguration) ReportGenerator.DotnetCliTool.csproj'
-        zipAfterPublish: false
-        modifyOutputPath: false
-        workingDirectory: src/ReportGenerator.DotnetCliTool
-
-    - task: DotNetCoreCLI@2
       displayName: 'dotnet publish DotnetGlobalTool 2.1'
       inputs:
         command: publish

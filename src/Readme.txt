@@ -63,6 +63,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.7.0.0
+
+    * New: Dropped support for Nuget package 'dotnet-reportgenerator-cli'. Use 'dotnet-reportgenerator-globaltool' instead.
+
 4.6.7.0
 
     * New: #374: Added support for .netconfig
