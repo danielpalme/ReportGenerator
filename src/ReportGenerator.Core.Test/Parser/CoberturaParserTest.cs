@@ -30,7 +30,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
 
             var report = XDocument.Load(FilePath1);
             new CoberturaReportPreprocessor().Execute(report);
-            this.parserResult = new CoberturaParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(report);
+            this.parserResult = new CoberturaParser(filterMock.Object, filterMock.Object, filterMock.Object, filterMock.Object).Parse(report);
         }
 
         /// <summary>

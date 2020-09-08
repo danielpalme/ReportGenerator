@@ -96,6 +96,8 @@ namespace Palmmedia.ReportGenerator.Core.Test.Reporting
 
             public IReadOnlyCollection<string> AssemblyFilters { get; set; }
 
+            public IReadOnlyCollection<string> NamespaceFilters { get; set; }
+
             public IReadOnlyCollection<string> ClassFilters { get; set; }
 
             public IReadOnlyCollection<string> FileFilters { get; set; }

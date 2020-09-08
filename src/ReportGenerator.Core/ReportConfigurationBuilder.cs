@@ -26,6 +26,7 @@ namespace Palmmedia.ReportGenerator.Core
             var reportTypes = new string[] { };
             var plugins = new string[] { };
             var assemblyFilters = new string[] { };
+            var namespaceFilters = new string[] { };
             var classFilters = new string[] { };
             var fileFilters = new string[] { };
             string verbosityLevel = null;
@@ -34,9 +35,11 @@ namespace Palmmedia.ReportGenerator.Core
 
             string value = null;
 
+            char[] separator = new[] { ';' };
+
             if (namedArguments.TryGetValue("REPORTS", out value))
             {
-                reportFilePatterns = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                reportFilePatterns = value.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             }
 
             if (namedArguments.TryGetValue("TARGETDIR", out value))
@@ -46,7 +49,7 @@ namespace Palmmedia.ReportGenerator.Core
 
             if (namedArguments.TryGetValue("SOURCEDIRS", out value))
             {
-                sourceDirectories = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                sourceDirectories = value.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             }
 
             if (namedArguments.TryGetValue("HISTORYDIR", out value))
@@ -56,7 +59,7 @@ namespace Palmmedia.ReportGenerator.Core
 
             if (namedArguments.TryGetValue("REPORTTYPES", out value))
             {
-                reportTypes = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                reportTypes = value.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             }
             else if (namedArguments.TryGetValue("REPORTTYPE", out value))
             {
@@ -65,26 +68,31 @@ namespace Palmmedia.ReportGenerator.Core
 
             if (namedArguments.TryGetValue("PLUGINS", out value))
             {
-                plugins = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                plugins = value.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             }
 
             if (namedArguments.TryGetValue("ASSEMBLYFILTERS", out value))
             {
-                assemblyFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                assemblyFilters = value.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             }
             else if (namedArguments.TryGetValue("FILTERS", out value))
             {
-                assemblyFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                assemblyFilters = value.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+            }
+
+            if (namedArguments.TryGetValue("NAMESPACEFILTERS", out value))
+            {
+                namespaceFilters = value.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             }
 
             if (namedArguments.TryGetValue("CLASSFILTERS", out value))
             {
-                classFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                classFilters = value.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             }
 
             if (namedArguments.TryGetValue("FILEFILTERS", out value))
             {
-                fileFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                fileFilters = value.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             }
 
             if (namedArguments.TryGetValue("VERBOSITY", out value))
@@ -110,6 +118,7 @@ namespace Palmmedia.ReportGenerator.Core
                 reportTypes,
                 plugins,
                 assemblyFilters,
+                namespaceFilters,
                 classFilters,
                 fileFilters,
                 verbosityLevel,

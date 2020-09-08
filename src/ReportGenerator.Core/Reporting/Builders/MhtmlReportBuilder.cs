@@ -309,6 +309,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             public IReadOnlyCollection<string> AssemblyFilters => this.reportConfiguration.AssemblyFilters;
 
             /// <summary>
+            /// Gets the namespace filters.
+            /// </summary>
+            public IReadOnlyCollection<string> NamespaceFilters => this.reportConfiguration.NamespaceFilters;
+
+            /// <summary>
             /// Gets the class filters.
             /// </summary>
             public IReadOnlyCollection<string> ClassFilters => this.reportConfiguration.ClassFilters;

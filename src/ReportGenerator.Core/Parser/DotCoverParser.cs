@@ -36,10 +36,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// Initializes a new instance of the <see cref="DotCoverParser" /> class.
         /// </summary>
         /// <param name="assemblyFilter">The assembly filter.</param>
+        /// <param name="namespaceFilter">The namespace filter.</param>
         /// <param name="classFilter">The class filter.</param>
         /// <param name="fileFilter">The file filter.</param>
-        internal DotCoverParser(IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter)
-            : base(assemblyFilter, classFilter, fileFilter)
+        internal DotCoverParser(IFilter assemblyFilter, IFilter namespaceFilter, IFilter classFilter, IFilter fileFilter)
+            : base(assemblyFilter, namespaceFilter, classFilter, fileFilter)
         {
         }
 

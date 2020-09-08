@@ -114,6 +114,22 @@
                     </div>
                     <br/>
 
+                    <h3>Namespace filters</h3>
+                    <div class="alert alert-info">Optional list of <b>namespaces</b> that should be included or excluded in the report. 
+                        <br/>Exclusion filters take precedence over inclusion filters.     
+                        <br/>Wildcards are allowed.<br/><p>Examples:<br/><code>+Included</code><br/><code>-Excluded</code></p>
+                    </div>
+                    <div class="form-group" ng-repeat="namespacefilter in namespacefilters track by $index">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="The include or exclude filter for namespaces" ng-model="namespacefilters[$index]" pattern="^[+-].+$" required />
+                            <span class="input-group-addon" ng-click="removeNamespaceFilter($index)"><a href=""><i class="fa fa-trash text-danger"></i></a></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <a href="" ng-click="addNamespaceFilter()" class="text-info"><i class="fa fa-plus-circle"></i> Add namespace filter</a>
+                    </div>
+                    <br/>
+
                     <h3>Class filters</h3>
                     <div class="alert alert-info">Optional list of <b>classes</b> that should be included or excluded in the report. 
                         <br/>Exclusion filters take precedence over inclusion filters.     
@@ -274,6 +290,7 @@
             $scope.historydir = null;
             $scope.plugins = [];
             $scope.assemblyfilters = [];
+            $scope.namespacefilters = [];
             $scope.classfilters = [];
             $scope.filefilters = [];
             $scope.selectedverbosity = 'Verbose';
@@ -310,6 +327,14 @@
             
             $scope.removeAssemblyFilter = function(index) {
                 $scope.assemblyfilters.splice(index, 1);
+            }
+
+            $scope.addNamespaceFilter = function() {
+                $scope.namespacefilters.push(null);
+            }
+
+            $scope.removeNamespaceFilter = function(index) {
+                $scope.namespacefilters.splice(index, 1);
             }
 
             $scope.addClassFilter = function() {
@@ -427,6 +452,25 @@
                         }
                         
                         result += $scope.assemblyfilters[i];
+                    }
+
+                    result += '"';  
+                }
+
+                if ($scope.namespacefilters.length > 0) {
+                    result += '\r\n';
+                    result += '"-namespacefilters:';
+
+                    for (var i = 0; i < $scope.namespacefilters.length; i++) {
+                        if ($scope.namespacefilters[i] === null || $scope.namespacefilters[i] === undefined || $scope.namespacefilters[i].length === 0) {
+                            continue;
+                        }
+
+                        if (i > 0) {
+                            result += ';';
+                        }
+                        
+                        result += $scope.namespacefilters[i];
                     }
 
                     result += '"';  

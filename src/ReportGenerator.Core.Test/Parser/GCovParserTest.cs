@@ -29,7 +29,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
 
             var lines = File.ReadAllLines(FilePath);
             new GCovReportPreprocessor(new[] { "C:\\temp" }).Execute(lines);
-            this.parserResult = new GCovParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(lines);
+            this.parserResult = new GCovParser(filterMock.Object, filterMock.Object, filterMock.Object, filterMock.Object).Parse(lines);
         }
 
         /// <summary>

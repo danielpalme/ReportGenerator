@@ -144,6 +144,9 @@
   <data name="Explanations_HistoryDirectory" xml:space="preserve">
     <value>History directory:  Optional directory for storing persistent coverage information.</value>
   </data>
+  <data name="Explanations_NamespaceFilters" xml:space="preserve">
+    <value>Namespace filters:  Optional list of namespaces that should be included or excluded in the report.</value>
+  </data>
   <data name="Explanations_Plugins" xml:space="preserve">
     <value>Plugins:            Optional plugin files for custom reports or custom history storage (separated by semicolon).</value>
   </data>
@@ -187,6 +190,9 @@
   <data name="Parameters_HistoryDirectory" xml:space="preserve">
     <value>[["]-historydir:&lt;history directory&gt;["]]</value>
   </data>
+  <data name="Parameters_NamespaceFilters" xml:space="preserve">
+    <value>[["]-namespacefilters:&lt;(+|-)filter&gt;[;&lt;(+|-)filter&gt;][;&lt;(+|-)filter&gt;]["]]</value>
+  </data>
   <data name="Parameters_Plugins" xml:space="preserve">
     <value>[["]-plugins:&lt;plugin&gt;[;&lt;plugin&gt;][;&lt;plugin&gt;]["]]</value>
   </data>
@@ -213,6 +219,9 @@
   </data>
   <data name="ReportTypeValues" xml:space="preserve">
     <value>                    Values: {0}</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
   </data>
   <data name="VerbosityValues" xml:space="preserve">
     <value>                    Values: {0}</value>

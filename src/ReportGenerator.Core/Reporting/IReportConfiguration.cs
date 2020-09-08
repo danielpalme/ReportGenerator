@@ -44,6 +44,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
         IReadOnlyCollection<string> AssemblyFilters { get; }
 
         /// <summary>
+        /// Gets the namespace filters.
+        /// </summary>
+        IReadOnlyCollection<string> NamespaceFilters { get; }
+
+        /// <summary>
         /// Gets the class filters.
         /// </summary>
         IReadOnlyCollection<string> ClassFilters { get; }

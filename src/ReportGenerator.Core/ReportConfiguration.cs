@@ -32,6 +32,7 @@ namespace Palmmedia.ReportGenerator.Core
         /// <param name="reportTypes">The report types.</param>
         /// <param name="plugins">The plugins.</param>
         /// <param name="assemblyFilters">The assembly filters.</param>
+        /// <param name="namespaceFilters">The namespace filters.</param>
         /// <param name="classFilters">The class filters.</param>
         /// <param name="fileFilters">The file filters.</param>
         /// <param name="verbosityLevel">The verbosity level.</param>
@@ -44,6 +45,7 @@ namespace Palmmedia.ReportGenerator.Core
             IEnumerable<string> reportTypes,
             IEnumerable<string> plugins,
             IEnumerable<string> assemblyFilters,
+            IEnumerable<string> namespaceFilters,
             IEnumerable<string> classFilters,
             IEnumerable<string> fileFilters,
             string verbosityLevel,
@@ -72,6 +74,11 @@ namespace Palmmedia.ReportGenerator.Core
             if (assemblyFilters == null)
             {
                 throw new ArgumentNullException(nameof(assemblyFilters));
+            }
+
+            if (namespaceFilters == null)
+            {
+                throw new ArgumentNullException(nameof(namespaceFilters));
             }
 
             if (classFilters == null)
@@ -129,6 +136,7 @@ namespace Palmmedia.ReportGenerator.Core
 
             this.Plugins = plugins.ToList();
             this.AssemblyFilters = assemblyFilters.ToList();
+            this.NamespaceFilters = namespaceFilters.ToList();
             this.ClassFilters = classFilters.ToList();
             this.FileFilters = fileFilters.ToList();
 
@@ -160,6 +168,7 @@ namespace Palmmedia.ReportGenerator.Core
         /// <param name="reportTypes">The report types.</param>
         /// <param name="plugins">The plugins.</param>
         /// <param name="assemblyFilters">The assembly filters.</param>
+        /// <param name="namespaceFilters">The namespace filters.</param>
         /// <param name="classFilters">The class filters.</param>
         /// <param name="fileFilters">The file filters.</param>
         /// <param name="verbosityLevel">The verbosity level.</param>
@@ -173,12 +182,13 @@ namespace Palmmedia.ReportGenerator.Core
             IEnumerable<string> reportTypes,
             IEnumerable<string> plugins,
             IEnumerable<string> assemblyFilters,
+            IEnumerable<string> namespaceFilters,
             IEnumerable<string> classFilters,
             IEnumerable<string> fileFilters,
             string verbosityLevel,
             string tag,
             string title)
-            : this(reportFilePatterns, targetDirectory, sourceDirectories, historyDirectory, reportTypes, plugins, assemblyFilters, classFilters, fileFilters, verbosityLevel, tag)
+            : this(reportFilePatterns, targetDirectory, sourceDirectories, historyDirectory, reportTypes, plugins, assemblyFilters, namespaceFilters, classFilters, fileFilters, verbosityLevel, tag)
         {
             this.Title = title;
         }
@@ -217,6 +227,11 @@ namespace Palmmedia.ReportGenerator.Core
         /// Gets the assembly filters.
         /// </summary>
         public IReadOnlyCollection<string> AssemblyFilters { get; }
+
+        /// <summary>
+        /// Gets the namespace filters.
+        /// </summary>
+        public IReadOnlyCollection<string> NamespaceFilters { get; }
 
         /// <summary>
         /// Gets the class filters.

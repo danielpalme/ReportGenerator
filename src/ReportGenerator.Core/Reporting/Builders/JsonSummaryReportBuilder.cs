@@ -52,7 +52,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <param name="summaryResult">The summary result.</param>
         public void CreateSummaryReport(SummaryResult summaryResult)
         {
-
             string targetDirectory = this.ReportContext.ReportConfiguration.TargetDirectory;
 
             if (this.ReportContext.Settings.CreateSubdirectoryForAllReportTypes)

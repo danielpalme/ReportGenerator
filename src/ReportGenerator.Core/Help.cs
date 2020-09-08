@@ -55,6 +55,7 @@ namespace Palmmedia.ReportGenerator.Core
             Console.WriteLine("    " + Properties.Help.Parameters_HistoryDirectory);
             Console.WriteLine("    " + Properties.Help.Parameters_Plugins);
             Console.WriteLine("    " + Properties.Help.Parameters_AssemblyFilters);
+            Console.WriteLine("    " + Properties.Help.Parameters_NamespaceFilters);
             Console.WriteLine("    " + Properties.Help.Parameters_ClassFilters);
             Console.WriteLine("    " + Properties.Help.Parameters_FileFilters);
             Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "    " + Properties.Help.Parameters_Verbosity, string.Join("|", Enum.GetNames(typeof(VerbosityLevel)))));
@@ -73,6 +74,7 @@ namespace Palmmedia.ReportGenerator.Core
             Console.WriteLine("    " + Properties.Help.Explanations7);
             Console.WriteLine("    " + Properties.Help.Explanations_Plugins);
             Console.WriteLine("    " + Properties.Help.Explanations_AssemblyFilters);
+            Console.WriteLine("    " + Properties.Help.Explanations_NamespaceFilters);
             Console.WriteLine("    " + Properties.Help.Explanations_ClassFilters);
             Console.WriteLine("    " + Properties.Help.Explanations_FileFilters);
             Console.WriteLine("    " + Properties.Help.Explanations_FiltersCommon);
@@ -85,6 +87,7 @@ namespace Palmmedia.ReportGenerator.Core
             Console.WriteLine(Properties.Help.DefaultValues);
             Console.WriteLine("   -reporttypes:Html");
             Console.WriteLine("   -assemblyfilters:+*");
+            Console.WriteLine("   -namespacefilters:+*");
             Console.WriteLine("   -classfilters:+*");
             Console.WriteLine("   -filefilters:+*");
             Console.WriteLine("   -verbosity:" + VerbosityLevel.Info);

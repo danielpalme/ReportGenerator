@@ -58,6 +58,7 @@ Parameters:
     [["]-historydir:<history directory>["]]
     [["]-plugins:<plugin>[;<plugin>][;<plugin>]["]]
     [["]-assemblyfilters:<(+|-)filter>[;<(+|-)filter>][;<(+|-)filter>]["]]
+    [["]-namespacefilters:<(+|-)filter>[;<(+|-)filter>][;<(+|-)filter>]["]]
     [["]-classfilters:<(+|-)filter>[;<(+|-)filter>][;<(+|-)filter>]["]]
     [["]-filefilters:<(+|-)filter>[;<(+|-)filter>][;<(+|-)filter>]["]]
     [["]-verbosity:<Verbose|Info|Warning|Error|Off>["]]
@@ -80,6 +81,7 @@ Explanations:
                        Can be used in future reports to show coverage evolution.
    Plugins:            Optional plugin files for custom reports or custom history storage (separated by semicolon). 
    Assembly filters:   Optional list of assemblies that should be included or excluded in the report.
+   Namespace filters:  Optional list of namespaces that should be included or excluded in the report.
    Class filters:      Optional list of classes that should be included or excluded in the report.
    File filters:       Optional list of files that should be included or excluded in the report.
                        Exclusion filters take precedence over inclusion filters.                      
@@ -92,6 +94,7 @@ Explanations:
 Default values:
    -reporttypes:Html
    -assemblyfilters:+*
+   -namespacefilters:+*
    -classfilters:+*
    -filefilters:+*
    -verbosity:Info

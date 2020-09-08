@@ -129,6 +129,7 @@ namespace Palmmedia.ReportGenerator.Core
                     settings.ExcludeTestProjects,
                     reportConfiguration.SourceDirectories,
                     new DefaultFilter(reportConfiguration.AssemblyFilters),
+                    new DefaultFilter(reportConfiguration.NamespaceFilters),
                     new DefaultFilter(reportConfiguration.ClassFilters),
                     new DefaultFilter(reportConfiguration.FileFilters))
                         .ParseFiles(reportConfiguration.ReportFiles);

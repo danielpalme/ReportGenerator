@@ -26,6 +26,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 new string[] { },
                 new string[] { },
                 new string[] { },
+                new string[] { },
                 null,
                 null);
 
@@ -56,6 +57,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 new[] { "Latex", "Xml", "Html" },
                 new string[] { "ReportGenerator.Core.Test.dll" },
                 new[] { "+Test", "-Test" },
+                new[] { "+Test1", "-Test1" },
                 new[] { "+Test2", "-Test2" },
                 new[] { "+Test3", "-Test3" },
                 VerbosityLevel.Warning.ToString(),
@@ -94,6 +96,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 "C:\\temp\\historic",
                 new string[] { },
                 new string[] { "notexistingplugin.dll" },
+                new string[] { },
                 new string[] { },
                 new string[] { },
                 new string[] { },

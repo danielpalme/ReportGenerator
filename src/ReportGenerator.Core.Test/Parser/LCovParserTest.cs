@@ -27,7 +27,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
             filterMock.Setup(f => f.IsElementIncludedInReport(It.IsAny<string>())).Returns(true);
 
             var lines = File.ReadAllLines(FilePath);
-            this.parserResult = new LCovParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(lines);
+            this.parserResult = new LCovParser(filterMock.Object, filterMock.Object, filterMock.Object, filterMock.Object).Parse(lines);
         }
 
         /// <summary>

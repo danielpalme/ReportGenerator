@@ -80,6 +80,14 @@ namespace Palmmedia.ReportGenerator.MSBuild
         public ITaskItem[] AssemblyFilters { get; set; }
 
         /// <summary>
+        /// Gets or sets the namespace filters.
+        /// </summary>
+        /// <value>
+        /// The namespace filters.
+        /// </value>
+        public ITaskItem[] NamespaceFilters { get; set; }
+
+        /// <summary>
         /// Gets or sets the class filters.
         /// </summary>
         /// <value>
@@ -136,6 +144,7 @@ namespace Palmmedia.ReportGenerator.MSBuild
                 reportTypes,
                 this.Plugins == null ? Enumerable.Empty<string>() : this.Plugins.Select(r => r.ItemSpec),
                 assemblyFilters == null ? Enumerable.Empty<string>() : assemblyFilters.Select(r => r.ItemSpec),
+                this.NamespaceFilters == null ? Enumerable.Empty<string>() : this.NamespaceFilters.Select(r => r.ItemSpec),
                 this.ClassFilters == null ? Enumerable.Empty<string>() : this.ClassFilters.Select(r => r.ItemSpec),
                 this.FileFilters == null ? Enumerable.Empty<string>() : this.FileFilters.Select(r => r.ItemSpec),
                 this.VerbosityLevel,

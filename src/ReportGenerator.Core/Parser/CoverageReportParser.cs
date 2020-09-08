@@ -51,6 +51,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         private readonly IFilter assemblyFilter;
 
         /// <summary>
+        /// The namespace filter.
+        /// </summary>
+        private readonly IFilter namespaceFilter;
+
+        /// <summary>
         /// The class filter.
         /// </summary>
         private readonly IFilter classFilter;
@@ -72,14 +77,16 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="numberOfReportsMergedInParallel">The number reports that are merged in parallel.</param>
         /// <param name="sourceDirectories">The source directories.</param>
         /// <param name="assemblyFilter">The assembly filter.</param>
+        /// <param name="namespaceFilter">The namespace filter.</param>
         /// <param name="classFilter">The class filter.</param>
         /// <param name="fileFilter">The file filter.</param>
-        public CoverageReportParser(int numberOfReportsParsedInParallel, int numberOfReportsMergedInParallel, IEnumerable<string> sourceDirectories, IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter)
+        public CoverageReportParser(int numberOfReportsParsedInParallel, int numberOfReportsMergedInParallel, IEnumerable<string> sourceDirectories, IFilter assemblyFilter, IFilter namespaceFilter, IFilter classFilter, IFilter fileFilter)
         {
             this.numberOfReportsParsedInParallel = Math.Max(1, numberOfReportsParsedInParallel);
             this.numberOfReportsMergedInParallel = Math.Max(1, numberOfReportsMergedInParallel);
             this.sourceDirectories = sourceDirectories ?? throw new ArgumentNullException(nameof(sourceDirectories));
             this.assemblyFilter = assemblyFilter ?? throw new ArgumentNullException(nameof(assemblyFilter));
+            this.namespaceFilter = namespaceFilter ?? throw new ArgumentNullException(nameof(namespaceFilter));
             this.classFilter = classFilter ?? throw new ArgumentNullException(nameof(classFilter));
             this.fileFilter = fileFilter ?? throw new ArgumentNullException(nameof(fileFilter));
         }
@@ -92,15 +99,17 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="excludeTestProjects">Indicates whether test projects should be included.</param>
         /// <param name="sourceDirectories">The source directories.</param>
         /// <param name="assemblyFilter">The assembly filter.</param>
+        /// <param name="namespaceFilter">The namespace filter.</param>
         /// <param name="classFilter">The class filter.</param>
         /// <param name="fileFilter">The file filter.</param>
-        public CoverageReportParser(int numberOfReportsParsedInParallel, int numberOfReportsMergedInParallel, bool excludeTestProjects, IEnumerable<string> sourceDirectories, IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter)
+        public CoverageReportParser(int numberOfReportsParsedInParallel, int numberOfReportsMergedInParallel, bool excludeTestProjects, IEnumerable<string> sourceDirectories, IFilter assemblyFilter, IFilter namespaceFilter, IFilter classFilter, IFilter fileFilter)
         {
             this.numberOfReportsParsedInParallel = Math.Max(1, numberOfReportsParsedInParallel);
             this.numberOfReportsMergedInParallel = Math.Max(1, numberOfReportsMergedInParallel);
             this.excludeTestProjects = excludeTestProjects;
             this.sourceDirectories = sourceDirectories ?? throw new ArgumentNullException(nameof(sourceDirectories));
             this.assemblyFilter = assemblyFilter ?? throw new ArgumentNullException(nameof(assemblyFilter));
+            this.namespaceFilter = namespaceFilter ?? throw new ArgumentNullException(nameof(namespaceFilter));
             this.classFilter = classFilter ?? throw new ArgumentNullException(nameof(classFilter));
             this.fileFilter = fileFilter ?? throw new ArgumentNullException(nameof(fileFilter));
         }
@@ -306,7 +315,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     new OpenCoverReportPreprocessor().Execute(item);
 
                     Logger.DebugFormat(Resources.InitiatingParser, "OpenCover");
-                    yield return new OpenCoverParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
+                    yield return new OpenCoverParser(this.assemblyFilter, this.namespaceFilter, this.classFilter, this.fileFilter).Parse(item);
                 }
 
                 yield break;
@@ -322,7 +331,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     new DotCoverReportPreprocessor().Execute(item);
 
                     Logger.DebugFormat(Resources.InitiatingParser, "dotCover");
-                    yield return new DotCoverParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
+                    yield return new DotCoverParser(this.assemblyFilter, this.namespaceFilter, this.classFilter, this.fileFilter).Parse(item);
                 }
 
                 yield break;
@@ -338,7 +347,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     new JaCoCoReportPreprocessor(this.sourceDirectories).Execute(item);
 
                     Logger.DebugFormat(Resources.InitiatingParser, "JaCoCo");
-                    var result = new JaCoCoParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
+                    var result = new JaCoCoParser(this.assemblyFilter, this.namespaceFilter, this.classFilter, this.fileFilter).Parse(item);
 
                     foreach (var sourceDirectory in this.sourceDirectories)
                     {
@@ -360,7 +369,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     if (item.Attribute("profilerVersion") != null)
                     {
                         Logger.DebugFormat(Resources.InitiatingParser, "NCover");
-                        yield return new NCoverParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
+                        yield return new NCoverParser(this.assemblyFilter, this.namespaceFilter, this.classFilter, this.fileFilter).Parse(item);
                     }
                     else if (item.Attribute("clover") != null || item.Attribute("generated") != null)
                     {
@@ -368,7 +377,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         new CloverReportPreprocessor(this.sourceDirectories).Execute(item);
 
                         Logger.DebugFormat(Resources.InitiatingParser, "Clover");
-                        var result = new CloverParser(this.assemblyFilter, this.classFilter, this.fileFilter, this.excludeTestProjects).Parse(item);
+                        var result = new CloverParser(this.assemblyFilter, this.namespaceFilter, this.classFilter, this.fileFilter, this.excludeTestProjects).Parse(item);
 
                         foreach (var sourceDirectory in this.sourceDirectories)
                         {
@@ -383,12 +392,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         new CoberturaReportPreprocessor().Execute(item);
 
                         Logger.DebugFormat(Resources.InitiatingParser, "Cobertura");
-                        yield return new CoberturaParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
+                        yield return new CoberturaParser(this.assemblyFilter, this.namespaceFilter, this.classFilter, this.fileFilter).Parse(item);
                     }
                     else
                     {
                         Logger.DebugFormat(Resources.InitiatingParser, "mprof");
-                        yield return new MProfParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
+                        yield return new MProfParser(this.assemblyFilter, this.namespaceFilter, this.classFilter, this.fileFilter).Parse(item);
                     }
                 }
 
@@ -404,7 +413,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     Logger.DebugFormat(Resources.InitiatingParser, "Visual Studio");
                     new VisualStudioReportPreprocessor().Execute(item);
 
-                    yield return new VisualStudioParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
+                    yield return new VisualStudioParser(this.assemblyFilter, this.namespaceFilter, this.classFilter, this.fileFilter).Parse(item);
                 }
 
                 yield break;
@@ -421,7 +430,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         Logger.DebugFormat(Resources.InitiatingParser, "Dynamic Code Coverage");
                         new DynamicCodeCoverageReportPreprocessor().Execute(item);
 
-                        yield return new DynamicCodeCoverageParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
+                        yield return new DynamicCodeCoverageParser(this.assemblyFilter, this.namespaceFilter, this.classFilter, this.fileFilter).Parse(item);
                     }
                 }
 
@@ -446,7 +455,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             {
                 Logger.DebugFormat(Resources.InitiatingParser, "LCov");
 
-                yield return new LCovParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(lines);
+                yield return new LCovParser(this.assemblyFilter, this.namespaceFilter, this.classFilter, this.fileFilter).Parse(lines);
             }
             else if (lines[0].Contains(GCovParser.SourceElementInFirstLine))
             {
@@ -454,7 +463,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 new GCovReportPreprocessor(this.sourceDirectories).Execute(lines);
 
                 Logger.DebugFormat(Resources.InitiatingParser, "GCov");
-                var result = new GCovParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(lines);
+                var result = new GCovParser(this.assemblyFilter, this.namespaceFilter, this.classFilter, this.fileFilter).Parse(lines);
 
                 foreach (var sourceDirectory in this.sourceDirectories)
                 {

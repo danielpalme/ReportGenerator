@@ -31,10 +31,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// Initializes a new instance of the <see cref="CloverParser" /> class.
         /// </summary>
         /// <param name="assemblyFilter">The assembly filter.</param>
+        /// <param name="namespaceFilter">The namespace filter.</param>
         /// <param name="classFilter">The class filter.</param>
         /// <param name="fileFilter">The file filter.</param>
-        internal CloverParser(IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter)
-            : this(assemblyFilter, classFilter, fileFilter, false)
+        internal CloverParser(IFilter assemblyFilter, IFilter namespaceFilter, IFilter classFilter, IFilter fileFilter)
+            : this(assemblyFilter, namespaceFilter, classFilter, fileFilter, false)
         {
         }
 
@@ -42,11 +43,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// Initializes a new instance of the <see cref="CloverParser" /> class.
         /// </summary>
         /// <param name="assemblyFilter">The assembly filter.</param>
+        /// <param name="namespaceFilter">The namespace filter.</param>
         /// <param name="classFilter">The class filter.</param>
         /// <param name="fileFilter">The file filter.</param>
         /// <param name="excludeTestProjects">Indicates whether test projects should be included.</param>
-        internal CloverParser(IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter, bool excludeTestProjects)
-            : base(assemblyFilter, classFilter, fileFilter)
+        internal CloverParser(IFilter assemblyFilter, IFilter namespaceFilter, IFilter classFilter, IFilter fileFilter, bool excludeTestProjects)
+            : base(assemblyFilter, namespaceFilter, classFilter, fileFilter)
         {
             this.excludeTestProjects = excludeTestProjects;
         }
