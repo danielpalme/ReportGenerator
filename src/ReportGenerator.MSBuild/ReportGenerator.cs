@@ -1,6 +1,9 @@
+﻿using System;
+using System.IO;
 using System.Linq;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
+using DotNetConfig;
 using Palmmedia.ReportGenerator.Core;
 
 namespace Palmmedia.ReportGenerator.MSBuild
@@ -25,15 +28,24 @@ namespace Palmmedia.ReportGenerator.MSBuild
     public class ReportGenerator : Task, ITask
     {
         /// <summary>
+        /// Name of the configuration section in a .netconfig file.
+        /// </summary>
+        const string SectionName = ReportConfigurationBuilder.SectionName;
+
+        /// <summary>
+        /// Gets or sets the project directory where the tool is being run, for loading 
+        /// the relevant .netconfig.
+        /// </summary>
+        public string ProjectDirectory { get; set; } = Directory.GetCurrentDirectory();
+
+        /// <summary>
         /// Gets or sets the report files.
         /// </summary>
-        [Required]
-        public ITaskItem[] ReportFiles { get; set; }
+        public ITaskItem[] ReportFiles { get; set; } = Array.Empty<ITaskItem>();
 
         /// <summary>
         /// Gets or sets the directory the report will be created in. This must be a directory, not a file. If the directory does not exist, it is created automatically.
         /// </summary>
-        [Required]
         public string TargetDirectory { get; set; }
 
         /// <summary>
@@ -45,7 +57,7 @@ namespace Palmmedia.ReportGenerator.MSBuild
         /// Gets or sets the types of the report.
         /// </summary>
         /// <value>The types of the report.</value>
-        public ITaskItem[] ReportTypes { get; set; }
+        public ITaskItem[] ReportTypes { get; set; } = Array.Empty<ITaskItem>();
 
         /// <summary>
         /// Gets or sets the source directories. Optional directories which contain the corresponding source code. The source files are used if coverage report contains classes without path information.
@@ -53,7 +65,7 @@ namespace Palmmedia.ReportGenerator.MSBuild
         /// <value>
         /// The source directories.
         /// </value>
-        public ITaskItem[] SourceDirectories { get; set; }
+        public ITaskItem[] SourceDirectories { get; set; } = Array.Empty<ITaskItem>();
 
         /// <summary>
         /// Gets or sets the plugins.
@@ -61,7 +73,7 @@ namespace Palmmedia.ReportGenerator.MSBuild
         /// <value>
         /// The plugins.
         /// </value>
-        public ITaskItem[] Plugins { get; set; }
+        public ITaskItem[] Plugins { get; set; } = Array.Empty<ITaskItem>();
 
         /// <summary>
         /// Gets or sets the assembly filters (old property).
@@ -69,7 +81,7 @@ namespace Palmmedia.ReportGenerator.MSBuild
         /// <value>
         /// The assembly filters.
         /// </value>
-        public ITaskItem[] Filters { get; set; }
+        public ITaskItem[] Filters { get; set; } = Array.Empty<ITaskItem>();
 
         /// <summary>
         /// Gets or sets the assembly filters (new property).
@@ -77,7 +89,7 @@ namespace Palmmedia.ReportGenerator.MSBuild
         /// <value>
         /// The assembly filters.
         /// </value>
-        public ITaskItem[] AssemblyFilters { get; set; }
+        public ITaskItem[] AssemblyFilters { get; set; } = Array.Empty<ITaskItem>();
 
         /// <summary>
         /// Gets or sets the class filters.
@@ -85,7 +97,7 @@ namespace Palmmedia.ReportGenerator.MSBuild
         /// <value>
         /// The class filters.
         /// </value>
-        public ITaskItem[] ClassFilters { get; set; }
+        public ITaskItem[] ClassFilters { get; set; } = Array.Empty<ITaskItem>();
 
         /// <summary>
         /// Gets or sets the file filters.
@@ -93,7 +105,7 @@ namespace Palmmedia.ReportGenerator.MSBuild
         /// <value>
         /// The file filters.
         /// </value>
-        public ITaskItem[] FileFilters { get; set; }
+        public ITaskItem[] FileFilters { get; set; } = Array.Empty<ITaskItem>();
 
         /// <summary>
         /// Gets or sets the verbosity level.
@@ -119,27 +131,192 @@ namespace Palmmedia.ReportGenerator.MSBuild
         /// </returns>
         public override bool Execute()
         {
-            string[] reportTypes = new string[] { };
+            var reportFilePatterns = Array.Empty<string>();
+            var targetDirectory = TargetDirectory;
+            var sourceDirectories = Array.Empty<string>();
+            string historyDirectory = HistoryDirectory;
+            var reportTypes = Array.Empty<string>();
+            var plugins = Array.Empty<string>();
+            var assemblyFilters = Array.Empty<string>();
+            var classFilters = Array.Empty<string>();
+            var fileFilters = Array.Empty<string>();
+            string verbosityLevel = VerbosityLevel;
+            string tag = Tag;
 
-            if (this.ReportTypes != null && this.ReportTypes.Length > 0)
+            var config = Config.Build(ProjectDirectory).GetSection(SectionName);
+            string value = null;
+
+            if (ReportFiles.Length > 0)
             {
-                reportTypes = this.ReportTypes.Select(r => r.ItemSpec).ToArray();
+                reportFilePatterns = ReportFiles.Select(r => r.ItemSpec).ToArray();
+            }
+            else if (config.TryGetString("reports", out value))
+            {
+                reportFilePatterns = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            }
+            else
+            {
+                reportFilePatterns = config
+                    .GetAll("report")
+                    .Select(x => x.RawValue)
+                    .Where(x => !string.IsNullOrEmpty(x))
+                    .ToArray();
             }
 
-            ITaskItem[] assemblyFilters = this.AssemblyFilters ?? this.Filters;
+            if (reportFilePatterns.Length == 0)
+            {
+                Log.LogError($"{nameof(ReportFiles)} is required.");
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(targetDirectory) &&
+                config.TryGetString("targetdir", out value))
+            {
+                targetDirectory = value;
+            }
+
+            if (string.IsNullOrEmpty(targetDirectory))
+            {
+                Log.LogError($"{nameof(TargetDirectory)} is required.");
+                return false;
+            }
+
+            if (SourceDirectories.Length > 0)
+            {
+                sourceDirectories = SourceDirectories.Select(r => r.ItemSpec).ToArray();
+            }
+            else if (config.TryGetString("sourcedirs", out value))
+            {
+                sourceDirectories = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            }
+            else
+            {
+                sourceDirectories = config
+                    .GetAll("sourcedir")
+                    .Select(x => x.RawValue)
+                    .Where(x => !string.IsNullOrEmpty(x))
+                    .ToArray();
+            }
+
+            if (string.IsNullOrEmpty(HistoryDirectory) &&
+                config.TryGetString("historydir", out value))
+            {
+                historyDirectory = value;
+            }
+
+            if (ReportTypes.Length > 0)
+            {
+                reportTypes = ReportTypes.Select(r => r.ItemSpec).ToArray();
+            }
+            else if (config.TryGetString("reporttypes", out value))
+            {
+                reportTypes = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            }
+            else
+            {
+                reportTypes = config
+                    .GetAll("reporttype")
+                    .Select(x => x.RawValue)
+                    .Where(x => !string.IsNullOrEmpty(x))
+                    .ToArray();
+            }
+
+            if (Plugins.Length > 0)
+            {
+                plugins = Plugins.Select(r => r.ItemSpec).ToArray();
+            }
+            else if (config.TryGetString("plugins", out value))
+            {
+                plugins = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            }
+            else
+            {
+                plugins = config
+                    .GetAll("plugin")
+                    .Select(x => x.RawValue)
+                    .Where(x => !string.IsNullOrEmpty(x))
+                    .ToArray();
+            }
+
+            if (AssemblyFilters.Length > 0)
+            {
+                assemblyFilters = AssemblyFilters.Select(r => r.ItemSpec).ToArray();
+            }
+            else if (Filters.Length > 0)
+            {
+                assemblyFilters = Filters.Select(r => r.ItemSpec).ToArray();
+            }
+            else if (config.TryGetString("assemblyfilters", out value))
+            {
+                assemblyFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            }
+            else
+            {
+                assemblyFilters = config
+                    .GetAll("assemblyfilter")
+                    .Select(x => x.RawValue)
+                    .Where(x => !string.IsNullOrEmpty(x))
+                    .ToArray();
+            }
+
+            if (ClassFilters.Length > 0)
+            {
+                classFilters = ClassFilters.Select(r => r.ItemSpec).ToArray();
+            }
+            else if (config.TryGetString("classfilters", out value))
+            {
+                classFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            }
+            else
+            {
+                classFilters = config
+                    .GetAll("classfilter")
+                    .Select(x => x.RawValue)
+                    .Where(x => !string.IsNullOrEmpty(x))
+                    .ToArray();
+            }
+
+            if (FileFilters.Length > 0)
+            {
+                fileFilters = FileFilters.Select(r => r.ItemSpec).ToArray();
+            }
+            else if (config.TryGetString("filefilters", out value))
+            {
+                fileFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            }
+            else
+            {
+                fileFilters = config
+                    .GetAll("filefilter")
+                    .Select(x => x.RawValue)
+                    .Where(x => !string.IsNullOrEmpty(x))
+                    .ToArray();
+            }
+
+            if (string.IsNullOrEmpty(verbosityLevel) &&
+                config.TryGetString("verbosity", out value))
+            {
+                verbosityLevel = value;
+            }
+
+            if (string.IsNullOrEmpty(tag) &&
+                config.TryGetString("tag", out value))
+            {
+                tag = value;
+            }
 
             var configuration = new ReportConfiguration(
-                this.ReportFiles == null ? Enumerable.Empty<string>() : this.ReportFiles.Select(r => r.ItemSpec),
-                this.TargetDirectory,
-                this.SourceDirectories == null ? Enumerable.Empty<string>() : this.SourceDirectories.Select(r => r.ItemSpec),
-                this.HistoryDirectory,
+                reportFilePatterns,
+                targetDirectory,
+                sourceDirectories,
+                historyDirectory,
                 reportTypes,
-                this.Plugins == null ? Enumerable.Empty<string>() : this.Plugins.Select(r => r.ItemSpec),
-                assemblyFilters == null ? Enumerable.Empty<string>() : assemblyFilters.Select(r => r.ItemSpec),
-                this.ClassFilters == null ? Enumerable.Empty<string>() : this.ClassFilters.Select(r => r.ItemSpec),
-                this.FileFilters == null ? Enumerable.Empty<string>() : this.FileFilters.Select(r => r.ItemSpec),
-                this.VerbosityLevel,
-                this.Tag);
+                plugins,
+                assemblyFilters,
+                classFilters,
+                fileFilters,
+                verbosityLevel,
+                tag);
 
             return new Generator().GenerateReport(configuration);
         }

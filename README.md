@@ -103,7 +103,52 @@ Examples:
    "-reports:coverage.xml" "-targetdir:C:\report" "-assemblyfilters:+Included;-Excluded.*"
 ```
 
-**MSBuild**  
+#### .netconfig support
+
+All the above parameters can also be persisted in a [.netconfig](https://dotnetconfig.org) file, under a `[ReportGenerator]` 
+section. Examples:
+
+```
+[ReportGenerator]
+	reports = coverage.xml
+	targetdir = "C:\report"
+	reporttypes = Latex;HtmlSummary
+	assemblyfilters = +Test;-Test
+	classfilters = +Test2;-Test2
+```
+
+All the plural options can also be specified as multiple singular entries, like:
+
+```
+[ReportGenerator]
+	report = coverage1.xml
+	report = coverage2.xml
+	reporttype = Latex
+	reporttype = HtmlSummary
+	assemblyfilter = +Test
+	assemblyfilter = -Test
+	classfilter = +Test2
+	classfilter = -Test2
+	filefilter = +cs
+	filefilter = -vb
+	sourcedir = src
+	sourcedir = test
+```
+
+Adding/removing values is trivial using the [dotnet-config](https://dotnetconfig.org) CLI:
+
+```
+# set a single-valued variable
+dotnet config reportgenerator.reporttypes Latex;HtmlSummary
+# add to multi-valued variable
+dotnet config --add reportgenerator.report coverage3.xml
+# clear all multi-valued entries for a variable
+dotnet config --unset-all reportgenerator.assemblyfilter
+```
+
+Of course it's equally trivial to just edit the `.netconfig` file by hand.
+
+#### MSBuild
 A MSBuild task also exists:
 
 ```xml
@@ -116,10 +161,40 @@ A MSBuild task also exists:
     <ItemGroup>
       <CoverageFiles Include="OpenCover.xml" />
     </ItemGroup>
-    <ReportGenerator ReportFiles="@(CoverageFiles)" TargetDirectory="report" ReportTypes="Html;Latex" HistoryDirectory="history" Plugins="CustomReports.dll" AssemblyFilters="+Include;-Excluded" VerbosityLevel="Verbose" />
+    <ReportGenerator ProjectDirectory="$(MSBuildProjectDirectory)" ReportFiles="@(CoverageFiles)" TargetDirectory="report" ReportTypes="Html;Latex" HistoryDirectory="history" Plugins="CustomReports.dll" AssemblyFilters="+Include;-Excluded" VerbosityLevel="Verbose" />
   </Target>
 </Project>
 ```
+
+The MSBuild task parameters can be complemented with the `.netconfig`, if used. That means that parameters 
+can be omitted if they are provided via `.netconfig`, which is useful when reusing fixed settings across 
+multiple projects in a solution, where the MSBuild task is only provided the dynamic values for the current 
+project:
+
+Given the following `.netconfig`:
+
+```
+[ReportGenerator]
+  reporttypes = Html;Latex
+  targetdirectory = report
+  historydirectory = history
+  assemblyfilters = +Include;-Excluded
+  verbosityLevel = Verbose
+```
+
+The above target could be simplified as:
+
+```xml
+  <Target Name="Coverage">
+    <ItemGroup>
+      <CoverageFiles Include="OpenCover.xml" />
+    </ItemGroup>
+    <ReportGenerator ProjectDirectory="$(MSBuildProjectDirectory)"
+                     ReportFiles="@(CoverageFiles)" 
+                     Plugins="CustomReports.dll" />
+  </Target>
+```
+
 
 ## Supported input and output file formats
 *ReportGenerator* supports several input and output formats.  

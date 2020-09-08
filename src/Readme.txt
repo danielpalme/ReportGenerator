@@ -65,6 +65,7 @@ CHANGELOG
 
 4.6.7.0
 
+    * New: #374: Added support for .netconfig
     * Fix: #363: Improved handling of HTML generation (several HTML reports at once)
     * Fix: #385: Added filtering by namespace for classfilters in DynamicCodeCoverageParser
     * Fix: #388: Removed branch coverage columns if no branch coverage is available
