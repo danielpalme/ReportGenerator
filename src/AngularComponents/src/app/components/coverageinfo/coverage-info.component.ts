@@ -98,11 +98,11 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
                   [ngClass]="{'icon-up-dir_active': settings.sortBy === 'coverage' && settings.sortOrder === 'desc',
                   'icon-down-dir_active': settings.sortBy === 'coverage' && settings.sortOrder === 'asc',
                   'icon-down-dir': settings.sortBy !== 'coverage'}"></i>{{translations.coverage}}</a></th>
-            <th class="right"><a href="#" (click)="updateSorting('covered_branches', $event)"><i class="icon-down-dir"
+            <th class="right" *ngIf="branchCoverageAvailable"><a href="#" (click)="updateSorting('covered_branches', $event)"><i class="icon-down-dir"
               [ngClass]="{'icon-up-dir_active': settings.sortBy === 'covered_branches' && settings.sortOrder === 'desc',
               'icon-down-dir_active': settings.sortBy === 'covered_branches' && settings.sortOrder === 'asc',
               'icon-down-dir': settings.sortBy !== 'covered_branches'}"></i>{{translations.covered}}</a></th>
-            <th class="right"><a href="#" (click)="updateSorting('total_branches', $event)"><i class="icon-down-dir"
+            <th class="right" *ngIf="branchCoverageAvailable"><a href="#" (click)="updateSorting('total_branches', $event)"><i class="icon-down-dir"
                 [ngClass]="{'icon-up-dir_active': settings.sortBy === 'total_branches' && settings.sortOrder === 'desc',
                 'icon-down-dir_active': settings.sortBy === 'total_branches' && settings.sortOrder === 'asc',
                 'icon-down-dir': settings.sortBy !== 'total_branches'}"></i>{{translations.total}}</a></th>
