@@ -1,4 +1,3 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.202
@@ -137,6 +136,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "branch_unconditional", "bra
 	ProjectSection(SolutionItems) = preProject
 		Testprojects\C++\Reports\gcov\branch_unconditional\calculator.cpp.gcov = Testprojects\C++\Reports\gcov\branch_unconditional\calculator.cpp.gcov
 		Testprojects\C++\Reports\gcov\branch_unconditional\main.cpp.gcov = Testprojects\C++\Reports\gcov\branch_unconditional\main.cpp.gcov
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F1F0D6C8-0A52-49B4-A78E-A06C4ABCB14D}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
 Global

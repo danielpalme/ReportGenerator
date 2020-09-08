@@ -1,0 +1,55 @@
+#
+# https://docs.microsoft.com/en-us/visualstudio/ide/create-portable-custom-editor-options?view=vs-2019
+#
+# Remove the line below if you want to inherit .editorconfig settings from higher directories
+root = true
+
+[*]
+charset = utf-8
+
+[*.cs]
+
+# Naming rules
+
+dotnet_naming_rule.static_readonly_field_should_be_pascal_case.severity = error
+dotnet_naming_rule.static_readonly_field_should_be_pascal_case.symbols = static_readonly_field
+dotnet_naming_rule.static_readonly_field_should_be_pascal_case.style = pascal_case
+
+dotnet_naming_rule.private_or_internal_field_should_be_camel_case.severity = error
+dotnet_naming_rule.private_or_internal_field_should_be_camel_case.symbols = private_or_internal_field
+dotnet_naming_rule.private_or_internal_field_should_be_camel_case.style = camel_case
+
+# Symbol specifications
+
+dotnet_naming_symbols.static_readonly_field.applicable_kinds = field
+dotnet_naming_symbols.static_readonly_field.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+dotnet_naming_symbols.static_readonly_field.required_modifiers = readonly, static
+
+dotnet_naming_symbols.private_or_internal_field.applicable_kinds = field
+dotnet_naming_symbols.private_or_internal_field.applicable_accessibilities = internal, private, private_protected
+dotnet_naming_symbols.private_or_internal_field.required_modifiers = 
+
+# var preferences
+# Not sure what the preference is, disable warnings for now
+csharp_style_var_elsewhere = false:none
+csharp_style_var_for_built_in_types = false:none
+csharp_style_var_when_type_is_apparent = true:none
+
+dotnet_style_qualification_for_event = true:warning
+dotnet_style_qualification_for_field = true:warning
+dotnet_style_qualification_for_method = true:warning
+dotnet_style_qualification_for_property = true:warning
+
+# IDE0017: Simplify object initialization
+dotnet_style_object_initializer = false:suggestion
+
+# IDE0018: Inline variable declaration
+csharp_style_inlined_variable_declaration = false:suggestion
+
+###############################################################################
+# StyleCop rules
+# Static elements should appear before instance elements
+dotnet_diagnostic.SA1204.severity = none
+
+# File may only contain a single type
+dotnet_diagnostic.SA1402.severity = none
