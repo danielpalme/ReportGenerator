@@ -66,6 +66,7 @@ CHANGELOG
 4.7.0.0
 
     * New: Dropped support for Nuget package 'dotnet-reportgenerator-cli'. Use 'dotnet-reportgenerator-globaltool' instead.
+    * New: #384: Added warning for unknown or duplicate command line arguments
 
 4.6.7.0
 

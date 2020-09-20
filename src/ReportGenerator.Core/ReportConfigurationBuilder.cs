@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using DotNetConfig;
+using Palmmedia.ReportGenerator.Core.Logging;
+using Palmmedia.ReportGenerator.Core.Properties;
 
 namespace Palmmedia.ReportGenerator.Core
 {
@@ -13,9 +15,9 @@ namespace Palmmedia.ReportGenerator.Core
     public class ReportConfigurationBuilder
     {
         /// <summary>
-        /// Name of the configuration section in a .netconfig file.
+        /// The Logger.
         /// </summary>
-        public const string SectionName = "ReportGenerator";
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(ReportConfigurationBuilder));
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ReportConfiguration"/> class.
@@ -25,7 +27,7 @@ namespace Palmmedia.ReportGenerator.Core
         public ReportConfiguration Create(Dictionary<string, string> cliArguments)
         {
             var namedArguments = new Dictionary<string, string>(cliArguments, StringComparer.OrdinalIgnoreCase);
-            var config = Config.Build().GetSection(SectionName);
+            var config = Config.Build().GetSection(DotNetConfigSettingNames.SectionName);
 
             var reportFilePatterns = Array.Empty<string>();
             var targetDirectory = string.Empty;
@@ -42,174 +44,174 @@ namespace Palmmedia.ReportGenerator.Core
 
             string value = null;
 
-            if (namedArguments.TryGetValue("REPORTS", out value))
+            if (namedArguments.TryGetValue(CommandLineArgumentNames.Reports, out value))
             {
                 reportFilePatterns = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             }
-            else if (config.TryGetString("reports", out value))
+            else if (config.TryGetString(DotNetConfigSettingNames.Reports, out value))
             {
                 reportFilePatterns = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {
                 reportFilePatterns = config
-                    .GetAll("report")
+                    .GetAll(DotNetConfigSettingNames.Report)
                     .Select(x => x.RawValue)
                     .Where(x => !string.IsNullOrEmpty(x))
                     .ToArray();
             }
 
-            if (namedArguments.TryGetValue("TARGETDIR", out value))
+            if (namedArguments.TryGetValue(CommandLineArgumentNames.TargetDirectory, out value))
             {
                 targetDirectory = value;
             }
-            else if (config.TryGetString("targetdir", out value))
+            else if (config.TryGetString(DotNetConfigSettingNames.TargetDirectory, out value))
             {
                 targetDirectory = value;
             }
 
-            if (namedArguments.TryGetValue("SOURCEDIRS", out value))
+            if (namedArguments.TryGetValue(CommandLineArgumentNames.SourceDirectories, out value))
             {
                 sourceDirectories = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             }
-            else if (config.TryGetString("sourcedirs", out value))
+            else if (config.TryGetString(DotNetConfigSettingNames.SourceDirectories, out value))
             {
                 sourceDirectories = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {
                 sourceDirectories = config
-                    .GetAll("sourcedir")
+                    .GetAll(DotNetConfigSettingNames.SourceDirectory)
                     .Select(x => x.RawValue)
                     .Where(x => !string.IsNullOrEmpty(x))
                     .ToArray();
             }
 
-            if (namedArguments.TryGetValue("HISTORYDIR", out value))
+            if (namedArguments.TryGetValue(CommandLineArgumentNames.HistoryDirectory, out value))
             {
                 historyDirectory = value;
             }
-            else if (config.TryGetString("historydir", out value))
+            else if (config.TryGetString(DotNetConfigSettingNames.HistoryDirectory, out value))
             {
                 historyDirectory = value;
             }
 
-            if (namedArguments.TryGetValue("REPORTTYPES", out value))
+            if (namedArguments.TryGetValue(CommandLineArgumentNames.ReportTypes, out value))
             {
                 reportTypes = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             }
-            else if (namedArguments.TryGetValue("REPORTTYPE", out value))
+            else if (namedArguments.TryGetValue(CommandLineArgumentNames.ReportType, out value))
             {
                 reportTypes = new[] { value };
             }
-            else if (config.TryGetString("reporttypes", out value))
+            else if (config.TryGetString(DotNetConfigSettingNames.ReportTypes, out value))
             {
                 reportTypes = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {
                 reportTypes = config
-                    .GetAll("reporttype")
+                    .GetAll(DotNetConfigSettingNames.ReportType)
                     .Select(x => x.RawValue)
                     .Where(x => !string.IsNullOrEmpty(x))
                     .ToArray();
             }
 
-            if (namedArguments.TryGetValue("PLUGINS", out value))
+            if (namedArguments.TryGetValue(CommandLineArgumentNames.Plugins, out value))
             {
                 plugins = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             }
-            else if (config.TryGetString("plugins", out value))
+            else if (config.TryGetString(DotNetConfigSettingNames.Plugins, out value))
             {
                 plugins = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {
                 plugins = config
-                    .GetAll("plugin")
+                    .GetAll(DotNetConfigSettingNames.Plugin)
                     .Select(x => x.RawValue)
                     .Where(x => !string.IsNullOrEmpty(x))
                     .ToArray();
             }
 
-            if (namedArguments.TryGetValue("ASSEMBLYFILTERS", out value))
+            if (namedArguments.TryGetValue(CommandLineArgumentNames.AssemblyFilters, out value))
             {
                 assemblyFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             }
-            else if (namedArguments.TryGetValue("FILTERS", out value))
+            else if (namedArguments.TryGetValue(CommandLineArgumentNames.Filters, out value))
             {
                 assemblyFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             }
-            else if (config.TryGetString("assemblyfilters", out value))
+            else if (config.TryGetString(DotNetConfigSettingNames.AssemblyFilters, out value))
             {
                 assemblyFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {
                 assemblyFilters = config
-                    .GetAll("assemblyfilter")
+                    .GetAll(DotNetConfigSettingNames.AssemblyFilter)
                     .Select(x => x.RawValue)
                     .Where(x => !string.IsNullOrEmpty(x))
                     .ToArray();
             }
 
-            if (namedArguments.TryGetValue("CLASSFILTERS", out value))
+            if (namedArguments.TryGetValue(CommandLineArgumentNames.ClassFilters, out value))
             {
                 classFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             }
-            else if (config.TryGetString("classfilters", out value))
+            else if (config.TryGetString(DotNetConfigSettingNames.ClassFilters, out value))
             {
                 classFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {
                 classFilters = config
-                    .GetAll("classfilter")
+                    .GetAll(DotNetConfigSettingNames.ClassFilter)
                     .Select(x => x.RawValue)
                     .Where(x => !string.IsNullOrEmpty(x))
                     .ToArray();
             }
 
-            if (namedArguments.TryGetValue("FILEFILTERS", out value))
+            if (namedArguments.TryGetValue(CommandLineArgumentNames.FileFilters, out value))
             {
                 fileFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             }
-            else if (config.TryGetString("filefilters", out value))
+            else if (config.TryGetString(DotNetConfigSettingNames.FileFilters, out value))
             {
                 fileFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {
                 fileFilters = config
-                    .GetAll("filefilter")
+                    .GetAll(DotNetConfigSettingNames.FileFilter)
                     .Select(x => x.RawValue)
                     .Where(x => !string.IsNullOrEmpty(x))
                     .ToArray();
             }
 
-            if (namedArguments.TryGetValue("VERBOSITY", out value))
+            if (namedArguments.TryGetValue(CommandLineArgumentNames.Verbosity, out value))
             {
                 verbosityLevel = value;
             }
-            else if (config.TryGetString("verbosity", out value))
+            else if (config.TryGetString(DotNetConfigSettingNames.Verbosity, out value))
             {
                 verbosityLevel = value;
             }
 
-            if (namedArguments.TryGetValue("TITLE", out value))
+            if (namedArguments.TryGetValue(CommandLineArgumentNames.Title, out value))
             {
                 title = value;
             }
-            else if (config.TryGetString("title", out value))
+            else if (config.TryGetString(DotNetConfigSettingNames.Title, out value))
             {
                 title = value;
             }
 
-            if (namedArguments.TryGetValue("TAG", out value))
+            if (namedArguments.TryGetValue(CommandLineArgumentNames.Tag, out value))
             {
                 tag = value;
             }
-            else if (config.TryGetString("tag", out value))
+            else if (config.TryGetString(DotNetConfigSettingNames.Tag, out value))
             {
                 tag = value;
             }
@@ -249,7 +251,21 @@ namespace Palmmedia.ReportGenerator.Core
 
                 if (match.Success)
                 {
-                    namedArguments[match.Groups["key"].Value] = match.Groups["value"].Value;
+                    if (namedArguments.ContainsKey(match.Groups["key"].Value))
+                    {
+                        Logger.WarnFormat(Resources.DuplicateCommandLineParameter, match.Groups["key"].Value, namedArguments[match.Groups["key"].Value]);
+                    }
+                    else
+                    {
+                        if (CommandLineArgumentNames.IsValid(match.Groups["key"].Value))
+                        {
+                            namedArguments[match.Groups["key"].Value] = match.Groups["value"].Value;
+                        }
+                        else
+                        {
+                            Logger.WarnFormat(Resources.UnknownCommandLineParameter, match.Groups["key"].Value);
+                        }
+                    }
                 }
             }
 

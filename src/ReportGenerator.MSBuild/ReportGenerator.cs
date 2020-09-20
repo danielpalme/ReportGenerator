@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using DotNetConfig;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using DotNetConfig;
 using Palmmedia.ReportGenerator.Core;
 
 namespace Palmmedia.ReportGenerator.MSBuild
@@ -27,11 +27,6 @@ namespace Palmmedia.ReportGenerator.MSBuild
     /// </example>
     public class ReportGenerator : Task, ITask
     {
-        /// <summary>
-        /// Name of the configuration section in a .netconfig file.
-        /// </summary>
-        const string SectionName = ReportConfigurationBuilder.SectionName;
-
         /// <summary>
         /// Gets or sets the project directory where the tool is being run, for loading 
         /// the relevant .netconfig.
@@ -143,21 +138,21 @@ namespace Palmmedia.ReportGenerator.MSBuild
             string verbosityLevel = VerbosityLevel;
             string tag = Tag;
 
-            var config = Config.Build(ProjectDirectory).GetSection(SectionName);
+            var config = Config.Build(ProjectDirectory).GetSection(DotNetConfigSettingNames.SectionName);
             string value = null;
 
             if (ReportFiles.Length > 0)
             {
                 reportFilePatterns = ReportFiles.Select(r => r.ItemSpec).ToArray();
             }
-            else if (config.TryGetString("reports", out value))
+            else if (config.TryGetString(DotNetConfigSettingNames.Reports, out value))
             {
                 reportFilePatterns = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {
                 reportFilePatterns = config
-                    .GetAll("report")
+                    .GetAll(DotNetConfigSettingNames.Report)
                     .Select(x => x.RawValue)
                     .Where(x => !string.IsNullOrEmpty(x))
                     .ToArray();
@@ -170,7 +165,7 @@ namespace Palmmedia.ReportGenerator.MSBuild
             }
 
             if (string.IsNullOrEmpty(targetDirectory) &&
-                config.TryGetString("targetdir", out value))
+                config.TryGetString(DotNetConfigSettingNames.TargetDirectory, out value))
             {
                 targetDirectory = value;
             }
@@ -185,21 +180,21 @@ namespace Palmmedia.ReportGenerator.MSBuild
             {
                 sourceDirectories = SourceDirectories.Select(r => r.ItemSpec).ToArray();
             }
-            else if (config.TryGetString("sourcedirs", out value))
+            else if (config.TryGetString(DotNetConfigSettingNames.SourceDirectories, out value))
             {
                 sourceDirectories = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {
                 sourceDirectories = config
-                    .GetAll("sourcedir")
+                    .GetAll(DotNetConfigSettingNames.SourceDirectory)
                     .Select(x => x.RawValue)
                     .Where(x => !string.IsNullOrEmpty(x))
                     .ToArray();
             }
 
             if (string.IsNullOrEmpty(HistoryDirectory) &&
-                config.TryGetString("historydir", out value))
+                config.TryGetString(DotNetConfigSettingNames.HistoryDirectory, out value))
             {
                 historyDirectory = value;
             }
@@ -208,14 +203,14 @@ namespace Palmmedia.ReportGenerator.MSBuild
             {
                 reportTypes = ReportTypes.Select(r => r.ItemSpec).ToArray();
             }
-            else if (config.TryGetString("reporttypes", out value))
+            else if (config.TryGetString(DotNetConfigSettingNames.ReportTypes, out value))
             {
                 reportTypes = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {
                 reportTypes = config
-                    .GetAll("reporttype")
+                    .GetAll(DotNetConfigSettingNames.ReportType)
                     .Select(x => x.RawValue)
                     .Where(x => !string.IsNullOrEmpty(x))
                     .ToArray();
@@ -225,14 +220,14 @@ namespace Palmmedia.ReportGenerator.MSBuild
             {
                 plugins = Plugins.Select(r => r.ItemSpec).ToArray();
             }
-            else if (config.TryGetString("plugins", out value))
+            else if (config.TryGetString(DotNetConfigSettingNames.Plugins, out value))
             {
                 plugins = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {
                 plugins = config
-                    .GetAll("plugin")
+                    .GetAll(DotNetConfigSettingNames.Plugin)
                     .Select(x => x.RawValue)
                     .Where(x => !string.IsNullOrEmpty(x))
                     .ToArray();
@@ -246,14 +241,14 @@ namespace Palmmedia.ReportGenerator.MSBuild
             {
                 assemblyFilters = Filters.Select(r => r.ItemSpec).ToArray();
             }
-            else if (config.TryGetString("assemblyfilters", out value))
+            else if (config.TryGetString(DotNetConfigSettingNames.AssemblyFilters, out value))
             {
                 assemblyFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {
                 assemblyFilters = config
-                    .GetAll("assemblyfilter")
+                    .GetAll(DotNetConfigSettingNames.AssemblyFilter)
                     .Select(x => x.RawValue)
                     .Where(x => !string.IsNullOrEmpty(x))
                     .ToArray();
@@ -263,14 +258,14 @@ namespace Palmmedia.ReportGenerator.MSBuild
             {
                 classFilters = ClassFilters.Select(r => r.ItemSpec).ToArray();
             }
-            else if (config.TryGetString("classfilters", out value))
+            else if (config.TryGetString(DotNetConfigSettingNames.ClassFilters, out value))
             {
                 classFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {
                 classFilters = config
-                    .GetAll("classfilter")
+                    .GetAll(DotNetConfigSettingNames.ClassFilter)
                     .Select(x => x.RawValue)
                     .Where(x => !string.IsNullOrEmpty(x))
                     .ToArray();
@@ -280,27 +275,27 @@ namespace Palmmedia.ReportGenerator.MSBuild
             {
                 fileFilters = FileFilters.Select(r => r.ItemSpec).ToArray();
             }
-            else if (config.TryGetString("filefilters", out value))
+            else if (config.TryGetString(DotNetConfigSettingNames.FileFilters, out value))
             {
                 fileFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {
                 fileFilters = config
-                    .GetAll("filefilter")
+                    .GetAll(DotNetConfigSettingNames.FileFilter)
                     .Select(x => x.RawValue)
                     .Where(x => !string.IsNullOrEmpty(x))
                     .ToArray();
             }
 
             if (string.IsNullOrEmpty(verbosityLevel) &&
-                config.TryGetString("verbosity", out value))
+                config.TryGetString(DotNetConfigSettingNames.Verbosity, out value))
             {
                 verbosityLevel = value;
             }
 
             if (string.IsNullOrEmpty(tag) &&
-                config.TryGetString("tag", out value))
+                config.TryGetString(DotNetConfigSettingNames.Tag, out value))
             {
                 tag = value;
             }

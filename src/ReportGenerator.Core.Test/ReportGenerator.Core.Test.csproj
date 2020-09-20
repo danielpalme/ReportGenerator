@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <IsPackable>false</IsPackable>
     <RootNamespace>Palmmedia.ReportGenerator.Core.Test</RootNamespace>
-    <AssemblyVersion>4.6.7.0</AssemblyVersion>
-    <FileVersion>4.6.7.0</FileVersion>
+    <AssemblyVersion>4.7.0.0</AssemblyVersion>
+    <FileVersion>4.7.0.0</FileVersion>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
   

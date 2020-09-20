@@ -84,7 +84,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
         {
             var dir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
             Directory.CreateDirectory(dir);
-            var config = Config.Build(dir).GetSection(ReportConfigurationBuilder.SectionName);
+            var config = Config.Build(dir).GetSection(DotNetConfigSettingNames.SectionName);
 
             config.SetString("reports", ReportPath);
             config.SetString("targetdir", "C:\\temp");
@@ -116,7 +116,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
         {
             var dir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
             Directory.CreateDirectory(dir);
-            var config = Config.Build(dir).GetSection(ReportConfigurationBuilder.SectionName);
+            var config = Config.Build(dir).GetSection(DotNetConfigSettingNames.SectionName);
 
             config.SetString("reports", ReportPath);
 

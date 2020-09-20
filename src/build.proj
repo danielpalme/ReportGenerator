@@ -22,7 +22,7 @@
 
   <!-- Version, adjust before build -->
   <PropertyGroup>
-    <Version>4.6.7</Version>
+    <Version>4.7.0</Version>
   </PropertyGroup>
   
   <!-- Tools -->
