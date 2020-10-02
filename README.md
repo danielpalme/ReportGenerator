@@ -108,7 +108,7 @@ Examples:
 All the above parameters can also be persisted in a [.netconfig](https://dotnetconfig.org) file, under a `[ReportGenerator]` 
 section. Examples:
 
-```
+```gitconfig
 [ReportGenerator]
 	reports = coverage.xml
 	targetdir = "C:\report"
@@ -119,7 +119,7 @@ section. Examples:
 
 All the plural options can also be specified as multiple singular entries, like:
 
-```
+```gitconfig
 [ReportGenerator]
 	report = coverage1.xml
 	report = coverage2.xml
@@ -173,7 +173,7 @@ project:
 
 Given the following `.netconfig`:
 
-```
+```gitconfig
 [ReportGenerator]
   reporttypes = Html;Latex
   targetdirectory = report
