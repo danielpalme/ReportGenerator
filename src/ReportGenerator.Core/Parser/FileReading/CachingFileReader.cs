@@ -36,10 +36,28 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
         /// </summary>
         /// <param name="localFileReader"><see cref="IFileReader"/> for loading files from local disk.</param>
         /// <param name="cachingDurationOfRemoteFilesInMinutes">The caching duration of code files that are downloaded from remote servers in minutes.</param>
-        public CachingFileReader(IFileReader localFileReader, int cachingDurationOfRemoteFilesInMinutes)
+        /// <param name="customHeadersForRemoteFiles">Custom headers (e.g. authentication headers) for remote requests.</param>
+        public CachingFileReader(IFileReader localFileReader, int cachingDurationOfRemoteFilesInMinutes, string customHeadersForRemoteFiles)
         {
             this.localFileReader = localFileReader;
             this.cachingDurationOfRemoteFilesInMinutes = cachingDurationOfRemoteFilesInMinutes;
+
+            if (!string.IsNullOrWhiteSpace(customHeadersForRemoteFiles))
+            {
+                var parts = customHeadersForRemoteFiles.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+
+                foreach (var part in parts)
+                {
+                    int index = part.IndexOf('=');
+
+                    if (index > 0 && part.Length > index + 1)
+                    {
+                        string key = part.Substring(0, index);
+                        string value = part.Substring(index + 1);
+                        HttpClient.DefaultRequestHeaders.Add(key, value);
+                    }
+                }
+            }
         }
 
         /// <summary>

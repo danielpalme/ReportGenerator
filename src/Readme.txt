@@ -67,6 +67,7 @@ CHANGELOG
 
     * New: Dropped support for Nuget package 'dotnet-reportgenerator-cli'. Use 'dotnet-reportgenerator-globaltool' instead.
     * New: #384: Added warning for unknown or duplicate command line arguments
+    * New: #391: Added authentication support for remote files via custom HTTP headers
 
 4.6.7.0
 

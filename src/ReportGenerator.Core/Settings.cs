@@ -65,5 +65,12 @@ namespace Palmmedia.ReportGenerator.Core
         ///  Gets or sets a value indicating whether a subdirectory should be created in the target directory for each report type.
         /// </summary>
         public bool CreateSubdirectoryForAllReportTypes { get; set; } = false;
+
+        /// <summary>
+        ///  Gets or sets custom headers (e.g. authentication headers) for remote requests.
+        ///  Format: key1=value1;key2=value2
+        ///  Example: Authorization=Bearer <JWT>
+        /// </summary>
+        public string CustomHeadersForRemoteFiles { get; set; }
     }
 }
