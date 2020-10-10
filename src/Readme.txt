@@ -63,6 +63,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.7.1.0
+
+    * New: #392: Filters are now case insensitive
+
 4.7.0.0
 
     * New: Dropped support for Nuget package 'dotnet-reportgenerator-cli'. Use 'dotnet-reportgenerator-globaltool' instead.
