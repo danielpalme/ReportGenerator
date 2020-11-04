@@ -216,6 +216,14 @@ Badges in SVG and PNG format can be generated if `-reporttypes:Badges` is used:
 
 ## Resources
 
+### Visual Studio extensions
+The following extensions exist to visualize coverage in Visual Studio: 
+| **Name** | **Coverage tool** | **GitHub** | **Marketplace** | **Comment** |
+|:---------|:------------------|:-----------|:----------------|:----------------|
+| AxoCover | [OpenCover](https://github.com/OpenCover/opencover)| https://github.com/axodox/AxoCover | https://marketplace.visualstudio.com/items?itemName=axodox1.AxoCover | VS 2019 is not supported |
+| FineCodeCoverage | [coverlet](https://github.com/coverlet-coverage/coverlet/), [OpenCover](https://github.com/OpenCover/opencover) | https://github.com/FortuneN/FineCodeCoverage | https://marketplace.visualstudio.com/items?itemName=FortuneNgwenya.FineCodeCoverage | |
+| RunCoverletReport | [coverlet](https://github.com/coverlet-coverage/coverlet/) | https://github.com/the-dext/RunCoverletReport | https://marketplace.visualstudio.com/items?itemName=ChrisDexter.RunCoverletReport | |
+
 ### Links
 * https://www.palmmedia.de/Blog/2017/12/6/reportgenerator-new-release-with-risk-hotspots-analysis
 * https://www.palmmedia.de/Blog/2016/11/6/reportgenerator-new-release-with-enhanced-html-report-and-cobertura-support
