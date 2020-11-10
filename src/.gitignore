@@ -11,6 +11,7 @@
 *.suo
 *.user
 *.Cache
+*.binlog
 bin
 obj
 .DS_Store

@@ -4,8 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <IsPackable>false</IsPackable>
     <RootNamespace>Palmmedia.ReportGenerator.Core.Test</RootNamespace>
-    <AssemblyVersion>4.7.1.0</AssemblyVersion>
-    <FileVersion>4.7.1.0</FileVersion>
+    <AssemblyVersion>4.8.0.0</AssemblyVersion>
+    <FileVersion>4.8.0.0</FileVersion>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
   
@@ -14,10 +14,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
-    <PackageReference Include="Moq" Version="4.14.5" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.0-preview-20201020-06" />
+    <PackageReference Include="Moq" Version="4.14.7" />
     <PackageReference Include="xunit" Version="2.4.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>

@@ -47,5 +47,9 @@ dotnet reportgenerator [options]</description>
     <!-- NetCoreApp3.0 ('tools\netcoreapp3.0' directory) -->
     <file src="..\..\ReportGenerator.DotnetGlobalTool\bin\Release\netcoreapp3.0\publish\**\*.*" target="tools\netcoreapp3.0\any" />
     <file src="DotnetToolSettings.xml" target="tools\netcoreapp3.0\any" />
+    
+    <!-- Net5.0 ('tools\net5.0' directory) -->
+    <file src="..\..\ReportGenerator.DotnetGlobalTool\bin\Release\net5.0\publish\**\*.*" target="tools\net5.0\any" />
+    <file src="DotnetToolSettings.xml" target="tools\net5.0\any" />
   </files>
 </package>

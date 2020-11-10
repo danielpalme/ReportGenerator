@@ -17,8 +17,8 @@
 Use this package if your project is based on .NET Framework or .NET Core and you want to use ReportGenerator via the command line or a build script.
 
 Usage:
-dotnet $(UserProfile)\.nuget\packages\reportgenerator\x.y.z\tools\netcoreapp3.0\ReportGenerator.dll [options]
-$(UserProfile)\.nuget\packages\reportgenerator\x.y.z\tools\netcoreapp3.0\ReportGenerator.exe [options]
+dotnet $(UserProfile)\.nuget\packages\reportgenerator\x.y.z\tools\net5.0\ReportGenerator.dll [options]
+$(UserProfile)\.nuget\packages\reportgenerator\x.y.z\tools\net5.0\ReportGenerator.exe [options]
 $(UserProfile)\.nuget\packages\reportgenerator\x.y.z\tools\net47\ReportGenerator.exe [options]</description>
     <language>en-US</language>
     <tags>Code Coverage Reporting Testing TDD Utility</tags>
@@ -40,6 +40,9 @@ $(UserProfile)\.nuget\packages\reportgenerator\x.y.z\tools\net47\ReportGenerator
     
     <!-- NetCoreApp3.0 ('tools\netcoreapp3.0' directory) -->
     <file src="..\..\ReportGenerator.Console.NetCore\bin\Release\netcoreapp3.0\publish\**\*.*" target="tools\netcoreapp3.0" />
+
+    <!-- Net5.0 ('tools\net5.0' directory) -->
+    <file src="..\..\ReportGenerator.Console.NetCore\bin\Release\net5.0\publish\**\*.*" target="tools\net5.0" />
     
     <!-- .NET 4.7 ('tools\net47' directory) -->
     <file src="..\..\ReportGenerator.Console\bin\Release\appsettings.json" target="tools\net47" />

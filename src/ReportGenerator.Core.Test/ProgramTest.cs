@@ -14,7 +14,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
         [ClassData(typeof(ProgramTest))]
         public void CreateReport(string reportType)
         {
-            string targetdir = $@"..\..\..\..\target\samplereports\{reportType}";
+            string targetdir = $@"..\..\..\target\samplereports\{reportType}";
             string historydir = $@"{targetdir}\history";
 
             if (Directory.Exists(historydir))

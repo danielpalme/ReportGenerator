@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>netcoreapp2.1;netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.1;netcoreapp3.0;net5.0</TargetFrameworks>
     <ApplicationIcon>ProgramIcon.ico</ApplicationIcon>
     <AssemblyName>ReportGenerator</AssemblyName>
     <RootNamespace>Palmmedia.ReportGenerator</RootNamespace>
     <StartupObject>Palmmedia.ReportGenerator.DotnetGlobalTool.Program</StartupObject>
-    <AssemblyVersion>4.7.1.0</AssemblyVersion>
-    <FileVersion>4.7.1.0</FileVersion>
+    <AssemblyVersion>4.8.0.0</AssemblyVersion>
+    <FileVersion>4.8.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

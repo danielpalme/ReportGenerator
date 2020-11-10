@@ -16,13 +16,13 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   
   <!-- Imported MSBuild tasks -->
-  <UsingTask TaskName="ReportGenerator" AssemblyFile="ReportGenerator.Console\bin\Release\ReportGenerator.exe" />
+  <UsingTask TaskName="ReportGenerator" AssemblyFile="ReportGenerator.Console\bin\Release\ReportGenerator.MSBuild.dll" />
   <UsingTask TaskName="Zip" AssemblyFile="$(UserProfile)\.nuget\packages\msbuildtasks\1.5.0.235\tools\MSBuild.Community.Tasks.dll" /> 
   <UsingTask TaskName="FileUpdate" AssemblyFile="$(UserProfile)\.nuget\packages\msbuildtasks\1.5.0.235\tools\MSBuild.Community.Tasks.dll" /> 
 
   <!-- Version, adjust before build -->
   <PropertyGroup>
-    <Version>4.7.1</Version>
+    <Version>4.8.0</Version>
   </PropertyGroup>
   
   <!-- Tools -->
@@ -55,9 +55,11 @@
     <Exec Command="dotnet publish -c Release -f netcoreapp2.0 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
     <Exec Command="dotnet publish -c Release -f netcoreapp2.1 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
     <Exec Command="dotnet publish -c Release -f netcoreapp3.0 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
+    <Exec Command="dotnet publish -c Release -f net5.0 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
 
     <Exec Command="dotnet publish -c Release -f netcoreapp2.1 ReportGenerator.DotnetGlobalTool.csproj" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
     <Exec Command="dotnet publish -c Release -f netcoreapp3.0 ReportGenerator.DotnetGlobalTool.csproj" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
+    <Exec Command="dotnet publish -c Release -f net5.0 ReportGenerator.DotnetGlobalTool.csproj" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
 
     <RemoveDir Directories="bin" />
     <RemoveDir Directories="obj" />
@@ -83,6 +85,7 @@
       <ZipFileContentNetCore20 Include="ReportGenerator.Console.NetCore\bin\Release\netcoreapp2.0\publish\**\*.*"/>
       <ZipFileContentNetCore21 Include="ReportGenerator.Console.NetCore\bin\Release\netcoreapp2.1\publish\**\*.*"/>
       <ZipFileContentNetCore30 Include="ReportGenerator.Console.NetCore\bin\Release\netcoreapp3.0\publish\**\*.*"/>
+      <ZipFileContentNetCore50 Include="ReportGenerator.Console.NetCore\bin\Release\net5.0\publish\**\*.*"/>
     </ItemGroup>
 
     <!-- ZIP -->
@@ -94,6 +97,7 @@
     <Copy SourceFiles="@(ZipFileContentNetCore20)" DestinationFolder="tmpzip\netcoreapp2.0\%(RecursiveDir)" />
     <Copy SourceFiles="@(ZipFileContentNetCore21)" DestinationFolder="tmpzip\netcoreapp2.1\%(RecursiveDir)" />
     <Copy SourceFiles="@(ZipFileContentNetCore30)" DestinationFolder="tmpzip\netcoreapp3.0\%(RecursiveDir)" />
+    <Copy SourceFiles="@(ZipFileContentNetCore50)" DestinationFolder="tmpzip\net5.0\%(RecursiveDir)" />
    <ItemGroup>
       <ZipFileContent Include="tmpzip\**\*.*"/>
     </ItemGroup> 
