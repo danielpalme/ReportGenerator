@@ -292,7 +292,7 @@ stages:
               tag: 'v$(Version)'
               title: 'ReportGenerator_$(Version)'
               releaseNotesSource: inline
-              releaseNotesInline: 'This release requires .NET 4.7 or .NET Core 2.x/3.x.'
+              releaseNotesInline: 'This release requires .NET 4.7 or .NET Core 2.x/3.x/5.x.'
               assets: '../packages/zip/ReportGenerator_*.zip'
             continueOnError: true
 

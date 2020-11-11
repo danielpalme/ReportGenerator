@@ -63,6 +63,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.8.0.0
+
+    * New: #397: Added .NET 5 support
+
 4.7.1.0
 
     * New: #392: Filters are now case insensitive
