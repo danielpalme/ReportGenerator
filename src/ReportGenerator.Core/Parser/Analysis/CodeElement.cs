@@ -63,7 +63,26 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// Gets the coverage quota of the code element.
         /// </summary>
         /// <value>The coverage quota.</value>
-        public decimal? CoverageQuota { get; }
+        public decimal? CoverageQuota { get; private set; }
+
+        /// <summary>
+        /// Applies the given coverage quota if greater than existing quota.
+        /// </summary>
+        /// <param name="quota">The quota.</param>
+        public void ApplyMaximumCoverageQuota(decimal? quota)
+        {
+            if (quota.HasValue)
+            {
+                if (this.CoverageQuota.HasValue)
+                {
+                    this.CoverageQuota = Math.Max(quota.Value, this.CoverageQuota.Value);
+                }
+                else
+                {
+                    this.CoverageQuota = quota;
+                }
+            }
+        }
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
