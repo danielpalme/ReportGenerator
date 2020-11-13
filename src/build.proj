@@ -8,7 +8,7 @@
       <Version>1.5.0.235</Version>
     </PackageReference>
     <PackageReference Include="NuGet.CommandLine">
-      <Version>5.3.0</Version>
+      <Version>5.7.0</Version>
     </PackageReference>
   </ItemGroup>
   
@@ -22,12 +22,12 @@
 
   <!-- Version, adjust before build -->
   <PropertyGroup>
-    <Version>4.8.0</Version>
+    <Version>4.8.1</Version>
   </PropertyGroup>
   
   <!-- Tools -->
   <PropertyGroup>
-    <NuGetCommandLine>$(UserProfile)\.nuget\packages\nuget.commandline\5.3.0\tools\NuGet.exe</NuGetCommandLine>
+    <NuGetCommandLine>$(UserProfile)\.nuget\packages\nuget.commandline\5.7.0\tools\NuGet.exe</NuGetCommandLine>
     <ChocolateyCommandLine>$(UserProfile)\.nuget\packages\chocolatey\0.10.14\tools\chocolateyInstall\choco.exe</ChocolateyCommandLine>
   </PropertyGroup>
   

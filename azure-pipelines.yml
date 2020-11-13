@@ -12,7 +12,7 @@ variables:
   - name: disable.coverage.autogenerate
     value: 'true'
   - name: version
-    value: '4.8.0'
+    value: '4.8.1'
 
 stages:
 - stage: Build
@@ -44,9 +44,9 @@ stages:
         custom: '--version'
 
     - task: NuGetToolInstaller@0
-      displayName: 'Use NuGet 5.3.0'
+      displayName: 'Use NuGet 5.x'
       inputs:
-        versionSpec: 5.3.0
+        versionSpec: 5.x
 
     - task: NuGetCommand@2
       displayName: 'NuGet Restore'
