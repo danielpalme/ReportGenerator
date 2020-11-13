@@ -541,17 +541,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
 
             foreach (var codeElement in file.codeElements)
             {
-                if (this.codeElements.Contains(codeElement))
-                {
-                    // Not perfect for performance, but Hashset has no GetElement method
-                    var existingCodeElement = this.codeElements.First(b => b.Equals(codeElement));
+                this.codeElements.Add(codeElement);
+            }
 
-                    existingCodeElement.ApplyMaximumCoverageQuota(codeElement.CoverageQuota);
-                }
-                else
-                {
-                    this.codeElements.Add(codeElement);
-                }
+            foreach (var codeElement in this.codeElements)
+            {
+                codeElement.ApplyMaximumCoverageQuota(this.CoverageQuota(codeElement.FirstLine, codeElement.LastLine));
             }
         }
 
