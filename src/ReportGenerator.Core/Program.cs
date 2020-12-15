@@ -17,6 +17,11 @@ namespace Palmmedia.ReportGenerator.Core
         private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(Program));
 
         /// <summary>
+        /// The arguments which will show the help.
+        /// </summary>
+        private static readonly string[] HelpArguments = new[] { "-h", "--h", "help", "-help", "/?", "?" };
+
+        /// <summary>
         /// The main method.
         /// </summary>
         /// <param name="args">The command line arguments.</param>
@@ -39,12 +44,12 @@ namespace Palmmedia.ReportGenerator.Core
             var reportConfigurationBuilder = new ReportConfigurationBuilder();
             ReportConfiguration configuration = reportConfigurationBuilder.Create(args);
 
-            if (args.Length < 2)
+            if (args.Length == 1 && HelpArguments.Contains(args[0]))
             {
                 var help = new Help(new ReportBuilderFactory(new ReflectionPluginLoader(configuration.Plugins)));
                 help.ShowHelp();
 
-                return 1;
+                return 0;
             }
 
             return new Generator().GenerateReport(configuration) ? 0 : 1;

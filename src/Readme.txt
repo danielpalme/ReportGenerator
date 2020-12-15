@@ -63,6 +63,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.8.2.0
+
+    * Fix: #400: Allow suppling all parameters .netconfig
+
 4.8.1.0
 
     * Fix: #399: Improved merging of codeelements (maximum coverage quota was not considered)
