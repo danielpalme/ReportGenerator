@@ -63,9 +63,13 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.8.3.0
+
+    * Fix: #401: Fixed handling of '=' in command line parameters
+
 4.8.2.0
 
-    * Fix: #400: Allow suppling all parameters .netconfig
+    * Fix: #400: Allow suppling all parameters via .netconfig
 
 4.8.1.0
 

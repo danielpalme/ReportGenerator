@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Palmmedia.ReportGenerator.Core
 {
@@ -88,6 +89,11 @@ namespace Palmmedia.ReportGenerator.Core
                 .Where(fi => fi.IsLiteral && !fi.IsInitOnly && fi.FieldType == typeof(string))
                 .Select(x => (string)x.GetRawConstantValue())
                 .ToList());
+
+        /// <summary>
+        /// Gets the regex to parse command line parameters.
+        /// </summary>
+        internal static Regex CommandLineParameterRegex { get; } = new Regex("^-(?<key>[a-zA-Z]{2,}):(?<value>.+)$", RegexOptions.Compiled);
 
         /// <summary>
         /// Gets a value indicating whether a command line parameter name is valid.

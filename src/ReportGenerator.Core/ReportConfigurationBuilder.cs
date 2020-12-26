@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using DotNetConfig;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Properties;
@@ -247,7 +246,7 @@ namespace Palmmedia.ReportGenerator.Core
 
             foreach (var arg in args)
             {
-                var match = Regex.Match(arg, "-(?<key>\\w{2,}):(?<value>.+)");
+                var match = CommandLineArgumentNames.CommandLineParameterRegex.Match(arg);
 
                 if (match.Success)
                 {
