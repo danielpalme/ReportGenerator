@@ -63,6 +63,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.8.4.0
+
+    * Fix: #403: Fixed handling of leading/trailing spaces in command line parameters
+
 4.8.3.0
 
     * Fix: #401: Fixed handling of '=' in command line parameters

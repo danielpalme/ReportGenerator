@@ -57,7 +57,7 @@ namespace Palmmedia.ReportGenerator.Core
 
         public static string[] NormalizeArgs(string[] args)
         {
-            return args.Select(a => a.Replace(@"""", string.Empty)).ToArray();
+            return args.Select(a => a.Replace(@"""", string.Empty).Trim()).ToArray();
         }
     }
 }
