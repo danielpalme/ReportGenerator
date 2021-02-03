@@ -63,6 +63,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.8.5.0
+
+    * Fix: #406: Fixed reference version of McMaster.NETCore.Plugins for package ReportGenerator.Core
+
 4.8.4.0
 
     * Fix: #403: Fixed handling of leading/trailing spaces in command line parameters
