@@ -13,16 +13,19 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
         /// <summary>
         /// A test for the Constructor
         /// </summary>
-        [Fact]
-        public void Constructor()
+        [Theory]
+        [InlineData("TestClass", "TestClass")]
+        [InlineData("TestClass`1", "TestClass<T>")]
+        [InlineData("TestClass`2", "TestClass<T1, T2>")]
+        [InlineData("TestClass`3", "TestClass<T1, T2, T3>")]
+        public void Constructor(string classname, string expectedClassName)
         {
             Assembly assembly = new Assembly("C:\\test\\TestAssembly.dll");
-            string classname = "TestClass";
 
             var sut = new Class(classname, assembly);
 
             Assert.Equal(assembly, sut.Assembly);
-            Assert.Equal(classname, sut.Name);
+            Assert.Equal(expectedClassName, sut.Name);
         }
 
         /// <summary>
