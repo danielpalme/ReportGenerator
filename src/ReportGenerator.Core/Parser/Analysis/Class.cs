@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
 {
@@ -9,6 +10,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
     /// </summary>
     public class Class
     {
+        /// <summary>
+        /// Regex to analyze if a class is generic.
+        /// </summary>
+        private static Regex genericClassRegex = new Regex("^(?<Name>.+)`(?<Number>\\d+)$", RegexOptions.Compiled);
+
         /// <summary>
         /// The object to lock the class add.
         /// </summary>
@@ -38,6 +44,47 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         {
             this.Name = name ?? throw new ArgumentNullException(nameof(name));
             this.Assembly = assembly ?? throw new ArgumentNullException(nameof(assembly));
+
+            /*
+             * Convert class name of generic classes:
+             * See: https://github.com/coverlet-coverage/coverlet/issues/1077
+             *
+             * SomeClass`1 -> SomeClass<T>
+             * SomeClass`2 -> SomeClass<T1, T2>
+             * SomeClass`3 -> SomeClass<T1, T2, T3>
+             */
+            if (name.Contains("`"))
+            {
+                Match match = genericClassRegex.Match(name);
+
+                if (match.Success)
+                {
+                    this.Name = match.Groups["Name"].Value;
+
+                    int number = int.Parse(match.Groups["Number"].Value);
+
+                    if (number == 1)
+                    {
+                        this.Name += "<T>";
+                    }
+                    else if (number > 1)
+                    {
+                        this.Name += "<";
+
+                        for (int i = 1; i <= number; i++)
+                        {
+                            if (i > 1)
+                            {
+                                this.Name += ", ";
+                            }
+
+                            this.Name += "T" + i;
+                        }
+
+                        this.Name += ">";
+                    }
+                }
+            }
         }
 
         /// <summary>

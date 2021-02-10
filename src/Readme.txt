@@ -63,6 +63,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.8.6.0
+
+    * New: Improved name of generic classes (https://github.com/coverlet-coverage/coverlet/issues/1077)
+
 4.8.5.0
 
     * Fix: #406: Fixed reference version of McMaster.NETCore.Plugins for package ReportGenerator.Core
