@@ -65,6 +65,7 @@ CHANGELOG
 
 4.8.6.0
 
+    * New: #405: Added support for deterministic source paths
     * New: Improved name of generic classes (https://github.com/coverlet-coverage/coverlet/issues/1077)
 
 4.8.5.0

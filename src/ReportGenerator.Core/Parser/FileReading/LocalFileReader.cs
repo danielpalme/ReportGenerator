@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Properties;
 
@@ -14,9 +15,50 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
     internal class LocalFileReader : IFileReader
     {
         /// <summary>
+        /// Regex to analyze if a path is a deterministic path
+        /// </summary>
+        private static Regex deterministicPathRegex = new Regex("\\/_\\d?\\/", RegexOptions.Compiled);
+
+        /// <summary>
+        /// The source directories for typical environments like Azure DevOps or Github Actions.
+        /// </summary>
+        private static IReadOnlyList<string> deterministicSourceDirectories;
+
+        /// <summary>
         /// The source directories.
         /// </summary>
         private readonly IReadOnlyList<string> sourceDirectories;
+
+        static LocalFileReader()
+        {
+            var directories = new List<string>();
+
+            // Azure Devops - Windows
+            if (Directory.Exists(@"D:\a\1\s"))
+            {
+                directories.Add(@"D:\a\1\s");
+            }
+
+            // Azure Devops - Unix
+            if (Directory.Exists("/a/1/s"))
+            {
+                directories.Add("/a/1/s");
+            }
+
+            // Github Actions - Windows
+            if (Directory.Exists(@"D:\a") && !Directory.Exists(@"D:\a\1\s"))
+            {
+                directories.Add(@"D:\a");
+            }
+
+            // Github Actions - Unix
+            if (Directory.Exists("/home/runner/work"))
+            {
+                directories.Add("/home/runner/work");
+            }
+
+            deterministicSourceDirectories = directories;
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LocalFileReader" /> class.
@@ -48,18 +90,18 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
         /// <returns><code>null</code> if an error occurs, otherwise the lines of the file.</returns>
         public string[] LoadFile(string path, out string error)
         {
-            path = this.MapPath(path);
+            string mappedPath = this.MapPath(path);
 
             try
             {
-                if (!File.Exists(path))
+                if (!File.Exists(mappedPath))
                 {
                     error = string.Format(CultureInfo.InvariantCulture, Resources.FileDoesNotExist, path);
                     return null;
                 }
 
-                var encoding = FileHelper.GetEncoding(path);
-                string[] lines = File.ReadAllLines(path, encoding);
+                var encoding = FileHelper.GetEncoding(mappedPath);
+                string[] lines = File.ReadAllLines(mappedPath, encoding);
 
                 error = null;
                 return lines;
@@ -73,14 +115,48 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
 
         private string MapPath(string path)
         {
-            if (this.sourceDirectories.Count == 0 || File.Exists(path))
+            if (File.Exists(path))
             {
                 return path;
             }
 
+            if (path.StartsWith("/_") && deterministicPathRegex.IsMatch(path))
+            {
+                path = path.Substring(path.IndexOf("/", 2) + 1);
+
+                if (File.Exists(path))
+                {
+                    return path;
+                }
+
+                if (this.sourceDirectories.Count == 0)
+                {
+                    return MapPath(path, deterministicSourceDirectories);
+                }
+            }
+
+            if (this.sourceDirectories.Count > 0)
+            {
+                return MapPath(path, this.sourceDirectories);
+            }
+
+            return path;
+        }
+
+        private static string MapPath(string path, IEnumerable<string> directories)
+        {
+            /*
+             * Search in source dirctories
+             * 
+             * E.g. with source directory 'C:\agent\1\work\s' the following locations will be searched:
+             * C:\agent\1\work\s\_\some\directory\file.cs
+             * C:\agent\1\work\s\some\directory\file.cs
+             * C:\agent\1\work\s\directory\file.cs
+             * C:\agent\1\work\s\file.cs
+             */
             string[] parts = path.Split('/', '\\');
 
-            foreach (var sourceDirectory in this.sourceDirectories)
+            foreach (var sourceDirectory in directories)
             {
                 for (int i = 0; i < parts.Length; i++)
                 {
