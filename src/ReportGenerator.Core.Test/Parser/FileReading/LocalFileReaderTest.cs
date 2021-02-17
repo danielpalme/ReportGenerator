@@ -54,5 +54,18 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.FileReading
             Assert.NotNull(error);
             Assert.Null(lines);
         }
+
+        [Theory]
+        [InlineData("/_/OpenCover.xml")]
+        [InlineData("/_1/OpenCover.xml")]
+        [InlineData("/_2/OpenCover.xml")]
+        public void DeterminicticPath_ExistingSourceDirectory_FileExists_MappedPathReturned(string filename)
+        {
+            var sut = new LocalFileReader(new[] { FileManager.GetCSharpReportDirectory() });
+
+            string[] lines = sut.LoadFile(filename, out string error);
+            Assert.Null(error);
+            Assert.True(lines.Length > 0);
+        }
     }
 }
