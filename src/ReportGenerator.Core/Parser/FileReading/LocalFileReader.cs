@@ -33,28 +33,18 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
         {
             var directories = new List<string>();
 
-            // Azure Devops - Windows
-            if (Directory.Exists(@"D:\a\1\s"))
+            // Azure DevOps
+            if ("true".Equals(Environment.GetEnvironmentVariable("TF_BUILD"), StringComparison.OrdinalIgnoreCase)
+                && Environment.GetEnvironmentVariable("Build.SourcesDirectory") != null)
             {
-                directories.Add(@"D:\a\1\s");
+                directories.Add(Environment.GetEnvironmentVariable("Build.SourcesDirectory"));
             }
 
-            // Azure Devops - Unix
-            if (Directory.Exists("/a/1/s"))
+            // Github Actions
+            if ("true".Equals(Environment.GetEnvironmentVariable("GITHUB_ACTIONS"), StringComparison.OrdinalIgnoreCase)
+                && Environment.GetEnvironmentVariable("GITHUB_WORKSPACE") != null)
             {
-                directories.Add("/a/1/s");
-            }
-
-            // Github Actions - Windows
-            if (Directory.Exists(@"D:\a") && !Directory.Exists(@"D:\a\1\s"))
-            {
-                directories.Add(@"D:\a");
-            }
-
-            // Github Actions - Unix
-            if (Directory.Exists("/home/runner/work"))
-            {
-                directories.Add("/home/runner/work");
+                directories.Add(Environment.GetEnvironmentVariable("GITHUB_WORKSPACE"));
             }
 
             deterministicSourceDirectories = directories;
