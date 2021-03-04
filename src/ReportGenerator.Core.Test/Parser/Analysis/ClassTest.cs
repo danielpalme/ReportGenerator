@@ -18,14 +18,15 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
         [InlineData("TestClass`1", "TestClass<T>")]
         [InlineData("TestClass`2", "TestClass<T1, T2>")]
         [InlineData("TestClass`3", "TestClass<T1, T2, T3>")]
-        public void Constructor(string classname, string expectedClassName)
+        public void Constructor(string classname, string expectedClassDisplayName)
         {
             Assembly assembly = new Assembly("C:\\test\\TestAssembly.dll");
 
             var sut = new Class(classname, assembly);
 
             Assert.Equal(assembly, sut.Assembly);
-            Assert.Equal(expectedClassName, sut.Name);
+            Assert.Equal(classname, sut.Name);
+            Assert.Equal(expectedClassDisplayName, sut.DisplayName);
         }
 
         /// <summary>
