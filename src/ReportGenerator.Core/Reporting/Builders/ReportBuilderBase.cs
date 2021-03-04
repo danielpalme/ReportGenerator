@@ -62,7 +62,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             string additionalTitle = this.ReportContext.ReportConfiguration.Title != null ? $"{this.ReportContext.ReportConfiguration.Title} - " : null;
 
-            reportRenderer.BeginClassReport(this.CreateTargetDirectory(), @class.Assembly.ShortName, @class.Name, additionalTitle);
+            reportRenderer.BeginClassReport(this.CreateTargetDirectory(), @class.Assembly.ShortName, @class.Name, @class.DisplayName, additionalTitle);
 
             if (this.ReportContext.ReportConfiguration.Title != null)
             {
@@ -74,7 +74,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             }
 
             reportRenderer.BeginKeyValueTable();
-            reportRenderer.KeyValueRow(ReportResources.Class, @class.Name);
+            reportRenderer.KeyValueRow(ReportResources.Class, @class.DisplayName);
             reportRenderer.KeyValueRow(ReportResources.Assembly, @class.Assembly.ShortName);
             reportRenderer.KeyValueRow(ReportResources.Files3, @class.Files.Select(f => f.Path));
             reportRenderer.KeyValueRow(ReportResources.CoveredLines, @class.CoveredLines.ToString(CultureInfo.InvariantCulture));

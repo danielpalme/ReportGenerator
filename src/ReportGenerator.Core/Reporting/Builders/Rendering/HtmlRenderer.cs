@@ -155,8 +155,9 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="targetDirectory">The target directory.</param>
         /// <param name="assemblyName">Name of the assembly.</param>
         /// <param name="className">Name of the class.</param>
+        /// <param name="classDisplayName">Display name of the class.</param>
         /// <param name="additionalTitle">Additional title.</param>
-        public void BeginClassReport(string targetDirectory, string assemblyName, string className, string additionalTitle)
+        public void BeginClassReport(string targetDirectory, string assemblyName, string className, string classDisplayName, string additionalTitle)
         {
             this.classReport = true;
 
@@ -171,7 +172,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     "<style type=\"text/css\">" + new StreamReader(cssStream).ReadToEnd() + "</style>"
                     : CssLink;
 
-                this.reportTextWriter.WriteLine(HtmlStart, WebUtility.HtmlEncode(className), WebUtility.HtmlEncode(additionalTitle + ReportResources.CoverageReport), style);
+                this.reportTextWriter.WriteLine(HtmlStart, WebUtility.HtmlEncode(classDisplayName), WebUtility.HtmlEncode(additionalTitle + ReportResources.CoverageReport), style);
             }
         }
 
@@ -480,7 +481,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     historicCoveragesSb.Append("]");
 
                     this.javaScriptContent.Append("      { ");
-                    this.javaScriptContent.AppendFormat("\"name\": \"{0}\",", @class.Name.Replace(@"\", @"\\"));
+                    this.javaScriptContent.AppendFormat("\"name\": \"{0}\",", @class.DisplayName.Replace(@"\", @"\\"));
                     this.javaScriptContent.AppendFormat(
                         " \"rp\": \"{0}\",",
                         this.onlySummary ? string.Empty : this.GetClassReportFilename(@class.Assembly.ShortName, @class.Name));
@@ -554,7 +555,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             {
                 this.javaScriptContent.AppendLine("  {");
                 this.javaScriptContent.AppendFormat("    \"assembly\": \"{0}\",", riskHotspot.Assembly.ShortName);
-                this.javaScriptContent.AppendFormat(" \"class\": \"{0}\",", riskHotspot.Class.Name);
+                this.javaScriptContent.AppendFormat(" \"class\": \"{0}\",", riskHotspot.Class.DisplayName);
                 this.javaScriptContent.AppendFormat(" \"reportPath\": \"{0}\",", this.onlySummary ? string.Empty : this.GetClassReportFilename(riskHotspot.Assembly.ShortName, riskHotspot.Class.Name));
                 this.javaScriptContent.AppendFormat(" \"methodName\": \"{0}\",", riskHotspot.MethodMetric.FullName);
                 this.javaScriptContent.AppendFormat(" \"methodShortName\": \"{0}\",", riskHotspot.MethodMetric.ShortName);
@@ -1005,7 +1006,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                         CultureInfo.InvariantCulture,
                         "<a href=\"{0}\">{1}</a>",
                         WebUtility.HtmlEncode(this.GetClassReportFilename(riskHotspot.Assembly.ShortName, riskHotspot.Class.Name)),
-                        WebUtility.HtmlEncode(riskHotspot.Class.Name));
+                        WebUtility.HtmlEncode(riskHotspot.Class.DisplayName));
                 }
 
                 this.reportTextWriter.WriteLine("<tr>");
@@ -1100,7 +1101,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     CultureInfo.InvariantCulture,
                     "<a href=\"{0}\">{1}</a>",
                     WebUtility.HtmlEncode(this.GetClassReportFilename(@class.Assembly.ShortName, @class.Name)),
-                    WebUtility.HtmlEncode(@class.Name));
+                    WebUtility.HtmlEncode(@class.DisplayName));
             }
 
             this.reportTextWriter.Write("<tr>");

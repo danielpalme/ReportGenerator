@@ -98,7 +98,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 if (summaryResult.Assemblies.Any())
                 {
                     var maximumNameLength = summaryResult.Assemblies
-                        .SelectMany(a => a.Classes).Select(c => c.Name)
+                        .SelectMany(a => a.Classes).Select(c => c.DisplayName)
                         .Union(summaryResult.Assemblies.Select(a => a.Name))
                         .Max(n => n.Length);
 
@@ -117,8 +117,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                             string classQuota = @class.CoverageQuota.HasValue ? @class.CoverageQuota.Value.ToString("f1", CultureInfo.InvariantCulture) + "%" : string.Empty;
                             reportTextWriter.WriteLine(
                                 "  {0}{1}  {2}",
-                                @class.Name,
-                                new string(' ', maximumNameLength - @class.Name.Length + 6 - classQuota.Length),
+                                @class.DisplayName,
+                                new string(' ', maximumNameLength - @class.DisplayName.Length + 6 - classQuota.Length),
                                 classQuota);
                         }
                     }

@@ -63,6 +63,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.8.7.0
+
+    * Fix: #408: Fixed coverage of generic classes
+
 4.8.6.0
 
     * New: #405: Added support for deterministic source paths

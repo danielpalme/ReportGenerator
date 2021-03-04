@@ -122,8 +122,9 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="targetDirectory">The target directory.</param>
         /// <param name="assemblyName">Name of the assembly.</param>
         /// <param name="className">Name of the class.</param>
+        /// <param name="classDisplayName">Display name of the class.</param>
         /// <param name="additionalTitle">Additional title.</param>
-        public void BeginClassReport(string targetDirectory, string assemblyName, string className, string additionalTitle)
+        public void BeginClassReport(string targetDirectory, string assemblyName, string className, string classDisplayName, string additionalTitle)
         {
             if (this.classReportTextWriter == null)
             {
@@ -136,8 +137,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.reportTextWriter = this.classReportTextWriter;
             this.reportTextWriter.WriteLine(@"\newpage");
 
-            className = string.Format(CultureInfo.InvariantCulture, @"\section{{{0}}}", EscapeLatexChars(className));
-            this.reportTextWriter.WriteLine(className);
+            classDisplayName = string.Format(CultureInfo.InvariantCulture, @"\section{{{0}}}", EscapeLatexChars(classDisplayName));
+            this.reportTextWriter.WriteLine(classDisplayName);
         }
 
         /// <summary>
@@ -537,7 +538,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 this.reportTextWriter.Write(
                     "{0} & {1} & {2}",
                     EscapeLatexChars(riskHotspot.Assembly.ShortName),
-                    EscapeLatexChars(riskHotspot.Class.Name),
+                    EscapeLatexChars(riskHotspot.Class.DisplayName),
                     EscapeLatexChars(riskHotspot.MethodMetric.ShortName));
 
                 foreach (var statusMetric in riskHotspot.StatusMetrics)
@@ -612,7 +613,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             string row = string.Format(
                 CultureInfo.InvariantCulture,
                 @"{0} & {1} & {2} & {3} & {4} & {5}",
-                EscapeLatexChars(@class.Name),
+                EscapeLatexChars(@class.DisplayName),
                 @class.CoveredLines,
                 @class.CoverableLines - @class.CoveredLines,
                 @class.CoverableLines,
@@ -765,6 +766,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 .Replace(@"\", @"\textbackslash ")
                 .Replace("%", @"\%")
                 .Replace("#", @"\#")
-                .Replace("_", @"\_");
+                .Replace("_", @"\_")
+                .Replace("<", "$<$")
+                .Replace(">", "$>$");
     }
 }

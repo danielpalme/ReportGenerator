@@ -94,7 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" />
-    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="16.8.0" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="16.9.0" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

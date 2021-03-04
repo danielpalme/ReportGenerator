@@ -28,8 +28,9 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="targetDirectory">The target directory.</param>
         /// <param name="assemblyName">Name of the assembly.</param>
         /// <param name="className">Name of the class.</param>
+        /// <param name="classDisplayName">Display name of the class.</param>
         /// <param name="additionalTitle">Additional title.</param>
-        void BeginClassReport(string targetDirectory, string assemblyName, string className, string additionalTitle);
+        void BeginClassReport(string targetDirectory, string assemblyName, string className, string classDisplayName, string additionalTitle);
 
         /// <summary>
         /// Saves a summary report.

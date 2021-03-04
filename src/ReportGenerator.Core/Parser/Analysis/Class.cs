@@ -45,6 +45,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
             this.Name = name ?? throw new ArgumentNullException(nameof(name));
             this.Assembly = assembly ?? throw new ArgumentNullException(nameof(assembly));
 
+            this.DisplayName = name;
+
             /*
              * Convert class name of generic classes:
              * See: https://github.com/coverlet-coverage/coverlet/issues/1077
@@ -59,29 +61,29 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
 
                 if (match.Success)
                 {
-                    this.Name = match.Groups["Name"].Value;
+                    this.DisplayName = match.Groups["Name"].Value;
 
                     int number = int.Parse(match.Groups["Number"].Value);
 
                     if (number == 1)
                     {
-                        this.Name += "<T>";
+                        this.DisplayName += "<T>";
                     }
                     else if (number > 1)
                     {
-                        this.Name += "<";
+                        this.DisplayName += "<";
 
                         for (int i = 1; i <= number; i++)
                         {
                             if (i > 1)
                             {
-                                this.Name += ", ";
+                                this.DisplayName += ", ";
                             }
 
-                            this.Name += "T" + i;
+                            this.DisplayName += "T" + i;
                         }
 
-                        this.Name += ">";
+                        this.DisplayName += ">";
                     }
                 }
             }
@@ -91,6 +93,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// Gets the name of the class.
         /// </summary>
         public string Name { get; }
+
+        /// <summary>
+        /// Gets the display name of the class.
+        /// </summary>
+        public string DisplayName { get; }
 
         /// <summary>
         /// Gets the assembly.
