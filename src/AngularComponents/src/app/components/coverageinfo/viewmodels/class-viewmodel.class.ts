@@ -11,7 +11,7 @@ export class ClassViewModel extends ElementBase {
     branchCoverageHistory: number[] = [];
     historicCoverages: HistoricCoverage[] = [];
 
-    currentHistoricCoverage: HistoricCoverage = null;
+    currentHistoricCoverage: HistoricCoverage|null = null;
 
     constructor(
         clazz: Class,

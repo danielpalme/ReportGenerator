@@ -14,22 +14,22 @@ export class Class {
     /*
     * The coveredLines.
     */
-    cl: number;
+    cl: number = 0;
 
     /*
     * The uncoveredLines.
     */
-    ucl: number;
+    ucl: number = 0;
 
     /*
     * The coverableLines.
     */
-    cal: number;
+    cal: number = 0;
 
     /*
     * The totalLines.
     */
-    tl: number;
+    tl: number = 0;
 
     /*
     * The coverageType.
@@ -44,12 +44,12 @@ export class Class {
     /*
     * The coveredBranches.
     */
-    cb: number;
+    cb: number = 0;
 
     /*
     * The totalBranches.
     */
-    tb: number;
+    tb: number = 0;
 
     /*
     * The lineCoverageHistory.

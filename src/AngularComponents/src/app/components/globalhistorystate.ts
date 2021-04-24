@@ -2,6 +2,6 @@ import { CoverageInfoSettings } from "./coverageinfo/data/coverageinfo-settings.
 import { RiskHotspotsSettings } from "./riskhotspots/data/riskhotspots-settings.class";
 
 export class GlobalHistoryState {
-  riskHotspotsSettings: RiskHotspotsSettings = null;
-  coverageInfoSettings: CoverageInfoSettings = null;
+  riskHotspotsSettings: RiskHotspotsSettings|null = null;
+  coverageInfoSettings: CoverageInfoSettings|null = null;
 }

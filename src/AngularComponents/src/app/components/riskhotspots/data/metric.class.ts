@@ -1,4 +1,4 @@
 export class Metric {
-    value: number;
-    exceeded: boolean;
+    value: number = 0;
+    exceeded: boolean = false;
 }

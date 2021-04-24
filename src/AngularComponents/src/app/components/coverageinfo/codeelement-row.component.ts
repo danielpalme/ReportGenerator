@@ -23,7 +23,7 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CodeElementRow {
-    @Input() element: CodeElementViewModel = null;
+    @Input() element!: CodeElementViewModel;
 
     @Input() collapsed: boolean = false;
 

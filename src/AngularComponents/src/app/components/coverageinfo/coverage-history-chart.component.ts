@@ -12,7 +12,7 @@ import { Helper } from './viewmodels/helper.class';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CoverageHistoryChartComponent {
-    path: string = null;
+    path: string|null = null;
 
     _historicCoverages: number[] = [];
     get historicCoverages(): number[] {

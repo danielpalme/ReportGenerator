@@ -111,7 +111,7 @@ import { ClassViewModel } from "./viewmodels/class-viewmodel.class";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ClassRow {
-    @Input() clazz: ClassViewModel = null;
+    @Input() clazz!: ClassViewModel;
 
     @Input() translations: any = { };
 

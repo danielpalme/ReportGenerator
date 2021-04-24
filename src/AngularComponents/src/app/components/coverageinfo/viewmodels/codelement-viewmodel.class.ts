@@ -11,7 +11,7 @@ export class CodeElementViewModel extends ElementBase {
 
     constructor(
         name: string,
-        parent: CodeElementViewModel) {
+        parent: CodeElementViewModel|null) {
             super();
             this.name = name;
             this.collapsed = name.indexOf("Test") > -1 && parent === null;
@@ -37,7 +37,7 @@ export class CodeElementViewModel extends ElementBase {
         return false;
     }
 
-    insertClass(clazz: ClassViewModel, grouping: number): void {
+    insertClass(clazz: ClassViewModel, grouping: number|null): void {
         this.coveredLines += clazz.coveredLines;
         this.uncoveredLines += clazz.uncoveredLines;
         this.coverableLines += clazz.coverableLines;

@@ -137,7 +137,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
         {
             /*
              * Search in source dirctories
-             * 
+             *
              * E.g. with source directory 'C:\agent\1\work\s' the following locations will be searched:
              * C:\agent\1\work\s\_\some\directory\file.cs
              * C:\agent\1\work\s\some\directory\file.cs

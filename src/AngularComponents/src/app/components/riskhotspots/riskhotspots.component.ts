@@ -126,16 +126,14 @@ export class RiskHotspotsComponent implements OnInit {
     if (this.window.history !== undefined && this.window.history.replaceState !== undefined) {
       console.log("Risk hotspots: Updating history", this.settings);
 
-      let globalHistoryState: GlobalHistoryState = null;
+      let globalHistoryState: GlobalHistoryState = new GlobalHistoryState();
 
       if (window.history.state !== null) {
         globalHistoryState = JSON.parse(JSON.stringify(this.window.history.state));
-      } else {
-        globalHistoryState = new GlobalHistoryState();
       }
 
       globalHistoryState.riskHotspotsSettings = JSON.parse(JSON.stringify(this.settings));
-      window.history.replaceState(globalHistoryState, null);
+      window.history.replaceState(globalHistoryState, "");
     }
   }
 

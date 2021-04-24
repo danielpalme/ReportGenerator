@@ -63,6 +63,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.8.8.0
+
+    * Fix: Updated Angular Components (dropped support for IE)
+
 4.8.7.0
 
     * Fix: #408: Fixed coverage of generic classes
