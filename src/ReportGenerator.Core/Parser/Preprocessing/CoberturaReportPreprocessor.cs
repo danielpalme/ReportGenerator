@@ -71,9 +71,15 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
                         continue;
                     }
 
-                    string path = Path.Combine(sources[0], fileNameAttribute.Value)
+                    string sourcePath = sources[0]
                         .Replace('\\', Path.DirectorySeparatorChar)
                         .Replace('/', Path.DirectorySeparatorChar);
+
+                    string fileName = fileNameAttribute.Value
+                        .Replace('\\', Path.DirectorySeparatorChar)
+                        .Replace('/', Path.DirectorySeparatorChar);
+
+                    string path = Path.Combine(sourcePath, fileName);
                     fileNameAttribute.Value = path;
                 }
             }
@@ -90,9 +96,15 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
 
                     foreach (var source in sources)
                     {
-                        string path = Path.Combine(source, fileNameAttribute.Value)
+                        string sourcePath = source
                             .Replace('\\', Path.DirectorySeparatorChar)
                             .Replace('/', Path.DirectorySeparatorChar);
+
+                        string fileName = fileNameAttribute.Value
+                            .Replace('\\', Path.DirectorySeparatorChar)
+                            .Replace('/', Path.DirectorySeparatorChar);
+
+                        string path = Path.Combine(sourcePath, fileName);
 
                         if (File.Exists(path))
                         {

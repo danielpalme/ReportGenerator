@@ -66,6 +66,7 @@ CHANGELOG
 4.8.8.0
 
     * Fix: Updated Angular Components (dropped support for IE)
+    * Fix: #418: Cobertura: Clean up directory separators before path combine
 
 4.8.7.0
 
