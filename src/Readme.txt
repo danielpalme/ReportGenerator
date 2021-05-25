@@ -63,6 +63,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.8.9.0
+
+    * Fix: Updated Angular Components
+
 4.8.8.0
 
     * Fix: Updated Angular Components (dropped support for IE)
