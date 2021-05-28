@@ -83,7 +83,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <returns>The <see cref="Assembly"/>.</returns>
         private Assembly ProcessAssembly(XElement module)
         {
-            string assemblyName = module.Attribute("name").Value;
+            string assemblyName = module.Attribute("name").Value + "_" + module.Attribute("id").Value;
 
             Logger.DebugFormat(Resources.CurrentAssembly, assemblyName);
 
@@ -187,7 +187,9 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             var linesOfFile = methods
                 .Elements("ranges")
                 .Elements("range")
+                .Where(r => r.Attribute("source_id").Value == fileId)
                 .Where(l => l.Attribute("start_line").Value != "15732480")
+                .Distinct()
                 .Select(l => new
                 {
                     LineNumberStart = int.Parse(l.Attribute("start_line").Value, CultureInfo.InvariantCulture),

@@ -299,7 +299,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                             codeElement.FirstLine,
                             codeElement.CoverageQuota.HasValue ? coverageRounded.ToString() : "undefined",
                             codeElement.CoverageQuota.HasValue ? ReportResources.Coverage2 + " " + codeElement.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "% - " : string.Empty,
-                            WebUtility.HtmlEncode(codeElement.Name),
+                            WebUtility.HtmlEncode($"File {item.Key} => " + codeElement.Name),
                             codeElement.CodeElementType == CodeElementType.Method ? "cube" : "wrench");
                     }
                 }
@@ -626,7 +626,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="files">The files.</param>
         public void KeyValueRow(string key, IEnumerable<string> files)
         {
-            string value = string.Join("<br />", files.Select(v => string.Format(CultureInfo.InvariantCulture, "<a href=\"#{0}\" class=\"navigatetohash\">{1}</a>", WebUtility.HtmlEncode(StringHelper.ReplaceNonLetterChars(v)), WebUtility.HtmlEncode(v))));
+            int fileIndex = 0;
+            string value = string.Join("<br />", files.Select(v => string.Format(CultureInfo.InvariantCulture, "<a href=\"#{0}\" class=\"navigatetohash\">{1}</a>", WebUtility.HtmlEncode(StringHelper.ReplaceNonLetterChars(v)), WebUtility.HtmlEncode($"File {fileIndex++}: " + v))));
 
             this.reportTextWriter.WriteLine(
                 "<tr><th>{0}</th><td>{1}</td></tr>",
@@ -686,11 +687,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                             WebUtility.HtmlEncode(methodMetric.FullName),
                             fileIndex,
                             methodMetric.Line,
-                            WebUtility.HtmlEncode(methodMetric.ShortName));
+                            WebUtility.HtmlEncode($"File {fileIndex} => " + methodMetric.ShortName));
                     }
                     else
                     {
-                        this.reportTextWriter.Write("<td title=\"{0}\">{1}</td>", WebUtility.HtmlEncode(methodMetric.FullName), WebUtility.HtmlEncode(methodMetric.ShortName));
+                        this.reportTextWriter.Write("<td title=\"{0}\">{1}</td>", WebUtility.HtmlEncode(methodMetric.FullName), WebUtility.HtmlEncode(file.Path + " => " + methodMetric.ShortName));
                     }
 
                     foreach (var metric in metrics)
