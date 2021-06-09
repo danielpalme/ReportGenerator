@@ -1,2 +1,32 @@
 $*.";/
 $*.";/run-dotnet-config
+# 
+#
+# 
+#
+#
+
+
+--clear single-valued variable
+-Latex-
+-dotnet-
+
+-Latex-
+
+ -reportgenerator.reporttypes-
+ 
+ -HtmlSummary--
+ --add--
+--add-- 
+-to-
+
+ -m
+ -valu
+ -variable
+ --add
+dotnet config 
+
+--unset-alltgenerator.report coverage3.xml
+--clear all multi-valued entries for a variable
+dotnet config 
+--unset-all reportgenerator.assemblyfilter
