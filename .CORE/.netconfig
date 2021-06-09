@@ -1,2 +1,11 @@
 $*.";/
-$*.";/run.netconfig
+$*.";/run.build-ReportGenerator-1.netconfig
+/
+#
+
+[ReportGenerator-1]
+	reports = coverage.xml
+	targetdir = "C:\\report"
+	reporttypes = Latex;HtmlSummary
+	assemblyfilters = +Test;-Test
+	classfilters = +Test2;-Test2
