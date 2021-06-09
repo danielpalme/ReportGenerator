@@ -1,1 +1,13 @@
 $*.";/run-task-MSBUILD/run.cmd.msbuild/msbuild.yml
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Coverage" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <ItemGroup>
+    <PackageReference Include="ReportGenerator" Version="x.y.z" />
+  </ItemGroup>
+  <Target Name="Coverage">
+    <ItemGroup>
+      <CoverageFiles Include="OpenCover.xml" />
+    </ItemGroup>
+    <ReportGenerator ProjectDirectory="$(MSBuildProjectDirectory)" ReportFiles="@(CoverageFiles)" TargetDirectory="report" ReportTypes="Html;Latex" HistoryDirectory="history" Plugins="CustomReports.dll" AssemblyFilters="+Include;-Excluded" VerbosityLevel="Verbose" />
+  </Target>
+</Project>
