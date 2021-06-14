@@ -32,6 +32,7 @@ The following output formats are supported by ReportGenerator:
 -TeamCitySummary
 -TextSummary
 -CsvSummary
+-MarkdownSummary
 -PngChart
 -Badges
 -Custom formats (https://github.com/danielpalme/ReportGenerator/wiki/Custom-reports)
@@ -62,6 +63,10 @@ For further details take a look at LICENSE.txt.
 =======================================================================
 
 CHANGELOG
+
+4.8.10.0
+
+    * New: #431: Added Markdown output format
 
 4.8.9.0
 

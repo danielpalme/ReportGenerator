@@ -1,0 +1,210 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Text;
+using Palmmedia.ReportGenerator.Core.Common;
+using Palmmedia.ReportGenerator.Core.Logging;
+using Palmmedia.ReportGenerator.Core.Parser.Analysis;
+using Palmmedia.ReportGenerator.Core.Properties;
+
+namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
+{
+    /// <summary>
+    /// Creates summary report in Markdown format (no reports for classes are generated).
+    /// </summary>
+    public class MarkdownSummaryReportBuilder : IReportBuilder
+    {
+        /// <summary>
+        /// The Logger.
+        /// </summary>
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(MarkdownSummaryReportBuilder));
+
+        /// <summary>
+        /// Gets the report type.
+        /// </summary>
+        /// <value>
+        /// The report type.
+        /// </value>
+        public string ReportType => "MarkdownSummary";
+
+        /// <summary>
+        /// Gets or sets the report context.
+        /// </summary>
+        /// <value>
+        /// The report context.
+        /// </value>
+        public IReportContext ReportContext { get; set; }
+
+        /// <summary>
+        /// Creates a class report.
+        /// </summary>
+        /// <param name="class">The class.</param>
+        /// <param name="fileAnalyses">The file analyses that correspond to the class.</param>
+        public void CreateClassReport(Class @class, IEnumerable<FileAnalysis> fileAnalyses)
+        {
+        }
+
+        /// <summary>
+        /// Creates the summary report.
+        /// </summary>
+        /// <param name="summaryResult">The summary result.</param>
+        public void CreateSummaryReport(SummaryResult summaryResult)
+        {
+            if (summaryResult == null)
+            {
+                throw new ArgumentNullException(nameof(summaryResult));
+            }
+
+            string targetDirectory = this.ReportContext.ReportConfiguration.TargetDirectory;
+
+            if (this.ReportContext.Settings.CreateSubdirectoryForAllReportTypes)
+            {
+                targetDirectory = Path.Combine(targetDirectory, this.ReportType);
+
+                if (!Directory.Exists(targetDirectory))
+                {
+                    try
+                    {
+                        Directory.CreateDirectory(targetDirectory);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.ErrorFormat(Resources.TargetDirectoryCouldNotBeCreated, targetDirectory, ex.GetExceptionMessageForDisplay());
+                        return;
+                    }
+                }
+            }
+
+            string targetPath = Path.Combine(targetDirectory, "Summary.md");
+
+            Logger.InfoFormat(Resources.WritingReportFile, targetPath);
+
+            using (var reportTextWriter = new StreamWriter(new FileStream(targetPath, FileMode.Create), Encoding.UTF8))
+            {
+                reportTextWriter.WriteLine("# {0}", ReportResources.Summary);
+                reportTextWriter.WriteLine("|||");
+                reportTextWriter.WriteLine("|:---|:---|");
+                reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.GeneratedOn, DateTime.Now.ToShortDateString() + " - " + DateTime.Now.ToLongTimeString());
+                reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.Parser, summaryResult.UsedParser);
+                reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.Assemblies2, summaryResult.Assemblies.Count().ToString(CultureInfo.InvariantCulture));
+                reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.Classes, summaryResult.Assemblies.SelectMany(a => a.Classes).Count().ToString(CultureInfo.InvariantCulture));
+                reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.Files2, summaryResult.Assemblies.SelectMany(a => a.Classes).SelectMany(a => a.Files).Distinct().Count().ToString(CultureInfo.InvariantCulture));
+                reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.CoveredLines, summaryResult.CoveredLines.ToString(CultureInfo.InvariantCulture));
+                reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.UncoveredLines, (summaryResult.CoverableLines - summaryResult.CoveredLines).ToString(CultureInfo.InvariantCulture));
+                reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.CoverableLines, summaryResult.CoverableLines.ToString(CultureInfo.InvariantCulture));
+                reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.TotalLines, summaryResult.TotalLines.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
+                reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.Coverage2, summaryResult.CoverageQuota.HasValue ? $"{summaryResult.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}% ({summaryResult.CoveredLines.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {summaryResult.CoverableLines.ToString(CultureInfo.InvariantCulture)})" : string.Empty);
+
+                if (summaryResult.SupportsBranchCoverage)
+                {
+                    if (summaryResult.CoveredBranches.HasValue && summaryResult.TotalBranches.HasValue)
+                    {
+                        reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.CoveredBranches2, summaryResult.CoveredBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
+                        reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.TotalBranches, summaryResult.TotalBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
+
+                        decimal? branchCoverage = summaryResult.BranchCoverageQuota;
+
+                        if (branchCoverage.HasValue)
+                        {
+                            reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.BranchCoverage2, $"{branchCoverage.Value.ToString(CultureInfo.InvariantCulture)}% ({summaryResult.CoveredBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {summaryResult.TotalBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)})");
+                        }
+                    }
+                }
+
+                if (this.ReportContext.ReportConfiguration.Tag != null)
+                {
+                    reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.Tag, this.ReportContext.ReportConfiguration.Tag);
+                }
+
+                reportTextWriter.WriteLine();
+
+                if (summaryResult.Assemblies.Any())
+                {
+                    var maximumNameLength = summaryResult.Assemblies
+                        .SelectMany(a => a.Classes).Select(c => c.DisplayName)
+                        .Union(summaryResult.Assemblies.Select(a => a.Name))
+                        .Max(n => n.Length);
+
+                    reportTextWriter.Write(
+                        "|**{0}**|**{1}**|**{2}**|**{3}**|**{4}**|**{5}**|",
+                        ReportResources.Name,
+                        ReportResources.Covered,
+                        ReportResources.Uncovered,
+                        ReportResources.Coverable,
+                        ReportResources.Total,
+                        ReportResources.Coverage);
+
+                    if (summaryResult.SupportsBranchCoverage)
+                    {
+                        reportTextWriter.WriteLine(
+                            "**{0}**|**{1}**|**{2}**|",
+                            ReportResources.Covered,
+                            ReportResources.Total,
+                            ReportResources.BranchCoverage);
+                    }
+                    else
+                    {
+                        reportTextWriter.WriteLine(string.Empty);
+                    }
+
+                    reportTextWriter.Write("|:---|---:|---:|---:|---:|---:|");
+
+                    if (summaryResult.SupportsBranchCoverage)
+                    {
+                        reportTextWriter.WriteLine("---:|---:|---:|");
+                    }
+                    else
+                    {
+                        reportTextWriter.WriteLine(string.Empty);
+                    }
+
+                    foreach (var assembly in summaryResult.Assemblies)
+                    {
+                        reportTextWriter.Write("|**{0}**", assembly.Name);
+                        reportTextWriter.Write("|**{0}**", assembly.CoveredLines);
+                        reportTextWriter.Write("|**{0}**", assembly.CoverableLines - assembly.CoveredLines);
+                        reportTextWriter.Write("|**{0}**", assembly.CoverableLines);
+                        reportTextWriter.Write("|**{0}**", assembly.TotalLines.GetValueOrDefault());
+                        reportTextWriter.Write("|**{0}**", assembly.CoverageQuota.HasValue ? assembly.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
+
+                        if (summaryResult.SupportsBranchCoverage)
+                        {
+                            reportTextWriter.Write("|**{0}**", assembly.CoveredBranches);
+                            reportTextWriter.Write("|**{0}**", assembly.TotalBranches);
+                            reportTextWriter.Write("|**{0}**", assembly.BranchCoverageQuota.HasValue ? assembly.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
+                        }
+
+                        reportTextWriter.WriteLine("|");
+
+                        foreach (var @class in assembly.Classes)
+                        {
+                            reportTextWriter.Write("|{0}", @class.Name);
+                            reportTextWriter.Write("|{0}", @class.CoveredLines);
+                            reportTextWriter.Write("|{0}", @class.CoverableLines - @class.CoveredLines);
+                            reportTextWriter.Write("|{0}", @class.CoverableLines);
+                            reportTextWriter.Write("|{0}", @class.TotalLines.GetValueOrDefault());
+                            reportTextWriter.Write("|{0}", @class.CoverageQuota.HasValue ? @class.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
+
+                            if (summaryResult.SupportsBranchCoverage)
+                            {
+                                reportTextWriter.Write("|{0}", @class.CoveredBranches);
+                                reportTextWriter.Write("|{0}", @class.TotalBranches);
+                                reportTextWriter.Write("|{0}", @class.BranchCoverageQuota.HasValue ? @class.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
+                            }
+
+                            reportTextWriter.WriteLine("|");
+                        }
+                    }
+                }
+                else
+                {
+                    reportTextWriter.WriteLine(ReportResources.NoCoveredAssemblies);
+                }
+
+                reportTextWriter.Flush();
+            }
+        }
+    }
+}
