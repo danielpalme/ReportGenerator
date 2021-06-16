@@ -128,5 +128,8 @@
     
     <!-- Chocolatey -->
     <Exec Command="$(ChocolateyCommandLine) push .\target\packages\reportgenerator.portable.$(Version).nupkg --apikey $(ChocolateyApiKey) --source https://push.chocolatey.org/" />
+    
+     <!-- VSIX -->
+    <Exec Command="tfx extension publish --vsix .\target\packages\Palmmedia.reportgenerator-$(Version).vsix -t $(VisualStudioMarketPlaceToken)" />
   </Target> 
 </Project>
