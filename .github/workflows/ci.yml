@@ -1,0 +1,237 @@
+name: CI-CD
+
+on: [push, pull_request]
+
+env:
+  solution: 'src\ReportGenerator.sln'
+  buildPlatform: Any CPU
+  buildConfiguration: Release
+  version: 4.8.9
+  dotnetSDKVersion: 5.0.301
+  nodeVersion: 14
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: 'Install npm'
+      uses: actions/setup-node@v2
+      with:
+        node-version: '${{ env.nodeVersion }}'
+
+    - name: setup-msbuild
+      uses: microsoft/setup-msbuild@v1
+
+    - name: 'Install dependendies'
+      run: msbuild .\build.proj /t:Restore
+      working-directory: src
+
+    - name: 'Setup .NET Core'
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.dotnetSDKVersion }}
+
+    - name: 'Show dotnet info'
+      run: dotnet --info
+
+    - name: 'Show dotnet version'
+      run: dotnet --version
+
+    - name: 'Use NuGet 5.x'
+      uses: nuget/setup-nuget@v1
+
+    - name: 'NuGet Restore'
+      run: nuget restore ${{ env.solution }}
+
+    - name: 'Compile Solution'
+      run: msbuild '${{ env.solution }}' /p:configuration='${{ env.buildConfiguration }}' /p:platform='${{ env.buildPlatform }}'
+
+    - name: dotnet publish Console.NetCore 2.0
+      run: dotnet publish -c ${{ env.BuildConfiguration }} -f netcoreapp2.0 ReportGenerator.Console.NetCore.csproj
+      working-directory: src/ReportGenerator.Console.NetCore
+
+    - name: dotnet publish Console.NetCore 2.1
+      run: dotnet publish -c ${{ env.BuildConfiguration }} -f netcoreapp2.1 ReportGenerator.Console.NetCore.csproj
+      working-directory: src/ReportGenerator.Console.NetCore
+
+    - name: dotnet publish Console.NetCore 3.0
+      run: dotnet publish -c ${{ env.BuildConfiguration }} -f netcoreapp3.0 ReportGenerator.Console.NetCore.csproj
+      working-directory: src/ReportGenerator.Console.NetCore
+
+    - name: dotnet publish Console.NetCore 5.0
+      run: dotnet publish -c ${{ env.BuildConfiguration }} -f net5.0 ReportGenerator.Console.NetCore.csproj
+      working-directory: src/ReportGenerator.Console.NetCore
+
+    - name: dotnet publish DotnetGlobalTool 2.1
+      run: dotnet publish -c ${{ env.BuildConfiguration }} -f netcoreapp2.1 ReportGenerator.DotnetGlobalTool.csproj
+      working-directory: src/ReportGenerator.DotnetGlobalTool
+
+    - name: dotnet publish DotnetGlobalTool 3.0
+      run: dotnet publish -c ${{ env.BuildConfiguration }} -f netcoreapp3.0 ReportGenerator.DotnetGlobalTool.csproj
+      working-directory: src/ReportGenerator.DotnetGlobalTool
+
+    - name: dotnet publish DotnetGlobalTool 5.0
+      run: dotnet publish -c ${{ env.BuildConfiguration }} -f net5.0 ReportGenerator.DotnetGlobalTool.csproj
+      working-directory: src/ReportGenerator.DotnetGlobalTool
+
+    - name: Test
+      run: dotnet test src\ReportGenerator.Core.Test\ReportGenerator.Core.Test.csproj --configuration ${{ env.BuildConfiguration }} --no-build /p:CollectCoverage=true /p:DeterministicSourcePaths=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=opencover%2ccobertura /p:CoverletOutput=../target/reports/coverage/
+
+    - name: ReportGenerator
+      uses: danielpalme/ReportGenerator-GitHub-Action@4.8.9
+      with:
+        reports: 'src\target\reports\coverage\coverage.opencover.xml'
+        targetdir: 'src\target\reports\coverage'
+        reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
+        assemblyfilters: '-xunit*'
+
+    - name: 'Publish code coverage results'
+      uses: actions/upload-artifact@v2.2.3
+      with:
+        name: CoverageReport
+        path: src/target/reports/coverage
+
+    - name: 'Prepare VSIX release: NetCore'
+      run: |
+        mkdir src/AzureDevopsTask/ReportGenerator/tools/netcoreapp2.1
+        xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\netcoreapp2.1\publish' 'src\AzureDevopsTask\ReportGenerator\tools\netcoreapp2.1' /s
+
+    - name: 'Prepare VSIX release: Install TFS Cross Platform Command Line Interface (tfx-cli)'
+      run: npm install -g tfx-cli
+
+    - name: 'Prepare VSIX release: npm install'
+      run: npm install
+      working-directory: src/AzureDevopsTask/ReportGenerator
+
+    - name: 'Prepare VSIX release: Compile TypeScript'
+      run: npm run tsc --
+      working-directory: src/AzureDevopsTask/ReportGenerator
+
+    - name: Create VSIX release
+      run: tfx extension create --manifest-globs vss-extension.json --output-path ../target/packages
+      working-directory: src/AzureDevopsTask
+
+    - name: 'Prepare ZIP release: mkdir'
+      run: |
+        mkdir tmpzip
+        mkdir tmpzip\net47
+        mkdir tmpzip\netcoreapp2.0
+        mkdir tmpzip\netcoreapp2.1
+        mkdir tmpzip\netcoreapp3.0
+        mkdir tmpzip\net5.0
+
+    - name: 'Prepare ZIP release'
+      run: |
+        xcopy "src\ReportGenerator.Console\bin\Release\Readme.txt" "tmpzip\"
+        xcopy "src\ReportGenerator.Console\bin\Release\LICENSE.txt" "tmpzip\"
+        xcopy "src\ReportGenerator.Console\bin\Release\appsettings.json" "tmpzip\net47\"
+        xcopy "src\ReportGenerator.Console\bin\Release\*.dll" "tmpzip\net47"
+        xcopy "src\ReportGenerator.Console\bin\Release\ReportGenerator.exe" "tmpzip\net47"
+        xcopy "src\ReportGenerator.Console\bin\Release\ReportGenerator.exe.config" "tmpzip\net47"
+        xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\netcoreapp2.0\publish\*' 'tmpzip\netcoreapp2.0' /s
+        xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\netcoreapp2.1\publish\*' 'tmpzip\netcoreapp2.1' /s
+        xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\netcoreapp3.0\publish\*' 'tmpzip\netcoreapp3.0' /s
+        xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\net5.0\publish\*' 'tmpzip\net5.0' /s
+
+    - name: 'Pack ZIP release'
+      run: Compress-Archive -Path tmpzip/* -DestinationPath src/target/packages/ReportGenerator_${{ env.Version }}.zip
+
+    - name: 'NuGet pack dotnet-reportgenerator-globaltool'
+      run: nuget pack src/Deployment/nuget/dotnet-reportgenerator-globaltool.nuspec -OutputDirectory src/target/packages -Version ${{ env.Version }}
+
+    - name: 'NuGet pack ReportGenerator.Core'
+      run: nuget pack src/Deployment/nuget/ReportGenerator.Core.nuspec -OutputDirectory src/target/packages -Version ${{ env.Version }}
+
+    - name: 'NuGet pack ReportGenerator'
+      run: nuget pack src/Deployment/nuget/ReportGenerator.nuspec -OutputDirectory src/target/packages -Version ${{ env.Version }}
+
+    - name: 'Chocolatey pack reportgenerator.portable'
+      run: .$env:USERPROFILE\.nuget\packages\chocolatey\0.10.14\tools\chocolateyInstall\choco.exe pack src/Deployment/chocolatey/reportgenerator.portable.nuspec --outputdirectory=src/target/packages --version=${{ env.Version }}
+
+    - name: 'Publish Artifact: packages'
+      uses: actions/upload-artifact@v2
+      with:
+        path: src/target/packages
+        name: packages
+
+  publish:
+
+    needs: build
+    runs-on: windows-latest
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && startsWith(github.event.commits[0].message, 'Release ') }}
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: 'Install npm'
+      uses: actions/setup-node@v2
+      with:
+        node-version: '${{ env.nodeVersion }}'
+
+    - name: setup-msbuild
+      uses: microsoft/setup-msbuild@v1
+
+    - name: 'Install dependendies'
+      run: msbuild .\build.proj /t:Restore
+      working-directory: src
+
+    - name: 'Use NuGet 5.x'
+      uses: nuget/setup-nuget@v1
+
+    - uses: actions/download-artifact@v2
+      with:
+        name: packages
+
+    - name: GitHubRelease
+      uses: softprops/action-gh-release@v1
+      with:
+        name: ReportGenerator_${{ env.Version }}
+        body: This release requires .NET 4.7 or .NET Core 2.x/3.x/5.x.
+        tag_name: v${{ env.Version }}
+        files: ReportGenerator_${{ env.Version }}.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      continue-on-error: true
+
+    - name: 'Prepare FTP Upload'
+      run: |
+        mkdir ftp
+        xcopy "ReportGenerator_${{ env.Version }}.zip" "ftp"
+
+    - name: 'FTP Upload: ZIP Release'
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      with:
+        server: ${{ secrets.FTP_HOST }}
+        username: ${{ secrets.FTP_USER }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ftp
+        dangerous-clean-slate: true
+      continue-on-error: true
+
+    - name: 'NuGet push dotnet-reportgenerator-globaltool'
+      run: nuget push dotnet-reportgenerator-globaltool.${{ env.Version }}.nupkg -ApiKey ${{ secrets.NUGETAPIKEY }} -Source https://www.nuget.org/api/v2/package
+      continue-on-error: true
+
+    - name: 'NuGet push ReportGenerator.Core'
+      run: nuget push ReportGenerator.Core.${{ env.Version }}.nupkg -ApiKey ${{ secrets.NUGETAPIKEY }} -Source https://www.nuget.org/api/v2/package"
+      continue-on-error: true
+
+    - name: 'NuGet push ReportGenerator'
+      run: nuget push ReportGenerator.${{ env.Version }}.nupkg -ApiKey ${{ secrets.NUGETAPIKEY }} -Source https://www.nuget.org/api/v2/package"
+      continue-on-error: true
+
+    - name: 'Chocolatey push reportgenerator.portable'
+      run: .$env:USERPROFILE\.nuget\packages\chocolatey\0.10.14\tools\chocolateyInstall\choco.exe push reportgenerator.portable.${{ env.Version }}.nupkg --apikey ${{ secrets.CHOCOLATEYAPIKEY }} --source https://push.chocolatey.org/
+      continue-on-error: true
+
+    - name: 'Prepare VSIX release: Install TFS Cross Platform Command Line Interface (tfx-cli)'
+      run: npm install -g tfx-cli
+      continue-on-error: true
+
+    - name: Create VSIX release
+      run: tfx extension publish --vsix Palmmedia.reportgenerator-${{ env.Version }}.vsix -t ${{ secrets.VISUALSTUDIOMARKETPLACETOKEN }}
+      continue-on-error: true
