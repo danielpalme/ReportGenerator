@@ -345,4 +345,7 @@
   <data name="StarTooltip" xml:space="preserve">
     <value>Star on GitHub</value>
   </data>
+  <data name="File" xml:space="preserve">
+    <value>File</value>
+  </data>
 </root>

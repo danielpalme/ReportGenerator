@@ -64,6 +64,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.8.11.0
+
+    * New: #426: Added file numbers to class report
+
 4.8.10.0
 
     * New: #431: Added Markdown output format
