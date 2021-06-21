@@ -5,11 +5,14 @@
     .container { background-color: #292827; }
     .containerrightfixed { background-color: #3D3C3C; border-left: solid 1px #515050; }
     .containerrightfixed h1 { background-color: #484747; }
-    .overview tr:hover { background: #2E2D2C }
-    .overview th { background: #292827 }
+    .overview tr:hover { background-color: #2E2D2C }
+    .overview th { background-color: #292827 }
+    .overview th { background-color: #333; border: solid 1px #3B3A39; }
     .overview th a { color: #fff; color: rgba(255, 255, 255, 0.95); }
     .overview th a:hover { color: #0078d4; }
-    input, select { background-color: #292827; color: #fff; border: 1px solid #fff; }
+    .overview td { border: solid 1px #3B3A39; }
+    .overview .coverage td { border: none; }
+    input, select { background-color: #292827; color: #fff; border: 1px solid #A19F9D; }
     a { color: #fff; color: rgba(255, 255, 255, 0.95); }
     a:hover { color: #0078d4; }
     h1 a.back { background-color: #4a4846; }

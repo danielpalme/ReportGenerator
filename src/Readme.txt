@@ -67,6 +67,7 @@ CHANGELOG
 4.8.11.0
 
     * New: #426: Added file numbers to class report
+    * New: #433: Added dark mode
 
 4.8.10.0
 
