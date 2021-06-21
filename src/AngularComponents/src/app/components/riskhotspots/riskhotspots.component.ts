@@ -17,7 +17,7 @@ import { RiskHotspotsSettings } from "./data/riskhotspots-settings.class";
           </select>
         </div>
         <div class="center">
-          <span>{{translations.top}}</span>
+          <span *ngIf="totalNumberOfRiskHotspots > 10">{{translations.top}}</span>
           <select [(ngModel)]="settings.numberOfRiskHotspots" *ngIf="totalNumberOfRiskHotspots > 10">
             <option value="10">10</option>
             <option value="20" *ngIf="totalNumberOfRiskHotspots > 10">20</option>
