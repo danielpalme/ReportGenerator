@@ -35,6 +35,9 @@
 
     <!-- Net5.0 ('tools\net5.0' directory) -->
     <file src="..\..\ReportGenerator.Console.NetCore\bin\Release\net5.0\publish\**\*.*" target="tools\net5.0" />
+
+    <!-- Net6.0 ('tools\net6.0' directory) -->
+    <file src="..\..\ReportGenerator.Console.NetCore\bin\Release\net6.0\publish\**\*.*" target="tools\net6.0" />
     
     <!-- .NET 4.7 ('tools\net47' directory) -->
     <file src="..\..\ReportGenerator.Console\bin\Release\appsettings.json" target="tools\net47" />

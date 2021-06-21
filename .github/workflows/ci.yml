@@ -7,7 +7,7 @@ env:
   buildPlatform: Any CPU
   buildConfiguration: Release
   version: 4.8.10
-  dotnetSDKVersion: 5.0.301
+  dotnetSDKVersion: 6.0.100-preview.5.21302.13
   nodeVersion: 14
 
 jobs:
@@ -66,6 +66,10 @@ jobs:
       run: dotnet publish -c ${{ env.BuildConfiguration }} -f net5.0 ReportGenerator.Console.NetCore.csproj
       working-directory: src/ReportGenerator.Console.NetCore
 
+    - name: dotnet publish Console.NetCore 6.0
+      run: dotnet publish -c ${{ env.BuildConfiguration }} -f net6.0 ReportGenerator.Console.NetCore.csproj
+      working-directory: src/ReportGenerator.Console.NetCore
+
     - name: dotnet publish DotnetGlobalTool 2.1
       run: dotnet publish -c ${{ env.BuildConfiguration }} -f netcoreapp2.1 ReportGenerator.DotnetGlobalTool.csproj
       working-directory: src/ReportGenerator.DotnetGlobalTool
@@ -76,6 +80,10 @@ jobs:
 
     - name: dotnet publish DotnetGlobalTool 5.0
       run: dotnet publish -c ${{ env.BuildConfiguration }} -f net5.0 ReportGenerator.DotnetGlobalTool.csproj
+      working-directory: src/ReportGenerator.DotnetGlobalTool
+
+    - name: dotnet publish DotnetGlobalTool 6.0
+      run: dotnet publish -c ${{ env.BuildConfiguration }} -f net6.0 ReportGenerator.DotnetGlobalTool.csproj
       working-directory: src/ReportGenerator.DotnetGlobalTool
 
     - name: Test
@@ -123,6 +131,7 @@ jobs:
         mkdir tmpzip\netcoreapp2.1
         mkdir tmpzip\netcoreapp3.0
         mkdir tmpzip\net5.0
+        mkdir tmpzip\net6.0
 
     - name: 'Prepare ZIP release'
       run: |
@@ -136,6 +145,7 @@ jobs:
         xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\netcoreapp2.1\publish\*' 'tmpzip\netcoreapp2.1' /s
         xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\netcoreapp3.0\publish\*' 'tmpzip\netcoreapp3.0' /s
         xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\net5.0\publish\*' 'tmpzip\net5.0' /s
+        xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\net6.0\publish\*' 'tmpzip\net6.0' /s
 
     - name: 'Pack ZIP release'
       run: Compress-Archive -Path tmpzip/* -DestinationPath src/target/packages/ReportGenerator_${{ env.Version }}.zip

@@ -56,10 +56,12 @@
     <Exec Command="dotnet publish -c Release -f netcoreapp2.1 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
     <Exec Command="dotnet publish -c Release -f netcoreapp3.0 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
     <Exec Command="dotnet publish -c Release -f net5.0 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
+    <Exec Command="dotnet publish -c Release -f net6.0 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
 
     <Exec Command="dotnet publish -c Release -f netcoreapp2.1 ReportGenerator.DotnetGlobalTool.csproj" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
     <Exec Command="dotnet publish -c Release -f netcoreapp3.0 ReportGenerator.DotnetGlobalTool.csproj" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
     <Exec Command="dotnet publish -c Release -f net5.0 ReportGenerator.DotnetGlobalTool.csproj" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
+    <Exec Command="dotnet publish -c Release -f net6.0 ReportGenerator.DotnetGlobalTool.csproj" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
 
     <RemoveDir Directories="bin" />
     <RemoveDir Directories="obj" />
@@ -86,6 +88,7 @@
       <ZipFileContentNetCore21 Include="ReportGenerator.Console.NetCore\bin\Release\netcoreapp2.1\publish\**\*.*"/>
       <ZipFileContentNetCore30 Include="ReportGenerator.Console.NetCore\bin\Release\netcoreapp3.0\publish\**\*.*"/>
       <ZipFileContentNetCore50 Include="ReportGenerator.Console.NetCore\bin\Release\net5.0\publish\**\*.*"/>
+      <ZipFileContentNetCore60 Include="ReportGenerator.Console.NetCore\bin\Release\net6.0\publish\**\*.*"/>
     </ItemGroup>
 
     <!-- ZIP -->
@@ -98,6 +101,7 @@
     <Copy SourceFiles="@(ZipFileContentNetCore21)" DestinationFolder="tmpzip\netcoreapp2.1\%(RecursiveDir)" />
     <Copy SourceFiles="@(ZipFileContentNetCore30)" DestinationFolder="tmpzip\netcoreapp3.0\%(RecursiveDir)" />
     <Copy SourceFiles="@(ZipFileContentNetCore50)" DestinationFolder="tmpzip\net5.0\%(RecursiveDir)" />
+    <Copy SourceFiles="@(ZipFileContentNetCore60)" DestinationFolder="tmpzip\net6.0\%(RecursiveDir)" />
    <ItemGroup>
       <ZipFileContent Include="tmpzip\**\*.*"/>
     </ItemGroup> 
