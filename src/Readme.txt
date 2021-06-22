@@ -67,7 +67,7 @@ CHANGELOG
 4.8.11.0
 
     * New: #426: Added file numbers to class report
-    * New: #433: Added dark mode
+    * New: #433: Added dark mode to all HTML report types (light/dark mode is applied based on OS theme)
 
 4.8.10.0
 
