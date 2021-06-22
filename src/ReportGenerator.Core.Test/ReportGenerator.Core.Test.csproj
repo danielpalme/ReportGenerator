@@ -4,8 +4,8 @@
     <TargetFramework>net5.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <RootNamespace>Palmmedia.ReportGenerator.Core.Test</RootNamespace>
-    <AssemblyVersion>4.8.10.0</AssemblyVersion>
-    <FileVersion>4.8.10.0</FileVersion>
+    <AssemblyVersion>4.8.11.0</AssemblyVersion>
+    <FileVersion>4.8.11.0</FileVersion>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
   
