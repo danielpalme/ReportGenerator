@@ -186,6 +186,17 @@ jobs:
       with:
         name: packages
 
+    - name: GitHubRelease
+      uses: softprops/action-gh-release@v1
+      with:
+        name: ReportGenerator_${{ env.Version }}
+        body: This release requires .NET 4.7 or .NET Core 2.x/3.x/5.x.
+        tag_name: v${{ env.Version }}
+        files: ReportGenerator_${{ env.Version }}.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      continue-on-error: true
+
     - name: 'Prepare FTP Upload'
       run: |
         mkdir ftp
@@ -197,7 +208,7 @@ jobs:
         server: ${{ secrets.FTP_HOST }}
         username: ${{ secrets.FTP_USER }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ftp
+        local-dir: ftp/
         dangerous-clean-slate: true
       continue-on-error: true
 
