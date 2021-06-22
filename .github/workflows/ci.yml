@@ -189,7 +189,7 @@ jobs:
     - name: 'Prepare FTP Upload'
       run: |
         mkdir ftp
-        xcopy "ReportGenerator_${{ env.Version }}.zip" "ftp/ReportGenerator_${{ env.Version }}.zip"
+        xcopy "ReportGenerator_${{ env.Version }}.zip" "ftp\ReportGenerator_${{ env.Version }}.zip"
 
     - name: 'FTP Upload: ZIP Release'
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
