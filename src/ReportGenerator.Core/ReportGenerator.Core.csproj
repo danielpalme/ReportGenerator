@@ -78,7 +78,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
     <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta11" />
-    <PackageReference Include="DotNetConfig" Version="1.0.0-rc.2" />
+    <PackageReference Include="DotNetConfig" Version="1.0.4" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
