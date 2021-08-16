@@ -199,7 +199,7 @@
     <value>The report file '{0}' is invalid. File does not exist (Full path: '{1}').</value>
   </data>
   <data name="FailedReportFilePattern" xml:space="preserve">
-    <value>The report file pattern '{0}' is invalid. No matching files found.</value>
+    <value>The report file pattern '{0}' found no matching files.</value>
   </data>
   <data name="FailedToInstantiatePlugin" xml:space="preserve">
     <value>Failed to instantiate plugin class '{0}'.</value>
