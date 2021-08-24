@@ -108,13 +108,13 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     try
                     {
                         var font = SystemFonts.CreateFont("Arial", 11, FontStyle.Regular);
-                        var textGraphicsOptions = new TextGraphicsOptions();
-                        textGraphicsOptions.TextOptions.HorizontalAlignment = HorizontalAlignment.Right;
-                        ctx.DrawText(textGraphicsOptions, "100", font, Color.Gray, new PointF(38, 5));
-                        ctx.DrawText(textGraphicsOptions, "75", font, Color.Gray, new PointF(38, 30));
-                        ctx.DrawText(textGraphicsOptions, "50", font, Color.Gray, new PointF(38, 55));
-                        ctx.DrawText(textGraphicsOptions, "25", font, Color.Gray, new PointF(38, 80));
-                        ctx.DrawText(textGraphicsOptions, "0", font, Color.Gray, new PointF(38, 105));
+                        var drawingOptions = new DrawingOptions();
+                        drawingOptions.TextOptions.HorizontalAlignment = HorizontalAlignment.Right;
+                        ctx.DrawText(drawingOptions, "100", font, Color.Gray, new PointF(38, 5));
+                        ctx.DrawText(drawingOptions, "75", font, Color.Gray, new PointF(38, 30));
+                        ctx.DrawText(drawingOptions, "50", font, Color.Gray, new PointF(38, 55));
+                        ctx.DrawText(drawingOptions, "25", font, Color.Gray, new PointF(38, 80));
+                        ctx.DrawText(drawingOptions, "0", font, Color.Gray, new PointF(38, 105));
                     }
                     catch (SixLabors.Fonts.Exceptions.FontFamilyNotFoundException)
                     {
