@@ -264,7 +264,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                     if (!"NaN".Equals(lineRate.Value, StringComparison.OrdinalIgnoreCase))
                     {
-                        value = Math.Round(100 * decimal.Parse(lineRate.Value, NumberStyles.Number | NumberStyles.AllowExponent, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero);
+                        value = Math.Round(100 * decimal.Parse(lineRate.Value.Replace(',', '.'), NumberStyles.Number | NumberStyles.AllowExponent, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero);
                     }
 
                     metrics.Add(new Metric(
@@ -282,7 +282,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                     if (!"NaN".Equals(branchRate.Value, StringComparison.OrdinalIgnoreCase))
                     {
-                        value = Math.Round(100 * decimal.Parse(branchRate.Value, NumberStyles.Number | NumberStyles.AllowExponent, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero);
+                        value = Math.Round(100 * decimal.Parse(branchRate.Value.Replace(',', '.'), NumberStyles.Number | NumberStyles.AllowExponent, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero);
                     }
 
                     metrics.Add(new Metric(
@@ -300,7 +300,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                     if (!"NaN".Equals(cyclomaticComplexityAttribute.Value, StringComparison.OrdinalIgnoreCase))
                     {
-                        value = Math.Round(decimal.Parse(cyclomaticComplexityAttribute.Value, NumberStyles.Number | NumberStyles.AllowExponent, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero);
+                        value = Math.Round(decimal.Parse(cyclomaticComplexityAttribute.Value.Replace(',', '.'), NumberStyles.Number | NumberStyles.AllowExponent, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero);
                     }
 
                     metrics.Insert(
