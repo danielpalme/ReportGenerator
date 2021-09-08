@@ -38,6 +38,15 @@ namespace Palmmedia.ReportGenerator.Core.Logging
         }
 
         /// <summary>
+        /// Configures the inner logger factory.
+        /// </summary>
+        /// <param name="logDelegate">The log delegate.</param>
+        public static void Configure(Action<VerbosityLevel, string> logDelegate)
+        {
+            innerFactory = new DelegateLoggerFactory(logDelegate) ?? throw new ArgumentNullException(nameof(logDelegate));
+        }
+
+        /// <summary>
         /// Initializes the logger for the given type.
         /// </summary>
         /// <param name="type">The type of the class that uses the logger.</param>

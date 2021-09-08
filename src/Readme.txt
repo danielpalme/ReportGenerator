@@ -64,6 +64,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.8.13.0
+
+    * New: #445: Added support for better custom logging
+
 4.8.11.0
 
     * New: #426: Added file numbers to class report
