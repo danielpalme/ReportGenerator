@@ -113,6 +113,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                     }
                 }
 
+                reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.CoveredCodeElements, summaryResult.CoveredCodeElements.ToString(CultureInfo.InvariantCulture));
+                reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.TotalCodeElements, summaryResult.TotalCodeElements.ToString(CultureInfo.InvariantCulture));
+                reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.CodeElementCoverageQuota2, summaryResult.CodeElementCoverageQuota.HasValue ? $"{summaryResult.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}% ({summaryResult.CoveredCodeElements.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {summaryResult.TotalCodeElements.ToString(CultureInfo.InvariantCulture)})" : string.Empty);
+
                 if (this.ReportContext.ReportConfiguration.Tag != null)
                 {
                     reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.Tag, this.ReportContext.ReportConfiguration.Tag);
@@ -122,11 +126,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
                 if (summaryResult.Assemblies.Any())
                 {
-                    var maximumNameLength = summaryResult.Assemblies
-                        .SelectMany(a => a.Classes).Select(c => c.DisplayName)
-                        .Union(summaryResult.Assemblies.Select(a => a.Name))
-                        .Max(n => n.Length);
-
                     reportTextWriter.Write(
                         "|**{0}**|**{1}**|**{2}**|**{3}**|**{4}**|**{5}**|",
                         ReportResources.Name,
@@ -139,25 +138,32 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                     if (summaryResult.SupportsBranchCoverage)
                     {
                         reportTextWriter.WriteLine(
-                            "**{0}**|**{1}**|**{2}**|",
+                            "**{0}**|**{1}**|**{2}**|**{3}**|**{4}**|**{5}**|",
                             ReportResources.Covered,
                             ReportResources.Total,
-                            ReportResources.BranchCoverage);
+                            ReportResources.BranchCoverage,
+                            ReportResources.Covered,
+                            ReportResources.Total,
+                            ReportResources.CodeElementCoverageQuota);
                     }
                     else
                     {
-                        reportTextWriter.WriteLine(string.Empty);
+                        reportTextWriter.WriteLine(
+                            "**{0}**|**{1}**|**{2}**|",
+                            ReportResources.Covered,
+                            ReportResources.Total,
+                            ReportResources.CodeElementCoverageQuota);
                     }
 
                     reportTextWriter.Write("|:---|---:|---:|---:|---:|---:|");
 
                     if (summaryResult.SupportsBranchCoverage)
                     {
-                        reportTextWriter.WriteLine("---:|---:|---:|");
+                        reportTextWriter.WriteLine("---:|---:|---:|---:|---:|---:|");
                     }
                     else
                     {
-                        reportTextWriter.WriteLine(string.Empty);
+                        reportTextWriter.WriteLine("---:|---:|---:|");
                     }
 
                     foreach (var assembly in summaryResult.Assemblies)
@@ -176,6 +182,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                             reportTextWriter.Write("|**{0}**", assembly.BranchCoverageQuota.HasValue ? assembly.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
                         }
 
+                        reportTextWriter.Write("|**{0}**", assembly.CoveredCodeElements);
+                        reportTextWriter.Write("|**{0}**", assembly.TotalCodeElements);
+                        reportTextWriter.Write("|**{0}**", assembly.CodeElementCoverageQuota.HasValue ? assembly.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
+
                         reportTextWriter.WriteLine("|");
 
                         foreach (var @class in assembly.Classes)
@@ -193,6 +203,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                                 reportTextWriter.Write("|{0}", @class.TotalBranches);
                                 reportTextWriter.Write("|{0}", @class.BranchCoverageQuota.HasValue ? @class.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
                             }
+
+                            reportTextWriter.Write("|{0}", @class.CoveredCodeElements);
+                            reportTextWriter.Write("|{0}", @class.TotalCodeElements);
+                            reportTextWriter.Write("|{0}", @class.CodeElementCoverageQuota.HasValue ? @class.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
 
                             reportTextWriter.WriteLine("|");
                         }

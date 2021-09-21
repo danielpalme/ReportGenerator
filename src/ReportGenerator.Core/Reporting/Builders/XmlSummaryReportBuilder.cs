@@ -81,6 +81,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 }
             }
 
+            summaryElement.Add(new XElement("Coveredmethods", summaryResult.CoveredCodeElements.ToString(CultureInfo.InvariantCulture)));
+            summaryElement.Add(new XElement("Totalmethods", summaryResult.TotalCodeElements.ToString(CultureInfo.InvariantCulture)));
+            summaryElement.Add(new XElement("Methodcoverage", summaryResult.CodeElementCoverageQuota.HasValue ? summaryResult.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : string.Empty));
+
             if (this.ReportContext.ReportConfiguration.Title != null)
             {
                 summaryElement.Add(new XElement("Title", this.ReportContext.ReportConfiguration.Title));
@@ -131,6 +135,9 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 assemblyElement.Add(new XAttribute("branchcoverage", assembly.BranchCoverageQuota.HasValue ? assembly.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : string.Empty));
                 assemblyElement.Add(new XAttribute("coveredbranches", assembly.CoveredBranches.HasValue ? assembly.CoveredBranches.Value.ToString(CultureInfo.InvariantCulture) : string.Empty));
                 assemblyElement.Add(new XAttribute("totalbranches", assembly.TotalBranches.HasValue ? assembly.TotalBranches.Value.ToString(CultureInfo.InvariantCulture) : string.Empty));
+                assemblyElement.Add(new XAttribute("coveredmethods", assembly.CoveredCodeElements.ToString(CultureInfo.InvariantCulture)));
+                assemblyElement.Add(new XAttribute("totalmethods", assembly.TotalCodeElements.ToString(CultureInfo.InvariantCulture)));
+                assemblyElement.Add(new XAttribute("methodcoverage", assembly.CodeElementCoverageQuota.HasValue ? assembly.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : string.Empty));
 
                 foreach (var @class in assembly.Classes)
                 {
@@ -144,6 +151,9 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                     classElement.Add(new XAttribute("branchcoverage", @class.BranchCoverageQuota.HasValue ? @class.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : string.Empty));
                     classElement.Add(new XAttribute("coveredbranches", @class.CoveredBranches.HasValue ? @class.CoveredBranches.Value.ToString(CultureInfo.InvariantCulture) : string.Empty));
                     classElement.Add(new XAttribute("totalbranches", @class.TotalBranches.HasValue ? @class.TotalBranches.Value.ToString(CultureInfo.InvariantCulture) : string.Empty));
+                    classElement.Add(new XAttribute("coveredmethods", @class.CoveredCodeElements.ToString(CultureInfo.InvariantCulture)));
+                    classElement.Add(new XAttribute("totalmethods", @class.TotalCodeElements.ToString(CultureInfo.InvariantCulture)));
+                    classElement.Add(new XAttribute("methodcoverage", @class.CodeElementCoverageQuota.HasValue ? @class.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : string.Empty));
 
                     assemblyElement.Add(classElement);
                 }

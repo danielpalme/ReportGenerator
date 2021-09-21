@@ -66,6 +66,7 @@ CHANGELOG
 
 4.8.13.0
 
+    * New: #441: Added method coverage to reports
     * New: #445: Added support for better custom logging
     * Fix: #450: Conditional file numbers in class report
 

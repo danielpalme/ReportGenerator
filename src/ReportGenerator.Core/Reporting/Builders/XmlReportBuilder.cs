@@ -75,6 +75,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 }
             }
 
+            summaryElement.Add(new XElement("Coveredmethods", @class.CoveredCodeElements.ToString(CultureInfo.InvariantCulture)));
+            summaryElement.Add(new XElement("Totalmethods", @class.TotalCodeElements.ToString(CultureInfo.InvariantCulture)));
+            summaryElement.Add(new XElement("Methodcoverage", @class.CodeElementCoverageQuota.HasValue ? @class.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : string.Empty));
+
             if (this.ReportContext.ReportConfiguration.Title != null)
             {
                 summaryElement.Add(new XElement("Title", this.ReportContext.ReportConfiguration.Title));

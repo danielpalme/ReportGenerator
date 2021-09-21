@@ -348,4 +348,16 @@
   <data name="File" xml:space="preserve">
     <value>File</value>
   </data>
+  <data name="CodeElementCoverageQuota" xml:space="preserve">
+    <value>Method coverage</value>
+  </data>
+  <data name="CodeElementCoverageQuota2" xml:space="preserve">
+    <value>Method coverage:</value>
+  </data>
+  <data name="CoveredCodeElements" xml:space="preserve">
+    <value>Covered methods:</value>
+  </data>
+  <data name="TotalCodeElements" xml:space="preserve">
+    <value>Total methods:</value>
+  </data>
 </root>
