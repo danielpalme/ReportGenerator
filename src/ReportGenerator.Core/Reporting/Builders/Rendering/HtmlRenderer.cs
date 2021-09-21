@@ -293,12 +293,13 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                             coverageRounded -= coverageRounded % 10;
                         }
 
+                        string prefix = fileAnalyses.Count() > 1 ? $"{ReportResources.File} {item.Key + 1}: " : string.Empty;
                         this.reportTextWriter.WriteLine(
                             "<a href=\"#file{0}_line{1}\" class=\"navigatetohash percentagebar percentagebar{2}\" title=\"{3}{4}\"><i class=\"icon-{5}\"></i>{4}</a><br />",
                             item.Key,
                             codeElement.FirstLine,
                             codeElement.CoverageQuota.HasValue ? coverageRounded.ToString() : "undefined",
-                            $"{ReportResources.File} {item.Key + 1}: " + (codeElement.CoverageQuota.HasValue ? ReportResources.Coverage2 + " " + codeElement.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "% - " : string.Empty),
+                            prefix + (codeElement.CoverageQuota.HasValue ? ReportResources.Coverage2 + " " + codeElement.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "% - " : string.Empty),
                             WebUtility.HtmlEncode(codeElement.Name),
                             codeElement.CodeElementType == CodeElementType.Method ? "cube" : "wrench");
                     }
@@ -627,7 +628,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         public void KeyValueRow(string key, IEnumerable<string> files)
         {
             int fileNumber = 1;
-            string value = string.Join("<br />", files.Select(v => string.Format(CultureInfo.InvariantCulture, "<a href=\"#{0}\" class=\"navigatetohash\">{1}</a>", WebUtility.HtmlEncode(StringHelper.ReplaceNonLetterChars(v)), WebUtility.HtmlEncode($"{ReportResources.File} {fileNumber++}: " + v))));
+
+            bool usePrefix = files.Count() > 1;
+
+            string value = string.Join("<br />", files.Select(v => string.Format(CultureInfo.InvariantCulture, "<a href=\"#{0}\" class=\"navigatetohash\">{1}</a>", WebUtility.HtmlEncode(StringHelper.ReplaceNonLetterChars(v)), WebUtility.HtmlEncode((usePrefix ? $"{ReportResources.File} {fileNumber++}: " : string.Empty) + v))));
 
             this.reportTextWriter.WriteLine(
                 "<tr><th>{0}</th><td>{1}</td></tr>",
@@ -673,6 +677,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.reportTextWriter.WriteLine("<tbody>");
 
             int fileIndex = 0;
+            bool usePrefix = @class.Files.Count() > 1;
 
             foreach (var file in @class.Files)
             {
@@ -687,7 +692,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                             WebUtility.HtmlEncode(methodMetric.FullName),
                             fileIndex,
                             methodMetric.Line,
-                            WebUtility.HtmlEncode($"{ReportResources.File} {fileIndex + 1}: " + methodMetric.ShortName));
+                            WebUtility.HtmlEncode(
+                                (usePrefix ? $"{ReportResources.File} {fileIndex + 1}: " : string.Empty) + methodMetric.ShortName));
                     }
                     else
                     {
