@@ -86,11 +86,11 @@ namespace Palmmedia.ReportGenerator.Core.Test
             Directory.CreateDirectory(dir);
             var config = Config.Build(dir).GetSection(DotNetConfigSettingNames.SectionName);
 
-            config.SetString("reports", ReportPath);
-            config.SetString("targetdir", "C:\\temp");
-            config.SetString("reporttype", "Latex");
-            config.SetString("assemblyfilters", "+Test;-Test");
-            config.SetString("classfilters", "+Test2;-Test2");
+            config = config.SetString("reports", ReportPath);
+            config = config.SetString("targetdir", "C:\\temp");
+            config = config.SetString("reporttype", "Latex");
+            config = config.SetString("assemblyfilters", "+Test;-Test");
+            config = config.SetString("classfilters", "+Test2;-Test2");
             config.SetString("verbosity", VerbosityLevel.Info.ToString());
 
             Directory.SetCurrentDirectory(dir);
@@ -118,24 +118,24 @@ namespace Palmmedia.ReportGenerator.Core.Test
             Directory.CreateDirectory(dir);
             var config = Config.Build(dir).GetSection(DotNetConfigSettingNames.SectionName);
 
-            config.SetString("reports", ReportPath);
+            config = config.SetString("reports", ReportPath);
 
-            config.AddString("reporttype", "Latex");
-            config.AddString("reporttype", "Html");
+            config = config.AddString("reporttype", "Latex");
+            config = config.AddString("reporttype", "Html");
 
-            config.AddString("assemblyfilter", "+Test");
-            config.AddString("assemblyfilter", "-Test");
+            config = config.AddString("assemblyfilter", "+Test");
+            config = config.AddString("assemblyfilter", "-Test");
 
-            config.AddString("classfilter", "+Test2");
-            config.AddString("classfilter", "-Test2");
+            config = config.AddString("classfilter", "+Test2");
+            config = config.AddString("classfilter", "-Test2");
 
-            config.AddString("filefilter", "+cs");
-            config.AddString("filefilter", "-vb");
+            config = config.AddString("filefilter", "+cs");
+            config = config.AddString("filefilter", "-vb");
 
-            config.AddString("sourcedir", "src");
-            config.AddString("sourcedir", "test");
+            config = config.AddString("sourcedir", "src");
+            config = config.AddString("sourcedir", "test");
 
-            config.AddString("plugin", "xunit");
+            config = config.AddString("plugin", "xunit");
             config.AddString("plugin", "moq");
 
             Directory.SetCurrentDirectory(dir);

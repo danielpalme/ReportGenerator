@@ -96,6 +96,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 }
             }
 
+            reportRenderer.KeyValueRow(ReportResources.CoveredCodeElements, @class.CoveredCodeElements.ToString(CultureInfo.InvariantCulture));
+            reportRenderer.KeyValueRow(ReportResources.TotalCodeElements, @class.TotalCodeElements.ToString(CultureInfo.InvariantCulture));
+            reportRenderer.KeyValueRow(ReportResources.CodeElementCoverageQuota2, @class.CodeElementCoverageQuota.HasValue ? $"{@class.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}% ({@class.CoveredCodeElements.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {@class.TotalCodeElements.ToString(CultureInfo.InvariantCulture)})" : string.Empty);
+
             if (this.ReportContext.ReportConfiguration.Tag != null)
             {
                 reportRenderer.KeyValueRow(ReportResources.Tag, this.ReportContext.ReportConfiguration.Tag);
@@ -220,6 +224,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                     reportRenderer.KeyValueRow(ReportResources.BranchCoverage2, $"{branchCoverage.Value.ToString(CultureInfo.InvariantCulture)}% ({summaryResult.CoveredBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {summaryResult.TotalBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)})");
                 }
             }
+
+            reportRenderer.KeyValueRow(ReportResources.CoveredCodeElements, summaryResult.CoveredCodeElements.ToString(CultureInfo.InvariantCulture));
+            reportRenderer.KeyValueRow(ReportResources.TotalCodeElements, summaryResult.TotalCodeElements.ToString(CultureInfo.InvariantCulture));
+            reportRenderer.KeyValueRow(ReportResources.CodeElementCoverageQuota2, summaryResult.CodeElementCoverageQuota.HasValue ? $"{summaryResult.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}% ({summaryResult.CoveredCodeElements.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {summaryResult.TotalCodeElements.ToString(CultureInfo.InvariantCulture)})" : string.Empty);
 
             if (this.ReportContext.ReportConfiguration.Tag != null)
             {

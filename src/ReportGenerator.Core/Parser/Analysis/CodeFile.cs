@@ -172,6 +172,25 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         }
 
         /// <summary>
+        /// Gets the number of total branches.
+        /// </summary>
+        /// <value>
+        /// The number of total branches.
+        /// </value>
+        public int? TotalBranches
+        {
+            get
+            {
+                if (this.branches == null)
+                {
+                    return null;
+                }
+
+                return this.branches.Sum(l => l.Value.Count);
+            }
+        }
+
+        /// <summary>
         /// Gets the number of covered code elements.
         /// </summary>
         /// <value>
@@ -195,25 +214,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// The number of total code elements.
         /// </value>
         public int TotalCodeElements => this.codeElements.Count;
-
-        /// <summary>
-        /// Gets the number of total branches.
-        /// </summary>
-        /// <value>
-        /// The number of total branches.
-        /// </value>
-        public int? TotalBranches
-        {
-            get
-            {
-                if (this.branches == null)
-                {
-                    return null;
-                }
-
-                return this.branches.Sum(l => l.Value.Count);
-            }
-        }
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.

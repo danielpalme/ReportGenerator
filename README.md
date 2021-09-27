@@ -135,7 +135,7 @@ All the plural options can also be specified as multiple singular entries, like:
 
 Adding/removing values is trivial using the [dotnet-config](https://dotnetconfig.org) CLI:
 
-```
+```bash
 # set a single-valued variable
 dotnet config reportgenerator.reporttypes Latex;HtmlSummary
 # add to multi-valued variable

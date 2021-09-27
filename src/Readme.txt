@@ -64,9 +64,16 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.8.13.0
+
+    * New: #441: Added method coverage to reports
+    * New: #445: Added support for better custom logging
+    * Fix: #450: Conditional file numbers in class report
+
 4.8.11.0
 
     * New: #426: Added file numbers to class report
+    * New: #433: Added dark mode to all HTML report types (light/dark mode is applied based on OS theme)
 
 4.8.10.0
 

@@ -204,6 +204,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         public int TotalCodeElements => this.files.Sum(f => f.TotalCodeElements);
 
         /// <summary>
+        /// Gets the code elements coverage quota.
+        /// </summary>
+        /// <value>The code elements coverage quota.</value>
+        public decimal? CodeElementCoverageQuota => (this.TotalCodeElements == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)this.CoveredCodeElements / (double)this.TotalCodeElements) / 10;
+
+        /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <returns>

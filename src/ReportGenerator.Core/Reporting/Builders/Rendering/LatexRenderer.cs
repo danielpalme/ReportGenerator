@@ -247,7 +247,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 this.reportTextWriter.Write("r|");
             }
 
-            this.reportTextWriter.WriteLine("}");
+            this.reportTextWriter.WriteLine("r|}");
             this.reportTextWriter.WriteLine(@"\hline");
 
             this.reportTextWriter.Write(
@@ -266,7 +266,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     EscapeLatexChars(ReportResources.BranchCoverage));
             }
 
-            this.reportTextWriter.WriteLine(@"\\");
+            this.reportTextWriter.WriteLine(@" & \textbf{{{0}}}\\", EscapeLatexChars(ReportResources.CodeElementCoverageQuota));
             this.reportTextWriter.WriteLine(@"\hline");
         }
 
@@ -594,6 +594,13 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 this.reportTextWriter.Write(row);
             }
 
+            row = string.Format(
+                CultureInfo.InvariantCulture,
+                @" & \textbf{{{0}}}",
+                assembly.CodeElementCoverageQuota.HasValue ? assembly.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + @"\%" : string.Empty);
+
+            this.reportTextWriter.Write(row);
+
             this.reportTextWriter.WriteLine(@"\\");
             this.reportTextWriter.WriteLine(@"\hline");
         }
@@ -631,6 +638,13 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
                 this.reportTextWriter.Write(row);
             }
+
+            row = string.Format(
+                CultureInfo.InvariantCulture,
+                @" & {0}",
+                @class.CodeElementCoverageQuota.HasValue ? @class.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + @"\%" : string.Empty);
+
+            this.reportTextWriter.Write(row);
 
             this.reportTextWriter.WriteLine(@"\\");
             this.reportTextWriter.WriteLine(@"\hline");

@@ -152,6 +152,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         public int TotalCodeElements => this.Assemblies.Sum(f => f.TotalCodeElements);
 
         /// <summary>
+        /// Gets the code elements coverage quota.
+        /// </summary>
+        /// <value>The code elements coverage quota.</value>
+        public decimal? CodeElementCoverageQuota => (this.TotalCodeElements == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)this.CoveredCodeElements / (double)this.TotalCodeElements) / 10;
+
+        /// <summary>
         /// Gets all sumable metrics.
         /// </summary>
         /// <value>The sumable metrics.</value>

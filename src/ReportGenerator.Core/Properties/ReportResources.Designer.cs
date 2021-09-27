@@ -232,6 +232,24 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Method coverage.
+        /// </summary>
+        public static string CodeElementCoverageQuota {
+            get {
+                return ResourceManager.GetString("CodeElementCoverageQuota", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Method coverage:.
+        /// </summary>
+        public static string CodeElementCoverageQuota2 {
+            get {
+                return ResourceManager.GetString("CodeElementCoverageQuota2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Collapse all.
         /// </summary>
         public static string CollapseAll {
@@ -363,6 +381,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         public static string CoveredBranches2 {
             get {
                 return ResourceManager.GetString("CoveredBranches2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Covered methods:.
+        /// </summary>
+        public static string CoveredCodeElements {
+            get {
+                return ResourceManager.GetString("CoveredCodeElements", resourceCulture);
             }
         }
         
@@ -723,6 +750,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         public static string TotalBranches {
             get {
                 return ResourceManager.GetString("TotalBranches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total methods:.
+        /// </summary>
+        public static string TotalCodeElements {
+            get {
+                return ResourceManager.GetString("TotalCodeElements", resourceCulture);
             }
         }
         
