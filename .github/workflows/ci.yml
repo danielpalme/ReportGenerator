@@ -6,7 +6,7 @@ env:
   solution: 'src\ReportGenerator.sln'
   buildPlatform: Any CPU
   buildConfiguration: Release
-  version: 4.8.12
+  version: 4.8.13
   dotnetSDKVersion: 5.0.301
   nodeVersion: 14
 
