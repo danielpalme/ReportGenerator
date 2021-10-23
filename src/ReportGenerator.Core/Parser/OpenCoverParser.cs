@@ -137,13 +137,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .Elements("Classes")
                 .Elements("Class")
                 .Where(c => c.Attribute("skippedDueTo") == null)
+                .Where(c => c.Element("Methods").Elements("Method").Any())
                 .Select(c =>
                     {
                         string fullname = c.Element("FullName").Value;
                         int nestedClassSeparatorIndex = fullname.IndexOf('/');
                         return nestedClassSeparatorIndex > -1 ? fullname.Substring(0, nestedClassSeparatorIndex) : fullname;
                     })
-                .Where(name => !name.Contains("<"))
+                .Where(name => name.IndexOf("<") < 1)
                 .Distinct()
                 .Where(c => this.ClassFilter.IsElementIncludedInReport(c))
                 .OrderBy(name => name)

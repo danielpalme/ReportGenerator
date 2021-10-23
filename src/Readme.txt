@@ -64,6 +64,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.8.14.0
+
+    * Fix: #459: Improved support for C++/CLI for OpenCover coverage files
+
 4.8.13.0
 
     * New: #441: Added method coverage to reports
