@@ -1,6 +1,8 @@
 <Project>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
+    <DebugType>Embedded</DebugType>
+    <EmbedAllSources>True</EmbedAllSources>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)ReportGenerator.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   

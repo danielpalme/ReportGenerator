@@ -7,7 +7,7 @@ env:
   buildPlatform: Any CPU
   buildConfiguration: Release
   version: 4.9.0
-  dotnetSDKVersion: 6.0.100-rc.1.21463.6
+  dotnetSDKVersion: 6.0.100-rc.2
   nodeVersion: 14
 
 jobs:
