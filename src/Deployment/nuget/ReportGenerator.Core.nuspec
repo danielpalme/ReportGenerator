@@ -71,15 +71,12 @@ https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage</desc
     <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.dll" target="lib\net5.0\" />
     <file src="..\..\ReportGenerator.Core\bin\Release\appsettings.json" target="lib\net5.0\" />
     <file src="..\..\ReportGenerator.DotnetCorePluginLoader\bin\Release\net5.0\ReportGenerator.DotnetCorePluginLoader.dll" target="lib\net5.0\" />
-    <file src="..\..\ReportGenerator.DotnetCorePluginLoader\bin\Release\net5.0\ReportGenerator.DotnetCorePluginLoader.pdb" target="lib\net5.0\" />
 
 	  <!-- Execution .NET 6.x (see https://github.com/coverlet-coverage/coverlet/pull/694) -->
     <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.deps.json" target="lib\net6.0\" />
     <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.dll" target="lib\net6.0\" />
-    <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.pdb" target="lib\net6.0\" />
     <file src="..\..\ReportGenerator.Core\bin\Release\appsettings.json" target="lib\net6.0\" />
     <file src="..\..\ReportGenerator.DotnetCorePluginLoader\bin\Release\net6.0\ReportGenerator.DotnetCorePluginLoader.dll" target="lib\net6.0\" />
-    <file src="..\..\ReportGenerator.DotnetCorePluginLoader\bin\Release\net6.0\ReportGenerator.DotnetCorePluginLoader.pdb" target="lib\net6.0\" />
   </files>
 </package>
 
