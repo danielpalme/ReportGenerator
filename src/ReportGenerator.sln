@@ -22,6 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{7925
 		Testprojects\CSharp\Reports\OpenCover.xml = Testprojects\CSharp\Reports\OpenCover.xml
 		Testprojects\CSharp\Reports\OpenCover_altcover.xml = Testprojects\CSharp\Reports\OpenCover_altcover.xml
 		Testprojects\CSharp\Reports\OpenCover_coverlet.xml = Testprojects\CSharp\Reports\OpenCover_coverlet.xml
+		Testprojects\CSharp\Reports\OpenCoverWithEmbeddedSource.xml = Testprojects\CSharp\Reports\OpenCoverWithEmbeddedSource.xml
 		Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml = Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml
 		Testprojects\CSharp\Reports\Partcover2.2.xml = Testprojects\CSharp\Reports\Partcover2.2.xml
 		Testprojects\CSharp\Reports\Partcover2.3.0.35109.xml = Testprojects\CSharp\Reports\Partcover2.3.0.35109.xml

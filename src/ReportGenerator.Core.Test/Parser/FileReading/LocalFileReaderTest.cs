@@ -5,8 +5,8 @@ using Xunit;
 namespace Palmmedia.ReportGenerator.Core.Test.Parser.FileReading
 {
     /// <summary>
-    /// This is a test class for CloverParser and is intended
-    /// to contain all CloverParser Unit Tests
+    /// This is a test class for LocalFileReader and is intended
+    /// to contain all LocalFileReader Unit Tests
     /// </summary>
     [Collection("FileManager")]
     public class LocalFileReaderTest

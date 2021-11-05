@@ -51,13 +51,30 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         private IDictionary<int, ICollection<Branch>> branches;
 
         /// <summary>
+        /// The optional additional file reader.
+        /// </summary>
+        private IFileReader additionalFileReader;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="CodeFile" /> class.
         /// </summary>
         /// <param name="path">The path of the file.</param>
         /// <param name="lineCoverage">The line coverage.</param>
         /// <param name="lineVisitStatus">The line visit status.</param>
         internal CodeFile(string path, int[] lineCoverage, LineVisitStatus[] lineVisitStatus)
-            : this(path, lineCoverage, lineVisitStatus, null)
+            : this(path, lineCoverage, lineVisitStatus, null, null)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CodeFile" /> class.
+        /// </summary>
+        /// <param name="path">The path of the file.</param>
+        /// <param name="lineCoverage">The line coverage.</param>
+        /// <param name="lineVisitStatus">The line visit status.</param>
+        /// <param name="additionalFileReader">The optional additional file reader.</param>
+        internal CodeFile(string path, int[] lineCoverage, LineVisitStatus[] lineVisitStatus, IFileReader additionalFileReader)
+            : this(path, lineCoverage, lineVisitStatus, null, additionalFileReader)
         {
         }
 
@@ -69,6 +86,24 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <param name="lineVisitStatus">The line visit status.</param>
         /// <param name="branches">The branches.</param>
         internal CodeFile(string path, int[] lineCoverage, LineVisitStatus[] lineVisitStatus, IDictionary<int, ICollection<Branch>> branches)
+            : this(path, lineCoverage, lineVisitStatus, branches, null)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CodeFile" /> class.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <param name="lineCoverage">The line coverage.</param>
+        /// <param name="lineVisitStatus">The line visit status.</param>
+        /// <param name="branches">The branches.</param>
+        /// <param name="additionalFileReader">The optional additional file reader.</param>
+        internal CodeFile(
+            string path,
+            int[] lineCoverage,
+            LineVisitStatus[] lineVisitStatus,
+            IDictionary<int, ICollection<Branch>> branches,
+            IFileReader additionalFileReader)
         {
             if (lineCoverage == null)
             {
@@ -89,6 +124,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
             this.lineCoverage = lineCoverage;
             this.lineVisitStatus = lineVisitStatus;
             this.branches = branches;
+            this.additionalFileReader = additionalFileReader;
         }
 
         /// <summary>
@@ -347,7 +383,19 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         internal FileAnalysis AnalyzeFile(IFileReader fileReader)
         {
             string error = null;
-            string[] lines = fileReader.LoadFile(this.Path, out error);
+
+            string[] lines = null;
+
+            if (this.additionalFileReader != null)
+            {
+                lines = this.additionalFileReader.LoadFile(this.Path, out error);
+            }
+
+            if (this.additionalFileReader == null || error != null)
+            {
+                error = null;
+                lines = fileReader.LoadFile(this.Path, out error);
+            }
 
             if (error != null)
             {
@@ -547,6 +595,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
             foreach (var codeElement in this.codeElements)
             {
                 codeElement.ApplyMaximumCoverageQuota(this.CoverageQuota(codeElement.FirstLine, codeElement.LastLine));
+            }
+
+            if (file.additionalFileReader == null)
+            {
+                file.additionalFileReader = this.additionalFileReader;
             }
         }
 

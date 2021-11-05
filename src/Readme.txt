@@ -64,6 +64,11 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+4.9.0.0
+
+    * New: #397: Added .NET 6 support
+    * New: #457: Added support for altcover embedded files
+
 4.8.14.0
 
     * Fix: #459: Improved support for C++/CLI for OpenCover coverage files
