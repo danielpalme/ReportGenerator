@@ -68,6 +68,7 @@ CHANGELOG
 
     * New: #397: Added .NET 6 support
     * New: #457: Added support for altcover embedded files
+    * Fix: #461: Fixed namespace color in dark mode
 
 4.8.14.0
 
