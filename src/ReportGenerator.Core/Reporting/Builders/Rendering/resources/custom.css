@@ -409,6 +409,10 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
             border: solid 1px #3B3A39;
         }
 
+        .overview tr.namespace th {
+            background-color: #444;
+        }
+
         .overview thead th {
             background-color: #444;
         }
