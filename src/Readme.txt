@@ -64,9 +64,9 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
-4.9.0.0
+5.0.0.0
 
-    * New: #397: Added .NET 6 support
+    * New: #397: Added .NET 6 support, dropped support for .NET Core 2.x and 3.0
     * New: #457: Added support for altcover embedded files
     * Fix: #461: Fixed namespace color in dark mode
 

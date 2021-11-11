@@ -51,15 +51,12 @@
 
   <Target Name="Compile">
     <MSBuild Projects="ReportGenerator.sln" Targets="Restore;Build" Properties="Configuration=Release" />
-    
-    <Exec Command="dotnet publish -c Release -f netcoreapp2.0 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
-    <Exec Command="dotnet publish -c Release -f netcoreapp2.1 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
-    <Exec Command="dotnet publish -c Release -f netcoreapp3.0 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
+
+    <Exec Command="dotnet publish -c Release -f netcoreapp3.1 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
     <Exec Command="dotnet publish -c Release -f net5.0 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
     <Exec Command="dotnet publish -c Release -f net6.0 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
 
-    <Exec Command="dotnet publish -c Release -f netcoreapp2.1 ReportGenerator.DotnetGlobalTool.csproj" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
-    <Exec Command="dotnet publish -c Release -f netcoreapp3.0 ReportGenerator.DotnetGlobalTool.csproj" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
+    <Exec Command="dotnet publish -c Release -f netcoreapp3.1 ReportGenerator.DotnetGlobalTool.csproj" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
     <Exec Command="dotnet publish -c Release -f net5.0 ReportGenerator.DotnetGlobalTool.csproj" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
     <Exec Command="dotnet publish -c Release -f net6.0 ReportGenerator.DotnetGlobalTool.csproj" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
 
@@ -84,9 +81,7 @@
     <ItemGroup>
       <ZipFileContentBase Include="ReportGenerator.Console\bin\Release\LICENSE.txt;ReportGenerator.Console\bin\Release\Readme.txt" />
       <ZipFileContentNet47 Include="ReportGenerator.Console\bin\Release\appsettings.json;ReportGenerator.Console\bin\Release\*.dll;ReportGenerator.Console\bin\Release\ReportGenerator.exe;ReportGenerator.Console\bin\Release\ReportGenerator.exe.config" />
-      <ZipFileContentNetCore20 Include="ReportGenerator.Console.NetCore\bin\Release\netcoreapp2.0\publish\**\*.*"/>
-      <ZipFileContentNetCore21 Include="ReportGenerator.Console.NetCore\bin\Release\netcoreapp2.1\publish\**\*.*"/>
-      <ZipFileContentNetCore30 Include="ReportGenerator.Console.NetCore\bin\Release\netcoreapp3.0\publish\**\*.*"/>
+      <ZipFileContentNetCore31 Include="ReportGenerator.Console.NetCore\bin\Release\netcoreapp3.1\publish\**\*.*"/>
       <ZipFileContentNetCore50 Include="ReportGenerator.Console.NetCore\bin\Release\net5.0\publish\**\*.*"/>
       <ZipFileContentNetCore60 Include="ReportGenerator.Console.NetCore\bin\Release\net6.0\publish\**\*.*"/>
     </ItemGroup>
@@ -94,12 +89,9 @@
     <!-- ZIP -->
     <MakeDir Directories="tmpzip" />
     <MakeDir Directories="tmpzip\net47" />
-    <MakeDir Directories="tmpzip\netcoreapp2.0" />
     <Copy SourceFiles="@(ZipFileContentBase)" DestinationFolder="tmpzip" /> 
     <Copy SourceFiles="@(ZipFileContentNet47)" DestinationFolder="tmpzip\net47" /> 
-    <Copy SourceFiles="@(ZipFileContentNetCore20)" DestinationFolder="tmpzip\netcoreapp2.0\%(RecursiveDir)" />
-    <Copy SourceFiles="@(ZipFileContentNetCore21)" DestinationFolder="tmpzip\netcoreapp2.1\%(RecursiveDir)" />
-    <Copy SourceFiles="@(ZipFileContentNetCore30)" DestinationFolder="tmpzip\netcoreapp3.0\%(RecursiveDir)" />
+    <Copy SourceFiles="@(ZipFileContentNetCore31)" DestinationFolder="tmpzip\netcoreapp3.1\%(RecursiveDir)" />
     <Copy SourceFiles="@(ZipFileContentNetCore50)" DestinationFolder="tmpzip\net5.0\%(RecursiveDir)" />
     <Copy SourceFiles="@(ZipFileContentNetCore60)" DestinationFolder="tmpzip\net6.0\%(RecursiveDir)" />
    <ItemGroup>
@@ -109,9 +101,9 @@
     <RemoveDir Directories="tmpzip" />  
 
     <!-- AzureDevopsTask -->
-    <RemoveDir Directories="AzureDevopsTask\ReportGenerator\tools\netcoreapp2.1" />  
-    <MakeDir Directories="AzureDevopsTask\ReportGenerator\tools\netcoreapp2.1" />
-    <Copy SourceFiles="@(ZipFileContentNetCore21)" DestinationFolder="AzureDevopsTask\ReportGenerator\tools\netcoreapp2.1\%(RecursiveDir)" /> 
+    <RemoveDir Directories="AzureDevopsTask\ReportGenerator\tools\netcoreapp3.1" />  
+    <MakeDir Directories="AzureDevopsTask\ReportGenerator\tools\netcoreapp3.1" />
+    <Copy SourceFiles="@(ZipFileContentNetCore21)" DestinationFolder="AzureDevopsTask\ReportGenerator\tools\netcoreapp3.1\%(RecursiveDir)" /> 
     <Exec Command="npm run tsc --" WorkingDirectory="AzureDevopsTask\ReportGenerator" />
     <Exec Command="tfx extension create --manifest-globs vss-extension.json --output-path ..\target\packages" WorkingDirectory="AzureDevopsTask" />
 

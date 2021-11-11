@@ -32,14 +32,8 @@ $(UserProfile)\.nuget\packages\reportgenerator\x.y.z\tools\net47\ReportGenerator
     <!-- MSBuild *.props file -->
     <file src="ReportGenerator.props" target="build\netstandard2.0" />
 
-    <!-- NetCoreApp2.0 ('tools\netcoreapp2.0' directory) -->
-    <file src="..\..\ReportGenerator.Console.NetCore\bin\Release\netcoreapp2.0\publish\**\*.*" target="tools\netcoreapp2.0" />
-
-    <!-- NetCoreApp2.1 ('tools\netcoreapp2.1' directory) -->
-    <file src="..\..\ReportGenerator.Console.NetCore\bin\Release\netcoreapp2.1\publish\**\*.*" target="tools\netcoreapp2.1" />
-    
-    <!-- NetCoreApp3.0 ('tools\netcoreapp3.0' directory) -->
-    <file src="..\..\ReportGenerator.Console.NetCore\bin\Release\netcoreapp3.0\publish\**\*.*" target="tools\netcoreapp3.0" />
+    <!-- NetCoreApp3.1 ('tools\netcoreapp3.1' directory) -->
+    <file src="..\..\ReportGenerator.Console.NetCore\bin\Release\netcoreapp3.1\publish\**\*.*" target="tools\netcoreapp3.1" />
 
     <!-- Net5.0 ('tools\net5.0' directory) -->
     <file src="..\..\ReportGenerator.Console.NetCore\bin\Release\net5.0\publish\**\*.*" target="tools\net5.0" />

@@ -24,24 +24,22 @@ https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage</desc
     <repository type="git" url="https://github.com/danielpalme/ReportGenerator.git" />
     <dependencies>
       <group targetFramework="netstandard2.0">
-        <dependency id="System.Text.Encodings.Web" version="5.0.1" /><!-- System.Text.Encodings.Web 5.0.1+ for  CVE-2021-26701  - see https://github.com/dotnet/runtime/issues/49377 -->
-        <dependency id="Microsoft.Extensions.Configuration" version="5.0.0" />
-        <dependency id="Microsoft.Extensions.Configuration.Binder" version="5.0.0" />
-        <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="5.0.0" />
-        <dependency id="Microsoft.Extensions.Configuration.Json" version="5.0.0" />
+        <dependency id="Microsoft.Extensions.Configuration" version="6.0.0" />
+        <dependency id="Microsoft.Extensions.Configuration.Binder" version="6.0.0" />
+        <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="6.0.0" />
+        <dependency id="Microsoft.Extensions.Configuration.Json" version="6.0.0" />
         <dependency id="SixLabors.ImageSharp.Drawing" version="1.0.0-beta13" />
         <dependency id="DotNetConfig" version="1.0.6" />
       </group>
 
       <group targetFramework="netcoreapp">
-        <dependency id="System.Text.Encodings.Web" version="5.0.1" /><!-- System.Text.Encodings.Web 5.0.1+ for  CVE-2021-26701  - see https://github.com/dotnet/runtime/issues/49377 -->
-        <dependency id="Microsoft.Extensions.Configuration" version="5.0.0" />
-        <dependency id="Microsoft.Extensions.Configuration.Binder" version="5.0.0" />
-        <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="5.0.0" />
-        <dependency id="Microsoft.Extensions.Configuration.Json" version="5.0.0" />
+        <dependency id="Microsoft.Extensions.Configuration" version="6.0.0" />
+        <dependency id="Microsoft.Extensions.Configuration.Binder" version="6.0.0" />
+        <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="6.0.0" />
+        <dependency id="Microsoft.Extensions.Configuration.Json" version="6.0.0" />
         <dependency id="SixLabors.ImageSharp.Drawing" version="1.0.0-beta13" />
         <dependency id="DotNetConfig" version="1.0.6" />
-        <dependency id="McMaster.NETCore.Plugins" version="1.3.1" />
+        <dependency id="McMaster.NETCore.Plugins" version="1.4.0" />
       </group>
     </dependencies>
   </metadata>
@@ -54,17 +52,11 @@ https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage</desc
     <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.deps.json" target="lib\netstandard2.0\" />
     <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.dll" target="lib\netstandard2.0\" />
 
-	  <!-- Execution .NET Core 2.x (see #253) -->
-    <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.deps.json" target="lib\netcoreapp\" />
-    <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.dll" target="lib\netcoreapp\" />
-    <file src="..\..\ReportGenerator.Core\bin\Release\appsettings.json" target="lib\netcoreapp\" />
-    <file src="..\..\ReportGenerator.DotnetCorePluginLoader\bin\Release\netcoreapp2.0\ReportGenerator.DotnetCorePluginLoader.dll" target="lib\netcoreapp\" />
-
 	  <!-- Execution .NET Core 3.x (see https://github.com/coverlet-coverage/coverlet/pull/694) -->
-    <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.deps.json" target="lib\netcoreapp3.0\" />
-    <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.dll" target="lib\netcoreapp3.0\" />
-    <file src="..\..\ReportGenerator.Core\bin\Release\appsettings.json" target="lib\netcoreapp3.0\" />
-    <file src="..\..\ReportGenerator.DotnetCorePluginLoader\bin\Release\netcoreapp2.0\ReportGenerator.DotnetCorePluginLoader.dll" target="lib\netcoreapp3.0\" />
+    <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.deps.json" target="lib\netcoreapp3.1\" />
+    <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.dll" target="lib\netcoreapp3.1\" />
+    <file src="..\..\ReportGenerator.Core\bin\Release\appsettings.json" target="lib\netcoreapp3.1\" />
+    <file src="..\..\ReportGenerator.DotnetCorePluginLoader\bin\Release\netcoreapp3.1\ReportGenerator.DotnetCorePluginLoader.dll" target="lib\netcoreapp3.1\" />
 
 	  <!-- Execution .NET 5.x (see https://github.com/coverlet-coverage/coverlet/pull/694) -->
     <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.deps.json" target="lib\net5.0\" />
