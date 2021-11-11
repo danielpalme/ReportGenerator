@@ -7,7 +7,6 @@ namespace Palmmedia.ReportGenerator.Core.Test
 {
     public class MsBuildTest
     {
-
         [Fact]
         public void ExecuteMSBuildScript_NetFull()
         {
@@ -19,9 +18,9 @@ namespace Palmmedia.ReportGenerator.Core.Test
 
             var paths = new[]
             {
-                @"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe",
-                @"C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe",
-                @"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\MSBuild.exe"
+                @"C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe",
+                @"C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin\MSBuild.exe",
+                @"C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\MSBuild.exe"
             };
 
             bool found = false;
