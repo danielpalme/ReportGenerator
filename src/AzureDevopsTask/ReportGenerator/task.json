@@ -11,9 +11,9 @@
     ],
     "author": "Palmmedia",
     "version": {
-        "Major": 4,
-        "Minor": 8,
-        "Patch": 13
+        "Major": 5,
+        "Minor": 0,
+        "Patch": 0
     },
     "instanceNameFormat": "ReportGenerator",
     "groups": [
