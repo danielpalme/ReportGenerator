@@ -9,6 +9,7 @@ using System.Xml.Linq;
 using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
+using Palmmedia.ReportGenerator.Core.Parser.FileReading;
 using Palmmedia.ReportGenerator.Core.Parser.Filtering;
 using Palmmedia.ReportGenerator.Core.Properties;
 
@@ -130,8 +131,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             var fileIdsByFilename = assemblyModules[assemblyName]
                 .Elements("Files")
                 .Elements("File")
-                .GroupBy(f => f.Attribute("fullPath").Value, f => f.Attribute("uid").Value)
-                .ToDictionary(g => g.Key, g => g.ToHashSet());
+                .GroupBy(f => f.Attribute("fullPath").Value)
+                .ToDictionary(g => g.Key, g => new FileElement(g));
 
             var classNames = assemblyModules[assemblyName]
                 .Elements("Classes")
@@ -166,7 +167,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="fileIdsByFilename">Dictionary containing the file ids by filename.</param>
         /// <param name="assembly">The assembly.</param>
         /// <param name="className">Name of the class.</param>
-        private void ProcessClass(IDictionary<string, XElement[]> assemblyModules, XElement[] files, IDictionary<string, string> trackedMethods, Dictionary<string, HashSet<string>> fileIdsByFilename, Assembly assembly, string className)
+        private void ProcessClass(IDictionary<string, XElement[]> assemblyModules, XElement[] files, IDictionary<string, string> trackedMethods, Dictionary<string, FileElement> fileIdsByFilename, Assembly assembly, string className)
         {
             var methods = assemblyModules[assembly.Name]
                 .Elements("Classes")
@@ -230,15 +231,15 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="filePath">The file path.</param>
         /// <param name="methods">The methods.</param>
         /// <returns>The <see cref="CodeFile"/>.</returns>
-        private static CodeFile ProcessFile(IDictionary<string, string> trackedMethods, HashSet<string> fileIds, string filePath, XElement[] methods)
+        private static CodeFile ProcessFile(IDictionary<string, string> trackedMethods, FileElement fileIds, string filePath, XElement[] methods)
         {
             var seqpntsOfFile = methods
                 .Elements("SequencePoints")
                 .Elements("SequencePoint")
                 .Where(seqpnt => (seqpnt.Attribute("fileid") != null
-                                    && fileIds.Contains(seqpnt.Attribute("fileid").Value))
+                                    && fileIds.Uids.Contains(seqpnt.Attribute("fileid").Value))
                     || (seqpnt.Attribute("fileid") == null && seqpnt.Parent.Parent.Element("FileRef") != null
-                        && fileIds.Contains(seqpnt.Parent.Parent.Element("FileRef").Attribute("uid").Value)))
+                        && fileIds.Uids.Contains(seqpnt.Parent.Parent.Element("FileRef").Attribute("uid").Value)))
                 .Select(seqpnt => new
                 {
                     LineNumberStart = int.Parse(seqpnt.Attribute("sl").Value, CultureInfo.InvariantCulture),
@@ -331,7 +332,16 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 }
             }
 
-            var codeFile = new CodeFile(filePath, coverage, lineVisitStatus, branches);
+            CodeFile codeFile = null;
+            if (!string.IsNullOrWhiteSpace(fileIds.EmbeddedSource))
+            {
+                var additionalFileReader = new AltCoverEmbeddedFileReader(fileIds.EmbeddedSource);
+                codeFile = new CodeFile(filePath, coverage, lineVisitStatus, branches, additionalFileReader);
+            }
+            else
+            {
+                codeFile = new CodeFile(filePath, coverage, lineVisitStatus, branches);
+            }
 
             foreach (var trackedMethodCoverage in coverageByTrackedMethod)
             {
@@ -347,7 +357,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             }
 
             var methodsOfFile = methods
-                .Where(m => m.Element("FileRef") != null && fileIds.Contains(m.Element("FileRef").Attribute("uid").Value))
+                .Where(m => m.Element("FileRef") != null && fileIds.Uids.Contains(m.Element("FileRef").Attribute("uid").Value))
                 .ToArray();
 
             SetMethodMetrics(codeFile, methodsOfFile);
@@ -448,7 +458,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="methods">The methods.</param>
         /// <param name="fileIds">The file ids of the class.</param>
         /// <returns>The branches by line number.</returns>
-        private static Dictionary<int, ICollection<Branch>> GetBranches(XElement[] methods, HashSet<string> fileIds)
+        private static Dictionary<int, ICollection<Branch>> GetBranches(XElement[] methods, FileElement fileIds)
         {
             var branchPoints = methods
                 .Elements("BranchPoints")
@@ -465,7 +475,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             foreach (var branchPoint in branchPoints)
             {
                 if (branchPoint.Attribute("fileid") != null
-                    && !fileIds.Contains(branchPoint.Attribute("fileid").Value))
+                    && !fileIds.Uids.Contains(branchPoint.Attribute("fileid").Value))
                 {
                     // If fileid is available, verify that branch belongs to same file (available since version OpenCover.4.5.3418)
                     continue;
@@ -599,6 +609,33 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             int visitedMethods = methodGroups.Count(g => g.Any(m => m.Attribute("visited").Value == "true"));
 
             return (methodGroups.Length == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)visitedMethods / (double)methodGroups.Length) / 10;
+        }
+
+        private class FileElement
+        {
+            /// <summary>
+            /// Initializes a new instance of the <see cref="FileElement" /> class.
+            /// </summary>
+            /// <param name="elements">The File elements.</param>
+            public FileElement(IEnumerable<XElement> elements)
+            {
+                this.Uids = elements.Select(f => f.Attribute("uid").Value).ToHashSet();
+                this.EmbeddedSource = elements
+                    .Select(e => e.Attribute("altcover.embed"))
+                    .Where(e => e != null)
+                    .FirstOrDefault()
+                    ?.Value;
+            }
+
+            /// <summary>
+            /// Gets the uids.
+            /// </summary>
+            public HashSet<string> Uids { get; }
+
+            /// <summary>
+            /// Gets or sets the embedded source code.
+            /// </summary>
+            public string EmbeddedSource { get; set; }
         }
     }
 }

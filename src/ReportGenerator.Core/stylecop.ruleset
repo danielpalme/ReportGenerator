@@ -5,6 +5,7 @@
     <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
     </Rules>
     <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+        <Rule Id="SA0001" Action="None" />
         <Rule Id="SA1200" Action="None" />
         <Rule Id="SA1413" Action="None" />
         <Rule Id="SA1633" Action="None" />

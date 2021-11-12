@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Moq;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Parser.FileReading;
 using Xunit;
@@ -258,6 +259,63 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
             Assert.Equal(fileAnalysis.Path, fileAnalysis.Path);
             Assert.Null(sut.TotalLines);
             Assert.Empty(fileAnalysis.Lines);
+        }
+
+        /// <summary>
+        /// A test for AnalyzeFile
+        /// </summary>
+        [Fact]
+        public void AnalyzeFile_AdditionFileReaderNoError_RegularFileReaderIgnored()
+        {
+            var additionalFileReaderMock = new Mock<IFileReader>();
+            string error = null;
+            additionalFileReaderMock.Setup(f => f.LoadFile(It.IsAny<string>(), out error))
+                .Returns(new[] { "Test" });
+
+            var fileReaderMock = new Mock<IFileReader>();
+
+            var sut = new CodeFile("C:\\temp\\Other.cs", new int[] { -2, -1, 0, 1 }, new LineVisitStatus[] { LineVisitStatus.NotCoverable, LineVisitStatus.NotCoverable, LineVisitStatus.NotCovered, LineVisitStatus.Covered }, additionalFileReaderMock.Object);
+
+            Assert.Null(sut.TotalLines);
+
+            var fileAnalysis = sut.AnalyzeFile(fileReaderMock.Object);
+
+            Assert.NotNull(fileAnalysis);
+            Assert.Null(fileAnalysis.Error);
+
+            additionalFileReaderMock.Verify(f => f.LoadFile(It.IsAny<string>(), out error), Times.Once);
+            fileReaderMock.Verify(f => f.LoadFile(It.IsAny<string>(), out error), Times.Never);
+        }
+
+        /// <summary>
+        /// A test for AnalyzeFile
+        /// </summary>
+        [Fact]
+        public void AnalyzeFile_AdditionFileReaderReturnsError_RegularFileReaderUsed()
+        {
+            var additionalFileReaderMock = new Mock<IFileReader>();
+            string error = "Some error";
+            additionalFileReaderMock.Setup(f => f.LoadFile(It.IsAny<string>(), out error))
+                .Returns((string[])null);
+
+            var fileReaderMock = new Mock<IFileReader>();
+            fileReaderMock.Setup(f => f.LoadFile(It.IsAny<string>(), out error))
+                .Returns(new[] { "Test" });
+
+            var sut = new CodeFile("C:\\temp\\Other.cs", new int[] { -2, -1, 0, 1 }, new LineVisitStatus[] { LineVisitStatus.NotCoverable, LineVisitStatus.NotCoverable, LineVisitStatus.NotCovered, LineVisitStatus.Covered }, additionalFileReaderMock.Object);
+
+            Assert.Null(sut.TotalLines);
+
+            var fileAnalysis = sut.AnalyzeFile(fileReaderMock.Object);
+
+            Assert.NotNull(fileAnalysis);
+            Assert.NotNull(fileAnalysis.Error);
+            Assert.Equal(fileAnalysis.Path, fileAnalysis.Path);
+            Assert.Null(sut.TotalLines);
+            Assert.Empty(fileAnalysis.Lines);
+
+            additionalFileReaderMock.Verify(f => f.LoadFile(It.IsAny<string>(), out error), Times.Once);
+            fileReaderMock.Verify(f => f.LoadFile(It.IsAny<string>(), out error), Times.Once);
         }
 
         /// <summary>

@@ -39,17 +39,17 @@ dotnet reportgenerator [options]</description>
     <file src="..\logo_global_64.png" target="icon.png" />
     <file src="..\..\..\LICENSE.txt" target="LICENSE.txt" />
     <file src="..\..\Readme.txt" target="Readme.txt" />
-
-    <!-- NetCoreApp2.1 ('tools\netcoreapp2.1' directory) -->
-    <file src="..\..\ReportGenerator.DotnetGlobalTool\bin\Release\netcoreapp2.1\publish\**\*.*" target="tools\netcoreapp2.1\any" />
-    <file src="DotnetToolSettings.xml" target="tools\netcoreapp2.1\any" />
     
-    <!-- NetCoreApp3.0 ('tools\netcoreapp3.0' directory) -->
-    <file src="..\..\ReportGenerator.DotnetGlobalTool\bin\Release\netcoreapp3.0\publish\**\*.*" target="tools\netcoreapp3.0\any" />
-    <file src="DotnetToolSettings.xml" target="tools\netcoreapp3.0\any" />
+    <!-- NetCoreApp3.1 ('tools\netcoreapp3.1' directory) -->
+    <file src="..\..\ReportGenerator.DotnetGlobalTool\bin\Release\netcoreapp3.1\publish\**\*.*" target="tools\netcoreapp3.1\any" />
+    <file src="DotnetToolSettings.xml" target="tools\netcoreapp3.1\any" />
     
     <!-- Net5.0 ('tools\net5.0' directory) -->
     <file src="..\..\ReportGenerator.DotnetGlobalTool\bin\Release\net5.0\publish\**\*.*" target="tools\net5.0\any" />
     <file src="DotnetToolSettings.xml" target="tools\net5.0\any" />
+    
+    <!-- Net6.0 ('tools\net6.0' directory) -->
+    <file src="..\..\ReportGenerator.DotnetGlobalTool\bin\Release\net6.0\publish\**\*.*" target="tools\net6.0\any" />
+    <file src="DotnetToolSettings.xml" target="tools\net6.0\any" />
   </files>
 </package>

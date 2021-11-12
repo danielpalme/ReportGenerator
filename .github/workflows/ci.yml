@@ -6,8 +6,8 @@ env:
   solution: 'src\ReportGenerator.sln'
   buildPlatform: Any CPU
   buildConfiguration: Release
-  version: 4.8.13
-  dotnetSDKVersion: 5.0.301
+  version: 4.9.0
+  dotnetSDKVersion: 6.0.100
   nodeVersion: 14
 
 jobs:
@@ -50,32 +50,28 @@ jobs:
     - name: 'Compile Solution'
       run: msbuild '${{ env.solution }}' /p:configuration='${{ env.buildConfiguration }}' /p:platform='${{ env.buildPlatform }}'
 
-    - name: dotnet publish Console.NetCore 2.0
-      run: dotnet publish -c ${{ env.BuildConfiguration }} -f netcoreapp2.0 ReportGenerator.Console.NetCore.csproj
-      working-directory: src/ReportGenerator.Console.NetCore
-
-    - name: dotnet publish Console.NetCore 2.1
-      run: dotnet publish -c ${{ env.BuildConfiguration }} -f netcoreapp2.1 ReportGenerator.Console.NetCore.csproj
-      working-directory: src/ReportGenerator.Console.NetCore
-
-    - name: dotnet publish Console.NetCore 3.0
-      run: dotnet publish -c ${{ env.BuildConfiguration }} -f netcoreapp3.0 ReportGenerator.Console.NetCore.csproj
+    - name: dotnet publish Console.NetCore 3.1
+      run: dotnet publish -c ${{ env.BuildConfiguration }} -f netcoreapp3.1 ReportGenerator.Console.NetCore.csproj
       working-directory: src/ReportGenerator.Console.NetCore
 
     - name: dotnet publish Console.NetCore 5.0
       run: dotnet publish -c ${{ env.BuildConfiguration }} -f net5.0 ReportGenerator.Console.NetCore.csproj
       working-directory: src/ReportGenerator.Console.NetCore
 
-    - name: dotnet publish DotnetGlobalTool 2.1
-      run: dotnet publish -c ${{ env.BuildConfiguration }} -f netcoreapp2.1 ReportGenerator.DotnetGlobalTool.csproj
-      working-directory: src/ReportGenerator.DotnetGlobalTool
+    - name: dotnet publish Console.NetCore 6.0
+      run: dotnet publish -c ${{ env.BuildConfiguration }} -f net6.0 ReportGenerator.Console.NetCore.csproj
+      working-directory: src/ReportGenerator.Console.NetCore
 
-    - name: dotnet publish DotnetGlobalTool 3.0
-      run: dotnet publish -c ${{ env.BuildConfiguration }} -f netcoreapp3.0 ReportGenerator.DotnetGlobalTool.csproj
+    - name: dotnet publish DotnetGlobalTool 3.1
+      run: dotnet publish -c ${{ env.BuildConfiguration }} -f netcoreapp3.1 ReportGenerator.DotnetGlobalTool.csproj
       working-directory: src/ReportGenerator.DotnetGlobalTool
 
     - name: dotnet publish DotnetGlobalTool 5.0
       run: dotnet publish -c ${{ env.BuildConfiguration }} -f net5.0 ReportGenerator.DotnetGlobalTool.csproj
+      working-directory: src/ReportGenerator.DotnetGlobalTool
+
+    - name: dotnet publish DotnetGlobalTool 6.0
+      run: dotnet publish -c ${{ env.BuildConfiguration }} -f net6.0 ReportGenerator.DotnetGlobalTool.csproj
       working-directory: src/ReportGenerator.DotnetGlobalTool
 
     - name: Test
@@ -97,8 +93,8 @@ jobs:
 
     - name: 'Prepare VSIX release: NetCore'
       run: |
-        mkdir src/AzureDevopsTask/ReportGenerator/tools/netcoreapp2.1
-        xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\netcoreapp2.1\publish' 'src\AzureDevopsTask\ReportGenerator\tools\netcoreapp2.1' /s
+        mkdir src/AzureDevopsTask/ReportGenerator/tools/netcoreapp3.1
+        xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\netcoreapp3.1\publish' 'src\AzureDevopsTask\ReportGenerator\tools\netcoreapp3.1' /s
 
     - name: 'Prepare VSIX release: Install TFS Cross Platform Command Line Interface (tfx-cli)'
       run: npm install -g tfx-cli
@@ -119,10 +115,9 @@ jobs:
       run: |
         mkdir tmpzip
         mkdir tmpzip\net47
-        mkdir tmpzip\netcoreapp2.0
-        mkdir tmpzip\netcoreapp2.1
-        mkdir tmpzip\netcoreapp3.0
+        mkdir tmpzip\netcoreapp3.1
         mkdir tmpzip\net5.0
+        mkdir tmpzip\net6.0
 
     - name: 'Prepare ZIP release'
       run: |
@@ -132,10 +127,9 @@ jobs:
         xcopy "src\ReportGenerator.Console\bin\Release\*.dll" "tmpzip\net47"
         xcopy "src\ReportGenerator.Console\bin\Release\ReportGenerator.exe" "tmpzip\net47"
         xcopy "src\ReportGenerator.Console\bin\Release\ReportGenerator.exe.config" "tmpzip\net47"
-        xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\netcoreapp2.0\publish\*' 'tmpzip\netcoreapp2.0' /s
-        xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\netcoreapp2.1\publish\*' 'tmpzip\netcoreapp2.1' /s
-        xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\netcoreapp3.0\publish\*' 'tmpzip\netcoreapp3.0' /s
+        xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\netcoreapp3.1\publish\*' 'tmpzip\netcoreapp3.1' /s
         xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\net5.0\publish\*' 'tmpzip\net5.0' /s
+        xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\net6.0\publish\*' 'tmpzip\net6.0' /s
 
     - name: 'Pack ZIP release'
       run: Compress-Archive -Path tmpzip/* -DestinationPath src/target/packages/ReportGenerator_${{ env.Version }}.zip

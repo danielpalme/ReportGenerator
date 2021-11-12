@@ -3,7 +3,7 @@ import tl = require('azure-pipelines-task-lib/task');
 
 async function executeReportGenerator(): Promise<number> {
     var tool = tl.tool('dotnet')
-    .arg(path.join(__dirname, 'tools/netcoreapp2.1/ReportGenerator.dll'))
+    .arg(path.join(__dirname, 'tools/netcoreapp3.1/ReportGenerator.dll'))
     .arg('-reports:' + (tl.getInput('reports') || ''))
     .arg('-targetdir:' + (tl.getInput('targetdir') || ''))
     .arg('-reporttypes:' + (tl.getInput('reporttypes') || ''))

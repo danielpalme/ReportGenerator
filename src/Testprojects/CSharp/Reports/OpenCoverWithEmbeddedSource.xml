@@ -1,0 +1,35 @@
+<CoverageSession xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Summary numSequencePoints="166" visitedSequencePoints="0" numBranchPoints="44" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="4" minCyclomaticComplexity="1" visitedClasses="0" numClasses="21" visitedMethods="0" numMethods="38" minCrapScore="0" maxCrapScore="0" />
+  <Modules>
+    <Module hash="43-95-27-EF-5A-C0-74-46-28-B5-A6-56-71-DB-A6-4E-E9-9A-C2-92">
+      <Summary numSequencePoints="166" visitedSequencePoints="0" numBranchPoints="44" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="4" minCyclomaticComplexity="1" visitedClasses="0" numClasses="21" visitedMethods="0" numMethods="38" minCrapScore="0" maxCrapScore="0" />
+      <ModulePath>C:\temp\CSharpGeneratedDemo.dll</ModulePath>
+      <ModuleTime>2021-10-25T17:23:59.746698Z</ModuleTime>
+      <ModuleName>CSharpGeneratedDemo</ModuleName>
+      <Files>
+        <File uid="1" fullPath="C:\temp\Mustache_MainAttributes__.cs"
+	altcover.embed="hY7BCoJQEEX3Qf8wS4XoAxIDd21qk62ixWiDCqOJM4+Q6Mta9En9Qs+eGRTS3TyYd++593G7Tydgtd+2olTOI9WmSIzSTjAj7/saY5ORyjwSoTLhdgYR8+m8NqxFzRRqY8g/OGRRKTUVMggh0xFSRhFYG1FMcxqQC/gucfGLezrVJuEiBbH/VQYbLAkuYHcEcB0zxVTWjPrfuELJx00/a70+VtkRszdD+7LhkFuo/4F1CpfgbV6heHB33T6E4DnaB/PKBw5gRz0B" />
+      </Files>
+      <Classes>
+        <Class>
+          <Summary numSequencePoints="2" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" visitedClasses="0" numClasses="1" visitedMethods="0" numMethods="1" minCrapScore="0" maxCrapScore="0" />
+          <FullName>MustacheAttribute</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false" crapScore="0">
+              <Summary numSequencePoints="2" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" minCrapScore="0" maxCrapScore="0" />
+              <MetadataToken>100663304</MetadataToken>
+              <Name>System.Void MustacheAttribute::.ctor(System.String,System.String,System.String)</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="1" ordinal="0" offset="0" sl="8" sc="9" el="8" ec="76" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="0" ordinal="1" offset="7" sl="9" sc="16" el="9" ec="63" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint />
+            </Method>
+          </Methods>
+        </Class>
+      </Classes>
+    </Module>
+  </Modules>
+</CoverageSession>
