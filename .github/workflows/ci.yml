@@ -6,7 +6,7 @@ env:
   solution: 'src\ReportGenerator.sln'
   buildPlatform: Any CPU
   buildConfiguration: Release
-  version: 4.9.0
+  version: 5.0.0
   dotnetSDKVersion: 6.0.100
   nodeVersion: 14
 
@@ -184,7 +184,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         name: ReportGenerator_${{ env.Version }}
-        body: This release requires .NET 4.7 or .NET Core 2.x/3.x/5.x.
+        body: This release requires .NET 4.7 or .NET Core 3.1/5.x/6.x.
         tag_name: v${{ env.Version }}
         files: ReportGenerator_${{ env.Version }}.zip
       env:
