@@ -13,7 +13,7 @@
     "version": {
         "Major": 5,
         "Minor": 0,
-        "Patch": 0
+        "Patch": 1
     },
     "instanceNameFormat": "ReportGenerator",
     "groups": [
@@ -132,7 +132,7 @@
         }
     ],
     "execution": {
-          "Node": {
+          "Node10": {
             "target": "reportgenerator.js",
             "argumentFormat": ""
             }
