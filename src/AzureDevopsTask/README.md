@@ -13,7 +13,7 @@ To learn how to use *ReportGenerator* have a look at the:
 ### YAML example
 ```yaml
 
-- task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@4
+- task: reportgenerator@5reportgenerator@5
       displayName: ReportGenerator
       inputs:
         reports: 'coverage.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
