@@ -64,6 +64,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.0.2.0
+
+    * Fix: #466: Cobertura: Full method name for code elements
+
 5.0.0.0
 
     * New: #397: Added .NET 6 support, dropped support for .NET Core 2.x and 3.0

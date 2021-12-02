@@ -346,8 +346,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     continue;
                 }
 
-                methodName = GetShortMethodName(methodName);
-
                 var lines = method.Elements("lines")
                     .Elements("line");
 
