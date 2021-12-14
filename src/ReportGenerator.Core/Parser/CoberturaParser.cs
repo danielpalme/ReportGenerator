@@ -173,7 +173,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .Elements("class")
                 .Where(c => c.Attribute("name").Value.Equals(@class.Name)
                             || c.Attribute("name").Value.StartsWith(@class.Name + "$", StringComparison.Ordinal)
-                            || c.Attribute("name").Value.StartsWith(@class.Name + "/", StringComparison.Ordinal))
+                            || c.Attribute("name").Value.StartsWith(@class.Name + "/", StringComparison.Ordinal)
+                            || c.Attribute("name").Value.StartsWith(@class.Name + ".", StringComparison.Ordinal))
                 .Where(c => c.Attribute("filename").Value.Equals(filePath))
                 .ToArray();
 

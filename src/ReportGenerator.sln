@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.202
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSharp", "CSharp", "{B27F2CDF-8E01-4D2C-9A26-972F02A0EFB6}"
 EndProject
@@ -8,6 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{7925
 	ProjectSection(SolutionItems) = preProject
 		Testprojects\CSharp\Reports\Cobertura_altcover.xml = Testprojects\CSharp\Reports\Cobertura_altcover.xml
 		Testprojects\CSharp\Reports\Cobertura_coverlet.xml = Testprojects\CSharp\Reports\Cobertura_coverlet.xml
+		Testprojects\CSharp\Reports\Cobertura_dotnet-coverage.xml = Testprojects\CSharp\Reports\Cobertura_dotnet-coverage.xml
 		Testprojects\CSharp\Reports\dotCover.xml = Testprojects\CSharp\Reports\dotCover.xml
 		Testprojects\CSharp\Reports\DynamicCodeCoverage.xml = Testprojects\CSharp\Reports\DynamicCodeCoverage.xml
 		Testprojects\CSharp\Reports\lcov.info = Testprojects\CSharp\Reports\lcov.info
