@@ -39,7 +39,7 @@ export class ClassViewModel extends ElementBase {
             });
     }
 
-    get coverage(): number {
+    override get coverage(): number {
         if (this.coverableLines === 0) {
             if (this.methodCoverage !== "-") {
                 return parseFloat(this.methodCoverage);

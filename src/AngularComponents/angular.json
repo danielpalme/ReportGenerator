@@ -23,8 +23,6 @@
         "@schematics/angular:interceptor": {
           "skipTests": true
         },
-        "@schematics/angular:module": {
-        },
         "@schematics/angular:pipe": {
           "skipTests": true
         },
@@ -76,7 +74,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "none"
             },
             "development": {
               "buildOptimizer": false,
@@ -86,19 +84,17 @@
               "sourceMap": true,
               "namedChunks": true
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "coverage-app:build"
-          },
           "configurations": {
             "production": {
               "browserTarget": "coverage-app:build:production"
             },
             "development": {
-              "browserTarget": "hus:build:development"
+              "browserTarget": "coverage-app:build:development"
             }
           },
           "defaultConfiguration": "development"
