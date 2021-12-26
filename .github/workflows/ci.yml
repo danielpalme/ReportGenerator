@@ -86,7 +86,7 @@ jobs:
         assemblyfilters: '-xunit*'
 
     - name: 'Publish code coverage results'
-      uses: actions/upload-artifact@v2.2.3
+      uses: actions/upload-artifact@v2.3.1
       with:
         name: CoverageReport
         path: src/target/reports/coverage
@@ -147,7 +147,7 @@ jobs:
       run: .$env:USERPROFILE\.nuget\packages\chocolatey\0.10.14\tools\chocolateyInstall\choco.exe pack src/Deployment/chocolatey/reportgenerator.portable.nuspec --outputdirectory=src/target/packages --version=${{ env.Version }}
 
     - name: 'Publish Artifact: packages'
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v2.3.1
       with:
         path: src/target/packages
         name: packages
