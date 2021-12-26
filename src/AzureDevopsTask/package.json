@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "tfx-cli": "^0.9.3"
+    "tfx-cli": "^0.10.0"
   },
   "scripts": {
     "tfx": "tfx"
