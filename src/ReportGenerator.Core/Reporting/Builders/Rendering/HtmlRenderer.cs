@@ -153,15 +153,15 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// Begins the class report.
         /// </summary>
         /// <param name="targetDirectory">The target directory.</param>
-        /// <param name="assemblyName">Name of the assembly.</param>
+        /// <param name="assembly">The assembly.</param>
         /// <param name="className">Name of the class.</param>
         /// <param name="classDisplayName">Display name of the class.</param>
         /// <param name="additionalTitle">Additional title.</param>
-        public void BeginClassReport(string targetDirectory, string assemblyName, string className, string classDisplayName, string additionalTitle)
+        public void BeginClassReport(string targetDirectory, Assembly assembly, string className, string classDisplayName, string additionalTitle)
         {
             this.classReport = true;
 
-            string targetPath = this.GetClassReportFilename(assemblyName, className);
+            string targetPath = this.GetClassReportFilename(assembly, className);
 
             Logger.DebugFormat(Resources.WritingReportFile, targetPath);
             this.CreateTextWriter(Path.Combine(targetDirectory, targetPath));
@@ -485,7 +485,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     this.javaScriptContent.AppendFormat("\"name\": \"{0}\",", @class.DisplayName.Replace(@"\", @"\\"));
                     this.javaScriptContent.AppendFormat(
                         " \"rp\": \"{0}\",",
-                        this.onlySummary ? string.Empty : this.GetClassReportFilename(@class.Assembly.ShortName, @class.Name));
+                        this.onlySummary ? string.Empty : this.GetClassReportFilename(@class.Assembly, @class.Name));
                     this.javaScriptContent.AppendFormat(" \"cl\": {0},", @class.CoveredLines);
                     this.javaScriptContent.AppendFormat(" \"ucl\": {0},", @class.CoverableLines - @class.CoveredLines);
                     this.javaScriptContent.AppendFormat(" \"cal\": {0},", @class.CoverableLines);
@@ -557,7 +557,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 this.javaScriptContent.AppendLine("  {");
                 this.javaScriptContent.AppendFormat("    \"assembly\": \"{0}\",", riskHotspot.Assembly.ShortName);
                 this.javaScriptContent.AppendFormat(" \"class\": \"{0}\",", riskHotspot.Class.DisplayName);
-                this.javaScriptContent.AppendFormat(" \"reportPath\": \"{0}\",", this.onlySummary ? string.Empty : this.GetClassReportFilename(riskHotspot.Assembly.ShortName, riskHotspot.Class.Name));
+                this.javaScriptContent.AppendFormat(" \"reportPath\": \"{0}\",", this.onlySummary ? string.Empty : this.GetClassReportFilename(riskHotspot.Assembly, riskHotspot.Class.Name));
                 this.javaScriptContent.AppendFormat(" \"methodName\": \"{0}\",", riskHotspot.MethodMetric.FullName);
                 this.javaScriptContent.AppendFormat(" \"methodShortName\": \"{0}\",", riskHotspot.MethodMetric.ShortName);
                 this.javaScriptContent.AppendFormat(" \"fileIndex\": {0},", riskHotspot.FileIndex);
@@ -1012,7 +1012,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     filenameColumn = string.Format(
                         CultureInfo.InvariantCulture,
                         "<a href=\"{0}\">{1}</a>",
-                        WebUtility.HtmlEncode(this.GetClassReportFilename(riskHotspot.Assembly.ShortName, riskHotspot.Class.Name)),
+                        WebUtility.HtmlEncode(this.GetClassReportFilename(riskHotspot.Assembly, riskHotspot.Class.Name)),
                         WebUtility.HtmlEncode(riskHotspot.Class.DisplayName));
                 }
 
@@ -1025,7 +1025,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     this.reportTextWriter.Write(
                         "<td title=\"{0}\"><a href=\"{1}#file{2}_line{3}\">{4}</a></td>",
                         WebUtility.HtmlEncode(riskHotspot.MethodMetric.FullName),
-                        WebUtility.HtmlEncode(this.GetClassReportFilename(riskHotspot.Assembly.ShortName, riskHotspot.Class.Name)),
+                        WebUtility.HtmlEncode(this.GetClassReportFilename(riskHotspot.Assembly, riskHotspot.Class.Name)),
                         riskHotspot.FileIndex,
                         riskHotspot.MethodMetric.Line,
                         WebUtility.HtmlEncode(riskHotspot.MethodMetric.ShortName));
@@ -1107,7 +1107,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 filenameColumn = string.Format(
                     CultureInfo.InvariantCulture,
                     "<a href=\"{0}\">{1}</a>",
-                    WebUtility.HtmlEncode(this.GetClassReportFilename(@class.Assembly.ShortName, @class.Name)),
+                    WebUtility.HtmlEncode(this.GetClassReportFilename(@class.Assembly, @class.Name)),
                     WebUtility.HtmlEncode(@class.DisplayName));
             }
 
@@ -1292,12 +1292,14 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <summary>
         /// Gets the file name of the report file for the given class.
         /// </summary>
-        /// <param name="assemblyName">Name of the assembly.</param>
+        /// <param name="assembly">The assembly.</param>
         /// <param name="className">Name of the class.</param>
         /// <returns>The file name.</returns>
-        private string GetClassReportFilename(string assemblyName, string className)
+        private string GetClassReportFilename(Assembly assembly, string className)
         {
-            string key = assemblyName + "_" + className;
+            string assemblyName = assembly.ShortName;
+
+            string key = assembly.Name + "_" + className;
 
             string fileName = null;
 

@@ -62,7 +62,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             string additionalTitle = this.ReportContext.ReportConfiguration.Title != null ? $"{this.ReportContext.ReportConfiguration.Title} - " : null;
 
-            reportRenderer.BeginClassReport(this.CreateTargetDirectory(), @class.Assembly.ShortName, @class.Name, @class.DisplayName, additionalTitle);
+            reportRenderer.BeginClassReport(this.CreateTargetDirectory(), @class.Assembly, @class.Name, @class.DisplayName, additionalTitle);
 
             if (this.ReportContext.ReportConfiguration.Title != null)
             {

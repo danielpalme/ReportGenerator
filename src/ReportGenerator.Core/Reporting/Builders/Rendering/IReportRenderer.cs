@@ -26,11 +26,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// Begins the class report.
         /// </summary>
         /// <param name="targetDirectory">The target directory.</param>
-        /// <param name="assemblyName">Name of the assembly.</param>
+        /// <param name="assembly">The assembly.</param>
         /// <param name="className">Name of the class.</param>
         /// <param name="classDisplayName">Display name of the class.</param>
         /// <param name="additionalTitle">Additional title.</param>
-        void BeginClassReport(string targetDirectory, string assemblyName, string className, string classDisplayName, string additionalTitle);
+        void BeginClassReport(string targetDirectory, Assembly assembly, string className, string classDisplayName, string additionalTitle);
 
         /// <summary>
         /// Saves a summary report.
@@ -148,13 +148,13 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         void SummaryClass(Class @class, bool branchCoverageAvailable);
 
         /// <summary>
-        /// Adds metrics to the report
+        /// Adds metrics to the report.
         /// </summary>
         /// <param name="class">The class.</param>
         void MetricsTable(Class @class);
 
         /// <summary>
-        /// Adds metrics to the report
+        /// Adds metrics to the report.
         /// </summary>
         /// <param name="methodMetrics">The method metrics.</param>
         void MetricsTable(IEnumerable<MethodMetric> methodMetrics);
@@ -175,7 +175,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// Renderes a chart with the given historic coverages.
         /// </summary>
         /// <param name="historicCoverages">The historic coverages.</param>
-        /// <param name="renderPngFallBackImage">Indicates whether PNG images are rendered as a fallback</param>
+        /// <param name="renderPngFallBackImage">Indicates whether PNG images are rendered as a fallback.</param>
         void Chart(IEnumerable<HistoricCoverage> historicCoverages, bool renderPngFallBackImage);
 
         /// <summary>
