@@ -1,6 +1,6 @@
 <h1 align="center">
 
-<img src="https://raw.githubusercontent.com/danielpalme/ReportGenerator/master/docs/resources/logo_512.png" alt="ReportGenerator" width="256"/>
+<img src="https://raw.githubusercontent.com/danielpalme/ReportGenerator/main/docs/resources/logo_512.png" alt="ReportGenerator" width="256"/>
 <br/>
 ReportGenerator
 </h1>
@@ -10,7 +10,7 @@ ReportGenerator
     
 <b>Powerful code coverage visualization</b>
     
-[![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/danielpalme/ReportGenerator/master/LICENSE.txt)
+[![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/danielpalme/ReportGenerator/main/LICENSE.txt)
 [![CI-CD](https://github.com/danielpalme/ReportGenerator/actions/workflows/ci.yml/badge.svg)](https://github.com/danielpalme/ReportGenerator/actions/workflows/ci.yml)
 
 </div>

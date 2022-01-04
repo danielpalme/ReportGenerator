@@ -156,7 +156,7 @@ jobs:
 
     needs: build
     runs-on: windows-latest
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && startsWith(github.event.commits[0].message, 'Release ') }}
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && startsWith(github.event.commits[0].message, 'Release ') }}
 
     steps:
     - uses: actions/checkout@v2

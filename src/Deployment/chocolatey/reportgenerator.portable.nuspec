@@ -6,7 +6,7 @@
     <title>ReportGenerator (Portable) - Generates reports for various code coverage tools</title>
     <authors>Daniel Palme</authors>
     <owners>Daniel Palme</owners> 
-    <licenseUrl>https://raw.githubusercontent.com/danielpalme/ReportGenerator/master/LICENSE.txt</licenseUrl>
+    <licenseUrl>https://raw.githubusercontent.com/danielpalme/ReportGenerator/main/LICENSE.txt</licenseUrl>
     <projectUrl>https://github.com/danielpalme/ReportGenerator</projectUrl>
     <projectSourceUrl>https://github.com/danielpalme/ReportGenerator</projectSourceUrl>
     <packageSourceUrl>https://github.com/danielpalme/ReportGenerator</packageSourceUrl>
