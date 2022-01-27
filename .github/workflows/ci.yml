@@ -6,8 +6,8 @@ env:
   solution: 'src\ReportGenerator.sln'
   buildPlatform: Any CPU
   buildConfiguration: Release
-  version: 5.0.2
-  dotnetSDKVersion: 6.0.100
+  version: 5.0.3
+  dotnetSDKVersion: 6.0.101
   nodeVersion: 14
 
 jobs:
@@ -78,7 +78,7 @@ jobs:
       run: dotnet test src\ReportGenerator.Core.Test\ReportGenerator.Core.Test.csproj --configuration ${{ env.BuildConfiguration }} --no-build /p:CollectCoverage=true /p:DeterministicSourcePaths=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=opencover%2ccobertura /p:CoverletOutput=../target/reports/coverage/
 
     - name: ReportGenerator
-      uses: danielpalme/ReportGenerator-GitHub-Action@5.0.2
+      uses: danielpalme/ReportGenerator-GitHub-Action@5.0.3
       with:
         reports: 'src\target\reports\coverage\coverage.opencover.xml'
         targetdir: 'src\target\reports\coverage'
