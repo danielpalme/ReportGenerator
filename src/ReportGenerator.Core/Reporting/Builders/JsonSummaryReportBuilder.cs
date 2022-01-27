@@ -76,7 +76,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
-            using (var reportTextWriter = new StreamWriter(new FileStream(targetPath, FileMode.Create), Encoding.UTF8))
+            using (var reportTextWriter = new StreamWriter(new FileStream(targetPath, FileMode.Create), new UTF8Encoding(encoderShouldEmitUTF8Identifier: false)))
             {
                 reportTextWriter.WriteLine("{");
                 reportTextWriter.WriteLine("  \"summary\": {");

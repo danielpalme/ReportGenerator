@@ -64,6 +64,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.0.3.0
+
+    * Fix: #481: Removed BOM from JSON summary
+
 5.0.2.0
 
     * Fix: #466: Cobertura: Full method name for code elements
