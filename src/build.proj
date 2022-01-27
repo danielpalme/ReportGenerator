@@ -5,7 +5,7 @@
       <Version>0.10.14</Version>
     </PackageReference>
     <PackageReference Include="MSBuildTasks">
-      <Version>1.5.0.335</Version>
+      <Version>1.5.0.235</Version>
     </PackageReference>
     <PackageReference Include="NuGet.CommandLine">
       <Version>5.7.0</Version>
@@ -17,8 +17,8 @@
   
   <!-- Imported MSBuild tasks -->
   <UsingTask TaskName="ReportGenerator" AssemblyFile="ReportGenerator.Console\bin\Release\ReportGenerator.MSBuild.dll" />
-  <UsingTask TaskName="Zip" AssemblyFile="$(UserProfile)\.nuget\packages\msbuildtasks\1.5.0.335\tools\MSBuild.Community.Tasks.dll" /> 
-  <UsingTask TaskName="FileUpdate" AssemblyFile="$(UserProfile)\.nuget\packages\msbuildtasks\1.5.0.335\tools\MSBuild.Community.Tasks.dll" /> 
+  <UsingTask TaskName="Zip" AssemblyFile="$(UserProfile)\.nuget\packages\msbuildtasks\1.5.0.235\tools\MSBuild.Community.Tasks.dll" /> 
+  <UsingTask TaskName="FileUpdate" AssemblyFile="$(UserProfile)\.nuget\packages\msbuildtasks\1.5.0.235\tools\MSBuild.Community.Tasks.dll" /> 
 
   <!-- Version, adjust before build -->
   <PropertyGroup>
