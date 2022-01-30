@@ -33,12 +33,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
         /// <param name="base64DeflateCompressedFile">The Base64 and deflate compressed file.</param>
         public AltCoverEmbeddedFileReader(string base64DeflateCompressedFile)
         {
-            if (base64DeflateCompressedFile == null)
-            {
-                throw new ArgumentNullException(nameof(base64DeflateCompressedFile));
-            }
-
-            this.base64DeflateCompressedFile = base64DeflateCompressedFile;
+            this.base64DeflateCompressedFile = base64DeflateCompressedFile ?? throw new ArgumentNullException(nameof(base64DeflateCompressedFile));
         }
 
         /// <summary>

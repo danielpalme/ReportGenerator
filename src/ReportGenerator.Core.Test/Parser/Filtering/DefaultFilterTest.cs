@@ -12,7 +12,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Filtering
         [Fact]
         public void NoFilter_AnyElement_ElementIsAccepted()
         {
-            IFilter filter = new DefaultFilter(new string[] { });
+            IFilter filter = new DefaultFilter(System.Array.Empty<string>());
 
             Assert.True(filter.IsElementIncludedInReport("Test"), "Element is expected to be included.");
             Assert.True(filter.IsElementIncludedInReport("test"), "Element is expected to be included.");

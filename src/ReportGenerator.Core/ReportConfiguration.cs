@@ -15,12 +15,12 @@ namespace Palmmedia.ReportGenerator.Core
         /// <summary>
         /// The report files.
         /// </summary>
-        private List<string> reportFiles = new List<string>();
+        private readonly List<string> reportFiles = new List<string>();
 
         /// <summary>
         /// The report file pattern that could not be parsed.
         /// </summary>
-        private List<string> invalidReportFilePatterns = new List<string>();
+        private readonly List<string> invalidReportFilePatterns = new List<string>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ReportConfiguration" /> class.

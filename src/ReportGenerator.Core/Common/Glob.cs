@@ -15,9 +15,9 @@ namespace Palmmedia.ReportGenerator.Core.Common
     {
         private static readonly char[] GlobCharacters = "*?[]{}".ToCharArray();
 
-        private static Dictionary<string, RegexOrString> regexOrStringCache = new Dictionary<string, RegexOrString>();
+        private static readonly Dictionary<string, RegexOrString> RegexOrStringCache = new Dictionary<string, RegexOrString>();
 
-        private static HashSet<char> regexSpecialChars = new HashSet<char>(new[] { '[', '\\', '^', '$', '.', '|', '?', '*', '+', '(', ')' });
+        private static readonly HashSet<char> RegexSpecialChars = new HashSet<char>(new[] { '[', '\\', '^', '$', '.', '|', '?', '*', '+', '(', ')' });
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Glob"/> class.
@@ -129,10 +129,10 @@ namespace Palmmedia.ReportGenerator.Core.Common
 
         private RegexOrString CreateRegexOrString(string pattern)
         {
-            if (!regexOrStringCache.TryGetValue(pattern, out RegexOrString regexOrString))
+            if (!RegexOrStringCache.TryGetValue(pattern, out RegexOrString regexOrString))
             {
                 regexOrString = new RegexOrString(GlobToRegex(pattern), pattern, this.IgnoreCase, compileRegex: true);
-                regexOrStringCache[pattern] = regexOrString;
+                RegexOrStringCache[pattern] = regexOrString;
             }
 
             return regexOrString;
@@ -273,7 +273,7 @@ namespace Palmmedia.ReportGenerator.Core.Common
                         regex.Append(c);
                         break;
                     default:
-                        if (regexSpecialChars.Contains(c))
+                        if (RegexSpecialChars.Contains(c))
                         {
                             regex.Append('\\');
                         }
@@ -379,7 +379,7 @@ namespace Palmmedia.ReportGenerator.Core.Common
 
         private static IEnumerable<DirectoryInfo> GetDirectories(DirectoryInfo root)
         {
-            IEnumerable<DirectoryInfo> subDirs = null;
+            IEnumerable<DirectoryInfo> subDirs;
 
             try
             {
@@ -434,23 +434,6 @@ namespace Palmmedia.ReportGenerator.Core.Common
                 }
 
                 return this.Pattern.Equals(input, this.IgnoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
-            }
-        }
-    }
-
-    internal static class Extensions
-    {
-        internal static IEnumerable<TSource> DistinctBy<TSource, TKey>(
-            this IEnumerable<TSource> source,
-            Func<TSource, TKey> keySelector)
-        {
-            var knownKeys = new HashSet<TKey>();
-            foreach (TSource element in source)
-            {
-                if (knownKeys.Add(keySelector(element)))
-                {
-                    yield return element;
-                }
             }
         }
     }

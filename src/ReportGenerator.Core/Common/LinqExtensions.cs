@@ -59,5 +59,27 @@ namespace Palmmedia.ReportGenerator.Core.Common
                 return string.Equals(attribute.Value, attributeValue, StringComparison.OrdinalIgnoreCase);
             }
         }
+
+        /// <summary>
+        /// Determines the distinct elements of a collection by the given key selector.
+        /// </summary>
+        /// <typeparam name="TSource">The type of source elements.</typeparam>
+        /// <typeparam name="TKey">The type of the key elements.</typeparam>
+        /// <param name="source">The source collection.</param>
+        /// <param name="keySelector">The key selector</param>
+        /// <returns>The distinct elemtents.</returns>
+        internal static IEnumerable<TSource> DistinctBy<TSource, TKey>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector)
+        {
+            var knownKeys = new HashSet<TKey>();
+            foreach (TSource element in source)
+            {
+                if (knownKeys.Add(keySelector(element)))
+                {
+                    yield return element;
+                }
+            }
+        }
     }
 }

@@ -26,7 +26,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <summary>
         /// Regex to analyze if a method name belongs to a lamda expression.
         /// </summary>
-        private static Regex lambdaMethodNameRegex = new Regex("<.*>.+__", RegexOptions.Compiled);
+        private static readonly Regex LambdaMethodNameRegex = new Regex("<.*>.+__", RegexOptions.Compiled);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MProfParser" /> class.
@@ -196,7 +196,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             {
                 string methodName = method.Attribute("name").Value;
 
-                if (lambdaMethodNameRegex.IsMatch(methodName))
+                if (LambdaMethodNameRegex.IsMatch(methodName))
                 {
                     continue;
                 }

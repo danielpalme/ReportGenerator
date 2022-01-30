@@ -16,9 +16,9 @@ namespace Palmmedia.ReportGenerator.Core.Test
     {
         private static readonly string ReportPath = Path.Combine(FileManager.GetCSharpReportDirectory(), "OpenCover.xml");
 
-        private ReportConfigurationBuilder reportConfigurationBuilder;
+        private readonly ReportConfigurationBuilder reportConfigurationBuilder;
 
-        private string currentDir;
+        private readonly string currentDir;
 
         public ReportConfigurationBuilderTest()
         {
@@ -95,7 +95,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
 
             Directory.SetCurrentDirectory(dir);
 
-            string[] namedArguments = new string[0];
+            string[] namedArguments = Array.Empty<string>();
 
             var configuration = this.reportConfigurationBuilder.Create(namedArguments);
 
@@ -140,7 +140,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
 
             Directory.SetCurrentDirectory(dir);
 
-            string[] namedArguments = new string[0];
+            string[] namedArguments = Array.Empty<string>();
 
             var configuration = this.reportConfigurationBuilder.Create(namedArguments);
 

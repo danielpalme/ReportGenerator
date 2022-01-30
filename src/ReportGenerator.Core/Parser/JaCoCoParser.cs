@@ -25,7 +25,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <summary>
         /// Regex to extract short method name.
         /// </summary>
-        private static Regex methodRegex = new Regex(@"^(?<MethodName>.+)\((?<Arguments>.*)\).*$", RegexOptions.Compiled);
+        private static readonly Regex MethodRegex = new Regex(@"^(?<MethodName>.+)\((?<Arguments>.*)\).*$", RegexOptions.Compiled);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JaCoCoParser" /> class.
@@ -220,7 +220,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     continue;
                 }
 
-                string shortName = methodRegex.Replace(fullName, m => string.Format(CultureInfo.InvariantCulture, "{0}({1})", m.Groups["MethodName"].Value, m.Groups["Arguments"].Value.Length > 0 ? "..." : string.Empty));
+                string shortName = MethodRegex.Replace(fullName, m => string.Format(CultureInfo.InvariantCulture, "{0}({1})", m.Groups["MethodName"].Value, m.Groups["Arguments"].Value.Length > 0 ? "..." : string.Empty));
 
                 var metrics = new List<Metric>();
 
@@ -298,7 +298,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     continue;
                 }
 
-                methodName = methodRegex.Replace(methodName, m => string.Format(CultureInfo.InvariantCulture, "{0}({1})", m.Groups["MethodName"].Value, m.Groups["Arguments"].Value));
+                methodName = MethodRegex.Replace(methodName, m => string.Format(CultureInfo.InvariantCulture, "{0}({1})", m.Groups["MethodName"].Value, m.Groups["Arguments"].Value));
 
                 int lineNumber = int.Parse(method.Attribute("line")?.Value ?? "0", CultureInfo.InvariantCulture);
 

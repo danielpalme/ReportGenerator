@@ -20,7 +20,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
     {
         private static readonly string FilePath = Path.Combine(FileManager.GetCSharpReportDirectory(), "DynamicCodeCoverage.xml");
 
-        private ParserResult parserResult;
+        private readonly ParserResult parserResult;
 
         public DynamicCodeCoverageParserTest()
         {

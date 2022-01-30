@@ -19,13 +19,13 @@ namespace Palmmedia.ReportGenerator.Core.Test
             var configuration = new ReportConfiguration(
                 new[] { ReportPath },
                 "C:\\temp",
-                new string[] { },
+                System.Array.Empty<string>(),
                 "C:\\temp\\historic",
-                new string[] { },
-                new string[] { },
-                new string[] { },
-                new string[] { },
-                new string[] { },
+                System.Array.Empty<string>(),
+                System.Array.Empty<string>(),
+                System.Array.Empty<string>(),
+                System.Array.Empty<string>(),
+                System.Array.Empty<string>(),
                 null,
                 null);
 
@@ -90,13 +90,13 @@ namespace Palmmedia.ReportGenerator.Core.Test
             var configuration = new ReportConfiguration(
                 new[] { ReportPath, "\t?<>", "C:\\temp\\DoesNotExist.xml" },
                 "C:\\temp",
-                new string[] { },
+                System.Array.Empty<string>(),
                 "C:\\temp\\historic",
-                new string[] { },
+                System.Array.Empty<string>(),
                 new string[] { "notexistingplugin.dll" },
-                new string[] { },
-                new string[] { },
-                new string[] { },
+                System.Array.Empty<string>(),
+                System.Array.Empty<string>(),
+                System.Array.Empty<string>(),
                 "Invalid",
                 null);
 

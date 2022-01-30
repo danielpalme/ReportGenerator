@@ -17,12 +17,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
         /// <summary>
         /// Regex to analyze if a path is a deterministic path
         /// </summary>
-        private static Regex deterministicPathRegex = new Regex("\\/_\\d?\\/", RegexOptions.Compiled);
+        private static readonly Regex DeterministicPathRegex = new Regex("\\/_\\d?\\/", RegexOptions.Compiled);
 
         /// <summary>
         /// The source directories for typical environments like Azure DevOps or Github Actions.
         /// </summary>
-        private static IReadOnlyList<string> deterministicSourceDirectories;
+        private static readonly IReadOnlyList<string> DeterministicSourceDirectories;
 
         /// <summary>
         /// The source directories.
@@ -47,7 +47,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
                 directories.Add(Environment.GetEnvironmentVariable("GITHUB_WORKSPACE"));
             }
 
-            deterministicSourceDirectories = directories;
+            DeterministicSourceDirectories = directories;
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
                 return path;
             }
 
-            if (path.StartsWith("/_") && deterministicPathRegex.IsMatch(path))
+            if (path.StartsWith("/_") && DeterministicPathRegex.IsMatch(path))
             {
                 path = path.Substring(path.IndexOf("/", 2) + 1);
 
@@ -121,7 +121,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
 
                 if (this.sourceDirectories.Count == 0)
                 {
-                    return MapPath(path, deterministicSourceDirectories);
+                    return MapPath(path, DeterministicSourceDirectories);
                 }
             }
 

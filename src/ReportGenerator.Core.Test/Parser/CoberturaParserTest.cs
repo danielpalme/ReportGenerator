@@ -21,7 +21,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
     {
         private static readonly string FilePath1 = Path.Combine(FileManager.GetJavaReportDirectory(), "Cobertura2.1.1.xml");
 
-        private ParserResult parserResult;
+        private readonly ParserResult parserResult;
 
         public CoberturaParserTest()
         {

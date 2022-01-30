@@ -23,12 +23,7 @@ namespace Palmmedia.ReportGenerator.Core.Plugin
         /// <param name="assemblyLoader">The <see cref="IAssemblyLoader"/> to wrap.</param>
         public ReflectionWrapperAssemblyLoader(object assemblyLoader)
         {
-            if (assemblyLoader == null)
-            {
-                throw new ArgumentNullException(nameof(assemblyLoader));
-            }
-
-            this.assemblyLoader = assemblyLoader;
+            this.assemblyLoader = assemblyLoader ?? throw new ArgumentNullException(nameof(assemblyLoader));
         }
 
         /// <summary>

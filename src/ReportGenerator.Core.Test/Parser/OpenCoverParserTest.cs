@@ -23,11 +23,11 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
 
         private static readonly string FilePath2 = Path.Combine(FileManager.GetCSharpReportDirectory(), "OpenCoverWithTrackedMethods.xml");
 
-        private ParserResult parserResultWithoutPreprocessing;
+        private readonly ParserResult parserResultWithoutPreprocessing;
 
-        private ParserResult parserResultWithPreprocessing;
+        private readonly ParserResult parserResultWithPreprocessing;
 
-        private ParserResult parserResultWithTrackedMethods;
+        private readonly ParserResult parserResultWithTrackedMethods;
 
         public OpenCoverParserTest()
         {

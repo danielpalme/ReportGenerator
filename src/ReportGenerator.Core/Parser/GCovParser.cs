@@ -23,12 +23,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <summary>
         /// Regex to analyze if a line contains line coverage data.
         /// </summary>
-        private static Regex lineCoverageRegex = new Regex("\\s*(?<Visits>-|#####|=====|\\d+):\\s*(?<LineNumber>[1-9]\\d*):.*", RegexOptions.Compiled);
+        private static readonly Regex LineCoverageRegex = new Regex("\\s*(?<Visits>-|#####|=====|\\d+):\\s*(?<LineNumber>[1-9]\\d*):.*", RegexOptions.Compiled);
 
         /// <summary>
         /// Regex to analyze if a line contains branch coverage data.
         /// </summary>
-        private static Regex branchCoverageRegex = new Regex("branch\\s*(?<Number>\\d+)\\s*(?:taken\\s*(?<Visits>\\d+)|never\\sexecuted?)", RegexOptions.Compiled);
+        private static readonly Regex BranchCoverageRegex = new Regex("branch\\s*(?<Number>\\d+)\\s*(?:taken\\s*(?<Visits>\\d+)|never\\sexecuted?)", RegexOptions.Compiled);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GCovParser" /> class.
@@ -103,7 +103,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             foreach (var line in lines)
             {
-                var match = lineCoverageRegex.Match(line);
+                var match = LineCoverageRegex.Match(line);
 
                 if (match.Success)
                 {
@@ -133,7 +133,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 }
                 else
                 {
-                    match = branchCoverageRegex.Match(line);
+                    match = BranchCoverageRegex.Match(line);
 
                     if (match.Success)
                     {
@@ -141,8 +141,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                             match.Groups["Visits"].Success ? match.Groups["Visits"].Value.ParseLargeInteger() : 0,
                             match.Groups["Number"].Value);
 
-                        ICollection<Branch> branches = null;
-                        if (branchesByLineNumber.TryGetValue(maxiumLineNumber, out branches))
+                        if (branchesByLineNumber.TryGetValue(maxiumLineNumber, out ICollection<Branch> branches))
                         {
                             HashSet<Branch> branchesHashset = (HashSet<Branch>)branches;
                             if (branchesHashset.Contains(branch))
@@ -157,8 +156,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         }
                         else
                         {
-                            branches = new HashSet<Branch>();
-                            branches.Add(branch);
+                            branches = new HashSet<Branch>
+                            {
+                                branch
+                            };
 
                             branchesByLineNumber.Add(maxiumLineNumber, branches);
                         }
@@ -188,9 +189,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 {
                     bool partiallyCovered = false;
 
-                    ICollection<Branch> branchesOfLine = null;
-
-                    if (branchesByLineNumber.TryGetValue(kv.Key, out branchesOfLine))
+                    if (branchesByLineNumber.TryGetValue(kv.Key, out ICollection<Branch> branchesOfLine))
                     {
                         partiallyCovered = branchesOfLine.Any(b => b.BranchVisits == 0);
                     }

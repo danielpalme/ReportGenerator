@@ -176,8 +176,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                     bool partiallyCovered = false;
 
-                    ICollection<Branch> branchesOfLine = null;
-                    if (branches.TryGetValue(line.LineNumber, out branchesOfLine))
+                    if (branches.TryGetValue(line.LineNumber, out ICollection<Branch> branchesOfLine))
                     {
                         partiallyCovered = branchesOfLine.Any(b => b.BranchVisits == 0);
                     }
@@ -245,9 +244,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                             lineNumber,
                             "1");
 
-                    var branches = new HashSet<Branch>();
-                    branches.Add(new Branch(negativeBrancheCovered > 0 ? 1 : 0, identifier1));
-                    branches.Add(new Branch(positiveBrancheCovered > 0 ? 1 : 0, identifier2));
+                    var branches = new HashSet<Branch>
+                    {
+                        new Branch(negativeBrancheCovered > 0 ? 1 : 0, identifier1),
+                        new Branch(positiveBrancheCovered > 0 ? 1 : 0, identifier2)
+                    };
 
                     result.Add(lineNumber, branches);
                 }

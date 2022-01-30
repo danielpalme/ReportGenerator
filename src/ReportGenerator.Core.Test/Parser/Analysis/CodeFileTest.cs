@@ -324,9 +324,9 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
         [Fact]
         public void CodeFile_Equals()
         {
-            var target1 = new CodeFile("C:\\temp\\Program.cs", new int[0], new LineVisitStatus[0]);
-            var target2 = new CodeFile("C:\\temp\\Program.cs", new int[0], new LineVisitStatus[0]);
-            var target3 = new CodeFile("C:\\temp\\Other.cs", new int[0], new LineVisitStatus[0]);
+            var target1 = new CodeFile("C:\\temp\\Program.cs", System.Array.Empty<int>(), System.Array.Empty<LineVisitStatus>());
+            var target2 = new CodeFile("C:\\temp\\Program.cs", System.Array.Empty<int>(), System.Array.Empty<LineVisitStatus>());
+            var target3 = new CodeFile("C:\\temp\\Other.cs", System.Array.Empty<int>(), System.Array.Empty<LineVisitStatus>());
 
             Assert.True(target1.Equals(target2), "Objects are not equal");
             Assert.False(target1.Equals(target3), "Objects are equal");
@@ -340,7 +340,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
         [Fact]
         public void AddCoverageByTestMethod_AddCoverageByTestMethodForExistingMethod_CoverageInformationIsMerged()
         {
-            var sut = new CodeFile("C:\\temp\\Program.cs", new int[0], new LineVisitStatus[0]);
+            var sut = new CodeFile("C:\\temp\\Program.cs", System.Array.Empty<int>(), System.Array.Empty<LineVisitStatus>());
             var testMethod = new TestMethod("TestFull", "Test");
 
             var coverageByTrackedMethod = new CoverageByTrackedMethod() { Coverage = new int[] { -1, -1, -1, -1, 0, 0, 0, 1, 1, 1 }, LineVisitStatus = new LineVisitStatus[] { LineVisitStatus.NotCoverable, LineVisitStatus.NotCoverable, LineVisitStatus.NotCoverable, LineVisitStatus.NotCoverable, LineVisitStatus.NotCovered, LineVisitStatus.NotCovered, LineVisitStatus.NotCovered, LineVisitStatus.Covered, LineVisitStatus.Covered, LineVisitStatus.Covered } };

@@ -20,7 +20,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
     {
         private static readonly string FilePath = Path.Combine(FileManager.GetCPlusPlusReportDirectory(), "gcov", "branch_unconditional", "main.cpp.gcov");
 
-        private ParserResult parserResult;
+        private readonly ParserResult parserResult;
 
         public GCovParserTest()
         {

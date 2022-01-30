@@ -13,7 +13,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <summary>
         /// The shared renderer.
         /// </summary>
-        private LatexRenderer renderer = new LatexRenderer();
+        private readonly LatexRenderer renderer = new LatexRenderer();
 
         /// <summary>
         /// Gets the type of the report.

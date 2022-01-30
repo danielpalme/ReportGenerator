@@ -10,7 +10,7 @@ namespace Palmmedia.ReportGenerator.Core.Logging
         /// <summary>
         /// The log delegate.
         /// </summary>
-        private Action<VerbosityLevel, string> logDelegate;
+        private readonly Action<VerbosityLevel, string> logDelegate;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DelegateLogger"/> class.

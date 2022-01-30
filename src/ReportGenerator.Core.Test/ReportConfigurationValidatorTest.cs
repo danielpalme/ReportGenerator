@@ -11,7 +11,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
     {
         private static readonly string ReportPath = Path.Combine(FileManager.GetCSharpReportDirectory(), "OpenCover.xml");
 
-        private Mock<IReportBuilderFactory> reportBuilderFactoryMock = new Mock<IReportBuilderFactory>();
+        private readonly Mock<IReportBuilderFactory> reportBuilderFactoryMock = new Mock<IReportBuilderFactory>();
 
         public ReportConfigurationValidatorTest()
         {
@@ -26,10 +26,10 @@ namespace Palmmedia.ReportGenerator.Core.Test
             var configuration = new ReportConfiguration(
                 new[] { ReportPath },
                 "C:\\temp",
-                new string[] { },
+                System.Array.Empty<string>(),
                 null,
                 new[] { "Latex", "Xml", "Html" },
-                new string[] { },
+                System.Array.Empty<string>(),
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
                 new[] { "+Test3", "-Test3" },
@@ -45,15 +45,15 @@ namespace Palmmedia.ReportGenerator.Core.Test
         public void Validate_NoReport_ValidationFails()
         {
             var configuration = new ReportConfiguration(
-                new string[] { },
+                System.Array.Empty<string>(),
                 "C:\\temp",
-                new string[] { },
+                System.Array.Empty<string>(),
                 null,
                 new[] { "Latex" },
-                new string[] { },
+                System.Array.Empty<string>(),
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
-                new string[] { },
+                System.Array.Empty<string>(),
                 VerbosityLevel.Info.ToString(),
                 null);
 
@@ -68,13 +68,13 @@ namespace Palmmedia.ReportGenerator.Core.Test
             var configuration = new ReportConfiguration(
                 new[] { "123.xml" },
                 "C:\\temp",
-                new string[] { },
+                System.Array.Empty<string>(),
                 null,
                 new[] { "Latex" },
-                new string[] { },
+                System.Array.Empty<string>(),
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
-                new string[] { },
+                System.Array.Empty<string>(),
                 VerbosityLevel.Info.ToString(),
                 null);
 
@@ -89,13 +89,13 @@ namespace Palmmedia.ReportGenerator.Core.Test
             var configuration = new ReportConfiguration(
                 new[] { ReportPath },
                 string.Empty,
-                new string[] { },
+                System.Array.Empty<string>(),
                 null,
                 new[] { "Latex" },
-                new string[] { },
+                System.Array.Empty<string>(),
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
-                new string[] { },
+                System.Array.Empty<string>(),
                 VerbosityLevel.Info.ToString(),
                 null);
 
@@ -110,13 +110,13 @@ namespace Palmmedia.ReportGenerator.Core.Test
             var configuration = new ReportConfiguration(
                 new[] { ReportPath },
                 "C:\\temp:?$",
-                new string[] { },
+                System.Array.Empty<string>(),
                 null,
                 new[] { "Latex" },
-                new string[] { },
+                System.Array.Empty<string>(),
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
-                new string[] { },
+                System.Array.Empty<string>(),
                 VerbosityLevel.Info.ToString(),
                 null);
 
@@ -137,7 +137,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 new string[] { "notexistingplugin.dll" },
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
-                new string[] { },
+                System.Array.Empty<string>(),
                 VerbosityLevel.Info.ToString(),
                 null);
 
@@ -152,13 +152,13 @@ namespace Palmmedia.ReportGenerator.Core.Test
             var configuration = new ReportConfiguration(
                 new[] { ReportPath },
                 "C:\\temp",
-                new string[] { },
+                System.Array.Empty<string>(),
                 "C:\\temp:?$",
                 new[] { "Latex" },
-                new string[] { },
+                System.Array.Empty<string>(),
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
-                new string[] { },
+                System.Array.Empty<string>(),
                 VerbosityLevel.Info.ToString(),
                 null);
 
@@ -173,13 +173,13 @@ namespace Palmmedia.ReportGenerator.Core.Test
             var configuration = new ReportConfiguration(
                 new[] { ReportPath },
                 "C:\\temp",
-                new string[] { },
+                System.Array.Empty<string>(),
                 null,
                 new[] { "DoesNotExist" },
-                new string[] { },
+                System.Array.Empty<string>(),
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
-                new string[] { },
+                System.Array.Empty<string>(),
                 VerbosityLevel.Info.ToString(),
                 null);
 
@@ -194,10 +194,10 @@ namespace Palmmedia.ReportGenerator.Core.Test
             var configuration = new ReportConfiguration(
                 new[] { ReportPath },
                 @"C:\\temp",
-                new string[] { },
+                System.Array.Empty<string>(),
                 null,
                 new[] { "Latex" },
-                new string[] { },
+                System.Array.Empty<string>(),
                 new[] { "Test" },
                 new[] { "Test2" },
                 new[] { "Test3" },
@@ -215,13 +215,13 @@ namespace Palmmedia.ReportGenerator.Core.Test
             var configuration = new ReportConfiguration(
                 new[] { ReportPath },
                 @"C:\\temp",
-                new string[] { },
+                System.Array.Empty<string>(),
                 null,
                 new[] { "Latex" },
                 new string[] { "notexistingplugin.dll" },
                 new[] { "+Test", "-Test" },
                 new[] { "+Test2", "-Test2" },
-                new string[] { },
+                System.Array.Empty<string>(),
                 VerbosityLevel.Info.ToString(),
                 null);
 

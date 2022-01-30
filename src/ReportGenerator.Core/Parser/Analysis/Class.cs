@@ -13,7 +13,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <summary>
         /// Regex to analyze if a class is generic.
         /// </summary>
-        private static Regex genericClassRegex = new Regex("^(?<Name>.+)`(?<Number>\\d+)$", RegexOptions.Compiled);
+        private static readonly Regex GenericClassRegex = new Regex("^(?<Name>.+)`(?<Number>\\d+)$", RegexOptions.Compiled);
 
         /// <summary>
         /// The object to lock the class add.
@@ -57,7 +57,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
              */
             if (name.Contains("`"))
             {
-                Match match = genericClassRegex.Match(name);
+                Match match = GenericClassRegex.Match(name);
 
                 if (match.Success)
                 {

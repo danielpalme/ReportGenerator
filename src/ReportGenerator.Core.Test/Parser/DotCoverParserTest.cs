@@ -20,7 +20,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
     {
         private static readonly string FilePath1 = Path.Combine(FileManager.GetCSharpReportDirectory(), "dotCover.xml");
 
-        private ParserResult parserResult;
+        private readonly ParserResult parserResult;
 
         public DotCoverParserTest()
         {
