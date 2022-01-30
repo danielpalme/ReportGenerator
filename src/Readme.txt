@@ -64,6 +64,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.0.4.0
+
+    * Fix: #482: Fixed incorrect shadow text in badges
+
 5.0.3.0
 
     * Fix: #481: Removed BOM from JSON summary
