@@ -102,6 +102,28 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         public decimal? BranchCoverageQuota => (this.TotalBranches == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)this.CoveredBranches / (double)this.TotalBranches) / 10;
 
         /// <summary>
+        /// Gets or sets the number of covered code elements.
+        /// </summary>
+        /// <value>
+        /// The number of total branches.
+        /// </value>
+        public int? CoveredCodeElements { get; set; }
+
+        /// <summary>
+        /// Gets or sets the number of total code elements.
+        /// </summary>
+        /// <value>
+        /// The number of total branches.
+        /// </value>
+        public int? TotalCodeElements { get; set; }
+
+        /// <summary>
+        /// Gets the code elements coverage quota.
+        /// </summary>
+        /// <value>The code elements coverage quota.</value>
+        public decimal? CodeElementCoverageQuota => (this.TotalCodeElements.GetValueOrDefault() == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)this.CoveredCodeElements.GetValueOrDefault() / (double)this.TotalCodeElements) / 10;
+
+        /// <summary>
         /// Determines whether the specified <see cref="object" />, is equal to this instance.
         /// </summary>
         /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
@@ -121,7 +143,9 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                     && historicCoverage.CoverableLines == this.CoverableLines
                     && historicCoverage.TotalLines == this.TotalLines
                     && historicCoverage.CoveredBranches == this.CoveredBranches
-                    && historicCoverage.TotalBranches == this.TotalBranches;
+                    && historicCoverage.TotalBranches == this.TotalBranches
+                    && historicCoverage.CoveredCodeElements == this.CoveredCodeElements
+                    && historicCoverage.TotalCodeElements == this.TotalCodeElements;
             }
         }
 
@@ -135,6 +159,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                 + this.CoverableLines
                 + this.TotalLines
                 + this.CoveredBranches
-                + this.TotalBranches;
+                + this.TotalBranches
+                + this.CoveredCodeElements.GetValueOrDefault()
+                + this.TotalCodeElements.GetValueOrDefault();
     }
 }

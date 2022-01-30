@@ -129,6 +129,19 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.History
                         CoveredBranches = int.Parse(classElement.Attribute("coveredbranches").Value, CultureInfo.InvariantCulture),
                         TotalBranches = int.Parse(classElement.Attribute("totalbranches").Value, CultureInfo.InvariantCulture)
                     };
+
+                    var attribute = classElement.Attribute("coveredcodeelements");
+                    if (attribute != null)
+                    {
+                        historicCoverage.CoveredCodeElements = int.Parse(attribute.Value, CultureInfo.InvariantCulture);
+                    }
+
+                    attribute = classElement.Attribute("totalcodeelements");
+                    if (attribute != null)
+                    {
+                        historicCoverage.TotalCodeElements = int.Parse(attribute.Value, CultureInfo.InvariantCulture);
+                    }
+
                     historicCoverages.Add(historicCoverage);
                     if (classes.TryGetValue(this.GetFullClassName(assemblyName, classElement.Attribute("name").Value), out var @class))
                     {
