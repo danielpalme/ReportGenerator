@@ -62,9 +62,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <param name="fileAnalyses">The file analyses that correspond to the class.</param>
         public void CreateClassReport(Class @class, IEnumerable<FileAnalysis> fileAnalyses)
         {
-            XElement packageElement = null;
-
-            if (!this.packageElementsByName.TryGetValue(@class.Assembly.Name, out packageElement))
+            if (!this.packageElementsByName.TryGetValue(@class.Assembly.Name, out XElement packageElement))
             {
                 packageElement = new XElement("package", new XAttribute("name", @class.Assembly.Name));
 

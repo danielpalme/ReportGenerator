@@ -8,7 +8,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
     /// <summary>
     /// Creates report in Latex format.
     /// </summary>
-    public class LatexReportBuilder : ReportBuilderBase, IDisposable
+    public class LatexReportBuilder : LatexReportBuilderBase, IDisposable
     {
         /// <summary>
         /// The shared renderer.

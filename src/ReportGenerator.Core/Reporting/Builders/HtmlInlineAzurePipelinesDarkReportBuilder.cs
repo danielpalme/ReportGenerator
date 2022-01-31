@@ -8,7 +8,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
     /// <summary>
     /// Creates report in HTML format.
     /// </summary>
-    public class HtmlInlineAzurePipelinesDarkReportBuilder : ReportBuilderBase
+    public class HtmlInlineAzurePipelinesDarkReportBuilder : HtmlReportBuilderBase
     {
         /// <summary>
         /// Dictionary containing the filenames of the class reports by class.

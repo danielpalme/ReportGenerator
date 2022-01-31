@@ -27,7 +27,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// </summary>
         /// <param name="reportRenderer">The report renderer.</param>
         /// <param name="summaryResult">The summary result.</param>
-        public override void CreateSummaryReport(IReportRenderer reportRenderer, SummaryResult summaryResult)
+        public override void CreateSummaryReport(IHtmlRenderer reportRenderer, SummaryResult summaryResult)
         {
             if (reportRenderer == null)
             {

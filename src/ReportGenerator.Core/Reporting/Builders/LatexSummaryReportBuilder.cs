@@ -7,7 +7,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
     /// <summary>
     /// Creates summary report in Latex format (no reports for classes are generated).
     /// </summary>
-    public class LatexSummaryReportBuilder : ReportBuilderBase
+    public class LatexSummaryReportBuilder : LatexReportBuilderBase
     {
         /// <summary>
         /// Gets the report type.

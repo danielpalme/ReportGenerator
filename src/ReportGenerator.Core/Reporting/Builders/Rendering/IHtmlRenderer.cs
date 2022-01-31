@@ -5,15 +5,10 @@ using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 {
     /// <summary>
-    /// Interface for report renderers.
+    /// HTML report renderer.
     /// </summary>
-    public interface IReportRenderer
+    public interface IHtmlRenderer
     {
-        /// <summary>
-        /// Gets a value indicating whether renderer support rendering of charts.
-        /// </summary>
-        bool SupportsCharts { get; }
-
         /// <summary>
         /// Begins the summary report.
         /// </summary>
@@ -31,20 +26,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="classDisplayName">Display name of the class.</param>
         /// <param name="additionalTitle">Additional title.</param>
         void BeginClassReport(string targetDirectory, Assembly assembly, string className, string classDisplayName, string additionalTitle);
-
-        /// <summary>
-        /// Saves a summary report.
-        /// </summary>
-        /// <param name="targetDirectory">The target directory.</param>
-        void SaveSummaryReport(string targetDirectory);
-
-        /// <summary>
-        /// Saves a class report.
-        /// </summary>
-        /// <param name="targetDirectory">The target directory.</param>
-        /// <param name="assemblyName">Name of the assembly.</param>
-        /// <param name="className">Name of the class.</param>
-        void SaveClassReport(string targetDirectory, string assemblyName, string className);
 
         /// <summary>
         /// Adds a header to the report.
@@ -134,20 +115,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         void KeyValueRow(string key, IEnumerable<string> files);
 
         /// <summary>
-        /// Adds the coverage information of an assembly to the report.
-        /// </summary>
-        /// <param name="assembly">The assembly.</param>
-        /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
-        void SummaryAssembly(Assembly assembly, bool branchCoverageAvailable);
-
-        /// <summary>
-        /// Adds the coverage information of a class to the report.
-        /// </summary>
-        /// <param name="class">The class.</param>
-        /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
-        void SummaryClass(Class @class, bool branchCoverageAvailable);
-
-        /// <summary>
         /// Adds metrics to the report.
         /// </summary>
         /// <param name="class">The class.</param>
@@ -195,8 +162,34 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         void RiskHotspots(IEnumerable<RiskHotspot> riskHotspots);
 
         /// <summary>
+        /// Adds the coverage information of an assembly to the report.
+        /// </summary>
+        /// <param name="assembly">The assembly.</param>
+        /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
+        void SummaryAssembly(Assembly assembly, bool branchCoverageAvailable);
+
+        /// <summary>
+        /// Adds the coverage information of a class to the report.
+        /// </summary>
+        /// <param name="class">The class.</param>
+        /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
+        void SummaryClass(Class @class, bool branchCoverageAvailable);
+
+        /// <summary>
         /// Adds the footer to the report.
         /// </summary>
         void AddFooter();
+
+        /// <summary>
+        /// Saves a summary report.
+        /// </summary>
+        /// <param name="targetDirectory">The target directory.</param>
+        void SaveSummaryReport(string targetDirectory);
+
+        /// <summary>
+        /// Saves a class report.
+        /// </summary><param name="targetDirectory">The target directory.</param>
+        /// <param name="className">Name of the class.</param>
+        void SaveClassReport(string targetDirectory, string className);
     }
 }

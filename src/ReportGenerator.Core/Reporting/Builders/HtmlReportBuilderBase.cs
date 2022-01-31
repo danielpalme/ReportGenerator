@@ -14,12 +14,12 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
     /// <summary>
     /// Implementation of <see cref="IReportBuilder"/> that uses <see cref="IReportRenderer"/> to create reports.
     /// </summary>
-    public abstract class ReportBuilderBase : IReportBuilder
+    public abstract class HtmlReportBuilderBase : IReportBuilder
     {
         /// <summary>
         /// The Logger.
         /// </summary>
-        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(ReportBuilderBase));
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(HtmlReportBuilderBase));
 
         /// <summary>
         /// Gets the report type.
@@ -43,7 +43,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <param name="reportRenderer">The report renderer.</param>
         /// <param name="class">The class.</param>
         /// <param name="fileAnalyses">The file analyses that correspond to the class.</param>
-        public virtual void CreateClassReport(IReportRenderer reportRenderer, Class @class, IEnumerable<FileAnalysis> fileAnalyses)
+        public virtual void CreateClassReport(IHtmlRenderer reportRenderer, Class @class, IEnumerable<FileAnalysis> fileAnalyses)
         {
             if (reportRenderer == null)
             {
@@ -107,13 +107,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             reportRenderer.FinishTable();
 
-            if (reportRenderer.SupportsCharts)
+            if (@class.HistoricCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue))
             {
-                if (@class.HistoricCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue))
-                {
-                    reportRenderer.Header(ReportResources.History);
-                    reportRenderer.Chart(@class.HistoricCoverages, this.ReportContext.Settings.RenderPngFallBackImagesForHistoryCharts);
-                }
+                reportRenderer.Header(ReportResources.History);
+                reportRenderer.Chart(@class.HistoricCoverages, this.ReportContext.Settings.RenderPngFallBackImagesForHistoryCharts);
             }
 
             if (@class.Files.Any(f => f.MethodMetrics.Any()))
@@ -175,7 +172,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 reportRenderer.TestMethods(testMethods, fileAnalyses, codeElementsByFileIndex);
             }
 
-            reportRenderer.SaveClassReport(this.CreateTargetDirectory(), @class.Assembly.ShortName, @class.Name);
+            reportRenderer.SaveClassReport(this.CreateTargetDirectory(), @class.Name);
         }
 
         /// <summary>
@@ -183,7 +180,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// </summary>
         /// <param name="reportRenderer">The report renderer.</param>
         /// <param name="summaryResult">The summary result.</param>
-        public virtual void CreateSummaryReport(IReportRenderer reportRenderer, SummaryResult summaryResult)
+        public virtual void CreateSummaryReport(IHtmlRenderer reportRenderer, SummaryResult summaryResult)
         {
             if (reportRenderer == null)
             {
@@ -236,14 +233,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             reportRenderer.FinishTable();
 
-            if (reportRenderer.SupportsCharts)
+            var historicCoverages = this.GetOverallHistoricCoverages(this.ReportContext.OverallHistoricCoverages);
+            if (historicCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue))
             {
-                var historicCoverages = this.GetOverallHistoricCoverages(this.ReportContext.OverallHistoricCoverages);
-                if (historicCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue))
-                {
-                    reportRenderer.Header(ReportResources.History);
-                    reportRenderer.Chart(historicCoverages, this.ReportContext.Settings.RenderPngFallBackImagesForHistoryCharts);
-                }
+                reportRenderer.Header(ReportResources.History);
+                reportRenderer.Chart(historicCoverages, this.ReportContext.Settings.RenderPngFallBackImagesForHistoryCharts);
             }
 
             var sumableMetrics = summaryResult.SumableMetrics;

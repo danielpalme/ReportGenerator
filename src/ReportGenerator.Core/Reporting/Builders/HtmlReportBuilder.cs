@@ -8,7 +8,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
     /// <summary>
     /// Creates report in HTML format.
     /// </summary>
-    public class HtmlReportBuilder : ReportBuilderBase
+    public class HtmlReportBuilder : HtmlReportBuilderBase
     {
         /// <summary>
         /// Defines how CSS and JavaScript are referenced.

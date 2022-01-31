@@ -16,7 +16,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
     /// <summary>
     /// HTML report renderer.
     /// </summary>
-    internal class HtmlRenderer : IReportRenderer, IDisposable
+    internal class HtmlRenderer : IHtmlRenderer, IDisposable
     {
         /// <summary>
         /// The head of each generated HTML file.
@@ -116,17 +116,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.additionalCssFileResource = additionalCssFileResource;
         }
 
-        /// <summary>
-        /// Gets a value indicating whether renderer support rendering of charts.
-        /// </summary>
-        public bool SupportsCharts => true;
-
-        /// <summary>
-        /// Begins the summary report.
-        /// </summary>
-        /// <param name="targetDirectory">The target directory.</param>
-        /// <param name="fileName">The file name.</param>
-        /// <param name="title">The title.</param>
+        /// <inheritdoc />
         public void BeginSummaryReport(string targetDirectory, string fileName, string title)
         {
             string targetPath = Path.Combine(targetDirectory, this.onlySummary ? "summary.html" : "index.html");
@@ -149,14 +139,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             }
         }
 
-        /// <summary>
-        /// Begins the class report.
-        /// </summary>
-        /// <param name="targetDirectory">The target directory.</param>
-        /// <param name="assembly">The assembly.</param>
-        /// <param name="className">Name of the class.</param>
-        /// <param name="classDisplayName">Display name of the class.</param>
-        /// <param name="additionalTitle">Additional title.</param>
+        /// <inheritdoc />
         public void BeginClassReport(string targetDirectory, Assembly assembly, string className, string classDisplayName, string additionalTitle)
         {
             this.classReport = true;
@@ -176,19 +159,13 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             }
         }
 
-        /// <summary>
-        /// Adds a header to the report.
-        /// </summary>
-        /// <param name="text">The text.</param>
+        /// <inheritdoc />
         public void Header(string text)
         {
             this.reportTextWriter.WriteLine("<h1>{0}</h1>", WebUtility.HtmlEncode(text));
         }
 
-        /// <summary>
-        /// Adds a header to the report.
-        /// </summary>
-        /// <param name="text">The text.</param>
+        /// <inheritdoc />
         public void HeaderWithGithubLinks(string text)
         {
             this.reportTextWriter.WriteLine(
@@ -200,21 +177,13 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 WebUtility.HtmlEncode(ReportResources.Sponsor));
         }
 
-        /// <summary>
-        /// Adds a header to the report.
-        /// </summary>
-        /// <param name="text">The text.</param>
+        /// <inheritdoc />
         public void HeaderWithBackLink(string text)
         {
             this.reportTextWriter.WriteLine("<h1><a href=\"index.html\" class=\"back\">&lt;</a> {0}</h1>", WebUtility.HtmlEncode(text));
         }
 
-        /// <summary>
-        /// Adds the test methods to the report.
-        /// </summary>
-        /// <param name="testMethods">The test methods.</param>
-        /// <param name="fileAnalyses">The file analyses that correspond to the class.</param>
-        /// <param name="codeElementsByFileIndex">Code elements by file index.</param>
+        /// <inheritdoc />
         public void TestMethods(IEnumerable<TestMethod> testMethods, IEnumerable<FileAnalysis> fileAnalyses, IDictionary<int, IEnumerable<CodeElement>> codeElementsByFileIndex)
         {
             if (testMethods == null)
@@ -309,27 +278,19 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.reportTextWriter.WriteLine("<br/></div>");
         }
 
-        /// <summary>
-        /// Adds a file of a class to a report.
-        /// </summary>
-        /// <param name="path">The path of the file.</param>
+        /// <inheritdoc />
         public void File(string path)
         {
             this.reportTextWriter.WriteLine("<h2 id=\"{0}\">{1}</h2>", WebUtility.HtmlEncode(StringHelper.ReplaceNonLetterChars(path)), WebUtility.HtmlEncode(path));
         }
 
-        /// <summary>
-        /// Adds a paragraph to the report.
-        /// </summary>
-        /// <param name="text">The text.</param>
+        /// <inheritdoc />
         public void Paragraph(string text)
         {
             this.reportTextWriter.WriteLine("<p>{0}</p>", WebUtility.HtmlEncode(text));
         }
 
-        /// <summary>
-        /// Adds a table with two columns to the report.
-        /// </summary>
+        /// <inheritdoc />
         public void BeginKeyValueTable()
         {
             this.reportTextWriter.WriteLine("<table class=\"overview table-fixed\">");
@@ -340,26 +301,19 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.reportTextWriter.WriteLine("<tbody>");
         }
 
-        /// <summary>
-        /// Start of risk summary table section.
-        /// </summary>
+        /// <inheritdoc />
         public void BeginSummaryTable()
         {
             this.reportTextWriter.WriteLine("<coverage-info>");
         }
 
-        /// <summary>
-        /// End of risk summary table section.
-        /// </summary>
+        /// <inheritdoc />
         public void FinishSummaryTable()
         {
             this.reportTextWriter.WriteLine("</coverage-info>");
         }
 
-        /// <summary>
-        /// Adds a summary table to the report.
-        /// </summary>
-        /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
+        /// <inheritdoc />
         public void BeginSummaryTable(bool branchCoverageAvailable)
         {
             this.reportTextWriter.WriteLine("<table class=\"overview table-fixed stripped\">");
@@ -404,12 +358,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.reportTextWriter.WriteLine("<tbody>");
         }
 
-        /// <summary>
-        /// Adds custom summary elements to the report.
-        /// </summary>
-        /// <param name="assemblies">The assemblies.</param>
-        /// <param name="riskHotspots">The risk hotspots.</param>
-        /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
+        /// <inheritdoc />
         public void CustomSummary(IEnumerable<Assembly> assemblies, IEnumerable<RiskHotspot> riskHotspots, bool branchCoverageAvailable)
         {
             if (assemblies == null)
@@ -584,10 +533,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.javaScriptContent.AppendLine();
         }
 
-        /// <summary>
-        /// Adds a file analysis table to the report.
-        /// </summary>
-        /// <param name="headers">The headers.</param>
+        /// <inheritdoc />
         public void BeginLineAnalysisTable(IEnumerable<string> headers)
         {
             if (headers == null)
@@ -607,11 +553,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.reportTextWriter.WriteLine("<tbody>");
         }
 
-        /// <summary>
-        /// Adds a table row with two cells to the report.
-        /// </summary>
-        /// <param name="key">The text of the first column.</param>
-        /// <param name="value">The text of the second column.</param>
+        /// <inheritdoc />
         public void KeyValueRow(string key, string value)
         {
             this.reportTextWriter.WriteLine(
@@ -620,11 +562,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 WebUtility.HtmlEncode(value));
         }
 
-        /// <summary>
-        /// Adds a table row with two cells to the report.
-        /// </summary>
-        /// <param name="key">The text of the first column.</param>
-        /// <param name="files">The files.</param>
+        /// <inheritdoc />
         public void KeyValueRow(string key, IEnumerable<string> files)
         {
             int fileNumber = 1;
@@ -639,10 +577,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 value);
         }
 
-        /// <summary>
-        /// Adds metrics to the report.
-        /// </summary>
-        /// <param name="class">The class.</param>
+        /// <inheritdoc />
         public void MetricsTable(Class @class)
         {
             if (@class == null)
@@ -727,10 +662,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.reportTextWriter.WriteLine("</table>");
         }
 
-        /// <summary>
-        /// Adds metrics to the report.
-        /// </summary>
-        /// <param name="methodMetrics">The method metrics.</param>
+        /// <inheritdoc />
         public void MetricsTable(IEnumerable<MethodMetric> methodMetrics)
         {
             if (methodMetrics == null)
@@ -792,11 +724,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.reportTextWriter.WriteLine("</table>");
         }
 
-        /// <summary>
-        /// Adds the coverage information of a single line of a file to the report.
-        /// </summary>
-        /// <param name="fileIndex">The index of the file.</param>
-        /// <param name="analysis">The line analysis.</param>
+        /// <inheritdoc />
         public void LineAnalysis(int fileIndex, LineAnalysis analysis)
         {
             if (analysis == null)
@@ -869,20 +797,14 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.reportTextWriter.WriteLine("</tr>");
         }
 
-        /// <summary>
-        /// Finishes the current table.
-        /// </summary>
+        /// <inheritdoc />
         public void FinishTable()
         {
             this.reportTextWriter.WriteLine("</tbody>");
             this.reportTextWriter.WriteLine("</table>");
         }
 
-        /// <summary>
-        /// Renderes a chart with the given historic coverages.
-        /// </summary>
-        /// <param name="historicCoverages">The historic coverages.</param>
-        /// <param name="renderPngFallBackImage">Indicates whether PNG images are rendered as a fallback.</param>
+        /// <inheritdoc />
         public void Chart(IEnumerable<HistoricCoverage> historicCoverages, bool renderPngFallBackImage)
         {
             if (historicCoverages == null)
@@ -910,8 +832,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     id);
             }
 
-            var series = new List<string>();
-            series.Add("[" + string.Join(",", filteredHistoricCoverages.Select(h => h.CoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture))) + "]");
+            var series = new List<string>
+            {
+                "[" + string.Join(",", filteredHistoricCoverages.Select(h => h.CoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture))) + "]"
+            };
 
             if (filteredHistoricCoverages.Any(h => h.BranchCoverageQuota.HasValue))
             {
@@ -941,26 +865,19 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.reportTextWriter.WriteLine(" /* ]]> */ </script>");
         }
 
-        /// <summary>
-        /// Start of risk hotspots section.
-        /// </summary>
+        /// <inheritdoc />
         public void BeginRiskHotspots()
         {
             this.reportTextWriter.WriteLine("<risk-hotspots>");
         }
 
-        /// <summary>
-        /// End of risk hotspots section.
-        /// </summary>
+        /// <inheritdoc />
         public void FinishRiskHotspots()
         {
             this.reportTextWriter.WriteLine("</risk-hotspots>");
         }
 
-        /// <summary>
-        /// Summary of risk hotspots.
-        /// </summary>
-        /// <param name="riskHotspots">The risk hotspots.</param>
+        /// <inheritdoc />
         public void RiskHotspots(IEnumerable<RiskHotspot> riskHotspots)
         {
             var codeQualityMetrics = riskHotspots.First().MethodMetric.Metrics
@@ -1050,11 +967,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.reportTextWriter.WriteLine("</table>");
         }
 
-        /// <summary>
-        /// Adds the coverage information of an assembly to the report.
-        /// </summary>
-        /// <param name="assembly">The assembly.</param>
-        /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
+        /// <inheritdoc />
         public void SummaryAssembly(Assembly assembly, bool branchCoverageAvailable)
         {
             if (assembly == null)
@@ -1088,11 +1001,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.reportTextWriter.WriteLine("</tr>");
         }
 
-        /// <summary>
-        /// Adds the coverage information of a class to the report.
-        /// </summary>
-        /// <param name="class">The class.</param>
-        /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
+        /// <inheritdoc />
         public void SummaryClass(Class @class, bool branchCoverageAvailable)
         {
             if (@class == null)
@@ -1137,9 +1046,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.reportTextWriter.WriteLine("</tr>");
         }
 
-        /// <summary>
-        /// Adds the footer to the report.
-        /// </summary>
+        /// <inheritdoc />
         public void AddFooter()
         {
             this.reportTextWriter.Write(string.Format(
@@ -1151,10 +1058,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 DateTime.Now.ToLongTimeString()));
         }
 
-        /// <summary>
-        /// Saves a summary report.
-        /// </summary>
-        /// <param name="targetDirectory">The target directory.</param>
+        /// <inheritdoc />
         public void SaveSummaryReport(string targetDirectory)
         {
             this.SaveReport();
@@ -1166,12 +1070,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             }
         }
 
-        /// <summary>
-        /// Saves a class report.
-        /// </summary><param name="targetDirectory">The target directory.</param>
-        /// <param name="assemblyName">Name of the assembly.</param>
-        /// <param name="className">Name of the class.</param>
-        public void SaveClassReport(string targetDirectory, string assemblyName, string className)
+        /// <inheritdoc />
+        public void SaveClassReport(string targetDirectory, string className)
         {
             this.SaveReport();
 
@@ -1301,9 +1201,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             string key = assembly.Name + "_" + className;
 
-            string fileName = null;
-
-            if (!this.fileNameByClass.TryGetValue(key, out fileName))
+            if (!this.fileNameByClass.TryGetValue(key, out string fileName))
             {
                 string shortClassName = null;
 
