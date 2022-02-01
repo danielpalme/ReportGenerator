@@ -49,7 +49,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 reportRenderer.Chart(historicCoverages, this.ReportContext.Settings.RenderPngFallBackImagesForHistoryCharts);
             }
 
-            reportRenderer.CustomSummary(summaryResult.Assemblies, new List<RiskHotspot>(), summaryResult.SupportsBranchCoverage);
+            reportRenderer.CustomSummary(summaryResult.Assemblies, new List<RiskHotspot>(), summaryResult.SupportsBranchCoverage, true);
 
             reportRenderer.SaveSummaryReport(targetDirectory);
 

@@ -82,6 +82,7 @@ import { ClassViewModel } from "./viewmodels/class-viewmodel.class";
     {{clazz.coveredBranches}}
   </ng-container>
 </td>
+
 <td class="right" *ngIf="branchCoverageAvailable">
   <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
     <div class="currenthistory">{{clazz.totalBranches}}</div>
@@ -107,7 +108,47 @@ import { ClassViewModel } from "./viewmodels/class-viewmodel.class";
     {{clazz.branchCoveragePercentage}}
   </ng-container>
 </td>
-<td class="right" *ngIf="branchCoverageAvailable"><coverage-bar [percentage]="clazz.branchCoverage"></coverage-bar></td>`,
+<td class="right" *ngIf="branchCoverageAvailable"><coverage-bar [percentage]="clazz.branchCoverage"></coverage-bar></td>
+
+<td class="right" *ngIf="methodCoverageAvailable">
+  <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
+    <div class="currenthistory {{getClassName(clazz.coveredMethods, clazz.currentHistoricCoverage.cm)}}">
+      {{clazz.coveredMethods}}
+    </div>
+    <div [title]="clazz.currentHistoricCoverage.et">
+      {{clazz.currentHistoricCoverage.cm}}
+    </div>
+  </ng-container>
+  <ng-container *ngIf="clazz.currentHistoricCoverage === null">
+    {{clazz.coveredMethods}}
+  </ng-container>
+</td>
+<td class="right" *ngIf="methodCoverageAvailable">
+  <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
+    <div class="currenthistory">{{clazz.totalMethods}}</div>
+    <div [title]="clazz.currentHistoricCoverage.et">{{clazz.currentHistoricCoverage.tm}}</div>
+  </ng-container>
+  <ng-container *ngIf="clazz.currentHistoricCoverage === null">
+    {{clazz.totalMethods}}
+  </ng-container>
+</td>
+<td class="right" *ngIf="methodCoverageAvailable" [title]="clazz.methodCoverageRatioText">
+  <div coverage-history-chart [historicCoverages]="clazz.methodCoverageHistory"
+    *ngIf="clazz.methodCoverageHistory.length > 1"
+    [ngClass]="{'historiccoverageoffset': clazz.currentHistoricCoverage !== null}"
+    class="tinymethodcoveragechart ct-chart" title="{{translations.history + ': ' + translations.methodCoverage}}">
+  </div>
+  <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
+    <div class="currenthistory {{getClassName(clazz.methodCoverage, clazz.currentHistoricCoverage.mcq)}}">
+      {{clazz.methodCoveragePercentage}}
+    </div>
+    <div [title]="clazz.currentHistoricCoverage.et + ': ' + clazz.currentHistoricCoverage.methodCoverageRatioText">{{clazz.currentHistoricCoverage.mcq}}%</div>
+  </ng-container>
+  <ng-container *ngIf="clazz.currentHistoricCoverage === null">
+    {{clazz.methodCoveragePercentage}}
+  </ng-container>
+</td>
+<td class="right" *ngIf="methodCoverageAvailable"><coverage-bar [percentage]="clazz.methodCoverage"></coverage-bar></td>`,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ClassRow {
@@ -116,6 +157,8 @@ export class ClassRow {
     @Input() translations: any = { };
 
     @Input() branchCoverageAvailable: boolean = false;
+
+    @Input() methodCoverageAvailable: boolean = false;
 
     @Input() historyComparisionDate: string = "";
 

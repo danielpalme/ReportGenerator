@@ -28,6 +28,12 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         void BeginClassReport(string targetDirectory, Assembly assembly, string className, string classDisplayName, string additionalTitle);
 
         /// <summary>
+        /// Add cards to report.
+        /// </summary>
+        /// <param name="cards">The cards.</param>
+        void Cards(IEnumerable<Card> cards);
+
+        /// <summary>
         /// Adds a header to the report.
         /// </summary>
         /// <param name="text">The text.</param>
@@ -66,11 +72,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         void Paragraph(string text);
 
         /// <summary>
-        /// Adds a table with two columns to the report.
-        /// </summary>
-        void BeginKeyValueTable();
-
-        /// <summary>
         /// Start of risk summary table section.
         /// </summary>
         void BeginSummaryTable();
@@ -84,7 +85,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// Adds a summary table to the report.
         /// </summary>
         /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
-        void BeginSummaryTable(bool branchCoverageAvailable);
+        /// <param name="methodCoverageAvailable">if set to <c>true</c> method coverage is available.</param>
+        void BeginSummaryTable(bool branchCoverageAvailable, bool methodCoverageAvailable);
 
         /// <summary>
         /// Adds custom summary elements to the report.
@@ -92,27 +94,14 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="assemblies">The assemblies.</param>
         /// <param name="riskHotspots">The risk hotspots.</param>
         /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
-        void CustomSummary(IEnumerable<Assembly> assemblies, IEnumerable<RiskHotspot> riskHotspots, bool branchCoverageAvailable);
+        /// <param name="methodCoverageAvailable">if set to <c>true</c> method coverage is available.</param>
+        void CustomSummary(IEnumerable<Assembly> assemblies, IEnumerable<RiskHotspot> riskHotspots, bool branchCoverageAvailable, bool methodCoverageAvailable);
 
         /// <summary>
         /// Adds a file analysis table to the report.
         /// </summary>
         /// <param name="headers">The headers.</param>
         void BeginLineAnalysisTable(IEnumerable<string> headers);
-
-        /// <summary>
-        /// Adds a table row with two cells to the report.
-        /// </summary>
-        /// <param name="key">The text of the first column.</param>
-        /// <param name="value">The text of the second column.</param>
-        void KeyValueRow(string key, string value);
-
-        /// <summary>
-        /// Adds a table row with two cells to the report.
-        /// </summary>
-        /// <param name="key">The text of the first column.</param>
-        /// <param name="files">The files.</param>
-        void KeyValueRow(string key, IEnumerable<string> files);
 
         /// <summary>
         /// Adds metrics to the report.
@@ -166,14 +155,16 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// </summary>
         /// <param name="assembly">The assembly.</param>
         /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
-        void SummaryAssembly(Assembly assembly, bool branchCoverageAvailable);
+        /// <param name="methodCoverageAvailable">if set to <c>true</c> method coverage is available.</param>
+        void SummaryAssembly(Assembly assembly, bool branchCoverageAvailable, bool methodCoverageAvailable);
 
         /// <summary>
         /// Adds the coverage information of a class to the report.
         /// </summary>
         /// <param name="class">The class.</param>
         /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
-        void SummaryClass(Class @class, bool branchCoverageAvailable);
+        /// <param name="methodCoverageAvailable">if set to <c>true</c> method coverage is available.</param>
+        void SummaryClass(Class @class, bool branchCoverageAvailable, bool methodCoverageAvailable);
 
         /// <summary>
         /// Adds the footer to the report.

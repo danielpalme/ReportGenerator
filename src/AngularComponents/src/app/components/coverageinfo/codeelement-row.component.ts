@@ -19,6 +19,12 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
 <th class="right" *ngIf="branchCoverageAvailable" [title]="element.branchCoverageRatioText">{{element.branchCoveragePercentage}}</th>
 <th class="right" *ngIf="branchCoverageAvailable">
   <coverage-bar [percentage]="element.branchCoverage"></coverage-bar>
+</th>
+<th class="right" *ngIf="methodCoverageAvailable">{{element.coveredMethods}}</th>
+<th class="right" *ngIf="methodCoverageAvailable">{{element.totalMethods}}</th>
+<th class="right" *ngIf="methodCoverageAvailable" [title]="element.methodCoverageRatioText">{{element.methodCoveragePercentage}}</th>
+<th class="right" *ngIf="methodCoverageAvailable">
+  <coverage-bar [percentage]="element.methodCoverage"></coverage-bar>
 </th>`,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -28,4 +34,6 @@ export class CodeElementRow {
     @Input() collapsed: boolean = false;
 
     @Input() branchCoverageAvailable: boolean = false;
+
+    @Input() methodCoverageAvailable: boolean = false;
 }

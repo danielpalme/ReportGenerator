@@ -73,41 +73,70 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 reportRenderer.HeaderWithBackLink(ReportResources.Summary);
             }
 
-            reportRenderer.BeginKeyValueTable();
-            reportRenderer.KeyValueRow(ReportResources.Class, @class.DisplayName);
-            reportRenderer.KeyValueRow(ReportResources.Assembly, @class.Assembly.ShortName);
-            reportRenderer.KeyValueRow(ReportResources.Files3, @class.Files.Select(f => f.Path));
-            reportRenderer.KeyValueRow(ReportResources.CoveredLines, @class.CoveredLines.ToString(CultureInfo.InvariantCulture));
-            reportRenderer.KeyValueRow(ReportResources.UncoveredLines, (@class.CoverableLines - @class.CoveredLines).ToString(CultureInfo.InvariantCulture));
-            reportRenderer.KeyValueRow(ReportResources.CoverableLines, @class.CoverableLines.ToString(CultureInfo.InvariantCulture));
-            reportRenderer.KeyValueRow(ReportResources.TotalLines, @class.TotalLines.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
-            reportRenderer.KeyValueRow(ReportResources.Coverage2, @class.CoverageQuota.HasValue ? $"{@class.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}% ({@class.CoveredLines.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {@class.CoverableLines.ToString(CultureInfo.InvariantCulture)})" : string.Empty);
-
-            if (@class.CoveredBranches.HasValue && @class.TotalBranches.HasValue)
+            var infoCardItems = new List<CardLineItem>()
             {
-                reportRenderer.KeyValueRow(ReportResources.CoveredBranches2, @class.CoveredBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
-                reportRenderer.KeyValueRow(ReportResources.TotalBranches, @class.TotalBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
-
-                decimal? branchCoverage = @class.BranchCoverageQuota;
-
-                if (branchCoverage.HasValue)
-                {
-                    reportRenderer.KeyValueRow(ReportResources.BranchCoverage2, $"{branchCoverage.Value.ToString(CultureInfo.InvariantCulture)}% ({@class.CoveredBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {@class.TotalBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)})");
-                }
-            }
-
-            reportRenderer.KeyValueRow(ReportResources.CoveredCodeElements, @class.CoveredCodeElements.ToString(CultureInfo.InvariantCulture));
-            reportRenderer.KeyValueRow(ReportResources.TotalCodeElements, @class.TotalCodeElements.ToString(CultureInfo.InvariantCulture));
-            reportRenderer.KeyValueRow(ReportResources.CodeElementCoverageQuota2, @class.CodeElementCoverageQuota.HasValue ? $"{@class.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}% ({@class.CoveredCodeElements.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {@class.TotalCodeElements.ToString(CultureInfo.InvariantCulture)})" : string.Empty);
+                new CardLineItem(ReportResources.Class, @class.DisplayName, null, CardLineItemAlignment.Left),
+                new CardLineItem(ReportResources.Assembly, @class.Assembly.ShortName, null, CardLineItemAlignment.Left),
+                new CardLineItem(ReportResources.Files3, @class.Files.Select(f => f.Path).ToArray())
+            };
 
             if (this.ReportContext.ReportConfiguration.Tag != null)
             {
-                reportRenderer.KeyValueRow(ReportResources.Tag, this.ReportContext.ReportConfiguration.Tag);
+                infoCardItems.Add(new CardLineItem(ReportResources.Tag, this.ReportContext.ReportConfiguration.Tag, null, CardLineItemAlignment.Left));
             }
 
-            reportRenderer.FinishTable();
+            var infoCard = new Card(
+                ReportResources.Information,
+                string.Empty,
+                null,
+                infoCardItems.ToArray());
 
-            if (@class.HistoricCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue))
+            reportRenderer.Cards(new[] { infoCard });
+
+            var cards = new List<Card>()
+            {
+                new Card(
+                    ReportResources.Coverage,
+                    @class.CoverageQuota.HasValue ? $"{Math.Floor(@class.CoverageQuota.Value).ToString(CultureInfo.InvariantCulture)}%" : ReportResources.NotAvailable,
+                    @class.CoverageQuota,
+                    new CardLineItem(ReportResources.CoveredLines, @class.CoveredLines.ToString(CultureInfo.InvariantCulture), null),
+                    new CardLineItem(ReportResources.UncoveredLines, (@class.CoverableLines - @class.CoveredLines).ToString(CultureInfo.InvariantCulture), null),
+                    new CardLineItem(ReportResources.CoverableLines, @class.CoverableLines.ToString(CultureInfo.InvariantCulture), null),
+                    new CardLineItem(ReportResources.TotalLines, @class.TotalLines.GetValueOrDefault().ToString(CultureInfo.InvariantCulture), null),
+                    new CardLineItem(
+                        ReportResources.Coverage2,
+                        @class.CoverageQuota.HasValue ? $"{@class.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}%" : ReportResources.NotAvailable,
+                        @class.CoverageQuota.HasValue ? $"{@class.CoveredLines.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {@class.CoverableLines.ToString(CultureInfo.InvariantCulture)}" : ReportResources.NotAvailable))
+            };
+
+            if (@class.CoveredBranches.HasValue && @class.TotalBranches.HasValue)
+            {
+                cards.Add(new Card(
+                    ReportResources.BranchCoverage,
+                    @class.BranchCoverageQuota.HasValue ? $"{Math.Floor(@class.BranchCoverageQuota.Value).ToString(CultureInfo.InvariantCulture)}%" : ReportResources.NotAvailable,
+                    @class.BranchCoverageQuota,
+                    new CardLineItem(ReportResources.CoveredBranches2, @class.CoveredBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture), null),
+                    new CardLineItem(ReportResources.TotalBranches, @class.TotalBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture), null),
+                    new CardLineItem(
+                        ReportResources.BranchCoverage2,
+                        @class.BranchCoverageQuota.HasValue ? $"{@class.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}%" : ReportResources.NotAvailable,
+                        @class.BranchCoverageQuota.HasValue ? $"{@class.CoveredBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {@class.TotalBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)}" : ReportResources.NotAvailable)));
+            }
+
+            cards.Add(new Card(
+                ReportResources.CodeElementCoverageQuota,
+                @class.CodeElementCoverageQuota.HasValue ? $"{Math.Floor(@class.CodeElementCoverageQuota.Value).ToString(CultureInfo.InvariantCulture)}%" : ReportResources.NotAvailable,
+                @class.CodeElementCoverageQuota,
+                new CardLineItem(ReportResources.CoveredCodeElements, @class.CoveredCodeElements.ToString(CultureInfo.InvariantCulture), null),
+                new CardLineItem(ReportResources.TotalCodeElements, @class.TotalCodeElements.ToString(CultureInfo.InvariantCulture), null),
+                new CardLineItem(
+                    ReportResources.CodeElementCoverageQuota2,
+                    @class.CodeElementCoverageQuota.HasValue ? $"{@class.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}%" : ReportResources.NotAvailable,
+                    @class.CodeElementCoverageQuota.HasValue ? $"{@class.CoveredCodeElements.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {@class.TotalCodeElements.ToString(CultureInfo.InvariantCulture)}" : ReportResources.NotAvailable)));
+
+            reportRenderer.Cards(cards);
+
+            if (@class.HistoricCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue || h.CodeElementCoverageQuota.HasValue))
             {
                 reportRenderer.Header(ReportResources.History);
                 reportRenderer.Chart(@class.HistoricCoverages, this.ReportContext.Settings.RenderPngFallBackImagesForHistoryCharts);
@@ -197,44 +226,69 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             reportRenderer.BeginSummaryReport(this.CreateTargetDirectory(), null, title);
             reportRenderer.HeaderWithGithubLinks(title);
 
-            reportRenderer.BeginKeyValueTable();
-            reportRenderer.KeyValueRow(ReportResources.GeneratedOn, DateTime.Now.ToShortDateString() + " - " + DateTime.Now.ToLongTimeString());
-            reportRenderer.KeyValueRow(ReportResources.Parser, summaryResult.UsedParser);
-            reportRenderer.KeyValueRow(ReportResources.Assemblies2, summaryResult.Assemblies.Count().ToString(CultureInfo.InvariantCulture));
-            reportRenderer.KeyValueRow(ReportResources.Classes, summaryResult.Assemblies.SelectMany(a => a.Classes).Count().ToString(CultureInfo.InvariantCulture));
-            reportRenderer.KeyValueRow(ReportResources.Files2, summaryResult.Assemblies.SelectMany(a => a.Classes).SelectMany(a => a.Files).Distinct().Count().ToString(CultureInfo.InvariantCulture));
-            reportRenderer.KeyValueRow(ReportResources.CoveredLines, summaryResult.CoveredLines.ToString(CultureInfo.InvariantCulture));
-            reportRenderer.KeyValueRow(ReportResources.UncoveredLines, (summaryResult.CoverableLines - summaryResult.CoveredLines).ToString(CultureInfo.InvariantCulture));
-            reportRenderer.KeyValueRow(ReportResources.CoverableLines, summaryResult.CoverableLines.ToString(CultureInfo.InvariantCulture));
-            reportRenderer.KeyValueRow(ReportResources.TotalLines, summaryResult.TotalLines.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
-            reportRenderer.KeyValueRow(ReportResources.Coverage2, summaryResult.CoverageQuota.HasValue ? $"{summaryResult.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}% ({summaryResult.CoveredLines.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {summaryResult.CoverableLines.ToString(CultureInfo.InvariantCulture)})" : string.Empty);
-
-            if (summaryResult.CoveredBranches.HasValue && summaryResult.TotalBranches.HasValue)
+            var infoCardItems = new List<CardLineItem>()
             {
-                reportRenderer.KeyValueRow(ReportResources.CoveredBranches2, summaryResult.CoveredBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
-                reportRenderer.KeyValueRow(ReportResources.TotalBranches, summaryResult.TotalBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
-
-                decimal? branchCoverage = summaryResult.BranchCoverageQuota;
-
-                if (branchCoverage.HasValue)
-                {
-                    reportRenderer.KeyValueRow(ReportResources.BranchCoverage2, $"{branchCoverage.Value.ToString(CultureInfo.InvariantCulture)}% ({summaryResult.CoveredBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {summaryResult.TotalBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)})");
-                }
-            }
-
-            reportRenderer.KeyValueRow(ReportResources.CoveredCodeElements, summaryResult.CoveredCodeElements.ToString(CultureInfo.InvariantCulture));
-            reportRenderer.KeyValueRow(ReportResources.TotalCodeElements, summaryResult.TotalCodeElements.ToString(CultureInfo.InvariantCulture));
-            reportRenderer.KeyValueRow(ReportResources.CodeElementCoverageQuota2, summaryResult.CodeElementCoverageQuota.HasValue ? $"{summaryResult.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}% ({summaryResult.CoveredCodeElements.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {summaryResult.TotalCodeElements.ToString(CultureInfo.InvariantCulture)})" : string.Empty);
+                new CardLineItem(ReportResources.Parser, summaryResult.UsedParser, null, CardLineItemAlignment.Left),
+                new CardLineItem(ReportResources.Assemblies2, summaryResult.Assemblies.Count().ToString(CultureInfo.InvariantCulture), null),
+                new CardLineItem(ReportResources.Classes, summaryResult.Assemblies.SelectMany(a => a.Classes).Count().ToString(CultureInfo.InvariantCulture), null),
+                new CardLineItem(ReportResources.Files2, summaryResult.Assemblies.SelectMany(a => a.Classes).SelectMany(a => a.Files).Distinct().Count().ToString(CultureInfo.InvariantCulture), null)
+            };
 
             if (this.ReportContext.ReportConfiguration.Tag != null)
             {
-                reportRenderer.KeyValueRow(ReportResources.Tag, this.ReportContext.ReportConfiguration.Tag);
+                infoCardItems.Add(new CardLineItem(ReportResources.Tag, this.ReportContext.ReportConfiguration.Tag, null, CardLineItemAlignment.Left));
             }
 
-            reportRenderer.FinishTable();
+            var cards = new List<Card>()
+            {
+                new Card(
+                    ReportResources.Information,
+                    string.Empty,
+                    null,
+                    infoCardItems.ToArray()),
+                new Card(
+                    ReportResources.Coverage,
+                    summaryResult.CoverageQuota.HasValue ? $"{Math.Floor(summaryResult.CoverageQuota.Value).ToString(CultureInfo.InvariantCulture)}%" : ReportResources.NotAvailable,
+                    summaryResult.CoverageQuota,
+                    new CardLineItem(ReportResources.CoveredLines, summaryResult.CoveredLines.ToString(CultureInfo.InvariantCulture), null),
+                    new CardLineItem(ReportResources.UncoveredLines, (summaryResult.CoverableLines - summaryResult.CoveredLines).ToString(CultureInfo.InvariantCulture), null),
+                    new CardLineItem(ReportResources.CoverableLines, summaryResult.CoverableLines.ToString(CultureInfo.InvariantCulture), null),
+                    new CardLineItem(ReportResources.TotalLines, summaryResult.TotalLines.GetValueOrDefault().ToString(CultureInfo.InvariantCulture), null),
+                    new CardLineItem(
+                        ReportResources.Coverage2,
+                        summaryResult.CoverageQuota.HasValue ? $"{summaryResult.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}%" : ReportResources.NotAvailable,
+                        summaryResult.CoverageQuota.HasValue ? $"{summaryResult.CoveredLines.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {summaryResult.CoverableLines.ToString(CultureInfo.InvariantCulture)}" : ReportResources.NotAvailable))
+            };
+
+            if (summaryResult.CoveredBranches.HasValue && summaryResult.TotalBranches.HasValue)
+            {
+                cards.Add(new Card(
+                    ReportResources.BranchCoverage,
+                    summaryResult.BranchCoverageQuota.HasValue ? $"{Math.Floor(summaryResult.BranchCoverageQuota.Value).ToString(CultureInfo.InvariantCulture)}%" : ReportResources.NotAvailable,
+                    summaryResult.BranchCoverageQuota,
+                    new CardLineItem(ReportResources.CoveredBranches2, summaryResult.CoveredBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture), null),
+                    new CardLineItem(ReportResources.TotalBranches, summaryResult.TotalBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture), null),
+                    new CardLineItem(
+                        ReportResources.BranchCoverage2,
+                        summaryResult.BranchCoverageQuota.HasValue ? $"{summaryResult.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}%" : ReportResources.NotAvailable,
+                        summaryResult.BranchCoverageQuota.HasValue ? $"{summaryResult.CoveredBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {summaryResult.TotalBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)}" : ReportResources.NotAvailable)));
+            }
+
+            cards.Add(new Card(
+                ReportResources.CodeElementCoverageQuota,
+                summaryResult.CodeElementCoverageQuota.HasValue ? $"{Math.Floor(summaryResult.CodeElementCoverageQuota.Value).ToString(CultureInfo.InvariantCulture)}%" : ReportResources.NotAvailable,
+                summaryResult.CodeElementCoverageQuota,
+                new CardLineItem(ReportResources.CoveredCodeElements, summaryResult.CoveredCodeElements.ToString(CultureInfo.InvariantCulture), null),
+                new CardLineItem(ReportResources.TotalCodeElements, summaryResult.TotalCodeElements.ToString(CultureInfo.InvariantCulture), null),
+                new CardLineItem(
+                    ReportResources.CodeElementCoverageQuota2,
+                    summaryResult.CodeElementCoverageQuota.HasValue ? $"{summaryResult.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}%" : ReportResources.NotAvailable,
+                    summaryResult.CodeElementCoverageQuota.HasValue ? $"{summaryResult.CoveredCodeElements.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {summaryResult.TotalCodeElements.ToString(CultureInfo.InvariantCulture)}" : ReportResources.NotAvailable)));
+
+            reportRenderer.Cards(cards);
 
             var historicCoverages = this.GetOverallHistoricCoverages(this.ReportContext.OverallHistoricCoverages);
-            if (historicCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue))
+            if (historicCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue || h.CodeElementCoverageQuota.HasValue))
             {
                 reportRenderer.Header(ReportResources.History);
                 reportRenderer.Chart(historicCoverages, this.ReportContext.Settings.RenderPngFallBackImagesForHistoryCharts);
@@ -282,15 +336,15 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             if (summaryResult.Assemblies.Any())
             {
                 reportRenderer.BeginSummaryTable();
-                reportRenderer.BeginSummaryTable(summaryResult.SupportsBranchCoverage);
+                reportRenderer.BeginSummaryTable(summaryResult.SupportsBranchCoverage, true);
 
                 foreach (var assembly in summaryResult.Assemblies)
                 {
-                    reportRenderer.SummaryAssembly(assembly, summaryResult.SupportsBranchCoverage);
+                    reportRenderer.SummaryAssembly(assembly, summaryResult.SupportsBranchCoverage, true);
 
                     foreach (var @class in assembly.Classes)
                     {
-                        reportRenderer.SummaryClass(@class, summaryResult.SupportsBranchCoverage);
+                        reportRenderer.SummaryClass(@class, summaryResult.SupportsBranchCoverage, true);
                     }
                 }
 
@@ -306,7 +360,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 reportRenderer.Paragraph(ReportResources.NoCoveredAssemblies);
             }
 
-            reportRenderer.CustomSummary(summaryResult.Assemblies, this.ReportContext.RiskHotspotAnalysisResult.RiskHotspots, summaryResult.SupportsBranchCoverage);
+            reportRenderer.CustomSummary(summaryResult.Assemblies, this.ReportContext.RiskHotspotAnalysisResult.RiskHotspots, summaryResult.SupportsBranchCoverage, true);
 
             reportRenderer.AddFooter();
             reportRenderer.SaveSummaryReport(this.CreateTargetDirectory());
@@ -382,7 +436,9 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                     CoverableLines = historicCoveragesOfExecutionTime.Sum(h => h.CoverableLines),
                     CoveredBranches = historicCoveragesOfExecutionTime.Sum(h => h.CoveredBranches),
                     TotalBranches = historicCoveragesOfExecutionTime.Sum(h => h.TotalBranches),
-                    TotalLines = historicCoveragesOfExecutionTime.Sum(h => h.TotalLines)
+                    TotalLines = historicCoveragesOfExecutionTime.Sum(h => h.TotalLines),
+                    CoveredCodeElements = historicCoveragesOfExecutionTime.Sum(h => h.CoveredCodeElements),
+                    TotalCodeElements = historicCoveragesOfExecutionTime.Sum(h => h.TotalCodeElements)
                 });
             }
 

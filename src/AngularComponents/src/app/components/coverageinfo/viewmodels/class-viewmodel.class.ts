@@ -6,9 +6,10 @@ import { Helper } from "./helper.class";
 export class ClassViewModel extends ElementBase {
     reportPath: string = "";
     _coverageType: string = "";
-    methodCoverage: string = "";
+    coverageByMethod: string = "";
     lineCoverageHistory: number[] = [];
     branchCoverageHistory: number[] = [];
+    methodCoverageHistory: number[] = [];
     historicCoverages: HistoricCoverage[] = [];
 
     currentHistoricCoverage: HistoricCoverage|null = null;
@@ -26,13 +27,17 @@ export class ClassViewModel extends ElementBase {
             this.totalLines = clazz.tl;
 
             this._coverageType = clazz.ct;
-            this.methodCoverage = clazz.mc;
+            this.coverageByMethod = clazz.cbm;
 
             this.coveredBranches = clazz.cb;
             this.totalBranches = clazz.tb;
 
+            this.coveredMethods = clazz.cm;
+            this.totalMethods = clazz.tm;
+
             this.lineCoverageHistory = clazz.lch;
             this.branchCoverageHistory = clazz.bch;
+            this.methodCoverageHistory = clazz.mch;
 
             clazz.hc.forEach(element => {
                 this.historicCoverages.push(new HistoricCoverage(element))
@@ -41,8 +46,8 @@ export class ClassViewModel extends ElementBase {
 
     override get coverage(): number {
         if (this.coverableLines === 0) {
-            if (this.methodCoverage !== "-") {
-                return parseFloat(this.methodCoverage);
+            if (this.coverageByMethod !== "-") {
+                return parseFloat(this.coverageByMethod);
             }
 
             return NaN;
@@ -53,7 +58,7 @@ export class ClassViewModel extends ElementBase {
 
     get coverageType(): string {
         if (this.coverableLines === 0) {
-            if (this.methodCoverage !== "-") {
+            if (this.coverageByMethod !== "-") {
                 return this._coverageType;
             }
 
@@ -78,7 +83,9 @@ export class ClassViewModel extends ElementBase {
                 && this.coverableLines === this.currentHistoricCoverage.cal
                 && this.totalLines === this.currentHistoricCoverage.tl
                 && this.coveredBranches === this.currentHistoricCoverage.cb
-                && this.totalBranches === this.currentHistoricCoverage.tb) {
+                && this.totalBranches === this.currentHistoricCoverage.tb
+                && this.coveredMethods === this.currentHistoricCoverage.cm
+                && this.totalMethods === this.currentHistoricCoverage.tm) {
                 return false;
             }
         } else if (historicCoverageFilter === "lineCoverageIncreaseOnly") {
@@ -99,6 +106,16 @@ export class ClassViewModel extends ElementBase {
         } else if (historicCoverageFilter === "branchCoverageDecreaseOnly") {
             let branchCoverage: number = this.branchCoverage;
             if (isNaN(branchCoverage) || branchCoverage >= this.currentHistoricCoverage.bcq) {
+                return false;
+            }
+        } else if (historicCoverageFilter === "methodCoverageIncreaseOnly") {
+            let methodCoverage: number = this.methodCoverage;
+            if (isNaN(methodCoverage) || methodCoverage <= this.currentHistoricCoverage.mcq) {
+                return false;
+            }
+        } else if (historicCoverageFilter === "methodCoverageDecreaseOnly") {
+            let methodCoverage: number = this.methodCoverage;
+            if (isNaN(methodCoverage) || methodCoverage >= this.currentHistoricCoverage.mcq) {
                 return false;
             }
         }

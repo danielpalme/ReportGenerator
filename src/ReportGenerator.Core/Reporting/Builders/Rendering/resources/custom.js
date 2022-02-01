@@ -151,10 +151,9 @@ var renderChart = function (chart) {
 
     /* Tooltips */
     var showToolTip = function () {
-        var point = this;
-        var index = [].slice.call(chart.getElementsByClassName('ct-point')).indexOf(point);
+        var index = this.getAttribute('ct:meta');
 
-        tooltip.innerHTML = chartData.tooltips[index % chartData.tooltips.length];
+        tooltip.innerHTML = chartData.tooltips[index];
         tooltip.style.display = 'block';
     };
 

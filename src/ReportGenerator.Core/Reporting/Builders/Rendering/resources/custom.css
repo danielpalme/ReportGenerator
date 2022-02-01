@@ -15,7 +15,7 @@ h1 a.button i { position: relative; top: 1px; }
 .container { margin: auto; max-width: 1650px; width: 90%; background-color: #fff; display: flex; box-shadow: 0 0 60px #7d7d7d; min-height: 100%; }
 .containerleft { padding: 0 20px 20px 20px; flex: 1; }
 .containerright { width: 340px; min-width: 340px; background-color: #e5e5e5; height: 100%; }
-.containerrightfixed { position: fixed; padding: 0 20px 20px 20px; border-left: solid 1px #6f6f6f; width: 300px; overflow-y: auto; height: 100%; top: 0; bottom: 0; }
+.containerrightfixed { position: fixed; padding: 0 20px 20px 20px; border-left: 1px solid #6f6f6f; width: 300px; overflow-y: auto; height: 100%; top: 0; bottom: 0; }
 .containerrightfixed h1 { background-color: #c00; }
 .containerrightfixed label, .containerright a { white-space: nowrap; overflow: hidden; display: inline-block; width: 100%; max-width: 300px; text-overflow: ellipsis; }
 .containerright a { margin-bottom: 3px; }
@@ -27,15 +27,32 @@ h1 a.button i { position: relative; top: 1px; }
 
 .footer { font-size: 0.7em; text-align: center; margin-top: 35px; }
 
+.card-group { display: flex; flex-wrap: wrap; gap: 15px; }
+.card-group + .card-group { margin-top: 15px; }
+.card-group .card { display: flex; flex-direction: column; background-color: #e4e4e4; background: radial-gradient(circle, #fefefe 0%, #f6f6f6 100%); border: 1px solid #c1c1c1; padding: 15px; color: #6f6f6f;}
+.card-group .card .card-header { font-size: 1.5rem; font-family: 'Century Gothic', sans-serif; margin-bottom: 15px; flex-grow: 1; }
+.card-group .card .card-body { display: flex; flex-direction: row; gap: 15px; flex-grow: 1; }
+.card-group .card .card-body div { display: flex; flex-direction: column; }
+.card-group .card .large { font-size: 5rem; line-height: 5rem; font-weight: bold; align-self: flex-end; border-left-width: 4px; padding-left: 10px; }
+.card-group .card table { align-self: flex-end; border-collapse: collapse; }
+.card-group .card table tr { border-bottom: 1px solid #c1c1c1; }
+.card-group .card table tr:hover { background-color: #c1c1c1; }
+.card-group .card table tr:last-child { border-bottom: none; }
+.card-group .card table th, .card-group .card table td { padding: 2px; }
+
 th { text-align: left; }
 .table-fixed { table-layout: fixed; }
-.overview { border: solid 1px #c1c1c1; border-collapse: collapse; width: 100%; word-wrap: break-word; }
-.overview th { border: solid 1px #c1c1c1; border-collapse: collapse; padding: 2px 4px 2px 4px; background-color: #ddd; }
+.overview { border: 1px solid #c1c1c1; border-collapse: collapse; width: 100%; word-wrap: break-word; }
+.overview th { border: 1px solid #c1c1c1; border-collapse: collapse; padding: 2px 4px 2px 4px; background-color: #ddd; }
 .overview tr.namespace th { background-color: #dcdcdc; }
 .overview thead th { background-color: #d1d1d1; }
 .overview th a { color: #000; }
 .overview tr.namespace a { margin-left: 15px; display: block; }
-.overview td { border: solid 1px #c1c1c1; border-collapse: collapse; padding: 2px 5px 2px 5px; }
+.overview td { border: 1px solid #c1c1c1; border-collapse: collapse; padding: 2px 5px 2px 5px; }
+.overview tr.header th { background-color: #d1d1d1; }
+.overview tr.header th:nth-child(2n+1) { background-color: #ddd; }
+.overview tr.header th:first-child { border-left: 1px solid #fff; border-top: 1px solid #fff; background-color: #fff; }
+
 div.currenthistory { margin: -2px -5px 0 -5px; padding: 2px 5px 2px 5px; height: 16px; }
 .coverage { border-collapse: collapse; font-size: 5px; height: 10px; }
 .coverage td { padding: 0; border: none; }
@@ -123,15 +140,18 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
 .ct-chart .ct-point:hover { stroke-width: 10px !important; }
 .ct-chart .ct-series.ct-series-a .ct-line, .ct-chart .ct-series.ct-series-a .ct-point { stroke: #c00 !important;}
 .ct-chart .ct-series.ct-series-b .ct-line, .ct-chart .ct-series.ct-series-b .ct-point { stroke: #1c2298 !important;}
+.ct-chart .ct-series.ct-series-c .ct-line, .ct-chart .ct-series.ct-series-c .ct-point { stroke: #0aad0a !important;}
 
-.tinylinecoveragechart, .tinybranchcoveragechart { background-color: #fff; margin-left: -3px; float: left; border: solid 1px #c1c1c1; width: 30px; height: 18px; }
+.tinylinecoveragechart, .tinybranchcoveragechart, .tinymethodcoveragechart { background-color: #fff; margin-left: -3px; float: left; border: 1px solid #c1c1c1; width: 30px; height: 18px; }
 .historiccoverageoffset { margin-top: 7px; }
 
-.tinylinecoveragechart .ct-line, .tinybranchcoveragechart .ct-line { stroke-width: 1px !important; }
+.tinylinecoveragechart .ct-line, .tinybranchcoveragechart .ct-line, .tinymethodcoveragechart .ct-line { stroke-width: 1px !important; }
 .tinybranchcoveragechart .ct-series.ct-series-a .ct-line { stroke: #1c2298 !important; }
+.tinymethodcoveragechart .ct-series.ct-series-a .ct-line { stroke: #0aad0a !important; }
 
 .linecoverage { background-color: #c00; width: 10px; height: 8px; border: 1px solid #000; display: inline-block; }
 .branchcoverage { background-color: #1c2298; width: 10px; height: 8px; border: 1px solid #000; display: inline-block; }
+.codeelementcoverage { background-color: #0aad0a; width: 10px; height: 8px; border: 1px solid #000; display: inline-block; }
 
 .tooltip { position: absolute; display: none; padding: 5px; background: #F4C63D; color: #453D3F; pointer-events: none; z-index: 1; min-width: 250px; }
 
@@ -145,7 +165,6 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
 .column105 { width: 105px; }
 .column112 { width: 112px; }
 .column135 { width: 135px; }
-.column150 { width: 150px; }
 
 .covered0 { width: 0px; }
 .covered1 { width: 1px; }
@@ -393,12 +412,27 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
 
         .containerrightfixed {
             background-color: #3D3C3C;
-            border-left: solid 1px #515050;
+            border-left: 1px solid #515050;
         }
 
             .containerrightfixed h1 {
                 background-color: #484747;
             }
+
+        .card-group .card {
+            background-color: #333;
+            background: radial-gradient(circle, #444 0%, #333 100%);
+            border: 1px solid #545454;
+            color: #fff;
+        }
+
+            .card-group .card table tr {
+                border-bottom: 1px solid #545454;
+            }
+
+                .card-group .card table tr:hover {
+                    background-color: #545454;
+                }
 
         .overview tr:hover {
             background-color: #2E2D2C;
@@ -406,7 +440,7 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
 
         .overview th {
             background-color: #444;
-            border: solid 1px #3B3A39;
+            border: 1px solid #3B3A39;
         }
 
         .overview tr.namespace th {
@@ -427,12 +461,26 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
             }
 
         .overview td {
-            border: solid 1px #3B3A39;
+            border: 1px solid #3B3A39;
         }
 
         .overview .coverage td {
             border: none;
         }
+
+        .overview tr.header th {
+            background-color: #444;
+        }
+
+            .overview tr.header th:nth-child(2n+1) {
+                background-color: #3a3a3a;
+            }
+
+            .overview tr.header th:first-child {
+                border-left: 1px solid #333;
+                border-top: 1px solid #333;
+                background-color: #333;
+            }
 
         .stripped tr:nth-child(2n+1) {
             background-color: #3c3c3c;
@@ -507,6 +555,10 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
             stroke: #6dc428 !important;
         }
 
+        .ct-chart .ct-series.ct-series-c .ct-line, .ct-chart .ct-series.ct-series-c .ct-point {
+            stroke: #e58f1d !important;
+        }
+
         .linecoverage {
             background-color: #0078D4;
         }
@@ -514,13 +566,20 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
         .branchcoverage {
             background-color: #6dc428;
         }
+        .codeelementcoverage {
+            background-color: #e58f1d;
+        }
 
-        .tinylinecoveragechart, .tinybranchcoveragechart {
+        .tinylinecoveragechart, .tinybranchcoveragechart, .tinymethodcoveragechart {
             background-color: #333;
         }
 
             .tinybranchcoveragechart .ct-series.ct-series-a .ct-line {
                 stroke: #6dc428 !important;
+            }
+
+            .tinymethodcoveragechart .ct-series.ct-series-a .ct-line {
+                stroke: #e58f1d !important;
             }
 
         .icon-down-dir {

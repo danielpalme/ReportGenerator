@@ -62,6 +62,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <returns>
         /// A <see cref="string"/> that represents this instance.
         /// </returns>
-        public override string ToString() => this.GetType().Name;
+        public override string ToString() => this.GetType().Name.Replace("Parser", string.Empty);
     }
 }

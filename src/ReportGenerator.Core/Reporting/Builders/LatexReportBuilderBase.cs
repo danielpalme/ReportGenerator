@@ -250,15 +250,15 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             if (summaryResult.Assemblies.Any())
             {
-                reportRenderer.BeginSummaryTable(summaryResult.SupportsBranchCoverage);
+                reportRenderer.BeginSummaryTable(summaryResult.SupportsBranchCoverage, true);
 
                 foreach (var assembly in summaryResult.Assemblies)
                 {
-                    reportRenderer.SummaryAssembly(assembly, summaryResult.SupportsBranchCoverage);
+                    reportRenderer.SummaryAssembly(assembly, summaryResult.SupportsBranchCoverage, true);
 
                     foreach (var @class in assembly.Classes)
                     {
-                        reportRenderer.SummaryClass(@class, summaryResult.SupportsBranchCoverage);
+                        reportRenderer.SummaryClass(@class, summaryResult.SupportsBranchCoverage, true);
                     }
                 }
 

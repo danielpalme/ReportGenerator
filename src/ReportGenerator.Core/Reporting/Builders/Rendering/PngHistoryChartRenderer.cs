@@ -30,9 +30,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 var grayPen = Pens.Dash(Color.LightGray, 1);
                 var redPen = Pens.Solid(Color.ParseHex("cc0000"), 2);
                 var bluePen = Pens.Solid(Color.ParseHex("1c2298"), 2);
+                var greenPen = Pens.Solid(Color.ParseHex("0aad0a"), 2);
 
                 var redBrush = Brushes.Solid(Color.ParseHex("cc0000"));
                 var blueBrush = Brushes.Solid(Color.ParseHex("1c2298"));
+                var greenBrush = Brushes.Solid(Color.ParseHex("0aad0a"));
 
                 int numberOfLines = historicCoverages.Count;
 
@@ -61,48 +63,103 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                         ctx.DrawLines(grayPen, new PointF(50 + (i * width), 15), new PointF(50 + (i * width), 115));
                     }
 
-                    for (int i = 1; i < historicCoverages.Count; i++)
+                    if (historicCoverages.Any(h => h.CoverageQuota.HasValue))
                     {
-                        float x1 = 50 + ((i - 1) * width);
-                        float y1 = 15 + (((100 - (float)historicCoverages[i - 1].CoverageQuota.GetValueOrDefault()) * totalHeight) / 100);
+                        for (int i = 1; i < historicCoverages.Count; i++)
+                        {
+                            if (!historicCoverages[i - 1].CoverageQuota.HasValue
+                                || !historicCoverages[i].CoverageQuota.HasValue)
+                            {
+                                continue;
+                            }
 
-                        float x2 = 50 + (i * width);
-                        float y2 = 15 + (((100 - (float)historicCoverages[i].CoverageQuota.GetValueOrDefault()) * totalHeight) / 100);
+                            float x1 = 50 + ((i - 1) * width);
+                            float y1 = 15 + (((100 - (float)historicCoverages[i - 1].CoverageQuota.Value) * totalHeight) / 100);
 
-                        ctx.DrawLines(redPen, new PointF(x1, y1), new PointF(x2, y2));
+                            float x2 = 50 + (i * width);
+                            float y2 = 15 + (((100 - (float)historicCoverages[i].CoverageQuota.Value) * totalHeight) / 100);
+
+                            ctx.DrawLines(redPen, new PointF(x1, y1), new PointF(x2, y2));
+                        }
                     }
 
                     if (historicCoverages.Any(h => h.BranchCoverageQuota.HasValue))
                     {
                         for (int i = 1; i < historicCoverages.Count; i++)
                         {
+                            if (!historicCoverages[i - 1].BranchCoverageQuota.HasValue
+                                || !historicCoverages[i].BranchCoverageQuota.HasValue)
+                            {
+                                continue;
+                            }
+
                             float x1 = 50 + ((i - 1) * width);
-                            float y1 = 15 + (((100 - (float)historicCoverages[i - 1].BranchCoverageQuota.GetValueOrDefault()) * totalHeight) / 100);
+                            float y1 = 15 + (((100 - (float)historicCoverages[i - 1].BranchCoverageQuota.Value) * totalHeight) / 100);
 
                             float x2 = 50 + (i * width);
-                            float y2 = 15 + (((100 - (float)historicCoverages[i].BranchCoverageQuota.GetValueOrDefault()) * totalHeight) / 100);
+                            float y2 = 15 + (((100 - (float)historicCoverages[i].BranchCoverageQuota.Value) * totalHeight) / 100);
 
                             ctx.DrawLines(bluePen, new PointF(x1, y1), new PointF(x2, y2));
                         }
                     }
 
+                    if (historicCoverages.Any(h => h.CodeElementCoverageQuota.HasValue))
+                    {
+                        for (int i = 1; i < historicCoverages.Count; i++)
+                        {
+                            if (!historicCoverages[i - 1].CodeElementCoverageQuota.HasValue
+                                || !historicCoverages[i].CodeElementCoverageQuota.HasValue)
+                            {
+                                continue;
+                            }
+
+                            float x1 = 50 + ((i - 1) * width);
+                            float y1 = 15 + (((100 - (float)historicCoverages[i - 1].CodeElementCoverageQuota.Value) * totalHeight) / 100);
+
+                            float x2 = 50 + (i * width);
+                            float y2 = 15 + (((100 - (float)historicCoverages[i].CodeElementCoverageQuota.Value) * totalHeight) / 100);
+
+                            ctx.DrawLines(greenPen, new PointF(x1, y1), new PointF(x2, y2));
+                        }
+                    }
+
                     for (int i = 0; i < historicCoverages.Count; i++)
                     {
+                        if (!historicCoverages[i].CoverageQuota.HasValue)
+                        {
+                            continue;
+                        }
+
                         float x1 = 50 + (i * width);
-                        float y1 = 15 + (((100 - (float)historicCoverages[i].CoverageQuota.GetValueOrDefault()) * totalHeight) / 100);
+                        float y1 = 15 + (((100 - (float)historicCoverages[i].CoverageQuota.Value) * totalHeight) / 100);
 
                         ctx.Fill(redBrush, new EllipsePolygon(x1, y1, 3));
                     }
 
-                    if (historicCoverages.Any(h => h.BranchCoverageQuota.HasValue))
+                    for (int i = 0; i < historicCoverages.Count; i++)
                     {
-                        for (int i = 0; i < historicCoverages.Count; i++)
+                        if (!historicCoverages[i].BranchCoverageQuota.HasValue)
                         {
-                            float x1 = 50 + (i * width);
-                            float y1 = 15 + (((100 - (float)historicCoverages[i].BranchCoverageQuota.GetValueOrDefault()) * totalHeight) / 100);
-
-                            ctx.Fill(blueBrush, new EllipsePolygon(x1, y1, 3));
+                            continue;
                         }
+
+                        float x1 = 50 + (i * width);
+                        float y1 = 15 + (((100 - (float)historicCoverages[i].BranchCoverageQuota.Value) * totalHeight) / 100);
+
+                        ctx.Fill(blueBrush, new EllipsePolygon(x1, y1, 3));
+                    }
+
+                    for (int i = 0; i < historicCoverages.Count; i++)
+                    {
+                        if (!historicCoverages[i].CodeElementCoverageQuota.HasValue)
+                        {
+                            continue;
+                        }
+
+                        float x1 = 50 + (i * width);
+                        float y1 = 15 + (((100 - (float)historicCoverages[i].CodeElementCoverageQuota.Value) * totalHeight) / 100);
+
+                        ctx.Fill(greenBrush, new EllipsePolygon(x1, y1, 3));
                     }
 
                     try

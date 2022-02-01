@@ -46,6 +46,9 @@ export class CodeElementViewModel extends ElementBase {
         this.coveredBranches += clazz.coveredBranches;
         this.totalBranches += clazz.totalBranches;
 
+        this.coveredMethods += clazz.coveredMethods;
+        this.totalMethods += clazz.totalMethods;
+
         if (grouping === null) {
             this.classes.push(clazz);
             return;
@@ -154,6 +157,18 @@ export class CodeElementViewModel extends ElementBase {
                     return left.branchCoverage < right.branchCoverage ? smaller : bigger;
                 }
             });
+        } else if (sortBy === "methodcoverage") {
+            elements.sort(function (left: CodeElementViewModel, right: CodeElementViewModel): number {
+                if (left.methodCoverage === right.methodCoverage) {
+                    return 0;
+                } else if (isNaN(left.methodCoverage)) {
+                    return smaller;
+                } else if (isNaN(right.methodCoverage)) {
+                    return bigger;
+                } else {
+                    return left.methodCoverage < right.methodCoverage ? smaller : bigger;
+                }
+            });
         }
     }
 
@@ -225,6 +240,30 @@ export class CodeElementViewModel extends ElementBase {
                     return bigger;
                 } else {
                     return left.branchCoverage < right.branchCoverage ? smaller : bigger;
+                }
+            });
+        } else if (sortBy === "covered_methods") {
+            this.classes.sort(function (left: ClassViewModel, right: ClassViewModel): number {
+                return left.coveredMethods === right.coveredMethods ?
+                        0
+                        : (left.coveredMethods < right.coveredMethods ? smaller : bigger);
+            });
+        } else if (sortBy === "total_methods") {
+            this.classes.sort(function (left: ClassViewModel, right: ClassViewModel): number {
+                return left.totalMethods === right.totalMethods ?
+                        0
+                        : (left.totalMethods < right.totalMethods ? smaller : bigger);
+            });
+        } else if (sortBy === "methodcoverage") {
+            this.classes.sort(function (left: ClassViewModel, right: ClassViewModel): number {
+                if (left.methodCoverage === right.methodCoverage) {
+                    return 0;
+                } else if (isNaN(left.methodCoverage)) {
+                    return smaller;
+                } else if (isNaN(right.methodCoverage)) {
+                    return bigger;
+                } else {
+                    return left.methodCoverage < right.methodCoverage ? smaller : bigger;
                 }
             });
         }

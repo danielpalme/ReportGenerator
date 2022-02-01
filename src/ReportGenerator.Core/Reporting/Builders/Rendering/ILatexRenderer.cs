@@ -48,7 +48,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// Adds a summary table to the report.
         /// </summary>
         /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
-        void BeginSummaryTable(bool branchCoverageAvailable);
+        /// <param name="methodCoverageAvailable">if set to <c>true</c> method coverage is available.</param>
+        void BeginSummaryTable(bool branchCoverageAvailable, bool methodCoverageAvailable);
 
         /// <summary>
         /// Adds a file analysis table to the report.
@@ -105,14 +106,16 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// </summary>
         /// <param name="assembly">The assembly.</param>
         /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
-        void SummaryAssembly(Assembly assembly, bool branchCoverageAvailable);
+        /// <param name="methodCoverageAvailable">if set to <c>true</c> method coverage is available.</param>
+        void SummaryAssembly(Assembly assembly, bool branchCoverageAvailable, bool methodCoverageAvailable);
 
         /// <summary>
         /// Adds the coverage information of a class to the report.
         /// </summary>
         /// <param name="class">The class.</param>
         /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
-        void SummaryClass(Class @class, bool branchCoverageAvailable);
+        /// <param name="methodCoverageAvailable">if set to <c>true</c> method coverage is available.</param>
+        void SummaryClass(Class @class, bool branchCoverageAvailable, bool methodCoverageAvailable);
 
         /// <summary>
         /// Saves a summary report.

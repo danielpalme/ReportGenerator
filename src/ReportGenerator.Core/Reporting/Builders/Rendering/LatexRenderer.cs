@@ -165,11 +165,16 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         }
 
         /// <inheritdoc />
-        public void BeginSummaryTable(bool branchCoverageAvailable)
+        public void BeginSummaryTable(bool branchCoverageAvailable, bool methodCoverageAvailable)
         {
-            this.reportTextWriter.Write(@"\begin{longtable}[l]{|l|r|r|r|r|r|");
+            this.reportTextWriter.Write(@"\begin{longtable}[l]{|l|r|r|r|r|");
 
             if (branchCoverageAvailable)
+            {
+                this.reportTextWriter.Write("r|");
+            }
+
+            if (methodCoverageAvailable)
             {
                 this.reportTextWriter.Write("r|");
             }
@@ -193,7 +198,14 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     EscapeLatexChars(ReportResources.BranchCoverage));
             }
 
-            this.reportTextWriter.WriteLine(@" & \textbf{{{0}}}\\", EscapeLatexChars(ReportResources.CodeElementCoverageQuota));
+            if (methodCoverageAvailable)
+            {
+                this.reportTextWriter.Write(
+                    " & \\textbf{{{0}}}",
+                    EscapeLatexChars(ReportResources.CodeElementCoverageQuota));
+            }
+
+            this.reportTextWriter.WriteLine(@"\\");
             this.reportTextWriter.WriteLine(@"\hline");
         }
 
@@ -429,7 +441,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         }
 
         /// <inheritdoc />
-        public void SummaryAssembly(Assembly assembly, bool branchCoverageAvailable)
+        public void SummaryAssembly(Assembly assembly, bool branchCoverageAvailable, bool methodCoverageAvailable)
         {
             if (assembly == null)
             {
@@ -458,19 +470,22 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 this.reportTextWriter.Write(row);
             }
 
-            row = string.Format(
-                CultureInfo.InvariantCulture,
-                @" & \textbf{{{0}}}",
-                assembly.CodeElementCoverageQuota.HasValue ? assembly.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + @"\%" : string.Empty);
+            if (methodCoverageAvailable)
+            {
+                row = string.Format(
+                    CultureInfo.InvariantCulture,
+                    @" & \textbf{{{0}}}",
+                    assembly.CodeElementCoverageQuota.HasValue ? assembly.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + @"\%" : string.Empty);
 
-            this.reportTextWriter.Write(row);
+                this.reportTextWriter.Write(row);
+            }
 
             this.reportTextWriter.WriteLine(@"\\");
             this.reportTextWriter.WriteLine(@"\hline");
         }
 
         /// <inheritdoc />
-        public void SummaryClass(Class @class, bool branchCoverageAvailable)
+        public void SummaryClass(Class @class, bool branchCoverageAvailable, bool methodCoverageAvailable)
         {
             if (@class == null)
             {
@@ -499,12 +514,15 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 this.reportTextWriter.Write(row);
             }
 
-            row = string.Format(
-                CultureInfo.InvariantCulture,
-                @" & {0}",
-                @class.CodeElementCoverageQuota.HasValue ? @class.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + @"\%" : string.Empty);
+            if (methodCoverageAvailable)
+            {
+                row = string.Format(
+                    CultureInfo.InvariantCulture,
+                    @" & {0}",
+                    @class.CodeElementCoverageQuota.HasValue ? @class.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + @"\%" : string.Empty);
 
-            this.reportTextWriter.Write(row);
+                this.reportTextWriter.Write(row);
+            }
 
             this.reportTextWriter.WriteLine(@"\\");
             this.reportTextWriter.WriteLine(@"\hline");

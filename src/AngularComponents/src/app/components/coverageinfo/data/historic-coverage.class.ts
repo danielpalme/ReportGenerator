@@ -44,6 +44,21 @@ export class HistoricCoverage {
     */
     bcq: number;
 
+    /*
+    * The coveredMethods.
+    */
+    cm: number;
+
+    /*
+    * The totalMethods.
+    */
+    tm: number;
+
+    /*
+    * The methodCoverageQuota.
+    */
+    mcq: number;
+
     constructor(hc: HistoricCoverage) {
         this.et = hc.et;
         this.cl = hc.cl;
@@ -54,6 +69,9 @@ export class HistoricCoverage {
         this.cb = hc.cb;
         this.tb = hc.tb;
         this.bcq = hc.bcq;
+        this.cm = hc.cm;
+        this.tm = hc.tm;
+        this.mcq = hc.mcq;
     }
 
     get coverageRatioText(): string {
@@ -70,5 +88,13 @@ export class HistoricCoverage {
         }
 
         return this.cb + "/" + this.tb;
+    }
+
+    get methodCoverageRatioText(): string {
+        if (this.tm === 0) {
+            return "-";
+        }
+
+        return this.cm + "/" + this.tm;
     }
 }

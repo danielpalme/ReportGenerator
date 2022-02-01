@@ -3,14 +3,16 @@
     body { color: #fff; }
     h1 { background-color: #252423; color: #fff; }
     .container { background-color: #292827; }
-    .containerrightfixed { background-color: #3D3C3C; border-left: solid 1px #515050; }
+    .containerrightfixed { background-color: #3D3C3C; border-left: 1px solid #515050; }
     .containerrightfixed h1 { background-color: #484747; }
+    .card-group .card { background-color: #333; background: radial-gradient(circle, #444 0%, #333 100%); border: 1px solid #545454; color: #fff; }
+    .card-group .card table tr { border-bottom: 1px solid #545454; }
+    .card-group .card table tr:hover { background-color: #545454; }
     .overview tr:hover { background-color: #2E2D2C }
-    .overview th { background-color: #292827 }
-    .overview th { background-color: #333; border: solid 1px #3B3A39; }
+    .overview thead th, .overview th { background-color: #333; border: 1px solid #3B3A39; }
     .overview th a { color: #fff; color: rgba(255, 255, 255, 0.95); }
     .overview th a:hover { color: #0078d4; }
-    .overview td { border: solid 1px #3B3A39; }
+    .overview td { border: 1px solid #3B3A39; }
     .overview .coverage td { border: none; }
     input, select { background-color: #292827; color: #fff; border: 1px solid #A19F9D; }
     a { color: #fff; color: rgba(255, 255, 255, 0.95); }
@@ -28,11 +30,14 @@
     .ct-grid{ stroke:#fff !important; }
     .ct-chart .ct-series.ct-series-a .ct-line, .ct-chart .ct-series.ct-series-a .ct-point { stroke: #0078D4  !important; }
     .ct-chart .ct-series.ct-series-b .ct-line, .ct-chart .ct-series.ct-series-b .ct-point { stroke: #6dc428 !important; }
+    .ct-chart .ct-series.ct-series-c .ct-line, .ct-chart .ct-series.ct-series-c .ct-point { stroke: #e58f1d !important; }
 
     .linecoverage { background-color: #0078D4; }
     .branchcoverage { background-color: #6dc428; }
-    .tinylinecoveragechart, .tinybranchcoveragechart { background-color: #292827; }
+    .codeelementcoverage { background-color: #e58f1d; }
+    .tinylinecoveragechart, .tinybranchcoveragechart, .tinymethodcoveragechart { background-color: #292827; }
     .tinybranchcoveragechart .ct-series.ct-series-a .ct-line { stroke: #6dc428 !important; }
+    .tinymethodcoveragechart .ct-series.ct-series-a .ct-line { stroke: #e58f1d !important; }
 
     .icon-down-dir {
         background-image: url(icon_down-dir_active.svg), url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHdpZHRoPSIxNzkyIiBoZWlnaHQ9IjE3OTIiIHZpZXdCb3g9IjAgMCAxNzkyIDE3OTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbD0iI0JGQkZDMCIgZD0iTTE0MDggNzA0cTAgMjYtMTkgNDVsLTQ0OCA0NDhxLTE5IDE5LTQ1IDE5dC00NS0xOWwtNDQ4LTQ0OHEtMTktMTktMTktNDV0MTktNDUgNDUtMTloODk2cTI2IDAgNDUgMTl0MTkgNDV6Ii8+PC9zdmc+);

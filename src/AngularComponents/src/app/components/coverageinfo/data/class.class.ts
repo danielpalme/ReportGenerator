@@ -37,9 +37,9 @@ export class Class {
     ct: string = "";
 
     /*
-    * The methodCoverage.
+    * The line coverage determined by method coverage.
     */
-    mc: string = "";
+    cbm: string = "";
 
     /*
     * The coveredBranches.
@@ -52,6 +52,16 @@ export class Class {
     tb: number = 0;
 
     /*
+    * The coveredMethods.
+    */
+    cm: number = 0;
+
+    /*
+    * The totalMethods.
+    */
+    tm: number = 0;
+
+    /*
     * The lineCoverageHistory.
     */
     lch: number[] = [];
@@ -60,6 +70,11 @@ export class Class {
     * The branchCoverageHistory.
     */
     bch: number[] = [];
+
+    /*
+    * The methodCoverageHistory.
+    */
+    mch: number[] = [];
 
     /*
     * The historicCoverages.

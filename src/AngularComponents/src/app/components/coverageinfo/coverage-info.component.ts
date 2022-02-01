@@ -47,6 +47,12 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
               <option value="branchCoverageDecreaseOnly" *ngIf="branchCoverageAvailable">
                 {{translations.branchCoverageDecreaseOnly}}
               </option>
+              <option value="methodCoverageIncreaseOnly" *ngIf="methodCoverageAvailable">
+                {{translations.methodCoverageIncreaseOnly}}
+              </option>
+              <option value="methodCoverageDecreaseOnly" *ngIf="methodCoverageAvailable">
+                {{translations.methodCoverageDecreaseOnly}}
+              </option>
             </select>
           </div>
         </ng-container>
@@ -70,8 +76,18 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
           <col class="column70" *ngIf="branchCoverageAvailable">
           <col class="column98" *ngIf="branchCoverageAvailable">
           <col class="column112" *ngIf="branchCoverageAvailable">
+          <col class="column90" *ngIf="methodCoverageAvailable">
+          <col class="column70" *ngIf="methodCoverageAvailable">
+          <col class="column98" *ngIf="methodCoverageAvailable">
+          <col class="column112" *ngIf="methodCoverageAvailable">
         </colgroup>
         <thead>
+          <tr class="header">
+            <th></th>
+            <th class="center" colspan="6">{{translations.coverage}}</th>
+            <th class="center" colspan="4" *ngIf="branchCoverageAvailable">{{translations.branchCoverage}}</th>
+            <th class="center" colspan="4" *ngIf="methodCoverageAvailable">{{translations.methodCoverage}}</th>
+          </tr>
           <tr>
             <th><a href="#" (click)="updateSorting('name', $event)"><i class="icon-down-dir"
               [ngClass]="{'icon-up-dir_active': settings.sortBy === 'name' && settings.sortOrder === 'desc',
@@ -97,7 +113,7 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
                 <a href="#" (click)="updateSorting('coverage', $event)"><i class="icon-down-dir"
                   [ngClass]="{'icon-up-dir_active': settings.sortBy === 'coverage' && settings.sortOrder === 'desc',
                   'icon-down-dir_active': settings.sortBy === 'coverage' && settings.sortOrder === 'asc',
-                  'icon-down-dir': settings.sortBy !== 'coverage'}"></i>{{translations.coverage}}</a></th>
+                  'icon-down-dir': settings.sortBy !== 'coverage'}"></i>{{translations.percentage}}</a></th>
             <th class="right" *ngIf="branchCoverageAvailable"><a href="#" (click)="updateSorting('covered_branches', $event)"><i class="icon-down-dir"
               [ngClass]="{'icon-up-dir_active': settings.sortBy === 'covered_branches' && settings.sortOrder === 'desc',
               'icon-down-dir_active': settings.sortBy === 'covered_branches' && settings.sortOrder === 'asc',
@@ -110,7 +126,20 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
                 <a href="#" (click)="updateSorting('branchcoverage', $event)"><i class="icon-down-dir"
                   [ngClass]="{'icon-up-dir_active': settings.sortBy === 'branchcoverage' && settings.sortOrder === 'desc',
                   'icon-down-dir_active': settings.sortBy === 'branchcoverage' && settings.sortOrder === 'asc',
-                  'icon-down-dir': settings.sortBy !== 'branchcoverage'}"></i>{{translations.branchCoverage}}</a></th>
+                  'icon-down-dir': settings.sortBy !== 'branchcoverage'}"></i>{{translations.percentage}}</a></th>
+            <th class="right" *ngIf="methodCoverageAvailable"><a href="#" (click)="updateSorting('covered_methods', $event)"><i class="icon-down-dir"
+              [ngClass]="{'icon-up-dir_active': settings.sortBy === 'covered_methods' && settings.sortOrder === 'desc',
+              'icon-down-dir_active': settings.sortBy === 'covered_methods' && settings.sortOrder === 'asc',
+              'icon-down-dir': settings.sortBy !== 'covered_methods'}"></i>{{translations.covered}}</a></th>
+            <th class="right" *ngIf="methodCoverageAvailable"><a href="#" (click)="updateSorting('total_methods', $event)"><i class="icon-down-dir"
+                [ngClass]="{'icon-up-dir_active': settings.sortBy === 'total_methods' && settings.sortOrder === 'desc',
+                'icon-down-dir_active': settings.sortBy === 'total_methods' && settings.sortOrder === 'asc',
+                'icon-down-dir': settings.sortBy !== 'total_methods'}"></i>{{translations.total}}</a></th>
+            <th class="center" colspan="2" *ngIf="methodCoverageAvailable">
+                <a href="#" (click)="updateSorting('methodcoverage', $event)"><i class="icon-down-dir"
+                  [ngClass]="{'icon-up-dir_active': settings.sortBy === 'methodcoverage' && settings.sortOrder === 'desc',
+                  'icon-down-dir_active': settings.sortBy === 'methodcoverage' && settings.sortOrder === 'asc',
+                  'icon-down-dir': settings.sortBy !== 'methodcoverage'}"></i>{{translations.percentage}}</a></th>
           </tr>
         </thead>
         <tbody>
@@ -119,7 +148,8 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
               codeelement-row
               [element]="element"
               [collapsed]="element.collapsed"
-              [branchCoverageAvailable]="branchCoverageAvailable">
+              [branchCoverageAvailable]="branchCoverageAvailable"
+              [methodCoverageAvailable]="methodCoverageAvailable">
             </tr>
             <ng-container *ngFor="let clazz of element.classes">
               <tr *ngIf="!element.collapsed
@@ -127,6 +157,7 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
                 class-row [clazz]="clazz"
                   [translations]="translations"
                   [branchCoverageAvailable]="branchCoverageAvailable"
+                  [methodCoverageAvailable]="methodCoverageAvailable"
                   [historyComparisionDate]="settings.historyComparisionDate">
               </tr>
             </ng-container>
@@ -137,7 +168,8 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
                  codeelement-row
                  [element]="subElement"
                  [collapsed]="subElement.collapsed"
-                 [branchCoverageAvailable]="branchCoverageAvailable">
+                 [branchCoverageAvailable]="branchCoverageAvailable"
+                 [methodCoverageAvailable]="methodCoverageAvailable">
                 </tr>
                 <ng-container *ngFor="let clazz of subElement.classes">
                   <tr class="namespace" *ngIf="!subElement.collapsed
@@ -145,6 +177,7 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
                    class-row [clazz]="clazz"
                     [translations]="translations"
                     [branchCoverageAvailable]="branchCoverageAvailable"
+                    [methodCoverageAvailable]="methodCoverageAvailable"
                     [historyComparisionDate]="settings.historyComparisionDate">
                   </tr>
                 </ng-container>
@@ -161,6 +194,7 @@ export class CoverageInfoComponent {
 
   historicCoverageExecutionTimes: string[] = [];
   branchCoverageAvailable: boolean = false;
+  methodCoverageAvailable: boolean = false;
   codeElements: CodeElementViewModel[] = [];
 
   translations: any = { };
@@ -175,6 +209,7 @@ export class CoverageInfoComponent {
   ngOnInit(): void {
     this.historicCoverageExecutionTimes = (<any>this.window).historicCoverageExecutionTimes;
     this.branchCoverageAvailable = (<any>this.window).branchCoverageAvailable;
+    this.methodCoverageAvailable = (<any>this.window).methodCoverageAvailable;
 
     this.translations = (<any>this.window).translations;
 

@@ -19,7 +19,7 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ReportResources {
@@ -228,6 +228,24 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         public static string CodeCoverage {
             get {
                 return ResourceManager.GetString("CodeCoverage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Method coverage: Decrease only.
+        /// </summary>
+        public static string CodeElementCoverageDecreaseOnly {
+            get {
+                return ResourceManager.GetString("CodeElementCoverageDecreaseOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Method coverage: Increase only.
+        /// </summary>
+        public static string CodeElementCoverageIncreaseOnly {
+            get {
+                return ResourceManager.GetString("CodeElementCoverageIncreaseOnly", resourceCulture);
             }
         }
         
@@ -520,6 +538,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Information.
+        /// </summary>
+        public static string Information {
+            get {
+                return ResourceManager.GetString("Information", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Line.
         /// </summary>
         public static string Line {
@@ -619,6 +646,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to N/A.
+        /// </summary>
+        public static string NotAvailable {
+            get {
+                return ResourceManager.GetString("NotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to NPath complexity.
         /// </summary>
         public static string NPathComplexity {
@@ -642,6 +678,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         public static string Parser {
             get {
                 return ResourceManager.GetString("Parser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Percentage.
+        /// </summary>
+        public static string Percentage {
+            get {
+                return ResourceManager.GetString("Percentage", resourceCulture);
             }
         }
         

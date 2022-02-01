@@ -37,6 +37,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
             this.TotalLines = @class.TotalLines.GetValueOrDefault();
             this.CoveredBranches = @class.CoveredBranches.GetValueOrDefault();
             this.TotalBranches = @class.TotalBranches.GetValueOrDefault();
+            this.CoveredCodeElements = @class.CoveredCodeElements;
+            this.TotalCodeElements = @class.TotalCodeElements;
         }
 
         /// <summary>
