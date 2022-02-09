@@ -239,11 +239,14 @@
             $scope.targetdir = 'coveragereport';
             $scope.reporttypes = [ 
                 { name: 'Html', description: 'The default output format. Creates a summary overview (index.htm) and detailed reports for each class.', requiresHistoryDir: false, checked: true },
+                { name: 'Html_Light', description: 'Same as Html but with a light theme.', requiresHistoryDir: false, checked: false },
+                { name: 'Html_Dark', description: 'Same as Html but with a dark theme.', requiresHistoryDir: false, checked: false },
                 { name: 'HtmlSummary', description: 'Creates a single HTML file (summary.htm) without links.', requiresHistoryDir: false, checked: false  },
-                { name: 'HtmlInline', description: 'Same as HTML but CSS and JavaScript is included in every HTML page. This results in larger file sizes, but can be useful for integration into build servers like Azure DevOps (VSTS), since they may block referenced CSS and JavaScript files.', requiresHistoryDir: false, checked: false  },
-                { name: 'HtmlInline_AzurePipelines', description: 'Same as HTMLInline but with modified CSS that matches the light look and feel of Azure Pipelines.', requiresHistoryDir: false, checked: false },
-                { name: 'HtmlInline_AzurePipelines_Dark', description: 'Same as HTMLInline but with modified CSS that matches the dark look and feel of Azure Pipelines.', requiresHistoryDir: false, checked: false },
                 { name: 'HtmlChart', description: 'Creates a single HTML file containing a chart with historic coverage information.', requiresHistoryDir: true, checked: false },
+                { name: 'HtmlInline', description: 'Same as HTML but CSS and JavaScript is included in every HTML page. This results in larger file sizes, but can be useful for integration into build servers like Azure DevOps (VSTS), since they may block referenced CSS and JavaScript files.', requiresHistoryDir: false, checked: false  },
+                { name: 'HtmlInline_AzurePipelines', description: 'Same as HtmlInline but with an adpative light/dark theme matching the light look and feel of Azure Pipelines.', requiresHistoryDir: false, checked: false },
+                { name: 'HtmlInline_AzurePipelines_Light', description: 'Same as HtmlInline but with a light theme matching the light look and feel of Azure Pipelines.', requiresHistoryDir: false, checked: false },
+                { name: 'HtmlInline_AzurePipelines_Dark', description: 'Same as HtmlInline but with a dark theme matching the dark look and feel of Azure Pipelines.', requiresHistoryDir: false, checked: false },
                 { name: 'MHtml', description: 'Same as HTML but packaged into a single MHTML file.', requiresHistoryDir: false, checked: false },
                 { name: 'Clover', description: 'Creates a XML file in Clover format. This format integrates with tools like Atlassian Bamboo.', requiresHistoryDir: false, checked: false },
                 { name: 'Cobertura', description: 'Creates a XML file in Cobertura format. This format integrates with tools like Azure DevOps (VSTS) or Jenkins.', requiresHistoryDir: false, checked: false },

@@ -106,7 +106,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             bool onlySummary,
             HtmlMode htmlMode,
             string cssFileResource = "custom.css",
-            string additionalCssFileResource = null)
+            string additionalCssFileResource = "custom_adaptive.css")
         {
             this.fileNameByClass = fileNameByClass;
             this.onlySummary = onlySummary;

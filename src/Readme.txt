@@ -21,7 +21,10 @@ ReportGenerator supports merging several reports into one.
 
 The following output formats are supported by ReportGenerator:
 
--Html, HtmlSummary, HtmlInline, HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Dark, HtmlChart, MHtml
+-Html, Html_Light, Html_Dark
+-HtmlSummary, HtmlChart, HtmlInline
+-HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Light, HtmlInline_AzurePipelines_Dark
+-MHtml
 -Clover
 -Cobertura
 -SonarQube
@@ -63,6 +66,12 @@ For further details take a look at LICENSE.txt.
 =======================================================================
 
 CHANGELOG
+
+5.1.0.0
+
+    * New: #433: Added report types Html_Light, Html_Dark and HtmlInline_AzurePipelines_Light
+    * New: HTML reports: Replaced tabular data with cards
+    * New: Added method coverage to summary table
 
 5.0.4.0
 

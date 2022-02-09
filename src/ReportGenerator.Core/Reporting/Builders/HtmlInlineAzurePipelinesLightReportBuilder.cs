@@ -8,7 +8,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
     /// <summary>
     /// Creates report in HTML format.
     /// </summary>
-    public class HtmlInlineAzurePipelinesReportBuilder : HtmlReportBuilderBase
+    public class HtmlInlineAzurePipelinesLightReportBuilder : HtmlReportBuilderBase
     {
         /// <summary>
         /// Dictionary containing the filenames of the class reports by class.
@@ -21,7 +21,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <value>
         /// The report format.
         /// </value>
-        public override string ReportType => "HtmlInline_AzurePipelines";
+        public override string ReportType => "HtmlInline_AzurePipelines_Light";
 
         /// <summary>
         /// Creates a class report.
@@ -30,7 +30,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <param name="fileAnalyses">The file analyses that correspond to the class.</param>
         public override void CreateClassReport(Class @class, IEnumerable<FileAnalysis> fileAnalyses)
         {
-            using (var renderer = new HtmlRenderer(this.fileNameByClass, false, HtmlMode.InlineCssAndJavaScript, "custom-azurepipelines.css", "custom-azurepipelines_adaptive.css"))
+            using (var renderer = new HtmlRenderer(this.fileNameByClass, false, HtmlMode.InlineCssAndJavaScript, "custom-azurepipelines.css", null))
             {
                 this.CreateClassReport(renderer, @class, fileAnalyses);
             }
@@ -42,7 +42,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <param name="summaryResult">The summary result.</param>
         public override void CreateSummaryReport(SummaryResult summaryResult)
         {
-            using (var renderer = new HtmlRenderer(this.fileNameByClass, false, HtmlMode.InlineCssAndJavaScript, "custom-azurepipelines.css", "custom-azurepipelines_adaptive.css"))
+            using (var renderer = new HtmlRenderer(this.fileNameByClass, false, HtmlMode.InlineCssAndJavaScript, "custom-azurepipelines.css", null))
             {
                 this.CreateSummaryReport(renderer, summaryResult);
             }

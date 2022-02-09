@@ -18,10 +18,13 @@
   <ItemGroup>
     <None Remove="Reporting\Builders\Rendering\resources\chartist.min.css" />
     <None Remove="Reporting\Builders\Rendering\resources\chartist.min.js" />
+    <None Remove="Reporting\Builders\Rendering\resources\custom-azurepipelines_adaptive.css" />
     <None Remove="Reporting\Builders\Rendering\resources\custom-azurepipelines_dark.css" />
     <None Remove="Reporting\Builders\Rendering\resources\custom.css" />
     <None Remove="Reporting\Builders\Rendering\resources\custom-azurepipelines.css" />
     <None Remove="Reporting\Builders\Rendering\resources\custom.js" />
+    <None Remove="Reporting\Builders\Rendering\resources\custom_adaptive.css" />
+    <None Remove="Reporting\Builders\Rendering\resources\custom_dark.css" />
     <None Remove="Reporting\Builders\Rendering\resources\main.js" />
     <None Remove="Reporting\Builders\Rendering\resources\polyfills.js" />
     <None Remove="Reporting\Builders\Rendering\resources\runtime.js" />
@@ -30,6 +33,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\chartist.min.css" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\chartist.min.js" />
+    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom_dark.css" />
+    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom_adaptive.css" />
+    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom-azurepipelines_adaptive.css" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom-azurepipelines_dark.css" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom.css" />
     <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom-azurepipelines.css" />

@@ -2,7 +2,7 @@
   "profiles": {
     "ReportGenerator.Console.NetCore": {
       "commandName": "Project",
-      "commandLineArgs": "-reports:C:\\Users\\danie\\Documents\\Projects\\ReportGenerator\\src\\Testprojects\\CSharp\\Reports\\OpenCover.xml -targetdir:out"
+      "commandLineArgs": "-reports:C:\\Users\\danie\\Documents\\Projects\\ReportGenerator\\src\\Testprojects\\CSharp\\Reports\\OpenCover.xml -targetdir:C:\\Users\\danie\\Desktop\\test -historydir:C:\\Users\\danie\\Desktop\\test\\history -title:TestTitle -tag:TestTag -reportTypes:Html;HtmlChart;Latex;HtmlInline_AzurePipelines_Dark;HtmlInline_AzurePipelines --settings:createSubdirectoryForAllReportTypes=true"
     }
   }
 }
