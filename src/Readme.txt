@@ -67,6 +67,7 @@ CHANGELOG
 5.0.4.0
 
     * Fix: #482: Fixed incorrect shadow text in badges
+    * Fix: #485: Coberatura: Fixed special file format
 
 5.0.3.0
 
