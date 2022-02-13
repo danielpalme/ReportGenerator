@@ -95,7 +95,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 }
                 else
                 {
-                    StringBuilder sb = new StringBuilder("MultiReportParser (");
+                    StringBuilder sb = new StringBuilder("MultiReport (");
 
                     var groupedParsers = this.parserNames.GroupBy(p => p).OrderBy(pg => pg.Key);
 
