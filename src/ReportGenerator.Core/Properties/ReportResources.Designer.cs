@@ -583,6 +583,24 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Upgrade to PRO version.
+        /// </summary>
+        public static string MethodCoverageProButton {
+            get {
+                return ResourceManager.GetString("MethodCoverageProButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Method coverage is only available for sponsors..
+        /// </summary>
+        public static string MethodCoverageProVersion {
+            get {
+                return ResourceManager.GetString("MethodCoverageProVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Methods/Properties.
         /// </summary>
         public static string MethodsProperties {

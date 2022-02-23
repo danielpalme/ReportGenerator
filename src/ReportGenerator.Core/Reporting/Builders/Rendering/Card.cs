@@ -11,6 +11,16 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// Initializes a new instance of the <see cref="Card" /> class.
         /// </summary>
         /// <param name="title">The title.</param>
+        public Card(string title)
+        {
+            this.Title = title;
+            this.ProRequired = true;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Card" /> class.
+        /// </summary>
+        /// <param name="title">The title.</param>
         /// <param name="subtitle">The sub title.</param>
         /// <param name="subTitlePercentage">The percentage for the left border.</param>
         /// <param name="rows">The rows.</param>
@@ -21,6 +31,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.SubTitlePercentage = subTitlePercentage;
             this.Rows = rows;
         }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether PRO version is required.
+        /// </summary>
+        public bool ProRequired { get; set; }
 
         /// <summary>
         /// Gets the title.
@@ -40,6 +55,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <summary>
         /// Gets the rows.
         /// </summary>
-        public IReadOnlyCollection<CardLineItem> Rows { get; }
+        public IReadOnlyCollection<CardLineItem> Rows { get; } = new List<CardLineItem>();
     }
 }

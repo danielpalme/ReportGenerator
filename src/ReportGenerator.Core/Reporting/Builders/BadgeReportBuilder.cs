@@ -26,28 +26,46 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         private const string Template = @"<svg xmlns=""http://www.w3.org/2000/svg"" xmlns:xlink=""http://www.w3.org/1999/xlink"" width=""155"" height=""20"">
     <style type=""text/css"">
           <![CDATA[
-            @keyframes fadeout {{
-              0 % {{ visibility: visible; opacity: 1; }}
-              40% {{ visibility: visible; opacity: 1; }}
-              50% {{ visibility: hidden; opacity: 0; }}
-              90% {{ visibility: hidden; opacity: 0; }}
+            @keyframes fade1 {{
+                0% {{ visibility: visible; opacity: 1; }}
+               27% {{ visibility: visible; opacity: 1; }}
+               33% {{ visibility: hidden; opacity: 0; }}
+               60% {{ visibility: hidden; opacity: 0; }}
+               66% {{ visibility: hidden; opacity: 0; }}
+               93% {{ visibility: hidden; opacity: 0; }}
               100% {{ visibility: visible; opacity: 1; }}
             }}
-            @keyframes fadein {{
-              0% {{ visibility: hidden; opacity: 0; }}
-              40% {{ visibility: hidden; opacity: 0; }}
-              50% {{ visibility: visible; opacity: 1; }}
-              90% {{ visibility: visible; opacity: 1; }}
+            @keyframes fade2 {{
+                0% {{ visibility: hidden; opacity: 0; }}
+               27% {{ visibility: hidden; opacity: 0; }}
+               33% {{ visibility: visible; opacity: 1; }}
+               60% {{ visibility: visible; opacity: 1; }}
+               66% {{ visibility: hidden; opacity: 0; }}
+               93% {{ visibility: hidden; opacity: 0; }}
+              100% {{ visibility: hidden; opacity: 0; }}
+            }}
+            @keyframes fade3 {{
+                0% {{ visibility: hidden; opacity: 0; }}
+               27% {{ visibility: hidden; opacity: 0; }}
+               33% {{ visibility: hidden; opacity: 0; }}
+               60% {{ visibility: hidden; opacity: 0; }}
+               66% {{ visibility: visible; opacity: 1; }}
+               93% {{ visibility: visible; opacity: 1; }}
               100% {{ visibility: hidden; opacity: 0; }}
             }}
             .linecoverage {{
-                animation-duration: 10s;
-                animation-name: fadeout;
+                animation-duration: 15s;
+                animation-name: fade1;
                 animation-iteration-count: infinite;
             }}
             .branchcoverage {{
-                animation-duration: 10s;
-                animation-name: fadein;
+                animation-duration: 15s;
+                animation-name: fade2;
+                animation-iteration-count: infinite;
+            }}
+            .methodcoverage {{
+                animation-duration: 15s;
+                animation-name: fade3;
                 animation-iteration-count: infinite;
             }}
           ]]>
@@ -92,23 +110,26 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
     <g>
         {1}
         {2}
+        {3}
     </g>
     
     <g fill=""#fff"" text-anchor=""middle"" font-family=""Verdana,Arial,Geneva,sans-serif"" font-size=""11"">
         <a xlink:href=""https://github.com/danielpalme/ReportGenerator"" target=""_top"">
-            <title>{3}</title>
+            <title>{4}</title>
             <use xlink:href=""#icon"" transform=""translate(3,2) scale(.04)""/>
         </a>
 
-        <text x=""53"" y=""15"" fill=""#010101"" fill-opacity="".3"">{4}</text>
-        <text x=""53"" y=""14"" fill=""#fff"">{4}</text>
-        {5}
+        <text x=""53"" y=""15"" fill=""#010101"" fill-opacity="".3"">{5}</text>
+        <text x=""53"" y=""14"" fill=""#fff"">{5}</text>
         {6}
+        {7}
+        {8}
     </g>
 
     <g>
-        {7}
-        {8}
+        {9}
+        {10}
+        {11}
     </g>
 </svg>";
 
@@ -121,6 +142,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// The template for the branch coverage symbol.
         /// </summary>
         private const string BranchCoverageSymbol = @"<path class=""{0}"" fill=""#fff"" d=""m 97.627847,15.246584 q 0,-0.36435 -0.255043,-0.619412 -0.255042,-0.254975 -0.619388,-0.254975 -0.364346,0 -0.619389,0.254975 -0.255042,0.255062 -0.255042,0.619412 0,0.36435 0.255042,0.619412 0.255043,0.254975 0.619389,0.254975 0.364346,0 0.619388,-0.254975 0.255043,-0.255062 0.255043,-0.619412 z m 0,-10.4931686 q 0,-0.3643498 -0.255043,-0.6194121 -0.255042,-0.2550624 -0.619388,-0.2550624 -0.364346,0 -0.619389,0.2550624 -0.255042,0.2550623 -0.255042,0.6194121 0,0.3643498 0.255042,0.6193246 0.255043,0.2551499 0.619389,0.2551499 0.364346,0 0.619388,-0.2551499 0.255043,-0.2549748 0.255043,-0.6193246 z m 5.829537,1.1659368 q 0,-0.3643498 -0.255042,-0.6194121 -0.255042,-0.2550624 -0.619388,-0.2550624 -0.364347,0 -0.619389,0.2550624 -0.255042,0.2550623 -0.255042,0.6194121 0,0.3643497 0.255042,0.6193246 0.255042,0.2550623 0.619389,0.2550623 0.364346,0 0.619388,-0.2550623 0.255042,-0.2549749 0.255042,-0.6193246 z m 0.874431,0 q 0,0.4736372 -0.236825,0.8789369 -0.236824,0.4052998 -0.637606,0.6330621 -0.01822,2.6142358 -2.058555,3.7709858 -0.619388,0.346149 -1.849057,0.737799 -1.165908,0.36435 -1.543916,0.646712 -0.378009,0.282363 -0.378009,0.910875 l 0,0.236862 q 0.40078,0.227675 0.637605,0.633062 0.236825,0.4053 0.236825,0.878937 0,0.7287 -0.510084,1.238824 -0.510085,0.510038 -1.238777,0.510038 -0.728692,0 -1.238777,-0.510038 -0.510085,-0.510124 -0.510085,-1.238824 0,-0.473637 0.236825,-0.878937 0.236826,-0.405387 0.637606,-0.633062 l 0,-7.469083 q -0.40078,-0.2277624 -0.637606,-0.6331496 -0.236825,-0.4052998 -0.236825,-0.878937 0,-0.7286996 0.510085,-1.2388242 0.510085,-0.5100372 1.238777,-0.5100372 0.728692,0 1.238777,0.5100372 0.510084,0.5101246 0.510084,1.2388242 0,0.4736372 -0.236825,0.878937 -0.236825,0.4053872 -0.637605,0.6331496 l 0,4.526985 q 0.491866,-0.236862 1.402732,-0.519225 0.500976,-0.154875 0.797007,-0.268712 0.296031,-0.1138373 0.64216,-0.2823623 0.346129,-0.168525 0.537411,-0.3598 0.191281,-0.191275 0.3689,-0.4645374 0.177619,-0.2732623 0.255042,-0.6330621 0.07742,-0.3597998 0.07742,-0.833437 -0.40078,-0.2277623 -0.637606,-0.6330621 -0.236824,-0.4052997 -0.236824,-0.8789369 0,-0.7286996 0.510084,-1.2388243 0.510085,-0.5101246 1.238777,-0.5101246 0.728693,0 1.238777,0.5101246 0.510084,0.5101247 0.510084,1.2388243 z""/>";
+
+        /// <summary>
+        /// The template for the method coverage symbol.
+        /// </summary>
+        private const string MethodCoverageSymbol = @"<path class=""{0}"" fill=""#fff"" d=""m 100.5384,15.628605 5.3846,-2.9363 v -5.35096 l -5.3846,1.96033 z M 100,8.350955 105.8726,6.213935 100,4.076925 94.1274,6.213935 Z m 7,-2.12019 v 6.46154 q 0,0.29447 -0.1515,0.54687 -0.1514,0.25241 -0.4122,0.39544 l -5.9231,3.23076 q -0.2356,0.13462 -0.5132,0.13462 -0.2777,0 -0.5133,-0.13462 l -5.923,-3.23076 Q 93.3028,13.491585 93.1514,13.239175 93,12.986775 93,12.692305 v -6.46154 q 0,-0.33654 0.1935,-0.61418 0.1935,-0.27765 0.5132,-0.39543 l 5.9231,-2.15385 q 0.1851,-0.0673 0.3702,-0.0673 0.1851,0 0.3702,0.0673 l 5.923,2.15385 q 0.3197,0.11778 0.5133,0.39543 Q 107,5.894225 107,6.230765 Z""/>";
 
         /// <summary>
         /// The template for the coverage text.
@@ -146,6 +172,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// The template for branch coverage badge in PNG format.
         /// </summary>
         private const string BranchCoveragePngTemplate = "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";
+
+        /// <summary>
+        /// The template for method coverage badge in PNG format.
+        /// </summary>
+        private const string MethodCoveragePngTemplate = "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";
 
         /// <summary>
         /// Colors for ShiedsIo badges.
@@ -229,7 +260,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             File.WriteAllText(
                 targetPath,
-                this.CreateSvgBadge(summaryResult, true, false));
+                this.CreateSvgBadge(summaryResult, true, false, false));
 
             foreach (var color in ShieldIoColors)
             {
@@ -248,7 +279,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             File.WriteAllText(
                 targetPath,
-                this.CreateSvgBadge(summaryResult, false, true));
+                this.CreateSvgBadge(summaryResult, false, true, false));
 
             foreach (var color in ShieldIoColors)
             {
@@ -261,13 +292,32 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                     this.CreateShieldsIoSvgBadge(summaryResult.BranchCoverageQuota, color.Item2));
             }
 
+            targetPath = Path.Combine(targetDirectory, "badge_methodcoverage.svg");
+
+            Logger.InfoFormat(Resources.WritingReportFile, targetPath);
+
+            File.WriteAllText(
+                targetPath,
+                this.CreateSvgBadge(summaryResult, false, false, true));
+
+            foreach (var color in ShieldIoColors)
+            {
+                targetPath = Path.Combine(targetDirectory, $"badge_shieldsio_methodcoverage_{color.Item1}.svg");
+
+                Logger.InfoFormat(Resources.WritingReportFile, targetPath);
+
+                File.WriteAllText(
+                    targetPath,
+                    this.CreateShieldsIoSvgBadge(summaryResult.CodeElementCoverageQuota, color.Item2));
+            }
+
             targetPath = Path.Combine(targetDirectory, "badge_combined.svg");
 
             Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
             File.WriteAllText(
                 targetPath,
-                this.CreateSvgBadge(summaryResult, true, true));
+                this.CreateSvgBadge(summaryResult, true, true, true));
 
             targetPath = Path.Combine(targetDirectory, "badge_linecoverage.png");
 
@@ -275,14 +325,23 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             File.WriteAllBytes(
                 targetPath,
-                this.CreatePngBadge(summaryResult, true));
+                this.CreatePngBadge(summaryResult.CoverageQuota, LineCoveragePngTemplate));
+
             targetPath = Path.Combine(targetDirectory, "badge_branchcoverage.png");
 
             Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
             File.WriteAllBytes(
                 targetPath,
-                this.CreatePngBadge(summaryResult, false));
+                this.CreatePngBadge(summaryResult.BranchCoverageQuota, BranchCoveragePngTemplate));
+
+            targetPath = Path.Combine(targetDirectory, "badge_methodcoverage.png");
+
+            Logger.InfoFormat(Resources.WritingReportFile, targetPath);
+
+            File.WriteAllBytes(
+                targetPath,
+                this.CreatePngBadge(summaryResult.CodeElementCoverageQuota, MethodCoveragePngTemplate));
         }
 
         /// <summary>
@@ -291,14 +350,17 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <param name="summaryResult">The summary result.</param>
         /// <param name="includeLineCoverage">Indicates whether line coverage should be included.</param>
         /// <param name="includeBranchCoverage">Indicates whether branch coverage should be included.</param>
+        /// <param name="includeMethodCoverage">Indicates whether method coverage should be included.</param>
         /// <returns>The rendered SVG.</returns>
-        private string CreateSvgBadge(SummaryResult summaryResult, bool includeLineCoverage, bool includeBranchCoverage)
+        private string CreateSvgBadge(SummaryResult summaryResult, bool includeLineCoverage, bool includeBranchCoverage, bool includeMethodCoverage)
         {
-            string lineCoverageClass = includeLineCoverage && includeBranchCoverage ? "linecoverage" : string.Empty;
-            string branchCoverageClass = includeLineCoverage && includeBranchCoverage ? "branchcoverage" : string.Empty;
+            string lineCoverageClass = includeLineCoverage && includeBranchCoverage && includeMethodCoverage ? "linecoverage" : string.Empty;
+            string branchCoverageClass = includeLineCoverage && includeBranchCoverage && includeMethodCoverage ? "branchcoverage" : string.Empty;
+            string methodCoverageClass = includeLineCoverage && includeBranchCoverage && includeMethodCoverage ? "methodcoverage" : string.Empty;
 
             string lineCoverage = "N/A";
             string branchCoverage = "N/A";
+            string methodCoverage = "N/A";
 
             if (summaryResult.CoverageQuota.HasValue)
             {
@@ -310,17 +372,26 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 branchCoverage = $"{summaryResult.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}%";
             }
 
+            if (summaryResult.CodeElementCoverageQuota.HasValue)
+            {
+                methodCoverage = $"{summaryResult.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}%";
+            }
+
+            // TODO
             return string.Format(
                 Template,
                 ReportResources.CodeCoverage,
                 includeLineCoverage ? string.Format(LineCoverageSymbol, lineCoverageClass) : string.Empty,
                 includeBranchCoverage ? string.Format(BranchCoverageSymbol, branchCoverageClass) : string.Empty,
+                includeMethodCoverage ? string.Format(MethodCoverageSymbol, methodCoverageClass) : string.Empty,
                 $"{ReportResources.GeneratedBy} ReportGenerator {typeof(IReportBuilder).Assembly.GetName().Version}",
                 ReportResources.Coverage3,
                 includeLineCoverage ? string.Format(CoverageText, lineCoverageClass, lineCoverage) : string.Empty,
                 includeBranchCoverage ? string.Format(CoverageText, branchCoverageClass, branchCoverage) : string.Empty,
+                includeMethodCoverage ? string.Format(CoverageText, methodCoverageClass, methodCoverage) : string.Empty,
                 includeLineCoverage ? string.Format(CoverageTooltip, lineCoverageClass, ReportResources.Coverage) : string.Empty,
-                includeBranchCoverage ? string.Format(CoverageTooltip, branchCoverageClass, ReportResources.BranchCoverage) : string.Empty);
+                includeBranchCoverage ? string.Format(CoverageTooltip, branchCoverageClass, ReportResources.BranchCoverage) : string.Empty,
+                includeMethodCoverage ? string.Format(CoverageTooltip, methodCoverageClass, ReportResources.CodeElementCoverageQuota) : string.Empty);
         }
 
         /// <summary>
@@ -354,15 +425,12 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <summary>
         /// Renderes the PNG.
         /// </summary>
-        /// <param name="summaryResult">The summary result.</param>
-        /// <param name="lineCoverage">Indicates whether line coverage or branch coverage should be displayed.</param>
+        /// <param name="coverage">The coverage.</param>
+        /// <param name="template">The template to use.</param>
         /// <returns>The rendered PNG.</returns>
-        private byte[] CreatePngBadge(SummaryResult summaryResult, bool lineCoverage)
+        private byte[] CreatePngBadge(decimal? coverage, string template)
         {
-            string template = lineCoverage ? LineCoveragePngTemplate : BranchCoveragePngTemplate;
             string text = "N/A";
-
-            decimal? coverage = lineCoverage ? summaryResult.CoverageQuota : summaryResult.BranchCoverageQuota;
 
             if (coverage.HasValue)
             {

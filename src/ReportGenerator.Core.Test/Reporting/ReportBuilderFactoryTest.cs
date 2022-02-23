@@ -108,6 +108,8 @@ namespace Palmmedia.ReportGenerator.Core.Test.Reporting
 
             public string Tag { get; set; }
 
+            public string License { get; set; }
+
             public bool VerbosityLevelValid { get; set; }
         }
     }

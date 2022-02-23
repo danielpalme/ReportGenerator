@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Palmmedia.ReportGenerator.Core.CodeAnalysis;
+using Palmmedia.ReportGenerator.Core.Licensing;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Properties;
 using Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering;
@@ -39,6 +40,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 throw new ArgumentNullException(nameof(summaryResult));
             }
 
+            bool proVersion = this.ReportContext.ReportConfiguration.License.DetermineLicenseType() == LicenseType.Pro;
+
             string targetDirectory = this.CreateTargetDirectory();
 
             reportRenderer.BeginSummaryReport(targetDirectory, "CoverageHistory.html", ReportResources.Summary);
@@ -46,7 +49,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             var historicCoverages = this.GetOverallHistoricCoverages(this.ReportContext.OverallHistoricCoverages);
             if (historicCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue))
             {
-                reportRenderer.Chart(historicCoverages, this.ReportContext.Settings.RenderPngFallBackImagesForHistoryCharts);
+                reportRenderer.Chart(historicCoverages, this.ReportContext.Settings.RenderPngFallBackImagesForHistoryCharts, proVersion);
             }
 
             reportRenderer.CustomSummary(summaryResult.Assemblies, new List<RiskHotspot>(), summaryResult.SupportsBranchCoverage, true);

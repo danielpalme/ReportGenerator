@@ -163,6 +163,12 @@
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Optional tag or build version" ng-model="tag" />
                     </div>
+
+                    <h3>License</h3>
+                    <div class="alert alert-info">Optional license. Get your license here: <a href="https://danielpalme.github.io/ReportGenerator/pro">https://danielpalme.github.io/ReportGenerator/pro</a></div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Optional license" ng-model="license" />
+                    </div>
                 </form>
             </div>
             <div class="col-md-5">
@@ -273,6 +279,7 @@
             $scope.selectedverbosity = 'Verbose';
             $scope.title = '';
             $scope.tag = '';
+            $scope.license = '';
 
             $scope.addSourceDirectory = function() {
                 $scope.sourcedirectories.push(null);
@@ -493,6 +500,19 @@
                     } else {
                         result += '-tag:';
                         result += $scope.tag;
+                    }
+                }
+
+                if ($scope.license !== '') {
+                    result += '\r\n';
+
+                    if ($scope.license.indexOf(' ') > -1) {
+                        result += '"-license:';
+                        result += $scope.license;
+                        result += '"';
+                    } else {
+                        result += '-license:';
+                        result += $scope.license;
                     }
                 }
 

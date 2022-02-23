@@ -60,6 +60,7 @@ namespace Palmmedia.ReportGenerator.Core
             Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "    " + Properties.Help.Parameters_Verbosity, string.Join("|", Enum.GetNames(typeof(VerbosityLevel)))));
             Console.WriteLine("    " + Properties.Help.Parameters_Title);
             Console.WriteLine("    " + Properties.Help.Parameters_Tag);
+            Console.WriteLine("    " + Properties.Help.Parameters_License);
 
             Console.WriteLine();
             Console.WriteLine(Properties.Help.Explanations);
@@ -80,6 +81,7 @@ namespace Palmmedia.ReportGenerator.Core
             Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "    " + Properties.Help.VerbosityValues, string.Join(", ", Enum.GetNames(typeof(VerbosityLevel)))));
             Console.WriteLine("    " + Properties.Help.Explanations_Title);
             Console.WriteLine("    " + Properties.Help.Explanations_Tag);
+            Console.WriteLine("    " + Properties.Help.Explanations_License);
 
             Console.WriteLine();
             Console.WriteLine(Properties.Help.DefaultValues);

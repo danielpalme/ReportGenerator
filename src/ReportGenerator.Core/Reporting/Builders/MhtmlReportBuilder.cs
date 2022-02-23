@@ -334,6 +334,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             public string Tag => this.reportConfiguration.Tag;
 
             /// <summary>
+            /// Gets the license.
+            /// </summary>
+            public string License => this.reportConfiguration.License;
+
+            /// <summary>
             /// Gets the invalid file patters supplied by the user.
             /// </summary>
             public IReadOnlyCollection<string> InvalidReportFilePatterns => this.reportConfiguration.InvalidReportFilePatterns;

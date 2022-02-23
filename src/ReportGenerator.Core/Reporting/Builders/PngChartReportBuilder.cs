@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Palmmedia.ReportGenerator.Core.Common;
+using Palmmedia.ReportGenerator.Core.Licensing;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Properties;
@@ -56,13 +57,15 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 throw new ArgumentNullException(nameof(summaryResult));
             }
 
+            bool proVersion = this.ReportContext.ReportConfiguration.License.DetermineLicenseType() == LicenseType.Pro;
+
             var historicCoverages = this.GetOverallHistoricCoverages(this.ReportContext.OverallHistoricCoverages);
 
             var filteredHistoricCoverages = this.FilterHistoricCoverages(historicCoverages, 100);
 
             if (filteredHistoricCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue))
             {
-                byte[] image = PngHistoryChartRenderer.RenderHistoryChart(filteredHistoricCoverages);
+                byte[] image = PngHistoryChartRenderer.RenderHistoryChart(filteredHistoricCoverages, proVersion);
 
                 string targetDirectory = this.ReportContext.ReportConfiguration.TargetDirectory;
 

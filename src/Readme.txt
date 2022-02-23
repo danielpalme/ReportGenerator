@@ -71,7 +71,7 @@ CHANGELOG
 
     * New: #433: Added report types Html_Light, Html_Dark and HtmlInline_AzurePipelines_Light
     * New: HTML reports: Replaced tabular data with cards
-    * New: Added method coverage to summary table
+    * New: Added method coverage to summary table (PRO version only)
 
 5.0.4.0
 

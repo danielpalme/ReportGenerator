@@ -119,6 +119,22 @@ namespace Palmmedia.ReportGenerator.MSBuild
         public string Tag { get; set; }
 
         /// <summary>
+        /// Gets or sets the custom title.
+        /// </summary>
+        /// <value>
+        /// The custom title.
+        /// </value>
+        public string Title { get; set; }
+
+        /// <summary>
+        /// Gets or sets the license.
+        /// </summary>
+        /// <value>
+        /// The license.
+        /// </value>
+        public string License { get; set; }
+
+        /// <summary>
         /// When overridden in a derived class, executes the task.
         /// </summary>
         /// <returns>
@@ -137,6 +153,8 @@ namespace Palmmedia.ReportGenerator.MSBuild
             var fileFilters = Array.Empty<string>();
             string verbosityLevel = VerbosityLevel;
             string tag = Tag;
+            string title = Title;
+            string license = License;
 
             var config = Config.Build(ProjectDirectory).GetSection(DotNetConfigSettingNames.SectionName);
             string value = null;
@@ -300,6 +318,18 @@ namespace Palmmedia.ReportGenerator.MSBuild
                 tag = value;
             }
 
+            if (string.IsNullOrEmpty(title) &&
+                config.TryGetString(DotNetConfigSettingNames.Title, out value))
+            {
+                title = value;
+            }
+
+            if (string.IsNullOrEmpty(license) &&
+                config.TryGetString(DotNetConfigSettingNames.License, out value))
+            {
+                license = value;
+            }
+
             var configuration = new ReportConfiguration(
                 reportFilePatterns,
                 targetDirectory,
@@ -311,7 +341,9 @@ namespace Palmmedia.ReportGenerator.MSBuild
                 classFilters,
                 fileFilters,
                 verbosityLevel,
-                tag);
+                tag,
+                title,
+                license);
 
             return new Generator().GenerateReport(configuration);
         }

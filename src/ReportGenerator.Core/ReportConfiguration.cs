@@ -184,6 +184,41 @@ namespace Palmmedia.ReportGenerator.Core
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="ReportConfiguration" /> class.
+        /// </summary>
+        /// <param name="reportFilePatterns">The report file patterns.</param>
+        /// <param name="targetDirectory">The target directory.</param>
+        /// <param name="sourceDirectories">The source directories.</param>
+        /// <param name="historyDirectory">The history directory.</param>
+        /// <param name="reportTypes">The report types.</param>
+        /// <param name="plugins">The plugins.</param>
+        /// <param name="assemblyFilters">The assembly filters.</param>
+        /// <param name="classFilters">The class filters.</param>
+        /// <param name="fileFilters">The file filters.</param>
+        /// <param name="verbosityLevel">The verbosity level.</param>
+        /// <param name="tag">The custom tag (e.g. build number).</param>
+        /// <param name="title">The custom title.</param>
+        /// <param name="license">The license in Base64 format.</param>
+        public ReportConfiguration(
+            IEnumerable<string> reportFilePatterns,
+            string targetDirectory,
+            IEnumerable<string> sourceDirectories,
+            string historyDirectory,
+            IEnumerable<string> reportTypes,
+            IEnumerable<string> plugins,
+            IEnumerable<string> assemblyFilters,
+            IEnumerable<string> classFilters,
+            IEnumerable<string> fileFilters,
+            string verbosityLevel,
+            string tag,
+            string title,
+            string license)
+            : this(reportFilePatterns, targetDirectory, sourceDirectories, historyDirectory, reportTypes, plugins, assemblyFilters, classFilters, fileFilters, verbosityLevel, tag, title)
+        {
+            this.License = license;
+        }
+
+        /// <summary>
         /// Gets the report files.
         /// </summary>
         public IReadOnlyCollection<string> ReportFiles => this.reportFiles;
@@ -237,6 +272,11 @@ namespace Palmmedia.ReportGenerator.Core
         /// Gets the custom title.
         /// </summary>
         public string Title { get; }
+
+        /// <summary>
+        /// Gets the license in Base64 format.
+        /// </summary>
+        public string License { get; }
 
         /// <summary>
         /// Gets the custom tag (e.g. build number).

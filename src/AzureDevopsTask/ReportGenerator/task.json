@@ -12,8 +12,8 @@
     "author": "Palmmedia",
     "version": {
         "Major": 5,
-        "Minor": 0,
-        "Patch": 4
+        "Minor": 1,
+        "Patch": 0
     },
     "instanceNameFormat": "ReportGenerator",
     "groups": [
@@ -121,6 +121,14 @@
             "defaultValue": "$(build.buildnumber)_#$(build.buildid)",
             "required": false,
             "helpMarkDown": "Optional tag or build version."
+        },
+        {
+            "name": "license",
+            "type": "string",
+            "label": "License",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Optional license. Get your license here: https://danielpalme.github.io/ReportGenerator/pro"
         },
         {
             "name": "customSettings",

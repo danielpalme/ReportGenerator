@@ -38,8 +38,9 @@ namespace Palmmedia.ReportGenerator.Core
             var classFilters = Array.Empty<string>();
             var fileFilters = Array.Empty<string>();
             string verbosityLevel = null;
-            string title = null;
             string tag = null;
+            string title = null;
+            string license = null;
 
             string value = null;
 
@@ -197,6 +198,15 @@ namespace Palmmedia.ReportGenerator.Core
                 verbosityLevel = value;
             }
 
+            if (namedArguments.TryGetValue(CommandLineArgumentNames.Tag, out value))
+            {
+                tag = value;
+            }
+            else if (config.TryGetString(DotNetConfigSettingNames.Tag, out value))
+            {
+                tag = value;
+            }
+
             if (namedArguments.TryGetValue(CommandLineArgumentNames.Title, out value))
             {
                 title = value;
@@ -206,13 +216,13 @@ namespace Palmmedia.ReportGenerator.Core
                 title = value;
             }
 
-            if (namedArguments.TryGetValue(CommandLineArgumentNames.Tag, out value))
+            if (namedArguments.TryGetValue(CommandLineArgumentNames.License, out value))
             {
-                tag = value;
+                license = value;
             }
-            else if (config.TryGetString(DotNetConfigSettingNames.Tag, out value))
+            else if (config.TryGetString(DotNetConfigSettingNames.License, out value))
             {
-                tag = value;
+                license = value;
             }
 
             return new ReportConfiguration(
@@ -227,7 +237,8 @@ namespace Palmmedia.ReportGenerator.Core
                 fileFilters,
                 verbosityLevel,
                 tag,
-                title);
+                title,
+                license);
         }
 
         /// <summary>

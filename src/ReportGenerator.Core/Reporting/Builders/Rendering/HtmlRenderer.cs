@@ -188,39 +188,49 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     this.reportTextWriter.WriteLine("<div class=\"large\"{0}>{1}</div>", style, WebUtility.HtmlEncode(card.SubTitle));
                 }
 
-                this.reportTextWriter.WriteLine("<div>");
-                this.reportTextWriter.WriteLine("<table>");
-
-                foreach (var row in card.Rows)
+                if (card.ProRequired)
                 {
-                    this.reportTextWriter.WriteLine("<tr>");
-                    this.reportTextWriter.WriteLine("<th>{0}</th>", WebUtility.HtmlEncode(row.Header));
-                    if (row.Links != null)
-                    {
-                        int fileNumber = 1;
-
-                        bool usePrefix = row.Links.Count > 1;
-
-                        string value = string.Join("<br />", row.Links.Select(v => string.Format(CultureInfo.InvariantCulture, "<a href=\"#{0}\" class=\"navigatetohash\">{1}</a>", WebUtility.HtmlEncode(StringHelper.ReplaceNonLetterChars(v)), WebUtility.HtmlEncode((usePrefix ? $"{ReportResources.File} {fileNumber++}: " : string.Empty) + v))));
-
-                        this.reportTextWriter.WriteLine(
-                            "<td>{0}</td>",
-                            value);
-                    }
-                    else
-                    {
-                        this.reportTextWriter.WriteLine(
-                            "<td class=\"{0}\" title=\"{1}\">{2}</td>",
-                            row.Alignment == CardLineItemAlignment.Right ? "right" : string.Empty,
-                            WebUtility.HtmlEncode(row.Tooltip ?? row.Text),
-                            WebUtility.HtmlEncode(row.Text));
-                    }
-
-                    this.reportTextWriter.WriteLine("</tr>");
+                    this.reportTextWriter.WriteLine("<div class=\"center\">");
+                    this.reportTextWriter.WriteLine("<p>{0}</p>", ReportResources.MethodCoverageProVersion);
+                    this.reportTextWriter.WriteLine("<a class=\"pro-button\" href=\"https://danielpalme.github.io/ReportGenerator/pro\" target=\"_blank\">{0}</a>", ReportResources.MethodCoverageProButton);
+                    this.reportTextWriter.WriteLine("</div>");
                 }
+                else
+                {
+                    this.reportTextWriter.WriteLine("<div class=\"table\">");
+                    this.reportTextWriter.WriteLine("<table>");
 
-                this.reportTextWriter.WriteLine("</table>");
-                this.reportTextWriter.WriteLine("</div>");
+                    foreach (var row in card.Rows)
+                    {
+                        this.reportTextWriter.WriteLine("<tr>");
+                        this.reportTextWriter.WriteLine("<th>{0}</th>", WebUtility.HtmlEncode(row.Header));
+                        if (row.Links != null)
+                        {
+                            int fileNumber = 1;
+
+                            bool usePrefix = row.Links.Count > 1;
+
+                            string value = string.Join("<br />", row.Links.Select(v => string.Format(CultureInfo.InvariantCulture, "<a href=\"#{0}\" class=\"navigatetohash\">{1}</a>", WebUtility.HtmlEncode(StringHelper.ReplaceNonLetterChars(v)), WebUtility.HtmlEncode((usePrefix ? $"{ReportResources.File} {fileNumber++}: " : string.Empty) + v))));
+
+                            this.reportTextWriter.WriteLine(
+                                "<td>{0}</td>",
+                                value);
+                        }
+                        else
+                        {
+                            this.reportTextWriter.WriteLine(
+                                "<td class=\"limit-width {0}\" title=\"{1}\">{2}</td>",
+                                row.Alignment == CardLineItemAlignment.Right ? "right" : string.Empty,
+                                WebUtility.HtmlEncode(row.Tooltip ?? row.Text),
+                                WebUtility.HtmlEncode(row.Text));
+                        }
+
+                        this.reportTextWriter.WriteLine("</tr>");
+                    }
+
+                    this.reportTextWriter.WriteLine("</table>");
+                    this.reportTextWriter.WriteLine("</div>");
+                }
 
                 this.reportTextWriter.WriteLine("</div>");
                 this.reportTextWriter.WriteLine("</div>");
@@ -498,7 +508,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     }
 
                     var methodCoverageHistory = "[]";
-                    if (historicCoverages.Any(h => h.CodeElementCoverageQuota.HasValue))
+                    if (methodCoverageAvailable && historicCoverages.Any(h => h.CodeElementCoverageQuota.HasValue))
                     {
                         methodCoverageHistory = "[" + string.Join(",", historicCoverages.Select(h => h.CodeElementCoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture))) + "]";
                     }
@@ -530,9 +540,9 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                             historicCoverage.CoveredBranches.ToString(CultureInfo.InvariantCulture),
                             historicCoverage.TotalBranches.ToString(CultureInfo.InvariantCulture),
                             historicCoverage.BranchCoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture),
-                            historicCoverage.CoveredCodeElements.GetValueOrDefault().ToString(CultureInfo.InvariantCulture),
-                            historicCoverage.TotalCodeElements.GetValueOrDefault().ToString(CultureInfo.InvariantCulture),
-                            historicCoverage.CodeElementCoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
+                            methodCoverageAvailable ? historicCoverage.CoveredCodeElements.GetValueOrDefault().ToString(CultureInfo.InvariantCulture) : "0",
+                            methodCoverageAvailable ? historicCoverage.TotalCodeElements.GetValueOrDefault().ToString(CultureInfo.InvariantCulture) : "0",
+                            methodCoverageAvailable ? historicCoverage.CodeElementCoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture) : "0");
                     }
 
                     historicCoveragesSb.Append("]");
@@ -552,8 +562,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                         @class.CoverageType == CoverageType.MethodCoverage && @class.CoverageQuota.HasValue ? @class.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : "\"-\"");
                     this.javaScriptContent.AppendFormat(" \"cb\": {0},", @class.CoveredBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
                     this.javaScriptContent.AppendFormat(" \"tb\": {0},", @class.TotalBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
-                    this.javaScriptContent.AppendFormat(" \"cm\": {0},", @class.CoveredCodeElements.ToString(CultureInfo.InvariantCulture));
-                    this.javaScriptContent.AppendFormat(" \"tm\": {0},", @class.TotalCodeElements.ToString(CultureInfo.InvariantCulture));
+                    this.javaScriptContent.AppendFormat(" \"cm\": {0},", methodCoverageAvailable ? @class.CoveredCodeElements.ToString(CultureInfo.InvariantCulture) : "0");
+                    this.javaScriptContent.AppendFormat(" \"tm\": {0},", methodCoverageAvailable ? @class.TotalCodeElements.ToString(CultureInfo.InvariantCulture) : "0");
                     this.javaScriptContent.AppendFormat(" \"lch\": {0},", lineCoverageHistory);
                     this.javaScriptContent.AppendFormat(" \"bch\": {0},", branchCoverageHistory);
                     this.javaScriptContent.AppendFormat(" \"mch\": {0},", methodCoverageHistory);
@@ -892,7 +902,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         }
 
         /// <inheritdoc />
-        public void Chart(IEnumerable<HistoricCoverage> historicCoverages, bool renderPngFallBackImage)
+        public void Chart(IEnumerable<HistoricCoverage> historicCoverages, bool renderPngFallBackImage, bool methodCoverageAvailable)
         {
             if (historicCoverages == null)
             {
@@ -905,7 +915,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             if (renderPngFallBackImage || this.htmlMode == HtmlMode.InlineCssAndJavaScript)
             {
-                byte[] pngHistory = PngHistoryChartRenderer.RenderHistoryChart(filteredHistoricCoverages);
+                byte[] pngHistory = PngHistoryChartRenderer.RenderHistoryChart(filteredHistoricCoverages, methodCoverageAvailable);
 
                 this.reportTextWriter.WriteLine(
                     "<div class=\"historychart ct-chart\" data-data=\"historyChartData{0}\"><img src=\"data:image/png;base64,{1}\" /></div>",
@@ -975,7 +985,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             series.AppendLine("],");
             series.Append("[");
 
-            if (filteredHistoricCoverages.Any(h => h.CodeElementCoverageQuota.HasValue))
+            if (methodCoverageAvailable && filteredHistoricCoverages.Any(h => h.CodeElementCoverageQuota.HasValue))
             {
                 for (int i = 0; i < filteredHistoricCoverages.Count; i++)
                 {

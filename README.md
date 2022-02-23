@@ -61,6 +61,7 @@ Parameters:
     [["]-verbosity:<Verbose|Info|Warning|Error|Off>["]]
     [["]-title:<title>["]]
     [["]-tag:<tag>["]]
+    [["]-license:<license>["]]
 
 Explanations:
    Reports:            The coverage reports that should be parsed (separated by semicolon).
@@ -88,6 +89,7 @@ Explanations:
                        Values: Verbose, Info, Warning, Error, Off
    Title:              Optional title.
    Tag:                Optional tag or build version.
+   License:            Optional license. Get your license here: https://danielpalme.github.io/ReportGenerator/pro
 
 Default values:
    -reporttypes:Html

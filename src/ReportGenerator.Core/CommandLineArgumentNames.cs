@@ -71,14 +71,19 @@ namespace Palmmedia.ReportGenerator.Core
         public const string Verbosity = "VERBOSITY";
 
         /// <summary>
+        /// The tag.
+        /// </summary>
+        public const string Tag = "TAG";
+
+        /// <summary>
         /// The title.
         /// </summary>
         public const string Title = "TITLE";
 
         /// <summary>
-        /// The tag.
+        /// The license.
         /// </summary>
-        public const string Tag = "TAG";
+        public const string License = "LICENSE";
 
         /// <summary>
         /// All valid command line parameter names.

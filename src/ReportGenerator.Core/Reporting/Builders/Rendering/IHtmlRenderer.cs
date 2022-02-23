@@ -132,7 +132,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// </summary>
         /// <param name="historicCoverages">The historic coverages.</param>
         /// <param name="renderPngFallBackImage">Indicates whether PNG images are rendered as a fallback.</param>
-        void Chart(IEnumerable<HistoricCoverage> historicCoverages, bool renderPngFallBackImage);
+        /// <param name="methodCoverageAvailable">if set to <c>true</c> method coverage is available.</param>
+        void Chart(IEnumerable<HistoricCoverage> historicCoverages, bool renderPngFallBackImage, bool methodCoverageAvailable);
 
         /// <summary>
         /// Start of risk hotspots section.

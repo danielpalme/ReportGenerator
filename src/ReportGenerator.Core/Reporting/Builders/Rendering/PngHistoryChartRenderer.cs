@@ -21,8 +21,9 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// Renderes the given historic coverages as PNG image.
         /// </summary>
         /// <param name="historicCoverages">The historic coverages.</param>
+        /// <param name="methodCoverageAvailable">if set to <c>true</c> method coverage is available.</param>
         /// <returns>The image in PNG format.</returns>
-        public static byte[] RenderHistoryChart(IReadOnlyList<HistoricCoverage> historicCoverages)
+        public static byte[] RenderHistoryChart(IReadOnlyList<HistoricCoverage> historicCoverages, bool methodCoverageAvailable)
         {
             using (Image<Rgba32> image = new Image<Rgba32>(1450, 150))
             using (MemoryStream output = new MemoryStream())
@@ -103,7 +104,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                         }
                     }
 
-                    if (historicCoverages.Any(h => h.CodeElementCoverageQuota.HasValue))
+                    if (methodCoverageAvailable && historicCoverages.Any(h => h.CodeElementCoverageQuota.HasValue))
                     {
                         for (int i = 1; i < historicCoverages.Count; i++)
                         {
@@ -149,17 +150,20 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                         ctx.Fill(blueBrush, new EllipsePolygon(x1, y1, 3));
                     }
 
-                    for (int i = 0; i < historicCoverages.Count; i++)
+                    if (methodCoverageAvailable)
                     {
-                        if (!historicCoverages[i].CodeElementCoverageQuota.HasValue)
+                        for (int i = 0; i < historicCoverages.Count; i++)
                         {
-                            continue;
+                            if (!historicCoverages[i].CodeElementCoverageQuota.HasValue)
+                            {
+                                continue;
+                            }
+
+                            float x1 = 50 + (i * width);
+                            float y1 = 15 + (((100 - (float)historicCoverages[i].CodeElementCoverageQuota.Value) * totalHeight) / 100);
+
+                            ctx.Fill(greenBrush, new EllipsePolygon(x1, y1, 3));
                         }
-
-                        float x1 = 50 + (i * width);
-                        float y1 = 15 + (((100 - (float)historicCoverages[i].CodeElementCoverageQuota.Value) * totalHeight) / 100);
-
-                        ctx.Fill(greenBrush, new EllipsePolygon(x1, y1, 3));
                     }
 
                     try

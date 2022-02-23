@@ -96,13 +96,18 @@
         public const string Verbosity = "verbosity";
 
         /// <summary>
+        /// The tag.
+        /// </summary>
+        public const string Tag = "tag";
+
+        /// <summary>
         /// The title.
         /// </summary>
         public const string Title = "title";
 
         /// <summary>
-        /// The tag.
+        /// The license.
         /// </summary>
-        public const string Tag = "tag";
+        public const string License = "license";
     }
 }

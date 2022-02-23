@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using Palmmedia.ReportGenerator.Core.Common;
+using Palmmedia.ReportGenerator.Core.Licensing;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Properties;
 using Palmmedia.ReportGenerator.Core.Reporting;
@@ -41,6 +42,12 @@ namespace Palmmedia.ReportGenerator.Core
         /// </returns>
         internal bool Validate(IReportConfiguration reportConfiguration)
         {
+            if (reportConfiguration.License != null
+                && !reportConfiguration.License.IsValid())
+            {
+                Logger.WarnFormat(Resources.InvalidLicense);
+            }
+
             if (reportConfiguration.InvalidReportFilePatterns.Count > 0)
             {
                 foreach (var failedReportFilePattern in reportConfiguration.InvalidReportFilePatterns)

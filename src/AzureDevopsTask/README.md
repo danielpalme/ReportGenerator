@@ -28,6 +28,7 @@ To learn how to use *ReportGenerator* have a look at the:
         verbosity: 'Info' # The verbosity level of the log messages. Values: Verbose, Info, Warning, Error, Off
         title: '' # Optional title.
         tag: '$(build.buildnumber)_#$(build.buildid)' # Optional tag or build version.
+        license: '' # Optional license. Get your license here: https://danielpalme.github.io/ReportGenerator/pro
         customSettings: '' # Optional custom settings (separated by semicolon). See: https://github.com/danielpalme/ReportGenerator/wiki/Settings.
 ```
 

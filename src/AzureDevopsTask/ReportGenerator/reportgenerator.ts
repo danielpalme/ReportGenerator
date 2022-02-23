@@ -15,7 +15,8 @@ async function executeReportGenerator(): Promise<number> {
     .arg('-filefilters:' + (tl.getInput('filefilters') || ''))
     .arg('-verbosity:' + (tl.getInput('verbosity') || ''))
     .arg('-title:' + (tl.getInput('title') || ''))
-    .arg('-tag:' + (tl.getInput('tag') || ''));
+    .arg('-tag:' + (tl.getInput('tag') || ''))
+    .arg('-license:' + (tl.getInput('license') || ''));
 
     const customSettings = (tl.getInput('customSettings') || '');
 

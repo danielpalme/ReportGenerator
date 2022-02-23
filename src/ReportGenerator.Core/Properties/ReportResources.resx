@@ -375,4 +375,10 @@
   <data name="Percentage" xml:space="preserve">
     <value>Percentage</value>
   </data>
+  <data name="MethodCoverageProButton" xml:space="preserve">
+    <value>Upgrade to PRO version</value>
+  </data>
+  <data name="MethodCoverageProVersion" xml:space="preserve">
+    <value>Method coverage is only available for sponsors.</value>
+  </data>
 </root>

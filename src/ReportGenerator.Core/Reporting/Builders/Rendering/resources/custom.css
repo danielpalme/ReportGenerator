@@ -32,13 +32,17 @@ h1 a.button i { position: relative; top: 1px; }
 .card-group .card { display: flex; flex-direction: column; background-color: #e4e4e4; background: radial-gradient(circle, #fefefe 0%, #f6f6f6 100%); border: 1px solid #c1c1c1; padding: 15px; color: #6f6f6f;}
 .card-group .card .card-header { font-size: 1.5rem; font-family: 'Century Gothic', sans-serif; margin-bottom: 15px; flex-grow: 1; }
 .card-group .card .card-body { display: flex; flex-direction: row; gap: 15px; flex-grow: 1; }
-.card-group .card .card-body div { display: flex; flex-direction: column; }
+.card-group .card .card-body div.table { display: flex; flex-direction: column; }
 .card-group .card .large { font-size: 5rem; line-height: 5rem; font-weight: bold; align-self: flex-end; border-left-width: 4px; padding-left: 10px; }
 .card-group .card table { align-self: flex-end; border-collapse: collapse; }
 .card-group .card table tr { border-bottom: 1px solid #c1c1c1; }
 .card-group .card table tr:hover { background-color: #c1c1c1; }
 .card-group .card table tr:last-child { border-bottom: none; }
 .card-group .card table th, .card-group .card table td { padding: 2px; }
+.card-group td.limit-width { max-width: 200px; text-overflow: ellipsis; overflow: hidden; }
+
+.pro-button { color: #fff; background-color: #419ff9; padding: 10px; border-radius: 3px; font-weight: bold; display: inline-block; border: 3px double white; }
+.pro-button:hover { color: #fff; background-color: #2e89df; }
 
 th { text-align: left; }
 .table-fixed { table-layout: fixed; }

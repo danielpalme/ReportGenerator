@@ -19,7 +19,7 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -178,6 +178,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error during reading license: {0}.
+        /// </summary>
+        internal static string ErrorDuringDeserializingLicense {
+            get {
+                return ResourceManager.GetString("ErrorDuringDeserializingLicense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error during reading file &apos;{0}&apos;: {1}.
         /// </summary>
         internal static string ErrorDuringReadingFile {
@@ -304,7 +313,7 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The report file pattern &apos;{0}&apos; is invalid. No matching files found..
+        ///   Looks up a localized string similar to The report file pattern &apos;{0}&apos; found no matching files..
         /// </summary>
         internal static string FailedReportFilePattern {
             get {
@@ -427,6 +436,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         internal static string InvalidFilter {
             get {
                 return ResourceManager.GetString("InvalidFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The license is not valid.
+        /// </summary>
+        internal static string InvalidLicense {
+            get {
+                return ResourceManager.GetString("InvalidLicense", resourceCulture);
             }
         }
         
