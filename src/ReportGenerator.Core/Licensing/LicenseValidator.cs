@@ -7,8 +7,14 @@ using Palmmedia.ReportGenerator.Core.Properties;
 
 namespace Palmmedia.ReportGenerator.Core.Licensing
 {
+    /// <summary>
+    /// Validates the user's license.
+    /// </summary>
     internal static class LicenseValidator
     {
+        /// <summary>
+        /// The public RSA key.
+        /// </summary>
         private const string PublicRsaKey = "<RSAKeyValue><Modulus>vt+tb/fQ3r+7Rglb6c3n2pbkXNiNOTp85lFu8unk5MkFAlr5oYf6ADA6hVQvKadHBrFU22yGdddTqrEc4KkujMCr1XZ4bQ6phtPcVCXwEhjsurggPZtWUW7gi3FcRnksJfnIzVSsUFdA+3s0EXTwFuZFTQuUy8uPKsOaNST4InC5E04xY73dKs7++QoAg9grNdKJHMEp69JJ0jTiGzOmhh3ZoSmbDEywJnEP8Z14VrtAkJtzCSU4uiAhxmL1tUDanNJrET4DKkyXcPeroiVbdD8D7c4peWZTuq8mjtd8gyWz6WykIOvB1nst8hNG0Gn1sS9FioRaDFvFIBS9X2dsBQ==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>";
 
         /// <summary>
@@ -16,12 +22,26 @@ namespace Palmmedia.ReportGenerator.Core.Licensing
         /// </summary>
         private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(LicenseValidator));
 
+        /// <summary>
+        /// The cached license in Base 64 format.
+        /// </summary>
         private static string cachedLicenseAsBase64;
 
+        /// <summary>
+        /// The deserilized license.
+        /// </summary>
         private static LicenseWrapper cachedLicense;
 
+        /// <summary>
+        /// Indicates whether an exception occured to prevent logging same exception several times.
+        /// </summary>
         private static bool exceptionLogged = false;
 
+        /// <summary>
+        /// Validates the given license in Base 64 format.
+        /// </summary>
+        /// <param name="license">The license in Base 64 format containg a serialized <see cref="LicenseWrapper"/>.</param>
+        /// <returns>True if license's signature is valid.</returns>
         public static bool IsValid(this string license)
         {
             if (string.IsNullOrEmpty(license))
@@ -79,6 +99,11 @@ namespace Palmmedia.ReportGenerator.Core.Licensing
             }
         }
 
+        /// <summary>
+        /// Validates the license and determines the license type.
+        /// </summary>
+        /// <param name="license">The license in Base 64 format containg a serialized <see cref="LicenseWrapper"/>.</param>
+        /// <returns>The license type.</returns>
         public static LicenseType DetermineLicenseType(this string license)
         {
             if (string.IsNullOrEmpty(license))

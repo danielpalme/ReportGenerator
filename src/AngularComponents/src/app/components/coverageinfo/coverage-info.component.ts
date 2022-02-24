@@ -63,9 +63,10 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
       </div>
     </div>
 
-    <table class="overview table-fixed stripped">
+    <div class="table-responsive">
+      <table class="overview table-fixed stripped">
         <colgroup>
-          <col>
+          <col class="column-min-200">
           <col class="column90">
           <col class="column105">
           <col class="column100">
@@ -186,6 +187,7 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
           </ng-container>
         </tbody>
       </table>
+    </div>
   </div>`
 })
 export class CoverageInfoComponent {

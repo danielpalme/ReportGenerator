@@ -25,6 +25,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 <html>
 <head>
 <meta charset=""utf-8"" />
+<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />
 <meta http-equiv=""X-UA-Compatible"" content=""IE=EDGE,chrome=1"" />
 <link href=""data:image/png;base64,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"" rel=""icon"" type=""image/x-icon"" />
 <title>{0} - {1}</title>
@@ -213,7 +214,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                             string value = string.Join("<br />", row.Links.Select(v => string.Format(CultureInfo.InvariantCulture, "<a href=\"#{0}\" class=\"navigatetohash\">{1}</a>", WebUtility.HtmlEncode(StringHelper.ReplaceNonLetterChars(v)), WebUtility.HtmlEncode((usePrefix ? $"{ReportResources.File} {fileNumber++}: " : string.Empty) + v))));
 
                             this.reportTextWriter.WriteLine(
-                                "<td>{0}</td>",
+                                "<td class=\"overflow-wrap\">{0}</td>",
                                 value);
                         }
                         else
@@ -385,9 +386,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <inheritdoc />
         public void BeginSummaryTable(bool branchCoverageAvailable, bool methodCoverageAvailable)
         {
+            this.reportTextWriter.WriteLine("<div class=\"table-responsive\">");
             this.reportTextWriter.WriteLine("<table class=\"overview table-fixed stripped\">");
             this.reportTextWriter.WriteLine("<colgroup>");
-            this.reportTextWriter.WriteLine("<col />");
+            this.reportTextWriter.WriteLine("<col class=\"column-min-200\" />");
             this.reportTextWriter.WriteLine("<col class=\"column90\" />");
             this.reportTextWriter.WriteLine("<col class=\"column105\" />");
             this.reportTextWriter.WriteLine("<col class=\"column100\" />");
@@ -662,6 +664,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 throw new ArgumentNullException(nameof(headers));
             }
 
+            this.reportTextWriter.WriteLine("<div class=\"table-responsive\">");
             this.reportTextWriter.WriteLine("<table class=\"lineAnalysis\">");
             this.reportTextWriter.Write("<thead><tr>");
 
@@ -688,6 +691,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 .Distinct()
                 .OrderBy(m => m.Name);
 
+            this.reportTextWriter.WriteLine("<div class=\"table-responsive\">");
             this.reportTextWriter.WriteLine("<table class=\"overview table-fixed\">");
             this.reportTextWriter.Write("<thead><tr>");
 
@@ -757,6 +761,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             this.reportTextWriter.WriteLine("</tbody>");
             this.reportTextWriter.WriteLine("</table>");
+            this.reportTextWriter.WriteLine("</div>");
         }
 
         /// <inheritdoc />
@@ -772,6 +777,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 .Distinct()
                 .OrderBy(m => m.Name);
 
+            this.reportTextWriter.WriteLine("<div class=\"table-responsive\">");
             this.reportTextWriter.WriteLine("<table class=\"overview table-fixed\">");
             this.reportTextWriter.Write("<thead><tr>");
 
@@ -819,6 +825,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             this.reportTextWriter.WriteLine("</tbody>");
             this.reportTextWriter.WriteLine("</table>");
+            this.reportTextWriter.WriteLine("</div>");
         }
 
         /// <inheritdoc />
@@ -899,6 +906,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         {
             this.reportTextWriter.WriteLine("</tbody>");
             this.reportTextWriter.WriteLine("</table>");
+            this.reportTextWriter.WriteLine("</div>");
         }
 
         /// <inheritdoc />
@@ -1054,6 +1062,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 .Where(m => m.MetricType == MetricType.CodeQuality)
                 .ToArray();
 
+            this.reportTextWriter.WriteLine("<div class=\"table-responsive\">");
             this.reportTextWriter.WriteLine("<table class=\"overview table-fixed stripped\">");
 
             this.reportTextWriter.WriteLine("<colgroup>");
@@ -1135,6 +1144,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             this.reportTextWriter.WriteLine("</tbody>");
             this.reportTextWriter.WriteLine("</table>");
+            this.reportTextWriter.WriteLine("</div>");
         }
 
         /// <inheritdoc />

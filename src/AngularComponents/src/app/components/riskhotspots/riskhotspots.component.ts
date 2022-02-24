@@ -33,50 +33,52 @@ import { RiskHotspotsSettings } from "./data/riskhotspots-settings.class";
         </div>
       </div>
 
-      <table class="overview table-fixed stripped">
-        <colgroup>
-          <col>
-          <col>
-          <col>
-          <col class="column105" *ngFor="let riskHotspotMetric of riskHotspotMetrics">
-        </colgroup>
-        <thead>
-          <tr>
-            <th><a href="#" (click)="updateSorting('assembly', $event)"><i class="icon-down-dir"
-              [ngClass]="{'icon-up-dir_active': settings.sortBy === 'assembly' && settings.sortOrder === 'desc',
-              'icon-down-dir_active': settings.sortBy === 'assembly' && settings.sortOrder === 'asc',
-              'icon-down-dir': settings.sortBy !== 'assembly'}"></i>{{translations.assembly}}</a></th>
-            <th><a href="#" (click)="updateSorting('class', $event)"><i class="icon-down-dir"
-            [ngClass]="{'icon-up-dir_active': settings.sortBy === 'class' && settings.sortOrder === 'desc',
-            'icon-down-dir_active': settings.sortBy === 'class' && settings.sortOrder === 'asc',
-            'icon-down-dir': settings.sortBy !== 'class'}"></i>{{translations.class}}</a></th>
-            <th><a href="#" (click)="updateSorting('method', $event)"><i class="icon-down-dir"
-            [ngClass]="{'icon-up-dir_active': settings.sortBy === 'method' && settings.sortOrder === 'desc',
-            'icon-down-dir_active': settings.sortBy === 'method' && settings.sortOrder === 'asc',
-            'icon-down-dir': settings.sortBy !== 'method'}"></i>{{translations.method}}</a></th>
-            <th *ngFor="let riskHotspotMetric of riskHotspotMetrics; index as i">
-              <a href="#" (click)="updateSorting('' + i, $event)"><i class="icon-down-dir"
-              [ngClass]="{'icon-up-dir_active': settings.sortBy === '' + i && settings.sortOrder === 'desc',
-              'icon-down-dir_active': settings.sortBy === '' + i && settings.sortOrder === 'asc',
-              'icon-down-dir': settings.sortBy !== '' + i}"></i>{{riskHotspotMetric.name}}</a>
-              <a href="{{riskHotspotMetric.explanationUrl}}"><i class="icon-info-circled"></i></a>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let riskHotspot of riskHotspots | slice:0:settings.numberOfRiskHotspots">
-            <td>{{riskHotspot.assembly}}</td>
-            <td><a [href]="riskHotspot.reportPath + queryString">{{riskHotspot.class}}</a></td>
-            <td [title]="riskHotspot.methodName">
-              <a [href]="riskHotspot.reportPath + queryString + '#file' + riskHotspot.fileIndex + '_line' + riskHotspot.line">
-                {{riskHotspot.methodShortName}}
-              </a>
-            </td>
-            <td class="right" *ngFor="let metric of riskHotspot.metrics"
-              [ngClass]="{'lightred': metric.exceeded, 'lightgreen': !metric.exceeded}">{{metric.value}}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="overview table-fixed stripped">
+          <colgroup>
+            <col>
+            <col>
+            <col>
+            <col class="column105" *ngFor="let riskHotspotMetric of riskHotspotMetrics">
+          </colgroup>
+          <thead>
+            <tr>
+              <th><a href="#" (click)="updateSorting('assembly', $event)"><i class="icon-down-dir"
+                [ngClass]="{'icon-up-dir_active': settings.sortBy === 'assembly' && settings.sortOrder === 'desc',
+                'icon-down-dir_active': settings.sortBy === 'assembly' && settings.sortOrder === 'asc',
+                'icon-down-dir': settings.sortBy !== 'assembly'}"></i>{{translations.assembly}}</a></th>
+              <th><a href="#" (click)="updateSorting('class', $event)"><i class="icon-down-dir"
+              [ngClass]="{'icon-up-dir_active': settings.sortBy === 'class' && settings.sortOrder === 'desc',
+              'icon-down-dir_active': settings.sortBy === 'class' && settings.sortOrder === 'asc',
+              'icon-down-dir': settings.sortBy !== 'class'}"></i>{{translations.class}}</a></th>
+              <th><a href="#" (click)="updateSorting('method', $event)"><i class="icon-down-dir"
+              [ngClass]="{'icon-up-dir_active': settings.sortBy === 'method' && settings.sortOrder === 'desc',
+              'icon-down-dir_active': settings.sortBy === 'method' && settings.sortOrder === 'asc',
+              'icon-down-dir': settings.sortBy !== 'method'}"></i>{{translations.method}}</a></th>
+              <th *ngFor="let riskHotspotMetric of riskHotspotMetrics; index as i">
+                <a href="#" (click)="updateSorting('' + i, $event)"><i class="icon-down-dir"
+                [ngClass]="{'icon-up-dir_active': settings.sortBy === '' + i && settings.sortOrder === 'desc',
+                'icon-down-dir_active': settings.sortBy === '' + i && settings.sortOrder === 'asc',
+                'icon-down-dir': settings.sortBy !== '' + i}"></i>{{riskHotspotMetric.name}}</a>
+                <a href="{{riskHotspotMetric.explanationUrl}}"><i class="icon-info-circled"></i></a>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let riskHotspot of riskHotspots | slice:0:settings.numberOfRiskHotspots">
+              <td>{{riskHotspot.assembly}}</td>
+              <td><a [href]="riskHotspot.reportPath + queryString">{{riskHotspot.class}}</a></td>
+              <td [title]="riskHotspot.methodName">
+                <a [href]="riskHotspot.reportPath + queryString + '#file' + riskHotspot.fileIndex + '_line' + riskHotspot.line">
+                  {{riskHotspot.methodShortName}}
+                </a>
+              </td>
+              <td class="right" *ngFor="let metric of riskHotspot.metrics"
+                [ngClass]="{'lightred': metric.exceeded, 'lightgreen': !metric.exceeded}">{{metric.value}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   `,
   styles: []

@@ -13,7 +13,7 @@ h1 a.button:hover { background-color: #f4f4f4; }
 h1 a.button i { position: relative; top: 1px; }
 
 .container { margin: auto; background-color: #fff; display: flex; min-height: 100%; }
-.containerleft { padding: 0 20px 20px 20px; }
+.containerleft { padding: 0 20px 20px 20px; min-width: 1%; }
 .containerright { width: 340px; min-width: 340px; background-color: #fff; height: 100%; }
 .containerrightfixed { position: fixed; padding: 0 20px 20px 20px; border-left:1px solid  #EAEAEA; width: 300px; overflow-y: auto; height: 100%; top: 0; bottom: 0; }
 .containerrightfixed h1 { background-color: rgba(248,248,248,1); }
@@ -40,12 +40,14 @@ h1 a.button i { position: relative; top: 1px; }
 .card-group .card table tr:last-child { border-bottom: none; }
 .card-group .card table th, .card-group .card table td { padding: 2px; }
 .card-group td.limit-width { max-width: 200px; text-overflow: ellipsis; overflow: hidden; }
+.card-group td.overflow-wrap { overflow-wrap: anywhere; }
 
 .pro-button { color: #fff; background-color: #419ff9; padding: 10px; border-radius: 3px; font-weight: bold; display: inline-block; border: 3px double white; }
 .pro-button:hover { color: #fff; background-color: #2e89df; text-decoration: none; }
 
 th { text-align: left; }
 .table-fixed { table-layout: fixed; }
+.table-responsive { overflow-x: auto; }
 .overview { border: 1px solid #c1c1c1; border-collapse: collapse; width: 100%; word-wrap: break-word; }
 .overview th { border: 1px solid #c1c1c1; border-collapse: collapse; padding: 5px 4px 5px 4px; background-color: #fff}
 .overview thead th { background-color: #fff; }
@@ -156,8 +158,7 @@ a.percentagebar {
 
 .tooltip { position: absolute; display: none; padding: 5px; background: #F4C63D; color: #453D3F; pointer-events: none; z-index: 1; min-width: 250px; }
 
-.column1324 { max-width: 1324px; }
-.column674 { max-width: 674px; }
+.column-min-200 { min-width: 200px; }
 .column60 { width: 60px; }
 .column70 { width: 70px; }
 .column90 { width: 90px; }
@@ -165,7 +166,6 @@ a.percentagebar {
 .column100 { width: 100px; }
 .column105 { width: 105px; }
 .column112 { width: 112px; }
-.column135 { width: 135px; }
 
 .covered0 { width: 0px; }
 .covered1 { width: 1px; }
