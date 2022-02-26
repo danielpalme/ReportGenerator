@@ -8,7 +8,6 @@
     .card-group .card { background-color: #333; background: radial-gradient(circle, #444 0%, #333 100%); border: 1px solid #545454; color: #fff; }
     .card-group .card table tr { border-bottom: 1px solid #545454; }
     .card-group .card table tr:hover { background-color: #545454; }
-    .pro-button { border: 3px double #545454; }
     .overview tr:hover { background-color: #2E2D2C }
     .overview thead th, .overview th { background-color: #333; border: 1px solid #3B3A39; }
     .overview th a { color: #fff; color: rgba(255, 255, 255, 0.95); }
