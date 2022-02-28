@@ -19,7 +19,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: 'Install npm'
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: '${{ env.nodeVersion }}'
 
@@ -162,7 +162,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: 'Install npm'
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: '${{ env.nodeVersion }}'
 
