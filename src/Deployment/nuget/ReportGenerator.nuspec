@@ -42,7 +42,7 @@ $(UserProfile)\.nuget\packages\reportgenerator\x.y.z\tools\net47\ReportGenerator
     <file src="..\..\ReportGenerator.Console.NetCore\bin\Release\net6.0\publish\**\*.*" target="tools\net6.0" />
     
     <!-- .NET 4.7 ('tools\net47' directory) -->
-    <file src="..\..\ReportGenerator.Console\bin\Release\appsettings.json" target="tools\net47" />
+    <file src="..\..\ReportGenerator.Console\bin\Release\*.json" target="tools\net47" />
     <file src="..\..\ReportGenerator.Console\bin\Release\*.dll" target="tools\net47" />
     <file src="..\..\ReportGenerator.Console\bin\Release\ReportGenerator.exe" target="tools\net47" />
     <file src="..\..\ReportGenerator.Console\bin\Release\ReportGenerator.exe.config" target="tools\net47" />
