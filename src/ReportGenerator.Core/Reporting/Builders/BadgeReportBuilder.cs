@@ -377,7 +377,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 methodCoverage = $"{summaryResult.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}%";
             }
 
-            // TODO
             return string.Format(
                 Template,
                 ReportResources.CodeCoverage,
