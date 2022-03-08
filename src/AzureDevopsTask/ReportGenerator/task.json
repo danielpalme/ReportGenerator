@@ -128,7 +128,7 @@
             "label": "License",
             "defaultValue": "",
             "required": false,
-            "helpMarkDown": "Optional license. Get your license here: https://danielpalme.github.io/ReportGenerator/pro"
+            "helpMarkDown": "Optional license for PRO version. Get your license here: https://danielpalme.github.io/ReportGenerator/pro"
         },
         {
             "name": "customSettings",

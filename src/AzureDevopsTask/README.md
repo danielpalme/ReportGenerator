@@ -7,7 +7,7 @@ Twitter: [@danielpalme](https://twitter.com/danielpalme)
 
 ## Usage
 To learn how to use *ReportGenerator* have a look at the:
-* [Usage Guide](https://danielpalme.github.io/ReportGenerator/usage.html)
+* [Usage Guide](https://danielpalme.github.io/ReportGenerator/usage)
 * [Command line parameters](https://github.com/danielpalme/ReportGenerator/#usage--command-line-parameters)
 
 ### YAML example
@@ -28,7 +28,7 @@ To learn how to use *ReportGenerator* have a look at the:
         verbosity: 'Info' # The verbosity level of the log messages. Values: Verbose, Info, Warning, Error, Off
         title: '' # Optional title.
         tag: '$(build.buildnumber)_#$(build.buildid)' # Optional tag or build version.
-        license: '' # Optional license. Get your license here: https://danielpalme.github.io/ReportGenerator/pro
+        license: '' # Optional license for PRO version. Get your license here: https://danielpalme.github.io/ReportGenerator/pro
         customSettings: '' # Optional custom settings (separated by semicolon). See: https://github.com/danielpalme/ReportGenerator/wiki/Settings.
 ```
 

@@ -145,7 +145,7 @@
     <value>History directory:  Optional directory for storing persistent coverage information.</value>
   </data>
   <data name="Explanations_License" xml:space="preserve">
-    <value>License:            Optional license. Get your license here: https://danielpalme.github.io/ReportGenerator/pro</value>
+    <value>License:            Optional license for PRO version. Get your license here: https://danielpalme.github.io/ReportGenerator/pro</value>
   </data>
   <data name="Explanations_Plugins" xml:space="preserve">
     <value>Plugins:            Optional plugin files for custom reports or custom history storage (separated by semicolon).</value>

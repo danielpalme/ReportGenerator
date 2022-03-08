@@ -34,7 +34,7 @@ I encourage you to do so, especially if you are using ReportGenerator for commer
 
 ## Getting started
 *ReportGenerator* is a commandline tool which works with full .NET Framework and .NET Core.  
-Use the online [configuration tool](https://danielpalme.github.io/ReportGenerator/usage.html) to get started quickly.
+Use the online [configuration tool](https://danielpalme.github.io/ReportGenerator/usage) to get started quickly.
 
 ### Install the package matching your platform and needs
 
@@ -89,7 +89,7 @@ Explanations:
                        Values: Verbose, Info, Warning, Error, Off
    Title:              Optional title.
    Tag:                Optional tag or build version.
-   License:            Optional license. Get your license here: https://danielpalme.github.io/ReportGenerator/pro
+   License:            Optional license for PRO version. Get your license here: https://danielpalme.github.io/ReportGenerator/pro
 
 Default values:
    -reporttypes:Html
