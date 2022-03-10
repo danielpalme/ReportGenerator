@@ -447,7 +447,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 {
                     font = SystemFonts.CreateFont("Arial", 12, FontStyle.Regular);
                 }
-                catch (SixLabors.Fonts.Exceptions.FontFamilyNotFoundException)
+                catch (FontFamilyNotFoundException)
                 {
                     throw new InvalidOperationException(Resources.ErrorFontNotFound);
                 }

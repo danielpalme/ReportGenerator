@@ -7,7 +7,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
 {
     public class MsBuildTest
     {
-        [Fact (Skip = "Not working with Github Action")]
+        [Fact(Skip = "Not working with Github Action")]
         public void ExecuteMSBuildScript_NetFull()
         {
             string configuration = "Release";
@@ -44,7 +44,8 @@ namespace Palmmedia.ReportGenerator.Core.Test
                     var process = Process.Start(processStartInfo);
                     Assert.True(process.WaitForExit(5000));
 
-                    Assert.True(0 == process.ExitCode, process.StandardOutput.ReadToEnd());
+                    string result = process.StandardOutput.ReadToEnd();
+                    Assert.True(0 == process.ExitCode, result);
 
                     break;
                 }
@@ -53,7 +54,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
             Assert.True(found, "MsBuild was not found");
         }
 
-        [Fact]
+        [Fact(Skip = "Not working with Github Action")]
         public void ExecuteMSBuildScript_NetCore()
         {
             string configuration = "Release";
@@ -76,7 +77,8 @@ namespace Palmmedia.ReportGenerator.Core.Test
             var process = Process.Start(processStartInfo);
             Assert.True(process.WaitForExit(5000));
 
-            Assert.True(0 == process.ExitCode, process.StandardOutput.ReadToEnd());
+            string result = process.StandardOutput.ReadToEnd();
+            Assert.True(0 == process.ExitCode, result);
         }
     }
 }

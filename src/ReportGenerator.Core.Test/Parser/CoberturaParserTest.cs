@@ -110,7 +110,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         [Fact]
         public void AssembliesTest()
         {
-            Assert.Equal(2, this.parserResult.Assemblies.Count());
+            Assert.Equal(2, this.parserResult.Assemblies.Count);
         }
 
         /// <summary>

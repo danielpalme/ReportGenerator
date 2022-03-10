@@ -169,15 +169,28 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     try
                     {
                         var font = SystemFonts.CreateFont("Arial", 11, FontStyle.Regular);
-                        var drawingOptions = new DrawingOptions();
-                        drawingOptions.TextOptions.HorizontalAlignment = HorizontalAlignment.Right;
-                        ctx.DrawText(drawingOptions, "100", font, Color.Gray, new PointF(38, 5));
-                        ctx.DrawText(drawingOptions, "75", font, Color.Gray, new PointF(38, 30));
-                        ctx.DrawText(drawingOptions, "50", font, Color.Gray, new PointF(38, 55));
-                        ctx.DrawText(drawingOptions, "25", font, Color.Gray, new PointF(38, 80));
-                        ctx.DrawText(drawingOptions, "0", font, Color.Gray, new PointF(38, 105));
+
+                        TextOptions options = new TextOptions(font)
+                        {
+                            HorizontalAlignment = HorizontalAlignment.Right
+                        };
+
+                        options.Origin = new PointF(38, 5);
+                        ctx.DrawText(options, "100", Color.Gray);
+
+                        options.Origin = new PointF(38, 30);
+                        ctx.DrawText(options, "75", Color.Gray);
+
+                        options.Origin = new PointF(38, 55);
+                        ctx.DrawText(options, "50", Color.Gray);
+
+                        options.Origin = new PointF(38, 80);
+                        ctx.DrawText(options, "25", Color.Gray);
+
+                        options.Origin = new PointF(38, 1055);
+                        ctx.DrawText(options, "0", Color.Gray);
                     }
-                    catch (SixLabors.Fonts.Exceptions.FontFamilyNotFoundException)
+                    catch (FontFamilyNotFoundException)
                     {
                         // Font 'Arial' may not be present on Linux
                     }

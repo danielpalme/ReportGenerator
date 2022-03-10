@@ -123,7 +123,9 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                     CoverableLines = historicCoveragesOfExecutionTime.Sum(h => h.CoverableLines),
                     CoveredBranches = historicCoveragesOfExecutionTime.Sum(h => h.CoveredBranches),
                     TotalBranches = historicCoveragesOfExecutionTime.Sum(h => h.TotalBranches),
-                    TotalLines = historicCoveragesOfExecutionTime.Sum(h => h.TotalLines)
+                    TotalLines = historicCoveragesOfExecutionTime.Sum(h => h.TotalLines),
+                    CoveredCodeElements = historicCoveragesOfExecutionTime.Sum(h => h.CoveredCodeElements),
+                    TotalCodeElements = historicCoveragesOfExecutionTime.Sum(h => h.TotalCodeElements)
                 });
             }
 
