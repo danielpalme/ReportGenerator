@@ -35,7 +35,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Issues
 
             var report = XDocument.Parse(Report);
 
-            var parserResult = new CoberturaParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(report);
+            var parserResult = new CoberturaParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(report.Root);
 
             Assert.Equal("OutwardPaymentDocumentProcessing.HttpStart", parserResult.Assemblies.First().Classes.First().Name);
         }

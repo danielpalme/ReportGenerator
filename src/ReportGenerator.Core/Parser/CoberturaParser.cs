@@ -85,9 +85,9 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 result.AddSourceDirectory(sourceElement.Value);
             }
 
-            if (report.Element("sources").Parent.Attribute("timestamp") != null)
+            try
             {
-                try
+                if (report.Element("sources").Parent.Attribute("timestamp") != null)
                 {
                     DateTime timeStamp = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
                     timeStamp = timeStamp.AddSeconds(double.Parse(report.Element("sources").Parent.Attribute("timestamp").Value)).ToLocalTime();
@@ -95,10 +95,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     result.MinimumTimeStamp = timeStamp;
                     result.MaximumTimeStamp = timeStamp;
                 }
-                catch (Exception)
-                {
-                    // Ignore since timestamp is not relevant. If timestamp is missing or in wrong format the information is just missing in the report(s)
-                }
+            }
+            catch (Exception)
+            {
+                // Ignore since timestamp is not relevant. If timestamp is missing or in wrong format the information is just missing in the report(s)
             }
 
             return result;
