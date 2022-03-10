@@ -68,6 +68,23 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             }
 
             var result = new ParserResult(assemblies.OrderBy(a => a.Name).ToList(), true, this.ToString());
+
+            if (report.Element("sessioninfo")?.Attribute("start") != null)
+            {
+                try
+                {
+                    DateTime timeStamp = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+                    timeStamp = timeStamp.AddMilliseconds(double.Parse(report.Element("sessioninfo").Attribute("start").Value)).ToLocalTime();
+
+                    result.MinimumTimeStamp = timeStamp;
+                    result.MaximumTimeStamp = timeStamp;
+                }
+                catch (Exception)
+                {
+                    // Ignore since timestamp is not relevant. If timestamp is missing or in wrong format the information is just missing in the report(s)
+                }
+            }
+
             return result;
         }
 

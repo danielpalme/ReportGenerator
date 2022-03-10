@@ -85,6 +85,12 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             {
                 reportTextWriter.WriteLine(ReportResources.Summary);
                 reportTextWriter.WriteLine("  {0} {1}", ReportResources.GeneratedOn, DateTime.Now.ToShortDateString() + " - " + DateTime.Now.ToLongTimeString());
+
+                if (summaryResult.MinimumTimeStamp.HasValue || summaryResult.MaximumTimeStamp.HasValue)
+                {
+                    reportTextWriter.WriteLine("  {0} {1}", ReportResources.CoverageDate, summaryResult.CoverageDate());
+                }
+
                 reportTextWriter.WriteLine("  {0} {1}", ReportResources.Parser, summaryResult.UsedParser);
                 reportTextWriter.WriteLine("  {0} {1}", ReportResources.Assemblies2, summaryResult.Assemblies.Count().ToString(CultureInfo.InvariantCulture));
                 reportTextWriter.WriteLine("  {0} {1}", ReportResources.Classes, summaryResult.Assemblies.SelectMany(a => a.Classes).Count().ToString(CultureInfo.InvariantCulture));

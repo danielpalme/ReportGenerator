@@ -381,4 +381,7 @@
   <data name="MethodCoverageProVersion" xml:space="preserve">
     <value>Method coverage is only available for sponsors.</value>
   </data>
+  <data name="CoverageDate" xml:space="preserve">
+    <value>Coverage date:</value>
+  </data>
 </root>

@@ -16,6 +16,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         public SummaryResult(ParserResult parserResult)
             : this(parserResult.Assemblies, parserResult.ParserName, parserResult.SupportsBranchCoverage, parserResult.SourceDirectories)
         {
+            this.MinimumTimeStamp = parserResult.MinimumTimeStamp;
+            this.MaximumTimeStamp = parserResult.MaximumTimeStamp;
         }
 
         /// <summary>
@@ -64,6 +66,16 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// The source directories.
         /// </value>
         public IReadOnlyCollection<string> SourceDirectories { get; }
+
+        /// <summary>
+        /// Gets the timestamp on which the coverage report was generated.
+        /// </summary>
+        public DateTime? MinimumTimeStamp { get; }
+
+        /// <summary>
+        /// Gets the timestamp on which the coverage report was generated.
+        /// </summary>
+        public DateTime? MaximumTimeStamp { get; }
 
         /// <summary>
         /// Gets the number of covered lines.
@@ -171,5 +183,31 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                 .GroupBy(m => m.Name)
                 .Select(g => new Metric(g.Key, g.First().ExplanationUrl, MetricType.CoverageAbsolute, g.Sum(m => m.Value)))
                 .ToList();
+
+        /// <summary>
+        /// Get the coverage date(s) based on the minimum and maximum timestamp.
+        /// </summary>
+        /// <returns> The coverage date(s).</returns>
+        public string CoverageDate()
+        {
+            string value = null;
+
+            if (this.MinimumTimeStamp.HasValue)
+            {
+                value = $"{this.MinimumTimeStamp.Value.ToShortDateString()} - {this.MinimumTimeStamp.Value.ToLongTimeString()}";
+
+                if (this.MaximumTimeStamp.HasValue
+                    && !this.MinimumTimeStamp.Value.Equals(this.MaximumTimeStamp.Value))
+                {
+                    value += $" - {this.MaximumTimeStamp.Value.ToShortDateString()} - {this.MaximumTimeStamp.Value.ToLongTimeString()}";
+                }
+            }
+            else if (this.MaximumTimeStamp.HasValue)
+            {
+                value = $"{this.MaximumTimeStamp.Value.ToShortDateString()} - {this.MaximumTimeStamp.Value.ToLongTimeString()}";
+            }
+
+            return value;
+        }
     }
 }

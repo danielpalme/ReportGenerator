@@ -79,6 +79,16 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         public bool SupportsBranchCoverage { get; private set; }
 
         /// <summary>
+        /// Gets the timestamp on which the coverage report was generated.
+        /// </summary>
+        public DateTime? MinimumTimeStamp { get; internal set; }
+
+        /// <summary>
+        /// Gets the timestamp on which the coverage report was generated.
+        /// </summary>
+        public DateTime? MaximumTimeStamp { get; internal set; }
+
+        /// <summary>
         /// Gets the names of the parsers.
         /// </summary>
         public string ParserName
@@ -147,6 +157,66 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             this.SupportsBranchCoverage |= parserResult.SupportsBranchCoverage;
             this.parserNames.AddRange(parserResult.parserNames);
+
+            if (this.MinimumTimeStamp.HasValue)
+            {
+                if (parserResult.MinimumTimeStamp.HasValue)
+                {
+                    this.MinimumTimeStamp = Min(this.MinimumTimeStamp.Value, parserResult.MinimumTimeStamp.Value);
+                }
+            }
+            else
+            {
+                this.MinimumTimeStamp = parserResult.MinimumTimeStamp;
+            }
+
+            if (this.MaximumTimeStamp.HasValue)
+            {
+                if (parserResult.MaximumTimeStamp.HasValue)
+                {
+                    this.MaximumTimeStamp = Max(this.MaximumTimeStamp.Value, parserResult.MaximumTimeStamp.Value);
+                }
+            }
+            else
+            {
+                this.MaximumTimeStamp = parserResult.MaximumTimeStamp;
+            }
+        }
+
+        /// <summary>
+        /// Returns the minimum date.
+        /// </summary>
+        /// <param name="first">The first date.</param>
+        /// <param name="second">The second date.</param>
+        /// <returns>The minimum of the two dates.</returns>
+        private static DateTime Min(DateTime first, DateTime second)
+        {
+            if (first < second)
+            {
+                return first;
+            }
+            else
+            {
+                return second;
+            }
+        }
+
+        /// <summary>
+        /// Returns the maximum date.
+        /// </summary>
+        /// <param name="first">The first date.</param>
+        /// <param name="second">The second date.</param>
+        /// <returns>The maximum of the two dates.</returns>
+        private static DateTime Max(DateTime first, DateTime second)
+        {
+            if (first > second)
+            {
+                return first;
+            }
+            else
+            {
+                return second;
+            }
         }
     }
 }

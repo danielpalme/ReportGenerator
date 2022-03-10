@@ -72,6 +72,8 @@ CHANGELOG
     * New: #433: Added report types Html_Light, Html_Dark and HtmlInline_AzurePipelines_Light
     * New: HTML reports: Replaced tabular data with cards
     * New: Added method coverage to summary table (PRO version only)
+    * New: #497: Added coverage date to summary reports (for Cobertura and JaCoCo coverage files)
+    * New: #494: Fixed MSBuild task
 
 5.0.4.0
 

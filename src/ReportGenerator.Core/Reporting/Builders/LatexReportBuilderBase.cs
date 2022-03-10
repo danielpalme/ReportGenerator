@@ -187,6 +187,12 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             reportRenderer.BeginKeyValueTable();
             reportRenderer.KeyValueRow(ReportResources.GeneratedOn, DateTime.Now.ToShortDateString() + " - " + DateTime.Now.ToLongTimeString());
+
+            if (summaryResult.MinimumTimeStamp.HasValue || summaryResult.MaximumTimeStamp.HasValue)
+            {
+                reportRenderer.KeyValueRow(ReportResources.CoverageDate, summaryResult.CoverageDate());
+            }
+
             reportRenderer.KeyValueRow(ReportResources.Parser, summaryResult.UsedParser);
             reportRenderer.KeyValueRow(ReportResources.Assemblies2, summaryResult.Assemblies.Count().ToString(CultureInfo.InvariantCulture));
             reportRenderer.KeyValueRow(ReportResources.Classes, summaryResult.Assemblies.SelectMany(a => a.Classes).Count().ToString(CultureInfo.InvariantCulture));

@@ -251,6 +251,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 infoCardItems.Add(new CardLineItem(ReportResources.Tag, this.ReportContext.ReportConfiguration.Tag, null, CardLineItemAlignment.Left));
             }
 
+            if (summaryResult.MinimumTimeStamp.HasValue || summaryResult.MaximumTimeStamp.HasValue)
+            {
+                infoCardItems.Add(new CardLineItem(ReportResources.CoverageDate, summaryResult.CoverageDate(), null, CardLineItemAlignment.Left));
+            }
+
             var cards = new List<Card>()
             {
                 new Card(

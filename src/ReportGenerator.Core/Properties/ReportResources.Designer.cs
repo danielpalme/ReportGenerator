@@ -331,6 +331,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Coverage date:.
+        /// </summary>
+        public static string CoverageDate {
+            get {
+                return ResourceManager.GetString("CoverageDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Coverage Report.
         /// </summary>
         public static string CoverageReport {
