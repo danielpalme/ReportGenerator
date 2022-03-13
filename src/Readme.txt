@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.1.1.0
+
+    * Fix: Improved CSS for Azure DevOps
+
 5.1.0.0
 
     * New: #433: Added report types Html_Light, Html_Dark and HtmlInline_AzurePipelines_Light

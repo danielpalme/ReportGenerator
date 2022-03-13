@@ -177,16 +177,16 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 this.reportTextWriter.WriteLine("<div class=\"card-body\">");
                 if (!string.IsNullOrWhiteSpace(card.SubTitle))
                 {
-                    string style = string.Empty;
+                    string clazz = string.Empty;
 
                     if (card.SubTitlePercentage.HasValue)
                     {
                         int uncovered = 100 - (int)Math.Round(card.SubTitlePercentage.Value, 0);
 
-                        style = $" style=\"border-left-style: solid; border-image: linear-gradient(to bottom, #c10909 0%, #c10909 {uncovered}%, #0aad0a {uncovered}%);border-image-slice: 1;\"";
+                        clazz = $" cardpercentagebar cardpercentagebar{uncovered}";
                     }
 
-                    this.reportTextWriter.WriteLine("<div class=\"large\"{0}>{1}</div>", style, WebUtility.HtmlEncode(card.SubTitle));
+                    this.reportTextWriter.WriteLine("<div class=\"large{0}\">{1}</div>", clazz, WebUtility.HtmlEncode(card.SubTitle));
                 }
 
                 if (card.ProRequired)
