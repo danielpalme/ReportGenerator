@@ -8,7 +8,7 @@ env:
   buildConfiguration: Release
   version: 5.1.1
   dotnetSDKVersion: 6.0.201
-  nodeVersion: 14
+  nodeVersion: 16
 
 jobs:
   build:
@@ -16,10 +16,10 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: 'Install npm'
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: '${{ env.nodeVersion }}'
 
@@ -31,7 +31,7 @@ jobs:
       working-directory: src
 
     - name: 'Setup .NET Core'
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v2
       with:
         dotnet-version: ${{ env.dotnetSDKVersion }}
 
@@ -86,7 +86,7 @@ jobs:
         assemblyfilters: '-xunit*'
 
     - name: 'Publish code coverage results'
-      uses: actions/upload-artifact@v2.3.1
+      uses: actions/upload-artifact@v3
       with:
         name: CoverageReport
         path: src/target/reports/coverage
@@ -147,7 +147,7 @@ jobs:
       run: .$env:USERPROFILE\.nuget\packages\chocolatey\0.10.14\tools\chocolateyInstall\choco.exe pack src/Deployment/chocolatey/reportgenerator.portable.nuspec --outputdirectory=src/target/packages --version=${{ env.Version }}
 
     - name: 'Publish Artifact: packages'
-      uses: actions/upload-artifact@v2.3.1
+      uses: actions/upload-artifact@v3
       with:
         path: src/target/packages
         name: packages
@@ -159,10 +159,10 @@ jobs:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && startsWith(github.event.commits[0].message, 'Release ') }}
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: 'Install npm'
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: '${{ env.nodeVersion }}'
 
