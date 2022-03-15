@@ -57,7 +57,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
             Assert.True(found, "MsBuild was not found");
         }
 
-        [Fact]
+        [Fact(Skip = "Not working with Github Action")]
         public void ExecuteMSBuildScript_NetCore()
         {
             string configuration = "Release";
