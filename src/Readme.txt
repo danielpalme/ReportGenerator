@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.1.2.0
+
+    * Fix: #494: Fixed MSBuild task
+
 5.1.1.0
 
     * Fix: Improved CSS for Azure DevOps
@@ -77,7 +81,7 @@ CHANGELOG
     * New: HTML reports: Replaced tabular data with cards
     * New: Added method coverage to summary table (PRO version only)
     * New: #497: Added coverage date to summary reports (for Cobertura and JaCoCo coverage files)
-    * New: #494: Fixed MSBuild task
+    * Fix: #494: Fixed MSBuild task
 
 5.0.4.0
 
