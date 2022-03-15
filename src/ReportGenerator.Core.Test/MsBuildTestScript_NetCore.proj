@@ -13,6 +13,6 @@
       <CoverageFiles Include="..\Testprojects\CSharp\Reports\Opencover.xml" />
     </ItemGroup>
 
-    <ReportGenerator ReportFiles="@(CoverageFiles)" ReportTypes="Html" TargetDirectory="bin\$(Configuration)\report" AssemblyFilters="-Moq;-xunit*" HistoryDirectory="bin\$(Comnfiguration)\history" />
+    <ReportGenerator ReportFiles="@(CoverageFiles)" ReportTypes="Html" TargetDirectory="bin\$(Configuration)\report" AssemblyFilters="-Moq;-xunit*" HistoryDirectory="bin\$(Configuration)\history" />
   </Target>
 </Project>

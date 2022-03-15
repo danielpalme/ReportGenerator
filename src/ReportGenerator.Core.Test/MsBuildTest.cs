@@ -7,7 +7,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
 {
     public class MsBuildTest
     {
-        [Fact(Skip = "Not working with Github Action")]
+        [Fact]
         public void ExecuteMSBuildScript_NetFull()
         {
             string configuration = "Release";
@@ -35,17 +35,20 @@ namespace Palmmedia.ReportGenerator.Core.Test
                         nameof(ExecuteMSBuildScript_NetFull) + ".binlog");
                     var processStartInfo = new ProcessStartInfo(
                         paths[i],
-                        $"MsBuildTestScript.proj /p:Configuration={configuration} /bl:{log}")
+                        $"/p:Configuration={configuration} /bl:{log} MsBuildTestScript.proj ")
                     {
                         WorkingDirectory = FileManager.GetTestDirectory(),
-                        RedirectStandardOutput = true
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true
                     };
 
                     var process = Process.Start(processStartInfo);
                     Assert.True(process.WaitForExit(5000));
 
                     string result = process.StandardOutput.ReadToEnd();
-                    Assert.True(0 == process.ExitCode, result);
+                    string errors = process.StandardError.ReadToEnd();
+
+                    Assert.True(0 == process.ExitCode, result + errors);
 
                     break;
                 }
@@ -54,7 +57,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
             Assert.True(found, "MsBuild was not found");
         }
 
-        [Fact(Skip = "Not working with Github Action")]
+        [Fact]
         public void ExecuteMSBuildScript_NetCore()
         {
             string configuration = "Release";
@@ -67,18 +70,21 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 Environment.GetEnvironmentVariable("BUILD_ARTIFACTSTAGINGDIRECTORY") ?? FileManager.GetTestDirectory(),
                 nameof(ExecuteMSBuildScript_NetCore) + ".binlog");
             var processStartInfo = new ProcessStartInfo(
-                "dotnet",
-                $"msbuild MsBuildTestScript_NetCore.proj /p:Configuration={configuration} /bl:{log}")
+                @"C:\Program Files\dotnet\dotnet.exe",
+                $"msbuild /p:Configuration={configuration} /bl:{log} MsBuildTestScript_NetCore.proj")
             {
                 WorkingDirectory = FileManager.GetTestDirectory(),
-                RedirectStandardOutput = true
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
             };
 
             var process = Process.Start(processStartInfo);
             Assert.True(process.WaitForExit(5000));
 
             string result = process.StandardOutput.ReadToEnd();
-            Assert.True(0 == process.ExitCode, result);
+            string errors = process.StandardError.ReadToEnd();
+
+            Assert.True(0 == process.ExitCode, result + errors);
         }
     }
 }
