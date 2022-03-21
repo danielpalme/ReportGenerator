@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.1.3.0
+
+    * Fix: #503: Updated System.Text.Encodings.Web
+
 5.1.2.0
 
     * Fix: #494: Fixed MSBuild task

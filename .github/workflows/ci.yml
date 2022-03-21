@@ -226,6 +226,6 @@ jobs:
       run: npm install -g tfx-cli
       continue-on-error: true
 
-    - name: Publish VSIX release
-      run: tfx extension publish --vsix Palmmedia.reportgenerator-${{ env.Version }}.vsix -t ${{ secrets.VISUALSTUDIOMARKETPLACETOKEN }}
-      continue-on-error: true
+#    - name: Publish VSIX release
+#      run: tfx extension publish --vsix Palmmedia.reportgenerator-${{ env.Version }}.vsix -t ${{ secrets.VISUALSTUDIOMARKETPLACETOKEN }}
+#      continue-on-error: true
