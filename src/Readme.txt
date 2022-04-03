@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.1.4.0
+
+    * Fix: #408: Improved support for generic classes for 'dotnet-coverage'
+
 5.1.3.0
 
     * Fix: #503: Updated System.Text.Encodings.Web

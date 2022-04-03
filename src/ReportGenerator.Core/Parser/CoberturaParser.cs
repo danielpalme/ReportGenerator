@@ -24,6 +24,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(CoberturaParser));
 
         /// <summary>
+        /// Regex to analyze if a class name represents a generic class.
+        /// </summary>
+        private static readonly Regex GenericClassRegex = new Regex("<.*>$", RegexOptions.Compiled);
+
+        /// <summary>
         /// Regex to analyze if a method name belongs to a lamda expression.
         /// </summary>
         private static readonly Regex LambdaMethodNameRegex = new Regex("<.+>.+__", RegexOptions.Compiled);
@@ -124,7 +129,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     int nestedClassSeparatorIndex = fullname.IndexOf('/');
                     return nestedClassSeparatorIndex > -1 ? fullname.Substring(0, nestedClassSeparatorIndex) : fullname;
                 })
-                .Where(name => !name.Contains("$") && !name.Contains("<"))
+                .Where(name => !name.Contains("$")
+                    && (!name.Contains("<") || GenericClassRegex.IsMatch(name)))
                 .Distinct()
                 .Where(c => this.ClassFilter.IsElementIncludedInReport(c))
                 .OrderBy(name => name)
