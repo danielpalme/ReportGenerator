@@ -63,7 +63,7 @@ namespace Palmmedia.ReportGenerator.Core.Plugin
                 }
             }
 
-            if (this.plugins.Count == 0)
+            if (this.plugins.Count == 0 || this.assemblyLoader == null)
             {
                 return result;
             }
@@ -114,11 +114,24 @@ namespace Palmmedia.ReportGenerator.Core.Plugin
                 var directory = new FileInfo(typeof(ReflectionPluginLoader).Assembly.Location).Directory.FullName;
                 string path = Path.Combine(directory, "ReportGenerator.DotnetCorePluginLoader.dll");
 
-                var dotnetCorePluginLoaderAssembly = Assembly.LoadFrom(path);
-                var assemblyLoaderType = dotnetCorePluginLoaderAssembly.GetExportedTypes()
-                        .Where(t => t.FullName == "ReportGenerator.DotnetCorePluginLoader.DotNetCoreAssemblyLoader" && t.IsClass && !t.IsAbstract)
-                        .Single();
-                return new ReflectionWrapperAssemblyLoader(Activator.CreateInstance(assemblyLoaderType));
+                if (!File.Exists(path))
+                {
+                    return null;
+                }
+
+                try
+                {
+                    var dotnetCorePluginLoaderAssembly = Assembly.LoadFrom(path);
+                    var assemblyLoaderType = dotnetCorePluginLoaderAssembly.GetExportedTypes()
+                            .Where(t => t.FullName == "ReportGenerator.DotnetCorePluginLoader.DotNetCoreAssemblyLoader" && t.IsClass && !t.IsAbstract)
+                            .Single();
+                    return new ReflectionWrapperAssemblyLoader(Activator.CreateInstance(assemblyLoaderType));
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(string.Format(Resources.FailedToLoadPluginLoader, ex.Message));
+                    return null;
+                }
             }
 
             return new DefaultAssemblyLoader();

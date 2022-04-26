@@ -207,6 +207,9 @@
   <data name="FailedToInstantiatePlugin" xml:space="preserve">
     <value>Failed to instantiate plugin class '{0}'.</value>
   </data>
+  <data name="FailedToLoadPluginLoader" xml:space="preserve">
+    <value>Failed to load plugin loader (Error: '{0}').</value>
+  </data>
   <data name="FailedToLoadPlugins" xml:space="preserve">
     <value>Failed to load plugins from '{0}'. Make sure plugin has a strong name.</value>
   </data>
