@@ -6,7 +6,7 @@ env:
   solution: 'src\ReportGenerator.sln'
   buildPlatform: Any CPU
   buildConfiguration: Release
-  version: 5.1.4
+  version: 5.1.5
   dotnetSDKVersion: 6.0.202
   nodeVersion: 16
 
@@ -78,7 +78,7 @@ jobs:
       run: dotnet test src\ReportGenerator.Core.Test\ReportGenerator.Core.Test.csproj --configuration ${{ env.BuildConfiguration }} --no-build /p:CollectCoverage=true /p:DeterministicSourcePaths=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=opencover%2ccobertura /p:CoverletOutput=../target/reports/coverage/
 
     - name: ReportGenerator
-      uses: danielpalme/ReportGenerator-GitHub-Action@5.1.3
+      uses: danielpalme/ReportGenerator-GitHub-Action@5.1.4
       with:
         reports: 'src\target\reports\coverage\coverage.opencover.xml'
         targetdir: 'src\target\reports\coverage'
@@ -226,6 +226,6 @@ jobs:
       run: npm install -g tfx-cli
       continue-on-error: true
 
-#    - name: Publish VSIX release
-#      run: tfx extension publish --vsix Palmmedia.reportgenerator-${{ env.Version }}.vsix -t ${{ secrets.VISUALSTUDIOMARKETPLACETOKEN }}
-#      continue-on-error: true
+    - name: Publish VSIX release
+      run: tfx extension publish --vsix Palmmedia.reportgenerator-${{ env.Version }}.vsix -t ${{ secrets.VISUALSTUDIOMARKETPLACETOKEN }}
+      continue-on-error: true
