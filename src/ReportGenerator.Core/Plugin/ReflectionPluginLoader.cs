@@ -20,6 +20,11 @@ namespace Palmmedia.ReportGenerator.Core.Plugin
         private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(ReflectionPluginLoader));
 
         /// <summary>
+        /// Indicates whether an exception occured to prevent logging same exception several times.
+        /// </summary>
+        private static bool pluginsNotSupportedMessageShown;
+
+        /// <summary>
         /// The plugins.
         /// </summary>
         private readonly IReadOnlyCollection<string> plugins;
@@ -63,8 +68,19 @@ namespace Palmmedia.ReportGenerator.Core.Plugin
                 }
             }
 
-            if (this.plugins.Count == 0 || this.assemblyLoader == null)
+            if (this.plugins.Count == 0)
             {
+                return result;
+            }
+
+            if (this.assemblyLoader == null)
+            {
+                if (!pluginsNotSupportedMessageShown)
+                {
+                    Logger.Error(Resources.PluginsNotSupported);
+                    pluginsNotSupportedMessageShown = true;
+                }
+
                 return result;
             }
 
@@ -119,19 +135,11 @@ namespace Palmmedia.ReportGenerator.Core.Plugin
                     return null;
                 }
 
-                try
-                {
-                    var dotnetCorePluginLoaderAssembly = Assembly.LoadFrom(path);
-                    var assemblyLoaderType = dotnetCorePluginLoaderAssembly.GetExportedTypes()
-                            .Where(t => t.FullName == "ReportGenerator.DotnetCorePluginLoader.DotNetCoreAssemblyLoader" && t.IsClass && !t.IsAbstract)
-                            .Single();
-                    return new ReflectionWrapperAssemblyLoader(Activator.CreateInstance(assemblyLoaderType));
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(string.Format(Resources.FailedToLoadPluginLoader, ex.Message));
-                    return null;
-                }
+                var dotnetCorePluginLoaderAssembly = Assembly.LoadFrom(path);
+                var assemblyLoaderType = dotnetCorePluginLoaderAssembly.GetExportedTypes()
+                        .Where(t => t.FullName == "ReportGenerator.DotnetCorePluginLoader.DotNetCoreAssemblyLoader" && t.IsClass && !t.IsAbstract)
+                        .Single();
+                return new ReflectionWrapperAssemblyLoader(Activator.CreateInstance(assemblyLoaderType));
             }
 
             return new DefaultAssemblyLoader();

@@ -331,15 +331,6 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to load plugin loader (Error: &apos;{0}&apos;)..
-        /// </summary>
-        internal static string FailedToLoadPluginLoader {
-            get {
-                return ResourceManager.GetString("FailedToLoadPluginLoader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Failed to load plugins from &apos;{0}&apos;. Make sure plugin has a strong name..
         /// </summary>
         internal static string FailedToLoadPlugins {
@@ -544,6 +535,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         internal static string ParsingCompleted {
             get {
                 return ResourceManager.GetString("ParsingCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plugins are not supported in a .NET Standard environment. .
+        /// </summary>
+        internal static string PluginsNotSupported {
+            get {
+                return ResourceManager.GetString("PluginsNotSupported", resourceCulture);
             }
         }
         

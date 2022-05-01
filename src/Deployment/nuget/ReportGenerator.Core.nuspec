@@ -30,7 +30,6 @@ https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage</desc
         <dependency id="Microsoft.Extensions.Configuration.Json" version="5.0.0" />
         <dependency id="SixLabors.ImageSharp.Drawing" version="1.0.0-beta14" />
         <dependency id="DotNetConfig" version="1.0.6" />
-        <dependency id="McMaster.NETCore.Plugins" version="1.4.0" />
       </group>
 
       <group targetFramework="netcoreapp">
