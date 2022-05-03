@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.1.7.0
+
+    * Fix: #516: Improved class name for gcov parser
+
 5.1.6.0
 
     * Fix: #514: Improved plugin handling for netstandard2.0
