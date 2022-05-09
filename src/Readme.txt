@@ -70,6 +70,7 @@ CHANGELOG
 5.1.7.0
 
     * Fix: #516: Improved class name for gcov parser
+    * Fix: #517: Riskhotspot filter is now case insensitive
 
 5.1.6.0
 

@@ -158,7 +158,7 @@ export class RiskHotspotsComponent implements OnInit {
     let riskHotspots: RiskHotspot[] = [];
 
     for (let i: number = 0; i < allRiskHotspots.length; i++) {
-        if (this.settings.filter !== "" && allRiskHotspots[i].class.toLowerCase().indexOf(this.settings.filter) === -1) {
+        if (this.settings.filter !== "" && allRiskHotspots[i].class.toLowerCase().indexOf(this.settings.filter.toLowerCase()) === -1) {
             continue;
         }
 
