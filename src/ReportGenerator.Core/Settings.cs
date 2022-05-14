@@ -72,5 +72,10 @@ namespace Palmmedia.ReportGenerator.Core
         ///  Example: Authorization=Bearer <JWT>
         /// </summary>
         public string CustomHeadersForRemoteFiles { get; set; }
+
+        /// <summary>
+        ///  Gets or sets the default assembly name for gcov and lcov.
+        /// </summary>
+        public string DefaultAssemblyName { get; set; } = "Default";
     }
 }

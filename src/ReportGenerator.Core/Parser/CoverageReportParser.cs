@@ -46,6 +46,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         private readonly IEnumerable<string> sourceDirectories;
 
         /// <summary>
+        /// The default assembly name.
+        /// </summary>
+        private readonly string defaultAssemblyName = "Default";
+
+        /// <summary>
         /// The assembly filter.
         /// </summary>
         private readonly IFilter assemblyFilter;
@@ -99,6 +104,29 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             this.numberOfReportsParsedInParallel = Math.Max(1, numberOfReportsParsedInParallel);
             this.numberOfReportsMergedInParallel = Math.Max(1, numberOfReportsMergedInParallel);
             this.excludeTestProjects = excludeTestProjects;
+            this.sourceDirectories = sourceDirectories ?? throw new ArgumentNullException(nameof(sourceDirectories));
+            this.assemblyFilter = assemblyFilter ?? throw new ArgumentNullException(nameof(assemblyFilter));
+            this.classFilter = classFilter ?? throw new ArgumentNullException(nameof(classFilter));
+            this.fileFilter = fileFilter ?? throw new ArgumentNullException(nameof(fileFilter));
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CoverageReportParser" /> class.
+        /// </summary>
+        /// <param name="numberOfReportsParsedInParallel">The number reports that are parsed and processed in parallel.</param>
+        /// <param name="numberOfReportsMergedInParallel">The number reports that are merged in parallel.</param>
+        /// <param name="excludeTestProjects">Indicates whether test projects should be included.</param>
+        /// <param name="sourceDirectories">The source directories.</param>
+        /// <param name="defaultAssemblyName">The default assembly name.</param>
+        /// <param name="assemblyFilter">The assembly filter.</param>
+        /// <param name="classFilter">The class filter.</param>
+        /// <param name="fileFilter">The file filter.</param>
+        public CoverageReportParser(int numberOfReportsParsedInParallel, int numberOfReportsMergedInParallel, bool excludeTestProjects, string defaultAssemblyName, IEnumerable<string> sourceDirectories, IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter)
+        {
+            this.numberOfReportsParsedInParallel = Math.Max(1, numberOfReportsParsedInParallel);
+            this.numberOfReportsMergedInParallel = Math.Max(1, numberOfReportsMergedInParallel);
+            this.excludeTestProjects = excludeTestProjects;
+            this.defaultAssemblyName = defaultAssemblyName ?? throw new ArgumentNullException(nameof(defaultAssemblyName));
             this.sourceDirectories = sourceDirectories ?? throw new ArgumentNullException(nameof(sourceDirectories));
             this.assemblyFilter = assemblyFilter ?? throw new ArgumentNullException(nameof(assemblyFilter));
             this.classFilter = classFilter ?? throw new ArgumentNullException(nameof(classFilter));
@@ -445,7 +473,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             {
                 Logger.DebugFormat(Resources.InitiatingParser, "LCov");
 
-                yield return new LCovParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(lines);
+                yield return new LCovParser(this.assemblyFilter, this.classFilter, this.fileFilter, this.defaultAssemblyName).Parse(lines);
             }
             else if (lines[0].Contains(GCovParser.SourceElementInFirstLine))
             {
@@ -453,7 +481,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 new GCovReportPreprocessor(this.sourceDirectories).Execute(lines);
 
                 Logger.DebugFormat(Resources.InitiatingParser, "GCov");
-                var result = new GCovParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(lines);
+                var result = new GCovParser(this.assemblyFilter, this.classFilter, this.fileFilter, this.defaultAssemblyName).Parse(lines);
 
                 foreach (var sourceDirectory in this.sourceDirectories)
                 {

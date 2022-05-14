@@ -31,6 +31,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         private static readonly Regex BranchCoverageRegex = new Regex("branch\\s*(?<Number>\\d+)\\s*(?:taken\\s*(?<Visits>\\d+)|never\\sexecuted?)", RegexOptions.Compiled);
 
         /// <summary>
+        /// The default assembly name.
+        /// </summary>
+        private readonly string defaultAssemblyName = "Default";
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="GCovParser" /> class.
         /// </summary>
         /// <param name="assemblyFilter">The assembly filter.</param>
@@ -39,6 +44,19 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         public GCovParser(IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter)
             : base(assemblyFilter, classFilter, fileFilter)
         {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GCovParser" /> class.
+        /// </summary>
+        /// <param name="assemblyFilter">The assembly filter.</param>
+        /// <param name="classFilter">The class filter.</param>
+        /// <param name="fileFilter">The file filter.</param>
+        /// <param name="defaultAssemblyName">The default assembly name.</param>
+        public GCovParser(IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter, string defaultAssemblyName)
+            : base(assemblyFilter, classFilter, fileFilter)
+        {
+            this.defaultAssemblyName = defaultAssemblyName;
         }
 
         /// <summary>
@@ -53,7 +71,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 throw new ArgumentNullException(nameof(lines));
             }
 
-            var assembly = new Assembly("Default");
+            var assembly = new Assembly(this.defaultAssemblyName);
             var assemblies = new List<Assembly>()
             {
                 assembly

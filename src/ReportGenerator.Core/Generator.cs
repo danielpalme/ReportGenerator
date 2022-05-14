@@ -127,6 +127,7 @@ namespace Palmmedia.ReportGenerator.Core
                     settings.NumberOfReportsParsedInParallel,
                     settings.NumberOfReportsMergedInParallel,
                     settings.ExcludeTestProjects,
+                    settings.DefaultAssemblyName,
                     reportConfiguration.SourceDirectories,
                     new DefaultFilter(reportConfiguration.AssemblyFilters),
                     new DefaultFilter(reportConfiguration.ClassFilters),

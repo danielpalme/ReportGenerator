@@ -15,6 +15,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
     internal class LCovParser : ParserBase
     {
         /// <summary>
+        /// The default assembly name.
+        /// </summary>
+        private readonly string defaultAssemblyName = "Default";
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="LCovParser" /> class.
         /// </summary>
         /// <param name="assemblyFilter">The assembly filter.</param>
@@ -23,6 +28,19 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         public LCovParser(IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter)
             : base(assemblyFilter, classFilter, fileFilter)
         {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LCovParser" /> class.
+        /// </summary>
+        /// <param name="assemblyFilter">The assembly filter.</param>
+        /// <param name="classFilter">The class filter.</param>
+        /// <param name="fileFilter">The file filter.</param>
+        /// <param name="defaultAssemblyName">The default assembly name.</param>
+        public LCovParser(IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter, string defaultAssemblyName)
+            : base(assemblyFilter, classFilter, fileFilter)
+        {
+            this.defaultAssemblyName = defaultAssemblyName;
         }
 
         /// <summary>
@@ -37,7 +55,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 throw new ArgumentNullException(nameof(lines));
             }
 
-            var assembly = new Assembly("Default");
+            var assembly = new Assembly(this.defaultAssemblyName);
             var assemblies = new List<Assembly>()
             {
                 assembly
