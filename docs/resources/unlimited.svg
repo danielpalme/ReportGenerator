@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="150" height="150">
+  <defs>
+    <linearGradient id="a">
+      <stop offset="0" stop-color="#1c7ed6"/>
+      <stop offset="1" stop-color="#23b8cf" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient xlink:href="#a" id="b" x1=".24" x2="297.78" y1="84.61" y2="40.16" gradientUnits="userSpaceOnUse"/>
+  </defs>
+  <rect width="150" height="150" fill="url(#b)" rx="35" ry="35"/>
+  <g fill="#fff" stroke-width="1.76">
+    <path d="M76.7 37.32A32.9 32.9 0 0 1 108 60.05a32.9 32.9 0 0 1-11.95 36.77 32.9 32.9 0 0 1-38.67 0l19.33-26.6Z"/>
+    <path d="M53.96 96.82a32.9 32.9 0 0 1-13.56-26.6A32.9 32.9 0 0 1 53.96 43.6L73.3 70.21ZM55.1 41.33a32.9 32.9 0 0 1 19.33-6.28v32.9Z"/>
+  </g>
+  <path fill="#2070a9" d="M86.35 117.45c-2.52 0-4.88.98-6.66 2.75L75 124.9l-4.68-4.7a9.43 9.43 0 0 0-16.08 6.66v1.93a9.42 9.42 0 0 0 16.07 6.65l4.69-4.68 4.69 4.7a9.43 9.43 0 0 0 16.07-6.66v-1.94c0-5.2-4.22-9.41-9.41-9.41zm-18.97 15.07a5.27 5.27 0 0 1-8.98-3.72v-1.94a5.27 5.27 0 0 1 8.98-3.72l4.68 4.69zm24.23-3.73a5.27 5.27 0 0 1-8.99 3.72l-4.68-4.68 4.68-4.69a5.27 5.27 0 0 1 8.99 3.72z"/>
+</svg>
