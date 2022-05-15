@@ -42,16 +42,16 @@ The following output formats are supported by ReportGenerator:
 
 Compatibility:
 
-OpenCover, coverlet, altcover
-dotCover
-Visual Studio (vstest.console.exe, CodeCoverage.exe)
-NCover (tested version 1.5.8, other versions may not work)
-Cobertura
-JaCoCo
-Clover
-Mono (mprof-report)
-gcov
-lcov
+-OpenCover, coverlet, altcover
+-dotCover
+-Visual Studio (vstest.console.exe, CodeCoverage.exe)
+-NCover (tested version 1.5.8, other versions may not work)
+-Cobertura
+-JaCoCo
+-Clover
+-Mono (mprof-report)
+-gcov
+-lcov
 
 =======================================================================
 
