@@ -89,7 +89,7 @@ Explanations:
                        Values: Verbose, Info, Warning, Error, Off
    Title:              Optional title.
    Tag:                Optional tag or build version.
-   License:            Optional license for PRO version. Get your license here: https://danielpalme.github.io/ReportGenerator/pro
+   License:            Optional license for PRO version. Get your license here: https://reportgenerator.io/pro
 
 Default values:
    -reporttypes:Html

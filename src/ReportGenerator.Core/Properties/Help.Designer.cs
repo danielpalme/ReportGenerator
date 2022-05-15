@@ -133,7 +133,7 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to License:            Optional license for PRO version. Get your license here: https://danielpalme.github.io/ReportGenerator/pro.
+        ///   Looks up a localized string similar to License:            Optional license for PRO version. Get your license here: https://reportgenerator.io/pro.
         /// </summary>
         internal static string Explanations_License {
             get {

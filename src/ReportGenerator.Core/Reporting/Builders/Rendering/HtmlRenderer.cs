@@ -193,7 +193,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 {
                     this.reportTextWriter.WriteLine("<div class=\"center\">");
                     this.reportTextWriter.WriteLine("<p>{0}</p>", ReportResources.MethodCoverageProVersion);
-                    this.reportTextWriter.WriteLine("<a class=\"pro-button\" href=\"https://danielpalme.github.io/ReportGenerator/pro\" target=\"_blank\">{0}</a>", ReportResources.MethodCoverageProButton);
+                    this.reportTextWriter.WriteLine("<a class=\"pro-button\" href=\"https://reportgenerator.io/pro\" target=\"_blank\">{0}</a>", ReportResources.MethodCoverageProButton);
                     this.reportTextWriter.WriteLine("</div>");
                 }
                 else
