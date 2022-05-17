@@ -7,7 +7,7 @@ Twitter: [@danielpalme](https://twitter.com/danielpalme)
 
 ## Usage
 To learn how to use *ReportGenerator* have a look at the:
-* [Usage Guide](https://danielpalme.github.io/ReportGenerator/usage)
+* [Usage Guide](https://reportgenerator.io/usage)
 * [Command line parameters](https://github.com/danielpalme/ReportGenerator/#usage--command-line-parameters)
 
 ### YAML example

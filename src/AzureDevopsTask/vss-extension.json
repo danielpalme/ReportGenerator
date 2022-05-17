@@ -42,7 +42,7 @@
     },
     "links": {
         "getstarted": {
-            "uri": "https://danielpalme.github.io/ReportGenerator/usage"
+            "uri": "https://reportgenerator.io/usage"
         },
         "source": {
             "uri": "https://github.com/danielpalme/ReportGenerator"
