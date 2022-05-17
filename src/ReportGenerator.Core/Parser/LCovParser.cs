@@ -100,7 +100,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         continue;
                     }
 
-                    var @class = new Class(fileName, assembly);
+                    var @class = new Class(className, assembly);
 
                     this.ProcessClass(@class, fileName, lines, ref i);
 
