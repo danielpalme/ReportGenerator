@@ -67,9 +67,13 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.1.9.0
+
+    * Fix: #522: Reverted #516: Improved class name for gcov parser
+
 5.1.8.0
 
-    * Fix: #516: Improved class name for gcov parser
+    * Fix: #516: Added setting for custom assembly name
 
 5.1.7.0
 

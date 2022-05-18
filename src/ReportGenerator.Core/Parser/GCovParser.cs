@@ -104,7 +104,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 return;
             }
 
-            var @class = new Class(className, assembly);
+            var @class = new Class(fileName, assembly);
 
             this.ProcessCoverage(@class, fileName, lines);
 
