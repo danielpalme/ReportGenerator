@@ -31,6 +31,7 @@ The following output formats are supported by ReportGenerator:
 -lcov
 -Xml, XmlSummary
 -JsonSummary
+-IstanbulJsonSummary (https://istanbul.js.org/ formatted coverage-summary.json)
 -Latex, LatexSummary
 -TeamCitySummary
 -TextSummary
