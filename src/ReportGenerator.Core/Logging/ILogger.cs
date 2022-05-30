@@ -50,7 +50,7 @@ namespace Palmmedia.ReportGenerator.Core.Logging
         void WarnFormat(string format, params object[] args);
 
         /// <summary>
-        /// Log a message at INFO level.
+        /// Log a message at ERROR level.
         /// </summary>
         /// <param name="message">The message.</param>
         void Error(string message);
