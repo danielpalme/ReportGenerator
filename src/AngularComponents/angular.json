@@ -107,6 +107,5 @@
         }
       }
     }
-  },
-  "defaultProject": "coverage-app"
+  }
 }
