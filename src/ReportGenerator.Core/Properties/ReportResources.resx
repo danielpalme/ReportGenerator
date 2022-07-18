@@ -384,4 +384,19 @@
   <data name="CoverageDate" xml:space="preserve">
     <value>Coverage date:</value>
   </data>
+  <data name="DeltaSummary" xml:space="preserve">
+    <value>Delta Summary</value>
+  </data>
+  <data name="Current" xml:space="preserve">
+    <value>Current</value>
+  </data>
+  <data name="Delta" xml:space="preserve">
+    <value>Delta</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Previous</value>
+  </data>
 </root>
