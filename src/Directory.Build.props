@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <SourceRoot Include="$(NuGetPackageRoot)" />
+    <SourceRoot Include="$([MSBuild]::EnsureTrailingSlash($(NuGetPackageRoot)))" />
   </ItemGroup>
 
   <Target Name="CoverletGetPathMap"
