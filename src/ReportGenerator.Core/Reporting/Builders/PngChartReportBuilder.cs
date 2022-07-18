@@ -59,7 +59,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             bool proVersion = this.ReportContext.ReportConfiguration.License.DetermineLicenseType() == LicenseType.Pro;
 
-            var historicCoverages = this.GetOverallHistoricCoverages(this.ReportContext.OverallHistoricCoverages);
+            var historicCoverages = HistoricCoverages.GetOverallHistoricCoverages(this.ReportContext.OverallHistoricCoverages);
 
             var filteredHistoricCoverages = this.FilterHistoricCoverages(historicCoverages, 100);
 
@@ -93,43 +93,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
                 File.WriteAllBytes(targetPath, image);
             }
-        }
-
-        /// <summary>
-        /// Gets the overall historic coverages from all classes grouped by execution time.
-        /// </summary>
-        /// <param name="overallHistoricCoverages">All historic coverage elements.</param>
-        /// <returns>
-        /// The overall historic coverages from all classes grouped by execution time.
-        /// </returns>
-        protected virtual IEnumerable<HistoricCoverage> GetOverallHistoricCoverages(IEnumerable<HistoricCoverage> overallHistoricCoverages)
-        {
-            var executionTimes = overallHistoricCoverages
-                .Select(h => h.ExecutionTime)
-                .Distinct()
-                .OrderBy(e => e);
-
-            var result = new List<HistoricCoverage>();
-
-            foreach (var executionTime in executionTimes)
-            {
-                var historicCoveragesOfExecutionTime = overallHistoricCoverages
-                    .Where(h => h.ExecutionTime.Equals(executionTime))
-                    .ToArray();
-
-                result.Add(new HistoricCoverage(executionTime, historicCoveragesOfExecutionTime[0].Tag)
-                {
-                    CoveredLines = historicCoveragesOfExecutionTime.Sum(h => h.CoveredLines),
-                    CoverableLines = historicCoveragesOfExecutionTime.Sum(h => h.CoverableLines),
-                    CoveredBranches = historicCoveragesOfExecutionTime.Sum(h => h.CoveredBranches),
-                    TotalBranches = historicCoveragesOfExecutionTime.Sum(h => h.TotalBranches),
-                    TotalLines = historicCoveragesOfExecutionTime.Sum(h => h.TotalLines),
-                    CoveredCodeElements = historicCoveragesOfExecutionTime.Sum(h => h.CoveredCodeElements),
-                    TotalCodeElements = historicCoveragesOfExecutionTime.Sum(h => h.TotalCodeElements)
-                });
-            }
-
-            return result;
         }
 
         /// <summary>
