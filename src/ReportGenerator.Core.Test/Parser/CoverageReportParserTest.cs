@@ -76,6 +76,11 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
             Assert.Equal(1, parserResult.SourceDirectories.Count);
             Assert.Equal("C:/temp", parserResult.SourceDirectories.First());
 
+            filePath = Path.Combine(FileManager.GetCPlusPlusReportDirectory(), "Cobertura_CPPCoverage.xml");
+            parserResult = new CoverageReportParser(1, 1, new string[] { "C:\\somedirectory" }, this.filterMock.Object, this.filterMock.Object, this.filterMock.Object).ParseFiles(new string[] { filePath });
+            Assert.Equal("Cobertura", parserResult.ParserName);
+            Assert.Equal(0, parserResult.SourceDirectories.Count);
+
             filePath = Path.Combine(FileManager.GetJavaReportDirectory(), "JaCoCo0.8.3.xml");
             parserResult = new CoverageReportParser(1, 1, new string[] { "C:\\somedirectory" }, this.filterMock.Object, this.filterMock.Object, this.filterMock.Object).ParseFiles(new string[] { filePath });
             Assert.Equal("JaCoCo", parserResult.ParserName);

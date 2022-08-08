@@ -404,7 +404,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                         yield return result;
                     }
-                    else if (item.Attributes().Count() > 1)
+                    else if (item.Attributes().Count() > 1
+                        || item.Elements("packages").Any())
                     {
                         Logger.Debug(Resources.PreprocessingReport);
                         new CoberturaReportPreprocessor().Execute(item);

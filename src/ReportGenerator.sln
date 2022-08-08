@@ -21,10 +21,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{7925
 		Testprojects\CSharp\Reports\MultiVisualStudio2010.coveragexml = Testprojects\CSharp\Reports\MultiVisualStudio2010.coveragexml
 		Testprojects\CSharp\Reports\NCover1.5.8.xml = Testprojects\CSharp\Reports\NCover1.5.8.xml
 		Testprojects\CSharp\Reports\OpenCover.xml = Testprojects\CSharp\Reports\OpenCover.xml
-		Testprojects\CSharp\Reports\OpenCover_altcover.xml = Testprojects\CSharp\Reports\OpenCover_altcover.xml
-		Testprojects\CSharp\Reports\OpenCover_coverlet.xml = Testprojects\CSharp\Reports\OpenCover_coverlet.xml
 		Testprojects\CSharp\Reports\OpenCoverWithEmbeddedSource.xml = Testprojects\CSharp\Reports\OpenCoverWithEmbeddedSource.xml
 		Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml = Testprojects\CSharp\Reports\OpenCoverWithTrackedMethods.xml
+		Testprojects\CSharp\Reports\OpenCover_altcover.xml = Testprojects\CSharp\Reports\OpenCover_altcover.xml
+		Testprojects\CSharp\Reports\OpenCover_coverlet.xml = Testprojects\CSharp\Reports\OpenCover_coverlet.xml
 		Testprojects\CSharp\Reports\Partcover2.2.xml = Testprojects\CSharp\Reports\Partcover2.2.xml
 		Testprojects\CSharp\Reports\Partcover2.3.0.35109.xml = Testprojects\CSharp\Reports\Partcover2.3.0.35109.xml
 		Testprojects\CSharp\Reports\Partcover2.3.xml = Testprojects\CSharp\Reports\Partcover2.3.xml
@@ -79,7 +79,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportGenerator.Core.Test",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportGenerator.Console.NetCore", "ReportGenerator.Console.NetCore\ReportGenerator.Console.NetCore.csproj", "{C6110743-B7C9-4D1D-B210-3601E5A380F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportGenerator.Console.Net", "ReportGenerator.Console\ReportGenerator.Console.Net.csproj", "{19A59768-9410-440D-A857-A1B5D44787B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportGenerator.Console.Net", "ReportGenerator.Console\ReportGenerator.Console.Net.csproj", "{19A59768-9410-440D-A857-A1B5D44787B8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportGenerator.DotnetGlobalTool", "ReportGenerator.DotnetGlobalTool\ReportGenerator.DotnetGlobalTool.csproj", "{B697EF09-935C-482A-89BB-78D9E8BBB387}"
 EndProject
@@ -104,6 +104,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project", "Project", "{BE7E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{1368829B-AD9B-4EB4-B2CA-0B8E3F081B27}"
 	ProjectSection(SolutionItems) = preProject
+		Testprojects\C++\Reports\Cobertura_CPPCoverage.xml = Testprojects\C++\Reports\Cobertura_CPPCoverage.xml
 		Testprojects\C++\Reports\lcov.info = Testprojects\C++\Reports\lcov.info
 	EndProjectSection
 EndProject

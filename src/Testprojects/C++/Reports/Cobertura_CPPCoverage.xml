@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<coverage line-rate="0.120511">
+    <packages>
+        <package name="Program.exe" line-rate="0.120511">
+            <classes>
+                <class name="C:/temp/someclass.h" filename="/temp/someclass.h" line-rate="0">
+                    <lines>
+                        <line number="1" hits="0"/>
+                        <line number="2" hits="0"/>
+                    </lines>
+                </class>
+            </classes>
+        </package>
+    </packages>
+</coverage>
