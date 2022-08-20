@@ -47,7 +47,7 @@ Compatibility:
 -Visual Studio (vstest.console.exe, CodeCoverage.exe)
 -NCover (tested version 1.5.8, other versions may not work)
 -Cobertura
--JaCoCo
+-JaCoCo (version 0.8.3 or greater)
 -Clover
 -Mono (mprof-report)
 -gcov
