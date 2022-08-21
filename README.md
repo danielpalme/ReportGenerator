@@ -209,8 +209,14 @@ If you need a custom format, you can create a [plugin](https://github.com/daniel
 
 ### Screenshots
 The screenshots show two snippets of the generated reports:
-![Screenshot 1](https://danielpalme.github.io/ReportGenerator/resources/screenshot1.png)
-![Screenshot 2](https://danielpalme.github.io/ReportGenerator/resources/screenshot2.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://danielpalme.github.io/ReportGenerator/resources/screenshot1_dark.png">
+  <img alt="Screenshot 1" src="https://danielpalme.github.io/ReportGenerator/resources/screenshot1.png">
+</picture>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://danielpalme.github.io/ReportGenerator/resources/screenshot2_dark.png">
+  <img alt="Screenshot 2" src="https://danielpalme.github.io/ReportGenerator/resources/screenshot2.png">
+</picture>
 
 **Badges**  
 Badges in SVG and PNG format can be generated if `-reporttypes:Badges` is used:
