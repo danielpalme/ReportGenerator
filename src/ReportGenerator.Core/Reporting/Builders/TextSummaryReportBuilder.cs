@@ -101,6 +101,31 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 reportTextWriter.WriteLine("  {0} {1}", ReportResources.CoverableLines, summaryResult.CoverableLines.ToString(CultureInfo.InvariantCulture));
                 reportTextWriter.WriteLine("  {0} {1}", ReportResources.TotalLines, summaryResult.TotalLines.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
 
+                if (summaryResult.SupportsBranchCoverage)
+                {
+                    if (summaryResult.CoveredBranches.HasValue && summaryResult.TotalBranches.HasValue)
+                    {
+                        decimal? branchCoverage = summaryResult.BranchCoverageQuota;
+
+                        if (branchCoverage.HasValue)
+                        {
+                            reportTextWriter.WriteLine("  {0} {1}", ReportResources.BranchCoverage2, $"{branchCoverage.Value.ToString(CultureInfo.InvariantCulture)}% ({summaryResult.CoveredBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {summaryResult.TotalBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)})");
+                        }
+
+                        reportTextWriter.WriteLine("  {0} {1}", ReportResources.CoveredBranches2, summaryResult.CoveredBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
+                        reportTextWriter.WriteLine("  {0} {1}", ReportResources.TotalBranches, summaryResult.TotalBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
+                    }
+                }
+
+                reportTextWriter.WriteLine("  {0} {1}", ReportResources.CodeElementCoverageQuota2, summaryResult.CodeElementCoverageQuota.HasValue ? $"{summaryResult.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}% ({summaryResult.CoveredCodeElements.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {summaryResult.TotalCodeElements.ToString(CultureInfo.InvariantCulture)})" : string.Empty);
+                reportTextWriter.WriteLine("  {0} {1}", ReportResources.CoveredCodeElements, summaryResult.CoveredCodeElements.ToString(CultureInfo.InvariantCulture));
+                reportTextWriter.WriteLine("  {0} {1}", ReportResources.TotalCodeElements, summaryResult.TotalCodeElements.ToString(CultureInfo.InvariantCulture));
+
+                if (this.ReportContext.ReportConfiguration.Tag != null)
+                {
+                    reportTextWriter.WriteLine("  {0} {1}", ReportResources.Tag, this.ReportContext.ReportConfiguration.Tag);
+                }
+
                 if (summaryResult.Assemblies.Any())
                 {
                     var maximumNameLength = summaryResult.Assemblies

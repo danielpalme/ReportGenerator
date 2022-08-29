@@ -68,12 +68,14 @@ Explanations:
                        Globbing is supported.
    Target directory:   The directory where the generated report should be saved.
    Report types:       The output formats and scope (separated by semicolon).
-                       Values: Badges, Clover, Cobertura, CsvSummary, MarkdownSummary, 
+                       Values: Badges, Clover, Cobertura, CsvSummary, 
+                       MarkdownSummary, MarkdownDeltaSummary
                        Html, Html_Light, Html_Dark,
                        HtmlChart, HtmlInline, HtmlSummary,
                        HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Light, HtmlInline_AzurePipelines_Dark,
                        JsonSummary, Latex, LatexSummary, lcov, MHtml, PngChart, SonarQube, TeamCitySummary,
-                       TextSummary, Xml, XmlSummary
+                       TextSummary, TextDeltaSummary
+                       Xml, XmlSummary
    Source directories: Optional directories which contain the corresponding source code (separated by semicolon).
                        The source directories are used if coverage report contains classes without path information.
                        Globbing is not supported.

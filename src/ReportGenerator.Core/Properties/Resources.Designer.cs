@@ -178,6 +178,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unable to generate report &apos;{0}&apos;. No historic coverage to compare..
+        /// </summary>
+        internal static string ErrorDeltaReport {
+            get {
+                return ResourceManager.GetString("ErrorDeltaReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error during reading license: {0}.
         /// </summary>
         internal static string ErrorDuringDeserializingLicense {

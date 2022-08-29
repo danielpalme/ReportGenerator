@@ -46,7 +46,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             reportRenderer.BeginSummaryReport(targetDirectory, "CoverageHistory.html", ReportResources.Summary);
 
-            var historicCoverages = this.GetOverallHistoricCoverages(this.ReportContext.OverallHistoricCoverages);
+            var historicCoverages = HistoricCoverages.GetOverallHistoricCoverages(this.ReportContext.OverallHistoricCoverages);
             if (historicCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue))
             {
                 reportRenderer.Chart(historicCoverages, this.ReportContext.Settings.RenderPngFallBackImagesForHistoryCharts, proVersion);

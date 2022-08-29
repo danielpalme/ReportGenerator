@@ -35,7 +35,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.History
         /// </summary>
         /// <param name="reportConfiguration">The report configuration.</param>
         /// <returns>
-        /// The history storage or <code>null</code> if no storage exists.
+        /// The history storage or <see langword="null"/> if no storage exists.
         /// </returns>
         public IHistoryStorage GetHistoryStorage(IReportConfiguration reportConfiguration)
         {
