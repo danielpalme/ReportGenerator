@@ -14,22 +14,22 @@ To learn how to use *ReportGenerator* have a look at the:
 ```yaml
 
 - task: reportgenerator@5
-      displayName: ReportGenerator
-      inputs:
-        reports: 'coverage.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
-        targetdir: 'coveragereport' # REQUIRED # The directory where the generated report should be saved.
-        reporttypes: 'HtmlInline_AzurePipelines;Cobertura' # The output formats and scope (separated by semicolon) Values: Badges, Clover, Cobertura, CsvSummary, Html, Html_Dark, Html_Light, HtmlChart, HtmlInline, HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Dark, HtmlInline_AzurePipelines_Light, HtmlSummary, JsonSummary, Latex, LatexSummary, lcov, MarkdownSummary, MarkdownDeltaSummary, MHtml, PngChart, SonarQube, TeamCitySummary, TextSummary, TextDeltaSummary, Xml, XmlSummary
-        sourcedirs: '' # Optional directories which contain the corresponding source code (separated by semicolon). The source directories are used if coverage report contains classes without path information.
-        historydir: '' # Optional directory for storing persistent coverage information. Can be used in future reports to show coverage evolution.
-        plugins: '' # Optional plugin files for custom reports or custom history storage (separated by semicolon).
-        assemblyfilters: '+*' # Optional list of assemblies that should be included or excluded in the report. Exclusion filters take precedence over inclusion filters. Wildcards are allowed.
-        classfilters: '+*' # Optional list of classes that should be included or excluded in the report. Exclusion filters take precedence over inclusion filters. Wildcards are allowed.
-        filefilters: '+*' # Optional list of files that should be included or excluded in the report. Exclusion filters take precedence over inclusion filters. Wildcards are allowed.
-        verbosity: 'Info' # The verbosity level of the log messages. Values: Verbose, Info, Warning, Error, Off
-        title: '' # Optional title.
-        tag: '$(build.buildnumber)_#$(build.buildid)' # Optional tag or build version.
-        license: '' # Optional license for PRO version. Get your license here: https://reportgenerator.io/pro
-        customSettings: '' # Optional custom settings (separated by semicolon). See: https://github.com/danielpalme/ReportGenerator/wiki/Settings.
+  displayName: ReportGenerator
+  inputs:
+    reports: 'coverage.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
+    targetdir: 'coveragereport' # REQUIRED # The directory where the generated report should be saved.
+    reporttypes: 'HtmlInline_AzurePipelines;Cobertura' # The output formats and scope (separated by semicolon) Values: Badges, Clover, Cobertura, CsvSummary, Html, Html_Dark, Html_Light, HtmlChart, HtmlInline, HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Dark, HtmlInline_AzurePipelines_Light, HtmlSummary, JsonSummary, Latex, LatexSummary, lcov, MarkdownSummary, MarkdownDeltaSummary, MHtml, PngChart, SonarQube, TeamCitySummary, TextSummary, TextDeltaSummary, Xml, XmlSummary
+    sourcedirs: '' # Optional directories which contain the corresponding source code (separated by semicolon). The source directories are used if coverage report contains classes without path information.
+    historydir: '' # Optional directory for storing persistent coverage information. Can be used in future reports to show coverage evolution.
+    plugins: '' # Optional plugin files for custom reports or custom history storage (separated by semicolon).
+    assemblyfilters: '+*' # Optional list of assemblies that should be included or excluded in the report. Exclusion filters take precedence over inclusion filters. Wildcards are allowed.
+    classfilters: '+*' # Optional list of classes that should be included or excluded in the report. Exclusion filters take precedence over inclusion filters. Wildcards are allowed.
+    filefilters: '+*' # Optional list of files that should be included or excluded in the report. Exclusion filters take precedence over inclusion filters. Wildcards are allowed.
+    verbosity: 'Info' # The verbosity level of the log messages. Values: Verbose, Info, Warning, Error, Off
+    title: '' # Optional title.
+    tag: '$(build.buildnumber)_#$(build.buildid)' # Optional tag or build version.
+    license: '' # Optional license for PRO version. Get your license here: https://reportgenerator.io/pro
+    customSettings: '' # Optional custom settings (separated by semicolon). See: https://github.com/danielpalme/ReportGenerator/wiki/Settings.
 ```
 
 ### Attention
