@@ -31,7 +31,7 @@ jobs:
       working-directory: src
 
     - name: 'Setup .NET Core'
-      uses: actions/setup-dotnet@v2
+      uses: actions/setup-dotnet@v3
       with:
         dotnet-version: ${{ env.dotnetSDKVersion }}
 
