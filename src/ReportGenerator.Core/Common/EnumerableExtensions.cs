@@ -63,6 +63,7 @@ namespace Palmmedia.ReportGenerator.Core.Common
 
                 queue.Enqueue(item);
             }
+
             return queue;
         }
 
