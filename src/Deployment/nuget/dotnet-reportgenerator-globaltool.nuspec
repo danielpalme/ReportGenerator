@@ -51,5 +51,9 @@ dotnet reportgenerator [options]</description>
     <!-- Net6.0 ('tools\net6.0' directory) -->
     <file src="..\..\ReportGenerator.DotnetGlobalTool\bin\Release\net6.0\publish\**\*.*" target="tools\net6.0\any" />
     <file src="DotnetToolSettings.xml" target="tools\net6.0\any" />
+    
+    <!-- Net7.0 ('tools\net7.0' directory) -->
+    <file src="..\..\ReportGenerator.DotnetGlobalTool\bin\Release\net7.0\publish\**\*.*" target="tools\net7.0\any" />
+    <file src="DotnetToolSettings.xml" target="tools\net7.0\any" />
   </files>
 </package>
