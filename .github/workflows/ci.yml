@@ -34,6 +34,7 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: ${{ env.dotnetSDKVersion }}
+        include-prerelease: true
 
     - name: 'Show dotnet info'
       run: dotnet --info
