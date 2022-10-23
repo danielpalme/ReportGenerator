@@ -49,7 +49,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
         }
 
         /// <summary>
-        /// Gets the report builders that correspond to the given <paramref name="reportConfiguration" />.
+        /// Gets the report builders that correspond to the given <paramref name="reportContext" />.
         /// </summary>
         /// <param name="reportContext">The report context.</param>
         /// <returns>

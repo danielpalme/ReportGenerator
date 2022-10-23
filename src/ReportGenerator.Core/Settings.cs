@@ -69,7 +69,7 @@ namespace Palmmedia.ReportGenerator.Core
         /// <summary>
         ///  Gets or sets custom headers (e.g. authentication headers) for remote requests.
         ///  Format: key1=value1;key2=value2
-        ///  Example: Authorization=Bearer <JWT>
+        ///  Example: Authorization=Bearer ~JWT~
         /// </summary>
         public string CustomHeadersForRemoteFiles { get; set; }
 

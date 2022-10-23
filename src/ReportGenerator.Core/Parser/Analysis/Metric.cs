@@ -29,6 +29,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <param name="explanationUrl">The explanation url.</param>
         /// <param name="metricType">The type of the metric.</param>
         /// <param name="value">The value.</param>
+        /// <param name="mergeOrder">The merge order.</param>
         public Metric(string name, Uri explanationUrl, MetricType metricType, decimal? value, MetricMergeOrder mergeOrder)
             : this(name, explanationUrl, metricType, value)
         {
