@@ -6,6 +6,9 @@ using Palmmedia.ReportGenerator.Core.Reporting.History;
 
 namespace ReportGenerator.DotnetCorePluginLoader
 {
+    /// <summary>
+    /// Aassembly loader for .NET Core.
+    /// </summary>
     public class DotNetCoreAssemblyLoader : IAssemblyLoader
     {
         /// <summary>

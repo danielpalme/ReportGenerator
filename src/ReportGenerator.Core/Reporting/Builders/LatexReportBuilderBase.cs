@@ -12,7 +12,7 @@ using Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering;
 namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 {
     /// <summary>
-    /// Implementation of <see cref="IReportBuilder"/> that uses <see cref="IReportRenderer"/> to create reports.
+    /// Implementation of <see cref="IReportBuilder"/> that uses <see cref="ILatexRenderer"/> to create reports.
     /// </summary>
     public abstract class LatexReportBuilderBase : IReportBuilder
     {
