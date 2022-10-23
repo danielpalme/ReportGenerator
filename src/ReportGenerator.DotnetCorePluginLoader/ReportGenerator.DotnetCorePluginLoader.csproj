@@ -4,6 +4,7 @@
     <RootNamespace>ReportGenerator.DotnetCorePluginLoader</RootNamespace>
     <AssemblyVersion>5.1.10.0</AssemblyVersion>
     <FileVersion>5.1.10.0</FileVersion>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

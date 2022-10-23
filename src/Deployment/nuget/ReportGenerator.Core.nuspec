@@ -55,20 +55,26 @@ https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage</desc
 	  <!-- Execution .NET Core 3.x (see https://github.com/coverlet-coverage/coverlet/pull/694) -->
     <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.deps.json" target="lib\netcoreapp3.1\" />
     <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.dll" target="lib\netcoreapp3.1\" />
+    <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.xml" target="lib\netcoreapp3.1\" />
     <file src="..\..\ReportGenerator.Core\bin\Release\appsettings.json" target="lib\netcoreapp3.1\" />
     <file src="..\..\ReportGenerator.DotnetCorePluginLoader\bin\Release\netcoreapp3.1\ReportGenerator.DotnetCorePluginLoader.dll" target="lib\netcoreapp3.1\" />
+    <file src="..\..\ReportGenerator.DotnetCorePluginLoader\bin\Release\netcoreapp3.1\ReportGenerator.DotnetCorePluginLoader.xml" target="lib\netcoreapp3.1\" />
 
 	  <!-- Execution .NET 5.x (see https://github.com/coverlet-coverage/coverlet/pull/694) -->
     <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.deps.json" target="lib\net5.0\" />
     <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.dll" target="lib\net5.0\" />
+    <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.xml" target="lib\net5.0\" />
     <file src="..\..\ReportGenerator.Core\bin\Release\appsettings.json" target="lib\net5.0\" />
     <file src="..\..\ReportGenerator.DotnetCorePluginLoader\bin\Release\net5.0\ReportGenerator.DotnetCorePluginLoader.dll" target="lib\net5.0\" />
+    <file src="..\..\ReportGenerator.DotnetCorePluginLoader\bin\Release\net5.0\ReportGenerator.DotnetCorePluginLoader.xml" target="lib\net5.0\" />
 
 	  <!-- Execution .NET 6.x (see https://github.com/coverlet-coverage/coverlet/pull/694) -->
     <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.deps.json" target="lib\net6.0\" />
     <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.dll" target="lib\net6.0\" />
+    <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.xml" target="lib\net6.0\" />
     <file src="..\..\ReportGenerator.Core\bin\Release\appsettings.json" target="lib\net6.0\" />
     <file src="..\..\ReportGenerator.DotnetCorePluginLoader\bin\Release\net6.0\ReportGenerator.DotnetCorePluginLoader.dll" target="lib\net6.0\" />
+    <file src="..\..\ReportGenerator.DotnetCorePluginLoader\bin\Release\net6.0\ReportGenerator.DotnetCorePluginLoader.xml" target="lib\net6.0\" />
   </files>
 </package>
 
