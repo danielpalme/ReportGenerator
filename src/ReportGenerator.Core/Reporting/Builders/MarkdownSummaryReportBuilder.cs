@@ -81,7 +81,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
-            using (var reportTextWriter = new StreamWriter(new FileStream(targetPath, FileMode.Create), Encoding.UTF8))
+            using (var reportTextWriter = File.CreateText(targetPath))
             {
                 reportTextWriter.WriteLine("# {0}", ReportResources.Summary);
                 reportTextWriter.WriteLine("|||");
