@@ -70,6 +70,7 @@ CHANGELOG
 5.1.11.0
 
     * New: #556: Generate text reports without UTF-8 BOM
+    * New: #557: Added support for .NET 7
 
 5.1.10.0
 
