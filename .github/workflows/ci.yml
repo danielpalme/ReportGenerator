@@ -7,7 +7,7 @@ env:
   buildPlatform: Any CPU
   buildConfiguration: Release
   version: 5.1.10
-  dotnetSDKVersion: 7.x
+  dotnetSDKVersion: 7.0.100
   nodeVersion: 16
 
 jobs:
@@ -34,7 +34,6 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: ${{ env.dotnetSDKVersion }}
-        dotnet-quality: 'preview'
 
     - name: 'Show dotnet info'
       run: dotnet --info
