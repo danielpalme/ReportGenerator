@@ -7,6 +7,7 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using Palmmedia.ReportGenerator.Core.CodeAnalysis;
+using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Properties;
@@ -286,8 +287,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             {
                 this.reportTextWriter.WriteLine("<h1>{0}</h1>", WebUtility.HtmlEncode(ReportResources.Testmethods));
 
-                int coverableLines = fileAnalyses.Sum(f => f.Lines.Count(l => l.LineVisitStatus != LineVisitStatus.NotCoverable));
-                int coveredLines = fileAnalyses.Sum(f => f.Lines.Count(l => l.LineVisitStatus > LineVisitStatus.NotCovered));
+                int coverableLines = fileAnalyses.SafeSum(f => f.Lines.Count(l => l.LineVisitStatus != LineVisitStatus.NotCoverable));
+                int coveredLines = fileAnalyses.SafeSum(f => f.Lines.Count(l => l.LineVisitStatus > LineVisitStatus.NotCovered));
                 decimal? coverage = (coverableLines == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)coveredLines / (double)coverableLines) / 10;
 
                 int? coverageRounded = null;
@@ -306,7 +307,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
                 foreach (var testMethod in testMethods)
                 {
-                    coveredLines = fileAnalyses.Sum(f => f.Lines.Count(l => l.LineCoverageByTestMethod.ContainsKey(testMethod) && l.LineCoverageByTestMethod[testMethod].LineVisitStatus > LineVisitStatus.NotCovered));
+                    coveredLines = fileAnalyses.SafeSum(f => f.Lines.Count(l => l.LineCoverageByTestMethod.ContainsKey(testMethod) && l.LineCoverageByTestMethod[testMethod].LineVisitStatus > LineVisitStatus.NotCovered));
                     coverage = (coverableLines == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)coveredLines / (double)coverableLines) / 10;
 
                     coverageRounded = null;

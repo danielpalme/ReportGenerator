@@ -12,6 +12,138 @@ namespace Palmmedia.ReportGenerator.Core.Common
     internal static class EnumerableExtensions
     {
         /// <summary>
+        /// Computes the sum of the sequence of System.Int32 values that are obtained by invoking a transform function on each element of the input sequence. If an OverflowException occurs, the Int32.MaxValue is returned.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <param name="source">A sequence of values that are used to calculate a sum.</param>
+        /// <param name="selector">A transform function to apply to each element.</param>
+        /// <returns>The sum of the projected values.</returns>
+        public static int SafeSum<TSource>(this IEnumerable<TSource> source, Func<TSource, int> selector)
+        {
+            checked
+            {
+                try
+                {
+                    return source.Sum(selector);
+                }
+                catch (OverflowException)
+                {
+                    return int.MaxValue;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Computes the sum of the sequence of System.Int32 values that are obtained by invoking a transform function on each element of the input sequence. If an OverflowException occurs, the Int32.MaxValue is returned.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <param name="source">A sequence of values that are used to calculate a sum.</param>
+        /// <param name="selector">A transform function to apply to each element.</param>
+        /// <returns>The sum of the projected values.</returns>
+        public static int? SafeSum<TSource>(this IEnumerable<TSource> source, Func<TSource, int?> selector)
+        {
+            checked
+            {
+                try
+                {
+                    return source.Sum(selector);
+                }
+                catch (OverflowException)
+                {
+                    return int.MaxValue;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Computes the sum of the sequence of System.Int64 values that are obtained by invoking a transform function on each element of the input sequence. If an OverflowException occurs, the Int64.MaxValue is returned.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <param name="source">A sequence of values that are used to calculate a sum.</param>
+        /// <param name="selector">A transform function to apply to each element.</param>
+        /// <returns>The sum of the projected values.</returns>
+        public static long SafeSum<TSource>(this IEnumerable<TSource> source, Func<TSource, long> selector)
+        {
+            checked
+            {
+                try
+                {
+                    return source.Sum(selector);
+                }
+                catch (OverflowException)
+                {
+                    return long.MaxValue;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Computes the sum of the sequence of System.Int64 values that are obtained by invoking a transform function on each element of the input sequence. If an OverflowException occurs, the Int64.MaxValue is returned.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <param name="source">A sequence of values that are used to calculate a sum.</param>
+        /// <param name="selector">A transform function to apply to each element.</param>
+        /// <returns>The sum of the projected values.</returns>
+        public static long? SafeSum<TSource>(this IEnumerable<TSource> source, Func<TSource, long?> selector)
+        {
+            checked
+            {
+                try
+                {
+                    return source.Sum(selector);
+                }
+                catch (OverflowException)
+                {
+                    return long.MaxValue;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Computes the sum of the sequence of decimal values that are obtained by invoking a transform function on each element of the input sequence. If an OverflowException occurs, the decimal.MaxValue is returned.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <param name="source">A sequence of values that are used to calculate a sum.</param>
+        /// <param name="selector">A transform function to apply to each element.</param>
+        /// <returns>The sum of the projected values.</returns>
+        public static decimal SafeSum<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal> selector)
+        {
+            checked
+            {
+                try
+                {
+                    return source.Sum(selector);
+                }
+                catch (OverflowException)
+                {
+                    return decimal.MaxValue;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Computes the sum of the sequence of decimal values that are obtained by invoking a transform function on each element of the input sequence. If an OverflowException occurs, the decimal is returned.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <param name="source">A sequence of values that are used to calculate a sum.</param>
+        /// <param name="selector">A transform function to apply to each element.</param>
+        /// <returns>The sum of the projected values.</returns>
+        public static decimal? SafeSum<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal?> selector)
+        {
+            checked
+            {
+                try
+                {
+                    return source.Sum(selector);
+                }
+                catch (OverflowException)
+                {
+                    return decimal.MaxValue;
+                }
+            }
+        }
+
+        /// <summary>
         /// Returns a new enumerable collection that contains the last
         /// <paramref name="count"/> elements from <paramref name="source"/>.
         /// </summary>

@@ -58,7 +58,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
         /// <param name="tag">The custom tag (e.g. build number).</param>
         internal void CreateReport(bool addHistoricCoverage, List<HistoricCoverage> overallHistoricCoverages, DateTime executionTime, string tag)
         {
-            int numberOfClasses = this.parserResult.Assemblies.Sum(a => a.Classes.Count());
+            int numberOfClasses = this.parserResult.Assemblies.SafeSum(a => a.Classes.Count());
 
             Logger.DebugFormat(Resources.AnalyzingClasses, numberOfClasses);
 
@@ -121,6 +121,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
                         Resources.ErrorDuringRenderingSummaryReport,
                         renderer.ReportType,
                         ex.GetExceptionMessageForDisplay());
+
+                    if (Logger.VerbosityLevel == VerbosityLevel.Verbose)
+                    {
+                        Logger.Error(ex.StackTrace);
+                    }
                 }
             }
         }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Palmmedia.ReportGenerator.Core.Common;
 
 namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
 {
@@ -32,13 +33,13 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
 
                 result.Add(new HistoricCoverage(executionTime, historicCoveragesOfExecutionTime[0].Tag)
                 {
-                    CoveredLines = historicCoveragesOfExecutionTime.Sum(h => h.CoveredLines),
-                    CoverableLines = historicCoveragesOfExecutionTime.Sum(h => h.CoverableLines),
-                    CoveredBranches = historicCoveragesOfExecutionTime.Sum(h => h.CoveredBranches),
-                    TotalBranches = historicCoveragesOfExecutionTime.Sum(h => h.TotalBranches),
-                    TotalLines = historicCoveragesOfExecutionTime.Sum(h => h.TotalLines),
-                    CoveredCodeElements = historicCoveragesOfExecutionTime.Sum(h => h.CoveredCodeElements),
-                    TotalCodeElements = historicCoveragesOfExecutionTime.Sum(h => h.TotalCodeElements)
+                    CoveredLines = historicCoveragesOfExecutionTime.SafeSum(h => h.CoveredLines),
+                    CoverableLines = historicCoveragesOfExecutionTime.SafeSum(h => h.CoverableLines),
+                    CoveredBranches = historicCoveragesOfExecutionTime.SafeSum(h => h.CoveredBranches),
+                    TotalBranches = historicCoveragesOfExecutionTime.SafeSum(h => h.TotalBranches),
+                    TotalLines = historicCoveragesOfExecutionTime.SafeSum(h => h.TotalLines),
+                    CoveredCodeElements = historicCoveragesOfExecutionTime.SafeSum(h => h.CoveredCodeElements),
+                    TotalCodeElements = historicCoveragesOfExecutionTime.SafeSum(h => h.TotalCodeElements)
                 });
             }
 

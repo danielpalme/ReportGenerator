@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.FileReading;
 
@@ -203,7 +204,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                     return null;
                 }
 
-                return this.branches.Sum(l => l.Value.Count(b => b.BranchVisits > 0));
+                return this.branches.SafeSum(l => l.Value.Count(b => b.BranchVisits > 0));
             }
         }
 
@@ -222,7 +223,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                     return null;
                 }
 
-                return this.branches.Sum(l => l.Value.Count);
+                return this.branches.SafeSum(l => l.Value.Count);
             }
         }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Palmmedia.ReportGenerator.Core.Common;
 
 namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
 {
@@ -81,13 +82,13 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// Gets the number of covered lines.
         /// </summary>
         /// <value>The covered lines.</value>
-        public int CoveredLines => this.Assemblies.Sum(a => a.CoveredLines);
+        public int CoveredLines => this.Assemblies.SafeSum(a => a.CoveredLines);
 
         /// <summary>
         /// Gets the number of coverable lines.
         /// </summary>
         /// <value>The coverable lines.</value>
-        public int CoverableLines => this.Assemblies.Sum(a => a.CoverableLines);
+        public int CoverableLines => this.Assemblies.SafeSum(a => a.CoverableLines);
 
         /// <summary>
         /// Gets the number of total lines.
@@ -131,7 +132,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <value>
         /// The number of covered branches.
         /// </value>
-        public int? CoveredBranches => this.Assemblies.Sum(f => f.CoveredBranches);
+        public int? CoveredBranches => this.Assemblies.SafeSum(f => f.CoveredBranches);
 
         /// <summary>
         /// Gets the number of total branches.
@@ -139,7 +140,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <value>
         /// The number of total branches.
         /// </value>
-        public int? TotalBranches => this.Assemblies.Sum(f => f.TotalBranches);
+        public int? TotalBranches => this.Assemblies.SafeSum(f => f.TotalBranches);
 
         /// <summary>
         /// Gets the branch coverage quota.
@@ -153,7 +154,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <value>
         /// The number of covered code elements.
         /// </value>
-        public int CoveredCodeElements => this.Assemblies.Sum(f => f.CoveredCodeElements);
+        public int CoveredCodeElements => this.Assemblies.SafeSum(f => f.CoveredCodeElements);
 
         /// <summary>
         /// Gets the number of total code elements.
@@ -161,7 +162,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <value>
         /// The number of total code elements.
         /// </value>
-        public int TotalCodeElements => this.Assemblies.Sum(f => f.TotalCodeElements);
+        public int TotalCodeElements => this.Assemblies.SafeSum(f => f.TotalCodeElements);
 
         /// <summary>
         /// Gets the code elements coverage quota.
@@ -181,7 +182,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                 .SelectMany(m => m.Metrics)
                 .Where(m => m.MetricType == MetricType.CoverageAbsolute)
                 .GroupBy(m => m.Name)
-                .Select(g => new Metric(g.Key, g.First().ExplanationUrl, MetricType.CoverageAbsolute, g.Sum(m => m.Value)))
+                .Select(g => new Metric(g.Key, g.First().ExplanationUrl, MetricType.CoverageAbsolute, g.SafeSum(m => m.Value)))
                 .ToList();
 
         /// <summary>

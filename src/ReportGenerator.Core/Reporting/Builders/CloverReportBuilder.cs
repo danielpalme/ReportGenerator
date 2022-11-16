@@ -269,14 +269,14 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                     {
                         var classMetricElements = fileElement.Elements("class").Elements("metrics").ToArray();
 
-                        int elements = classMetricElements.Sum(e => int.Parse(e.Attribute("elements").Value, CultureInfo.InvariantCulture));
-                        int coveredelements = classMetricElements.Sum(e => int.Parse(e.Attribute("coveredelements").Value, CultureInfo.InvariantCulture));
-                        int conditionals = classMetricElements.Sum(e => int.Parse(e.Attribute("conditionals").Value, CultureInfo.InvariantCulture));
-                        int coveredconditionals = classMetricElements.Sum(e => int.Parse(e.Attribute("coveredconditionals").Value, CultureInfo.InvariantCulture));
-                        int statements = classMetricElements.Sum(e => int.Parse(e.Attribute("statements").Value, CultureInfo.InvariantCulture));
-                        int coveredstatements = classMetricElements.Sum(e => int.Parse(e.Attribute("coveredstatements").Value, CultureInfo.InvariantCulture));
-                        int coveredmethods = classMetricElements.Sum(e => int.Parse(e.Attribute("coveredmethods").Value, CultureInfo.InvariantCulture));
-                        int methods = classMetricElements.Sum(e => int.Parse(e.Attribute("methods").Value, CultureInfo.InvariantCulture));
+                        int elements = classMetricElements.SafeSum(e => int.Parse(e.Attribute("elements").Value, CultureInfo.InvariantCulture));
+                        int coveredelements = classMetricElements.SafeSum(e => int.Parse(e.Attribute("coveredelements").Value, CultureInfo.InvariantCulture));
+                        int conditionals = classMetricElements.SafeSum(e => int.Parse(e.Attribute("conditionals").Value, CultureInfo.InvariantCulture));
+                        int coveredconditionals = classMetricElements.SafeSum(e => int.Parse(e.Attribute("coveredconditionals").Value, CultureInfo.InvariantCulture));
+                        int statements = classMetricElements.SafeSum(e => int.Parse(e.Attribute("statements").Value, CultureInfo.InvariantCulture));
+                        int coveredstatements = classMetricElements.SafeSum(e => int.Parse(e.Attribute("coveredstatements").Value, CultureInfo.InvariantCulture));
+                        int coveredmethods = classMetricElements.SafeSum(e => int.Parse(e.Attribute("coveredmethods").Value, CultureInfo.InvariantCulture));
+                        int methods = classMetricElements.SafeSum(e => int.Parse(e.Attribute("methods").Value, CultureInfo.InvariantCulture));
                         int classes = classMetricElements.Length;
                         int loc = this.totalLinesByFileElement[fileElement];
                         int ncloc = this.coverableLinesByFileElement[fileElement];

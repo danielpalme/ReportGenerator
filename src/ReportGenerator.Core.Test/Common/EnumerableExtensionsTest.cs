@@ -7,6 +7,36 @@ namespace Palmmedia.ReportGenerator.Core.Test.Common
 {
     public class EnumerableExtensionsTest
     {
+        [Fact]
+        public void SafeSum_Int()
+        {
+            var values = new[] { 1, 2, 3 };
+            Assert.Equal(6, values.SafeSum(i => i));
+
+            values = new[] { 10, int.MaxValue };
+            Assert.Equal(int.MaxValue, values.SafeSum(i => i));
+        }
+
+        [Fact]
+        public void SafeSum_Long()
+        {
+            var values = new[] { 1L, 2L, 3L };
+            Assert.Equal(6L, values.SafeSum(i => i));
+
+            values = new[] { 10L, long.MaxValue };
+            Assert.Equal(long.MaxValue, values.SafeSum(i => i));
+        }
+
+        [Fact]
+        public void SafeSum_Decimal()
+        {
+            var values = new[] { 1m, 2m, 3m };
+            Assert.Equal(6m, values.SafeSum(i => i));
+
+            values = new[] { 10m, decimal.MaxValue };
+            Assert.Equal(decimal.MaxValue, values.SafeSum(i => i));
+        }
+
         [Theory]
         [MemberData(nameof(Encodings))]
         public void TakeLast(int numberOfElements, IEnumerable<int> input, List<int> expectedResult)

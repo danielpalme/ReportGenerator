@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Palmmedia.ReportGenerator.Core.Common;
 
 namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
 {
@@ -127,19 +128,19 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// Gets the number of covered lines.
         /// </summary>
         /// <value>The covered lines.</value>
-        public int CoveredLines => this.files.Sum(f => f.CoveredLines);
+        public int CoveredLines => this.files.SafeSum(f => f.CoveredLines);
 
         /// <summary>
         /// Gets the number of coverable lines.
         /// </summary>
         /// <value>The coverable lines.</value>
-        public int CoverableLines => this.files.Sum(f => f.CoverableLines);
+        public int CoverableLines => this.files.SafeSum(f => f.CoverableLines);
 
         /// <summary>
         /// Gets the number of total lines.
         /// </summary>
         /// <value>The total lines.</value>
-        public int? TotalLines => this.files.Sum(f => f.TotalLines);
+        public int? TotalLines => this.files.SafeSum(f => f.TotalLines);
 
         /// <summary>
         /// Gets or sets the coverage quota of the class.
@@ -171,7 +172,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <value>
         /// The number of covered branches.
         /// </value>
-        public int? CoveredBranches => this.files.Sum(f => f.CoveredBranches);
+        public int? CoveredBranches => this.files.SafeSum(f => f.CoveredBranches);
 
         /// <summary>
         /// Gets the number of total branches.
@@ -179,7 +180,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <value>
         /// The number of total branches.
         /// </value>
-        public int? TotalBranches => this.files.Sum(f => f.TotalBranches);
+        public int? TotalBranches => this.files.SafeSum(f => f.TotalBranches);
 
         /// <summary>
         /// Gets the branch coverage quota of the class.
@@ -193,7 +194,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <value>
         /// The number of covered code elements.
         /// </value>
-        public int CoveredCodeElements => this.files.Sum(f => f.CoveredCodeElements);
+        public int CoveredCodeElements => this.files.SafeSum(f => f.CoveredCodeElements);
 
         /// <summary>
         /// Gets the number of total code elements.
@@ -201,7 +202,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <value>
         /// The number of total code elements.
         /// </value>
-        public int TotalCodeElements => this.files.Sum(f => f.TotalCodeElements);
+        public int TotalCodeElements => this.files.SafeSum(f => f.TotalCodeElements);
 
         /// <summary>
         /// Gets the code elements coverage quota.

@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.1.12.0
+
+    * Fix: #548: Improved handling of OverflowException
+
 5.1.11.0
 
     * New: #556: Generate text reports without UTF-8 BOM
