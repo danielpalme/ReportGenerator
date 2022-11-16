@@ -2,7 +2,7 @@
   "profiles": {
     "ReportGenerator.Console.NetCore": {
       "commandName": "Project",
-      "commandLineArgs": "-reports:C:\\Users\\danie\\Documents\\Projects\\ReportGenerator\\src\\Testprojects\\CSharp\\Reports\\Cobertura_coverlet.xml -targetdir:C:\\Users\\danie\\Desktop\\coverlet"
+      "commandLineArgs": "-reports:C:\\Users\\danie\\Desktop\\coverage.xml -targetdir:C:\\Users\\danie\\Desktop\\out123 -verbosity:Verbose"
     }
   }
 }
