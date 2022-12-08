@@ -399,4 +399,7 @@
   <data name="Previous" xml:space="preserve">
     <value>Previous</value>
   </data>
+  <data name="Branch" xml:space="preserve">
+    <value>Branch</value>
+  </data>
 </root>

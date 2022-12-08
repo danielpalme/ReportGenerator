@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Licensing;
 using Palmmedia.ReportGenerator.Core.Logging;
@@ -12,14 +13,14 @@ using Palmmedia.ReportGenerator.Core.Properties;
 namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 {
     /// <summary>
-    /// Creates summary report in Markdown format (no reports for classes are generated).
+    /// Creates summary report in Markdown format optimized for Github (no reports for classes are generated).
     /// </summary>
-    public class MarkdownSummaryReportBuilder : IReportBuilder
+    public class MarkdownSummaryGithubReportBuilder : IReportBuilder
     {
         /// <summary>
         /// The Logger.
         /// </summary>
-        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(MarkdownSummaryReportBuilder));
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(MarkdownSummaryGithubReportBuilder));
 
         /// <summary>
         /// Gets the report type.
@@ -27,7 +28,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <value>
         /// The report type.
         /// </value>
-        public string ReportType => "MarkdownSummary";
+        public string ReportType => "MarkdownSummaryGithub";
 
         /// <summary>
         /// Gets or sets the report context.
@@ -77,7 +78,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 }
             }
 
-            string targetPath = Path.Combine(targetDirectory, "Summary.md");
+            string targetPath = Path.Combine(targetDirectory, "SummaryGithub.md");
 
             bool proVersion = this.ReportContext.ReportConfiguration.License.DetermineLicenseType() == LicenseType.Pro;
 
@@ -86,6 +87,13 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             using (var reportTextWriter = File.CreateText(targetPath))
             {
                 reportTextWriter.WriteLine("# {0}", ReportResources.Summary);
+
+                reportTextWriter.WriteLine(
+                    "<details open><summary>{0}</summary>",
+                    ReportResources.Summary);
+
+                reportTextWriter.WriteLine();
+
                 reportTextWriter.WriteLine("|||");
                 reportTextWriter.WriteLine("|:---|:---|");
                 reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.GeneratedOn, DateTime.Now.ToShortDateString() + " - " + DateTime.Now.ToLongTimeString());
@@ -138,72 +146,67 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 }
 
                 reportTextWriter.WriteLine();
+                reportTextWriter.WriteLine("</details>");
+
+                reportTextWriter.WriteLine();
+                reportTextWriter.WriteLine("## {0}", ReportResources.Coverage3);
 
                 if (summaryResult.Assemblies.Any())
                 {
-                    reportTextWriter.Write(
-                        "|**{0}**|**{1}**|**{2}**|**{3}**|**{4}**|**{5}**|",
-                        ReportResources.Name,
-                        ReportResources.Covered,
-                        ReportResources.Uncovered,
-                        ReportResources.Coverable,
-                        ReportResources.Total,
-                        ReportResources.Coverage);
-
-                    if (summaryResult.SupportsBranchCoverage)
-                    {
-                        reportTextWriter.Write(
-                            "**{0}**|**{1}**|**{2}**|",
-                            ReportResources.Covered,
-                            ReportResources.Total,
-                            ReportResources.BranchCoverage);
-                    }
-
-                    if (proVersion)
-                    {
-                        reportTextWriter.Write(
-                            "**{0}**|**{1}**|**{2}**|",
-                            ReportResources.Covered,
-                            ReportResources.Total,
-                            ReportResources.CodeElementCoverageQuota);
-                    }
-
-                    reportTextWriter.WriteLine();
-
-                    reportTextWriter.Write("|:---|---:|---:|---:|---:|---:|");
-
-                    if (summaryResult.SupportsBranchCoverage)
-                    {
-                        reportTextWriter.Write("---:|---:|---:|");
-                    }
-
-                    if (proVersion)
-                    {
-                        reportTextWriter.Write("---:|---:|---:|");
-                    }
-
-                    reportTextWriter.WriteLine();
-
                     foreach (var assembly in summaryResult.Assemblies)
                     {
-                        reportTextWriter.Write("|**{0}**", assembly.Name);
-                        reportTextWriter.Write("|**{0}**", assembly.CoveredLines);
-                        reportTextWriter.Write("|**{0}**", assembly.CoverableLines - assembly.CoveredLines);
-                        reportTextWriter.Write("|**{0}**", assembly.CoverableLines);
-                        reportTextWriter.Write("|**{0}**", assembly.TotalLines.GetValueOrDefault());
+                        reportTextWriter.WriteLine(
+                            "<details><summary>{0} - {1}</summary>",
+                            assembly.Name,
+                            assembly.CoverageQuota.HasValue ? assembly.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
+
+                        reportTextWriter.WriteLine();
+
+                        reportTextWriter.Write(
+                            "|**{0}**|**{1}**|",
+                            ReportResources.Name,
+                            ReportResources.Line);
+
+                        if (summaryResult.SupportsBranchCoverage)
+                        {
+                            reportTextWriter.Write(
+                                "**{0}**|",
+                                ReportResources.Branch);
+                        }
+
+                        if (proVersion)
+                        {
+                            reportTextWriter.Write(
+                                "**{0}**|",
+                                ReportResources.Method);
+                        }
+
+                        reportTextWriter.WriteLine();
+
+                        reportTextWriter.Write("|:---|---:|");
+
+                        if (summaryResult.SupportsBranchCoverage)
+                        {
+                            reportTextWriter.Write("---:|");
+                        }
+
+                        if (proVersion)
+                        {
+                            reportTextWriter.Write("---:|");
+                        }
+
+                        reportTextWriter.WriteLine();
+
+                        reportTextWriter.Write("|**{0}**", InsertLineBreaks(assembly.Name));
                         reportTextWriter.Write("|**{0}**", assembly.CoverageQuota.HasValue ? assembly.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
 
                         if (summaryResult.SupportsBranchCoverage)
                         {
-                            reportTextWriter.Write("|**{0}**", assembly.CoveredBranches);
-                            reportTextWriter.Write("|**{0}**", assembly.TotalBranches);
                             reportTextWriter.Write("|**{0}**", assembly.BranchCoverageQuota.HasValue ? assembly.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
                         }
 
                         if (proVersion)
                         {
-                            reportTextWriter.Write("|**{0}**", assembly.CoveredCodeElements);
-                            reportTextWriter.Write("|**{0}**", assembly.TotalCodeElements);
                             reportTextWriter.Write("|**{0}**", assembly.CodeElementCoverageQuota.HasValue ? assembly.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
                         }
 
@@ -211,29 +214,24 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
                         foreach (var @class in assembly.Classes)
                         {
-                            reportTextWriter.Write("|{0}", @class.Name);
-                            reportTextWriter.Write("|{0}", @class.CoveredLines);
-                            reportTextWriter.Write("|{0}", @class.CoverableLines - @class.CoveredLines);
-                            reportTextWriter.Write("|{0}", @class.CoverableLines);
-                            reportTextWriter.Write("|{0}", @class.TotalLines.GetValueOrDefault());
+                            reportTextWriter.Write("|{0}", InsertLineBreaks(@class.Name));
                             reportTextWriter.Write("|{0}", @class.CoverageQuota.HasValue ? @class.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
 
                             if (summaryResult.SupportsBranchCoverage)
                             {
-                                reportTextWriter.Write("|{0}", @class.CoveredBranches);
-                                reportTextWriter.Write("|{0}", @class.TotalBranches);
                                 reportTextWriter.Write("|{0}", @class.BranchCoverageQuota.HasValue ? @class.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
                             }
 
                             if (proVersion)
                             {
-                                reportTextWriter.Write("|{0}", @class.CoveredCodeElements);
-                                reportTextWriter.Write("|{0}", @class.TotalCodeElements);
                                 reportTextWriter.Write("|{0}", @class.CodeElementCoverageQuota.HasValue ? @class.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
                             }
 
                             reportTextWriter.WriteLine("|");
                         }
+
+                        reportTextWriter.WriteLine();
+                        reportTextWriter.WriteLine("</details>");
                     }
                 }
                 else
@@ -243,6 +241,34 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
                 reportTextWriter.Flush();
             }
+        }
+
+        /// <summary>
+        /// Inserts a separator after the given chunk length.
+        /// </summary>
+        /// <param name="text">The text.</param>
+        /// <param name="chunkLength">The chunk length</param>
+        /// <param name="separator">The separator.</param>
+        /// <returns>The text with the separator.</returns>
+        private static string InsertLineBreaks(string text, int chunkLength = 75, string separator = "<br/>")
+        {
+            if (text == null || text.Length <= chunkLength)
+            {
+                return text;
+            }
+
+            StringBuilder builder = new StringBuilder();
+            for (int index = 0; index < text.Length; index += chunkLength)
+            {
+                if (builder.Length > 0)
+                {
+                    builder.Append(separator);
+                }
+
+                builder.Append(text, index, Math.Min(chunkLength, text.Length - index));
+            }
+
+            return builder.ToString();
         }
     }
 }

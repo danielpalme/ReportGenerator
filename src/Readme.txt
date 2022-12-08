@@ -35,7 +35,7 @@ The following output formats are supported by ReportGenerator:
 -TeamCitySummary
 -TextSummary, TextDeltaSummary
 -CsvSummary
--MarkdownSummary, MarkdownDeltaSummary
+-MarkdownSummary, MarkdownSummaryGithub, MarkdownDeltaSummary
 -PngChart
 -Badges
 -Custom formats (https://github.com/danielpalme/ReportGenerator/wiki/Custom-reports)
@@ -66,6 +66,10 @@ For further details take a look at LICENSE.txt.
 =======================================================================
 
 CHANGELOG
+
+5.1.13.0
+
+    * New: #567: Added report type: MarkdownSummaryGithub
 
 5.1.12.0
 

@@ -69,7 +69,7 @@ Explanations:
    Target directory:   The directory where the generated report should be saved.
    Report types:       The output formats and scope (separated by semicolon).
                        Values: Badges, Clover, Cobertura, CsvSummary, 
-                       MarkdownSummary, MarkdownDeltaSummary
+                       MarkdownSummary, MarkdownSummaryGithub, MarkdownDeltaSummary
                        Html, Html_Light, Html_Dark,
                        HtmlChart, HtmlInline, HtmlSummary,
                        HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Light, HtmlInline_AzurePipelines_Dark,
