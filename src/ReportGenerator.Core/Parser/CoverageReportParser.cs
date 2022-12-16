@@ -392,7 +392,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     else if (item.Attribute("clover") != null || item.Attribute("generated") != null)
                     {
                         Logger.Debug(Resources.PreprocessingReport);
-                        new CloverReportPreprocessor(this.sourceDirectories).Execute(item);
+                        new CloverReportPreprocessor(this.sourceDirectories, this.defaultAssemblyName).Execute(item);
 
                         Logger.DebugFormat(Resources.InitiatingParser, "Clover");
                         var result = new CloverParser(this.assemblyFilter, this.classFilter, this.fileFilter, this.excludeTestProjects).Parse(item);
