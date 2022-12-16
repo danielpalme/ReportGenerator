@@ -86,7 +86,14 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             using (var reportTextWriter = File.CreateText(targetPath))
             {
-                reportTextWriter.WriteLine("# {0}", ReportResources.Summary);
+                if (this.ReportContext.ReportConfiguration.Title != null)
+                {
+                    reportTextWriter.WriteLine("# {0} - {1}", ReportResources.Summary, this.ReportContext.ReportConfiguration.Title);
+                }
+                else
+                {
+                    reportTextWriter.WriteLine("# {0}", ReportResources.Summary);
+                }
 
                 reportTextWriter.WriteLine(
                     "<details open><summary>{0}</summary>",
@@ -247,7 +254,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// Inserts a separator after the given chunk length.
         /// </summary>
         /// <param name="text">The text.</param>
-        /// <param name="chunkLength">The chunk length</param>
+        /// <param name="chunkLength">The chunk length.</param>
         /// <param name="separator">The separator.</param>
         /// <returns>The text with the separator.</returns>
         private static string InsertLineBreaks(string text, int chunkLength = 75, string separator = "<br/>")

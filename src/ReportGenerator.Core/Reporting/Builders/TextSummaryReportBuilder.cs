@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
@@ -83,7 +82,15 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             using (var reportTextWriter = File.CreateText(targetPath))
             {
-                reportTextWriter.WriteLine(ReportResources.Summary);
+                if (this.ReportContext.ReportConfiguration.Title != null)
+                {
+                    reportTextWriter.WriteLine($"{ReportResources.Summary} - {this.ReportContext.ReportConfiguration.Title}");
+                }
+                else
+                {
+                    reportTextWriter.WriteLine(ReportResources.Summary);
+                }
+
                 reportTextWriter.WriteLine("  {0} {1}", ReportResources.GeneratedOn, DateTime.Now.ToShortDateString() + " - " + DateTime.Now.ToLongTimeString());
 
                 if (summaryResult.MinimumTimeStamp.HasValue || summaryResult.MaximumTimeStamp.HasValue)

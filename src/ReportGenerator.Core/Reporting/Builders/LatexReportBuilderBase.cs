@@ -60,8 +60,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 throw new ArgumentNullException(nameof(fileAnalyses));
             }
 
-            string additionalTitle = this.ReportContext.ReportConfiguration.Title != null ? $"{this.ReportContext.ReportConfiguration.Title} - " : null;
-
             reportRenderer.BeginClassReport(this.CreateTargetDirectory(), @class.DisplayName);
 
             if (this.ReportContext.ReportConfiguration.Title != null)

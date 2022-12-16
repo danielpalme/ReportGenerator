@@ -99,7 +99,15 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 HistoricCoverage previous = historicCoverages[0];
                 HistoricCoverage current = historicCoverages[1];
 
-                reportTextWriter.WriteLine("# {0}", ReportResources.DeltaSummary);
+                if (this.ReportContext.ReportConfiguration.Title != null)
+                {
+                    reportTextWriter.WriteLine("# {0} - {1}", ReportResources.DeltaSummary, this.ReportContext.ReportConfiguration.Title);
+                }
+                else
+                {
+                    reportTextWriter.WriteLine("# {0}", ReportResources.DeltaSummary);
+                }
+
                 reportTextWriter.WriteLine("|||||");
                 reportTextWriter.WriteLine("|:---|---:|---:|---:|");
 

@@ -70,6 +70,7 @@ CHANGELOG
 5.1.13.0
 
     * New: #567: Added report type: MarkdownSummaryGithub
+    * New: #575: Added title to Markdown and text reports
 
 5.1.12.0
 

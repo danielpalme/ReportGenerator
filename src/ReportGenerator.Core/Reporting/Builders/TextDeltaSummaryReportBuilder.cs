@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
@@ -97,7 +96,15 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 HistoricCoverage previous = historicCoverages[0];
                 HistoricCoverage current = historicCoverages[1];
 
-                reportTextWriter.WriteLine(ReportResources.DeltaSummary);
+                if (this.ReportContext.ReportConfiguration.Title != null)
+                {
+                    reportTextWriter.WriteLine($"{ReportResources.DeltaSummary} - {this.ReportContext.ReportConfiguration.Title}");
+                }
+                else
+                {
+                    reportTextWriter.WriteLine(ReportResources.DeltaSummary);
+                }
+
                 reportTextWriter.WriteLine("  {0} {1}", ReportResources.GeneratedOn, this.ReportTime(DateTime.Now));
                 reportTextWriter.WriteLine("  {0,-20} {1,20} {2,20} {3,10}", ReportResources.Description, ReportResources.Previous, ReportResources.Current, ReportResources.Delta);
                 reportTextWriter.WriteLine("  {0,-20} {1,20} {2,20}", ReportResources.CoverageDate, this.ReportTime(previous.ExecutionTime), this.ReportTime(current.ExecutionTime));

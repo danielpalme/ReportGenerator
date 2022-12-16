@@ -85,7 +85,15 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             using (var reportTextWriter = File.CreateText(targetPath))
             {
-                reportTextWriter.WriteLine("# {0}", ReportResources.Summary);
+                if (this.ReportContext.ReportConfiguration.Title != null)
+                {
+                    reportTextWriter.WriteLine("# {0} - {1}", ReportResources.Summary, this.ReportContext.ReportConfiguration.Title);
+                }
+                else
+                {
+                    reportTextWriter.WriteLine("# {0}", ReportResources.Summary);
+                }
+
                 reportTextWriter.WriteLine("|||");
                 reportTextWriter.WriteLine("|:---|:---|");
                 reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.GeneratedOn, DateTime.Now.ToShortDateString() + " - " + DateTime.Now.ToLongTimeString());
