@@ -7,8 +7,8 @@ env:
   buildPlatform: Any CPU
   buildConfiguration: Release
   version: 5.1.12
-  dotnetSDKVersion: 7.0.100
-  nodeVersion: 16
+  dotnetSDKVersion: 7.0.101
+  nodeVersion: 18
 
 jobs:
   build:
@@ -85,20 +85,19 @@ jobs:
     - name: Test
       run: dotnet test src\ReportGenerator.Core.Test\ReportGenerator.Core.Test.csproj --configuration ${{ env.BuildConfiguration }} --no-build /p:CollectCoverage=true /p:DeterministicSourcePaths=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=opencover%2ccobertura /p:CoverletOutput=../target/reports/coverage/
 
-    # Disabled due to: https://github.com/coverlet-coverage/coverlet/issues/1391
-    # - name: ReportGenerator
-    #   uses: danielpalme/ReportGenerator-GitHub-Action@5.1.11
-    #   with:
-    #     reports: 'src\target\reports\coverage\coverage.opencover.xml'
-    #     targetdir: 'src\target\reports\coverage'
-    #     reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
-    #     assemblyfilters: '-xunit*'
+    - name: ReportGenerator
+      uses: danielpalme/ReportGenerator-GitHub-Action@5
+      with:
+        reports: 'src\target\reports\coverage\coverage.opencover.xml'
+        targetdir: 'src\target\reports\coverage'
+        reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
+        assemblyfilters: '-xunit*'
 
-    # - name: 'Publish code coverage results'
-    #   uses: actions/upload-artifact@v3
-    #   with:
-    #     name: CoverageReport
-    #     path: src/target/reports/coverage
+    - name: 'Publish code coverage results'
+      uses: actions/upload-artifact@v3
+      with:
+        name: CoverageReport
+        path: src/target/reports/coverage
 
     - name: 'Prepare VSIX release: NetCore'
       run: |
