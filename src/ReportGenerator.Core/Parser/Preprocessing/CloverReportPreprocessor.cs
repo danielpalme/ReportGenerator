@@ -89,6 +89,13 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
                 {
                     file.Add(new XAttribute("path", nameAttribute.Value));
                 }
+
+                var @class = file.Element("class");
+
+                if (@class != null && @class.Attribute("namespace")?.Value == "global")
+                {
+                    file.Attribute("name").Value = @class.Attribute("name").Value;
+                }
             }
 
             if (this.sourceDirectories.Count == 0)

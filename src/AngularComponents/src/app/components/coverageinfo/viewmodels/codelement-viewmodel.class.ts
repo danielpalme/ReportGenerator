@@ -55,7 +55,12 @@ export class CodeElementViewModel extends ElementBase {
         }
 
         let groupingDotIndex: number = Helper.getNthOrLastIndexOf(clazz.name, ".", grouping);
-        let groupedNamespace: string = groupingDotIndex === -1 ? "-" : clazz.name.substr(0, groupingDotIndex);
+
+        if (groupingDotIndex === -1) {
+            groupingDotIndex = Helper.getNthOrLastIndexOf(clazz.name, "\\", grouping);
+        }
+
+        let groupedNamespace: string = groupingDotIndex === -1 ? "-" : clazz.name.substring(0, groupingDotIndex);
 
         for (let i: number = 0; i < this.subElements.length; i++) {
             if (this.subElements[i].name === groupedNamespace) {

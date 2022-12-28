@@ -233,7 +233,7 @@ export class CoverageInfoComponent {
         for (let j: number = 0; j < assemblies[i].classes.length; j++) {
           groupingMaximum = Math.max(
             groupingMaximum,
-            (assemblies[i].classes[j].name.match(/\./g) || []).length);
+            (assemblies[i].classes[j].name.match(/\.|\\/g) || []).length);
         }
       }
 
@@ -244,7 +244,7 @@ export class CoverageInfoComponent {
     const startOfQueryString: number = window.location.href.indexOf("?");
 
     if (startOfQueryString > -1) {
-      this.queryString = window.location.href.substr(startOfQueryString);
+      this.queryString = window.location.href.substring(startOfQueryString);
     }
 
     this.updateCoverageInfo();

@@ -117,7 +117,7 @@ export class RiskHotspotsComponent implements OnInit {
     const startOfQueryString: number = window.location.href.indexOf("?");
 
     if (startOfQueryString > -1) {
-      this.queryString = window.location.href.substr(startOfQueryString);
+      this.queryString = window.location.href.substring(startOfQueryString);
     }
 
     this.updateRiskHotpots();
