@@ -217,7 +217,7 @@
     <value>Grouping:</value>
   </data>
   <data name="History" xml:space="preserve">
-    <value>Coverage History</value>
+    <value>Coverage history</value>
   </data>
   <data name="Line" xml:space="preserve">
     <value>Line</value>
@@ -379,7 +379,7 @@
     <value>Upgrade to PRO version</value>
   </data>
   <data name="MethodCoverageProVersion" xml:space="preserve">
-    <value>Method coverage is only available for sponsors.</value>
+    <value>Feature is only available for sponsors</value>
   </data>
   <data name="CoverageDate" xml:space="preserve">
     <value>Coverage date:</value>
@@ -401,5 +401,14 @@
   </data>
   <data name="Branch" xml:space="preserve">
     <value>Branch</value>
+  </data>
+  <data name="CoverageTypes" xml:space="preserve">
+    <value>Coverage types</value>
+  </data>
+  <data name="SelectCoverageTypesAndMetrics" xml:space="preserve">
+    <value>Select coverage types &amp; metrics</value>
+  </data>
+  <data name="SelectCoverageTypes" xml:space="preserve">
+    <value>Select coverage types</value>
   </data>
 </root>

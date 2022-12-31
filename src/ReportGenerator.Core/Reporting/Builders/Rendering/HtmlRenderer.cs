@@ -491,6 +491,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             var historicCoverageExecutionTimes = new HashSet<DateTime>();
             var tagsByBistoricCoverageExecutionTime = new Dictionary<DateTime, string>();
+            var metricsByName = new Dictionary<string, Metric>();
 
             foreach (var assembly in assemblies)
             {
@@ -550,6 +551,55 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
                     historicCoveragesSb.Append("]");
 
+                    var metricsSb = new StringBuilder();
+                    int metricsCounter = 0;
+                    metricsSb.Append("{");
+
+                    foreach (var metricGroup in @class.Files.SelectMany(f => f.MethodMetrics).SelectMany(m => m.Metrics).GroupBy(m => m.Name))
+                    {
+                        var firstMetric = metricGroup.First();
+                        metricsByName[firstMetric.Name] = firstMetric;
+
+                        if (!methodCoverageAvailable)
+                        {
+                            continue;
+                        }
+
+                        decimal? value = null;
+
+                        if (firstMetric.MetricType == MetricType.CoverageAbsolute)
+                        {
+                            value = metricGroup.SafeSum(m => m.Value);
+                        }
+                        else
+                        {
+                            // Show worst result on summary page
+                            if (firstMetric.MergeOrder == MetricMergeOrder.HigherIsBetter)
+                            {
+                                value = metricGroup.Min(m => m.Value);
+                            }
+                            else
+                            {
+                                value = metricGroup.Max(m => m.Value);
+                            }
+                        }
+
+                        if (value.HasValue)
+                        {
+                            if (metricsCounter++ > 0)
+                            {
+                                metricsSb.Append(", ");
+                            }
+
+                            metricsSb.AppendFormat(
+                                " \"{0}\": {1}",
+                                firstMetric.Abbreviation,
+                                value.Value.ToString(CultureInfo.InvariantCulture));
+                        }
+                    }
+
+                    metricsSb.Append(" }");
+
                     this.javaScriptContent.Append("      { ");
                     this.javaScriptContent.AppendFormat("\"name\": \"{0}\",", @class.DisplayName.Replace(@"\", @"\\"));
                     this.javaScriptContent.AppendFormat(
@@ -570,12 +620,34 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     this.javaScriptContent.AppendFormat(" \"lch\": {0},", lineCoverageHistory);
                     this.javaScriptContent.AppendFormat(" \"bch\": {0},", branchCoverageHistory);
                     this.javaScriptContent.AppendFormat(" \"mch\": {0},", methodCoverageHistory);
-                    this.javaScriptContent.AppendFormat(" \"hc\": {0}", historicCoveragesSb.ToString());
+                    this.javaScriptContent.AppendFormat(" \"hc\": {0},", historicCoveragesSb.ToString());
+                    this.javaScriptContent.AppendFormat(" \"metrics\": {0}", metricsSb.ToString());
 
                     this.javaScriptContent.AppendLine(" },");
                 }
 
                 this.javaScriptContent.AppendLine("    ]},");
+            }
+
+            this.javaScriptContent.AppendLine("];");
+
+            this.javaScriptContent.AppendLine();
+
+            this.javaScriptContent.Append("var metrics = [");
+            int metricAbbreviationCounter = 0;
+
+            foreach (var item in metricsByName)
+            {
+                if (metricAbbreviationCounter++ > 0)
+                {
+                    this.javaScriptContent.Append(", ");
+                }
+
+                this.javaScriptContent.AppendFormat(
+                    "{{ \"name\": \"{0}\", \"abbreviation\": \"{1}\", \"explanationUrl\": \"{2}\" }}",
+                    item.Key,
+                    item.Value.Abbreviation,
+                    item.Value.ExplanationUrl);
             }
 
             this.javaScriptContent.AppendLine("];");
@@ -706,7 +778,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 }
                 else
                 {
-                    this.reportTextWriter.Write("<th>{0} <a href=\"{1}\"><i class=\"icon-info-circled\"></i></a></th>", WebUtility.HtmlEncode(met.Name), WebUtility.HtmlEncode(met.ExplanationUrl.OriginalString));
+                    this.reportTextWriter.Write("<th>{0} <a href=\"{1}\" target=\"_blank\"><i class=\"icon-info-circled\"></i></a></th>", WebUtility.HtmlEncode(met.Name), WebUtility.HtmlEncode(met.ExplanationUrl.OriginalString));
                 }
             }
 
@@ -792,7 +864,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 }
                 else
                 {
-                    this.reportTextWriter.Write("<th>{0} <a href=\"{1}\"><i class=\"icon-info-circled\"></i></a></th>", WebUtility.HtmlEncode(met.Name), WebUtility.HtmlEncode(met.ExplanationUrl.OriginalString));
+                    this.reportTextWriter.Write("<th>{0} <a href=\"{1}\" target=\"_blank\"><i class=\"icon-info-circled\"></i></a></th>", WebUtility.HtmlEncode(met.Name), WebUtility.HtmlEncode(met.ExplanationUrl.OriginalString));
                 }
             }
 
@@ -1092,7 +1164,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 }
                 else
                 {
-                    this.reportTextWriter.WriteLine("<th>{0} <a href=\"{1}\"><i class=\"icon-info-circled\"></i></a></th>", WebUtility.HtmlEncode(metric.Name), WebUtility.HtmlEncode(metric.ExplanationUrl.OriginalString));
+                    this.reportTextWriter.WriteLine("<th>{0} <a href=\"{1}\" target=\"_blank\"><i class=\"icon-info-circled\"></i></a></th>", WebUtility.HtmlEncode(metric.Name), WebUtility.HtmlEncode(metric.ExplanationUrl.OriginalString));
                 }
             }
 
@@ -1254,7 +1326,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         {
             this.reportTextWriter.Write(string.Format(
                 CultureInfo.InvariantCulture,
-                "<div class=\"footer\">{0} ReportGenerator {1}<br />{2} - {3}<br /><a href=\"https://github.com/danielpalme/ReportGenerator\">GitHub</a> | <a href=\"http://www.palmmedia.de\">www.palmmedia.de</a></div>",
+                "<div class=\"footer\">{0} ReportGenerator {1}<br />{2} - {3}<br /><a href=\"https://github.com/danielpalme/ReportGenerator\">GitHub</a> | <a href=\"https://reportgenerator.io\">reportgenerator.io</a></div>",
                 WebUtility.HtmlEncode(ReportResources.GeneratedBy),
                 typeof(IReportBuilder).Assembly.GetName().Version,
                 DateTime.Now.ToShortDateString(),
@@ -1302,10 +1374,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         {
             if (disposing)
             {
-                if (this.reportTextWriter != null)
-                {
-                    this.reportTextWriter.Dispose();
-                }
+                this.reportTextWriter?.Dispose();
             }
         }
 
@@ -1658,6 +1727,16 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             sb.AppendFormat("'date': '{0}'", WebUtility.HtmlEncode(ReportResources.Date));
             sb.AppendLine(",");
             sb.AppendFormat("'allChanges': '{0}'", WebUtility.HtmlEncode(ReportResources.AllChanges));
+            sb.AppendLine(",");
+            sb.AppendFormat("'selectCoverageTypes': '{0}'", WebUtility.HtmlEncode(ReportResources.SelectCoverageTypes));
+            sb.AppendLine(",");
+            sb.AppendFormat("'selectCoverageTypesAndMetrics': '{0}'", ReportResources.SelectCoverageTypesAndMetrics);
+            sb.AppendLine(",");
+            sb.AppendFormat("'coverageTypes': '{0}'", WebUtility.HtmlEncode(ReportResources.CoverageTypes));
+            sb.AppendLine(",");
+            sb.AppendFormat("'metrics': '{0}'", WebUtility.HtmlEncode(ReportResources.Metrics));
+            sb.AppendLine(",");
+            sb.AppendFormat("'methodCoverageProVersion': '{0}'", WebUtility.HtmlEncode(ReportResources.MethodCoverageProVersion));
             sb.AppendLine(",");
             sb.AppendFormat("'lineCoverageIncreaseOnly': '{0}'", WebUtility.HtmlEncode(ReportResources.LineCoverageIncreaseOnly));
             sb.AppendLine(",");

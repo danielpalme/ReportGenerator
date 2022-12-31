@@ -271,6 +271,20 @@ export class CodeElementViewModel extends ElementBase {
                     return left.methodCoverage < right.methodCoverage ? smaller : bigger;
                 }
             });
+        } else { 
+            this.classes.sort(function (left: ClassViewModel, right: ClassViewModel): number {
+                const leftMetric = left.metrics[sortBy];
+                const rightMetric = right.metrics[sortBy];
+                if (leftMetric === rightMetric) {
+                    return 0;
+                } else if (isNaN(leftMetric)) {
+                    return smaller;
+                } else if (isNaN(rightMetric)) {
+                    return bigger;
+                } else {
+                    return leftMetric < rightMetric ? smaller : bigger;
+                }
+            });
         }
 
         for (let i: number = 0; i < this.subElements.length; i++) {

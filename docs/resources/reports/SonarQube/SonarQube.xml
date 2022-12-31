@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<coverage version="1">
+  <file path="C:\temp\PartialClass.cs">
+    <lineToCover lineNumber="8" covered="true" />
+    <lineToCover lineNumber="9" covered="true" />
+    <lineToCover lineNumber="10" covered="true" />
+    <lineToCover lineNumber="13" covered="false" />
+    <lineToCover lineNumber="14" covered="false" />
+    <lineToCover lineNumber="15" covered="false" />
+    <lineToCover lineNumber="21" covered="false" />
+    <lineToCover lineNumber="24" covered="true" />
+    <lineToCover lineNumber="25" covered="true" branchesToCover="2" coveredBranches="1" />
+    <lineToCover lineNumber="26" covered="true" />
+    <lineToCover lineNumber="27" covered="true" />
+    <lineToCover lineNumber="28" covered="true" />
+    <lineToCover lineNumber="30" covered="false" />
+    <lineToCover lineNumber="31" covered="false" />
+    <lineToCover lineNumber="32" covered="false" />
+    <lineToCover lineNumber="33" covered="true" />
+  </file>
+  <file path="C:\temp\PartialClass2.cs">
+    <lineToCover lineNumber="8" covered="true" />
+    <lineToCover lineNumber="9" covered="true" />
+    <lineToCover lineNumber="10" covered="true" />
+    <lineToCover lineNumber="13" covered="false" />
+    <lineToCover lineNumber="14" covered="false" />
+    <lineToCover lineNumber="15" covered="false" />
+  </file>
+  <file path="C:\temp\TestClass.cs">
+    <lineToCover lineNumber="8" covered="true" />
+    <lineToCover lineNumber="9" covered="true" />
+    <lineToCover lineNumber="10" covered="true" />
+    <lineToCover lineNumber="11" covered="true" />
+    <lineToCover lineNumber="12" covered="true" />
+    <lineToCover lineNumber="14" covered="true" />
+    <lineToCover lineNumber="15" covered="true" />
+    <lineToCover lineNumber="17" covered="true" branchesToCover="2" coveredBranches="1" />
+    <lineToCover lineNumber="18" covered="true" />
+    <lineToCover lineNumber="19" covered="true" />
+    <lineToCover lineNumber="20" covered="true" />
+    <lineToCover lineNumber="22" covered="false" />
+    <lineToCover lineNumber="23" covered="false" />
+    <lineToCover lineNumber="24" covered="false" />
+    <lineToCover lineNumber="25" covered="true" />
+    <lineToCover lineNumber="30" covered="false" />
+    <lineToCover lineNumber="31" covered="false" />
+    <lineToCover lineNumber="32" covered="false" />
+    <lineToCover lineNumber="33" covered="false" />
+    <lineToCover lineNumber="34" covered="false" />
+    <lineToCover lineNumber="35" covered="false" />
+  </file>
+  <file path="C:\temp\Program.cs">
+    <lineToCover lineNumber="12" covered="true" />
+    <lineToCover lineNumber="13" covered="true" />
+    <lineToCover lineNumber="15" covered="true" />
+    <lineToCover lineNumber="16" covered="true" />
+    <lineToCover lineNumber="18" covered="true" />
+    <lineToCover lineNumber="19" covered="true" />
+    <lineToCover lineNumber="20" covered="true" />
+    <lineToCover lineNumber="22" covered="true" />
+    <lineToCover lineNumber="23" covered="true" />
+    <lineToCover lineNumber="25" covered="true" />
+    <lineToCover lineNumber="27" covered="true" />
+    <lineToCover lineNumber="28" covered="true" />
+    <lineToCover lineNumber="30" covered="true" />
+    <lineToCover lineNumber="31" covered="true" />
+    <lineToCover lineNumber="33" covered="true" />
+    <lineToCover lineNumber="35" covered="true" />
+    <lineToCover lineNumber="36" covered="true" />
+    <lineToCover lineNumber="38" covered="true" />
+    <lineToCover lineNumber="41" covered="true" />
+    <lineToCover lineNumber="42" covered="true" />
+    <lineToCover lineNumber="43" covered="true" />
+    <lineToCover lineNumber="44" covered="false" />
+    <lineToCover lineNumber="45" covered="false" />
+    <lineToCover lineNumber="46" covered="false" />
+    <lineToCover lineNumber="47" covered="true" />
+    <lineToCover lineNumber="51" covered="false" />
+    <lineToCover lineNumber="52" covered="false" />
+    <lineToCover lineNumber="53" covered="false" />
+    <lineToCover lineNumber="57" covered="false" />
+    <lineToCover lineNumber="58" covered="false" />
+    <lineToCover lineNumber="59" covered="false" />
+    <lineToCover lineNumber="62" covered="true" />
+    <lineToCover lineNumber="63" covered="true" />
+    <lineToCover lineNumber="64" covered="true" />
+    <lineToCover lineNumber="65" covered="true" />
+    <lineToCover lineNumber="66" covered="true" />
+    <lineToCover lineNumber="67" covered="true" />
+    <lineToCover lineNumber="73" covered="true" />
+    <lineToCover lineNumber="74" covered="true" />
+    <lineToCover lineNumber="75" covered="true" />
+    <lineToCover lineNumber="76" covered="true" />
+    <lineToCover lineNumber="79" covered="true" />
+    <lineToCover lineNumber="80" covered="true" />
+    <lineToCover lineNumber="81" covered="true" />
+  </file>
+  <file path="C:\temp\TestClass2.cs">
+    <lineToCover lineNumber="11" covered="true" />
+    <lineToCover lineNumber="13" covered="true" />
+    <lineToCover lineNumber="15" covered="false" />
+    <lineToCover lineNumber="17" covered="false" />
+    <lineToCover lineNumber="18" covered="false" />
+    <lineToCover lineNumber="19" covered="false" />
+    <lineToCover lineNumber="20" covered="false" />
+    <lineToCover lineNumber="21" covered="false" />
+    <lineToCover lineNumber="23" covered="true" />
+    <lineToCover lineNumber="24" covered="true" />
+    <lineToCover lineNumber="25" covered="true" />
+    <lineToCover lineNumber="26" covered="true" />
+    <lineToCover lineNumber="27" covered="true" />
+    <lineToCover lineNumber="30" covered="true" />
+    <lineToCover lineNumber="31" covered="true" />
+    <lineToCover lineNumber="32" covered="true" />
+    <lineToCover lineNumber="33" covered="true" />
+    <lineToCover lineNumber="36" covered="false" />
+    <lineToCover lineNumber="37" covered="false" />
+    <lineToCover lineNumber="38" covered="false" />
+    <lineToCover lineNumber="39" covered="false" />
+    <lineToCover lineNumber="42" covered="true" />
+    <lineToCover lineNumber="43" covered="true" />
+    <lineToCover lineNumber="45" covered="true" />
+    <lineToCover lineNumber="47" covered="true" />
+    <lineToCover lineNumber="48" covered="true" />
+    <lineToCover lineNumber="49" covered="true" />
+    <lineToCover lineNumber="50" covered="true" />
+    <lineToCover lineNumber="52" covered="true" />
+    <lineToCover lineNumber="54" covered="true" branchesToCover="2" coveredBranches="1" />
+    <lineToCover lineNumber="55" covered="true" />
+    <lineToCover lineNumber="56" covered="true" />
+    <lineToCover lineNumber="57" covered="true" />
+    <lineToCover lineNumber="58" covered="true" />
+    <lineToCover lineNumber="80" covered="false" />
+    <lineToCover lineNumber="81" covered="false" />
+    <lineToCover lineNumber="82" covered="false" />
+    <lineToCover lineNumber="83" covered="false" />
+  </file>
+</coverage>

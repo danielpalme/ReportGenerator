@@ -37,7 +37,14 @@ namespace Palmmedia.ReportGenerator.Core
 
                 foreach (var arg in args)
                 {
-                    Logger.Debug(" " + arg);
+                    if (arg.StartsWith("-license:", System.StringComparison.OrdinalIgnoreCase) && arg.Length > 15)
+                    {
+                        Logger.Debug(" " + arg.Substring(0, 15) + "...");
+                    }
+                    else
+                    {
+                        Logger.Debug(" " + arg);
+                    }
                 }
             }
 

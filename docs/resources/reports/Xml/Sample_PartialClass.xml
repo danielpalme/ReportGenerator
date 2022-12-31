@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Sample.PartialClass">
+  <Summary>
+    <Class>Sample.PartialClass</Class>
+    <Assembly>Sample</Assembly>
+    <Files>
+      <File>C:\temp\PartialClass.cs</File>
+      <File>C:\temp\PartialClass2.cs</File>
+    </Files>
+    <Coveredlines>12</Coveredlines>
+    <Uncoveredlines>10</Uncoveredlines>
+    <Coverablelines>22</Coverablelines>
+    <Totallines>53</Totallines>
+    <Linecoverage>54.5</Linecoverage>
+    <Coveredbranches>1</Coveredbranches>
+    <Totalbranches>2</Totalbranches>
+    <Branchcoverage>50</Branchcoverage>
+    <Coveredmethods>3</Coveredmethods>
+    <Totalmethods>6</Totalmethods>
+    <Methodcoverage>50</Methodcoverage>
+  </Summary>
+  <Metrics>
+    <Element name="ExecutedMethod_1">
+      <Cyclomaticcomplexity>1</Cyclomaticcomplexity>
+      <NPathcomplexity>0</NPathcomplexity>
+      <Sequencecoverage>100</Sequencecoverage>
+      <Branchcoverage>100</Branchcoverage>
+      <CrapScore>1</CrapScore>
+    </Element>
+    <Element name="UnExecutedMethod_1">
+      <Cyclomaticcomplexity>1</Cyclomaticcomplexity>
+      <NPathcomplexity>0</NPathcomplexity>
+      <Sequencecoverage>0</Sequencecoverage>
+      <Branchcoverage>0</Branchcoverage>
+      <CrapScore>2</CrapScore>
+    </Element>
+    <Element name="ExecutedMethod_2">
+      <Cyclomaticcomplexity>1</Cyclomaticcomplexity>
+      <NPathcomplexity>0</NPathcomplexity>
+      <Sequencecoverage>100</Sequencecoverage>
+      <Branchcoverage>100</Branchcoverage>
+      <CrapScore>1</CrapScore>
+    </Element>
+    <Element name="UnExecutedMethod_2">
+      <Cyclomaticcomplexity>1</Cyclomaticcomplexity>
+      <NPathcomplexity>0</NPathcomplexity>
+      <Sequencecoverage>0</Sequencecoverage>
+      <Branchcoverage>0</Branchcoverage>
+      <CrapScore>2</CrapScore>
+    </Element>
+  </Metrics>
+  <Files>
+    <File name="C:\temp\PartialClass.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System;" />
+      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Test" />
+      <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />
+      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    partial class PartialClass" />
+      <LineAnalysis line="6" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public void ExecutedMethod_1()" />
+      <LineAnalysis line="8" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="9" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            Console.WriteLine(&quot;Test&quot;);" />
+      <LineAnalysis line="10" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="11" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="12" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public void UnExecutedMethod_1()" />
+      <LineAnalysis line="13" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="14" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            Console.WriteLine(&quot;Test&quot;);" />
+      <LineAnalysis line="15" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="16" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="17" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        private int someProperty;" />
+      <LineAnalysis line="18" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="19" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public int SomeProperty" />
+      <LineAnalysis line="20" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="21" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            get { return this.someProperty; }" />
+      <LineAnalysis line="22" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="23" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            set" />
+      <LineAnalysis line="24" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="25" visits="1" coverage="PartiallyCovered" coveredbranches="1" totalbranches="2" content="                if (value &lt; 0)" />
+      <LineAnalysis line="26" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="27" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="                    this.someProperty = 0;" />
+      <LineAnalysis line="28" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="29" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                else" />
+      <LineAnalysis line="30" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="31" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    this.someProperty = value;" />
+      <LineAnalysis line="32" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="33" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="34" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="35" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="36" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="}" />
+    </File>
+    <File name="C:\temp\PartialClass2.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System;" />
+      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Test" />
+      <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />
+      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    partial class PartialClass" />
+      <LineAnalysis line="6" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public void ExecutedMethod_2()" />
+      <LineAnalysis line="8" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="9" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            Console.WriteLine(&quot;Test&quot;);" />
+      <LineAnalysis line="10" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="11" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="12" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public void UnExecutedMethod_2()" />
+      <LineAnalysis line="13" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="14" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            Console.WriteLine(&quot;Test&quot;);" />
+      <LineAnalysis line="15" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="16" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="17" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="}" />
+    </File>
+  </Files>
+</CoverageReport>

@@ -3,6 +3,7 @@ import { WindowRefService } from "../../infrastructure/windowref.service";
 import { GlobalHistoryState } from "../globalhistorystate";
 import { Assembly } from "./data/assembly.class";
 import { CoverageInfoSettings } from "./data/coverageinfo-settings.class";
+import { Metric } from "./data/metric.class";
 import { ClassViewModel } from "./viewmodels/class-viewmodel.class";
 import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
 
@@ -10,6 +11,17 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
   selector: "coverage-info",
   template: `
   <div *ngIf="codeElements.length > 0">
+    <popup *ngIf="popupVisible"
+      [(visible)]="popupVisible"
+      [translations]="translations"
+      [branchCoverageAvailable]="branchCoverageAvailable"
+      [methodCoverageAvailable]="methodCoverageAvailable"
+      [metrics]="metrics"
+      [(showLineCoverage)]="settings.showLineCoverage"
+      [(showBranchCoverage)]="settings.showBranchCoverage"
+      [(showMethodCoverage)]="settings.showMethodCoverage"
+      [(visibleMetrics)]="settings.visibleMetrics">
+    </popup>
     <div class="customizebox">
       <div>
         <a href="#" (click)="collapseAll($event)">{{translations.collapseAll}}</a>
@@ -58,8 +70,14 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
         </ng-container>
       </div>
       <div class="right">
-        <span>{{translations.filter}} </span>
-        <input type="text" [(ngModel)]="settings.filter">
+        <div>
+          <button type="button" (click)="popupVisible=true;"><i class="icon-cog"></i>{{ metrics.length > 0 ? translations.selectCoverageTypesAndMetrics :  translations.selectCoverageTypes}}</button>
+        </div>
+        <br/>
+        <div>
+          <span>{{translations.filter}} </span>
+          <input type="text" [(ngModel)]="settings.filter" />
+        </div>
       </div>
     </div>
 
@@ -67,80 +85,88 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
       <table class="overview table-fixed stripped">
         <colgroup>
           <col class="column-min-200">
-          <col class="column90">
-          <col class="column105">
-          <col class="column100">
-          <col class="column70">
-          <col class="column98">
-          <col class="column112">
-          <col class="column90" *ngIf="branchCoverageAvailable">
-          <col class="column70" *ngIf="branchCoverageAvailable">
-          <col class="column98" *ngIf="branchCoverageAvailable">
-          <col class="column112" *ngIf="branchCoverageAvailable">
-          <col class="column90" *ngIf="methodCoverageAvailable">
-          <col class="column70" *ngIf="methodCoverageAvailable">
-          <col class="column98" *ngIf="methodCoverageAvailable">
-          <col class="column112" *ngIf="methodCoverageAvailable">
+          <col class="column90" *ngIf="settings.showLineCoverage">
+          <col class="column105" *ngIf="settings.showLineCoverage">
+          <col class="column100" *ngIf="settings.showLineCoverage">
+          <col class="column70" *ngIf="settings.showLineCoverage">
+          <col class="column98" *ngIf="settings.showLineCoverage">
+          <col class="column112" *ngIf="settings.showLineCoverage">
+          <col class="column90" *ngIf="branchCoverageAvailable && settings.showBranchCoverage">
+          <col class="column70" *ngIf="branchCoverageAvailable && settings.showBranchCoverage">
+          <col class="column98" *ngIf="branchCoverageAvailable && settings.showBranchCoverage">
+          <col class="column112" *ngIf="branchCoverageAvailable && settings.showBranchCoverage">
+          <col class="column90" *ngIf="methodCoverageAvailable && settings.showMethodCoverage">
+          <col class="column70" *ngIf="methodCoverageAvailable && settings.showMethodCoverage">
+          <col class="column98" *ngIf="methodCoverageAvailable && settings.showMethodCoverage">
+          <col class="column112" *ngIf="methodCoverageAvailable && settings.showMethodCoverage">
+          <col class="column112" *ngFor="let metric of settings.visibleMetrics">
         </colgroup>
         <thead>
           <tr class="header">
             <th></th>
-            <th class="center" colspan="6">{{translations.coverage}}</th>
-            <th class="center" colspan="4" *ngIf="branchCoverageAvailable">{{translations.branchCoverage}}</th>
-            <th class="center" colspan="4" *ngIf="methodCoverageAvailable">{{translations.methodCoverage}}</th>
+            <th class="center" colspan="6" *ngIf="settings.showLineCoverage">{{translations.coverage}}</th>
+            <th class="center" colspan="4" *ngIf="branchCoverageAvailable && settings.showBranchCoverage">{{translations.branchCoverage}}</th>
+            <th class="center" colspan="4" *ngIf="methodCoverageAvailable && settings.showMethodCoverage">{{translations.methodCoverage}}</th>
+            <th class="center" [attr.colspan]="settings.visibleMetrics.length" *ngIf="settings.visibleMetrics.length > 0">{{translations.metrics}}</th>
           </tr>
           <tr>
             <th><a href="#" (click)="updateSorting('name', $event)"><i class="icon-down-dir"
               [ngClass]="{'icon-up-dir_active': settings.sortBy === 'name' && settings.sortOrder === 'desc',
               'icon-down-dir_active': settings.sortBy === 'name' && settings.sortOrder === 'asc',
               'icon-down-dir': settings.sortBy !== 'name'}"></i>{{translations.name}}</a></th>
-            <th class="right"><a href="#" (click)="updateSorting('covered', $event)"><i class="icon-down-dir"
+            <th class="right" *ngIf="settings.showLineCoverage"><a href="#" (click)="updateSorting('covered', $event)"><i class="icon-down-dir"
               [ngClass]="{'icon-up-dir_active': settings.sortBy === 'covered' && settings.sortOrder === 'desc',
               'icon-down-dir_active': settings.sortBy === 'covered' && settings.sortOrder === 'asc',
               'icon-down-dir': settings.sortBy !== 'covered'}"></i>{{translations.covered}}</a></th>
-            <th class="right"><a href="#" (click)="updateSorting('uncovered', $event)"><i class="icon-down-dir"
+            <th class="right" *ngIf="settings.showLineCoverage"><a href="#" (click)="updateSorting('uncovered', $event)"><i class="icon-down-dir"
               [ngClass]="{'icon-up-dir_active': settings.sortBy === 'uncovered' && settings.sortOrder === 'desc',
               'icon-down-dir_active': settings.sortBy === 'uncovered' && settings.sortOrder === 'asc',
               'icon-down-dir': settings.sortBy !== 'uncovered'}"></i>{{translations.uncovered}}</a></th>
-            <th class="right"><a href="#" (click)="updateSorting('coverable', $event)"><i class="icon-down-dir"
+            <th class="right" *ngIf="settings.showLineCoverage"><a href="#" (click)="updateSorting('coverable', $event)"><i class="icon-down-dir"
                 [ngClass]="{'icon-up-dir_active': settings.sortBy === 'coverable' && settings.sortOrder === 'desc',
                 'icon-down-dir_active': settings.sortBy === 'coverable' && settings.sortOrder === 'asc',
                 'icon-down-dir': settings.sortBy !== 'coverable'}"></i>{{translations.coverable}}</a></th>
-            <th class="right"><a href="#" (click)="updateSorting('total', $event)"><i class="icon-down-dir"
+            <th class="right" *ngIf="settings.showLineCoverage"><a href="#" (click)="updateSorting('total', $event)"><i class="icon-down-dir"
                 [ngClass]="{'icon-up-dir_active': settings.sortBy === 'total' && settings.sortOrder === 'desc',
                 'icon-down-dir_active': settings.sortBy === 'total' && settings.sortOrder === 'asc',
                 'icon-down-dir': settings.sortBy !== 'total'}"></i>{{translations.total}}</a></th>
-            <th class="center" colspan="2">
+            <th class="center" colspan="2" *ngIf="settings.showLineCoverage">
                 <a href="#" (click)="updateSorting('coverage', $event)"><i class="icon-down-dir"
                   [ngClass]="{'icon-up-dir_active': settings.sortBy === 'coverage' && settings.sortOrder === 'desc',
                   'icon-down-dir_active': settings.sortBy === 'coverage' && settings.sortOrder === 'asc',
                   'icon-down-dir': settings.sortBy !== 'coverage'}"></i>{{translations.percentage}}</a></th>
-            <th class="right" *ngIf="branchCoverageAvailable"><a href="#" (click)="updateSorting('covered_branches', $event)"><i class="icon-down-dir"
+            <th class="right" *ngIf="branchCoverageAvailable && settings.showBranchCoverage"><a href="#" (click)="updateSorting('covered_branches', $event)"><i class="icon-down-dir"
               [ngClass]="{'icon-up-dir_active': settings.sortBy === 'covered_branches' && settings.sortOrder === 'desc',
               'icon-down-dir_active': settings.sortBy === 'covered_branches' && settings.sortOrder === 'asc',
               'icon-down-dir': settings.sortBy !== 'covered_branches'}"></i>{{translations.covered}}</a></th>
-            <th class="right" *ngIf="branchCoverageAvailable"><a href="#" (click)="updateSorting('total_branches', $event)"><i class="icon-down-dir"
+            <th class="right" *ngIf="branchCoverageAvailable && settings.showBranchCoverage"><a href="#" (click)="updateSorting('total_branches', $event)"><i class="icon-down-dir"
                 [ngClass]="{'icon-up-dir_active': settings.sortBy === 'total_branches' && settings.sortOrder === 'desc',
                 'icon-down-dir_active': settings.sortBy === 'total_branches' && settings.sortOrder === 'asc',
                 'icon-down-dir': settings.sortBy !== 'total_branches'}"></i>{{translations.total}}</a></th>
-            <th class="center" colspan="2" *ngIf="branchCoverageAvailable">
+            <th class="center" colspan="2" *ngIf="branchCoverageAvailable && settings.showBranchCoverage">
                 <a href="#" (click)="updateSorting('branchcoverage', $event)"><i class="icon-down-dir"
                   [ngClass]="{'icon-up-dir_active': settings.sortBy === 'branchcoverage' && settings.sortOrder === 'desc',
                   'icon-down-dir_active': settings.sortBy === 'branchcoverage' && settings.sortOrder === 'asc',
                   'icon-down-dir': settings.sortBy !== 'branchcoverage'}"></i>{{translations.percentage}}</a></th>
-            <th class="right" *ngIf="methodCoverageAvailable"><a href="#" (click)="updateSorting('covered_methods', $event)"><i class="icon-down-dir"
+            <th class="right" *ngIf="methodCoverageAvailable && settings.showMethodCoverage"><a href="#" (click)="updateSorting('covered_methods', $event)"><i class="icon-down-dir"
               [ngClass]="{'icon-up-dir_active': settings.sortBy === 'covered_methods' && settings.sortOrder === 'desc',
               'icon-down-dir_active': settings.sortBy === 'covered_methods' && settings.sortOrder === 'asc',
               'icon-down-dir': settings.sortBy !== 'covered_methods'}"></i>{{translations.covered}}</a></th>
-            <th class="right" *ngIf="methodCoverageAvailable"><a href="#" (click)="updateSorting('total_methods', $event)"><i class="icon-down-dir"
+            <th class="right" *ngIf="methodCoverageAvailable && settings.showMethodCoverage"><a href="#" (click)="updateSorting('total_methods', $event)"><i class="icon-down-dir"
                 [ngClass]="{'icon-up-dir_active': settings.sortBy === 'total_methods' && settings.sortOrder === 'desc',
                 'icon-down-dir_active': settings.sortBy === 'total_methods' && settings.sortOrder === 'asc',
                 'icon-down-dir': settings.sortBy !== 'total_methods'}"></i>{{translations.total}}</a></th>
-            <th class="center" colspan="2" *ngIf="methodCoverageAvailable">
+            <th class="center" colspan="2" *ngIf="methodCoverageAvailable && settings.showMethodCoverage">
                 <a href="#" (click)="updateSorting('methodcoverage', $event)"><i class="icon-down-dir"
                   [ngClass]="{'icon-up-dir_active': settings.sortBy === 'methodcoverage' && settings.sortOrder === 'desc',
                   'icon-down-dir_active': settings.sortBy === 'methodcoverage' && settings.sortOrder === 'asc',
                   'icon-down-dir': settings.sortBy !== 'methodcoverage'}"></i>{{translations.percentage}}</a></th>
+            <th *ngFor="let metric of settings.visibleMetrics">
+              <a href="#" (click)="updateSorting(metric.abbreviation, $event)"><i class="icon-down-dir"
+                  [ngClass]="{'icon-up-dir_active': settings.sortBy === metric.abbreviation && settings.sortOrder === 'desc',
+                  'icon-down-dir_active': settings.sortBy === metric.abbreviation && settings.sortOrder === 'asc',
+                  'icon-down-dir': settings.sortBy !== metric.abbreviation}"></i>{{metric.name}}</a><a href="{{metric.explanationUrl}}" target="_blank"><i class="icon-info-circled"></i></a>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -149,16 +175,20 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
               codeelement-row
               [element]="element"
               [collapsed]="element.collapsed"
-              [branchCoverageAvailable]="branchCoverageAvailable"
-              [methodCoverageAvailable]="methodCoverageAvailable">
+              [lineCoverageAvailable]="settings.showLineCoverage"
+              [branchCoverageAvailable]="branchCoverageAvailable && settings.showBranchCoverage"
+              [methodCoverageAvailable]="methodCoverageAvailable && settings.showMethodCoverage"
+              [visibleMetrics]="settings.visibleMetrics">
             </tr>
             <ng-container *ngFor="let clazz of element.classes">
               <tr *ngIf="!element.collapsed
                 && clazz.visible(settings.filter, settings.historyComparisionType)"
                 class-row [clazz]="clazz"
                   [translations]="translations"
-                  [branchCoverageAvailable]="branchCoverageAvailable"
-                  [methodCoverageAvailable]="methodCoverageAvailable"
+                  [lineCoverageAvailable]="settings.showLineCoverage"
+                  [branchCoverageAvailable]="branchCoverageAvailable && settings.showBranchCoverage"
+                  [methodCoverageAvailable]="methodCoverageAvailable && settings.showMethodCoverage"
+                  [visibleMetrics]="settings.visibleMetrics"
                   [historyComparisionDate]="settings.historyComparisionDate">
               </tr>
             </ng-container>
@@ -169,16 +199,20 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
                  codeelement-row
                  [element]="subElement"
                  [collapsed]="subElement.collapsed"
-                 [branchCoverageAvailable]="branchCoverageAvailable"
-                 [methodCoverageAvailable]="methodCoverageAvailable">
+                 [lineCoverageAvailable]="settings.showLineCoverage"
+                 [branchCoverageAvailable]="branchCoverageAvailable && settings.showBranchCoverage"
+                 [methodCoverageAvailable]="methodCoverageAvailable && settings.showMethodCoverage"
+                 [visibleMetrics]="settings.visibleMetrics">
                 </tr>
                 <ng-container *ngFor="let clazz of subElement.classes">
                   <tr class="namespace" *ngIf="!subElement.collapsed
                    && clazz.visible(settings.filter, settings.historyComparisionType)"
                    class-row [clazz]="clazz"
                     [translations]="translations"
-                    [branchCoverageAvailable]="branchCoverageAvailable"
-                    [methodCoverageAvailable]="methodCoverageAvailable"
+                    [lineCoverageAvailable]="settings.showLineCoverage"
+                    [branchCoverageAvailable]="branchCoverageAvailable && settings.showBranchCoverage"
+                    [methodCoverageAvailable]="methodCoverageAvailable && settings.showMethodCoverage"
+                    [visibleMetrics]="settings.visibleMetrics"
                     [historyComparisionDate]="settings.historyComparisionDate">
                   </tr>
                 </ng-container>
@@ -197,9 +231,11 @@ export class CoverageInfoComponent {
   historicCoverageExecutionTimes: string[] = [];
   branchCoverageAvailable: boolean = false;
   methodCoverageAvailable: boolean = false;
+  metrics: Metric[] = [];
   codeElements: CodeElementViewModel[] = [];
-
   translations: any = { };
+
+  popupVisible: boolean = false;
 
   settings: CoverageInfoSettings = new CoverageInfoSettings();
 
@@ -212,6 +248,7 @@ export class CoverageInfoComponent {
     this.historicCoverageExecutionTimes = (<any>this.window).historicCoverageExecutionTimes;
     this.branchCoverageAvailable = (<any>this.window).branchCoverageAvailable;
     this.methodCoverageAvailable = (<any>this.window).methodCoverageAvailable;
+    this.metrics = (<any>this.window).metrics;
 
     this.translations = (<any>this.window).translations;
 
@@ -239,6 +276,9 @@ export class CoverageInfoComponent {
 
       this.settings.groupingMaximum = groupingMaximum;
       console.log("Grouping maximum: " + groupingMaximum);
+
+      this.settings.showBranchCoverage = this.branchCoverageAvailable;
+      this.settings.showMethodCoverage = this.methodCoverageAvailable;
     }
 
     const startOfQueryString: number = window.location.href.indexOf("?");
@@ -255,7 +295,7 @@ export class CoverageInfoComponent {
   }
 
   @HostListener("window:beforeunload")
-  onDonBeforeUnlodad(): void {
+  onBeforeUnload(): void {
     this.saveCollapseState();
 
     if (this.window.history !== undefined && this.window.history.replaceState !== undefined) {

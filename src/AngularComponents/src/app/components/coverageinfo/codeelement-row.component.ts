@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+import { Metric } from "./data/metric.class";
 import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
 
 @Component({
@@ -8,12 +9,12 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
   <i [ngClass]="{'icon-plus': element.collapsed, 'icon-minus': !element.collapsed}"></i>
   {{element.name}}</a>
 </th>
-<th class="right">{{element.coveredLines}}</th>
-<th class="right">{{element.uncoveredLines}}</th>
-<th class="right">{{element.coverableLines}}</th>
-<th class="right">{{element.totalLines}}</th>
-<th class="right" [title]="element.coverageRatioText">{{element.coveragePercentage}}</th>
-<th class="right"><coverage-bar [percentage]="element.coverage"></coverage-bar></th>
+<th class="right" *ngIf="lineCoverageAvailable">{{element.coveredLines}}</th>
+<th class="right" *ngIf="lineCoverageAvailable">{{element.uncoveredLines}}</th>
+<th class="right" *ngIf="lineCoverageAvailable">{{element.coverableLines}}</th>
+<th class="right" *ngIf="lineCoverageAvailable">{{element.totalLines}}</th>
+<th class="right" [title]="element.coverageRatioText" *ngIf="lineCoverageAvailable">{{element.coveragePercentage}}</th>
+<th class="right" *ngIf="lineCoverageAvailable"><coverage-bar [percentage]="element.coverage"></coverage-bar></th>
 <th class="right" *ngIf="branchCoverageAvailable">{{element.coveredBranches}}</th>
 <th class="right" *ngIf="branchCoverageAvailable">{{element.totalBranches}}</th>
 <th class="right" *ngIf="branchCoverageAvailable" [title]="element.branchCoverageRatioText">{{element.branchCoveragePercentage}}</th>
@@ -25,7 +26,8 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
 <th class="right" *ngIf="methodCoverageAvailable" [title]="element.methodCoverageRatioText">{{element.methodCoveragePercentage}}</th>
 <th class="right" *ngIf="methodCoverageAvailable">
   <coverage-bar [percentage]="element.methodCoverage"></coverage-bar>
-</th>`,
+</th>
+<th class="right" *ngFor="let metric of visibleMetrics"></th>`,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CodeElementRow {
@@ -33,7 +35,11 @@ export class CodeElementRow {
 
     @Input() collapsed: boolean = false;
 
+    @Input() lineCoverageAvailable: boolean = false;
+
     @Input() branchCoverageAvailable: boolean = false;
 
     @Input() methodCoverageAvailable: boolean = false;
+    
+    @Input() visibleMetrics: Metric[] = [];
 }

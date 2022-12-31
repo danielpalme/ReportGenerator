@@ -394,6 +394,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Coverage types.
+        /// </summary>
+        public static string CoverageTypes {
+            get {
+                return ResourceManager.GetString("CoverageTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Covered.
         /// </summary>
         public static string Covered {
@@ -583,7 +592,7 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Coverage History.
+        ///   Looks up a localized string similar to Coverage history.
         /// </summary>
         public static string History {
             get {
@@ -646,7 +655,7 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Method coverage is only available for sponsors..
+        ///   Looks up a localized string similar to Feature is only available for sponsors.
         /// </summary>
         public static string MethodCoverageProVersion {
             get {
@@ -777,6 +786,24 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         public static string RiskHotspots {
             get {
                 return ResourceManager.GetString("RiskHotspots", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select coverage types.
+        /// </summary>
+        public static string SelectCoverageTypes {
+            get {
+                return ResourceManager.GetString("SelectCoverageTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select coverage types &amp; metrics.
+        /// </summary>
+        public static string SelectCoverageTypesAndMetrics {
+            get {
+                return ResourceManager.GetString("SelectCoverageTypesAndMetrics", resourceCulture);
             }
         }
         

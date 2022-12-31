@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+import { Metric } from "./data/metric.class";
 import { ClassViewModel } from "./viewmodels/class-viewmodel.class";
 
 @Component({
@@ -8,7 +9,7 @@ import { ClassViewModel } from "./viewmodels/class-viewmodel.class";
   <a [href]="clazz.reportPath" *ngIf="clazz.reportPath !== ''">{{clazz.name}}</a>
   <ng-container *ngIf="clazz.reportPath === ''">{{clazz.name}}</ng-container>
 </td>
-<td class="right">
+<td class="right" *ngIf="lineCoverageAvailable">
   <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
     <div class="currenthistory {{getClassName(clazz.coveredLines, clazz.currentHistoricCoverage.cl)}}">
       {{clazz.coveredLines}}
@@ -21,7 +22,7 @@ import { ClassViewModel } from "./viewmodels/class-viewmodel.class";
     {{clazz.coveredLines}}
   </ng-container>
 </td>
-<td class="right">
+<td class="right" *ngIf="lineCoverageAvailable">
   <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
     <div class="currenthistory {{getClassName(clazz.currentHistoricCoverage.ucl, clazz.uncoveredLines)}}">
       {{clazz.uncoveredLines}}
@@ -34,7 +35,7 @@ import { ClassViewModel } from "./viewmodels/class-viewmodel.class";
     {{clazz.uncoveredLines}}
   </ng-container>
 </td>
-<td class="right">
+<td class="right" *ngIf="lineCoverageAvailable">
   <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
     <div class="currenthistory">{{clazz.coverableLines}}</div>
     <div [title]="clazz.currentHistoricCoverage.et">{{clazz.currentHistoricCoverage.cal}}</div>
@@ -43,7 +44,7 @@ import { ClassViewModel } from "./viewmodels/class-viewmodel.class";
     {{clazz.coverableLines}}
   </ng-container>
 </td>
-<td class="right">
+<td class="right" *ngIf="lineCoverageAvailable">
   <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
     <div class="currenthistory">{{clazz.totalLines}}</div>
     <div [title]="clazz.currentHistoricCoverage.et">{{clazz.currentHistoricCoverage.tl}}</div>
@@ -52,7 +53,7 @@ import { ClassViewModel } from "./viewmodels/class-viewmodel.class";
     {{clazz.totalLines}}
   </ng-container>
 </td>
-<td class="right" [title]="clazz.coverageType + ': ' + clazz.coverageRatioText">
+<td class="right" [title]="clazz.coverageType + ': ' + clazz.coverageRatioText" *ngIf="lineCoverageAvailable">
   <div coverage-history-chart [historicCoverages]="clazz.lineCoverageHistory"
     *ngIf="clazz.lineCoverageHistory.length > 1"
     [ngClass]="{'historiccoverageoffset': clazz.currentHistoricCoverage !== null}"
@@ -68,7 +69,7 @@ import { ClassViewModel } from "./viewmodels/class-viewmodel.class";
     {{clazz.coveragePercentage}}
   </ng-container>
 </td>
-<td class="right"><coverage-bar [percentage]="clazz.coverage"></coverage-bar></td>
+<td class="right" *ngIf="lineCoverageAvailable"><coverage-bar [percentage]="clazz.coverage"></coverage-bar></td>
 <td class="right" *ngIf="branchCoverageAvailable">
   <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
     <div class="currenthistory {{getClassName(clazz.coveredBranches, clazz.currentHistoricCoverage.cb)}}">
@@ -148,7 +149,8 @@ import { ClassViewModel } from "./viewmodels/class-viewmodel.class";
     {{clazz.methodCoveragePercentage}}
   </ng-container>
 </td>
-<td class="right" *ngIf="methodCoverageAvailable"><coverage-bar [percentage]="clazz.methodCoverage"></coverage-bar></td>`,
+<td class="right" *ngIf="methodCoverageAvailable"><coverage-bar [percentage]="clazz.methodCoverage"></coverage-bar></td>
+<td class="right" *ngFor="let metric of visibleMetrics">{{ clazz.metrics[metric.abbreviation] }}</td>`,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ClassRow {
@@ -156,9 +158,13 @@ export class ClassRow {
 
     @Input() translations: any = { };
 
+    @Input() lineCoverageAvailable: boolean = false;
+    
     @Input() branchCoverageAvailable: boolean = false;
 
     @Input() methodCoverageAvailable: boolean = false;
+
+    @Input() visibleMetrics: Metric[] = [];
 
     @Input() historyComparisionDate: string = "";
 

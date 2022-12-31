@@ -11,6 +11,7 @@ export class ClassViewModel extends ElementBase {
     branchCoverageHistory: number[] = [];
     methodCoverageHistory: number[] = [];
     historicCoverages: HistoricCoverage[] = [];
+    metrics: any;
 
     currentHistoricCoverage: HistoricCoverage|null = null;
 
@@ -42,6 +43,8 @@ export class ClassViewModel extends ElementBase {
             clazz.hc.forEach(element => {
                 this.historicCoverages.push(new HistoricCoverage(element))
             });
+
+            this.metrics = clazz.metrics;
     }
 
     override get coverage(): number {

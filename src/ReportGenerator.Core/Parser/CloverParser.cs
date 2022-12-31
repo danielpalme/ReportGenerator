@@ -287,12 +287,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 {
                     var metrics = new List<Metric>()
                     {
-                        new Metric(
-                            ReportResources.CyclomaticComplexity,
-                            ParserBase.CyclomaticComplexityUri,
-                            MetricType.CodeQuality,
-                            decimal.Parse(complexity.Value, CultureInfo.InvariantCulture),
-                            MetricMergeOrder.LowerIsBetter)
+                        Metric.CyclomaticComplexity(decimal.Parse(complexity.Value, CultureInfo.InvariantCulture))
                     };
 
                     var methodMetric = new MethodMetric(methodName, methodName, metrics)
