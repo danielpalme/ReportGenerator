@@ -7,31 +7,31 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://reportgenerator.io/features/</loc>
+    <loc>https://reportgenerator.io/features.html</loc>
     <lastmod>2023-01-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://reportgenerator.io/getstarted/</loc>
+    <loc>https://reportgenerator.io/getstarted.html</loc>
     <lastmod>2023-01-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://reportgenerator.io/usage/</loc>
+    <loc>https://reportgenerator.io/usage.html</loc>
     <lastmod>2023-01-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://reportgenerator.io/pro/</loc>
+    <loc>https://reportgenerator.io/pro.html</loc>
     <lastmod>2023-01-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://reportgenerator.io/contact/</loc>
+    <loc>https://reportgenerator.io/contact.html</loc>
     <lastmod>2023-01-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
