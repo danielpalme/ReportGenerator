@@ -1,6 +1,6 @@
 <h1 align="center">
 
-<img src="https://raw.githubusercontent.com/danielpalme/ReportGenerator/main/docs/resources/logo_512.png" alt="ReportGenerator" width="256"/>
+<img src="https://raw.githubusercontent.com/danielpalme/ReportGenerator/main/docs/resources/logo.svg" alt="ReportGenerator" width="200"/>
 <br/>
 ReportGenerator
 </h1>
@@ -212,12 +212,12 @@ If you need a custom format, you can create a [plugin](https://github.com/daniel
 ### Screenshots
 The screenshots show two snippets of the generated reports:
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://danielpalme.github.io/ReportGenerator/resources/screenshot1_dark.png">
-  <img alt="Screenshot 1" src="https://danielpalme.github.io/ReportGenerator/resources/screenshot1.png">
+  <source media="(prefers-color-scheme: dark)" srcset="https://danielpalme.github.io/ReportGenerator/resources/screenshot1_dark.webp">
+  <img alt="Screenshot 1" src="https://danielpalme.github.io/ReportGenerator/resources/screenshot1.webp">
 </picture>
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://danielpalme.github.io/ReportGenerator/resources/screenshot2_dark.png">
-  <img alt="Screenshot 2" src="https://danielpalme.github.io/ReportGenerator/resources/screenshot2.png">
+  <source media="(prefers-color-scheme: dark)" srcset="https://danielpalme.github.io/ReportGenerator/resources/screenshot2_dark.webp">
+  <img alt="Screenshot 2" src="https://danielpalme.github.io/ReportGenerator/resources/screenshot2.webp">
 </picture>
 
 **Badges**  
