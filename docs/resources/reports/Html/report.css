@@ -50,7 +50,7 @@ h1 a.button i { position: relative; top: 1px; }
 
 .pro-button { color: #fff; background-color: #20A0D2; background-image: linear-gradient(50deg, #1c7ed6 0%, #23b8cf 100%); padding: 10px; border-radius: 3px; font-weight: bold; display: inline-block; }
 .pro-button:hover { color: #fff; background-color: #1C8EB7; background-image: linear-gradient(50deg, #1A6FBA 0%, #1EA1B5 100%); }
-.pro-button-tiny { border-radius: 15px; padding: 3px 8px; }
+.pro-button-tiny { border-radius: 10px; padding: 3px 8px; }
 
 th { text-align: left; }
 .table-fixed { table-layout: fixed; }
