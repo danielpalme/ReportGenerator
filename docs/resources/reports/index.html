@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE,chrome=1" />
+    <link href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <title>Sample reports - ReportGenerator</title>
+    <style>
+        html {
+            font-family: sans-serif;
+        }
+
+        body {
+            margin: 30px;
+            padding: 0;
+        }
+        table {
+            border-collapse: collapse;
+        }
+        td {
+            border: 1px solid #000;
+            padding: 5px;
+        }
+        tr td:first-child {
+            min-width: 250px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Sample reports</h1>
+        <h2>HTML</h2>
+        <table>
+            <tr>
+                <td><a href="Html/index.html">Html</a></td>
+                <td>The default output format. Creates a summary overview (index.html) and detailed reports for each
+                    class.</td>
+            </tr>
+            <tr>
+                <td><a href="Html_Light/index.html">Html_Light</a></td>
+                <td>Same as Html but with a light theme.</td>
+            </tr>
+            <tr>
+                <td><a href="Html_Dark/index.html">Html_Dark</a></td>
+                <td>Same as Html but with a dark theme.</td>
+            </tr>
+            <tr>
+                <td><a href="HtmlSummary/summary.html">HtmlSummary</a></td>
+                <td>Creates a single HTML file (summary.html) without links.</td>
+            </tr>
+            <tr>
+                <td><a href="HtmlChart/CoverageHistory.html">HtmlChart</a></td>
+                <td>Creates a single HTML file containing a chart with historic coverage information.</td>
+            </tr>
+            <tr>
+                <td><a href="HtmlInline/index.html">HtmlInline</a></td>
+                <td>Same as HTML but CSS and JavaScript is included in every HTML page. This results in larger file
+                    sizes, but can be useful for integration into build servers like Azure DevOps (VSTS), since they may
+                    block referenced CSS and JavaScript files.</td>
+            </tr>
+            <tr>
+                <td><a href="HtmlInline_AzurePipelines/index.html">HtmlInline_AzurePipelines</a></td>
+                <td>Same as HtmlInline but with an adaptive light/dark theme matching the look and feel of Azure
+                    Pipelines</td>
+            </tr>
+            <tr>
+                <td><a href="HtmlInline_AzurePipelines_Light/index.html">HtmlInline_AzurePipelines_Light</a>
+                </td>
+                <td>Same as HtmlInline but with a light theme matching the look and feel of Azure Pipelines.</td>
+            </tr>
+            <tr>
+                <td><a href="HtmlInline_AzurePipelines_Dark/index.html">HtmlInline_AzurePipelines_Dark</a>
+                </td>
+                <td>Same as HtmlInline but with a dark theme matching the look and feel of Azure Pipelines.</td>
+            </tr>
+            <tr>
+                <td><a href="MHtml/Summary.mht">MHtml</a></td>
+                <td>Same as HTML but packaged into a single MHTML file.</td>
+            </tr>
+        </table>
+
+        <h2>Clover</h2>
+        <table>
+            <tr>
+                <td><a href="Clover/Clover.xml">Clover</a></td>
+                <td>Creates a XML file in Clover format. This format integrates with tools like Atlassian Bamboo.</td>
+            </tr>
+        </table>
+
+        <h2>Cobertura</h2>
+        <table>
+            <tr>
+                <td><a href="Cobertura/Cobertura.xml">Cobertura</a></td>
+                <td>Creates a XML file in Cobertura format. This format integrates with tools like Azure DevOps (VSTS)
+                    or Jenkins.</td>
+            </tr>
+        </table>
+
+        <h2>SonarQube</h2>
+        <table>
+            <tr>
+                <td><a href="SonarQube/SonarQube.xml">SonarQube</a></td>
+                <td>Creates a XML file in SonarQube 'Generic Test Data' format.</td>
+            </tr>
+        </table>
+
+        <h2>lcov</h2>
+        <table>
+            <tr>
+                <td><a href="lcov/lcov.info">lcov</a></td>
+                <td>Creates a text file in 'lcov' format.</td>
+            </tr>
+        </table>
+
+        <h2>TeamCity</h2>
+        <table>
+            <tr>
+                <td>TeamCitySummary</td>
+                <td>Command line output interpreted by TeamCity.</td>
+            </tr>
+        </table>
+
+        <h2>XML</h2>
+        <table>
+            <tr>
+                <td><a href="Xml/Summary.xml">XML</a></td>
+                <td>Creates a XML file containing a summary for all classes and detailed reports for each class.</td>
+            </tr>
+            <tr>
+                <td><a href="XmlSummary/Summary.xml">XMLSummary</a></td>
+                <td>Creates a single XML file containing a summary for all classes.</td>
+            </tr>
+        </table>
+
+        <h2>Latex</h2>
+        <table>
+            <tr>
+                <td><a href="Summary/Summary.tex">Latex</a></td>
+                <td>Creates a single TEX file containing a summary for all classes and detailed reports for each class.
+                </td>
+            </tr>
+            <tr>
+                <td><a href="LatexSummary/Summary.tex">LatexSummary</a></td>
+                <td>Creates a single TEX file containing a summary for all classes.</td>
+            </tr>
+        </table>
+
+        <h2>Markdown</h2>
+        <table>
+            <tr>
+                <td><a href="MarkdownSummary/Summary.md">MarkdownSummary</a></td>
+                <td>Creates a single Markdown file containing coverage information per class.</td>
+            </tr>
+            <tr>
+                <td><a href="MarkdownSummaryGithub/Summary.md">MarkdownSummaryGithub</a></td>
+                <td>Creates a single Markdown file containing coverage information per class. The report is optimized
+                    for GitHub.</td>
+            </tr>
+            <tr>
+                <td><a href="MarkdownDeltaSummary/DeltaSummary.md">MarkdownDeltaSummary</a></td>
+                <td>Creates a single Markdown file containing delta coverage information.</td>
+            </tr>
+        </table>
+
+        <h2>Text</h2>
+        <table>
+            <tr>
+                <td><a href="TextSummary/Summary.txt">TextSummary</a></td>
+                <td>Creates a single TXT file containing coverage information per class.</td>
+            </tr>
+            <tr>
+                <td><a href="TextDeltaSummary/DeltaSummary.txt">TextDeltaSummary</a></td>
+                <td>Creates a single TXT file containing delta coverage information.</td>
+            </tr>
+        </table>
+
+        <h2>Other</h2>
+        <table>
+            <tr>
+                <td><a href="JsonSummary/Summary.json">JsonSummary</a></td>
+                <td>Creates a single JSON file containing a summary for all classes.</td>
+            </tr>
+
+            <tr>
+                <td><a href="CsvSummary/Summary.csv">CsvSummary</a></td>
+                <td>Creates a single CSV file containing coverage information per class.</td>
+            </tr>
+            <tr>
+                <td><a href="PngChart/CoverageHistory.png">PngChart</a></td>
+                <td>Creates a single PNG file containing a chart with historic coverage information.</td>
+            </tr>
+            <tr>
+                <td><a href="Badges/index.html">Badges</a></td>
+                <td>Creates SVGs and PNGs files that show line and/or branch coverage information.</td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>
