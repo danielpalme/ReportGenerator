@@ -142,6 +142,8 @@ namespace Palmmedia.ReportGenerator.MSBuild
         /// </returns>
         public override bool Execute()
         {
+            AssemblyResolver.Enable();
+
             var reportFilePatterns = Array.Empty<string>();
             var targetDirectory = TargetDirectory;
             var sourceDirectories = Array.Empty<string>();

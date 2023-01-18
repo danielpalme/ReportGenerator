@@ -289,11 +289,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         value = Math.Round(100 * decimal.Parse(lineRate.Value.Replace(',', '.'), NumberStyles.Number | NumberStyles.AllowExponent, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero);
                     }
 
-                    metrics.Add(new Metric(
-                        ReportResources.Coverage,
-                        ParserBase.CodeCoverageUri,
-                        MetricType.CoveragePercentual,
-                        value));
+                    metrics.Add(Metric.Coverage(value));
                 }
 
                 var branchRate = method.Attribute("branch-rate");
@@ -307,11 +303,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         value = Math.Round(100 * decimal.Parse(branchRate.Value.Replace(',', '.'), NumberStyles.Number | NumberStyles.AllowExponent, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero);
                     }
 
-                    metrics.Add(new Metric(
-                        ReportResources.BranchCoverage,
-                        ParserBase.CodeCoverageUri,
-                        MetricType.CoveragePercentual,
-                        value));
+                    metrics.Add(Metric.BranchCoverage(value));
                 }
 
                 var cyclomaticComplexityAttribute = method.Attribute("complexity");
@@ -327,12 +319,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                     metrics.Insert(
                         0,
-                        new Metric(
-                        ReportResources.CyclomaticComplexity,
-                        ParserBase.CyclomaticComplexityUri,
-                        MetricType.CodeQuality,
-                        value,
-                        MetricMergeOrder.LowerIsBetter));
+                        Metric.CyclomaticComplexity(value));
                 }
 
                 var methodMetric = new MethodMetric(fullName, shortName, metrics);

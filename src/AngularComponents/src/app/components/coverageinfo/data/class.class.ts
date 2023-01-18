@@ -80,4 +80,9 @@ export class Class {
     * The historicCoverages.
     */
     hc: HistoricCoverage[] = [];
+
+    /*
+    * The metrics.
+    */
+    metrics: any;
 }

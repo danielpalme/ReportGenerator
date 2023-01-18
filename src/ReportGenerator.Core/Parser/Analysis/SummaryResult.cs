@@ -182,7 +182,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                 .SelectMany(m => m.Metrics)
                 .Where(m => m.MetricType == MetricType.CoverageAbsolute)
                 .GroupBy(m => m.Name)
-                .Select(g => new Metric(g.Key, g.First().ExplanationUrl, MetricType.CoverageAbsolute, g.SafeSum(m => m.Value)))
+                .Select(g => new Metric(g.Key, g.First().Abbreviation, g.First().ExplanationUrl, MetricType.CoverageAbsolute, g.SafeSum(m => m.Value)))
                 .ToList();
 
         /// <summary>

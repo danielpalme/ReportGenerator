@@ -1,0 +1,493 @@
+\documentclass[a4paper,landscape,10pt]{article}
+\usepackage[paper=a4paper,landscape,left=20mm,right=20mm,top=20mm,bottom=20mm]{geometry}
+\usepackage{longtable}
+\usepackage{fancyhdr}
+\usepackage[pdftex]{color}
+\usepackage{colortbl}
+\definecolor{green}{rgb}{0.04,0.68,0.04}
+\definecolor{orange}{rgb}{0.97,0.65,0.12}
+\definecolor{red}{rgb}{0.75,0.04,0.04}
+\definecolor{gray}{rgb}{0.86,0.86,0.86}
+
+\usepackage[pdftex,
+            colorlinks=true, linkcolor=red, urlcolor=green, citecolor=red,%
+            raiselinks=true,%
+            bookmarks=true,%
+            bookmarksopenlevel=1,%
+            bookmarksopen=true,%
+            bookmarksnumbered=true,%
+            hyperindex=true,% 
+            plainpages=false,% correct hyperlinks
+            pdfpagelabels=true%,% view TeX pagenumber in PDF reader
+            %pdfborder={0 0 0.5}
+            ]{hyperref}
+
+\hypersetup{pdftitle={Coverage Report},
+            pdfauthor={ReportGenerator - 5.1.14.0}
+           }
+
+\pagestyle{fancy}
+\fancyhead[LE,LO]{\leftmark}
+\fancyhead[R]{\thepage}
+\fancyfoot[C]{ReportGenerator - 5.1.14.0}
+
+\begin{document}
+
+\setcounter{secnumdepth}{-1}
+\section{Summary}
+\begin{longtable}[l]{ll}
+\textbf{Generated on:} & 18.01.2023 - 20:03:56\\
+\textbf{Parser:} & OpenCover\\
+\textbf{Assemblies:} & 1\\
+\textbf{Classes:} & 4\\
+\textbf{Files:} & 5\\
+\textbf{Covered lines:} & 83\\
+\textbf{Uncovered lines:} & 42\\
+\textbf{Coverable lines:} & 125\\
+\textbf{Total lines:} & 260\\
+\textbf{Line coverage:} & 66.4\% (83 of 125)\\
+\textbf{Covered branches:} & 3\\
+\textbf{Total branches:} & 6\\
+\textbf{Branch coverage:} & 50\% (3 of 6)\\
+\textbf{Covered methods:} & 14\\
+\textbf{Total methods:} & 24\\
+\textbf{Method coverage:} & 58.3\% (14 of 24)\\
+\end{longtable}
+\section{Risk Hotspots}
+No risk hotspots found.
+\section{Coverage}
+\begin{longtable}[l]{|l|r|r|r|r|r|r|r|}
+\hline
+\textbf{Name} & \textbf{Covered} & \textbf{Uncovered} & \textbf{Coverable} & \textbf{Total} & \textbf{Line coverage} & \textbf{Branch coverage} & \textbf{Method coverage}\\
+\hline
+\textbf{Sample} & \textbf{83} & \textbf{42} & \textbf{125} & \textbf{260} & \textbf{66.4\%} & \textbf{50\%} & \textbf{58.3\%}\\
+\hline
+Sample.PartialClass & 12 & 10 & 22 & 53 & 54.5\% & 50\% & 50\%\\
+\hline
+Sample.TestClass & 12 & 9 & 21 & 38 & 57.1\% & 50\% & 50\%\\
+\hline
+Test.Program & 35 & 9 & 44 & 84 & 79.5\% &  & 66.6\%\\
+\hline
+Test.TestClass2 & 24 & 14 & 38 & 85 & 63.1\% & 50\% & 60\%\\
+\hline
+\end{longtable}
+\newpage
+\section{Sample.PartialClass}
+\subsection{Summary}
+\begin{longtable}[l]{ll}
+\textbf{Class:} & Sample.PartialClass\\
+\textbf{Assembly:} & Sample\\
+\textbf{File(s):} & \begin{minipage}[t]{12cm}{C:\textbackslash temp\textbackslash PartialClass.cs\\C:\textbackslash temp\textbackslash PartialClass2.cs}\end{minipage} \\
+\textbf{Covered lines:} & 12\\
+\textbf{Uncovered lines:} & 10\\
+\textbf{Coverable lines:} & 22\\
+\textbf{Total lines:} & 53\\
+\textbf{Line coverage:} & 54.5\% (12 of 22)\\
+\textbf{Covered branches:} & 1\\
+\textbf{Total branches:} & 2\\
+\textbf{Branch coverage:} & 50\% (1 of 2)\\
+\textbf{Covered methods:} & 3\\
+\textbf{Total methods:} & 6\\
+\textbf{Method coverage:} & 50\% (3 of 6)\\
+\end{longtable}
+\subsection{Metrics}
+\begin{longtable}[l]{|l|r|r|r|r|r|}
+\hline
+\textbf{Method} & \textbf{Branch coverage} & \textbf{Crap Score} & \textbf{Cyclomatic complexity} & \textbf{NPath complexity} & \textbf{Sequence coverage}\\
+\hline
+\textbf{ExecutedMethod\_1()} & 100\% & 1 & 1 & 0 & 100\%\\
+\hline
+\textbf{ExecutedMethod\_2()} & 100\% & 1 & 1 & 0 & 100\%\\
+\hline
+\textbf{UnExecutedMethod\_1()} & 0\% & 2 & 1 & 0 & 0\%\\
+\hline
+\textbf{UnExecutedMethod\_2()} & 0\% & 2 & 1 & 0 & 0\%\\
+\hline
+\end{longtable}
+\subsection{File(s)}
+\subsubsection{C:\textbackslash temp\textbackslash PartialClass.cs}
+\begin{longtable}[l]{lrrll}
+\textbf{} & \textbf{\#} & \textbf{Line} & \textbf{} & \textbf{Line coverage}\\
+\cellcolor{gray} &  & \verb~1~ & & \verb~using System;~\\
+\cellcolor{gray} &  & \verb~2~ & & \verb~~\\
+\cellcolor{gray} &  & \verb~3~ & & \verb~namespace Test~\\
+\cellcolor{gray} &  & \verb~4~ & & \verb~{~\\
+\cellcolor{gray} &  & \verb~5~ & & \verb~    partial class PartialClass~\\
+\cellcolor{gray} &  & \verb~6~ & & \verb~    {~\\
+\cellcolor{gray} &  & \verb~7~ & & \verb~        public void ExecutedMethod_1()~\\
+\cellcolor{green} & 1 & \verb~8~ & & \verb~        {~\\
+\cellcolor{green} & 1 & \verb~9~ & & \verb~            Console.WriteLine("Test");~\\
+\cellcolor{green} & 1 & \verb~10~ & & \verb~        }~\\
+\cellcolor{gray} &  & \verb~11~ & & \verb~~\\
+\cellcolor{gray} &  & \verb~12~ & & \verb~        public void UnExecutedMethod_1()~\\
+\cellcolor{red} & 0 & \verb~13~ & & \verb~        {~\\
+\cellcolor{red} & 0 & \verb~14~ & & \verb~            Console.WriteLine("Test");~\\
+\cellcolor{red} & 0 & \verb~15~ & & \verb~        }~\\
+\cellcolor{gray} &  & \verb~16~ & & \verb~~\\
+\cellcolor{gray} &  & \verb~17~ & & \verb~        private int someProperty;~\\
+\cellcolor{gray} &  & \verb~18~ & & \verb~~\\
+\cellcolor{gray} &  & \verb~19~ & & \verb~        public int SomeProperty~\\
+\cellcolor{gray} &  & \verb~20~ & & \verb~        {~\\
+\cellcolor{red} & 0 & \verb~21~ & & \verb~            get { return this.someProperty; }~\\
+\cellcolor{gray} &  & \verb~22~ & & \verb~~\\
+\cellcolor{gray} &  & \verb~23~ & & \verb~            set~\\
+\cellcolor{green} & 1 & \verb~24~ & & \verb~            {~\\
+\cellcolor{orange} & 1 & \verb~25~ & & \verb~                if (value < 0)~\\
+\cellcolor{green} & 1 & \verb~26~ & & \verb~                {~\\
+\cellcolor{green} & 1 & \verb~27~ & & \verb~                    this.someProperty = 0;~\\
+\cellcolor{green} & 1 & \verb~28~ & & \verb~                }~\\
+\cellcolor{gray} &  & \verb~29~ & & \verb~                else~\\
+\cellcolor{red} & 0 & \verb~30~ & & \verb~                {~\\
+\cellcolor{red} & 0 & \verb~31~ & & \verb~                    this.someProperty = value;~\\
+\cellcolor{red} & 0 & \verb~32~ & & \verb~                }~\\
+\cellcolor{green} & 1 & \verb~33~ & & \verb~            }~\\
+\cellcolor{gray} &  & \verb~34~ & & \verb~        }~\\
+\cellcolor{gray} &  & \verb~35~ & & \verb~    }~\\
+\cellcolor{gray} &  & \verb~36~ & & \verb~}~\\
+\end{longtable}
+\subsubsection{C:\textbackslash temp\textbackslash PartialClass2.cs}
+\begin{longtable}[l]{lrrll}
+\textbf{} & \textbf{\#} & \textbf{Line} & \textbf{} & \textbf{Line coverage}\\
+\cellcolor{gray} &  & \verb~1~ & & \verb~using System;~\\
+\cellcolor{gray} &  & \verb~2~ & & \verb~~\\
+\cellcolor{gray} &  & \verb~3~ & & \verb~namespace Test~\\
+\cellcolor{gray} &  & \verb~4~ & & \verb~{~\\
+\cellcolor{gray} &  & \verb~5~ & & \verb~    partial class PartialClass~\\
+\cellcolor{gray} &  & \verb~6~ & & \verb~    {~\\
+\cellcolor{gray} &  & \verb~7~ & & \verb~        public void ExecutedMethod_2()~\\
+\cellcolor{green} & 1 & \verb~8~ & & \verb~        {~\\
+\cellcolor{green} & 1 & \verb~9~ & & \verb~            Console.WriteLine("Test");~\\
+\cellcolor{green} & 1 & \verb~10~ & & \verb~        }~\\
+\cellcolor{gray} &  & \verb~11~ & & \verb~~\\
+\cellcolor{gray} &  & \verb~12~ & & \verb~        public void UnExecutedMethod_2()~\\
+\cellcolor{red} & 0 & \verb~13~ & & \verb~        {~\\
+\cellcolor{red} & 0 & \verb~14~ & & \verb~            Console.WriteLine("Test");~\\
+\cellcolor{red} & 0 & \verb~15~ & & \verb~        }~\\
+\cellcolor{gray} &  & \verb~16~ & & \verb~    }~\\
+\cellcolor{gray} &  & \verb~17~ & & \verb~}~\\
+\end{longtable}
+\newpage
+\section{Sample.TestClass}
+\subsection{Summary}
+\begin{longtable}[l]{ll}
+\textbf{Class:} & Sample.TestClass\\
+\textbf{Assembly:} & Sample\\
+\textbf{File(s):} & \begin{minipage}[t]{12cm}{C:\textbackslash temp\textbackslash TestClass.cs}\end{minipage} \\
+\textbf{Covered lines:} & 12\\
+\textbf{Uncovered lines:} & 9\\
+\textbf{Coverable lines:} & 21\\
+\textbf{Total lines:} & 38\\
+\textbf{Line coverage:} & 57.1\% (12 of 21)\\
+\textbf{Covered branches:} & 1\\
+\textbf{Total branches:} & 2\\
+\textbf{Branch coverage:} & 50\% (1 of 2)\\
+\textbf{Covered methods:} & 1\\
+\textbf{Total methods:} & 2\\
+\textbf{Method coverage:} & 50\% (1 of 2)\\
+\end{longtable}
+\subsection{Metrics}
+\begin{longtable}[l]{|l|r|r|r|r|r|}
+\hline
+\textbf{Method} & \textbf{Branch coverage} & \textbf{Crap Score} & \textbf{Cyclomatic complexity} & \textbf{NPath complexity} & \textbf{Sequence coverage}\\
+\hline
+\textbf{SampleFunction()} & 66.67\% & 3.14 & 3 & 2 & 75\%\\
+\hline
+\textbf{SampleFunction()} & 0\% & 2 & 1 & 0 & 0\%\\
+\hline
+\end{longtable}
+\subsection{File(s)}
+\subsubsection{C:\textbackslash temp\textbackslash TestClass.cs}
+\begin{longtable}[l]{lrrll}
+\textbf{} & \textbf{\#} & \textbf{Line} & \textbf{} & \textbf{Line coverage}\\
+\cellcolor{gray} &  & \verb~1~ & & \verb~using System;~\\
+\cellcolor{gray} &  & \verb~2~ & & \verb~~\\
+\cellcolor{gray} &  & \verb~3~ & & \verb~namespace Test~\\
+\cellcolor{gray} &  & \verb~4~ & & \verb~{~\\
+\cellcolor{gray} &  & \verb~5~ & & \verb~    class TestClass~\\
+\cellcolor{gray} &  & \verb~6~ & & \verb~    {~\\
+\cellcolor{gray} &  & \verb~7~ & & \verb~        public void SampleFunction()~\\
+\cellcolor{green} & 1 & \verb~8~ & & \verb~        {~\\
+\cellcolor{green} & 1 & \verb~9~ & & \verb~            string test = string.Format(~\\
+\cellcolor{green} & 1 & \verb~10~ & & \verb~                "{0} {1}",~\\
+\cellcolor{green} & 1 & \verb~11~ & & \verb~                 "Hello",~\\
+\cellcolor{green} & 1 & \verb~12~ & & \verb~                 "World");~\\
+\cellcolor{gray} &  & \verb~13~ & & \verb~~\\
+\cellcolor{green} & 1 & \verb~14~ & & \verb~            Console.WriteLine(test);~\\
+\cellcolor{green} & 1 & \verb~15~ & & \verb~            int i = 10;~\\
+\cellcolor{gray} &  & \verb~16~ & & \verb~~\\
+\cellcolor{orange} & 1 & \verb~17~ & & \verb~            if (i > 0 || i > 1)~\\
+\cellcolor{green} & 1 & \verb~18~ & & \verb~            {~\\
+\cellcolor{green} & 1 & \verb~19~ & & \verb~                Console.WriteLine(i + " is greater that 0");~\\
+\cellcolor{green} & 1 & \verb~20~ & & \verb~            }~\\
+\cellcolor{gray} &  & \verb~21~ & & \verb~            else~\\
+\cellcolor{red} & 0 & \verb~22~ & & \verb~            {~\\
+\cellcolor{red} & 0 & \verb~23~ & & \verb~                Console.WriteLine(i + " is not greater that 0");~\\
+\cellcolor{red} & 0 & \verb~24~ & & \verb~            }~\\
+\cellcolor{green} & 1 & \verb~25~ & & \verb~        }~\\
+\cellcolor{gray} &  & \verb~26~ & & \verb~~\\
+\cellcolor{gray} &  & \verb~27~ & & \verb~        public class NestedClass~\\
+\cellcolor{gray} &  & \verb~28~ & & \verb~        {~\\
+\cellcolor{gray} &  & \verb~29~ & & \verb~            public void SampleFunction()~\\
+\cellcolor{red} & 0 & \verb~30~ & & \verb~            {~\\
+\cellcolor{red} & 0 & \verb~31~ & & \verb~                Console.WriteLine(~\\
+\cellcolor{red} & 0 & \verb~32~ & & \verb~                    "{0} {1}",~\\
+\cellcolor{red} & 0 & \verb~33~ & & \verb~                     "Hello",~\\
+\cellcolor{red} & 0 & \verb~34~ & & \verb~                     "World");~\\
+\cellcolor{red} & 0 & \verb~35~ & & \verb~            }~\\
+\cellcolor{gray} &  & \verb~36~ & & \verb~        }~\\
+\cellcolor{gray} &  & \verb~37~ & & \verb~    }~\\
+\cellcolor{gray} &  & \verb~38~ & & \verb~}~\\
+\end{longtable}
+\newpage
+\section{Test.Program}
+\subsection{Summary}
+\begin{longtable}[l]{ll}
+\textbf{Class:} & Test.Program\\
+\textbf{Assembly:} & Sample\\
+\textbf{File(s):} & \begin{minipage}[t]{12cm}{C:\textbackslash temp\textbackslash Program.cs}\end{minipage} \\
+\textbf{Covered lines:} & 35\\
+\textbf{Uncovered lines:} & 9\\
+\textbf{Coverable lines:} & 44\\
+\textbf{Total lines:} & 84\\
+\textbf{Line coverage:} & 79.5\% (35 of 44)\\
+\textbf{Covered branches:} & 0\\
+\textbf{Total branches:} & 0\\
+\textbf{Covered methods:} & 4\\
+\textbf{Total methods:} & 6\\
+\textbf{Method coverage:} & 66.6\% (4 of 6)\\
+\end{longtable}
+\subsection{Metrics}
+\begin{longtable}[l]{|l|r|r|r|r|r|}
+\hline
+\textbf{Method} & \textbf{Branch coverage} & \textbf{Crap Score} & \textbf{Cyclomatic complexity} & \textbf{NPath complexity} & \textbf{Sequence coverage}\\
+\hline
+\textbf{Main(...)} & 100\% & 1.00 & 1 & 0 & 88\%\\
+\hline
+\textbf{CSharp\_ExecuteTest1(} & 0\% & 2 & 1 & 0 & 0\%\\
+\hline
+\textbf{CSharp\_ExecuteTest2(} & 0\% & 2 & 1 & 0 & 0\%\\
+\hline
+\textbf{CallAsyncMethod()} & 100\% & 3 & 3 & 0 & 100\%\\
+\hline
+\textbf{.ctor(...)} & 100\% & 1 & 1 & 0 & 100\%\\
+\hline
+\textbf{SendAsync(...)} & 100\% & 1 & 1 & 0 & 100\%\\
+\hline
+\end{longtable}
+\subsection{File(s)}
+\subsubsection{C:\textbackslash temp\textbackslash Program.cs}
+\begin{longtable}[l]{lrrll}
+\textbf{} & \textbf{\#} & \textbf{Line} & \textbf{} & \textbf{Line coverage}\\
+\cellcolor{gray} &  & \verb~1~ & & \verb~using System.Net.Http;~\\
+\cellcolor{gray} &  & \verb~2~ & & \verb~using System.Threading;~\\
+\cellcolor{gray} &  & \verb~3~ & & \verb~using System.Threading.Tasks;~\\
+\cellcolor{gray} &  & \verb~4~ & & \verb~using Microsoft.VisualStudio.TestTools.UnitTesting;~\\
+\cellcolor{gray} &  & \verb~5~ & & \verb~~\\
+\cellcolor{gray} &  & \verb~6~ & & \verb~namespace Test~\\
+\cellcolor{gray} &  & \verb~7~ & & \verb~{~\\
+\cellcolor{gray} &  & \verb~8~ & & \verb~    [TestClass]~\\
+\cellcolor{gray} &  & \verb~9~ & & \verb~    public class Program~\\
+\cellcolor{gray} &  & \verb~10~ & & \verb~    {~\\
+\cellcolor{gray} &  & \verb~11~ & & \verb~        static void Main(string[] args)~\\
+\cellcolor{green} & 1 & \verb~12~ & & \verb~        {~\\
+\cellcolor{green} & 1 & \verb~13~ & & \verb~            new TestClass().SampleFunction();~\\
+\cellcolor{gray} &  & \verb~14~ & & \verb~~\\
+\cellcolor{green} & 1 & \verb~15~ & & \verb~            new TestClass2("Test").ExecutedMethod();~\\
+\cellcolor{green} & 1 & \verb~16~ & & \verb~            new TestClass2("Test").SampleFunction("Munich");~\\
+\cellcolor{gray} &  & \verb~17~ & & \verb~~\\
+\cellcolor{green} & 1 & \verb~18~ & & \verb~            new PartialClass().ExecutedMethod_1();~\\
+\cellcolor{green} & 1 & \verb~19~ & & \verb~            new PartialClass().ExecutedMethod_2();~\\
+\cellcolor{green} & 1 & \verb~20~ & & \verb~            new PartialClass().SomeProperty = -10;~\\
+\cellcolor{gray} &  & \verb~21~ & & \verb~~\\
+\cellcolor{green} & 1 & \verb~22~ & & \verb~            new PartialClassWithAutoProperties().Property1 = "Test";~\\
+\cellcolor{green} & 1 & \verb~23~ & & \verb~            new PartialClassWithAutoProperties().Property2 = "Test";~\\
+\cellcolor{gray} &  & \verb~24~ & & \verb~~\\
+\cellcolor{green} & 1 & \verb~25~ & & \verb~            new SomeClass().Property1 = "Test";~\\
+\cellcolor{gray} &  & \verb~26~ & & \verb~~\\
+\cellcolor{green} & 1 & \verb~27~ & & \verb~            new ClassWithExcludes().IncludedMethod();~\\
+\cellcolor{green} & 1 & \verb~28~ & & \verb~            new ClassWithExcludes().ExcludedMethod();~\\
+\cellcolor{gray} &  & \verb~29~ & & \verb~~\\
+\cellcolor{green} & 1 & \verb~30~ & & \verb~            new GenericClass<SomeModel, IState>().Process(null);~\\
+\cellcolor{green} & 1 & \verb~31~ & & \verb~            new GenericClass<SomeModel, IState>().PostProcess(null);~\\
+\cellcolor{gray} &  & \verb~32~ & & \verb~~\\
+\cellcolor{green} & 1 & \verb~33~ & & \verb~            new CodeContract_Target().Calculate(-1);~\\
+\cellcolor{gray} &  & \verb~34~ & & \verb~~\\
+\cellcolor{green} & 1 & \verb~35~ & & \verb~            new AbstractClass_SampleImpl1();~\\
+\cellcolor{green} & 1 & \verb~36~ & & \verb~            new AbstractClass_SampleImpl2();~\\
+\cellcolor{gray} &  & \verb~37~ & & \verb~~\\
+\cellcolor{green} & 1 & \verb~38~ & & \verb~            CallAsyncMethod();~\\
+\cellcolor{gray} &  & \verb~39~ & & \verb~~\\
+\cellcolor{gray} &  & \verb~40~ & & \verb~            try~\\
+\cellcolor{green} & 1 & \verb~41~ & & \verb~            {~\\
+\cellcolor{green} & 1 & \verb~42~ & & \verb~                new CodeContract_Target().Calculate(0);~\\
+\cellcolor{green} & 1 & \verb~43~ & & \verb~            }~\\
+\cellcolor{red} & 0 & \verb~44~ & & \verb~            catch (System.ArgumentException)~\\
+\cellcolor{red} & 0 & \verb~45~ & & \verb~            {~\\
+\cellcolor{red} & 0 & \verb~46~ & & \verb~            }~\\
+\cellcolor{green} & 1 & \verb~47~ & & \verb~        }~\\
+\cellcolor{gray} &  & \verb~48~ & & \verb~~\\
+\cellcolor{gray} &  & \verb~49~ & & \verb~        [TestMethod]~\\
+\cellcolor{gray} &  & \verb~50~ & & \verb~        public void CSharp_ExecuteTest1()~\\
+\cellcolor{red} & 0 & \verb~51~ & & \verb~        {~\\
+\cellcolor{red} & 0 & \verb~52~ & & \verb~            Main(null);~\\
+\cellcolor{red} & 0 & \verb~53~ & & \verb~        }~\\
+\cellcolor{gray} &  & \verb~54~ & & \verb~~\\
+\cellcolor{gray} &  & \verb~55~ & & \verb~        [TestMethod]~\\
+\cellcolor{gray} &  & \verb~56~ & & \verb~        public void CSharp_ExecuteTest2()~\\
+\cellcolor{red} & 0 & \verb~57~ & & \verb~        {~\\
+\cellcolor{red} & 0 & \verb~58~ & & \verb~            Main(null);~\\
+\cellcolor{red} & 0 & \verb~59~ & & \verb~        }~\\
+\cellcolor{gray} &  & \verb~60~ & & \verb~~\\
+\cellcolor{gray} &  & \verb~61~ & & \verb~        private static async void CallAsyncMethod()~\\
+\cellcolor{green} & 1 & \verb~62~ & & \verb~        {~\\
+\cellcolor{green} & 1 & \verb~63~ & & \verb~            var expected = new HttpResponseMessage();~\\
+\cellcolor{green} & 1 & \verb~64~ & & \verb~            var handler = new AsyncClass() { InnerHandler = new EchoHandler(expected) };~\\
+\cellcolor{green} & 1 & \verb~65~ & & \verb~            var invoker = new HttpMessageInvoker(handler, false);~\\
+\cellcolor{green} & 1 & \verb~66~ & & \verb~            var actual = await invoker.SendAsync(new HttpRequestMessage(), new CancellationToken());~\\
+\cellcolor{green} & 1 & \verb~67~ & & \verb~        }~\\
+\cellcolor{gray} &  & \verb~68~ & & \verb~~\\
+\cellcolor{gray} &  & \verb~69~ & & \verb~        private class EchoHandler : DelegatingHandler~\\
+\cellcolor{gray} &  & \verb~70~ & & \verb~        {~\\
+\cellcolor{gray} &  & \verb~71~ & & \verb~            private HttpResponseMessage _response;~\\
+\cellcolor{gray} &  & \verb~72~ & & \verb~~\\
+\cellcolor{green} & 1 & \verb~73~ & & \verb~            public EchoHandler(HttpResponseMessage response)~\\
+\cellcolor{green} & 1 & \verb~74~ & & \verb~            {~\\
+\cellcolor{green} & 1 & \verb~75~ & & \verb~                this._response = response;~\\
+\cellcolor{green} & 1 & \verb~76~ & & \verb~            }~\\
+\cellcolor{gray} &  & \verb~77~ & & \verb~~\\
+\cellcolor{gray} &  & \verb~78~ & & \verb~            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancell~\\
+\cellcolor{green} & 1 & \verb~79~ & & \verb~            {~\\
+\cellcolor{green} & 1 & \verb~80~ & & \verb~                return Task.FromResult(this._response);~\\
+\cellcolor{green} & 1 & \verb~81~ & & \verb~            }~\\
+\cellcolor{gray} &  & \verb~82~ & & \verb~        }~\\
+\cellcolor{gray} &  & \verb~83~ & & \verb~    }~\\
+\cellcolor{gray} &  & \verb~84~ & & \verb~}~\\
+\end{longtable}
+\newpage
+\section{Test.TestClass2}
+\subsection{Summary}
+\begin{longtable}[l]{ll}
+\textbf{Class:} & Test.TestClass2\\
+\textbf{Assembly:} & Sample\\
+\textbf{File(s):} & \begin{minipage}[t]{12cm}{C:\textbackslash temp\textbackslash TestClass2.cs}\end{minipage} \\
+\textbf{Covered lines:} & 24\\
+\textbf{Uncovered lines:} & 14\\
+\textbf{Coverable lines:} & 38\\
+\textbf{Total lines:} & 85\\
+\textbf{Line coverage:} & 63.1\% (24 of 38)\\
+\textbf{Covered branches:} & 1\\
+\textbf{Total branches:} & 2\\
+\textbf{Branch coverage:} & 50\% (1 of 2)\\
+\textbf{Covered methods:} & 6\\
+\textbf{Total methods:} & 10\\
+\textbf{Method coverage:} & 60\% (6 of 10)\\
+\end{longtable}
+\subsection{Metrics}
+\begin{longtable}[l]{|l|r|r|r|r|r|}
+\hline
+\textbf{Method} & \textbf{Branch coverage} & \textbf{Crap Score} & \textbf{Cyclomatic complexity} & \textbf{NPath complexity} & \textbf{Sequence coverage}\\
+\hline
+\textbf{.ctor()} & 0\% & 2 & 1 & 0 & 0\%\\
+\hline
+\textbf{.ctor(...)} & 100\% & 1 & 1 & 0 & 100\%\\
+\hline
+\textbf{ExecutedMethod()} & 100\% & 1 & 1 & 0 & 100\%\\
+\hline
+\textbf{UnExecutedMethod()} & 0\% & 2 & 1 & 0 & 0\%\\
+\hline
+\textbf{SampleFunction(...)} & 66.67\% & 5 & 5 & 2 & 100\%\\
+\hline
+\textbf{DoSomething(...)} & 0\% & 2 & 1 & 0 & 0\%\\
+\hline
+\end{longtable}
+\subsection{File(s)}
+\subsubsection{C:\textbackslash temp\textbackslash TestClass2.cs}
+\begin{longtable}[l]{lrrll}
+\textbf{} & \textbf{\#} & \textbf{Line} & \textbf{} & \textbf{Line coverage}\\
+\cellcolor{gray} &  & \verb~1~ & & \verb~using System;~\\
+\cellcolor{gray} &  & \verb~2~ & & \verb~using System.Collections.Generic;~\\
+\cellcolor{gray} &  & \verb~3~ & & \verb~using System.Linq;~\\
+\cellcolor{gray} &  & \verb~4~ & & \verb~~\\
+\cellcolor{gray} &  & \verb~5~ & & \verb~namespace Test~\\
+\cellcolor{gray} &  & \verb~6~ & & \verb~{~\\
+\cellcolor{gray} &  & \verb~7~ & & \verb~    class TestClass2~\\
+\cellcolor{gray} &  & \verb~8~ & & \verb~    {~\\
+\cellcolor{gray} &  & \verb~9~ & & \verb~        private string name;~\\
+\cellcolor{gray} &  & \verb~10~ & & \verb~~\\
+\cellcolor{green} & 2 & \verb~11~ & & \verb~        private Dictionary<string, int> dict = new Dictionary<string, int>();~\\
+\cellcolor{gray} &  & \verb~12~ & & \verb~~\\
+\cellcolor{green} & 3 & \verb~13~ & & \verb~        public string ExecutedProperty { get; set; }~\\
+\cellcolor{gray} &  & \verb~14~ & & \verb~~\\
+\cellcolor{red} & 0 & \verb~15~ & & \verb~        public string UnExecutedProperty { get; set; }~\\
+\cellcolor{gray} &  & \verb~16~ & & \verb~~\\
+\cellcolor{red} & 0 & \verb~17~ & & \verb~        public TestClass2()~\\
+\cellcolor{red} & 0 & \verb~18~ & & \verb~        {~\\
+\cellcolor{red} & 0 & \verb~19~ & & \verb~            this.name = "Nobody";~\\
+\cellcolor{red} & 0 & \verb~20~ & & \verb~            this.ExecutedProperty = "Nobody";~\\
+\cellcolor{red} & 0 & \verb~21~ & & \verb~        }~\\
+\cellcolor{gray} &  & \verb~22~ & & \verb~~\\
+\cellcolor{green} & 2 & \verb~23~ & & \verb~        public TestClass2(string name)~\\
+\cellcolor{green} & 2 & \verb~24~ & & \verb~        {~\\
+\cellcolor{green} & 2 & \verb~25~ & & \verb~            this.name = name;~\\
+\cellcolor{green} & 2 & \verb~26~ & & \verb~            this.ExecutedProperty = name + name;~\\
+\cellcolor{green} & 2 & \verb~27~ & & \verb~        }~\\
+\cellcolor{gray} &  & \verb~28~ & & \verb~~\\
+\cellcolor{gray} &  & \verb~29~ & & \verb~        public void ExecutedMethod()~\\
+\cellcolor{green} & 1 & \verb~30~ & & \verb~        {~\\
+\cellcolor{green} & 1 & \verb~31~ & & \verb~            Console.WriteLine(this.name);~\\
+\cellcolor{green} & 1 & \verb~32~ & & \verb~            Console.WriteLine(this.ExecutedProperty);~\\
+\cellcolor{green} & 1 & \verb~33~ & & \verb~        }~\\
+\cellcolor{gray} &  & \verb~34~ & & \verb~~\\
+\cellcolor{gray} &  & \verb~35~ & & \verb~        public void UnExecutedMethod()~\\
+\cellcolor{red} & 0 & \verb~36~ & & \verb~        {~\\
+\cellcolor{red} & 0 & \verb~37~ & & \verb~            Console.WriteLine(this.name);~\\
+\cellcolor{red} & 0 & \verb~38~ & & \verb~            Console.WriteLine(this.ExecutedProperty);~\\
+\cellcolor{red} & 0 & \verb~39~ & & \verb~        }~\\
+\cellcolor{gray} &  & \verb~40~ & & \verb~~\\
+\cellcolor{gray} &  & \verb~41~ & & \verb~        public void SampleFunction(string city)~\\
+\cellcolor{green} & 1 & \verb~42~ & & \verb~        {~\\
+\cellcolor{green} & 1 & \verb~43~ & & \verb~            int[] values = new int[] { 0, 1, 2, 3 };~\\
+\cellcolor{gray} &  & \verb~44~ & & \verb~~\\
+\cellcolor{green} & 5 & \verb~45~ & & \verb~            var doubled = values.Select(i => i * 2);~\\
+\cellcolor{gray} &  & \verb~46~ & & \verb~~\\
+\cellcolor{green} & 11 & \verb~47~ & & \verb~            foreach (var item in doubled)~\\
+\cellcolor{green} & 4 & \verb~48~ & & \verb~            {~\\
+\cellcolor{green} & 4 & \verb~49~ & & \verb~                Console.WriteLine(item);~\\
+\cellcolor{green} & 4 & \verb~50~ & & \verb~            }~\\
+\cellcolor{gray} &  & \verb~51~ & & \verb~~\\
+\cellcolor{green} & 1 & \verb~52~ & & \verb~            string[] cities = new string[] { "Berlin", "Munich", "Paris" };~\\
+\cellcolor{gray} &  & \verb~53~ & & \verb~~\\
+\cellcolor{orange} & 4 & \verb~54~ & & \verb~            if (cities.SingleOrDefault(c => c.Equals(city, StringComparison.OrdinalIgnoreCase)) != null)~\\
+\cellcolor{green} & 1 & \verb~55~ & & \verb~            {~\\
+\cellcolor{green} & 1 & \verb~56~ & & \verb~                Console.WriteLine("Found " + city);~\\
+\cellcolor{green} & 1 & \verb~57~ & & \verb~            }~\\
+\cellcolor{green} & 1 & \verb~58~ & & \verb~        }~\\
+\cellcolor{gray} &  & \verb~59~ & & \verb~~\\
+\cellcolor{gray} &  & \verb~60~ & & \verb~        public string DoSomething(string value,~\\
+\cellcolor{gray} &  & \verb~61~ & & \verb~            string[] stringArray,~\\
+\cellcolor{gray} &  & \verb~62~ & & \verb~            Guid id,~\\
+\cellcolor{gray} &  & \verb~63~ & & \verb~            IEnumerable<string> stringEnumerable,~\\
+\cellcolor{gray} &  & \verb~64~ & & \verb~            IList<string> stringList,~\\
+\cellcolor{gray} &  & \verb~65~ & & \verb~            decimal dec,~\\
+\cellcolor{gray} &  & \verb~66~ & & \verb~            int i,~\\
+\cellcolor{gray} &  & \verb~67~ & & \verb~            Dictionary<string, int> dict,~\\
+\cellcolor{gray} &  & \verb~68~ & & \verb~            out int g,~\\
+\cellcolor{gray} &  & \verb~69~ & & \verb~            float fff,~\\
+\cellcolor{gray} &  & \verb~70~ & & \verb~            double dou,~\\
+\cellcolor{gray} &  & \verb~71~ & & \verb~            bool bo,~\\
+\cellcolor{gray} &  & \verb~72~ & & \verb~            byte by,~\\
+\cellcolor{gray} &  & \verb~73~ & & \verb~            char ch,~\\
+\cellcolor{gray} &  & \verb~74~ & & \verb~            object o,~\\
+\cellcolor{gray} &  & \verb~75~ & & \verb~            sbyte sby,~\\
+\cellcolor{gray} &  & \verb~76~ & & \verb~            short sh,~\\
+\cellcolor{gray} &  & \verb~77~ & & \verb~            uint ui,~\\
+\cellcolor{gray} &  & \verb~78~ & & \verb~            ulong ul,~\\
+\cellcolor{gray} &  & \verb~79~ & & \verb~            ushort usho)~\\
+\cellcolor{red} & 0 & \verb~80~ & & \verb~        {~\\
+\cellcolor{red} & 0 & \verb~81~ & & \verb~            g = 0;~\\
+\cellcolor{red} & 0 & \verb~82~ & & \verb~            return null;~\\
+\cellcolor{red} & 0 & \verb~83~ & & \verb~        }~\\
+\cellcolor{gray} &  & \verb~84~ & & \verb~    }~\\
+\cellcolor{gray} &  & \verb~85~ & & \verb~}~\\
+\end{longtable}
+\end{document}

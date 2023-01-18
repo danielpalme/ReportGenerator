@@ -4,6 +4,8 @@ h1 { font-family: 'Century Gothic', sans-serif; font-size: 1.2em; font-weight: n
 h1:first-of-type { margin-top: 0; }
 h2 { font-size: 1.0em; font-weight: bold; margin: 10px 0 15px 0; padding: 0; }
 h3 { font-size: 1.0em; font-weight: bold; margin: 0 0 10px 0; padding: 0; display: inline-block; }
+input, select, button { border: 1px solid #767676; border-radius: 0; }
+button { background-color: #ddd; cursor: pointer; }
 a { color: #c00; text-decoration: none; }
 a:hover { color: #000; text-decoration: none; }
 h1 a.back { color: #fff; background-color: #949494; display: inline-block; margin: -12px 5px -10px -10px; padding: 10px; border-right: 1px solid #fff; }
@@ -25,6 +27,10 @@ h1 a.button i { position: relative; top: 1px; }
     .containerright { display: none; }
 }
 
+.popup-container { position: fixed; left: 0; right: 0; top: 0; bottom: 0; background-color: rgb(0, 0, 0, 0.6); z-index: 100; }
+.popup { position: absolute; top: 50%; right: 50%; transform: translate(50%,-50%); background-color: #fff; padding: 25px; border-radius: 15px; min-width: 300px; }
+.popup .close { text-align: right; color: #979797; font-size: 25px;position: relative; left: 10px; bottom: 10px; cursor: pointer; }
+
 .footer { font-size: 0.7em; text-align: center; margin-top: 35px; }
 
 .card-group { display: flex; flex-wrap: wrap; margin-top: -15px; margin-left: -15px; }
@@ -44,10 +50,13 @@ h1 a.button i { position: relative; top: 1px; }
 
 .pro-button { color: #fff; background-color: #20A0D2; background-image: linear-gradient(50deg, #1c7ed6 0%, #23b8cf 100%); padding: 10px; border-radius: 3px; font-weight: bold; display: inline-block; }
 .pro-button:hover { color: #fff; background-color: #1C8EB7; background-image: linear-gradient(50deg, #1A6FBA 0%, #1EA1B5 100%); }
+.pro-button-tiny { border-radius: 10px; padding: 3px 8px; }
 
 th { text-align: left; }
 .table-fixed { table-layout: fixed; }
 .table-responsive { overflow-x: auto; }
+.table-responsive::-webkit-scrollbar { height: 20px; }
+.table-responsive::-webkit-scrollbar-thumb { background-color: #6f6f6f; border-radius: 20px; border: 5px solid #fff; }
 .overview { border: 1px solid #c1c1c1; border-collapse: collapse; width: 100%; word-wrap: break-word; }
 .overview th { border: 1px solid #c1c1c1; border-collapse: collapse; padding: 2px 4px 2px 4px; background-color: #ddd; }
 .overview tr.namespace th { background-color: #dcdcdc; }
@@ -121,6 +130,7 @@ a.percentagebar {
     border-left: 2px solid #0aad0a;
 }
 
+.mt-1 { margin-top: 4px; }
 .hidden, .ng-hide { display: none; }
 .right { text-align: right; }
 .center { text-align: center; }
@@ -445,6 +455,14 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
     background-size: contain;
     padding-left: 20px;
     height: 0.9em;
+    display: inline-block;
+}
+.icon-cog {
+    background-image: url(icon_cog.svg), url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNDQ0Ljc4OCAyOTEuMWw0Mi42MTYgMjQuNTk5YzQuODY3IDIuODA5IDcuMTI2IDguNjE4IDUuNDU5IDEzLjk4NS0xMS4wNyAzNS42NDItMjkuOTcgNjcuODQyLTU0LjY4OSA5NC41ODZhMTIuMDE2IDEyLjAxNiAwIDAgMS0xNC44MzIgMi4yNTRsLTQyLjU4NC0yNC41OTVhMTkxLjU3NyAxOTEuNTc3IDAgMCAxLTYwLjc1OSAzNS4xM3Y0OS4xODJhMTIuMDEgMTIuMDEgMCAwIDEtOS4zNzcgMTEuNzE4Yy0zNC45NTYgNy44NS03Mi40OTkgOC4yNTYtMTA5LjIxOS4wMDctNS40OS0xLjIzMy05LjQwMy02LjA5Ni05LjQwMy0xMS43MjN2LTQ5LjE4NGExOTEuNTU1IDE5MS41NTUgMCAwIDEtNjAuNzU5LTM1LjEzbC00Mi41ODQgMjQuNTk1YTEyLjAxNiAxMi4wMTYgMCAwIDEtMTQuODMyLTIuMjU0Yy0yNC43MTgtMjYuNzQ0LTQzLjYxOS01OC45NDQtNTQuNjg5LTk0LjU4Ni0xLjY2Ny01LjM2Ni41OTItMTEuMTc1IDUuNDU5LTEzLjk4NUw2Ny4yMTIgMjkxLjFhMTkzLjQ4IDE5My40OCAwIDAgMSAwLTcwLjE5OWwtNDIuNjE2LTI0LjU5OWMtNC44NjctMi44MDktNy4xMjYtOC42MTgtNS40NTktMTMuOTg1IDExLjA3LTM1LjY0MiAyOS45Ny02Ny44NDIgNTQuNjg5LTk0LjU4NmExMi4wMTYgMTIuMDE2IDAgMCAxIDE0LjgzMi0yLjI1NGw0Mi41ODQgMjQuNTk1YTE5MS41NzcgMTkxLjU3NyAwIDAgMSA2MC43NTktMzUuMTNWMjUuNzU5YTEyLjAxIDEyLjAxIDAgMCAxIDkuMzc3LTExLjcxOGMzNC45NTYtNy44NSA3Mi40OTktOC4yNTYgMTA5LjIxOS0uMDA3IDUuNDkgMS4yMzMgOS40MDMgNi4wOTYgOS40MDMgMTEuNzIzdjQ5LjE4NGExOTEuNTU1IDE5MS41NTUgMCAwIDEgNjAuNzU5IDM1LjEzbDQyLjU4NC0yNC41OTVhMTIuMDE2IDEyLjAxNiAwIDAgMSAxNC44MzIgMi4yNTRjMjQuNzE4IDI2Ljc0NCA0My42MTkgNTguOTQ0IDU0LjY4OSA5NC41ODYgMS42NjcgNS4zNjYtLjU5MiAxMS4xNzUtNS40NTkgMTMuOTg1TDQ0NC43ODggMjIwLjlhMTkzLjQ4NSAxOTMuNDg1IDAgMCAxIDAgNzAuMnpNMzM2IDI1NmMwLTQ0LjExMi0zNS44ODgtODAtODAtODBzLTgwIDM1Ljg4OC04MCA4MCAzNS44ODggODAgODAgODAgODAtMzUuODg4IDgwLTgweiIvPjwvc3ZnPg==);
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding-left: 16px;
+    height: 0.8em;
     display: inline-block;
 }
 .icon-fork {

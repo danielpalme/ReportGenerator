@@ -384,21 +384,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                 var metrics = new List<Metric>()
                 {
-                    new Metric(
-                        ReportResources.CyclomaticComplexity,
-                        ParserBase.CyclomaticComplexityUri,
-                        MetricType.CodeQuality,
-                        methodGroup.Max(m => int.Parse(m.Attribute("cyclomaticComplexity").Value, CultureInfo.InvariantCulture)),
-                        MetricMergeOrder.LowerIsBetter),
-                    new Metric(
-                        ReportResources.SequenceCoverage,
-                        ParserBase.CodeCoverageUri,
-                        MetricType.CoveragePercentual,
+                    Metric.CyclomaticComplexity(
+                        methodGroup.Max(m => int.Parse(m.Attribute("cyclomaticComplexity").Value, CultureInfo.InvariantCulture))),
+                    Metric.SequenceCoverage(
                         methodGroup.Max(m => decimal.Parse(m.Attribute("sequenceCoverage").Value, CultureInfo.InvariantCulture))),
-                    new Metric(
-                        ReportResources.BranchCoverage,
-                        ParserBase.CodeCoverageUri,
-                        MetricType.CoveragePercentual,
+                    Metric.BranchCoverage(
                         methodGroup.Max(m => decimal.Parse(m.Attribute("branchCoverage").Value, CultureInfo.InvariantCulture)))
                 };
 
@@ -408,25 +398,17 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 {
                     metrics.Insert(
                         1,
-                        new Metric(
-                        ReportResources.NPathComplexity,
-                        ParserBase.NPathComplexityUri,
-                        MetricType.CodeQuality,
-                        npathComplexityAttributes
-                            .Select(a => int.Parse(a.Value, CultureInfo.InvariantCulture))
-                            .Max(a => a < 0 ? int.MaxValue : a),
-                        MetricMergeOrder.LowerIsBetter));
+                        Metric.NPathComplexity(
+                            npathComplexityAttributes
+                                .Select(a => int.Parse(a.Value, CultureInfo.InvariantCulture))
+                                .Max(a => a < 0 ? int.MaxValue : a)));
                 }
 
                 var crapScoreAttributes = methodGroup.Select(m => m.Attribute("crapScore")).Where(a => a != null).ToArray();
                 if (crapScoreAttributes.Length > 0)
                 {
-                    metrics.Add(new Metric(
-                        ReportResources.CrapScore,
-                        ParserBase.CrapScoreUri,
-                        MetricType.CodeQuality,
-                        crapScoreAttributes.Max(a => decimal.Parse(a.Value, CultureInfo.InvariantCulture)),
-                        MetricMergeOrder.LowerIsBetter));
+                    metrics.Add(Metric.CrapScore(
+                        crapScoreAttributes.Max(a => decimal.Parse(a.Value, CultureInfo.InvariantCulture))));
                 }
 
                 string fullName = ExtractMethodName(methodGroup.Key);

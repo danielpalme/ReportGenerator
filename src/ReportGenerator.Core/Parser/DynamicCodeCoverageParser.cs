@@ -258,17 +258,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                 var metrics = new[]
                 {
-                    new Metric(
-                        ReportResources.BlocksCovered,
-                        ParserBase.CodeCoverageUri,
-                        MetricType.CoverageAbsolute,
-                        int.Parse(method.Attribute("blocks_covered").Value, CultureInfo.InvariantCulture)),
-                    new Metric(
-                        ReportResources.BlocksNotCovered,
-                        ParserBase.CodeCoverageUri,
-                        MetricType.CoverageAbsolute,
-                        int.Parse(method.Attribute("blocks_not_covered").Value, CultureInfo.InvariantCulture),
-                        MetricMergeOrder.LowerIsBetter)
+                    Metric.BlocksCovered(int.Parse(method.Attribute("blocks_covered").Value, CultureInfo.InvariantCulture)),
+                    Metric.BlocksNotCovered(int.Parse(method.Attribute("blocks_not_covered").Value, CultureInfo.InvariantCulture))
                 };
 
                 var methodMetric = new MethodMetric(fullName, shortName, metrics);

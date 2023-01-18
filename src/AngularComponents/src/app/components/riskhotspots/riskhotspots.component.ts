@@ -60,7 +60,7 @@ import { RiskHotspotsSettings } from "./data/riskhotspots-settings.class";
                 [ngClass]="{'icon-up-dir_active': settings.sortBy === '' + i && settings.sortOrder === 'desc',
                 'icon-down-dir_active': settings.sortBy === '' + i && settings.sortOrder === 'asc',
                 'icon-down-dir': settings.sortBy !== '' + i}"></i>{{riskHotspotMetric.name}}</a>
-                <a href="{{riskHotspotMetric.explanationUrl}}"><i class="icon-info-circled"></i></a>
+                <a href="{{riskHotspotMetric.explanationUrl}}" target="_blank"><i class="icon-info-circled"></i></a>
               </th>
             </tr>
           </thead>

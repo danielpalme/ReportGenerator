@@ -6,6 +6,8 @@ import { CodeElementRow } from "./components/coverageinfo/codeelement-row.compon
 import { CoverageBarComponent } from "./components/coverageinfo/coverage-bar.component";
 import { CoverageHistoryChartComponent } from "./components/coverageinfo/coverage-history-chart.component";
 import { CoverageInfoComponent } from "./components/coverageinfo/coverage-info.component";
+import { PopupComponent } from "./components/coverageinfo/popup.component";
+import { ProButton } from "./components/coverageinfo/pro-button.component";
 import { RiskHotspotsComponent } from "./components/riskhotspots/riskhotspots.component";
 import { WindowRefService } from "./infrastructure/windowref.service";
 
@@ -13,10 +15,12 @@ import { WindowRefService } from "./infrastructure/windowref.service";
   declarations: [
     RiskHotspotsComponent,
     CoverageInfoComponent,
+    PopupComponent,
     CodeElementRow,
     ClassRow,
     CoverageHistoryChartComponent,
-    CoverageBarComponent
+    CoverageBarComponent,
+    ProButton
   ],
   imports: [
     BrowserModule,

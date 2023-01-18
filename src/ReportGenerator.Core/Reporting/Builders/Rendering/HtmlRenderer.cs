@@ -28,7 +28,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 <meta charset=""utf-8"" />
 <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />
 <meta http-equiv=""X-UA-Compatible"" content=""IE=EDGE,chrome=1"" />
-<link href=""data:image/png;base64,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"" rel=""icon"" type=""image/x-icon"" />
+<link href=""data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAn1BMVEUAAADCAAAAAAA3yDfUAAA3yDfUAAA8PDzr6+sAAAD4+Pg3yDeQkJDTAADt7e3V1dU3yDdCQkIAAADbMTHUAABBykHUAAA2yDY3yDfr6+vTAAB3diDR0dGYcHDUAAAjhiPSAAA3yDeuAADUAAA3yDf////OCALg9+BLzktBuzRelimzKgv87+/dNTVflSn1/PWz6rO126g5yDlYniy0KgwjJ0TyAAAAI3RSTlMABAj0WD6rJcsN7X1HzMqUJyYW+/X08+bltqSeaVRBOy0cE+citBEAAADBSURBVDjLlczXEoIwFIThJPYGiL0XiL3r+z+bBOJs9JDMuLffP8v+Gxfc6aIyDQVjQcnqnvRDEQwLJYtXpZT+YhDHKIjLbS+OUeT4TjkKi6OwOArq+yeKXD9uDqQQbcOjyCy0e6bTojZSftX+U6zUQ7OuittDu1k0WHqRFfdXQijgjKfF6ZwAikvmKD6OQjmKWUcDigkztm5FZN05nMON9ZcoinlBmTNnAUdBnRbUUbgdBZwWbkcBpwXcVsBtxfjb31j1QB5qeebOAAAAAElFTkSuQmCC"" rel=""icon"" type=""image/x-icon"" />
 <title>{0} - {1}</title>
 {2}
 </head><body><div class=""container""><div class=""containerleft"">";
@@ -491,6 +491,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             var historicCoverageExecutionTimes = new HashSet<DateTime>();
             var tagsByBistoricCoverageExecutionTime = new Dictionary<DateTime, string>();
+            var metricsByName = new Dictionary<string, Metric>();
 
             foreach (var assembly in assemblies)
             {
@@ -550,6 +551,55 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
                     historicCoveragesSb.Append("]");
 
+                    var metricsSb = new StringBuilder();
+                    int metricsCounter = 0;
+                    metricsSb.Append("{");
+
+                    foreach (var metricGroup in @class.Files.SelectMany(f => f.MethodMetrics).SelectMany(m => m.Metrics).GroupBy(m => m.Name))
+                    {
+                        var firstMetric = metricGroup.First();
+                        metricsByName[firstMetric.Name] = firstMetric;
+
+                        if (!methodCoverageAvailable)
+                        {
+                            continue;
+                        }
+
+                        decimal? value = null;
+
+                        if (firstMetric.MetricType == MetricType.CoverageAbsolute)
+                        {
+                            value = metricGroup.SafeSum(m => m.Value);
+                        }
+                        else
+                        {
+                            // Show worst result on summary page
+                            if (firstMetric.MergeOrder == MetricMergeOrder.HigherIsBetter)
+                            {
+                                value = metricGroup.Min(m => m.Value);
+                            }
+                            else
+                            {
+                                value = metricGroup.Max(m => m.Value);
+                            }
+                        }
+
+                        if (value.HasValue)
+                        {
+                            if (metricsCounter++ > 0)
+                            {
+                                metricsSb.Append(", ");
+                            }
+
+                            metricsSb.AppendFormat(
+                                " \"{0}\": {1}",
+                                firstMetric.Abbreviation,
+                                value.Value.ToString(CultureInfo.InvariantCulture));
+                        }
+                    }
+
+                    metricsSb.Append(" }");
+
                     this.javaScriptContent.Append("      { ");
                     this.javaScriptContent.AppendFormat("\"name\": \"{0}\",", @class.DisplayName.Replace(@"\", @"\\"));
                     this.javaScriptContent.AppendFormat(
@@ -570,12 +620,34 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     this.javaScriptContent.AppendFormat(" \"lch\": {0},", lineCoverageHistory);
                     this.javaScriptContent.AppendFormat(" \"bch\": {0},", branchCoverageHistory);
                     this.javaScriptContent.AppendFormat(" \"mch\": {0},", methodCoverageHistory);
-                    this.javaScriptContent.AppendFormat(" \"hc\": {0}", historicCoveragesSb.ToString());
+                    this.javaScriptContent.AppendFormat(" \"hc\": {0},", historicCoveragesSb.ToString());
+                    this.javaScriptContent.AppendFormat(" \"metrics\": {0}", metricsSb.ToString());
 
                     this.javaScriptContent.AppendLine(" },");
                 }
 
                 this.javaScriptContent.AppendLine("    ]},");
+            }
+
+            this.javaScriptContent.AppendLine("];");
+
+            this.javaScriptContent.AppendLine();
+
+            this.javaScriptContent.Append("var metrics = [");
+            int metricAbbreviationCounter = 0;
+
+            foreach (var item in metricsByName)
+            {
+                if (metricAbbreviationCounter++ > 0)
+                {
+                    this.javaScriptContent.Append(", ");
+                }
+
+                this.javaScriptContent.AppendFormat(
+                    "{{ \"name\": \"{0}\", \"abbreviation\": \"{1}\", \"explanationUrl\": \"{2}\" }}",
+                    item.Key,
+                    item.Value.Abbreviation,
+                    item.Value.ExplanationUrl);
             }
 
             this.javaScriptContent.AppendLine("];");
@@ -706,7 +778,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 }
                 else
                 {
-                    this.reportTextWriter.Write("<th>{0} <a href=\"{1}\"><i class=\"icon-info-circled\"></i></a></th>", WebUtility.HtmlEncode(met.Name), WebUtility.HtmlEncode(met.ExplanationUrl.OriginalString));
+                    this.reportTextWriter.Write("<th>{0} <a href=\"{1}\" target=\"_blank\"><i class=\"icon-info-circled\"></i></a></th>", WebUtility.HtmlEncode(met.Name), WebUtility.HtmlEncode(met.ExplanationUrl.OriginalString));
                 }
             }
 
@@ -792,7 +864,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 }
                 else
                 {
-                    this.reportTextWriter.Write("<th>{0} <a href=\"{1}\"><i class=\"icon-info-circled\"></i></a></th>", WebUtility.HtmlEncode(met.Name), WebUtility.HtmlEncode(met.ExplanationUrl.OriginalString));
+                    this.reportTextWriter.Write("<th>{0} <a href=\"{1}\" target=\"_blank\"><i class=\"icon-info-circled\"></i></a></th>", WebUtility.HtmlEncode(met.Name), WebUtility.HtmlEncode(met.ExplanationUrl.OriginalString));
                 }
             }
 
@@ -1092,7 +1164,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 }
                 else
                 {
-                    this.reportTextWriter.WriteLine("<th>{0} <a href=\"{1}\"><i class=\"icon-info-circled\"></i></a></th>", WebUtility.HtmlEncode(metric.Name), WebUtility.HtmlEncode(metric.ExplanationUrl.OriginalString));
+                    this.reportTextWriter.WriteLine("<th>{0} <a href=\"{1}\" target=\"_blank\"><i class=\"icon-info-circled\"></i></a></th>", WebUtility.HtmlEncode(metric.Name), WebUtility.HtmlEncode(metric.ExplanationUrl.OriginalString));
                 }
             }
 
@@ -1254,7 +1326,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         {
             this.reportTextWriter.Write(string.Format(
                 CultureInfo.InvariantCulture,
-                "<div class=\"footer\">{0} ReportGenerator {1}<br />{2} - {3}<br /><a href=\"https://github.com/danielpalme/ReportGenerator\">GitHub</a> | <a href=\"http://www.palmmedia.de\">www.palmmedia.de</a></div>",
+                "<div class=\"footer\">{0} ReportGenerator {1}<br />{2} - {3}<br /><a href=\"https://github.com/danielpalme/ReportGenerator\">GitHub</a> | <a href=\"https://reportgenerator.io\">reportgenerator.io</a></div>",
                 WebUtility.HtmlEncode(ReportResources.GeneratedBy),
                 typeof(IReportBuilder).Assembly.GetName().Version,
                 DateTime.Now.ToShortDateString(),
@@ -1302,10 +1374,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         {
             if (disposing)
             {
-                if (this.reportTextWriter != null)
-                {
-                    this.reportTextWriter.Dispose();
-                }
+                this.reportTextWriter?.Dispose();
             }
         }
 
@@ -1658,6 +1727,16 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             sb.AppendFormat("'date': '{0}'", WebUtility.HtmlEncode(ReportResources.Date));
             sb.AppendLine(",");
             sb.AppendFormat("'allChanges': '{0}'", WebUtility.HtmlEncode(ReportResources.AllChanges));
+            sb.AppendLine(",");
+            sb.AppendFormat("'selectCoverageTypes': '{0}'", WebUtility.HtmlEncode(ReportResources.SelectCoverageTypes));
+            sb.AppendLine(",");
+            sb.AppendFormat("'selectCoverageTypesAndMetrics': '{0}'", ReportResources.SelectCoverageTypesAndMetrics);
+            sb.AppendLine(",");
+            sb.AppendFormat("'coverageTypes': '{0}'", WebUtility.HtmlEncode(ReportResources.CoverageTypes));
+            sb.AppendLine(",");
+            sb.AppendFormat("'metrics': '{0}'", WebUtility.HtmlEncode(ReportResources.Metrics));
+            sb.AppendLine(",");
+            sb.AppendFormat("'methodCoverageProVersion': '{0}'", WebUtility.HtmlEncode(ReportResources.MethodCoverageProVersion));
             sb.AppendLine(",");
             sb.AppendFormat("'lineCoverageIncreaseOnly': '{0}'", WebUtility.HtmlEncode(ReportResources.LineCoverageIncreaseOnly));
             sb.AppendLine(",");

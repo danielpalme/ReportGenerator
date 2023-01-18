@@ -1,0 +1,74 @@
+\documentclass[a4paper,landscape,10pt]{article}
+\usepackage[paper=a4paper,landscape,left=20mm,right=20mm,top=20mm,bottom=20mm]{geometry}
+\usepackage{longtable}
+\usepackage{fancyhdr}
+\usepackage[pdftex]{color}
+\usepackage{colortbl}
+\definecolor{green}{rgb}{0.04,0.68,0.04}
+\definecolor{orange}{rgb}{0.97,0.65,0.12}
+\definecolor{red}{rgb}{0.75,0.04,0.04}
+\definecolor{gray}{rgb}{0.86,0.86,0.86}
+
+\usepackage[pdftex,
+            colorlinks=true, linkcolor=red, urlcolor=green, citecolor=red,%
+            raiselinks=true,%
+            bookmarks=true,%
+            bookmarksopenlevel=1,%
+            bookmarksopen=true,%
+            bookmarksnumbered=true,%
+            hyperindex=true,% 
+            plainpages=false,% correct hyperlinks
+            pdfpagelabels=true%,% view TeX pagenumber in PDF reader
+            %pdfborder={0 0 0.5}
+            ]{hyperref}
+
+\hypersetup{pdftitle={Coverage Report},
+            pdfauthor={ReportGenerator - 5.1.14.0}
+           }
+
+\pagestyle{fancy}
+\fancyhead[LE,LO]{\leftmark}
+\fancyhead[R]{\thepage}
+\fancyfoot[C]{ReportGenerator - 5.1.14.0}
+
+\begin{document}
+
+\setcounter{secnumdepth}{-1}
+\section{Summary}
+\begin{longtable}[l]{ll}
+\textbf{Generated on:} & 18.01.2023 - 20:03:57\\
+\textbf{Parser:} & OpenCover\\
+\textbf{Assemblies:} & 1\\
+\textbf{Classes:} & 4\\
+\textbf{Files:} & 5\\
+\textbf{Covered lines:} & 83\\
+\textbf{Uncovered lines:} & 42\\
+\textbf{Coverable lines:} & 125\\
+\textbf{Total lines:} & 260\\
+\textbf{Line coverage:} & 66.4\% (83 of 125)\\
+\textbf{Covered branches:} & 3\\
+\textbf{Total branches:} & 6\\
+\textbf{Branch coverage:} & 50\% (3 of 6)\\
+\textbf{Covered methods:} & 14\\
+\textbf{Total methods:} & 24\\
+\textbf{Method coverage:} & 58.3\% (14 of 24)\\
+\end{longtable}
+\section{Risk Hotspots}
+No risk hotspots found.
+\section{Coverage}
+\begin{longtable}[l]{|l|r|r|r|r|r|r|r|}
+\hline
+\textbf{Name} & \textbf{Covered} & \textbf{Uncovered} & \textbf{Coverable} & \textbf{Total} & \textbf{Line coverage} & \textbf{Branch coverage} & \textbf{Method coverage}\\
+\hline
+\textbf{Sample} & \textbf{83} & \textbf{42} & \textbf{125} & \textbf{260} & \textbf{66.4\%} & \textbf{50\%} & \textbf{58.3\%}\\
+\hline
+Sample.PartialClass & 12 & 10 & 22 & 53 & 54.5\% & 50\% & 50\%\\
+\hline
+Sample.TestClass & 12 & 9 & 21 & 38 & 57.1\% & 50\% & 50\%\\
+\hline
+Test.Program & 35 & 9 & 44 & 84 & 79.5\% &  & 66.6\%\\
+\hline
+Test.TestClass2 & 24 & 14 & 38 & 85 & 63.1\% & 50\% & 60\%\\
+\hline
+\end{longtable}
+\end{document}

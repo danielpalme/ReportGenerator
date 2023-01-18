@@ -251,11 +251,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     decimal covered = decimal.Parse(lineRate.Attribute("covered").Value, CultureInfo.InvariantCulture);
                     decimal total = missed + covered;
 
-                    metrics.Add(new Metric(
-                        ReportResources.Coverage,
-                        ParserBase.CodeCoverageUri,
-                        MetricType.CoveragePercentual,
-                        total == 0 ? (decimal?)null : Math.Round((100 * covered) / total, 2, MidpointRounding.AwayFromZero)));
+                    metrics.Add(Metric.Coverage(total == 0 ? (decimal?)null : Math.Round((100 * covered) / total, 2, MidpointRounding.AwayFromZero)));
                 }
                 else
                 {
@@ -273,20 +269,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     decimal covered = decimal.Parse(branchRate.Attribute("covered").Value, CultureInfo.InvariantCulture);
                     decimal total = missed + covered;
 
-                    metrics.Add(new Metric(
-                        ReportResources.BranchCoverage,
-                        ParserBase.CodeCoverageUri,
-                        MetricType.CoveragePercentual,
-                        total == 0 ? (decimal?)null : Math.Round((100 * covered) / total, 2, MidpointRounding.AwayFromZero)));
+                    metrics.Add(Metric.BranchCoverage(total == 0 ? (decimal?)null : Math.Round((100 * covered) / total, 2, MidpointRounding.AwayFromZero)));
                 }
                 else
                 {
                     // If no branch coverage is available, add default to avoid empty columns
-                    metrics.Add(new Metric(
-                        ReportResources.BranchCoverage,
-                        ParserBase.CodeCoverageUri,
-                        MetricType.CoveragePercentual,
-                        null));
+                    metrics.Add(Metric.BranchCoverage(null));
                 }
 
                 var methodMetric = new MethodMetric(fullName, shortName, metrics);
