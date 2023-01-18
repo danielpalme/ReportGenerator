@@ -19,7 +19,10 @@ ReportGenerator
 
 The reports show the coverage quotas and also visualize which lines of your source code have been covered.
 
-[Browse example report](https://reportgenerator.io/resources/reports/Html/index.html)
+
+ReportGenerator supports merging several coverage files into a single report.
+
+[Browse example HTML report](https://reportgenerator.io/resources/reports/Html/index.html)
 
 <div align="center">
 
