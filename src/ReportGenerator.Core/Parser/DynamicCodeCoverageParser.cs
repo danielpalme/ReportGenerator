@@ -93,7 +93,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .Select(f => new ClassWithNamespace()
                 {
                     Namespace = f.Attribute("namespace")?.Value,
-                    ClassName = f.Attribute("type_name").Value
+                    ClassName = f.Attribute("type_name")?.Value ?? string.Empty
                 })
                 .Where(c => !c.ClassName.Contains("<>")
                     && !c.ClassName.StartsWith("$", StringComparison.OrdinalIgnoreCase))
@@ -128,8 +128,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .Elements("functions")
                 .Elements("function")
                 .Where(c => c.Attribute("namespace")?.Value == classWithNamespace.Namespace)
-                .Where(c => c.Attribute("type_name").Value.Equals(classWithNamespace.ClassName, StringComparison.Ordinal)
-                            || c.Attribute("type_name").Value.StartsWith(classWithNamespace.ClassName + ".", StringComparison.Ordinal))
+                .Where(c => (c.Attribute("type_name")?.Value ?? string.Empty).Equals(classWithNamespace.ClassName, StringComparison.Ordinal)
+                            || (c.Attribute("type_name")?.Value ?? string.Empty).StartsWith(classWithNamespace.ClassName + ".", StringComparison.Ordinal))
                 .Elements("ranges")
                 .Elements("range")
                 .Select(r => r.Attribute("source_id").Value)
@@ -179,8 +179,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .Elements("functions")
                 .Elements("function")
                 .Where(c => c.Attribute("namespace")?.Value == classWithNamespace.Namespace)
-                .Where(c => c.Attribute("type_name").Value.Equals(classWithNamespace.ClassName, StringComparison.Ordinal)
-                            || c.Attribute("type_name").Value.StartsWith(classWithNamespace.ClassName + ".", StringComparison.Ordinal))
+                .Where(c => (c.Attribute("type_name")?.Value ?? string.Empty).Equals(classWithNamespace.ClassName, StringComparison.Ordinal)
+                            || (c.Attribute("type_name")?.Value ?? string.Empty).StartsWith(classWithNamespace.ClassName + ".", StringComparison.Ordinal))
                 .Where(m => m.Elements("ranges").Elements("range").Any(r => r.Attribute("source_id").Value == fileId))
                 .ToArray();
 
@@ -253,7 +253,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     continue;
                 }
 
-                fullName = ExtractMethodName(fullName, method.Attribute("type_name").Value);
+                fullName = ExtractMethodName(fullName, method.Attribute("type_name")?.Value);
                 string shortName = MethodRegex.Replace(fullName, m => string.Format(CultureInfo.InvariantCulture, "{0}({1})", m.Groups["MethodName"].Value, m.Groups["Arguments"].Value.Length > 0 ? "..." : string.Empty));
 
                 var metrics = new[]
@@ -292,7 +292,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     continue;
                 }
 
-                string methodName = ExtractMethodName(method.Attribute("name").Value, method.Attribute("type_name").Value);
+                string methodName = ExtractMethodName(method.Attribute("name").Value, method.Attribute("type_name")?.Value);
 
                 CodeElementType type = CodeElementType.Method;
 
@@ -337,11 +337,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <returns>The method name.</returns>
         private static string ExtractMethodName(string methodName, string typeName)
         {
-            Match match = CompilerGeneratedMethodNameRegex.Match(typeName);
-
-            if (match.Success)
+            if (!string.IsNullOrEmpty(typeName))
             {
-                methodName = match.Groups["CompilerGeneratedName"].Value + "()";
+                Match match = CompilerGeneratedMethodNameRegex.Match(typeName);
+
+                if (match.Success)
+                {
+                    methodName = match.Groups["CompilerGeneratedName"].Value + "()";
+                }
             }
 
             return methodName;

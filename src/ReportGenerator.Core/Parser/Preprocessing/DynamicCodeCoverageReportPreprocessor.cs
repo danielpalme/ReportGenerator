@@ -30,14 +30,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
             var startupCodeFunctions = module
                 .Elements("functions")
                 .Elements("function")
-                .Where(c => c.Attribute("type_name").Value.StartsWith("$", System.StringComparison.OrdinalIgnoreCase)
-                    && c.Attribute("name").Value.StartsWith("Invoke(", System.StringComparison.OrdinalIgnoreCase))
+                .Where(c => (c.Attribute("type_name")?.Value.StartsWith("$", System.StringComparison.OrdinalIgnoreCase) ?? false)
+                            && c.Attribute("name").Value.StartsWith("Invoke(", System.StringComparison.OrdinalIgnoreCase))
                 .ToArray();
 
             var functionsInModule = module
                 .Elements("functions")
                 .Elements("function")
-                .Where(c => !c.Attribute("type_name").Value.StartsWith("$", System.StringComparison.OrdinalIgnoreCase))
+                .Where(c => !c.Attribute("type_name")?.Value.StartsWith("$", System.StringComparison.OrdinalIgnoreCase) ?? true)
                 .ToArray();
 
             foreach (var startupCodeFunction in startupCodeFunctions)
