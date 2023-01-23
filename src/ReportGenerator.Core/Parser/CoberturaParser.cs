@@ -125,7 +125,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .Elements("class")
                 .Select(c =>
                 {
-                    string fullname = c.Attribute("name")?.Value ?? string.Empty;
+                    string fullname = c.Attribute("name").Value;
                     int nestedClassSeparatorIndex = fullname.IndexOf('/');
                     return nestedClassSeparatorIndex > -1 ? fullname.Substring(0, nestedClassSeparatorIndex) : fullname;
                 })
@@ -155,15 +155,9 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .Where(m => m.Attribute("name").Value.Equals(assembly.Name))
                 .Elements("classes")
                 .Elements("class")
-                .Where(c =>
-                {
-                    var cValue = c.Attribute("name")?.Value;
-                    return cValue != null && (
-                        cValue.Equals(className)
-                        || cValue.StartsWith(className + "$", StringComparison.Ordinal)
-                        || cValue.StartsWith(className + "/", StringComparison.Ordinal)
-                    );
-                })
+                .Where(c => c.Attribute("name").Value.Equals(className)
+                    || c.Attribute("name").Value.StartsWith(className + "$", StringComparison.Ordinal)
+                    || c.Attribute("name").Value.StartsWith(className + "/", StringComparison.Ordinal))
                 .Select(c => c.Attribute("filename").Value)
                 .Distinct()
                 .ToArray();
@@ -199,15 +193,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .Where(m => m.Attribute("name").Value.Equals(@class.Assembly.Name))
                 .Elements("classes")
                 .Elements("class")
-                .Where(c =>
-                {
-                    var cValue = c.Attribute("name")?.Value;
-                    return cValue != null && (
-                        cValue.Equals(@class.Name)
-                        || cValue.StartsWith(@class.Name + "$", StringComparison.Ordinal)
-                        || cValue.StartsWith(@class.Name + "/", StringComparison.Ordinal)
-                        || cValue.StartsWith(@class.Name + ".", StringComparison.Ordinal));
-                })
+                .Where(c => c.Attribute("name").Value.Equals(@class.Name)
+                            || c.Attribute("name").Value.StartsWith(@class.Name + "$", StringComparison.Ordinal)
+                            || c.Attribute("name").Value.StartsWith(@class.Name + "/", StringComparison.Ordinal)
+                            || c.Attribute("name").Value.StartsWith(@class.Name + ".", StringComparison.Ordinal))
                 .Where(c => c.Attribute("filename").Value.Equals(filePath))
                 .ToArray();
 
@@ -277,8 +266,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         {
             foreach (var method in methodsOfFile)
             {
-                string fullName = (method.Attribute("name")?.Value ?? string.Empty)
-                                  + (method.Attribute("signature")?.Value ?? string.Empty);
+                string fullName = method.Attribute("name").Value + method.Attribute("signature").Value;
                 fullName = ExtractMethodName(fullName, method.Parent.Parent.Attribute("name").Value);
 
                 if (fullName.Contains("__") && LambdaMethodNameRegex.IsMatch(fullName))
@@ -359,8 +347,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         {
             foreach (var method in methodsOfFile)
             {
-                string methodName = (method.Attribute("name")?.Value ?? string.Empty) +
-                                    (method.Attribute("signature")?.Value ?? string.Empty);
+                string methodName = method.Attribute("name").Value + method.Attribute("signature").Value;
                 methodName = ExtractMethodName(methodName, method.Parent.Parent.Attribute("name").Value);
 
                 if (methodName.Contains("__") && LambdaMethodNameRegex.IsMatch(methodName))
