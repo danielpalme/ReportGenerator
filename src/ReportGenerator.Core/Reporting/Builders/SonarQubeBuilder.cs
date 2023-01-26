@@ -172,7 +172,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                             }
                         }
 
-                        return;
+                        continue;
                     }
                 }
 
