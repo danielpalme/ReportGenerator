@@ -66,6 +66,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.1.16.0
+
+    * Fix: #585: Improved merging of results in SonarQube output format
+
 5.1.15.0
 
     * New: #533: Metrics on summary page
