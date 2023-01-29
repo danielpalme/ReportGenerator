@@ -250,7 +250,6 @@ The following extensions exist to visualize coverage in Visual Studio:
 ### Download statistics
 ![Nuget](https://img.shields.io/nuget/dt/ReportGenerator.svg?label=ReportGenerator%40nuget)
 ![Nuget](https://img.shields.io/nuget/dt/dotnet-reportgenerator-globaltool.svg?label=dotnet-reportgenerator-globaltool%40nuget)
-![Nuget](https://img.shields.io/nuget/dt/dotnet-reportgenerator-cli.svg?label=dotnet-reportgenerator-cli%40nuget)
 ![Nuget](https://img.shields.io/nuget/dt/ReportGenerator.Core.svg?label=ReportGenerator.Core%40nuget)
 
 ![Visual Studio Marketplace Installs - Azure DevOps Extension](https://img.shields.io/visual-studio-marketplace/azure-devops/installs/total/Palmmedia.reportgenerator.svg?label=Azure%20DevOps)
