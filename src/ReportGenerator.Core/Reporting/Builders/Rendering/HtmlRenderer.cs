@@ -762,7 +762,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 .SelectMany(f => f.MethodMetrics)
                 .SelectMany(m => m.Metrics)
                 .Distinct()
-                .OrderBy(m => m.Name);
+                .OrderBy(m => m.Name)
+                .ToArray();
 
             this.reportTextWriter.WriteLine("<div class=\"table-responsive\">");
             this.reportTextWriter.WriteLine("<table class=\"overview table-fixed\">");

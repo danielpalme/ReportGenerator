@@ -18,6 +18,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
             foreach (var module in report.Descendants("module").ToArray())
             {
                 ApplyClassNameToStartupCodeElements(module);
+                AddMissingTypeNames(module);
             }
         }
 
@@ -113,6 +114,42 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
                 if (closestClass != null)
                 {
                     startupCodeFunction.Attribute("type_name").Value = closestClass.Attribute("type_name").Value + "." + startupCodeFunction.Attribute("type_name").Value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Applies type names to funtions with empty 'type_name' attribute.
+        /// </summary>
+        /// <param name="module">The module.</param>
+        private static void AddMissingTypeNames(XElement module)
+        {
+            var functionsWithoutTypeNameInModule = module
+                .Elements("functions")
+                .Elements("function")
+                .Where(c => c.Attribute("type_name").Value == string.Empty)
+                .ToArray();
+
+            if (functionsWithoutTypeNameInModule.LongLength > 0)
+            {
+                var classNamesBySoureFileId = module
+                    .Elements("source_files")
+                    .Elements("source_file")
+                    .ToDictionary(e => e.Attribute("id").Value, e =>
+                    {
+                        string path = e.Attribute("path").Value.Replace("/", "\\");
+
+                        return path.Substring(path.LastIndexOf('\\') + 1);
+                    });
+
+                foreach (var function in functionsWithoutTypeNameInModule)
+                {
+                    string firstSourceId = function.Elements("ranges").Elements("range").FirstOrDefault()?.Attribute("source_id").Value;
+
+                    if (firstSourceId != null && classNamesBySoureFileId.TryGetValue(firstSourceId, out string className))
+                    {
+                        function.Attribute("type_name").Value = className;
+                    }
                 }
             }
         }

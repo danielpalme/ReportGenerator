@@ -68,6 +68,7 @@ CHANGELOG
 
 5.1.16.0
 
+    * Fix: #536: Improved support for C code in Visual Studio coverage input format (*.coveragexml)
     * Fix: #585: Improved merging of results in SonarQube output format
 
 5.1.15.0
