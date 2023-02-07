@@ -213,6 +213,7 @@ jobs:
         username: ${{ secrets.FTP_USER }}
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ftp/
+        protocol: ftps
         dangerous-clean-slate: true
       continue-on-error: true
 
