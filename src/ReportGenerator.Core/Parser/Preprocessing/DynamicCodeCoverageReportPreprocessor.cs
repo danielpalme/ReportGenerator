@@ -149,6 +149,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
                     if (firstSourceId != null && classNamesBySoureFileId.TryGetValue(firstSourceId, out string className))
                     {
                         function.Attribute("type_name").Value = className;
+                        function.Add(new XAttribute("type_name_missing", "true"));
                     }
                 }
             }

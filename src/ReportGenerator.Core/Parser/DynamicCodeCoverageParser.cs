@@ -93,14 +93,19 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .Select(f => new ClassWithNamespace()
                 {
                     Namespace = f.Attribute("namespace")?.Value,
-                    ClassName = f.Attribute("type_name").Value
+                    ClassName = f.Attribute("type_name").Value,
+                    TypeNameWasMissing = f.Attribute("type_name_missing") != null
                 })
                 .Where(c => !c.ClassName.Contains("<>")
                     && !c.ClassName.StartsWith("$", StringComparison.OrdinalIgnoreCase))
                 .Select(c =>
                 {
-                    int nestedClassSeparatorIndex = c.ClassName.IndexOf('.');
-                    c.ClassName = nestedClassSeparatorIndex > -1 ? c.ClassName.Substring(0, nestedClassSeparatorIndex) : c.ClassName;
+                    if (!c.TypeNameWasMissing)
+                    {
+                        int nestedClassSeparatorIndex = c.ClassName.IndexOf('.');
+                        c.ClassName = nestedClassSeparatorIndex > -1 ? c.ClassName.Substring(0, nestedClassSeparatorIndex) : c.ClassName;
+                    }
+
                     return c;
                 })
                 .Distinct()
@@ -352,6 +357,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             public string Namespace { get; set; }
 
             public string ClassName { get; set; }
+
+            public bool TypeNameWasMissing { get; set; }
 
             public string FullName => this.Namespace == null ? this.ClassName : $"{this.Namespace}.{this.ClassName}";
 
