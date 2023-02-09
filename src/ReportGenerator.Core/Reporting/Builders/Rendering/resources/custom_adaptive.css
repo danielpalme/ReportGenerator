@@ -56,7 +56,7 @@
             border: 5px solid #333;
         }
 
-        .overview tr:hover {
+        .overview tr:hover > td {
             background-color: #2E2D2C;
         }
 

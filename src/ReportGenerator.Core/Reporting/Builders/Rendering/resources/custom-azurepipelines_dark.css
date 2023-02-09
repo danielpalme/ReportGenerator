@@ -11,7 +11,7 @@
     .card-group .card table tr { border-bottom: 1px solid #545454; }
     .card-group .card table tr:hover { background-color: #2E2D2C; }
     .table-responsive::-webkit-scrollbar-thumb { background-color: #555453; border: 5px solid #292827; }
-    .overview tr:hover { background-color: #2E2D2C }
+    .overview tr:hover > td { background-color: #2E2D2C;}
     .overview thead th, .overview th { background-color: #333; border: 1px solid #3B3A39; }
     .overview th a { color: #fff; color: rgba(255, 255, 255, 0.95); }
     .overview th a:hover { color: #0078d4; }

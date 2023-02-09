@@ -70,6 +70,7 @@ CHANGELOG
 
     * Fix: #536: Improved support for C code in Visual Studio coverage input format (*.coveragexml)
     * Fix: #582: Removed method coverage usage for line coverage if no coverage is available
+    * Fix: #589: Improved highlighting of hovered table rows in summary table
 
 5.1.16.0
 

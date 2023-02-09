@@ -63,7 +63,7 @@ th { text-align: left; }
 .overview th a { color: #000; }
 .overview tr.namespace a { margin-left: 15px; display: block; }
 .overview td { border: 1px solid #c1c1c1; border-collapse: collapse; padding: 5px 4px 5px 4px; }
-.overview tr:hover { background: #f4f4f4 }
+.overview tr:hover>td { background: #f4f4f4 }
 div.currenthistory { margin: -6px -5px 0 -5px; padding: 2px 4px 6px 4px; height: 16px; }
 .coverage {
     border-collapse: collapse;
