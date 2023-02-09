@@ -32,11 +32,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         private readonly List<HistoricCoverage> historicCoverages = new List<HistoricCoverage>();
 
         /// <summary>
-        /// The coverage quota.
-        /// </summary>
-        private decimal? coverageQuota;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="Class"/> class.
         /// </summary>
         /// <param name="name">The name of the class.</param>
@@ -119,12 +114,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         public IEnumerable<HistoricCoverage> HistoricCoverages => this.historicCoverages;
 
         /// <summary>
-        /// Gets the coverage type.
-        /// </summary>
-        /// <value>The coverage type.</value>
-        public CoverageType CoverageType => this.files.Count == 0 ? CoverageType.MethodCoverage : CoverageType.LineCoverage;
-
-        /// <summary>
         /// Gets the number of covered lines.
         /// </summary>
         /// <value>The covered lines.</value>
@@ -143,26 +132,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         public int? TotalLines => this.files.SafeSum(f => f.TotalLines);
 
         /// <summary>
-        /// Gets or sets the coverage quota of the class.
+        /// Gets the coverage quota of the class.
         /// </summary>
         /// <value>The coverage quota.</value>
         public decimal? CoverageQuota
         {
             get
             {
-                if (this.files.Count == 0)
-                {
-                    return this.coverageQuota;
-                }
-                else
-                {
-                    return (this.CoverableLines == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)this.CoveredLines / (double)this.CoverableLines) / 10;
-                }
-            }
-
-            set
-            {
-                this.coverageQuota = value;
+                return (this.CoverableLines == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)this.CoveredLines / (double)this.CoverableLines) / 10;
             }
         }
 
@@ -279,15 +256,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
             if (@class == null)
             {
                 throw new ArgumentNullException(nameof(@class));
-            }
-
-            if (this.coverageQuota.HasValue && @class.coverageQuota.HasValue)
-            {
-                this.CoverageQuota = Math.Max(this.coverageQuota.Value, @class.coverageQuota.Value);
-            }
-            else if (@class.coverageQuota.HasValue)
-            {
-                this.CoverageQuota = @class.coverageQuota.Value;
             }
 
             foreach (var file in @class.files)

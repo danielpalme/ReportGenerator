@@ -66,6 +66,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.1.17.0
+
+    * Fix: #582: Removed method coverage usage for line coverage if no coverage is available
+
 5.1.16.0
 
     * Fix: #536: Improved support for C code in Visual Studio coverage input format (*.coveragexml)

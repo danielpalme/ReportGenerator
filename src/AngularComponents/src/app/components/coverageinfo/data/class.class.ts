@@ -32,16 +32,6 @@ export class Class {
     tl: number = 0;
 
     /*
-    * The coverageType.
-    */
-    ct: string = "";
-
-    /*
-    * The line coverage determined by method coverage.
-    */
-    cbm: string = "";
-
-    /*
     * The coveredBranches.
     */
     cb: number = 0;

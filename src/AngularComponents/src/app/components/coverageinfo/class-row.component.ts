@@ -53,7 +53,7 @@ import { ClassViewModel } from "./viewmodels/class-viewmodel.class";
     {{clazz.totalLines}}
   </ng-container>
 </td>
-<td class="right" [title]="clazz.coverageType + ': ' + clazz.coverageRatioText" *ngIf="lineCoverageAvailable">
+<td class="right" [title]="clazz.coverageRatioText" *ngIf="lineCoverageAvailable">
   <div coverage-history-chart [historicCoverages]="clazz.lineCoverageHistory"
     *ngIf="clazz.lineCoverageHistory.length > 1"
     [ngClass]="{'historiccoverageoffset': clazz.currentHistoricCoverage !== null}"

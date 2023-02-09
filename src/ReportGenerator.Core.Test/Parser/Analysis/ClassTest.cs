@@ -45,33 +45,6 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
         }
 
         /// <summary>
-        /// A test for Merge
-        /// </summary>
-        [Fact]
-        public void Merge_MergeClassWithCoverageQuota_CoverageQuotaApplied()
-        {
-            var assembly = new Assembly("C:\\test\\TestAssembly.dll");
-            var sut = new Class("Test", assembly);
-            var classToMerge = new Class("Test", assembly)
-            {
-                CoverageQuota = 15
-            };
-
-            sut.Merge(classToMerge);
-
-            Assert.Equal(15, sut.CoverageQuota);
-
-            classToMerge = new Class("Test", assembly)
-            {
-                CoverageQuota = 20
-            };
-
-            sut.Merge(classToMerge);
-
-            Assert.Equal(20, sut.CoverageQuota);
-        }
-
-        /// <summary>
         /// A test for Equals
         /// </summary>
         [Fact]

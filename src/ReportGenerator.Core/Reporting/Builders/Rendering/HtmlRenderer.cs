@@ -609,10 +609,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     this.javaScriptContent.AppendFormat(" \"ucl\": {0},", (@class.CoverableLines - @class.CoveredLines).ToString(CultureInfo.InvariantCulture));
                     this.javaScriptContent.AppendFormat(" \"cal\": {0},", @class.CoverableLines.ToString(CultureInfo.InvariantCulture));
                     this.javaScriptContent.AppendFormat(" \"tl\": {0},", @class.TotalLines.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
-                    this.javaScriptContent.AppendFormat(" \"ct\": \"{0}\",", @class.CoverageType);
-                    this.javaScriptContent.AppendFormat(
-                        " \"cbm\": {0},",
-                        @class.CoverageType == CoverageType.MethodCoverage && @class.CoverageQuota.HasValue ? @class.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : "\"-\"");
+
                     this.javaScriptContent.AppendFormat(" \"cb\": {0},", @class.CoveredBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
                     this.javaScriptContent.AppendFormat(" \"tb\": {0},", @class.TotalBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
                     this.javaScriptContent.AppendFormat(" \"cm\": {0},", methodCoverageAvailable ? @class.CoveredCodeElements.ToString(CultureInfo.InvariantCulture) : "0");
@@ -1237,7 +1234,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.reportTextWriter.Write("<th class=\"right\">{0}</th>", assembly.TotalLines.GetValueOrDefault());
             this.reportTextWriter.Write(
                 "<th title=\"{0}\" class=\"right\">{1}</th>",
-                assembly.CoverageQuota.HasValue ? $"{CoverageType.LineCoverage}: {assembly.CoveredLines}/{assembly.CoverableLines}" : string.Empty,
+                assembly.CoverageQuota.HasValue ? $"{assembly.CoveredLines}/{assembly.CoverableLines}" : string.Empty,
                 assembly.CoverageQuota.HasValue ? assembly.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
             this.reportTextWriter.Write("<th>{0}</th>", CreateCoverageTable(assembly.CoverageQuota));
 
@@ -1293,7 +1290,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.reportTextWriter.Write("<td class=\"right\">{0}</td>", @class.TotalLines.GetValueOrDefault());
             this.reportTextWriter.Write(
                 "<td title=\"{0}\" class=\"right\">{1}</td>",
-                @class.CoverageQuota.HasValue ? $"{@class.CoverageType}: {@class.CoveredLines}/{@class.CoverableLines}" : @class.CoverageType.ToString(),
+                @class.CoverageQuota.HasValue ? $"{@class.CoveredLines}/{@class.CoverableLines}" : string.Empty,
                 @class.CoverageQuota.HasValue ? @class.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
             this.reportTextWriter.Write("<td>{0}</td>", CreateCoverageTable(@class.CoverageQuota));
 
@@ -1685,7 +1682,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             sb.AppendLine(",");
             sb.AppendFormat("'method': '{0}'", WebUtility.HtmlEncode(ReportResources.Method));
             sb.AppendLine(",");
-            sb.AppendFormat("'lineCoverage': '{0}'", CoverageType.LineCoverage.ToString());
+            sb.AppendFormat("'lineCoverage': '{0}'", WebUtility.HtmlEncode(ReportResources.Coverage));
             sb.AppendLine(",");
             sb.AppendFormat("'noGrouping': '{0}'", WebUtility.HtmlEncode(ReportResources.NoGrouping));
             sb.AppendLine(",");

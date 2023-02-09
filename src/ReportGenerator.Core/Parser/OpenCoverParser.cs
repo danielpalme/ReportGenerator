@@ -217,8 +217,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     @class.AddFile(ProcessFile(trackedMethods, fileIdsByFilename[file], file, methods));
                 }
 
-                @class.CoverageQuota = GetCoverageQuotaOfClass(methods);
-
                 assembly.AddClass(@class);
             }
         }
@@ -571,24 +569,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             }
 
             return fullName;
-        }
-
-        /// <summary>
-        /// Gets the coverage quota of a class.
-        /// This method is used to get coverage quota if line coverage is not available.
-        /// </summary>
-        /// <param name="methods">The methods.</param>
-        /// <returns>The coverage quota.</returns>
-        private static decimal? GetCoverageQuotaOfClass(XElement[] methods)
-        {
-            var methodGroups = methods
-                .Where(m => m.Attribute("skippedDueTo") == null && m.Element("FileRef") == null && !m.Element("Name").Value.EndsWith(".ctor()", StringComparison.OrdinalIgnoreCase))
-                .GroupBy(m => m.Element("Name").Value)
-                .ToArray();
-
-            int visitedMethods = methodGroups.Count(g => g.Any(m => m.Attribute("visited").Value == "true"));
-
-            return (methodGroups.Length == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)visitedMethods / (double)methodGroups.Length) / 10;
         }
 
         private class FileElement

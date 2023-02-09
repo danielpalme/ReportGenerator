@@ -5,8 +5,6 @@ import { Helper } from "./helper.class";
 
 export class ClassViewModel extends ElementBase {
     reportPath: string = "";
-    _coverageType: string = "";
-    coverageByMethod: string = "";
     lineCoverageHistory: number[] = [];
     branchCoverageHistory: number[] = [];
     methodCoverageHistory: number[] = [];
@@ -27,9 +25,6 @@ export class ClassViewModel extends ElementBase {
             this.coverableLines = clazz.cal;
             this.totalLines = clazz.tl;
 
-            this._coverageType = clazz.ct;
-            this.coverageByMethod = clazz.cbm;
-
             this.coveredBranches = clazz.cb;
             this.totalBranches = clazz.tb;
 
@@ -49,26 +44,10 @@ export class ClassViewModel extends ElementBase {
 
     override get coverage(): number {
         if (this.coverableLines === 0) {
-            if (this.coverageByMethod !== "-") {
-                return parseFloat(this.coverageByMethod);
-            }
-
             return NaN;
         }
 
         return Helper.roundNumber(100 * this.coveredLines / this.coverableLines, 1);
-    }
-
-    get coverageType(): string {
-        if (this.coverableLines === 0) {
-            if (this.coverageByMethod !== "-") {
-                return this._coverageType;
-            }
-
-            return "";
-        }
-
-        return this._coverageType;
     }
 
     visible(filter: string, historicCoverageFilter: string): boolean {
