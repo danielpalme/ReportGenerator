@@ -572,7 +572,8 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
         .table-responsive::-webkit-scrollbar-thumb { background-color: #555453; border: 5px solid #333; }
 
         .overview tr:hover {
-            background-color: #2E2D2C;
+            border-color: #0078d4;
+            border-style: solid;
         }
 
         .overview th {
