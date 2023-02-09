@@ -67,6 +67,7 @@ th { text-align: left; }
 .overview tr.header th { background-color: #d1d1d1; }
 .overview tr.header th:nth-child(2n+1) { background-color: #ddd; }
 .overview tr.header th:first-child { border-left: 1px solid #fff; border-top: 1px solid #fff; background-color: #fff; }
+.overview tr:hover>td { background-color: #b0b0b0; }
 
 div.currenthistory { margin: -2px -5px 0 -5px; padding: 2px 5px 2px 5px; height: 16px; }
 .coverage { border-collapse: collapse; font-size: 5px; height: 10px; }
@@ -574,7 +575,7 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
             border: 5px solid #333;
         }
 
-        .overview tr:hover {
+        .overview tr:hover > td {
             background-color: #2E2D2C;
         }
 
