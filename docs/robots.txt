@@ -1,1 +1,6 @@
+User-agent: *
+
 Sitemap: https://reportgenerator.io/sitemap.xml
+
+Disallow: /resources/
+Disallow: /open-sans-*
