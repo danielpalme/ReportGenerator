@@ -42,6 +42,9 @@ namespace Test
             catch (System.ArgumentException)
             {
             }
+
+            new GenericAsyncClass<object>().MyAsyncMethod().Wait();
+            new ClassWithLocalFunctions<object>.MyNestedClass<object>().MyAsyncMethod<object>(null).GetAwaiter().GetResult();
         }
 
         private static async void CallAsyncMethod()

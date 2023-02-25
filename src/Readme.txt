@@ -66,6 +66,11 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.1.18.0
+
+    * Fix: #590, 591: Improved support for Cobertura files generated with 
+                      'dotnet test --collect "Code Coverage;Format=Cobertura"'
+
 5.1.17.0
 
     * Fix: #536: Improved support for C code in Visual Studio coverage input format (*.coveragexml)
