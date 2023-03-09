@@ -69,6 +69,7 @@ CHANGELOG
 5.1.19.0
 
     * New: #595: Added new report type 'Html_BlueRed' to improve red-green colorblind accessibility
+    * Fix: #596: Fixed issue with reading historic reports
 
 5.1.18.0
 

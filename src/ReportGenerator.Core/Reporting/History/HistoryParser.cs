@@ -86,7 +86,13 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.History
                 return;
             }
 
-            var classes = assemblies.SelectMany(t => t.Classes).ToDictionary(k => this.GetFullClassName(k.Assembly.Name, k.Name), v => v);
+            var classes = new Dictionary<string, Class>();
+
+            foreach (var item in assemblies.SelectMany(t => t.Classes))
+            {
+                classes[this.GetFullClassName(item.Assembly.Name, item.Name)] = item;
+            }
+
             Parallel.ForEach(
                 files,
                 new ParallelOptions { MaxDegreeOfParallelism = this.numberOfReportsParsedInParallel },
