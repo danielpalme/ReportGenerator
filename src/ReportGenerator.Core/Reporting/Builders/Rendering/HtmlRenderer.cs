@@ -76,9 +76,9 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         private readonly string cssFileResource;
 
         /// <summary>
-        /// Optional additional CSS file resource.
+        /// Optional additional CSS file resources.
         /// </summary>
-        private readonly string additionalCssFileResource;
+        private readonly string[] additionalCssFileResources;
 
         /// <summary>
         /// Indicates that JavaScript was generated.
@@ -115,7 +115,30 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.htmlMode = htmlMode;
             this.javaScriptContent = new StringBuilder();
             this.cssFileResource = cssFileResource;
-            this.additionalCssFileResource = additionalCssFileResource;
+            this.additionalCssFileResources = additionalCssFileResource == null ? new string[0] : new[] { additionalCssFileResource };
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HtmlRenderer" /> class.
+        /// </summary>
+        /// <param name="fileNameByClass">Dictionary containing the filenames of the class reports by class.</param>
+        /// <param name="onlySummary">if set to <c>true</c> only a summary report is created (no class reports).</param>
+        /// <param name="htmlMode">Defines how CSS and JavaScript are referenced.</param>
+        /// <param name="additionalCssFileResources">Optional additional CSS file resources.</param>
+        /// <param name="cssFileResource">Optional CSS file resource.</param>
+        internal HtmlRenderer(
+            IDictionary<string, string> fileNameByClass,
+            bool onlySummary,
+            HtmlMode htmlMode,
+            string[] additionalCssFileResources,
+            string cssFileResource = "custom.css")
+        {
+            this.fileNameByClass = fileNameByClass;
+            this.onlySummary = onlySummary;
+            this.htmlMode = htmlMode;
+            this.javaScriptContent = new StringBuilder();
+            this.additionalCssFileResources = additionalCssFileResources ?? new string[0];
+            this.cssFileResource = cssFileResource;
         }
 
         /// <inheritdoc />
@@ -1605,15 +1628,18 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             ms.Write(lineBreak, 0, lineBreak.Length);
             ms.Write(lineBreak, 0, lineBreak.Length);
 
-            if (this.additionalCssFileResource != null)
+            if (this.additionalCssFileResources != null && this.additionalCssFileResources.Length > 0)
             {
-                ms.Write(lineBreak, 0, lineBreak.Length);
-                ms.Write(lineBreak, 0, lineBreak.Length);
-
-                using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
-                    $"Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering.resources.{this.additionalCssFileResource}"))
+                foreach (var additionalCssFileResource in this.additionalCssFileResources)
                 {
-                    CopyWithFilteredUrls(stream);
+                    ms.Write(lineBreak, 0, lineBreak.Length);
+                    ms.Write(lineBreak, 0, lineBreak.Length);
+
+                    using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
+                        $"Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering.resources.{additionalCssFileResource}"))
+                    {
+                        CopyWithFilteredUrls(stream);
+                    }
                 }
 
                 ms.Write(lineBreak, 0, lineBreak.Length);

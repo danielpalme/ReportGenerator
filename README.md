@@ -73,7 +73,7 @@ Explanations:
    Report types:       The output formats and scope (separated by semicolon).
                        Values: Badges, Clover, Cobertura, CsvSummary, 
                        MarkdownSummary, MarkdownSummaryGithub, MarkdownDeltaSummary
-                       Html, Html_Light, Html_Dark,
+                       Html, Html_Light, Html_Dark, Html_BlueRed
                        HtmlChart, HtmlInline, HtmlSummary,
                        HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Light, HtmlInline_AzurePipelines_Dark,
                        JsonSummary, Latex, LatexSummary, lcov, MHtml, PngChart, SonarQube, TeamCitySummary,

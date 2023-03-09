@@ -20,7 +20,7 @@ ReportGenerator supports merging several coverage files into a single report.
 
 The following output formats are supported by ReportGenerator:
 
--Html, Html_Light, Html_Dark
+-Html, Html_Light, Html_Dark, Html_BlueRed
 -HtmlSummary, HtmlChart, HtmlInline
 -HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Light, HtmlInline_AzurePipelines_Dark
 -MHtml
@@ -65,6 +65,10 @@ For further details take a look at LICENSE.txt.
 =======================================================================
 
 CHANGELOG
+
+5.1.19.0
+
+    * New: #595: Added new report type 'Html_BlueRed' to improve red-green colorblind accessibility
 
 5.1.18.0
 
