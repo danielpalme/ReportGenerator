@@ -449,7 +449,7 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The license is not valid.
+        ///   Looks up a localized string similar to The license is not valid or has expired.
         /// </summary>
         internal static string InvalidLicense {
             get {

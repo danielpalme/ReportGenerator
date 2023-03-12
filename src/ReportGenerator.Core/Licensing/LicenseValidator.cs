@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
@@ -21,6 +22,15 @@ namespace Palmmedia.ReportGenerator.Core.Licensing
         /// The Logger.
         /// </summary>
         private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(LicenseValidator));
+
+        /// <summary>
+        /// Locked licenses.
+        /// </summary>
+        private static readonly Dictionary<Guid, DateTime> LockedLicences = new Dictionary<Guid, DateTime>()
+        {
+            { Guid.Parse("c05081c1-2ced-4bfd-8cb8-3cf23094369f"), DateTime.MinValue },
+            { Guid.Parse("70dcfc78-6ca3-4a0b-bb43-a3840e39ff4f"), new DateTime(2024, 1, 1) },
+        };
 
         /// <summary>
         /// The cached license in Base 64 format.
@@ -76,10 +86,23 @@ namespace Palmmedia.ReportGenerator.Core.Licensing
                     {
                         rsa.FromXmlString(PublicRsaKey);
 
-                        return rsa.VerifyData(
+                        if (!rsa.VerifyData(
                             Encoding.UTF8.GetBytes(cachedLicense.License.GetSignatureInput()),
                             SHA1.Create(),
-                            Convert.FromBase64String(cachedLicense.Signature));
+                            Convert.FromBase64String(cachedLicense.Signature)))
+                        {
+                            return false;
+                        }
+
+                        if (LockedLicences.TryGetValue(cachedLicense.License.Id, out DateTime lockDate))
+                        {
+                            if (DateTime.Today >= lockDate)
+                            {
+                                return false;
+                            }
+                        }
+
+                        return true;
                     }
                     finally
                     {

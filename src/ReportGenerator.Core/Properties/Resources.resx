@@ -248,7 +248,7 @@
     <value>The filter '{0}' is invalid. Filters must start with '+' or '-'.</value>
   </data>
   <data name="InvalidLicense" xml:space="preserve">
-    <value>The license is not valid</value>
+    <value>The license is not valid or has expired</value>
   </data>
   <data name="LoadingReport" xml:space="preserve">
     <value>Loading report '{0}' {1}/{2} in memory</value>
