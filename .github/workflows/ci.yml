@@ -207,7 +207,7 @@ jobs:
         copy "ReportGenerator_${{ env.Version }}.zip" "ftp\ReportGenerator_${{ env.Version }}.zip"
 
     - name: 'FTP Upload: ZIP Release'
-      uses: SamKirkland/FTP-Deploy-Action@4.3.3
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         server: ${{ secrets.FTP_HOST }}
         username: ${{ secrets.FTP_USER }}
