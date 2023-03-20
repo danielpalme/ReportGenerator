@@ -7,7 +7,7 @@ env:
   buildPlatform: Any CPU
   buildConfiguration: Release
   version: 5.1.19
-  dotnetSDKVersion: 7.0.200
+  dotnetSDKVersion: 7.0.202
   nodeVersion: 18
 
 jobs:
@@ -207,7 +207,7 @@ jobs:
         copy "ReportGenerator_${{ env.Version }}.zip" "ftp\ReportGenerator_${{ env.Version }}.zip"
 
     - name: 'FTP Upload: ZIP Release'
-      uses: SamKirkland/FTP-Deploy-Action@4.3.3
+      uses: SamKirkland/FTP-Deploy-Action@4.3.4
       with:
         server: ${{ secrets.FTP_HOST }}
         username: ${{ secrets.FTP_USER }}
