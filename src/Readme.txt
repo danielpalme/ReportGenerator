@@ -66,6 +66,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.1.20.0
+
+    * Fix: Improved OpenCover support
+
 5.1.19.0
 
     * New: #595: Added new report type 'Html_BlueRed' to improve red-green colorblind accessibility

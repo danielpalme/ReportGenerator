@@ -138,6 +138,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .Elements("Classes")
                 .Elements("Class")
                 .Where(c => c.Attribute("skippedDueTo") == null)
+                .Where(c => !c.Element("FullName").Value.Contains("<>f__AnonymousType"))
                 .Where(c => c.Element("Methods").Elements("Method").Any())
                 .Select(c =>
                     {
