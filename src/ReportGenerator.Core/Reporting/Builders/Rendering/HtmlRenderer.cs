@@ -51,6 +51,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(HtmlRenderer));
 
         /// <summary>
+        /// Indicates whether which CSS and Javascript files have already been written.
+        /// </summary>
+        private static readonly HashSet<string> WrittenCssAndJavascriptFiles = new HashSet<string>();
+
+        /// <summary>
         /// Dictionary containing the filenames of the class reports by class.
         /// </summary>
         private readonly IDictionary<string, string> fileNameByClass;
@@ -1552,6 +1557,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         {
             string targetPath = Path.Combine(targetDirectory, "report.css");
 
+            if (WrittenCssAndJavascriptFiles.Contains(targetPath))
+            {
+                return;
+            }
+
             using (var fs = new FileStream(targetPath, FileMode.Create))
             {
                 using (var cssStream = this.GetCombinedCss())
@@ -1574,6 +1584,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     }
                 }
             }
+
+            WrittenCssAndJavascriptFiles.Add(targetPath);
         }
 
         /// <summary>
@@ -1584,6 +1596,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         {
             string targetPath = Path.Combine(targetDirectory, this.classReport ? "class.js" : "main.js");
 
+            if (WrittenCssAndJavascriptFiles.Contains(targetPath))
+            {
+                return;
+            }
+
             using (var fs = new FileStream(targetPath, FileMode.Create))
             {
                 using (var javaScriptStream = this.GetCombinedJavascript())
@@ -1591,6 +1608,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     javaScriptStream.CopyTo(fs);
                 }
             }
+
+            WrittenCssAndJavascriptFiles.Add(targetPath);
         }
 
         /// <summary>
