@@ -232,7 +232,18 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .Elements("line")
                 .ToArray();
 
-            var linesOfFile = lines
+            var lineNumbers = lines
+                .Select(l => l.Attribute("number").Value)
+                .ToHashSet();
+
+            var additionalLinesInMethodElement = classes.Elements("methods")
+                .Elements("method")
+                .Elements("lines")
+                .Elements("line")
+                .Where(l => !lineNumbers.Contains(l.Attribute("number").Value))
+                .ToArray();
+
+            var linesOfFile = lines.Concat(additionalLinesInMethodElement)
                 .Select(line => new
                 {
                     LineNumber = int.Parse(line.Attribute("number").Value, CultureInfo.InvariantCulture),
