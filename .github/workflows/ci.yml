@@ -92,6 +92,7 @@ jobs:
         targetdir: 'src\target\reports\coverage'
         reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
         assemblyfilters: '-xunit*'
+        license: '${{ secrets.REPORTGENERATOR_LICENSE }}'
 
     - name: 'Publish code coverage results'
       uses: actions/upload-artifact@v3
