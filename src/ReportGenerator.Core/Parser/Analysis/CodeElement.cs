@@ -16,7 +16,22 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <param name="lastLine">The number of the last line.</param>
         /// <param name="coverageQuota">The coverage quota.</param>
         internal CodeElement(string name, CodeElementType type, int firstLine, int lastLine, decimal? coverageQuota)
+            : this(name, name, type, firstLine, lastLine, coverageQuota)
         {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CodeElement" /> class.
+        /// </summary>
+        /// <param name="fullName">The full name.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="type">The <see cref="Analysis.CodeElementType"/>.</param>
+        /// <param name="firstLine">The number of the first line.</param>
+        /// <param name="lastLine">The number of the last line.</param>
+        /// <param name="coverageQuota">The coverage quota.</param>
+        internal CodeElement(string fullName, string name, CodeElementType type, int firstLine, int lastLine, decimal? coverageQuota)
+        {
+            this.FullName = fullName ?? throw new ArgumentNullException(nameof(name));
             this.Name = name ?? throw new ArgumentNullException(nameof(name));
             this.CodeElementType = type;
             this.FirstLine = firstLine;
@@ -26,6 +41,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                 this.CoverageQuota = Math.Min(100, Math.Max(0, coverageQuota.Value));
             }
         }
+
+        /// <summary>
+        /// Gets the full name.
+        /// </summary>
+        /// <value>
+        /// The full name.
+        /// </value>
+        public string FullName { get; }
 
         /// <summary>
         /// Gets the name.
@@ -111,7 +134,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
             else
             {
                 var codeElement = (CodeElement)obj;
-                return this.Name.Equals(codeElement.Name) && this.FirstLine == codeElement.FirstLine;
+                return this.FullName.Equals(codeElement.FullName) && this.FirstLine == codeElement.FirstLine;
             }
         }
 
@@ -121,6 +144,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
-        public override int GetHashCode() => this.Name.GetHashCode() + this.FirstLine.GetHashCode();
+        public override int GetHashCode() => this.FullName.GetHashCode() + this.FirstLine.GetHashCode();
     }
 }

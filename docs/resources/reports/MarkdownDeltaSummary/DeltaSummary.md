@@ -1,9 +1,9 @@
 # Delta Summary
 |||||
 |:---|---:|---:|---:|
-| Generated on: | 18.01.2023 - 20:04 | | |
+| Generated on: | 27.04.2023 - 20:40 | | |
 | Description | **Previous** | **Current** | **Delta** |
-| Coverage date: | 09.02.2022 - 20:50 | 18.01.2023 - 20:04 | |
+| Coverage date: | 09.02.2022 - 20:50 | 27.04.2023 - 20:40 | |
 | **Line coverage:** | 58.4% | 66.4% | 8.0% |
 | Covered lines: | 73 | 83 | 10 |
 | Coverable lines: | 125 | 125 | 0 |

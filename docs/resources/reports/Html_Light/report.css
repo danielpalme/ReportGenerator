@@ -1,3 +1,8 @@
+:root {
+    --green: #0aad0a;
+    --lightgreen: #dcf4dc;
+}
+
 html { font-family: sans-serif; margin: 0; padding: 0; font-size: 0.9em; background-color: #d6d6d6; height: 100%; }
 body { margin: 0; padding: 0; height: 100%; color: #000; }
 h1 { font-family: 'Century Gothic', sans-serif; font-size: 1.2em; font-weight: normal; color: #fff; background-color: #6f6f6f; padding: 10px; margin: 20px -20px 20px -20px;  }
@@ -93,42 +98,42 @@ a.percentagebar {
 }
 .percentagebar10 {
     border-left: 2px solid;
-    border-image: linear-gradient(to bottom, #c10909 90%, #0aad0a 90%, #0aad0a 100%) 1;
+    border-image: linear-gradient(to bottom, #c10909 90%, var(--green) 90%, var(--green) 100%) 1;
 }
 .percentagebar20 {
     border-left: 2px solid;
-    border-image: linear-gradient(to bottom, #c10909 80%, #0aad0a 80%, #0aad0a 100%) 1;
+    border-image: linear-gradient(to bottom, #c10909 80%, var(--green) 80%, var(--green) 100%) 1;
 }
 .percentagebar30 {
     border-left: 2px solid;
-    border-image: linear-gradient(to bottom, #c10909 70%, #0aad0a 70%, #0aad0a 100%) 1;
+    border-image: linear-gradient(to bottom, #c10909 70%, var(--green) 70%, var(--green) 100%) 1;
 }
 .percentagebar40 {
     border-left: 2px solid;
-    border-image: linear-gradient(to bottom, #c10909 60%, #0aad0a 60%, #0aad0a 100%) 1;
+    border-image: linear-gradient(to bottom, #c10909 60%, var(--green) 60%, var(--green) 100%) 1;
 }
 .percentagebar50 {
     border-left: 2px solid;
-    border-image: linear-gradient(to bottom, #c10909 50%, #0aad0a 50%, #0aad0a 100%) 1;
+    border-image: linear-gradient(to bottom, #c10909 50%, var(--green) 50%, var(--green) 100%) 1;
 }
 .percentagebar60 {
     border-left: 2px solid;
-    border-image: linear-gradient(to bottom, #c10909 40%, #0aad0a 40%, #0aad0a 100%) 1;
+    border-image: linear-gradient(to bottom, #c10909 40%, var(--green) 40%, var(--green) 100%) 1;
 }
 .percentagebar70 {
     border-left: 2px solid;
-    border-image: linear-gradient(to bottom, #c10909 30%, #0aad0a 30%, #0aad0a 100%) 1;
+    border-image: linear-gradient(to bottom, #c10909 30%, var(--green) 30%, var(--green) 100%) 1;
 }
 .percentagebar80 {
     border-left: 2px solid;
-    border-image: linear-gradient(to bottom, #c10909 20%, #0aad0a 20%, #0aad0a 100%) 1;
+    border-image: linear-gradient(to bottom, #c10909 20%, var(--green) 20%, var(--green) 100%) 1;
 }
 .percentagebar90 {
     border-left: 2px solid;
-    border-image: linear-gradient(to bottom, #c10909 10%, #0aad0a 10%, #0aad0a 100%) 1;
+    border-image: linear-gradient(to bottom, #c10909 10%, var(--green) 10%, var(--green) 100%) 1;
 }
 .percentagebar100 {
-    border-left: 2px solid #0aad0a;
+    border-left: 2px solid var(--green);
 }
 
 .mt-1 { margin-top: 4px; }
@@ -137,8 +142,8 @@ a.percentagebar {
 .center { text-align: center; }
 .rightmargin  { padding-right: 8px; }
 .leftmargin { padding-left: 5px; }
-.green { background-color: #0aad0a; }
-.lightgreen { background-color: #dcf4dc; }
+.green { background-color: var(--green); }
+.lightgreen { background-color: var(--lightgreen); }
 .red { background-color: #c10909; }
 .lightred { background-color: #f7dede; }
 .orange { background-color: #FFA500; }
@@ -168,7 +173,7 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
 
 .linecoverage { background-color: #c00; width: 10px; height: 8px; border: 1px solid #000; display: inline-block; }
 .branchcoverage { background-color: #1c2298; width: 10px; height: 8px; border: 1px solid #000; display: inline-block; }
-.codeelementcoverage { background-color: #0aad0a; width: 10px; height: 8px; border: 1px solid #000; display: inline-block; }
+.codeelementcoverage { background-color: var(--green); width: 10px; height: 8px; border: 1px solid #000; display: inline-block; }
 
 .tooltip { position: absolute; display: none; padding: 5px; background: #F4C63D; color: #453D3F; pointer-events: none; z-index: 1; min-width: 250px; }
 
@@ -182,107 +187,107 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
 .column112 { width: 112px; }
 
 .cardpercentagebar { border-left-style: solid; }
-.cardpercentagebar0 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 0%, #0aad0a 0%) 1; }
-.cardpercentagebar1 { border-image: linear-gradient(to bottom, #c10909 1%, #c10909 1%, #0aad0a 1%) 1; }
-.cardpercentagebar2 { border-image: linear-gradient(to bottom, #c10909 2%, #c10909 2%, #0aad0a 2%) 1; }
-.cardpercentagebar3 { border-image: linear-gradient(to bottom, #c10909 3%, #c10909 3%, #0aad0a 3%) 1; }
-.cardpercentagebar4 { border-image: linear-gradient(to bottom, #c10909 4%, #c10909 4%, #0aad0a 4%) 1; }
-.cardpercentagebar5 { border-image: linear-gradient(to bottom, #c10909 5%, #c10909 5%, #0aad0a 5%) 1; }
-.cardpercentagebar6 { border-image: linear-gradient(to bottom, #c10909 6%, #c10909 6%, #0aad0a 6%) 1; }
-.cardpercentagebar7 { border-image: linear-gradient(to bottom, #c10909 7%, #c10909 7%, #0aad0a 7%) 1; }
-.cardpercentagebar8 { border-image: linear-gradient(to bottom, #c10909 8%, #c10909 8%, #0aad0a 8%) 1; }
-.cardpercentagebar9 { border-image: linear-gradient(to bottom, #c10909 9%, #c10909 9%, #0aad0a 9%) 1; }
-.cardpercentagebar10 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 10%, #0aad0a 10%) 1; }
-.cardpercentagebar11 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 11%, #0aad0a 11%) 1; }
-.cardpercentagebar12 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 12%, #0aad0a 12%) 1; }
-.cardpercentagebar13 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 13%, #0aad0a 13%) 1; }
-.cardpercentagebar14 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 14%, #0aad0a 14%) 1; }
-.cardpercentagebar15 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 15%, #0aad0a 15%) 1; }
-.cardpercentagebar16 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 16%, #0aad0a 16%) 1; }
-.cardpercentagebar17 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 17%, #0aad0a 17%) 1; }
-.cardpercentagebar18 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 18%, #0aad0a 18%) 1; }
-.cardpercentagebar19 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 19%, #0aad0a 19%) 1; }
-.cardpercentagebar20 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 20%, #0aad0a 20%) 1; }
-.cardpercentagebar21 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 21%, #0aad0a 21%) 1; }
-.cardpercentagebar22 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 22%, #0aad0a 22%) 1; }
-.cardpercentagebar23 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 23%, #0aad0a 23%) 1; }
-.cardpercentagebar24 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 24%, #0aad0a 24%) 1; }
-.cardpercentagebar25 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 25%, #0aad0a 25%) 1; }
-.cardpercentagebar26 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 26%, #0aad0a 26%) 1; }
-.cardpercentagebar27 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 27%, #0aad0a 27%) 1; }
-.cardpercentagebar28 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 28%, #0aad0a 28%) 1; }
-.cardpercentagebar29 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 29%, #0aad0a 29%) 1; }
-.cardpercentagebar30 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 30%, #0aad0a 30%) 1; }
-.cardpercentagebar31 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 31%, #0aad0a 31%) 1; }
-.cardpercentagebar32 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 32%, #0aad0a 32%) 1; }
-.cardpercentagebar33 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 33%, #0aad0a 33%) 1; }
-.cardpercentagebar34 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 34%, #0aad0a 34%) 1; }
-.cardpercentagebar35 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 35%, #0aad0a 35%) 1; }
-.cardpercentagebar36 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 36%, #0aad0a 36%) 1; }
-.cardpercentagebar37 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 37%, #0aad0a 37%) 1; }
-.cardpercentagebar38 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 38%, #0aad0a 38%) 1; }
-.cardpercentagebar39 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 39%, #0aad0a 39%) 1; }
-.cardpercentagebar40 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 40%, #0aad0a 40%) 1; }
-.cardpercentagebar41 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 41%, #0aad0a 41%) 1; }
-.cardpercentagebar42 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 42%, #0aad0a 42%) 1; }
-.cardpercentagebar43 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 43%, #0aad0a 43%) 1; }
-.cardpercentagebar44 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 44%, #0aad0a 44%) 1; }
-.cardpercentagebar45 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 45%, #0aad0a 45%) 1; }
-.cardpercentagebar46 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 46%, #0aad0a 46%) 1; }
-.cardpercentagebar47 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 47%, #0aad0a 47%) 1; }
-.cardpercentagebar48 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 48%, #0aad0a 48%) 1; }
-.cardpercentagebar49 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 49%, #0aad0a 49%) 1; }
-.cardpercentagebar50 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 50%, #0aad0a 50%) 1; }
-.cardpercentagebar51 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 51%, #0aad0a 51%) 1; }
-.cardpercentagebar52 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 52%, #0aad0a 52%) 1; }
-.cardpercentagebar53 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 53%, #0aad0a 53%) 1; }
-.cardpercentagebar54 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 54%, #0aad0a 54%) 1; }
-.cardpercentagebar55 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 55%, #0aad0a 55%) 1; }
-.cardpercentagebar56 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 56%, #0aad0a 56%) 1; }
-.cardpercentagebar57 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 57%, #0aad0a 57%) 1; }
-.cardpercentagebar58 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 58%, #0aad0a 58%) 1; }
-.cardpercentagebar59 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 59%, #0aad0a 59%) 1; }
-.cardpercentagebar60 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 60%, #0aad0a 60%) 1; }
-.cardpercentagebar61 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 61%, #0aad0a 61%) 1; }
-.cardpercentagebar62 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 62%, #0aad0a 62%) 1; }
-.cardpercentagebar63 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 63%, #0aad0a 63%) 1; }
-.cardpercentagebar64 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 64%, #0aad0a 64%) 1; }
-.cardpercentagebar65 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 65%, #0aad0a 65%) 1; }
-.cardpercentagebar66 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 66%, #0aad0a 66%) 1; }
-.cardpercentagebar67 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 67%, #0aad0a 67%) 1; }
-.cardpercentagebar68 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 68%, #0aad0a 68%) 1; }
-.cardpercentagebar69 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 69%, #0aad0a 69%) 1; }
-.cardpercentagebar70 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 70%, #0aad0a 70%) 1; }
-.cardpercentagebar71 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 71%, #0aad0a 71%) 1; }
-.cardpercentagebar72 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 72%, #0aad0a 72%) 1; }
-.cardpercentagebar73 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 73%, #0aad0a 73%) 1; }
-.cardpercentagebar74 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 74%, #0aad0a 74%) 1; }
-.cardpercentagebar75 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 75%, #0aad0a 75%) 1; }
-.cardpercentagebar76 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 76%, #0aad0a 76%) 1; }
-.cardpercentagebar77 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 77%, #0aad0a 77%) 1; }
-.cardpercentagebar78 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 78%, #0aad0a 78%) 1; }
-.cardpercentagebar79 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 79%, #0aad0a 79%) 1; }
-.cardpercentagebar80 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 80%, #0aad0a 80%) 1; }
-.cardpercentagebar81 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 81%, #0aad0a 81%) 1; }
-.cardpercentagebar82 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 82%, #0aad0a 82%) 1; }
-.cardpercentagebar83 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 83%, #0aad0a 83%) 1; }
-.cardpercentagebar84 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 84%, #0aad0a 84%) 1; }
-.cardpercentagebar85 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 85%, #0aad0a 85%) 1; }
-.cardpercentagebar86 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 86%, #0aad0a 86%) 1; }
-.cardpercentagebar87 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 87%, #0aad0a 87%) 1; }
-.cardpercentagebar88 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 88%, #0aad0a 88%) 1; }
-.cardpercentagebar89 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 89%, #0aad0a 89%) 1; }
-.cardpercentagebar90 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 90%, #0aad0a 90%) 1; }
-.cardpercentagebar91 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 91%, #0aad0a 91%) 1; }
-.cardpercentagebar92 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 92%, #0aad0a 92%) 1; }
-.cardpercentagebar93 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 93%, #0aad0a 93%) 1; }
-.cardpercentagebar94 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 94%, #0aad0a 94%) 1; }
-.cardpercentagebar95 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 95%, #0aad0a 95%) 1; }
-.cardpercentagebar96 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 96%, #0aad0a 96%) 1; }
-.cardpercentagebar97 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 97%, #0aad0a 97%) 1; }
-.cardpercentagebar98 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 98%, #0aad0a 98%) 1; }
-.cardpercentagebar99 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 99%, #0aad0a 99%) 1; }
-.cardpercentagebar100 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 100%, #0aad0a 100%) 1; }
+.cardpercentagebar0 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 0%, var(--green) 0%) 1; }
+.cardpercentagebar1 { border-image: linear-gradient(to bottom, #c10909 1%, #c10909 1%, var(--green) 1%) 1; }
+.cardpercentagebar2 { border-image: linear-gradient(to bottom, #c10909 2%, #c10909 2%, var(--green) 2%) 1; }
+.cardpercentagebar3 { border-image: linear-gradient(to bottom, #c10909 3%, #c10909 3%, var(--green) 3%) 1; }
+.cardpercentagebar4 { border-image: linear-gradient(to bottom, #c10909 4%, #c10909 4%, var(--green) 4%) 1; }
+.cardpercentagebar5 { border-image: linear-gradient(to bottom, #c10909 5%, #c10909 5%, var(--green) 5%) 1; }
+.cardpercentagebar6 { border-image: linear-gradient(to bottom, #c10909 6%, #c10909 6%, var(--green) 6%) 1; }
+.cardpercentagebar7 { border-image: linear-gradient(to bottom, #c10909 7%, #c10909 7%, var(--green) 7%) 1; }
+.cardpercentagebar8 { border-image: linear-gradient(to bottom, #c10909 8%, #c10909 8%, var(--green) 8%) 1; }
+.cardpercentagebar9 { border-image: linear-gradient(to bottom, #c10909 9%, #c10909 9%, var(--green) 9%) 1; }
+.cardpercentagebar10 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 10%, var(--green) 10%) 1; }
+.cardpercentagebar11 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 11%, var(--green) 11%) 1; }
+.cardpercentagebar12 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 12%, var(--green) 12%) 1; }
+.cardpercentagebar13 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 13%, var(--green) 13%) 1; }
+.cardpercentagebar14 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 14%, var(--green) 14%) 1; }
+.cardpercentagebar15 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 15%, var(--green) 15%) 1; }
+.cardpercentagebar16 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 16%, var(--green) 16%) 1; }
+.cardpercentagebar17 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 17%, var(--green) 17%) 1; }
+.cardpercentagebar18 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 18%, var(--green) 18%) 1; }
+.cardpercentagebar19 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 19%, var(--green) 19%) 1; }
+.cardpercentagebar20 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 20%, var(--green) 20%) 1; }
+.cardpercentagebar21 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 21%, var(--green) 21%) 1; }
+.cardpercentagebar22 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 22%, var(--green) 22%) 1; }
+.cardpercentagebar23 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 23%, var(--green) 23%) 1; }
+.cardpercentagebar24 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 24%, var(--green) 24%) 1; }
+.cardpercentagebar25 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 25%, var(--green) 25%) 1; }
+.cardpercentagebar26 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 26%, var(--green) 26%) 1; }
+.cardpercentagebar27 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 27%, var(--green) 27%) 1; }
+.cardpercentagebar28 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 28%, var(--green) 28%) 1; }
+.cardpercentagebar29 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 29%, var(--green) 29%) 1; }
+.cardpercentagebar30 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 30%, var(--green) 30%) 1; }
+.cardpercentagebar31 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 31%, var(--green) 31%) 1; }
+.cardpercentagebar32 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 32%, var(--green) 32%) 1; }
+.cardpercentagebar33 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 33%, var(--green) 33%) 1; }
+.cardpercentagebar34 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 34%, var(--green) 34%) 1; }
+.cardpercentagebar35 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 35%, var(--green) 35%) 1; }
+.cardpercentagebar36 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 36%, var(--green) 36%) 1; }
+.cardpercentagebar37 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 37%, var(--green) 37%) 1; }
+.cardpercentagebar38 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 38%, var(--green) 38%) 1; }
+.cardpercentagebar39 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 39%, var(--green) 39%) 1; }
+.cardpercentagebar40 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 40%, var(--green) 40%) 1; }
+.cardpercentagebar41 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 41%, var(--green) 41%) 1; }
+.cardpercentagebar42 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 42%, var(--green) 42%) 1; }
+.cardpercentagebar43 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 43%, var(--green) 43%) 1; }
+.cardpercentagebar44 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 44%, var(--green) 44%) 1; }
+.cardpercentagebar45 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 45%, var(--green) 45%) 1; }
+.cardpercentagebar46 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 46%, var(--green) 46%) 1; }
+.cardpercentagebar47 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 47%, var(--green) 47%) 1; }
+.cardpercentagebar48 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 48%, var(--green) 48%) 1; }
+.cardpercentagebar49 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 49%, var(--green) 49%) 1; }
+.cardpercentagebar50 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 50%, var(--green) 50%) 1; }
+.cardpercentagebar51 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 51%, var(--green) 51%) 1; }
+.cardpercentagebar52 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 52%, var(--green) 52%) 1; }
+.cardpercentagebar53 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 53%, var(--green) 53%) 1; }
+.cardpercentagebar54 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 54%, var(--green) 54%) 1; }
+.cardpercentagebar55 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 55%, var(--green) 55%) 1; }
+.cardpercentagebar56 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 56%, var(--green) 56%) 1; }
+.cardpercentagebar57 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 57%, var(--green) 57%) 1; }
+.cardpercentagebar58 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 58%, var(--green) 58%) 1; }
+.cardpercentagebar59 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 59%, var(--green) 59%) 1; }
+.cardpercentagebar60 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 60%, var(--green) 60%) 1; }
+.cardpercentagebar61 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 61%, var(--green) 61%) 1; }
+.cardpercentagebar62 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 62%, var(--green) 62%) 1; }
+.cardpercentagebar63 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 63%, var(--green) 63%) 1; }
+.cardpercentagebar64 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 64%, var(--green) 64%) 1; }
+.cardpercentagebar65 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 65%, var(--green) 65%) 1; }
+.cardpercentagebar66 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 66%, var(--green) 66%) 1; }
+.cardpercentagebar67 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 67%, var(--green) 67%) 1; }
+.cardpercentagebar68 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 68%, var(--green) 68%) 1; }
+.cardpercentagebar69 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 69%, var(--green) 69%) 1; }
+.cardpercentagebar70 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 70%, var(--green) 70%) 1; }
+.cardpercentagebar71 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 71%, var(--green) 71%) 1; }
+.cardpercentagebar72 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 72%, var(--green) 72%) 1; }
+.cardpercentagebar73 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 73%, var(--green) 73%) 1; }
+.cardpercentagebar74 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 74%, var(--green) 74%) 1; }
+.cardpercentagebar75 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 75%, var(--green) 75%) 1; }
+.cardpercentagebar76 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 76%, var(--green) 76%) 1; }
+.cardpercentagebar77 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 77%, var(--green) 77%) 1; }
+.cardpercentagebar78 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 78%, var(--green) 78%) 1; }
+.cardpercentagebar79 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 79%, var(--green) 79%) 1; }
+.cardpercentagebar80 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 80%, var(--green) 80%) 1; }
+.cardpercentagebar81 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 81%, var(--green) 81%) 1; }
+.cardpercentagebar82 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 82%, var(--green) 82%) 1; }
+.cardpercentagebar83 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 83%, var(--green) 83%) 1; }
+.cardpercentagebar84 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 84%, var(--green) 84%) 1; }
+.cardpercentagebar85 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 85%, var(--green) 85%) 1; }
+.cardpercentagebar86 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 86%, var(--green) 86%) 1; }
+.cardpercentagebar87 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 87%, var(--green) 87%) 1; }
+.cardpercentagebar88 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 88%, var(--green) 88%) 1; }
+.cardpercentagebar89 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 89%, var(--green) 89%) 1; }
+.cardpercentagebar90 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 90%, var(--green) 90%) 1; }
+.cardpercentagebar91 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 91%, var(--green) 91%) 1; }
+.cardpercentagebar92 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 92%, var(--green) 92%) 1; }
+.cardpercentagebar93 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 93%, var(--green) 93%) 1; }
+.cardpercentagebar94 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 94%, var(--green) 94%) 1; }
+.cardpercentagebar95 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 95%, var(--green) 95%) 1; }
+.cardpercentagebar96 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 96%, var(--green) 96%) 1; }
+.cardpercentagebar97 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 97%, var(--green) 97%) 1; }
+.cardpercentagebar98 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 98%, var(--green) 98%) 1; }
+.cardpercentagebar99 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 99%, var(--green) 99%) 1; }
+.cardpercentagebar100 { border-image: linear-gradient(to bottom, #c10909 0%, #c10909 100%, var(--green) 100%) 1; }
 
 .covered0 { width: 0px; }
 .covered1 { width: 1px; }

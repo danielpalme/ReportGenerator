@@ -386,8 +386,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         {
             foreach (var method in methodsOfFile)
             {
-                string methodName = method.Attribute("name").Value + method.Attribute("signature").Value;
-                methodName = ExtractMethodName(methodName, method.Parent.Parent.Attribute("name").Value);
+                string fullName = method.Attribute("name").Value + method.Attribute("signature").Value;
+                string methodName = ExtractMethodName(fullName, method.Parent.Parent.Attribute("name").Value);
 
                 if (methodName.Contains("__") && LambdaMethodNameRegex.IsMatch(methodName))
                 {
@@ -403,6 +403,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     int lastLine = int.Parse(lines.Last().Attribute("number").Value, CultureInfo.InvariantCulture);
 
                     codeFile.AddCodeElement(new CodeElement(
+                        fullName,
                         methodName,
                         methodName.StartsWith("get_") || methodName.StartsWith("set_") ? CodeElementType.Property : CodeElementType.Method,
                         firstLine,

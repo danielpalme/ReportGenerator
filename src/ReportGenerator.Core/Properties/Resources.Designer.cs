@@ -530,6 +530,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OpenCover output format is only available for sponsors. Get your license here: https://reportgenerator.io/pro.
+        /// </summary>
+        internal static string OpenCoverProVersion {
+            get {
+                return ResourceManager.GetString("OpenCoverProVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Parsing historic file &apos;{0}&apos;.
         /// </summary>
         internal static string ParseHistoricFile {

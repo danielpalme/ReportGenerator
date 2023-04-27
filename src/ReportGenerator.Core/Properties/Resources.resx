@@ -274,6 +274,9 @@
   <data name="NotExistingReportFile" xml:space="preserve">
     <value>The report file '{0}' does not exist.</value>
   </data>
+  <data name="OpenCoverProVersion" xml:space="preserve">
+    <value>OpenCover output format is only available for sponsors. Get your license here: https://reportgenerator.io/pro</value>
+  </data>
   <data name="ParseHistoricFile" xml:space="preserve">
     <value>Parsing historic file '{0}'</value>
   </data>

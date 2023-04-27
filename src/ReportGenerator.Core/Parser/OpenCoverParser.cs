@@ -508,8 +508,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     continue;
                 }
 
-                string methodName = ExtractMethodName(method.Element("Name").Value);
-                methodName = methodName.Substring(methodName.LastIndexOf(':') + 1);
+                string fullName = ExtractMethodName(method.Element("Name").Value);
+                string methodName = fullName.Substring(fullName.LastIndexOf(':') + 1);
 
                 CodeElementType type = CodeElementType.Method;
 
@@ -536,6 +536,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     int lastLine = seqpnts.Max(s => s.LineNumberEnd);
 
                     codeFile.AddCodeElement(new CodeElement(
+                        fullName,
                         methodName,
                         type,
                         firstLine,
