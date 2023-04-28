@@ -207,17 +207,17 @@ jobs:
         mkdir ftp
         copy "ReportGenerator_${{ env.Version }}.zip" "ftp\ReportGenerator_${{ env.Version }}.zip"
 
-    - name: 'FTP Upload: ZIP Release'
-      uses: SamKirkland/FTP-Deploy-Action@4.3.4
-      with:
-        server: ${{ secrets.FTP_HOST }}
-        username: ${{ secrets.FTP_USER }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ftp/
-        server-dir: ${{ secrets.FTP_DIRECTORY }}
-        protocol: ftps
-        dangerous-clean-slate: true
-      continue-on-error: true
+    # - name: 'FTP Upload: ZIP Release'
+    #   uses: SamKirkland/FTP-Deploy-Action@4.3.4
+    #   with:
+    #     server: ${{ secrets.FTP_HOST }}
+    #     username: ${{ secrets.FTP_USER }}
+    #     password: ${{ secrets.FTP_PASSWORD }}
+    #     local-dir: ftp/
+    #     server-dir: ${{ secrets.FTP_DIRECTORY }}
+    #     protocol: ftps
+    #     dangerous-clean-slate: true
+    #   continue-on-error: true
 
     - name: 'NuGet push dotnet-reportgenerator-globaltool'
       run: nuget push dotnet-reportgenerator-globaltool.${{ env.Version }}.nupkg -ApiKey ${{ secrets.NUGETAPIKEY }} -Source https://www.nuget.org/api/v2/package
