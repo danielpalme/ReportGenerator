@@ -2,13 +2,13 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Deploy">
   <ItemGroup>
     <PackageReference Include="chocolatey">
-      <Version>0.10.14</Version>
+      <Version>1.4.0</Version>
     </PackageReference>
     <PackageReference Include="MSBuildTasks">
       <Version>1.5.0.235</Version>
     </PackageReference>
     <PackageReference Include="NuGet.CommandLine">
-      <Version>5.7.0</Version>
+      <Version>6.5.0</Version>
     </PackageReference>
   </ItemGroup>
   
@@ -22,13 +22,13 @@
 
   <!-- Version, adjust before build -->
   <PropertyGroup>
-    <Version>5.1.20</Version>
+    <Version>5.1.21</Version>
   </PropertyGroup>
   
   <!-- Tools -->
   <PropertyGroup>
-    <NuGetCommandLine>$(UserProfile)\.nuget\packages\nuget.commandline\5.7.0\tools\NuGet.exe</NuGetCommandLine>
-    <ChocolateyCommandLine>$(UserProfile)\.nuget\packages\chocolatey\0.10.14\tools\chocolateyInstall\choco.exe</ChocolateyCommandLine>
+    <NuGetCommandLine>$(UserProfile)\.nuget\packages\nuget.commandline\6.5.0\tools\NuGet.exe</NuGetCommandLine>
+    <ChocolateyCommandLine>$(UserProfile)\.nuget\packages\chocolatey\1.4.0\tools\chocolateyInstall\choco.exe</ChocolateyCommandLine>
   </PropertyGroup>
   
   <Target Name="Clean">

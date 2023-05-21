@@ -6,8 +6,8 @@ env:
   solution: 'src\ReportGenerator.sln'
   buildPlatform: Any CPU
   buildConfiguration: Release
-  version: 5.1.20
-  dotnetSDKVersion: 7.0.203
+  version: 5.1.21
+  dotnetSDKVersion: 7.0.302
   nodeVersion: 18
 
 jobs:
@@ -41,7 +41,7 @@ jobs:
     - name: 'Show dotnet version'
       run: dotnet --version
 
-    - name: 'Use NuGet 5.x'
+    - name: 'Use NuGet 6.x'
       uses: nuget/setup-nuget@v1
 
     - name: 'NuGet Restore'
@@ -155,7 +155,7 @@ jobs:
       run: nuget pack src/Deployment/nuget/ReportGenerator.nuspec -OutputDirectory src/target/packages -Version ${{ env.Version }}
 
     - name: 'Chocolatey pack reportgenerator.portable'
-      run: .$env:USERPROFILE\.nuget\packages\chocolatey\0.10.14\tools\chocolateyInstall\choco.exe pack src/Deployment/chocolatey/reportgenerator.portable.nuspec --outputdirectory=src/target/packages --version=${{ env.Version }}
+      run: .$env:USERPROFILE\.nuget\packages\chocolatey\1.4.0\tools\chocolateyInstall\choco.exe pack src/Deployment/chocolatey/reportgenerator.portable.nuspec --outputdirectory=src/target/packages --version=${{ env.Version }}
 
     - name: 'Publish Artifact: packages'
       uses: actions/upload-artifact@v3
@@ -184,7 +184,7 @@ jobs:
       run: msbuild .\build.proj /t:Restore
       working-directory: src
 
-    - name: 'Use NuGet 5.x'
+    - name: 'Use NuGet 6.x'
       uses: nuget/setup-nuget@v1
 
     - uses: actions/download-artifact@v3

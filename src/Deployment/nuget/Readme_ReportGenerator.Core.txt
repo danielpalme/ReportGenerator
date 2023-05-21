@@ -11,7 +11,8 @@
 
 DESCRIPTION
 
-This package is only suited to create plugins for ReportGenerator.
+Use this package if you want to write a custom plugin for ReportGenerator
+or if you want to call/execute ReportGenerator within your code base.
 
 https://github.com/danielpalme/ReportGenerator/wiki/Custom-reports
 https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage

@@ -9,6 +9,9 @@ Write-Host $To
 ((Get-Content -path ..\.github\workflows\ci.yml -Raw) -replace $From, $To) | Set-Content -Path ..\.github\workflows\ci.yml -NoNewline
 (Get-ChildItem -Recurse -Filter ReportGenerator*.csproj | Select-String $From) | ForEach-Object { ((Get-Content -path $_.Path -Raw) -replace $From, $To) | Out-File $_.Path -Encoding UTF8 -NoNewline }
 ((Get-Content -path AzureDevopsTask\vss-extension.json -Raw) -replace $From, $To) | Set-Content -Path AzureDevopsTask\vss-extension.json -NoNewline
+((Get-Content -path Deployment\nuget\Readme_dotnet-reportgenerator-globaltool.md -Raw) -replace $From, $To) | Set-Content -Path Deployment\nuget\Readme_dotnet-reportgenerator-globaltool.md -NoNewline
+((Get-Content -path Deployment\nuget\Readme_ReportGenerator.Core.md -Raw) -replace $From, $To) | Set-Content -Path Deployment\nuget\Readme_ReportGenerator.Core.md -NoNewline
+((Get-Content -path Deployment\nuget\Readme_ReportGenerator.md -Raw) -replace $From, $To) | Set-Content -Path Deployment\nuget\Readme_ReportGenerator.md -NoNewline
 
 $FromVersions = $From.Split(".")
 $ToVersions = $To.Split(".")

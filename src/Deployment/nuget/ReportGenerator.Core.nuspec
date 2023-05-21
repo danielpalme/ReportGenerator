@@ -19,6 +19,7 @@ Use this package if you want to write a custom plugin for ReportGenerator or if 
 Plugin development:
 https://github.com/danielpalme/ReportGenerator/wiki/Custom-reports
 https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage</description>
+    <readme>README.md</readme>
     <language>en-US</language>
     <tags>Code Coverage Reporting Testing TDD Utility</tags>
     <repository type="git" url="https://github.com/danielpalme/ReportGenerator.git" />
@@ -47,6 +48,7 @@ https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage</desc
     <file src="..\logo_plugin_64.png" target="icon.png" />
     <file src="..\..\..\LICENSE.txt" target="LICENSE.txt" />
     <file src="Readme_ReportGenerator.Core.txt" target="Readme.txt" />
+    <file src="Readme_ReportGenerator.Core.md" target="Readme.md" />
 
     <!-- Plugin development -->
     <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.deps.json" target="lib\netstandard2.0\" />
