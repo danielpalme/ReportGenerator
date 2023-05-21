@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.1.21.0
+
+    * Fix: #606 Improved Cobertura output (complexity metric)
+
 5.1.20.0
 
     * New: Added report type: OpenCover (PRO version only)

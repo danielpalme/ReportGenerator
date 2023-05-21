@@ -97,7 +97,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                             methodElement.Add(new XAttribute("branch-rate", methodBranchRate.ToString(CultureInfo.InvariantCulture)));
 
                             var methodMetrics = file.MethodMetrics
-                                .FirstOrDefault(q => q.ShortName == codeElement.Name
+                                .FirstOrDefault(q => q.FullName == codeElement.FullName
                                     && q.Line == codeElement.FirstLine);
 
                             if (methodMetrics != null)
