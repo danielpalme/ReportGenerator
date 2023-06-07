@@ -555,6 +555,9 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                 this.lineCoverage[i] = coverage;
             }
 
+            this.coveredLines = this.lineCoverage.Count(l => l > 0);
+            this.coverableLines = this.lineCoverage.Count(l => l >= 0);
+
             for (long i = 0; i < file.lineVisitStatus.LongLength; i++)
             {
                 int lineVisitStatus = Math.Max((int)this.lineVisitStatus[i], (int)file.lineVisitStatus[i]);
