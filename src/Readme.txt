@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.1.22.0
+
+    * Fix: #608 Improved performance for classes with many lines
+
 5.1.21.0
 
     * Fix: #606 Improved Cobertura output (complexity metric)

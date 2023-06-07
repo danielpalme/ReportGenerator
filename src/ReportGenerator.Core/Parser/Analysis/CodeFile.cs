@@ -57,6 +57,16 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         private IFileReader additionalFileReader;
 
         /// <summary>
+        /// The number of covered lines.
+        /// </summary>
+        private int coveredLines;
+
+        /// <summary>
+        /// The number of coverable lines.
+        /// </summary>
+        private int coverableLines;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="CodeFile" /> class.
         /// </summary>
         /// <param name="path">The path of the file.</param>
@@ -126,6 +136,9 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
             this.lineVisitStatus = lineVisitStatus;
             this.branches = branches;
             this.additionalFileReader = additionalFileReader;
+
+            this.coveredLines = this.lineCoverage.Count(l => l > 0);
+            this.coverableLines = this.lineCoverage.Count(l => l >= 0);
         }
 
         /// <summary>
@@ -160,13 +173,13 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// Gets the number of covered lines.
         /// </summary>
         /// <value>The number of covered lines.</value>
-        public int CoveredLines => this.lineCoverage.Count(l => l > 0);
+        public int CoveredLines => this.coveredLines;
 
         /// <summary>
         /// Gets the number of coverable lines.
         /// </summary>
         /// <value>The number of coverable lines.</value>
-        public int CoverableLines => this.lineCoverage.Count(l => l >= 0);
+        public int CoverableLines => this.coverableLines;
 
         /// <summary>
         /// Gets the number of total lines.
