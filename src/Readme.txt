@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.1.23.0
+
+    * New: Added minimum coverage thresholds to validate coverage goals
+
 5.1.22.0
 
     * Fix: #608 Improved performance for classes with many lines

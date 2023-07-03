@@ -46,10 +46,18 @@ namespace Palmmedia.ReportGenerator.Core
                 var settings = new Settings();
                 configuration.GetSection("settings").Bind(settings);
 
+                var minimumCoverageThresholds = new MinimumCoverageThresholds();
+                configuration.GetSection("minimumCoverageThresholds").Bind(minimumCoverageThresholds);
+
                 var riskHotspotsAnalysisThresholds = new RiskHotspotsAnalysisThresholds();
                 configuration.GetSection("riskHotspotsAnalysisThresholds").Bind(riskHotspotsAnalysisThresholds);
 
-                return this.GenerateReport(reportConfiguration, settings, riskHotspotsAnalysisThresholds);
+                return this.GenerateReport(reportConfiguration, settings, minimumCoverageThresholds, riskHotspotsAnalysisThresholds);
+            }
+            catch (LowCoverageException ex)
+            {
+                Logger.Error(ex.GetExceptionMessageForDisplay());
+                return false;
             }
             catch (Exception ex)
             {
@@ -79,6 +87,27 @@ namespace Palmmedia.ReportGenerator.Core
             Settings settings,
             RiskHotspotsAnalysisThresholds riskHotspotsAnalysisThresholds)
         {
+            return this.GenerateReport(
+                reportConfiguration,
+                settings,
+                new MinimumCoverageThresholds(),
+                riskHotspotsAnalysisThresholds);
+        }
+
+        /// <summary>
+        /// Generates a report using given configuration.
+        /// </summary>
+        /// <param name="reportConfiguration">The report configuration.</param>
+        /// <param name="settings">The settings.</param>
+        /// <param name="minimumCoverageThresholds">The minimum coverage thresholds.</param>
+        /// <param name="riskHotspotsAnalysisThresholds">The risk hotspots analysis thresholds.</param>
+        /// <returns><c>true</c> if report was generated successfully; otherwise <c>false</c>.</returns>
+        public bool GenerateReport(
+            IReportConfiguration reportConfiguration,
+            Settings settings,
+            MinimumCoverageThresholds minimumCoverageThresholds,
+            RiskHotspotsAnalysisThresholds riskHotspotsAnalysisThresholds)
+        {
             if (reportConfiguration == null)
             {
                 throw new ArgumentNullException(nameof(reportConfiguration));
@@ -87,6 +116,11 @@ namespace Palmmedia.ReportGenerator.Core
             if (settings == null)
             {
                 throw new ArgumentNullException(nameof(settings));
+            }
+
+            if (minimumCoverageThresholds == null)
+            {
+                throw new ArgumentNullException(nameof(minimumCoverageThresholds));
             }
 
             if (riskHotspotsAnalysisThresholds == null)
@@ -139,6 +173,7 @@ namespace Palmmedia.ReportGenerator.Core
                 this.GenerateReport(
                     reportConfiguration,
                     settings,
+                    minimumCoverageThresholds,
                     riskHotspotsAnalysisThresholds,
                     parserResult);
 
@@ -146,6 +181,11 @@ namespace Palmmedia.ReportGenerator.Core
                 Logger.InfoFormat(Resources.ReportGenerationTook, stopWatch.ElapsedMilliseconds / 1000d);
 
                 return true;
+            }
+            catch (LowCoverageException ex)
+            {
+                Logger.Error(ex.GetExceptionMessageForDisplay());
+                return false;
             }
             catch (Exception ex)
             {
@@ -187,10 +227,13 @@ namespace Palmmedia.ReportGenerator.Core
             var settings = new Settings();
             configuration.GetSection("settings").Bind(settings);
 
+            var minimumCoverageThresholds = new MinimumCoverageThresholds();
+            configuration.GetSection("minimumCoverageThresholds").Bind(minimumCoverageThresholds);
+
             var riskHotspotsAnalysisThresholds = new RiskHotspotsAnalysisThresholds();
             configuration.GetSection("riskHotspotsAnalysisThresholds").Bind(riskHotspotsAnalysisThresholds);
 
-            this.GenerateReport(reportConfiguration, settings, riskHotspotsAnalysisThresholds, parserResult);
+            this.GenerateReport(reportConfiguration, settings, minimumCoverageThresholds, riskHotspotsAnalysisThresholds, parserResult);
         }
 
         /// <summary>
@@ -206,6 +249,29 @@ namespace Palmmedia.ReportGenerator.Core
             RiskHotspotsAnalysisThresholds riskHotspotsAnalysisThresholds,
             ParserResult parserResult)
         {
+            this.GenerateReport(
+                reportConfiguration,
+                settings,
+                new MinimumCoverageThresholds(),
+                riskHotspotsAnalysisThresholds,
+                parserResult);
+        }
+
+        /// <summary>
+        /// Executes the report generation.
+        /// </summary>
+        /// <param name="reportConfiguration">The report configuration.</param>
+        /// <param name="settings">The settings.</param>
+        /// <param name="minimumCoverageThresholds">The minimum coverage thresholds.</param>
+        /// <param name="riskHotspotsAnalysisThresholds">The risk hotspots analysis thresholds.</param>
+        /// <param name="parserResult">The parser result generated by <see cref="CoverageReportParser"/>.</param>
+        public void GenerateReport(
+            IReportConfiguration reportConfiguration,
+            Settings settings,
+            MinimumCoverageThresholds minimumCoverageThresholds,
+            RiskHotspotsAnalysisThresholds riskHotspotsAnalysisThresholds,
+            ParserResult parserResult)
+        {
             if (reportConfiguration == null)
             {
                 throw new ArgumentNullException(nameof(reportConfiguration));
@@ -214,6 +280,11 @@ namespace Palmmedia.ReportGenerator.Core
             if (settings == null)
             {
                 throw new ArgumentNullException(nameof(settings));
+            }
+
+            if (minimumCoverageThresholds == null)
+            {
+                throw new ArgumentNullException(nameof(minimumCoverageThresholds));
             }
 
             if (riskHotspotsAnalysisThresholds == null)
@@ -258,6 +329,9 @@ namespace Palmmedia.ReportGenerator.Core
                 new HistoryReportGenerator(historyStorage)
                     .CreateReport(parserResult.Assemblies, executionTime, reportConfiguration.Tag);
             }
+
+            new MinimumCoverageThresholdsValidator(minimumCoverageThresholds)
+                .Validate(parserResult);
         }
 
         /// <summary>

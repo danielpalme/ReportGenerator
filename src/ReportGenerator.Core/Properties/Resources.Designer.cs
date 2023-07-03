@@ -286,6 +286,33 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The branch coverage of {0}% is below the minimum threshold of {1}%..
+        /// </summary>
+        internal static string ErrorLowBranchCoverage {
+            get {
+                return ResourceManager.GetString("ErrorLowBranchCoverage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The line coverage of {0}% is below the minimum threshold of {1}%..
+        /// </summary>
+        internal static string ErrorLowLineCoverage {
+            get {
+                return ResourceManager.GetString("ErrorLowLineCoverage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The method coverage of {0}% is below the minimum threshold of {1}%..
+        /// </summary>
+        internal static string ErrorLowMethodCoverage {
+            get {
+                return ResourceManager.GetString("ErrorLowMethodCoverage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The &apos;uid&apos; of tracked method &apos;{0}&apos; is not unique. Ignoring tracked methods..
         /// </summary>
         internal static string ErrorNotUniqueTrackedMethodUid {

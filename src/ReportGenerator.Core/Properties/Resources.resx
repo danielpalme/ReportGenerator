@@ -192,6 +192,15 @@
   <data name="ErrorInvalidDotCoverReport" xml:space="preserve">
     <value>The dotCover report does not contain line coverage data. Use the dotCover command line parameter '/ReportType=DetailedXML' to capture line coverage.</value>
   </data>
+  <data name="ErrorLowBranchCoverage" xml:space="preserve">
+    <value>The branch coverage of {0}% is below the minimum threshold of {1}%.</value>
+  </data>
+  <data name="ErrorLowLineCoverage" xml:space="preserve">
+    <value>The line coverage of {0}% is below the minimum threshold of {1}%.</value>
+  </data>
+  <data name="ErrorLowMethodCoverage" xml:space="preserve">
+    <value>The method coverage of {0}% is below the minimum threshold of {1}%.</value>
+  </data>
   <data name="ErrorNotUniqueTrackedMethodUid" xml:space="preserve">
     <value>The 'uid' of tracked method '{0}' is not unique. Ignoring tracked methods.</value>
   </data>
