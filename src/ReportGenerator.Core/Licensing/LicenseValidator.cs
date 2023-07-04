@@ -115,9 +115,10 @@ namespace Palmmedia.ReportGenerator.Core.Licensing
                         {
                             return true;
                         }
-                        else if (cachedLicense.License.LicenseType == "Trial" && cachedLicense.License.ExpiresAt.HasValue)
+                        else if (cachedLicense.License.LicenseType == "Trial"
+                            && cachedLicense.License.ExpiresAt.HasValue)
                         {
-                            return cachedLicense.License.ExpiresAt.Value < DateTime.UtcNow;
+                            return DateTime.UtcNow < cachedLicense.License.ExpiresAt.Value;
                         }
 
                         return false;
