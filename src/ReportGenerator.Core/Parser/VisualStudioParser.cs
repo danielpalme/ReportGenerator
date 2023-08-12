@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Parser.Filtering;
@@ -251,8 +252,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                 var metrics = new[]
                 {
-                    Metric.BlocksCovered(int.Parse(method.Element("BlocksCovered").Value, CultureInfo.InvariantCulture)),
-                    Metric.BlocksNotCovered(int.Parse(method.Element("BlocksNotCovered").Value, CultureInfo.InvariantCulture))
+                    Metric.BlocksCovered(method.Element("BlocksCovered").Value.ParseLargeInteger()),
+                    Metric.BlocksNotCovered(method.Element("BlocksNotCovered").Value.ParseLargeInteger())
                 };
 
                 var methodMetric = new MethodMetric(fullName, shortName, metrics);

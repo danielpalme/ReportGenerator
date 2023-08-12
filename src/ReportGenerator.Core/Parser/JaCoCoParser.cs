@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Parser.Filtering;
@@ -182,10 +183,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .Select(line => new JaCoCoLineCoverage()
                 {
                     LineNumber = int.Parse(line.Attribute("nr").Value, CultureInfo.InvariantCulture),
-                    MissedInstructions = int.Parse(line.Attribute("mi")?.Value ?? "0", CultureInfo.InvariantCulture),
-                    CoveredInstructions = int.Parse(line.Attribute("ci")?.Value ?? "0", CultureInfo.InvariantCulture),
-                    MissedBranches = int.Parse(line.Attribute("mb")?.Value ?? "0", CultureInfo.InvariantCulture),
-                    CoveredBranches = int.Parse(line.Attribute("cb")?.Value ?? "0", CultureInfo.InvariantCulture)
+                    MissedInstructions = (line.Attribute("mi")?.Value ?? "0").ParseLargeInteger(),
+                    CoveredInstructions = (line.Attribute("ci")?.Value ?? "0").ParseLargeInteger(),
+                    MissedBranches = (line.Attribute("mb")?.Value ?? "0").ParseLargeInteger(),
+                    CoveredBranches = (line.Attribute("cb")?.Value ?? "0").ParseLargeInteger()
                 })
                 .OrderBy(seqpnt => seqpnt.LineNumber)
                 .ToArray();

@@ -467,7 +467,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     branchPoint.Attribute("path").Value,
                     branchPoint.Attribute("offset").Value,
                     branchPoint.Attribute("offsetend").Value);
-                int vc = int.Parse(branchPoint.Attribute("vc").Value, CultureInfo.InvariantCulture);
+                int vc = branchPoint.Attribute("vc").Value.ParseLargeInteger();
 
                 if (result.TryGetValue(lineNumber, out var branches))
                 {

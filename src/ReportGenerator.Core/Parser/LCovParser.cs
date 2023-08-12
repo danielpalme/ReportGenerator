@@ -150,7 +150,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     int lineNumber = int.Parse(tokens[0], CultureInfo.InvariantCulture);
 
                     var branch = new Branch(
-                        "-".Equals(tokens[3]) ? 0 : int.Parse(tokens[3], CultureInfo.InvariantCulture),
+                        "-".Equals(tokens[3]) ? 0 : tokens[3].ParseLargeInteger(),
                         $"{tokens[0]}_{tokens[1]}_{tokens[2]}");
 
                     ICollection<Branch> branches = null;

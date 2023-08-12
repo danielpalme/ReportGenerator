@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.1.24.0
+
+    * Fix: #619 Improved report parsing to avoid integer overflow
+
 5.1.23.0
 
     * New: Added minimum coverage thresholds to validate coverage goals

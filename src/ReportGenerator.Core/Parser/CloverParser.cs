@@ -217,8 +217,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                 int lineNumber = int.Parse(line.Attribute("num").Value, CultureInfo.InvariantCulture);
 
-                int negativeBrancheCovered = int.Parse(line.Attribute("falsecount").Value, CultureInfo.InvariantCulture);
-                int positiveBrancheCovered = int.Parse(line.Attribute("truecount").Value, CultureInfo.InvariantCulture);
+                int negativeBrancheCovered = line.Attribute("falsecount").Value.ParseLargeInteger();
+                int positiveBrancheCovered = line.Attribute("truecount").Value.ParseLargeInteger();
 
                 if (result.ContainsKey(lineNumber))
                 {

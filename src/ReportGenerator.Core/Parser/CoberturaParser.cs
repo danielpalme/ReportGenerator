@@ -437,8 +437,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 {
                     int lineNumber = int.Parse(line.Attribute("number").Value, CultureInfo.InvariantCulture);
 
-                    int numberOfCoveredBranches = int.Parse(match.Groups["NumberOfCoveredBranches"].Value, CultureInfo.InvariantCulture);
-                    int numberOfTotalBranches = int.Parse(match.Groups["NumberOfTotalBranches"].Value, CultureInfo.InvariantCulture);
+                    int numberOfCoveredBranches = match.Groups["NumberOfCoveredBranches"].Value.ParseLargeInteger();
+                    int numberOfTotalBranches = match.Groups["NumberOfTotalBranches"].Value.ParseLargeInteger();
 
                     var branches = new HashSet<Branch>();
 
