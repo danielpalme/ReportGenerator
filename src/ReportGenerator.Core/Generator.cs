@@ -297,6 +297,8 @@ namespace Palmmedia.ReportGenerator.Core
                 throw new ArgumentNullException(nameof(parserResult));
             }
 
+            MathExtensions.MaximumDecimalPlaces = settings.MaximumDecimalPlacesForCoverageQuotas;
+
             var reportContext = new ReportContext(reportConfiguration, settings);
 
             var pluginLoader = new ReflectionPluginLoader(reportConfiguration.Plugins);

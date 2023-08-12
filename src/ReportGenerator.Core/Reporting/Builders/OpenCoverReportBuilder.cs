@@ -412,7 +412,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
         private decimal CalculateQuota(int covered, int total)
         {
-            return (total == 0) ? 0m : (decimal)Math.Truncate(1000 * (double)covered / (double)total) / 10;
+            return (total == 0) ? 0m : MathExtensions.CalculatePercentage(covered, total);
         }
     }
 }

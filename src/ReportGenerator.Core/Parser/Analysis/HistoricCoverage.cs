@@ -1,4 +1,5 @@
 using System;
+using Palmmedia.ReportGenerator.Core.Common;
 
 namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
 {
@@ -73,7 +74,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// Gets the coverage quota of the class.
         /// </summary>
         /// <value>The coverage quota.</value>
-        public decimal? CoverageQuota => (this.CoverableLines == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)this.CoveredLines / (double)this.CoverableLines) / 10;
+        public decimal? CoverageQuota => (this.CoverableLines == 0) ? (decimal?)null : MathExtensions.CalculatePercentage(this.CoveredLines, this.CoverableLines);
 
         /// <summary>
         /// Gets or sets the number of total lines.
@@ -101,7 +102,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// Gets the branch coverage quota of the class.
         /// </summary>
         /// <value>The branch coverage quota.</value>
-        public decimal? BranchCoverageQuota => (this.TotalBranches == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)this.CoveredBranches / (double)this.TotalBranches) / 10;
+        public decimal? BranchCoverageQuota => (this.TotalBranches == 0) ? (decimal?)null : MathExtensions.CalculatePercentage(this.CoveredBranches, this.TotalBranches);
 
         /// <summary>
         /// Gets or sets the number of covered code elements.
@@ -123,7 +124,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// Gets the code elements coverage quota.
         /// </summary>
         /// <value>The code elements coverage quota.</value>
-        public decimal? CodeElementCoverageQuota => (this.TotalCodeElements.GetValueOrDefault() == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)this.CoveredCodeElements.GetValueOrDefault() / (double)this.TotalCodeElements) / 10;
+        public decimal? CodeElementCoverageQuota => (this.TotalCodeElements.GetValueOrDefault() == 0) ? (decimal?)null : MathExtensions.CalculatePercentage(this.CoveredCodeElements.GetValueOrDefault(), this.TotalCodeElements.GetValueOrDefault());
 
         /// <summary>
         /// Determines whether the specified <see cref="object" />, is equal to this instance.

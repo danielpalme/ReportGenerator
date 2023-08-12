@@ -6,6 +6,7 @@ import { CoverageInfoSettings } from "./data/coverageinfo-settings.class";
 import { Metric } from "./data/metric.class";
 import { ClassViewModel } from "./viewmodels/class-viewmodel.class";
 import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
+import { Helper } from "./viewmodels/helper.class";
 
 @Component({
   selector: "coverage-info",
@@ -251,6 +252,7 @@ export class CoverageInfoComponent {
     this.metrics = (<any>this.window).metrics;
 
     this.translations = (<any>this.window).translations;
+    Helper.maximumDecimalPlacesForCoverageQuotas = (<any>this.window).maximumDecimalPlacesForCoverageQuotas;
 
     let restoredFromHistory: boolean = false;
 

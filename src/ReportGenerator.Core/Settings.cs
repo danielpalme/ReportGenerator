@@ -77,5 +77,10 @@ namespace Palmmedia.ReportGenerator.Core
         ///  Gets or sets the default assembly name for gcov and lcov.
         /// </summary>
         public string DefaultAssemblyName { get; set; } = "Default";
+
+        /// <summary>
+        /// Gets or sets the maximum decimal places for coverage quotas / percentages.
+        /// </summary>
+        public int MaximumDecimalPlacesForCoverageQuotas { get; set; } = 1;
     }
 }

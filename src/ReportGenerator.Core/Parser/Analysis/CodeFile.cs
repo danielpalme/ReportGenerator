@@ -340,7 +340,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                 }
             }
 
-            return (coverableLines == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)coveredLines / (double)coverableLines) / 10;
+            return (coverableLines == 0) ? (decimal?)null : MathExtensions.CalculatePercentage(coveredLines, coverableLines);
         }
 
         /// <summary>

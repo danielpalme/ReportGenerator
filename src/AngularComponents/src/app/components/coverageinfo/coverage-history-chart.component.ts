@@ -28,8 +28,8 @@ export class CoverageHistoryChartComponent {
 
             for (let i: number = 0; i < value.length; i++) {
                 path += `${i === 0 ? "M" : "L"}`;
-                path += `${Helper.roundNumber(30 * i / (value.length - 1), 1)}`;
-                path += `,${Helper.roundNumber(18 - (18 * value[i] / 100), 1)}`;
+                path += `${Helper.roundNumber(30 * i / (value.length - 1))}`;
+                path += `,${Helper.roundNumber(18 - (18 * value[i] / 100))}`;
             }
 
             this.path = path;

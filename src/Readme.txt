@@ -69,6 +69,7 @@ CHANGELOG
 
 5.1.24.0
 
+    * Fix: #612 Increase percentage accuracy in reports
     * Fix: #619 Improved report parsing to avoid integer overflow
 
 5.1.23.0

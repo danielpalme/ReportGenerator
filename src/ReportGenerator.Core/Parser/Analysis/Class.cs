@@ -139,7 +139,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         {
             get
             {
-                return (this.CoverableLines == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)this.CoveredLines / (double)this.CoverableLines) / 10;
+                return (this.CoverableLines == 0) ? (decimal?)null : MathExtensions.CalculatePercentage(this.CoveredLines, this.CoverableLines);
             }
         }
 
@@ -163,7 +163,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// Gets the branch coverage quota of the class.
         /// </summary>
         /// <value>The branch coverage quota.</value>
-        public decimal? BranchCoverageQuota => (this.TotalBranches == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)this.CoveredBranches / (double)this.TotalBranches) / 10;
+        public decimal? BranchCoverageQuota => (this.TotalBranches == 0) ? (decimal?)null : MathExtensions.CalculatePercentage(this.CoveredBranches.GetValueOrDefault(), this.TotalBranches.GetValueOrDefault());
 
         /// <summary>
         /// Gets the number of covered code elements.
@@ -185,7 +185,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// Gets the code elements coverage quota.
         /// </summary>
         /// <value>The code elements coverage quota.</value>
-        public decimal? CodeElementCoverageQuota => (this.TotalCodeElements == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)this.CoveredCodeElements / (double)this.TotalCodeElements) / 10;
+        public decimal? CodeElementCoverageQuota => (this.TotalCodeElements == 0) ? (decimal?)null : MathExtensions.CalculatePercentage(this.CoveredCodeElements, this.TotalCodeElements);
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.

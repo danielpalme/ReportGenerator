@@ -19,7 +19,7 @@ export abstract class ElementBase {
             return NaN;
         }
 
-        return Helper.roundNumber(100 * this.coveredLines / this.coverableLines, 1);
+        return Helper.roundNumber(100 * this.coveredLines / this.coverableLines);
     }
 
     get coveragePercentage(): string {
@@ -43,7 +43,7 @@ export abstract class ElementBase {
             return NaN;
         }
 
-        return Helper.roundNumber(100 * this.coveredBranches / this.totalBranches, 1);
+        return Helper.roundNumber(100 * this.coveredBranches / this.totalBranches);
     }
 
     get branchCoveragePercentage(): string {
@@ -67,7 +67,7 @@ export abstract class ElementBase {
             return NaN;
         }
 
-        return Helper.roundNumber(100 * this.coveredMethods / this.totalMethods, 1);
+        return Helper.roundNumber(100 * this.coveredMethods / this.totalMethods);
     }
     
     get methodCoveragePercentage(): string {

@@ -47,7 +47,7 @@ export class ClassViewModel extends ElementBase {
             return NaN;
         }
 
-        return Helper.roundNumber(100 * this.coveredLines / this.coverableLines, 1);
+        return Helper.roundNumber(100 * this.coveredLines / this.coverableLines);
     }
 
     visible(filter: string, historicCoverageFilter: string): boolean {

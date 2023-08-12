@@ -317,7 +317,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
                 int coverableLines = fileAnalyses.SafeSum(f => f.Lines.Count(l => l.LineVisitStatus != LineVisitStatus.NotCoverable));
                 int coveredLines = fileAnalyses.SafeSum(f => f.Lines.Count(l => l.LineVisitStatus > LineVisitStatus.NotCovered));
-                decimal? coverage = (coverableLines == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)coveredLines / (double)coverableLines) / 10;
+                decimal? coverage = (coverableLines == 0) ? (decimal?)null : MathExtensions.CalculatePercentage(coveredLines, coverableLines);
 
                 int? coverageRounded = null;
 
@@ -336,7 +336,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 foreach (var testMethod in testMethods)
                 {
                     coveredLines = fileAnalyses.SafeSum(f => f.Lines.Count(l => l.LineCoverageByTestMethod.ContainsKey(testMethod) && l.LineCoverageByTestMethod[testMethod].LineVisitStatus > LineVisitStatus.NotCovered));
-                    coverage = (coverableLines == 0) ? (decimal?)null : (decimal)Math.Truncate(1000 * (double)coveredLines / (double)coverableLines) / 10;
+                    coverage = (coverableLines == 0) ? (decimal?)null : MathExtensions.CalculatePercentage(coveredLines, coverableLines);
 
                     coverageRounded = null;
 
@@ -751,6 +751,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             this.javaScriptContent.AppendLine("var branchCoverageAvailable = " + branchCoverageAvailable.ToString().ToLowerInvariant() + ";");
             this.javaScriptContent.AppendLine("var methodCoverageAvailable = " + methodCoverageAvailable.ToString().ToLowerInvariant() + ";");
+            this.javaScriptContent.AppendLine("var maximumDecimalPlacesForCoverageQuotas = " + MathExtensions.MaximumDecimalPlaces + ";");
             this.javaScriptContent.AppendLine();
         }
 

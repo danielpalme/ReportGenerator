@@ -1,6 +1,8 @@
 export class Helper {
-    static roundNumber(number: number, precision: number): number {
-        return Math.floor(number * Math.pow(10, precision)) / Math.pow(10, precision);
+    static maximumDecimalPlacesForCoverageQuotas: number;
+
+    static roundNumber(number: number): number {
+        return Math.floor(number * Math.pow(10, Helper.maximumDecimalPlacesForCoverageQuotas)) / Math.pow(10, Helper.maximumDecimalPlacesForCoverageQuotas);
     }
 
     static getNthOrLastIndexOf(text: string, substring: string, n: number): number {
