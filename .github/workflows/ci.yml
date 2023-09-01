@@ -95,7 +95,8 @@ jobs:
         license: '${{ secrets.REPORTGENERATOR_LICENSE }}'
 
     - name: 'Publish coverage summary'
-      run: $env:GITHUB_STEP_SUMMARY = type .\src\target\reports\coverage\SummaryGithub.md
+      run: cat src/target/reports/coverage/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
+      shell: bash
  
     - name: 'Publish code coverage results'
       uses: actions/upload-artifact@v3
