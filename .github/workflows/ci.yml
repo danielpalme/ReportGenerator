@@ -7,7 +7,7 @@ env:
   buildPlatform: Any CPU
   buildConfiguration: Release
   version: 5.1.24
-  dotnetSDKVersion: 7.0.306
+  dotnetSDKVersion: 7.0.400
   nodeVersion: 18
 
 jobs:
@@ -90,10 +90,13 @@ jobs:
       with:
         reports: 'src\target\reports\coverage\coverage.opencover.xml'
         targetdir: 'src\target\reports\coverage'
-        reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
+        reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges;MarkdownSummaryGithub'
         assemblyfilters: '-xunit*'
         license: '${{ secrets.REPORTGENERATOR_LICENSE }}'
 
+    - name: 'Publish coverage summary'
+      run: $env:GITHUB_STEP_SUMMARY = $env:GITHUB_STEP_SUMMARY = type .\src\target\reports\coverage\SummaryGithub.md
+ 
     - name: 'Publish code coverage results'
       uses: actions/upload-artifact@v3
       with:
