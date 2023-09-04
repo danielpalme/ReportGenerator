@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.1.25.0
+
+    * Fix: OpenCover: Improved handling of generic classes
+
 5.1.24.0
 
     * Fix: #612 Increase percentage accuracy in reports
