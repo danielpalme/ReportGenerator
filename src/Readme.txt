@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.1.26.0
+
+    * Fix: #623 Improved Cobertura output (complexity metric)
+
 5.1.25.0
 
     * Fix: OpenCover: Improved handling of generic classes

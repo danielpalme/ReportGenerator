@@ -403,7 +403,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     int lastLine = int.Parse(lines.Last().Attribute("number").Value, CultureInfo.InvariantCulture);
 
                     codeFile.AddCodeElement(new CodeElement(
-                        fullName,
+                        methodName,
                         methodName,
                         methodName.StartsWith("get_") || methodName.StartsWith("set_") ? CodeElementType.Property : CodeElementType.Method,
                         firstLine,
