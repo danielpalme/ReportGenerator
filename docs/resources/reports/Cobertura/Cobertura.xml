@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage line-rate="0.664" branch-rate="0.5" lines-covered="83" lines-valid="125" branches-covered="3" branches-valid="6" complexity="26" version="0" timestamp="1682628003">
+<coverage line-rate="0.664" branch-rate="0.5" lines-covered="83" lines-valid="125" branches-covered="3" branches-valid="6" complexity="26" version="0" timestamp="1696021530">
   <sources />
   <packages>
     <package name="Sample" line-rate="0.664" branch-rate="0.5" complexity="26">
@@ -141,9 +141,9 @@
             <line number="35" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="Test.Program" filename="C:\temp\Program.cs" line-rate="0.795454545454545" branch-rate="1" complexity="5">
+        <class name="Test.Program" filename="C:\temp\Program.cs" line-rate="0.795454545454545" branch-rate="1" complexity="8">
           <methods>
-            <method name="Main" signature="(System.String[])" line-rate="0.88" branch-rate="1" complexity="NaN">
+            <method name="Main" signature="(System.String[])" line-rate="0.88" branch-rate="1" complexity="1">
               <lines>
                 <line number="12" hits="1" branch="false" />
                 <line number="13" hits="1" branch="false" />
@@ -186,7 +186,7 @@
                 <line number="59" hits="0" branch="false" />
               </lines>
             </method>
-            <method name=".ctor" signature="(System.Net.Http.HttpResponseMessage)" line-rate="1" branch-rate="1" complexity="NaN">
+            <method name=".ctor" signature="(System.Net.Http.HttpResponseMessage)" line-rate="1" branch-rate="1" complexity="1">
               <lines>
                 <line number="73" hits="1" branch="false" />
                 <line number="74" hits="1" branch="false" />
@@ -194,7 +194,7 @@
                 <line number="76" hits="1" branch="false" />
               </lines>
             </method>
-            <method name="SendAsync" signature="(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)" line-rate="1" branch-rate="1" complexity="NaN">
+            <method name="SendAsync" signature="(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)" line-rate="1" branch-rate="1" complexity="1">
               <lines>
                 <line number="79" hits="1" branch="false" />
                 <line number="80" hits="1" branch="false" />
@@ -259,7 +259,7 @@
             <line number="81" hits="1" branch="false" />
           </lines>
         </class>
-        <class name="Test.TestClass2" filename="C:\temp\TestClass2.cs" line-rate="0.631578947368421" branch-rate="0.5" complexity="3">
+        <class name="Test.TestClass2" filename="C:\temp\TestClass2.cs" line-rate="0.631578947368421" branch-rate="0.5" complexity="10">
           <methods>
             <method name="ExecutedProperty" signature="()" line-rate="1" branch-rate="1" complexity="NaN">
               <lines>
@@ -293,7 +293,7 @@
                 <line number="21" hits="0" branch="false" />
               </lines>
             </method>
-            <method name=".ctor" signature="(System.String)" line-rate="0.538461538461538" branch-rate="1" complexity="NaN">
+            <method name=".ctor" signature="(System.String)" line-rate="0.538461538461538" branch-rate="1" complexity="1">
               <lines>
                 <line number="11" hits="2" branch="false" />
                 <line number="13" hits="3" branch="false" />
@@ -326,7 +326,7 @@
                 <line number="39" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="SampleFunction" signature="(System.String)" line-rate="1" branch-rate="0.5" complexity="NaN">
+            <method name="SampleFunction" signature="(System.String)" line-rate="1" branch-rate="0.5" complexity="5">
               <lines>
                 <line number="42" hits="1" branch="false" />
                 <line number="43" hits="1" branch="false" />
@@ -343,7 +343,7 @@
                 <line number="58" hits="1" branch="false" />
               </lines>
             </method>
-            <method name="DoSomething" signature="(System.String,System.String[],System.Guid,System.Collections.Generic.IEnumerable`1&lt;System.String&gt;,System.Collections.Generic.IList`1&lt;System.String&gt;,System.Decimal,System.Int32,System.Collections.Generic.Dictionary`2&lt;System.String,System.Int32&gt;,System.Int32&amp;,System.Single,System.Double,System.Boolean,System.Byte,System.Char,System.Object,System.SByte,System.Int16,System.UInt32,System.UInt64,System.UInt16)" line-rate="0" branch-rate="1" complexity="NaN">
+            <method name="DoSomething" signature="(System.String,System.String[],System.Guid,System.Collections.Generic.IEnumerable`1&lt;System.String&gt;,System.Collections.Generic.IList`1&lt;System.String&gt;,System.Decimal,System.Int32,System.Collections.Generic.Dictionary`2&lt;System.String,System.Int32&gt;,System.Int32&amp;,System.Single,System.Double,System.Boolean,System.Byte,System.Char,System.Object,System.SByte,System.Int16,System.UInt32,System.UInt64,System.UInt16)" line-rate="0" branch-rate="1" complexity="1">
               <lines>
                 <line number="80" hits="0" branch="false" />
                 <line number="81" hits="0" branch="false" />

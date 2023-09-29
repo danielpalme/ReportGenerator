@@ -69,6 +69,7 @@ CHANGELOG
 
 5.1.26.0
 
+    * New: #595 Added new report type 'Html_BlueRed_Summary' to improve red-green colorblind accessibility
     * Fix: #623 Improved Cobertura output (complexity metric)
 
 5.1.25.0
