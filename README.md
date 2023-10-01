@@ -75,7 +75,7 @@ Explanations:
                        MarkdownSummary, MarkdownSummaryGithub, MarkdownDeltaSummary
                        OpenCover
                        Html, Html_Light, Html_Dark, Html_BlueRed
-                       HtmlChart, HtmlInline, HtmlSummary
+                       HtmlChart, HtmlInline, HtmlSummary, Html_BlueRed_Summary
                        HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Light, HtmlInline_AzurePipelines_Dark
                        JsonSummary, Latex, LatexSummary, lcov, MHtml, PngChart, SonarQube, TeamCitySummary
                        TextSummary, TextDeltaSummary
