@@ -10,8 +10,8 @@ ReportGenerator
     
 <b>Powerful code coverage visualization</b>
     
-[![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/danielpalme/ReportGenerator/main/LICENSE.txt)
-[![CI-CD](https://github.com/danielpalme/ReportGenerator/actions/workflows/ci.yml/badge.svg)](https://github.com/danielpalme/ReportGenerator/actions/workflows/ci.yml)
+[![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg?style=for-the-badge)](https://raw.githubusercontent.com/danielpalme/ReportGenerator/main/LICENSE.txt)
+[![CI-CD](https://img.shields.io/github/actions/workflow/status/danielpalme/ReportGenerator/ci.yml?style=for-the-badge)](https://github.com/danielpalme/ReportGenerator/actions/workflows/ci.yml)
 
 </div>
 
@@ -42,10 +42,10 @@ Use the online [configuration tool](https://reportgenerator.io/usage) to get sta
 
 |**Package**|**Platforms**|**Installation/Usage**|
 |:----------|:------------|:---------------------|
-|[ReportGenerator](https://www.nuget.org/packages/ReportGenerator)<br/><br/>[![Nuget](https://img.shields.io/nuget/v/ReportGenerator.svg)![Nuget](https://img.shields.io/nuget/dt/ReportGenerator.svg)](https://www.nuget.org/packages/ReportGenerator)|.NET Core >=3.1<br/>.NET Framework 4.7|Use this package if your project is based on *.NET Framework* or *.NET Core* and you want to use *ReportGenerator* via the command line or a build script.<br/><br/>**Usage**<br/>```dotnet $(UserProfile).nuget\packages\reportgenerator\x.y.z\tools\net6.0\ReportGenerator.dll [options]```<br/>```$(UserProfile).nuget\packages\reportgenerator\x.y.z\tools\net6.0\ReportGenerator.exe [options]```<br/><br/>```$(UserProfile)\.nuget\packages\reportgenerator\x.y.z\tools\net47\ReportGenerator.exe [options]```|
-|[dotnet-reportgenerator-globaltool](https://www.nuget.org/packages/dotnet-reportgenerator-globaltool)<br/><br/>[![Nuget](https://img.shields.io/nuget/v/dotnet-reportgenerator-globaltool.svg)![Nuget](https://img.shields.io/nuget/dt/dotnet-reportgenerator-globaltool.svg)](https://www.nuget.org/packages/dotnet-reportgenerator-globaltool)|.NET Core >=3.1 |Use this package if your project is based on *.NET Core* and you want to use *ReportGenerator* as a (global) 'DotnetTool'.<br/><br/>**Installation**<br/>```dotnet tool install -g dotnet-reportgenerator-globaltool```<br/><br/>```dotnet tool install dotnet-reportgenerator-globaltool --tool-path tools```<br/><br/>```dotnet new tool-manifest```<br/>```dotnet tool install dotnet-reportgenerator-globaltool```<br/><br/>**Usage**<br/>```reportgenerator [options]```<br/>```tools\reportgenerator.exe [options]```<br/>```dotnet reportgenerator [options]```|
-|[ReportGenerator.Core](https://www.nuget.org/packages/ReportGenerator.Core)<br/><br/>[![Nuget](https://img.shields.io/nuget/v/ReportGenerator.Core.svg)![Nuget](https://img.shields.io/nuget/dt/ReportGenerator.Core.svg)](https://www.nuget.org/packages/ReportGenerator.Core)|.NET Standard 2.0|Use this package if you want to write a custom **plugin** for *ReportGenerator* or if you want to call/execute *ReportGenerator* within your code base.<br/><br/>**Plugin development**<br/>[Custom reports](https://github.com/danielpalme/ReportGenerator/wiki/Custom-reports)<br/>[Custom history storage](https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage)|
-|[Azure DevOps extension](https://marketplace.visualstudio.com/items?itemName=Palmmedia.reportgenerator)<br/><br/>[![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/Palmmedia.reportgenerator.svg)![Visual Studio Marketplace Installs - Azure DevOps Extension](https://img.shields.io/visual-studio-marketplace/azure-devops/installs/total/Palmmedia.reportgenerator.svg)](https://marketplace.visualstudio.com/items?itemName=Palmmedia.reportgenerator)|.NET Core >=3.1| Add the Azure DevOps extension to your build pipeline.<br />[Learn more](https://github.com/danielpalme/ReportGenerator/wiki/Integration#azure-devops-extension)|
+|[ReportGenerator](https://www.nuget.org/packages/ReportGenerator)<br/><br/>[![Nuget](https://img.shields.io/nuget/v/ReportGenerator.svg?style=for-the-badge)![Nuget](https://img.shields.io/nuget/dt/ReportGenerator.svg?style=for-the-badge)](https://www.nuget.org/packages/ReportGenerator)|.NET Core >=3.1<br/>.NET Framework 4.7|Use this package if your project is based on *.NET Framework* or *.NET Core* and you want to use *ReportGenerator* via the command line or a build script.<br/><br/>**Usage**<br/>```dotnet $(UserProfile).nuget\packages\reportgenerator\x.y.z\tools\net6.0\ReportGenerator.dll [options]```<br/>```$(UserProfile).nuget\packages\reportgenerator\x.y.z\tools\net6.0\ReportGenerator.exe [options]```<br/><br/>```$(UserProfile)\.nuget\packages\reportgenerator\x.y.z\tools\net47\ReportGenerator.exe [options]```|
+|[dotnet-reportgenerator-globaltool](https://www.nuget.org/packages/dotnet-reportgenerator-globaltool)<br/><br/>[![Nuget](https://img.shields.io/nuget/v/dotnet-reportgenerator-globaltool.svg?style=for-the-badge)![Nuget](https://img.shields.io/nuget/dt/dotnet-reportgenerator-globaltool.svg?style=for-the-badge)](https://www.nuget.org/packages/dotnet-reportgenerator-globaltool)|.NET Core >=3.1 |Use this package if your project is based on *.NET Core* and you want to use *ReportGenerator* as a (global) 'DotnetTool'.<br/><br/>**Installation**<br/>```dotnet tool install -g dotnet-reportgenerator-globaltool```<br/><br/>```dotnet tool install dotnet-reportgenerator-globaltool --tool-path tools```<br/><br/>```dotnet new tool-manifest```<br/>```dotnet tool install dotnet-reportgenerator-globaltool```<br/><br/>**Usage**<br/>```reportgenerator [options]```<br/>```tools\reportgenerator.exe [options]```<br/>```dotnet reportgenerator [options]```|
+|[ReportGenerator.Core](https://www.nuget.org/packages/ReportGenerator.Core)<br/><br/>[![Nuget](https://img.shields.io/nuget/v/ReportGenerator.Core.svg?style=for-the-badge)![Nuget](https://img.shields.io/nuget/dt/ReportGenerator.Core.svg?style=for-the-badge)](https://www.nuget.org/packages/ReportGenerator.Core)|.NET Standard 2.0|Use this package if you want to write a custom **plugin** for *ReportGenerator* or if you want to call/execute *ReportGenerator* within your code base.<br/><br/>**Plugin development**<br/>[Custom reports](https://github.com/danielpalme/ReportGenerator/wiki/Custom-reports)<br/>[Custom history storage](https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage)|
+|[Azure DevOps extension](https://marketplace.visualstudio.com/items?itemName=Palmmedia.reportgenerator)<br/><br/>[![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/Palmmedia.reportgenerator.svg?style=for-the-badge)![Visual Studio Marketplace Installs - Azure DevOps Extension](https://img.shields.io/visual-studio-marketplace/azure-devops/installs/total/Palmmedia.reportgenerator.svg?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=Palmmedia.reportgenerator)|.NET Core >=3.1| Add the Azure DevOps extension to your build pipeline.<br />[Learn more](https://github.com/danielpalme/ReportGenerator/wiki/Integration#azure-devops-extension)|
 |[GitHub Actions](https://github.com/marketplace/actions/reportgenerator)|.NET Core >=3.1| Add the GitHub Action to your build pipeline.<br />[Learn more](https://github.com/danielpalme/ReportGenerator/wiki/Integration#github-actions)|
 
 ### Usage / Command line parameters
@@ -235,11 +235,10 @@ Example: ![Sample badge](https://danielpalme.github.io/ReportGenerator/resources
 
 ### Visual Studio extensions
 The following extensions exist to visualize coverage in Visual Studio: 
-| **Name** | **Coverage tool** | **Links** | **Comment** |
-|:---------|:------------------|:----------|:------------|
-| Run Coverlet Report VS2022 | [coverlet](https://github.com/coverlet-coverage/coverlet/) | [GitHub](https://github.com/the-dext/RunCoverletReport)<br/>[Marketplace](https://marketplace.visualstudio.com/items?itemName=ChrisDexter.RunCoverletReportVs2022) | |
-| FineCodeCoverage | [coverlet](https://github.com/coverlet-coverage/coverlet/), [OpenCover](https://github.com/OpenCover/opencover) | [GitHub](https://github.com/FortuneN/FineCodeCoverage)<br/>[Marketplace](https://marketplace.visualstudio.com/items?itemName=FortuneNgwenya.FineCodeCoverage) | VS 2022 is not supported |
-| AxoCover | [OpenCover](https://github.com/OpenCover/opencover)| [GitHub](https://github.com/axodox/AxoCover)<br/>[Marketplace](https://marketplace.visualstudio.com/items?itemName=axodox1.AxoCover) | VS 2019+ is not supported |
+| **Name** | **Coverage tool** | **Links** |
+|:---------|:------------------|:----------|
+| Run Coverlet Report VS2022 | [coverlet](https://github.com/coverlet-coverage/coverlet/) | [GitHub](https://github.com/the-dext/RunCoverletReport)<br/>[Marketplace](https://marketplace.visualstudio.com/items?itemName=ChrisDexter.RunCoverletReportVs2022) |
+| FineCodeCoverage | [coverlet](https://github.com/coverlet-coverage/coverlet/), [OpenCover](https://github.com/OpenCover/opencover) | [GitHub](https://github.com/FortuneN/FineCodeCoverage)<br/>[Marketplace](https://marketplace.visualstudio.com/items?itemName=FortuneNgwenya.FineCodeCoverage) |
 
 
 ### Links
@@ -249,13 +248,13 @@ The following extensions exist to visualize coverage in Visual Studio:
 * https://www.palmmedia.de/Blog/2012/4/29/reportgenerator-new-release-with-more-advanced-report-preprocessing
 
 ### Download statistics
-![Nuget](https://img.shields.io/nuget/dt/ReportGenerator.svg?label=ReportGenerator%40nuget)
-![Nuget](https://img.shields.io/nuget/dt/dotnet-reportgenerator-globaltool.svg?label=dotnet-reportgenerator-globaltool%40nuget)
-![Nuget](https://img.shields.io/nuget/dt/ReportGenerator.Core.svg?label=ReportGenerator.Core%40nuget)
+![Nuget](https://img.shields.io/nuget/dt/ReportGenerator.svg?label=ReportGenerator%40nuget?style=for-the-badge)
+![Nuget](https://img.shields.io/nuget/dt/dotnet-reportgenerator-globaltool.svg?label=dotnet-reportgenerator-globaltool%40nuget?style=for-the-badge)
+![Nuget](https://img.shields.io/nuget/dt/ReportGenerator.Core.svg?label=ReportGenerator.Core%40nuget?style=for-the-badge)
 
-![Visual Studio Marketplace Installs - Azure DevOps Extension](https://img.shields.io/visual-studio-marketplace/azure-devops/installs/total/Palmmedia.reportgenerator.svg?label=Azure%20DevOps)
-![GitHub All Releases](https://img.shields.io/github/downloads/danielpalme/ReportGenerator/total.svg?label=GitHub)
-![Chocolatey](https://img.shields.io/chocolatey/dt/reportgenerator.portable.svg?label=Chocolatey)
+![Visual Studio Marketplace Installs - Azure DevOps Extension](https://img.shields.io/visual-studio-marketplace/azure-devops/installs/total/Palmmedia.reportgenerator.svg?label=Azure%20DevOps?style=for-the-badge)
+![GitHub All Releases](https://img.shields.io/github/downloads/danielpalme/ReportGenerator/total.svg?label=GitHub?style=for-the-badge)
+![Chocolatey](https://img.shields.io/chocolatey/dt/reportgenerator.portable.svg?label=Chocolatey?style=for-the-badge)
 
 ### Trends
 [Nuget downloads](https://nugettrends.com/packages?months=24&ids=ReportGenerator&ids=dotnet-reportgenerator-globaltool&ids=ReportGenerator.Core&ids=dotnet-reportgenerator-cli)  
