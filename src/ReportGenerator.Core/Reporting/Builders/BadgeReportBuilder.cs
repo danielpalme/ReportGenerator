@@ -6,12 +6,6 @@ using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Properties;
-using SixLabors.Fonts;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Drawing.Processing;
-using SixLabors.ImageSharp.Formats.Png;
-using SixLabors.ImageSharp.PixelFormats;
-using SixLabors.ImageSharp.Processing;
 
 namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 {
@@ -168,21 +162,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         private const string ShieldsIoTemplate = @"<svg xmlns=""http://www.w3.org/2000/svg"" xmlns:xlink=""http://www.w3.org/1999/xlink"" width=""{0}"" height=""20""><linearGradient id=""b"" x2=""0"" y2=""100%""><stop offset=""0"" stop-color=""#bbb"" stop-opacity="".1""/><stop offset=""1"" stop-opacity="".1""/></linearGradient><clipPath id=""a""><rect width=""{0}"" height=""20"" rx=""3"" fill=""#fff""/></clipPath><g clip-path=""url(#a)""><path fill=""#555"" d=""M0 0h61v20H0z""/><path fill=""#{1}"" d=""M61 0h{2}v20H61z""/><path fill=""url(#b)"" d=""M0 0h{0}v20H0z""/></g><g fill=""#fff"" text-anchor=""middle"" font-family=""DejaVu Sans,Verdana,Geneva,sans-serif"" font-size=""110""> <text x=""315"" y=""150"" fill=""#010101"" fill-opacity="".3"" transform=""scale(.1)"" textLength=""510"">coverage</text><text x=""315"" y=""140"" transform=""scale(.1)"" textLength=""510"">coverage</text><text x=""{3}"" y=""150"" fill=""#010101"" fill-opacity="".3"" transform=""scale(.1)"" textLength=""{4}"">{5}</text><text x=""{3}"" y=""140"" transform=""scale(.1)"" textLength=""{4}"">{5}</text></g></svg>";
 
         /// <summary>
-        /// The template for line coverage badge in PNG format.
-        /// </summary>
-        private const string LineCoveragePngTemplate = "iVBORw0KGgoAAAANSUhEUgAAAJsAAAAUCAMAAACtWb+zAAABgFBMVEUreCtOTk4QtBA+Pj4BpQFOTk49PT0StRIBpAFLS0s/Pz89PT1NTU1CQkIOsg5ISEhPT08MsAwKrgoIrAgGqgYCpgJEREQApABGRkZKSkrGDg4FqAUEpwQRtBEQsxAStRK+Bgb////EDAzBCQm8BATJEhLIERHHEBDCCwu/CAi6AwO5AgK4AQG3AAA1NTXe3t5SUlKCgoLT1NNaWlpWVlY3Nzf7KCjs7OwyMjLh4eHQ0NC5ubmysrKmpqba2trLy8vBwcGsrKygoKB6enpkZGS9vb22trY7Ozv2IiLuGRnlERHdCQnUAQH6+vr09fTw8fDl5eWUlJRfX19KTkp7OjryHR3pFRXhDQ3YBATo6OfX19fGx8Zqamo8pDw3yDdvMjIrmitzc3NwcHBCUkJ2ODgzujMxtDEtpS2MTRj8/PyampqYmJiQkJCIiIhvzm9ms2bPY188PDw2jzY1wjUvri8piSmVSiGBRBKRkZFCiEI5mzmjNjYvqS8nkCePHx+EURZSNd53AAAACXRSTlMG5+fm5YqJiYgKZ7i6AAACsUlEQVRIx83O11LbQBSAYVECWNZmnbZZpZv0pi5kyZJ7oblCigsQeodQ05NXj4SLnMxeIA+e5LtY6ZyVZn6KutQX6I3HBPfPrX/YTmN65QnBXQ+GqT6myefbYma+MBfnKcE9D/opX1ssWJubn5vxXZRbBJe9aLVBXzqX35uft+P+tzYWhvOFvbXV1aOjP+PKwj9sYx3Qlylo++u/No7X1la/zrBNAVPj81Kd7c6oLdjBma94QUEHa2qV/R+fpt9vrK9/Pz5kYUM4ClQumYRQkKErUG7d+2T57FUWYPvhGiXook2RKtKhnTb1buODbRk2tpsBDCENoFmsSoqcFyCs7UKLj+opmDalXDkf4XnZ/pnnC7swFYnqcdjhGcFVLyjsQIqhf3TSJt+enpws44ZFDWGHaKhcwkTpHaxoOFlTVTGNwzVFxQccF9/CmQTHhUVs1FU1ksKuhwTdtCGlmTbx5rSVhpe0xjP+GeMUj5ckvG0hKxKLRas4LAKEtw1eS2BdxvbI5mKxWEX8qy3YwZmveUGhhp+ttPGxb6gpsCkjR7yEUD2CQDHFy8iyBEFgUUZEaEdiuFIC6SmEwiLMKYLAYOR6TtBV28J0K21sFjWBTFRASFxMShBZcYRKUhSgRZ4BoH7WlrAADCeQaQpLugiiJQAUBbkeEFz3ggJNC1OtNNBGmwW+IJX98WLVwAAwuSQA/pJW1SyQEQEQKrxuJABOF9NGEgQMnS+Wgevi2sDCZCvNxYVgNkQDLovsE9ChrL1TQ5BT7ZU9cwwXUgFtHxHZuXW+cj2yBTs4820vKODGTbTTXDTdPF3uRPudMxmJ8XF/e++2EdzxgqJdK+Njs7R3fiEFOcL+BcENL6iBzrgVuhsHWT9p/ZLAS9ogNeTvlVcENz0YoaihAX9vvCY4f9ngCPUbjSNAsjHFfhsAAAAASUVORK5CYII=";
-
-        /// <summary>
-        /// The template for branch coverage badge in PNG format.
-        /// </summary>
-        private const string BranchCoveragePngTemplate = "iVBORw0KGgoAAAANSUhEUgAAAJsAAAAUCAMAAACtWb+zAAAB+1BMVEU+Pj4BpQFOTk49PT0StRIBpAFJSUkAqgBNTU0Psw9PT08StRJLS0s/Pz89PT1NTU1JSUkNsQ1BQUEKrgoHqwcEqARPT08CpgIApABFRUVDQ0NHR0cPsg8MrwwJrAkGqQYRtBEQsxAStRLJERG4AAC+Bga8BATACAjFDg7HEBC5AgLGDw+6AwM1NTXDDAz////CCwvBCgrEDQ2Dg4M3NzfV1dRYWFgyMjLe3t7d3d2lpaVbW1tVVVU7Ozvj4+PPz8/Ly8vBwcGgoKBoaGhSUlJQUFDy8vHn5+b55eW9vb22trazs7N6Ojr2IiLlERHdCQn6+vrY2NiUlJTji4txcXFfX19KTkozuTMqmSr6KirJKir7JibyHR3uGRnpFRXhDQ3YBATUAADu7u7q6urGx8a6urq4uLisrKyqqqp6enrTZGM3yDctpi319vT77+/s7evg4ODa2trR0dHz0NDwxMTppKSZmZmQkJDfhIR2dnbcbW1jY2PWWVl0NjbOMzNvMTEwrzDHJibKICCTSx+ITha/FRX8/Pz88/Pyycnuvr6wsLCKiop+fn5vzm9ms2bUSUlBUUE8pTw3lzc1wjUoiyiBRBL33t7O2c3qsbHrra3jk5PeeHjZcnJiYmLSUFDNRkZEVURCiEI+oz48pDw3izajNjaPHx/sHh7TBQUJLNt4AAAADHRSTlPm5YqJiYgHBufn5ub2Cs1oAAADMklEQVRIx83OV1vTUBjA8bhX08ao6DnHrUgdIUKTdO/dotJFFTd7b9kgMpQNAu69/ZhmlSD2wlR4Hn8X7/ucN7n4Yzu37s3bHGeyOP3X9m3fhW3VbZZsbSdV2I7t1sk0Go+u7NMGtp3P4pQKezDNKjdd9bnxaZlmo1wU9IcmRy8qjqqRaSM04dLmucbGDYzTC0KjiTd6ff9kQi/arwYmpxHVzYG5dDq9vPzlt7iU/9/auhKdC/rR58NdCzm0ESJNpKJ1vml8fGQknV4qI2T+aIU5wHqJ3BQLhulXxcXnQ4Odw+Izl7Zoa3D++rP798abmppGlghZjQsy1GwfQfg4QpGXImQaq1XcVpuyFIWCcvoBP/vpRKHomBoYEtjY4IuvfNq1u2PXeR+RdH2cx0+cJKKOGMtZm/0IVc0gi8nVNoDC02xpKhAzmznEsSZzYAa9i7naatEalwV8Gz976cHLogNqSG2AczoahLSrd8ZWVhaRJFkJxW1wMpQnCsI9iKsA9VUMMxtGNVU2BtkpqrYbRTwUVW1ATi/DmL1IUSTg24qKBp+0TBSJ1LUBEbTJabdvjS0CWbJS2rU9AAyYQZIF3RZgaXe7XTFQY4AAdTtNlRbgsAJQbSBK3W530AAUBYJH9FQiRD95XyA5rgYGJN8zaVdufgMy/2OruOviAHjNgAx6TRywWHw+PwEifEVPh46Ke4BjQGrjfD4d+rONpltelxfIDqqBQcnDn5m0GyVQRkZcfggNffUdCFrqIIyzLhImTToSemHEAKGnjkQ1Hjgd9SXbDNAVJ0nOBhX5gkd0S0Nh/iq1bXLcNSUtA48GTAE2pa11xJwIQl1pPYTaeCtbYRHbbJVmh9MDUTgYdtZDf4fDFEytbyunX+avcUINjMx4eFVKI9egjITdiJOUHfKTxI12/sYYCYrhT/yb0lFGhsT50W7lv4p/Kc4Jpno7P5xTHFJDaSOHfqymKXBcngrlhWuF2dfuNtVp5fv6ttBE79uc23DF0JUbJbh6Wp+XoLLcLwkaQl0TlxSH1cDWxpUM4bmw27XZzheyUJO2Bdum3Sxnsziiwg5s5zZMK/rP2rbs2PULwDaL24J71s4AAAAASUVORK5CYII=";
-
-        /// <summary>
-        /// The template for method coverage badge in PNG format.
-        /// </summary>
-        private const string MethodCoveragePngTemplate = "iVBORw0KGgoAAAANSUhEUgAAAJsAAAAUCAMAAACtWb+zAAAB3VBMVEU+Pj4BpQE9PT0StRIBpAFJSUkAqgBNTU0Psw9PT08StRJPT09OTk5AQEBLS0s9PT1OTk5JSUkOsg4MsAwKrgoHqwcEqARNTU1CQkJEREQApAD///8JrAkGqQYDpgMRtBEQsxACpQIStRLIEBBGRkZHR0e5AQHFDQ1ISEjJEhK+Bga3AADBCQm8BAQ1NTXGDw/DCwve3t5RUVG6AwPRz883NzfLv7/7KCi/CAi3t7dcXFypQ0MyMjL7+/tVVVU7Ozvm5ubi4uLa2trBwcGzs7OlpaWhoaGpVlb19vXt7e3b19fT09O7u7uVlZWCgoJiYmJXV1f2IiLuGRnlERHdCQnUAQHV1dW4nJxxcXFZWVlKTkryHR3pFRXhDQ3YBATz8/Px8fDq6urg4ODKysrGx8a9vb2/qqqpqamuf397e3t3d3esdXVnZ2c8pDw3yDcrmivMzMysrKybm5uQkJCEhISAgICqbW1ra2tCUkKrPT18Ozt5OTkzujMxtDEvrC8tpS0ojSiIThbNw8OwsLC1lJSKiopqwGrPY188ijw3lzd0Nzc1wjVxNDRtMDCwIyO2FRWBRBLO2c3JvLzBrq6urq6wh4dx1XFkrGSpYWGjNjasNDSXSSSTTB+PHx+QTRwn1+yJAAAADXRSTlPm5YmJiAcG5+fm5oqKkukDfQAAA0dJREFUSMe11Gd30lAYwPG4Z4C4uFfcJhIRIokJQti7bFyU1tG9a+2wSzvde+/1Wb23JE318MJb29+L5LlP8uJ/OJxQW3btsKyP03Wc+Gc7N22ldlt0Vqt1TdtO1nGUwCZqm1VjMo1amp9Y1069tmMEtlOmZXFb582hm82mtXJWM/3A0/tKm/eQ0NsYU1ew4dPQ0BrG2bFvH7MNjf7GhnsDr/BxNW0Mk29ofTQ7M/P8+Z9xqvQ/bel3tu60HUu/D3ZPk7YxS0y+1syj+cXFudnZmafNjEZKZMSW3CSzOqjIM2E3THjs9r0ktLZEJvJ54c2VG4vz83NzTxmNrwMoQl8/imxiDBZVn0xqba+GGKwJ3wxut9tmQ7+bG0t322SP203WxmOhSuTtE5R2+fqvW8gUX9sGLRzP04BJRLO5stoi8XznQz4pdrSX+K77laDaEhPFJr5cEcXWh3wp1tE+wq+A27Cl/1vkgd+P2vaRoDgMluXoY5x26dqPhYUprqbaBjmsKCtCKgG7xrhyhu3rVJTxPOfrDClcWBA+jHK+lCDki5w8qSixQc7gdDptmsZpdPB7nE6yNhaDMKSlXbz6fYrVVNtq95Exli2JbLXCjiZhMhaPd2RZ3ziAXEEW21JsVGXZfJEJxuPxSJE1rGhDY63tEAkK1vzU0y6c/wo1UlCFWE8BwsEYpCODYhNMJiVJYqDvNoRjOYtQSMFoCULcVpYkCwcNXq9Xb/Nifo/Xu5+E3vbyip52/g7UgMSwBGGxvy/Hw2QPhIXcMA2rooUGk0ttqR7A+1LwfkKqto+D4QJNl0PQ4HA49DYH5vc4HGRtQPPysp4GltGJVvQNKZlHolmZA8Aa7AfAXMhUMknguw1AqE2MyinA5SNdch+Q5KgYKQHD321fUNthEhTQvbikpRloIcCEAzQQwhBdAR0Io6USYAQFrfBjqxBQ8FtKTMVP8VsGl8vVq7WhMZ2V0y7XARIUvezFRZR2lyZhxpf+WFzsQdPfXNhArc0vZyfQibTN8OwCSiNnlgYZoc7+XA2uu9c+8HrpcIQEtTLu7jN6NcJhc731KV2vrfe1Nh4nsIHaaF4vp+o4SGAztWUjZV4fZ+r497INm7f+BiZYjIrB4yPmAAAAAElFTkSuQmCC";
-
-        /// <summary>
         /// Colors for ShiedsIo badges.
         /// </summary>
         private static readonly Tuple<string, string>[] ShieldIoColors = new[]
@@ -322,30 +301,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             File.WriteAllText(
                 targetPath,
                 this.CreateSvgBadge(summaryResult, true, true, true));
-
-            targetPath = Path.Combine(targetDirectory, "badge_linecoverage.png");
-
-            Logger.InfoFormat(Resources.WritingReportFile, targetPath);
-
-            File.WriteAllBytes(
-                targetPath,
-                this.CreatePngBadge(summaryResult.CoverageQuota, LineCoveragePngTemplate));
-
-            targetPath = Path.Combine(targetDirectory, "badge_branchcoverage.png");
-
-            Logger.InfoFormat(Resources.WritingReportFile, targetPath);
-
-            File.WriteAllBytes(
-                targetPath,
-                this.CreatePngBadge(summaryResult.BranchCoverageQuota, BranchCoveragePngTemplate));
-
-            targetPath = Path.Combine(targetDirectory, "badge_methodcoverage.png");
-
-            Logger.InfoFormat(Resources.WritingReportFile, targetPath);
-
-            File.WriteAllBytes(
-                targetPath,
-                this.CreatePngBadge(summaryResult.CodeElementCoverageQuota, MethodCoveragePngTemplate));
         }
 
         /// <summary>
@@ -423,44 +378,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 wide ? "815" : "775",
                 wide ? "330" : "250",
                 text);
-        }
-
-        /// <summary>
-        /// Renderes the PNG.
-        /// </summary>
-        /// <param name="coverage">The coverage.</param>
-        /// <param name="template">The template to use.</param>
-        /// <returns>The rendered PNG.</returns>
-        private byte[] CreatePngBadge(decimal? coverage, string template)
-        {
-            string text = "N/A";
-
-            if (coverage.HasValue)
-            {
-                coverage = Math.Floor(coverage.Value);
-                text = $"{coverage.Value.ToString(CultureInfo.InvariantCulture)}%";
-            }
-
-            using (var ms = new MemoryStream(Convert.FromBase64String(template)))
-            using (var image = Image.Load<Rgba32>(ms))
-            using (MemoryStream output = new MemoryStream())
-            {
-                Font font = null;
-
-                try
-                {
-                    font = SystemFonts.CreateFont("Arial", 12, FontStyle.Regular);
-                }
-                catch (FontFamilyNotFoundException)
-                {
-                    throw new InvalidOperationException(Resources.ErrorFontNotFound);
-                }
-
-                image.Mutate(ctx => ctx.DrawText(text, font, Color.White, new PointF(113, 3)));
-
-                image.Save(output, new PngEncoder());
-                return output.ToArray();
-            }
         }
     }
 }

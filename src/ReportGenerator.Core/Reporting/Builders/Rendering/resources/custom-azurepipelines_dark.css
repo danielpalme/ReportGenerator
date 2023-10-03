@@ -29,7 +29,7 @@
     .lightgreen {background-color: #406540; }
     .lightorange { background-color: #ab7f36; }
     .lightred { background-color: #954848; }
-    .ct-label { color: #fff !important; }
+    .ct-label { color: #fff !important; fill: #fff !important; }
     .ct-grid{ stroke:#fff !important; }
     .ct-chart .ct-series.ct-series-a .ct-line, .ct-chart .ct-series.ct-series-a .ct-point { stroke: #0078D4  !important; }
     .ct-chart .ct-series.ct-series-b .ct-line, .ct-chart .ct-series.ct-series-b .ct-point { stroke: #6dc428 !important; }

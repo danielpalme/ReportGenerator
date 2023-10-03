@@ -122,14 +122,84 @@ Content-Location: file:///index.html
 </div>
 </div>
 <h1>Coverage history</h1>
-<div class="historychart ct-chart" data-data="historyChartDatae4fc47c38a02441781f9ef8ccb1a9626"></div>
+<div class="historychart ct-chart" data-data="historyChartDataa5d15b99fbd248ac818bb87896a45a1b"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="ct-chart" width="1200" height="150" viewBox="0 0 1200 150">
+<style type="text/css">
+        <![CDATA[
+        .ct-chart .ct-grid {
+            stroke: rgba(0,0,0,.2);
+            stroke-width: 1px;
+            stroke-dasharray: 2px;
+        }
+
+        .ct-label {
+            fill: rgba(0, 0, 0, 0.4);
+            color: rgba(0, 0, 0, 0.4);
+            font-size: 12px;
+            font-family: sans-serif;
+            text-anchor: end;
+        }
+
+        .ct-chart .ct-series.ct-series-a .ct-line, .ct-chart .ct-series.ct-series-a .ct-point {
+            stroke: #c00;
+        }
+
+        .ct-chart .ct-series.ct-series-b .ct-line, .ct-chart .ct-series.ct-series-b .ct-point {
+            stroke: #1c2298;
+        }
+
+        .ct-chart .ct-series.ct-series-c .ct-line, .ct-chart .ct-series.ct-series-c .ct-point {
+            stroke: #0aad0a;
+        }
+
+        .ct-chart .ct-line {
+            fill: none;
+            stroke-width: 2px;
+        }
+
+        .ct-chart .ct-point {
+            stroke-width: 6px;
+            stroke-linecap: round;
+            transition: stroke-width .2s;
+        }
+        ]]>
+</style>
+<title>Coverage history</title>
+<defs>
+</defs>
+<g>
+    <line x1="50" x2="50" y1="15" y2="115" class="ct-grid"></line>
+    <line x1="1190" x2="1190" y1="15" y2="115" class="ct-grid"></line>
+    <line y1="115" y2="115" x1="50" x2="1190" class="ct-grid"></line>
+    <line y1="90" y2="90" x1="50" x2="1190" class="ct-grid"></line>
+    <line y1="65" y2="65" x1="50" x2="1190" class="ct-grid"></line>
+    <line y1="40" y2="40" x1="50" x2="1190" class="ct-grid"></line>
+    <line y1="15" y2="15" x1="50" x2="1190" class="ct-grid"></line>
+</g>
+    
+<g>
+    <text x="45" y="113" class="ct-label">0</text>
+    <text x="45" y="88" class="ct-label">25</text>
+    <text x="45" y="63" class="ct-label">50</text>
+    <text x="45" y="38" class="ct-label">75</text>
+    <text x="45" y="13" class="ct-label">100</text>
+</g><g class="ct-series ct-series-a">
+<path d="M50.000,61.400L192.500,59.000L335.000,57.400L477.500,56.600L620.000,59.000L762.500,57.400L905.000,56.600L1047.500,56.600L1190.000,48.600" class="ct-line"></path>
+<line x1="50.000" y1="61.400" x2="50.010" y2="61.400" class="ct-point"></line><line x1="192.500" y1="59.000" x2="192.510" y2="59.000" class="ct-point"></line><line x1="335.000" y1="57.400" x2="335.010" y2="57.400" class="ct-point"></line><line x1="477.500" y1="56.600" x2="477.510" y2="56.600" class="ct-point"></line><line x1="620.000" y1="59.000" x2="620.010" y2="59.000" class="ct-point"></line><line x1="762.500" y1="57.400" x2="762.510" y2="57.400" class="ct-point"></line><line x1="905.000" y1="56.600" x2="905.010" y2="56.600" class="ct-point"></line><line x1="1047.500" y1="56.600" x2="1047.510" y2="56.600" class="ct-point"></line><line x1="1190.000" y1="48.600" x2="1190.010" y2="48.600" class="ct-point"></line></g>
+<g class="ct-series ct-series-b">
+<path d="M50.000,65.000L192.500,71.700L335.000,68.400L477.500,66.700L620.000,65.000L762.500,65.000L905.000,65.000L1047.500,70.000L1190.000,65.000" class="ct-line"></path>
+<line x1="50.000" y1="65.000" x2="50.010" y2="65.000" class="ct-point"></line><line x1="192.500" y1="71.700" x2="192.510" y2="71.700" class="ct-point"></line><line x1="335.000" y1="68.400" x2="335.010" y2="68.400" class="ct-point"></line><line x1="477.500" y1="66.700" x2="477.510" y2="66.700" class="ct-point"></line><line x1="620.000" y1="65.000" x2="620.010" y2="65.000" class="ct-point"></line><line x1="762.500" y1="65.000" x2="762.510" y2="65.000" class="ct-point"></line><line x1="905.000" y1="65.000" x2="905.010" y2="65.000" class="ct-point"></line><line x1="1047.500" y1="70.000" x2="1047.510" y2="70.000" class="ct-point"></line><line x1="1190.000" y1="65.000" x2="1190.010" y2="65.000" class="ct-point"></line></g>
+<g class="ct-series ct-series-c">
+<path d="M50.000,56.700L192.500,69.200L335.000,65.000L477.500,60.900L620.000,60.900L762.500,52.500L905.000,48.400L1047.500,48.400L1190.000,56.700" class="ct-line"></path>
+<line x1="50.000" y1="56.700" x2="50.010" y2="56.700" class="ct-point"></line><line x1="192.500" y1="69.200" x2="192.510" y2="69.200" class="ct-point"></line><line x1="335.000" y1="65.000" x2="335.010" y2="65.000" class="ct-point"></line><line x1="477.500" y1="60.900" x2="477.510" y2="60.900" class="ct-point"></line><line x1="620.000" y1="60.900" x2="620.010" y2="60.900" class="ct-point"></line><line x1="762.500" y1="52.500" x2="762.510" y2="52.500" class="ct-point"></line><line x1="905.000" y1="48.400" x2="905.010" y2="48.400" class="ct-point"></line><line x1="1047.500" y1="48.400" x2="1047.510" y2="48.400" class="ct-point"></line><line x1="1190.000" y1="56.700" x2="1190.010" y2="56.700" class="ct-point"></line></g>
+</svg>
+</div>
 <script type="text/javascript">/* <![CDATA[ */ 
-var historyChartDatae4fc47c38a02441781f9ef8ccb1a9626 = {
+var historyChartDataa5d15b99fbd248ac818bb87896a45a1b = {
     "series" : [[{ 'meta': 0, 'value': 53.6 }, { 'meta': 1, 'value': 56 }, { 'meta': 2, 'value': 57.6 }, { 'meta': 3, 'value': 58.4 }, { 'meta': 4, 'value': 56 }, { 'meta': 5, 'value': 57.6 }, { 'meta': 6, 'value': 58.4 }, { 'meta': 7, 'value': 58.4 }, { 'meta': 8, 'value': 66.4 }],
 [{ 'meta': 0, 'value': 50 }, { 'meta': 1, 'value': 43.3 }, { 'meta': 2, 'value': 46.6 }, { 'meta': 3, 'value': 48.3 }, { 'meta': 4, 'value': 50 }, { 'meta': 5, 'value': 50 }, { 'meta': 6, 'value': 50 }, { 'meta': 7, 'value': 45 }, { 'meta': 8, 'value': 50 }],
 [{ 'meta': 0, 'value': 58.3 }, { 'meta': 1, 'value': 45.8 }, { 'meta': 2, 'value': 50 }, { 'meta': 3, 'value': 54.1 }, { 'meta': 4, 'value': 54.1 }, { 'meta': 5, 'value': 62.5 }, { 'meta': 6, 'value': 66.6 }, { 'meta': 7, 'value': 66.6 }, { 'meta': 8, 'value': 58.3 }]
 ],
-    "tooltips" : ['<h3>01.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 53.6% (67/125)<br /><span class="branchcoverage"></span> Branch coverage: 50% (30/60)<br /><span class="codeelementcoverage"></span> Method coverage: 58.3% (14/24)<br />Total lines: 260','<h3>02.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 56% (70/125)<br /><span class="branchcoverage"></span> Branch coverage: 43.3% (26/60)<br /><span class="codeelementcoverage"></span> Method coverage: 45.8% (11/24)<br />Total lines: 260','<h3>03.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 57.6% (72/125)<br /><span class="branchcoverage"></span> Branch coverage: 46.6% (28/60)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (12/24)<br />Total lines: 260','<h3>04.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 58.4% (73/125)<br /><span class="branchcoverage"></span> Branch coverage: 48.3% (29/60)<br /><span class="codeelementcoverage"></span> Method coverage: 54.1% (13/24)<br />Total lines: 260','<h3>05.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 56% (70/125)<br /><span class="branchcoverage"></span> Branch coverage: 50% (30/60)<br /><span class="codeelementcoverage"></span> Method coverage: 54.1% (13/24)<br />Total lines: 260','<h3>06.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 57.6% (72/125)<br /><span class="branchcoverage"></span> Branch coverage: 50% (30/60)<br /><span class="codeelementcoverage"></span> Method coverage: 62.5% (15/24)<br />Total lines: 260','<h3>07.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 58.4% (73/125)<br /><span class="branchcoverage"></span> Branch coverage: 50% (30/60)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (16/24)<br />Total lines: 260','<h3>09.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 58.4% (73/125)<br /><span class="branchcoverage"></span> Branch coverage: 45% (27/60)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (16/24)<br />Total lines: 260','<h3>29.09.2023 - 21:05:25</h3><br /><span class="linecoverage"></span> Line coverage: 66.4% (83/125)<br /><span class="branchcoverage"></span> Branch coverage: 50% (3/6)<br /><span class="codeelementcoverage"></span> Method coverage: 58.3% (14/24)<br />Total lines: 260']
+    "tooltips" : ['<h3>01.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 53.6% (67/125)<br /><span class="branchcoverage"></span> Branch coverage: 50% (30/60)<br /><span class="codeelementcoverage"></span> Method coverage: 58.3% (14/24)<br />Total lines: 260','<h3>02.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 56% (70/125)<br /><span class="branchcoverage"></span> Branch coverage: 43.3% (26/60)<br /><span class="codeelementcoverage"></span> Method coverage: 45.8% (11/24)<br />Total lines: 260','<h3>03.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 57.6% (72/125)<br /><span class="branchcoverage"></span> Branch coverage: 46.6% (28/60)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (12/24)<br />Total lines: 260','<h3>04.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 58.4% (73/125)<br /><span class="branchcoverage"></span> Branch coverage: 48.3% (29/60)<br /><span class="codeelementcoverage"></span> Method coverage: 54.1% (13/24)<br />Total lines: 260','<h3>05.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 56% (70/125)<br /><span class="branchcoverage"></span> Branch coverage: 50% (30/60)<br /><span class="codeelementcoverage"></span> Method coverage: 54.1% (13/24)<br />Total lines: 260','<h3>06.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 57.6% (72/125)<br /><span class="branchcoverage"></span> Branch coverage: 50% (30/60)<br /><span class="codeelementcoverage"></span> Method coverage: 62.5% (15/24)<br />Total lines: 260','<h3>07.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 58.4% (73/125)<br /><span class="branchcoverage"></span> Branch coverage: 50% (30/60)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (16/24)<br />Total lines: 260','<h3>09.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 58.4% (73/125)<br /><span class="branchcoverage"></span> Branch coverage: 45% (27/60)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (16/24)<br />Total lines: 260','<h3>03.10.2023 - 20:43:13</h3><br /><span class="linecoverage"></span> Line coverage: 66.4% (83/125)<br /><span class="branchcoverage"></span> Branch coverage: 50% (3/6)<br /><span class="codeelementcoverage"></span> Method coverage: 58.3% (14/24)<br />Total lines: 260']
 };
  /* ]]> */ </script>
 <h1>Risk Hotspots</h1>
@@ -170,7 +240,7 @@ var historyChartDatae4fc47c38a02441781f9ef8ccb1a9626 = {
 </table>
 </div>
 </coverage-info>
-<div class="footer">Generated by: ReportGenerator 5.1.25.0<br />29.09.2023 - 21:05:26<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div></div>
+<div class="footer">Generated by: ReportGenerator 5.1.25.0<br />03.10.2023 - 20:43:13<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div></div>
 <script type="text/javascript" src="file:///main.js"></script>
 </body></html>
 
@@ -291,14 +361,84 @@ Content-Location: file:///Sample_PartialClass.html
 </div>
 </div>
 <h1>Coverage history</h1>
-<div class="historychart ct-chart" data-data="historyChartData839a3d41796c4f2abb2b7fce6b141acc"></div>
+<div class="historychart ct-chart" data-data="historyChartData9035582ddaed4c188ca042d0a53b4b36"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="ct-chart" width="1200" height="150" viewBox="0 0 1200 150">
+<style type="text/css">
+        <![CDATA[
+        .ct-chart .ct-grid {
+            stroke: rgba(0,0,0,.2);
+            stroke-width: 1px;
+            stroke-dasharray: 2px;
+        }
+
+        .ct-label {
+            fill: rgba(0, 0, 0, 0.4);
+            color: rgba(0, 0, 0, 0.4);
+            font-size: 12px;
+            font-family: sans-serif;
+            text-anchor: end;
+        }
+
+        .ct-chart .ct-series.ct-series-a .ct-line, .ct-chart .ct-series.ct-series-a .ct-point {
+            stroke: #c00;
+        }
+
+        .ct-chart .ct-series.ct-series-b .ct-line, .ct-chart .ct-series.ct-series-b .ct-point {
+            stroke: #1c2298;
+        }
+
+        .ct-chart .ct-series.ct-series-c .ct-line, .ct-chart .ct-series.ct-series-c .ct-point {
+            stroke: #0aad0a;
+        }
+
+        .ct-chart .ct-line {
+            fill: none;
+            stroke-width: 2px;
+        }
+
+        .ct-chart .ct-point {
+            stroke-width: 6px;
+            stroke-linecap: round;
+            transition: stroke-width .2s;
+        }
+        ]]>
+</style>
+<title>Coverage history</title>
+<defs>
+</defs>
+<g>
+    <line x1="50" x2="50" y1="15" y2="115" class="ct-grid"></line>
+    <line x1="1190" x2="1190" y1="15" y2="115" class="ct-grid"></line>
+    <line y1="115" y2="115" x1="50" x2="1190" class="ct-grid"></line>
+    <line y1="90" y2="90" x1="50" x2="1190" class="ct-grid"></line>
+    <line y1="65" y2="65" x1="50" x2="1190" class="ct-grid"></line>
+    <line y1="40" y2="40" x1="50" x2="1190" class="ct-grid"></line>
+    <line y1="15" y2="15" x1="50" x2="1190" class="ct-grid"></line>
+</g>
+    
+<g>
+    <text x="45" y="113" class="ct-label">0</text>
+    <text x="45" y="88" class="ct-label">25</text>
+    <text x="45" y="63" class="ct-label">50</text>
+    <text x="45" y="38" class="ct-label">75</text>
+    <text x="45" y="13" class="ct-label">100</text>
+</g><g class="ct-series ct-series-a">
+<path d="M50.000,74.100L192.500,60.500L335.000,56.000L477.500,56.000L620.000,69.600L762.500,65.000L905.000,65.000L1047.500,56.000L1190.000,60.500" class="ct-line"></path>
+<line x1="50.000" y1="74.100" x2="50.010" y2="74.100" class="ct-point"></line><line x1="192.500" y1="60.500" x2="192.510" y2="60.500" class="ct-point"></line><line x1="335.000" y1="56.000" x2="335.010" y2="56.000" class="ct-point"></line><line x1="477.500" y1="56.000" x2="477.510" y2="56.000" class="ct-point"></line><line x1="620.000" y1="69.600" x2="620.010" y2="69.600" class="ct-point"></line><line x1="762.500" y1="65.000" x2="762.510" y2="65.000" class="ct-point"></line><line x1="905.000" y1="65.000" x2="905.010" y2="65.000" class="ct-point"></line><line x1="1047.500" y1="56.000" x2="1047.510" y2="56.000" class="ct-point"></line><line x1="1190.000" y1="60.500" x2="1190.010" y2="60.500" class="ct-point"></line></g>
+<g class="ct-series ct-series-b">
+<path d="M50.000,65.000L192.500,75.000L335.000,75.000L477.500,70.000L620.000,70.000L762.500,70.000L905.000,70.000L1047.500,70.000L1190.000,65.000" class="ct-line"></path>
+<line x1="50.000" y1="65.000" x2="50.010" y2="65.000" class="ct-point"></line><line x1="192.500" y1="75.000" x2="192.510" y2="75.000" class="ct-point"></line><line x1="335.000" y1="75.000" x2="335.010" y2="75.000" class="ct-point"></line><line x1="477.500" y1="70.000" x2="477.510" y2="70.000" class="ct-point"></line><line x1="620.000" y1="70.000" x2="620.010" y2="70.000" class="ct-point"></line><line x1="762.500" y1="70.000" x2="762.510" y2="70.000" class="ct-point"></line><line x1="905.000" y1="70.000" x2="905.010" y2="70.000" class="ct-point"></line><line x1="1047.500" y1="70.000" x2="1047.510" y2="70.000" class="ct-point"></line><line x1="1190.000" y1="65.000" x2="1190.010" y2="65.000" class="ct-point"></line></g>
+<g class="ct-series ct-series-c">
+<path d="M50.000,65.000L192.500,81.700L335.000,65.000L477.500,48.400L620.000,48.400L762.500,48.400L905.000,31.700L1047.500,31.700L1190.000,65.000" class="ct-line"></path>
+<line x1="50.000" y1="65.000" x2="50.010" y2="65.000" class="ct-point"></line><line x1="192.500" y1="81.700" x2="192.510" y2="81.700" class="ct-point"></line><line x1="335.000" y1="65.000" x2="335.010" y2="65.000" class="ct-point"></line><line x1="477.500" y1="48.400" x2="477.510" y2="48.400" class="ct-point"></line><line x1="620.000" y1="48.400" x2="620.010" y2="48.400" class="ct-point"></line><line x1="762.500" y1="48.400" x2="762.510" y2="48.400" class="ct-point"></line><line x1="905.000" y1="31.700" x2="905.010" y2="31.700" class="ct-point"></line><line x1="1047.500" y1="31.700" x2="1047.510" y2="31.700" class="ct-point"></line><line x1="1190.000" y1="65.000" x2="1190.010" y2="65.000" class="ct-point"></line></g>
+</svg>
+</div>
 <script type="text/javascript">/* <![CDATA[ */ 
-var historyChartData839a3d41796c4f2abb2b7fce6b141acc = {
+var historyChartData9035582ddaed4c188ca042d0a53b4b36 = {
     "series" : [[{ 'meta': 0, 'value': 40.9 }, { 'meta': 1, 'value': 54.5 }, { 'meta': 2, 'value': 59 }, { 'meta': 3, 'value': 59 }, { 'meta': 4, 'value': 45.4 }, { 'meta': 5, 'value': 50 }, { 'meta': 6, 'value': 50 }, { 'meta': 7, 'value': 59 }, { 'meta': 8, 'value': 54.5 }],
 [{ 'meta': 0, 'value': 50 }, { 'meta': 1, 'value': 40 }, { 'meta': 2, 'value': 40 }, { 'meta': 3, 'value': 45 }, { 'meta': 4, 'value': 45 }, { 'meta': 5, 'value': 45 }, { 'meta': 6, 'value': 45 }, { 'meta': 7, 'value': 45 }, { 'meta': 8, 'value': 50 }],
 [{ 'meta': 0, 'value': 50 }, { 'meta': 1, 'value': 33.3 }, { 'meta': 2, 'value': 50 }, { 'meta': 3, 'value': 66.6 }, { 'meta': 4, 'value': 66.6 }, { 'meta': 5, 'value': 66.6 }, { 'meta': 6, 'value': 83.3 }, { 'meta': 7, 'value': 83.3 }, { 'meta': 8, 'value': 50 }]
 ],
-    "tooltips" : ['<h3>01.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 40.9% (9/22)<br /><span class="branchcoverage"></span> Branch coverage: 50% (10/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (3/6)<br />Total lines: 53','<h3>02.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 54.5% (12/22)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 33.3% (2/6)<br />Total lines: 53','<h3>03.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 59% (13/22)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (3/6)<br />Total lines: 53','<h3>04.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 59% (13/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br />Total lines: 53','<h3>05.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 45.4% (10/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br />Total lines: 53','<h3>06.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 50% (11/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br />Total lines: 53','<h3>07.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 50% (11/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 83.3% (5/6)<br />Total lines: 53','<h3>08.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 59% (13/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 83.3% (5/6)<br />Total lines: 53','<h3>29.09.2023 - 21:05:25</h3><br /><span class="linecoverage"></span> Line coverage: 54.5% (12/22)<br /><span class="branchcoverage"></span> Branch coverage: 50% (1/2)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (3/6)<br />Total lines: 53']
+    "tooltips" : ['<h3>01.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 40.9% (9/22)<br /><span class="branchcoverage"></span> Branch coverage: 50% (10/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (3/6)<br />Total lines: 53','<h3>02.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 54.5% (12/22)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 33.3% (2/6)<br />Total lines: 53','<h3>03.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 59% (13/22)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (3/6)<br />Total lines: 53','<h3>04.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 59% (13/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br />Total lines: 53','<h3>05.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 45.4% (10/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br />Total lines: 53','<h3>06.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 50% (11/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br />Total lines: 53','<h3>07.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 50% (11/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 83.3% (5/6)<br />Total lines: 53','<h3>08.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 59% (13/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 83.3% (5/6)<br />Total lines: 53','<h3>03.10.2023 - 20:43:13</h3><br /><span class="linecoverage"></span> Line coverage: 54.5% (12/22)<br /><span class="branchcoverage"></span> Branch coverage: 50% (1/2)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (3/6)<br />Total lines: 53']
 };
  /* ]]> */ </script>
 <h1>Metrics</h1>
@@ -383,7 +523,7 @@ var historyChartData839a3d41796c4f2abb2b7fce6b141acc = {
 </tbody>
 </table>
 </div>
-<div class="footer">Generated by: ReportGenerator 5.1.25.0<br />29.09.2023 - 21:05:25<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
+<div class="footer">Generated by: ReportGenerator 5.1.25.0<br />03.10.2023 - 20:43:13<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
 <div class="containerright">
 <div class="containerrightfixed">
 <h1>Methods/Properties</h1>
@@ -515,9 +655,76 @@ Content-Location: file:///Sample_Program.html
 </div>
 </div>
 <h1>Coverage history</h1>
-<div class="historychart ct-chart" data-data="historyChartDatab1300a616a6345c1856f71aa7701814f"></div>
+<div class="historychart ct-chart" data-data="historyChartData1469e5285cdc4405bface3e5305aa323"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="ct-chart" width="1200" height="150" viewBox="0 0 1200 150">
+<style type="text/css">
+        <![CDATA[
+        .ct-chart .ct-grid {
+            stroke: rgba(0,0,0,.2);
+            stroke-width: 1px;
+            stroke-dasharray: 2px;
+        }
+
+        .ct-label {
+            fill: rgba(0, 0, 0, 0.4);
+            color: rgba(0, 0, 0, 0.4);
+            font-size: 12px;
+            font-family: sans-serif;
+            text-anchor: end;
+        }
+
+        .ct-chart .ct-series.ct-series-a .ct-line, .ct-chart .ct-series.ct-series-a .ct-point {
+            stroke: #c00;
+        }
+
+        .ct-chart .ct-series.ct-series-b .ct-line, .ct-chart .ct-series.ct-series-b .ct-point {
+            stroke: #1c2298;
+        }
+
+        .ct-chart .ct-series.ct-series-c .ct-line, .ct-chart .ct-series.ct-series-c .ct-point {
+            stroke: #0aad0a;
+        }
+
+        .ct-chart .ct-line {
+            fill: none;
+            stroke-width: 2px;
+        }
+
+        .ct-chart .ct-point {
+            stroke-width: 6px;
+            stroke-linecap: round;
+            transition: stroke-width .2s;
+        }
+        ]]>
+</style>
+<title>Coverage history</title>
+<defs>
+</defs>
+<g>
+    <line x1="50" x2="50" y1="15" y2="115" class="ct-grid"></line>
+    <line x1="1190" x2="1190" y1="15" y2="115" class="ct-grid"></line>
+    <line y1="115" y2="115" x1="50" x2="1190" class="ct-grid"></line>
+    <line y1="90" y2="90" x1="50" x2="1190" class="ct-grid"></line>
+    <line y1="65" y2="65" x1="50" x2="1190" class="ct-grid"></line>
+    <line y1="40" y2="40" x1="50" x2="1190" class="ct-grid"></line>
+    <line y1="15" y2="15" x1="50" x2="1190" class="ct-grid"></line>
+</g>
+    
+<g>
+    <text x="45" y="113" class="ct-label">0</text>
+    <text x="45" y="88" class="ct-label">25</text>
+    <text x="45" y="63" class="ct-label">50</text>
+    <text x="45" y="38" class="ct-label">75</text>
+    <text x="45" y="13" class="ct-label">100</text>
+</g><g class="ct-series ct-series-a">
+<path d="M50.000,35.500" class="ct-line"></path>
+<line x1="50.000" y1="35.500" x2="50.010" y2="35.500" class="ct-point"></line></g>
+<g class="ct-series ct-series-c">
+<path d="M50.000,48.400" class="ct-line"></path>
+<line x1="50.000" y1="48.400" x2="50.010" y2="48.400" class="ct-point"></line></g>
+</svg>
+</div>
 <script type="text/javascript">/* <![CDATA[ */ 
-var historyChartDatab1300a616a6345c1856f71aa7701814f = {
+var historyChartData1469e5285cdc4405bface3e5305aa323 = {
     "series" : [[{ 'meta': 0, 'value': 79.5 }],
 [],
 [{ 'meta': 0, 'value': 66.6 }]
@@ -632,7 +839,7 @@ var historyChartDatab1300a616a6345c1856f71aa7701814f = {
 </tbody>
 </table>
 </div>
-<div class="footer">Generated by: ReportGenerator 5.1.25.0<br />29.09.2023 - 21:05:25<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
+<div class="footer">Generated by: ReportGenerator 5.1.25.0<br />03.10.2023 - 20:43:13<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
 <div class="containerright">
 <div class="containerrightfixed">
 <h1>Methods/Properties</h1>
@@ -764,14 +971,84 @@ Content-Location: file:///Sample_TestClass.html
 </div>
 </div>
 <h1>Coverage history</h1>
-<div class="historychart ct-chart" data-data="historyChartDatacaa875bdd36b440a88b28fc40cad67d7"></div>
+<div class="historychart ct-chart" data-data="historyChartDataa4f4d9fd41f449c49d616562024184aa"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="ct-chart" width="1200" height="150" viewBox="0 0 1200 150">
+<style type="text/css">
+        <![CDATA[
+        .ct-chart .ct-grid {
+            stroke: rgba(0,0,0,.2);
+            stroke-width: 1px;
+            stroke-dasharray: 2px;
+        }
+
+        .ct-label {
+            fill: rgba(0, 0, 0, 0.4);
+            color: rgba(0, 0, 0, 0.4);
+            font-size: 12px;
+            font-family: sans-serif;
+            text-anchor: end;
+        }
+
+        .ct-chart .ct-series.ct-series-a .ct-line, .ct-chart .ct-series.ct-series-a .ct-point {
+            stroke: #c00;
+        }
+
+        .ct-chart .ct-series.ct-series-b .ct-line, .ct-chart .ct-series.ct-series-b .ct-point {
+            stroke: #1c2298;
+        }
+
+        .ct-chart .ct-series.ct-series-c .ct-line, .ct-chart .ct-series.ct-series-c .ct-point {
+            stroke: #0aad0a;
+        }
+
+        .ct-chart .ct-line {
+            fill: none;
+            stroke-width: 2px;
+        }
+
+        .ct-chart .ct-point {
+            stroke-width: 6px;
+            stroke-linecap: round;
+            transition: stroke-width .2s;
+        }
+        ]]>
+</style>
+<title>Coverage history</title>
+<defs>
+</defs>
+<g>
+    <line x1="50" x2="50" y1="15" y2="115" class="ct-grid"></line>
+    <line x1="1190" x2="1190" y1="15" y2="115" class="ct-grid"></line>
+    <line y1="115" y2="115" x1="50" x2="1190" class="ct-grid"></line>
+    <line y1="90" y2="90" x1="50" x2="1190" class="ct-grid"></line>
+    <line y1="65" y2="65" x1="50" x2="1190" class="ct-grid"></line>
+    <line y1="40" y2="40" x1="50" x2="1190" class="ct-grid"></line>
+    <line y1="15" y2="15" x1="50" x2="1190" class="ct-grid"></line>
+</g>
+    
+<g>
+    <text x="45" y="113" class="ct-label">0</text>
+    <text x="45" y="88" class="ct-label">25</text>
+    <text x="45" y="63" class="ct-label">50</text>
+    <text x="45" y="38" class="ct-label">75</text>
+    <text x="45" y="13" class="ct-label">100</text>
+</g><g class="ct-series ct-series-a">
+<path d="M50.000,77.000L240.000,77.000L430.000,72.200L620.000,72.200L810.000,67.400L1000.000,67.400L1190.000,57.900" class="ct-line"></path>
+<line x1="50.000" y1="77.000" x2="50.010" y2="77.000" class="ct-point"></line><line x1="240.000" y1="77.000" x2="240.010" y2="77.000" class="ct-point"></line><line x1="430.000" y1="72.200" x2="430.010" y2="72.200" class="ct-point"></line><line x1="620.000" y1="72.200" x2="620.010" y2="72.200" class="ct-point"></line><line x1="810.000" y1="67.400" x2="810.010" y2="67.400" class="ct-point"></line><line x1="1000.000" y1="67.400" x2="1000.010" y2="67.400" class="ct-point"></line><line x1="1190.000" y1="57.900" x2="1190.010" y2="57.900" class="ct-point"></line></g>
+<g class="ct-series ct-series-b">
+<path d="M50.000,65.000L240.000,55.000L430.000,55.000L620.000,50.000L810.000,50.000L1000.000,65.000L1190.000,65.000" class="ct-line"></path>
+<line x1="50.000" y1="65.000" x2="50.010" y2="65.000" class="ct-point"></line><line x1="240.000" y1="55.000" x2="240.010" y2="55.000" class="ct-point"></line><line x1="430.000" y1="55.000" x2="430.010" y2="55.000" class="ct-point"></line><line x1="620.000" y1="50.000" x2="620.010" y2="50.000" class="ct-point"></line><line x1="810.000" y1="50.000" x2="810.010" y2="50.000" class="ct-point"></line><line x1="1000.000" y1="65.000" x2="1000.010" y2="65.000" class="ct-point"></line><line x1="1190.000" y1="65.000" x2="1190.010" y2="65.000" class="ct-point"></line></g>
+<g class="ct-series ct-series-c">
+<path d="M50.000,65.000L240.000,65.000L430.000,65.000L620.000,65.000L810.000,65.000L1000.000,65.000L1190.000,65.000" class="ct-line"></path>
+<line x1="50.000" y1="65.000" x2="50.010" y2="65.000" class="ct-point"></line><line x1="240.000" y1="65.000" x2="240.010" y2="65.000" class="ct-point"></line><line x1="430.000" y1="65.000" x2="430.010" y2="65.000" class="ct-point"></line><line x1="620.000" y1="65.000" x2="620.010" y2="65.000" class="ct-point"></line><line x1="810.000" y1="65.000" x2="810.010" y2="65.000" class="ct-point"></line><line x1="1000.000" y1="65.000" x2="1000.010" y2="65.000" class="ct-point"></line><line x1="1190.000" y1="65.000" x2="1190.010" y2="65.000" class="ct-point"></line></g>
+</svg>
+</div>
 <script type="text/javascript">/* <![CDATA[ */ 
-var historyChartDatacaa875bdd36b440a88b28fc40cad67d7 = {
+var historyChartDataa4f4d9fd41f449c49d616562024184aa = {
     "series" : [[{ 'meta': 0, 'value': 38 }, { 'meta': 1, 'value': 38 }, { 'meta': 2, 'value': 42.8 }, { 'meta': 3, 'value': 42.8 }, { 'meta': 4, 'value': 47.6 }, { 'meta': 5, 'value': 47.6 }, { 'meta': 6, 'value': 57.1 }],
 [{ 'meta': 0, 'value': 50 }, { 'meta': 1, 'value': 60 }, { 'meta': 2, 'value': 60 }, { 'meta': 3, 'value': 65 }, { 'meta': 4, 'value': 65 }, { 'meta': 5, 'value': 50 }, { 'meta': 6, 'value': 50 }],
 [{ 'meta': 0, 'value': 50 }, { 'meta': 1, 'value': 50 }, { 'meta': 2, 'value': 50 }, { 'meta': 3, 'value': 50 }, { 'meta': 4, 'value': 50 }, { 'meta': 5, 'value': 50 }, { 'meta': 6, 'value': 50 }]
 ],
-    "tooltips" : ['<h3>01.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 38% (8/21)<br /><span class="branchcoverage"></span> Branch coverage: 50% (10/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (1/2)<br />Total lines: 38','<h3>03.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 38% (8/21)<br /><span class="branchcoverage"></span> Branch coverage: 60% (12/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (1/2)<br />Total lines: 38','<h3>04.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 42.8% (9/21)<br /><span class="branchcoverage"></span> Branch coverage: 60% (12/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (1/2)<br />Total lines: 38','<h3>05.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 42.8% (9/21)<br /><span class="branchcoverage"></span> Branch coverage: 65% (13/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (1/2)<br />Total lines: 38','<h3>07.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 47.6% (10/21)<br /><span class="branchcoverage"></span> Branch coverage: 65% (13/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (1/2)<br />Total lines: 38','<h3>09.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 47.6% (10/21)<br /><span class="branchcoverage"></span> Branch coverage: 50% (10/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (1/2)<br />Total lines: 38','<h3>29.09.2023 - 21:05:25</h3><br /><span class="linecoverage"></span> Line coverage: 57.1% (12/21)<br /><span class="branchcoverage"></span> Branch coverage: 50% (1/2)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (1/2)<br />Total lines: 38']
+    "tooltips" : ['<h3>01.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 38% (8/21)<br /><span class="branchcoverage"></span> Branch coverage: 50% (10/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (1/2)<br />Total lines: 38','<h3>03.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 38% (8/21)<br /><span class="branchcoverage"></span> Branch coverage: 60% (12/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (1/2)<br />Total lines: 38','<h3>04.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 42.8% (9/21)<br /><span class="branchcoverage"></span> Branch coverage: 60% (12/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (1/2)<br />Total lines: 38','<h3>05.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 42.8% (9/21)<br /><span class="branchcoverage"></span> Branch coverage: 65% (13/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (1/2)<br />Total lines: 38','<h3>07.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 47.6% (10/21)<br /><span class="branchcoverage"></span> Branch coverage: 65% (13/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (1/2)<br />Total lines: 38','<h3>09.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 47.6% (10/21)<br /><span class="branchcoverage"></span> Branch coverage: 50% (10/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (1/2)<br />Total lines: 38','<h3>03.10.2023 - 20:43:13</h3><br /><span class="linecoverage"></span> Line coverage: 57.1% (12/21)<br /><span class="branchcoverage"></span> Branch coverage: 50% (1/2)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (1/2)<br />Total lines: 38']
 };
  /* ]]> */ </script>
 <h1>Metrics</h1>
@@ -831,7 +1108,7 @@ var historyChartDatacaa875bdd36b440a88b28fc40cad67d7 = {
 </tbody>
 </table>
 </div>
-<div class="footer">Generated by: ReportGenerator 5.1.25.0<br />29.09.2023 - 21:05:25<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
+<div class="footer">Generated by: ReportGenerator 5.1.25.0<br />03.10.2023 - 20:43:13<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
 <div class="containerright">
 <div class="containerrightfixed">
 <h1>Methods/Properties</h1>
@@ -959,14 +1236,84 @@ Content-Location: file:///Sample_TestClass2.html
 </div>
 </div>
 <h1>Coverage history</h1>
-<div class="historychart ct-chart" data-data="historyChartDataaaccfdd9294e48a5a2eb863851dbe33d"></div>
+<div class="historychart ct-chart" data-data="historyChartData3e1f433da7d4418cba684d4b9828dd32"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="ct-chart" width="1200" height="150" viewBox="0 0 1200 150">
+<style type="text/css">
+        <![CDATA[
+        .ct-chart .ct-grid {
+            stroke: rgba(0,0,0,.2);
+            stroke-width: 1px;
+            stroke-dasharray: 2px;
+        }
+
+        .ct-label {
+            fill: rgba(0, 0, 0, 0.4);
+            color: rgba(0, 0, 0, 0.4);
+            font-size: 12px;
+            font-family: sans-serif;
+            text-anchor: end;
+        }
+
+        .ct-chart .ct-series.ct-series-a .ct-line, .ct-chart .ct-series.ct-series-a .ct-point {
+            stroke: #c00;
+        }
+
+        .ct-chart .ct-series.ct-series-b .ct-line, .ct-chart .ct-series.ct-series-b .ct-point {
+            stroke: #1c2298;
+        }
+
+        .ct-chart .ct-series.ct-series-c .ct-line, .ct-chart .ct-series.ct-series-c .ct-point {
+            stroke: #0aad0a;
+        }
+
+        .ct-chart .ct-line {
+            fill: none;
+            stroke-width: 2px;
+        }
+
+        .ct-chart .ct-point {
+            stroke-width: 6px;
+            stroke-linecap: round;
+            transition: stroke-width .2s;
+        }
+        ]]>
+</style>
+<title>Coverage history</title>
+<defs>
+</defs>
+<g>
+    <line x1="50" x2="50" y1="15" y2="115" class="ct-grid"></line>
+    <line x1="1190" x2="1190" y1="15" y2="115" class="ct-grid"></line>
+    <line y1="115" y2="115" x1="50" x2="1190" class="ct-grid"></line>
+    <line y1="90" y2="90" x1="50" x2="1190" class="ct-grid"></line>
+    <line y1="65" y2="65" x1="50" x2="1190" class="ct-grid"></line>
+    <line y1="40" y2="40" x1="50" x2="1190" class="ct-grid"></line>
+    <line y1="15" y2="15" x1="50" x2="1190" class="ct-grid"></line>
+</g>
+    
+<g>
+    <text x="45" y="113" class="ct-label">0</text>
+    <text x="45" y="88" class="ct-label">25</text>
+    <text x="45" y="63" class="ct-label">50</text>
+    <text x="45" y="38" class="ct-label">75</text>
+    <text x="45" y="13" class="ct-label">100</text>
+</g><g class="ct-series ct-series-a">
+<path d="M50.000,75.600L278.000,75.600L506.000,72.900L734.000,70.300L962.000,75.600L1190.000,51.900" class="ct-line"></path>
+<line x1="50.000" y1="75.600" x2="50.010" y2="75.600" class="ct-point"></line><line x1="278.000" y1="75.600" x2="278.010" y2="75.600" class="ct-point"></line><line x1="506.000" y1="72.900" x2="506.010" y2="72.900" class="ct-point"></line><line x1="734.000" y1="70.300" x2="734.010" y2="70.300" class="ct-point"></line><line x1="962.000" y1="75.600" x2="962.010" y2="75.600" class="ct-point"></line><line x1="1190.000" y1="51.900" x2="1190.010" y2="51.900" class="ct-point"></line></g>
+<g class="ct-series ct-series-b">
+<path d="M50.000,65.000L278.000,75.000L506.000,75.000L734.000,75.000L962.000,75.000L1190.000,65.000" class="ct-line"></path>
+<line x1="50.000" y1="65.000" x2="50.010" y2="65.000" class="ct-point"></line><line x1="278.000" y1="75.000" x2="278.010" y2="75.000" class="ct-point"></line><line x1="506.000" y1="75.000" x2="506.010" y2="75.000" class="ct-point"></line><line x1="734.000" y1="75.000" x2="734.010" y2="75.000" class="ct-point"></line><line x1="962.000" y1="75.000" x2="962.010" y2="75.000" class="ct-point"></line><line x1="1190.000" y1="65.000" x2="1190.010" y2="65.000" class="ct-point"></line></g>
+<g class="ct-series ct-series-c">
+<path d="M50.000,55.000L278.000,75.000L506.000,75.000L734.000,55.000L962.000,55.000L1190.000,55.000" class="ct-line"></path>
+<line x1="50.000" y1="55.000" x2="50.010" y2="55.000" class="ct-point"></line><line x1="278.000" y1="75.000" x2="278.010" y2="75.000" class="ct-point"></line><line x1="506.000" y1="75.000" x2="506.010" y2="75.000" class="ct-point"></line><line x1="734.000" y1="55.000" x2="734.010" y2="55.000" class="ct-point"></line><line x1="962.000" y1="55.000" x2="962.010" y2="55.000" class="ct-point"></line><line x1="1190.000" y1="55.000" x2="1190.010" y2="55.000" class="ct-point"></line></g>
+</svg>
+</div>
 <script type="text/javascript">/* <![CDATA[ */ 
-var historyChartDataaaccfdd9294e48a5a2eb863851dbe33d = {
+var historyChartData3e1f433da7d4418cba684d4b9828dd32 = {
     "series" : [[{ 'meta': 0, 'value': 39.4 }, { 'meta': 1, 'value': 39.4 }, { 'meta': 2, 'value': 42.1 }, { 'meta': 3, 'value': 44.7 }, { 'meta': 4, 'value': 39.4 }, { 'meta': 5, 'value': 63.1 }],
 [{ 'meta': 0, 'value': 50 }, { 'meta': 1, 'value': 40 }, { 'meta': 2, 'value': 40 }, { 'meta': 3, 'value': 40 }, { 'meta': 4, 'value': 40 }, { 'meta': 5, 'value': 50 }],
 [{ 'meta': 0, 'value': 60 }, { 'meta': 1, 'value': 40 }, { 'meta': 2, 'value': 40 }, { 'meta': 3, 'value': 60 }, { 'meta': 4, 'value': 60 }, { 'meta': 5, 'value': 60 }]
 ],
-    "tooltips" : ['<h3>01.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 39.4% (15/38)<br /><span class="branchcoverage"></span> Branch coverage: 50% (10/20)<br /><span class="codeelementcoverage"></span> Method coverage: 60% (6/10)<br />Total lines: 85','<h3>02.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 39.4% (15/38)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 40% (4/10)<br />Total lines: 85','<h3>03.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 42.1% (16/38)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 40% (4/10)<br />Total lines: 85','<h3>06.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 44.7% (17/38)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 60% (6/10)<br />Total lines: 85','<h3>08.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 39.4% (15/38)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 60% (6/10)<br />Total lines: 85','<h3>29.09.2023 - 21:05:25</h3><br /><span class="linecoverage"></span> Line coverage: 63.1% (24/38)<br /><span class="branchcoverage"></span> Branch coverage: 50% (1/2)<br /><span class="codeelementcoverage"></span> Method coverage: 60% (6/10)<br />Total lines: 85']
+    "tooltips" : ['<h3>01.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 39.4% (15/38)<br /><span class="branchcoverage"></span> Branch coverage: 50% (10/20)<br /><span class="codeelementcoverage"></span> Method coverage: 60% (6/10)<br />Total lines: 85','<h3>02.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 39.4% (15/38)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 40% (4/10)<br />Total lines: 85','<h3>03.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 42.1% (16/38)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 40% (4/10)<br />Total lines: 85','<h3>06.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 44.7% (17/38)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 60% (6/10)<br />Total lines: 85','<h3>08.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 39.4% (15/38)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 60% (6/10)<br />Total lines: 85','<h3>03.10.2023 - 20:43:13</h3><br /><span class="linecoverage"></span> Line coverage: 63.1% (24/38)<br /><span class="branchcoverage"></span> Branch coverage: 50% (1/2)<br /><span class="codeelementcoverage"></span> Method coverage: 60% (6/10)<br />Total lines: 85']
 };
  /* ]]> */ </script>
 <h1>Metrics</h1>
@@ -1077,7 +1424,7 @@ var historyChartDataaaccfdd9294e48a5a2eb863851dbe33d = {
 </tbody>
 </table>
 </div>
-<div class="footer">Generated by: ReportGenerator 5.1.25.0<br />29.09.2023 - 21:05:25<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
+<div class="footer">Generated by: ReportGenerator 5.1.25.0<br />03.10.2023 - 20:43:13<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
 <div class="containerright">
 <div class="containerrightfixed">
 <h1>Methods/Properties</h1>
@@ -1325,10 +1672,10 @@ var assemblies = [
   {
     "name": "Sample",
     "classes": [
-      { "name": "Sample.PartialClass", "rp": "file:///Sample_PartialClass.html", "cl": 12, "ucl": 10, "cal": 22, "tl": 53, "cb": 1, "tb": 2, "cm": 3, "tm": 6, "lch": [40.9,54.5,59,59,45.4,50,50,59,54.5], "bch": [50,40,40,45,45,45,45,45,50], "mch": [50,33.3,50,66.6,66.6,66.6,83.3,83.3,50], "hc": [{ "et": "01.02.2022 - 20:50:35", "cl": 9, "ucl": 13, "cal": 22, "tl": 53, "lcq": 40.9, "cb": 10, "tb": 20, "bcq": 50, "cm": 3, "tm": 6, "mcq": 50 }, { "et": "02.02.2022 - 20:50:35", "cl": 12, "ucl": 10, "cal": 22, "tl": 53, "lcq": 54.5, "cb": 8, "tb": 20, "bcq": 40, "cm": 2, "tm": 6, "mcq": 33.3 }, { "et": "03.02.2022 - 20:50:35", "cl": 13, "ucl": 9, "cal": 22, "tl": 53, "lcq": 59, "cb": 8, "tb": 20, "bcq": 40, "cm": 3, "tm": 6, "mcq": 50 }, { "et": "04.02.2022 - 20:50:35", "cl": 13, "ucl": 9, "cal": 22, "tl": 53, "lcq": 59, "cb": 9, "tb": 20, "bcq": 45, "cm": 4, "tm": 6, "mcq": 66.6 }, { "et": "05.02.2022 - 20:50:35", "cl": 10, "ucl": 12, "cal": 22, "tl": 53, "lcq": 45.4, "cb": 9, "tb": 20, "bcq": 45, "cm": 4, "tm": 6, "mcq": 66.6 }, { "et": "06.02.2022 - 20:50:35", "cl": 11, "ucl": 11, "cal": 22, "tl": 53, "lcq": 50, "cb": 9, "tb": 20, "bcq": 45, "cm": 4, "tm": 6, "mcq": 66.6 }, { "et": "07.02.2022 - 20:50:35", "cl": 11, "ucl": 11, "cal": 22, "tl": 53, "lcq": 50, "cb": 9, "tb": 20, "bcq": 45, "cm": 5, "tm": 6, "mcq": 83.3 }, { "et": "08.02.2022 - 20:50:35", "cl": 13, "ucl": 9, "cal": 22, "tl": 53, "lcq": 59, "cb": 9, "tb": 20, "bcq": 45, "cm": 5, "tm": 6, "mcq": 83.3 }, { "et": "09.02.2022 - 20:50:35", "cl": 13, "ucl": 9, "cal": 22, "tl": 53, "lcq": 59, "cb": 9, "tb": 20, "bcq": 45, "cm": 5, "tm": 6, "mcq": 83.3 }, { "et": "29.09.2023 - 21:05:25", "cl": 12, "ucl": 10, "cal": 22, "tl": 53, "lcq": 54.5, "cb": 1, "tb": 2, "bcq": 50, "cm": 3, "tm": 6, "mcq": 50 }], "metrics": { "cc": 1,  "npth": 0,  "seq": 0,  "bcov": 0,  "crp": 2 } },
-      { "name": "Sample.TestClass", "rp": "file:///Sample_TestClass.html", "cl": 12, "ucl": 9, "cal": 21, "tl": 38, "cb": 1, "tb": 2, "cm": 1, "tm": 2, "lch": [38,38,42.8,42.8,47.6,47.6,57.1], "bch": [50,60,60,65,65,50,50], "mch": [50,50,50,50,50,50,50], "hc": [{ "et": "01.02.2022 - 20:50:35", "cl": 8, "ucl": 13, "cal": 21, "tl": 38, "lcq": 38, "cb": 10, "tb": 20, "bcq": 50, "cm": 1, "tm": 2, "mcq": 50 }, { "et": "02.02.2022 - 20:50:35", "cl": 8, "ucl": 13, "cal": 21, "tl": 38, "lcq": 38, "cb": 10, "tb": 20, "bcq": 50, "cm": 1, "tm": 2, "mcq": 50 }, { "et": "03.02.2022 - 20:50:35", "cl": 8, "ucl": 13, "cal": 21, "tl": 38, "lcq": 38, "cb": 12, "tb": 20, "bcq": 60, "cm": 1, "tm": 2, "mcq": 50 }, { "et": "04.02.2022 - 20:50:35", "cl": 9, "ucl": 12, "cal": 21, "tl": 38, "lcq": 42.8, "cb": 12, "tb": 20, "bcq": 60, "cm": 1, "tm": 2, "mcq": 50 }, { "et": "05.02.2022 - 20:50:35", "cl": 9, "ucl": 12, "cal": 21, "tl": 38, "lcq": 42.8, "cb": 13, "tb": 20, "bcq": 65, "cm": 1, "tm": 2, "mcq": 50 }, { "et": "06.02.2022 - 20:50:35", "cl": 9, "ucl": 12, "cal": 21, "tl": 38, "lcq": 42.8, "cb": 13, "tb": 20, "bcq": 65, "cm": 1, "tm": 2, "mcq": 50 }, { "et": "07.02.2022 - 20:50:35", "cl": 10, "ucl": 11, "cal": 21, "tl": 38, "lcq": 47.6, "cb": 13, "tb": 20, "bcq": 65, "cm": 1, "tm": 2, "mcq": 50 }, { "et": "08.02.2022 - 20:50:35", "cl": 10, "ucl": 11, "cal": 21, "tl": 38, "lcq": 47.6, "cb": 13, "tb": 20, "bcq": 65, "cm": 1, "tm": 2, "mcq": 50 }, { "et": "09.02.2022 - 20:50:35", "cl": 10, "ucl": 11, "cal": 21, "tl": 38, "lcq": 47.6, "cb": 10, "tb": 20, "bcq": 50, "cm": 1, "tm": 2, "mcq": 50 }, { "et": "29.09.2023 - 21:05:25", "cl": 12, "ucl": 9, "cal": 21, "tl": 38, "lcq": 57.1, "cb": 1, "tb": 2, "bcq": 50, "cm": 1, "tm": 2, "mcq": 50 }], "metrics": { "cc": 3,  "npth": 2,  "seq": 0,  "bcov": 0,  "crp": 3.14 } },
-      { "name": "Test.Program", "rp": "file:///Sample_Program.html", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "cb": 0, "tb": 0, "cm": 4, "tm": 6, "lch": [79.5], "bch": [], "mch": [66.6], "hc": [{ "et": "01.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "tm": 6, "mcq": 66.6 }, { "et": "02.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "tm": 6, "mcq": 66.6 }, { "et": "03.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "tm": 6, "mcq": 66.6 }, { "et": "04.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "tm": 6, "mcq": 66.6 }, { "et": "05.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "tm": 6, "mcq": 66.6 }, { "et": "06.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "tm": 6, "mcq": 66.6 }, { "et": "07.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "tm": 6, "mcq": 66.6 }, { "et": "08.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "tm": 6, "mcq": 66.6 }, { "et": "09.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "tm": 6, "mcq": 66.6 }, { "et": "29.09.2023 - 21:05:25", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "tm": 6, "mcq": 66.6 }], "metrics": { "cc": 3,  "npth": 0,  "seq": 0,  "bcov": 0,  "crp": 3 } },
-      { "name": "Test.TestClass2", "rp": "file:///Sample_TestClass2.html", "cl": 24, "ucl": 14, "cal": 38, "tl": 85, "cb": 1, "tb": 2, "cm": 6, "tm": 10, "lch": [39.4,39.4,42.1,44.7,39.4,63.1], "bch": [50,40,40,40,40,50], "mch": [60,40,40,60,60,60], "hc": [{ "et": "01.02.2022 - 20:50:35", "cl": 15, "ucl": 23, "cal": 38, "tl": 85, "lcq": 39.4, "cb": 10, "tb": 20, "bcq": 50, "cm": 6, "tm": 10, "mcq": 60 }, { "et": "02.02.2022 - 20:50:35", "cl": 15, "ucl": 23, "cal": 38, "tl": 85, "lcq": 39.4, "cb": 8, "tb": 20, "bcq": 40, "cm": 4, "tm": 10, "mcq": 40 }, { "et": "03.02.2022 - 20:50:35", "cl": 16, "ucl": 22, "cal": 38, "tl": 85, "lcq": 42.1, "cb": 8, "tb": 20, "bcq": 40, "cm": 4, "tm": 10, "mcq": 40 }, { "et": "04.02.2022 - 20:50:35", "cl": 16, "ucl": 22, "cal": 38, "tl": 85, "lcq": 42.1, "cb": 8, "tb": 20, "bcq": 40, "cm": 4, "tm": 10, "mcq": 40 }, { "et": "05.02.2022 - 20:50:35", "cl": 16, "ucl": 22, "cal": 38, "tl": 85, "lcq": 42.1, "cb": 8, "tb": 20, "bcq": 40, "cm": 4, "tm": 10, "mcq": 40 }, { "et": "06.02.2022 - 20:50:35", "cl": 17, "ucl": 21, "cal": 38, "tl": 85, "lcq": 44.7, "cb": 8, "tb": 20, "bcq": 40, "cm": 6, "tm": 10, "mcq": 60 }, { "et": "07.02.2022 - 20:50:35", "cl": 17, "ucl": 21, "cal": 38, "tl": 85, "lcq": 44.7, "cb": 8, "tb": 20, "bcq": 40, "cm": 6, "tm": 10, "mcq": 60 }, { "et": "08.02.2022 - 20:50:35", "cl": 15, "ucl": 23, "cal": 38, "tl": 85, "lcq": 39.4, "cb": 8, "tb": 20, "bcq": 40, "cm": 6, "tm": 10, "mcq": 60 }, { "et": "09.02.2022 - 20:50:35", "cl": 15, "ucl": 23, "cal": 38, "tl": 85, "lcq": 39.4, "cb": 8, "tb": 20, "bcq": 40, "cm": 6, "tm": 10, "mcq": 60 }, { "et": "29.09.2023 - 21:05:25", "cl": 24, "ucl": 14, "cal": 38, "tl": 85, "lcq": 63.1, "cb": 1, "tb": 2, "bcq": 50, "cm": 6, "tm": 10, "mcq": 60 }], "metrics": { "cc": 5,  "npth": 2,  "seq": 0,  "bcov": 0,  "crp": 5 } },
+      { "name": "Sample.PartialClass", "rp": "file:///Sample_PartialClass.html", "cl": 12, "ucl": 10, "cal": 22, "tl": 53, "cb": 1, "tb": 2, "cm": 3, "tm": 6, "lch": [40.9,54.5,59,59,45.4,50,50,59,54.5], "bch": [50,40,40,45,45,45,45,45,50], "mch": [50,33.3,50,66.6,66.6,66.6,83.3,83.3,50], "hc": [{ "et": "01.02.2022 - 20:50:35", "cl": 9, "ucl": 13, "cal": 22, "tl": 53, "lcq": 40.9, "cb": 10, "tb": 20, "bcq": 50, "cm": 3, "tm": 6, "mcq": 50 }, { "et": "02.02.2022 - 20:50:35", "cl": 12, "ucl": 10, "cal": 22, "tl": 53, "lcq": 54.5, "cb": 8, "tb": 20, "bcq": 40, "cm": 2, "tm": 6, "mcq": 33.3 }, { "et": "03.02.2022 - 20:50:35", "cl": 13, "ucl": 9, "cal": 22, "tl": 53, "lcq": 59, "cb": 8, "tb": 20, "bcq": 40, "cm": 3, "tm": 6, "mcq": 50 }, { "et": "04.02.2022 - 20:50:35", "cl": 13, "ucl": 9, "cal": 22, "tl": 53, "lcq": 59, "cb": 9, "tb": 20, "bcq": 45, "cm": 4, "tm": 6, "mcq": 66.6 }, { "et": "05.02.2022 - 20:50:35", "cl": 10, "ucl": 12, "cal": 22, "tl": 53, "lcq": 45.4, "cb": 9, "tb": 20, "bcq": 45, "cm": 4, "tm": 6, "mcq": 66.6 }, { "et": "06.02.2022 - 20:50:35", "cl": 11, "ucl": 11, "cal": 22, "tl": 53, "lcq": 50, "cb": 9, "tb": 20, "bcq": 45, "cm": 4, "tm": 6, "mcq": 66.6 }, { "et": "07.02.2022 - 20:50:35", "cl": 11, "ucl": 11, "cal": 22, "tl": 53, "lcq": 50, "cb": 9, "tb": 20, "bcq": 45, "cm": 5, "tm": 6, "mcq": 83.3 }, { "et": "08.02.2022 - 20:50:35", "cl": 13, "ucl": 9, "cal": 22, "tl": 53, "lcq": 59, "cb": 9, "tb": 20, "bcq": 45, "cm": 5, "tm": 6, "mcq": 83.3 }, { "et": "09.02.2022 - 20:50:35", "cl": 13, "ucl": 9, "cal": 22, "tl": 53, "lcq": 59, "cb": 9, "tb": 20, "bcq": 45, "cm": 5, "tm": 6, "mcq": 83.3 }, { "et": "03.10.2023 - 20:43:13", "cl": 12, "ucl": 10, "cal": 22, "tl": 53, "lcq": 54.5, "cb": 1, "tb": 2, "bcq": 50, "cm": 3, "tm": 6, "mcq": 50 }], "metrics": { "cc": 1,  "npth": 0,  "seq": 0,  "bcov": 0,  "crp": 2 } },
+      { "name": "Sample.TestClass", "rp": "file:///Sample_TestClass.html", "cl": 12, "ucl": 9, "cal": 21, "tl": 38, "cb": 1, "tb": 2, "cm": 1, "tm": 2, "lch": [38,38,42.8,42.8,47.6,47.6,57.1], "bch": [50,60,60,65,65,50,50], "mch": [50,50,50,50,50,50,50], "hc": [{ "et": "01.02.2022 - 20:50:35", "cl": 8, "ucl": 13, "cal": 21, "tl": 38, "lcq": 38, "cb": 10, "tb": 20, "bcq": 50, "cm": 1, "tm": 2, "mcq": 50 }, { "et": "02.02.2022 - 20:50:35", "cl": 8, "ucl": 13, "cal": 21, "tl": 38, "lcq": 38, "cb": 10, "tb": 20, "bcq": 50, "cm": 1, "tm": 2, "mcq": 50 }, { "et": "03.02.2022 - 20:50:35", "cl": 8, "ucl": 13, "cal": 21, "tl": 38, "lcq": 38, "cb": 12, "tb": 20, "bcq": 60, "cm": 1, "tm": 2, "mcq": 50 }, { "et": "04.02.2022 - 20:50:35", "cl": 9, "ucl": 12, "cal": 21, "tl": 38, "lcq": 42.8, "cb": 12, "tb": 20, "bcq": 60, "cm": 1, "tm": 2, "mcq": 50 }, { "et": "05.02.2022 - 20:50:35", "cl": 9, "ucl": 12, "cal": 21, "tl": 38, "lcq": 42.8, "cb": 13, "tb": 20, "bcq": 65, "cm": 1, "tm": 2, "mcq": 50 }, { "et": "06.02.2022 - 20:50:35", "cl": 9, "ucl": 12, "cal": 21, "tl": 38, "lcq": 42.8, "cb": 13, "tb": 20, "bcq": 65, "cm": 1, "tm": 2, "mcq": 50 }, { "et": "07.02.2022 - 20:50:35", "cl": 10, "ucl": 11, "cal": 21, "tl": 38, "lcq": 47.6, "cb": 13, "tb": 20, "bcq": 65, "cm": 1, "tm": 2, "mcq": 50 }, { "et": "08.02.2022 - 20:50:35", "cl": 10, "ucl": 11, "cal": 21, "tl": 38, "lcq": 47.6, "cb": 13, "tb": 20, "bcq": 65, "cm": 1, "tm": 2, "mcq": 50 }, { "et": "09.02.2022 - 20:50:35", "cl": 10, "ucl": 11, "cal": 21, "tl": 38, "lcq": 47.6, "cb": 10, "tb": 20, "bcq": 50, "cm": 1, "tm": 2, "mcq": 50 }, { "et": "03.10.2023 - 20:43:13", "cl": 12, "ucl": 9, "cal": 21, "tl": 38, "lcq": 57.1, "cb": 1, "tb": 2, "bcq": 50, "cm": 1, "tm": 2, "mcq": 50 }], "metrics": { "cc": 3,  "npth": 2,  "seq": 0,  "bcov": 0,  "crp": 3.14 } },
+      { "name": "Test.Program", "rp": "file:///Sample_Program.html", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "cb": 0, "tb": 0, "cm": 4, "tm": 6, "lch": [79.5], "bch": [], "mch": [66.6], "hc": [{ "et": "01.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "tm": 6, "mcq": 66.6 }, { "et": "02.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "tm": 6, "mcq": 66.6 }, { "et": "03.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "tm": 6, "mcq": 66.6 }, { "et": "04.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "tm": 6, "mcq": 66.6 }, { "et": "05.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "tm": 6, "mcq": 66.6 }, { "et": "06.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "tm": 6, "mcq": 66.6 }, { "et": "07.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "tm": 6, "mcq": 66.6 }, { "et": "08.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "tm": 6, "mcq": 66.6 }, { "et": "09.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "tm": 6, "mcq": 66.6 }, { "et": "03.10.2023 - 20:43:13", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "tm": 6, "mcq": 66.6 }], "metrics": { "cc": 3,  "npth": 0,  "seq": 0,  "bcov": 0,  "crp": 3 } },
+      { "name": "Test.TestClass2", "rp": "file:///Sample_TestClass2.html", "cl": 24, "ucl": 14, "cal": 38, "tl": 85, "cb": 1, "tb": 2, "cm": 6, "tm": 10, "lch": [39.4,39.4,42.1,44.7,39.4,63.1], "bch": [50,40,40,40,40,50], "mch": [60,40,40,60,60,60], "hc": [{ "et": "01.02.2022 - 20:50:35", "cl": 15, "ucl": 23, "cal": 38, "tl": 85, "lcq": 39.4, "cb": 10, "tb": 20, "bcq": 50, "cm": 6, "tm": 10, "mcq": 60 }, { "et": "02.02.2022 - 20:50:35", "cl": 15, "ucl": 23, "cal": 38, "tl": 85, "lcq": 39.4, "cb": 8, "tb": 20, "bcq": 40, "cm": 4, "tm": 10, "mcq": 40 }, { "et": "03.02.2022 - 20:50:35", "cl": 16, "ucl": 22, "cal": 38, "tl": 85, "lcq": 42.1, "cb": 8, "tb": 20, "bcq": 40, "cm": 4, "tm": 10, "mcq": 40 }, { "et": "04.02.2022 - 20:50:35", "cl": 16, "ucl": 22, "cal": 38, "tl": 85, "lcq": 42.1, "cb": 8, "tb": 20, "bcq": 40, "cm": 4, "tm": 10, "mcq": 40 }, { "et": "05.02.2022 - 20:50:35", "cl": 16, "ucl": 22, "cal": 38, "tl": 85, "lcq": 42.1, "cb": 8, "tb": 20, "bcq": 40, "cm": 4, "tm": 10, "mcq": 40 }, { "et": "06.02.2022 - 20:50:35", "cl": 17, "ucl": 21, "cal": 38, "tl": 85, "lcq": 44.7, "cb": 8, "tb": 20, "bcq": 40, "cm": 6, "tm": 10, "mcq": 60 }, { "et": "07.02.2022 - 20:50:35", "cl": 17, "ucl": 21, "cal": 38, "tl": 85, "lcq": 44.7, "cb": 8, "tb": 20, "bcq": 40, "cm": 6, "tm": 10, "mcq": 60 }, { "et": "08.02.2022 - 20:50:35", "cl": 15, "ucl": 23, "cal": 38, "tl": 85, "lcq": 39.4, "cb": 8, "tb": 20, "bcq": 40, "cm": 6, "tm": 10, "mcq": 60 }, { "et": "09.02.2022 - 20:50:35", "cl": 15, "ucl": 23, "cal": 38, "tl": 85, "lcq": 39.4, "cb": 8, "tb": 20, "bcq": 40, "cm": 6, "tm": 10, "mcq": 60 }, { "et": "03.10.2023 - 20:43:13", "cl": 24, "ucl": 14, "cal": 38, "tl": 85, "lcq": 63.1, "cb": 1, "tb": 2, "bcq": 50, "cm": 6, "tm": 10, "mcq": 60 }], "metrics": { "cc": 5,  "npth": 2,  "seq": 0,  "bcov": 0,  "crp": 5 } },
     ]},
 ];
 
@@ -1783,6 +2130,7 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
 
 .toggleZoom { text-align:right; }
 
+.historychart svg { max-width: 100%; }
 .ct-chart { position: relative; }
 .ct-chart .ct-line { stroke-width: 2px !important; }
 .ct-chart .ct-point { stroke-width: 6px !important; transition: stroke-width .2s; }
@@ -2314,6 +2662,7 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
 
         .ct-label {
             color: #fff !important;
+            fill: #fff !important;
         }
 
         .ct-grid {

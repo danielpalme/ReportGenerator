@@ -1,19 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Palmmedia.ReportGenerator.Core.Common;
-using Palmmedia.ReportGenerator.Core.Licensing;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
-using Palmmedia.ReportGenerator.Core.Properties;
-using Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering;
 
 namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 {
     /// <summary>
     /// Creates history chart in PNG format.
     /// </summary>
+    [Obsolete("PngChart was replaced by SvgChart")]
     public class PngChartReportBuilder : IReportBuilder
     {
         /// <summary>
@@ -57,65 +52,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 throw new ArgumentNullException(nameof(summaryResult));
             }
 
-            bool proVersion = this.ReportContext.ReportConfiguration.License.DetermineLicenseType() == LicenseType.Pro;
-
-            var historicCoverages = HistoricCoverages.GetOverallHistoricCoverages(this.ReportContext.OverallHistoricCoverages);
-
-            var filteredHistoricCoverages = this.FilterHistoricCoverages(historicCoverages, 100);
-
-            if (filteredHistoricCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue))
-            {
-                byte[] image = PngHistoryChartRenderer.RenderHistoryChart(filteredHistoricCoverages, proVersion);
-
-                string targetDirectory = this.ReportContext.ReportConfiguration.TargetDirectory;
-
-                if (this.ReportContext.Settings.CreateSubdirectoryForAllReportTypes)
-                {
-                    targetDirectory = Path.Combine(targetDirectory, this.ReportType);
-
-                    if (!Directory.Exists(targetDirectory))
-                    {
-                        try
-                        {
-                            Directory.CreateDirectory(targetDirectory);
-                        }
-                        catch (Exception ex)
-                        {
-                            Logger.ErrorFormat(Resources.TargetDirectoryCouldNotBeCreated, targetDirectory, ex.GetExceptionMessageForDisplay());
-                            return;
-                        }
-                    }
-                }
-
-                string targetPath = Path.Combine(targetDirectory, "CoverageHistory.png");
-
-                Logger.InfoFormat(Resources.WritingReportFile, targetPath);
-
-                File.WriteAllBytes(targetPath, image);
-            }
-        }
-
-        /// <summary>
-        /// Filters the historic coverages (equal elements are removed).
-        /// </summary>
-        /// <param name="historicCoverages">The historic coverages.</param>
-        /// <param name="maximum">The maximum.</param>
-        /// <returns>The filtered historic coverages.</returns>
-        private List<HistoricCoverage> FilterHistoricCoverages(IEnumerable<HistoricCoverage> historicCoverages, int maximum)
-        {
-            var result = new List<HistoricCoverage>();
-
-            foreach (var historicCoverage in historicCoverages)
-            {
-                if (result.Count == 0 || !result[result.Count - 1].Equals(historicCoverage))
-                {
-                    result.Add(historicCoverage);
-                }
-            }
-
-            result.RemoveRange(0, Math.Max(0, result.Count - maximum));
-
-            return result;
+            Logger.Warn("Report type 'PngChart' is no longer supported. Please use 'SvgChart' instead.");
         }
     }
 }

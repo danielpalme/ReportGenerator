@@ -5,7 +5,7 @@
     <Module hash="375742924">
       <Summary numSequencePoints="125" visitedSequencePoints="83" numBranchPoints="6" visitedBranchPoints="3" sequenceCoverage="66.4" branchCoverage="50" maxCyclomaticComplexity="5" minCyclomaticComplexity="1" maxCrapScore="5" minCrapScore="1" visitedClasses="4" numClasses="4" visitedMethods="14" numMethods="24" />
       <ModulePath>Sample</ModulePath>
-      <ModuleTime>2023-09-29T19:05:57.6076794Z</ModuleTime>
+      <ModuleTime>2023-10-03T18:43:37.0801190Z</ModuleTime>
       <ModuleName>Sample</ModuleName>
       <Files>
         <File uid="1" fullPath="C:\temp\PartialClass.cs" />

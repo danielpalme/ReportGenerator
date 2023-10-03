@@ -1010,7 +1010,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         }
 
         /// <inheritdoc />
-        public void Chart(IEnumerable<HistoricCoverage> historicCoverages, bool renderPngFallBackImage, bool methodCoverageAvailable)
+        public void Chart(IEnumerable<HistoricCoverage> historicCoverages, bool methodCoverageAvailable)
         {
             if (historicCoverages == null)
             {
@@ -1021,21 +1021,12 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             string id = Guid.NewGuid().ToString("N");
 
-            if (renderPngFallBackImage || this.htmlMode == HtmlMode.InlineCssAndJavaScript)
-            {
-                byte[] pngHistory = PngHistoryChartRenderer.RenderHistoryChart(filteredHistoricCoverages, methodCoverageAvailable);
+            string svgHistory = SvgHistoryChartRenderer.RenderHistoryChart(filteredHistoricCoverages, methodCoverageAvailable);
 
-                this.reportTextWriter.WriteLine(
-                    "<div class=\"historychart ct-chart\" data-data=\"historyChartData{0}\"><img src=\"data:image/png;base64,{1}\" /></div>",
-                    id,
-                    Convert.ToBase64String(pngHistory));
-            }
-            else
-            {
-                this.reportTextWriter.WriteLine(
-                    "<div class=\"historychart ct-chart\" data-data=\"historyChartData{0}\"></div>",
-                    id);
-            }
+            this.reportTextWriter.WriteLine(
+                "<div class=\"historychart ct-chart\" data-data=\"historyChartData{0}\">{1}</div>",
+                id,
+                svgHistory);
 
             var series = new StringBuilder();
             series.Append("[");

@@ -156,6 +156,7 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
 
 .toggleZoom { text-align:right; }
 
+.historychart svg { max-width: 100%; }
 .ct-chart { position: relative; }
 .ct-chart .ct-line { stroke-width: 2px !important; }
 .ct-chart .ct-point { stroke-width: 6px !important; transition: stroke-width .2s; }
@@ -686,6 +687,7 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
 
     .ct-label {
         color: #fff !important;
+        fill: #fff !important;
     }
 
     .ct-grid {

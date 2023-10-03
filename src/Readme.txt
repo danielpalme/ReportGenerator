@@ -36,7 +36,7 @@ The following output formats are supported by ReportGenerator:
 -TextSummary, TextDeltaSummary
 -CsvSummary
 -MarkdownSummary, MarkdownSummaryGithub, MarkdownDeltaSummary
--PngChart
+-SvgChart
 -Badges
 -Custom formats (https://github.com/danielpalme/ReportGenerator/wiki/Custom-reports)
 
@@ -70,6 +70,7 @@ CHANGELOG
 5.1.26.0
 
     * New: #595 Added new report type 'Html_BlueRed_Summary' to improve red-green colorblind accessibility
+    * New: #627 Removed PNG badges and replaced report type 'PngChart' with 'SvgChart'
     * Fix: #623 Improved Cobertura output (complexity metric)
 
 5.1.25.0

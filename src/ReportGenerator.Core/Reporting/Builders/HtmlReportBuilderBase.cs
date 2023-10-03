@@ -149,7 +149,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             if (@class.HistoricCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue || h.CodeElementCoverageQuota.HasValue))
             {
                 reportRenderer.Header(ReportResources.History);
-                reportRenderer.Chart(@class.HistoricCoverages, this.ReportContext.Settings.RenderPngFallBackImagesForHistoryCharts, proVersion);
+                reportRenderer.Chart(@class.HistoricCoverages, proVersion);
             }
 
             if (@class.Files.Any(f => f.MethodMetrics.Any()))
@@ -314,7 +314,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             if (historicCoverages.Any(h => h.CoverageQuota.HasValue || h.BranchCoverageQuota.HasValue || h.CodeElementCoverageQuota.HasValue))
             {
                 reportRenderer.Header(ReportResources.History);
-                reportRenderer.Chart(historicCoverages, this.ReportContext.Settings.RenderPngFallBackImagesForHistoryCharts, proVersion);
+                reportRenderer.Chart(historicCoverages, proVersion);
             }
 
             var sumableMetrics = summaryResult.SumableMetrics;

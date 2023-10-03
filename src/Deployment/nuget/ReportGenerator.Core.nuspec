@@ -29,7 +29,6 @@ https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage</desc
         <dependency id="Microsoft.Extensions.Configuration.Binder" version="7.0.4" />
         <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="7.0.0" />
         <dependency id="Microsoft.Extensions.Configuration.Json" version="7.0.0" />
-        <dependency id="SixLabors.ImageSharp.Drawing" version="1.0.0-beta15" />
         <dependency id="DotNetConfig" version="1.0.6" />
       </group>
 
@@ -38,7 +37,6 @@ https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage</desc
         <dependency id="Microsoft.Extensions.Configuration.Binder" version="7.0.4" />
         <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="7.0.0" />
         <dependency id="Microsoft.Extensions.Configuration.Json" version="7.0.0" />
-        <dependency id="SixLabors.ImageSharp.Drawing" version="1.0.0-beta15" />
         <dependency id="DotNetConfig" version="1.0.6" />
         <dependency id="McMaster.NETCore.Plugins" version="1.4.0" />
       </group>
