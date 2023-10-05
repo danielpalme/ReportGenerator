@@ -45,6 +45,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         private static readonly Regex CompilerGeneratedMethodNameRegex = new Regex(@"(?<ClassName>.+)(/|\.)<(?<CompilerGeneratedName>.+)>.+__.+MoveNext\(\)$", RegexOptions.Compiled);
 
         /// <summary>
+        /// Regex to analyze if a method name is a nested method (a method nested within a method).
+        /// </summary>
+        private static readonly Regex LocalFunctionMethodNameRegex = new Regex(@"^.*(?<ParentMethodName><.+>).*__(?<NestedMethodName>[^\|]+)\|.*$", RegexOptions.Compiled);
+
+        /// <summary>
         /// Regex to analyze the branch coverage of a line element.
         /// </summary>
         private static readonly Regex BranchCoverageRegex = new Regex("\\((?<NumberOfCoveredBranches>\\d+)/(?<NumberOfTotalBranches>\\d+)\\)$", RegexOptions.Compiled);
@@ -480,8 +485,16 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <returns>The method name.</returns>
         private static string ExtractMethodName(string methodName, string className)
         {
-            // Quick check before expensive regex is called
-            if (methodName.EndsWith("MoveNext()"))
+            if (methodName.Contains("|") || className.Contains("|"))
+            {
+                Match match = LocalFunctionMethodNameRegex.Match(className + methodName);
+
+                if (match.Success)
+                {
+                    methodName = match.Groups["NestedMethodName"].Value + "()";
+                }
+            }
+            else if (methodName.EndsWith("MoveNext()"))
             {
                 Match match = CompilerGeneratedMethodNameRegex.Match(className + methodName);
 

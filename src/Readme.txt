@@ -70,6 +70,7 @@ CHANGELOG
 5.1.26.0
 
     * New: #595 Added new report type 'Html_BlueRed_Summary' to improve red-green colorblind accessibility
+    * New: #625 Improved support for local methods (Cobertura, dotCover, OpenCover, VisualStudio)
     * New: #627 Removed PNG badges and replaced report type 'PngChart' with 'SvgChart'
     * Fix: #623 Improved Cobertura output (complexity metric)
 

@@ -9,6 +9,8 @@ namespace Test
         public static void Main(string[] args)
         {
             new TestClass().SampleFunction();
+            new TestClass().ParentMethod();
+            new TestClass().MethodWithLambda();
 
             new TestClass2("Test").ExecutedMethod();
             new TestClass2("Test").SampleFunction("Munich");

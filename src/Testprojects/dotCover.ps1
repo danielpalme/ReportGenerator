@@ -1,9 +1,9 @@
-CoverageTools\JetBrains.dotCover.CommandLineTools.2018.2.3\dotCover.exe a /TargetExecutable=CSharp\Project\bin\Debug\Test.exe /ReportType=DetailedXML /Output=CSharp\Reports\dotCover.xml
+CoverageTools\jetbrains.dotcover.commandlinetools.2023.3.0-tc03\dotCover.exe dotnet --reportType=DetailedXML --output=CSharp\Reports\dotCover.xml -- test CSharp\Project_DotNetCore\UnitTests\UnitTests.csproj
 
-CoverageTools\JetBrains.dotCover.CommandLineTools.2018.2.3\dotCover.exe  a /TargetExecutable=FSharp\Project\bin\Debug\Test.exe /ReportType=DetailedXML /Output=FSharp\Reports\dotCover.xml
+CoverageTools\jetbrains.dotcover.commandlinetools.2023.3.0-tc03\dotCover.exe  a /TargetExecutable=FSharp\Project\bin\Debug\Test.exe /ReportType=DetailedXML /Output=FSharp\Reports\dotCover.xml
 
-$pathToReplace1 = [regex]::Escape((Get-Location).Path + "\CSharp\Project\bin\Debug")
-$pathToReplace2 = [regex]::Escape((Get-Location).Path + "\CSharp\Project")
+$pathToReplace1 = [regex]::Escape((Get-Location).Path + "\CSharp\Project_DotNetCore\bin\Debug")
+$pathToReplace2 = [regex]::Escape((Get-Location).Path + "\CSharp\Project_DotNetCore")
 $replacement = "C:\temp"
 
 (gc "CSharp\Reports\dotCover.xml") | % { $_ -replace $pathToReplace1, $replacement } | Out-File "CSharp\Reports\dotCover.xml" -Encoding UTF8

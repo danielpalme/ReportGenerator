@@ -44,6 +44,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{8775
 		Testprojects\FSharp\Reports\OpenCover.xml = Testprojects\FSharp\Reports\OpenCover.xml
 		Testprojects\FSharp\Reports\VisualStudio2010.coveragexml = Testprojects\FSharp\Reports\VisualStudio2010.coveragexml
 		Testprojects\FSharp\Reports\VisualStudio2013.coveragexml = Testprojects\FSharp\Reports\VisualStudio2013.coveragexml
+		Testprojects\CSharp\Reports\VisualStudio2022.coveragexml = Testprojects\CSharp\Reports\VisualStudio2022.coveragexml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Java", "Java", "{89813866-CE17-47E5-BCA3-4740F8624BA5}"
