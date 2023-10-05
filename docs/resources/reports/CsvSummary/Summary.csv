@@ -1,18 +1,18 @@
 Summary
-Generated on:;03.10.2023 - 20:43:27
+Generated on:;05.10.2023 - 22:36:23
 Parser:;OpenCover
 Assemblies:;1
 Classes:;4
 Files:;5
-Line coverage:;66.4%
-Covered lines:;83
-Uncovered lines:;42
-Coverable lines:;125
-Total lines:;260
+Line coverage:;69.4%
+Covered lines:;75
+Uncovered lines:;33
+Coverable lines:;108
+Total lines:;273
 
-Sample;66.4%
+Sample;69.4%
 
 Sample.PartialClass;54.5%
-Sample.TestClass;57.1%
-Test.Program;79.5%
+Test.Program;100.0%
+Test.TestClass;72.7%
 Test.TestClass2;63.1%

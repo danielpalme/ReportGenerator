@@ -3,34 +3,34 @@
 
 |||
 |:---|:---|
-| Generated on: | 03.10.2023 - 20:43:35 |
+| Generated on: | 05.10.2023 - 22:36:30 |
 | Parser: | OpenCover |
 | Assemblies: | 1 |
 | Classes: | 4 |
 | Files: | 5 |
-| **Line coverage:** | 66.4% (83 of 125) |
-| Covered lines: | 83 |
-| Uncovered lines: | 42 |
-| Coverable lines: | 125 |
-| Total lines: | 260 |
-| **Branch coverage:** | 50% (3 of 6) |
-| Covered branches: | 3 |
-| Total branches: | 6 |
-| **Method coverage:** | 58.3% (14 of 24) |
-| Covered methods: | 14 |
+| **Line coverage:** | 69.4% (75 of 108) |
+| Covered lines: | 75 |
+| Uncovered lines: | 33 |
+| Coverable lines: | 108 |
+| Total lines: | 273 |
+| **Branch coverage:** | 50% (4 of 8) |
+| Covered branches: | 4 |
+| Total branches: | 8 |
+| **Method coverage:** | 66.6% (16 of 24) |
+| Covered methods: | 16 |
 | Total methods: | 24 |
 
 </details>
 
 ## Coverage
-<details><summary>Sample - 66.4%</summary>
+<details><summary>Sample - 69.4%</summary>
 
 |**Name**|**Line**|**Branch**|**Method**|
 |:---|---:|---:|---:|
-|**Sample**|**66.4%**|**50%**|**58.3%**|
+|**Sample**|**69.4%**|**50%**|**66.6%**|
 |Sample.PartialClass|54.5%|50%|50%|
-|Sample.TestClass|57.1%|50%|50%|
-|Test.Program|79.5%||66.6%|
+|Test.Program|100%||100%|
+|Test.TestClass|72.7%|50%|80%|
 |Test.TestClass2|63.1%|50%|60%|
 
 </details>

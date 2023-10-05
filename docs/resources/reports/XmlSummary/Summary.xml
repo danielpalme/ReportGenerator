@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CoverageReport scope="Summary">
   <Summary>
-    <Generatedon>03.10.2023 - 20:43:21</Generatedon>
+    <Generatedon>05.10.2023 - 22:36:17</Generatedon>
     <Parser>OpenCover</Parser>
     <Assemblies>1</Assemblies>
     <Classes>4</Classes>
     <Files>5</Files>
-    <Coveredlines>83</Coveredlines>
-    <Uncoveredlines>42</Uncoveredlines>
-    <Coverablelines>125</Coverablelines>
-    <Totallines>260</Totallines>
-    <Linecoverage>66.4</Linecoverage>
-    <Coveredbranches>3</Coveredbranches>
-    <Totalbranches>6</Totalbranches>
+    <Coveredlines>75</Coveredlines>
+    <Uncoveredlines>33</Uncoveredlines>
+    <Coverablelines>108</Coverablelines>
+    <Totallines>273</Totallines>
+    <Linecoverage>69.4</Linecoverage>
+    <Coveredbranches>4</Coveredbranches>
+    <Totalbranches>8</Totalbranches>
     <Branchcoverage>50</Branchcoverage>
-    <Coveredmethods>14</Coveredmethods>
+    <Coveredmethods>16</Coveredmethods>
     <Totalmethods>24</Totalmethods>
-    <Methodcoverage>58.3</Methodcoverage>
+    <Methodcoverage>66.6</Methodcoverage>
   </Summary>
   <Coverage>
-    <Assembly name="Sample" classes="4" coverage="66.4" coveredlines="83" coverablelines="125" totallines="260" branchcoverage="50" coveredbranches="3" totalbranches="6" coveredmethods="14" totalmethods="24" methodcoverage="58.3">
+    <Assembly name="Sample" classes="4" coverage="69.4" coveredlines="75" coverablelines="108" totallines="273" branchcoverage="50" coveredbranches="4" totalbranches="8" coveredmethods="16" totalmethods="24" methodcoverage="66.6">
       <Class name="Sample.PartialClass" coverage="54.5" coveredlines="12" coverablelines="22" totallines="53" branchcoverage="50" coveredbranches="1" totalbranches="2" coveredmethods="3" totalmethods="6" methodcoverage="50" />
-      <Class name="Sample.TestClass" coverage="57.1" coveredlines="12" coverablelines="21" totallines="38" branchcoverage="50" coveredbranches="1" totalbranches="2" coveredmethods="1" totalmethods="2" methodcoverage="50" />
-      <Class name="Test.Program" coverage="79.5" coveredlines="35" coverablelines="44" totallines="84" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="6" methodcoverage="66.6" />
+      <Class name="Test.Program" coverage="100" coveredlines="15" coverablelines="15" totallines="75" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="3" methodcoverage="100" />
+      <Class name="Test.TestClass" coverage="72.7" coveredlines="24" coverablelines="33" totallines="60" branchcoverage="50" coveredbranches="2" totalbranches="4" coveredmethods="4" totalmethods="5" methodcoverage="80" />
       <Class name="Test.TestClass2" coverage="63.1" coveredlines="24" coverablelines="38" totallines="85" branchcoverage="50" coveredbranches="1" totalbranches="2" coveredmethods="6" totalmethods="10" methodcoverage="60" />
     </Assembly>
   </Coverage>

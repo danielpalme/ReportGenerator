@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<coverage generated="1696358595" clover="4.3.1">
-  <project timestamp="1696358595">
-    <metrics complexity="0" elements="125" coveredelements="83" conditionals="6" coveredconditionals="3" statements="125" coveredstatements="83" coveredmethods="13" methods="24" classes="5" loc="260" ncloc="125" files="5" packages="1" />
+<coverage generated="1696538171" clover="4.3.1">
+  <project timestamp="1696538171">
+    <metrics complexity="0" elements="108" coveredelements="75" conditionals="8" coveredconditionals="4" statements="108" coveredstatements="75" coveredmethods="14" methods="24" classes="5" loc="273" ncloc="108" files="5" packages="1" />
     <package name="Sample">
-      <metrics complexity="0" elements="125" coveredelements="83" conditionals="6" coveredconditionals="3" statements="125" coveredstatements="83" coveredmethods="13" methods="24" classes="5" loc="260" ncloc="125" files="5" />
+      <metrics complexity="0" elements="108" coveredelements="75" conditionals="8" coveredconditionals="4" statements="108" coveredstatements="75" coveredmethods="14" methods="24" classes="5" loc="273" ncloc="108" files="5" />
       <file path="C:\temp\PartialClass.cs" name="PartialClass.cs">
         <metrics complexity="0" elements="16" coveredelements="9" conditionals="2" coveredconditionals="1" statements="16" coveredstatements="9" coveredmethods="2" methods="4" classes="1" loc="36" ncloc="16" />
         <class name="Sample.PartialClass">
@@ -38,69 +38,13 @@
         <line num="14" count="0" type="stmt" />
         <line num="15" count="0" type="stmt" />
       </file>
-      <file path="C:\temp\TestClass.cs" name="TestClass.cs">
-        <metrics complexity="0" elements="21" coveredelements="12" conditionals="2" coveredconditionals="1" statements="21" coveredstatements="12" coveredmethods="1" methods="2" classes="1" loc="38" ncloc="21" />
-        <class name="Sample.TestClass">
-          <metrics complexity="0" elements="21" coveredelements="12" conditionals="2" coveredconditionals="1" statements="21" coveredstatements="12" coveredmethods="1" methods="2" />
-        </class>
-        <line complexity="3" signature="SampleFunction()" num="8" count="1" type="method" />
-        <line num="9" count="1" type="stmt" />
-        <line num="10" count="1" type="stmt" />
-        <line num="11" count="1" type="stmt" />
-        <line num="12" count="1" type="stmt" />
-        <line num="14" count="1" type="stmt" />
-        <line num="15" count="1" type="stmt" />
-        <line falsecount="1" truecount="1" num="17" type="cond" />
-        <line num="18" count="1" type="stmt" />
-        <line num="19" count="1" type="stmt" />
-        <line num="20" count="1" type="stmt" />
-        <line num="22" count="0" type="stmt" />
-        <line num="23" count="0" type="stmt" />
-        <line num="24" count="0" type="stmt" />
-        <line num="25" count="1" type="stmt" />
-        <line complexity="1" signature="SampleFunction()" num="30" count="0" type="method" />
-        <line num="31" count="0" type="stmt" />
-        <line num="32" count="0" type="stmt" />
-        <line num="33" count="0" type="stmt" />
-        <line num="34" count="0" type="stmt" />
-        <line num="35" count="0" type="stmt" />
-      </file>
       <file path="C:\temp\Program.cs" name="Program.cs">
-        <metrics complexity="0" elements="44" coveredelements="35" conditionals="0" coveredconditionals="0" statements="44" coveredstatements="35" coveredmethods="4" methods="6" classes="1" loc="84" ncloc="44" />
+        <metrics complexity="0" elements="15" coveredelements="15" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" coveredmethods="2" methods="3" classes="1" loc="75" ncloc="15" />
         <class name="Test.Program">
-          <metrics complexity="0" elements="44" coveredelements="35" conditionals="0" coveredconditionals="0" statements="44" coveredstatements="35" coveredmethods="4" methods="6" />
+          <metrics complexity="0" elements="15" coveredelements="15" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" coveredmethods="2" methods="3" />
         </class>
-        <line complexity="1" signature="Main(System.String[])" num="12" count="1" type="method" />
-        <line num="13" count="1" type="stmt" />
-        <line num="15" count="1" type="stmt" />
-        <line num="16" count="1" type="stmt" />
-        <line num="18" count="1" type="stmt" />
-        <line num="19" count="1" type="stmt" />
-        <line num="20" count="1" type="stmt" />
-        <line num="22" count="1" type="stmt" />
-        <line num="23" count="1" type="stmt" />
-        <line num="25" count="1" type="stmt" />
-        <line num="27" count="1" type="stmt" />
-        <line num="28" count="1" type="stmt" />
-        <line num="30" count="1" type="stmt" />
-        <line num="31" count="1" type="stmt" />
-        <line num="33" count="1" type="stmt" />
-        <line num="35" count="1" type="stmt" />
-        <line num="36" count="1" type="stmt" />
-        <line num="38" count="1" type="stmt" />
-        <line num="41" count="1" type="stmt" />
-        <line num="42" count="1" type="stmt" />
-        <line num="43" count="1" type="stmt" />
-        <line num="44" count="0" type="stmt" />
-        <line num="45" count="0" type="stmt" />
-        <line num="46" count="0" type="stmt" />
-        <line num="47" count="1" type="stmt" />
-        <line complexity="1" signature="CSharp_ExecuteTest1()" num="51" count="0" type="method" />
-        <line num="52" count="0" type="stmt" />
-        <line num="53" count="0" type="stmt" />
-        <line complexity="1" signature="CSharp_ExecuteTest2()" num="57" count="0" type="method" />
-        <line num="58" count="0" type="stmt" />
-        <line num="59" count="0" type="stmt" />
+        <line num="22" count="2" type="stmt" />
+        <line num="50" count="2" type="stmt" />
         <line complexity="3" signature="CallAsyncMethod()" num="62" count="1" type="method" />
         <line num="63" count="1" type="stmt" />
         <line num="64" count="1" type="stmt" />
@@ -110,10 +54,45 @@
         <line complexity="1" signature=".ctor(System.Net.Http.HttpResponseMessage)" num="73" count="1" type="method" />
         <line num="74" count="1" type="stmt" />
         <line num="75" count="1" type="stmt" />
-        <line num="76" count="1" type="stmt" />
-        <line complexity="1" signature="SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)" num="79" count="1" type="method" />
-        <line num="80" count="1" type="stmt" />
-        <line num="81" count="1" type="stmt" />
+      </file>
+      <file path="C:\temp\TestClass.cs" name="TestClass.cs">
+        <metrics complexity="0" elements="33" coveredelements="24" conditionals="4" coveredconditionals="2" statements="33" coveredstatements="24" coveredmethods="4" methods="5" classes="1" loc="60" ncloc="33" />
+        <class name="Test.TestClass">
+          <metrics complexity="0" elements="33" coveredelements="24" conditionals="4" coveredconditionals="2" statements="33" coveredstatements="24" coveredmethods="4" methods="5" />
+        </class>
+        <line complexity="4" signature="SampleFunction()" num="9" count="2" type="method" />
+        <line num="10" count="2" type="stmt" />
+        <line num="11" count="2" type="stmt" />
+        <line num="12" count="2" type="stmt" />
+        <line num="13" count="2" type="stmt" />
+        <line num="15" count="2" type="stmt" />
+        <line num="16" count="2" type="stmt" />
+        <line falsecount="2" truecount="2" num="18" type="cond" />
+        <line num="19" count="2" type="stmt" />
+        <line num="20" count="2" type="stmt" />
+        <line num="21" count="2" type="stmt" />
+        <line num="23" count="0" type="stmt" />
+        <line num="24" count="0" type="stmt" />
+        <line num="25" count="0" type="stmt" />
+        <line num="26" count="2" type="stmt" />
+        <line complexity="1" signature="ParentMethod()" num="29" count="2" type="method" />
+        <line num="30" count="2" type="stmt" />
+        <line num="32" count="2" type="stmt" />
+        <line complexity="1" signature="NestedLocalFunction(System.String)" num="35" count="2" type="method" />
+        <line num="36" count="2" type="stmt" />
+        <line num="37" count="2" type="stmt" />
+        <line num="38" count="2" type="stmt" />
+        <line complexity="1" signature="MethodWithLambda()" num="41" count="8" type="method" />
+        <line num="42" count="8" type="stmt" />
+        <line num="44" count="8" type="stmt" />
+        <line num="46" count="2" type="stmt" />
+        <line num="47" count="2" type="stmt" />
+        <line complexity="1" signature="SampleFunction()" num="52" count="0" type="method" />
+        <line num="53" count="0" type="stmt" />
+        <line num="54" count="0" type="stmt" />
+        <line num="55" count="0" type="stmt" />
+        <line num="56" count="0" type="stmt" />
+        <line num="57" count="0" type="stmt" />
       </file>
       <file path="C:\temp\TestClass2.cs" name="TestClass2.cs">
         <metrics complexity="0" elements="38" coveredelements="24" conditionals="2" coveredconditionals="1" statements="38" coveredstatements="24" coveredmethods="5" methods="10" classes="1" loc="85" ncloc="38" />
@@ -161,7 +140,7 @@
       </file>
     </package>
   </project>
-  <testproject timestamp="1696358595">
+  <testproject timestamp="1696538171">
     <metrics complexity="0" elements="0" coveredelements="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" coveredmethods="0" methods="0" classes="0" loc="0" ncloc="0" files="0" packages="0" />
   </testproject>
 </coverage>

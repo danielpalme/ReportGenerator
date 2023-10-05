@@ -1,16 +1,16 @@
 # Delta Summary
 |||||
 |:---|---:|---:|---:|
-| Generated on: | 03.10.2023 - 20:43 | | |
+| Generated on: | 05.10.2023 - 22:36 | | |
 | Description | **Previous** | **Current** | **Delta** |
-| Coverage date: | 09.02.2022 - 20:50 | 03.10.2023 - 20:43 | |
-| **Line coverage:** | 58.4% | 66.4% | 8.0% |
-| Covered lines: | 73 | 83 | 10 |
-| Coverable lines: | 125 | 125 | 0 |
-| Total lines: | 260 | 260 | 0 |
+| Coverage date: | 09.02.2022 - 20:50 | 05.10.2023 - 22:36 | |
+| **Line coverage:** | 58.4% | 69.4% | 11.0% |
+| Covered lines: | 73 | 75 | 2 |
+| Coverable lines: | 125 | 108 | -17 |
+| Total lines: | 260 | 273 | 13 |
 | **Branch coverage:** | 45% | 50% | 5% |
-| Covered branches: | 27 | 3 | -24 |
-| Total branches: | 60 | 6 | -54 |
-| **Method coverage:** | 66.6% | 58.3% | -8.3% |
-| Covered methods: | 16 | 14 | -2 |
+| Covered branches: | 27 | 4 | -23 |
+| Total branches: | 60 | 8 | -52 |
+| **Method coverage:** | 66.6% | 66.6% | 0.0% |
+| Covered methods: | 16 | 16 | 0 |
 | Total methods: | 24 | 24 | 0 |

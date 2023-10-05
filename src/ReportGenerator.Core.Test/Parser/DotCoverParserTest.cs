@@ -43,7 +43,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
             Assert.Equal(1, fileAnalysis.Lines.Single(l => l.LineNumber == 12).LineVisits);
             Assert.Equal(1, fileAnalysis.Lines.Single(l => l.LineNumber == 19).LineVisits);
             Assert.Equal(0, fileAnalysis.Lines.Single(l => l.LineNumber == 23).LineVisits);
-            Assert.Equal(0, fileAnalysis.Lines.Single(l => l.LineNumber == 31).LineVisits);
+            Assert.Equal(-1, fileAnalysis.Lines.Single(l => l.LineNumber == 31).LineVisits);
 
             fileAnalysis = GetFileAnalysis(this.parserResult.Assemblies, "Test.TestClass2", "C:\\temp\\TestClass2.cs");
             Assert.Equal(1, fileAnalysis.Lines.Single(l => l.LineNumber == 13).LineVisits);
@@ -78,7 +78,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
             line = fileAnalysis.Lines.Single(l => l.LineNumber == 15);
             Assert.Equal(LineVisitStatus.Covered, line.LineVisitStatus);
 
-            line = fileAnalysis.Lines.Single(l => l.LineNumber == 22);
+            line = fileAnalysis.Lines.Single(l => l.LineNumber == 23);
             Assert.Equal(LineVisitStatus.NotCovered, line.LineVisitStatus);
         }
 
@@ -88,7 +88,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         [Fact]
         public void NumberOfFilesTest()
         {
-            Assert.Equal(15, this.parserResult.Assemblies.SelectMany(a => a.Classes).SelectMany(a => a.Files).Distinct().Count());
+            Assert.Equal(18, this.parserResult.Assemblies.SelectMany(a => a.Classes).SelectMany(a => a.Files).Distinct().Count());
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         [Fact]
         public void ClassesInAssemblyTest()
         {
-            Assert.Equal(18, this.parserResult.Assemblies.SelectMany(a => a.Classes).Count());
+            Assert.Equal(19, this.parserResult.Assemblies.SelectMany(a => a.Classes).Count());
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         [Fact]
         public void AssembliesTest()
         {
-            Assert.Single(this.parserResult.Assemblies);
+            Assert.Equal(2, this.parserResult.Assemblies.Count);
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         public void CodeElementsTest()
         {
             var codeElements = GetFile(this.parserResult.Assemblies, "Test.TestClass", "C:\\temp\\TestClass.cs").CodeElements;
-            Assert.Equal(2, codeElements.Count());
+            Assert.Equal(5, codeElements.Count());
 
             codeElements = GetFile(this.parserResult.Assemblies, "Test.PartialClass", "C:\\temp\\PartialClass.cs").CodeElements;
             Assert.Equal(4, codeElements.Count());

@@ -26,61 +26,9 @@
     <lineToCover lineNumber="14" covered="false" />
     <lineToCover lineNumber="15" covered="false" />
   </file>
-  <file path="C:\temp\TestClass.cs">
-    <lineToCover lineNumber="8" covered="true" />
-    <lineToCover lineNumber="9" covered="true" />
-    <lineToCover lineNumber="10" covered="true" />
-    <lineToCover lineNumber="11" covered="true" />
-    <lineToCover lineNumber="12" covered="true" />
-    <lineToCover lineNumber="14" covered="true" />
-    <lineToCover lineNumber="15" covered="true" />
-    <lineToCover lineNumber="17" covered="true" branchesToCover="2" coveredBranches="1" />
-    <lineToCover lineNumber="18" covered="true" />
-    <lineToCover lineNumber="19" covered="true" />
-    <lineToCover lineNumber="20" covered="true" />
-    <lineToCover lineNumber="22" covered="false" />
-    <lineToCover lineNumber="23" covered="false" />
-    <lineToCover lineNumber="24" covered="false" />
-    <lineToCover lineNumber="25" covered="true" />
-    <lineToCover lineNumber="30" covered="false" />
-    <lineToCover lineNumber="31" covered="false" />
-    <lineToCover lineNumber="32" covered="false" />
-    <lineToCover lineNumber="33" covered="false" />
-    <lineToCover lineNumber="34" covered="false" />
-    <lineToCover lineNumber="35" covered="false" />
-  </file>
   <file path="C:\temp\Program.cs">
-    <lineToCover lineNumber="12" covered="true" />
-    <lineToCover lineNumber="13" covered="true" />
-    <lineToCover lineNumber="15" covered="true" />
-    <lineToCover lineNumber="16" covered="true" />
-    <lineToCover lineNumber="18" covered="true" />
-    <lineToCover lineNumber="19" covered="true" />
-    <lineToCover lineNumber="20" covered="true" />
     <lineToCover lineNumber="22" covered="true" />
-    <lineToCover lineNumber="23" covered="true" />
-    <lineToCover lineNumber="25" covered="true" />
-    <lineToCover lineNumber="27" covered="true" />
-    <lineToCover lineNumber="28" covered="true" />
-    <lineToCover lineNumber="30" covered="true" />
-    <lineToCover lineNumber="31" covered="true" />
-    <lineToCover lineNumber="33" covered="true" />
-    <lineToCover lineNumber="35" covered="true" />
-    <lineToCover lineNumber="36" covered="true" />
-    <lineToCover lineNumber="38" covered="true" />
-    <lineToCover lineNumber="41" covered="true" />
-    <lineToCover lineNumber="42" covered="true" />
-    <lineToCover lineNumber="43" covered="true" />
-    <lineToCover lineNumber="44" covered="false" />
-    <lineToCover lineNumber="45" covered="false" />
-    <lineToCover lineNumber="46" covered="false" />
-    <lineToCover lineNumber="47" covered="true" />
-    <lineToCover lineNumber="51" covered="false" />
-    <lineToCover lineNumber="52" covered="false" />
-    <lineToCover lineNumber="53" covered="false" />
-    <lineToCover lineNumber="57" covered="false" />
-    <lineToCover lineNumber="58" covered="false" />
-    <lineToCover lineNumber="59" covered="false" />
+    <lineToCover lineNumber="50" covered="true" />
     <lineToCover lineNumber="62" covered="true" />
     <lineToCover lineNumber="63" covered="true" />
     <lineToCover lineNumber="64" covered="true" />
@@ -90,10 +38,41 @@
     <lineToCover lineNumber="73" covered="true" />
     <lineToCover lineNumber="74" covered="true" />
     <lineToCover lineNumber="75" covered="true" />
-    <lineToCover lineNumber="76" covered="true" />
-    <lineToCover lineNumber="79" covered="true" />
-    <lineToCover lineNumber="80" covered="true" />
-    <lineToCover lineNumber="81" covered="true" />
+  </file>
+  <file path="C:\temp\TestClass.cs">
+    <lineToCover lineNumber="9" covered="true" />
+    <lineToCover lineNumber="10" covered="true" />
+    <lineToCover lineNumber="11" covered="true" />
+    <lineToCover lineNumber="12" covered="true" />
+    <lineToCover lineNumber="13" covered="true" />
+    <lineToCover lineNumber="15" covered="true" />
+    <lineToCover lineNumber="16" covered="true" />
+    <lineToCover lineNumber="18" covered="true" branchesToCover="4" coveredBranches="2" />
+    <lineToCover lineNumber="19" covered="true" />
+    <lineToCover lineNumber="20" covered="true" />
+    <lineToCover lineNumber="21" covered="true" />
+    <lineToCover lineNumber="23" covered="false" />
+    <lineToCover lineNumber="24" covered="false" />
+    <lineToCover lineNumber="25" covered="false" />
+    <lineToCover lineNumber="26" covered="true" />
+    <lineToCover lineNumber="29" covered="true" />
+    <lineToCover lineNumber="30" covered="true" />
+    <lineToCover lineNumber="32" covered="true" />
+    <lineToCover lineNumber="35" covered="true" />
+    <lineToCover lineNumber="36" covered="true" />
+    <lineToCover lineNumber="37" covered="true" />
+    <lineToCover lineNumber="38" covered="true" />
+    <lineToCover lineNumber="41" covered="true" />
+    <lineToCover lineNumber="42" covered="true" />
+    <lineToCover lineNumber="44" covered="true" />
+    <lineToCover lineNumber="46" covered="true" />
+    <lineToCover lineNumber="47" covered="true" />
+    <lineToCover lineNumber="52" covered="false" />
+    <lineToCover lineNumber="53" covered="false" />
+    <lineToCover lineNumber="54" covered="false" />
+    <lineToCover lineNumber="55" covered="false" />
+    <lineToCover lineNumber="56" covered="false" />
+    <lineToCover lineNumber="57" covered="false" />
   </file>
   <file path="C:\temp\TestClass2.cs">
     <lineToCover lineNumber="11" covered="true" />
