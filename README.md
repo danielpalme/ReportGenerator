@@ -248,13 +248,13 @@ The following extensions exist to visualize coverage in Visual Studio:
 * https://www.palmmedia.de/Blog/2012/4/29/reportgenerator-new-release-with-more-advanced-report-preprocessing
 
 ### Download statistics
-![Nuget](https://img.shields.io/nuget/dt/ReportGenerator.svg?label=ReportGenerator%40nuget?style=for-the-badge)
-![Nuget](https://img.shields.io/nuget/dt/dotnet-reportgenerator-globaltool.svg?label=dotnet-reportgenerator-globaltool%40nuget?style=for-the-badge)
-![Nuget](https://img.shields.io/nuget/dt/ReportGenerator.Core.svg?label=ReportGenerator.Core%40nuget?style=for-the-badge)
+![Nuget](https://img.shields.io/nuget/dt/ReportGenerator.svg?label=ReportGenerator%40nuget&style=for-the-badge)
+![Nuget](https://img.shields.io/nuget/dt/dotnet-reportgenerator-globaltool.svg?label=dotnet-reportgenerator-globaltool%40nuget&style=for-the-badge)
+![Nuget](https://img.shields.io/nuget/dt/ReportGenerator.Core.svg?label=ReportGenerator.Core%40nuget&style=for-the-badge)
 
-![Visual Studio Marketplace Installs - Azure DevOps Extension](https://img.shields.io/visual-studio-marketplace/azure-devops/installs/total/Palmmedia.reportgenerator.svg?label=Azure%20DevOps?style=for-the-badge)
-![GitHub All Releases](https://img.shields.io/github/downloads/danielpalme/ReportGenerator/total.svg?label=GitHub?style=for-the-badge)
-![Chocolatey](https://img.shields.io/chocolatey/dt/reportgenerator.portable.svg?label=Chocolatey?style=for-the-badge)
+![Visual Studio Marketplace Installs - Azure DevOps Extension](https://img.shields.io/visual-studio-marketplace/azure-devops/installs/total/Palmmedia.reportgenerator.svg?label=Azure%20DevOps&style=for-the-badge)
+![GitHub All Releases](https://img.shields.io/github/downloads/danielpalme/ReportGenerator/total.svg?label=GitHub&style=for-the-badge)
+![Chocolatey](https://img.shields.io/chocolatey/dt/reportgenerator.portable.svg?label=Chocolatey&style=for-the-badge)
 
 ### Trends
 [Nuget downloads](https://nugettrends.com/packages?months=24&ids=ReportGenerator&ids=dotnet-reportgenerator-globaltool&ids=ReportGenerator.Core&ids=dotnet-reportgenerator-cli)  
