@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.1.27.0
+
+    * New: #629 Visual Studio Coverage: Added support for partial line coverage
+
 5.1.26.0
 
     * New: #595 Added new report type 'Html_BlueRed_Summary' to improve red-green colorblind accessibility

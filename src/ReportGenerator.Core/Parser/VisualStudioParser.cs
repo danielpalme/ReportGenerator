@@ -220,7 +220,26 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     {
                         int visits = seqpnt.Coverage < 2 ? 1 : 0;
                         coverage[lineNumber] = coverage[lineNumber] == -1 ? visits : Math.Min(coverage[lineNumber] + visits, 1);
-                        lineVisitStatus[lineNumber] = lineVisitStatus[lineNumber] == LineVisitStatus.Covered || visits > 0 ? LineVisitStatus.Covered : LineVisitStatus.NotCovered;
+
+                        if (seqpnt.Coverage == 2)
+                        {
+                            if (lineVisitStatus[lineNumber] == LineVisitStatus.NotCoverable)
+                            {
+                                lineVisitStatus[lineNumber] = LineVisitStatus.NotCovered;
+                            }
+                        }
+                        else if (seqpnt.Coverage == 1)
+                        {
+                            if (lineVisitStatus[lineNumber] == LineVisitStatus.NotCoverable
+                                || lineVisitStatus[lineNumber] == LineVisitStatus.NotCovered)
+                            {
+                                lineVisitStatus[lineNumber] = LineVisitStatus.PartiallyCovered;
+                            }
+                        }
+                        else if (seqpnt.Coverage == 0)
+                        {
+                            lineVisitStatus[lineNumber] = LineVisitStatus.Covered;
+                        }
                     }
                 }
             }

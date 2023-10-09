@@ -32,6 +32,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{7925
 		Testprojects\CSharp\Reports\VisualStudio2010.coveragexml = Testprojects\CSharp\Reports\VisualStudio2010.coveragexml
 		Testprojects\CSharp\Reports\VisualStudio2012.coveragexml = Testprojects\CSharp\Reports\VisualStudio2012.coveragexml
 		Testprojects\CSharp\Reports\VisualStudio2013.coveragexml = Testprojects\CSharp\Reports\VisualStudio2013.coveragexml
+		Testprojects\CSharp\Reports\VisualStudio2022.coveragexml = Testprojects\CSharp\Reports\VisualStudio2022.coveragexml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FSharp", "FSharp", "{9223804A-D678-4EE8-BD89-19A6114DB86F}"
