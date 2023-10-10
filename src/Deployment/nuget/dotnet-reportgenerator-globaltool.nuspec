@@ -41,15 +41,7 @@ dotnet reportgenerator [options]</description>
     <file src="..\..\..\LICENSE.txt" target="LICENSE.txt" />
     <file src="..\..\Readme.txt" target="Readme.txt" />
     <file src="Readme_dotnet-reportgenerator-globaltool.md" target="Readme.md" />
-    
-    <!-- NetCoreApp3.1 ('tools\netcoreapp3.1' directory) -->
-    <file src="..\..\ReportGenerator.DotnetGlobalTool\bin\Release\netcoreapp3.1\publish\**\*.*" target="tools\netcoreapp3.1\any" />
-    <file src="DotnetToolSettings.xml" target="tools\netcoreapp3.1\any" />
-    
-    <!-- Net5.0 ('tools\net5.0' directory) -->
-    <file src="..\..\ReportGenerator.DotnetGlobalTool\bin\Release\net5.0\publish\**\*.*" target="tools\net5.0\any" />
-    <file src="DotnetToolSettings.xml" target="tools\net5.0\any" />
-    
+
     <!-- Net6.0 ('tools\net6.0' directory) -->
     <file src="..\..\ReportGenerator.DotnetGlobalTool\bin\Release\net6.0\publish\**\*.*" target="tools\net6.0\any" />
     <file src="DotnetToolSettings.xml" target="tools\net6.0\any" />
@@ -57,5 +49,9 @@ dotnet reportgenerator [options]</description>
     <!-- Net7.0 ('tools\net7.0' directory) -->
     <file src="..\..\ReportGenerator.DotnetGlobalTool\bin\Release\net7.0\publish\**\*.*" target="tools\net7.0\any" />
     <file src="DotnetToolSettings.xml" target="tools\net7.0\any" />
+    
+    <!-- Net8.0 ('tools\net8.0' directory) -->
+    <file src="..\..\ReportGenerator.DotnetGlobalTool\bin\Release\net8.0\publish\**\*.*" target="tools\net8.0\any" />
+    <file src="DotnetToolSettings.xml" target="tools\net8.0\any" />
   </files>
 </package>

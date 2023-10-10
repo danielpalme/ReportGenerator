@@ -67,8 +67,9 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
-5.1.27.0
+5.2.0.0
 
+    * New: Added support for .NET 8. Dropped support for .NET 3.1 and .NET 5.0
     * New: #629 Visual Studio Coverage: Added support for partial line coverage
 
 5.1.26.0
