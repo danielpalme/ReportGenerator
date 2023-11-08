@@ -8,7 +8,7 @@ env:
   buildConfiguration: Release
   version: 5.2.0
   dotnetSDKVersion: 8.0.100-rc.2.23502.2
-  nodeVersion: 18
+  nodeVersion: 20
 
 jobs:
   build:
