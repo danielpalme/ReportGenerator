@@ -38,6 +38,10 @@
     <lineToCover lineNumber="73" covered="true" />
     <lineToCover lineNumber="74" covered="true" />
     <lineToCover lineNumber="75" covered="true" />
+    <lineToCover lineNumber="76" covered="true" />
+    <lineToCover lineNumber="79" covered="true" />
+    <lineToCover lineNumber="80" covered="true" />
+    <lineToCover lineNumber="81" covered="true" />
   </file>
   <file path="C:\temp\TestClass.cs">
     <lineToCover lineNumber="9" covered="true" />
@@ -62,17 +66,6 @@
     <lineToCover lineNumber="36" covered="true" />
     <lineToCover lineNumber="37" covered="true" />
     <lineToCover lineNumber="38" covered="true" />
-    <lineToCover lineNumber="41" covered="true" />
-    <lineToCover lineNumber="42" covered="true" />
-    <lineToCover lineNumber="44" covered="true" />
-    <lineToCover lineNumber="46" covered="true" />
-    <lineToCover lineNumber="47" covered="true" />
-    <lineToCover lineNumber="52" covered="false" />
-    <lineToCover lineNumber="53" covered="false" />
-    <lineToCover lineNumber="54" covered="false" />
-    <lineToCover lineNumber="55" covered="false" />
-    <lineToCover lineNumber="56" covered="false" />
-    <lineToCover lineNumber="57" covered="false" />
   </file>
   <file path="C:\temp\TestClass2.cs">
     <lineToCover lineNumber="11" covered="true" />

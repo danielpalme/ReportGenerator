@@ -1,7 +1,7 @@
 # Summary
 |||
 |:---|:---|
-| Generated on: | 05.10.2023 - 22:36:24 |
+| Generated on: | 14.11.2023 - 19:01:47 |
 | Parser: | OpenCover |
 | Assemblies: | 1 |
 | Classes: | 4 |
@@ -10,7 +10,7 @@
 | Covered lines: | 75 |
 | Uncovered lines: | 33 |
 | Coverable lines: | 108 |
-| Total lines: | 273 |
+| Total lines: | 260 |
 | **Branch coverage:** | 50% (4 of 8) |
 | Covered branches: | 4 |
 | Total branches: | 8 |
@@ -20,8 +20,8 @@
 
 |**Name**|**Covered**|**Uncovered**|**Coverable**|**Total**|**Line coverage**|**Covered**|**Total**|**Branch coverage**|**Covered**|**Total**|**Method coverage**|
 |:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-|**Sample**|**75**|**33**|**108**|**273**|**69.4%**|**4**|**8**|**50%**|**16**|**24**|**66.6%**|
+|**Sample**|**75**|**33**|**108**|**260**|**69.4%**|**4**|**8**|**50%**|**16**|**24**|**66.6%**|
 |Sample.PartialClass|12|10|22|53|54.5%|1|2|50%|3|6|50%|
-|Test.Program|15|0|15|75|100%|0|0||3|3|100%|
-|Test.TestClass|24|9|33|60|72.7%|2|4|50%|4|5|80%|
+|Test.Program|15|0|15|84|100%|0|0||3|3|100%|
+|Test.TestClass|24|9|33|38|72.7%|2|4|50%|4|5|80%|
 |Test.TestClass2|24|14|38|85|63.1%|1|2|50%|6|10|60%|

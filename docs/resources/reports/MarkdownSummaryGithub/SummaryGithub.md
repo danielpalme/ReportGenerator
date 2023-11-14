@@ -3,7 +3,7 @@
 
 |||
 |:---|:---|
-| Generated on: | 05.10.2023 - 22:36:30 |
+| Generated on: | 14.11.2023 - 19:01:49 |
 | Parser: | OpenCover |
 | Assemblies: | 1 |
 | Classes: | 4 |
@@ -12,7 +12,7 @@
 | Covered lines: | 75 |
 | Uncovered lines: | 33 |
 | Coverable lines: | 108 |
-| Total lines: | 273 |
+| Total lines: | 260 |
 | **Branch coverage:** | 50% (4 of 8) |
 | Covered branches: | 4 |
 | Total branches: | 8 |

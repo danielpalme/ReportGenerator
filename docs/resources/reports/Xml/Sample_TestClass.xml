@@ -9,7 +9,7 @@
     <Coveredlines>24</Coveredlines>
     <Uncoveredlines>9</Uncoveredlines>
     <Coverablelines>33</Coverablelines>
-    <Totallines>60</Totallines>
+    <Totallines>38</Totallines>
     <Linecoverage>72.7</Linecoverage>
     <Coveredbranches>2</Coveredbranches>
     <Totalbranches>4</Totalbranches>
@@ -53,65 +53,43 @@
   <Files>
     <File name="C:\temp\TestClass.cs">
       <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System;" />
-      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Linq;" />
-      <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
-      <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Test" />
-      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />
-      <LineAnalysis line="6" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    class TestClass" />
-      <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
-      <LineAnalysis line="8" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public void SampleFunction()" />
-      <LineAnalysis line="9" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="        {" />
-      <LineAnalysis line="10" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="            string test = string.Format(" />
-      <LineAnalysis line="11" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="                &quot;{0} {1}&quot;," />
-      <LineAnalysis line="12" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="                 &quot;Hello&quot;," />
-      <LineAnalysis line="13" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="                 &quot;World&quot;);" />
-      <LineAnalysis line="14" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
-      <LineAnalysis line="15" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="            Console.WriteLine(test);" />
-      <LineAnalysis line="16" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="            int i = 10;" />
-      <LineAnalysis line="17" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
-      <LineAnalysis line="18" visits="2" coverage="PartiallyCovered" coveredbranches="2" totalbranches="4" content="            if (i &gt; 0 || i &gt; 1)" />
-      <LineAnalysis line="19" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="            {" />
-      <LineAnalysis line="20" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="                Console.WriteLine(i + &quot; is greater that 0&quot;);" />
-      <LineAnalysis line="21" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="            }" />
-      <LineAnalysis line="22" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            else" />
-      <LineAnalysis line="23" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
-      <LineAnalysis line="24" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                Console.WriteLine(i + &quot; is not greater that 0&quot;);" />
-      <LineAnalysis line="25" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            }" />
-      <LineAnalysis line="26" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="        }" />
-      <LineAnalysis line="27" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
-      <LineAnalysis line="28" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public void ParentMethod()" />
-      <LineAnalysis line="29" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="        {" />
-      <LineAnalysis line="30" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="            string resultFromLocalFunction = NestedLocalFunction(&quot;Hello&quot;);" />
-      <LineAnalysis line="31" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
-      <LineAnalysis line="32" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="            Console.WriteLine(resultFromLocalFunction);" />
-      <LineAnalysis line="33" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
-      <LineAnalysis line="34" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            string NestedLocalFunction(string input)" />
-      <LineAnalysis line="35" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="            {" />
-      <LineAnalysis line="36" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="                return input + &quot; world&quot;;" />
-      <LineAnalysis line="37" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="            }" />
-      <LineAnalysis line="38" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="        }" />
-      <LineAnalysis line="39" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
-      <LineAnalysis line="40" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public void MethodWithLambda()" />
-      <LineAnalysis line="41" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="        {" />
-      <LineAnalysis line="42" visits="8" coverage="Covered" coveredbranches="" totalbranches="" content="            var chars = &quot;abc&quot;.Where(c =&gt; c == 'a').ToArray();" />
-      <LineAnalysis line="43" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
-      <LineAnalysis line="44" visits="8" coverage="Covered" coveredbranches="" totalbranches="" content="            var lambda = (char c) =&gt; c == 'a';" />
-      <LineAnalysis line="45" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
-      <LineAnalysis line="46" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="            var chars2 = &quot;abc&quot;.Where(lambda).ToArray();" />
-      <LineAnalysis line="47" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="        }" />
-      <LineAnalysis line="48" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
-      <LineAnalysis line="49" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public class NestedClass" />
-      <LineAnalysis line="50" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
-      <LineAnalysis line="51" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            public void SampleFunction()" />
-      <LineAnalysis line="52" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
-      <LineAnalysis line="53" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                Console.WriteLine(" />
-      <LineAnalysis line="54" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    &quot;{0} {1}&quot;," />
-      <LineAnalysis line="55" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                     &quot;Hello&quot;," />
-      <LineAnalysis line="56" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                     &quot;World&quot;);" />
-      <LineAnalysis line="57" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            }" />
-      <LineAnalysis line="58" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
-      <LineAnalysis line="59" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
-      <LineAnalysis line="60" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="}" />
+      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Test" />
+      <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />
+      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    class TestClass" />
+      <LineAnalysis line="6" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public void SampleFunction()" />
+      <LineAnalysis line="8" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="9" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="            string test = string.Format(" />
+      <LineAnalysis line="10" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="                &quot;{0} {1}&quot;," />
+      <LineAnalysis line="11" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="                 &quot;Hello&quot;," />
+      <LineAnalysis line="12" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="                 &quot;World&quot;);" />
+      <LineAnalysis line="13" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="14" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            Console.WriteLine(test);" />
+      <LineAnalysis line="15" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="            int i = 10;" />
+      <LineAnalysis line="16" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="17" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            if (i &gt; 0 || i &gt; 1)" />
+      <LineAnalysis line="18" visits="2" coverage="PartiallyCovered" coveredbranches="2" totalbranches="4" content="            {" />
+      <LineAnalysis line="19" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="                Console.WriteLine(i + &quot; is greater that 0&quot;);" />
+      <LineAnalysis line="20" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="21" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="            else" />
+      <LineAnalysis line="22" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="23" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                Console.WriteLine(i + &quot; is not greater that 0&quot;);" />
+      <LineAnalysis line="24" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="25" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="26" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="27" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public class NestedClass" />
+      <LineAnalysis line="28" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="29" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="            public void SampleFunction()" />
+      <LineAnalysis line="30" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="31" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                Console.WriteLine(" />
+      <LineAnalysis line="32" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="                    &quot;{0} {1}&quot;," />
+      <LineAnalysis line="33" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                     &quot;Hello&quot;," />
+      <LineAnalysis line="34" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                     &quot;World&quot;);" />
+      <LineAnalysis line="35" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="36" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="37" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="38" visits="2" coverage="Covered" coveredbranches="" totalbranches="" content="}" />
     </File>
   </Files>
 </CoverageReport>

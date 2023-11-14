@@ -25,18 +25,18 @@ https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage</desc
     <repository type="git" url="https://github.com/danielpalme/ReportGenerator.git" />
     <dependencies>
       <group targetFramework="netstandard2.0">
-        <dependency id="Microsoft.Extensions.Configuration" version="7.0.0" />
-        <dependency id="Microsoft.Extensions.Configuration.Binder" version="7.0.4" />
-        <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="7.0.0" />
-        <dependency id="Microsoft.Extensions.Configuration.Json" version="7.0.0" />
+        <dependency id="Microsoft.Extensions.Configuration" version="8.0.0" />
+        <dependency id="Microsoft.Extensions.Configuration.Binder" version="8.0.0" />
+        <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="8.0.0" />
+        <dependency id="Microsoft.Extensions.Configuration.Json" version="8.0.0" />
         <dependency id="DotNetConfig" version="1.0.6" />
       </group>
 
       <group targetFramework="netcoreapp">
-        <dependency id="Microsoft.Extensions.Configuration" version="7.0.0" />
-        <dependency id="Microsoft.Extensions.Configuration.Binder" version="7.0.4" />
-        <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="7.0.0" />
-        <dependency id="Microsoft.Extensions.Configuration.Json" version="7.0.0" />
+        <dependency id="Microsoft.Extensions.Configuration" version="8.0.0" />
+        <dependency id="Microsoft.Extensions.Configuration.Binder" version="8.0.0" />
+        <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="8.0.0" />
+        <dependency id="Microsoft.Extensions.Configuration.Json" version="8.0.0" />
         <dependency id="DotNetConfig" version="1.0.6" />
         <dependency id="McMaster.NETCore.Plugins" version="1.4.0" />
       </group>

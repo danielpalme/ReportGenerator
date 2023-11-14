@@ -1,6 +1,6 @@
 {
   "summary": {
-    "generatedon": "2023-10-05T20:36:18Z",
+    "generatedon": "2023-11-14T18:01:45Z",
     "parser": "OpenCover",
     "assemblies": 1,
     "classes": 4,
@@ -8,7 +8,7 @@
     "coveredlines": 75,
     "uncoveredlines": 33,
     "coverablelines": 108,
-    "totallines": 273,
+    "totallines": 260,
     "linecoverage": 69.4,
     "coveredbranches": 4,
     "totalbranches": 8,
@@ -19,10 +19,10 @@
  },
   "coverage": {
     "assemblies": [
-      { "name": "Sample", "classes": 4, "coverage": 69.4, "coveredlines": 75, "coverablelines": 108, "totallines": 273, "branchcoverage": 50, "coveredbranches": 4, "totalbranches": 8, "methodcoverage": 66.6, "coveredmethods": 16, "totalmethods": 24, "classesinassembly": [
+      { "name": "Sample", "classes": 4, "coverage": 69.4, "coveredlines": 75, "coverablelines": 108, "totallines": 260, "branchcoverage": 50, "coveredbranches": 4, "totalbranches": 8, "methodcoverage": 66.6, "coveredmethods": 16, "totalmethods": 24, "classesinassembly": [
         { "name": "Sample.PartialClass", "coverage": 54.5, "coveredlines": 12, "coverablelines": 22, "totallines": 53, "branchcoverage": 50, "coveredbranches": 1, "totalbranches": 2, "methodcoverage": 50, "coveredmethods": 3, "totalmethods": 6 },
-        { "name": "Test.Program", "coverage": 100, "coveredlines": 15, "coverablelines": 15, "totallines": 75, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 3, "totalmethods": 3 },
-        { "name": "Test.TestClass", "coverage": 72.7, "coveredlines": 24, "coverablelines": 33, "totallines": 60, "branchcoverage": 50, "coveredbranches": 2, "totalbranches": 4, "methodcoverage": 80, "coveredmethods": 4, "totalmethods": 5 },
+        { "name": "Test.Program", "coverage": 100, "coveredlines": 15, "coverablelines": 15, "totallines": 84, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 3, "totalmethods": 3 },
+        { "name": "Test.TestClass", "coverage": 72.7, "coveredlines": 24, "coverablelines": 33, "totallines": 38, "branchcoverage": 50, "coveredbranches": 2, "totalbranches": 4, "methodcoverage": 80, "coveredmethods": 4, "totalmethods": 5 },
         { "name": "Test.TestClass2", "coverage": 63.1, "coveredlines": 24, "coverablelines": 38, "totallines": 85, "branchcoverage": 50, "coveredbranches": 1, "totalbranches": 2, "methodcoverage": 60, "coveredmethods": 6, "totalmethods": 10 } ] } ]
   }
 }
