@@ -65,7 +65,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         public void SourceDirectories()
         {
             var parserResult1 = new ParserResult();
-            Assert.Equal(0, parserResult1.SourceDirectories.Count);
+            Assert.Empty(parserResult1.SourceDirectories);
 
             parserResult1.AddSourceDirectory("C:\\temp1");
             parserResult1.AddSourceDirectory("C:\\temp2");

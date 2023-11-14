@@ -35,7 +35,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                         nameof(ExecuteMSBuildScript_NetFull) + ".binlog");
                     var processStartInfo = new ProcessStartInfo(
                         paths[i],
-                        $"/p:Configuration={configuration} /bl:{log} MsBuildTestScript.proj ")
+                        $"/p:Configuration={configuration} \"/bl:{log}\" MsBuildTestScript.proj")
                     {
                         WorkingDirectory = FileManager.GetTestDirectory(),
                         RedirectStandardOutput = true,

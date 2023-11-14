@@ -24,18 +24,15 @@
     <file src="..\..\Readme.txt" target="Readme.txt" />
     <file src="VERIFICATION.txt" target="tools\VERIFICATION.txt" />
 
-    <!-- NetCoreApp3.1 ('tools\netcoreapp3.1' directory) -->
-    <file src="..\..\ReportGenerator.Console.NetCore\bin\Release\netcoreapp3.1\publish\**\*.*" target="tools\netcoreapp3.1" />
-
-    <!-- Net5.0 ('tools\net5.0' directory) -->
-    <file src="..\..\ReportGenerator.Console.NetCore\bin\Release\net5.0\publish\**\*.*" target="tools\net5.0" />
-
     <!-- Net6.0 ('tools\net6.0' directory) -->
     <file src="..\..\ReportGenerator.Console.NetCore\bin\Release\net6.0\publish\**\*.*" target="tools\net6.0" />
 
     <!-- Net7.0 ('tools\net7.0' directory) -->
     <file src="..\..\ReportGenerator.Console.NetCore\bin\Release\net7.0\publish\**\*.*" target="tools\net7.0" />
     
+    <!-- Net8.0 ('tools\net8.0' directory) -->
+    <file src="..\..\ReportGenerator.Console.NetCore\bin\Release\net8.0\publish\**\*.*" target="tools\net8.0" />
+
     <!-- .NET 4.7 ('tools\net47' directory) -->
     <file src="..\..\ReportGenerator.Console\bin\Release\*.json" target="tools\net47" />
     <file src="..\..\ReportGenerator.Console\bin\Release\*.dll" target="tools\net47" />

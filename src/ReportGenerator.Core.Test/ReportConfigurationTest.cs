@@ -41,8 +41,8 @@ namespace Palmmedia.ReportGenerator.Core.Test
             Assert.NotNull(configuration.ClassFilters);
 
             Assert.True(configuration.VerbosityLevelValid);
-            Assert.Equal(0, configuration.InvalidReportFilePatterns.Count);
-            Assert.Equal(0, configuration.SourceDirectories.Count);
+            Assert.Empty(configuration.InvalidReportFilePatterns);
+            Assert.Empty(configuration.SourceDirectories);
         }
 
         [Fact]
@@ -81,7 +81,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
             Assert.Equal("CustomTag", configuration.Tag);
 
             Assert.True(configuration.VerbosityLevelValid);
-            Assert.Equal(0, configuration.InvalidReportFilePatterns.Count);
+            Assert.Empty(configuration.InvalidReportFilePatterns);
         }
 
         [Fact]
