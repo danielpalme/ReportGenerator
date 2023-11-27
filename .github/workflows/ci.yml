@@ -149,7 +149,7 @@ jobs:
       run: nuget pack src/Deployment/nuget/ReportGenerator.nuspec -OutputDirectory src/target/packages -Version ${{ env.Version }}
 
     - name: 'Chocolatey pack reportgenerator.portable'
-      run: .$env:USERPROFILE\.nuget\packages\chocolatey\1.4.0\tools\chocolateyInstall\choco.exe pack src/Deployment/chocolatey/reportgenerator.portable.nuspec --outputdirectory=src/target/packages --version=${{ env.Version }}
+      run: .$env:USERPROFILE\.nuget\packages\chocolatey\2.2.2\tools\chocolateyInstall\choco.exe pack src/Deployment/chocolatey/reportgenerator.portable.nuspec --outputdirectory=src/target/packages --version=${{ env.Version }}
 
     - name: 'Publish Artifact: packages'
       uses: actions/upload-artifact@v3

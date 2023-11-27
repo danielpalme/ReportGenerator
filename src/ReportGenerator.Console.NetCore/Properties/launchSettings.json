@@ -2,7 +2,7 @@
   "profiles": {
     "ReportGenerator.Console.NetCore": {
       "commandName": "Project",
-      "commandLineArgs": "-reports:C:\\Users\\danie\\Documents\\Projects\\ReportGenerator\\src\\Testprojects\\CSharp\\Reports\\OpenCover.xml -targetdir:C:\\Users\\danie\\Desktop\\coverage -reporttypes:Html;"
+      "commandLineArgs": "\"-reports:..\\..\\..\\..\\..\\Testprojects\\CSharp\\Reports\\OpenCover.xml\" \"-targetdir:C:\\Users\\Daniel Palme\\Desktop\\coverage\" -reporttypes:Html;"
     }
   }
 }
