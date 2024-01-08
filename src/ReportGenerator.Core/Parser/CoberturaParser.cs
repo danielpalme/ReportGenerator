@@ -324,46 +324,46 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                 var lineRate = method.Attribute("line-rate");
 
+                decimal? coveragePercent = null;
                 if (lineRate != null)
                 {
-                    decimal? value = null;
+                    coveragePercent = GetCoberturaDecimalPercentageValue(lineRate.Value);
 
-                    if (!"NaN".Equals(lineRate.Value, StringComparison.OrdinalIgnoreCase))
-                    {
-                        value = Math.Round(100 * decimal.Parse(lineRate.Value.Replace(',', '.'), NumberStyles.Number | NumberStyles.AllowExponent, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero);
-                    }
-
-                    metrics.Add(Metric.Coverage(value));
+                    metrics.Add(Metric.Coverage(coveragePercent));
                 }
 
                 var branchRate = method.Attribute("branch-rate");
 
                 if (branchRate != null)
                 {
-                    decimal? value = null;
-
-                    if (!"NaN".Equals(branchRate.Value, StringComparison.OrdinalIgnoreCase))
-                    {
-                        value = Math.Round(100 * decimal.Parse(branchRate.Value.Replace(',', '.'), NumberStyles.Number | NumberStyles.AllowExponent, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero);
-                    }
+                    decimal? value = GetCoberturaDecimalPercentageValue(branchRate.Value);
 
                     metrics.Add(Metric.BranchCoverage(value));
                 }
 
                 var cyclomaticComplexityAttribute = method.Attribute("complexity");
-
+                decimal? cyclomaticComplexity = null;
                 if (cyclomaticComplexityAttribute != null)
                 {
-                    decimal? value = null;
-
-                    if (!"NaN".Equals(cyclomaticComplexityAttribute.Value, StringComparison.OrdinalIgnoreCase))
-                    {
-                        value = Math.Round(decimal.Parse(cyclomaticComplexityAttribute.Value.Replace(',', '.'), NumberStyles.Number | NumberStyles.AllowExponent, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero);
-                    }
+                    cyclomaticComplexity = GetCoberturaDecimalValue(cyclomaticComplexityAttribute.Value);
 
                     metrics.Insert(
                         0,
-                        Metric.CyclomaticComplexity(value));
+                        Metric.CyclomaticComplexity(cyclomaticComplexity));
+                }
+
+                if (cyclomaticComplexity.HasValue && coveragePercent.HasValue)
+                {
+                    // https://testing.googleblog.com/2011/02/this-code-is-crap.html
+                    // CRAP(m) = CC(m)^2 * U(m)^3 + CC(m)
+                    // CC(m) <= Cyclomatic Complexity (e.g. 5)
+                    // U(m) <= Uncovered percentage (e.g. 30% = 0.3)
+                    var uncoveredPercent = (100f - (double)coveragePercent.Value) / 100.0;
+                    var complexity = (double)cyclomaticComplexity.Value;
+                    var crapScore = (Math.Pow(complexity, 2.0) * Math.Pow(uncoveredPercent, 3)) + complexity;
+                    crapScore = Math.Round(crapScore, 2, MidpointRounding.AwayFromZero);
+
+                    metrics.Insert(0, Metric.CrapScore((decimal)crapScore));
                 }
 
                 var methodMetric = new MethodMetric(fullName, shortName, metrics);
@@ -380,6 +380,39 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                 codeFile.AddMethodMetric(methodMetric);
             }
+        }
+
+        private static decimal? ParseCoberturaDecimalValue(string value)
+        {
+            decimal? result = null;
+            if (!"NaN".Equals(value, StringComparison.OrdinalIgnoreCase))
+            {
+                result = decimal.Parse(value.Replace(',', '.'), NumberStyles.Number | NumberStyles.AllowExponent, CultureInfo.InvariantCulture);
+            }
+
+            return result;
+        }
+
+        private static decimal? GetCoberturaDecimalValue(string value)
+        {
+            decimal? result = ParseCoberturaDecimalValue(value);
+            if (result.HasValue)
+            {
+                result = Math.Round(result.Value, 2, MidpointRounding.AwayFromZero);
+            }
+
+            return result;
+        }
+
+        private static decimal? GetCoberturaDecimalPercentageValue(string value)
+        {
+            decimal? result = ParseCoberturaDecimalValue(value);
+            if (result.HasValue)
+            {
+                result = Math.Round(result.Value * 100, 2, MidpointRounding.AwayFromZero);
+            }
+
+            return result;
         }
 
         /// <summary>

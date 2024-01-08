@@ -17,3 +17,4 @@ obj
 .DS_Store
 .AssemblyAttributes
 node_modules
+/_ReSharper.Caches
