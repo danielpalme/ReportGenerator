@@ -10,10 +10,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="17.7.2" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="17.8.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ReportGenerator.Core\ReportGenerator.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="8.0.0" />
   </ItemGroup>
 </Project>
