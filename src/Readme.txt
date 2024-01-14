@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.2.1.0
+
+    * New: Added 'Crap Score' metric for Coberatura coverage files (contrbuted by @rikrak)
+
 5.2.0.0
 
     * New: Added support for .NET 8. Dropped support for .NET 3.1 and .NET 5.0

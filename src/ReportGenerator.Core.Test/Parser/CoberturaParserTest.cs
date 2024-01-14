@@ -19,18 +19,17 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
     [Collection("FileManager")]
     public class CoberturaParserTest
     {
-        private static readonly string FilePath1 = Path.Combine(FileManager.GetJavaReportDirectory(), "Cobertura2.1.1.xml");
+        private static readonly string FilePathJavaReport   = Path.Combine(FileManager.GetJavaReportDirectory(), "Cobertura2.1.1.xml");
+        private static readonly string FilePathCSharpReport = Path.Combine(FileManager.GetCSharpReportDirectory(), "Cobertura_coverlet.xml");
 
-        private readonly ParserResult parserResult;
+        private readonly ParserResult javaParserResult;
+        private readonly ParserResult csharpParserResult;
 
         public CoberturaParserTest()
         {
-            var filterMock = new Mock<IFilter>();
-            filterMock.Setup(f => f.IsElementIncludedInReport(It.IsAny<string>())).Returns(true);
+            this.javaParserResult = ParseReport(FilePathJavaReport);
 
-            var report = XDocument.Load(FilePath1);
-            new CoberturaReportPreprocessor().Execute(report);
-            this.parserResult = new CoberturaParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(report.Root);
+            this.csharpParserResult = ParseReport(FilePathCSharpReport);
         }
 
         /// <summary>
@@ -39,7 +38,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         [Fact]
         public void SupportsBranchCoverage()
         {
-            Assert.True(this.parserResult.SupportsBranchCoverage);
+            Assert.True(this.javaParserResult.SupportsBranchCoverage);
         }
 
         /// <summary>
@@ -48,7 +47,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         [Fact]
         public void NumberOfLineVisitsTest()
         {
-            var fileAnalysis = GetFileAnalysis(this.parserResult.Assemblies, "test.TestClass", "C:\\temp\\test\\TestClass.java");
+            var fileAnalysis = GetFileAnalysis(this.javaParserResult.Assemblies, "test.TestClass", "C:\\temp\\test\\TestClass.java");
             Assert.Equal(1, fileAnalysis.Lines.Single(l => l.LineNumber == 15).LineVisits);
             Assert.Equal(1, fileAnalysis.Lines.Single(l => l.LineNumber == 17).LineVisits);
             Assert.Equal(0, fileAnalysis.Lines.Single(l => l.LineNumber == 20).LineVisits);
@@ -61,7 +60,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         [Fact]
         public void LineVisitStatusTest()
         {
-            var fileAnalysis = GetFileAnalysis(this.parserResult.Assemblies, "test.TestClass", "C:\\temp\\test\\TestClass.java");
+            var fileAnalysis = GetFileAnalysis(this.javaParserResult.Assemblies, "test.TestClass", "C:\\temp\\test\\TestClass.java");
 
             var line = fileAnalysis.Lines.Single(l => l.LineNumber == 1);
             Assert.Equal(LineVisitStatus.NotCoverable, line.LineVisitStatus);
@@ -82,7 +81,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         [Fact]
         public void NumberOfFilesTest()
         {
-            Assert.Equal(7, this.parserResult.Assemblies.SelectMany(a => a.Classes).SelectMany(a => a.Files).Distinct().Count());
+            Assert.Equal(7, this.javaParserResult.Assemblies.SelectMany(a => a.Classes).SelectMany(a => a.Files).Distinct().Count());
         }
 
         /// <summary>
@@ -91,8 +90,8 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         [Fact]
         public void FilesOfClassTest()
         {
-            Assert.Single(this.parserResult.Assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "test.TestClass").Files);
-            Assert.Single(this.parserResult.Assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "test.GenericClass").Files);
+            Assert.Single(this.javaParserResult.Assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "test.TestClass").Files);
+            Assert.Single(this.javaParserResult.Assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "test.GenericClass").Files);
         }
 
         /// <summary>
@@ -101,7 +100,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         [Fact]
         public void ClassesInAssemblyTest()
         {
-            Assert.Equal(7, this.parserResult.Assemblies.SelectMany(a => a.Classes).Count());
+            Assert.Equal(7, this.javaParserResult.Assemblies.SelectMany(a => a.Classes).Count());
         }
 
         /// <summary>
@@ -110,7 +109,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         [Fact]
         public void AssembliesTest()
         {
-            Assert.Equal(2, this.parserResult.Assemblies.Count);
+            Assert.Equal(2, this.javaParserResult.Assemblies.Count);
         }
 
         /// <summary>
@@ -119,7 +118,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         [Fact]
         public void GetCoverableLinesOfClassTest()
         {
-            Assert.Equal(3, this.parserResult.Assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "test.AbstractClass").CoverableLines);
+            Assert.Equal(3, this.javaParserResult.Assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "test.AbstractClass").CoverableLines);
         }
 
         /// <summary>
@@ -128,18 +127,73 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         [Fact]
         public void MethodMetricsTest()
         {
-            var metrics = this.parserResult.Assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "test.TestClass").Files.Single(f => f.Path == "C:\\temp\\test\\TestClass.java").MethodMetrics;
+            var metrics = this.javaParserResult.Assemblies.Single(a => a.Name == "test").Classes.Single(c => c.Name == "test.TestClass").Files.Single(f => f.Path == "C:\\temp\\test\\TestClass.java").MethodMetrics.ToArray();
 
             Assert.Equal(4, metrics.Count());
-            Assert.Equal("<init>()V", metrics.First().FullName);
-            Assert.Equal(3, metrics.First().Metrics.Count());
 
-            Assert.Equal("Cyclomatic complexity", metrics.First().Metrics.ElementAt(0).Name);
-            Assert.Equal(0, metrics.First().Metrics.ElementAt(0).Value);
-            Assert.Equal("Line coverage", metrics.First().Metrics.ElementAt(1).Name);
-            Assert.Equal(100.0M, metrics.First().Metrics.ElementAt(1).Value);
-            Assert.Equal("Branch coverage", metrics.First().Metrics.ElementAt(2).Name);
-            Assert.Equal(100.0M, metrics.First().Metrics.ElementAt(2).Value);
+            var initMethodMetric = metrics.First();
+            Assert.Equal("<init>()V", initMethodMetric.FullName);
+            Assert.Equal(4, initMethodMetric.Metrics.Count());
+
+            var complexityMetric = initMethodMetric.Metrics.Single(m => m.MetricType == MetricType.CodeQuality && m.Abbreviation == "cc");
+            Assert.Equal("Cyclomatic complexity", complexityMetric.Name);
+            Assert.Equal(0, complexityMetric.Value);
+
+            var lineCoverageMetric = initMethodMetric.Metrics.Single(m => m.MetricType == MetricType.CoveragePercentual && m.Abbreviation == "cov");
+            Assert.Equal("Line coverage", lineCoverageMetric.Name);
+            Assert.Equal(100.0M, lineCoverageMetric.Value);
+
+            var branchCoverageMetric = initMethodMetric.Metrics.Single(m => m.MetricType == MetricType.CoveragePercentual && m.Abbreviation == "bcov");
+            Assert.Equal("Branch coverage", branchCoverageMetric.Name);
+            Assert.Equal(100.0M, branchCoverageMetric.Value);
+
+            var crapScoreMetric = initMethodMetric.Metrics.Single(m => m.MetricType == MetricType.CodeQuality && m.Abbreviation == "crp");
+            Assert.Equal("Crap Score", crapScoreMetric.Name);
+            Assert.Equal(0M, crapScoreMetric.Value);
+        }
+
+        /// <summary>
+        /// A test for MethodMetrics
+        /// </summary>
+        [Theory]
+        [InlineData("Test", "Test.AbstractClass",             "C:\\temp\\AbstractClass.cs", ".ctor()",                        1, 1,   100, 100,    1)]
+        [InlineData("Test", "Test.AbstractClass_SampleImpl1", "C:\\temp\\AbstractClass.cs", "Method1()",                      3, 1,     0, 100,    2)]
+        [InlineData("Test", "Test.PartialClass",              "C:\\temp\\PartialClass.cs",  "set_SomeProperty(System.Int32)", 4, 2, 66.66,  50, 2.15)]
+        [InlineData("Test", "Test.Program",                   "C:\\temp\\Program.cs",       "Main(System.String[])",          4, 1, 89.65, 100, 1.00)]
+        [InlineData("Test", "Test.TestClass",                 "C:\\temp\\TestClass.cs",     "SampleFunction()",               5, 4,    80,  50, 4.13)]
+        public void MethodMetricsTest_2(string assemblyName, string className, string filePath, string methodName, int expectedMethodMetrics, double expectedComplexity, double expectedLineCoverage, double expectedBranchCoverage, double expectedCrapScore)
+        {
+            var methodMetrics = csharpParserResult
+                .Assemblies.Single(a => a.Name == assemblyName)
+                .Classes.Single(c => c.Name == className)
+                .Files.Single(f => f.Path == filePath)
+                .MethodMetrics.ToArray();
+
+            Assert.Equal(expectedMethodMetrics, methodMetrics.Length);
+
+            var methodMetric = methodMetrics.First(m => m.FullName == methodName);
+            Assert.Equal(methodName, methodMetric.FullName);
+            Assert.Equal(4, methodMetric.Metrics.Count());
+
+            var complexityMetric = methodMetric.Metrics.Single(m => m.MetricType == MetricType.CodeQuality && m.Abbreviation == "cc");
+            Assert.Equal("Cyclomatic complexity", complexityMetric.Name);
+            Assert.True(complexityMetric.Value.HasValue);
+            Assert.Equal((decimal)expectedComplexity, complexityMetric.Value);
+
+            var lineCoverageMetric = methodMetric.Metrics.Single(m => m.MetricType == MetricType.CoveragePercentual && m.Abbreviation == "cov");
+            Assert.Equal("Line coverage", lineCoverageMetric.Name);
+            Assert.True(lineCoverageMetric.Value.HasValue);
+            Assert.Equal((decimal)expectedLineCoverage, lineCoverageMetric.Value);
+
+            var branchCoverageMetric = methodMetric.Metrics.Single(m => m.MetricType == MetricType.CoveragePercentual && m.Abbreviation == "bcov");
+            Assert.Equal("Branch coverage", branchCoverageMetric.Name);
+            Assert.True(branchCoverageMetric.Value.HasValue);
+            Assert.Equal((decimal)expectedBranchCoverage, branchCoverageMetric.Value);
+
+            var crapScoreMetric = methodMetric.Metrics.Single(m => m.MetricType == MetricType.CodeQuality && m.Abbreviation == "crp");
+            Assert.Equal("Crap Score", crapScoreMetric.Name);
+            Assert.True(crapScoreMetric.Value.HasValue);
+            Assert.Equal((decimal)expectedCrapScore, crapScoreMetric.Value);
         }
 
         /// <summary>
@@ -148,7 +202,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         [Fact]
         public void CodeElementsTest()
         {
-            var codeElements = GetFile(this.parserResult.Assemblies, "test.TestClass", "C:\\temp\\test\\TestClass.java").CodeElements;
+            var codeElements = GetFile(this.javaParserResult.Assemblies, "test.TestClass", "C:\\temp\\test\\TestClass.java").CodeElements;
             Assert.Equal(4, codeElements.Count());
         }
 
@@ -162,5 +216,15 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
                 .Single(c => c.Name == className).Files
                 .Single(f => f.Path == fileName)
                 .AnalyzeFile(new CachingFileReader(new LocalFileReader(), 0, null));
+
+        private static ParserResult ParseReport(string filePath)
+        {
+            var filterMock = new Mock<IFilter>();
+            filterMock.Setup(f => f.IsElementIncludedInReport(It.IsAny<string>())).Returns(true);
+
+            var report = XDocument.Load(filePath);
+            new CoberturaReportPreprocessor().Execute(report);
+            return new CoberturaParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(report.Root);
+        }
     }
 }
