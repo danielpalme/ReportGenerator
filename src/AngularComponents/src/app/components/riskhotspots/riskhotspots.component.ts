@@ -16,7 +16,7 @@ import { RiskHotspotsSettings } from "./data/riskhotspots-settings.class";
             <option *ngFor="let assembly of assemblies" [value]="assembly">{{assembly}}</option>
           </select>
         </div>
-        <div class="center">
+        <div class="col-center">
           <span *ngIf="totalNumberOfRiskHotspots > 10">{{translations.top}}</span>
           <select [(ngModel)]="settings.numberOfRiskHotspots" *ngIf="totalNumberOfRiskHotspots > 10">
             <option value="10">10</option>
@@ -26,8 +26,8 @@ import { RiskHotspotsSettings } from "./data/riskhotspots-settings.class";
             <option [value]="totalNumberOfRiskHotspots" *ngIf="totalNumberOfRiskHotspots > 100">{{translations.all}}</option>
           </select>
         </div>
-        <div class="center"></div>
-        <div class="right">
+        <div class="col-center"></div>
+        <div class="col-right">
           <span>{{translations.filter}} </span>
           <input type="text" [(ngModel)]="settings.filter" (ngModelChange)="updateRiskHotpots()">
         </div>
@@ -36,9 +36,9 @@ import { RiskHotspotsSettings } from "./data/riskhotspots-settings.class";
       <div class="table-responsive">
         <table class="overview table-fixed stripped">
           <colgroup>
-            <col>
-            <col>
-            <col>
+            <col class="column-min-200">
+            <col class="column-min-200">
+            <col class="column-min-200">
             <col class="column105" *ngFor="let riskHotspotMetric of riskHotspotMetrics">
           </colgroup>
           <thead>

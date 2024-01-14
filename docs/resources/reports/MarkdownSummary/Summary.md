@@ -1,7 +1,7 @@
 # Summary
 |||
 |:---|:---|
-| Generated on: | 14.11.2023 - 19:01:47 |
+| Generated on: | 14.01.2024 - 21:25:32 |
 | Parser: | OpenCover |
 | Assemblies: | 1 |
 | Classes: | 4 |

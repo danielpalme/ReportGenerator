@@ -80,10 +80,16 @@ div.currenthistory { margin: -6px -5px 0 -5px; padding: 2px 4px 6px 4px; height:
 }
 .coverage td { padding: 0; border: none; }
 
-.customizebox { font-size: 0.75em; margin-bottom: 7px; }
-.customizebox>div { width: 25%; display: inline-block; }
-.customizebox div.right input { width: 150px; }
-#namespaceslider { width: 200px; display: inline-block; margin-left: 8px; }
+.customizebox { font-size: 0.75em; margin-bottom: 7px; display: grid; grid-template-columns: 1fr; grid-template-rows: auto auto auto auto; grid-column-gap: 10px; grid-row-gap: 10px; }
+.customizebox>div { align-self: end; }
+.customizebox div.col-right input { width: 150px; }
+
+@media screen and (min-width: 1000px) {
+  .customizebox { grid-template-columns: repeat(4, 1fr); grid-template-rows: 1fr; }
+  .customizebox div.col-center { justify-self: center; }
+  .customizebox div.col-right { justify-self: end; text-align: right; }
+}
+.slider-label { position: relative; left: 85px; }
 
 .percentagebar {
     padding-left: 3px;
@@ -707,7 +713,7 @@ a.percentagebar {
 </div>
 </div>
 <h1>Coverage history</h1>
-<div class="historychart ct-chart" data-data="historyChartData98f1a6cb196f45779c22aedc61f0cd35"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="ct-chart" width="1200" height="150" viewBox="0 0 1200 150">
+<div class="historychart ct-chart" data-data="historyChartData12ca8a44934d4702a7c94ec4e010683f"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="ct-chart" width="1200" height="150" viewBox="0 0 1200 150">
 <style type="text/css">
         <![CDATA[
         .ct-chart .ct-grid {
@@ -779,17 +785,25 @@ a.percentagebar {
 </svg>
 </div>
 <script type="text/javascript">/* <![CDATA[ */ 
-var historyChartData98f1a6cb196f45779c22aedc61f0cd35 = {
+var historyChartData12ca8a44934d4702a7c94ec4e010683f = {
     "series" : [[{ 'meta': 0, 'value': 40.9 }, { 'meta': 1, 'value': 54.5 }, { 'meta': 2, 'value': 59 }, { 'meta': 3, 'value': 59 }, { 'meta': 4, 'value': 45.4 }, { 'meta': 5, 'value': 50 }, { 'meta': 6, 'value': 50 }, { 'meta': 7, 'value': 59 }, { 'meta': 8, 'value': 54.5 }],
 [{ 'meta': 0, 'value': 50 }, { 'meta': 1, 'value': 40 }, { 'meta': 2, 'value': 40 }, { 'meta': 3, 'value': 45 }, { 'meta': 4, 'value': 45 }, { 'meta': 5, 'value': 45 }, { 'meta': 6, 'value': 45 }, { 'meta': 7, 'value': 45 }, { 'meta': 8, 'value': 50 }],
 [{ 'meta': 0, 'value': 50 }, { 'meta': 1, 'value': 33.3 }, { 'meta': 2, 'value': 50 }, { 'meta': 3, 'value': 66.6 }, { 'meta': 4, 'value': 66.6 }, { 'meta': 5, 'value': 66.6 }, { 'meta': 6, 'value': 83.3 }, { 'meta': 7, 'value': 83.3 }, { 'meta': 8, 'value': 50 }]
 ],
-    "tooltips" : ['<h3>01.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 40.9% (9/22)<br /><span class="branchcoverage"></span> Branch coverage: 50% (10/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (3/6)<br />Total lines: 53','<h3>02.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 54.5% (12/22)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 33.3% (2/6)<br />Total lines: 53','<h3>03.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 59% (13/22)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (3/6)<br />Total lines: 53','<h3>04.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 59% (13/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br />Total lines: 53','<h3>05.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 45.4% (10/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br />Total lines: 53','<h3>06.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 50% (11/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br />Total lines: 53','<h3>07.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 50% (11/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 83.3% (5/6)<br />Total lines: 53','<h3>08.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 59% (13/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 83.3% (5/6)<br />Total lines: 53','<h3>14.11.2023 - 19:01:40</h3><br /><span class="linecoverage"></span> Line coverage: 54.5% (12/22)<br /><span class="branchcoverage"></span> Branch coverage: 50% (1/2)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (3/6)<br />Total lines: 53']
+    "tooltips" : ['<h3>01.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 40.9% (9/22)<br /><span class="branchcoverage"></span> Branch coverage: 50% (10/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (3/6)<br />Total lines: 53','<h3>02.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 54.5% (12/22)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 33.3% (2/6)<br />Total lines: 53','<h3>03.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 59% (13/22)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (3/6)<br />Total lines: 53','<h3>04.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 59% (13/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br />Total lines: 53','<h3>05.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 45.4% (10/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br />Total lines: 53','<h3>06.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 50% (11/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br />Total lines: 53','<h3>07.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 50% (11/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 83.3% (5/6)<br />Total lines: 53','<h3>08.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 59% (13/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 83.3% (5/6)<br />Total lines: 53','<h3>14.01.2024 - 21:25:26</h3><br /><span class="linecoverage"></span> Line coverage: 54.5% (12/22)<br /><span class="branchcoverage"></span> Branch coverage: 50% (1/2)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (3/6)<br />Total lines: 53']
 };
  /* ]]> */ </script>
 <h1>Metrics</h1>
 <div class="table-responsive">
 <table class="overview table-fixed">
+<colgroup>
+<col class="column-min-200" />
+<col class="column105" />
+<col class="column105" />
+<col class="column105" />
+<col class="column105" />
+<col class="column105" />
+</colgroup>
 <thead><tr><th>Method</th><th>Branch coverage <a href="https://en.wikipedia.org/wiki/Code_coverage" target="_blank"><i class="icon-info-circled"></i></a></th><th>Crap Score <a href="https://googletesting.blogspot.de/2011/02/this-code-is-crap.html" target="_blank"><i class="icon-info-circled"></i></a></th><th>Cyclomatic complexity <a href="https://en.wikipedia.org/wiki/Cyclomatic_complexity" target="_blank"><i class="icon-info-circled"></i></a></th><th>NPath complexity <a href="https://modess.io/npath-complexity-cyclomatic-complexity-explained" target="_blank"><i class="icon-info-circled"></i></a></th><th>Sequence coverage <a href="https://en.wikipedia.org/wiki/Code_coverage" target="_blank"><i class="icon-info-circled"></i></a></th></tr></thead>
 <tbody>
 <tr><td title="System.Void Sample.PartialClass::ExecutedMethod_1()"><a href="#file0_line8" class="navigatetohash">File 1: ExecutedMethod_1()</a></td><td>100%</td><td>1</td><td>1</td><td>0</td><td>100%</td></tr>
@@ -869,7 +883,7 @@ var historyChartData98f1a6cb196f45779c22aedc61f0cd35 = {
 </tbody>
 </table>
 </div>
-<div class="footer">Generated by: ReportGenerator 5.2.0.0<br />14.11.2023 - 19:01:40<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
+<div class="footer">Generated by: ReportGenerator 5.2.1.0<br />14.01.2024 - 21:25:26<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
 <div class="containerright">
 <div class="containerrightfixed">
 <h1>Methods/Properties</h1>

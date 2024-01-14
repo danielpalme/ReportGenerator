@@ -3,7 +3,7 @@
 
 |||
 |:---|:---|
-| Generated on: | 14.11.2023 - 19:01:49 |
+| Generated on: | 14.01.2024 - 21:25:35 |
 | Parser: | OpenCover |
 | Assemblies: | 1 |
 | Classes: | 4 |

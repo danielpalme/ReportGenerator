@@ -793,6 +793,17 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             this.reportTextWriter.WriteLine("<div class=\"table-responsive\">");
             this.reportTextWriter.WriteLine("<table class=\"overview table-fixed\">");
+
+            this.reportTextWriter.WriteLine("<colgroup>");
+            this.reportTextWriter.WriteLine("<col class=\"column-min-200\" />");
+
+            foreach (var met in metrics)
+            {
+                this.reportTextWriter.WriteLine("<col class=\"column105\" />");
+            }
+
+            this.reportTextWriter.WriteLine("</colgroup>");
+
             this.reportTextWriter.Write("<thead><tr>");
 
             this.reportTextWriter.Write("<th>{0}</th>", WebUtility.HtmlEncode(ReportResources.Method));
@@ -879,6 +890,17 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             this.reportTextWriter.WriteLine("<div class=\"table-responsive\">");
             this.reportTextWriter.WriteLine("<table class=\"overview table-fixed\">");
+
+            this.reportTextWriter.WriteLine("<colgroup>");
+            this.reportTextWriter.WriteLine("<col class=\"column-min-200\" />");
+
+            foreach (var met in metrics)
+            {
+                this.reportTextWriter.WriteLine("<col class=\"column105\" />");
+            }
+
+            this.reportTextWriter.WriteLine("</colgroup>");
+
             this.reportTextWriter.Write("<thead><tr>");
 
             this.reportTextWriter.Write("<th>{0}</th>", WebUtility.HtmlEncode(ReportResources.Method));
@@ -1157,9 +1179,9 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.reportTextWriter.WriteLine("<table class=\"overview table-fixed stripped\">");
 
             this.reportTextWriter.WriteLine("<colgroup>");
-            this.reportTextWriter.WriteLine("<col />");
-            this.reportTextWriter.WriteLine("<col />");
-            this.reportTextWriter.WriteLine("<col />");
+            this.reportTextWriter.WriteLine("<col class=\"column-min-200\" />");
+            this.reportTextWriter.WriteLine("<col class=\"column-min-200\" />");
+            this.reportTextWriter.WriteLine("<col class=\"column-min-200\" />");
 
             foreach (var met in codeQualityMetrics)
             {

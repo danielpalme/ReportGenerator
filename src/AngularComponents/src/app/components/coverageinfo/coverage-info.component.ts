@@ -29,16 +29,18 @@ import { Helper } from "./viewmodels/helper.class";
         |
         <a href="#" (click)="expandAll($event)">{{translations.expandAll}}</a>
       </div>
-      <div class="center">
-        <ng-container *ngIf="settings.grouping === -1">{{translations.noGrouping}}</ng-container>
-        <ng-container *ngIf="settings.grouping === 0">{{translations.byAssembly}}</ng-container>
-        <ng-container *ngIf="settings.grouping > 0">{{translations.byNamespace + ' ' + this.settings.grouping}}</ng-container>
+      <div class="col-center">
+        <span class="slider-label">
+          <ng-container *ngIf="settings.grouping === -1">{{translations.noGrouping}}</ng-container>
+          <ng-container *ngIf="settings.grouping === 0">{{translations.byAssembly}}</ng-container>
+          <ng-container *ngIf="settings.grouping > 0">{{translations.byNamespace + ' ' + this.settings.grouping}}</ng-container>
+        </span>
         <br />
         {{translations.grouping}}
         <input type="range" step="1" min="-1" [max]="settings.groupingMaximum"
           [(ngModel)]="settings.grouping" (ngModelChange)="updateCoverageInfo()"/>
       </div>
-      <div class="center">
+      <div class="col-center">
         <ng-container *ngIf="historicCoverageExecutionTimes.length > 0">
           <div>
             {{translations.compareHistory}}
@@ -70,7 +72,7 @@ import { Helper } from "./viewmodels/helper.class";
           </div>
         </ng-container>
       </div>
-      <div class="right">
+      <div class="col-right">
         <div>
           <button type="button" (click)="popupVisible=true;"><i class="icon-cog"></i>{{ metrics.length > 0 ? translations.selectCoverageTypesAndMetrics :  translations.selectCoverageTypes}}</button>
         </div>
