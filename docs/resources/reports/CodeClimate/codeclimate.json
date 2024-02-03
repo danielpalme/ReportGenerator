@@ -10,8 +10,8 @@
   "environment": {
     "gem_version": "",
     "package_version": "",
-    "pwd": "C:\\Users\\Daniel Palme\\Documents\\Projects\\ReportGenerator\\src\\resources\\SampleReportsInAllFormats",
-    "prefix": "C:\\Users\\Daniel Palme\\Documents\\Projects\\ReportGenerator\\src\\resources\\SampleReportsInAllFormats",
+    "pwd": "C:\\temp",
+    "prefix": "C:\\temp",
     "rails_root": "",
     "reporter_version": "0.11.1",
     "simplecov_root": ""
