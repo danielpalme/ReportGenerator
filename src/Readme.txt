@@ -30,7 +30,7 @@ The following output formats are supported by ReportGenerator:
 -SonarQube
 -lcov
 -Xml, XmlSummary
--JsonSummary
+-JsonSummary, CodeClimate
 -Latex, LatexSummary
 -TeamCitySummary
 -TextSummary, TextDeltaSummary
@@ -70,6 +70,7 @@ CHANGELOG
 5.2.1.0
 
     * New: Added 'Crap Score' metric for Coberatura coverage files (contrbuted by @rikrak)
+    * New: #645 Added new report type 'CodeClimate'
 
 5.2.0.0
 

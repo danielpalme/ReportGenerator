@@ -1,0 +1,94 @@
+{
+  "ci_service": {
+    "branch": "main",
+    "build_identifier": "",
+    "build_url": "",
+    "commit_sha": "e2a0d2b74651749aeb48a8eaecc51d7cf49c5dc8",
+    "committed_at": 1706817706,
+    "name": ""
+  },
+  "environment": {
+    "gem_version": "",
+    "package_version": "",
+    "pwd": "C:\\Users\\Daniel Palme\\Documents\\Projects\\ReportGenerator\\src\\resources\\SampleReportsInAllFormats",
+    "prefix": "C:\\Users\\Daniel Palme\\Documents\\Projects\\ReportGenerator\\src\\resources\\SampleReportsInAllFormats",
+    "rails_root": "",
+    "reporter_version": "0.11.1",
+    "simplecov_root": ""
+  },
+  "git": {
+    "branch": "main",
+    "head": "e2a0d2b74651749aeb48a8eaecc51d7cf49c5dc8",
+    "committed_at": 1706817706
+  },
+  "covered_percent": 69.4,
+  "covered_strength": 0,
+  "line_counts": {
+    "missed": 33,
+    "covered": 108,
+    "total": 260
+  },
+  "source_files": [
+    {
+      "blob_id": "40ca65f862828baaca5ee2cbd023d0553ed58ec0",
+      "coverage": [null,null,null,null,null,null,null,null,1,1,1,null,null,0,0,0,null,null,null,null,null,0,null,null,1,1,1,1,1,null,0,0,0,1],
+      "covered_percent": 56.2,
+      "covered_strength": 0,
+      "line_counts": {
+        "missed": 7,
+        "covered": 16,
+        "total": 36
+      },
+      "name": "C:\\temp\\PartialClass.cs"
+    },
+    {
+      "blob_id": "8d31d4e55793c05223f5e31e595f5253f056e1e5",
+      "coverage": [null,null,null,null,null,null,null,null,1,1,1,null,null,0,0,0],
+      "covered_percent": 50,
+      "covered_strength": 0,
+      "line_counts": {
+        "missed": 3,
+        "covered": 6,
+        "total": 17
+      },
+      "name": "C:\\temp\\PartialClass2.cs"
+    },
+    {
+      "blob_id": "0f2c8d72a438702ce638795f861dacca678860a8",
+      "coverage": [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2,null,null,null,null,null,null,null,null,null,null,null,1,1,1,1,1,1,null,null,null,null,null,1,1,1,1,null,null,1,1,1],
+      "covered_percent": 100,
+      "covered_strength": 0,
+      "line_counts": {
+        "missed": 0,
+        "covered": 15,
+        "total": 84
+      },
+      "name": "C:\\temp\\Program.cs"
+    },
+    {
+      "blob_id": "9b0c3204400bff54a41bdcc34d08fd4196723994",
+      "coverage": [null,null,null,null,null,null,null,null,null,2,2,2,2,2,null,2,2,null,2,2,2,2,null,0,0,0,2,null,null,2,2,null,2,null,null,2,2,2,2,null,null,2,8,null,8,null,2,2,null,null,null,null,0,0,0,0,0,0],
+      "covered_percent": 72.7,
+      "covered_strength": 0,
+      "line_counts": {
+        "missed": 9,
+        "covered": 33,
+        "total": 38
+      },
+      "name": "C:\\temp\\TestClass.cs"
+    },
+    {
+      "blob_id": "4b272fbb3483cf936a792b0400a327cd3105f686",
+      "coverage": [null,null,null,null,null,null,null,null,null,null,null,2,null,3,null,0,null,0,0,0,0,0,null,2,2,2,2,2,null,null,1,1,1,1,null,null,0,0,0,0,null,null,1,1,null,5,null,11,4,4,4,null,1,null,4,1,1,1,1,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,0,0,0,0],
+      "covered_percent": 63.1,
+      "covered_strength": 0,
+      "line_counts": {
+        "missed": 14,
+        "covered": 38,
+        "total": 85
+      },
+      "name": "C:\\temp\\TestClass2.cs"
+    }
+  ],
+  "repo_token": ""
+}

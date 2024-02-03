@@ -446,7 +446,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         methodName.StartsWith("get_") || methodName.StartsWith("set_") ? CodeElementType.Property : CodeElementType.Method,
                         firstLine,
                         lastLine,
-                        codeFile.CoverageQuota(firstLine, lastLine)));
+                        codeFile.CoverageQuotaInRange(firstLine, lastLine)));
                 }
             }
         }

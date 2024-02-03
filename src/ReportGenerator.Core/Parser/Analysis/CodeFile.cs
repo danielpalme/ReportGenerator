@@ -266,6 +266,18 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         public int TotalCodeElements => this.codeElements.Count;
 
         /// <summary>
+        /// Gets the coverage quota of the file.
+        /// </summary>
+        /// <value>The coverage quota.</value>
+        public decimal? CoverageQuota
+        {
+            get
+            {
+                return (this.CoverableLines == 0) ? (decimal?)null : MathExtensions.CalculatePercentage(this.CoveredLines, this.CoverableLines);
+            }
+        }
+
+        /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <returns>
@@ -313,7 +325,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <param name="firstLine">The first line.</param>
         /// <param name="lastLine">The last line.</param>
         /// <returns>The coverage quota or <code>null</code> if not applicable.</returns>
-        internal decimal? CoverageQuota(int firstLine, int lastLine)
+        internal decimal? CoverageQuotaInRange(int firstLine, int lastLine)
         {
             if (firstLine < 0
                 || firstLine >= this.lineVisitStatus.Length
@@ -611,7 +623,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
 
             foreach (var codeElement in this.codeElements)
             {
-                codeElement.ApplyMaximumCoverageQuota(this.CoverageQuota(codeElement.FirstLine, codeElement.LastLine));
+                codeElement.ApplyMaximumCoverageQuota(this.CoverageQuotaInRange(codeElement.FirstLine, codeElement.LastLine));
             }
 
             if (file.additionalFileReader == null)

@@ -314,7 +314,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     CodeElementType.Method,
                     codeElement.FirstLine,
                     lastLine,
-                    codeFile.CoverageQuota(codeElement.FirstLine, lastLine)));
+                    codeFile.CoverageQuotaInRange(codeElement.FirstLine, lastLine)));
             }
         }
     }

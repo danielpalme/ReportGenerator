@@ -270,7 +270,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         type,
                         seqpnts.Min(s => s.LineNumberStart),
                         seqpnts.Max(s => s.LineNumberEnd),
-                        codeFile.CoverageQuota(firstLine, lastLine)));
+                        codeFile.CoverageQuotaInRange(firstLine, lastLine)));
                 }
             }
         }

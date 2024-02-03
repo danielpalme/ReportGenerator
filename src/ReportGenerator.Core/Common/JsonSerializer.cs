@@ -75,6 +75,11 @@ namespace Palmmedia.ReportGenerator.Core.Common
         /// <returns>The escaped string.</returns>
         public static string EscapeString(string input)
         {
+            if (input == null)
+            {
+                return null;
+            }
+
             bool NeedEscape(string src, int i)
             {
                 char c = src[i];

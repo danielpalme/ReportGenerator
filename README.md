@@ -77,7 +77,7 @@ Explanations:
                        Html, Html_Light, Html_Dark, Html_BlueRed
                        HtmlChart, HtmlInline, HtmlSummary, Html_BlueRed_Summary
                        HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Light, HtmlInline_AzurePipelines_Dark
-                       JsonSummary, Latex, LatexSummary, lcov, MHtml, SvgChart, SonarQube, TeamCitySummary
+                       JsonSummary, CodeClimate, Latex, LatexSummary, lcov, MHtml, SvgChart, SonarQube, TeamCitySummary
                        TextSummary, TextDeltaSummary
                        Xml, XmlSummary
    Source directories: Optional directories which contain the corresponding source code (separated by semicolon).
