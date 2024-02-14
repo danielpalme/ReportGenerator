@@ -7,7 +7,7 @@ env:
   buildPlatform: Any CPU
   buildConfiguration: Release
   version: 5.2.1
-  dotnetSDKVersion: 8.0.101
+  dotnetSDKVersion: 8.0.200
   nodeVersion: 20
 
 jobs:
@@ -226,7 +226,7 @@ jobs:
       continue-on-error: true
 
     - name: 'Chocolatey push reportgenerator.portable'
-      run: .$env:USERPROFILE\.nuget\packages\chocolatey\1.4.0\tools\chocolateyInstall\choco.exe push reportgenerator.portable.${{ env.Version }}.nupkg --apikey ${{ secrets.CHOCOLATEYAPIKEY }} --source https://push.chocolatey.org/
+      run: .$env:USERPROFILE\.nuget\packages\chocolatey\2.2.2\tools\chocolateyInstall\choco.exe push reportgenerator.portable.${{ env.Version }}.nupkg --apikey ${{ secrets.CHOCOLATEYAPIKEY }} --source https://push.chocolatey.org/
       continue-on-error: true
 
     - name: 'Prepare VSIX release: Install TFS Cross Platform Command Line Interface (tfx-cli)'
