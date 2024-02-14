@@ -75,5 +75,10 @@ namespace Palmmedia.ReportGenerator.Core
         /// Gets or sets the maximum decimal places for coverage quotas / percentages.
         /// </summary>
         public int MaximumDecimalPlacesForCoverageQuotas { get; set; } = 1;
+
+        /// <summary>
+        /// Gets or sets the prefix for history files.
+        /// </summary>
+        public string HistoryFileNamePrefix { get; set; }
     }
 }

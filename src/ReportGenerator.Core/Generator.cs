@@ -328,7 +328,7 @@ namespace Palmmedia.ReportGenerator.Core
 
             if (historyStorage != null)
             {
-                new HistoryReportGenerator(historyStorage)
+                new HistoryReportGenerator(historyStorage, settings.HistoryFileNamePrefix)
                     .CreateReport(parserResult.Assemblies, executionTime, reportConfiguration.Tag);
             }
 

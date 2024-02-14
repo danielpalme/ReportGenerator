@@ -29,12 +29,19 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.History
         private readonly IHistoryStorage historyStorage;
 
         /// <summary>
+        /// Optional custom file prefix.
+        /// </summary>
+        private readonly string customfilePrefix;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="HistoryReportGenerator" /> class.
         /// </summary>
         /// <param name="historyStorage">The history storage.</param>
-        internal HistoryReportGenerator(IHistoryStorage historyStorage)
+        /// <param name="customfilePrefix">Optional custom file prefix.</param>
+        internal HistoryReportGenerator(IHistoryStorage historyStorage, string customfilePrefix)
         {
             this.historyStorage = historyStorage ?? throw new ArgumentNullException(nameof(historyStorage));
+            this.customfilePrefix = string.IsNullOrWhiteSpace(customfilePrefix) ? string.Empty : "_" + customfilePrefix;
         }
 
         /// <summary>
@@ -86,7 +93,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.History
             }
 
             var document = new XDocument(new XDeclaration("1.0", "UTF-8", "yes"), rootElement);
-            string fileName = date + "_CoverageHistory.xml";
+            string fileName = date + this.customfilePrefix + "_CoverageHistory.xml";
             try
             {
                 using (var stream = new MemoryStream())

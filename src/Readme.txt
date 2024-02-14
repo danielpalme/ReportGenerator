@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.2.2.0
+
+    * New: #651 Added setting to add custom prefix to generated history files
+
 5.2.1.0
 
     * New: Added 'Crap Score' metric for Coberatura coverage files (contrbuted by @rikrak)
