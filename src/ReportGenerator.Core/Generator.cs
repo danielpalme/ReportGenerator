@@ -153,6 +153,7 @@ namespace Palmmedia.ReportGenerator.Core
 
                 Logger.Debug(Resources.Settings);
                 Logger.Debug(" " + JsonSerializer.ToJsonString(settings));
+                Logger.Debug(" " + JsonSerializer.ToJsonString(minimumCoverageThresholds));
                 Logger.Debug(" " + JsonSerializer.ToJsonString(riskHotspotsAnalysisThresholds));
 
                 var stopWatch = Stopwatch.StartNew();
@@ -345,6 +346,7 @@ namespace Palmmedia.ReportGenerator.Core
             var args = Environment.GetCommandLineArgs()
                 .Where(a => !a.StartsWith("-property:"))
                 .Where(a => !a.StartsWith("-p:"))
+                .Where(a => !(a.StartsWith("/") && a.EndsWith(".dll"))) // Filter path in arguments like /home/user/.dotnet/tools/.store/dotnet-reportgenerator-globaltool/x.y.z/dotnet-reportgenerator-globaltool/x.y.z/tools/net7.0/any/ReportGenerator.dll (appears in global tool)
                 .Where(a => !CommandLineArgumentNames.CommandLineParameterRegex.IsMatch(a))
                 .ToArray();
 

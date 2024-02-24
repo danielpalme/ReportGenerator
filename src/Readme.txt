@@ -70,6 +70,7 @@ CHANGELOG
 5.2.2.0
 
     * New: #651 Added setting to add custom prefix to generated history files
+    * Fix: #653 Fixed command line parameter handling on Linux and MacOS
 
 5.2.1.0
 
