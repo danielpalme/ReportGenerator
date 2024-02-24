@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
     <RootNamespace>ReportGenerator.DotnetCorePluginLoader</RootNamespace>
-    <AssemblyVersion>5.2.1.0</AssemblyVersion>
-    <FileVersion>5.2.1.0</FileVersion>
+    <AssemblyVersion>5.2.2.0</AssemblyVersion>
+    <FileVersion>5.2.2.0</FileVersion>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
