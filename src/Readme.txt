@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.2.3.0
+
+    * Fix: #656 Changed handling of files which are not found in source directory
+
 5.2.2.0
 
     * New: #651 Added setting to add custom prefix to generated history files

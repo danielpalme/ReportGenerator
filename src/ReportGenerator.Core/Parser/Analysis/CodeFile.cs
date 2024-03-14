@@ -426,14 +426,16 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
             if (error != null)
             {
                 Logger.Error(error);
-                return new FileAnalysis(this.Path, error);
+                lines = this.lineCoverage
+                    .Select(l => string.Empty)
+                    .ToArray();
             }
 
             this.TotalLines = lines.Length;
 
             int currentLineNumber = 0;
 
-            var result = new FileAnalysis(this.Path);
+            var result = new FileAnalysis(this.Path, error);
             ICollection<Branch> branchesOfLine = null;
 
             foreach (var line in lines)

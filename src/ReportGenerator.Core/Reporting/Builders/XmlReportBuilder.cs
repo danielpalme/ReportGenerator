@@ -125,21 +125,18 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             {
                 var fileElement = new XElement("File", new XAttribute("name", fileAnalysis.Path));
 
-                if (string.IsNullOrEmpty(fileAnalysis.Error))
+                foreach (var line in fileAnalysis.Lines)
                 {
-                    foreach (var line in fileAnalysis.Lines)
-                    {
-                        var lineElement = new XElement("LineAnalysis");
+                    var lineElement = new XElement("LineAnalysis");
 
-                        lineElement.Add(new XAttribute("line", line.LineNumber.ToString(CultureInfo.InvariantCulture)));
-                        lineElement.Add(new XAttribute("visits", line.LineVisits.ToString(CultureInfo.InvariantCulture)));
-                        lineElement.Add(new XAttribute("coverage", line.LineVisitStatus.ToString()));
-                        lineElement.Add(new XAttribute("coveredbranches", line.CoveredBranches.HasValue ? line.CoveredBranches.Value.ToString(CultureInfo.InvariantCulture) : string.Empty));
-                        lineElement.Add(new XAttribute("totalbranches", line.TotalBranches.HasValue ? line.TotalBranches.Value.ToString(CultureInfo.InvariantCulture) : string.Empty));
-                        lineElement.Add(new XAttribute("content", StringHelper.ReplaceInvalidXmlChars(line.LineContent)));
+                    lineElement.Add(new XAttribute("line", line.LineNumber.ToString(CultureInfo.InvariantCulture)));
+                    lineElement.Add(new XAttribute("visits", line.LineVisits.ToString(CultureInfo.InvariantCulture)));
+                    lineElement.Add(new XAttribute("coverage", line.LineVisitStatus.ToString()));
+                    lineElement.Add(new XAttribute("coveredbranches", line.CoveredBranches.HasValue ? line.CoveredBranches.Value.ToString(CultureInfo.InvariantCulture) : string.Empty));
+                    lineElement.Add(new XAttribute("totalbranches", line.TotalBranches.HasValue ? line.TotalBranches.Value.ToString(CultureInfo.InvariantCulture) : string.Empty));
+                    lineElement.Add(new XAttribute("content", StringHelper.ReplaceInvalidXmlChars(line.LineContent)));
 
-                        fileElement.Add(lineElement);
-                    }
+                    fileElement.Add(lineElement);
                 }
 
                 filesElement.Add(fileElement);

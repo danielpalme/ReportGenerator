@@ -257,8 +257,8 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
             Assert.NotNull(fileAnalysis);
             Assert.NotNull(fileAnalysis.Error);
             Assert.Equal(fileAnalysis.Path, fileAnalysis.Path);
-            Assert.Null(sut.TotalLines);
-            Assert.Empty(fileAnalysis.Lines);
+            Assert.Equal(4, sut.TotalLines);
+            Assert.Equal(4, fileAnalysis.Lines.Count());
         }
 
         /// <summary>
@@ -311,8 +311,8 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
             Assert.NotNull(fileAnalysis);
             Assert.NotNull(fileAnalysis.Error);
             Assert.Equal(fileAnalysis.Path, fileAnalysis.Path);
-            Assert.Null(sut.TotalLines);
-            Assert.Empty(fileAnalysis.Lines);
+            Assert.Equal(4, sut.TotalLines);
+            Assert.Equal(4, fileAnalysis.Lines.Count());
 
             additionalFileReaderMock.Verify(f => f.LoadFile(It.IsAny<string>(), out error), Times.Once);
             fileReaderMock.Verify(f => f.LoadFile(It.IsAny<string>(), out error), Times.Once);
