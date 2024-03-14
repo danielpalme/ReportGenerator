@@ -45,6 +45,7 @@ namespace Palmmedia.ReportGenerator.Core.Licensing
             { Guid.Parse("b673472f-24e0-4b4b-9837-713d49049e2d"), new DateTime(2024, 2, 1) },
             { Guid.Parse("6e4d43dd-84a5-40fd-beb2-34f3c4930994"), new DateTime(2024, 4, 1) },
             { Guid.Parse("4b80b56a-1eb0-4b93-9b82-b33c11215316"), new DateTime(2024, 4, 1) },
+            { Guid.Parse("c2acc361-1b27-44a9-9e5d-841d8467dac0"), new DateTime(2025, 3, 1) },
         };
 
         /// <summary>
