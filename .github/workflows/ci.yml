@@ -189,7 +189,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         name: ReportGenerator_${{ env.Version }}
-        body: This release requires .NET 4.7 or .NET Core 6.x/7.x/8.x.
+        body: This release requires .NET Framework 4.7 or .NET 6.0/7.0/8.0
         tag_name: v${{ env.Version }}
         files: ReportGenerator_${{ env.Version }}.zip
       env:
