@@ -16,22 +16,22 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: 'Install npm'
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: '${{ env.nodeVersion }}'
 
     - name: setup-msbuild
-      uses: microsoft/setup-msbuild@v1
+      uses: microsoft/setup-msbuild@v2
 
     - name: 'Install dependendies'
       run: msbuild .\build.proj /t:Restore
       working-directory: src
 
     - name: 'Setup .NET Core'
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: ${{ env.dotnetSDKVersion }}
 
@@ -42,7 +42,7 @@ jobs:
       run: dotnet --version
 
     - name: 'Use NuGet 6.x'
-      uses: nuget/setup-nuget@v1
+      uses: nuget/setup-nuget@v2
 
     - name: 'NuGet Restore'
       run: nuget restore ${{ env.solution }}
@@ -91,7 +91,7 @@ jobs:
       shell: bash
  
     - name: 'Publish code coverage results'
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: CoverageReport
         path: src/target/reports/coverage
@@ -152,7 +152,7 @@ jobs:
       run: .$env:USERPROFILE\.nuget\packages\chocolatey\2.2.2\tools\chocolateyInstall\choco.exe pack src/Deployment/chocolatey/reportgenerator.portable.nuspec --outputdirectory=src/target/packages --version=${{ env.Version }}
 
     - name: 'Publish Artifact: packages'
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         path: src/target/packages
         name: packages
@@ -164,7 +164,7 @@ jobs:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && startsWith(github.event.commits[0].message, 'Release ') }}
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: 'Install npm'
       uses: actions/setup-node@v3
@@ -172,21 +172,21 @@ jobs:
         node-version: '${{ env.nodeVersion }}'
 
     - name: setup-msbuild
-      uses: microsoft/setup-msbuild@v1
+      uses: microsoft/setup-msbuild@v2
 
     - name: 'Install dependendies'
       run: msbuild .\build.proj /t:Restore
       working-directory: src
 
     - name: 'Use NuGet 6.x'
-      uses: nuget/setup-nuget@v1
+      uses: nuget/setup-nuget@v2
 
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: packages
 
     - name: GitHubRelease
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         name: ReportGenerator_${{ env.Version }}
         body: This release requires .NET Framework 4.7 or .NET 6.0/7.0/8.0
@@ -202,7 +202,7 @@ jobs:
         copy "ReportGenerator_${{ env.Version }}.zip" "ftp\ReportGenerator_${{ env.Version }}.zip"
 
     # - name: 'FTP Upload: ZIP Release'
-    #   uses: SamKirkland/FTP-Deploy-Action@4.3.4
+    #   uses: SamKirkland/FTP-Deploy-Action@4.3.5
     #   with:
     #     server: ${{ secrets.FTP_HOST }}
     #     username: ${{ secrets.FTP_USER }}
