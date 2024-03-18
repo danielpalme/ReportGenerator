@@ -28,6 +28,7 @@ namespace Palmmedia.ReportGenerator.Core.Licensing
         /// </summary>
         private static readonly Dictionary<Guid, DateTime> LockedLicences = new Dictionary<Guid, DateTime>()
         {
+            { Guid.Parse("3aa02577-3966-4c4b-a24a-9c490b0e7a71"), DateTime.MinValue },
             { Guid.Parse("f7b8b8c5-811e-4b3d-92cf-f14a239ddca9"), DateTime.MinValue },
             { Guid.Parse("c05081c1-2ced-4bfd-8cb8-3cf23094369f"), DateTime.MinValue },
             { Guid.Parse("45404029-3119-4cc2-9e7c-aa9207673b15"), DateTime.MinValue },
