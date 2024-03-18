@@ -8,10 +8,12 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using Palmmedia.ReportGenerator.Core.Common;
+using Palmmedia.ReportGenerator.Core.Licensing;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Filtering;
 using Palmmedia.ReportGenerator.Core.Parser.Preprocessing;
 using Palmmedia.ReportGenerator.Core.Properties;
+using Palmmedia.ReportGenerator.Core.Reporting;
 
 namespace Palmmedia.ReportGenerator.Core.Parser
 {
@@ -24,6 +26,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// The Logger.
         /// </summary>
         private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(CoverageReportParser));
+
+        /// <summary>
+        /// The report context.
+        /// </summary>
+        private readonly IReportContext reportContext;
 
         /// <summary>
         /// The number reports that are parsed and processed in parallel.
@@ -71,6 +78,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         private int mergeCount;
 
         /// <summary>
+        /// Indicates the raw mode is not supported under current license.
+        /// </summary>
+        private bool rawModeProhibited;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="CoverageReportParser" /> class.
         /// </summary>
         /// <param name="numberOfReportsParsedInParallel">The number reports that are parsed and processed in parallel.</param>
@@ -79,7 +91,13 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="assemblyFilter">The assembly filter.</param>
         /// <param name="classFilter">The class filter.</param>
         /// <param name="fileFilter">The file filter.</param>
-        public CoverageReportParser(int numberOfReportsParsedInParallel, int numberOfReportsMergedInParallel, IEnumerable<string> sourceDirectories, IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter)
+        public CoverageReportParser(
+            int numberOfReportsParsedInParallel,
+            int numberOfReportsMergedInParallel,
+            IEnumerable<string> sourceDirectories,
+            IFilter assemblyFilter,
+            IFilter classFilter,
+            IFilter fileFilter)
         {
             this.numberOfReportsParsedInParallel = Math.Max(1, numberOfReportsParsedInParallel);
             this.numberOfReportsMergedInParallel = Math.Max(1, numberOfReportsMergedInParallel);
@@ -99,7 +117,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="assemblyFilter">The assembly filter.</param>
         /// <param name="classFilter">The class filter.</param>
         /// <param name="fileFilter">The file filter.</param>
-        public CoverageReportParser(int numberOfReportsParsedInParallel, int numberOfReportsMergedInParallel, bool excludeTestProjects, IEnumerable<string> sourceDirectories, IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter)
+        public CoverageReportParser(
+            int numberOfReportsParsedInParallel,
+            int numberOfReportsMergedInParallel,
+            bool excludeTestProjects,
+            IEnumerable<string> sourceDirectories,
+            IFilter assemblyFilter,
+            IFilter classFilter,
+            IFilter fileFilter)
         {
             this.numberOfReportsParsedInParallel = Math.Max(1, numberOfReportsParsedInParallel);
             this.numberOfReportsMergedInParallel = Math.Max(1, numberOfReportsMergedInParallel);
@@ -121,7 +146,15 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="assemblyFilter">The assembly filter.</param>
         /// <param name="classFilter">The class filter.</param>
         /// <param name="fileFilter">The file filter.</param>
-        public CoverageReportParser(int numberOfReportsParsedInParallel, int numberOfReportsMergedInParallel, bool excludeTestProjects, string defaultAssemblyName, IEnumerable<string> sourceDirectories, IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter)
+        public CoverageReportParser(
+            int numberOfReportsParsedInParallel,
+            int numberOfReportsMergedInParallel,
+            bool excludeTestProjects,
+            string defaultAssemblyName,
+            IEnumerable<string> sourceDirectories,
+            IFilter assemblyFilter,
+            IFilter classFilter,
+            IFilter fileFilter)
         {
             this.numberOfReportsParsedInParallel = Math.Max(1, numberOfReportsParsedInParallel);
             this.numberOfReportsMergedInParallel = Math.Max(1, numberOfReportsMergedInParallel);
@@ -131,6 +164,24 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             this.assemblyFilter = assemblyFilter ?? throw new ArgumentNullException(nameof(assemblyFilter));
             this.classFilter = classFilter ?? throw new ArgumentNullException(nameof(classFilter));
             this.fileFilter = fileFilter ?? throw new ArgumentNullException(nameof(fileFilter));
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CoverageReportParser" /> class.
+        /// </summary>
+        /// <param name="reportContext">The report context.</param>
+        public CoverageReportParser(IReportContext reportContext)
+        {
+            this.reportContext = reportContext ?? throw new ArgumentNullException(nameof(reportContext));
+
+            this.numberOfReportsParsedInParallel = Math.Max(1, reportContext.Settings.NumberOfReportsParsedInParallel);
+            this.numberOfReportsMergedInParallel = Math.Max(1, reportContext.Settings.NumberOfReportsMergedInParallel);
+            this.excludeTestProjects = reportContext.Settings.ExcludeTestProjects;
+            this.defaultAssemblyName = reportContext.Settings.DefaultAssemblyName ?? throw new ArgumentNullException(nameof(reportContext.Settings.DefaultAssemblyName));
+            this.sourceDirectories = reportContext.ReportConfiguration.SourceDirectories ?? throw new ArgumentNullException(nameof(reportContext.ReportConfiguration.SourceDirectories));
+            this.assemblyFilter = new DefaultFilter(reportContext.ReportConfiguration.AssemblyFilters);
+            this.classFilter = new DefaultFilter(reportContext.ReportConfiguration.ClassFilters);
+            this.fileFilter = new DefaultFilter(reportContext.ReportConfiguration.FileFilters);
         }
 
         /// <summary>
@@ -145,6 +196,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             if (reportFiles == null)
             {
                 throw new ArgumentNullException(nameof(reportFiles));
+            }
+
+            if (this.reportContext != null
+                && this.reportContext.Settings.RawMode
+                && this.reportContext.ReportConfiguration.License.DetermineLicenseType() != LicenseType.Pro)
+            {
+                Logger.Warn(Resources.RawModeProVersion);
+                this.rawModeProhibited = true;
             }
 
             List<Task<ParserResult>> consumers = new List<Task<ParserResult>>();
@@ -411,7 +470,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         new CoberturaReportPreprocessor().Execute(item);
 
                         Logger.DebugFormat(Resources.InitiatingParser, "Cobertura");
-                        yield return new CoberturaParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
+                        yield return new CoberturaParser(this.assemblyFilter, this.classFilter, this.fileFilter)
+                        {
+                            RawMode = !this.rawModeProhibited && this.reportContext?.Settings.RawMode == true
+                        }.Parse(item);
                     }
                     else
                     {

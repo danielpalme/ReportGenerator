@@ -602,6 +602,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Raw mode is only available for sponsors. Get your license here: https://reportgenerator.io/pro.
+        /// </summary>
+        internal static string RawModeProVersion {
+            get {
+                return ResourceManager.GetString("RawModeProVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reading historic reports.
         /// </summary>
         internal static string ReadingHistoricReports {

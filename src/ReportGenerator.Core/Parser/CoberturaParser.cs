@@ -137,6 +137,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .Select(c =>
                 {
                     string fullname = c.Attribute("name").Value;
+
+                    if (this.RawMode)
+                    {
+                        return Tuple.Create(fullname, fullname);
+                    }
+
                     int nestedClassSeparatorIndex = fullname.IndexOf('/');
 
                     if (nestedClassSeparatorIndex > -1)
@@ -159,8 +165,9 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                     return Tuple.Create(fullname, fullname);
                 })
-                .Where(c => !c.Item1.Contains("$")
-                    && (!c.Item1.Contains("<") || GenericClassRegex.IsMatch(c.Item1)))
+                .Where(c => this.RawMode
+                    || (!c.Item1.Contains("$")
+                        && (!c.Item1.Contains("<") || GenericClassRegex.IsMatch(c.Item1))))
                 .Distinct()
                 .Where(c => this.ClassFilter.IsElementIncludedInReport(c.Item1))
                 .OrderBy(c => c.Item1)
@@ -187,9 +194,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .Elements("classes")
                 .Elements("class")
                 .Where(c => c.Attribute("name").Value.Equals(className)
-                    || c.Attribute("name").Value.StartsWith(className + "$", StringComparison.Ordinal)
-                    || c.Attribute("name").Value.StartsWith(className + "/", StringComparison.Ordinal)
-                    || c.Attribute("name").Value.StartsWith(className + ".", StringComparison.Ordinal))
+                    || (!this.RawMode
+                        && (c.Attribute("name").Value.StartsWith(className + "$", StringComparison.Ordinal)
+                        || c.Attribute("name").Value.StartsWith(className + "/", StringComparison.Ordinal)
+                        || c.Attribute("name").Value.StartsWith(className + ".", StringComparison.Ordinal))))
                 .Select(c => c.Attribute("filename").Value)
                 .Distinct()
                 .ToArray();
@@ -205,7 +213,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                 foreach (var file in filteredFiles)
                 {
-                    @class.AddFile(ProcessFile(modules, @class, className, file));
+                    @class.AddFile(this.ProcessFile(modules, @class, className, file));
                 }
 
                 assembly.AddClass(@class);
@@ -220,16 +228,17 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="className">Name of the class.</param>
         /// <param name="filePath">The file path.</param>
         /// <returns>The <see cref="CodeFile"/>.</returns>
-        private static CodeFile ProcessFile(XElement[] modules, Class @class, string className, string filePath)
+        private CodeFile ProcessFile(XElement[] modules, Class @class, string className, string filePath)
         {
             var classes = modules
                 .Where(m => m.Attribute("name").Value.Equals(@class.Assembly.Name))
                 .Elements("classes")
                 .Elements("class")
                 .Where(c => c.Attribute("name").Value.Equals(className)
-                            || c.Attribute("name").Value.StartsWith(className + "$", StringComparison.Ordinal)
-                            || c.Attribute("name").Value.StartsWith(className + "/", StringComparison.Ordinal)
-                            || c.Attribute("name").Value.StartsWith(className + ".", StringComparison.Ordinal))
+                    || (!this.RawMode
+                        && (c.Attribute("name").Value.StartsWith(className + "$", StringComparison.Ordinal)
+                        || c.Attribute("name").Value.StartsWith(className + "/", StringComparison.Ordinal)
+                        || c.Attribute("name").Value.StartsWith(className + ".", StringComparison.Ordinal))))
                 .Where(c => c.Attribute("filename").Value.Equals(filePath))
                 .ToArray();
 

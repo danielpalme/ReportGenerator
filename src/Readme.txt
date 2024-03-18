@@ -67,6 +67,11 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.2.4.0
+
+    * New: #630 Added "raw mode" (settings:rawMode=true) to disable that coverage data of nested or compiler generated
+    classes is included in the parent class. This is useful to merge several Cobertura files into one file.
+
 5.2.3.0
 
     * Fix: #656 Changed handling of files which are not found in source directory

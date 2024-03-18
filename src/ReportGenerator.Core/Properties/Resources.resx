@@ -298,6 +298,9 @@
   <data name="PreprocessingReport" xml:space="preserve">
     <value>Preprocessing report</value>
   </data>
+  <data name="RawModeProVersion" xml:space="preserve">
+    <value>Raw mode is only available for sponsors. Get your license here: https://reportgenerator.io/pro</value>
+  </data>
   <data name="ReadingHistoricReports" xml:space="preserve">
     <value>Reading historic reports</value>
   </data>

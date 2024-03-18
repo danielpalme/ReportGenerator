@@ -9,7 +9,6 @@ using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser;
 using Palmmedia.ReportGenerator.Core.Parser.FileReading;
-using Palmmedia.ReportGenerator.Core.Parser.Filtering;
 using Palmmedia.ReportGenerator.Core.Plugin;
 using Palmmedia.ReportGenerator.Core.Properties;
 using Palmmedia.ReportGenerator.Core.Reporting;
@@ -159,14 +158,7 @@ namespace Palmmedia.ReportGenerator.Core
                 var stopWatch = Stopwatch.StartNew();
 
                 var parserResult = new CoverageReportParser(
-                    settings.NumberOfReportsParsedInParallel,
-                    settings.NumberOfReportsMergedInParallel,
-                    settings.ExcludeTestProjects,
-                    settings.DefaultAssemblyName,
-                    reportConfiguration.SourceDirectories,
-                    new DefaultFilter(reportConfiguration.AssemblyFilters),
-                    new DefaultFilter(reportConfiguration.ClassFilters),
-                    new DefaultFilter(reportConfiguration.FileFilters))
+                    new ReportContext(reportConfiguration, settings))
                         .ParseFiles(reportConfiguration.ReportFiles);
 
                 Logger.DebugFormat(Resources.ReportParsingTook, stopWatch.ElapsedMilliseconds / 1000d);
