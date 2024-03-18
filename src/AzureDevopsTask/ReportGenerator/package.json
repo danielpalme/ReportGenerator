@@ -14,12 +14,12 @@
   },
   "homepage": "https://github.com/danielpalme/ReportGenerator",
   "dependencies": {
-    "azure-pipelines-task-lib": "^4.7.0"
+    "azure-pipelines-task-lib": "^4.10.1"
   },
   "devDependencies": {
-    "@types/node": "^20.11.0",
+    "@types/node": "^20.11.29",
     "@types/q": "^1.5.8",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.2"
   },
   "scripts": {
     "tsc": "tsc"
