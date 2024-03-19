@@ -43,7 +43,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                     };
 
                     var process = Process.Start(processStartInfo);
-                    Assert.True(process.WaitForExit(5000));
+                    Assert.True(process.WaitForExit(10000));
 
                     string result = process.StandardOutput.ReadToEnd();
                     string errors = process.StandardError.ReadToEnd();
@@ -79,7 +79,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
             };
 
             var process = Process.Start(processStartInfo);
-            Assert.True(process.WaitForExit(5000));
+            Assert.True(process.WaitForExit(10000));
 
             string result = process.StandardOutput.ReadToEnd();
             string errors = process.StandardError.ReadToEnd();

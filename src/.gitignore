@@ -16,5 +16,6 @@ bin
 obj
 .DS_Store
 .AssemblyAttributes
+.netconfig
 node_modules
 /_ReSharper.Caches
