@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Moq;
+using NSubstitute;
 using Palmmedia.ReportGenerator.Core.Parser;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Parser.FileReading;
@@ -23,11 +23,11 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
 
         public LCovParserTest()
         {
-            var filterMock = new Mock<IFilter>();
-            filterMock.Setup(f => f.IsElementIncludedInReport(It.IsAny<string>())).Returns(true);
+            var filter = Substitute.For<IFilter>();
+            filter.IsElementIncludedInReport(Arg.Any<string>()).Returns(true);
 
             var lines = File.ReadAllLines(FilePath);
-            this.parserResult = new LCovParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(lines);
+            this.parserResult = new LCovParser(filter, filter, filter).Parse(lines);
         }
 
         /// <summary>

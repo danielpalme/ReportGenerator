@@ -1,5 +1,5 @@
 using System.IO;
-using Moq;
+using NSubstitute;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Reporting;
 using Xunit;
@@ -11,12 +11,11 @@ namespace Palmmedia.ReportGenerator.Core.Test
     {
         private static readonly string ReportPath = Path.Combine(FileManager.GetCSharpReportDirectory(), "OpenCover.xml");
 
-        private readonly Mock<IReportBuilderFactory> reportBuilderFactoryMock = new Mock<IReportBuilderFactory>();
+        private readonly IReportBuilderFactory reportBuilderFactory = Substitute.For<IReportBuilderFactory>();
 
         public ReportConfigurationValidatorTest()
         {
-            this.reportBuilderFactoryMock
-                .Setup(r => r.GetAvailableReportTypes())
+            this.reportBuilderFactory.GetAvailableReportTypes()
                 .Returns(new[] { "Latex", "Xml", "Html", "Something" });
         }
 
@@ -36,7 +35,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 VerbosityLevel.Info.ToString(),
                 null);
 
-            var sut = new ReportConfigurationValidator(this.reportBuilderFactoryMock.Object);
+            var sut = new ReportConfigurationValidator(this.reportBuilderFactory);
 
             Assert.True(sut.Validate(configuration));
         }
@@ -57,7 +56,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 VerbosityLevel.Info.ToString(),
                 null);
 
-            var sut = new ReportConfigurationValidator(this.reportBuilderFactoryMock.Object);
+            var sut = new ReportConfigurationValidator(this.reportBuilderFactory);
 
             Assert.False(sut.Validate(configuration));
         }
@@ -78,7 +77,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 VerbosityLevel.Info.ToString(),
                 null);
 
-            var sut = new ReportConfigurationValidator(this.reportBuilderFactoryMock.Object);
+            var sut = new ReportConfigurationValidator(this.reportBuilderFactory);
 
             Assert.False(sut.Validate(configuration));
         }
@@ -99,7 +98,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 VerbosityLevel.Info.ToString(),
                 null);
 
-            var sut = new ReportConfigurationValidator(this.reportBuilderFactoryMock.Object);
+            var sut = new ReportConfigurationValidator(this.reportBuilderFactory);
 
             Assert.False(sut.Validate(configuration));
         }
@@ -120,7 +119,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 VerbosityLevel.Info.ToString(),
                 null);
 
-            var sut = new ReportConfigurationValidator(this.reportBuilderFactoryMock.Object);
+            var sut = new ReportConfigurationValidator(this.reportBuilderFactory);
 
             Assert.False(sut.Validate(configuration));
         }
@@ -141,7 +140,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 VerbosityLevel.Info.ToString(),
                 null);
 
-            var sut = new ReportConfigurationValidator(this.reportBuilderFactoryMock.Object);
+            var sut = new ReportConfigurationValidator(this.reportBuilderFactory);
 
             Assert.False(sut.Validate(configuration));
         }
@@ -162,7 +161,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 VerbosityLevel.Info.ToString(),
                 null);
 
-            var sut = new ReportConfigurationValidator(this.reportBuilderFactoryMock.Object);
+            var sut = new ReportConfigurationValidator(this.reportBuilderFactory);
 
             Assert.False(sut.Validate(configuration));
         }
@@ -183,7 +182,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 VerbosityLevel.Info.ToString(),
                 null);
 
-            var sut = new ReportConfigurationValidator(this.reportBuilderFactoryMock.Object);
+            var sut = new ReportConfigurationValidator(this.reportBuilderFactory);
 
             Assert.False(sut.Validate(configuration));
         }
@@ -204,7 +203,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 VerbosityLevel.Info.ToString(),
                 null);
 
-            var sut = new ReportConfigurationValidator(this.reportBuilderFactoryMock.Object);
+            var sut = new ReportConfigurationValidator(this.reportBuilderFactory);
 
             Assert.False(sut.Validate(configuration));
         }
@@ -225,7 +224,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 VerbosityLevel.Info.ToString(),
                 null);
 
-            var sut = new ReportConfigurationValidator(this.reportBuilderFactoryMock.Object);
+            var sut = new ReportConfigurationValidator(this.reportBuilderFactory);
 
             Assert.False(sut.Validate(configuration));
         }

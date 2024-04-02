@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Moq;
+using NSubstitute;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Parser.FileReading;
 using Xunit;
@@ -267,24 +267,24 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
         [Fact]
         public void AnalyzeFile_AdditionFileReaderNoError_RegularFileReaderIgnored()
         {
-            var additionalFileReaderMock = new Mock<IFileReader>();
-            string error = null;
-            additionalFileReaderMock.Setup(f => f.LoadFile(It.IsAny<string>(), out error))
+            var additionalFileReader = Substitute.For<IFileReader>();
+            string errorArg = Arg.Any<string>();
+            additionalFileReader.LoadFile(Arg.Any<string>(), out errorArg)
                 .Returns(new[] { "Test" });
 
-            var fileReaderMock = new Mock<IFileReader>();
+            var fileReader = Substitute.For<IFileReader>();
 
-            var sut = new CodeFile("C:\\temp\\Other.cs", new int[] { -2, -1, 0, 1 }, new LineVisitStatus[] { LineVisitStatus.NotCoverable, LineVisitStatus.NotCoverable, LineVisitStatus.NotCovered, LineVisitStatus.Covered }, additionalFileReaderMock.Object);
+            var sut = new CodeFile("C:\\temp\\Other.cs", new int[] { -2, -1, 0, 1 }, new LineVisitStatus[] { LineVisitStatus.NotCoverable, LineVisitStatus.NotCoverable, LineVisitStatus.NotCovered, LineVisitStatus.Covered }, additionalFileReader);
 
             Assert.Null(sut.TotalLines);
 
-            var fileAnalysis = sut.AnalyzeFile(fileReaderMock.Object);
+            var fileAnalysis = sut.AnalyzeFile(fileReader);
 
             Assert.NotNull(fileAnalysis);
             Assert.Null(fileAnalysis.Error);
 
-            additionalFileReaderMock.Verify(f => f.LoadFile(It.IsAny<string>(), out error), Times.Once);
-            fileReaderMock.Verify(f => f.LoadFile(It.IsAny<string>(), out error), Times.Never);
+            additionalFileReader.Received(1).LoadFile(Arg.Any<string>(), out errorArg);
+            fileReader.DidNotReceive().LoadFile(Arg.Any<string>(), out errorArg);
         }
 
         /// <summary>
@@ -293,20 +293,29 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
         [Fact]
         public void AnalyzeFile_AdditionFileReaderReturnsError_RegularFileReaderUsed()
         {
-            var additionalFileReaderMock = new Mock<IFileReader>();
-            string error = "Some error";
-            additionalFileReaderMock.Setup(f => f.LoadFile(It.IsAny<string>(), out error))
-                .Returns((string[])null);
+            var additionalFileReader = Substitute.For<IFileReader>();
+            string errorArg = Arg.Any<string>();
+            string errorOut = "Some error";
+            additionalFileReader.LoadFile(Arg.Any<string>(), out errorArg)
+                .Returns(x =>
+                {
+                    x[1] = errorOut;
+                    return null;
+                });
 
-            var fileReaderMock = new Mock<IFileReader>();
-            fileReaderMock.Setup(f => f.LoadFile(It.IsAny<string>(), out error))
-                .Returns(new[] { "Test" });
+            var fileReader = Substitute.For<IFileReader>();
+            fileReader.LoadFile(Arg.Any<string>(), out errorArg)
+                .Returns(x =>
+                 {
+                     x[1] = errorOut;
+                     return new[] { "Test" };
+                 });
 
-            var sut = new CodeFile("C:\\temp\\Other.cs", new int[] { -2, -1, 0, 1 }, new LineVisitStatus[] { LineVisitStatus.NotCoverable, LineVisitStatus.NotCoverable, LineVisitStatus.NotCovered, LineVisitStatus.Covered }, additionalFileReaderMock.Object);
+            var sut = new CodeFile("C:\\temp\\Other.cs", new int[] { -2, -1, 0, 1 }, new LineVisitStatus[] { LineVisitStatus.NotCoverable, LineVisitStatus.NotCoverable, LineVisitStatus.NotCovered, LineVisitStatus.Covered }, additionalFileReader);
 
             Assert.Null(sut.TotalLines);
 
-            var fileAnalysis = sut.AnalyzeFile(fileReaderMock.Object);
+            var fileAnalysis = sut.AnalyzeFile(fileReader);
 
             Assert.NotNull(fileAnalysis);
             Assert.NotNull(fileAnalysis.Error);
@@ -314,8 +323,8 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
             Assert.Equal(4, sut.TotalLines);
             Assert.Equal(4, fileAnalysis.Lines.Count());
 
-            additionalFileReaderMock.Verify(f => f.LoadFile(It.IsAny<string>(), out error), Times.Once);
-            fileReaderMock.Verify(f => f.LoadFile(It.IsAny<string>(), out error), Times.Once);
+            additionalFileReader.Received(1).LoadFile(Arg.Any<string>(), out errorArg);
+            fileReader.Received(1).LoadFile(Arg.Any<string>(), out errorArg);
         }
 
         /// <summary>

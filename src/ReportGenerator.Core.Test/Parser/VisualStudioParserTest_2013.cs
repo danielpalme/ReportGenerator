@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using Moq;
+using NSubstitute;
 using Palmmedia.ReportGenerator.Core.Parser;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Parser.FileReading;
@@ -24,11 +24,11 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
 
         public VisualStudioParserTest_2013()
         {
-            var filterMock = new Mock<IFilter>();
-            filterMock.Setup(f => f.IsElementIncludedInReport(It.IsAny<string>())).Returns(true);
+            var filter = Substitute.For<IFilter>();
+            filter.IsElementIncludedInReport(Arg.Any<string>()).Returns(true);
 
             var report = XDocument.Load(FilePath);
-            this.parserResult = new VisualStudioParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(report);
+            this.parserResult = new VisualStudioParser(filter, filter, filter).Parse(report);
         }
 
         /// <summary>

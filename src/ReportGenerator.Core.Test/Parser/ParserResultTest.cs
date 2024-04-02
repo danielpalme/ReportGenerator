@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using Moq;
+using NSubstitute;
 using Palmmedia.ReportGenerator.Core.Parser;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Palmmedia.ReportGenerator.Core.Parser.FileReading;
@@ -27,19 +27,19 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
 
         public ParserResultTest()
         {
-            var filterMock = new Mock<IFilter>();
-            filterMock.Setup(f => f.IsElementIncludedInReport(It.IsAny<string>())).Returns(true);
+            var filter = Substitute.For<IFilter>();
+            filter.IsElementIncludedInReport(Arg.Any<string>()).Returns(true);
 
-            this.parserResultWithoutPreprocessing = new OpenCoverParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(XDocument.Load(FilePath));
-            this.parserResultWithoutPreprocessing.Merge(new OpenCoverParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(XDocument.Load(FilePath)));
+            this.parserResultWithoutPreprocessing = new OpenCoverParser(filter, filter, filter).Parse(XDocument.Load(FilePath));
+            this.parserResultWithoutPreprocessing.Merge(new OpenCoverParser(filter, filter, filter).Parse(XDocument.Load(FilePath)));
 
             var report = XDocument.Load(FilePath);
             new OpenCoverReportPreprocessor().Execute(report);
-            this.parserResultWithPreprocessing = new OpenCoverParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(report);
+            this.parserResultWithPreprocessing = new OpenCoverParser(filter, filter, filter).Parse(report);
 
             report = XDocument.Load(FilePath);
             new OpenCoverReportPreprocessor().Execute(report);
-            this.parserResultWithPreprocessing.Merge(new OpenCoverParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(report));
+            this.parserResultWithPreprocessing.Merge(new OpenCoverParser(filter, filter, filter).Parse(report));
         }
 
         /// <summary>
@@ -236,11 +236,11 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         [Fact]
         public void OpenCoverMethodMetricsTest()
         {
-            var filterMock = new Mock<IFilter>();
-            filterMock.Setup(f => f.IsElementIncludedInReport(It.IsAny<string>())).Returns(true);
+            var filter = Substitute.For<IFilter>();
+            filter.IsElementIncludedInReport(Arg.Any<string>()).Returns(true);
 
             string filePath = Path.Combine(FileManager.GetCSharpReportDirectory(), "MultiOpenCover.xml");
-            var parserResult = new CoverageReportParser(1, 1, System.Array.Empty<string>(), filterMock.Object, filterMock.Object, filterMock.Object).ParseFiles(new string[] { filePath });
+            var parserResult = new CoverageReportParser(1, 1, System.Array.Empty<string>(), filter, filter, filter).ParseFiles(new string[] { filePath });
 
             var metrics = parserResult.Assemblies
                 .Single(a => a.Name == "Test").Classes
@@ -266,11 +266,11 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         [Fact]
         public void OpenCoverBranchesTest()
         {
-            var filterMock = new Mock<IFilter>();
-            filterMock.Setup(f => f.IsElementIncludedInReport(It.IsAny<string>())).Returns(true);
+            var filter = Substitute.For<IFilter>();
+            filter.IsElementIncludedInReport(Arg.Any<string>()).Returns(true);
 
             string filePath = Path.Combine(FileManager.GetCSharpReportDirectory(), "MultiOpenCover.xml");
-            var parserResult = new CoverageReportParser(1, 1, System.Array.Empty<string>(), filterMock.Object, filterMock.Object, filterMock.Object).ParseFiles(new string[] { filePath });
+            var parserResult = new CoverageReportParser(1, 1, System.Array.Empty<string>(), filter, filter, filter).ParseFiles(new string[] { filePath });
 
             var fileAnalysis = GetFileAnalysis(parserResult.Assemblies, "Test.TestClass2", "C:\\temp\\TestClass2.cs");
 

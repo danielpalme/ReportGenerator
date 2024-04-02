@@ -1,6 +1,6 @@
 using System.Linq;
 using System.Xml.Linq;
-using Moq;
+using NSubstitute;
 using Palmmedia.ReportGenerator.Core.Parser;
 using Palmmedia.ReportGenerator.Core.Parser.Filtering;
 using Xunit;
@@ -30,12 +30,12 @@ namespace Palmmedia.ReportGenerator.Core.Test.Issues
         [Fact]
         public void NestedClassWithoutParentIsPresent()
         {
-            var filterMock = new Mock<IFilter>();
-            filterMock.Setup(f => f.IsElementIncludedInReport(It.IsAny<string>())).Returns(true);
+            var filter = Substitute.For<IFilter>();
+            filter.IsElementIncludedInReport(Arg.Any<string>()).Returns(true);
 
             var report = XDocument.Parse(Report);
 
-            var parserResult = new CoberturaParser(filterMock.Object, filterMock.Object, filterMock.Object).Parse(report.Root);
+            var parserResult = new CoberturaParser(filter, filter, filter).Parse(report.Root);
 
             Assert.Equal("OutwardPaymentDocumentProcessing.HttpStart", parserResult.Assemblies.First().Classes.First().Name);
         }
