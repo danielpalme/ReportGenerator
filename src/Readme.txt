@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.2.5.0
+
+    * Fix: #665 Improved handling of duplicate classes in JaCoCo files
+
 5.2.4.0
 
     * New: #630 Added "raw mode" (settings:rawMode=true) to disable that coverage data of nested or compiler generated

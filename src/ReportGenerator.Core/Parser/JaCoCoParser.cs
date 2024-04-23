@@ -362,7 +362,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     branches.Add(new Branch(i < line.CoveredBranches ? 1 : 0, identifier));
                 }
 
-                result.Add(line.LineNumber, branches);
+                if (!result.ContainsKey(line.LineNumber))
+                {
+                    result.Add(line.LineNumber, branches);
+                }
             }
 
             return result;
