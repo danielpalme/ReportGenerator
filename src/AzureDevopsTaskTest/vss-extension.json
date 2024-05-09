@@ -1,10 +1,10 @@
 {
     "manifestVersion": 1,
-    "id": "reportgenerator",
-    "name": "ReportGenerator",
+    "id": "reportgeneratortest",
+    "name": "ReportGeneratorTest",
     "version": "5.2.5",
     "publisher": "Palmmedia",
-    "public": true,
+    "public": false,
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"

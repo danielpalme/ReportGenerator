@@ -67,6 +67,11 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.3.0.0
+
+    * New: Azure DevOps task: Added new setting "publishCodeCoverageResults" This allows to publish report in 'Code Coverage' tab directly. 
+           Makes the 'PublishCodeCoverageResults' task obsolete.
+
 5.2.5.0
 
     * Fix: #665 Improved handling of duplicate classes in JaCoCo files
