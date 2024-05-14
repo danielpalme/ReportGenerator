@@ -35,7 +35,7 @@ The following output formats are supported by ReportGenerator:
 -TeamCitySummary
 -TextSummary, TextDeltaSummary
 -CsvSummary
--MarkdownSummary, MarkdownSummaryGithub, MarkdownDeltaSummary
+-MarkdownSummary, MarkdownAssembliesSummary, MarkdownSummaryGithub, MarkdownDeltaSummary
 -SvgChart
 -Badges
 -Custom formats (https://github.com/danielpalme/ReportGenerator/wiki/Custom-reports)
@@ -72,6 +72,7 @@ CHANGELOG
     * New: Azure DevOps task: Added new setting "publishCodeCoverageResults" This allows to publish report in 'Code Coverage' tab directly. 
            Makes the 'PublishCodeCoverageResults' task obsolete.
     * New: #662: Added ability to filter by coverage in Html reports
+    * New: #667: Added new report type 'MarkdownAssembliesSummary'
 
 5.2.5.0
 
