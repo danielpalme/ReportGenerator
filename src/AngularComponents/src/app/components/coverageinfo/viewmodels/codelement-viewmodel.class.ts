@@ -1,3 +1,4 @@
+import { CoverageInfoSettings } from "../data/coverageinfo-settings.class";
 import { ClassViewModel } from "./class-viewmodel.class";
 import { ElementBase } from "./elementbase.class";
 import { Helper } from "./helper.class";
@@ -17,19 +18,19 @@ export class CodeElementViewModel extends ElementBase {
             this.collapsed = name.indexOf("Test") > -1 && parent === null;
     }
 
-    visible(filter: string, historicCoverageFilter: string): boolean {
-        if (filter !== "" && this.name.toLowerCase().indexOf(filter.toLowerCase()) > -1) {
+    visible(settings: CoverageInfoSettings): boolean {
+        if (settings.filter !== "" && this.name.toLowerCase().indexOf(settings.filter.toLowerCase()) > -1) {
             return true;
         }
 
         for (let i: number = 0; i < this.subElements.length; i++) {
-            if (this.subElements[i].visible(filter, historicCoverageFilter)) {
+            if (this.subElements[i].visible(settings)) {
                 return true;
             }
         }
 
         for (let i: number = 0; i < this.classes.length; i++) {
-            if (this.classes[i].visible(filter, historicCoverageFilter)) {
+            if (this.classes[i].visible(settings)) {
                 return true;
             }
         }

@@ -71,6 +71,7 @@ CHANGELOG
 
     * New: Azure DevOps task: Added new setting "publishCodeCoverageResults" This allows to publish report in 'Code Coverage' tab directly. 
            Makes the 'PublishCodeCoverageResults' task obsolete.
+    * New: #662: Added ability to filter by coverage in Html reports
 
 5.2.5.0
 

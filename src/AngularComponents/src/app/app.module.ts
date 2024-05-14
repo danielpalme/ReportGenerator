@@ -1,3 +1,4 @@
+import { NgxSliderModule } from "@angular-slider/ngx-slider";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
@@ -24,7 +25,8 @@ import { WindowRefService } from "./infrastructure/windowref.service";
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    NgxSliderModule
   ],
   providers: [WindowRefService],
   bootstrap: [RiskHotspotsComponent, CoverageInfoComponent]

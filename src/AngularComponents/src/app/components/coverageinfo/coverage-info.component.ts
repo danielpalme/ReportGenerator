@@ -1,3 +1,4 @@
+import { Options } from "@angular-slider/ngx-slider";
 import { Component, HostListener } from "@angular/core";
 import { WindowRefService } from "../../infrastructure/windowref.service";
 import { GlobalHistoryState } from "../globalhistorystate";
@@ -72,15 +73,8 @@ import { Helper } from "./viewmodels/helper.class";
           </div>
         </ng-container>
       </div>
-      <div class="col-right">
-        <div>
+      <div class="col-right right">
           <button type="button" (click)="popupVisible=true;"><i class="icon-cog"></i>{{ metrics.length > 0 ? translations.selectCoverageTypesAndMetrics :  translations.selectCoverageTypes}}</button>
-        </div>
-        <br/>
-        <div>
-          <span>{{translations.filter}} </span>
-          <input type="text" [(ngModel)]="settings.filter" />
-        </div>
       </div>
     </div>
 
@@ -111,6 +105,21 @@ import { Helper } from "./viewmodels/helper.class";
             <th class="center" colspan="4" *ngIf="branchCoverageAvailable && settings.showBranchCoverage">{{translations.branchCoverage}}</th>
             <th class="center" colspan="4" *ngIf="methodCoverageAvailable && settings.showMethodCoverage">{{translations.methodCoverage}}</th>
             <th class="center" [attr.colspan]="settings.visibleMetrics.length" *ngIf="settings.visibleMetrics.length > 0">{{translations.metrics}}</th>
+          </tr>
+          <tr class="filterbar">
+            <td>
+              <input type="text" [(ngModel)]="settings.filter" placeholder="{{translations.filter}}" />
+            </td>
+            <td class="center" colspan="6" *ngIf="settings.showLineCoverage">
+              <ngx-slider [(value)]="settings.lineCoverageMin" [(highValue)]="settings.lineCoverageMax" [options]="sliderOptions"></ngx-slider>
+            </td>
+            <td class="center" colspan="4" *ngIf="branchCoverageAvailable && settings.showBranchCoverage">
+              <ngx-slider [(value)]="settings.branchCoverageMin" [(highValue)]="settings.branchCoverageMax" [options]="sliderOptions"></ngx-slider>
+            </td>
+            <td class="center" colspan="4" *ngIf="methodCoverageAvailable && settings.showMethodCoverage">
+              <ngx-slider [(value)]="settings.methodCoverageMin" [(highValue)]="settings.methodCoverageMax" [options]="sliderOptions"></ngx-slider>
+            </td>
+            <td class="center" [attr.colspan]="settings.visibleMetrics.length" *ngIf="settings.visibleMetrics.length > 0"></td>
           </tr>
           <tr>
             <th><a href="#" (click)="updateSorting('name', $event)"><i class="icon-down-dir"
@@ -174,7 +183,7 @@ import { Helper } from "./viewmodels/helper.class";
         </thead>
         <tbody>
           <ng-container *ngFor="let element of codeElements">
-            <tr *ngIf="element.visible(settings.filter, settings.historyComparisionType)"
+            <tr *ngIf="element.visible(settings)"
               codeelement-row
               [element]="element"
               [collapsed]="element.collapsed"
@@ -185,7 +194,7 @@ import { Helper } from "./viewmodels/helper.class";
             </tr>
             <ng-container *ngFor="let clazz of element.classes">
               <tr *ngIf="!element.collapsed
-                && clazz.visible(settings.filter, settings.historyComparisionType)"
+                && clazz.visible(settings)"
                 class-row [clazz]="clazz"
                   [translations]="translations"
                   [lineCoverageAvailable]="settings.showLineCoverage"
@@ -197,7 +206,7 @@ import { Helper } from "./viewmodels/helper.class";
             </ng-container>
             <ng-container *ngFor="let subElement of element.subElements">
               <ng-container *ngIf="!element.collapsed
-                && subElement.visible(settings.filter, settings.historyComparisionType)">
+                && subElement.visible(settings)">
                <tr class="namespace"
                  codeelement-row
                  [element]="subElement"
@@ -209,7 +218,7 @@ import { Helper } from "./viewmodels/helper.class";
                 </tr>
                 <ng-container *ngFor="let clazz of subElement.classes">
                   <tr class="namespace" *ngIf="!subElement.collapsed
-                   && clazz.visible(settings.filter, settings.historyComparisionType)"
+                   && clazz.visible(settings)"
                    class-row [clazz]="clazz"
                     [translations]="translations"
                     [lineCoverageAvailable]="settings.showLineCoverage"
@@ -241,6 +250,14 @@ export class CoverageInfoComponent {
   popupVisible: boolean = false;
 
   settings: CoverageInfoSettings = new CoverageInfoSettings();
+
+  sliderOptions: Options = {
+    floor: 0,
+    ceil: 100,
+    step: 1,
+    ticksArray: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+    showTicks: true
+  };
 
   constructor(
     windowRef: WindowRefService) {

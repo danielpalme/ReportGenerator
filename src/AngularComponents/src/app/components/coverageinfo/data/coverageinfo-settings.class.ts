@@ -10,7 +10,14 @@ export class CoverageInfoSettings {
     grouping: number = 0;
     historyComparisionDate: string = "";
     historyComparisionType: string = "";
+
     filter: string = "";
+    lineCoverageMin: number = 0;
+    lineCoverageMax: number = 100;
+    branchCoverageMin: number = 0;
+    branchCoverageMax: number = 100;
+    methodCoverageMin: number = 0;
+    methodCoverageMax: number = 100;
 
     sortBy: string = "name";
     sortOrder: string = "asc";

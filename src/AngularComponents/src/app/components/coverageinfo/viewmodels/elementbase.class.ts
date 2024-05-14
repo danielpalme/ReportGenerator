@@ -1,3 +1,4 @@
+import { CoverageInfoSettings } from "../data/coverageinfo-settings.class";
 import { Helper } from "./helper.class";
 
 export abstract class ElementBase {
@@ -86,7 +87,7 @@ export abstract class ElementBase {
         return this.coveredMethods + "/" + this.totalMethods;
     }
 
-    abstract visible(filter: string, historicCoverageFilter: string): boolean;
+    abstract visible(settings: CoverageInfoSettings): boolean;
 
     abstract updateCurrentHistoricCoverage(historyComparisionDate: string): void;
 }

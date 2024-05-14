@@ -1,4 +1,5 @@
 import { Class } from "../data/class.class";
+import { CoverageInfoSettings } from "../data/coverageinfo-settings.class";
 import { HistoricCoverage } from "../data/historic-coverage.class";
 import { ElementBase } from "./elementbase.class";
 import { Helper } from "./helper.class";
@@ -50,16 +51,43 @@ export class ClassViewModel extends ElementBase {
         return Helper.roundNumber(100 * this.coveredLines / this.coverableLines);
     }
 
-    visible(filter: string, historicCoverageFilter: string): boolean {
-        if (filter !== "" && this.name.toLowerCase().indexOf(filter.toLowerCase()) === -1) {
+    visible(settings: CoverageInfoSettings): boolean {
+        if (settings.filter !== "" && this.name.toLowerCase().indexOf(settings.filter.toLowerCase()) === -1) {
             return false;
         }
 
-        if (historicCoverageFilter === "" || this.currentHistoricCoverage === null) {
+        let coverageMin = this.coverage;
+        let coverageMax = coverageMin;
+        coverageMin = Number.isNaN(coverageMin) ? 0 : coverageMin;
+        coverageMax = Number.isNaN(coverageMax) ? 100 : coverageMax;
+
+        if (settings.lineCoverageMin > coverageMin || settings.lineCoverageMax < coverageMax) {
+            return false;
+        }
+
+        let branchCoverageMin = this.branchCoverage;
+        let branchCoverageMax = branchCoverageMin;
+        branchCoverageMin = Number.isNaN(branchCoverageMin) ? 0 : branchCoverageMin;
+        branchCoverageMax = Number.isNaN(branchCoverageMax) ? 100 : branchCoverageMax;
+        
+        if (settings.branchCoverageMin > branchCoverageMin || settings.branchCoverageMax < branchCoverageMax) {
+            return false;
+        }
+        
+        let methodCoverageMin = this.methodCoverage;
+        let methodCoverageMax = methodCoverageMin;
+        methodCoverageMin = Number.isNaN(methodCoverageMin) ? 0 : methodCoverageMin;
+        methodCoverageMax = Number.isNaN(methodCoverageMax) ? 100 : methodCoverageMax;
+
+        if (settings.methodCoverageMin > methodCoverageMin || settings.methodCoverageMax < methodCoverageMax) {
+            return false;
+        }
+
+        if (settings.historyComparisionType === "" || this.currentHistoricCoverage === null) {
             return true;
         }
 
-        if (historicCoverageFilter === "allChanges") {
+        if (settings.historyComparisionType === "allChanges") {
             if (this.coveredLines === this.currentHistoricCoverage.cl
                 && this.uncoveredLines === this.currentHistoricCoverage.ucl
                 && this.coverableLines === this.currentHistoricCoverage.cal
@@ -70,32 +98,32 @@ export class ClassViewModel extends ElementBase {
                 && this.totalMethods === this.currentHistoricCoverage.tm) {
                 return false;
             }
-        } else if (historicCoverageFilter === "lineCoverageIncreaseOnly") {
+        } else if (settings.historyComparisionType === "lineCoverageIncreaseOnly") {
             let coverage: number = this.coverage;
             if (isNaN(coverage) || coverage <= this.currentHistoricCoverage.lcq) {
                 return false;
             }
-        } else if (historicCoverageFilter === "lineCoverageDecreaseOnly") {
+        } else if (settings.historyComparisionType === "lineCoverageDecreaseOnly") {
             let coverage: number = this.coverage;
             if (isNaN(coverage) || coverage >= this.currentHistoricCoverage.lcq) {
                 return false;
             }
-        } else if (historicCoverageFilter === "branchCoverageIncreaseOnly") {
+        } else if (settings.historyComparisionType === "branchCoverageIncreaseOnly") {
             let branchCoverage: number = this.branchCoverage;
             if (isNaN(branchCoverage) || branchCoverage <= this.currentHistoricCoverage.bcq) {
                 return false;
             }
-        } else if (historicCoverageFilter === "branchCoverageDecreaseOnly") {
+        } else if (settings.historyComparisionType === "branchCoverageDecreaseOnly") {
             let branchCoverage: number = this.branchCoverage;
             if (isNaN(branchCoverage) || branchCoverage >= this.currentHistoricCoverage.bcq) {
                 return false;
             }
-        } else if (historicCoverageFilter === "methodCoverageIncreaseOnly") {
+        } else if (settings.historyComparisionType === "methodCoverageIncreaseOnly") {
             let methodCoverage: number = this.methodCoverage;
             if (isNaN(methodCoverage) || methodCoverage <= this.currentHistoricCoverage.mcq) {
                 return false;
             }
-        } else if (historicCoverageFilter === "methodCoverageDecreaseOnly") {
+        } else if (settings.historyComparisionType === "methodCoverageDecreaseOnly") {
             let methodCoverage: number = this.methodCoverage;
             if (isNaN(methodCoverage) || methodCoverage >= this.currentHistoricCoverage.mcq) {
                 return false;
