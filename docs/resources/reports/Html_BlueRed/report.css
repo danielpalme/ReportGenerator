@@ -69,10 +69,11 @@ th { text-align: left; }
 .overview th a { color: #000; }
 .overview tr.namespace a { margin-left: 15px; display: block; }
 .overview td { border: 1px solid #c1c1c1; border-collapse: collapse; padding: 2px 5px 2px 5px; }
+.overview tr.filterbar td { height: 60px; }
 .overview tr.header th { background-color: #d1d1d1; }
 .overview tr.header th:nth-child(2n+1) { background-color: #ddd; }
 .overview tr.header th:first-child { border-left: 1px solid #fff; border-top: 1px solid #fff; background-color: #fff; }
-.overview tr:hover>td { background-color: #b0b0b0; }
+.overview tbody tr:hover>td { background-color: #b0b0b0; }
 
 div.currenthistory { margin: -2px -5px 0 -5px; padding: 2px 5px 2px 5px; height: 16px; }
 .coverage { border-collapse: collapse; font-size: 5px; height: 10px; }
@@ -525,6 +526,40 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
     padding-left: 20px;
     height: 0.9em;
     display: inline-block;
+}
+
+.ngx-slider .ngx-slider-bar {
+    background: #a9a9a9 !important;
+}
+
+.ngx-slider .ngx-slider-selection {
+    background: #818181 !important;
+}
+
+.ngx-slider .ngx-slider-bubble {
+    padding: 3px 4px !important;
+    font-size: 12px !important;
+}
+
+.ngx-slider .ngx-slider-pointer {
+    width: 20px !important;
+    height: 20px !important;
+    top: -8px !important;
+    background-color: #0075FF !important;
+    -webkit-border-radius: 10px !important;
+    -moz-border-radius: 10px !important;
+    border-radius: 10px !important;
+}
+
+    .ngx-slider .ngx-slider-pointer:after {
+        content: none !important;
+    }
+
+.ngx-slider .ngx-slider-tick.ngx-slider-selected {
+    background-color: #62a5f4 !important;
+    width: 8px !important;
+    height: 8px !important;
+    top: 1px !important;
 }
 
 

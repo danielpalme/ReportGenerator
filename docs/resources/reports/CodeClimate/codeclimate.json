@@ -3,23 +3,23 @@
     "branch": "main",
     "build_identifier": "",
     "build_url": "",
-    "commit_sha": "e2a0d2b74651749aeb48a8eaecc51d7cf49c5dc8",
-    "committed_at": 1706817706,
+    "commit_sha": "7684c4105200f76416f4dd53fe2d9327e4e895b8",
+    "committed_at": 1715712910,
     "name": ""
   },
   "environment": {
     "gem_version": "",
     "package_version": "",
-    "pwd": "C:\\temp",
-    "prefix": "C:\\temp",
+    "pwd": "C:\\Users\\Daniel Palme\\Documents\\Projects\\ReportGenerator\\src\\resources\\SampleReportsInAllFormats",
+    "prefix": "C:\\Users\\Daniel Palme\\Documents\\Projects\\ReportGenerator\\src\\resources\\SampleReportsInAllFormats",
     "rails_root": "",
     "reporter_version": "0.11.1",
     "simplecov_root": ""
   },
   "git": {
     "branch": "main",
-    "head": "e2a0d2b74651749aeb48a8eaecc51d7cf49c5dc8",
-    "committed_at": 1706817706
+    "head": "7684c4105200f76416f4dd53fe2d9327e4e895b8",
+    "committed_at": 1715712910
   },
   "covered_percent": 69.4,
   "covered_strength": 0,
