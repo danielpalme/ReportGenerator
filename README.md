@@ -49,7 +49,9 @@ Use the online [configuration tool](https://reportgenerator.io/usage) to get sta
 |[GitHub Actions](https://github.com/marketplace/actions/reportgenerator)|.NET Core >=6.0| Add the GitHub Action to your build pipeline.<br />[Learn more](https://github.com/danielpalme/ReportGenerator/wiki/Integration#github-actions)|
 
 ### Usage / Command line parameters
-Use the online [configuration tool](https://reportgenerator.io/usage) to get started quickly.
+Use the online [configuration tool](https://reportgenerator.io/usage) to get started quickly.  
+The more advanced settings are documented in the [wiki](https://github.com/danielpalme/ReportGenerator/wiki/Settings).
+
 ```
 Parameters:
     ["]-reports:<report>[;<report>][;<report>]["]
