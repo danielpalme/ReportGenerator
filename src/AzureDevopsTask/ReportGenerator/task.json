@@ -148,10 +148,18 @@
         }
     ],
     "execution": {
-          "Node": {
+        "Node10": {
             "target": "reportgenerator.js",
             "argumentFormat": ""
-            }
+        },
+        "Node16": {
+            "target": "reportgenerator.js",
+            "argumentFormat": ""
+        },
+        "Node20": {
+            "target": "reportgenerator.js",
+            "argumentFormat": ""
+        }
     },
     "messages": {
         "FailedMsg": "ReportGenerator failed",
