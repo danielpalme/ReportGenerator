@@ -159,6 +159,10 @@
     },
     "messages": {
         "FailedMsg": "ReportGenerator failed",
-        "SucceedMsg": "Successfully executed ReportGenerator."
+        "FailedToPublishReportMsg": "Failed to publish report",
+        "SucceedMsg": "Successfully executed ReportGenerator.",
+        "PublishCodeCoverageResultsRequiresCobertura": "When using 'publishCodeCoverageResults: true' please add 'Cobertura' as a report type",
+        "PublishCodeCoverageResultsRequiresHtmlFormat": "When using 'publishCodeCoverageResults: true' please add one of the Html report types",
+        "MultipleSummaryFilesFound": "Multiple file or directory matches were found. Using the first match: %s"
     }
 }

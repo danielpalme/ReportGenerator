@@ -29,12 +29,43 @@ async function executeReportGenerator(): Promise<number> {
     return await tool.execAsync();
 }
 
+async function run() {
+    const publishCodeCoverageResults = ((tl.getInput('publishCodeCoverageResults') || 'false') + '').toLowerCase() === 'true';
+    try {
+        tl.setResourcePath(path.join( __dirname, 'task.json'));
+
+        let code = await executeReportGenerator();
+        if (code != 0) {
+            tl.setResult(tl.TaskResult.Failed, tl.loc('FailedMsg'));
+            return;
+        }
+
+        if (!publishCodeCoverageResults) {
+            tl.setResult(tl.TaskResult.Succeeded, tl.loc('SucceedMsg'));
+            return;
+        }
+    }
+    catch (e) {
+        tl.debug(e.message);
+        tl.setResult(tl.TaskResult.Failed, e.message);
+    }
+    
+    try {
+        publishCodeCoverageReport();
+    }
+    catch (e) {
+        tl.debug(e.message);
+        tl.setResult(tl.TaskResult.Failed, tl.loc('FailedToPublishReportMsg') + ': ' + e.message);
+        return;
+    }
+}
+
 function publishCodeCoverageReport() {
     if (((tl.getInput('publishCodeCoverageResults') || 'false') + '').toLowerCase() !== 'true') {
         return;
     }
 
-    const targetdir = trimPathEnd((tl.getInput('targetdir') || ''));
+    const targetdir = resolvePathToSingleItem(tl.getInput('targetdir') || '');
     const reporttypes = (tl.getInput('reporttypes') || '').toLowerCase().split(';');
     const createSubdirectoryForAllReportTypes = (tl.getInput('customSettings') || '').toLowerCase().indexOf('createsubdirectoryforallreporttypes=true') > -1;
 
@@ -71,49 +102,39 @@ function publishCodeCoverageReport() {
     tl.setResult(tl.TaskResult.Succeeded, tl.loc('SucceedMsg'));
 }
 
-async function run() {
-    const publishCodeCoverageResults = ((tl.getInput('publishCodeCoverageResults') || 'false') + '').toLowerCase() === 'true';
-    try {
-        tl.setResourcePath(path.join( __dirname, 'task.json'));
+// Resolves the specified path to a single item based on whether it contains wildcards
+function resolvePathToSingleItem(pathInput: string): string {
+    // Default to using the specific pathInput value
+    let resolvedPath: string = pathInput;
 
-        let code = await executeReportGenerator();
-        if (code != 0) {
-            tl.setResult(tl.TaskResult.Failed, tl.loc('FailedMsg'));
-            return;
+    if (pathInput) {
+        // Find match patterns won't work if the directory has a trailing slash
+        if (pathInput.endsWith('/') || pathInput.endsWith('\\')) {
+            pathInput = pathInput.slice(0, -1);
         }
+        // Resolve matches of the pathInput pattern
+        const findOptions: tl.FindOptions = { allowBrokenSymbolicLinks: false, followSymbolicLinks: false, followSpecifiedSymbolicLink: false };
+        const pathMatches: string[] = tl.findMatch(
+            tl.getVariable('System.DefaultWorkingDirectory'),
+            pathInput,
+            findOptions);
 
-        if (!publishCodeCoverageResults) {
-            tl.setResult(tl.TaskResult.Succeeded, tl.loc('SucceedMsg'));
-            return;
+        // Were any matches found?
+        if (pathMatches.length === 0) {
+            resolvedPath = undefined;
+        } else {
+            // Select the path to be used from the matches
+            resolvedPath = pathMatches[0];
+
+            // If more than one path matches, use the first and issue a warning
+            if (pathMatches.length > 1) {
+                tl.warning(tl.loc('MultipleSummaryFilesFound', resolvedPath));
+            }
         }
     }
-    catch (e) {
-        tl.debug(e.message);
-        tl.setResult(tl.TaskResult.Failed, e.message);
-    }
-    
-    try {
-        publishCodeCoverageReport();
-    }
-    catch (e) {
-        tl.debug(e.message);
-        tl.setResult(tl.TaskResult.Failed, tl.loc('FailedToPublishReportMsg') + ': ' + e.message);
-        return;
-    }
-}
 
-function trimPathEnd(input: string) {
-    if (!input || input.length === 0) {
-        return input;
-    }
-
-    let result = input;
-
-    while (result.length > 0 && (result.endsWith('/') || result.endsWith('\\'))) {
-        result = result.substring(0, result.length - 1);
-    }
-
-    return result;
+    // Return resolved path
+    return resolvedPath;
 }
 
 run();
