@@ -169,6 +169,24 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Risk hotspot assembly filters: Optional list of assemblies that should be included or excluded in the risk hotspots..
+        /// </summary>
+        internal static string Explanations_RiskHotspotAssemblyFilters {
+            get {
+                return ResourceManager.GetString("Explanations_RiskHotspotAssemblyFilters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Risk hotspot class filters:    Optional list of classes that should be included or excluded in the risk hotspots..
+        /// </summary>
+        internal static string Explanations_RiskHotspotClassFilters {
+            get {
+                return ResourceManager.GetString("Explanations_RiskHotspotClassFilters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Source directories: Optional directories which contain the corresponding source code (separated by semicolon)..
         /// </summary>
         internal static string Explanations_SourceDirectories {
@@ -310,6 +328,24 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         internal static string Parameters_ReportTypes {
             get {
                 return ResourceManager.GetString("Parameters_ReportTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [[&quot;]-riskhotspotassemblyfilters:&lt;(+|-)filter&gt;[;&lt;(+|-)filter&gt;][;&lt;(+|-)filter&gt;][&quot;]].
+        /// </summary>
+        internal static string Parameters_RiskHotspotAssemblyFilters {
+            get {
+                return ResourceManager.GetString("Parameters_RiskHotspotAssemblyFilters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [[&quot;]-riskhotspotclassfilters:&lt;(+|-)filter&gt;[;&lt;(+|-)filter&gt;][;&lt;(+|-)filter&gt;][&quot;]].
+        /// </summary>
+        internal static string Parameters_RiskHotspotClassFilters {
+            get {
+                return ResourceManager.GetString("Parameters_RiskHotspotClassFilters", resourceCulture);
             }
         }
         

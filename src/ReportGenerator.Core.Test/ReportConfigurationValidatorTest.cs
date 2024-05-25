@@ -209,6 +209,31 @@ namespace Palmmedia.ReportGenerator.Core.Test
         }
 
         [Fact]
+        public void Validate_InvalidRiskHotspotFilter_ValidationFails()
+        {
+            var configuration = new ReportConfiguration(
+                new[] { ReportPath },
+                "C:\\temp",
+                System.Array.Empty<string>(),
+                null,
+                new[] { "Latex", "Xml", "Html" },
+                System.Array.Empty<string>(),
+                new[] { "+Test", "-Test" },
+                new[] { "+Test2", "-Test2" },
+                new[] { "+Test3", "-Test3" },
+                new[] { "Test" },
+                new[] { "Test2" },
+                VerbosityLevel.Info.ToString(),
+                null,
+                null,
+                null);
+
+            var sut = new ReportConfigurationValidator(this.reportBuilderFactory);
+
+            Assert.False(sut.Validate(configuration));
+        }
+
+        [Fact]
         public void Validate_InvalidPlugin_ValidationFails()
         {
             var configuration = new ReportConfiguration(

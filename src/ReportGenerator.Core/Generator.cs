@@ -9,6 +9,7 @@ using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser;
 using Palmmedia.ReportGenerator.Core.Parser.FileReading;
+using Palmmedia.ReportGenerator.Core.Parser.Filtering;
 using Palmmedia.ReportGenerator.Core.Plugin;
 using Palmmedia.ReportGenerator.Core.Properties;
 using Palmmedia.ReportGenerator.Core.Reporting;
@@ -297,7 +298,11 @@ namespace Palmmedia.ReportGenerator.Core
             var pluginLoader = new ReflectionPluginLoader(reportConfiguration.Plugins);
             IReportBuilderFactory reportBuilderFactory = new ReportBuilderFactory(pluginLoader);
 
-            reportContext.RiskHotspotAnalysisResult = new RiskHotspotsAnalyzer(riskHotspotsAnalysisThresholds, settings.DisableRiskHotspots)
+            reportContext.RiskHotspotAnalysisResult = new RiskHotspotsAnalyzer(
+                riskHotspotsAnalysisThresholds,
+                settings.DisableRiskHotspots,
+                new DefaultFilter(reportContext.ReportConfiguration.RiskHotspotAssemblyFilters),
+                new DefaultFilter(reportContext.ReportConfiguration.RiskHotspotClassFilters))
                 .PerformRiskHotspotAnalysis(parserResult.Assemblies);
 
             var overallHistoricCoverages = new List<Parser.Analysis.HistoricCoverage>();

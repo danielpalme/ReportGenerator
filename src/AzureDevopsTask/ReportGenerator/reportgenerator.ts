@@ -13,6 +13,8 @@ async function executeReportGenerator(): Promise<number> {
     .arg('-assemblyfilters:' + (tl.getInput('assemblyfilters') || ''))
     .arg('-classfilters:' + (tl.getInput('classfilters') || ''))
     .arg('-filefilters:' + (tl.getInput('filefilters') || ''))
+    .arg('-riskhotspotassemblyfilters:' + (tl.getInput('riskhotspotassemblyfilters') || ''))
+    .arg('-riskhotspotclassfilters:' + (tl.getInput('riskhotspotclassfilters') || ''))
     .arg('-verbosity:' + (tl.getInput('verbosity') || ''))
     .arg('-title:' + (tl.getInput('title') || ''))
     .arg('-tag:' + (tl.getInput('tag') || ''))

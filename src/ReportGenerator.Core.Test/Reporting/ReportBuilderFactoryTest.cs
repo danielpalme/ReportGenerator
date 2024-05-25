@@ -100,6 +100,10 @@ namespace Palmmedia.ReportGenerator.Core.Test.Reporting
 
             public IReadOnlyCollection<string> FileFilters { get; set; }
 
+            public IReadOnlyCollection<string> RiskHotspotAssemblyFilters { get; set; }
+
+            public IReadOnlyCollection<string> RiskHotspotClassFilters { get; set; }
+
             public VerbosityLevel VerbosityLevel { get; set; }
 
             public IReadOnlyCollection<HistoricCoverage> OverallHistoricCoverages { get; set; }

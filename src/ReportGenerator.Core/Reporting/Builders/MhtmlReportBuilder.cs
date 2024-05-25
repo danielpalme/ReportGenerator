@@ -319,6 +319,16 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             public IReadOnlyCollection<string> FileFilters => this.reportConfiguration.FileFilters;
 
             /// <summary>
+            /// Gets the assembly filters for risk hotspots.
+            /// </summary>
+            public IReadOnlyCollection<string> RiskHotspotAssemblyFilters => this.reportConfiguration.RiskHotspotAssemblyFilters;
+
+            /// <summary>
+            /// Gets the class filters for risk hotspots.
+            /// </summary>
+            public IReadOnlyCollection<string> RiskHotspotClassFilters => this.reportConfiguration.RiskHotspotClassFilters;
+
+            /// <summary>
             /// Gets the verbosity level.
             /// </summary>
             public VerbosityLevel VerbosityLevel => this.reportConfiguration.VerbosityLevel;

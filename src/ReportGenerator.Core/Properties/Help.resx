@@ -156,6 +156,12 @@
   <data name="Explanations_ReportTypes" xml:space="preserve">
     <value>Report types:       The output formats and scope (separated by semicolon).</value>
   </data>
+  <data name="Explanations_RiskHotspotAssemblyFilters" xml:space="preserve">
+    <value>Risk hotspot assembly filters: Optional list of assemblies that should be included or excluded in the risk hotspots.</value>
+  </data>
+  <data name="Explanations_RiskHotspotClassFilters" xml:space="preserve">
+    <value>Risk hotspot class filters:    Optional list of classes that should be included or excluded in the risk hotspots.</value>
+  </data>
   <data name="Explanations_SourceDirectories" xml:space="preserve">
     <value>Source directories: Optional directories which contain the corresponding source code (separated by semicolon).</value>
   </data>
@@ -201,6 +207,12 @@
   </data>
   <data name="Parameters_ReportTypes" xml:space="preserve">
     <value>[["]-reporttypes:&lt;{0}&gt;[;&lt;{0}&gt;]["]]"</value>
+  </data>
+  <data name="Parameters_RiskHotspotAssemblyFilters" xml:space="preserve">
+    <value>[["]-riskhotspotassemblyfilters:&lt;(+|-)filter&gt;[;&lt;(+|-)filter&gt;][;&lt;(+|-)filter&gt;]["]]</value>
+  </data>
+  <data name="Parameters_RiskHotspotClassFilters" xml:space="preserve">
+    <value>[["]-riskhotspotclassfilters:&lt;(+|-)filter&gt;[;&lt;(+|-)filter&gt;][;&lt;(+|-)filter&gt;]["]]</value>
   </data>
   <data name="Parameters_SourceDirectories" xml:space="preserve">
     <value>[["]-sourcedirs:&lt;directory&gt;[;&lt;directory&gt;][;&lt;directory&gt;]["]]</value>

@@ -66,6 +66,16 @@ namespace Palmmedia.ReportGenerator.Core
         public const string FileFilters = "FILEFILTERS";
 
         /// <summary>
+        /// The assembly filters for risk hotspots.
+        /// </summary>
+        public const string RiskHotspotAssemblyFilters = "RISKHOTSPOTASSEMBLYFILTERS";
+
+        /// <summary>
+        /// The class filters for risk hotspots.
+        /// </summary>
+        public const string RiskHotspotClassFilters = "RISKHOTSPOTCLASSFILTERS";
+
+        /// <summary>
         /// The verbosity.
         /// </summary>
         public const string Verbosity = "VERBOSITY";

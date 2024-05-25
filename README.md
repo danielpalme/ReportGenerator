@@ -63,6 +63,8 @@ Parameters:
     [["]-assemblyfilters:<(+|-)filter>[;<(+|-)filter>][;<(+|-)filter>]["]]
     [["]-classfilters:<(+|-)filter>[;<(+|-)filter>][;<(+|-)filter>]["]]
     [["]-filefilters:<(+|-)filter>[;<(+|-)filter>][;<(+|-)filter>]["]]
+    [["]-riskhotspotassemblyfilters:<(+|-)filter>[;<(+|-)filter>][;<(+|-)filter>]["]]
+    [["]-riskhotspotclassfilters:<(+|-)filter>[;<(+|-)filter>][;<(+|-)filter>]["]]
     [["]-verbosity:<Verbose|Info|Warning|Error|Off>["]]
     [["]-title:<title>["]]
     [["]-tag:<tag>["]]
@@ -91,7 +93,9 @@ Explanations:
    Assembly filters:   Optional list of assemblies that should be included or excluded in the report.
    Class filters:      Optional list of classes that should be included or excluded in the report.
    File filters:       Optional list of files that should be included or excluded in the report.
-                       Exclusion filters take precedence over inclusion filters.                      
+   Risk hotspot assembly filters: Optional list of assemblies that should be included or excluded in the risk hotspots.
+   Risk hotspot class filters:    Optional list of classes that should be included or excluded in the risk hotspots.  
+                       Exclusion filters take precedence over inclusion filters.
                        Wildcards are allowed.
    Verbosity:          The verbosity level of the log messages.
                        Values: Verbose, Info, Warning, Error, Off
@@ -104,6 +108,8 @@ Default values:
    -assemblyfilters:+*
    -classfilters:+*
    -filefilters:+*
+   -riskhotspotassemblyfilters:+*
+   -riskhotspotclassfilters:+*
    -verbosity:Info
 
 Examples:
@@ -141,6 +147,10 @@ All the plural options can also be specified as multiple singular entries, like:
 	classfilter = -Test2
 	filefilter = +cs
 	filefilter = -vb
+  riskhotspotassemblyfilter = +Test
+	riskhotspotassemblyfilter = -Test
+	riskhotspotclassfilter = +Test2
+	riskhotspotclassfilter = -Test2
 	sourcedir = src
 	sourcedir = test
 ```

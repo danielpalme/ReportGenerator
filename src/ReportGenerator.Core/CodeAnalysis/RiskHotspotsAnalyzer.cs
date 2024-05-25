@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
+using Palmmedia.ReportGenerator.Core.Parser.Filtering;
 using Palmmedia.ReportGenerator.Core.Properties;
 
 namespace Palmmedia.ReportGenerator.Core.CodeAnalysis
@@ -21,11 +23,43 @@ namespace Palmmedia.ReportGenerator.Core.CodeAnalysis
         private readonly Dictionary<string, decimal> thresholdsByMetricName;
 
         /// <summary>
+        /// The assembly filters for risk hotspots.
+        /// </summary>
+        private readonly IFilter riskHotSpotAssemblyFilter;
+
+        /// <summary>
+        /// The class filters for risk hotspots.
+        /// </summary>
+        private readonly IFilter riskHotSpotClassFilter;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="RiskHotspotsAnalyzer"/> class.
         /// </summary>
         /// <param name="riskHotspotsAnalysisThresholds">The metric thresholds.</param>
         /// <param name="disableRiskHotspots">Indicates whether risk hotspots should be disabled or not.</param>
-        public RiskHotspotsAnalyzer(RiskHotspotsAnalysisThresholds riskHotspotsAnalysisThresholds, bool disableRiskHotspots)
+        public RiskHotspotsAnalyzer(
+            RiskHotspotsAnalysisThresholds riskHotspotsAnalysisThresholds,
+            bool disableRiskHotspots)
+            : this(
+                  riskHotspotsAnalysisThresholds,
+                  disableRiskHotspots,
+                  new DefaultFilter(Array.Empty<string>()),
+                  new DefaultFilter(Array.Empty<string>()))
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RiskHotspotsAnalyzer"/> class.
+        /// </summary>
+        /// <param name="riskHotspotsAnalysisThresholds">The metric thresholds.</param>
+        /// <param name="disableRiskHotspots">Indicates whether risk hotspots should be disabled or not.</param>
+        /// <param name="riskHotSpotAssemblyFilter">The class filter.</param>
+        /// <param name="riskHotSpotClassFilter">The file filter.</param>
+        public RiskHotspotsAnalyzer(
+            RiskHotspotsAnalysisThresholds riskHotspotsAnalysisThresholds,
+            bool disableRiskHotspots,
+            IFilter riskHotSpotAssemblyFilter,
+            IFilter riskHotSpotClassFilter)
         {
             this.disabled = disableRiskHotspots;
 
@@ -35,6 +69,9 @@ namespace Palmmedia.ReportGenerator.Core.CodeAnalysis
                 { ReportResources.NPathComplexity, riskHotspotsAnalysisThresholds.MetricThresholdForNPathComplexity },
                 { ReportResources.CrapScore, riskHotspotsAnalysisThresholds.MetricThresholdForCrapScore }
             };
+
+            this.riskHotSpotAssemblyFilter = riskHotSpotAssemblyFilter;
+            this.riskHotSpotClassFilter = riskHotSpotClassFilter;
         }
 
         /// <summary>
@@ -55,9 +92,9 @@ namespace Palmmedia.ReportGenerator.Core.CodeAnalysis
 
             bool codeCodeQualityMetricsAvailable = false;
 
-            foreach (var assembly in assemblies)
+            foreach (var assembly in assemblies.Where(c => this.riskHotSpotAssemblyFilter.IsElementIncludedInReport(c.Name)))
             {
-                foreach (var clazz in assembly.Classes)
+                foreach (var clazz in assembly.Classes.Where(c => this.riskHotSpotClassFilter.IsElementIncludedInReport(c.Name)))
                 {
                     int fileIndex = 0;
 

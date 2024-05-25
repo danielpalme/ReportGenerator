@@ -57,6 +57,9 @@ namespace Palmmedia.ReportGenerator.Core
             Console.WriteLine("    " + Properties.Help.Parameters_AssemblyFilters);
             Console.WriteLine("    " + Properties.Help.Parameters_ClassFilters);
             Console.WriteLine("    " + Properties.Help.Parameters_FileFilters);
+            Console.WriteLine("    " + Properties.Help.Parameters_FileFilters);
+            Console.WriteLine("    " + Properties.Help.Parameters_RiskHotspotAssemblyFilters);
+            Console.WriteLine("    " + Properties.Help.Parameters_RiskHotspotClassFilters);
             Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "    " + Properties.Help.Parameters_Verbosity, string.Join("|", Enum.GetNames(typeof(VerbosityLevel)))));
             Console.WriteLine("    " + Properties.Help.Parameters_Title);
             Console.WriteLine("    " + Properties.Help.Parameters_Tag);
@@ -76,6 +79,8 @@ namespace Palmmedia.ReportGenerator.Core
             Console.WriteLine("    " + Properties.Help.Explanations_AssemblyFilters);
             Console.WriteLine("    " + Properties.Help.Explanations_ClassFilters);
             Console.WriteLine("    " + Properties.Help.Explanations_FileFilters);
+            Console.WriteLine("    " + Properties.Help.Explanations_RiskHotspotAssemblyFilters);
+            Console.WriteLine("    " + Properties.Help.Explanations_RiskHotspotClassFilters);
             Console.WriteLine("    " + Properties.Help.Explanations_FiltersCommon);
             Console.WriteLine("    " + Properties.Help.Explanations_Verbosity);
             Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "    " + Properties.Help.VerbosityValues, string.Join(", ", Enum.GetNames(typeof(VerbosityLevel)))));
@@ -89,6 +94,8 @@ namespace Palmmedia.ReportGenerator.Core
             Console.WriteLine("   -assemblyfilters:+*");
             Console.WriteLine("   -classfilters:+*");
             Console.WriteLine("   -filefilters:+*");
+            Console.WriteLine("   -riskhotspotassemblyfilters:+*");
+            Console.WriteLine("   -riskhotspotclassfilters:+*");
             Console.WriteLine("   -verbosity:" + VerbosityLevel.Info);
 
             Console.WriteLine();

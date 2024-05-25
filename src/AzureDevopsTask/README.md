@@ -25,6 +25,8 @@ To learn how to use *ReportGenerator* have a look at the:
     assemblyfilters: '+*' # Optional list of assemblies that should be included or excluded in the report. Exclusion filters take precedence over inclusion filters. Wildcards are allowed.
     classfilters: '+*' # Optional list of classes that should be included or excluded in the report. Exclusion filters take precedence over inclusion filters. Wildcards are allowed.
     filefilters: '+*' # Optional list of files that should be included or excluded in the report. Exclusion filters take precedence over inclusion filters. Wildcards are allowed.
+    riskhotspotassemblyfilters: '+*' # Optional list of assemblies that should be included or excluded in the risk hotspots. Exclusion filters take precedence over inclusion filters. Wildcards are allowed.
+    riskhotspotclassfilters: '+*' # Optional list of classes that should be included or excluded in the risk hotspots. Exclusion filters take precedence over inclusion filters. Wildcards are allowed.
     verbosity: 'Info' # The verbosity level of the log messages. Values: Verbose, Info, Warning, Error, Off
     title: '' # Optional title.
     tag: '$(build.buildnumber)_#$(build.buildid)' # Optional tag or build version.

@@ -153,6 +153,50 @@ namespace Palmmedia.ReportGenerator.Core
                 }
             }
 
+            foreach (var filter in reportConfiguration.ClassFilters)
+            {
+                if (string.IsNullOrEmpty(filter)
+                    || (!filter.StartsWith("+", StringComparison.OrdinalIgnoreCase)
+                        && !filter.StartsWith("-", StringComparison.OrdinalIgnoreCase)))
+                {
+                    Logger.ErrorFormat(Resources.InvalidFilter, filter);
+                    result &= false;
+                }
+            }
+
+            foreach (var filter in reportConfiguration.FileFilters)
+            {
+                if (string.IsNullOrEmpty(filter)
+                    || (!filter.StartsWith("+", StringComparison.OrdinalIgnoreCase)
+                        && !filter.StartsWith("-", StringComparison.OrdinalIgnoreCase)))
+                {
+                    Logger.ErrorFormat(Resources.InvalidFilter, filter);
+                    result &= false;
+                }
+            }
+
+            foreach (var filter in reportConfiguration.RiskHotspotAssemblyFilters)
+            {
+                if (string.IsNullOrEmpty(filter)
+                    || (!filter.StartsWith("+", StringComparison.OrdinalIgnoreCase)
+                        && !filter.StartsWith("-", StringComparison.OrdinalIgnoreCase)))
+                {
+                    Logger.ErrorFormat(Resources.InvalidFilter, filter);
+                    result &= false;
+                }
+            }
+
+            foreach (var filter in reportConfiguration.RiskHotspotClassFilters)
+            {
+                if (string.IsNullOrEmpty(filter)
+                    || (!filter.StartsWith("+", StringComparison.OrdinalIgnoreCase)
+                        && !filter.StartsWith("-", StringComparison.OrdinalIgnoreCase)))
+                {
+                    Logger.ErrorFormat(Resources.InvalidFilter, filter);
+                    result &= false;
+                }
+            }
+
             if (!reportConfiguration.VerbosityLevelValid)
             {
                 Logger.Error(Resources.UnknownVerbosityLevel);

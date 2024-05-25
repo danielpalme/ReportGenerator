@@ -37,6 +37,8 @@ namespace Palmmedia.ReportGenerator.Core
             var assemblyFilters = Array.Empty<string>();
             var classFilters = Array.Empty<string>();
             var fileFilters = Array.Empty<string>();
+            var riskHotspotAssemblyFilters = Array.Empty<string>();
+            var riskHotspotClassFilters = Array.Empty<string>();
             string verbosityLevel = null;
             string tag = null;
             string title = null;
@@ -189,6 +191,40 @@ namespace Palmmedia.ReportGenerator.Core
                     .ToArray();
             }
 
+            if (namedArguments.TryGetValue(CommandLineArgumentNames.RiskHotspotAssemblyFilters, out value))
+            {
+                riskHotspotAssemblyFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            }
+            else if (config.TryGetString(DotNetConfigSettingNames.RiskHotspotAssemblyFilters, out value))
+            {
+                riskHotspotAssemblyFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            }
+            else
+            {
+                riskHotspotAssemblyFilters = config
+                    .GetAll(DotNetConfigSettingNames.RiskHotspotAssemblyFilter)
+                    .Select(x => x.RawValue)
+                    .Where(x => !string.IsNullOrEmpty(x))
+                    .ToArray();
+            }
+
+            if (namedArguments.TryGetValue(CommandLineArgumentNames.RiskHotspotClassFilters, out value))
+            {
+                riskHotspotClassFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            }
+            else if (config.TryGetString(DotNetConfigSettingNames.RiskHotspotClassFilters, out value))
+            {
+                riskHotspotClassFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            }
+            else
+            {
+                riskHotspotClassFilters = config
+                    .GetAll(DotNetConfigSettingNames.RiskHotspotClassFilter)
+                    .Select(x => x.RawValue)
+                    .Where(x => !string.IsNullOrEmpty(x))
+                    .ToArray();
+            }
+
             if (namedArguments.TryGetValue(CommandLineArgumentNames.Verbosity, out value))
             {
                 verbosityLevel = value;
@@ -235,6 +271,8 @@ namespace Palmmedia.ReportGenerator.Core
                 assemblyFilters,
                 classFilters,
                 fileFilters,
+                riskHotspotAssemblyFilters,
+                riskHotspotClassFilters,
                 verbosityLevel,
                 tag,
                 title,

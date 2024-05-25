@@ -103,6 +103,22 @@ namespace Palmmedia.ReportGenerator.MSBuild
         public ITaskItem[] FileFilters { get; set; } = Array.Empty<ITaskItem>();
 
         /// <summary>
+        /// Gets or sets the assembly filters for risk hotspots.
+        /// </summary>
+        /// <value>
+        /// The assembly filters for risk hotspots.
+        /// </value>
+        public ITaskItem[] RiskHotspotAssemblyFilters { get; set; } = Array.Empty<ITaskItem>();
+
+        /// <summary>
+        /// Gets or sets the class filters for risk hotspots.
+        /// </summary>
+        /// <value>
+        /// The class filters for risk hotspots.
+        /// </value>
+        public ITaskItem[] RiskHotspotClassFilters { get; set; } = Array.Empty<ITaskItem>();
+
+        /// <summary>
         /// Gets or sets the verbosity level.
         /// </summary>
         /// <value>
@@ -153,6 +169,8 @@ namespace Palmmedia.ReportGenerator.MSBuild
             var assemblyFilters = Array.Empty<string>();
             var classFilters = Array.Empty<string>();
             var fileFilters = Array.Empty<string>();
+            var riskHotspotAssemblyFilters = Array.Empty<string>();
+            var riskHotspotClassFilters = Array.Empty<string>();
             string verbosityLevel = VerbosityLevel;
             string tag = Tag;
             string title = Title;
@@ -308,6 +326,40 @@ namespace Palmmedia.ReportGenerator.MSBuild
                     .ToArray();
             }
 
+            if (RiskHotspotAssemblyFilters.Length > 0)
+            {
+                riskHotspotAssemblyFilters = RiskHotspotAssemblyFilters.Select(r => r.ItemSpec).ToArray();
+            }
+            else if (config.TryGetString(DotNetConfigSettingNames.RiskHotspotAssemblyFilters, out value))
+            {
+                riskHotspotAssemblyFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            }
+            else
+            {
+                riskHotspotAssemblyFilters = config
+                    .GetAll(DotNetConfigSettingNames.RiskHotspotAssemblyFilter)
+                    .Select(x => x.RawValue)
+                    .Where(x => !string.IsNullOrEmpty(x))
+                    .ToArray();
+            }
+
+            if (RiskHotspotClassFilters.Length > 0)
+            {
+                riskHotspotClassFilters = RiskHotspotClassFilters.Select(r => r.ItemSpec).ToArray();
+            }
+            else if (config.TryGetString(DotNetConfigSettingNames.RiskHotspotClassFilters, out value))
+            {
+                riskHotspotClassFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            }
+            else
+            {
+                riskHotspotClassFilters = config
+                    .GetAll(DotNetConfigSettingNames.RiskHotspotClassFilter)
+                    .Select(x => x.RawValue)
+                    .Where(x => !string.IsNullOrEmpty(x))
+                    .ToArray();
+            }
+
             if (string.IsNullOrEmpty(verbosityLevel) &&
                 config.TryGetString(DotNetConfigSettingNames.Verbosity, out value))
             {
@@ -342,6 +394,8 @@ namespace Palmmedia.ReportGenerator.MSBuild
                 assemblyFilters,
                 classFilters,
                 fileFilters,
+                riskHotspotAssemblyFilters,
+                riskHotspotClassFilters,
                 verbosityLevel,
                 tag,
                 title,

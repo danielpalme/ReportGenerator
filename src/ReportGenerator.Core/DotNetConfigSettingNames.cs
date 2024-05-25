@@ -91,6 +91,26 @@
         public const string FileFilter = "filefilter";
 
         /// <summary>
+        /// The assembly filters for risk hotspots.
+        /// </summary>
+        public const string RiskHotspotAssemblyFilters = "riskhotspotassemblyfilters";
+
+        /// <summary>
+        /// Single assembly filter for risk hotspots.
+        /// </summary>
+        public const string RiskHotspotAssemblyFilter = "riskhotspotassemblyfilter";
+
+        /// <summary>
+        /// Class filters for risk hotspots.
+        /// </summary>
+        public const string RiskHotspotClassFilters = "riskhotspotclassfilters";
+
+        /// <summary>
+        /// Single class filters for risk hotspots.
+        /// </summary>
+        public const string RiskHotspotClassFilter = "riskhotspotclassfilter";
+
+        /// <summary>
         /// The verbosity.
         /// </summary>
         public const string Verbosity = "verbosity";

@@ -92,6 +92,22 @@
             "helpMarkDown": "Optional list of files that should be included or excluded in the report. Exclusion filters take precedence over inclusion filters. Wildcards are allowed."
         },
         {
+            "name": "riskhotspotassemblyfilters",
+            "type": "string",
+            "label": "Assembly filters for risk hotspots",
+            "defaultValue": "+*",
+            "required": false,
+            "helpMarkDown": "Optional list of assemblies that should be included or excluded in the risk hotspots. Exclusion filters take precedence over inclusion filters. Wildcards are allowed."
+        },
+        {
+            "name": "riskhotspotclassfilters",
+            "type": "string",
+            "label": "Class filters for risk hotspots",
+            "defaultValue": "+*",
+            "required": false,
+            "helpMarkDown": "Optional list of classes that should be included or excluded in the risk hotspots. Exclusion filters take precedence over inclusion filters. Wildcards are allowed."
+        },
+        {
             "name": "verbosity",
             "type": "pickList",
             "label": "Verbosity",

@@ -195,6 +195,8 @@ namespace Palmmedia.ReportGenerator.Core
         /// <param name="assemblyFilters">The assembly filters.</param>
         /// <param name="classFilters">The class filters.</param>
         /// <param name="fileFilters">The file filters.</param>
+        /// <param name="riskHotspotAssemblyFilters">The assembly filters for risk hotspots.</param>
+        /// <param name="riskHotspotClassFilters">The class filters for risk hotspots.</param>
         /// <param name="verbosityLevel">The verbosity level.</param>
         /// <param name="tag">The custom tag (e.g. build number).</param>
         /// <param name="title">The custom title.</param>
@@ -209,12 +211,26 @@ namespace Palmmedia.ReportGenerator.Core
             IEnumerable<string> assemblyFilters,
             IEnumerable<string> classFilters,
             IEnumerable<string> fileFilters,
+            IEnumerable<string> riskHotspotAssemblyFilters,
+            IEnumerable<string> riskHotspotClassFilters,
             string verbosityLevel,
             string tag,
             string title,
             string license)
             : this(reportFilePatterns, targetDirectory, sourceDirectories, historyDirectory, reportTypes, plugins, assemblyFilters, classFilters, fileFilters, verbosityLevel, tag, title)
         {
+            if (riskHotspotAssemblyFilters == null)
+            {
+                throw new ArgumentNullException(nameof(riskHotspotAssemblyFilters));
+            }
+
+            if (riskHotspotClassFilters == null)
+            {
+                throw new ArgumentNullException(nameof(riskHotspotClassFilters));
+            }
+
+            this.RiskHotspotAssemblyFilters = riskHotspotAssemblyFilters.ToList();
+            this.RiskHotspotClassFilters = riskHotspotClassFilters.ToList();
             this.License = license;
         }
 
@@ -262,6 +278,16 @@ namespace Palmmedia.ReportGenerator.Core
         /// Gets the file filters.
         /// </summary>
         public IReadOnlyCollection<string> FileFilters { get; }
+
+        /// <summary>
+        /// Gets the assembly filters for risk hotspots.
+        /// </summary>
+        public IReadOnlyCollection<string> RiskHotspotAssemblyFilters { get; } = new List<string>();
+
+        /// <summary>
+        /// Gets the class filters for risk hotspots.
+        /// </summary>
+        public IReadOnlyCollection<string> RiskHotspotClassFilters { get; } = new List<string>();
 
         /// <summary>
         /// Gets the verbosity level.
