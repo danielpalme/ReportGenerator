@@ -252,6 +252,8 @@ namespace Palmmedia.ReportGenerator.Core
                 title = value;
             }
 
+            string licenseFromEnviroment = Environment.GetEnvironmentVariable("REPORTGENERATOR_LICENSE");
+
             if (namedArguments.TryGetValue(CommandLineArgumentNames.License, out value))
             {
                 license = value;
@@ -259,6 +261,10 @@ namespace Palmmedia.ReportGenerator.Core
             else if (config.TryGetString(DotNetConfigSettingNames.License, out value))
             {
                 license = value;
+            }
+            else if (licenseFromEnviroment != null)
+            {
+                license = licenseFromEnviroment;
             }
 
             return new ReportConfiguration(

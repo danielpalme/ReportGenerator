@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.3.5.0
+
+    * New: #674: License can now be supplied via the REPORTGENERATOR_LICENSE environment variable
+
 5.3.4.0
 
     * New: #664: Added filter options for risk hotspots: '-riskhotspotassemblyfilters:', '-riskhotspotclassfilters:'
