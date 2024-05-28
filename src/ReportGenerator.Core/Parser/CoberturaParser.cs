@@ -153,6 +153,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                     if (fullname.Contains("<"))
                     {
+                        if (fullname.Contains("__")
+                            || fullname.Contains(".<>"))
+                        {
+                            return Tuple.Create(string.Empty, string.Empty);
+                        }
+
                         var match = AsyncClassRegex.Match(fullname);
 
                         if (match.Success)
@@ -166,7 +172,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     return Tuple.Create(fullname, fullname);
                 })
                 .Where(c => this.RawMode
-                    || (!c.Item1.Contains("$")
+                    || (c.Item1 != string.Empty
+                        && !c.Item1.Contains("$")
                         && (!c.Item1.Contains("<") || GenericClassRegex.IsMatch(c.Item1))))
                 .Distinct()
                 .Where(c => this.ClassFilter.IsElementIncludedInReport(c.Item1))
