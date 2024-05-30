@@ -82,7 +82,7 @@ namespace Palmmedia.ReportGenerator.Core
         public string HistoryFileNamePrefix { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether class names are interpreted (true) or not (false).
+        /// Gets or sets a value indicating whether class names are interpreted (false) or not (true).
         /// Interpreted means that the coverage data of nested or compiler generated classes is included in the parent class.
         /// In raw mode the coverage data is reported for each class separately.
         /// </summary>
