@@ -13,7 +13,7 @@ namespace Palmmedia.ReportGenerator.Core.Common
         /// <summary>
         /// Gets a full error message especially for <see cref="AggregateException"/>.
         /// </summary>
-        /// <param name="exception">The exception</param>
+        /// <param name="exception">The exception.</param>
         /// <returns>The error message.</returns>
         public static string GetExceptionMessageForDisplay(this Exception exception)
         {

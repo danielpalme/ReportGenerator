@@ -6,6 +6,9 @@ using Palmmedia.ReportGenerator.Core.Properties;
 
 namespace Palmmedia.ReportGenerator.Core
 {
+    /// <summary>
+    /// Validates the coverage thresholds.
+    /// </summary>
     public class MinimumCoverageThresholdsValidator
     {
         /// <summary>

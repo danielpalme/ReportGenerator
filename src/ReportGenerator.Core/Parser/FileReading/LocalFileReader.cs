@@ -15,7 +15,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
     internal class LocalFileReader : IFileReader
     {
         /// <summary>
-        /// Regex to analyze if a path is a deterministic path
+        /// Regex to analyze if a path is a deterministic path.
         /// </summary>
         private static readonly Regex DeterministicPathRegex = new Regex("\\/_\\d?\\/", RegexOptions.Compiled);
 

@@ -4,8 +4,8 @@
     <TargetFramework>net7.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <RootNamespace>Palmmedia.ReportGenerator.Core.Test</RootNamespace>
-    <AssemblyVersion>5.3.4.0</AssemblyVersion>
-    <FileVersion>5.3.4.0</FileVersion>
+    <AssemblyVersion>5.3.5.0</AssemblyVersion>
+    <FileVersion>5.3.5.0</FileVersion>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
   
@@ -14,10 +14,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
     <PackageReference Include="NSubstitute" Version="5.1.0" />
-    <PackageReference Include="xunit" Version="2.7.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.7">
+    <PackageReference Include="xunit" Version="2.8.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>

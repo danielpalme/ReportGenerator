@@ -66,7 +66,7 @@ namespace Palmmedia.ReportGenerator.Core.Common
         /// <typeparam name="TSource">The type of source elements.</typeparam>
         /// <typeparam name="TKey">The type of the key elements.</typeparam>
         /// <param name="source">The source collection.</param>
-        /// <param name="keySelector">The key selector</param>
+        /// <param name="keySelector">The key selector.</param>
         /// <returns>The distinct elemtents.</returns>
         internal static IEnumerable<TSource> DistinctBy<TSource, TKey>(
             this IEnumerable<TSource> source,
