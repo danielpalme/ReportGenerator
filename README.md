@@ -32,7 +32,8 @@ ReportGenerator supports merging several coverage files into a single report.
 
 ## License
 - ReportGenerator is licensed under the [Apache License, Version 2.0](https://opensource.org/licenses/Apache-2.0)
-- You can support the project by buying a [PRO license](https://reportgenerator.io/pro) or by becoming a [GitHub sponsor](https://github.com/sponsors/danielpalme). Sponsors have exclusive access to [additional features](https://reportgenerator.io/pro).
+- You can support the project by buying a [PRO license](https://reportgenerator.io/pro) or by becoming a [GitHub sponsor](https://github.com/sponsors/danielpalme).  
+Sponsors have exclusive access to [additional features](https://reportgenerator.io/pro).
 
 ## Getting started
 *ReportGenerator* is a commandline tool which works with full .NET Framework and .NET Core.  
