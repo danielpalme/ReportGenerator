@@ -32,7 +32,7 @@ ReportGenerator supports merging several coverage files into a single report.
 
 ## License
 - ReportGenerator is licensed under the [Apache License, Version 2.0](https://opensource.org/licenses/Apache-2.0)
-- You can support the project by becoming a sponsor. Sponsors have exclusive access to [additional features](https://reportgenerator.io/pro).
+- You can support the project by buying a [PRO license](https://reportgenerator.io/pro) or by becoming a [GitHub sponsor](https://github.com/sponsors/danielpalme). Sponsors have exclusive access to [additional features](https://reportgenerator.io/pro).
 
 ## Getting started
 *ReportGenerator* is a commandline tool which works with full .NET Framework and .NET Core.  
@@ -102,6 +102,7 @@ Explanations:
    Title:              Optional title.
    Tag:                Optional tag or build version.
    License:            Optional license for PRO version. Get your license here: https://reportgenerator.io/pro
+                       License can also be supplied via 'REPORTGENERATOR_LICENSE' environment variable.
 
 Default values:
    -reporttypes:Html
@@ -147,7 +148,7 @@ All the plural options can also be specified as multiple singular entries, like:
 	classfilter = -Test2
 	filefilter = +cs
 	filefilter = -vb
-  riskhotspotassemblyfilter = +Test
+	riskhotspotassemblyfilter = +Test
 	riskhotspotassemblyfilter = -Test
 	riskhotspotclassfilter = +Test2
 	riskhotspotclassfilter = -Test2
