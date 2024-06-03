@@ -26,7 +26,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <returns>The parser result.</returns>
         public static ClassNameParserResult ParseClassName(string rawName, bool rawMode)
         {
-            if (string.IsNullOrEmpty(rawName))
+            if (rawName == null)
             {
                 throw new ArgumentNullException(nameof(rawName));
             }
