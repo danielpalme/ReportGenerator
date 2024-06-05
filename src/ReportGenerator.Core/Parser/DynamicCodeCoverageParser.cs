@@ -70,7 +70,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             foreach (var module in modules)
             {
-                assemblies.Add(this.ProcessAssembly(module));
+                var assembly = this.ProcessAssembly(module);
+                if (assembly.Classes.Any())
+                {
+                    assemblies.Add(assembly);
+                }
             }
 
             var result = new ParserResult(assemblies.OrderBy(a => a.Name).ToList(), false, this.ToString());

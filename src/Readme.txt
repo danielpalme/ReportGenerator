@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.3.7.0
+
+    * Fix: Exclude empty modules/assemblies from reports
+
 5.3.6.0
 
     * Fix: #676: Fixed issue with Cobertura files with empty class names
