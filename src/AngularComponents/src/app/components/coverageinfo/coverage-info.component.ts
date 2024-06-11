@@ -122,62 +122,62 @@ import { Helper } from "./viewmodels/helper.class";
             <td class="center" [attr.colspan]="settings.visibleMetrics.length" *ngIf="settings.visibleMetrics.length > 0"></td>
           </tr>
           <tr>
-            <th><a href="#" (click)="updateSorting('name', $event)"><i class="icon-down-dir"
-              [ngClass]="{'icon-up-dir_active': settings.sortBy === 'name' && settings.sortOrder === 'desc',
-              'icon-down-dir_active': settings.sortBy === 'name' && settings.sortOrder === 'asc',
-              'icon-down-dir': settings.sortBy !== 'name'}"></i>{{translations.name}}</a></th>
-            <th class="right" *ngIf="settings.showLineCoverage"><a href="#" (click)="updateSorting('covered', $event)"><i class="icon-down-dir"
-              [ngClass]="{'icon-up-dir_active': settings.sortBy === 'covered' && settings.sortOrder === 'desc',
-              'icon-down-dir_active': settings.sortBy === 'covered' && settings.sortOrder === 'asc',
-              'icon-down-dir': settings.sortBy !== 'covered'}"></i>{{translations.covered}}</a></th>
-            <th class="right" *ngIf="settings.showLineCoverage"><a href="#" (click)="updateSorting('uncovered', $event)"><i class="icon-down-dir"
-              [ngClass]="{'icon-up-dir_active': settings.sortBy === 'uncovered' && settings.sortOrder === 'desc',
-              'icon-down-dir_active': settings.sortBy === 'uncovered' && settings.sortOrder === 'asc',
-              'icon-down-dir': settings.sortBy !== 'uncovered'}"></i>{{translations.uncovered}}</a></th>
-            <th class="right" *ngIf="settings.showLineCoverage"><a href="#" (click)="updateSorting('coverable', $event)"><i class="icon-down-dir"
-                [ngClass]="{'icon-up-dir_active': settings.sortBy === 'coverable' && settings.sortOrder === 'desc',
-                'icon-down-dir_active': settings.sortBy === 'coverable' && settings.sortOrder === 'asc',
-                'icon-down-dir': settings.sortBy !== 'coverable'}"></i>{{translations.coverable}}</a></th>
-            <th class="right" *ngIf="settings.showLineCoverage"><a href="#" (click)="updateSorting('total', $event)"><i class="icon-down-dir"
-                [ngClass]="{'icon-up-dir_active': settings.sortBy === 'total' && settings.sortOrder === 'desc',
-                'icon-down-dir_active': settings.sortBy === 'total' && settings.sortOrder === 'asc',
-                'icon-down-dir': settings.sortBy !== 'total'}"></i>{{translations.total}}</a></th>
+            <th><a href="#" (click)="updateSorting('name', $event)"><i class="icon-up-dir"
+              [ngClass]="{'icon-up-dir_active': settings.sortBy === 'name' && settings.sortOrder === 'asc',
+              'icon-down-dir_active': settings.sortBy === 'name' && settings.sortOrder === 'desc',
+              'icon-up-dir': settings.sortBy !== 'name'}"></i>{{translations.name}}</a></th>
+            <th class="right" *ngIf="settings.showLineCoverage"><a href="#" (click)="updateSorting('covered', $event)"><i class="icon-up-dir"
+              [ngClass]="{'icon-up-dir_active': settings.sortBy === 'covered' && settings.sortOrder === 'asc',
+              'icon-down-dir_active': settings.sortBy === 'covered' && settings.sortOrder === 'desc',
+              'icon-up-dir': settings.sortBy !== 'covered'}"></i>{{translations.covered}}</a></th>
+            <th class="right" *ngIf="settings.showLineCoverage"><a href="#" (click)="updateSorting('uncovered', $event)"><i class="icon-up-dir"
+              [ngClass]="{'icon-up-dir_active': settings.sortBy === 'uncovered' && settings.sortOrder === 'asc',
+              'icon-down-dir_active': settings.sortBy === 'uncovered' && settings.sortOrder === 'desc',
+              'icon-up-dir': settings.sortBy !== 'uncovered'}"></i>{{translations.uncovered}}</a></th>
+            <th class="right" *ngIf="settings.showLineCoverage"><a href="#" (click)="updateSorting('coverable', $event)"><i class="icon-up-dir"
+                [ngClass]="{'icon-up-dir_active': settings.sortBy === 'coverable' && settings.sortOrder === 'asc',
+                'icon-down-dir_active': settings.sortBy === 'coverable' && settings.sortOrder === 'desc',
+                'icon-up-dir': settings.sortBy !== 'coverable'}"></i>{{translations.coverable}}</a></th>
+            <th class="right" *ngIf="settings.showLineCoverage"><a href="#" (click)="updateSorting('total', $event)"><i class="icon-up-dir"
+                [ngClass]="{'icon-up-dir_active': settings.sortBy === 'total' && settings.sortOrder === 'asc',
+                'icon-down-dir_active': settings.sortBy === 'total' && settings.sortOrder === 'desc',
+                'icon-up-dir': settings.sortBy !== 'total'}"></i>{{translations.total}}</a></th>
             <th class="center" colspan="2" *ngIf="settings.showLineCoverage">
-                <a href="#" (click)="updateSorting('coverage', $event)"><i class="icon-down-dir"
-                  [ngClass]="{'icon-up-dir_active': settings.sortBy === 'coverage' && settings.sortOrder === 'desc',
-                  'icon-down-dir_active': settings.sortBy === 'coverage' && settings.sortOrder === 'asc',
-                  'icon-down-dir': settings.sortBy !== 'coverage'}"></i>{{translations.percentage}}</a></th>
-            <th class="right" *ngIf="branchCoverageAvailable && settings.showBranchCoverage"><a href="#" (click)="updateSorting('covered_branches', $event)"><i class="icon-down-dir"
-              [ngClass]="{'icon-up-dir_active': settings.sortBy === 'covered_branches' && settings.sortOrder === 'desc',
-              'icon-down-dir_active': settings.sortBy === 'covered_branches' && settings.sortOrder === 'asc',
-              'icon-down-dir': settings.sortBy !== 'covered_branches'}"></i>{{translations.covered}}</a></th>
-            <th class="right" *ngIf="branchCoverageAvailable && settings.showBranchCoverage"><a href="#" (click)="updateSorting('total_branches', $event)"><i class="icon-down-dir"
-                [ngClass]="{'icon-up-dir_active': settings.sortBy === 'total_branches' && settings.sortOrder === 'desc',
-                'icon-down-dir_active': settings.sortBy === 'total_branches' && settings.sortOrder === 'asc',
-                'icon-down-dir': settings.sortBy !== 'total_branches'}"></i>{{translations.total}}</a></th>
+                <a href="#" (click)="updateSorting('coverage', $event)"><i class="icon-up-dir"
+                  [ngClass]="{'icon-up-dir_active': settings.sortBy === 'coverage' && settings.sortOrder === 'asc',
+                  'icon-down-dir_active': settings.sortBy === 'coverage' && settings.sortOrder === 'desc',
+                  'icon-up-dir': settings.sortBy !== 'coverage'}"></i>{{translations.percentage}}</a></th>
+            <th class="right" *ngIf="branchCoverageAvailable && settings.showBranchCoverage"><a href="#" (click)="updateSorting('covered_branches', $event)"><i class="icon-up-dir"
+              [ngClass]="{'icon-up-dir_active': settings.sortBy === 'covered_branches' && settings.sortOrder === 'asc',
+              'icon-down-dir_active': settings.sortBy === 'covered_branches' && settings.sortOrder === 'desc',
+              'icon-up-dir': settings.sortBy !== 'covered_branches'}"></i>{{translations.covered}}</a></th>
+            <th class="right" *ngIf="branchCoverageAvailable && settings.showBranchCoverage"><a href="#" (click)="updateSorting('total_branches', $event)"><i class="icon-up-dir"
+                [ngClass]="{'icon-up-dir_active': settings.sortBy === 'total_branches' && settings.sortOrder === 'asc',
+                'icon-down-dir_active': settings.sortBy === 'total_branches' && settings.sortOrder === 'desc',
+                'icon-up-dir': settings.sortBy !== 'total_branches'}"></i>{{translations.total}}</a></th>
             <th class="center" colspan="2" *ngIf="branchCoverageAvailable && settings.showBranchCoverage">
-                <a href="#" (click)="updateSorting('branchcoverage', $event)"><i class="icon-down-dir"
-                  [ngClass]="{'icon-up-dir_active': settings.sortBy === 'branchcoverage' && settings.sortOrder === 'desc',
-                  'icon-down-dir_active': settings.sortBy === 'branchcoverage' && settings.sortOrder === 'asc',
-                  'icon-down-dir': settings.sortBy !== 'branchcoverage'}"></i>{{translations.percentage}}</a></th>
-            <th class="right" *ngIf="methodCoverageAvailable && settings.showMethodCoverage"><a href="#" (click)="updateSorting('covered_methods', $event)"><i class="icon-down-dir"
-              [ngClass]="{'icon-up-dir_active': settings.sortBy === 'covered_methods' && settings.sortOrder === 'desc',
-              'icon-down-dir_active': settings.sortBy === 'covered_methods' && settings.sortOrder === 'asc',
-              'icon-down-dir': settings.sortBy !== 'covered_methods'}"></i>{{translations.covered}}</a></th>
-            <th class="right" *ngIf="methodCoverageAvailable && settings.showMethodCoverage"><a href="#" (click)="updateSorting('total_methods', $event)"><i class="icon-down-dir"
-                [ngClass]="{'icon-up-dir_active': settings.sortBy === 'total_methods' && settings.sortOrder === 'desc',
-                'icon-down-dir_active': settings.sortBy === 'total_methods' && settings.sortOrder === 'asc',
-                'icon-down-dir': settings.sortBy !== 'total_methods'}"></i>{{translations.total}}</a></th>
+                <a href="#" (click)="updateSorting('branchcoverage', $event)"><i class="icon-up-dir"
+                  [ngClass]="{'icon-up-dir_active': settings.sortBy === 'branchcoverage' && settings.sortOrder === 'asc',
+                  'icon-down-dir_active': settings.sortBy === 'branchcoverage' && settings.sortOrder === 'desc',
+                  'icon-up-dir': settings.sortBy !== 'branchcoverage'}"></i>{{translations.percentage}}</a></th>
+            <th class="right" *ngIf="methodCoverageAvailable && settings.showMethodCoverage"><a href="#" (click)="updateSorting('covered_methods', $event)"><i class="icon-up-dir"
+              [ngClass]="{'icon-up-dir_active': settings.sortBy === 'covered_methods' && settings.sortOrder === 'asc',
+              'icon-down-dir_active': settings.sortBy === 'covered_methods' && settings.sortOrder === 'desc',
+              'icon-up-dir': settings.sortBy !== 'covered_methods'}"></i>{{translations.covered}}</a></th>
+            <th class="right" *ngIf="methodCoverageAvailable && settings.showMethodCoverage"><a href="#" (click)="updateSorting('total_methods', $event)"><i class="icon-up-dir"
+                [ngClass]="{'icon-up-dir_active': settings.sortBy === 'total_methods' && settings.sortOrder === 'asc',
+                'icon-down-dir_active': settings.sortBy === 'total_methods' && settings.sortOrder === 'desc',
+                'icon-up-dir': settings.sortBy !== 'total_methods'}"></i>{{translations.total}}</a></th>
             <th class="center" colspan="2" *ngIf="methodCoverageAvailable && settings.showMethodCoverage">
-                <a href="#" (click)="updateSorting('methodcoverage', $event)"><i class="icon-down-dir"
-                  [ngClass]="{'icon-up-dir_active': settings.sortBy === 'methodcoverage' && settings.sortOrder === 'desc',
-                  'icon-down-dir_active': settings.sortBy === 'methodcoverage' && settings.sortOrder === 'asc',
-                  'icon-down-dir': settings.sortBy !== 'methodcoverage'}"></i>{{translations.percentage}}</a></th>
+                <a href="#" (click)="updateSorting('methodcoverage', $event)"><i class="icon-up-dir"
+                  [ngClass]="{'icon-up-dir_active': settings.sortBy === 'methodcoverage' && settings.sortOrder === 'asc',
+                  'icon-down-dir_active': settings.sortBy === 'methodcoverage' && settings.sortOrder === 'desc',
+                  'icon-up-dir': settings.sortBy !== 'methodcoverage'}"></i>{{translations.percentage}}</a></th>
             <th *ngFor="let metric of settings.visibleMetrics">
-              <a href="#" (click)="updateSorting(metric.abbreviation, $event)"><i class="icon-down-dir"
-                  [ngClass]="{'icon-up-dir_active': settings.sortBy === metric.abbreviation && settings.sortOrder === 'desc',
-                  'icon-down-dir_active': settings.sortBy === metric.abbreviation && settings.sortOrder === 'asc',
-                  'icon-down-dir': settings.sortBy !== metric.abbreviation}"></i>{{metric.name}}</a><a href="{{metric.explanationUrl}}" target="_blank"><i class="icon-info-circled"></i></a>
+              <a href="#" (click)="updateSorting(metric.abbreviation, $event)"><i class="icon-up-dir"
+                  [ngClass]="{'icon-up-dir_active': settings.sortBy === metric.abbreviation && settings.sortOrder === 'asc',
+                  'icon-down-dir_active': settings.sortBy === metric.abbreviation && settings.sortOrder === 'desc',
+                  'icon-up-dir': settings.sortBy !== metric.abbreviation}"></i>{{metric.name}}</a><a href="{{metric.explanationUrl}}" target="_blank"><i class="icon-info-circled"></i></a>
             </th>
           </tr>
         </thead>
