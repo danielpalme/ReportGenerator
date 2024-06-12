@@ -70,6 +70,7 @@ CHANGELOG
 5.3.7.0
 
     * Fix: Exclude empty modules/assemblies from reports
+    * Fix: Fix sort direction triangles (contributed by @YuriyDurov)
 
 5.3.6.0
 
@@ -111,7 +112,7 @@ CHANGELOG
 
 5.2.1.0
 
-    * New: Added 'Crap Score' metric for Coberatura coverage files (contrbuted by @rikrak)
+    * New: Added 'Crap Score' metric for Coberatura coverage files (contributed by @rikrak)
     * New: #645 Added new report type 'CodeClimate'
 
 5.2.0.0
