@@ -71,6 +71,7 @@ CHANGELOG
 
     * Fix: Exclude empty modules/assemblies from reports
     * Fix: Fix sort direction triangles (contributed by @YuriyDurov)
+    * Fix: #602: HtmlSummary and Html_BlueRed_Summary report types now also create an index.html file
 
 5.3.6.0
 
