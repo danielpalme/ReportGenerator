@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.3.8.0
+
+    * Fix: #681 Updated System.Text.Json to address CVE-2024-30105 (contributed by @304NotModified)
+
 5.3.7.0
 
     * Fix: Exclude empty modules/assemblies from reports
