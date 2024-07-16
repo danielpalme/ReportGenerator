@@ -246,16 +246,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <value>
         /// The number of covered code elements.
         /// </value>
-        public int CoveredCodeElements
-        {
-            get
-            {
-                return this.CodeElements.Count(
+        public int CoveredCodeElements =>
+            this.CodeElements.Count(
                     x => this.lineCoverage.Skip(x.FirstLine)
                         .Take(x.LastLine - x.FirstLine + 1)
                         .Any(y => y > 0));
-            }
-        }
 
         /// <summary>
         /// Gets the number of total code elements.
@@ -269,13 +264,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// Gets the coverage quota of the file.
         /// </summary>
         /// <value>The coverage quota.</value>
-        public decimal? CoverageQuota
-        {
-            get
-            {
-                return (this.CoverableLines == 0) ? (decimal?)null : MathExtensions.CalculatePercentage(this.CoveredLines, this.CoverableLines);
-            }
-        }
+        public decimal? CoverageQuota =>
+            (this.CoverableLines == 0) ? (decimal?)null : MathExtensions.CalculatePercentage(this.CoveredLines, this.CoverableLines);
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
@@ -283,10 +273,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public override string ToString()
-        {
-            return this.Path;
-        }
+        public override string ToString() => this.Path;
 
         /// <summary>
         /// Determines whether the specified <see cref="object"/> is equal to this instance.
@@ -387,19 +374,13 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// Adds the given method metric.
         /// </summary>
         /// <param name="methodMetric">The method metric.</param>
-        internal void AddMethodMetric(MethodMetric methodMetric)
-        {
-            this.methodMetrics.Add(methodMetric);
-        }
+        internal void AddMethodMetric(MethodMetric methodMetric) => this.methodMetrics.Add(methodMetric);
 
         /// <summary>
         /// Adds the code element.
         /// </summary>
         /// <param name="codeElement">The code element.</param>
-        internal void AddCodeElement(CodeElement codeElement)
-        {
-            this.codeElements.Add(codeElement);
-        }
+        internal void AddCodeElement(CodeElement codeElement) => this.codeElements.Add(codeElement);
 
         /// <summary>
         /// Performs the analysis of the source file.
