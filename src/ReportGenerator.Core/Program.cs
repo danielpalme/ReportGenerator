@@ -67,9 +67,7 @@ namespace Palmmedia.ReportGenerator.Core
         /// </summary>
         /// <param name="args">The command line arguments.</param>
         /// <returns>The normalized command line arguments.</returns>
-        public static string[] NormalizeArgs(string[] args)
-        {
-            return args.Select(a => a.Replace(@"""", string.Empty).Trim()).ToArray();
-        }
+        public static string[] NormalizeArgs(string[] args) => 
+            args.Select(a => a.Replace(@"""", string.Empty).Trim()).ToArray();
     }
 }

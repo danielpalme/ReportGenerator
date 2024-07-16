@@ -36,10 +36,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <summary>
         /// Initializes a new instance of the <see cref="SonarQubeBuilder"/> class.
         /// </summary>
-        public SonarQubeBuilder()
-        {
+        public SonarQubeBuilder() =>
             this.document = new XDocument(new XElement("coverage", new XAttribute("version", "1")));
-        }
 
         /// <summary>
         /// Gets the type of the report.

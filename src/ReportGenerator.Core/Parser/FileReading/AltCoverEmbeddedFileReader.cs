@@ -31,10 +31,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
         /// Initializes a new instance of the <see cref="AltCoverEmbeddedFileReader" /> class.
         /// </summary>
         /// <param name="base64DeflateCompressedFile">The Base64 and deflate compressed file.</param>
-        public AltCoverEmbeddedFileReader(string base64DeflateCompressedFile)
-        {
+        public AltCoverEmbeddedFileReader(string base64DeflateCompressedFile) => 
             this.base64DeflateCompressedFile = base64DeflateCompressedFile ?? throw new ArgumentNullException(nameof(base64DeflateCompressedFile));
-        }
 
         /// <summary>
         /// Loads the file with the given path.

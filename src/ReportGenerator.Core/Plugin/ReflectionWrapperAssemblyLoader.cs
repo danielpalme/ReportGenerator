@@ -21,10 +21,8 @@ namespace Palmmedia.ReportGenerator.Core.Plugin
         /// Initializes a new instance of the <see cref="ReflectionWrapperAssemblyLoader" /> class.
         /// </summary>
         /// <param name="assemblyLoader">The <see cref="IAssemblyLoader"/> to wrap.</param>
-        public ReflectionWrapperAssemblyLoader(object assemblyLoader)
-        {
+        public ReflectionWrapperAssemblyLoader(object assemblyLoader) => 
             this.assemblyLoader = assemblyLoader ?? throw new ArgumentNullException(nameof(assemblyLoader));
-        }
 
         /// <summary>
         /// Loads the assembly with the given name.

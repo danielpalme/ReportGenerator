@@ -85,14 +85,12 @@ namespace Palmmedia.ReportGenerator.Core
         public bool GenerateReport(
             IReportConfiguration reportConfiguration,
             Settings settings,
-            RiskHotspotsAnalysisThresholds riskHotspotsAnalysisThresholds)
-        {
-            return this.GenerateReport(
+            RiskHotspotsAnalysisThresholds riskHotspotsAnalysisThresholds) =>
+            this.GenerateReport(
                 reportConfiguration,
                 settings,
                 new MinimumCoverageThresholds(),
                 riskHotspotsAnalysisThresholds);
-        }
 
         /// <summary>
         /// Generates a report using given configuration.
@@ -241,15 +239,13 @@ namespace Palmmedia.ReportGenerator.Core
             IReportConfiguration reportConfiguration,
             Settings settings,
             RiskHotspotsAnalysisThresholds riskHotspotsAnalysisThresholds,
-            ParserResult parserResult)
-        {
+            ParserResult parserResult) =>
             this.GenerateReport(
                 reportConfiguration,
                 settings,
                 new MinimumCoverageThresholds(),
                 riskHotspotsAnalysisThresholds,
                 parserResult);
-        }
 
         /// <summary>
         /// Executes the report generation.

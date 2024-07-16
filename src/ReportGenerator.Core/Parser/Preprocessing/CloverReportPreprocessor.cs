@@ -48,10 +48,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
         /// <param name="sourceDirectories">The source directories.</param>
         /// <param name="defaultAssemblyName">The default assembly name.</param>
         internal CloverReportPreprocessor(IEnumerable<string> sourceDirectories, string defaultAssemblyName)
-            : this(sourceDirectories)
-        {
-            this.defaultAssemblyName = defaultAssemblyName;
-        }
+            : this(sourceDirectories) => this.defaultAssemblyName = defaultAssemblyName;
 
         /// <summary>
         /// Executes the preprocessing of the report.

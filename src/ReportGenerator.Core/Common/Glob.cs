@@ -74,10 +74,7 @@ namespace Palmmedia.ReportGenerator.Core.Common
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public override string ToString()
-        {
-            return this.Pattern;
-        }
+        public override string ToString() => this.Pattern;
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -85,10 +82,7 @@ namespace Palmmedia.ReportGenerator.Core.Common
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
-        public override int GetHashCode()
-        {
-            return this.Pattern.GetHashCode();
-        }
+        public override int GetHashCode() => this.Pattern.GetHashCode();
 
         /// <summary>
         /// Determines whether the specified <see cref="object" />, is equal to this instance.
@@ -113,19 +107,13 @@ namespace Palmmedia.ReportGenerator.Core.Common
         /// Performs a pattern match.
         /// </summary>
         /// <returns>The matched path names.</returns>
-        public IEnumerable<string> ExpandNames()
-        {
-            return this.Expand(this.Pattern, false).Select(f => f.FullName);
-        }
+        public IEnumerable<string> ExpandNames() => this.Expand(this.Pattern, false).Select(f => f.FullName);
 
         /// <summary>
         /// Performs a pattern match.
         /// </summary>
         /// <returns>The matched <see cref="FileSystemInfo"/> objects.</returns>
-        public IEnumerable<FileSystemInfo> Expand()
-        {
-            return this.Expand(this.Pattern, false);
-        }
+        public IEnumerable<FileSystemInfo> Expand() => this.Expand(this.Pattern, false);
 
         private RegexOrString CreateRegexOrString(string pattern)
         {

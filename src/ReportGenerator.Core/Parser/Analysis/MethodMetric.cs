@@ -56,10 +56,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public override string ToString()
-        {
-            return this.ShortName;
-        }
+        public override string ToString() => this.ShortName;
 
         /// <summary>
         /// Determines whether the specified <see cref="object"/> is equal to this instance.
@@ -93,19 +90,13 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// Adds the given metric.
         /// </summary>
         /// <param name="metric">The metric.</param>
-        internal void AddMetric(Metric metric)
-        {
-            this.metrics.Add(metric);
-        }
+        internal void AddMetric(Metric metric) => this.metrics.Add(metric);
 
         /// <summary>
         /// Adds the given metrics.
         /// </summary>
         /// <param name="metrics">The metrics to add.</param>
-        internal void AddMetrics(IEnumerable<Metric> metrics)
-        {
-            this.metrics.AddRange(metrics);
-        }
+        internal void AddMetrics(IEnumerable<Metric> metrics) => this.metrics.AddRange(metrics);
 
         /// <summary>
         /// Merges the given method metric with the current instance.

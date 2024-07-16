@@ -16,10 +16,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// Initializes a new instance of the <see cref="FileAnalysis"/> class.
         /// </summary>
         /// <param name="path">The path of the source file.</param>
-        internal FileAnalysis(string path)
-        {
-            this.Path = path;
-        }
+        internal FileAnalysis(string path) => this.Path = path;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileAnalysis"/> class.
@@ -27,10 +24,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <param name="path">The path of the source file.</param>
         /// <param name="error">The error.</param>
         internal FileAnalysis(string path, string error)
-            : this(path)
-        {
-            this.Error = error;
-        }
+            : this(path) => this.Error = error;
 
         /// <summary>
         /// Gets the path.
@@ -56,18 +50,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public override string ToString()
-        {
-            return this.Path;
-        }
+        public override string ToString() => this.Path;
 
         /// <summary>
         /// Adds the given line analysis to the file analysis.
         /// </summary>
         /// <param name="lineAnalysis">The line analysis.</param>
-        internal void AddLineAnalysis(LineAnalysis lineAnalysis)
-        {
-            this.lineAnalysis.Add(lineAnalysis);
-        }
+        internal void AddLineAnalysis(LineAnalysis lineAnalysis) => this.lineAnalysis.Add(lineAnalysis);
     }
 }

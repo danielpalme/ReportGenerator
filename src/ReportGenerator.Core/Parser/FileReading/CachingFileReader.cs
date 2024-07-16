@@ -127,9 +127,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
             }
         }
 
-        private static string GetSha1Hash(string input)
-        {
-            return string.Concat(new SHA1Managed().ComputeHash(Encoding.UTF8.GetBytes(input)).Select(x => x.ToString("x2")).ToArray());
-        }
+        private static string GetSha1Hash(string input) => 
+            string.Concat(new SHA1Managed().ComputeHash(Encoding.UTF8.GetBytes(input)).Select(x => x.ToString("x2")).ToArray());
     }
 }

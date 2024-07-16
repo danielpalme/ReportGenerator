@@ -18,10 +18,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.History
         /// Initializes a new instance of the <see cref="FileHistoryStorage"/> class.
         /// </summary>
         /// <param name="historyDirectory">The history directory.</param>
-        public FileHistoryStorage(string historyDirectory)
-        {
-            this.historyDirectory = historyDirectory;
-        }
+        public FileHistoryStorage(string historyDirectory) => this.historyDirectory = historyDirectory;
 
         /// <summary>
         /// Gets the history file paths.

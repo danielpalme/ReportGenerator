@@ -16,10 +16,8 @@ namespace Palmmedia.ReportGenerator.Core.Logging
         /// Initializes a new instance of the <see cref="DelegateLogger"/> class.
         /// </summary>
         /// <param name="logDelegate">The log delegate.</param>
-        public DelegateLogger(Action<VerbosityLevel, string> logDelegate)
-        {
+        public DelegateLogger(Action<VerbosityLevel, string> logDelegate) => 
             this.logDelegate = logDelegate ?? throw new ArgumentNullException(nameof(logDelegate));
-        }
 
         /// <summary>
         /// Gets or sets the verbosity level.

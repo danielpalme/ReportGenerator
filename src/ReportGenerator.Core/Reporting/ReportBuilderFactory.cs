@@ -26,10 +26,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
         /// Initializes a new instance of the <see cref="ReportBuilderFactory" /> class.
         /// </summary>
         /// <param name="pluginLoader">The plugin loader.</param>
-        public ReportBuilderFactory(IPluginLoader pluginLoader)
-        {
+        public ReportBuilderFactory(IPluginLoader pluginLoader) => 
             this.pluginLoader = pluginLoader ?? throw new ArgumentNullException(nameof(pluginLoader));
-        }
 
         /// <summary>
         /// Gets the available report types.

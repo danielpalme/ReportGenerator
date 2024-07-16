@@ -25,10 +25,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
         /// </summary>
         /// <param name="path">The path.</param>
         /// <returns>The Git information.</returns>
-        public static string GetFileHash(string path)
-        {
-            return ExecuteGitCommand("hash-object " + path);
-        }
+        public static string GetFileHash(string path) => ExecuteGitCommand("hash-object " + path);
 
         private static string ExecuteGitCommand(string arguments)
         {
