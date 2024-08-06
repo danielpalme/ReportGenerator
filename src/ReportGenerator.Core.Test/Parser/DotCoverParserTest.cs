@@ -107,7 +107,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         [Fact]
         public void ClassesInAssemblyTest()
         {
-            Assert.Equal(19, this.parserResult.Assemblies.SelectMany(a => a.Classes).Count());
+            Assert.Equal(24, this.parserResult.Assemblies.SelectMany(a => a.Classes).Count());
         }
 
         /// <summary>
@@ -153,8 +153,11 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         public void CodeElementsTest()
         {
             var codeElements = GetFile(this.parserResult.Assemblies, "Test.TestClass", "C:\\temp\\TestClass.cs").CodeElements;
-            Assert.Equal(5, codeElements.Count());
+            Assert.Equal(4, codeElements.Count());
 
+            codeElements = GetFile(this.parserResult.Assemblies, "Test.TestClass.NestedClass", "C:\\temp\\TestClass.cs").CodeElements;
+            Assert.Equal(1, codeElements.Count());
+            
             codeElements = GetFile(this.parserResult.Assemblies, "Test.PartialClass", "C:\\temp\\PartialClass.cs").CodeElements;
             Assert.Equal(4, codeElements.Count());
 
