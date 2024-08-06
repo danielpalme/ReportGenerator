@@ -38,6 +38,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         private static readonly Regex LocalFunctionMethodNameRegex = new Regex(@"^.*(?<ParentMethodName><.+>).*__(?<NestedMethodName>[^\|]+)\|.+\((?<Arguments>.*)\):.+$", RegexOptions.Compiled);
 
         /// <summary>
+        /// Regex to analyze if a type name is a generated nested type (e.g. an async method).
+        /// </summary>
+        private static readonly Regex GeneratedClassNameRegex = new Regex("<.*>.+__", RegexOptions.Compiled);
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="DotCoverParser" /> class.
         /// </summary>
         /// <param name="assemblyFilter">The assembly filter.</param>
@@ -96,12 +101,9 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             var assemblyElement = modules
                 .Where(m => m.Attribute("Name").Value.Equals(assemblyName));
 
-            var classNames = assemblyElement
-                .Elements("Namespace")
-                .Elements("Type")
-                .Concat(assemblyElement.Elements("Type"))
-                .Where(c => !Regex.IsMatch(c.Attribute("Name").Value, "<.*>.+__", RegexOptions.Compiled))
-                .Select(c => c.Parent.Attribute("Name").Value + "." + c.Attribute("Name").Value)
+            var allTypes = this.GetAllTypes(assemblyElement.ToList());
+            var classNames = allTypes
+                .Select(this.GetFullTypeName)
                 .Distinct()
                 .Where(c => this.ClassFilter.IsElementIncludedInReport(c))
                 .OrderBy(name => name)
@@ -126,12 +128,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             var assemblyElement = modules
                 .Where(m => m.Attribute("Name").Value.Equals(assembly.Name));
 
-            var fileIdsOfClass = assemblyElement
-                .Elements("Namespace")
-                .Elements("Type")
-                .Concat(assemblyElement.Elements("Type"))
-                .Where(c => (c.Parent.Attribute("Name").Value + "." + c.Attribute("Name").Value).Equals(className))
-                .Descendants("Statement")
+            var allTypes = this.GetAllTypes(assemblyElement.ToList());
+            var fileIdsOfClass = allTypes
+                .Where(c => this.GetFullTypeName(c).Equals(className))
+                .SelectMany(c => this.DescendantsNotInOtherType(c, "Statement"))
                 .Select(c => c.Attribute("FileIndex").Value)
                 .Distinct()
                 .ToArray();
@@ -153,7 +153,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                 foreach (var file in filteredFilesOfClass)
                 {
-                    @class.AddFile(ProcessFile(modules, file.FileId, @class, file.FilePath));
+                    @class.AddFile(this.ProcessFile(modules, file.FileId, @class, file.FilePath));
                 }
 
                 assembly.AddClass(@class);
@@ -168,17 +168,16 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="class">The class.</param>
         /// <param name="filePath">The file path.</param>
         /// <returns>The <see cref="CodeFile"/>.</returns>
-        private static CodeFile ProcessFile(XElement[] modules, string fileId, Class @class, string filePath)
+        private CodeFile ProcessFile(XElement[] modules, string fileId, Class @class, string filePath)
         {
             var assemblyElement = modules
                 .Where(m => m.Attribute("Name").Value.Equals(@class.Assembly.Name));
 
-            var methodsOfFile = assemblyElement
-               .Elements("Namespace")
-               .Elements("Type")
-               .Concat(assemblyElement.Elements("Type"))
-               .Where(c => (c.Parent.Attribute("Name").Value + "." + c.Attribute("Name").Value).Equals(@class.Name))
-               .Descendants("Method")
+            var allTypes = this.GetAllTypes(assemblyElement.ToList());
+            var classType = allTypes
+                .Where(c => this.GetFullTypeName(c).Equals(@class.Name));
+            var methodsOfFile = classType
+               .SelectMany( c => this.DescendantsNotInOtherType(c, "Method"))
                .ToArray();
 
             var statements = methodsOfFile
@@ -193,13 +192,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                .OrderBy(seqpnt => seqpnt.LineNumberEnd)
                .ToArray();
 
-            int[] coverage = new int[] { };
-            LineVisitStatus[] lineVisitStatus = new LineVisitStatus[] { };
+            int[] coverage = { };
+            LineVisitStatus[] lineVisitStatus = { };
 
             if (statements.Length > 0)
             {
-                coverage = new int[statements[statements.LongLength - 1].LineNumberEnd + 1];
-                lineVisitStatus = new LineVisitStatus[statements[statements.LongLength - 1].LineNumberEnd + 1];
+                int lastCoveredLine = statements[statements.LongLength - 1].LineNumberEnd + 1;
+                coverage = new int[lastCoveredLine];
+                lineVisitStatus = new LineVisitStatus[lastCoveredLine];
 
                 for (int i = 0; i < coverage.Length; i++)
                 {
@@ -219,7 +219,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             var codeFile = new CodeFile(filePath, coverage, lineVisitStatus);
 
-            SetCodeElements(codeFile, fileId, methodsOfFile);
+            this.SetCodeElements(codeFile, fileId, methodsOfFile);
 
             return codeFile;
         }
@@ -230,11 +230,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="codeFile">The code file.</param>
         /// <param name="fileId">The id of the file.</param>
         /// <param name="methods">The methods.</param>
-        private static void SetCodeElements(CodeFile codeFile, string fileId, IEnumerable<XElement> methods)
+        private void SetCodeElements(CodeFile codeFile, string fileId, IEnumerable<XElement> methods)
         {
             foreach (var method in methods)
             {
-                string methodName = ExtractMethodName(method.Parent.Attribute("Name").Value, method.Attribute("Name").Value);
+                string methodName = ExtractMethodName(this.GetFullTypeName(method.Parent), method.Attribute("Name").Value);
 
                 if (LambdaMethodNameRegex.IsMatch(methodName))
                 {
@@ -303,6 +303,82 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             }
 
             return methodName.Substring(0, methodName.LastIndexOf(':'));
+        }
+
+        /// <summary>
+        /// Gets the full type name from the provided XElement.
+        /// </summary>
+        /// <param name="type">The XElement representing the type.</param>
+        /// <returns>The full type name.</returns>
+        private string GetFullTypeName(XElement type)
+        {
+            if (type.Name != "Type")
+            {
+                throw new Exception("Element is not a type");
+            }
+
+            var name = type.Attribute("Name").Value;
+            while (type.Parent != null)
+            {
+                type = type.Parent;
+
+                // do not use assembly name
+                if (type.Name == "Assembly")
+                {
+                    break;
+                }
+
+                name = $"{type.Attribute("Name").Value}.{name}";
+            }
+
+            return name;
+        }
+
+        /// <summary>
+        /// Retrieves all types from the given list of elements.
+        /// </summary>
+        /// <param name="elements">The list of elements to retrieve types from.</param>
+        /// <returns>An array of XElement representing the retrieved types.</returns>
+        private XElement[] GetAllTypes(List<XElement> elements)
+        {
+            var types = elements.Elements("Namespace")
+                .Elements("Type")
+                .Concat(elements.Elements("Type"))
+                .Where(c => !GeneratedClassNameRegex.IsMatch(c.Attribute("Name").Value))
+                .ToList();
+            if (types.Any())
+            {
+                types.AddRange(this.GetAllTypes(types));
+            }
+
+            return types.ToArray();
+        }
+
+        /// <summary>
+        /// Retrieves all descendants of the specified element that have the specified name, excluding those that are within a "Type" element whose "Name" attribute matches the generated class name pattern.
+        /// </summary>
+        /// <param name="element">The element to search within.</param>
+        /// <param name="name">The name of the descendants to retrieve.</param>
+        /// <returns>An enumerable collection of XElement objects representing the descendants of the specified element that have the specified name.</returns>
+        private IEnumerable<XElement> DescendantsNotInOtherType(XElement element, XName name)
+        {
+            foreach (var child in element.Elements())
+            {
+                if (child.Name == "Type" && !GeneratedClassNameRegex.IsMatch(child.Attribute("Name").Value))
+                {
+                    continue;
+                }
+
+                if (child.Name == name)
+                {
+                    yield return child;
+                }
+
+                foreach (var descendent in this.DescendantsNotInOtherType(child, name))
+                {
+                    yield return descendent;
+                }
+            }
         }
     }
 }
