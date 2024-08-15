@@ -29,20 +29,20 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         private readonly Dictionary<string, XElement> packageElementsByName = new Dictionary<string, XElement>();
 
         /// <summary>
-        /// Gets the type of the report.
-        /// </summary>
-        /// <value>
-        /// The type of the report.
-        /// </value>
-        public string ReportType => "Cobertura";
-
-        /// <summary>
         /// Gets or sets the report context.
         /// </summary>
         /// <value>
         /// The report context.
         /// </value>
         public IReportContext ReportContext { get; set; }
+
+        /// <summary>
+        /// Gets the type of the report.
+        /// </summary>
+        /// <value>
+        /// The type of the report.
+        /// </value>
+        public string ReportType => "Cobertura";
 
         /// <summary>
         /// Creates a class report.
@@ -75,21 +75,21 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 {
                     if (file.Path == fileAnalysis.Path)
                     {
-                        foreach (var codeElement in file.CodeElements)
+                        foreach (var codeElement in file.CodeElements.GroupBy(x => x.Name))
                         {
-                            int index = codeElement.Name.LastIndexOf('(');
+                            int index = codeElement.First().Name.LastIndexOf('(');
 
                             var methodLinesElement = new XElement("lines");
 
                             var methodElement = new XElement(
                                 "method",
-                                new XAttribute("name", index == -1 ? codeElement.Name : codeElement.Name.Substring(0, index)),
-                                new XAttribute("signature", index == -1 ? string.Empty : codeElement.Name.Substring(index)),
+                                new XAttribute("name", index == -1 ? codeElement.First().Name : codeElement.First().Name.Substring(0, index)),
+                                new XAttribute("signature", index == -1 ? string.Empty : codeElement.First().Name.Substring(index)),
                                 methodLinesElement);
 
                             this.AddLineElements(
                                 methodLinesElement,
-                                fileAnalysis.Lines.Skip(codeElement.FirstLine - 1).Take(codeElement.LastLine - codeElement.FirstLine + 1),
+                                DistinctTouchedLines(fileAnalysis, codeElement),
                                 out double methodLineRate,
                                 out double methodBranchRate);
 
@@ -97,8 +97,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                             methodElement.Add(new XAttribute("branch-rate", methodBranchRate.ToString(CultureInfo.InvariantCulture)));
 
                             var methodMetrics = file.MethodMetrics
-                                .FirstOrDefault(q => q.FullName == codeElement.FullName
-                                    && q.Line == codeElement.FirstLine);
+                                .FirstOrDefault(q => q.FullName == codeElement.First().FullName
+                                    && q.Line == codeElement.First().FirstLine);
 
                             if (methodMetrics != null)
                             {
@@ -264,6 +264,17 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             {
                 result.Save(writer);
             }
+        }
+
+        /// <summary>
+        /// Merge touched lines from multiple coverage sources
+        /// </summary>
+        private IEnumerable<LineAnalysis> DistinctTouchedLines(FileAnalysis fileAnalysis, IGrouping<string, CodeElement> codeElement)
+        {
+            return codeElement.SelectMany(element => fileAnalysis.Lines.Skip(element.FirstLine - 1)
+                                                                       .Take(element.LastLine - element.FirstLine + 1))
+                              .DistinctBy(x => x.LineNumber)
+                              .OrderBy(x => x.LineNumber);
         }
 
         /// <summary>
