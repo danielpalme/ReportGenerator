@@ -96,20 +96,15 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             var assemblyElement = modules
                 .Where(m => m.Attribute("Name").Value.Equals(assemblyName));
 
-            var classNames = assemblyElement
-                .Elements("Namespace")
-                .Elements("Type")
-                .Concat(assemblyElement.Elements("Type"))
+            var classes = assemblyElement
+                .Descendants("Type")
+                .Where(c => this.RawMode || c.Parent.Name != "Type")
                 .Where(c => !Regex.IsMatch(c.Attribute("Name").Value, "<.*>.+__", RegexOptions.Compiled))
-                .Select(c => c.Parent.Attribute("Name").Value + "." + c.Attribute("Name").Value)
-                .Distinct()
-                .Where(c => this.ClassFilter.IsElementIncludedInReport(c))
-                .OrderBy(name => name)
                 .ToArray();
 
             var assembly = new Assembly(assemblyName);
 
-            Parallel.ForEach(classNames, className => this.ProcessClass(modules, files, assembly, className));
+            Parallel.ForEach(classes, clazz => this.ProcessClass(files, assembly, clazz));
 
             return assembly;
         }
@@ -117,24 +112,47 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <summary>
         /// Processes the given class.
         /// </summary>
-        /// <param name="modules">The modules.</param>
         /// <param name="files">The files.</param>
         /// <param name="assembly">The assembly.</param>
-        /// <param name="className">Name of the class.</param>
-        private void ProcessClass(XElement[] modules, XElement[] files, Assembly assembly, string className)
+        /// <param name="classElement">The class element.</param>
+        private void ProcessClass(XElement[] files, Assembly assembly, XElement classElement)
         {
-            var assemblyElement = modules
-                .Where(m => m.Attribute("Name").Value.Equals(assembly.Name));
+            string className = classElement.Attribute("Name").Value;
 
-            var fileIdsOfClass = assemblyElement
-                .Elements("Namespace")
-                .Elements("Type")
-                .Concat(assemblyElement.Elements("Type"))
-                .Where(c => (c.Parent.Attribute("Name").Value + "." + c.Attribute("Name").Value).Equals(className))
-                .Descendants("Statement")
-                .Select(c => c.Attribute("FileIndex").Value)
-                .Distinct()
-                .ToArray();
+            XElement parent = classElement.Parent;
+
+            while (parent.Name == "Type")
+            {
+                className = parent.Attribute("Name").Value + "." + className;
+                parent = parent.Parent;
+            }
+
+            className = parent.Attribute("Name").Value + "." + className;
+
+            if (!this.ClassFilter.IsElementIncludedInReport(className))
+            {
+                return;
+            }
+
+            string[] fileIdsOfClass;
+
+            if (this.RawMode)
+            {
+                fileIdsOfClass = classElement
+                    .Elements("Method")
+                    .Elements("Statement")
+                    .Select(c => c.Attribute("FileIndex").Value)
+                    .Distinct()
+                    .ToArray();
+            }
+            else
+            {
+                fileIdsOfClass = classElement
+                    .Descendants("Statement")
+                    .Select(c => c.Attribute("FileIndex").Value)
+                    .Distinct()
+                    .ToArray();
+            }
 
             var filteredFilesOfClass = fileIdsOfClass
                 .Select(fileId =>
@@ -153,7 +171,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                 foreach (var file in filteredFilesOfClass)
                 {
-                    @class.AddFile(ProcessFile(modules, file.FileId, @class, file.FilePath));
+                    @class.AddFile(this.ProcessFile(file.FileId, classElement, file.FilePath));
                 }
 
                 assembly.AddClass(@class);
@@ -163,23 +181,26 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <summary>
         /// Processes the file.
         /// </summary>
-        /// <param name="modules">The modules.</param>
         /// <param name="fileId">The file id.</param>
-        /// <param name="class">The class.</param>
+        /// <param name="classElement">The class element.</param>
         /// <param name="filePath">The file path.</param>
         /// <returns>The <see cref="CodeFile"/>.</returns>
-        private static CodeFile ProcessFile(XElement[] modules, string fileId, Class @class, string filePath)
+        private CodeFile ProcessFile(string fileId, XElement classElement, string filePath)
         {
-            var assemblyElement = modules
-                .Where(m => m.Attribute("Name").Value.Equals(@class.Assembly.Name));
+            XElement[] methodsOfFile;
 
-            var methodsOfFile = assemblyElement
-               .Elements("Namespace")
-               .Elements("Type")
-               .Concat(assemblyElement.Elements("Type"))
-               .Where(c => (c.Parent.Attribute("Name").Value + "." + c.Attribute("Name").Value).Equals(@class.Name))
-               .Descendants("Method")
-               .ToArray();
+            if (this.RawMode)
+            {
+                methodsOfFile = classElement
+                    .Elements("Method")
+                    .ToArray();
+            }
+            else
+            {
+                methodsOfFile = classElement
+                    .Descendants("Method")
+                    .ToArray();
+            }
 
             var statements = methodsOfFile
                .Elements("Statement")

@@ -408,7 +408,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     new DotCoverReportPreprocessor().Execute(item);
 
                     Logger.DebugFormat(Resources.InitiatingParser, "dotCover");
-                    yield return new DotCoverParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
+                    yield return new DotCoverParser(this.assemblyFilter, this.classFilter, this.fileFilter)
+                    {
+                        RawMode = !this.rawModeProhibited && this.reportContext?.Settings.RawMode == true
+                    }.Parse(item);
                 }
 
                 yield break;

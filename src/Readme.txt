@@ -67,6 +67,11 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.3.9.0
+
+    * New: #685 Extended "raw mode" for dotCover format (settings:rawMode=true) to disable that coverage data of nested or compiler generated
+    classes is included in the parent class.
+
 5.3.8.0
 
     * Fix: #681 Updated System.Text.Json to address CVE-2024-30105 (contributed by @304NotModified)
