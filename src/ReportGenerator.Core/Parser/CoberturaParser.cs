@@ -68,19 +68,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             var assemblies = new List<Assembly>();
 
-            var modules = report.Descendants("package")
-              .ToArray();
-
-            var assemblyNames = modules
-                .Select(m => m.Attribute("name").Value)
-                .Distinct()
-                .Where(a => this.AssemblyFilter.IsElementIncludedInReport(a))
-                .OrderBy(a => a)
+            var assemblyElementGrouping = report.Descendants("package")
+                .GroupBy(m => m.Attribute("name").Value)
+                .Where(a => this.AssemblyFilter.IsElementIncludedInReport(a.Key))
                 .ToArray();
 
-            foreach (var assemblyName in assemblyNames)
+            foreach (var elements in assemblyElementGrouping)
             {
-                assemblies.Add(this.ProcessAssembly(modules, assemblyName));
+                assemblies.Add(this.ProcessAssembly(elements.ToArray(), elements.Key));
             }
 
             var result = new ParserResult(assemblies.OrderBy(a => a.Name).ToList(), true, this.ToString());
@@ -92,7 +87,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             try
             {
-                if (report.Element("sources").Parent.Attribute("timestamp") != null)
+                if (report.Element("sources")?.Parent.Attribute("timestamp") != null)
                 {
                     DateTime timeStamp = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
                     timeStamp = timeStamp.AddSeconds(double.Parse(report.Element("sources").Parent.Attribute("timestamp").Value)).ToLocalTime();
@@ -119,10 +114,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         {
             Logger.DebugFormat(Resources.CurrentAssembly, assemblyName);
 
-            var classNames = modules
-                .Where(m => m.Attribute("name").Value.Equals(assemblyName))
+            var classes = modules
                 .Elements("classes")
                 .Elements("class")
+                .ToArray();
+
+            var classNames = classes
                 .Select(c => ClassNameParser.ParseClassName(c.Attribute("name").Value, this.RawMode))
                 .Where(c => c.Include)
                 .Distinct()
@@ -132,7 +129,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             var assembly = new Assembly(assemblyName);
 
-            Parallel.ForEach(classNames, c => this.ProcessClass(modules, assembly, c.Name, c.DisplayName));
+            Parallel.ForEach(classNames, c => this.ProcessClass(classes, assembly, c.Name, c.DisplayName));
 
             return assembly;
         }
@@ -140,21 +137,29 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <summary>
         /// Processes the given class.
         /// </summary>
-        /// <param name="modules">The modules.</param>
+        /// <param name="allClasses">All class elements.</param>
         /// <param name="assembly">The assembly.</param>
         /// <param name="className">Name of the class.</param>
         /// <param name="classDisplayName">Diesplay name of the class.</param>
-        private void ProcessClass(XElement[] modules, Assembly assembly, string className, string classDisplayName)
+        private void ProcessClass(XElement[] allClasses, Assembly assembly, string className, string classDisplayName)
         {
-            var files = modules
-                .Where(m => m.Attribute("name").Value.Equals(assembly.Name))
-                .Elements("classes")
-                .Elements("class")
-                .Where(c => c.Attribute("name").Value.Equals(className)
+            bool FilterClass(XElement element)
+            {
+                var name = element.Attribute("name").Value;
+
+                return name.Equals(className)
                     || (!this.RawMode
-                        && (c.Attribute("name").Value.StartsWith(className + "$", StringComparison.Ordinal)
-                        || c.Attribute("name").Value.StartsWith(className + "/", StringComparison.Ordinal)
-                        || c.Attribute("name").Value.StartsWith(className + ".", StringComparison.Ordinal))))
+                        && name.StartsWith(className, StringComparison.Ordinal)
+                        && (name[className.Length] == '$'
+                            || name[className.Length] == '/'
+                            || name[className.Length] == '.'));
+            }
+
+            var classes = allClasses
+                .Where(FilterClass)
+                .ToArray();
+
+            var files = classes
                 .Select(c => c.Attribute("filename").Value)
                 .Distinct()
                 .ToArray();
@@ -170,7 +175,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                 foreach (var file in filteredFiles)
                 {
-                    @class.AddFile(this.ProcessFile(modules, @class, className, file));
+                    var fileClasses = classes
+                        .Where(c => c.Attribute("filename").Value.Equals(file))
+                        .ToArray();
+                    @class.AddFile(this.ProcessFile(fileClasses, @class, className, file));
                 }
 
                 assembly.AddClass(@class);
@@ -180,26 +188,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <summary>
         /// Processes the file.
         /// </summary>
-        /// <param name="modules">The modules.</param>
+        /// <param name="classElements">The class elements for the file.</param>
         /// <param name="class">The class.</param>
         /// <param name="className">Name of the class.</param>
         /// <param name="filePath">The file path.</param>
         /// <returns>The <see cref="CodeFile"/>.</returns>
-        private CodeFile ProcessFile(XElement[] modules, Class @class, string className, string filePath)
+        private CodeFile ProcessFile(XElement[] classElements, Class @class, string className, string filePath)
         {
-            var classes = modules
-                .Where(m => m.Attribute("name").Value.Equals(@class.Assembly.Name))
-                .Elements("classes")
-                .Elements("class")
-                .Where(c => c.Attribute("name").Value.Equals(className)
-                    || (!this.RawMode
-                        && (c.Attribute("name").Value.StartsWith(className + "$", StringComparison.Ordinal)
-                        || c.Attribute("name").Value.StartsWith(className + "/", StringComparison.Ordinal)
-                        || c.Attribute("name").Value.StartsWith(className + ".", StringComparison.Ordinal))))
-                .Where(c => c.Attribute("filename").Value.Equals(filePath))
-                .ToArray();
-
-            var lines = classes.Elements("lines")
+            var lines = classElements.Elements("lines")
                 .Elements("line")
                 .ToArray();
 
@@ -207,8 +203,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .Select(l => l.Attribute("number").Value)
                 .ToHashSet();
 
-            var additionalLinesInMethodElement = classes.Elements("methods")
+            var methodsOfFile = classElements
+                .Elements("methods")
                 .Elements("method")
+                .ToArray();
+
+            var additionalLinesInMethodElement = methodsOfFile
                 .Elements("lines")
                 .Elements("line")
                 .Where(l => !lineNumbers.Contains(l.Attribute("number").Value))
@@ -253,11 +253,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     lineVisitStatus[line.LineNumber] = statusOfLine;
                 }
             }
-
-            var methodsOfFile = classes
-                .Elements("methods")
-                .Elements("method")
-                .ToArray();
 
             var codeFile = new CodeFile(filePath, coverage, lineVisitStatus, branches);
 

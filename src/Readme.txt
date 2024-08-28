@@ -71,6 +71,7 @@ CHANGELOG
 
     * New: #685 Extended "raw mode" for dotCover format (settings:rawMode=true) to disable that coverage data of nested or compiler generated
     classes is included in the parent class.
+    * New: #691 Cobertura parser: Performance and memory improvements (contributed by @afscrome)
 
 5.3.8.0
 
