@@ -405,6 +405,16 @@ a.percentagebar {
     .overview colgroup col:first-child { width: 300px; }
 }
 
+.icon-up-down-dir {
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB3aWR0aD0iMTc5MiIgaGVpZ2h0PSIxNzkyIiB2aWV3Qm94PSIwIDAgMTc5MiAxNzkyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Im0gMTQwOCw3NDIgcSAwLDI2IC0xOSw0NSAtMTksMTkgLTQ1LDE5IEggNDQ4IHEgLTI2LDAgLTQ1LC0xOSAtMTksLTE5IC0xOSwtNDUgMCwtMjYgMTksLTQ1IEwgODUxLDI0OSBxIDE5LC0xOSA0NSwtMTkgMjYsMCA0NSwxOSBsIDQ0OCw0NDggcSAxOSwxOSAxOSw0NSB6IiAvPjxwYXRoIGQ9Im0gMTQwOCwxMDUwIHEgMCwyNiAtMTksNDUgbCAtNDQ4LDQ0OCBxIC0xOSwxOSAtNDUsMTkgLTI2LDAgLTQ1LC0xOSBMIDQwMywxMDk1IHEgLTE5LC0xOSAtMTksLTQ1IDAsLTI2IDE5LC00NSAxOSwtMTkgNDUsLTE5IGggODk2IHEgMjYsMCA0NSwxOSAxOSwxOSAxOSw0NSB6IiAvPjwvc3ZnPg==);
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding-left: 15px;
+    height: 0.9em;
+    display: inline-block;
+    position: relative;
+    top: 3px;
+}
 .icon-up-dir_active {
     background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxzdmcgd2lkdGg9IjE3OTIiIGhlaWdodD0iMTc5MiIgdmlld0JveD0iMCAwIDE3OTIgMTc5MiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsPSIjMDA3OEQ0IiBkPSJNMTQwOCAxMjE2cTAgMjYtMTkgNDV0LTQ1IDE5aC04OTZxLTI2IDAtNDUtMTl0LTE5LTQ1IDE5LTQ1bDQ0OC00NDhxMTktMTkgNDUtMTl0NDUgMTlsNDQ4IDQ0OHExOSAxOSAxOSA0NXoiLz48L3N2Zz4=);
     background-repeat: no-repeat;
@@ -417,16 +427,6 @@ a.percentagebar {
 }
 .icon-down-dir_active {
     background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxzdmcgd2lkdGg9IjE3OTIiIGhlaWdodD0iMTc5MiIgdmlld0JveD0iMCAwIDE3OTIgMTc5MiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsPSIjMDA3OEQ0IiBkPSJNMTQwOCA3MDRxMCAyNi0xOSA0NWwtNDQ4IDQ0OHEtMTkgMTktNDUgMTl0LTQ1LTE5bC00NDgtNDQ4cS0xOS0xOS0xOS00NXQxOS00NSA0NS0xOWg4OTZxMjYgMCA0NSAxOXQxOSA0NXoiLz48L3N2Zz4=);
-    background-repeat: no-repeat;
-    background-size: contain;
-    padding-left: 15px;
-    height: 0.9em;
-    display: inline-block;
-    position: relative;
-    top: 3px;
-}
-.icon-down-dir {
-    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB3aWR0aD0iMTc5MiIgaGVpZ2h0PSIxNzkyIiB2aWV3Qm94PSIwIDAgMTc5MiAxNzkyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0xNDA4IDcwNHEwIDI2LTE5IDQ1bC00NDggNDQ4cS0xOSAxOS00NSAxOXQtNDUtMTlsLTQ0OC00NDhxLTE5LTE5LTE5LTQ1dDE5LTQ1IDQ1LTE5aDg5NnEyNiAwIDQ1IDE5dDE5IDQ1eiIvPjwvc3ZnPg==);
     background-repeat: no-repeat;
     background-size: contain;
     padding-left: 15px;
@@ -609,8 +609,8 @@ a.percentagebar {
     .tinybranchcoveragechart .ct-series.ct-series-a .ct-line { stroke: #6dc428 !important; }
     .tinymethodcoveragechart .ct-series.ct-series-a .ct-line { stroke: #e58f1d !important; }
 
-    .icon-down-dir {
-        background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHdpZHRoPSIxNzkyIiBoZWlnaHQ9IjE3OTIiIHZpZXdCb3g9IjAgMCAxNzkyIDE3OTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbD0iI0JGQkZDMCIgZD0iTTE0MDggNzA0cTAgMjYtMTkgNDVsLTQ0OCA0NDhxLTE5IDE5LTQ1IDE5dC00NS0xOWwtNDQ4LTQ0OHEtMTktMTktMTktNDV0MTktNDUgNDUtMTloODk2cTI2IDAgNDUgMTl0MTkgNDV6Ii8+PC9zdmc+);
+    .icon-up-down-dir {
+        background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB3aWR0aD0iMTc5MiIgaGVpZ2h0PSIxNzkyIiB2aWV3Qm94PSIwIDAgMTc5MiAxNzkyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGZpbGw9IiNCRkJGQzAiIGQ9Im0gMTQwOCw3NDIgcSAwLDI2IC0xOSw0NSAtMTksMTkgLTQ1LDE5IEggNDQ4IHEgLTI2LDAgLTQ1LC0xOSAtMTksLTE5IC0xOSwtNDUgMCwtMjYgMTksLTQ1IEwgODUxLDI0OSBxIDE5LC0xOSA0NSwtMTkgMjYsMCA0NSwxOSBsIDQ0OCw0NDggcSAxOSwxOSAxOSw0NSB6IiAvPjxwYXRoIGZpbGw9IiNCRkJGQzAiIGQ9Im0gMTQwOCwxMDUwIHEgMCwyNiAtMTksNDUgbCAtNDQ4LDQ0OCBxIC0xOSwxOSAtNDUsMTkgLTI2LDAgLTQ1LC0xOSBMIDQwMywxMDk1IHEgLTE5LC0xOSAtMTksLTQ1IDAsLTI2IDE5LC00NSAxOSwtMTkgNDUsLTE5IGggODk2IHEgMjYsMCA0NSwxOSAxOSwxOSAxOSw0NSB6IiAvPjwvc3ZnPg==);
     }
     .icon-info-circled {
         background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB3aWR0aD0iMTc5MiIgaGVpZ2h0PSIxNzkyIiB2aWV3Qm94PSIwIDAgMTc5MiAxNzkyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxjaXJjbGUgY3g9Ijg5NiIgY3k9Ijg5NiIgcj0iNzUwIiBmaWxsPSIjZmZmIiAvPjxwYXRoIGZpbGw9IiMyOEE1RkYiIGQ9Ik0xMTUyIDEzNzZ2LTE2MHEwLTE0LTktMjN0LTIzLTloLTk2di01MTJxMC0xNC05LTIzdC0yMy05aC0zMjBxLTE0IDAtMjMgOXQtOSAyM3YxNjBxMCAxNCA5IDIzdDIzIDloOTZ2MzIwaC05NnEtMTQgMC0yMyA5dC05IDIzdjE2MHEwIDE0IDkgMjN0MjMgOWg0NDhxMTQgMCAyMy05dDktMjN6bS0xMjgtODk2di0xNjBxMC0xNC05LTIzdC0yMy05aC0xOTJxLTE0IDAtMjMgOXQtOSAyM3YxNjBxMCAxNCA5IDIzdDIzIDloMTkycTE0IDAgMjMtOXQ5LTIzem02NDAgNDE2cTAgMjA5LTEwMyAzODUuNXQtMjc5LjUgMjc5LjUtMzg1LjUgMTAzLTM4NS41LTEwMy0yNzkuNS0yNzkuNS0xMDMtMzg1LjUgMTAzLTM4NS41IDI3OS41LTI3OS41IDM4NS41LTEwMyAzODUuNSAxMDMgMjc5LjUgMjc5LjUgMTAzIDM4NS41eiIvPjwvc3ZnPg==);
@@ -749,7 +749,7 @@ a.percentagebar {
 </div>
 </div>
 <h1>Coverage history</h1>
-<div class="historychart ct-chart" data-data="historyChartDatae606b004123a45efbaa69cc62d2154e4"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="ct-chart" width="1200" height="150" viewBox="0 0 1200 150">
+<div class="historychart ct-chart" data-data="historyChartData000d03e08e7648629362df7eac080d4e"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="ct-chart" width="1200" height="150" viewBox="0 0 1200 150">
 <style type="text/css">
         <![CDATA[
         .ct-chart .ct-grid {
@@ -821,12 +821,12 @@ a.percentagebar {
 </svg>
 </div>
 <script type="text/javascript">/* <![CDATA[ */ 
-var historyChartDatae606b004123a45efbaa69cc62d2154e4 = {
+var historyChartData000d03e08e7648629362df7eac080d4e = {
     "series" : [[{ 'meta': 0, 'value': 72.7 }],
 [{ 'meta': 0, 'value': 50 }],
 [{ 'meta': 0, 'value': 80 }]
 ],
-    "tooltips" : ['<h3>14.05.2024 - 20:56:24</h3><br /><span class="linecoverage"></span> Line coverage: 72.7% (24/33)<br /><span class="branchcoverage"></span> Branch coverage: 50% (2/4)<br /><span class="codeelementcoverage"></span> Method coverage: 80% (4/5)<br />Total lines: 38']
+    "tooltips" : ['<h3>03.09.2024 - 20:23:24</h3><br /><span class="linecoverage"></span> Line coverage: 72.7% (24/33)<br /><span class="branchcoverage"></span> Branch coverage: 50% (2/4)<br /><span class="codeelementcoverage"></span> Method coverage: 80% (4/5)<br />Total lines: 38']
 };
  /* ]]> */ </script>
 <h1>Metrics</h1>
@@ -896,7 +896,7 @@ var historyChartDatae606b004123a45efbaa69cc62d2154e4 = {
 </tbody>
 </table>
 </div>
-<div class="footer">Generated by: ReportGenerator 5.3.0.0<br />14.05.2024 - 20:56:24<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
+<div class="footer">Generated by: ReportGenerator 5.3.9.0<br />03.09.2024 - 20:23:24<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
 <div class="containerright">
 <div class="containerrightfixed">
 <h1>Methods/Properties</h1>
