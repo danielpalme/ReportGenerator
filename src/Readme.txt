@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.3.10.0
+
+    * Fix: #690 Fixed handling of history files for classes with not unique names
+
 5.3.9.0
 
     * New: #685 Extended "raw mode" for dotCover format (settings:rawMode=true) to disable that coverage data of nested or compiler generated

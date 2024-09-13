@@ -77,7 +77,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.History
                 {
                     var classElement = new XElement(
                        "class",
-                       new XAttribute("name", @class.Name),
+                       new XAttribute("name", @class.RawName),
                        new XAttribute("coveredlines", @class.CoveredLines.ToString(CultureInfo.InvariantCulture)),
                        new XAttribute("coverablelines", @class.CoverableLines.ToString(CultureInfo.InvariantCulture)),
                        new XAttribute("totallines", @class.TotalLines.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)),

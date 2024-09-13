@@ -37,8 +37,20 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <param name="name">The name of the class.</param>
         /// <param name="assembly">The assembly.</param>
         internal Class(string name, Assembly assembly)
+            : this(name, name, assembly)
+        {
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Class"/> class.
+        /// </summary>
+        /// <param name="name">The name of the class.</param>
+        /// <param name="assembly">The assembly.</param>
+        internal Class(string name, string rawName, Assembly assembly)
         {
             this.Name = name ?? throw new ArgumentNullException(nameof(name));
+            this.RawName = rawName ?? throw new ArgumentNullException(nameof(rawName));
             this.Assembly = assembly ?? throw new ArgumentNullException(nameof(assembly));
 
             this.DisplayName = name;
@@ -94,6 +106,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// Gets the display name of the class.
         /// </summary>
         public string DisplayName { get; }
+
+        /// <summary>
+        /// Gets the raw name of the class.
+        /// </summary>
+        public string RawName { get; }
 
         /// <summary>
         /// Gets the assembly.
@@ -214,7 +231,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
             else
             {
                 var @class = (Class)obj;
-                return @class.Name.Equals(this.Name) && @class.Assembly.Equals(this.Assembly);
+                return @class.RawName.Equals(this.RawName) && @class.Assembly.Equals(this.Assembly);
             }
         }
 

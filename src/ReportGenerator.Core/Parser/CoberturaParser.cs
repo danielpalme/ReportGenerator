@@ -129,7 +129,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             var assembly = new Assembly(assemblyName);
 
-            Parallel.ForEach(classNames, c => this.ProcessClass(classes, assembly, c.Name, c.DisplayName));
+            Parallel.ForEach(classNames, c => this.ProcessClass(classes, assembly, c));
 
             return assembly;
         }
@@ -139,20 +139,19 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// </summary>
         /// <param name="allClasses">All class elements.</param>
         /// <param name="assembly">The assembly.</param>
-        /// <param name="className">Name of the class.</param>
-        /// <param name="classDisplayName">Diesplay name of the class.</param>
-        private void ProcessClass(XElement[] allClasses, Assembly assembly, string className, string classDisplayName)
+        /// <param name="classNameParserResult">Name of the class.</param>
+        private void ProcessClass(XElement[] allClasses, Assembly assembly, ClassNameParserResult classNameParserResult)
         {
             bool FilterClass(XElement element)
             {
                 var name = element.Attribute("name").Value;
 
-                return name.Equals(className)
+                return name.Equals(classNameParserResult.Name)
                     || (!this.RawMode
-                        && name.StartsWith(className, StringComparison.Ordinal)
-                        && (name[className.Length] == '$'
-                            || name[className.Length] == '/'
-                            || name[className.Length] == '.'));
+                        && name.StartsWith(classNameParserResult.Name, StringComparison.Ordinal)
+                        && (name[classNameParserResult.Name.Length] == '$'
+                            || name[classNameParserResult.Name.Length] == '/'
+                            || name[classNameParserResult.Name.Length] == '.'));
             }
 
             var classes = allClasses
@@ -171,14 +170,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             // If all files are removed by filters, then the whole class is omitted
             if ((files.Length == 0 && !this.FileFilter.HasCustomFilters) || filteredFiles.Length > 0)
             {
-                var @class = new Class(classDisplayName, assembly);
+                var @class = new Class(classNameParserResult.DisplayName, classNameParserResult.RawName, assembly);
 
                 foreach (var file in filteredFiles)
                 {
                     var fileClasses = classes
                         .Where(c => c.Attribute("filename").Value.Equals(file))
                         .ToArray();
-                    @class.AddFile(this.ProcessFile(fileClasses, @class, className, file));
+                    @class.AddFile(this.ProcessFile(fileClasses, @class, classNameParserResult.Name, file));
                 }
 
                 assembly.AddClass(@class);

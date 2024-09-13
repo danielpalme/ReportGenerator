@@ -90,7 +90,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.History
 
             foreach (var item in assemblies.SelectMany(t => t.Classes))
             {
-                classes[this.GetFullClassName(item.Assembly.Name, item.Name)] = item;
+                classes[this.GetFullClassName(item.Assembly.Name, item.RawName)] = item;
             }
 
             Parallel.ForEach(
