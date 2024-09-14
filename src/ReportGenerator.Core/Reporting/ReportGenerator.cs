@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
@@ -16,6 +18,9 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
     /// </summary>
     internal class ReportGenerator
     {
+        // TODO: Make this configurable
+        private const int MaxConcurrency = 8;
+
         /// <summary>
         /// The Logger.
         /// </summary>
@@ -34,7 +39,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
         /// <summary>
         /// The renderers.
         /// </summary>
-        private readonly IEnumerable<IReportBuilder> renderers;
+        private readonly List<IReportBuilder> renderers;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ReportGenerator" /> class.
@@ -46,7 +51,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
         {
             this.fileReader = fileReader ?? throw new ArgumentNullException(nameof(fileReader));
             this.parserResult = parserResult ?? throw new ArgumentNullException(nameof(parserResult));
-            this.renderers = renderers ?? throw new ArgumentNullException(nameof(renderers));
+            this.renderers = renderers?.ToList() ?? throw new ArgumentNullException(nameof(renderers));
         }
 
         /// <summary>
@@ -58,53 +63,72 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
         /// <param name="tag">The custom tag (e.g. build number).</param>
         internal void CreateReport(bool addHistoricCoverage, List<HistoricCoverage> overallHistoricCoverages, DateTime executionTime, string tag)
         {
+            // TODO: Can we change overallHistoricCoverages to a ConcurrentBag to avoid this?
+            object overallHistoricCoveragesLock = new object();
+
+            // TODO: This probably belongs in the ReportGenerator Console and/or Global Tool
+            //       AND can probably be a bit smarter.
+            //
+            // If there aren't enough threads in the thread pool, the Parallelism here can deadlock until the pool grows large enough
+            // With all avaialble threads being used in class analysis, but with ConcurrentReportBuilder threads having
+            // to wait for the thread pool to grow.  By default, .Net core adds 2 threads every 0.5 secs
+            // App will become responsive within a few seconds, but given that report generator can complete in tens of seconds,
+            // these stalls become significant
+            ThreadPool.SetMinThreads(200, 200);
+
+            var allClasses = this.parserResult.Assemblies.SelectMany(a => a.Classes);
+            var classAnalysis = Partitioner.Create(allClasses, EnumerablePartitionerOptions.NoBuffering)
+                .AsParallel()
+                .AsOrdered()
+                .WithDegreeOfParallelism(MaxConcurrency)
+                .Select(AnalyseClass)
+                .AsSequential();
+
             int numberOfClasses = this.parserResult.Assemblies.SafeSum(a => a.Classes.Count());
 
             Logger.DebugFormat(Resources.AnalyzingClasses, numberOfClasses);
 
             int counter = 0;
+            var concurrentRenderers = this.renderers.OfType<IParallelisableReportBuilder>().ToList();
+            var sequentialRenderers = this.renderers.Except(concurrentRenderers).ToList();
 
-            foreach (var assembly in this.parserResult.Assemblies)
+            var concurrentRenderQueue = new BlockingCollection<(IReportBuilder renderer, Class @class, List<FileAnalysis> analysis)>(MaxConcurrency);
+            Task concurrentRendererTask = Task.CompletedTask;
+
+            if (concurrentRenderers.Any())
             {
-                foreach (var @class in assembly.Classes)
+                concurrentRendererTask = Task.Factory.StartNew(() =>
                 {
-                    counter++;
-
-                    Logger.DebugFormat(
-                        Resources.CreatingReport,
-                        counter,
-                        numberOfClasses,
-                        @class.Assembly.ShortName,
-                        @class.Name);
-
-                    var fileAnalyses = @class.Files.Select(f => f.AnalyzeFile(this.fileReader)).ToArray();
-
-                    if (addHistoricCoverage)
-                    {
-                        var historicCoverage = new HistoricCoverage(@class, executionTime, tag);
-                        @class.AddHistoricCoverage(historicCoverage);
-                        overallHistoricCoverages.Add(historicCoverage);
-                    }
-
-                    Parallel.ForEach(
-                        this.renderers,
-                        renderer =>
-                        {
-                            try
-                            {
-                                renderer.CreateClassReport(@class, fileAnalyses);
-                            }
-                            catch (Exception ex)
-                            {
-                                Logger.ErrorFormat(
-                                    Resources.ErrorDuringRenderingClassReport,
-                                    @class.Name,
-                                    renderer.ReportType,
-                                    ex.GetExceptionMessageForDisplay());
-                            }
-                        });
-                }
+                    Partitioner.Create(concurrentRenderQueue.GetConsumingEnumerable(), EnumerablePartitionerOptions.NoBuffering)
+                        .AsParallel()
+                        .WithDegreeOfParallelism(MaxConcurrency)
+                        .ForAll(x => RenderReport(x.renderer, x.@class, x.analysis));
+                });
             }
+
+            foreach (var (@class, analysis) in classAnalysis)
+            {
+                counter++;
+                Logger.DebugFormat(
+                    Resources.CreatingReport,
+                    counter,
+                    numberOfClasses,
+                    @class.Assembly.ShortName,
+                    @class.Name);
+
+                foreach (var renderer in concurrentRenderers)
+                {
+                    concurrentRenderQueue.Add((renderer, @class, analysis));
+                }
+
+                sequentialRenderers
+                    .AsParallel()
+                    .WithMergeOptions(ParallelMergeOptions.NotBuffered)
+                    .ForAll(x => RenderReport(x, @class, analysis));
+            }
+
+            concurrentRenderQueue.CompleteAdding();
+            concurrentRendererTask.Wait();
 
             Logger.Debug(Resources.CreatingSummary);
             SummaryResult summaryResult = new SummaryResult(this.parserResult);
@@ -127,6 +151,40 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
                         Logger.Error(ex.StackTrace);
                     }
                 }
+            }
+
+            (Class @class, List<FileAnalysis> analysis) AnalyseClass(Class @class)
+            {
+                var fileAnalyses = @class.Files.Select(f => f.AnalyzeFile(this.fileReader)).ToList();
+
+                if (addHistoricCoverage)
+                {
+                    var historicCoverage = new HistoricCoverage(@class, executionTime, tag);
+                    @class.AddHistoricCoverage(historicCoverage);
+
+                    lock (overallHistoricCoveragesLock)
+                    {
+                        overallHistoricCoverages.Add(historicCoverage);
+                    }
+                }
+
+                return (@class, fileAnalyses);
+            }
+        }
+
+        private static void RenderReport(IReportBuilder renderer, Class @class, List<FileAnalysis> analysis)
+        {
+            try
+            {
+                renderer.CreateClassReport(@class, analysis);
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorFormat(
+                    Resources.ErrorDuringRenderingClassReport,
+                    @class.Name,
+                    renderer.ReportType,
+                    ex.GetExceptionMessageForDisplay());
             }
         }
     }
