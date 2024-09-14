@@ -177,7 +177,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
 
             foreach (var @class in assembly.classes)
             {
-                var existingClass = this.classes.FirstOrDefault(c => c.Name == @class.Name);
+                var existingClass = this.classes.FirstOrDefault(c => c.Equals(@class));
 
                 if (existingClass != null)
                 {
