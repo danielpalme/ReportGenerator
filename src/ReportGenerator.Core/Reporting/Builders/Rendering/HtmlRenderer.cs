@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using Microsoft.Extensions.ObjectPool;
 using Palmmedia.ReportGenerator.Core.CodeAnalysis;
 using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
@@ -19,27 +21,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
     /// </summary>
     internal class HtmlRenderer : IHtmlRenderer, IDisposable
     {
-        /// <summary>
-        /// The head of each generated HTML file.
-        /// </summary>
-        private const string HtmlStart = @"<!DOCTYPE html>
-<html>
-<head>
-<meta charset=""utf-8"" />
-<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />
-<meta http-equiv=""X-UA-Compatible"" content=""IE=EDGE,chrome=1"" />
-<link href=""data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAn1BMVEUAAADCAAAAAAA3yDfUAAA3yDfUAAA8PDzr6+sAAAD4+Pg3yDeQkJDTAADt7e3V1dU3yDdCQkIAAADbMTHUAABBykHUAAA2yDY3yDfr6+vTAAB3diDR0dGYcHDUAAAjhiPSAAA3yDeuAADUAAA3yDf////OCALg9+BLzktBuzRelimzKgv87+/dNTVflSn1/PWz6rO126g5yDlYniy0KgwjJ0TyAAAAI3RSTlMABAj0WD6rJcsN7X1HzMqUJyYW+/X08+bltqSeaVRBOy0cE+citBEAAADBSURBVDjLlczXEoIwFIThJPYGiL0XiL3r+z+bBOJs9JDMuLffP8v+Gxfc6aIyDQVjQcnqnvRDEQwLJYtXpZT+YhDHKIjLbS+OUeT4TjkKi6OwOArq+yeKXD9uDqQQbcOjyCy0e6bTojZSftX+U6zUQ7OuittDu1k0WHqRFfdXQijgjKfF6ZwAikvmKD6OQjmKWUcDigkztm5FZN05nMON9ZcoinlBmTNnAUdBnRbUUbgdBZwWbkcBpwXcVsBtxfjb31j1QB5qeebOAAAAAElFTkSuQmCC"" rel=""icon"" type=""image/x-icon"" />
-<title>{0} - {1}</title>
-{2}
-</head><body><div class=""container""><div class=""containerleft"">";
-
-        /// <summary>
-        /// The end of each generated HTML file.
-        /// </summary>
-        private const string HtmlEnd = @"</div></div>
-{0}
-</body></html>";
-
         /// <summary>
         /// The link to the static CSS file.
         /// </summary>
@@ -118,7 +99,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.fileNameByClass = fileNameByClass;
             this.onlySummary = onlySummary;
             this.htmlMode = htmlMode;
-            this.javaScriptContent = new StringBuilder();
+            this.javaScriptContent = StringBuilderCache.Get();
             this.cssFileResource = cssFileResource;
             this.additionalCssFileResources = additionalCssFileResource == null ? new string[0] : new[] { additionalCssFileResource };
         }
@@ -141,7 +122,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.fileNameByClass = fileNameByClass;
             this.onlySummary = onlySummary;
             this.htmlMode = htmlMode;
-            this.javaScriptContent = new StringBuilder();
+            this.javaScriptContent = StringBuilderCache.Get();
             this.additionalCssFileResources = additionalCssFileResources ?? new string[0];
             this.cssFileResource = cssFileResource;
         }
@@ -159,14 +140,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             Logger.InfoFormat(Resources.WritingReportFile, targetPath);
             this.CreateTextWriter(targetPath);
 
-            using (var cssStream = this.GetCombinedCss())
-            {
-                string style = this.htmlMode == HtmlMode.InlineCssAndJavaScript ?
-                    "<style type=\"text/css\">" + new StreamReader(cssStream).ReadToEnd() + "</style>"
-                    : CssLink;
-
-                this.reportTextWriter.WriteLine(HtmlStart, WebUtility.HtmlEncode(title), WebUtility.HtmlEncode(ReportResources.CoverageReport), style);
-            }
+            this.WriteHtmlStart(this.reportTextWriter, title, ReportResources.CoverageReport);
         }
 
         /// <inheritdoc />
@@ -179,14 +153,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             Logger.DebugFormat(Resources.WritingReportFile, targetPath);
             this.CreateTextWriter(Path.Combine(targetDirectory, targetPath));
 
-            using (var cssStream = this.GetCombinedCss())
-            {
-                string style = this.htmlMode == HtmlMode.InlineCssAndJavaScript ?
-                    "<style type=\"text/css\">" + new StreamReader(cssStream).ReadToEnd() + "</style>"
-                    : CssLink;
-
-                this.reportTextWriter.WriteLine(HtmlStart, WebUtility.HtmlEncode(classDisplayName), WebUtility.HtmlEncode(additionalTitle + ReportResources.CoverageReport), style);
-            }
+            this.WriteHtmlStart(this.reportTextWriter, classDisplayName, additionalTitle + ReportResources.CoverageReport);
         }
 
         /// <inheritdoc />
@@ -425,7 +392,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.reportTextWriter.WriteLine("<col class=\"column70\" />");
             this.reportTextWriter.WriteLine("<col class=\"column60\" />");
             this.reportTextWriter.WriteLine("<col class=\"column112\" />");
-
             if (branchCoverageAvailable)
             {
                 this.reportTextWriter.WriteLine("<col class=\"column90\" />");
@@ -545,88 +511,92 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                         methodCoverageHistory = "[" + string.Join(",", historicCoverages.Select(h => h.CodeElementCoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture))) + "]";
                     }
 
-                    var historicCoveragesSb = new StringBuilder();
-                    int historicCoveragesCounter = 0;
-                    historicCoveragesSb.Append("[");
-                    foreach (var historicCoverage in @class.HistoricCoverages)
+                    void WriteHistoricCoverage()
                     {
-                        historicCoverageExecutionTimes.Add(historicCoverage.ExecutionTime);
-                        tagsByBistoricCoverageExecutionTime[historicCoverage.ExecutionTime] = historicCoverage.Tag;
-
-                        if (historicCoveragesCounter++ > 0)
+                        int historicCoveragesCounter = 0;
+                        this.javaScriptContent.Append("[");
+                        foreach (var historicCoverage in @class.HistoricCoverages)
                         {
-                            historicCoveragesSb.Append(", ");
+                            historicCoverageExecutionTimes.Add(historicCoverage.ExecutionTime);
+                            tagsByBistoricCoverageExecutionTime[historicCoverage.ExecutionTime] = historicCoverage.Tag;
+
+                            if (historicCoveragesCounter++ > 0)
+                            {
+                                this.javaScriptContent.Append(", ");
+                            }
+
+                            this.javaScriptContent.AppendFormat(
+                                "{{ \"et\": \"{0} - {1}{2}{3}\", \"cl\": {4}, \"ucl\": {5}, \"cal\": {6}, \"tl\": {7}, \"lcq\": {8}, \"cb\": {9}, \"tb\": {10}, \"bcq\": {11}, \"cm\": {12}, \"tm\": {13}, \"mcq\": {14} }}",
+                                historicCoverage.ExecutionTime.ToShortDateString(),
+                                historicCoverage.ExecutionTime.ToLongTimeString(),
+                                string.IsNullOrEmpty(historicCoverage.Tag) ? string.Empty : " - ",
+                                historicCoverage.Tag,
+                                historicCoverage.CoveredLines.ToString(CultureInfo.InvariantCulture),
+                                (historicCoverage.CoverableLines - historicCoverage.CoveredLines).ToString(CultureInfo.InvariantCulture),
+                                historicCoverage.CoverableLines.ToString(CultureInfo.InvariantCulture),
+                                historicCoverage.TotalLines.ToString(CultureInfo.InvariantCulture),
+                                historicCoverage.CoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture),
+                                historicCoverage.CoveredBranches.ToString(CultureInfo.InvariantCulture),
+                                historicCoverage.TotalBranches.ToString(CultureInfo.InvariantCulture),
+                                historicCoverage.BranchCoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture),
+                                methodCoverageAvailable ? historicCoverage.CoveredCodeElements.GetValueOrDefault().ToString(CultureInfo.InvariantCulture) : "0",
+                                methodCoverageAvailable ? historicCoverage.TotalCodeElements.GetValueOrDefault().ToString(CultureInfo.InvariantCulture) : "0",
+                                methodCoverageAvailable ? historicCoverage.CodeElementCoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture) : "0");
                         }
 
-                        historicCoveragesSb.AppendFormat(
-                            "{{ \"et\": \"{0} - {1}{2}{3}\", \"cl\": {4}, \"ucl\": {5}, \"cal\": {6}, \"tl\": {7}, \"lcq\": {8}, \"cb\": {9}, \"tb\": {10}, \"bcq\": {11}, \"cm\": {12}, \"tm\": {13}, \"mcq\": {14} }}",
-                            historicCoverage.ExecutionTime.ToShortDateString(),
-                            historicCoverage.ExecutionTime.ToLongTimeString(),
-                            string.IsNullOrEmpty(historicCoverage.Tag) ? string.Empty : " - ",
-                            historicCoverage.Tag,
-                            historicCoverage.CoveredLines.ToString(CultureInfo.InvariantCulture),
-                            (historicCoverage.CoverableLines - historicCoverage.CoveredLines).ToString(CultureInfo.InvariantCulture),
-                            historicCoverage.CoverableLines.ToString(CultureInfo.InvariantCulture),
-                            historicCoverage.TotalLines.ToString(CultureInfo.InvariantCulture),
-                            historicCoverage.CoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture),
-                            historicCoverage.CoveredBranches.ToString(CultureInfo.InvariantCulture),
-                            historicCoverage.TotalBranches.ToString(CultureInfo.InvariantCulture),
-                            historicCoverage.BranchCoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture),
-                            methodCoverageAvailable ? historicCoverage.CoveredCodeElements.GetValueOrDefault().ToString(CultureInfo.InvariantCulture) : "0",
-                            methodCoverageAvailable ? historicCoverage.TotalCodeElements.GetValueOrDefault().ToString(CultureInfo.InvariantCulture) : "0",
-                            methodCoverageAvailable ? historicCoverage.CodeElementCoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture) : "0");
+                        this.javaScriptContent.Append("]");
                     }
 
-                    historicCoveragesSb.Append("]");
-
-                    var metricsSb = new StringBuilder();
-                    int metricsCounter = 0;
-                    metricsSb.Append("{");
-
-                    foreach (var metricGroup in @class.Files.SelectMany(f => f.MethodMetrics).SelectMany(m => m.Metrics).GroupBy(m => m.Name))
+                    void WriteMetricsCoverage()
                     {
-                        var firstMetric = metricGroup.First();
-                        metricsByName[firstMetric.Name] = firstMetric;
+                        int metricsCounter = 0;
+                        this.javaScriptContent.Append("{");
 
-                        if (!methodCoverageAvailable)
+                        foreach (var metricGroup in @class.Files.SelectMany(f => f.MethodMetrics).SelectMany(m => m.Metrics).GroupBy(m => m.Name))
                         {
-                            continue;
-                        }
+                            var firstMetric = metricGroup.First();
+                            metricsByName[firstMetric.Name] = firstMetric;
 
-                        decimal? value = null;
-
-                        if (firstMetric.MetricType == MetricType.CoverageAbsolute)
-                        {
-                            value = metricGroup.SafeSum(m => m.Value);
-                        }
-                        else
-                        {
-                            // Show worst result on summary page
-                            if (firstMetric.MergeOrder == MetricMergeOrder.HigherIsBetter)
+                            if (!methodCoverageAvailable)
                             {
-                                value = metricGroup.Min(m => m.Value);
+                                continue;
+                            }
+
+                            decimal? value = null;
+
+                            if (firstMetric.MetricType == MetricType.CoverageAbsolute)
+                            {
+                                value = metricGroup.SafeSum(m => m.Value);
                             }
                             else
                             {
-                                value = metricGroup.Max(m => m.Value);
+                                // Show worst result on summary page
+                                if (firstMetric.MergeOrder == MetricMergeOrder.HigherIsBetter)
+                                {
+                                    value = metricGroup.Min(m => m.Value);
+                                }
+                                else
+                                {
+                                    value = metricGroup.Max(m => m.Value);
+                                }
                             }
-                        }
 
-                        if (value.HasValue)
-                        {
-                            if (metricsCounter++ > 0)
+                            if (value.HasValue)
                             {
-                                metricsSb.Append(", ");
+                                if (metricsCounter++ > 0)
+                                {
+                                    this.javaScriptContent.Append(", ");
+                                }
+
+                                this.javaScriptContent.AppendFormat(
+                                    " \"{0}\": {1}",
+                                    firstMetric.Abbreviation,
+                                    value.Value.ToString(CultureInfo.InvariantCulture));
                             }
-
-                            metricsSb.AppendFormat(
-                                " \"{0}\": {1}",
-                                firstMetric.Abbreviation,
-                                value.Value.ToString(CultureInfo.InvariantCulture));
                         }
-                    }
 
-                    metricsSb.Append(" }");
+                        this.javaScriptContent.Append(" }");
+                    }
 
                     this.javaScriptContent.Append("      { ");
                     this.javaScriptContent.AppendFormat("\"name\": \"{0}\",", @class.DisplayName.Replace(@"\", @"\\"));
@@ -645,8 +615,13 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     this.javaScriptContent.AppendFormat(" \"lch\": {0},", lineCoverageHistory);
                     this.javaScriptContent.AppendFormat(" \"bch\": {0},", branchCoverageHistory);
                     this.javaScriptContent.AppendFormat(" \"mch\": {0},", methodCoverageHistory);
-                    this.javaScriptContent.AppendFormat(" \"hc\": {0},", historicCoveragesSb.ToString());
-                    this.javaScriptContent.AppendFormat(" \"metrics\": {0}", metricsSb.ToString());
+
+                    this.javaScriptContent.Append(" \"hc\": ");
+                    WriteHistoricCoverage();
+                    this.javaScriptContent.Append(",");
+
+                    this.javaScriptContent.Append(" \"metrics\": ");
+                    WriteMetricsCoverage();
 
                     this.javaScriptContent.AppendLine(" },");
                 }
@@ -1050,87 +1025,89 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 id,
                 svgHistory);
 
-            var series = new StringBuilder();
-            series.Append("[");
-            if (filteredHistoricCoverages.Any(h => h.CoverageQuota.HasValue))
+            void WriteSeries(TextWriter series)
             {
-                for (int i = 0; i < filteredHistoricCoverages.Count; i++)
+                series.Write("[");
+                if (filteredHistoricCoverages.Any(h => h.CoverageQuota.HasValue))
                 {
-                    if (i > 0)
+                    for (int i = 0; i < filteredHistoricCoverages.Count; i++)
                     {
-                        series.Append(", ");
-                    }
+                        if (i > 0)
+                        {
+                            series.Write(", ");
+                        }
 
-                    if (filteredHistoricCoverages[i].CoverageQuota.HasValue)
-                    {
-                        series.Append("{ 'meta': ");
-                        series.Append(i);
-                        series.Append(", 'value': ");
-                        series.Append(filteredHistoricCoverages[i].CoverageQuota.Value.ToString(CultureInfo.InvariantCulture));
-                        series.Append(" }");
-                    }
-                    else
-                    {
-                        series.Append("null");
+                        if (filteredHistoricCoverages[i].CoverageQuota.HasValue)
+                        {
+                            series.Write("{ 'meta': ");
+                            series.Write(i);
+                            series.Write(", 'value': ");
+                            series.Write(filteredHistoricCoverages[i].CoverageQuota.Value.ToString(CultureInfo.InvariantCulture));
+                            series.Write(" }");
+                        }
+                        else
+                        {
+                            series.Write("null");
+                        }
                     }
                 }
-            }
 
-            series.AppendLine("],");
-            series.Append("[");
+                series.WriteLine("],");
+                series.Write("[");
 
-            if (filteredHistoricCoverages.Any(h => h.BranchCoverageQuota.HasValue))
-            {
-                for (int i = 0; i < filteredHistoricCoverages.Count; i++)
+                if (filteredHistoricCoverages.Any(h => h.BranchCoverageQuota.HasValue))
                 {
-                    if (i > 0)
+                    for (int i = 0; i < filteredHistoricCoverages.Count; i++)
                     {
-                        series.Append(", ");
-                    }
+                        if (i > 0)
+                        {
+                            series.Write(", ");
+                        }
 
-                    if (filteredHistoricCoverages[i].BranchCoverageQuota.HasValue)
-                    {
-                        series.Append("{ 'meta': ");
-                        series.Append(i);
-                        series.Append(", 'value': ");
-                        series.Append(filteredHistoricCoverages[i].BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture));
-                        series.Append(" }");
-                    }
-                    else
-                    {
-                        series.Append("null");
+                        if (filteredHistoricCoverages[i].BranchCoverageQuota.HasValue)
+                        {
+                            series.Write("{ 'meta': ");
+                            series.Write(i);
+                            series.Write(", 'value': ");
+                            series.Write(filteredHistoricCoverages[i].BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture));
+                            series.Write(" }");
+                        }
+                        else
+                        {
+                            series.Write("null");
+                        }
                     }
                 }
-            }
 
-            series.AppendLine("],");
-            series.Append("[");
+                series.WriteLine("],");
+                series.Write("[");
 
-            if (methodCoverageAvailable && filteredHistoricCoverages.Any(h => h.CodeElementCoverageQuota.HasValue))
-            {
-                for (int i = 0; i < filteredHistoricCoverages.Count; i++)
+                if (methodCoverageAvailable && filteredHistoricCoverages.Any(h => h.CodeElementCoverageQuota.HasValue))
                 {
-                    if (i > 0)
+                    for (int i = 0; i < filteredHistoricCoverages.Count; i++)
                     {
-                        series.Append(", ");
-                    }
+                        if (i > 0)
+                        {
+                            series.Write(", ");
+                        }
 
-                    if (filteredHistoricCoverages[i].CodeElementCoverageQuota.HasValue)
-                    {
-                        series.Append("{ 'meta': ");
-                        series.Append(i);
-                        series.Append(", 'value': ");
-                        series.Append(filteredHistoricCoverages[i].CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture));
-                        series.Append(" }");
-                    }
-                    else
-                    {
-                        series.Append("null");
+                        if (filteredHistoricCoverages[i].CodeElementCoverageQuota.HasValue)
+                        {
+                            series.Write("{ 'meta': ");
+                            series.Write(i);
+                            series.Write(", 'value': ");
+                            series.Write(filteredHistoricCoverages[i].CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture));
+                            series.Write(" }");
+                        }
+                        else
+                        {
+                            series.Write("null");
+                        }
                     }
                 }
-            }
 
-            series.AppendLine("]");
+                series.WriteLine("]");
+            }
 
             var toolTips = filteredHistoricCoverages.Select(h =>
                 string.Format(
@@ -1146,9 +1123,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.reportTextWriter.WriteLine("<script type=\"text/javascript\">/* <![CDATA[ */ ");
 
             this.reportTextWriter.WriteLine("var historyChartData{0} = {{", id);
-            this.reportTextWriter.WriteLine(
-                "    \"series\" : [{0}],",
-                series);
+            this.reportTextWriter.Write("    \"series\" : [");
+            WriteSeries(this.reportTextWriter);
+            this.reportTextWriter.WriteLine("],\"");
+
             this.reportTextWriter.WriteLine(
                  "    \"tooltips\" : [{0}]",
                  string.Join(",", toolTips));
@@ -1278,7 +1256,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 "<th title=\"{0}\" class=\"right\">{1}</th>",
                 assembly.CoverageQuota.HasValue ? $"{assembly.CoveredLines}/{assembly.CoverableLines}" : string.Empty,
                 assembly.CoverageQuota.HasValue ? assembly.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
-            this.reportTextWriter.Write("<th>{0}</th>", CreateCoverageTable(assembly.CoverageQuota));
+            WriteCoverageTable(this.reportTextWriter, "th", assembly.CoverageQuota);
 
             if (branchCoverageAvailable)
             {
@@ -1288,7 +1266,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 "<th class=\"right\" title=\"{0}\">{1}</th>",
                 assembly.BranchCoverageQuota.HasValue ? $"{assembly.CoveredBranches}/{assembly.TotalBranches}" : "-",
                 assembly.BranchCoverageQuota.HasValue ? assembly.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
-                this.reportTextWriter.Write("<th>{0}</th>", CreateCoverageTable(assembly.BranchCoverageQuota));
+                WriteCoverageTable(this.reportTextWriter, "th", assembly.BranchCoverageQuota);
             }
 
             if (methodCoverageAvailable)
@@ -1299,7 +1277,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 "<th class=\"right\" title=\"{0}\">{1}</th>",
                 assembly.CodeElementCoverageQuota.HasValue ? $"{assembly.CoveredCodeElements}/{assembly.TotalCodeElements}" : "-",
                 assembly.CodeElementCoverageQuota.HasValue ? assembly.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
-                this.reportTextWriter.Write("<th>{0}</th>", CreateCoverageTable(assembly.CodeElementCoverageQuota));
+                WriteCoverageTable(this.reportTextWriter, "th", assembly.CodeElementCoverageQuota);
             }
 
             this.reportTextWriter.WriteLine("</tr>");
@@ -1334,7 +1312,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 "<td title=\"{0}\" class=\"right\">{1}</td>",
                 @class.CoverageQuota.HasValue ? $"{@class.CoveredLines}/{@class.CoverableLines}" : string.Empty,
                 @class.CoverageQuota.HasValue ? @class.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
-            this.reportTextWriter.Write("<td>{0}</td>", CreateCoverageTable(@class.CoverageQuota));
+
+            WriteCoverageTable(this.reportTextWriter, "td", @class.CoverageQuota);
 
             if (branchCoverageAvailable)
             {
@@ -1344,7 +1323,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     "<td class=\"right\" title=\"{0}\">{1}</td>",
                     @class.BranchCoverageQuota.HasValue ? $"{@class.CoveredBranches}/{@class.TotalBranches}" : "-",
                     @class.BranchCoverageQuota.HasValue ? @class.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
-                this.reportTextWriter.Write("<td>{0}</td>", CreateCoverageTable(@class.BranchCoverageQuota));
+                WriteCoverageTable(this.reportTextWriter, "td", @class.BranchCoverageQuota);
             }
 
             if (methodCoverageAvailable)
@@ -1355,7 +1334,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     "<td class=\"right\" title=\"{0}\">{1}</td>",
                     @class.CodeElementCoverageQuota.HasValue ? $"{@class.CoveredCodeElements}/{@class.TotalCodeElements}" : "-",
                     @class.CodeElementCoverageQuota.HasValue ? @class.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
-                this.reportTextWriter.Write("<td>{0}</td>", CreateCoverageTable(@class.CodeElementCoverageQuota));
+                WriteCoverageTable(this.reportTextWriter, "td", @class.CodeElementCoverageQuota);
             }
 
             this.reportTextWriter.WriteLine("</tr>");
@@ -1415,19 +1394,19 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             if (disposing)
             {
                 this.reportTextWriter?.Dispose();
+                StringBuilderCache.Return(this.javaScriptContent);
             }
         }
 
         /// <summary>
-        /// Builds a table showing the coverage quota with red and green bars.
+        /// Writes a table showing the coverage quota with red and green bars to the TextWriter.
         /// </summary>
+        /// <param name="writer"><see cref="TextWriter"/> to write to.</param>
+        /// <param name="surroundingElement">Html element to write around the table (e.g. 'td', or 'th').</param>
         /// <param name="coverage">The coverage quota.</param>
-        /// <returns>Table showing the coverage quota with red and green bars.</returns>
-        private static string CreateCoverageTable(decimal? coverage)
+        private static void WriteCoverageTable(TextWriter writer, string surroundingElement, decimal? coverage)
         {
-            var stringBuilder = new StringBuilder();
-
-            stringBuilder.Append("<table class=\"coverage\"><tr>");
+            writer.Write("<{0}><table class=\"coverage\"><tr>", surroundingElement);
 
             if (coverage.HasValue)
             {
@@ -1436,21 +1415,20 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
                 if (covered > 0)
                 {
-                    stringBuilder.Append("<td class=\"green covered" + covered + "\">&nbsp;</td>");
+                    writer.Write("<td class=\"green covered{0}\">&nbsp;</td>", covered);
                 }
 
                 if (uncovered > 0)
                 {
-                    stringBuilder.Append("<td class=\"red covered" + uncovered + "\">&nbsp;</td>");
+                    writer.Write("<td class=\"red covered{0}\">&nbsp;</td>", uncovered);
                 }
             }
             else
             {
-                stringBuilder.Append("<td class=\"gray covered100\">&nbsp;</td>");
+                writer.Write("<td class=\"gray covered100\">&nbsp;</td>");
             }
 
-            stringBuilder.Append("</tr></table>");
-            return stringBuilder.ToString();
+            writer.Write("</tr></table></{0}>", surroundingElement);
         }
 
         /// <summary>
@@ -1499,6 +1477,32 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             {
                 return ReportResources.CoverageTooltip_NotCoverable;
             }
+        }
+
+        private void WriteHtmlStart(TextWriter writer, string title, string subtitle)
+        {
+            writer.WriteLine($@"<!DOCTYPE html>
+<html>
+<head>
+<meta charset=""utf-8"" />
+<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />
+<meta http-equiv=""X-UA-Compatible"" content=""IE=EDGE,chrome=1"" />
+<link href=""data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAn1BMVEUAAADCAAAAAAA3yDfUAAA3yDfUAAA8PDzr6+sAAAD4+Pg3yDeQkJDTAADt7e3V1dU3yDdCQkIAAADbMTHUAABBykHUAAA2yDY3yDfr6+vTAAB3diDR0dGYcHDUAAAjhiPSAAA3yDeuAADUAAA3yDf////OCALg9+BLzktBuzRelimzKgv87+/dNTVflSn1/PWz6rO126g5yDlYniy0KgwjJ0TyAAAAI3RSTlMABAj0WD6rJcsN7X1HzMqUJyYW+/X08+bltqSeaVRBOy0cE+citBEAAADBSURBVDjLlczXEoIwFIThJPYGiL0XiL3r+z+bBOJs9JDMuLffP8v+Gxfc6aIyDQVjQcnqnvRDEQwLJYtXpZT+YhDHKIjLbS+OUeT4TjkKi6OwOArq+yeKXD9uDqQQbcOjyCy0e6bTojZSftX+U6zUQ7OuittDu1k0WHqRFfdXQijgjKfF6ZwAikvmKD6OQjmKWUcDigkztm5FZN05nMON9ZcoinlBmTNnAUdBnRbUUbgdBZwWbkcBpwXcVsBtxfjb31j1QB5qeebOAAAAAElFTkSuQmCC"" rel=""icon"" type=""image/x-icon"" />
+<title>{WebUtility.HtmlEncode(title)} - {WebUtility.HtmlEncode(subtitle)}</title>");
+
+            if (this.htmlMode == HtmlMode.InlineCssAndJavaScript)
+            {
+                writer.Write("<style type=\"text/css\">");
+                this.WriteCss(writer);
+
+                writer.WriteLine("</style>");
+            }
+            else
+            {
+                writer.WriteLine(CssLink);
+            }
+
+            writer.WriteLine("</head><body><div class=\"container\"><div class=\"containerleft\">");
         }
 
         /// <summary>
@@ -1578,24 +1582,25 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             using (var fs = new FileStream(targetPath, FileMode.Create))
             {
-                using (var cssStream = this.GetCombinedCss())
+                if (this.htmlMode != HtmlMode.InlineCssAndJavaScript)
                 {
-                    cssStream.CopyTo(fs);
-
-                    if (this.htmlMode != HtmlMode.InlineCssAndJavaScript)
+                    var builder = StringBuilderCache.Get();
+                    using (var writer = new StringWriter(builder))
                     {
-                        cssStream.Position = 0;
-                        string css = new StreamReader(cssStream).ReadToEnd();
-
-                        var matches = Regex.Matches(css, @"url\(icon_(?<filename>.+).svg\),\surl\(data:image/svg\+xml;base64,(?<base64image>.+)\)");
-
-                        foreach (Match match in matches)
-                        {
-                            System.IO.File.WriteAllBytes(
-                                Path.Combine(targetDirectory, "icon_" + match.Groups["filename"].Value + ".svg"),
-                                Convert.FromBase64String(match.Groups["base64image"].Value));
-                        }
+                        this.WriteCss(writer);
                     }
+
+                    string css = StringBuilderCache.ToStringAndReturnToPool(builder);
+                    var matches = Regex.Matches(css, @"url\(icon_(?<filename>.+).svg\),\surl\(data:image/svg\+xml;base64,(?<base64image>.+)\)");
+
+                    foreach (Match match in matches)
+                    {
+                        System.IO.File.WriteAllBytes(
+                            Path.Combine(targetDirectory, "icon_" + match.Groups["filename"].Value + ".svg"),
+                            Convert.FromBase64String(match.Groups["base64image"].Value));
+                    }
+
+                    StringBuilderCache.Return(builder);
                 }
             }
 
@@ -1616,230 +1621,168 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             }
 
             using (var fs = new FileStream(targetPath, FileMode.Create))
+            using (var writer = new StreamWriter(fs))
             {
-                using (var javaScriptStream = this.GetCombinedJavascript())
-                {
-                    javaScriptStream.CopyTo(fs);
-                }
+                this.WriteCombinedJavascript(writer);
             }
 
             WrittenCssAndJavascriptFiles.Add(targetPath);
         }
 
         /// <summary>
-        /// Gets the combined CSS.
+        /// Writes CSS to the provided Text Writer.
         /// </summary>
-        /// <returns>The combined CSS.</returns>
-        private Stream GetCombinedCss()
+        private void WriteCss(TextWriter writer)
         {
-            var ms = new MemoryStream();
-            var lineBreak = Encoding.UTF8.GetBytes(Environment.NewLine);
-
-            void CopyWithFilteredUrls(Stream s)
+            void WriteWithFilteredUrls(string resourceName)
             {
+                var resource = ResourceStreamCache.Get(resourceName);
                 if (this.htmlMode != HtmlMode.InlineCssAndJavaScript)
                 {
-                    s.CopyTo(ms);
-                    return;
+                    writer.Write(resource);
                 }
-
-                using (var reader = new StreamReader(s))
+                else
                 {
-                    var contents = Regex.Replace(reader.ReadToEnd(), @"url\(icon_.+.svg\),\s", string.Empty);
-                    var bytes = Encoding.UTF8.GetBytes(contents);
-                    ms.Write(bytes, 0, bytes.Length);
-                    ms.Write(lineBreak, 0, lineBreak.Length);
+                    writer.WriteLine(Regex.Replace(resource, @"url\(icon_.+.svg\),\s", string.Empty));
                 }
             }
 
-            using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
-                $"Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering.resources.{this.cssFileResource}"))
-            {
-                CopyWithFilteredUrls(stream);
-            }
-
-            ms.Write(lineBreak, 0, lineBreak.Length);
-            ms.Write(lineBreak, 0, lineBreak.Length);
+            WriteWithFilteredUrls(this.cssFileResource);
+            writer.WriteLine();
+            writer.WriteLine();
 
             if (this.additionalCssFileResources != null && this.additionalCssFileResources.Length > 0)
             {
                 foreach (var additionalCssFileResource in this.additionalCssFileResources)
                 {
-                    ms.Write(lineBreak, 0, lineBreak.Length);
-                    ms.Write(lineBreak, 0, lineBreak.Length);
-
-                    using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
-                        $"Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering.resources.{additionalCssFileResource}"))
-                    {
-                        CopyWithFilteredUrls(stream);
-                    }
+                    writer.WriteLine();
+                    writer.WriteLine();
+                    WriteWithFilteredUrls(additionalCssFileResource);
                 }
 
-                ms.Write(lineBreak, 0, lineBreak.Length);
-                ms.Write(lineBreak, 0, lineBreak.Length);
+                writer.WriteLine();
+                writer.WriteLine();
             }
 
-            using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
-                "Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering.resources.chartist.min.css"))
-            {
-                stream.CopyTo(ms);
-            }
-
-            ms.Position = 0;
-
-            return ms;
+            WriteWithFilteredUrls("chartist.min.css");
         }
 
         /// <summary>
-        /// Gets the combined javascript.
+        /// Writes combined javascript to the provided TextWriter.
         /// </summary>
-        /// <returns>The combined javascript.</returns>
-        private Stream GetCombinedJavascript()
+        private void WriteCombinedJavascript(TextWriter writer)
         {
-            byte[] lineBreak = Encoding.UTF8.GetBytes(Environment.NewLine);
+            writer.WriteLine(ResourceStreamCache.Get("chartist.min.js"));
+            writer.WriteLine();
 
-            var ms = new MemoryStream();
-
-            using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
-                "Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering.resources.chartist.min.js"))
-            {
-                stream.CopyTo(ms);
-            }
-
-            ms.Write(lineBreak, 0, lineBreak.Length);
-            ms.Write(lineBreak, 0, lineBreak.Length);
-
-            using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
-                "Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering.resources.custom.js"))
-            {
-                stream.CopyTo(ms);
-            }
+            writer.Write(ResourceStreamCache.Get("custom.js"));
 
             if (this.classReport)
             {
-                ms.Position = 0;
-                return ms;
+                return;
             }
 
-            ms.Write(lineBreak, 0, lineBreak.Length);
-            ms.Write(lineBreak, 0, lineBreak.Length);
+            writer.WriteLine();
+            writer.WriteLine();
 
-            byte[] assembliesText = Encoding.UTF8.GetBytes(this.javaScriptContent.ToString());
-            ms.Write(assembliesText, 0, assembliesText.Length);
+#if NETSTANDARD
+            writer.Write(this.javaScriptContent.ToString());
 
-            ms.Write(lineBreak, 0, lineBreak.Length);
+#else
+            writer.Write(this.javaScriptContent);
+#endif
 
-            var sb = new StringBuilder();
-            sb.AppendLine("var translations = {");
-            sb.AppendFormat("'top': '{0}'", WebUtility.HtmlEncode(ReportResources.Top));
-            sb.AppendLine(",");
-            sb.AppendFormat("'all': '{0}'", WebUtility.HtmlEncode(ReportResources.All));
-            sb.AppendLine(",");
-            sb.AppendFormat("'assembly': '{0}'", WebUtility.HtmlEncode(ReportResources.Assembly2));
-            sb.AppendLine(",");
-            sb.AppendFormat("'class': '{0}'", WebUtility.HtmlEncode(ReportResources.Class2));
-            sb.AppendLine(",");
-            sb.AppendFormat("'method': '{0}'", WebUtility.HtmlEncode(ReportResources.Method));
-            sb.AppendLine(",");
-            sb.AppendFormat("'lineCoverage': '{0}'", WebUtility.HtmlEncode(ReportResources.Coverage));
-            sb.AppendLine(",");
-            sb.AppendFormat("'noGrouping': '{0}'", WebUtility.HtmlEncode(ReportResources.NoGrouping));
-            sb.AppendLine(",");
-            sb.AppendFormat("'byAssembly': '{0}'", WebUtility.HtmlEncode(ReportResources.ByAssembly));
-            sb.AppendLine(",");
-            sb.AppendFormat("'byNamespace': '{0}'", WebUtility.HtmlEncode(ReportResources.ByNamespace));
-            sb.AppendLine(",");
-            sb.AppendFormat("'all': '{0}'", WebUtility.HtmlEncode(ReportResources.All));
-            sb.AppendLine(",");
-            sb.AppendFormat("'collapseAll': '{0}'", WebUtility.HtmlEncode(ReportResources.CollapseAll));
-            sb.AppendLine(",");
-            sb.AppendFormat("'expandAll': '{0}'", WebUtility.HtmlEncode(ReportResources.ExpandAll));
-            sb.AppendLine(",");
-            sb.AppendFormat("'grouping': '{0}'", WebUtility.HtmlEncode(ReportResources.Grouping));
-            sb.AppendLine(",");
-            sb.AppendFormat("'filter': '{0}'", WebUtility.HtmlEncode(ReportResources.Filter));
-            sb.AppendLine(",");
-            sb.AppendFormat("'name': '{0}'", WebUtility.HtmlEncode(ReportResources.Name));
-            sb.AppendLine(",");
-            sb.AppendFormat("'covered': '{0}'", WebUtility.HtmlEncode(ReportResources.Covered));
-            sb.AppendLine(",");
-            sb.AppendFormat("'uncovered': '{0}'", WebUtility.HtmlEncode(ReportResources.Uncovered));
-            sb.AppendLine(",");
-            sb.AppendFormat("'coverable': '{0}'", WebUtility.HtmlEncode(ReportResources.Coverable));
-            sb.AppendLine(",");
-            sb.AppendFormat("'total': '{0}'", WebUtility.HtmlEncode(ReportResources.Total));
-            sb.AppendLine(",");
-            sb.AppendFormat("'coverage': '{0}'", WebUtility.HtmlEncode(ReportResources.Coverage));
-            sb.AppendLine(",");
-            sb.AppendFormat("'branchCoverage': '{0}'", WebUtility.HtmlEncode(ReportResources.BranchCoverage));
-            sb.AppendLine(",");
-            sb.AppendFormat("'methodCoverage': '{0}'", WebUtility.HtmlEncode(ReportResources.CodeElementCoverageQuota));
-            sb.AppendLine(",");
-            sb.AppendFormat("'percentage': '{0}'", WebUtility.HtmlEncode(ReportResources.Percentage));
-            sb.AppendLine(",");
-            sb.AppendFormat("'history': '{0}'", WebUtility.HtmlEncode(ReportResources.History));
-            sb.AppendLine(",");
-            sb.AppendFormat("'compareHistory': '{0}'", WebUtility.HtmlEncode(ReportResources.CompareHistory));
-            sb.AppendLine(",");
-            sb.AppendFormat("'date': '{0}'", WebUtility.HtmlEncode(ReportResources.Date));
-            sb.AppendLine(",");
-            sb.AppendFormat("'allChanges': '{0}'", WebUtility.HtmlEncode(ReportResources.AllChanges));
-            sb.AppendLine(",");
-            sb.AppendFormat("'selectCoverageTypes': '{0}'", WebUtility.HtmlEncode(ReportResources.SelectCoverageTypes));
-            sb.AppendLine(",");
-            sb.AppendFormat("'selectCoverageTypesAndMetrics': '{0}'", ReportResources.SelectCoverageTypesAndMetrics);
-            sb.AppendLine(",");
-            sb.AppendFormat("'coverageTypes': '{0}'", WebUtility.HtmlEncode(ReportResources.CoverageTypes));
-            sb.AppendLine(",");
-            sb.AppendFormat("'metrics': '{0}'", WebUtility.HtmlEncode(ReportResources.Metrics));
-            sb.AppendLine(",");
-            sb.AppendFormat("'methodCoverageProVersion': '{0}'", WebUtility.HtmlEncode(ReportResources.MethodCoverageProVersion));
-            sb.AppendLine(",");
-            sb.AppendFormat("'lineCoverageIncreaseOnly': '{0}'", WebUtility.HtmlEncode(ReportResources.LineCoverageIncreaseOnly));
-            sb.AppendLine(",");
-            sb.AppendFormat("'lineCoverageDecreaseOnly': '{0}'", WebUtility.HtmlEncode(ReportResources.LineCoverageDecreaseOnly));
-            sb.AppendLine(",");
-            sb.AppendFormat("'branchCoverageIncreaseOnly': '{0}'", WebUtility.HtmlEncode(ReportResources.BranchCoverageIncreaseOnly));
-            sb.AppendLine(",");
-            sb.AppendFormat("'branchCoverageDecreaseOnly': '{0}'", WebUtility.HtmlEncode(ReportResources.BranchCoverageDecreaseOnly));
-            sb.AppendLine(",");
-            sb.AppendFormat("'methodCoverageIncreaseOnly': '{0}'", WebUtility.HtmlEncode(ReportResources.CodeElementCoverageIncreaseOnly));
-            sb.AppendLine(",");
-            sb.AppendFormat("'methodCoverageDecreaseOnly': '{0}'", WebUtility.HtmlEncode(ReportResources.CodeElementCoverageDecreaseOnly));
-            sb.AppendLine();
-            sb.AppendLine("};");
+            writer.WriteLine();
 
-            byte[] translations = Encoding.UTF8.GetBytes(sb.ToString());
-            ms.Write(translations, 0, translations.Length);
+            writer.WriteLine("var translations = {");
+            writer.Write("'top': '{0}'", WebUtility.HtmlEncode(ReportResources.Top));
+            writer.WriteLine(",");
+            writer.Write("'all': '{0}'", WebUtility.HtmlEncode(ReportResources.All));
+            writer.WriteLine(",");
+            writer.Write("'assembly': '{0}'", WebUtility.HtmlEncode(ReportResources.Assembly2));
+            writer.WriteLine(",");
+            writer.Write("'class': '{0}'", WebUtility.HtmlEncode(ReportResources.Class2));
+            writer.WriteLine(",");
+            writer.Write("'method': '{0}'", WebUtility.HtmlEncode(ReportResources.Method));
+            writer.WriteLine(",");
+            writer.Write("'lineCoverage': '{0}'", WebUtility.HtmlEncode(ReportResources.Coverage));
+            writer.WriteLine(",");
+            writer.Write("'noGrouping': '{0}'", WebUtility.HtmlEncode(ReportResources.NoGrouping));
+            writer.WriteLine(",");
+            writer.Write("'byAssembly': '{0}'", WebUtility.HtmlEncode(ReportResources.ByAssembly));
+            writer.WriteLine(",");
+            writer.Write("'byNamespace': '{0}'", WebUtility.HtmlEncode(ReportResources.ByNamespace));
+            writer.WriteLine(",");
+            writer.Write("'all': '{0}'", WebUtility.HtmlEncode(ReportResources.All));
+            writer.WriteLine(",");
+            writer.Write("'collapseAll': '{0}'", WebUtility.HtmlEncode(ReportResources.CollapseAll));
+            writer.WriteLine(",");
+            writer.Write("'expandAll': '{0}'", WebUtility.HtmlEncode(ReportResources.ExpandAll));
+            writer.WriteLine(",");
+            writer.Write("'grouping': '{0}'", WebUtility.HtmlEncode(ReportResources.Grouping));
+            writer.WriteLine(",");
+            writer.Write("'filter': '{0}'", WebUtility.HtmlEncode(ReportResources.Filter));
+            writer.WriteLine(",");
+            writer.Write("'name': '{0}'", WebUtility.HtmlEncode(ReportResources.Name));
+            writer.WriteLine(",");
+            writer.Write("'covered': '{0}'", WebUtility.HtmlEncode(ReportResources.Covered));
+            writer.WriteLine(",");
+            writer.Write("'uncovered': '{0}'", WebUtility.HtmlEncode(ReportResources.Uncovered));
+            writer.WriteLine(",");
+            writer.Write("'coverable': '{0}'", WebUtility.HtmlEncode(ReportResources.Coverable));
+            writer.WriteLine(",");
+            writer.Write("'total': '{0}'", WebUtility.HtmlEncode(ReportResources.Total));
+            writer.WriteLine(",");
+            writer.Write("'coverage': '{0}'", WebUtility.HtmlEncode(ReportResources.Coverage));
+            writer.WriteLine(",");
+            writer.Write("'branchCoverage': '{0}'", WebUtility.HtmlEncode(ReportResources.BranchCoverage));
+            writer.WriteLine(",");
+            writer.Write("'methodCoverage': '{0}'", WebUtility.HtmlEncode(ReportResources.CodeElementCoverageQuota));
+            writer.WriteLine(",");
+            writer.Write("'percentage': '{0}'", WebUtility.HtmlEncode(ReportResources.Percentage));
+            writer.WriteLine(",");
+            writer.Write("'history': '{0}'", WebUtility.HtmlEncode(ReportResources.History));
+            writer.WriteLine(",");
+            writer.Write("'compareHistory': '{0}'", WebUtility.HtmlEncode(ReportResources.CompareHistory));
+            writer.WriteLine(",");
+            writer.Write("'date': '{0}'", WebUtility.HtmlEncode(ReportResources.Date));
+            writer.WriteLine(",");
+            writer.Write("'allChanges': '{0}'", WebUtility.HtmlEncode(ReportResources.AllChanges));
+            writer.WriteLine(",");
+            writer.Write("'selectCoverageTypes': '{0}'", WebUtility.HtmlEncode(ReportResources.SelectCoverageTypes));
+            writer.WriteLine(",");
+            writer.Write("'selectCoverageTypesAndMetrics': '{0}'", ReportResources.SelectCoverageTypesAndMetrics);
+            writer.WriteLine(",");
+            writer.Write("'coverageTypes': '{0}'", WebUtility.HtmlEncode(ReportResources.CoverageTypes));
+            writer.WriteLine(",");
+            writer.Write("'metrics': '{0}'", WebUtility.HtmlEncode(ReportResources.Metrics));
+            writer.WriteLine(",");
+            writer.Write("'methodCoverageProVersion': '{0}'", WebUtility.HtmlEncode(ReportResources.MethodCoverageProVersion));
+            writer.WriteLine(",");
+            writer.Write("'lineCoverageIncreaseOnly': '{0}'", WebUtility.HtmlEncode(ReportResources.LineCoverageIncreaseOnly));
+            writer.WriteLine(",");
+            writer.Write("'lineCoverageDecreaseOnly': '{0}'", WebUtility.HtmlEncode(ReportResources.LineCoverageDecreaseOnly));
+            writer.WriteLine(",");
+            writer.Write("'branchCoverageIncreaseOnly': '{0}'", WebUtility.HtmlEncode(ReportResources.BranchCoverageIncreaseOnly));
+            writer.WriteLine(",");
+            writer.Write("'branchCoverageDecreaseOnly': '{0}'", WebUtility.HtmlEncode(ReportResources.BranchCoverageDecreaseOnly));
+            writer.WriteLine(",");
+            writer.Write("'methodCoverageIncreaseOnly': '{0}'", WebUtility.HtmlEncode(ReportResources.CodeElementCoverageIncreaseOnly));
+            writer.WriteLine(",");
+            writer.Write("'methodCoverageDecreaseOnly': '{0}'", WebUtility.HtmlEncode(ReportResources.CodeElementCoverageDecreaseOnly));
+            writer.WriteLine();
+            writer.WriteLine("};");
 
-            ms.Write(lineBreak, 0, lineBreak.Length);
-            ms.Write(lineBreak, 0, lineBreak.Length);
+            writer.WriteLine();
+            writer.WriteLine();
 
-            using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
-                "Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering.resources.runtime.js"))
-            {
-                stream.CopyTo(ms);
-            }
+            writer.WriteLine(ResourceStreamCache.Get("runtime.js"));
+            writer.WriteLine();
 
-            ms.Write(lineBreak, 0, lineBreak.Length);
+            writer.WriteLine(ResourceStreamCache.Get("polyfills.js"));
+            writer.WriteLine();
 
-            using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
-                "Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering.resources.polyfills.js"))
-            {
-                stream.CopyTo(ms);
-            }
-
-            ms.Write(lineBreak, 0, lineBreak.Length);
-            ms.Write(lineBreak, 0, lineBreak.Length);
-
-            using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
-                "Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering.resources.main.js"))
-            {
-                stream.CopyTo(ms);
-            }
-
-            ms.Position = 0;
-            return ms;
+            writer.Write(ResourceStreamCache.Get("main.js"));
         }
 
         /// <summary>
@@ -1871,12 +1814,12 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         {
             string fileName = this.classReport ? "class.js" : "main.js";
 
-            string javascript = $"<script type=\"text/javascript\" src=\"{fileName}\"></script>";
+            this.reportTextWriter.WriteLine("</div></div>");
 
             if (this.htmlMode == HtmlMode.ExternalCssAndJavaScriptWithQueryStringHandling)
             {
                 // #349: Apply query string to referenced CSS and JavaScript files and links
-                javascript = $@"<script type=""text/javascript"">
+                this.reportTextWriter.Write($@"<script type=""text/javascript"">
 /* <![CDATA[ */
 (function() {{
     var url = window.location.href;
@@ -1919,17 +1862,20 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
     document.getElementsByTagName('body')[0].appendChild(newScript);
 }})();
 /* ]]> */ 
-</script>";
+</script>");
             }
             else if (this.htmlMode == HtmlMode.InlineCssAndJavaScript)
             {
-                using (var javaScriptStream = this.GetCombinedJavascript())
-                {
-                    javascript = "<script type=\"text/javascript\">/* <![CDATA[ */ " + new StreamReader(javaScriptStream).ReadToEnd() + " /* ]]> */ </script>";
-                }
+                this.reportTextWriter.Write("<script type=\"text/javascript\">/* <![CDATA[ */ ");
+                this.WriteCombinedJavascript(this.reportTextWriter);
+                this.reportTextWriter.WriteLine(" /* ]]> */ </script>");
+            }
+            else
+            {
+                this.reportTextWriter.WriteLine($"<script type=\"text/javascript\" src=\"{fileName}\"></script>");
             }
 
-            this.reportTextWriter.Write(HtmlEnd, javascript);
+            this.reportTextWriter.Write("</body></html>");
         }
 
         /// <summary>
@@ -1953,6 +1899,42 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             result.RemoveRange(0, Math.Max(0, result.Count - maximum));
 
             return result;
+        }
+
+        private static class ResourceStreamCache
+        {
+            private static readonly ConcurrentDictionary<string, string> Cache = new ConcurrentDictionary<string, string>();
+
+            public static string Get(string resourceName) => Cache.GetOrAdd(resourceName, v =>
+            {
+                using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream("Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering.resources." + resourceName))
+                {
+                    using (var reader = new StreamReader(stream))
+                    {
+                        return reader.ReadToEnd();
+                    }
+                }
+            });
+        }
+
+        private static class StringBuilderCache
+        {
+            private static readonly DefaultObjectPool<StringBuilder> Pool = new DefaultObjectPool<StringBuilder>(new StringBuilderPooledObjectPolicy
+            {
+                InitialCapacity = 4096,
+                MaximumRetainedCapacity = 1 * 1024 * 1024
+            });
+
+            internal static StringBuilder Get() => Pool.Get();
+
+            internal static void Return(StringBuilder builder) => Pool.Return(builder);
+
+            internal static string ToStringAndReturnToPool(StringBuilder builder)
+            {
+                var result = builder.ToString();
+                Pool.Return(builder);
+                return result;
+            }
         }
     }
 }
