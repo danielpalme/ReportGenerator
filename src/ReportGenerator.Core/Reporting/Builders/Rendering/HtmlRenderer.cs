@@ -1125,7 +1125,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.reportTextWriter.WriteLine("var historyChartData{0} = {{", id);
             this.reportTextWriter.Write("    \"series\" : [");
             WriteSeries(this.reportTextWriter);
-            this.reportTextWriter.WriteLine("],\"");
+            this.reportTextWriter.WriteLine("],");
 
             this.reportTextWriter.WriteLine(
                  "    \"tooltips\" : [{0}]",
@@ -1580,27 +1580,33 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 return;
             }
 
-            using (var fs = new FileStream(targetPath, FileMode.Create))
+            if (this.htmlMode == HtmlMode.InlineCssAndJavaScript)
             {
-                if (this.htmlMode != HtmlMode.InlineCssAndJavaScript)
+                using (var fs = new FileStream(targetPath, FileMode.Create))
+                using (var writer = new StreamWriter(fs))
                 {
-                    var builder = StringBuilderCache.Get();
-                    using (var writer = new StringWriter(builder))
-                    {
-                        this.WriteCss(writer);
-                    }
+                    this.WriteCss(writer);
+                }
+            }
+            else
+            {
+                var builder = StringBuilderCache.Get();
+                using (var writer = new StringWriter(builder))
+                {
+                    this.WriteCss(writer);
+                }
 
-                    string css = StringBuilderCache.ToStringAndReturnToPool(builder);
-                    var matches = Regex.Matches(css, @"url\(icon_(?<filename>.+).svg\),\surl\(data:image/svg\+xml;base64,(?<base64image>.+)\)");
+                string css = StringBuilderCache.ToStringAndReturnToPool(builder);
 
-                    foreach (Match match in matches)
-                    {
-                        System.IO.File.WriteAllBytes(
-                            Path.Combine(targetDirectory, "icon_" + match.Groups["filename"].Value + ".svg"),
-                            Convert.FromBase64String(match.Groups["base64image"].Value));
-                    }
+                System.IO.File.WriteAllText(targetPath, css);
 
-                    StringBuilderCache.Return(builder);
+                var matches = Regex.Matches(css, @"url\(icon_(?<filename>.+).svg\),\surl\(data:image/svg\+xml;base64,(?<base64image>.+)\)");
+
+                foreach (Match match in matches)
+                {
+                    System.IO.File.WriteAllBytes(
+                        Path.Combine(targetDirectory, "icon_" + match.Groups["filename"].Value + ".svg"),
+                        Convert.FromBase64String(match.Groups["base64image"].Value));
                 }
             }
 
