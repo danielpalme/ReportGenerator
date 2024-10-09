@@ -12,9 +12,6 @@ namespace Palmmedia.ReportGenerator.Core.Plugin
         /// </summary>
         /// <param name="name">The name of the assembly.</param>
         /// <returns>The assembly.</returns>
-        public Assembly Load(string name)
-        {
-            return Assembly.LoadFrom(name);
-        }
+        public Assembly Load(string name) => Assembly.LoadFrom(name);
     }
 }

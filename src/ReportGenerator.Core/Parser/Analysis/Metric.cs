@@ -121,124 +121,108 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The metric.</returns>
-        public static Metric Coverage(decimal? value)
-        {
-            return new Metric(
+        public static Metric Coverage(decimal? value) =>
+            new Metric(
                 ReportResources.Coverage,
                 "cov",
                 CodeCoverageUri,
                 MetricType.CoveragePercentual,
                 value);
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Metric"/> class which represents branch coverage.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The metric.</returns>
-        public static Metric BranchCoverage(decimal? value)
-        {
-            return new Metric(
+        public static Metric BranchCoverage(decimal? value) =>
+            new Metric(
                 ReportResources.BranchCoverage,
                 "bcov",
                 CodeCoverageUri,
                 MetricType.CoveragePercentual,
                 value);
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Metric"/> class which represents sequence coverage.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The metric.</returns>
-        public static Metric SequenceCoverage(decimal? value)
-        {
-            return new Metric(
+        public static Metric SequenceCoverage(decimal? value) =>
+            new Metric(
                 ReportResources.SequenceCoverage,
                 "seq",
                 CodeCoverageUri,
                 MetricType.CoveragePercentual,
                 value);
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Metric"/> class which represents blocks covered.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The metric.</returns>
-        public static Metric BlocksCovered(decimal? value)
-        {
-            return new Metric(
+        public static Metric BlocksCovered(decimal? value) => 
+            new Metric(
                 ReportResources.BlocksCovered,
                 "cb",
                 CodeCoverageUri,
                 MetricType.CoverageAbsolute,
                 value);
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Metric"/> class which represents blocks not covered.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The metric.</returns>
-        public static Metric BlocksNotCovered(decimal? value)
-        {
-            return new Metric(
+        public static Metric BlocksNotCovered(decimal? value) =>
+            new Metric(
                 ReportResources.BlocksNotCovered,
                 "ub",
                 CodeCoverageUri,
                 MetricType.CoverageAbsolute,
                 value,
                 MetricMergeOrder.LowerIsBetter);
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Metric"/> class which represents cyclomatic complexity.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The metric.</returns>
-        public static Metric CyclomaticComplexity(decimal? value)
-        {
-            return new Metric(
+        public static Metric CyclomaticComplexity(decimal? value) =>
+            new Metric(
                 ReportResources.CyclomaticComplexity,
                 "cc",
                 CyclomaticComplexityUri,
                 MetricType.CodeQuality,
                 value,
                 MetricMergeOrder.LowerIsBetter);
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Metric"/> class which represents NPath complexity.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The metric.</returns>
-        public static Metric NPathComplexity(decimal? value)
-        {
-            return new Metric(
+        public static Metric NPathComplexity(decimal? value) => 
+            new Metric(
                 ReportResources.NPathComplexity,
                 "npth",
                 NPathComplexityUri,
                 MetricType.CodeQuality,
                 value,
                 MetricMergeOrder.LowerIsBetter);
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Metric"/> class which represents crap score.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The metric.</returns>
-        public static Metric CrapScore(decimal? value)
-        {
-            return new Metric(
+        public static Metric CrapScore(decimal? value) =>
+            new Metric(
                 ReportResources.CrapScore,
                 "crp",
                 CrapScoreUri,
                 MetricType.CodeQuality,
                 value,
                 MetricMergeOrder.LowerIsBetter);
-        }
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
@@ -246,10 +230,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public override string ToString()
-        {
-            return $"{this.Name}: {this.Value}";
-        }
+        public override string ToString() => $"{this.Name}: {this.Value}";
 
         /// <summary>
         /// Determines whether the specified <see cref="object"/> is equal to this instance.

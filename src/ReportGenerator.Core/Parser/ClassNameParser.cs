@@ -81,9 +81,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// </summary>
         /// <param name="name">The name of the class.</param>
         /// <returns>True if the class should be included; otherwise, false.</returns>
-        private static bool IncludeClass(string name)
-        {
-            return !name.Contains("$");
-        }
+        private static bool IncludeClass(string name) => !name.Contains("$");
     }
 }

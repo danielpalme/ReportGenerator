@@ -12,9 +12,6 @@ namespace Palmmedia.ReportGenerator.Core.Common
         /// </summary>
         /// <param name="pattern">The file pattern.</param>
         /// <returns>The files.</returns>
-        internal static IEnumerable<string> GetFiles(string pattern)
-        {
-            return new Glob(pattern).ExpandNames();
-        }
+        internal static IEnumerable<string> GetFiles(string pattern) => new Glob(pattern).ExpandNames();
     }
 }

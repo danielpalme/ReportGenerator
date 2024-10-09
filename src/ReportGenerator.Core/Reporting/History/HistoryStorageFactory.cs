@@ -25,10 +25,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.History
         /// Initializes a new instance of the <see cref="HistoryStorageFactory" /> class.
         /// </summary>
         /// <param name="pluginLoader">The plugin loader.</param>
-        public HistoryStorageFactory(IPluginLoader pluginLoader)
-        {
+        public HistoryStorageFactory(IPluginLoader pluginLoader) => 
             this.pluginLoader = pluginLoader ?? throw new ArgumentNullException(nameof(pluginLoader));
-        }
 
         /// <summary>
         /// Gets the history storage.

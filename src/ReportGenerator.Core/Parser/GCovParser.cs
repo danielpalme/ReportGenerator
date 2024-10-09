@@ -54,10 +54,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="fileFilter">The file filter.</param>
         /// <param name="defaultAssemblyName">The default assembly name.</param>
         public GCovParser(IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter, string defaultAssemblyName)
-            : base(assemblyFilter, classFilter, fileFilter)
-        {
-            this.defaultAssemblyName = defaultAssemblyName;
-        }
+            : base(assemblyFilter, classFilter, fileFilter) => this.defaultAssemblyName = defaultAssemblyName;
 
         /// <summary>
         /// Parses the given report.

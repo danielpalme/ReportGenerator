@@ -46,10 +46,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="fileFilter">The file filter.</param>
         /// <param name="excludeTestProjects">Indicates whether test projects should be included.</param>
         internal CloverParser(IFilter assemblyFilter, IFilter classFilter, IFilter fileFilter, bool excludeTestProjects)
-            : base(assemblyFilter, classFilter, fileFilter)
-        {
-            this.excludeTestProjects = excludeTestProjects;
-        }
+            : base(assemblyFilter, classFilter, fileFilter) => this.excludeTestProjects = excludeTestProjects;
 
         /// <summary>
         /// Parses the given XML report.
