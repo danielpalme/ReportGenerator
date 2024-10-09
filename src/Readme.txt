@@ -69,6 +69,10 @@ CHANGELOG
 
 5.3.10.0
 
+    * New: Update dependencies (CVE-2024-43485)
+
+5.3.10.0
+
     * New: #695 HTML reports: Performance and memory improvements (contributed by @afscrome)
     * Fix: #690 Fixed handling of history files for classes with not unique names
 
