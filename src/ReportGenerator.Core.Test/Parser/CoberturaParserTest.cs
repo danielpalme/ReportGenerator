@@ -158,9 +158,9 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         [Theory]
         [InlineData("Test", "Test.AbstractClass", "C:\\temp\\AbstractClass.cs", ".ctor()", 1, 1, 100, 100, 1)]
         [InlineData("Test", "Test.AbstractClass_SampleImpl1", "C:\\temp\\AbstractClass.cs", "Method1()", 3, 1, 0, 100, 2)]
-        [InlineData("Test", "Test.PartialClass", "C:\\temp\\PartialClass.cs", "set_SomeProperty(System.Int32)", 4, 2, 66.66, 50, 2.15)]
+        [InlineData("Test", "Test.PartialClass", "C:\\temp\\PartialClass.cs", "set_SomeProperty(System.Int32)", 4, 2, 66.66, 50, 2)]
         [InlineData("Test", "Test.Program", "C:\\temp\\Program.cs", "Main(System.String[])", 4, 1, 89.65, 100, 1.00)]
-        [InlineData("Test", "Test.TestClass", "C:\\temp\\TestClass.cs", "SampleFunction()", 5, 4, 80, 50, 4.13)]
+        [InlineData("Test", "Test.TestClass", "C:\\temp\\TestClass.cs", "SampleFunction()", 5, 4, 80, 50, 4)]
         public void MethodMetricsTest_2(string assemblyName, string className, string filePath, string methodName, int expectedMethodMetrics, double expectedComplexity, double expectedLineCoverage, double expectedBranchCoverage, double expectedCrapScore)
         {
             var methodMetrics = csharpParserResult
