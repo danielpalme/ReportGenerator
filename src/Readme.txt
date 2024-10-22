@@ -67,7 +67,11 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
-5.3.10.0
+5.3.12.0
+
+    * Fix: #699 Rounding crap score to full number
+
+5.3.11.0
 
     * New: Update dependencies (CVE-2024-43485)
 

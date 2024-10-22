@@ -321,7 +321,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     var uncoveredPercent = (100f - (double)coveragePercent.Value) / 100.0;
                     var complexity = (double)cyclomaticComplexity.Value;
                     var crapScore = (Math.Pow(complexity, 2.0) * Math.Pow(uncoveredPercent, 3)) + complexity;
-                    crapScore = Math.Round(crapScore, 2, MidpointRounding.AwayFromZero);
+                    crapScore = Math.Round(crapScore, 0, MidpointRounding.AwayFromZero);
 
                     metrics.Insert(0, Metric.CrapScore((decimal)crapScore));
                 }
