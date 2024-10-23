@@ -70,6 +70,7 @@ CHANGELOG
 5.3.12.0
 
     * Fix: #699 Rounding crap score to full number
+    * Fix: #700 Fixed handling of .netconfig files (sourceDirectories, reportTypes, plugins, assemblyFilters, etc.)
 
 5.3.11.0
 

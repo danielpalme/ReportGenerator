@@ -130,9 +130,9 @@ section. Examples:
 [ReportGenerator]
 	reports = coverage.xml
 	targetdir = "C:\\report"
-	reporttypes = Latex;HtmlSummary
-	assemblyfilters = +Test;-Test
-	classfilters = +Test2;-Test2
+	reporttypes = Latex,HtmlSummary
+	assemblyfilters = +Test,-Test
+	classfilters = +Test2,-Test2
 ```
 
 All the plural options can also be specified as multiple singular entries, like:

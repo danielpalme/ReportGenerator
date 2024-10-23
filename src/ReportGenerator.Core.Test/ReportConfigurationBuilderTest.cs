@@ -89,8 +89,8 @@ namespace Palmmedia.ReportGenerator.Core.Test
             config = config.SetString("reports", ReportPath);
             config = config.SetString("targetdir", "C:\\temp");
             config = config.SetString("reporttype", "Latex");
-            config = config.SetString("assemblyfilters", "+Test;-Test");
-            config = config.SetString("classfilters", "+Test2;-Test2");
+            config = config.SetString("assemblyfilters", "+Test1,-Test2");
+            config = config.SetString("classfilters", "+Test3,-Test4");
             config.SetString("verbosity", VerbosityLevel.Info.ToString());
 
             Directory.SetCurrentDirectory(dir);
@@ -102,10 +102,10 @@ namespace Palmmedia.ReportGenerator.Core.Test
             Assert.True(configuration.ReportFiles.Contains(ReportPath), "ReportPath does not exist in ReportFiles.");
             Assert.Equal("C:\\temp", configuration.TargetDirectory);
             Assert.True(configuration.ReportTypes.Contains("Latex"), "Wrong report type applied.");
-            Assert.True(configuration.AssemblyFilters.Contains("+Test"), "AssemblyFilters does not exist in ReportFiles.");
-            Assert.True(configuration.ClassFilters.Contains("+Test2"), "ClassFilters does not exist in ReportFiles.");
-            Assert.True(configuration.AssemblyFilters.Contains("-Test"), "AssemblyFilters does not exist in ReportFiles.");
-            Assert.True(configuration.ClassFilters.Contains("-Test2"), "ClassFilters does not exist in ReportFiles.");
+            Assert.True(configuration.AssemblyFilters.Contains("+Test1"), "AssemblyFilters does not exist in ReportFiles.");
+            Assert.True(configuration.ClassFilters.Contains("+Test3"), "ClassFilters does not exist in ReportFiles.");
+            Assert.True(configuration.AssemblyFilters.Contains("-Test2"), "AssemblyFilters does not exist in ReportFiles.");
+            Assert.True(configuration.ClassFilters.Contains("-Test4"), "ClassFilters does not exist in ReportFiles.");
             Assert.NotNull(configuration.ReportFiles);
             Assert.NotNull(configuration.AssemblyFilters);
             Assert.NotNull(configuration.ClassFilters);
