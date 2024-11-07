@@ -67,7 +67,7 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
-5.3.12.0
+5.4.0.0
 
     * New: Added support for .NET 9. Dropped support for .NET 6 and .NET 7
     * Fix: #699 Rounding crap score to full number
