@@ -24,14 +24,11 @@
     <file src="..\..\Readme.txt" target="Readme.txt" />
     <file src="VERIFICATION.txt" target="tools\VERIFICATION.txt" />
 
-    <!-- Net6.0 ('tools\net6.0' directory) -->
-    <file src="..\..\ReportGenerator.Console.NetCore\bin\Release\net6.0\publish\**\*.*" target="tools\net6.0" />
-
-    <!-- Net7.0 ('tools\net7.0' directory) -->
-    <file src="..\..\ReportGenerator.Console.NetCore\bin\Release\net7.0\publish\**\*.*" target="tools\net7.0" />
-    
     <!-- Net8.0 ('tools\net8.0' directory) -->
     <file src="..\..\ReportGenerator.Console.NetCore\bin\Release\net8.0\publish\**\*.*" target="tools\net8.0" />
+
+    <!-- Net9.0 ('tools\net9.0' directory) -->
+    <file src="..\..\ReportGenerator.Console.NetCore\bin\Release\net9.0\publish\**\*.*" target="tools\net9.0" />
 
     <!-- .NET 4.7 ('tools\net47' directory) -->
     <file src="..\..\ReportGenerator.Console\bin\Release\*.json" target="tools\net47" />

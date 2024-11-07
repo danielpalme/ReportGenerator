@@ -69,6 +69,7 @@ CHANGELOG
 
 5.3.12.0
 
+    * New: Added support for .NET 9. Dropped support for .NET 6 and .NET 7
     * Fix: #699 Rounding crap score to full number
     * Fix: #700 Fixed handling of .netconfig files (sourceDirectories, reportTypes, plugins, assemblyFilters, etc.)
 

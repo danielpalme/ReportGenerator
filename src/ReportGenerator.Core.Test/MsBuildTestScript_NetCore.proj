@@ -2,11 +2,11 @@
 <Project Sdk="Microsoft.NET.Sdk" DefaultTargets="ReportGenerator">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 
   <!-- Imported MSBuild tasks -->
-  <UsingTask TaskName="ReportGenerator" AssemblyFile="$(MSBuildThisFileDirectory)..\ReportGenerator.Console.NetCore\bin\$(Configuration)\net6.0\ReportGenerator.MSBuild.dll" />
+  <UsingTask TaskName="ReportGenerator" AssemblyFile="$(MSBuildThisFileDirectory)..\ReportGenerator.Console.NetCore\bin\$(Configuration)\net8.0\ReportGenerator.MSBuild.dll" />
 
   <Target Name="ReportGenerator">
     <ItemGroup>

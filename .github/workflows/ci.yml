@@ -7,7 +7,7 @@ env:
   buildPlatform: Any CPU
   buildConfiguration: Release
   version: 5.3.11
-  dotnetSDKVersion: 8.0.403
+  dotnetSDKVersion: 9.0.100
   nodeVersion: 20
 
 jobs:
@@ -50,28 +50,20 @@ jobs:
     - name: 'Compile Solution'
       run: msbuild '${{ env.solution }}' /p:configuration='${{ env.buildConfiguration }}' /p:platform='${{ env.buildPlatform }}'
 
-    - name: dotnet publish Console.NetCore 6.0
-      run: dotnet publish -c ${{ env.BuildConfiguration }} -f net6.0 ReportGenerator.Console.NetCore.csproj
-      working-directory: src/ReportGenerator.Console.NetCore
-
-    - name: dotnet publish Console.NetCore 7.0
-      run: dotnet publish -c ${{ env.BuildConfiguration }} -f net7.0 ReportGenerator.Console.NetCore.csproj
-      working-directory: src/ReportGenerator.Console.NetCore
-
     - name: dotnet publish Console.NetCore 8.0
       run: dotnet publish -c ${{ env.BuildConfiguration }} -f net8.0 ReportGenerator.Console.NetCore.csproj
       working-directory: src/ReportGenerator.Console.NetCore
 
-    - name: dotnet publish DotnetGlobalTool 6.0
-      run: dotnet publish -c ${{ env.BuildConfiguration }} -f net6.0 ReportGenerator.DotnetGlobalTool.csproj
-      working-directory: src/ReportGenerator.DotnetGlobalTool
-
-    - name: dotnet publish DotnetGlobalTool 7.0
-      run: dotnet publish -c ${{ env.BuildConfiguration }} -f net7.0 ReportGenerator.DotnetGlobalTool.csproj
-      working-directory: src/ReportGenerator.DotnetGlobalTool
+    - name: dotnet publish Console.NetCore 9.0
+      run: dotnet publish -c ${{ env.BuildConfiguration }} -f net9.0 ReportGenerator.Console.NetCore.csproj
+      working-directory: src/ReportGenerator.Console.NetCore
 
     - name: dotnet publish DotnetGlobalTool 8.0
       run: dotnet publish -c ${{ env.BuildConfiguration }} -f net8.0 ReportGenerator.DotnetGlobalTool.csproj
+      working-directory: src/ReportGenerator.DotnetGlobalTool
+
+    - name: dotnet publish DotnetGlobalTool 9.0
+      run: dotnet publish -c ${{ env.BuildConfiguration }} -f net9.0 ReportGenerator.DotnetGlobalTool.csproj
       working-directory: src/ReportGenerator.DotnetGlobalTool
 
     - name: Test
@@ -98,8 +90,8 @@ jobs:
 
     - name: 'Prepare VSIX release: NetCore'
       run: |
-        mkdir src/AzureDevopsTask/ReportGenerator/tools/net6.0
-        xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\net6.0\publish' 'src\AzureDevopsTask\ReportGenerator\tools\net6.0' /s
+        mkdir src/AzureDevopsTask/ReportGenerator/tools/net8.0
+        xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\net8.0\publish' 'src\AzureDevopsTask\ReportGenerator\tools\net8.0' /s
 
     - name: 'Prepare VSIX release: Install TFS Cross Platform Command Line Interface (tfx-cli)'
       run: npm install -g tfx-cli
@@ -120,9 +112,8 @@ jobs:
       run: |
         mkdir tmpzip
         mkdir tmpzip\net47
-        mkdir tmpzip\net6.0
-        mkdir tmpzip\net7.0
         mkdir tmpzip\net8.0
+        mkdir tmpzip\net9.0
 
     - name: 'Prepare ZIP release'
       run: |
@@ -132,9 +123,8 @@ jobs:
         xcopy "src\ReportGenerator.Console\bin\Release\*.dll" "tmpzip\net47"
         xcopy "src\ReportGenerator.Console\bin\Release\ReportGenerator.exe" "tmpzip\net47"
         xcopy "src\ReportGenerator.Console\bin\Release\ReportGenerator.exe.config" "tmpzip\net47"
-        xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\net6.0\publish\*' 'tmpzip\net6.0' /s
-        xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\net7.0\publish\*' 'tmpzip\net7.0' /s
         xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\net8.0\publish\*' 'tmpzip\net8.0' /s
+        xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\net9.0\publish\*' 'tmpzip\net9.0' /s
 
     - name: 'Pack ZIP release'
       run: Compress-Archive -Path tmpzip/* -DestinationPath src/target/packages/ReportGenerator_${{ env.Version }}.zip
