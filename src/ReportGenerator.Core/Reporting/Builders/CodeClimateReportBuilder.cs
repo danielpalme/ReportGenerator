@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using System.Text.Json;
 using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
@@ -84,7 +85,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 reportTextWriter.WriteLine("{");
 
                 reportTextWriter.WriteLine("  \"ci_service\": {");
-                reportTextWriter.WriteLine($"    \"branch\": \"{JsonSerializer.EscapeString(gitInformation.Branch)}\",");
+                reportTextWriter.WriteLine($"    \"branch\": {JsonSerializer.Serialize(gitInformation.Branch)},");
                 reportTextWriter.WriteLine("    \"build_identifier\": \"\",");
                 reportTextWriter.WriteLine("    \"build_url\": \"\",");
                 reportTextWriter.WriteLine($"    \"commit_sha\": \"{gitInformation.Sha}\",");
@@ -95,15 +96,15 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 reportTextWriter.WriteLine("  \"environment\": {");
                 reportTextWriter.WriteLine("    \"gem_version\": \"\",");
                 reportTextWriter.WriteLine("    \"package_version\": \"\",");
-                reportTextWriter.WriteLine($"    \"pwd\": \"{JsonSerializer.EscapeString(Directory.GetCurrentDirectory())}\",");
-                reportTextWriter.WriteLine($"    \"prefix\": \"{JsonSerializer.EscapeString(Directory.GetCurrentDirectory())}\",");
+                reportTextWriter.WriteLine($"    \"pwd\": {JsonSerializer.Serialize(Directory.GetCurrentDirectory())},");
+                reportTextWriter.WriteLine($"    \"prefix\": {JsonSerializer.Serialize(Directory.GetCurrentDirectory())},");
                 reportTextWriter.WriteLine("    \"rails_root\": \"\",");
                 reportTextWriter.WriteLine("    \"reporter_version\": \"0.11.1\",");
                 reportTextWriter.WriteLine("    \"simplecov_root\": \"\"");
                 reportTextWriter.WriteLine("  },");
 
                 reportTextWriter.WriteLine("  \"git\": {");
-                reportTextWriter.WriteLine($"    \"branch\": \"{JsonSerializer.EscapeString(gitInformation.Branch)}\",");
+                reportTextWriter.WriteLine($"    \"branch\": {JsonSerializer.Serialize(gitInformation.Branch)},");
                 reportTextWriter.WriteLine($"    \"head\": \"{gitInformation.Sha}\",");
                 reportTextWriter.WriteLine($"    \"committed_at\": {(string.IsNullOrWhiteSpace(gitInformation.TimeStamp) ? "null" : gitInformation.TimeStamp)}");
                 reportTextWriter.WriteLine("  },");
@@ -140,7 +141,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                             }
 
                             reportTextWriter.WriteLine("    {");
-                            reportTextWriter.WriteLine($"      \"blob_id\": \"{JsonSerializer.EscapeString(GitHelper.GetFileHash(file.Path))}\",");
+                            reportTextWriter.WriteLine($"      \"blob_id\": {JsonSerializer.Serialize(GitHelper.GetFileHash(file.Path))},");
                             reportTextWriter.Write($"      \"coverage\": [");
 
                             var lineCoverage = file.LineCoverage;
@@ -170,7 +171,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                             reportTextWriter.WriteLine($"        \"covered\": {file.CoverableLines.ToString(CultureInfo.InvariantCulture)},");
                             reportTextWriter.WriteLine($"        \"total\": {file.TotalLines.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)}");
                             reportTextWriter.WriteLine("      },");
-                            reportTextWriter.WriteLine($"      \"name\": \"{JsonSerializer.EscapeString(file.Path)}\"");
+                            reportTextWriter.WriteLine($"      \"name\": {JsonSerializer.Serialize(file.Path)}");
                             reportTextWriter.Write("    }");
                         }
                     }

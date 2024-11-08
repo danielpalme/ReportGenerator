@@ -152,9 +152,9 @@ namespace Palmmedia.ReportGenerator.Core
                 }
 
                 Logger.Debug(Resources.Settings);
-                Logger.Debug(" " + JsonSerializer.ToJsonString(settings));
-                Logger.Debug(" " + JsonSerializer.ToJsonString(minimumCoverageThresholds));
-                Logger.Debug(" " + JsonSerializer.ToJsonString(riskHotspotsAnalysisThresholds));
+                Logger.Debug(" " + System.Text.Json.JsonSerializer.Serialize(settings));
+                Logger.Debug(" " + System.Text.Json.JsonSerializer.Serialize(minimumCoverageThresholds));
+                Logger.Debug(" " + System.Text.Json.JsonSerializer.Serialize(riskHotspotsAnalysisThresholds));
 
                 var stopWatch = Stopwatch.StartNew();
 
