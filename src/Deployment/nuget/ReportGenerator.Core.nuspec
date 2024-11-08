@@ -31,7 +31,7 @@ https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage</desc
         <dependency id="Microsoft.Extensions.Configuration.Json" version="8.0.1" />
         <dependency id="Microsoft.Extensions.ObjectPool" version="8.0.10" />
         <dependency id="System.Text.Json" version="8.0.5" />
-        <dependency id="DotNetConfig" version="1.0.6" />
+        <dependency id="DotNetConfig" version="1.2.0" />
       </group>
 
       <group targetFramework="netcoreapp">
@@ -41,7 +41,7 @@ https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage</desc
         <dependency id="Microsoft.Extensions.Configuration.Json" version="8.0.1" />
         <dependency id="Microsoft.Extensions.ObjectPool" version="8.0.10" />
         <dependency id="System.Text.Json" version="8.0.5" />
-        <dependency id="DotNetConfig" version="1.0.6" />
+        <dependency id="DotNetConfig" version="1.2.0" />
         <dependency id="McMaster.NETCore.Plugins" version="1.4.0" />
       </group>
     </dependencies>
