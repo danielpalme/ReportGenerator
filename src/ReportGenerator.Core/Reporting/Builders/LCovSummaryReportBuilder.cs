@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Text;
+using System.Linq;
 using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
@@ -85,7 +85,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 reportTextWriter.WriteLine("TN:");
                 long branchCounter = 0;
 
-                foreach (var assembly in summaryResult.Assemblies)
+                var assembliesWithClasses = summaryResult.Assemblies
+                    .Where(a => a.Classes.Any())
+                    .ToArray();
+
+                foreach (var assembly in assembliesWithClasses)
                 {
                     foreach (var @class in assembly.Classes)
                     {

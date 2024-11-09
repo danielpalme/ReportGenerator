@@ -238,12 +238,16 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             reportRenderer.BeginSummaryReport(this.CreateTargetDirectory(), null, title);
             reportRenderer.HeaderWithGithubLinks(title);
 
+            var assembliesWithClasses = summaryResult.Assemblies
+                .Where(a => a.Classes.Any())
+                .ToArray();
+
             var infoCardItems = new List<CardLineItem>()
             {
                 new CardLineItem(ReportResources.Parser, summaryResult.UsedParser, null, CardLineItemAlignment.Left),
-                new CardLineItem(ReportResources.Assemblies2, summaryResult.Assemblies.Count().ToString(CultureInfo.InvariantCulture), null),
-                new CardLineItem(ReportResources.Classes, summaryResult.Assemblies.SelectMany(a => a.Classes).Count().ToString(CultureInfo.InvariantCulture), null),
-                new CardLineItem(ReportResources.Files2, summaryResult.Assemblies.SelectMany(a => a.Classes).SelectMany(a => a.Files).Distinct().Count().ToString(CultureInfo.InvariantCulture), null)
+                new CardLineItem(ReportResources.Assemblies2, assembliesWithClasses.Count().ToString(CultureInfo.InvariantCulture), null),
+                new CardLineItem(ReportResources.Classes, assembliesWithClasses.SelectMany(a => a.Classes).Count().ToString(CultureInfo.InvariantCulture), null),
+                new CardLineItem(ReportResources.Files2, assembliesWithClasses.SelectMany(a => a.Classes).SelectMany(a => a.Files).Distinct().Count().ToString(CultureInfo.InvariantCulture), null)
             };
 
             if (this.ReportContext.ReportConfiguration.Tag != null)
@@ -356,12 +360,12 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             reportRenderer.Header(ReportResources.Coverage3);
 
-            if (summaryResult.Assemblies.Any())
+            if (assembliesWithClasses.Any())
             {
                 reportRenderer.BeginSummaryTable();
                 reportRenderer.BeginSummaryTable(summaryResult.SupportsBranchCoverage, proVersion);
 
-                foreach (var assembly in summaryResult.Assemblies)
+                foreach (var assembly in assembliesWithClasses)
                 {
                     reportRenderer.SummaryAssembly(assembly, summaryResult.SupportsBranchCoverage, proVersion);
 
@@ -384,7 +388,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             }
 
             reportRenderer.CustomSummary(
-                summaryResult.Assemblies,
+                assembliesWithClasses,
                 this.ReportContext.RiskHotspotAnalysisResult.RiskHotspots,
                 summaryResult.SupportsBranchCoverage,
                 proVersion);

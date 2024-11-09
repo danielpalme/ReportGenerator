@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
@@ -83,6 +82,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             using (var reportTextWriter = File.CreateText(targetPath))
             {
+                var assembliesWithClasses = summaryResult.Assemblies
+                    .Where(a => a.Classes.Any())
+                    .ToArray();
+
                 reportTextWriter.WriteLine(ReportResources.Summary);
                 reportTextWriter.WriteLine(
                     "{0};{1}",
@@ -95,15 +98,15 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 reportTextWriter.WriteLine(
                     "{0};{1}",
                     ReportResources.Assemblies2,
-                    summaryResult.Assemblies.Count().ToString(CultureInfo.InvariantCulture));
+                    assembliesWithClasses.Count().ToString(CultureInfo.InvariantCulture));
                 reportTextWriter.WriteLine(
                     "{0};{1}",
                     ReportResources.Classes,
-                    summaryResult.Assemblies.SelectMany(a => a.Classes).Count().ToString(CultureInfo.InvariantCulture));
+                    assembliesWithClasses.SelectMany(a => a.Classes).Count().ToString(CultureInfo.InvariantCulture));
                 reportTextWriter.WriteLine(
                     "{0};{1}",
                     ReportResources.Files2,
-                    summaryResult.Assemblies.SelectMany(a => a.Classes).SelectMany(a => a.Files).Distinct().Count().ToString(CultureInfo.InvariantCulture));
+                    assembliesWithClasses.SelectMany(a => a.Classes).SelectMany(a => a.Files).Distinct().Count().ToString(CultureInfo.InvariantCulture));
                 reportTextWriter.WriteLine(
                     "{0};{1}",
                     ReportResources.Coverage2,
@@ -125,7 +128,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                     ReportResources.TotalLines,
                     summaryResult.TotalLines.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
 
-                foreach (var assembly in summaryResult.Assemblies)
+                foreach (var assembly in assembliesWithClasses)
                 {
                     reportTextWriter.WriteLine();
                     reportTextWriter.WriteLine(

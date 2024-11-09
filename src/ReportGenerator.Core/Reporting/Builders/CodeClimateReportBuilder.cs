@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Palmmedia.ReportGenerator.Core.Common;
@@ -120,7 +121,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
                 reportTextWriter.WriteLine("  \"source_files\": [");
 
-                foreach (var assembly in summaryResult.Assemblies)
+                var assembliesWithClasses = summaryResult.Assemblies
+                    .Where(a => a.Classes.Any())
+                    .ToArray();
+
+                foreach (var assembly in assembliesWithClasses)
                 {
                     foreach (var clazz in assembly.Classes)
                     {
