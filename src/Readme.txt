@@ -67,10 +67,11 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
-5.3.12.0
+5.4.0.0
 
     * Fix: #699 Rounding crap score to full number
     * Fix: #700 Fixed handling of .netconfig files (sourceDirectories, reportTypes, plugins, assemblyFilters, etc.)
+    * Fix: #704 Improved handling of file filters
 
 5.3.11.0
 
