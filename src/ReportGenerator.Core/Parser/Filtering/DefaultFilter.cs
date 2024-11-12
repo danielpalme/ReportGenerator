@@ -28,6 +28,16 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Filtering
         /// </summary>
         /// <param name="filters">The filters.</param>
         public DefaultFilter(IEnumerable<string> filters)
+            : this(filters, false)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DefaultFilter"/> class.
+        /// </summary>
+        /// <param name="filters">The filters.</param>
+        /// <param name="osIndependantPathSeparator">Indicates whether filter thould be treated as paths and the operating system format should be ignored.</param>
+        public DefaultFilter(IEnumerable<string> filters, bool osIndependantPathSeparator)
         {
             if (filters == null)
             {
@@ -36,12 +46,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Filtering
 
             this.excludeFilters = filters
                 .Where(f => f.StartsWith("-", StringComparison.OrdinalIgnoreCase))
-                .Select(f => CreateFilterRegex(f))
+                .Select(f => CreateFilterRegex(f, osIndependantPathSeparator))
                 .ToArray();
 
             this.includeFilters = filters
                 .Where(f => f.StartsWith("+", StringComparison.OrdinalIgnoreCase))
-                .Select(f => CreateFilterRegex(f))
+                .Select(f => CreateFilterRegex(f, osIndependantPathSeparator))
                 .ToArray();
 
             this.HasCustomFilters = this.excludeFilters.Length > 0 || this.includeFilters.Length > 0;
@@ -50,7 +60,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Filtering
             {
                 this.includeFilters = new[]
                 {
-                    CreateFilterRegex("+*")
+                    CreateFilterRegex("+*", false)
                 };
             }
         }
@@ -87,13 +97,22 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Filtering
         /// Special characters are escaped. Wildcards '*' are converted to '.*'.
         /// </summary>
         /// <param name="filter">The filter.</param>
+        /// <param name="osIndependantPathSeparator">Indicates whether filter thould be treated as paths and the operating system format should be ignored.</param>
         /// <returns>The regular expression.</returns>
-        private static Regex CreateFilterRegex(string filter)
+        private static Regex CreateFilterRegex(string filter, bool osIndependantPathSeparator)
         {
             filter = filter.Substring(1);
             filter = filter.Replace("*", "$$$*");
             filter = Regex.Escape(filter);
             filter = filter.Replace(@"\$\$\$\*", ".*");
+
+            if (osIndependantPathSeparator)
+            {
+                filter = filter
+                    .Replace("/", "$$$")
+                    .Replace("\\", "$$$")
+                    .Replace("$$$", @"[/\\]");
+            }
 
             return new Regex($"^{filter}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         }

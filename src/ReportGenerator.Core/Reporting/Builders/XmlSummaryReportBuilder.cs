@@ -55,14 +55,18 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <param name="summaryResult">The summary result.</param>
         public void CreateSummaryReport(SummaryResult summaryResult)
         {
+            var assembliesWithClasses = summaryResult.Assemblies
+                .Where(a => a.Classes.Any())
+                .ToArray();
+
             var rootElement = new XElement("CoverageReport", new XAttribute("scope", "Summary"));
             var summaryElement = new XElement("Summary");
 
             summaryElement.Add(new XElement("Generatedon", DateTime.Now.ToShortDateString() + " - " + DateTime.Now.ToLongTimeString()));
             summaryElement.Add(new XElement("Parser", summaryResult.UsedParser));
-            summaryElement.Add(new XElement("Assemblies", summaryResult.Assemblies.Count().ToString(CultureInfo.InvariantCulture)));
-            summaryElement.Add(new XElement("Classes", summaryResult.Assemblies.SelectMany(a => a.Classes).Count().ToString(CultureInfo.InvariantCulture)));
-            summaryElement.Add(new XElement("Files", summaryResult.Assemblies.SelectMany(a => a.Classes).SelectMany(a => a.Files).Distinct().Count().ToString(CultureInfo.InvariantCulture)));
+            summaryElement.Add(new XElement("Assemblies", assembliesWithClasses.Count().ToString(CultureInfo.InvariantCulture)));
+            summaryElement.Add(new XElement("Classes", assembliesWithClasses.SelectMany(a => a.Classes).Count().ToString(CultureInfo.InvariantCulture)));
+            summaryElement.Add(new XElement("Files", assembliesWithClasses.SelectMany(a => a.Classes).SelectMany(a => a.Files).Distinct().Count().ToString(CultureInfo.InvariantCulture)));
 
             summaryElement.Add(new XElement("Coveredlines", summaryResult.CoveredLines.ToString(CultureInfo.InvariantCulture)));
             summaryElement.Add(new XElement("Uncoveredlines", (summaryResult.CoverableLines - summaryResult.CoveredLines).ToString(CultureInfo.InvariantCulture)));
@@ -122,7 +126,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             var coverageElement = new XElement("Coverage");
 
-            foreach (var assembly in summaryResult.Assemblies)
+            foreach (var assembly in assembliesWithClasses)
             {
                 var assemblyElement = new XElement("Assembly");
 

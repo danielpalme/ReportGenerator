@@ -82,6 +82,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             using (var reportTextWriter = File.CreateText(targetPath))
             {
+                var assembliesWithClasses = summaryResult.Assemblies
+                    .Where(a => a.Classes.Any())
+                    .ToArray();
+
                 if (this.ReportContext.ReportConfiguration.Title != null)
                 {
                     reportTextWriter.WriteLine($"{ReportResources.Summary} - {this.ReportContext.ReportConfiguration.Title}");
@@ -99,9 +103,9 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 }
 
                 reportTextWriter.WriteLine("  {0} {1}", ReportResources.Parser, summaryResult.UsedParser);
-                reportTextWriter.WriteLine("  {0} {1}", ReportResources.Assemblies2, summaryResult.Assemblies.Count().ToString(CultureInfo.InvariantCulture));
-                reportTextWriter.WriteLine("  {0} {1}", ReportResources.Classes, summaryResult.Assemblies.SelectMany(a => a.Classes).Count().ToString(CultureInfo.InvariantCulture));
-                reportTextWriter.WriteLine("  {0} {1}", ReportResources.Files2, summaryResult.Assemblies.SelectMany(a => a.Classes).SelectMany(a => a.Files).Distinct().Count().ToString(CultureInfo.InvariantCulture));
+                reportTextWriter.WriteLine("  {0} {1}", ReportResources.Assemblies2, assembliesWithClasses.Count().ToString(CultureInfo.InvariantCulture));
+                reportTextWriter.WriteLine("  {0} {1}", ReportResources.Classes, assembliesWithClasses.SelectMany(a => a.Classes).Count().ToString(CultureInfo.InvariantCulture));
+                reportTextWriter.WriteLine("  {0} {1}", ReportResources.Files2, assembliesWithClasses.SelectMany(a => a.Classes).SelectMany(a => a.Files).Distinct().Count().ToString(CultureInfo.InvariantCulture));
                 reportTextWriter.WriteLine("  {0} {1}", ReportResources.Coverage2, summaryResult.CoverageQuota.HasValue ? summaryResult.CoverageQuota.Value.ToString("f1", CultureInfo.InvariantCulture) + "%" : string.Empty);
                 reportTextWriter.WriteLine("  {0} {1}", ReportResources.CoveredLines, summaryResult.CoveredLines.ToString(CultureInfo.InvariantCulture));
                 reportTextWriter.WriteLine("  {0} {1}", ReportResources.UncoveredLines, (summaryResult.CoverableLines - summaryResult.CoveredLines).ToString(CultureInfo.InvariantCulture));
@@ -133,14 +137,14 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                     reportTextWriter.WriteLine("  {0} {1}", ReportResources.Tag, this.ReportContext.ReportConfiguration.Tag);
                 }
 
-                if (summaryResult.Assemblies.Any())
+                if (assembliesWithClasses.Any())
                 {
-                    var maximumNameLength = summaryResult.Assemblies
+                    var maximumNameLength = assembliesWithClasses
                         .SelectMany(a => a.Classes).Select(c => c.DisplayName)
-                        .Union(summaryResult.Assemblies.Select(a => a.Name))
+                        .Union(assembliesWithClasses.Select(a => a.Name))
                         .Max(n => n.Length);
 
-                    foreach (var assembly in summaryResult.Assemblies)
+                    foreach (var assembly in assembliesWithClasses)
                     {
                         string assemblyQuota = assembly.CoverageQuota.HasValue ? assembly.CoverageQuota.Value.ToString("f1", CultureInfo.InvariantCulture) + "%" : string.Empty;
                         reportTextWriter.WriteLine();

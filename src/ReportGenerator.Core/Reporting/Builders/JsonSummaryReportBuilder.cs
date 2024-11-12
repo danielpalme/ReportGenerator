@@ -79,13 +79,17 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             using (var reportTextWriter = new StreamWriter(new FileStream(targetPath, FileMode.Create), new UTF8Encoding(encoderShouldEmitUTF8Identifier: false)))
             {
+                var assembliesWithClasses = summaryResult.Assemblies
+                    .Where(a => a.Classes.Any())
+                    .ToArray();
+
                 reportTextWriter.WriteLine("{");
                 reportTextWriter.WriteLine("  \"summary\": {");
                 reportTextWriter.WriteLine($"    \"generatedon\": \"{DateTime.Now.ToUniversalTime().ToString("s")}Z\",");
                 reportTextWriter.WriteLine($"    \"parser\": \"{summaryResult.UsedParser}\",");
-                reportTextWriter.WriteLine($"    \"assemblies\": {summaryResult.Assemblies.Count().ToString(CultureInfo.InvariantCulture)},");
-                reportTextWriter.WriteLine($"    \"classes\": {summaryResult.Assemblies.SelectMany(a => a.Classes).Count().ToString(CultureInfo.InvariantCulture)},");
-                reportTextWriter.WriteLine($"    \"files\": {summaryResult.Assemblies.SelectMany(a => a.Classes).SelectMany(a => a.Files).Distinct().Count().ToString(CultureInfo.InvariantCulture)},");
+                reportTextWriter.WriteLine($"    \"assemblies\": {assembliesWithClasses.Count().ToString(CultureInfo.InvariantCulture)},");
+                reportTextWriter.WriteLine($"    \"classes\": {assembliesWithClasses.SelectMany(a => a.Classes).Count().ToString(CultureInfo.InvariantCulture)},");
+                reportTextWriter.WriteLine($"    \"files\": {assembliesWithClasses.SelectMany(a => a.Classes).SelectMany(a => a.Files).Distinct().Count().ToString(CultureInfo.InvariantCulture)},");
                 reportTextWriter.WriteLine($"    \"coveredlines\": {summaryResult.CoveredLines.ToString(CultureInfo.InvariantCulture)},");
                 reportTextWriter.WriteLine($"    \"uncoveredlines\": {(summaryResult.CoverableLines - summaryResult.CoveredLines).ToString(CultureInfo.InvariantCulture)},");
                 reportTextWriter.WriteLine($"    \"coverablelines\": {summaryResult.CoverableLines.ToString(CultureInfo.InvariantCulture)},");
@@ -161,7 +165,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
                 int assemblyCounter = 0;
 
-                foreach (var assembly in summaryResult.Assemblies)
+                foreach (var assembly in assembliesWithClasses)
                 {
                     if (assemblyCounter > 0)
                     {

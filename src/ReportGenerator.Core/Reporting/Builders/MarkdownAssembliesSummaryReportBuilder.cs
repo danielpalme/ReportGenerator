@@ -111,7 +111,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 reportTextWriter.WriteLine();
                 reportTextWriter.WriteLine();
 
-                if (summaryResult.Assemblies.Any())
+                var assembliesWithClasses = summaryResult.Assemblies
+                    .Where(a => a.Classes.Any())
+                    .ToArray();
+
+                if (assembliesWithClasses.Any())
                 {
                     reportTextWriter.Write(
                         "|**{0}**|**{1}**|",
@@ -148,7 +152,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
                     reportTextWriter.WriteLine();
 
-                    foreach (var assembly in summaryResult.Assemblies)
+                    foreach (var assembly in assembliesWithClasses)
                     {
                         reportTextWriter.Write("|**{0}**", assembly.Name);
                         reportTextWriter.Write("|**{0}**", assembly.CoverageQuota.HasValue ? assembly.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);

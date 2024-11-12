@@ -150,7 +150,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         {
             decimal? summaryComplexity = null;
 
-            foreach (var assembly in summaryResult.Assemblies)
+            var assembliesWithClasses = summaryResult.Assemblies
+                .Where(a => a.Classes.Any())
+                .ToArray();
+
+            foreach (var assembly in assembliesWithClasses)
             {
                 decimal? assemblyComplexity = null;
                 if (this.packageElementsByName.TryGetValue(assembly.Name, out XElement packageElement))

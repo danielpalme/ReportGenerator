@@ -249,6 +249,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 return;
             }
 
+            var assembliesWithClasses = summaryResult.Assemblies
+                .Where(a => a.Classes.Any())
+                .ToArray();
+
             var rootElement = new XElement(
                 "CoverageSession",
                 new XAttribute(XNamespace.Xmlns + "xsd", "http://www.w3.org/2001/XMLSchema"),
@@ -263,19 +267,19 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 new XAttribute("visitedBranchPoints", summaryResult.CoveredBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)),
                 new XAttribute("sequenceCoverage", summaryResult.CoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)),
                 new XAttribute("branchCoverage", summaryResult.BranchCoverageQuota.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)),
-                new XAttribute("maxCyclomaticComplexity", summaryResult.Assemblies.SelectMany(f => f.Classes).SelectMany(c => c.Files).SelectMany(f => f.MethodMetrics).SelectMany(m => m.Metrics).Where(m => m.Name == ReportResources.CyclomaticComplexity).Select(m => m.Value.GetValueOrDefault()).DefaultIfEmpty().Max().ToString(CultureInfo.InvariantCulture)),
-                new XAttribute("minCyclomaticComplexity", summaryResult.Assemblies.SelectMany(f => f.Classes).SelectMany(c => c.Files).SelectMany(f => f.MethodMetrics).SelectMany(m => m.Metrics).Where(m => m.Name == ReportResources.CyclomaticComplexity).Select(m => m.Value.GetValueOrDefault()).DefaultIfEmpty().Min().ToString(CultureInfo.InvariantCulture)),
-                new XAttribute("maxCrapScore", summaryResult.Assemblies.SelectMany(f => f.Classes).SelectMany(c => c.Files).SelectMany(f => f.MethodMetrics).SelectMany(m => m.Metrics).Where(m => m.Name == ReportResources.CrapScore).Select(m => m.Value.GetValueOrDefault()).DefaultIfEmpty().Max().ToString(CultureInfo.InvariantCulture)),
-                new XAttribute("minCrapScore", summaryResult.Assemblies.SelectMany(f => f.Classes).SelectMany(c => c.Files).SelectMany(f => f.MethodMetrics).SelectMany(m => m.Metrics).Where(m => m.Name == ReportResources.CrapScore).Select(m => m.Value.GetValueOrDefault()).DefaultIfEmpty().Min().ToString(CultureInfo.InvariantCulture)),
-                new XAttribute("visitedClasses", summaryResult.Assemblies.SelectMany(a => a.Classes).Count(c => c.CoverageQuota.GetValueOrDefault() > 0).ToString(CultureInfo.InvariantCulture)),
-                new XAttribute("numClasses", summaryResult.Assemblies.SelectMany(a => a.Classes).Count().ToString(CultureInfo.InvariantCulture)),
+                new XAttribute("maxCyclomaticComplexity", assembliesWithClasses.SelectMany(f => f.Classes).SelectMany(c => c.Files).SelectMany(f => f.MethodMetrics).SelectMany(m => m.Metrics).Where(m => m.Name == ReportResources.CyclomaticComplexity).Select(m => m.Value.GetValueOrDefault()).DefaultIfEmpty().Max().ToString(CultureInfo.InvariantCulture)),
+                new XAttribute("minCyclomaticComplexity", assembliesWithClasses.SelectMany(f => f.Classes).SelectMany(c => c.Files).SelectMany(f => f.MethodMetrics).SelectMany(m => m.Metrics).Where(m => m.Name == ReportResources.CyclomaticComplexity).Select(m => m.Value.GetValueOrDefault()).DefaultIfEmpty().Min().ToString(CultureInfo.InvariantCulture)),
+                new XAttribute("maxCrapScore", assembliesWithClasses.SelectMany(f => f.Classes).SelectMany(c => c.Files).SelectMany(f => f.MethodMetrics).SelectMany(m => m.Metrics).Where(m => m.Name == ReportResources.CrapScore).Select(m => m.Value.GetValueOrDefault()).DefaultIfEmpty().Max().ToString(CultureInfo.InvariantCulture)),
+                new XAttribute("minCrapScore", assembliesWithClasses.SelectMany(f => f.Classes).SelectMany(c => c.Files).SelectMany(f => f.MethodMetrics).SelectMany(m => m.Metrics).Where(m => m.Name == ReportResources.CrapScore).Select(m => m.Value.GetValueOrDefault()).DefaultIfEmpty().Min().ToString(CultureInfo.InvariantCulture)),
+                new XAttribute("visitedClasses", assembliesWithClasses.SelectMany(a => a.Classes).Count(c => c.CoverageQuota.GetValueOrDefault() > 0).ToString(CultureInfo.InvariantCulture)),
+                new XAttribute("numClasses", assembliesWithClasses.SelectMany(a => a.Classes).Count().ToString(CultureInfo.InvariantCulture)),
                 new XAttribute("visitedMethods", summaryResult.CoveredCodeElements.ToString(CultureInfo.InvariantCulture)),
                 new XAttribute("numMethods", summaryResult.TotalCodeElements.ToString(CultureInfo.InvariantCulture))));
 
             var modulesElement = new XElement("Modules");
             rootElement.Add(modulesElement);
 
-            foreach (var assembly in summaryResult.Assemblies)
+            foreach (var assembly in assembliesWithClasses)
             {
                 if (this.packageElementsByName.TryGetValue(assembly.Name, out XElement packageElement))
                 {

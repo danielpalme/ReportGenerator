@@ -191,10 +191,14 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 reportRenderer.KeyValueRow(ReportResources.CoverageDate, summaryResult.CoverageDate());
             }
 
+            var assembliesWithClasses = summaryResult.Assemblies
+                .Where(a => a.Classes.Any())
+                .ToArray();
+
             reportRenderer.KeyValueRow(ReportResources.Parser, summaryResult.UsedParser);
-            reportRenderer.KeyValueRow(ReportResources.Assemblies2, summaryResult.Assemblies.Count().ToString(CultureInfo.InvariantCulture));
-            reportRenderer.KeyValueRow(ReportResources.Classes, summaryResult.Assemblies.SelectMany(a => a.Classes).Count().ToString(CultureInfo.InvariantCulture));
-            reportRenderer.KeyValueRow(ReportResources.Files2, summaryResult.Assemblies.SelectMany(a => a.Classes).SelectMany(a => a.Files).Distinct().Count().ToString(CultureInfo.InvariantCulture));
+            reportRenderer.KeyValueRow(ReportResources.Assemblies2, assembliesWithClasses.Count().ToString(CultureInfo.InvariantCulture));
+            reportRenderer.KeyValueRow(ReportResources.Classes, assembliesWithClasses.SelectMany(a => a.Classes).Count().ToString(CultureInfo.InvariantCulture));
+            reportRenderer.KeyValueRow(ReportResources.Files2, assembliesWithClasses.SelectMany(a => a.Classes).SelectMany(a => a.Files).Distinct().Count().ToString(CultureInfo.InvariantCulture));
             reportRenderer.KeyValueRow(ReportResources.CoveredLines, summaryResult.CoveredLines.ToString(CultureInfo.InvariantCulture));
             reportRenderer.KeyValueRow(ReportResources.UncoveredLines, (summaryResult.CoverableLines - summaryResult.CoveredLines).ToString(CultureInfo.InvariantCulture));
             reportRenderer.KeyValueRow(ReportResources.CoverableLines, summaryResult.CoverableLines.ToString(CultureInfo.InvariantCulture));
@@ -252,11 +256,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             reportRenderer.Header(ReportResources.Coverage3);
 
-            if (summaryResult.Assemblies.Any())
+            if (assembliesWithClasses.Any())
             {
                 reportRenderer.BeginSummaryTable(summaryResult.SupportsBranchCoverage, true);
 
-                foreach (var assembly in summaryResult.Assemblies)
+                foreach (var assembly in assembliesWithClasses)
                 {
                     reportRenderer.SummaryAssembly(assembly, summaryResult.SupportsBranchCoverage, true);
 

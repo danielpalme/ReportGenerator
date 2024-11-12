@@ -246,7 +246,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             int totalProjectNcloc = 0;
             int totalProjectFiles = 0;
 
-            foreach (var assembly in summaryResult.Assemblies)
+            var assembliesWithClasses = summaryResult.Assemblies
+                .Where(a => a.Classes.Any())
+                .ToArray();
+
+            foreach (var assembly in assembliesWithClasses)
             {
                 if (this.packageElementsByName.TryGetValue(assembly.Name, out XElement packageElement))
                 {
@@ -356,7 +360,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 new XAttribute("loc", totalProjectLoc.ToString(CultureInfo.InvariantCulture)),
                 new XAttribute("ncloc", totalProjectNcloc.ToString(CultureInfo.InvariantCulture)),
                 new XAttribute("files", totalProjectFiles.ToString(CultureInfo.InvariantCulture)),
-                new XAttribute("packages", summaryResult.Assemblies.Count.ToString(CultureInfo.InvariantCulture))));
+                new XAttribute("packages", assembliesWithClasses.Length.ToString(CultureInfo.InvariantCulture))));
 
             var testProjectElement = new XElement(
                 "testproject",

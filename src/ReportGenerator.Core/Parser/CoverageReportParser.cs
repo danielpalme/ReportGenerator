@@ -181,7 +181,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             this.sourceDirectories = reportContext.ReportConfiguration.SourceDirectories ?? throw new ArgumentNullException(nameof(reportContext.ReportConfiguration.SourceDirectories));
             this.assemblyFilter = new DefaultFilter(reportContext.ReportConfiguration.AssemblyFilters);
             this.classFilter = new DefaultFilter(reportContext.ReportConfiguration.ClassFilters);
-            this.fileFilter = new DefaultFilter(reportContext.ReportConfiguration.FileFilters);
+            this.fileFilter = new DefaultFilter(reportContext.ReportConfiguration.FileFilters, true);
         }
 
         /// <summary>
