@@ -1,7 +1,7 @@
 Delta Summary
-  Generated on: 03.09.2024 - 20:23
+  Generated on: 12.11.2024 - 21:04
   Description                      Previous              Current      Delta
-  Coverage date:         09.02.2022 - 20:50   03.09.2024 - 20:23
+  Coverage date:         09.02.2022 - 20:50   12.11.2024 - 21:04
   Line coverage:                      58.4%                69.4%      11.0%
   Covered lines:                         73                   75          2
   Coverable lines:                      125                  108        -17

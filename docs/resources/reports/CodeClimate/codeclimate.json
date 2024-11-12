@@ -1,10 +1,10 @@
 {
   "ci_service": {
-    "branch": "main",
+    "branch": "net9",
     "build_identifier": "",
     "build_url": "",
-    "commit_sha": "957c3b00ecf0a96a8aa59a79eff80f18eb0adadf",
-    "committed_at": 1725386928,
+    "commit_sha": "038b8bebb938fbd7bdef2acfba0a39a48c9e8c19",
+    "committed_at": 1731441362,
     "name": ""
   },
   "environment": {
@@ -17,9 +17,9 @@
     "simplecov_root": ""
   },
   "git": {
-    "branch": "main",
-    "head": "957c3b00ecf0a96a8aa59a79eff80f18eb0adadf",
-    "committed_at": 1725386928
+    "branch": "net9",
+    "head": "038b8bebb938fbd7bdef2acfba0a39a48c9e8c19",
+    "committed_at": 1731441362
   },
   "covered_percent": 69.4,
   "covered_strength": 0,

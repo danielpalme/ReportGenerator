@@ -1,5 +1,5 @@
 Summary
-  Generated on: 03.09.2024 - 20:23:30
+  Generated on: 12.11.2024 - 21:04:42
   Parser: OpenCover
   Assemblies: 1
   Classes: 4

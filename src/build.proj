@@ -99,7 +99,7 @@
     <!-- AzureDevopsTask -->
     <RemoveDir Directories="AzureDevopsTask\ReportGenerator\tools\net8.0" />  
     <MakeDir Directories="AzureDevopsTask\ReportGenerator\tools\net8.0" />
-    <Copy SourceFiles="@(ZipFileContentNetCore60)" DestinationFolder="AzureDevopsTask\ReportGenerator\tools\net8.0\%(RecursiveDir)" /> 
+    <Copy SourceFiles="@(ZipFileContentNetCore80)" DestinationFolder="AzureDevopsTask\ReportGenerator\tools\net8.0\%(RecursiveDir)" /> 
     <Exec Command="npm run tsc --" WorkingDirectory="AzureDevopsTask\ReportGenerator" />
     <Exec Command="tfx extension create --manifest-globs vss-extension.json --output-path ..\target\packages" WorkingDirectory="AzureDevopsTask" />
 
