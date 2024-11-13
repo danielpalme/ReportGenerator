@@ -103,15 +103,20 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Filtering
         {
             filter = filter.Substring(1);
             filter = filter.Replace("*", "$$$*");
+
+            if (osIndependantPathSeparator)
+            {
+                filter = filter
+                    .Replace("/", "$$$pathseparator$$$")
+                    .Replace("\\", "$$$pathseparator$$$");
+            }
+
             filter = Regex.Escape(filter);
             filter = filter.Replace(@"\$\$\$\*", ".*");
 
             if (osIndependantPathSeparator)
             {
-                filter = filter
-                    .Replace("/", "$$$")
-                    .Replace("\\", "$$$")
-                    .Replace("$$$", @"[/\\]");
+                filter = filter.Replace(@"\$\$\$pathseparator\$\$\$", @"[/\\]");
             }
 
             return new Regex($"^{filter}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);

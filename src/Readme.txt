@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.4.1.0
+
+    * Fix: #707 Fixed issue with file filters
+
 5.4.0.0
 
     * New: Added support for .NET 9. Dropped support for .NET 6 and .NET 7
