@@ -128,33 +128,33 @@ section. Examples:
 
 ```gitconfig
 [ReportGenerator]
-	reports = coverage.xml
+	reports = "coverage.xml"
 	targetdir = "C:\\report"
-	reporttypes = Latex,HtmlSummary
-	assemblyfilters = +Test,-Test
-	classfilters = +Test2,-Test2
+	reporttypes = "Latex;HtmlSummary"
+	assemblyfilters = "+Test;-Test"
+	classfilters = "+Test2;-Test2"
 ```
 
 All the plural options can also be specified as multiple singular entries, like:
 
 ```gitconfig
 [ReportGenerator]
-	report = coverage1.xml
-	report = coverage2.xml
-	reporttype = Latex
-	reporttype = HtmlSummary
-	assemblyfilter = +Test
-	assemblyfilter = -Test
-	classfilter = +Test2
-	classfilter = -Test2
-	filefilter = +cs
-	filefilter = -vb
-	riskhotspotassemblyfilter = +Test
-	riskhotspotassemblyfilter = -Test
-	riskhotspotclassfilter = +Test2
-	riskhotspotclassfilter = -Test2
-	sourcedir = src
-	sourcedir = test
+	report = "coverage1.xml"
+	report = "coverage2.xml"
+	reporttype = "Latex"
+	reporttype = "HtmlSummary"
+	assemblyfilter = "+Test"
+	assemblyfilter = "-Test"
+	classfilter = "+Test2"
+	classfilter = "-Test2"
+	filefilter = "+cs"
+	filefilter = "-vb"
+	riskhotspotassemblyfilter = "+Test"
+	riskhotspotassemblyfilter = "-Test"
+	riskhotspotclassfilter = "+Test2"
+	riskhotspotclassfilter = "-Test2"
+	sourcedir = "src"
+	sourcedir = "test"
 ```
 
 Adding/removing values is trivial using the [dotnet-config](https://dotnetconfig.org) CLI:
@@ -197,11 +197,11 @@ Given the following `.netconfig`:
 
 ```gitconfig
 [ReportGenerator]
-  reporttypes = Html;Latex
-  targetdirectory = report
-  historydirectory = history
-  assemblyfilters = +Include;-Excluded
-  verbosityLevel = Verbose
+  reporttypes = "Html;Latex"
+  targetdirectory = "report"
+  historydirectory = "history"
+  assemblyfilters = "+Include;-Excluded"
+  verbosityLevel = "Verbose"
 ```
 
 The above target could be simplified as:
