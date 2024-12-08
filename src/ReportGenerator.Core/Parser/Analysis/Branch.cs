@@ -32,10 +32,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public override string ToString()
-        {
-            return this.identifier;
-        }
+        public override string ToString() => this.identifier;
 
         /// <summary>
         /// Determines whether the specified <see cref="object"/> is equal to this instance.

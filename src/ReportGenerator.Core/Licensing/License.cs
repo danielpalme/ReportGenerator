@@ -46,9 +46,7 @@ namespace Palmmedia.ReportGenerator.Core.Licensing
         /// Gets a string containing the relevant properties for the signature.
         /// </summary>
         /// <returns>The string containing the relevant properties for the signature.</returns>
-        public string GetSignatureInput()
-        {
-            return $"{this.Id:N}{this.Login}{this.Name}{this.Email}{this.LicenseType}{this.IssuedAt:yyyyMMddHH:mm:ss}{this.ExpiresAt:yyyyMMddHH:mm:ss}";
-        }
+        public string GetSignatureInput() =>
+            $"{this.Id:N}{this.Login}{this.Name}{this.Email}{this.LicenseType}{this.IssuedAt:yyyyMMddHH:mm:ss}{this.ExpiresAt:yyyyMMddHH:mm:ss}";
     }
 }

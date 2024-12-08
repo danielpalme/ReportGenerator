@@ -45,10 +45,7 @@
         public bool Include { get; }
 
         /// <inheritdoc />
-        public override string ToString()
-        {
-            return this.RawName;
-        }
+        public override string ToString() => this.RawName;
 
         /// <inheritdoc />
         public override bool Equals(object obj)

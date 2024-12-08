@@ -20,10 +20,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// Initializes a new instance of the <see cref="Assembly"/> class.
         /// </summary>
         /// <param name="name">The name of the assembly.</param>
-        internal Assembly(string name)
-        {
-            this.Name = name ?? throw new ArgumentNullException(nameof(name));
-        }
+        internal Assembly(string name) => this.Name = name ?? throw new ArgumentNullException(nameof(name));
 
         /// <summary>
         /// Gets the list of classes in assembly.
@@ -122,10 +119,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public override string ToString()
-        {
-            return this.Name;
-        }
+        public override string ToString() => this.Name;
 
         /// <summary>
         /// Determines whether the specified <see cref="object"/> is equal to this instance.
@@ -159,10 +153,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// Adds the given class to the assembly.
         /// </summary>
         /// <param name="class">The class to add.</param>
-        internal void AddClass(Class @class)
-        {
-            this.classes.Add(@class);
-        }
+        internal void AddClass(Class @class) => this.classes.Add(@class);
 
         /// <summary>
         /// Merges the given assembly with the current instance.
