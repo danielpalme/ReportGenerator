@@ -96,16 +96,16 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
                 reportTextWriter.WriteLine();
 
-                reportTextWriter.Write($"![{ReportResources.Coverage}](https://img.shields.io/badge/lines-{(summaryResult.CoverageQuota.HasValue ? summaryResult.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : "-")}-{(summaryResult.CoverageQuota.GetValueOrDefault() < 80 ? "C10909" : "0AAD0A")})");
+                reportTextWriter.Write($"![{ReportResources.Coverage}](https://img.shields.io/badge/lines-{(summaryResult.CoverageQuota.HasValue ? summaryResult.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%25" : "-")}-{(summaryResult.CoverageQuota.GetValueOrDefault() < 80 ? "C10909" : "0AAD0A")})");
 
                 if (summaryResult.SupportsBranchCoverage)
                 {
-                    reportTextWriter.Write($" ![{ReportResources.BranchCoverage}](https://img.shields.io/badge/branches-{(summaryResult.BranchCoverageQuota.HasValue ? summaryResult.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : "-")}-{(summaryResult.BranchCoverageQuota.GetValueOrDefault() < 80 ? "C10909" : "0AAD0A")})");
+                    reportTextWriter.Write($" ![{ReportResources.BranchCoverage}](https://img.shields.io/badge/branches-{(summaryResult.BranchCoverageQuota.HasValue ? summaryResult.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%25" : "-")}-{(summaryResult.BranchCoverageQuota.GetValueOrDefault() < 80 ? "C10909" : "0AAD0A")})");
                 }
 
                 if (proVersion)
                 {
-                    reportTextWriter.Write($" ![{ReportResources.CodeElementCoverageQuota}](https://img.shields.io/badge/methods-{(summaryResult.CodeElementCoverageQuota.HasValue ? summaryResult.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : "-")}-{(summaryResult.CodeElementCoverageQuota.GetValueOrDefault() < 80 ? "C10909" : "0AAD0A")})");
+                    reportTextWriter.Write($" ![{ReportResources.CodeElementCoverageQuota}](https://img.shields.io/badge/methods-{(summaryResult.CodeElementCoverageQuota.HasValue ? summaryResult.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%25" : "-")}-{(summaryResult.CodeElementCoverageQuota.GetValueOrDefault() < 80 ? "C10909" : "0AAD0A")})");
                 }
 
                 reportTextWriter.WriteLine();

@@ -1,6 +1,6 @@
 # Summary
 
-![Line coverage](https://img.shields.io/badge/lines-69.4%-C10909) ![Branch coverage](https://img.shields.io/badge/branches-50%-C10909) ![Method coverage](https://img.shields.io/badge/methods-66.6%-C10909)
+![Line coverage](https://img.shields.io/badge/lines-69.4%25-C10909) ![Branch coverage](https://img.shields.io/badge/branches-50%25-C10909) ![Method coverage](https://img.shields.io/badge/methods-66.6%25-C10909)
 
 |**Assembly**|**Line coverage**|**Branch coverage**|**Method coverage**|
 |:---|---:|---:|---:|
