@@ -10,8 +10,8 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
 import { Helper } from "./viewmodels/helper.class";
 
 @Component({
-  selector: "coverage-info",
-  template: `
+    selector: "coverage-info",
+    template: `
   <div *ngIf="codeElements.length > 0">
     <popup *ngIf="popupVisible"
       [(visible)]="popupVisible"
@@ -234,7 +234,8 @@ import { Helper } from "./viewmodels/helper.class";
         </tbody>
       </table>
     </div>
-  </div>`
+  </div>`,
+    standalone: false
 })
 export class CoverageInfoComponent {
   window: Window;

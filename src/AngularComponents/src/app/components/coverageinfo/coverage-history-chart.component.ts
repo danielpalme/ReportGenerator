@@ -2,14 +2,15 @@ import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { Helper } from './viewmodels/helper.class';
 
 @Component({
-  selector: "[coverage-history-chart]",
-  template: `
+    selector: "[coverage-history-chart]",
+    template: `
   <svg width="30" height="18" class="ct-chart-line">
     <g class="ct-series ct-series-a">
         <path [attr.d]="path" class="ct-line"></path>
     </g>
   </svg>`,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CoverageHistoryChartComponent {
     path: string|null = null;

@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { Metric } from "./data/metric.class";
 
 @Component({
-  selector: "popup",
-  template: `
+    selector: "popup",
+    template: `
 <div class="popup-container" (click)="close()">
   <div class="popup" (click)="cancelEvent($event)">
     <div class="close" (click)="close()">X</div>
@@ -26,7 +26,8 @@ import { Metric } from "./data/metric.class";
       </div>
     </ng-container>
   </div>
-</div>`
+</div>`,
+    standalone: false
 })
 export class PopupComponent {
     @Input() visible: boolean = false;

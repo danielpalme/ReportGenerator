@@ -1,14 +1,15 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 
 @Component({
-  selector: "coverage-bar",
-  template: `
+    selector: "coverage-bar",
+    template: `
   <table class="coverage">
     <td class="gray covered100" *ngIf="grayVisible"> </td>
     <td class="green {{greenClass}}" *ngIf="greenVisible"> </td>
     <td class="red {{redClass}}" *ngIf="redVisible"> </td>
   </table>`,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CoverageBarComponent {
     grayVisible: boolean = true;

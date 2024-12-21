@@ -6,8 +6,8 @@ import { RiskHotspot } from "./data/riskhotspot.class";
 import { RiskHotspotsSettings } from "./data/riskhotspots-settings.class";
 
 @Component({
-  selector: "risk-hotspots",
-  template: `
+    selector: "risk-hotspots",
+    template: `
     <div *ngIf="totalNumberOfRiskHotspots > 0">
       <div class="customizebox">
         <div>
@@ -81,7 +81,8 @@ import { RiskHotspotsSettings } from "./data/riskhotspots-settings.class";
       </div>
     </div>
   `,
-  styles: []
+    styles: [],
+    standalone: false
 })
 export class RiskHotspotsComponent implements OnInit {
   window: Window;

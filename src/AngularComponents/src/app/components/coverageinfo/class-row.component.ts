@@ -3,8 +3,8 @@ import { Metric } from "./data/metric.class";
 import { ClassViewModel } from "./viewmodels/class-viewmodel.class";
 
 @Component({
-  selector: "[class-row]",
-  template: `
+    selector: "[class-row]",
+    template: `
 <td>
   <a [href]="clazz.reportPath" *ngIf="clazz.reportPath !== ''">{{clazz.name}}</a>
   <ng-container *ngIf="clazz.reportPath === ''">{{clazz.name}}</ng-container>
@@ -151,7 +151,8 @@ import { ClassViewModel } from "./viewmodels/class-viewmodel.class";
 </td>
 <td class="right" *ngIf="methodCoverageAvailable"><coverage-bar [percentage]="clazz.methodCoverage"></coverage-bar></td>
 <td class="right" *ngFor="let metric of visibleMetrics">{{ clazz.metrics[metric.abbreviation] }}</td>`,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ClassRow {
     @Input() clazz!: ClassViewModel;

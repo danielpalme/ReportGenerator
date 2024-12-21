@@ -3,8 +3,8 @@ import { Metric } from "./data/metric.class";
 import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
 
 @Component({
-  selector: "[codeelement-row]",
-  template: `
+    selector: "[codeelement-row]",
+    template: `
 <th><a href="#" (click)="element.toggleCollapse($event)">
   <i [ngClass]="{'icon-plus': element.collapsed, 'icon-minus': !element.collapsed}"></i>
   {{element.name}}</a>
@@ -28,7 +28,8 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
   <coverage-bar [percentage]="element.methodCoverage"></coverage-bar>
 </th>
 <th class="right" *ngFor="let metric of visibleMetrics"></th>`,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CodeElementRow {
     @Input() element!: CodeElementViewModel;
