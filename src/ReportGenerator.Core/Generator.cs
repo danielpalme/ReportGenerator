@@ -151,10 +151,18 @@ namespace Palmmedia.ReportGenerator.Core
                     return false;
                 }
 
-                Logger.Debug(Resources.Settings);
-                Logger.Debug(" " + System.Text.Json.JsonSerializer.Serialize(settings));
-                Logger.Debug(" " + System.Text.Json.JsonSerializer.Serialize(minimumCoverageThresholds));
-                Logger.Debug(" " + System.Text.Json.JsonSerializer.Serialize(riskHotspotsAnalysisThresholds));
+                try
+                {
+                    string settingsAsJson = System.Text.Json.JsonSerializer.Serialize(settings);
+                    Logger.Debug(Resources.Settings);
+                    Logger.Debug(" " + settingsAsJson);
+                    Logger.Debug(" " + System.Text.Json.JsonSerializer.Serialize(minimumCoverageThresholds));
+                    Logger.Debug(" " + System.Text.Json.JsonSerializer.Serialize(riskHotspotsAnalysisThresholds));
+                }
+                catch (InvalidOperationException)
+                {
+                    // Json serialization may fail in AOT scenarios
+                }
 
                 var stopWatch = Stopwatch.StartNew();
 
