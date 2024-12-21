@@ -41,11 +41,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         {
         }
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Class"/> class.
         /// </summary>
         /// <param name="name">The name of the class.</param>
+        /// <param name="rawName">The raw name of the class.</param>
         /// <param name="assembly">The assembly.</param>
         internal Class(string name, string rawName, Assembly assembly)
         {

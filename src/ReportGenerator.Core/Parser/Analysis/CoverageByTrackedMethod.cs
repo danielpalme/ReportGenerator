@@ -7,9 +7,9 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
     {
         /// <summary>
         /// Gets or sets an array containing the coverage information by line number.
-        /// -1: Not coverable
-        /// 0: Not visited
-        /// >0: Number of visits
+        /// -1: Not coverable.
+        /// 0: Not visited.
+        /// >0: Number of visits.
         /// </summary>
         internal int[] Coverage { get; set; }
 
