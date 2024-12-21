@@ -15,7 +15,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
     /// <summary>
     /// Implementation of <see cref="IReportBuilder"/> that uses <see cref="IHtmlRenderer"/> to create reports.
     /// </summary>
-    public abstract class HtmlReportBuilderBase : IReportBuilder
+    public abstract class HtmlReportBuilderBase : IParallelisableReportBuilder
     {
         /// <summary>
         /// The Logger.
