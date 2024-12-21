@@ -110,7 +110,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 reportTextWriter.WriteLine(
                     "{0};{1}",
                     ReportResources.Coverage2,
-                    summaryResult.CoverageQuota.HasValue ? summaryResult.CoverageQuota.Value.ToString("f1", CultureInfo.InvariantCulture) + "%" : string.Empty);
+                    summaryResult.CoverageQuota.HasValue ? summaryResult.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
                 reportTextWriter.WriteLine(
                     "{0};{1}",
                     ReportResources.CoveredLines,
@@ -134,7 +134,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                     reportTextWriter.WriteLine(
                         "{0};{1}",
                         assembly.Name,
-                        assembly.CoverageQuota.HasValue ? assembly.CoverageQuota.Value.ToString("f1", CultureInfo.InvariantCulture) + "%" : string.Empty);
+                        assembly.CoverageQuota.HasValue ? assembly.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
 
                     if (assembly.Classes.Any())
                     {
@@ -146,7 +146,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                         reportTextWriter.WriteLine(
                             "{0};{1}",
                             @class.Name,
-                            @class.CoverageQuota.HasValue ? @class.CoverageQuota.Value.ToString("f1", CultureInfo.InvariantCulture) + "%" : string.Empty);
+                            @class.CoverageQuota.HasValue ? @class.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
                     }
                 }
 

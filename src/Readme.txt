@@ -70,6 +70,7 @@ CHANGELOG
 5.4.2.0
 
     * Fix: #700 Fixed handling of .netconfig files (sourceDirectories, reportTypes, plugins, assemblyFilters, etc.)
+    * Fix: #716 Increased precision of percentages in CsvSummary and TextSummary reports (contributed by @tomap)
     * Fix: #719 Fixed badges in MarkdownAssembliesSummary report
 
 5.4.1.0
