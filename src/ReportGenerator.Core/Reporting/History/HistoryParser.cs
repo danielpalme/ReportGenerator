@@ -142,6 +142,12 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.History
                         historicCoverage.CoveredCodeElements = int.Parse(attribute.Value, CultureInfo.InvariantCulture);
                     }
 
+                    attribute = classElement.Attribute("fullcoveredcodeelements");
+                    if (attribute != null)
+                    {
+                        historicCoverage.FullCoveredCodeElements = int.Parse(attribute.Value, CultureInfo.InvariantCulture);
+                    }
+
                     attribute = classElement.Attribute("totalcodeelements");
                     if (attribute != null)
                     {

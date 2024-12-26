@@ -14,8 +14,10 @@
     <Coveredbranches>0</Coveredbranches>
     <Totalbranches>0</Totalbranches>
     <Coveredmethods>3</Coveredmethods>
+    <Fullcoveredmethods>3</Fullcoveredmethods>
     <Totalmethods>3</Totalmethods>
     <Methodcoverage>100</Methodcoverage>
+    <Fullmethodcoverage>100</Fullmethodcoverage>
   </Summary>
   <Metrics>
     <Element name="CallAsyncMethod">

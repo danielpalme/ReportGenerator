@@ -48,6 +48,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             stroke: #0aad0a;
         }
 
+        .ct-chart .ct-series.ct-series-d .ct-line, .ct-chart .ct-series.ct-series-d .ct-point {
+            stroke: #FF6A00;
+        }
+
         .ct-chart .ct-line {
             fill: none;
             stroke-width: 2px;
@@ -223,6 +227,53 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
                     float x = 50 + (i * width);
                     float y = 15 + (((100 - (float)historicCoverages[i].CodeElementCoverageQuota.Value) * totalHeight) / 100);
+
+                    sb.AppendFormat(
+                        "<line x1=\"{0}\" y1=\"{2}\" x2=\"{1}\" y2=\"{2}\" class=\"ct-point\"></line>",
+                        x.ToString("F3", CultureInfo.InvariantCulture),
+                        (x + 0.01f).ToString("F3", CultureInfo.InvariantCulture),
+                        y.ToString("F3", CultureInfo.InvariantCulture));
+                }
+
+                sb.AppendLine("</g>");
+            }
+
+            if (methodCoverageAvailable && historicCoverages.Any(h => h.FullCodeElementCoverageQuota.HasValue))
+            {
+                sb.AppendLine("<g class=\"ct-series ct-series-d\">");
+
+                sb.Append("<path d=\"");
+
+                bool first = true;
+                for (int i = 0; i < historicCoverages.Count; i++)
+                {
+                    if (!historicCoverages[i].FullCodeElementCoverageQuota.HasValue)
+                    {
+                        continue;
+                    }
+
+                    float x = 50 + (i * width);
+                    float y = 15 + (((100 - (float)historicCoverages[i].FullCodeElementCoverageQuota.Value) * totalHeight) / 100);
+
+                    sb.Append(first ? "M" : "L");
+                    sb.Append(x.ToString("F3", CultureInfo.InvariantCulture));
+                    sb.Append(",");
+                    sb.Append(y.ToString("F3", CultureInfo.InvariantCulture));
+
+                    first = false;
+                }
+
+                sb.AppendLine("\" class=\"ct-line\"></path>");
+
+                for (int i = 0; i < historicCoverages.Count; i++)
+                {
+                    if (!historicCoverages[i].FullCodeElementCoverageQuota.HasValue)
+                    {
+                        continue;
+                    }
+
+                    float x = 50 + (i * width);
+                    float y = 15 + (((100 - (float)historicCoverages[i].FullCodeElementCoverageQuota.Value) * totalHeight) / 100);
 
                     sb.AppendFormat(
                         "<line x1=\"{0}\" y1=\"{2}\" x2=\"{1}\" y2=\"{2}\" class=\"ct-point\"></line>",

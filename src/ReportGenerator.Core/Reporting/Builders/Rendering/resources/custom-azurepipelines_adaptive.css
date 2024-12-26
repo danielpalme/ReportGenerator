@@ -35,13 +35,16 @@
         .ct-chart .ct-series.ct-series-a .ct-line, .ct-chart .ct-series.ct-series-a .ct-point { stroke: #0078D4  !important; }
         .ct-chart .ct-series.ct-series-b .ct-line, .ct-chart .ct-series.ct-series-b .ct-point { stroke: #6dc428 !important; }
         .ct-chart .ct-series.ct-series-c .ct-line, .ct-chart .ct-series.ct-series-c .ct-point { stroke: #e58f1d !important; }
+        .ct-chart .ct-series.ct-series-d .ct-line, .ct-chart .ct-series.ct-series-d .ct-point { stroke: #c71bca !important; }
 
         .linecoverage { background-color: #0078D4; }
         .branchcoverage { background-color: #6dc428; }
         .codeelementcoverage { background-color: #e58f1d; }
-        .tinylinecoveragechart, .tinybranchcoveragechart, .tinymethodcoveragechart { background-color: #292827; }
+        .fullcodeelementcoverage { background-color: #c71bca; }
+        .tinylinecoveragechart, .tinybranchcoveragechart, .tinymethodcoveragechart, .tinyfullmethodcoveragechart { background-color: #292827; }
         .tinybranchcoveragechart .ct-series.ct-series-a .ct-line { stroke: #6dc428 !important; }
         .tinymethodcoveragechart .ct-series.ct-series-a .ct-line { stroke: #e58f1d !important; }
+        .tinyfullmethodcoveragechart .ct-series.ct-series-a .ct-line { stroke: #c71bca !important; }
 
         .icon-up-down-dir {
             background-image: url(icon_up-down-dir.svg), url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB3aWR0aD0iMTc5MiIgaGVpZ2h0PSIxNzkyIiB2aWV3Qm94PSIwIDAgMTc5MiAxNzkyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGZpbGw9IiNCRkJGQzAiIGQ9Im0gMTQwOCw3NDIgcSAwLDI2IC0xOSw0NSAtMTksMTkgLTQ1LDE5IEggNDQ4IHEgLTI2LDAgLTQ1LC0xOSAtMTksLTE5IC0xOSwtNDUgMCwtMjYgMTksLTQ1IEwgODUxLDI0OSBxIDE5LC0xOSA0NSwtMTkgMjYsMCA0NSwxOSBsIDQ0OCw0NDggcSAxOSwxOSAxOSw0NSB6IiAvPjxwYXRoIGZpbGw9IiNCRkJGQzAiIGQ9Im0gMTQwOCwxMDUwIHEgMCwyNiAtMTksNDUgbCAtNDQ4LDQ0OCBxIC0xOSwxOSAtNDUsMTkgLTI2LDAgLTQ1LC0xOSBMIDQwMywxMDk1IHEgLTE5LC0xOSAtMTksLTQ1IDAsLTI2IDE5LC00NSAxOSwtMTkgNDUsLTE5IGggODk2IHEgMjYsMCA0NSwxOSAxOSwxOSAxOSw0NSB6IiAvPjwvc3ZnPg==);

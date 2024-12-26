@@ -68,6 +68,13 @@ namespace Palmmedia.ReportGenerator.Core
                 errors.Add(string.Format(Resources.ErrorLowMethodCoverage, summaryResult.CodeElementCoverageQuota.Value, this.minimumCoverageThresholds.MethodCoverage.Value));
             }
 
+            if (this.minimumCoverageThresholds.FullMethodCoverage.HasValue
+                && summaryResult.FullCodeElementCoverageQuota.HasValue
+                && summaryResult.FullCodeElementCoverageQuota < this.minimumCoverageThresholds.FullMethodCoverage.Value)
+            {
+                errors.Add(string.Format(Resources.ErrorLowFullMethodCoverage, summaryResult.FullCodeElementCoverageQuota.Value, this.minimumCoverageThresholds.FullMethodCoverage.Value));
+            }
+
             if (errors.Count > 0)
             {
                 throw new LowCoverageException(string.Join("\r\n", errors));

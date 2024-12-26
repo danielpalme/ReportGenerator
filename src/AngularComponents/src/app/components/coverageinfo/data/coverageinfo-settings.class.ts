@@ -4,6 +4,7 @@ export class CoverageInfoSettings {
     showLineCoverage: boolean = true;
     showBranchCoverage: boolean = true;
     showMethodCoverage: boolean = true;
+    showFullMethodCoverage: boolean = true;
     visibleMetrics: Metric[] = [];
 
     groupingMaximum: number = 0;
@@ -18,6 +19,8 @@ export class CoverageInfoSettings {
     branchCoverageMax: number = 100;
     methodCoverageMin: number = 0;
     methodCoverageMax: number = 100;
+    methodFullCoverageMin: number = 0;
+    methodFullCoverageMax: number = 100;
 
     sortBy: string = "name";
     sortOrder: string = "asc";

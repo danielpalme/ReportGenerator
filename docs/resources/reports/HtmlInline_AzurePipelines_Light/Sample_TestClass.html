@@ -171,17 +171,20 @@ a.percentagebar {
 .ct-chart .ct-series.ct-series-a .ct-line, .ct-chart .ct-series.ct-series-a .ct-point { stroke: #0078D4 !important;}
 .ct-chart .ct-series.ct-series-b .ct-line, .ct-chart .ct-series.ct-series-b .ct-point { stroke: #1c2298 !important;}
 .ct-chart .ct-series.ct-series-c .ct-line, .ct-chart .ct-series.ct-series-c .ct-point { stroke: #0aad0a !important;}
+.ct-chart .ct-series.ct-series-d .ct-line, .ct-chart .ct-series.ct-series-d .ct-point { stroke: #FF6A00 !important;}
 
-.tinylinecoveragechart, .tinybranchcoveragechart, .tinymethodcoveragechart { background-color: #fff; margin-left: -3px; float: left; border: 1px solid #c1c1c1; width: 30px; height: 18px; }
+.tinylinecoveragechart, .tinybranchcoveragechart, .tinymethodcoveragechart, .tinyfullmethodcoveragechart { background-color: #fff; margin-left: -3px; float: left; border: 1px solid #c1c1c1; width: 30px; height: 18px; }
 .historiccoverageoffset { margin-top: 7px; }
 
-.tinylinecoveragechart .ct-line, .tinybranchcoveragechart .ct-line, .tinymethodcoveragechart .ct-line { stroke-width: 1px !important; }
+.tinylinecoveragechart .ct-line, .tinybranchcoveragechart .ct-line, .tinymethodcoveragechart .ct-line, .tinyfullmethodcoveragechart .ct-line { stroke-width: 1px !important; }
 .tinybranchcoveragechart .ct-series.ct-series-a .ct-line { stroke: #1c2298 !important; }
 .tinymethodcoveragechart .ct-series.ct-series-a .ct-line { stroke: #0aad0a !important; }
+.tinyfullmethodcoveragechart .ct-series.ct-series-a .ct-line { stroke: #FF6A00 !important; }
 
 .linecoverage { background-color: #0078D4; width: 10px; height: 8px; border: 1px solid #000; display: inline-block; }
 .branchcoverage { background-color: #1c2298; width: 10px; height: 8px; border: 1px solid #000; display: inline-block; }
 .codeelementcoverage { background-color: #0aad0a; width: 10px; height: 8px; border: 1px solid #000; display: inline-block; }
+.fullcodeelementcoverage { background-color: #FF6A00; width: 10px; height: 8px; border: 1px solid #000; display: inline-block; }
 
 .tooltip { position: absolute; display: none; padding: 5px; background: #F4C63D; color: #453D3F; pointer-events: none; z-index: 1; min-width: 250px; }
 
@@ -654,6 +657,10 @@ a.percentagebar {
 <td class="limit-width right" title="4">4</td>
 </tr>
 <tr>
+<th>Fully covered methods:</th>
+<td class="limit-width right" title="1">1</td>
+</tr>
+<tr>
 <th>Total methods:</th>
 <td class="limit-width right" title="5">5</td>
 </tr>
@@ -661,13 +668,17 @@ a.percentagebar {
 <th>Method coverage:</th>
 <td class="limit-width right" title="4 of 5">80%</td>
 </tr>
+<tr>
+<th>Full method coverage:</th>
+<td class="limit-width right" title="1 of 5">20%</td>
+</tr>
 </table>
 </div>
 </div>
 </div>
 </div>
 <h1>Coverage history</h1>
-<div class="historychart ct-chart" data-data="historyChartData9f21519dccee4d4cbc4b74b9807d234a"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="ct-chart" width="1200" height="150" viewBox="0 0 1200 150">
+<div class="historychart ct-chart" data-data="historyChartData2db84b2bb10d4f8f8b27224d508919d1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="ct-chart" width="1200" height="150" viewBox="0 0 1200 150">
 <style type="text/css">
         <![CDATA[
         .ct-chart .ct-grid {
@@ -694,6 +705,10 @@ a.percentagebar {
 
         .ct-chart .ct-series.ct-series-c .ct-line, .ct-chart .ct-series.ct-series-c .ct-point {
             stroke: #0aad0a;
+        }
+
+        .ct-chart .ct-series.ct-series-d .ct-line, .ct-chart .ct-series.ct-series-d .ct-point {
+            stroke: #FF6A00;
         }
 
         .ct-chart .ct-line {
@@ -736,15 +751,19 @@ a.percentagebar {
 <g class="ct-series ct-series-c">
 <path d="M50.000,35.000" class="ct-line"></path>
 <line x1="50.000" y1="35.000" x2="50.010" y2="35.000" class="ct-point"></line></g>
+<g class="ct-series ct-series-d">
+<path d="M50.000,95.000" class="ct-line"></path>
+<line x1="50.000" y1="95.000" x2="50.010" y2="95.000" class="ct-point"></line></g>
 </svg>
 </div>
 <script type="text/javascript">/* <![CDATA[ */ 
-var historyChartData9f21519dccee4d4cbc4b74b9807d234a = {
+var historyChartData2db84b2bb10d4f8f8b27224d508919d1 = {
     "series" : [[{ 'meta': 0, 'value': 72.7 }],
 [{ 'meta': 0, 'value': 50 }],
-[{ 'meta': 0, 'value': 80 }]
+[{ 'meta': 0, 'value': 80 }],
+[{ 'meta': 0, 'value': 20 }]
 ],
-    "tooltips" : ['<h3>12.11.2024 - 21:04:34</h3><br /><span class="linecoverage"></span> Line coverage: 72.7% (24/33)<br /><span class="branchcoverage"></span> Branch coverage: 50% (2/4)<br /><span class="codeelementcoverage"></span> Method coverage: 80% (4/5)<br />Total lines: 38']
+    "tooltips" : ['<h3>28.12.2024 - 20:11:04</h3><br /><span class="linecoverage"></span> Line coverage: 72.7% (24/33)<br /><span class="branchcoverage"></span> Branch coverage: 50% (2/4)<br /><span class="codeelementcoverage"></span> Method coverage: 80% (4/5)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 20% (1/5)<br />Total lines: 38']
 };
  /* ]]> */ </script>
 <h1>Metrics</h1>
@@ -814,7 +833,7 @@ var historyChartData9f21519dccee4d4cbc4b74b9807d234a = {
 </tbody>
 </table>
 </div>
-<div class="footer">Generated by: ReportGenerator 5.4.0.0<br />12.11.2024 - 21:04:34<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
+<div class="footer">Generated by: ReportGenerator 5.4.2.0<br />28.12.2024 - 20:11:04<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
 <div class="containerright">
 <div class="containerrightfixed">
 <h1>Methods/Properties</h1>

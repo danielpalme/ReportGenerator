@@ -171,17 +171,20 @@ a.percentagebar {
 .ct-chart .ct-series.ct-series-a .ct-line, .ct-chart .ct-series.ct-series-a .ct-point { stroke: #0078D4 !important;}
 .ct-chart .ct-series.ct-series-b .ct-line, .ct-chart .ct-series.ct-series-b .ct-point { stroke: #1c2298 !important;}
 .ct-chart .ct-series.ct-series-c .ct-line, .ct-chart .ct-series.ct-series-c .ct-point { stroke: #0aad0a !important;}
+.ct-chart .ct-series.ct-series-d .ct-line, .ct-chart .ct-series.ct-series-d .ct-point { stroke: #FF6A00 !important;}
 
-.tinylinecoveragechart, .tinybranchcoveragechart, .tinymethodcoveragechart { background-color: #fff; margin-left: -3px; float: left; border: 1px solid #c1c1c1; width: 30px; height: 18px; }
+.tinylinecoveragechart, .tinybranchcoveragechart, .tinymethodcoveragechart, .tinyfullmethodcoveragechart { background-color: #fff; margin-left: -3px; float: left; border: 1px solid #c1c1c1; width: 30px; height: 18px; }
 .historiccoverageoffset { margin-top: 7px; }
 
-.tinylinecoveragechart .ct-line, .tinybranchcoveragechart .ct-line, .tinymethodcoveragechart .ct-line { stroke-width: 1px !important; }
+.tinylinecoveragechart .ct-line, .tinybranchcoveragechart .ct-line, .tinymethodcoveragechart .ct-line, .tinyfullmethodcoveragechart .ct-line { stroke-width: 1px !important; }
 .tinybranchcoveragechart .ct-series.ct-series-a .ct-line { stroke: #1c2298 !important; }
 .tinymethodcoveragechart .ct-series.ct-series-a .ct-line { stroke: #0aad0a !important; }
+.tinyfullmethodcoveragechart .ct-series.ct-series-a .ct-line { stroke: #FF6A00 !important; }
 
 .linecoverage { background-color: #0078D4; width: 10px; height: 8px; border: 1px solid #000; display: inline-block; }
 .branchcoverage { background-color: #1c2298; width: 10px; height: 8px; border: 1px solid #000; display: inline-block; }
 .codeelementcoverage { background-color: #0aad0a; width: 10px; height: 8px; border: 1px solid #000; display: inline-block; }
+.fullcodeelementcoverage { background-color: #FF6A00; width: 10px; height: 8px; border: 1px solid #000; display: inline-block; }
 
 .tooltip { position: absolute; display: none; padding: 5px; background: #F4C63D; color: #453D3F; pointer-events: none; z-index: 1; min-width: 250px; }
 
@@ -602,13 +605,16 @@ a.percentagebar {
         .ct-chart .ct-series.ct-series-a .ct-line, .ct-chart .ct-series.ct-series-a .ct-point { stroke: #0078D4  !important; }
         .ct-chart .ct-series.ct-series-b .ct-line, .ct-chart .ct-series.ct-series-b .ct-point { stroke: #6dc428 !important; }
         .ct-chart .ct-series.ct-series-c .ct-line, .ct-chart .ct-series.ct-series-c .ct-point { stroke: #e58f1d !important; }
+        .ct-chart .ct-series.ct-series-d .ct-line, .ct-chart .ct-series.ct-series-d .ct-point { stroke: #c71bca !important; }
 
         .linecoverage { background-color: #0078D4; }
         .branchcoverage { background-color: #6dc428; }
         .codeelementcoverage { background-color: #e58f1d; }
-        .tinylinecoveragechart, .tinybranchcoveragechart, .tinymethodcoveragechart { background-color: #292827; }
+        .fullcodeelementcoverage { background-color: #c71bca; }
+        .tinylinecoveragechart, .tinybranchcoveragechart, .tinymethodcoveragechart, .tinyfullmethodcoveragechart { background-color: #292827; }
         .tinybranchcoveragechart .ct-series.ct-series-a .ct-line { stroke: #6dc428 !important; }
         .tinymethodcoveragechart .ct-series.ct-series-a .ct-line { stroke: #e58f1d !important; }
+        .tinyfullmethodcoveragechart .ct-series.ct-series-a .ct-line { stroke: #c71bca !important; }
 
         .icon-up-down-dir {
             background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB3aWR0aD0iMTc5MiIgaGVpZ2h0PSIxNzkyIiB2aWV3Qm94PSIwIDAgMTc5MiAxNzkyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGZpbGw9IiNCRkJGQzAiIGQ9Im0gMTQwOCw3NDIgcSAwLDI2IC0xOSw0NSAtMTksMTkgLTQ1LDE5IEggNDQ4IHEgLTI2LDAgLTQ1LC0xOSAtMTksLTE5IC0xOSwtNDUgMCwtMjYgMTksLTQ1IEwgODUxLDI0OSBxIDE5LC0xOSA0NSwtMTkgMjYsMCA0NSwxOSBsIDQ0OCw0NDggcSAxOSwxOSAxOSw0NSB6IiAvPjxwYXRoIGZpbGw9IiNCRkJGQzAiIGQ9Im0gMTQwOCwxMDUwIHEgMCwyNiAtMTksNDUgbCAtNDQ4LDQ0OCBxIC0xOSwxOSAtNDUsMTkgLTI2LDAgLTQ1LC0xOSBMIDQwMywxMDk1IHEgLTE5LC0xOSAtMTksLTQ1IDAsLTI2IDE5LC00NSAxOSwtMTkgNDUsLTE5IGggODk2IHEgMjYsMCA0NSwxOSAxOSwxOSAxOSw0NSB6IiAvPjwvc3ZnPg==);
@@ -738,6 +744,10 @@ a.percentagebar {
 <td class="limit-width right" title="6">6</td>
 </tr>
 <tr>
+<th>Fully covered methods:</th>
+<td class="limit-width right" title="3">3</td>
+</tr>
+<tr>
 <th>Total methods:</th>
 <td class="limit-width right" title="10">10</td>
 </tr>
@@ -745,13 +755,17 @@ a.percentagebar {
 <th>Method coverage:</th>
 <td class="limit-width right" title="6 of 10">60%</td>
 </tr>
+<tr>
+<th>Full method coverage:</th>
+<td class="limit-width right" title="3 of 10">30%</td>
+</tr>
 </table>
 </div>
 </div>
 </div>
 </div>
 <h1>Coverage history</h1>
-<div class="historychart ct-chart" data-data="historyChartDatad2d5a221bc6a44b59acc1e9795c39e67"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="ct-chart" width="1200" height="150" viewBox="0 0 1200 150">
+<div class="historychart ct-chart" data-data="historyChartDataafa340b3728a40d8a93919d6f76c0002"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="ct-chart" width="1200" height="150" viewBox="0 0 1200 150">
 <style type="text/css">
         <![CDATA[
         .ct-chart .ct-grid {
@@ -778,6 +792,10 @@ a.percentagebar {
 
         .ct-chart .ct-series.ct-series-c .ct-line, .ct-chart .ct-series.ct-series-c .ct-point {
             stroke: #0aad0a;
+        }
+
+        .ct-chart .ct-series.ct-series-d .ct-line, .ct-chart .ct-series.ct-series-d .ct-point {
+            stroke: #FF6A00;
         }
 
         .ct-chart .ct-line {
@@ -820,15 +838,19 @@ a.percentagebar {
 <g class="ct-series ct-series-c">
 <path d="M50.000,55.000L278.000,75.000L506.000,75.000L734.000,55.000L962.000,55.000L1190.000,55.000" class="ct-line"></path>
 <line x1="50.000" y1="55.000" x2="50.010" y2="55.000" class="ct-point"></line><line x1="278.000" y1="75.000" x2="278.010" y2="75.000" class="ct-point"></line><line x1="506.000" y1="75.000" x2="506.010" y2="75.000" class="ct-point"></line><line x1="734.000" y1="55.000" x2="734.010" y2="55.000" class="ct-point"></line><line x1="962.000" y1="55.000" x2="962.010" y2="55.000" class="ct-point"></line><line x1="1190.000" y1="55.000" x2="1190.010" y2="55.000" class="ct-point"></line></g>
+<g class="ct-series ct-series-d">
+<path d="M50.000,75.000L278.000,75.000L506.000,75.000L734.000,75.000L962.000,75.000L1190.000,85.000" class="ct-line"></path>
+<line x1="50.000" y1="75.000" x2="50.010" y2="75.000" class="ct-point"></line><line x1="278.000" y1="75.000" x2="278.010" y2="75.000" class="ct-point"></line><line x1="506.000" y1="75.000" x2="506.010" y2="75.000" class="ct-point"></line><line x1="734.000" y1="75.000" x2="734.010" y2="75.000" class="ct-point"></line><line x1="962.000" y1="75.000" x2="962.010" y2="75.000" class="ct-point"></line><line x1="1190.000" y1="85.000" x2="1190.010" y2="85.000" class="ct-point"></line></g>
 </svg>
 </div>
 <script type="text/javascript">/* <![CDATA[ */ 
-var historyChartDatad2d5a221bc6a44b59acc1e9795c39e67 = {
+var historyChartDataafa340b3728a40d8a93919d6f76c0002 = {
     "series" : [[{ 'meta': 0, 'value': 39.4 }, { 'meta': 1, 'value': 39.4 }, { 'meta': 2, 'value': 42.1 }, { 'meta': 3, 'value': 44.7 }, { 'meta': 4, 'value': 39.4 }, { 'meta': 5, 'value': 63.1 }],
 [{ 'meta': 0, 'value': 50 }, { 'meta': 1, 'value': 40 }, { 'meta': 2, 'value': 40 }, { 'meta': 3, 'value': 40 }, { 'meta': 4, 'value': 40 }, { 'meta': 5, 'value': 50 }],
-[{ 'meta': 0, 'value': 60 }, { 'meta': 1, 'value': 40 }, { 'meta': 2, 'value': 40 }, { 'meta': 3, 'value': 60 }, { 'meta': 4, 'value': 60 }, { 'meta': 5, 'value': 60 }]
+[{ 'meta': 0, 'value': 60 }, { 'meta': 1, 'value': 40 }, { 'meta': 2, 'value': 40 }, { 'meta': 3, 'value': 60 }, { 'meta': 4, 'value': 60 }, { 'meta': 5, 'value': 60 }],
+[{ 'meta': 0, 'value': 40 }, { 'meta': 1, 'value': 40 }, { 'meta': 2, 'value': 40 }, { 'meta': 3, 'value': 40 }, { 'meta': 4, 'value': 40 }, { 'meta': 5, 'value': 30 }]
 ],
-    "tooltips" : ['<h3>01.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 39.4% (15/38)<br /><span class="branchcoverage"></span> Branch coverage: 50% (10/20)<br /><span class="codeelementcoverage"></span> Method coverage: 60% (6/10)<br />Total lines: 85','<h3>02.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 39.4% (15/38)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 40% (4/10)<br />Total lines: 85','<h3>03.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 42.1% (16/38)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 40% (4/10)<br />Total lines: 85','<h3>06.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 44.7% (17/38)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 60% (6/10)<br />Total lines: 85','<h3>08.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 39.4% (15/38)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 60% (6/10)<br />Total lines: 85','<h3>12.11.2024 - 21:04:33</h3><br /><span class="linecoverage"></span> Line coverage: 63.1% (24/38)<br /><span class="branchcoverage"></span> Branch coverage: 50% (1/2)<br /><span class="codeelementcoverage"></span> Method coverage: 60% (6/10)<br />Total lines: 85']
+    "tooltips" : ['<h3>01.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 39.4% (15/38)<br /><span class="branchcoverage"></span> Branch coverage: 50% (10/20)<br /><span class="codeelementcoverage"></span> Method coverage: 60% (6/10)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 40% (4/10)<br />Total lines: 85','<h3>02.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 39.4% (15/38)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 40% (4/10)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 40% (4/10)<br />Total lines: 85','<h3>03.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 42.1% (16/38)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 40% (4/10)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 40% (4/10)<br />Total lines: 85','<h3>06.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 44.7% (17/38)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 60% (6/10)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 40% (4/10)<br />Total lines: 85','<h3>08.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 39.4% (15/38)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 60% (6/10)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 40% (4/10)<br />Total lines: 85','<h3>28.12.2024 - 20:11:03</h3><br /><span class="linecoverage"></span> Line coverage: 63.1% (24/38)<br /><span class="branchcoverage"></span> Branch coverage: 50% (1/2)<br /><span class="codeelementcoverage"></span> Method coverage: 60% (6/10)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 30% (3/10)<br />Total lines: 85']
 };
  /* ]]> */ </script>
 <h1>Metrics</h1>
@@ -947,7 +969,7 @@ var historyChartDatad2d5a221bc6a44b59acc1e9795c39e67 = {
 </tbody>
 </table>
 </div>
-<div class="footer">Generated by: ReportGenerator 5.4.0.0<br />12.11.2024 - 21:04:34<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
+<div class="footer">Generated by: ReportGenerator 5.4.2.0<br />28.12.2024 - 20:11:03<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
 <div class="containerright">
 <div class="containerrightfixed">
 <h1>Methods/Properties</h1>

@@ -1,5 +1,5 @@
 Summary
-Generated on:;12.11.2024 - 21:04:42
+Generated on:;28.12.2024 - 20:11:13
 Parser:;OpenCover
 Assemblies:;1
 Classes:;4
@@ -13,6 +13,6 @@ Total lines:;260
 Sample;69.4%
 
 Sample.PartialClass;54.5%
-Test.Program;100.0%
+Test.Program;100%
 Test.TestClass;72.7%
 Test.TestClass2;63.1%

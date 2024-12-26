@@ -103,6 +103,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         public int CoveredCodeElements => this.classes.SafeSum(f => f.CoveredCodeElements);
 
         /// <summary>
+        /// Gets the number of fully covered code elements.
+        /// </summary>
+        /// <value>
+        /// The number of fully covered code elements.
+        /// </value>
+        public int FullCoveredCodeElements => this.classes.SafeSum(f => f.FullCoveredCodeElements);
+
+        /// <summary>
         /// Gets the number of total code elements.
         /// </summary>
         /// <value>
@@ -115,6 +123,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// </summary>
         /// <value>The code elements coverage quota.</value>
         public decimal? CodeElementCoverageQuota => (this.TotalCodeElements == 0) ? (decimal?)null : MathExtensions.CalculatePercentage(this.CoveredCodeElements, this.TotalCodeElements);
+
+        /// <summary>
+        /// Gets the full code elements coverage quota.
+        /// </summary>
+        /// <value>The full code elements coverage quota.</value>
+        public decimal? FullCodeElementCoverageQuota => (this.TotalCodeElements == 0) ? (decimal?)null : MathExtensions.CalculatePercentage(this.FullCoveredCodeElements, this.TotalCodeElements);
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.

@@ -132,7 +132,9 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 if (proVersion)
                 {
                     reportTextWriter.WriteLine("| **{0}** | {1} |", ReportResources.CodeElementCoverageQuota2, this.ReportCoverageQuota(previous.CodeElementCoverageQuota, current.CodeElementCoverageQuota));
+                    reportTextWriter.WriteLine("| **{0}** | {1} |", ReportResources.FullCodeElementCoverageQuota2, this.ReportCoverageQuota(previous.FullCodeElementCoverageQuota, current.FullCodeElementCoverageQuota));
                     reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.CoveredCodeElements, this.ReportValues(previous.CoveredCodeElements, current.CoveredCodeElements));
+                    reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.FullCoveredCodeElements, this.ReportValues(previous.FullCoveredCodeElements, current.FullCoveredCodeElements));
                     reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.TotalCodeElements, this.ReportValues(previous.TotalCodeElements, current.TotalCodeElements));
                 }
                 else

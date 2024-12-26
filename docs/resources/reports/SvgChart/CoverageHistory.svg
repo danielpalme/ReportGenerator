@@ -27,6 +27,10 @@
             stroke: #0aad0a;
         }
 
+        .ct-chart .ct-series.ct-series-d .ct-line, .ct-chart .ct-series.ct-series-d .ct-point {
+            stroke: #FF6A00;
+        }
+
         .ct-chart .ct-line {
             fill: none;
             stroke-width: 2px;
@@ -67,4 +71,7 @@
 <g class="ct-series ct-series-c">
 <path d="M50.000,56.700L192.500,69.200L335.000,65.000L477.500,60.900L620.000,60.900L762.500,52.500L905.000,48.400L1047.500,48.400L1190.000,48.400" class="ct-line"></path>
 <line x1="50.000" y1="56.700" x2="50.010" y2="56.700" class="ct-point"></line><line x1="192.500" y1="69.200" x2="192.510" y2="69.200" class="ct-point"></line><line x1="335.000" y1="65.000" x2="335.010" y2="65.000" class="ct-point"></line><line x1="477.500" y1="60.900" x2="477.510" y2="60.900" class="ct-point"></line><line x1="620.000" y1="60.900" x2="620.010" y2="60.900" class="ct-point"></line><line x1="762.500" y1="52.500" x2="762.510" y2="52.500" class="ct-point"></line><line x1="905.000" y1="48.400" x2="905.010" y2="48.400" class="ct-point"></line><line x1="1047.500" y1="48.400" x2="1047.510" y2="48.400" class="ct-point"></line><line x1="1190.000" y1="48.400" x2="1190.010" y2="48.400" class="ct-point"></line></g>
+<g class="ct-series ct-series-d">
+<path d="M50.000,90.000L192.500,90.000L335.000,85.900L477.500,81.700L620.000,81.700L762.500,77.500L905.000,77.500L1047.500,77.500L1190.000,77.500" class="ct-line"></path>
+<line x1="50.000" y1="90.000" x2="50.010" y2="90.000" class="ct-point"></line><line x1="192.500" y1="90.000" x2="192.510" y2="90.000" class="ct-point"></line><line x1="335.000" y1="85.900" x2="335.010" y2="85.900" class="ct-point"></line><line x1="477.500" y1="81.700" x2="477.510" y2="81.700" class="ct-point"></line><line x1="620.000" y1="81.700" x2="620.010" y2="81.700" class="ct-point"></line><line x1="762.500" y1="77.500" x2="762.510" y2="77.500" class="ct-point"></line><line x1="905.000" y1="77.500" x2="905.010" y2="77.500" class="ct-point"></line><line x1="1047.500" y1="77.500" x2="1047.510" y2="77.500" class="ct-point"></line><line x1="1190.000" y1="77.500" x2="1190.010" y2="77.500" class="ct-point"></line></g>
 </svg>

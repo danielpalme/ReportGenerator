@@ -13,6 +13,7 @@ export abstract class ElementBase {
     totalBranches: number = 0;
 
     coveredMethods: number = 0;
+    fullyCoveredMethods: number = 0;
     totalMethods: number = 0;
 
     get coverage(): number {
@@ -85,6 +86,30 @@ export abstract class ElementBase {
         }
 
         return this.coveredMethods + "/" + this.totalMethods;
+    }
+
+    get methodFullCoverage(): number {
+        if (this.totalMethods === 0) {
+            return NaN;
+        }
+
+        return Helper.roundNumber(100 * this.fullyCoveredMethods / this.totalMethods);
+    }
+    
+    get methodFullCoveragePercentage(): string {
+        if (this.totalMethods === 0) {
+            return "";
+        }
+
+        return this.methodFullCoverage + "%";
+    }
+
+    get methodFullCoverageRatioText(): string {
+        if (this.totalMethods === 0) {
+            return "-";
+        }
+
+        return this.fullyCoveredMethods + "/" + this.totalMethods;
     }
 
     abstract visible(settings: CoverageInfoSettings): boolean;

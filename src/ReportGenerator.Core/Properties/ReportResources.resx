@@ -411,4 +411,22 @@
   <data name="SelectCoverageTypes" xml:space="preserve">
     <value>Select coverage types</value>
   </data>
+  <data name="FullCoveredCodeElements" xml:space="preserve">
+    <value>Fully covered methods:</value>
+  </data>
+  <data name="FullCodeElementCoverageQuota2" xml:space="preserve">
+    <value>Full method coverage:</value>
+  </data>
+  <data name="FullCodeElementCoverageQuota" xml:space="preserve">
+    <value>Full method coverage</value>
+  </data>
+  <data name="FullCodeElementCoverageIncreaseOnly" xml:space="preserve">
+    <value>Full method coverage: Increase only</value>
+  </data>
+  <data name="FullCodeElementCoverageDecreaseOnly" xml:space="preserve">
+    <value>Full method coverage: Decrease only</value>
+  </data>
+  <data name="FullMethod" xml:space="preserve">
+    <value>Full method</value>
+  </data>
 </root>

@@ -19,5 +19,10 @@
         /// Gets or sets minimum method coverage. If method coverage falls below this treshold, ReportGenerator will exit unsuccessfully.
         /// </summary>
         public int? MethodCoverage { get; set; }
+
+        /// <summary>
+        /// Gets or sets minimum full method coverage. If full method coverage falls below this treshold, ReportGenerator will exit unsuccessfully.
+        /// </summary>
+        public int? FullMethodCoverage { get; set; }
     }
 }

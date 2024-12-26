@@ -15,8 +15,10 @@
     <Totalbranches>2</Totalbranches>
     <Branchcoverage>50</Branchcoverage>
     <Coveredmethods>6</Coveredmethods>
+    <Fullcoveredmethods>3</Fullcoveredmethods>
     <Totalmethods>10</Totalmethods>
     <Methodcoverage>60</Methodcoverage>
+    <Fullmethodcoverage>30</Fullmethodcoverage>
   </Summary>
   <Metrics>
     <Element name="ctor">

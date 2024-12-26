@@ -22,29 +22,46 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
           <![CDATA[
             @keyframes fade1 {{
                 0% {{ visibility: visible; opacity: 1; }}
-               27% {{ visibility: visible; opacity: 1; }}
-               33% {{ visibility: hidden; opacity: 0; }}
-               60% {{ visibility: hidden; opacity: 0; }}
-               66% {{ visibility: hidden; opacity: 0; }}
-               93% {{ visibility: hidden; opacity: 0; }}
+               23% {{ visibility: visible; opacity: 1; }}
+               25% {{ visibility: hidden; opacity: 0; }}
+               48% {{ visibility: hidden; opacity: 0; }}
+               50% {{ visibility: hidden; opacity: 0; }}
+               73% {{ visibility: hidden; opacity: 0; }}
+               75% {{ visibility: hidden; opacity: 0; }}
+               98% {{ visibility: hidden; opacity: 0; }}
               100% {{ visibility: visible; opacity: 1; }}
             }}
             @keyframes fade2 {{
                 0% {{ visibility: hidden; opacity: 0; }}
-               27% {{ visibility: hidden; opacity: 0; }}
-               33% {{ visibility: visible; opacity: 1; }}
-               60% {{ visibility: visible; opacity: 1; }}
-               66% {{ visibility: hidden; opacity: 0; }}
-               93% {{ visibility: hidden; opacity: 0; }}
+               23% {{ visibility: hidden; opacity: 0; }}
+               25% {{ visibility: visible; opacity: 1; }}
+               48% {{ visibility: visible; opacity: 1; }}
+               50% {{ visibility: hidden; opacity: 0; }}
+               73% {{ visibility: hidden; opacity: 0; }}
+               75% {{ visibility: hidden; opacity: 0; }}
+               98% {{ visibility: hidden; opacity: 0; }}
               100% {{ visibility: hidden; opacity: 0; }}
             }}
             @keyframes fade3 {{
                 0% {{ visibility: hidden; opacity: 0; }}
-               27% {{ visibility: hidden; opacity: 0; }}
-               33% {{ visibility: hidden; opacity: 0; }}
-               60% {{ visibility: hidden; opacity: 0; }}
-               66% {{ visibility: visible; opacity: 1; }}
-               93% {{ visibility: visible; opacity: 1; }}
+               23% {{ visibility: hidden; opacity: 0; }}
+               25% {{ visibility: hidden; opacity: 0; }}
+               48% {{ visibility: hidden; opacity: 0; }}
+               50% {{ visibility: visible; opacity: 1; }}
+               73% {{ visibility: visible; opacity: 1; }}
+               75% {{ visibility: hidden; opacity: 0; }}
+               98% {{ visibility: hidden; opacity: 0; }}
+              100% {{ visibility: hidden; opacity: 0; }}
+            }}
+            @keyframes fade4 {{
+                0% {{ visibility: hidden; opacity: 0; }}
+               23% {{ visibility: hidden; opacity: 0; }}
+               25% {{ visibility: hidden; opacity: 0; }}
+               48% {{ visibility: hidden; opacity: 0; }}
+               50% {{ visibility: hidden; opacity: 0; }}
+               73% {{ visibility: hidden; opacity: 0; }}
+               75% {{ visibility: visible; opacity: 1; }}
+               98% {{ visibility: visible; opacity: 1; }}
               100% {{ visibility: hidden; opacity: 0; }}
             }}
             .linecoverage {{
@@ -60,6 +77,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             .methodcoverage {{
                 animation-duration: 15s;
                 animation-name: fade3;
+                animation-iteration-count: infinite;
+            }}
+            .fullmethodcoverage {{
+                animation-duration: 15s;
+                animation-name: fade4;
                 animation-iteration-count: infinite;
             }}
           ]]>
@@ -109,25 +131,28 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         {1}
         {2}
         {3}
+        {4}
     </g>
     
     <g fill=""#fff"" text-anchor=""middle"" font-family=""Verdana,Arial,Geneva,sans-serif"" font-size=""11"">
         <a xlink:href=""https://github.com/danielpalme/ReportGenerator"" target=""_top"">
-            <title>{4}</title>
+            <title>{5}</title>
             <use xlink:href=""#icon"" transform=""translate(3,1) scale(3.5)""/>
         </a>
 
-        <text x=""53"" y=""15"" fill=""#010101"" fill-opacity="".3"">{5}</text>
-        <text x=""53"" y=""14"" fill=""#fff"">{5}</text>
-        {6}
+        <text x=""53"" y=""15"" fill=""#010101"" fill-opacity="".3"">{6}</text>
+        <text x=""53"" y=""14"" fill=""#fff"">{6}</text>
         {7}
         {8}
+        {9}
+        {10}
     </g>
 
     <g>
-        {9}
-        {10}
         {11}
+        {12}
+        {13}
+        {14}
     </g>
 </svg>";
 
@@ -145,6 +170,17 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// The template for the method coverage symbol.
         /// </summary>
         private const string MethodCoverageSymbol = @"<path class=""{0}"" fill=""#fff"" d=""m 100.5384,15.628605 5.3846,-2.9363 v -5.35096 l -5.3846,1.96033 z M 100,8.350955 105.8726,6.213935 100,4.076925 94.1274,6.213935 Z m 7,-2.12019 v 6.46154 q 0,0.29447 -0.1515,0.54687 -0.1514,0.25241 -0.4122,0.39544 l -5.9231,3.23076 q -0.2356,0.13462 -0.5132,0.13462 -0.2777,0 -0.5133,-0.13462 l -5.923,-3.23076 Q 93.3028,13.491585 93.1514,13.239175 93,12.986775 93,12.692305 v -6.46154 q 0,-0.33654 0.1935,-0.61418 0.1935,-0.27765 0.5132,-0.39543 l 5.9231,-2.15385 q 0.1851,-0.0673 0.3702,-0.0673 0.1851,0 0.3702,0.0673 l 5.923,2.15385 q 0.3197,0.11778 0.5133,0.39543 Q 107,5.894225 107,6.230765 Z""/>";
+
+        /// <summary>
+        /// The template for the full method coverage symbol.
+        /// </summary>
+        private const string FullMethodCoverageSymbol = @"<path class=""{0}"" fill=""#fff"" d=""m 107,6.230765 v 6.46154 c 0,0.196313 -0.0505,0.378603 -0.1515,0.54687 -0.10093,0.168273 -0.23833,0.300087 -0.4122,0.39544 l -5.9231,3.23076 c -0.15707,0.08975 -0.32813,0.13462 -0.5132,0.13462 -0.185133,0 -0.356233,-0.04487 -0.5133,-0.13462 l -5.923,-3.23076 C 93.389767,13.539262 93.252333,13.407448 93.1514,13.239175 93.050467,13.070908 93,12.888618 93,12.692305 v -6.46154 c 0,-0.22436 0.0645,-0.4290867 0.1935,-0.61418 0.129,-0.1851 0.300067,-0.31691 0.5132,-0.39543 l 5.9231,-2.15385 c 0.1234,-0.044867 0.2468,-0.0673 0.3702,-0.0673 0.1234,0 0.2468,0.022433 0.3702,0.0673 l 5.923,2.15385 c 0.21313,0.07852 0.38423,0.21033 0.5133,0.39543 0.129,0.1850933 0.1935,0.38982 0.1935,0.61418 z""/>
+          <path class=""{0}""
+             style=""fill:none;stroke:#cc0000;stroke-width:1;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1""
+             d=""m 100.0644,16.676777 -0.002,-7.833027 6.90625,-2.546875"" />
+          <path class=""{0}""
+             style=""fill:none;stroke:#cc0000;stroke-width:1;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1""
+             d=""M 99.914297,8.7645146 93.052236,5.882392"" />";
 
         /// <summary>
         /// The template for the coverage text.
@@ -243,7 +279,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             File.WriteAllText(
                 targetPath,
-                this.CreateSvgBadge(summaryResult, true, false, false));
+                this.CreateSvgBadge(summaryResult, true, false, false, false));
 
             foreach (var color in ShieldIoColors)
             {
@@ -262,7 +298,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             File.WriteAllText(
                 targetPath,
-                this.CreateSvgBadge(summaryResult, false, true, false));
+                this.CreateSvgBadge(summaryResult, false, true, false, false));
 
             foreach (var color in ShieldIoColors)
             {
@@ -281,7 +317,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             File.WriteAllText(
                 targetPath,
-                this.CreateSvgBadge(summaryResult, false, false, true));
+                this.CreateSvgBadge(summaryResult, false, false, true, false));
 
             foreach (var color in ShieldIoColors)
             {
@@ -294,13 +330,32 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                     this.CreateShieldsIoSvgBadge(summaryResult.CodeElementCoverageQuota, color.Item2));
             }
 
+            targetPath = Path.Combine(targetDirectory, "badge_fullmethodcoverage.svg");
+
+            Logger.InfoFormat(Resources.WritingReportFile, targetPath);
+
+            File.WriteAllText(
+                targetPath,
+                this.CreateSvgBadge(summaryResult, false, false, false, true));
+
+            foreach (var color in ShieldIoColors)
+            {
+                targetPath = Path.Combine(targetDirectory, $"badge_shieldsio_fullmethodcoverage_{color.Item1}.svg");
+
+                Logger.InfoFormat(Resources.WritingReportFile, targetPath);
+
+                File.WriteAllText(
+                    targetPath,
+                    this.CreateShieldsIoSvgBadge(summaryResult.FullCodeElementCoverageQuota, color.Item2));
+            }
+
             targetPath = Path.Combine(targetDirectory, "badge_combined.svg");
 
             Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
             File.WriteAllText(
                 targetPath,
-                this.CreateSvgBadge(summaryResult, true, true, true));
+                this.CreateSvgBadge(summaryResult, true, true, true, true));
         }
 
         /// <summary>
@@ -310,16 +365,21 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <param name="includeLineCoverage">Indicates whether line coverage should be included.</param>
         /// <param name="includeBranchCoverage">Indicates whether branch coverage should be included.</param>
         /// <param name="includeMethodCoverage">Indicates whether method coverage should be included.</param>
+        /// <param name="includeFullMethodCoverage">Indicates whether full method coverage should be included.</param>
         /// <returns>The rendered SVG.</returns>
-        private string CreateSvgBadge(SummaryResult summaryResult, bool includeLineCoverage, bool includeBranchCoverage, bool includeMethodCoverage)
+        private string CreateSvgBadge(SummaryResult summaryResult, bool includeLineCoverage, bool includeBranchCoverage, bool includeMethodCoverage, bool includeFullMethodCoverage)
         {
-            string lineCoverageClass = includeLineCoverage && includeBranchCoverage && includeMethodCoverage ? "linecoverage" : string.Empty;
-            string branchCoverageClass = includeLineCoverage && includeBranchCoverage && includeMethodCoverage ? "branchcoverage" : string.Empty;
-            string methodCoverageClass = includeLineCoverage && includeBranchCoverage && includeMethodCoverage ? "methodcoverage" : string.Empty;
+            bool all = includeLineCoverage && includeBranchCoverage && includeMethodCoverage && includeFullMethodCoverage;
+
+            string lineCoverageClass = all ? "linecoverage" : string.Empty;
+            string branchCoverageClass = all ? "branchcoverage" : string.Empty;
+            string methodCoverageClass = all ? "methodcoverage" : string.Empty;
+            string fullMethodCoverageClass = all ? "fullmethodcoverage" : string.Empty;
 
             string lineCoverage = "N/A";
             string branchCoverage = "N/A";
             string methodCoverage = "N/A";
+            string fullMethodCoverage = "N/A";
 
             if (summaryResult.CoverageQuota.HasValue)
             {
@@ -336,20 +396,28 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 methodCoverage = $"{summaryResult.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}%";
             }
 
+            if (summaryResult.FullCodeElementCoverageQuota.HasValue)
+            {
+                fullMethodCoverage = $"{summaryResult.FullCodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}%";
+            }
+
             return string.Format(
                 Template,
                 ReportResources.CodeCoverage,
                 includeLineCoverage ? string.Format(LineCoverageSymbol, lineCoverageClass) : string.Empty,
                 includeBranchCoverage ? string.Format(BranchCoverageSymbol, branchCoverageClass) : string.Empty,
                 includeMethodCoverage ? string.Format(MethodCoverageSymbol, methodCoverageClass) : string.Empty,
+                includeFullMethodCoverage ? string.Format(FullMethodCoverageSymbol, fullMethodCoverageClass) : string.Empty,
                 $"{ReportResources.GeneratedBy} ReportGenerator {typeof(IReportBuilder).Assembly.GetName().Version}",
                 ReportResources.Coverage3,
                 includeLineCoverage ? string.Format(CoverageText, lineCoverageClass, lineCoverage) : string.Empty,
                 includeBranchCoverage ? string.Format(CoverageText, branchCoverageClass, branchCoverage) : string.Empty,
                 includeMethodCoverage ? string.Format(CoverageText, methodCoverageClass, methodCoverage) : string.Empty,
+                includeFullMethodCoverage ? string.Format(CoverageText, fullMethodCoverageClass, fullMethodCoverage) : string.Empty,
                 includeLineCoverage ? string.Format(CoverageTooltip, lineCoverageClass, ReportResources.Coverage) : string.Empty,
                 includeBranchCoverage ? string.Format(CoverageTooltip, branchCoverageClass, ReportResources.BranchCoverage) : string.Empty,
-                includeMethodCoverage ? string.Format(CoverageTooltip, methodCoverageClass, ReportResources.CodeElementCoverageQuota) : string.Empty);
+                includeMethodCoverage ? string.Format(CoverageTooltip, methodCoverageClass, ReportResources.CodeElementCoverageQuota) : string.Empty,
+                includeFullMethodCoverage ? string.Format(CoverageTooltip, fullMethodCoverageClass, ReportResources.FullCodeElementCoverageQuota) : string.Empty);
         }
 
         /// <summary>

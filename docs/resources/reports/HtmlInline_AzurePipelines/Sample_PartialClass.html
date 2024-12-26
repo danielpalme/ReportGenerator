@@ -171,17 +171,20 @@ a.percentagebar {
 .ct-chart .ct-series.ct-series-a .ct-line, .ct-chart .ct-series.ct-series-a .ct-point { stroke: #0078D4 !important;}
 .ct-chart .ct-series.ct-series-b .ct-line, .ct-chart .ct-series.ct-series-b .ct-point { stroke: #1c2298 !important;}
 .ct-chart .ct-series.ct-series-c .ct-line, .ct-chart .ct-series.ct-series-c .ct-point { stroke: #0aad0a !important;}
+.ct-chart .ct-series.ct-series-d .ct-line, .ct-chart .ct-series.ct-series-d .ct-point { stroke: #FF6A00 !important;}
 
-.tinylinecoveragechart, .tinybranchcoveragechart, .tinymethodcoveragechart { background-color: #fff; margin-left: -3px; float: left; border: 1px solid #c1c1c1; width: 30px; height: 18px; }
+.tinylinecoveragechart, .tinybranchcoveragechart, .tinymethodcoveragechart, .tinyfullmethodcoveragechart { background-color: #fff; margin-left: -3px; float: left; border: 1px solid #c1c1c1; width: 30px; height: 18px; }
 .historiccoverageoffset { margin-top: 7px; }
 
-.tinylinecoveragechart .ct-line, .tinybranchcoveragechart .ct-line, .tinymethodcoveragechart .ct-line { stroke-width: 1px !important; }
+.tinylinecoveragechart .ct-line, .tinybranchcoveragechart .ct-line, .tinymethodcoveragechart .ct-line, .tinyfullmethodcoveragechart .ct-line { stroke-width: 1px !important; }
 .tinybranchcoveragechart .ct-series.ct-series-a .ct-line { stroke: #1c2298 !important; }
 .tinymethodcoveragechart .ct-series.ct-series-a .ct-line { stroke: #0aad0a !important; }
+.tinyfullmethodcoveragechart .ct-series.ct-series-a .ct-line { stroke: #FF6A00 !important; }
 
 .linecoverage { background-color: #0078D4; width: 10px; height: 8px; border: 1px solid #000; display: inline-block; }
 .branchcoverage { background-color: #1c2298; width: 10px; height: 8px; border: 1px solid #000; display: inline-block; }
 .codeelementcoverage { background-color: #0aad0a; width: 10px; height: 8px; border: 1px solid #000; display: inline-block; }
+.fullcodeelementcoverage { background-color: #FF6A00; width: 10px; height: 8px; border: 1px solid #000; display: inline-block; }
 
 .tooltip { position: absolute; display: none; padding: 5px; background: #F4C63D; color: #453D3F; pointer-events: none; z-index: 1; min-width: 250px; }
 
@@ -602,13 +605,16 @@ a.percentagebar {
         .ct-chart .ct-series.ct-series-a .ct-line, .ct-chart .ct-series.ct-series-a .ct-point { stroke: #0078D4  !important; }
         .ct-chart .ct-series.ct-series-b .ct-line, .ct-chart .ct-series.ct-series-b .ct-point { stroke: #6dc428 !important; }
         .ct-chart .ct-series.ct-series-c .ct-line, .ct-chart .ct-series.ct-series-c .ct-point { stroke: #e58f1d !important; }
+        .ct-chart .ct-series.ct-series-d .ct-line, .ct-chart .ct-series.ct-series-d .ct-point { stroke: #c71bca !important; }
 
         .linecoverage { background-color: #0078D4; }
         .branchcoverage { background-color: #6dc428; }
         .codeelementcoverage { background-color: #e58f1d; }
-        .tinylinecoveragechart, .tinybranchcoveragechart, .tinymethodcoveragechart { background-color: #292827; }
+        .fullcodeelementcoverage { background-color: #c71bca; }
+        .tinylinecoveragechart, .tinybranchcoveragechart, .tinymethodcoveragechart, .tinyfullmethodcoveragechart { background-color: #292827; }
         .tinybranchcoveragechart .ct-series.ct-series-a .ct-line { stroke: #6dc428 !important; }
         .tinymethodcoveragechart .ct-series.ct-series-a .ct-line { stroke: #e58f1d !important; }
+        .tinyfullmethodcoveragechart .ct-series.ct-series-a .ct-line { stroke: #c71bca !important; }
 
         .icon-up-down-dir {
             background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB3aWR0aD0iMTc5MiIgaGVpZ2h0PSIxNzkyIiB2aWV3Qm94PSIwIDAgMTc5MiAxNzkyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGZpbGw9IiNCRkJGQzAiIGQ9Im0gMTQwOCw3NDIgcSAwLDI2IC0xOSw0NSAtMTksMTkgLTQ1LDE5IEggNDQ4IHEgLTI2LDAgLTQ1LC0xOSAtMTksLTE5IC0xOSwtNDUgMCwtMjYgMTksLTQ1IEwgODUxLDI0OSBxIDE5LC0xOSA0NSwtMTkgMjYsMCA0NSwxOSBsIDQ0OCw0NDggcSAxOSwxOSAxOSw0NSB6IiAvPjxwYXRoIGZpbGw9IiNCRkJGQzAiIGQ9Im0gMTQwOCwxMDUwIHEgMCwyNiAtMTksNDUgbCAtNDQ4LDQ0OCBxIC0xOSwxOSAtNDUsMTkgLTI2LDAgLTQ1LC0xOSBMIDQwMywxMDk1IHEgLTE5LC0xOSAtMTksLTQ1IDAsLTI2IDE5LC00NSAxOSwtMTkgNDUsLTE5IGggODk2IHEgMjYsMCA0NSwxOSAxOSwxOSAxOSw0NSB6IiAvPjwvc3ZnPg==);
@@ -738,6 +744,10 @@ a.percentagebar {
 <td class="limit-width right" title="3">3</td>
 </tr>
 <tr>
+<th>Fully covered methods:</th>
+<td class="limit-width right" title="2">2</td>
+</tr>
+<tr>
 <th>Total methods:</th>
 <td class="limit-width right" title="6">6</td>
 </tr>
@@ -745,13 +755,17 @@ a.percentagebar {
 <th>Method coverage:</th>
 <td class="limit-width right" title="3 of 6">50%</td>
 </tr>
+<tr>
+<th>Full method coverage:</th>
+<td class="limit-width right" title="2 of 6">33.3%</td>
+</tr>
 </table>
 </div>
 </div>
 </div>
 </div>
 <h1>Coverage history</h1>
-<div class="historychart ct-chart" data-data="historyChartDataf6bde11a52dc45e7adee0dc43e861faf"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="ct-chart" width="1200" height="150" viewBox="0 0 1200 150">
+<div class="historychart ct-chart" data-data="historyChartData92524110a4af4f7da866559e6fa36432"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="ct-chart" width="1200" height="150" viewBox="0 0 1200 150">
 <style type="text/css">
         <![CDATA[
         .ct-chart .ct-grid {
@@ -778,6 +792,10 @@ a.percentagebar {
 
         .ct-chart .ct-series.ct-series-c .ct-line, .ct-chart .ct-series.ct-series-c .ct-point {
             stroke: #0aad0a;
+        }
+
+        .ct-chart .ct-series.ct-series-d .ct-line, .ct-chart .ct-series.ct-series-d .ct-point {
+            stroke: #FF6A00;
         }
 
         .ct-chart .ct-line {
@@ -820,15 +838,19 @@ a.percentagebar {
 <g class="ct-series ct-series-c">
 <path d="M50.000,65.000L192.500,81.700L335.000,65.000L477.500,48.400L620.000,48.400L762.500,48.400L905.000,31.700L1047.500,31.700L1190.000,65.000" class="ct-line"></path>
 <line x1="50.000" y1="65.000" x2="50.010" y2="65.000" class="ct-point"></line><line x1="192.500" y1="81.700" x2="192.510" y2="81.700" class="ct-point"></line><line x1="335.000" y1="65.000" x2="335.010" y2="65.000" class="ct-point"></line><line x1="477.500" y1="48.400" x2="477.510" y2="48.400" class="ct-point"></line><line x1="620.000" y1="48.400" x2="620.010" y2="48.400" class="ct-point"></line><line x1="762.500" y1="48.400" x2="762.510" y2="48.400" class="ct-point"></line><line x1="905.000" y1="31.700" x2="905.010" y2="31.700" class="ct-point"></line><line x1="1047.500" y1="31.700" x2="1047.510" y2="31.700" class="ct-point"></line><line x1="1190.000" y1="65.000" x2="1190.010" y2="65.000" class="ct-point"></line></g>
+<g class="ct-series ct-series-d">
+<path d="M50.000,81.700L192.500,81.700L335.000,65.000L477.500,65.000L620.000,65.000L762.500,65.000L905.000,65.000L1047.500,65.000L1190.000,81.700" class="ct-line"></path>
+<line x1="50.000" y1="81.700" x2="50.010" y2="81.700" class="ct-point"></line><line x1="192.500" y1="81.700" x2="192.510" y2="81.700" class="ct-point"></line><line x1="335.000" y1="65.000" x2="335.010" y2="65.000" class="ct-point"></line><line x1="477.500" y1="65.000" x2="477.510" y2="65.000" class="ct-point"></line><line x1="620.000" y1="65.000" x2="620.010" y2="65.000" class="ct-point"></line><line x1="762.500" y1="65.000" x2="762.510" y2="65.000" class="ct-point"></line><line x1="905.000" y1="65.000" x2="905.010" y2="65.000" class="ct-point"></line><line x1="1047.500" y1="65.000" x2="1047.510" y2="65.000" class="ct-point"></line><line x1="1190.000" y1="81.700" x2="1190.010" y2="81.700" class="ct-point"></line></g>
 </svg>
 </div>
 <script type="text/javascript">/* <![CDATA[ */ 
-var historyChartDataf6bde11a52dc45e7adee0dc43e861faf = {
+var historyChartData92524110a4af4f7da866559e6fa36432 = {
     "series" : [[{ 'meta': 0, 'value': 40.9 }, { 'meta': 1, 'value': 54.5 }, { 'meta': 2, 'value': 59 }, { 'meta': 3, 'value': 59 }, { 'meta': 4, 'value': 45.4 }, { 'meta': 5, 'value': 50 }, { 'meta': 6, 'value': 50 }, { 'meta': 7, 'value': 59 }, { 'meta': 8, 'value': 54.5 }],
 [{ 'meta': 0, 'value': 50 }, { 'meta': 1, 'value': 40 }, { 'meta': 2, 'value': 40 }, { 'meta': 3, 'value': 45 }, { 'meta': 4, 'value': 45 }, { 'meta': 5, 'value': 45 }, { 'meta': 6, 'value': 45 }, { 'meta': 7, 'value': 45 }, { 'meta': 8, 'value': 50 }],
-[{ 'meta': 0, 'value': 50 }, { 'meta': 1, 'value': 33.3 }, { 'meta': 2, 'value': 50 }, { 'meta': 3, 'value': 66.6 }, { 'meta': 4, 'value': 66.6 }, { 'meta': 5, 'value': 66.6 }, { 'meta': 6, 'value': 83.3 }, { 'meta': 7, 'value': 83.3 }, { 'meta': 8, 'value': 50 }]
+[{ 'meta': 0, 'value': 50 }, { 'meta': 1, 'value': 33.3 }, { 'meta': 2, 'value': 50 }, { 'meta': 3, 'value': 66.6 }, { 'meta': 4, 'value': 66.6 }, { 'meta': 5, 'value': 66.6 }, { 'meta': 6, 'value': 83.3 }, { 'meta': 7, 'value': 83.3 }, { 'meta': 8, 'value': 50 }],
+[{ 'meta': 0, 'value': 33.3 }, { 'meta': 1, 'value': 33.3 }, { 'meta': 2, 'value': 50 }, { 'meta': 3, 'value': 50 }, { 'meta': 4, 'value': 50 }, { 'meta': 5, 'value': 50 }, { 'meta': 6, 'value': 50 }, { 'meta': 7, 'value': 50 }, { 'meta': 8, 'value': 33.3 }]
 ],
-    "tooltips" : ['<h3>01.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 40.9% (9/22)<br /><span class="branchcoverage"></span> Branch coverage: 50% (10/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (3/6)<br />Total lines: 53','<h3>02.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 54.5% (12/22)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 33.3% (2/6)<br />Total lines: 53','<h3>03.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 59% (13/22)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (3/6)<br />Total lines: 53','<h3>04.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 59% (13/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br />Total lines: 53','<h3>05.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 45.4% (10/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br />Total lines: 53','<h3>06.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 50% (11/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br />Total lines: 53','<h3>07.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 50% (11/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 83.3% (5/6)<br />Total lines: 53','<h3>08.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 59% (13/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 83.3% (5/6)<br />Total lines: 53','<h3>12.11.2024 - 21:04:33</h3><br /><span class="linecoverage"></span> Line coverage: 54.5% (12/22)<br /><span class="branchcoverage"></span> Branch coverage: 50% (1/2)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (3/6)<br />Total lines: 53']
+    "tooltips" : ['<h3>01.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 40.9% (9/22)<br /><span class="branchcoverage"></span> Branch coverage: 50% (10/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (3/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 33.3% (2/6)<br />Total lines: 53','<h3>02.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 54.5% (12/22)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 33.3% (2/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 33.3% (2/6)<br />Total lines: 53','<h3>03.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 59% (13/22)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (3/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 50% (3/6)<br />Total lines: 53','<h3>04.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 59% (13/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 50% (3/6)<br />Total lines: 53','<h3>05.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 45.4% (10/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 50% (3/6)<br />Total lines: 53','<h3>06.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 50% (11/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 50% (3/6)<br />Total lines: 53','<h3>07.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 50% (11/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 83.3% (5/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 50% (3/6)<br />Total lines: 53','<h3>08.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 59% (13/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 83.3% (5/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 50% (3/6)<br />Total lines: 53','<h3>28.12.2024 - 20:11:03</h3><br /><span class="linecoverage"></span> Line coverage: 54.5% (12/22)<br /><span class="branchcoverage"></span> Branch coverage: 50% (1/2)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (3/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 33.3% (2/6)<br />Total lines: 53']
 };
  /* ]]> */ </script>
 <h1>Metrics</h1>
@@ -921,7 +943,7 @@ var historyChartDataf6bde11a52dc45e7adee0dc43e861faf = {
 </tbody>
 </table>
 </div>
-<div class="footer">Generated by: ReportGenerator 5.4.0.0<br />12.11.2024 - 21:04:34<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
+<div class="footer">Generated by: ReportGenerator 5.4.2.0<br />28.12.2024 - 20:11:03<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
 <div class="containerright">
 <div class="containerrightfixed">
 <h1>Methods/Properties</h1>

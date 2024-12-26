@@ -133,11 +133,16 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                     @class.CodeElementCoverageQuota.HasValue ? $"{Math.Floor(@class.CodeElementCoverageQuota.Value).ToString(CultureInfo.InvariantCulture)}%" : ReportResources.NotAvailable,
                     @class.CodeElementCoverageQuota,
                     new CardLineItem(ReportResources.CoveredCodeElements, @class.CoveredCodeElements.ToString(CultureInfo.InvariantCulture), null),
+                    new CardLineItem(ReportResources.FullCoveredCodeElements, @class.FullCoveredCodeElements.ToString(CultureInfo.InvariantCulture), null),
                     new CardLineItem(ReportResources.TotalCodeElements, @class.TotalCodeElements.ToString(CultureInfo.InvariantCulture), null),
                     new CardLineItem(
                         ReportResources.CodeElementCoverageQuota2,
                         @class.CodeElementCoverageQuota.HasValue ? $"{@class.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}%" : ReportResources.NotAvailable,
-                        @class.CodeElementCoverageQuota.HasValue ? $"{@class.CoveredCodeElements.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {@class.TotalCodeElements.ToString(CultureInfo.InvariantCulture)}" : ReportResources.NotAvailable)));
+                        @class.CodeElementCoverageQuota.HasValue ? $"{@class.CoveredCodeElements.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {@class.TotalCodeElements.ToString(CultureInfo.InvariantCulture)}" : ReportResources.NotAvailable),
+                    new CardLineItem(
+                        ReportResources.FullCodeElementCoverageQuota2,
+                        @class.FullCodeElementCoverageQuota.HasValue ? $"{@class.FullCodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}%" : ReportResources.NotAvailable,
+                        @class.FullCodeElementCoverageQuota.HasValue ? $"{@class.FullCoveredCodeElements.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {@class.TotalCodeElements.ToString(CultureInfo.InvariantCulture)}" : ReportResources.NotAvailable)));
             }
             else
             {
@@ -302,11 +307,16 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                     summaryResult.CodeElementCoverageQuota.HasValue ? $"{Math.Floor(summaryResult.CodeElementCoverageQuota.Value).ToString(CultureInfo.InvariantCulture)}%" : ReportResources.NotAvailable,
                     summaryResult.CodeElementCoverageQuota,
                     new CardLineItem(ReportResources.CoveredCodeElements, summaryResult.CoveredCodeElements.ToString(CultureInfo.InvariantCulture), null),
+                    new CardLineItem(ReportResources.FullCoveredCodeElements, summaryResult.FullCoveredCodeElements.ToString(CultureInfo.InvariantCulture), null),
                     new CardLineItem(ReportResources.TotalCodeElements, summaryResult.TotalCodeElements.ToString(CultureInfo.InvariantCulture), null),
                     new CardLineItem(
                         ReportResources.CodeElementCoverageQuota2,
                         summaryResult.CodeElementCoverageQuota.HasValue ? $"{summaryResult.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}%" : ReportResources.NotAvailable,
-                        summaryResult.CodeElementCoverageQuota.HasValue ? $"{summaryResult.CoveredCodeElements.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {summaryResult.TotalCodeElements.ToString(CultureInfo.InvariantCulture)}" : ReportResources.NotAvailable)));
+                        summaryResult.CodeElementCoverageQuota.HasValue ? $"{summaryResult.CoveredCodeElements.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {summaryResult.TotalCodeElements.ToString(CultureInfo.InvariantCulture)}" : ReportResources.NotAvailable),
+                    new CardLineItem(
+                        ReportResources.FullCodeElementCoverageQuota2,
+                        summaryResult.FullCodeElementCoverageQuota.HasValue ? $"{summaryResult.FullCodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}%" : ReportResources.NotAvailable,
+                        summaryResult.FullCodeElementCoverageQuota.HasValue ? $"{summaryResult.FullCoveredCodeElements.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {summaryResult.TotalCodeElements.ToString(CultureInfo.InvariantCulture)}" : ReportResources.NotAvailable)));
             }
             else
             {

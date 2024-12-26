@@ -343,4 +343,7 @@
   <data name="WritingReportFile" xml:space="preserve">
     <value>Writing report file '{0}'</value>
   </data>
+  <data name="ErrorLowFullMethodCoverage" xml:space="preserve">
+    <value>The full method coverage of {0}% is below the minimum threshold of {1}%.</value>
+  </data>
 </root>

@@ -47,6 +47,11 @@ export class Class {
     cm: number = 0;
 
     /*
+    * The fully coveredMethods.
+    */
+    fcm: number = 0;
+
+    /*
     * The totalMethods.
     */
     tm: number = 0;
@@ -65,6 +70,11 @@ export class Class {
     * The methodCoverageHistory.
     */
     mch: number[] = [];
+
+    /*
+    * The methodFullCoverageHistory.
+    */
+    mfch: number[] = [];
 
     /*
     * The historicCoverages.

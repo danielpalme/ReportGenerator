@@ -106,6 +106,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 if (proVersion)
                 {
                     reportTextWriter.Write($" ![{ReportResources.CodeElementCoverageQuota}](https://img.shields.io/badge/methods-{(summaryResult.CodeElementCoverageQuota.HasValue ? summaryResult.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%25" : "-")}-{(summaryResult.CodeElementCoverageQuota.GetValueOrDefault() < 80 ? "C10909" : "0AAD0A")})");
+
+                    reportTextWriter.Write($" ![{ReportResources.FullCodeElementCoverageQuota}](https://img.shields.io/badge/methods-{(summaryResult.FullCodeElementCoverageQuota.HasValue ? summaryResult.FullCodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%25" : "-")}-{(summaryResult.FullCodeElementCoverageQuota.GetValueOrDefault() < 80 ? "C10909" : "0AAD0A")})");
                 }
 
                 reportTextWriter.WriteLine();
@@ -134,6 +136,10 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                         reportTextWriter.Write(
                             "**{0}**|",
                             ReportResources.CodeElementCoverageQuota);
+
+                        reportTextWriter.Write(
+                            "**{0}**|",
+                            ReportResources.FullCodeElementCoverageQuota);
                     }
 
                     reportTextWriter.WriteLine();
@@ -147,6 +153,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
                     if (proVersion)
                     {
+                        reportTextWriter.Write("---:|");
                         reportTextWriter.Write("---:|");
                     }
 
@@ -165,6 +172,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                         if (proVersion)
                         {
                             reportTextWriter.Write("|**{0}**", assembly.CodeElementCoverageQuota.HasValue ? assembly.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
+                            reportTextWriter.Write("|**{0}**", assembly.FullCodeElementCoverageQuota.HasValue ? assembly.FullCodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
                         }
 
                         reportTextWriter.WriteLine("|");

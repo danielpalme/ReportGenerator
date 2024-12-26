@@ -48,6 +48,7 @@ export class CodeElementViewModel extends ElementBase {
         this.totalBranches += clazz.totalBranches;
 
         this.coveredMethods += clazz.coveredMethods;
+        this.fullyCoveredMethods += clazz.fullyCoveredMethods;
         this.totalMethods += clazz.totalMethods;
 
         if (grouping === null) {
@@ -151,6 +152,30 @@ export class CodeElementViewModel extends ElementBase {
                     return left.coverage < right.coverage ? smaller : bigger;
                 }
             });
+        } else if (sortBy === "covered_branches") {
+            elements.sort(function (left: CodeElementViewModel, right: CodeElementViewModel): number {
+                if (left.coveredBranches === right.coveredBranches) {
+                    return 0;
+                } else if (isNaN(left.coveredBranches)) {
+                    return smaller;
+                } else if (isNaN(right.coveredBranches)) {
+                    return bigger;
+                } else {
+                    return left.coveredBranches < right.coveredBranches ? smaller : bigger;
+                }
+            });
+        } else if (sortBy === "total_branches") {
+            elements.sort(function (left: CodeElementViewModel, right: CodeElementViewModel): number {
+                if (left.totalBranches === right.totalBranches) {
+                    return 0;
+                } else if (isNaN(left.totalBranches)) {
+                    return smaller;
+                } else if (isNaN(right.totalBranches)) {
+                    return bigger;
+                } else {
+                    return left.totalBranches < right.totalBranches ? smaller : bigger;
+                }
+            });
         } else if (sortBy === "branchcoverage") {
             elements.sort(function (left: CodeElementViewModel, right: CodeElementViewModel): number {
                 if (left.branchCoverage === right.branchCoverage) {
@@ -163,6 +188,42 @@ export class CodeElementViewModel extends ElementBase {
                     return left.branchCoverage < right.branchCoverage ? smaller : bigger;
                 }
             });
+        } else if (sortBy === "covered_methods") {
+            elements.sort(function (left: CodeElementViewModel, right: CodeElementViewModel): number {
+                if (left.coveredMethods === right.coveredMethods) {
+                    return 0;
+                } else if (isNaN(left.coveredMethods)) {
+                    return smaller;
+                } else if (isNaN(right.coveredMethods)) {
+                    return bigger;
+                } else {
+                    return left.coveredMethods < right.coveredMethods ? smaller : bigger;
+                }
+            });
+        } else if (sortBy === "fullycovered_methods") {
+            elements.sort(function (left: CodeElementViewModel, right: CodeElementViewModel): number {
+                if (left.fullyCoveredMethods === right.fullyCoveredMethods) {
+                    return 0;
+                } else if (isNaN(left.fullyCoveredMethods)) {
+                    return smaller;
+                } else if (isNaN(right.fullyCoveredMethods)) {
+                    return bigger;
+                } else {
+                    return left.fullyCoveredMethods < right.fullyCoveredMethods ? smaller : bigger;
+                }
+            });
+        } else if (sortBy === "total_methods") {
+            elements.sort(function (left: CodeElementViewModel, right: CodeElementViewModel): number {
+                if (left.totalMethods === right.totalMethods) {
+                    return 0;
+                } else if (isNaN(left.totalMethods)) {
+                    return smaller;
+                } else if (isNaN(right.totalMethods)) {
+                    return bigger;
+                } else {
+                    return left.totalMethods < right.totalMethods ? smaller : bigger;
+                }
+            });
         } else if (sortBy === "methodcoverage") {
             elements.sort(function (left: CodeElementViewModel, right: CodeElementViewModel): number {
                 if (left.methodCoverage === right.methodCoverage) {
@@ -173,6 +234,18 @@ export class CodeElementViewModel extends ElementBase {
                     return bigger;
                 } else {
                     return left.methodCoverage < right.methodCoverage ? smaller : bigger;
+                }
+            });
+        } else if (sortBy === "methodfullcoverage") {
+            elements.sort(function (left: CodeElementViewModel, right: CodeElementViewModel): number {
+                if (left.methodFullCoverage === right.methodFullCoverage) {
+                    return 0;
+                } else if (isNaN(left.methodFullCoverage)) {
+                    return smaller;
+                } else if (isNaN(right.methodFullCoverage)) {
+                    return bigger;
+                } else {
+                    return left.methodFullCoverage < right.methodFullCoverage ? smaller : bigger;
                 }
             });
         }
@@ -254,6 +327,12 @@ export class CodeElementViewModel extends ElementBase {
                         0
                         : (left.coveredMethods < right.coveredMethods ? smaller : bigger);
             });
+        } else if (sortBy === "fullycovered_methods") {
+            this.classes.sort(function (left: ClassViewModel, right: ClassViewModel): number {
+                return left.fullyCoveredMethods === right.fullyCoveredMethods ?
+                        0
+                        : (left.fullyCoveredMethods < right.fullyCoveredMethods ? smaller : bigger);
+            });
         } else if (sortBy === "total_methods") {
             this.classes.sort(function (left: ClassViewModel, right: ClassViewModel): number {
                 return left.totalMethods === right.totalMethods ?
@@ -270,6 +349,18 @@ export class CodeElementViewModel extends ElementBase {
                     return bigger;
                 } else {
                     return left.methodCoverage < right.methodCoverage ? smaller : bigger;
+                }
+            });
+        } else if (sortBy === "methodfullcoverage") {
+            this.classes.sort(function (left: ClassViewModel, right: ClassViewModel): number {
+                if (left.methodFullCoverage === right.methodFullCoverage) {
+                    return 0;
+                } else if (isNaN(left.methodFullCoverage)) {
+                    return smaller;
+                } else if (isNaN(right.methodFullCoverage)) {
+                    return bigger;
+                } else {
+                    return left.methodFullCoverage < right.methodFullCoverage ? smaller : bigger;
                 }
             });
         } else { 

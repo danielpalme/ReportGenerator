@@ -150,6 +150,46 @@ import { ClassViewModel } from "./viewmodels/class-viewmodel.class";
   </ng-container>
 </td>
 <td class="right" *ngIf="methodCoverageAvailable"><coverage-bar [percentage]="clazz.methodCoverage"></coverage-bar></td>
+
+<td class="right" *ngIf="methodFullCoverageAvailable">
+  <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
+    <div class="currenthistory {{getClassName(clazz.fullyCoveredMethods, clazz.currentHistoricCoverage.fcm)}}">
+      {{clazz.fullyCoveredMethods}}
+    </div>
+    <div [title]="clazz.currentHistoricCoverage.et">
+      {{clazz.currentHistoricCoverage.fcm}}
+    </div>
+  </ng-container>
+  <ng-container *ngIf="clazz.currentHistoricCoverage === null">
+    {{clazz.fullyCoveredMethods}}
+  </ng-container>
+</td>
+<td class="right" *ngIf="methodFullCoverageAvailable">
+  <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
+    <div class="currenthistory">{{clazz.totalMethods}}</div>
+    <div [title]="clazz.currentHistoricCoverage.et">{{clazz.currentHistoricCoverage.tm}}</div>
+  </ng-container>
+  <ng-container *ngIf="clazz.currentHistoricCoverage === null">
+    {{clazz.totalMethods}}
+  </ng-container>
+</td>
+<td class="right" *ngIf="methodFullCoverageAvailable" [title]="clazz.methodFullCoverageRatioText">
+  <div coverage-history-chart [historicCoverages]="clazz.methodFullCoverageHistory"
+    *ngIf="clazz.methodFullCoverageHistory.length > 1"
+    [ngClass]="{'historiccoverageoffset': clazz.currentHistoricCoverage !== null}"
+    class="tinyfullmethodcoveragechart ct-chart" title="{{translations.history + ': ' + translations.fullMethodCoverage}}">
+  </div>
+  <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
+    <div class="currenthistory {{getClassName(clazz.methodFullCoverage, clazz.currentHistoricCoverage.mfcq)}}">
+      {{clazz.methodFullCoveragePercentage}}
+    </div>
+    <div [title]="clazz.currentHistoricCoverage.et + ': ' + clazz.currentHistoricCoverage.methodFullCoverageRatioText">{{clazz.currentHistoricCoverage.mfcq}}%</div>
+  </ng-container>
+  <ng-container *ngIf="clazz.currentHistoricCoverage === null">
+    {{clazz.methodFullCoveragePercentage}}
+  </ng-container>
+</td>
+<td class="right" *ngIf="methodFullCoverageAvailable"><coverage-bar [percentage]="clazz.methodFullCoverage"></coverage-bar></td>
 <td class="right" *ngFor="let metric of visibleMetrics">{{ clazz.metrics[metric.abbreviation] }}</td>`,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
@@ -164,6 +204,8 @@ export class ClassRow {
     @Input() branchCoverageAvailable: boolean = false;
 
     @Input() methodCoverageAvailable: boolean = false;
+
+    @Input() methodFullCoverageAvailable: boolean = false;
 
     @Input() visibleMetrics: Metric[] = [];
 

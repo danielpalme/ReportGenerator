@@ -22,6 +22,7 @@ import { Helper } from "./viewmodels/helper.class";
       [(showLineCoverage)]="settings.showLineCoverage"
       [(showBranchCoverage)]="settings.showBranchCoverage"
       [(showMethodCoverage)]="settings.showMethodCoverage"
+      [(showMethodFullCoverage)]="settings.showFullMethodCoverage"
       [(visibleMetrics)]="settings.visibleMetrics">
     </popup>
     <div class="customizebox">
@@ -69,6 +70,12 @@ import { Helper } from "./viewmodels/helper.class";
               <option value="methodCoverageDecreaseOnly" *ngIf="methodCoverageAvailable">
                 {{translations.methodCoverageDecreaseOnly}}
               </option>
+              <option value="fullMethodCoverageIncreaseOnly" *ngIf="methodCoverageAvailable">
+                {{translations.fullMethodCoverageIncreaseOnly}}
+              </option>
+              <option value="fullMethodCoverageDecreaseOnly" *ngIf="methodCoverageAvailable">
+                {{translations.fullMethodCoverageDecreaseOnly}}
+              </option>
             </select>
           </div>
         </ng-container>
@@ -96,6 +103,10 @@ import { Helper } from "./viewmodels/helper.class";
           <col class="column70" *ngIf="methodCoverageAvailable && settings.showMethodCoverage">
           <col class="column98" *ngIf="methodCoverageAvailable && settings.showMethodCoverage">
           <col class="column112" *ngIf="methodCoverageAvailable && settings.showMethodCoverage">
+          <col class="column90" *ngIf="methodCoverageAvailable && settings.showFullMethodCoverage">
+          <col class="column70" *ngIf="methodCoverageAvailable && settings.showFullMethodCoverage">
+          <col class="column98" *ngIf="methodCoverageAvailable && settings.showFullMethodCoverage">
+          <col class="column112" *ngIf="methodCoverageAvailable && settings.showFullMethodCoverage">
           <col class="column112" *ngFor="let metric of settings.visibleMetrics">
         </colgroup>
         <thead>
@@ -104,6 +115,7 @@ import { Helper } from "./viewmodels/helper.class";
             <th class="center" colspan="6" *ngIf="settings.showLineCoverage">{{translations.coverage}}</th>
             <th class="center" colspan="4" *ngIf="branchCoverageAvailable && settings.showBranchCoverage">{{translations.branchCoverage}}</th>
             <th class="center" colspan="4" *ngIf="methodCoverageAvailable && settings.showMethodCoverage">{{translations.methodCoverage}}</th>
+            <th class="center" colspan="4" *ngIf="methodCoverageAvailable && settings.showFullMethodCoverage">{{translations.fullMethodCoverage}}</th>
             <th class="center" [attr.colspan]="settings.visibleMetrics.length" *ngIf="settings.visibleMetrics.length > 0">{{translations.metrics}}</th>
           </tr>
           <tr class="filterbar">
@@ -118,6 +130,9 @@ import { Helper } from "./viewmodels/helper.class";
             </td>
             <td class="center" colspan="4" *ngIf="methodCoverageAvailable && settings.showMethodCoverage">
               <ngx-slider [(value)]="settings.methodCoverageMin" [(highValue)]="settings.methodCoverageMax" [options]="sliderOptions"></ngx-slider>
+            </td>
+            <td class="center" colspan="4" *ngIf="methodCoverageAvailable && settings.showFullMethodCoverage">
+              <ngx-slider [(value)]="settings.methodFullCoverageMin" [(highValue)]="settings.methodFullCoverageMax" [options]="sliderOptions"></ngx-slider>
             </td>
             <td class="center" [attr.colspan]="settings.visibleMetrics.length" *ngIf="settings.visibleMetrics.length > 0"></td>
           </tr>
@@ -173,6 +188,19 @@ import { Helper } from "./viewmodels/helper.class";
                   [ngClass]="{'icon-up-dir_active': settings.sortBy === 'methodcoverage' && settings.sortOrder === 'asc',
                   'icon-down-dir_active': settings.sortBy === 'methodcoverage' && settings.sortOrder === 'desc',
                   'icon-up-down-dir': settings.sortBy !== 'methodcoverage'}"></i>{{translations.percentage}}</a></th>
+            <th class="right" *ngIf="methodCoverageAvailable && settings.showFullMethodCoverage"><a href="#" (click)="updateSorting('fullycovered_methods', $event)"><i
+              [ngClass]="{'icon-up-dir_active': settings.sortBy === 'fullycovered_methods' && settings.sortOrder === 'asc',
+              'icon-down-dir_active': settings.sortBy === 'fullycovered_methods' && settings.sortOrder === 'desc',
+              'icon-up-down-dir': settings.sortBy !== 'fullycovered_methods'}"></i>{{translations.covered}}</a></th>
+            <th class="right" *ngIf="methodCoverageAvailable && settings.showFullMethodCoverage"><a href="#" (click)="updateSorting('total_methods', $event)"><i
+                [ngClass]="{'icon-up-dir_active': settings.sortBy === 'total_methods' && settings.sortOrder === 'asc',
+                'icon-down-dir_active': settings.sortBy === 'total_methods' && settings.sortOrder === 'desc',
+                'icon-up-down-dir': settings.sortBy !== 'total_methods'}"></i>{{translations.total}}</a></th>
+            <th class="center" colspan="2" *ngIf="methodCoverageAvailable && settings.showFullMethodCoverage">
+                <a href="#" (click)="updateSorting('methodfullcoverage', $event)"><i
+                  [ngClass]="{'icon-up-dir_active': settings.sortBy === 'methodfullcoverage' && settings.sortOrder === 'asc',
+                  'icon-down-dir_active': settings.sortBy === 'methodfullcoverage' && settings.sortOrder === 'desc',
+                  'icon-up-down-dir': settings.sortBy !== 'methodfullcoverage'}"></i>{{translations.percentage}}</a></th>
             <th *ngFor="let metric of settings.visibleMetrics">
               <a href="#" (click)="updateSorting(metric.abbreviation, $event)"><i
                   [ngClass]="{'icon-up-dir_active': settings.sortBy === metric.abbreviation && settings.sortOrder === 'asc',
@@ -190,6 +218,7 @@ import { Helper } from "./viewmodels/helper.class";
               [lineCoverageAvailable]="settings.showLineCoverage"
               [branchCoverageAvailable]="branchCoverageAvailable && settings.showBranchCoverage"
               [methodCoverageAvailable]="methodCoverageAvailable && settings.showMethodCoverage"
+              [methodFullCoverageAvailable]="methodCoverageAvailable && settings.showFullMethodCoverage"
               [visibleMetrics]="settings.visibleMetrics">
             </tr>
             <ng-container *ngFor="let clazz of element.classes">
@@ -200,6 +229,7 @@ import { Helper } from "./viewmodels/helper.class";
                   [lineCoverageAvailable]="settings.showLineCoverage"
                   [branchCoverageAvailable]="branchCoverageAvailable && settings.showBranchCoverage"
                   [methodCoverageAvailable]="methodCoverageAvailable && settings.showMethodCoverage"
+                  [methodFullCoverageAvailable]="methodCoverageAvailable && settings.showFullMethodCoverage"
                   [visibleMetrics]="settings.visibleMetrics"
                   [historyComparisionDate]="settings.historyComparisionDate">
               </tr>
@@ -214,6 +244,7 @@ import { Helper } from "./viewmodels/helper.class";
                  [lineCoverageAvailable]="settings.showLineCoverage"
                  [branchCoverageAvailable]="branchCoverageAvailable && settings.showBranchCoverage"
                  [methodCoverageAvailable]="methodCoverageAvailable && settings.showMethodCoverage"
+                 [methodFullCoverageAvailable]="methodCoverageAvailable && settings.showFullMethodCoverage"
                  [visibleMetrics]="settings.visibleMetrics">
                 </tr>
                 <ng-container *ngFor="let clazz of subElement.classes">
@@ -224,6 +255,7 @@ import { Helper } from "./viewmodels/helper.class";
                     [lineCoverageAvailable]="settings.showLineCoverage"
                     [branchCoverageAvailable]="branchCoverageAvailable && settings.showBranchCoverage"
                     [methodCoverageAvailable]="methodCoverageAvailable && settings.showMethodCoverage"
+                    [methodFullCoverageAvailable]="methodCoverageAvailable && settings.showFullMethodCoverage"
                     [visibleMetrics]="settings.visibleMetrics"
                     [historyComparisionDate]="settings.historyComparisionDate">
                   </tr>
@@ -301,6 +333,7 @@ export class CoverageInfoComponent {
 
       this.settings.showBranchCoverage = this.branchCoverageAvailable;
       this.settings.showMethodCoverage = this.methodCoverageAvailable;
+      this.settings.showFullMethodCoverage = this.methodCoverageAvailable;
     }
 
     const startOfQueryString: number = window.location.href.indexOf("?");

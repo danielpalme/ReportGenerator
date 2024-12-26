@@ -84,6 +84,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.History
                        new XAttribute("coveredbranches", @class.CoveredBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)),
                        new XAttribute("totalbranches", @class.TotalBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)),
                        new XAttribute("coveredcodeelements", @class.CoveredCodeElements.ToString(CultureInfo.InvariantCulture)),
+                       new XAttribute("fullcoveredcodeelements", @class.FullCoveredCodeElements.ToString(CultureInfo.InvariantCulture)),
                        new XAttribute("totalcodeelements", @class.TotalCodeElements.ToString(CultureInfo.InvariantCulture)));
 
                     assemblyElement.Add(classElement);

@@ -171,17 +171,20 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
 .ct-chart .ct-series.ct-series-a .ct-line, .ct-chart .ct-series.ct-series-a .ct-point { stroke: #c00 !important;}
 .ct-chart .ct-series.ct-series-b .ct-line, .ct-chart .ct-series.ct-series-b .ct-point { stroke: #1c2298 !important;}
 .ct-chart .ct-series.ct-series-c .ct-line, .ct-chart .ct-series.ct-series-c .ct-point { stroke: #0aad0a !important;}
+.ct-chart .ct-series.ct-series-d .ct-line, .ct-chart .ct-series.ct-series-d .ct-point { stroke: #FF6A00 !important;}
 
-.tinylinecoveragechart, .tinybranchcoveragechart, .tinymethodcoveragechart { background-color: #fff; margin-left: -3px; float: left; border: 1px solid #c1c1c1; width: 30px; height: 18px; }
+.tinylinecoveragechart, .tinybranchcoveragechart, .tinymethodcoveragechart, .tinyfullmethodcoveragechart { background-color: #fff; margin-left: -3px; float: left; border: 1px solid #c1c1c1; width: 30px; height: 18px; }
 .historiccoverageoffset { margin-top: 7px; }
 
-.tinylinecoveragechart .ct-line, .tinybranchcoveragechart .ct-line, .tinymethodcoveragechart .ct-line { stroke-width: 1px !important; }
+.tinylinecoveragechart .ct-line, .tinybranchcoveragechart .ct-line, .tinymethodcoveragechart .ct-line, .tinyfullmethodcoveragechart .ct-line { stroke-width: 1px !important; }
 .tinybranchcoveragechart .ct-series.ct-series-a .ct-line { stroke: #1c2298 !important; }
 .tinymethodcoveragechart .ct-series.ct-series-a .ct-line { stroke: #0aad0a !important; }
+.tinyfullmethodcoveragechart .ct-series.ct-series-a .ct-line { stroke: #FF6A00 !important; }
 
 .linecoverage { background-color: #c00; width: 10px; height: 8px; border: 1px solid #000; display: inline-block; }
 .branchcoverage { background-color: #1c2298; width: 10px; height: 8px; border: 1px solid #000; display: inline-block; }
 .codeelementcoverage { background-color: #0aad0a; width: 10px; height: 8px; border: 1px solid #000; display: inline-block; }
+.fullcodeelementcoverage { background-color: #FF6A00; width: 10px; height: 8px; border: 1px solid #000; display: inline-block; }
 
 .tooltip { position: absolute; display: none; padding: 5px; background: #F4C63D; color: #453D3F; pointer-events: none; z-index: 1; min-width: 250px; }
 
@@ -748,6 +751,10 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
             stroke: #e58f1d !important;
         }
 
+        .ct-chart .ct-series.ct-series-d .ct-line, .ct-chart .ct-series.ct-series-d .ct-point {
+            stroke: #c71bca !important;
+        }
+
         .linecoverage {
             background-color: #0078D4;
         }
@@ -759,7 +766,11 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
             background-color: #e58f1d;
         }
 
-        .tinylinecoveragechart, .tinybranchcoveragechart, .tinymethodcoveragechart {
+        .fullcodeelementcoverage {
+            background-color: #c71bca;
+        }
+
+        .tinylinecoveragechart, .tinybranchcoveragechart, .tinymethodcoveragechart, .tinyfullmethodcoveragechart {
             background-color: #333;
         }
 
@@ -769,6 +780,10 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
 
             .tinymethodcoveragechart .ct-series.ct-series-a .ct-line {
                 stroke: #e58f1d !important;
+            }
+
+            .tinyfullmethodcoveragechart .ct-series.ct-series-a .ct-line {
+                stroke: #c71bca !important;
             }
 
         .icon-up-down-dir {

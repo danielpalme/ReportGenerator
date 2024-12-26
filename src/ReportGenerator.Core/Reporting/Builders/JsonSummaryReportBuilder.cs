@@ -116,15 +116,25 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 }
 
                 reportTextWriter.WriteLine($"    \"coveredmethods\": {summaryResult.CoveredCodeElements.ToString(CultureInfo.InvariantCulture)},");
+                reportTextWriter.WriteLine($"    \"fullcoveredmethods\": {summaryResult.FullCoveredCodeElements.ToString(CultureInfo.InvariantCulture)},");
                 reportTextWriter.WriteLine($"    \"totalmethods\": {summaryResult.TotalCodeElements.ToString(CultureInfo.InvariantCulture)},");
 
                 if (summaryResult.CodeElementCoverageQuota.HasValue)
                 {
-                    reportTextWriter.WriteLine($"    \"methodcoverage\": {summaryResult.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}");
+                    reportTextWriter.WriteLine($"    \"methodcoverage\": {summaryResult.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)},");
                 }
                 else
                 {
-                    reportTextWriter.WriteLine($"    \"methodcoverage\": null");
+                    reportTextWriter.WriteLine($"    \"methodcoverage\": null,");
+                }
+
+                if (summaryResult.FullCodeElementCoverageQuota.HasValue)
+                {
+                    reportTextWriter.WriteLine($"    \"fullmethodcoverage\": {summaryResult.FullCodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}");
+                }
+                else
+                {
+                    reportTextWriter.WriteLine($"    \"fullmethodcoverage\": null");
                 }
 
                 reportTextWriter.WriteLine(" },");
@@ -172,7 +182,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                         reportTextWriter.WriteLine(",");
                     }
 
-                    reportTextWriter.WriteLine($"      {{ \"name\": {JsonSerializer.Serialize(assembly.Name)}, \"classes\": {assembly.Classes.Count().ToString(CultureInfo.InvariantCulture)}, \"coverage\": {(assembly.CoverageQuota.HasValue ? assembly.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : "null")}, \"coveredlines\": {assembly.CoveredLines.ToString(CultureInfo.InvariantCulture)}, \"coverablelines\": {assembly.CoverableLines.ToString(CultureInfo.InvariantCulture)}, \"totallines\": {(assembly.TotalLines.HasValue ? assembly.TotalLines.Value.ToString(CultureInfo.InvariantCulture) : "null")}, \"branchcoverage\": {(assembly.BranchCoverageQuota.HasValue ? assembly.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : "null")}, \"coveredbranches\": {(assembly.CoveredBranches.HasValue ? assembly.CoveredBranches.Value.ToString(CultureInfo.InvariantCulture) : "null")}, \"totalbranches\": {(assembly.TotalBranches.HasValue ? assembly.TotalBranches.Value.ToString(CultureInfo.InvariantCulture) : null)}, \"methodcoverage\": {(assembly.CodeElementCoverageQuota.HasValue ? assembly.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : "null")}, \"coveredmethods\": {assembly.CoveredCodeElements.ToString(CultureInfo.InvariantCulture)}, \"totalmethods\": {assembly.TotalCodeElements.ToString(CultureInfo.InvariantCulture)}, \"classesinassembly\": [");
+                    reportTextWriter.WriteLine($"      {{ \"name\": {JsonSerializer.Serialize(assembly.Name)}, \"classes\": {assembly.Classes.Count().ToString(CultureInfo.InvariantCulture)}, \"coverage\": {(assembly.CoverageQuota.HasValue ? assembly.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : "null")}, \"coveredlines\": {assembly.CoveredLines.ToString(CultureInfo.InvariantCulture)}, \"coverablelines\": {assembly.CoverableLines.ToString(CultureInfo.InvariantCulture)}, \"totallines\": {(assembly.TotalLines.HasValue ? assembly.TotalLines.Value.ToString(CultureInfo.InvariantCulture) : "null")}, \"branchcoverage\": {(assembly.BranchCoverageQuota.HasValue ? assembly.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : "null")}, \"coveredbranches\": {(assembly.CoveredBranches.HasValue ? assembly.CoveredBranches.Value.ToString(CultureInfo.InvariantCulture) : "null")}, \"totalbranches\": {(assembly.TotalBranches.HasValue ? assembly.TotalBranches.Value.ToString(CultureInfo.InvariantCulture) : null)}, \"methodcoverage\": {(assembly.CodeElementCoverageQuota.HasValue ? assembly.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : "null")}, \"fullmethodcoverage\": {(assembly.FullCodeElementCoverageQuota.HasValue ? assembly.FullCodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : "null")}, \"coveredmethods\": {assembly.CoveredCodeElements.ToString(CultureInfo.InvariantCulture)}, \"fullcoveredmethods\": {assembly.FullCoveredCodeElements.ToString(CultureInfo.InvariantCulture)}, \"totalmethods\": {assembly.TotalCodeElements.ToString(CultureInfo.InvariantCulture)}, \"classesinassembly\": [");
 
                     int classCounter = 0;
 
@@ -183,7 +193,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                             reportTextWriter.WriteLine(",");
                         }
 
-                        reportTextWriter.Write($"        {{ \"name\": {JsonSerializer.Serialize(@class.Name)}, \"coverage\": {(@class.CoverageQuota.HasValue ? @class.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : "null")}, \"coveredlines\": {@class.CoveredLines.ToString(CultureInfo.InvariantCulture)}, \"coverablelines\": {@class.CoverableLines.ToString(CultureInfo.InvariantCulture)}, \"totallines\": {(@class.TotalLines.HasValue ? @class.TotalLines.Value.ToString(CultureInfo.InvariantCulture) : "null")}, \"branchcoverage\": {(@class.BranchCoverageQuota.HasValue ? @class.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : "null")}, \"coveredbranches\": {(@class.CoveredBranches.HasValue ? @class.CoveredBranches.Value.ToString(CultureInfo.InvariantCulture) : "null")}, \"totalbranches\": {(@class.TotalBranches.HasValue ? @class.TotalBranches.Value.ToString(CultureInfo.InvariantCulture) : null)}, \"methodcoverage\": {(@class.CodeElementCoverageQuota.HasValue ? @class.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : "null")}, \"coveredmethods\": {@class.CoveredCodeElements.ToString(CultureInfo.InvariantCulture)}, \"totalmethods\": {@class.TotalCodeElements.ToString(CultureInfo.InvariantCulture)} }}");
+                        reportTextWriter.Write($"        {{ \"name\": {JsonSerializer.Serialize(@class.Name)}, \"coverage\": {(@class.CoverageQuota.HasValue ? @class.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : "null")}, \"coveredlines\": {@class.CoveredLines.ToString(CultureInfo.InvariantCulture)}, \"coverablelines\": {@class.CoverableLines.ToString(CultureInfo.InvariantCulture)}, \"totallines\": {(@class.TotalLines.HasValue ? @class.TotalLines.Value.ToString(CultureInfo.InvariantCulture) : "null")}, \"branchcoverage\": {(@class.BranchCoverageQuota.HasValue ? @class.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : "null")}, \"coveredbranches\": {(@class.CoveredBranches.HasValue ? @class.CoveredBranches.Value.ToString(CultureInfo.InvariantCulture) : "null")}, \"totalbranches\": {(@class.TotalBranches.HasValue ? @class.TotalBranches.Value.ToString(CultureInfo.InvariantCulture) : null)}, \"methodcoverage\": {(@class.CodeElementCoverageQuota.HasValue ? @class.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : "null")}, \"fullmethodcoverage\": {(@class.FullCodeElementCoverageQuota.HasValue ? @class.FullCodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) : "null")}, \"coveredmethods\": {@class.CoveredCodeElements.ToString(CultureInfo.InvariantCulture)}, \"fullcoveredmethods\": {@class.FullCoveredCodeElements.ToString(CultureInfo.InvariantCulture)}, \"totalmethods\": {@class.TotalCodeElements.ToString(CultureInfo.InvariantCulture)} }}");
 
                         classCounter++;
                     }

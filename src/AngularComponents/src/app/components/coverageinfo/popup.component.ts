@@ -17,6 +17,9 @@ import { Metric } from "./data/metric.class";
     <div class="mt-1">
       <label><input type="checkbox" [(ngModel)]="showMethodCoverage" (change)="showMethodCoverageChange.emit(this.showMethodCoverage)" [disabled]="!methodCoverageAvailable" /> {{ translations.methodCoverage }}</label><pro-button *ngIf="!methodCoverageAvailable" [translations]="translations"></pro-button>
     </div>
+    <div class="mt-1">
+      <label><input type="checkbox" [(ngModel)]="showMethodFullCoverage" (change)="showMethodFullCoverageChange.emit(this.showMethodFullCoverage)" [disabled]="!methodCoverageAvailable" /> {{ translations.fullMethodCoverage }}</label><pro-button *ngIf="!methodCoverageAvailable" [translations]="translations"></pro-button>
+    </div>
     <ng-container *ngIf="metrics.length > 0">
       <br />
       <br/>
@@ -49,6 +52,9 @@ export class PopupComponent {
     
     @Input() showMethodCoverage: boolean = false;
     @Output() showMethodCoverageChange = new EventEmitter<boolean>();
+    
+    @Input() showMethodFullCoverage: boolean = false;
+    @Output() showMethodFullCoverageChange = new EventEmitter<boolean>();
     
     @Input() visibleMetrics: Metric[] = [];
     @Output() visibleMetricsChange = new EventEmitter<Metric[]>();

@@ -106,24 +106,26 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 }
 
                 reportTextWriter.WriteLine("  {0} {1}", ReportResources.GeneratedOn, this.ReportTime(DateTime.Now));
-                reportTextWriter.WriteLine("  {0,-20} {1,20} {2,20} {3,10}", ReportResources.Description, ReportResources.Previous, ReportResources.Current, ReportResources.Delta);
-                reportTextWriter.WriteLine("  {0,-20} {1,20} {2,20}", ReportResources.CoverageDate, this.ReportTime(previous.ExecutionTime), this.ReportTime(current.ExecutionTime));
+                reportTextWriter.WriteLine("  {0,-25} {1,20} {2,20} {3,10}", ReportResources.Description, ReportResources.Previous, ReportResources.Current, ReportResources.Delta);
+                reportTextWriter.WriteLine("  {0,-25} {1,20} {2,20}", ReportResources.CoverageDate, this.ReportTime(previous.ExecutionTime), this.ReportTime(current.ExecutionTime));
 
                 if (previous.Tag != null || current.Tag != null)
                 {
-                    reportTextWriter.WriteLine("  {0,-20} {1,20} {2,20}", ReportResources.Tag, previous.Tag, current.Tag);
+                    reportTextWriter.WriteLine("  {0,-25} {1,20} {2,20}", ReportResources.Tag, previous.Tag, current.Tag);
                 }
 
-                reportTextWriter.WriteLine("  {0,-20} {1}", ReportResources.Coverage2, this.ReportCoverageQuota(previous.CoverageQuota, current.CoverageQuota));
-                reportTextWriter.WriteLine("  {0,-20} {1}", ReportResources.CoveredLines, this.ReportValues(previous.CoveredLines, current.CoveredLines));
-                reportTextWriter.WriteLine("  {0,-20} {1}", ReportResources.CoverableLines, this.ReportValues(previous.CoverableLines, current.CoverableLines));
-                reportTextWriter.WriteLine("  {0,-20} {1}", ReportResources.TotalLines, this.ReportValues(previous.TotalLines, current.TotalLines));
-                reportTextWriter.WriteLine("  {0,-20} {1}", ReportResources.BranchCoverage2, this.ReportCoverageQuota(previous.BranchCoverageQuota, current.BranchCoverageQuota));
-                reportTextWriter.WriteLine("  {0,-20} {1}", ReportResources.CoveredBranches2, this.ReportValues(previous.CoveredBranches, current.CoveredBranches));
-                reportTextWriter.WriteLine("  {0,-20} {1}", ReportResources.TotalBranches, this.ReportValues(previous.TotalBranches, current.TotalBranches));
-                reportTextWriter.WriteLine("  {0,-20} {1}", ReportResources.CodeElementCoverageQuota2, this.ReportCoverageQuota(previous.CodeElementCoverageQuota, current.CodeElementCoverageQuota));
-                reportTextWriter.WriteLine("  {0,-20} {1}", ReportResources.CoveredCodeElements, this.ReportValues(previous.CoveredCodeElements, current.CoveredCodeElements));
-                reportTextWriter.WriteLine("  {0,-20} {1}", ReportResources.TotalCodeElements, this.ReportValues(previous.TotalCodeElements, current.TotalCodeElements));
+                reportTextWriter.WriteLine("  {0,-25} {1}", ReportResources.Coverage2, this.ReportCoverageQuota(previous.CoverageQuota, current.CoverageQuota));
+                reportTextWriter.WriteLine("  {0,-25} {1}", ReportResources.CoveredLines, this.ReportValues(previous.CoveredLines, current.CoveredLines));
+                reportTextWriter.WriteLine("  {0,-25} {1}", ReportResources.CoverableLines, this.ReportValues(previous.CoverableLines, current.CoverableLines));
+                reportTextWriter.WriteLine("  {0,-25} {1}", ReportResources.TotalLines, this.ReportValues(previous.TotalLines, current.TotalLines));
+                reportTextWriter.WriteLine("  {0,-25} {1}", ReportResources.BranchCoverage2, this.ReportCoverageQuota(previous.BranchCoverageQuota, current.BranchCoverageQuota));
+                reportTextWriter.WriteLine("  {0,-25} {1}", ReportResources.CoveredBranches2, this.ReportValues(previous.CoveredBranches, current.CoveredBranches));
+                reportTextWriter.WriteLine("  {0,-25} {1}", ReportResources.TotalBranches, this.ReportValues(previous.TotalBranches, current.TotalBranches));
+                reportTextWriter.WriteLine("  {0,-25} {1}", ReportResources.CodeElementCoverageQuota2, this.ReportCoverageQuota(previous.CodeElementCoverageQuota, current.CodeElementCoverageQuota));
+                reportTextWriter.WriteLine("  {0,-25} {1}", ReportResources.FullCodeElementCoverageQuota2, this.ReportCoverageQuota(previous.FullCodeElementCoverageQuota, current.FullCodeElementCoverageQuota));
+                reportTextWriter.WriteLine("  {0,-25} {1}", ReportResources.CoveredCodeElements, this.ReportValues(previous.CoveredCodeElements, current.CoveredCodeElements));
+                reportTextWriter.WriteLine("  {0,-25} {1}", ReportResources.FullCoveredCodeElements, this.ReportValues(previous.FullCoveredCodeElements, current.FullCoveredCodeElements));
+                reportTextWriter.WriteLine("  {0,-25} {1}", ReportResources.TotalCodeElements, this.ReportValues(previous.TotalCodeElements, current.TotalCodeElements));
 
                 reportTextWriter.Flush();
             }

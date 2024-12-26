@@ -16,8 +16,10 @@
     <Totalbranches>2</Totalbranches>
     <Branchcoverage>50</Branchcoverage>
     <Coveredmethods>3</Coveredmethods>
+    <Fullcoveredmethods>2</Fullcoveredmethods>
     <Totalmethods>6</Totalmethods>
     <Methodcoverage>50</Methodcoverage>
+    <Fullmethodcoverage>33.3</Fullmethodcoverage>
   </Summary>
   <Metrics>
     <Element name="ExecutedMethod_1">

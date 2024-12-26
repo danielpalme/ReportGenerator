@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CoverageReport scope="Summary">
   <Summary>
-    <Generatedon>12.11.2024 - 21:04:39</Generatedon>
+    <Generatedon>28.12.2024 - 20:11:10</Generatedon>
     <Parser>OpenCover</Parser>
     <Assemblies>1</Assemblies>
     <Classes>4</Classes>
@@ -15,15 +15,17 @@
     <Totalbranches>8</Totalbranches>
     <Branchcoverage>50</Branchcoverage>
     <Coveredmethods>16</Coveredmethods>
+    <Fullcoveredmethods>9</Fullcoveredmethods>
     <Totalmethods>24</Totalmethods>
     <Methodcoverage>66.6</Methodcoverage>
+    <Fullmethodcoverage>37.5</Fullmethodcoverage>
   </Summary>
   <Coverage>
-    <Assembly name="Sample" classes="4" coverage="69.4" coveredlines="75" coverablelines="108" totallines="260" branchcoverage="50" coveredbranches="4" totalbranches="8" coveredmethods="16" totalmethods="24" methodcoverage="66.6">
-      <Class name="Sample.PartialClass" coverage="54.5" coveredlines="12" coverablelines="22" totallines="53" branchcoverage="50" coveredbranches="1" totalbranches="2" coveredmethods="3" totalmethods="6" methodcoverage="50" />
-      <Class name="Test.Program" coverage="100" coveredlines="15" coverablelines="15" totallines="84" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="3" methodcoverage="100" />
-      <Class name="Test.TestClass" coverage="72.7" coveredlines="24" coverablelines="33" totallines="38" branchcoverage="50" coveredbranches="2" totalbranches="4" coveredmethods="4" totalmethods="5" methodcoverage="80" />
-      <Class name="Test.TestClass2" coverage="63.1" coveredlines="24" coverablelines="38" totallines="85" branchcoverage="50" coveredbranches="1" totalbranches="2" coveredmethods="6" totalmethods="10" methodcoverage="60" />
+    <Assembly name="Sample" classes="4" coverage="69.4" coveredlines="75" coverablelines="108" totallines="260" branchcoverage="50" coveredbranches="4" totalbranches="8" coveredmethods="16" fullcoveredmethods="9" totalmethods="24" methodcoverage="66.6" fullmethodcoverage="37.5">
+      <Class name="Sample.PartialClass" coverage="54.5" coveredlines="12" coverablelines="22" totallines="53" branchcoverage="50" coveredbranches="1" totalbranches="2" coveredmethods="3" fullcoveredmethods="2" totalmethods="6" methodcoverage="50" fullmethodcoverage="33.3" />
+      <Class name="Test.Program" coverage="100" coveredlines="15" coverablelines="15" totallines="84" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" fullcoveredmethods="3" totalmethods="3" methodcoverage="100" fullmethodcoverage="100" />
+      <Class name="Test.TestClass" coverage="72.7" coveredlines="24" coverablelines="33" totallines="38" branchcoverage="50" coveredbranches="2" totalbranches="4" coveredmethods="4" fullcoveredmethods="1" totalmethods="5" methodcoverage="80" fullmethodcoverage="20" />
+      <Class name="Test.TestClass2" coverage="63.1" coveredlines="24" coverablelines="38" totallines="85" branchcoverage="50" coveredbranches="1" totalbranches="2" coveredmethods="6" fullcoveredmethods="3" totalmethods="10" methodcoverage="60" fullmethodcoverage="30" />
     </Assembly>
   </Coverage>
 </CoverageReport>

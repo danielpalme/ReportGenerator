@@ -67,6 +67,11 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.4.3.0
+
+    * New: #717 Added new new coverage type "Full method coverage" (percentage of methods that are fully covered)
+
+
 5.4.2.0
 
     * Fix: #700 Fixed handling of .netconfig files (sourceDirectories, reportTypes, plugins, assemblyFilters, etc.)

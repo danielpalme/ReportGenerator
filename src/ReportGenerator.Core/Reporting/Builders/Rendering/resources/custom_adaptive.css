@@ -182,6 +182,10 @@
             stroke: #e58f1d !important;
         }
 
+        .ct-chart .ct-series.ct-series-d .ct-line, .ct-chart .ct-series.ct-series-d .ct-point {
+            stroke: #c71bca !important;
+        }
+
         .linecoverage {
             background-color: #0078D4;
         }
@@ -193,7 +197,11 @@
             background-color: #e58f1d;
         }
 
-        .tinylinecoveragechart, .tinybranchcoveragechart, .tinymethodcoveragechart {
+        .fullcodeelementcoverage {
+            background-color: #c71bca;
+        }
+
+        .tinylinecoveragechart, .tinybranchcoveragechart, .tinymethodcoveragechart, .tinyfullmethodcoveragechart {
             background-color: #333;
         }
 
@@ -203,6 +211,10 @@
 
             .tinymethodcoveragechart .ct-series.ct-series-a .ct-line {
                 stroke: #e58f1d !important;
+            }
+
+            .tinyfullmethodcoveragechart .ct-series.ct-series-a .ct-line {
+                stroke: #c71bca !important;
             }
 
         .icon-up-down-dir {

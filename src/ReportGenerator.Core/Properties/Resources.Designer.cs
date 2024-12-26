@@ -295,6 +295,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The full method coverage of {0}% is below the minimum threshold of {1}%..
+        /// </summary>
+        internal static string ErrorLowFullMethodCoverage {
+            get {
+                return ResourceManager.GetString("ErrorLowFullMethodCoverage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The line coverage of {0}% is below the minimum threshold of {1}%..
         /// </summary>
         internal static string ErrorLowLineCoverage {

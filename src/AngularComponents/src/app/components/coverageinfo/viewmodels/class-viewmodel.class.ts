@@ -9,6 +9,7 @@ export class ClassViewModel extends ElementBase {
     lineCoverageHistory: number[] = [];
     branchCoverageHistory: number[] = [];
     methodCoverageHistory: number[] = [];
+    methodFullCoverageHistory: number[] = [];
     historicCoverages: HistoricCoverage[] = [];
     metrics: any;
 
@@ -30,11 +31,13 @@ export class ClassViewModel extends ElementBase {
             this.totalBranches = clazz.tb;
 
             this.coveredMethods = clazz.cm;
+            this.fullyCoveredMethods = clazz.fcm;
             this.totalMethods = clazz.tm;
 
             this.lineCoverageHistory = clazz.lch;
             this.branchCoverageHistory = clazz.bch;
             this.methodCoverageHistory = clazz.mch;
+            this.methodFullCoverageHistory = clazz.mfch;
 
             clazz.hc.forEach(element => {
                 this.historicCoverages.push(new HistoricCoverage(element))
@@ -83,6 +86,15 @@ export class ClassViewModel extends ElementBase {
             return false;
         }
 
+        let methodFullCoverageMin = this.methodFullCoverage;
+        let methodFullCoverageMax = methodFullCoverageMin;
+        methodFullCoverageMin = Number.isNaN(methodFullCoverageMin) ? 0 : methodFullCoverageMin;
+        methodFullCoverageMax = Number.isNaN(methodFullCoverageMax) ? 100 : methodFullCoverageMax;
+
+        if (settings.methodFullCoverageMin > methodFullCoverageMin || settings.methodFullCoverageMax < methodFullCoverageMax) {
+            return false;
+        }
+
         if (settings.historyComparisionType === "" || this.currentHistoricCoverage === null) {
             return true;
         }
@@ -95,6 +107,7 @@ export class ClassViewModel extends ElementBase {
                 && this.coveredBranches === this.currentHistoricCoverage.cb
                 && this.totalBranches === this.currentHistoricCoverage.tb
                 && this.coveredMethods === this.currentHistoricCoverage.cm
+                && this.fullyCoveredMethods === this.currentHistoricCoverage.fcm
                 && this.totalMethods === this.currentHistoricCoverage.tm) {
                 return false;
             }
@@ -126,6 +139,16 @@ export class ClassViewModel extends ElementBase {
         } else if (settings.historyComparisionType === "methodCoverageDecreaseOnly") {
             let methodCoverage: number = this.methodCoverage;
             if (isNaN(methodCoverage) || methodCoverage >= this.currentHistoricCoverage.mcq) {
+                return false;
+            }
+        } else if (settings.historyComparisionType === "fullMethodCoverageIncreaseOnly") {
+            let methodFullCoverage: number = this.methodFullCoverage;
+            if (isNaN(methodFullCoverage) || methodFullCoverage <= this.currentHistoricCoverage.mfcq) {
+                return false;
+            }
+        } else if (settings.historyComparisionType === "fullMethodCoverageDecreaseOnly") {
+            let methodFullCoverage: number = this.methodFullCoverage;
+            if (isNaN(methodFullCoverage) || methodFullCoverage >= this.currentHistoricCoverage.mfcq) {
                 return false;
             }
         }

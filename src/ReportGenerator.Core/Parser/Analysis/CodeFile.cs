@@ -258,6 +258,23 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         }
 
         /// <summary>
+        /// Gets the number of fully covered code elements.
+        /// </summary>
+        /// <value>
+        /// The number of fully covered code elements.
+        /// </value>
+        public int FullCoveredCodeElements
+        {
+            get
+            {
+                return this.CodeElements.Count(
+                    x => this.lineCoverage.Skip(x.FirstLine)
+                        .Take(x.LastLine - x.FirstLine + 1)
+                        .All(y => y > 0));
+            }
+        }
+
+        /// <summary>
         /// Gets the number of total code elements.
         /// </summary>
         /// <value>

@@ -39,6 +39,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
             this.CoveredBranches = @class.CoveredBranches.GetValueOrDefault();
             this.TotalBranches = @class.TotalBranches.GetValueOrDefault();
             this.CoveredCodeElements = @class.CoveredCodeElements;
+            this.FullCoveredCodeElements = @class.FullCoveredCodeElements;
             this.TotalCodeElements = @class.TotalCodeElements;
         }
 
@@ -108,9 +109,17 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// Gets or sets the number of covered code elements.
         /// </summary>
         /// <value>
-        /// The number of total branches.
+        /// The number of covered code elements.
         /// </value>
         public int? CoveredCodeElements { get; set; }
+
+        /// <summary>
+        /// Gets or sets the number of fully covered code elements.
+        /// </summary>
+        /// <value>
+        /// The number of fully covered code elements.
+        /// </value>
+        public int? FullCoveredCodeElements { get; set; }
 
         /// <summary>
         /// Gets or sets the number of total code elements.
@@ -125,6 +134,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// </summary>
         /// <value>The code elements coverage quota.</value>
         public decimal? CodeElementCoverageQuota => (this.TotalCodeElements.GetValueOrDefault() == 0) ? (decimal?)null : MathExtensions.CalculatePercentage(this.CoveredCodeElements.GetValueOrDefault(), this.TotalCodeElements.GetValueOrDefault());
+
+        /// <summary>
+        /// Gets the full code elements coverage quota.
+        /// </summary>
+        /// <value>The full code elements coverage quota.</value>
+        public decimal? FullCodeElementCoverageQuota => (this.TotalCodeElements.GetValueOrDefault() == 0) ? (decimal?)null : MathExtensions.CalculatePercentage(this.FullCoveredCodeElements.GetValueOrDefault(), this.TotalCodeElements.GetValueOrDefault());
 
         /// <summary>
         /// Determines whether the specified <see cref="object" />, is equal to this instance.
