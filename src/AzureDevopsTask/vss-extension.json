@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "reportgenerator",
     "name": "ReportGenerator",
-    "version": "5.4.2",
+    "version": "5.4.3",
     "publisher": "Palmmedia",
     "public": true,
     "targets": [
