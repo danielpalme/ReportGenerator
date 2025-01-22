@@ -28,6 +28,11 @@ namespace Palmmedia.ReportGenerator.MSBuild
     public class ReportGenerator : Task, ITask
     {
         /// <summary>
+        /// The argument separators.
+        /// </summary>
+        private static readonly char[] ArgumentSeparators = new[] { ';', ',' };
+
+        /// <summary>
         /// Gets or sets the project directory where the tool is being run, for loading 
         /// the relevant .netconfig.
         /// </summary>
@@ -185,7 +190,7 @@ namespace Palmmedia.ReportGenerator.MSBuild
             }
             else if (config.TryGetString(DotNetConfigSettingNames.Reports, out value))
             {
-                reportFilePatterns = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                reportFilePatterns = value.Split(ArgumentSeparators, StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {
@@ -220,7 +225,7 @@ namespace Palmmedia.ReportGenerator.MSBuild
             }
             else if (config.TryGetString(DotNetConfigSettingNames.SourceDirectories, out value))
             {
-                sourceDirectories = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                sourceDirectories = value.Split(ArgumentSeparators, StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {
@@ -243,7 +248,7 @@ namespace Palmmedia.ReportGenerator.MSBuild
             }
             else if (config.TryGetString(DotNetConfigSettingNames.ReportTypes, out value))
             {
-                reportTypes = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                reportTypes = value.Split(ArgumentSeparators, StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {
@@ -260,7 +265,7 @@ namespace Palmmedia.ReportGenerator.MSBuild
             }
             else if (config.TryGetString(DotNetConfigSettingNames.Plugins, out value))
             {
-                plugins = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                plugins = value.Split(ArgumentSeparators, StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {
@@ -281,7 +286,7 @@ namespace Palmmedia.ReportGenerator.MSBuild
             }
             else if (config.TryGetString(DotNetConfigSettingNames.AssemblyFilters, out value))
             {
-                assemblyFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                assemblyFilters = value.Split(ArgumentSeparators, StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {
@@ -298,7 +303,7 @@ namespace Palmmedia.ReportGenerator.MSBuild
             }
             else if (config.TryGetString(DotNetConfigSettingNames.ClassFilters, out value))
             {
-                classFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                classFilters = value.Split(ArgumentSeparators, StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {
@@ -315,7 +320,7 @@ namespace Palmmedia.ReportGenerator.MSBuild
             }
             else if (config.TryGetString(DotNetConfigSettingNames.FileFilters, out value))
             {
-                fileFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                fileFilters = value.Split(ArgumentSeparators, StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {
@@ -332,7 +337,7 @@ namespace Palmmedia.ReportGenerator.MSBuild
             }
             else if (config.TryGetString(DotNetConfigSettingNames.RiskHotspotAssemblyFilters, out value))
             {
-                riskHotspotAssemblyFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                riskHotspotAssemblyFilters = value.Split(ArgumentSeparators, StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {
@@ -349,7 +354,7 @@ namespace Palmmedia.ReportGenerator.MSBuild
             }
             else if (config.TryGetString(DotNetConfigSettingNames.RiskHotspotClassFilters, out value))
             {
-                riskHotspotClassFilters = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                riskHotspotClassFilters = value.Split(ArgumentSeparators, StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {

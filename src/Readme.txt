@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.4.4.0
+
+    * New: #721 Added support for comma-separated arguments in addition to semicolon
+
 5.4.3.0
 
     * New: #717 Added new new coverage type "Full method coverage" (percentage of methods that are fully covered)
