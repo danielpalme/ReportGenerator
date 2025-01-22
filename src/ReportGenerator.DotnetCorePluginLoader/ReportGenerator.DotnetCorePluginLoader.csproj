@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="McMaster.NETCore.Plugins" Version="1.4.0" />
+    <PackageReference Include="McMaster.NETCore.Plugins" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
