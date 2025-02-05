@@ -44,7 +44,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
 
             if (!string.IsNullOrWhiteSpace(customHeadersForRemoteFiles))
             {
-                var parts = customHeadersForRemoteFiles.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                var parts = customHeadersForRemoteFiles.Split(new[] { ';', '|' }, StringSplitOptions.RemoveEmptyEntries);
 
                 foreach (var part in parts)
                 {

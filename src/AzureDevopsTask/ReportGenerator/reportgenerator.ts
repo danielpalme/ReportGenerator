@@ -23,7 +23,7 @@ async function executeReportGenerator(): Promise<number> {
     const customSettings = (tl.getInput('customSettings') || '');
 
     if (customSettings.length > 0) {
-        customSettings.split(';').forEach(setting => {
+        customSettings.split(/[,;]/).forEach(setting => {
             tool = tool.arg(setting.trim());
         });
     }
@@ -68,7 +68,7 @@ function publishCodeCoverageReport() {
     }
 
     const targetdir = resolvePathToSingleItem(tl.getInput('targetdir') || '');
-    const reporttypes = (tl.getInput('reporttypes') || '').toLowerCase().split(';');
+    const reporttypes = (tl.getInput('reporttypes') || '').toLowerCase().split(/[,;]/);
     const createSubdirectoryForAllReportTypes = (tl.getInput('customSettings') || '').toLowerCase().indexOf('createsubdirectoryforallreporttypes=true') > -1;
 
     if (!reporttypes.find(r => r === 'cobertura')) {
