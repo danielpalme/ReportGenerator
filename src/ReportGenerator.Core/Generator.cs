@@ -136,7 +136,7 @@ namespace Palmmedia.ReportGenerator.Core
                 // Set log level before validation is performed
                 LoggerFactory.VerbosityLevel = reportConfiguration.VerbosityLevel;
 
-                Logger.Debug($"{Resources.Executable}: {typeof(Program).Assembly.Location}");
+                Logger.Debug($"{Resources.Executable}: {AppContext.BaseDirectory}");
                 Logger.Debug($"{Resources.WorkingDirectory}: {Directory.GetCurrentDirectory()}");
 
                 if (!new ReportConfigurationValidator(reportBuilderFactory).Validate(reportConfiguration))
@@ -358,7 +358,7 @@ namespace Palmmedia.ReportGenerator.Core
             try
             {
                 var builder = new ConfigurationBuilder()
-                    .SetBasePath(new FileInfo(this.GetType().Assembly.Location).DirectoryName)
+                    .SetBasePath(AppContext.BaseDirectory)
                     .AddJsonFile("appsettings.json")
                     .AddCommandLine(args);
 
@@ -368,7 +368,7 @@ namespace Palmmedia.ReportGenerator.Core
             {
                 // This can happen when excuted within MSBuild (dotnet msbuild): JSON configuration gets ignored
                 var builder = new ConfigurationBuilder()
-                    .SetBasePath(new FileInfo(this.GetType().Assembly.Location).DirectoryName)
+                    .SetBasePath(AppContext.BaseDirectory)
                     .AddCommandLine(args);
 
                 return builder.Build();

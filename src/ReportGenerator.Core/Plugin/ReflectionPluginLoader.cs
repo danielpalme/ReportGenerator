@@ -127,8 +127,7 @@ namespace Palmmedia.ReportGenerator.Core.Plugin
 
             if (framework != null && framework.StartsWith(".NETCoreApp"))
             {
-                var directory = new FileInfo(typeof(ReflectionPluginLoader).Assembly.Location).Directory.FullName;
-                string path = Path.Combine(directory, "ReportGenerator.DotnetCorePluginLoader.dll");
+                string path = Path.Combine(AppContext.BaseDirectory, "ReportGenerator.DotnetCorePluginLoader.dll");
 
                 if (!File.Exists(path))
                 {

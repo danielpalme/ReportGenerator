@@ -69,6 +69,7 @@ CHANGELOG
 
 5.4.4.0
 
+    * New: #714 Improved AoT support
     * New: #721 Added support for comma-separated arguments in addition to semicolon
 
 5.4.3.0
