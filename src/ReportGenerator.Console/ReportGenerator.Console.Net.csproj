@@ -8,8 +8,8 @@
     <AssemblyTitle>ReportGenerator.Console</AssemblyTitle>
     <Product>ReportGenerator.Console</Product>
     <Copyright>Copyright © 2022</Copyright>
-    <AssemblyVersion>5.4.3.0</AssemblyVersion>
-    <FileVersion>5.4.3.0</FileVersion>
+    <AssemblyVersion>5.4.4.0</AssemblyVersion>
+    <FileVersion>5.4.4.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
