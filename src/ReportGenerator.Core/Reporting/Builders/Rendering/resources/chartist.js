@@ -87,8 +87,8 @@ var Chartist = {
     for (i = 1; i < arguments.length; i++) {
       source = arguments[i]; 
       targetProto = Object.getPrototypeOf(target);
-      for (var prop in source) {
-        if (targetProto !== null && prop in targetProto) {
+        for (var prop in source) {
+        if (prop === "__proto__" || prop === "constructor" || (targetProto !== null && prop in targetProto)) {
           continue; // prevent prototype pollution
         }
         sourceProp = source[prop];

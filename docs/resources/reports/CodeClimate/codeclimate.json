@@ -3,8 +3,8 @@
     "branch": "main",
     "build_identifier": "",
     "build_url": "",
-    "commit_sha": "51f539d4c224ce0b897a30de171a4f7c7daaa4e5",
-    "committed_at": 1739122953,
+    "commit_sha": "ae0d925558c2d5f7695c4d1bec871f422b93b38f",
+    "committed_at": 1739123290,
     "name": ""
   },
   "environment": {
@@ -18,8 +18,8 @@
   },
   "git": {
     "branch": "main",
-    "head": "51f539d4c224ce0b897a30de171a4f7c7daaa4e5",
-    "committed_at": 1739122953
+    "head": "ae0d925558c2d5f7695c4d1bec871f422b93b38f",
+    "committed_at": 1739123290
   },
   "covered_percent": 69.4,
   "covered_strength": 0,
