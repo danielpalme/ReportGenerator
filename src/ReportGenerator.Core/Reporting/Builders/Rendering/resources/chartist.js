@@ -81,12 +81,16 @@ var Chartist = {
    * @return {Object} An object that has the same reference as target but is extended and merged with the properties of source
    */
   Chartist.extend = function (target) {
-    var i, source, sourceProp;
+    var i, source, sourceProp, targetProto;
     target = target || {};
 
     for (i = 1; i < arguments.length; i++) {
-      source = arguments[i];
+      source = arguments[i]; 
+      targetProto = Object.getPrototypeOf(target);
       for (var prop in source) {
+        if (targetProto !== null && prop in targetProto) {
+          continue; // prevent prototype pollution
+        }
         sourceProp = source[prop];
         if (typeof sourceProp === 'object' && sourceProp !== null && !(sourceProp instanceof Array)) {
           target[prop] = Chartist.extend(target[prop], sourceProp);
