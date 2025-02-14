@@ -5,6 +5,7 @@ using DotNetConfig;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using Palmmedia.ReportGenerator.Core;
+using Palmmedia.ReportGenerator.Core.Common;
 
 namespace Palmmedia.ReportGenerator.MSBuild
 {
@@ -190,7 +191,7 @@ namespace Palmmedia.ReportGenerator.MSBuild
             }
             else if (config.TryGetString(DotNetConfigSettingNames.Reports, out value))
             {
-                reportFilePatterns = value.Split(ArgumentSeparators, StringSplitOptions.RemoveEmptyEntries);
+                reportFilePatterns = value.SplitThatEnsuresGlobsAreSafe(ArgumentSeparators);
             }
             else
             {
