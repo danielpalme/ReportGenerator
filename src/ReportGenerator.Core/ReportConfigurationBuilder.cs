@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DotNetConfig;
+using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Logging;
 using Palmmedia.ReportGenerator.Core.Properties;
 
@@ -53,11 +54,11 @@ namespace Palmmedia.ReportGenerator.Core
 
             if (namedArguments.TryGetValue(CommandLineArgumentNames.Reports, out value))
             {
-                reportFilePatterns = value.Split(ArgumentSeparators, StringSplitOptions.RemoveEmptyEntries);
+                reportFilePatterns = value.SplitThatEnsuresGlobsAreSafe(ArgumentSeparators);
             }
             else if (config.TryGetString(DotNetConfigSettingNames.Reports, out value))
             {
-                reportFilePatterns = value.Split(ArgumentSeparators, StringSplitOptions.RemoveEmptyEntries);
+                reportFilePatterns = value.SplitThatEnsuresGlobsAreSafe(ArgumentSeparators);
             }
             else
             {

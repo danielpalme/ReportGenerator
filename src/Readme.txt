@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.4.5.0
+
+    * Fix: #724  Fixed splitting of possible glob patterns (contributed by @karl-sjogren)
+
 5.4.4.0
 
     * New: #714 Improved AoT support
