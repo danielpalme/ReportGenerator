@@ -25,22 +25,22 @@ https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage</desc
     <repository type="git" url="https://github.com/danielpalme/ReportGenerator.git" />
     <dependencies>
       <group targetFramework="netstandard2.0">
-        <dependency id="Microsoft.Extensions.Configuration" version="9.0.1" />
-        <dependency id="Microsoft.Extensions.Configuration.Binder" version="9.0.1" />
-        <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="9.0.1" />
-        <dependency id="Microsoft.Extensions.Configuration.Json" version="9.0.1" />
-        <dependency id="Microsoft.Extensions.ObjectPool" version="9.0.1" />
-        <dependency id="System.Text.Json" version="9.0.1" />
+        <dependency id="Microsoft.Extensions.Configuration" version="9.0.2" />
+        <dependency id="Microsoft.Extensions.Configuration.Binder" version="9.0.2" />
+        <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="9.0.2" />
+        <dependency id="Microsoft.Extensions.Configuration.Json" version="9.0.2" />
+        <dependency id="Microsoft.Extensions.ObjectPool" version="9.0.2" />
+        <dependency id="System.Text.Json" version="9.0.2" />
         <dependency id="DotNetConfig" version="1.2.0" />
       </group>
 
       <group targetFramework="netcoreapp">
-        <dependency id="Microsoft.Extensions.Configuration" version="9.0.1" />
-        <dependency id="Microsoft.Extensions.Configuration.Binder" version="9.0.1" />
-        <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="9.0.1" />
-        <dependency id="Microsoft.Extensions.Configuration.Json" version="9.0.1" />
-        <dependency id="Microsoft.Extensions.ObjectPool" version="9.0.1" />
-        <dependency id="System.Text.Json" version="9.0.1" />
+        <dependency id="Microsoft.Extensions.Configuration" version="9.0.2" />
+        <dependency id="Microsoft.Extensions.Configuration.Binder" version="9.0.2" />
+        <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="9.0.2" />
+        <dependency id="Microsoft.Extensions.Configuration.Json" version="9.0.2" />
+        <dependency id="Microsoft.Extensions.ObjectPool" version="9.0.2" />
+        <dependency id="System.Text.Json" version="9.0.2" />
         <dependency id="DotNetConfig" version="1.2.0" />
         <dependency id="McMaster.NETCore.Plugins" version="1.4.0" />
       </group>
