@@ -51,11 +51,11 @@ disable.coverage.autogenerate: 'true' # Global environment variable
     DISABLE_COVERAGE_AUTOGENERATE: 'true' # Local environment variable
 ```
 
-The [PublishCodeCoverageResults@1](https://learn.microsoft.com/de-de/azure/devops/pipelines/tasks/reference/publish-code-coverage-results-v1?view=azure-pipelines) will get [deprecated](https://devblogs.microsoft.com/devops/new-pccr-task/).  
+The [PublishCodeCoverageResults@1](https://learn.microsoft.com/de-de/azure/devops/pipelines/tasks/reference/publish-code-coverage-results-v1?view=azure-pipelines) has been [deprecated](https://devblogs.microsoft.com/devops/new-pccr-task/).  
 Microsoft recommends to use the [PublishCodeCoverageResults@2](https://learn.microsoft.com/de-de/azure/devops/pipelines/tasks/reference/publish-code-coverage-results-v2?view=azure-pipelines) instead.  
-The new version has several disadvantages regarding the report in the `Code Coverage` tab within Azure DevOps
-- No branch and method coverage
-- No details page for each class
+The new version has several disadvantags
+- It uses an old version of _ReportGenerator_
+- It regenerates the report and no custom options can be applied
 
 **Recommendation**:  
 Use the setting `publishCodeCoverageResults: true` of the *ReportGenerator* task. This way you don't have to use the *PublishCodeCoverageResults@1* or *PublishCodeCoverageResults@2* task at all.  
