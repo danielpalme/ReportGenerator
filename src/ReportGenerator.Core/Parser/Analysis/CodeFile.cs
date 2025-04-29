@@ -270,7 +270,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                 return this.CodeElements.Count(
                     x => this.lineCoverage.Skip(x.FirstLine)
                         .Take(x.LastLine - x.FirstLine + 1)
-                        .All(y => y > 0));
+                        .All(y => y != 0));
             }
         }
 
