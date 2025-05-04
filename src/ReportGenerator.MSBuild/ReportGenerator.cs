@@ -384,10 +384,18 @@ namespace Palmmedia.ReportGenerator.MSBuild
                 title = value;
             }
 
-            if (string.IsNullOrEmpty(license) &&
-                config.TryGetString(DotNetConfigSettingNames.License, out value))
+            if (string.IsNullOrEmpty(license))
             {
-                license = value;
+                string licenseFromEnvironment = Environment.GetEnvironmentVariable("REPORTGENERATOR_LICENSE");
+
+                if (config.TryGetString(DotNetConfigSettingNames.License, out value))
+                {
+                    license = value;
+                }
+                else if (licenseFromEnvironment != null)
+                {
+                    license = licenseFromEnvironment;
+                }
             }
 
             var configuration = new ReportConfiguration(
