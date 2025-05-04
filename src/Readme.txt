@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.4.6.0
+
+    * Fix: #730 Added support for the REPORTGENERATOR_LICENSE environment variable in the MSBuild task (contributed by @0xced)
+
 5.4.5.0
 
     * Fix: #724  Fixed splitting of possible glob patterns (contributed by @karl-sjogren)
