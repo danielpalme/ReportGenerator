@@ -1,0 +1,93 @@
+<coverage version="1.1" ctcreport-version="10.1">
+	<project name="Coasterbeispiel - 3b XML for ReportGenerator">
+		<file name="PassengerScan.cpp" location="C:\temp\PassengerScan.cpp">
+		<measure name="MC/DC" RawHits="6" Hits="6" Checkpoints="8" RawTER="75" TER="75"></measure>
+		<measure name="Decision" RawHits="5" Hits="5" Checkpoints="5" RawTER="100" TER="100"></measure>
+		<measure name="Statement" RawHits="3" Hits="3" Checkpoints="3" RawTER="100" TER="100"></measure>
+			<function name="">
+				<line number="1" type="PreprocessorLine" status="" IsJustified="">
+				</line>
+				<line number="2" type="Empty" status="" IsJustified="">
+				</line>
+			</function>
+			<function name="hasAdmission">
+				<measure name="MC/DC" RawHits="6" Hits="6" Checkpoints="8" RawTER="75" TER="75"></measure>
+				<measure name="Decision" RawHits="5" Hits="5" Checkpoints="5" RawTER="100" TER="100"></measure>
+				<measure name="Statement" RawHits="3" Hits="3" Checkpoints="3" RawTER="100" TER="100"></measure>
+				<line number="3" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelFunction" trueAchieved="Achieved" falseAchieved="" trueJustified="" falseJustified="">
+						<description>FUNCTION hasAdmission()</description>
+						<trueCount>3</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="4" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="5" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="Achieved" falseAchieved="Achieved" trueJustified="" falseJustified="">
+						<description>if (BodyHeight &gt;= 1.2 &amp;&amp; BodyHeight &lt;= 1.9 &amp;&amp; Age &gt;= 6)</description>
+						<trueCount>2</trueCount>
+						<falseCount>1</falseCount>
+						<tfcombination Achieved="Achieved">
+							<description>T &amp;&amp; T &amp;&amp; T</description>
+						</tfcombination>
+						<tfcombination Achieved="Achieved">
+							<description>T &amp;&amp; T &amp;&amp; F</description>
+						</tfcombination>
+						<tfcombination Achieved="NotAchieved">
+							<description>T &amp;&amp; F &amp;&amp; _</description>
+						</tfcombination>
+						<tfcombination Achieved="NotAchieved">
+							<description>F &amp;&amp; _ &amp;&amp; _</description>
+						</tfcombination>
+						<mcdc Achieved="NotAchieved">
+							<description>BodyHeight &gt;= 1.2</description>
+						</mcdc>
+						<mcdc Achieved="NotAchieved">
+							<description>BodyHeight &lt;= 1.9</description>
+						</mcdc>
+						<mcdc Achieved="Achieved">
+							<description>Age &gt;= 6</description>
+						</mcdc>
+					</probe>
+				</line>
+				<line number="6" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="7" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="Achieved" falseAchieved="" trueJustified="" falseJustified="">
+						<description>return true</description>
+						<trueCount>2</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="8" type="BracesOnly" status="NotExecuted" IsJustified="">
+				</line>
+				<line number="9" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="" falseAchieved="" trueJustified="" falseJustified="">
+						<description>else</description>
+						<trueCount></trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="10" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="11" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="Achieved" falseAchieved="" trueJustified="" falseJustified="">
+						<description>return false</description>
+						<trueCount>1</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="12" type="BracesOnly" status="NotExecuted" IsJustified="">
+				</line>
+				<line number="13" type="BracesOnly" status="NotExecuted" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="" falseAchieved="" trueJustified="" falseJustified="">
+						<description>function end</description>
+						<trueCount></trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+			</function>
+		</file>
+	</project>
+</coverage>

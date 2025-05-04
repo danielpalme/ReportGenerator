@@ -484,6 +484,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Decision.
+        /// </summary>
+        public static string DecisionCoverage {
+            get {
+                return ResourceManager.GetString("DecisionCoverage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delta.
         /// </summary>
         public static string Delta {
@@ -687,6 +696,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         public static string LineCoverageIncreaseOnly {
             get {
                 return ResourceManager.GetString("LineCoverageIncreaseOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MC/DC.
+        /// </summary>
+        public static string McdcCoverage {
+            get {
+                return ResourceManager.GetString("McdcCoverage", resourceCulture);
             }
         }
         
@@ -903,6 +921,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         public static string StarTooltip {
             get {
                 return ResourceManager.GetString("StarTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statement.
+        /// </summary>
+        public static string StatementCoverage {
+            get {
+                return ResourceManager.GetString("StatementCoverage", resourceCulture);
             }
         }
         

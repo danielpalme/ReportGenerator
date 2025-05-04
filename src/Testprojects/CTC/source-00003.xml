@@ -1,0 +1,141 @@
+<coverage version="1.1" ctcreport-version="10.1">
+	<project name="Coasterbeispiel - 3b XML for ReportGenerator">
+		<file name="Rollercoaster.cpp" location="C:\temp\Rollercoaster.cpp">
+		<measure name="MC/DC" RawHits="6" Hits="6" Checkpoints="6" RawTER="100" TER="100"></measure>
+		<measure name="Decision" RawHits="6" Hits="6" Checkpoints="6" RawTER="100" TER="100"></measure>
+		<measure name="Statement" RawHits="15" Hits="15" Checkpoints="15" RawTER="100" TER="100"></measure>
+			<function name="">
+				<line number="1" type="CommentOnly" status="" IsJustified="">
+				</line>
+				<line number="2" type="CommentOnly" status="" IsJustified="">
+				</line>
+				<line number="3" type="Empty" status="" IsJustified="">
+				</line>
+				<line number="4" type="PreprocessorLine" status="" IsJustified="">
+				</line>
+				<line number="5" type="PreprocessorLine" status="" IsJustified="">
+				</line>
+				<line number="6" type="Empty" status="" IsJustified="">
+				</line>
+				<line number="7" type="PreprocessorLine" status="" IsJustified="">
+				</line>
+				<line number="8" type="PreprocessorLine" status="" IsJustified="">
+				</line>
+				<line number="9" type="Empty" status="" IsJustified="">
+				</line>
+				<line number="10" type="PreprocessorLine" status="" IsJustified="">
+				</line>
+				<line number="11" type="PreprocessorLine" status="" IsJustified="">
+				</line>
+				<line number="12" type="Empty" status="" IsJustified="">
+				</line>
+				<line number="13" type="Executable" status="" IsJustified="">
+				</line>
+				<line number="14" type="Empty" status="" IsJustified="">
+				</line>
+			</function>
+			<function name="main">
+				<measure name="MC/DC" RawHits="6" Hits="6" Checkpoints="6" RawTER="100" TER="100"></measure>
+				<measure name="Decision" RawHits="6" Hits="6" Checkpoints="6" RawTER="100" TER="100"></measure>
+				<measure name="Statement" RawHits="15" Hits="15" Checkpoints="15" RawTER="100" TER="100"></measure>
+				<line number="15" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelFunction" trueAchieved="Achieved" falseAchieved="" trueJustified="" falseJustified="">
+						<description>FUNCTION main()</description>
+						<trueCount>1</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="16" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="17" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="18" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="19" type="Empty" status="Executed" IsJustified="">
+				</line>
+				<line number="20" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="21" type="Empty" status="Executed" IsJustified="">
+				</line>
+				<line number="22" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="" falseAchieved="" trueJustified="" falseJustified="">
+						<description>do</description>
+						<trueCount></trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="23" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="24" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="25" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="26" type="Empty" status="Executed" IsJustified="">
+				</line>
+				<line number="27" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="28" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="29" type="Empty" status="Executed" IsJustified="">
+				</line>
+				<line number="30" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="31" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="32" type="Empty" status="Executed" IsJustified="">
+				</line>
+				<line number="33" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="Achieved" falseAchieved="Achieved" trueJustified="" falseJustified="">
+						<description>if (hasAdmission ( passenger . BodyHeight , passenger . Age ))</description>
+						<trueCount>2</trueCount>
+						<falseCount>1</falseCount>
+					</probe>
+				</line>
+				<line number="34" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="35" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="36" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="37" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="" falseAchieved="" trueJustified="" falseJustified="">
+						<description>else</description>
+						<trueCount></trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="38" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="39" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="40" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="41" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="Achieved" falseAchieved="Achieved" trueJustified="" falseJustified="">
+						<description>do-while (myApp . shallProceed ( ))</description>
+						<trueCount>2</trueCount>
+						<falseCount>1</falseCount>
+					</probe>
+				</line>
+				<line number="42" type="Empty" status="Executed" IsJustified="">
+				</line>
+				<line number="43" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="44" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="Achieved" falseAchieved="" trueJustified="" falseJustified="">
+						<description>return 0</description>
+						<trueCount>1</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="45" type="BracesOnly" status="NotExecuted" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="" falseAchieved="" trueJustified="" falseJustified="">
+						<description>function end</description>
+						<trueCount></trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+			</function>
+		</file>
+	</project>
+</coverage>

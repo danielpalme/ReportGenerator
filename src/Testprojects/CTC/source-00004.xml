@@ -1,0 +1,669 @@
+<coverage version="1.1" ctcreport-version="10.1">
+	<project name="Coasterbeispiel - 3b XML for ReportGenerator">
+		<file name="TicketApp.cpp" location="C:\temp\TicketApp.cpp">
+		<measure name="MC/DC" RawHits="27" Hits="61" Checkpoints="64" RawTER="42" TER="95"></measure>
+		<measure name="Decision" RawHits="26" Hits="58" Checkpoints="58" RawTER="44" TER="100"></measure>
+		<measure name="Statement" RawHits="37" Hits="47" Checkpoints="47" RawTER="78" TER="100"></measure>
+			<function name="">
+				<line number="1" type="PreprocessorLine" status="" IsJustified="">
+				</line>
+				<line number="2" type="PreprocessorLine" status="" IsJustified="">
+				</line>
+				<line number="3" type="PreprocessorLine" status="" IsJustified="">
+				</line>
+				<line number="4" type="PreprocessorLine" status="" IsJustified="">
+				</line>
+				<line number="5" type="PreprocessorLine" status="" IsJustified="">
+				</line>
+				<line number="6" type="PreprocessorLine" status="" IsJustified="">
+				</line>
+				<line number="7" type="Empty" status="" IsJustified="">
+				</line>
+				<line number="8" type="Executable" status="" IsJustified="">
+				</line>
+				<line number="9" type="Empty" status="" IsJustified="">
+				</line>
+				<line number="28" type="Empty" status="" IsJustified="">
+				</line>
+				<line number="29" type="CommentOnly" status="" IsJustified="">
+				</line>
+				<line number="38" type="Empty" status="" IsJustified="">
+				</line>
+				<line number="46" type="Empty" status="" IsJustified="">
+				</line>
+				<line number="58" type="Empty" status="" IsJustified="">
+				</line>
+				<line number="70" type="Empty" status="" IsJustified="">
+				</line>
+				<line number="87" type="Empty" status="" IsJustified="">
+				</line>
+				<line number="99" type="Empty" status="" IsJustified="">
+				</line>
+				<line number="100" type="CommentOnly" status="" IsJustified="">
+				</line>
+			</function>
+			<function name="TicketApp::showInstruction">
+				<measure name="MC/DC" RawHits="3" Hits="6" Checkpoints="6" RawTER="50" TER="100"></measure>
+				<measure name="Decision" RawHits="3" Hits="4" Checkpoints="4" RawTER="75" TER="100"></measure>
+				<measure name="Statement" RawHits="12" Hits="12" Checkpoints="12" RawTER="100" TER="100"></measure>
+				<line number="10" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelFunction" trueAchieved="Achieved" falseAchieved="" trueJustified="" falseJustified="">
+						<description>FUNCTION TicketApp::showInstruction()</description>
+						<trueCount>1</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="11" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="12" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="13" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="14" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="15" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="16" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="17" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="18" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="19" type="Empty" status="Executed" IsJustified="">
+				</line>
+				<line number="20" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="21" type="Empty" status="Executed" IsJustified="">
+				</line>
+				<line number="22" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="23" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="24" type="Empty" status="Executed" IsJustified="">
+				</line>
+				<line number="25" type="CommentOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="26" type="Executable" status="Executed" IsJustified="PartiallyJustified">
+					<probe level="LevelDecision" trueAchieved="Achieved" falseAchieved="NotAchieved" trueJustified="" falseJustified="Justified">
+						<description>if (! ( selectedDialogueMode == "s" || selectedDialogueMode == "S" ))</description>
+						<trueCount>1</trueCount>
+						<falseCount>0</falseCount>
+						<tfcombination Achieved="Achieved">
+							<description>!(F || F)</description>
+						</tfcombination>
+						<tfcombination Achieved="NotAchieved">
+							<description>!(T || _)</description>
+						</tfcombination>
+						<tfcombination Achieved="NotAchieved">
+							<description>!(F || T)</description>
+						</tfcombination>
+						<mcdc Achieved="NotAchieved">
+							<description>selectedDialogueMode == "s"</description>
+						</mcdc>
+						<mcdc Achieved="NotAchieved">
+							<description>selectedDialogueMode == "S"</description>
+						</mcdc>
+					</probe>
+				</line>
+				<line number="27" type="BracesOnly" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="Achieved" falseAchieved="" trueJustified="" falseJustified="">
+						<description>function end</description>
+						<trueCount>1</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+			</function>
+			<function name="TicketApp::switch2BatchMode">
+				<measure name="MC/DC" RawHits="2" Hits="2" Checkpoints="2" RawTER="100" TER="100"></measure>
+				<measure name="Decision" RawHits="2" Hits="2" Checkpoints="2" RawTER="100" TER="100"></measure>
+				<measure name="Statement" RawHits="5" Hits="5" Checkpoints="5" RawTER="100" TER="100"></measure>
+				<line number="30" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelFunction" trueAchieved="Achieved" falseAchieved="" trueJustified="" falseJustified="">
+						<description>FUNCTION TicketApp::switch2BatchMode()</description>
+						<trueCount>1</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="31" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="32" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="33" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="34" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="35" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="36" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="37" type="BracesOnly" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="Achieved" falseAchieved="" trueJustified="" falseJustified="">
+						<description>function end</description>
+						<trueCount>1</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+			</function>
+			<function name="TicketApp::ask4Input">
+				<measure name="MC/DC" RawHits="3" Hits="4" Checkpoints="4" RawTER="75" TER="100"></measure>
+				<measure name="Decision" RawHits="3" Hits="4" Checkpoints="4" RawTER="75" TER="100"></measure>
+				<measure name="Statement" RawHits="1" Hits="2" Checkpoints="2" RawTER="50" TER="100"></measure>
+				<line number="39" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelFunction" trueAchieved="Achieved" falseAchieved="" trueJustified="" falseJustified="">
+						<description>FUNCTION TicketApp::ask4Input()</description>
+						<trueCount>12</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="40" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="41" type="Executable" status="Executed" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="Achieved" trueJustified="Justified" falseJustified="">
+						<description>if (runInDialogueMode)</description>
+						<trueCount>0</trueCount>
+						<falseCount>12</falseCount>
+					</probe>
+				</line>
+				<line number="42" type="BracesOnly" status="NotExecuted" IsJustified="Justified">
+				</line>
+				<line number="43" type="Executable" status="NotExecuted" IsJustified="Justified">
+				</line>
+				<line number="44" type="BracesOnly" status="NotExecuted" IsJustified="Justified">
+				</line>
+				<line number="45" type="BracesOnly" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="Achieved" falseAchieved="" trueJustified="" falseJustified="">
+						<description>function end</description>
+						<trueCount>12</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+			</function>
+			<function name="TicketApp::reportPrice">
+				<measure name="MC/DC" RawHits="3" Hits="4" Checkpoints="4" RawTER="75" TER="100"></measure>
+				<measure name="Decision" RawHits="3" Hits="4" Checkpoints="4" RawTER="75" TER="100"></measure>
+				<measure name="Statement" RawHits="2" Hits="3" Checkpoints="3" RawTER="66" TER="100"></measure>
+				<line number="47" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelFunction" trueAchieved="Achieved" falseAchieved="" trueJustified="" falseJustified="">
+						<description>FUNCTION TicketApp::reportPrice()</description>
+						<trueCount>2</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="48" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="49" type="Executable" status="Executed" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="Achieved" trueJustified="Justified" falseJustified="">
+						<description>if (runInDialogueMode)</description>
+						<trueCount>0</trueCount>
+						<falseCount>2</falseCount>
+					</probe>
+				</line>
+				<line number="50" type="BracesOnly" status="NotExecuted" IsJustified="Justified">
+				</line>
+				<line number="51" type="Executable" status="NotExecuted" IsJustified="Justified">
+				</line>
+				<line number="52" type="BracesOnly" status="NotExecuted" IsJustified="Justified">
+				</line>
+				<line number="53" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="" falseAchieved="" trueJustified="" falseJustified="">
+						<description>else</description>
+						<trueCount></trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="54" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="55" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="56" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="57" type="BracesOnly" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="Achieved" falseAchieved="" trueJustified="" falseJustified="">
+						<description>function end</description>
+						<trueCount>2</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+			</function>
+			<function name="TicketApp::reportRefusal">
+				<measure name="MC/DC" RawHits="3" Hits="4" Checkpoints="4" RawTER="75" TER="100"></measure>
+				<measure name="Decision" RawHits="3" Hits="4" Checkpoints="4" RawTER="75" TER="100"></measure>
+				<measure name="Statement" RawHits="2" Hits="3" Checkpoints="3" RawTER="66" TER="100"></measure>
+				<line number="59" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelFunction" trueAchieved="Achieved" falseAchieved="" trueJustified="" falseJustified="">
+						<description>FUNCTION TicketApp::reportRefusal()</description>
+						<trueCount>1</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="60" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="61" type="Executable" status="Executed" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="Achieved" trueJustified="Justified" falseJustified="">
+						<description>if (runInDialogueMode)</description>
+						<trueCount>0</trueCount>
+						<falseCount>1</falseCount>
+					</probe>
+				</line>
+				<line number="62" type="BracesOnly" status="NotExecuted" IsJustified="Justified">
+				</line>
+				<line number="63" type="Executable" status="NotExecuted" IsJustified="Justified">
+				</line>
+				<line number="64" type="BracesOnly" status="NotExecuted" IsJustified="Justified">
+				</line>
+				<line number="65" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="" falseAchieved="" trueJustified="" falseJustified="">
+						<description>else</description>
+						<trueCount></trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="66" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="67" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="68" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="69" type="BracesOnly" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="Achieved" falseAchieved="" trueJustified="" falseJustified="">
+						<description>function end</description>
+						<trueCount>1</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+			</function>
+			<function name="TicketApp::shallProceed">
+				<measure name="MC/DC" RawHits="6" Hits="6" Checkpoints="9" RawTER="66" TER="66"></measure>
+				<measure name="Decision" RawHits="5" Hits="5" Checkpoints="5" RawTER="100" TER="100"></measure>
+				<measure name="Statement" RawHits="7" Hits="7" Checkpoints="7" RawTER="100" TER="100"></measure>
+				<line number="71" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelFunction" trueAchieved="Achieved" falseAchieved="" trueJustified="" falseJustified="">
+						<description>FUNCTION TicketApp::shallProceed()</description>
+						<trueCount>3</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="72" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="73" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="74" type="Empty" status="Executed" IsJustified="">
+				</line>
+				<line number="75" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="76" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="77" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="78" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="Achieved" falseAchieved="Achieved" trueJustified="" falseJustified="">
+						<description>if (anotherPassenger == "j" || anotherPassenger == "ja" || anotherPassenger == "y" || anotherPassenger == "yes")</description>
+						<trueCount>2</trueCount>
+						<falseCount>1</falseCount>
+						<tfcombination Achieved="Achieved">
+							<description>T || _ || _ || _</description>
+						</tfcombination>
+						<tfcombination Achieved="NotAchieved">
+							<description>F || T || _ || _</description>
+						</tfcombination>
+						<tfcombination Achieved="NotAchieved">
+							<description>F || F || T || _</description>
+						</tfcombination>
+						<tfcombination Achieved="NotAchieved">
+							<description>F || F || F || T</description>
+						</tfcombination>
+						<tfcombination Achieved="Achieved">
+							<description>F || F || F || F</description>
+						</tfcombination>
+						<mcdc Achieved="Achieved">
+							<description>anotherPassenger == "j"</description>
+						</mcdc>
+						<mcdc Achieved="NotAchieved">
+							<description>anotherPassenger == "ja"</description>
+						</mcdc>
+						<mcdc Achieved="NotAchieved">
+							<description>anotherPassenger == "y"</description>
+						</mcdc>
+						<mcdc Achieved="NotAchieved">
+							<description>anotherPassenger == "yes"</description>
+						</mcdc>
+					</probe>
+				</line>
+				<line number="79" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="80" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="Achieved" falseAchieved="" trueJustified="" falseJustified="">
+						<description>return true</description>
+						<trueCount>2</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="81" type="BracesOnly" status="NotExecuted" IsJustified="">
+				</line>
+				<line number="82" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="" falseAchieved="" trueJustified="" falseJustified="">
+						<description>else</description>
+						<trueCount></trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="83" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="84" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="Achieved" falseAchieved="" trueJustified="" falseJustified="">
+						<description>return false</description>
+						<trueCount>1</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="85" type="BracesOnly" status="NotExecuted" IsJustified="">
+				</line>
+				<line number="86" type="BracesOnly" status="NotExecuted" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="" falseAchieved="" trueJustified="" falseJustified="">
+						<description>function end</description>
+						<trueCount></trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+			</function>
+			<function name="TicketApp::sayGoodBye">
+				<measure name="MC/DC" RawHits="3" Hits="4" Checkpoints="4" RawTER="75" TER="100"></measure>
+				<measure name="Decision" RawHits="3" Hits="4" Checkpoints="4" RawTER="75" TER="100"></measure>
+				<measure name="Statement" RawHits="2" Hits="3" Checkpoints="3" RawTER="66" TER="100"></measure>
+				<line number="88" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelFunction" trueAchieved="Achieved" falseAchieved="" trueJustified="" falseJustified="">
+						<description>FUNCTION TicketApp::sayGoodBye()</description>
+						<trueCount>1</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="89" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="90" type="Executable" status="Executed" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="Achieved" trueJustified="Justified" falseJustified="">
+						<description>if (runInDialogueMode)</description>
+						<trueCount>0</trueCount>
+						<falseCount>1</falseCount>
+					</probe>
+				</line>
+				<line number="91" type="BracesOnly" status="NotExecuted" IsJustified="Justified">
+				</line>
+				<line number="92" type="Executable" status="NotExecuted" IsJustified="Justified">
+				</line>
+				<line number="93" type="BracesOnly" status="NotExecuted" IsJustified="Justified">
+				</line>
+				<line number="94" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="" falseAchieved="" trueJustified="" falseJustified="">
+						<description>else</description>
+						<trueCount></trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="95" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="96" type="Executable" status="Executed" IsJustified="">
+				</line>
+				<line number="97" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="98" type="BracesOnly" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="Achieved" falseAchieved="" trueJustified="" falseJustified="">
+						<description>function end</description>
+						<trueCount>1</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+			</function>
+			<function name="TicketApp::greetUser">
+				<measure name="MC/DC" RawHits="4" Hits="31" Checkpoints="31" RawTER="12" TER="100"></measure>
+				<measure name="Decision" RawHits="4" Hits="31" Checkpoints="31" RawTER="12" TER="100"></measure>
+				<measure name="Statement" RawHits="6" Hits="12" Checkpoints="12" RawTER="50" TER="100"></measure>
+				<line number="101" type="Executable" status="Executed" IsJustified="Justified">
+					<probe level="LevelFunction" trueAchieved="Achieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>FUNCTION TicketApp::greetUser()</description>
+						<trueCount>1</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="102" type="BracesOnly" status="Executed" IsJustified="Justified">
+				</line>
+				<line number="103" type="CommentOnly" status="Executed" IsJustified="Justified">
+				</line>
+				<line number="104" type="Executable" status="Executed" IsJustified="Justified">
+				</line>
+				<line number="105" type="Executable" status="Executed" IsJustified="Justified">
+				</line>
+				<line number="106" type="Executable" status="Executed" IsJustified="Justified">
+				</line>
+				<line number="107" type="Empty" status="Executed" IsJustified="Justified">
+				</line>
+				<line number="108" type="Executable" status="Executed" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="" falseAchieved="" trueJustified="" falseJustified="">
+						<description>switch (hour)</description>
+						<trueCount></trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="109" type="Executable" status="NotExecuted" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>case 0:</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="110" type="Executable" status="NotExecuted" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>case 1:</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="111" type="Executable" status="NotExecuted" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>case 2:</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="112" type="Executable" status="NotExecuted" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>case 3:</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="113" type="Executable" status="NotExecuted" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>case 4:</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="114" type="Executable" status="NotExecuted" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>case 5:</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="115" type="Executable" status="NotExecuted" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>case 6:</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="116" type="Executable" status="NotExecuted" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>case 7:</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="117" type="Executable" status="NotExecuted" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>case 8:</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="118" type="Executable" status="NotExecuted" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>case 9:</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="119" type="Executable" status="Executed" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="Achieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>case 10:</description>
+						<trueCount>1</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="120" type="Executable" status="Executed" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>case 11:</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="121" type="Executable" status="Executed" IsJustified="Justified">
+				</line>
+				<line number="122" type="Executable" status="Executed" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="Achieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>break</description>
+						<trueCount>1</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="123" type="Executable" status="NotExecuted" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>case 12:</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="124" type="Executable" status="NotExecuted" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>case 13:</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="125" type="Executable" status="NotExecuted" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>case 14:</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="126" type="Executable" status="NotExecuted" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>case 15:</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="127" type="Executable" status="NotExecuted" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>case 16:</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="128" type="Executable" status="NotExecuted" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>case 17:</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="129" type="Executable" status="NotExecuted" IsJustified="Justified">
+				</line>
+				<line number="130" type="Executable" status="NotExecuted" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>break</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="131" type="Executable" status="NotExecuted" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>case 18:</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="132" type="Executable" status="NotExecuted" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>case 19:</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="133" type="Executable" status="NotExecuted" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>case 20:</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="134" type="Executable" status="NotExecuted" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>case 21:</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="135" type="Executable" status="NotExecuted" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>case 22:</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="136" type="Executable" status="NotExecuted" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>case 23:</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="137" type="Executable" status="NotExecuted" IsJustified="Justified">
+				</line>
+				<line number="138" type="Executable" status="NotExecuted" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>break</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="139" type="Executable" status="NotExecuted" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>default:</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="140" type="Executable" status="NotExecuted" IsJustified="Justified">
+				</line>
+				<line number="141" type="Executable" status="NotExecuted" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>break</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="142" type="BracesOnly" status="NotExecuted" IsJustified="">
+				</line>
+				<line number="143" type="BracesOnly" status="Executed" IsJustified="Justified">
+					<probe level="LevelDecision" trueAchieved="Achieved" falseAchieved="" trueJustified="Justified" falseJustified="">
+						<description>function end</description>
+						<trueCount>1</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+			</function>
+		</file>
+	</project>
+</coverage>

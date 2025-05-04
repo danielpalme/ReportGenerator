@@ -29,6 +29,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         private static readonly Uri CrapScoreUri = new Uri("https://googletesting.blogspot.de/2011/02/this-code-is-crap.html");
 
         /// <summary>
+        /// The MC/DC Uri.
+        /// </summary>
+        private static readonly Uri McdcCoverageUri = new Uri("https://en.wikipedia.org/wiki/Modified_condition/decision_coverage");
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Metric"/> class.
         /// </summary>
         /// <param name="name">The name.</param>
@@ -238,6 +243,51 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                 MetricType.CodeQuality,
                 value,
                 MetricMergeOrder.LowerIsBetter);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Metric"/> class which represents MC/DC coverage.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>The metric.</returns>
+        public static Metric Mcdc(decimal? value)
+        {
+            return new Metric(
+                ReportResources.McdcCoverage,
+                "mcdc",
+                McdcCoverageUri,
+                MetricType.CoveragePercentual,
+                value);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Metric"/> class which represents decision coverage.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>The metric.</returns>
+        public static Metric Decision(decimal? value)
+        {
+            return new Metric(
+                ReportResources.DecisionCoverage,
+                "decision",
+                CodeCoverageUri,
+                MetricType.CoveragePercentual,
+                value);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Metric"/> class which represents statement coverage.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>The metric.</returns>
+        public static Metric Statement(decimal? value)
+        {
+            return new Metric(
+                ReportResources.StatementCoverage,
+                "stmt",
+                CodeCoverageUri,
+                MetricType.CoveragePercentual,
+                value);
         }
 
         /// <summary>

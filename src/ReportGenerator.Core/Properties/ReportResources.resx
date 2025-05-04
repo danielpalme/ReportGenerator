@@ -429,4 +429,13 @@
   <data name="FullMethod" xml:space="preserve">
     <value>Full method</value>
   </data>
+  <data name="McdcCoverage" xml:space="preserve">
+    <value>MC/DC</value>
+  </data>
+  <data name="DecisionCoverage" xml:space="preserve">
+    <value>Decision</value>
+  </data>
+  <data name="StatementCoverage" xml:space="preserve">
+    <value>Statement</value>
+  </data>
 </root>

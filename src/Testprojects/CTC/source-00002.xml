@@ -1,0 +1,105 @@
+<coverage version="1.1" ctcreport-version="10.1">
+	<project name="Coasterbeispiel - 3b XML for ReportGenerator">
+		<file name="PriceCalculation.cpp" location="C:\temp\PriceCalculation.cpp">
+		<measure name="MC/DC" RawHits="7" Hits="7" Checkpoints="10" RawTER="70" TER="70"></measure>
+		<measure name="Decision" RawHits="6" Hits="6" Checkpoints="8" RawTER="75" TER="75"></measure>
+		<measure name="Statement" RawHits="4" Hits="4" Checkpoints="5" RawTER="80" TER="80"></measure>
+			<function name="">
+				<line number="1" type="PreprocessorLine" status="" IsJustified="">
+				</line>
+				<line number="2" type="Empty" status="" IsJustified="">
+				</line>
+			</function>
+			<function name="calcPrice">
+				<measure name="MC/DC" RawHits="7" Hits="7" Checkpoints="10" RawTER="70" TER="70"></measure>
+				<measure name="Decision" RawHits="6" Hits="6" Checkpoints="8" RawTER="75" TER="75"></measure>
+				<measure name="Statement" RawHits="4" Hits="4" Checkpoints="5" RawTER="80" TER="80"></measure>
+				<line number="3" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelFunction" trueAchieved="Achieved" falseAchieved="" trueJustified="" falseJustified="">
+						<description>FUNCTION calcPrice()</description>
+						<trueCount>2</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="4" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="5" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="Achieved" trueJustified="" falseJustified="">
+						<description>if (Age &lt; 10)</description>
+						<trueCount>0</trueCount>
+						<falseCount>2</falseCount>
+					</probe>
+				</line>
+				<line number="6" type="BracesOnly" status="NotExecuted" IsJustified="">
+				</line>
+				<line number="7" type="Executable" status="NotExecuted" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="NotAchieved" falseAchieved="" trueJustified="" falseJustified="">
+						<description>return 2</description>
+						<trueCount>0</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="8" type="BracesOnly" status="NotExecuted" IsJustified="">
+				</line>
+				<line number="9" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="Achieved" falseAchieved="Achieved" trueJustified="" falseJustified="">
+						<description>else if (Age &lt; 18 || Age &gt;= 65)</description>
+						<trueCount>1</trueCount>
+						<falseCount>1</falseCount>
+						<tfcombination Achieved="Achieved">
+							<description>T || _</description>
+						</tfcombination>
+						<tfcombination Achieved="NotAchieved">
+							<description>F || T</description>
+						</tfcombination>
+						<tfcombination Achieved="Achieved">
+							<description>F || F</description>
+						</tfcombination>
+						<mcdc Achieved="Achieved">
+							<description>Age &lt; 18</description>
+						</mcdc>
+						<mcdc Achieved="NotAchieved">
+							<description>Age &gt;= 65</description>
+						</mcdc>
+					</probe>
+				</line>
+				<line number="10" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="11" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="Achieved" falseAchieved="" trueJustified="" falseJustified="">
+						<description>return 3</description>
+						<trueCount>1</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="12" type="BracesOnly" status="NotExecuted" IsJustified="">
+				</line>
+				<line number="13" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="" falseAchieved="" trueJustified="" falseJustified="">
+						<description>else</description>
+						<trueCount></trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="14" type="BracesOnly" status="Executed" IsJustified="">
+				</line>
+				<line number="15" type="Executable" status="Executed" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="Achieved" falseAchieved="" trueJustified="" falseJustified="">
+						<description>return 5</description>
+						<trueCount>1</trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+				<line number="16" type="BracesOnly" status="NotExecuted" IsJustified="">
+				</line>
+				<line number="17" type="BracesOnly" status="NotExecuted" IsJustified="">
+					<probe level="LevelDecision" trueAchieved="" falseAchieved="" trueJustified="" falseJustified="">
+						<description>function end</description>
+						<trueCount></trueCount>
+						<falseCount></falseCount>
+					</probe>
+				</line>
+			</function>
+		</file>
+	</project>
+</coverage>
