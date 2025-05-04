@@ -1530,22 +1530,46 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 branchRate = ", " + string.Format(ReportResources.CoveredBranches, analysis.CoveredBranches, analysis.TotalBranches);
             }
 
+            string result;
+
             if (analysis.LineVisitStatus == LineVisitStatus.Covered)
             {
-                return string.Format(ReportResources.CoverageTooltip_Covered, analysis.LineVisits, branchRate);
+                result = string.Format(ReportResources.CoverageTooltip_Covered, analysis.LineVisits, branchRate);
             }
             else if (analysis.LineVisitStatus == LineVisitStatus.PartiallyCovered)
             {
-                return string.Format(ReportResources.CoverageTooltip_PartiallyCovered, analysis.LineVisits, branchRate);
+                result = string.Format(ReportResources.CoverageTooltip_PartiallyCovered, analysis.LineVisits, branchRate);
             }
             else if (analysis.LineVisitStatus == LineVisitStatus.NotCovered)
             {
-                return string.Format(ReportResources.CoverageTooltip_NotCovered, analysis.LineVisits, branchRate);
+                result = string.Format(ReportResources.CoverageTooltip_NotCovered, analysis.LineVisits, branchRate);
             }
             else
             {
-                return ReportResources.CoverageTooltip_NotCoverable;
+                result = ReportResources.CoverageTooltip_NotCoverable;
+                return result;
             }
+
+            if (analysis.CtcDetails != null)
+            {
+                if (analysis.CtcDetails.TrueFalseCombinations.Count > 0)
+                {
+                    result += string.Format(
+                        "\r\n\r\n{0}\r\n{1}",
+                        ReportResources.TrueFalseCombinations,
+                        string.Join("\r\n", analysis.CtcDetails.TrueFalseCombinations.Select(c => (c.Achived ? "\u2713" : "\u2715") + "   " + c.Description)));
+                }
+
+                if (analysis.CtcDetails.Mcdcs.Count > 0)
+                {
+                    result += string.Format(
+                        "\r\n\r\n{0}\r\n{1}",
+                        ReportResources.McdcCoverage,
+                        string.Join("\r\n", analysis.CtcDetails.Mcdcs.Select(c => (c.Achived ? "\u2713" : "\u2715") + "   " + c.Description)));
+                }
+            }
+
+            return result;
         }
 
         private void WriteHtmlStart(TextWriter writer, string title, string subtitle)

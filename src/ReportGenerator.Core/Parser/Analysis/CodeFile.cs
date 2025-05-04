@@ -52,6 +52,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         private IDictionary<int, ICollection<Branch>> branches;
 
         /// <summary>
+        /// The CTC details by line number.
+        /// </summary>
+        private IDictionary<int, CtcDetails> ctcDetails = new Dictionary<int, CtcDetails>();
+
+        /// <summary>
         /// The optional additional file reader.
         /// </summary>
         private IFileReader additionalFileReader;
@@ -419,6 +424,16 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         }
 
         /// <summary>
+        /// Adds the CTC details for the given line.
+        /// </summary>
+        /// <param name="line">The line number.</param>
+        /// <param name="ctcDetails">The CTC details.</param>
+        internal void AddCtcDetail(int line, CtcDetails ctcDetails)
+        {
+            this.ctcDetails.Add(line, ctcDetails);
+        }
+
+        /// <summary>
         /// Performs the analysis of the source file.
         /// </summary>
         /// <param name="fileReader">The file reader.</param>
@@ -476,6 +491,9 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                         }
                     });
 
+                CtcDetails ctcDetailsOfLine = null;
+                this.ctcDetails.TryGetValue(currentLineNumber, out ctcDetailsOfLine);
+
                 if (this.branches != null && this.branches.TryGetValue(currentLineNumber, out branchesOfLine))
                 {
                     result.AddLineAnalysis(
@@ -486,7 +504,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                             currentLineNumber,
                             line.TrimEnd(),
                             branchesOfLine.Count(b => b.BranchVisits > 0),
-                            branchesOfLine.Count));
+                            branchesOfLine.Count)
+                        {
+                            CtcDetails = ctcDetailsOfLine
+                        })
+                    ;
                 }
                 else
                 {
@@ -496,7 +518,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                             lineVisitStatus,
                             lineCoverageByTestMethod,
                             currentLineNumber,
-                            line.TrimEnd()));
+                            line.TrimEnd())
+                        {
+                            CtcDetails = ctcDetailsOfLine
+                        });
                 }
             }
 
@@ -643,6 +668,18 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
             foreach (var codeElement in this.codeElements)
             {
                 codeElement.ApplyMaximumCoverageQuota(this.CoverageQuotaInRange(codeElement.FirstLine, codeElement.LastLine));
+            }
+
+            foreach (var ctcDetails in file.ctcDetails)
+            {
+                if (this.ctcDetails.TryGetValue(ctcDetails.Key, out CtcDetails existingCtcDetails))
+                {
+                    existingCtcDetails.Merge(ctcDetails.Value);
+                }
+                else
+                {
+                    this.ctcDetails.Add(ctcDetails);
+                }
             }
 
             if (file.additionalFileReader == null)

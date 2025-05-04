@@ -468,8 +468,16 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     }
                     else if (item.Attribute("ctcreport-version") != null)
                     {
-                        Logger.DebugFormat(Resources.InitiatingParser, "Testwell CTC");
-                        yield return new CtcParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
+                        if (this.reportContext != null
+                            && this.reportContext.ReportConfiguration.License.DetermineLicenseType() != LicenseType.Pro)
+                        {
+                            Logger.Warn(Resources.CtcReportProVersion);
+                        }
+                        else
+                        {
+                            Logger.DebugFormat(Resources.InitiatingParser, "Testwell CTC");
+                            yield return new CtcParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
+                        }
                     }
                     else if (item.Attributes().Count() > 1
                         || item.Elements("packages").Any())

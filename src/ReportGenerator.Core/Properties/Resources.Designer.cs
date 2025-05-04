@@ -142,6 +142,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Support for Testwell CTC++ input files is only available for sponsors. Get your license here: https://reportgenerator.io/pro.
+        /// </summary>
+        internal static string CtcReportProVersion {
+            get {
+                return ResourceManager.GetString("CtcReportProVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current Assembly: {0}.
         /// </summary>
         internal static string CurrentAssembly {

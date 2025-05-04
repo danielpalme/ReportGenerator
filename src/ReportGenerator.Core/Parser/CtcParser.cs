@@ -109,6 +109,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             var @class = new Class(className, assembly);
 
             var lines = fileElement.Elements("function")
+                .Where(f => !string.IsNullOrEmpty(f.Attribute("name")?.Value))
                 .Elements("line")
                 .ToArray();
 
@@ -160,6 +161,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             SetMethodMetrics(codeFile, methodsOfFile);
             SetCodeElements(codeFile, methodsOfFile);
+            SetCtcDetails(codeFile, methodsOfFile);
 
             @class.AddFile(codeFile);
 
@@ -260,20 +262,88 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                 var lines = method
                     .Elements("line")
-                    .Where(line => line.Attribute("type").Value == "Executable");
+                    .Where(line => line.Attribute("type").Value == "Executable")
+                    .ToArray();
 
-                if (lines.Any())
+                if (lines.Length == 0)
                 {
-                    int firstLine = int.Parse(lines.First().Attribute("number").Value, CultureInfo.InvariantCulture);
-                    int lastLine = int.Parse(lines.Last().Attribute("number").Value, CultureInfo.InvariantCulture);
+                    continue;
+                }
 
-                    codeFile.AddCodeElement(new CodeElement(
-                        methodName,
-                        methodName,
-                        CodeElementType.Method,
-                        firstLine,
-                        lastLine,
-                        codeFile.CoverageQuotaInRange(firstLine, lastLine)));
+                int firstLine = int.Parse(lines.First().Attribute("number").Value, CultureInfo.InvariantCulture);
+                int lastLine = int.Parse(lines.Last().Attribute("number").Value, CultureInfo.InvariantCulture);
+
+                codeFile.AddCodeElement(new CodeElement(
+                    methodName,
+                    methodName,
+                    CodeElementType.Method,
+                    firstLine,
+                    lastLine,
+                    codeFile.CoverageQuotaInRange(firstLine, lastLine)));
+            }
+        }
+
+        /// <summary>
+        /// Extracts the CTC specific details of the given <see cref="XElement">XElements</see>.
+        /// </summary>
+        /// <param name="codeFile">The code file.</param>
+        /// <param name="methodsOfFile">The methods of the file.</param>
+        private static void SetCtcDetails(CodeFile codeFile, IEnumerable<XElement> methodsOfFile)
+        {
+            foreach (var method in methodsOfFile)
+            {
+                string methodName = method.Attribute("name").Value;
+
+                if (string.IsNullOrEmpty(methodName))
+                {
+                    continue;
+                }
+
+                var lines = method
+                    .Elements("line")
+                    .Where(line => line.Attribute("type").Value == "Executable")
+                    .ToArray();
+
+                if (lines.Length == 0)
+                {
+                    continue;
+                }
+
+                foreach (var line in lines)
+                {
+                    var levelDecisionProbe = line.Elements("probe")
+                    .Where(p => p.Attribute("level")?.Value == "LevelDecision")
+                    .FirstOrDefault();
+
+                    if (levelDecisionProbe == null)
+                    {
+                        continue;
+                    }
+
+                    var tfcombinations = levelDecisionProbe
+                        .Elements("tfcombination")
+                        .Select(x => new CtcProbeDetail(
+                            x.Attribute("Achieved").Value == "Achieved",
+                            x.Element("description").Value))
+                        .ToList();
+
+                    var mcdcs = levelDecisionProbe
+                        .Elements("mcdc")
+                        .Select(x => new CtcProbeDetail(
+                            x.Attribute("Achieved").Value == "Achieved",
+                            x.Element("description").Value))
+                        .ToList();
+
+                    if (tfcombinations.Count > 0 || mcdcs.Count > 0)
+                    {
+                        var ctcDetails = new CtcDetails(
+                            tfcombinations,
+                            mcdcs);
+
+                        int lineNumber = int.Parse(line.Attribute("number").Value, CultureInfo.InvariantCulture);
+
+                        codeFile.AddCtcDetail(lineNumber, ctcDetails);
+                    }
                 }
             }
         }

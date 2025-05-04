@@ -192,6 +192,77 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
         }
 
         /// <summary>
+        /// A test for Merge
+        /// </summary>
+        [Fact]
+        public void Merge_MergeCodeFileCtcDetails_CtcDetailsUpdated()
+        {
+            var branches = new Dictionary<int, ICollection<Branch>>();
+
+            var sut = new CodeFile("C:\\temp\\Program.cs", new int[] { }, new LineVisitStatus[] { }, branches);
+            sut.AddCtcDetail(1, new CtcDetails(new List<CtcProbeDetail>()
+            {
+                new CtcProbeDetail(true, "1"),
+                new CtcProbeDetail(false, "2"),
+                new CtcProbeDetail(true, "3"),
+                new CtcProbeDetail(false, "4")
+            }, new List<CtcProbeDetail>()
+            {
+                new CtcProbeDetail(true, "1"),
+                new CtcProbeDetail(false, "2"),
+                new CtcProbeDetail(true, "3"),
+                new CtcProbeDetail(false, "4")
+            }));
+            sut.AddCtcDetail(2, new CtcDetails(new List<CtcProbeDetail>()
+            {
+                new CtcProbeDetail(true, "1"),
+                new CtcProbeDetail(false, "2"),
+                new CtcProbeDetail(true, "3"),
+                new CtcProbeDetail(false, "4")
+            }, new List<CtcProbeDetail>()
+            {
+                new CtcProbeDetail(true, "1"),
+                new CtcProbeDetail(false, "2"),
+                new CtcProbeDetail(true, "3"),
+                new CtcProbeDetail(false, "4")
+            }));
+
+            var codeFileToMerge = new CodeFile("C:\\temp\\Program.cs", new int[] { }, new LineVisitStatus[] { }, branches);
+            codeFileToMerge.AddCtcDetail(1, new CtcDetails(new List<CtcProbeDetail>()
+            {
+                new CtcProbeDetail(true, "1"),
+                new CtcProbeDetail(false, "2"),
+                new CtcProbeDetail(true, "3"),
+                new CtcProbeDetail(true, "4"),
+                new CtcProbeDetail(true, "5")
+            }, new List<CtcProbeDetail>()
+            {
+                new CtcProbeDetail(true, "1"),
+                new CtcProbeDetail(false, "2"),
+                new CtcProbeDetail(true, "3"),
+                new CtcProbeDetail(true, "4"),
+                new CtcProbeDetail(true, "5")
+            }));
+            codeFileToMerge.AddCtcDetail(3, new CtcDetails(new List<CtcProbeDetail>()
+            {
+                new CtcProbeDetail(true, "1"),
+                new CtcProbeDetail(false, "2"),
+                new CtcProbeDetail(true, "3"),
+                new CtcProbeDetail(false, "4")
+            }, new List<CtcProbeDetail>()
+            {
+                new CtcProbeDetail(true, "1"),
+                new CtcProbeDetail(false, "2"),
+                new CtcProbeDetail(true, "3"),
+                new CtcProbeDetail(false, "4")
+            }));
+
+            sut.Merge(codeFileToMerge);
+
+            // No assert possible, just check for exception
+        }
+
+        /// <summary>
         /// A test for AnalyzeFile
         /// </summary>
         [Fact]

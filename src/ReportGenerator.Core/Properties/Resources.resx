@@ -346,4 +346,7 @@
   <data name="ErrorLowFullMethodCoverage" xml:space="preserve">
     <value>The full method coverage of {0}% is below the minimum threshold of {1}%.</value>
   </data>
+  <data name="CtcReportProVersion" xml:space="preserve">
+    <value>Support for Testwell CTC++ input files is only available for sponsors. Get your license here: https://reportgenerator.io/pro</value>
+  </data>
 </root>

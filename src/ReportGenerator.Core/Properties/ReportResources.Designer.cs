@@ -1006,6 +1006,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to True/False combinations.
+        /// </summary>
+        public static string TrueFalseCombinations {
+            get {
+                return ResourceManager.GetString("TrueFalseCombinations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Uncovered.
         /// </summary>
         public static string Uncovered {

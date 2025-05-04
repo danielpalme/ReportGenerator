@@ -76,5 +76,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// The number of total branches.
         /// </value>
         public int? TotalBranches { get; }
+
+        /// <summary>
+        /// Gets the Ctc details.
+        /// </summary>
+        public CtcDetails CtcDetails { get; internal set; }
     }
 }

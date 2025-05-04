@@ -438,4 +438,7 @@
   <data name="StatementCoverage" xml:space="preserve">
     <value>Statement</value>
   </data>
+  <data name="TrueFalseCombinations" xml:space="preserve">
+    <value>True/False combinations</value>
+  </data>
 </root>
