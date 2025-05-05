@@ -39,7 +39,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <summary>
         /// Dictionary containing the filenames of the class reports by class.
         /// </summary>
-        private readonly IDictionary<string, string> fileNameByClass;
+        private readonly ConcurrentDictionary<string, string> fileNameByClass;
 
         /// <summary>
         /// Indicates that only a summary report is created (no class reports).
@@ -90,7 +90,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="cssFileResource">Optional CSS file resource.</param>
         /// <param name="additionalCssFileResource">Optional additional CSS file resource.</param>
         internal HtmlRenderer(
-            IDictionary<string, string> fileNameByClass,
+            ConcurrentDictionary<string, string> fileNameByClass,
             bool onlySummary,
             HtmlMode htmlMode,
             string cssFileResource = "custom.css",
@@ -113,7 +113,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="additionalCssFileResources">Optional additional CSS file resources.</param>
         /// <param name="cssFileResource">Optional CSS file resource.</param>
         internal HtmlRenderer(
-            IDictionary<string, string> fileNameByClass,
+            ConcurrentDictionary<string, string> fileNameByClass,
             bool onlySummary,
             HtmlMode htmlMode,
             string[] additionalCssFileResources,
@@ -1630,7 +1630,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     while (this.fileNameByClass.Values.Any(v => v.Equals(fileName, StringComparison.OrdinalIgnoreCase)));
                 }
 
-                this.fileNameByClass.Add(key, fileName);
+                this.fileNameByClass[key] = fileName;
             }
 
             return fileName;
