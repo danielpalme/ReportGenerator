@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.4.7.0
+
+    * New: #731 Added option to break build when maximum risk hotspots metrics are exceeded
+
 5.4.6.0
 
     * Fix: #730 Added support for the REPORTGENERATOR_LICENSE environment variable in the MSBuild task (contributed by @0xced)

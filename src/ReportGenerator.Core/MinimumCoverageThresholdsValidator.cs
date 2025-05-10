@@ -38,7 +38,8 @@ namespace Palmmedia.ReportGenerator.Core
         {
             if (!this.minimumCoverageThresholds.LineCoverage.HasValue
                 && !this.minimumCoverageThresholds.BranchCoverage.HasValue
-                && !this.minimumCoverageThresholds.MethodCoverage.HasValue)
+                && !this.minimumCoverageThresholds.MethodCoverage.HasValue
+                && !this.minimumCoverageThresholds.FullMethodCoverage.HasValue)
             {
                 return;
             }

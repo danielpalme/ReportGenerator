@@ -19,5 +19,20 @@ namespace Palmmedia.ReportGenerator.Core.CodeAnalysis
         /// Gets or sets the threshold for NPath complexity.
         /// </summary>
         public decimal MetricThresholdForNPathComplexity { get; set; } = 200;
+
+        /// <summary>
+        /// Gets or sets the maximum threshold for cylomatic complexity. If any risk hotspot is greater this this treshold, ReportGenerator will exit unsuccessfully.
+        /// </summary>
+        public decimal? MaximumThresholdForCyclomaticComplexity { get; set; }
+
+        /// <summary>
+        /// Gets or sets the maximum threshold for crap score. If any risk hotspot is greater this this treshold, ReportGenerator will exit unsuccessfully.
+        /// </summary>
+        public decimal? MaximumThresholdForCrapScore { get; set; }
+
+        /// <summary>
+        /// Gets or sets the maximum threshold for NPath complexity. If any risk hotspot is greater this this treshold, ReportGenerator will exit unsuccessfully.
+        /// </summary>
+        public decimal? MaximumThresholdForNPathComplexity { get; set; }
     }
 }

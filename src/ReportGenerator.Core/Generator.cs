@@ -59,6 +59,11 @@ namespace Palmmedia.ReportGenerator.Core
                 Logger.Error(ex.GetExceptionMessageForDisplay());
                 return false;
             }
+            catch (RiskhotspotThresholdException ex)
+            {
+                Logger.Error(ex.GetExceptionMessageForDisplay());
+                return false;
+            }
             catch (Exception ex)
             {
                 Logger.Error(ex.GetExceptionMessageForDisplay());
@@ -340,6 +345,9 @@ namespace Palmmedia.ReportGenerator.Core
 
             new MinimumCoverageThresholdsValidator(minimumCoverageThresholds)
                 .Validate(parserResult);
+
+            new MaxiumRiskhotspotsThresholdsValidator(riskHotspotsAnalysisThresholds)
+                .Validate(reportContext.RiskHotspotAnalysisResult);
         }
 
         /// <summary>
