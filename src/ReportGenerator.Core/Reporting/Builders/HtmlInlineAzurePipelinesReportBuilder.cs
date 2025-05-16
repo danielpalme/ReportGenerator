@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
@@ -13,7 +14,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <summary>
         /// Dictionary containing the filenames of the class reports by class.
         /// </summary>
-        private readonly IDictionary<string, string> fileNameByClass = new Dictionary<string, string>();
+        private readonly ConcurrentDictionary<string, string> fileNameByClass = new ConcurrentDictionary<string, string>();
 
         /// <summary>
         /// Gets the report type.
