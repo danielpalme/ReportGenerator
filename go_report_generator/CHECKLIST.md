@@ -1,27 +1,31 @@
-# Go Report Generator: Cobertura Migration Checklist
+# Go Report Generator – Cobertura Migration Checklist  
 
-## ✅ Features Already Implemented
+## ✅ Completed (Cobertura-specific)
 
-- [x] Project structure: Modular Go project with `internal/model`, `internal/parser`, and `cmd/`.
-- [x] Cobertura data model: Go structs for CoverageReport, Package, Class, Method, Line.
-- [x] Cobertura XML parser: Reads and parses Cobertura XML into Go structs.
-- [x] Basic CLI: Command-line tool that loads a Cobertura XML and prints a summary (lines covered, total lines, package count).
-- [x] Builds successfully: Project compiles and runs with the above features.
+- [x] Modular Go project layout (`cmd/`, `internal/*`).
+- [x] Cobertura **raw data model** (`internal/inputxml` structs).
+- [x] Cobertura **XML parser** (`internal/parser`).
+- [x] Enriched **analysis layer** (`internal/analyzer`) producing `SummaryResult`.
+- [x] Unified **domain model** (`internal/model`) mirroring C# structures.
+- [x] **TextSummary** reporter that replicates C# “Summary.txt”.
+- [x] **CLI** with flags `-report`, `-output`, `-reporttypes` + validation.
+- [x] Builds & runs with `go run ./cmd` or `go build ./...`.
 
-## 🟡 To-Do List (Cobertura-focused)
+## 🟡 In Progress / To-Do (Cobertura focus)
 
-- [ ] Unit tests for parser: Add Go tests to validate parsing against real Cobertura XML files.
-- [ ] Error handling: Improve error messages and robustness for malformed or incomplete XML.
-- [ ] Report output: Generate HTML or other human-readable reports from the parsed data (to match C# output).
-- [ ] CLI options: Add flags for output directory, report format, and verbosity.
-- [ ] Integration with test projects: Automate running test projects and generating Cobertura XML for comparison.
-- [ ] Comparison automation: Integrate with the Python compare script for automated validation.
-- [ ] Documentation: Add usage instructions and developer docs.
+| Area | What’s left |
+|------|-------------|
+| **Testing** | • Unit tests for XML parser and analyzer.<br>• Golden-file tests for TextSummary output. |
+| **Robustness** | • Centralised error & warning logger.<br>• Graceful handling of malformed XML. |
+| **Reporting** | • HTML report builder matching C# ReportGenerator.<br>• Optionally emit JSON for downstream tools. |
+| **CLI UX** | • `-v/--verbose` flag (log level).<br>• `--reporttypes Html,Json,…` auto-detect duplicates. |
+| **Automation** | • Script to run sample projects → `go test -coverprofile` → `gocover-cobertura` → compare output.<br>• Python diff utility integration. |
+| **Docs** | • Expand README with advanced examples.<br>• Developer guide for adding new formats. |
 
-## 🟦 Future-Proofing for Other Report Formats
+## 🔮 Future-Proofing (Multi-format)
 
-- [ ] Abstract parser interface: Define a common interface for report parsers (e.g., Cobertura, OpenCover, JaCoCo, etc.).
-- [ ] Pluggable parser architecture: Allow easy addition of new report formats by implementing the interface.
-- [ ] Format auto-detection: Detect report type from XML root or CLI flag.
-- [ ] Unified data model: Ensure the internal model can represent all supported formats’ features.
-- [ ] Comprehensive test suite: Add test data and tests for each supported format.
+- [ ] Abstract `Parser` interface (Cobertura, OpenCover, JaCoCo, …).
+- [ ] Plug-in discovery (build-tag or go:generate).
+- [ ] Auto-detect report format from XML root or explicit flag.
+- [ ] Ensure domain model can express unique features of other formats.
+- [ ] Shared test-suite covering every supported format.
