@@ -1,8 +1,9 @@
 package analyzer
 
 import (
+	"fmt"
+	"os"
 	"strconv"
-	// "time" // No longer needed here if time.Now() isn't used as a fallback
 
 	"github.com/IgorBayerl/ReportGenerator/go_report_generator/internal/inputxml"
 	"github.com/IgorBayerl/ReportGenerator/go_report_generator/internal/model"
@@ -13,7 +14,7 @@ func Analyze(rawReport *inputxml.CoberturaRoot, sourceDirs []string) (*model.Sum
 		ParserName: "Cobertura",
 		SourceDirs: sourceDirs,
 		Assemblies: []model.Assembly{},
-		Timestamp:  processCoberturaTimestamp(rawReport.Timestamp), // Use the new helper
+		Timestamp:  processCoberturaTimestamp(rawReport.Timestamp), 
 	}
 
 	summary.LinesCovered = parseInt(rawReport.LinesCovered)
@@ -38,6 +39,7 @@ func Analyze(rawReport *inputxml.CoberturaRoot, sourceDirs []string) (*model.Sum
 		assembly, err := processPackageXML(pkgXML, sourceDirs, uniqueFilePathsForGrandTotalLines)
 		if err != nil {
 			// Consider logging this error if a logging mechanism is introduced
+			fmt.Fprintf(os.Stderr, "Warning: could not process package XML: %v\n", err)
 			continue
 		}
 		summary.Assemblies = append(summary.Assemblies, *assembly)
