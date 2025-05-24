@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "MjGOihMsxZo=",
+  "success": true,
+  "projectFilePath": "C:\\www\\ReportGenerator\\Testprojects\\CSharp\\Project_DotNetCore\\Test\\Test.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\devig\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.16\\microsoft.netcore.app.ref.8.0.16.nupkg.sha512",
+    "C:\\Users\\devig\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.16\\microsoft.windowsdesktop.app.ref.8.0.16.nupkg.sha512",
+    "C:\\Users\\devig\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.16\\microsoft.aspnetcore.app.ref.8.0.16.nupkg.sha512"
+  ],
+  "logs": []
+}

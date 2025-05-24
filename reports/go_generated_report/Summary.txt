@@ -1,0 +1,40 @@
+Summary
+  Generated on: 24/05/2025 - 19:09:43
+  Coverage date: 24/05/2025 - 19:09:43
+  Parser: Cobertura
+  Assemblies: 1
+  Classes: 18
+  Files: 17
+  Line coverage: 72.7%
+  Covered lines: 109
+  Uncovered lines: 41
+  Coverable lines: 150
+  Total lines: 558
+  Branch coverage: 75.0% (9 of 12)
+  Covered branches: 9
+  Total branches: 12
+  Method coverage: 65.4% (34 of 52)
+  Full method coverage: 57.7% (30 of 52)
+  Covered methods: 34
+  Fully covered methods: 30
+  Total methods: 52
+
+Test                                     72.7%
+  Test.AbstractClass                     100.0%
+  Test.AbstractClass_SampleImpl1         60.0%
+  Test.AbstractClass_SampleImpl2         60.0%
+  Test.AbstractGenericClass<T1, T2>      0.0%
+  Test.AnalyzerTestClass                 0.0%
+  Test.AsyncClass                        100.0%
+  Test.ClassWithExcludes                 100.0%
+  Test.ClassWithLocalFunctions<T>        100.0%
+  Test.CodeContract_Contract             0.0%
+  Test.CodeContract_Target               100.0%
+  Test.GenericAsyncClass<T>              100.0%
+  Test.GenericClass<T1, T2>              100.0%
+  Test.PartialClass                      46.2%
+  Test.PartialClassWithAutoProperties    66.7%
+  Test.Program                           94.3%
+  Test.SomeClass                         100.0%
+  Test.TestClass                         69.6%
+  Test.TestClass2                        63.0%
