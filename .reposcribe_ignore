@@ -64,52 +64,30 @@ src/ReportGenerator.Core/Reporting/Builders/HtmlLightReportBuilder.cs
 src/ReportGenerator.Core/Reporting/Builders/HtmlSummaryReportBuilder.cs
 
 
-src/Testprojects/CSharp/Project/
-src/Testprojects/FSharp/Project/
-src/Testprojects/Java/Project/
-src/Testprojects/C++/Projects/
 src/ReportGenerator.Core.Test/
 
-src/Testprojects/CSharp/Reports/dotCover.xml
-src/Testprojects/CSharp/Reports/DynamicCodeCoverage.xml
-src/Testprojects/CSharp/Reports/lcov.info
-src/Testprojects/CSharp/Reports/mprof-report.xml
-src/Testprojects/CSharp/Reports/MultiDynamicCodeCoverage.xml
-src/Testprojects/CSharp/Reports/MultiNCover1.5.8.xml
-src/Testprojects/CSharp/Reports/MultiOpenCover.xml
-src/Testprojects/CSharp/Reports/MultiPartcover*.xml
-src/Testprojects/CSharp/Reports/MultiVisualStudio*.coveragexml
-src/Testprojects/CSharp/Reports/NCover1.5.8.xml
-src/Testprojects/CSharp/Reports/OpenCover.xml
-src/Testprojects/CSharp/Reports/OpenCoverWith*.xml
-src/Testprojects/CSharp/Reports/Partcover*.xml
-src/Testprojects/CSharp/Reports/VisualStudio*.coveragexml
-src/Testprojects/FSharp/Reports/*
-!src/Testprojects/FSharp/Reports/Cobertura*.xml
-src/Testprojects/Java/Reports/*
-!src/Testprojects/Java/Reports/Cobertura*.xml
-src/Testprojects/C++/Reports/*
-!src/Testprojects/C++/Reports/Cobertura*.xml
-src/Testprojects/Other/*
-!src/Testprojects/Other/Cobertura*.xml
+Testprojects/CSharp/**
+Testprojects/Go/**
 
-src/AngularComponents/
-src/AzureDevopsTask/
-src/AzureDevopsTaskTest/
-src/Deployment/
-src/coverage-report/
+AngularComponents/
+AzureDevopsTask/
+AzureDevopsTaskTest/
+Deployment/
+coverage-report/
 
 docs/*
 .github/*
 
-src/**/*.ico
-src/**/*.png
-src/**/*.jpg
-src/**/*.svg
-src/**/*.ttf
-src/**/*.woff
-src/**/*.woff2
-src/**/*.eot
+**/*.ico
+**/*.png
+**/*.jpg
+**/*.js
+**/*.css
+**/*.svg
+**/*.ttf
+**/*.woff
+**/*.woff2
+**/*.eot
 
 
 **go_report_generator/README.md
