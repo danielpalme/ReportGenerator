@@ -1,3 +1,3 @@
 src/coverage-report
-go_report_generator/test/Testprojects
+go_report_generator/test/Testprojects/Reports/*
 go_report_generator/*.exe
