@@ -8,10 +8,9 @@ type SummaryResult struct {
 	Assemblies      []Assembly
 	LinesCovered    int // Overall
 	LinesValid      int // Overall
-	BranchesCovered int // Overall
-	BranchesValid   int // Overall
+	BranchesCovered *int // Overall - Pointer to indicate presence
+	BranchesValid   *int // Overall - Pointer to indicate presence
 	TotalLines      int // Grand total physical lines from unique source files
-	// Other overall metrics if needed
 }
 
 type Assembly struct {
@@ -19,23 +18,21 @@ type Assembly struct {
 	Classes         []Class
 	LinesCovered    int
 	LinesValid      int
-	BranchesCovered int
-	BranchesValid   int
-	TotalLines      int // Sum of unique file TotalLines in this assembly
-	// LineRate, BranchRate can be calculated properties or methods
+	BranchesCovered *int // Pointer
+	BranchesValid   *int // Pointer
+	TotalLines      int  // Sum of unique file TotalLines in this assembly
 }
 
 type Class struct {
-	Name            string     // The "logical" class name (e.g., Test.MyClass)
-	DisplayName     string     // For display (e.g., Test.MyClass<T>)
-	Files           []CodeFile // A class can span multiple files (partials)
+	Name            string
+	DisplayName     string
+	Files           []CodeFile
 	Methods         []Method
 	LinesCovered    int
 	LinesValid      int
-	BranchesCovered int
-	BranchesValid   int
-	TotalLines      int // Sum of CodeFile.TotalLines IF class is primary owner, or complex if shared
-	// LineRate, BranchRate can be calculated properties or methods
+	BranchesCovered *int // Pointer
+	BranchesValid   *int // Pointer
+	TotalLines      int
 }
 
 type CodeFile struct {
