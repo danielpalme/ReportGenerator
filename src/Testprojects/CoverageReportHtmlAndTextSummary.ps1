@@ -17,10 +17,10 @@ $reportGenPath = Join-Path $PSScriptRoot "..\..\src\ReportGenerator.Console.NetC
 dotnet $reportGenPath `
     "-reports:$reportPath" `
     "-targetdir:$outputPath" `
-    "-reporttypes:Html;TextSummary"
+    "-reporttypes:TextSummary"
 
-if (Test-Path "$outputPath\index.html") {
-    Write-Host "HTML report generated successfully at: $outputPath\index.html"
+if (Test-Path "$outputPath\Summary.txt") {
+    Write-Host "Text summary report generated successfully at: $outputPath\Summary.txt"
 } else {
     Write-Error "Failed to generate HTML report"
     exit 1
