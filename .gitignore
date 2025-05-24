@@ -1,3 +1,5 @@
 src/coverage-report
+src/go-coverage-report
 go_report_generator/test/Testprojects/Reports/*
 go_report_generator/*.exe
+src/Testprojects/CSharp/Reports/*
