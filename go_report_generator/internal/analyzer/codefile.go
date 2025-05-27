@@ -51,29 +51,47 @@ func processCodeFileFragment(
 ) (*model.CodeFile, fileProcessingMetrics, error) {
 	metrics := fileProcessingMetrics{}
 	codeFile := model.CodeFile{Path: classXML.Filename}
+	var sourceLines []string // Declare sourceLines
 
 	resolvedPath, err := findFileInSourceDirs(classXML.Filename, sourceDirs)
 	if err == nil {
 		codeFile.Path = resolvedPath // Use resolved absolute path
+
+		// Read source file content
+		sLines, readErr := filereader.ReadLinesInFile(resolvedPath)
+		if readErr != nil {
+			fmt.Fprintf(os.Stderr, "Warning: could not read content of source file %s: %v\n", resolvedPath, readErr)
+			sourceLines = []string{} // Ensure sourceLines is empty on error
+		} else {
+			sourceLines = sLines
+		}
+
 		if _, known := uniqueFilePathsForGrandTotalLines[resolvedPath]; !known {
 			if n, ferr := filereader.CountLinesInFile(resolvedPath); ferr == nil {
 				uniqueFilePathsForGrandTotalLines[resolvedPath] = n
 				codeFile.TotalLines = n
 			} else {
 				fmt.Fprintf(os.Stderr, "Warning: could not count lines in %s: %v\n", resolvedPath, ferr)
+				// If we can't count lines, but could read them, use len(sourceLines) as a fallback for TotalLines for this specific file.
+				// This might be different from physical lines if ReadLinesInFile does some normalization, but better than 0.
+				if readErr == nil { // Only if ReadLinesInFile succeeded
+					uniqueFilePathsForGrandTotalLines[resolvedPath] = len(sourceLines)
+					codeFile.TotalLines = len(sourceLines)
+				}
 			}
 		} else {
 			codeFile.TotalLines = uniqueFilePathsForGrandTotalLines[resolvedPath]
 		}
 	} else {
 		fmt.Fprintf(os.Stderr, "Warning: source file %s not found: %v\n", classXML.Filename, err)
+		sourceLines = []string{} // Ensure sourceLines is empty if file not found
 	}
 
 	var fileFragmentCoveredLines, fileFragmentCoverableLines int
 
 	// Process lines defined directly under <class><lines>
 	for _, lineXML := range classXML.Lines.Line {
-		lineModel, lineMetrics := processLineXML(lineXML) 
+		lineModel, lineMetrics := processLineXML(lineXML, sourceLines) // Pass sourceLines
 		codeFile.Lines = append(codeFile.Lines, lineModel)
 
 		fileFragmentCoverableLines++
