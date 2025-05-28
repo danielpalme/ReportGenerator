@@ -1,10 +1,13 @@
 package analyzer
 
 import (
-	"regexp" // Added import for regexp
+	"fmt"
+	"os" // Ensure os is imported
+	"regexp"
 	"strconv"
 	"strings"
 
+	"github.com/IgorBayerl/ReportGenerator/go_report_generator/internal/filereader" // Ensure filereader is imported
 	"github.com/IgorBayerl/ReportGenerator/go_report_generator/internal/inputxml"
 	"github.com/IgorBayerl/ReportGenerator/go_report_generator/internal/model"
 )
@@ -164,10 +167,33 @@ func processClassGroup(
 			totalClassBranchesValid += fragmentMetrics.branchesValid
 		}
 
+		// Read source file content for the current class fragment (clsXML.Filename)
+		var classFragmentSourceLines []string
+		if clsXML.Filename != "" { // Only attempt if filename is present
+			resolvedPath, findErr := findFileInSourceDirs(clsXML.Filename, sourceDirs)
+			if findErr == nil {
+				sLines, readErr := filereader.ReadLinesInFile(resolvedPath)
+				if readErr == nil {
+					classFragmentSourceLines = sLines
+				} else {
+					fmt.Fprintf(os.Stderr, "Warning: could not read content of source file %s for class %s: %v\n", resolvedPath, clsXML.Name, readErr)
+					classFragmentSourceLines = []string{}
+				}
+			} else {
+				// This warning might be redundant if processCodeFileFragment already warned.
+				// However, methods for this clsXML won't get source lines if the file isn't found here.
+				fmt.Fprintf(os.Stderr, "Warning: source file %s for class %s not found when preparing for method processing: %v\n", clsXML.Filename, clsXML.Name, findErr)
+				classFragmentSourceLines = []string{}
+			}
+		} else {
+			classFragmentSourceLines = []string{} // Ensure it's empty if no filename
+		}
 
 		for _, methodXML := range clsXML.Methods.Method {
-			method, err := processMethodXML(methodXML, clsXML.Filename)
+			method, err := processMethodXML(methodXML, classFragmentSourceLines) // Pass classFragmentSourceLines
 			if err != nil {
+				// Consider logging this error or handling it more explicitly
+				fmt.Fprintf(os.Stderr, "Warning: error processing method %s in class %s: %v\n", methodXML.Name, clsXML.Name, err)
 				continue
 			}
 			classModel.Methods = append(classModel.Methods, *method)

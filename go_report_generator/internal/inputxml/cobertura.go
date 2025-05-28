@@ -73,10 +73,23 @@ type LinesXML struct {
 	Line []LineXML `xml:"line"`
 }
 
+// ConditionXML represents a <condition> element within <conditions>.
+type ConditionXML struct {
+	Number   string `xml:"number,attr"`
+	Type     string `xml:"type,attr"`
+	Coverage string `xml:"coverage,attr"`
+}
+
+// ConditionsXML represents the <conditions> element.
+type ConditionsXML struct {
+	Condition []ConditionXML `xml:"condition"`
+}
+
 // LineXML represents a <line> element.
 type LineXML struct {
-	Number            string `xml:"number,attr"`
-	Hits              string `xml:"hits,attr"`
-	Branch            string `xml:"branch,attr"` // "true" or "false"
-	ConditionCoverage string `xml:"condition-coverage,attr"`
+	Number            string        `xml:"number,attr"`
+	Hits              string        `xml:"hits,attr"`
+	Branch            string        `xml:"branch,attr"` // "true" or "false"
+	ConditionCoverage string        `xml:"condition-coverage,attr"`
+	Conditions        ConditionsXML `xml:"conditions"`
 }

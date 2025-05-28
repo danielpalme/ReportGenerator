@@ -9,6 +9,7 @@ import (
 
 	"github.com/IgorBayerl/ReportGenerator/go_report_generator/internal/analyzer"
 	"github.com/IgorBayerl/ReportGenerator/go_report_generator/internal/parser"
+	"github.com/IgorBayerl/ReportGenerator/go_report_generator/internal/reporter/htmlreport" // Added import
 	"github.com/IgorBayerl/ReportGenerator/go_report_generator/internal/reporter/textsummary"
 )
 
@@ -92,10 +93,15 @@ func main() {
 			textBuilder := textsummary.NewTextReportBuilder(*outputDir)
 			if err := textBuilder.CreateReport(summaryResult); err != nil {
 				fmt.Fprintf(os.Stderr, "Failed to generate text report: %v\n", err)
-				os.Exit(1)
+				os.Exit(1) // Keep exit for text summary as it might be critical for CI
 			}
 		case "Html":
-			fmt.Printf("HTML report generation is a placeholder for now (coming soon)\n")
+			// Instantiate HtmlReportBuilder and create the report
+			htmlBuilder := htmlreport.NewHtmlReportBuilder(*outputDir)
+			if err := htmlBuilder.CreateReport(summaryResult); err != nil {
+				fmt.Fprintf(os.Stderr, "Failed to generate HTML report: %v\n", err)
+				// Do not os.Exit(1) here to allow other reports to be generated
+			}
 		}
 	}
 
