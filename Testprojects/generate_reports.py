@@ -1,8 +1,8 @@
 # TODO: Before running this script to generate Go reports,
 # ensure the Angular SPA is built. Navigate to
-# 'go_report_generator/frontend_spa/' and run:
+# 'go_report_generator/angular_frontend_spa/' and run:
 # npm install (if not done already)
-# npm run build_prod
+# npm run build
 #!/usr/bin/env python3
 """
 Universal Coverage Reporter Script

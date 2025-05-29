@@ -4,19 +4,22 @@ import (
 	"fmt"
 	"html/template"
 	"io"
+	"io/fs"
 	"os"
 	"path/filepath"
-	"io/fs" // Added for filepath.WalkDir
-	"strings" // Added for string manipulation
+	"strings"
 	"time"
 
-	"golang.org/x/net/html" // Added for HTML parsing
-
 	"github.com/IgorBayerl/ReportGenerator/go_report_generator/internal/model"
+	"github.com/IgorBayerl/ReportGenerator/go_report_generator/internal/utils"
+	"golang.org/x/net/html"
 )
 
-const assetsDir = "../../../assets/htmlreport/" // Corrected path relative to builder.go
-const angularDistSourcePath = "../../../frontend_spa/dist/coverage-app/browser/" // Path to Angular build output
+var (
+	// Absolute paths to asset directories
+	assetsDir            = filepath.Join(utils.ProjectRoot(), "assets", "htmlreport")
+	angularDistSourcePath = filepath.Join(utils.ProjectRoot(), "angular_frontend_spa", "dist")
+)
 
 // HTMLReportData holds all data for the base HTML template.
 type HTMLReportData struct {

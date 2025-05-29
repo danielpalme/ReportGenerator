@@ -47,7 +47,7 @@ To port the HTML reporting functionality from the C# ReportGenerator tool to the
 
 ---
 ## 🗺️ High-Level HTML Reporting Plan
-1.  **Foundation & Asset Integration:** Set up the basic HTML report builder, integrate static CSS/JS assets, and incorporate the pre-compiled Angular SPA.
+1.  ✅ **Foundation & Asset Integration:** Set up the basic HTML report builder, integrate static CSS/JS assets, and incorporate the pre-compiled Angular SPA.
 2.  **Data-Driven Rendering:** Implement Go backend logic to provide data (summary, class details, source code, history) to the Angular SPA for rendering dynamic HTML pages.
 3.  **Feature Parity & Refinements:** Add advanced features (inline HTML, risk hotspots, theming) and polish the output.
 4.  **Finalization:** Thorough testing, performance optimization, and documentation.
@@ -93,24 +93,24 @@ To port the HTML reporting functionality from the C# ReportGenerator tool to the
 * **Step 1.3: Integrate Pre-compiled Angular SPA Assets**
     * **Goal:** Integrate the static files (JS, CSS, assets) from the pre-compiled Angular SPA into the Go build process and output directory.
     * **Tasks:**
-        * Copy C#'s `src/AngularComponents` to `go_report_generator/frontend_spa/`.
+        * Copy C#'s `src/AngularComponents` to `go_report_generator/angular_frontend_spa/`.
         * Establish a build process for the Angular SPA (`npm install && npm run build_prod`).
         * Implement logic in `htmlreport/builder.go` to copy Angular's `dist/` output to the Go `output/` directory.
         * Update `base_layout.gohtml` to correctly link Angular's JS/CSS bundles (e.g., `styles.*.css`, `runtime.*.js`, `main.*.js`).
     * **C# Reference:** `src/AngularComponents/`, `ReportGenerator.Core.csproj` (for EmbeddedResource), `HtmlRenderer.cs` (for script/style linking).
     * **Status:** DONE.
     * **Summary (Step 1.3):**
-        * Copied `src/AngularComponents` to `go_report_generator/frontend_spa/` (this directory contains the Angular SPA source).
-        * **Developer Note:** The Angular SPA must be built manually by the developer. Navigate to `go_report_generator/frontend_spa/` and run `npm install` (once) and then `npm run build_prod` (or equivalent). This will generate the necessary static assets in `go_report_generator/frontend_spa/dist/coverage-app/browser/`.
+        * Copied `src/AngularComponents` content to `go_report_generator/angular_frontend_spa/` (this directory contains the AngularComponents source).
+        * **Developer Note:** The Angular SPA must be built manually by the developer. Navigate to `go_report_generator/angular_frontend_spa/` and run `npm install` (once) and then `npm run build`. This will generate the necessary static assets in `go_report_generator/angular_frontend_spa/dist/`.
         * Updated `go_report_generator/internal/reporter/htmlreport/builder.go`:
-            * Added `copyAngularAssets` function to copy all files and subdirectories from `frontend_spa/dist/coverage-app/browser/` (once built by the developer) to the Go report output directory.
+            * Added `copyAngularAssets` function to copy all files and subdirectories from `angular_frontend_spa/dist/coverage-app/browser/` (once built by the developer) to the Go report output directory.
             * Implemented `parseAngularIndexHTML` to read the Angular-generated `index.html` (from the developer's build) and extract hashed JS/CSS filenames.
             * The Go `CreateReport` function passes these filenames to the HTML template.
         * Updated `go_report_generator/internal/reporter/htmlreport/templates.go`:
             * Modified `baseLayoutTemplate` to dynamically link the Angular CSS and JS files using the extracted names.
             * Added `<app-root></app-root>` to the template for Angular bootstrapping.
         * Placeholder Angular asset files (previously used for simulation) have been removed.
-        * Created `go_report_generator/frontend_spa/.gitignore` to exclude `dist/` and `node_modules/` from Git tracking.
+        * Created `go_report_generator/angular_frontend_spa/.gitignore` to exclude `dist/` and `node_modules/` from Git tracking.
         * The `Testprojects/generate_reports.py` script contains a comment reminding about the manual Angular build step.
 
 ---
@@ -216,7 +216,7 @@ This section tracks how components from the C# project are handled in the Go por
 | **Static Assets (Non-Angular)** |                                                        |                                                                                |
 | `Reporting/Builders/Rendering/resources/*`  | **Copy** to `go_report_generator/assets/htmlreport/` | PENDING (CSS, JS, themes like `custom_dark.css`)                               |
 | **Angular SPA** |                                                        |                                                                                |
-| `src/AngularComponents/*`                   | **Copy** to `go_report_generator/frontend_spa/`      | PENDING (Entire Angular project)                                               |
+| `src/AngularComponents/*`                   | **Copy** to `go_report_generator/angular_frontend_spa/`      | DONE (Entire Angular project)                                               |
 | Angular Build Process (`ng build`)          | Replicate via `npm` scripts                            | PENDING                                                                        |
 | Angular Data Injection (JS variables)       | Replicate via Go templates embedding JSON              | PENDING                                                                        |
 | **Report Resources & Translations** |                                                        |                                                                                |
@@ -234,5 +234,7 @@ This section tracks how components from the C# project are handled in the Go por
 * **[Date]** TextSummary report generation functional.
 * **[Date]** CLI arguments for input/output and TextSummary report type.
 * **[Date]** Phase 0: Pre-flight Checks & Setup - CLI argument for "Html" added.
-* **[Date]** Phase 1, Step 1.1: HTML Report Builder and Basic Templates (Go) - Initial `HtmlReportBuilder` and `base_layout.gohtml` created.
+* **2025-05-29** Phase 1: Basic HTML Structure & Asset Management - Completed all steps including HTML Report Builder setup, static assets integration, and Angular SPA integration.
+* **2025-05-29** Phase 1, Step 1.1: HTML Report Builder and Basic Templates (Go) - Initial `HtmlReportBuilder` and `base_layout.gohtml` created.
 * **2025-05-29** Phase 1, Step 1.2: Copy and Integrate Static Assets (CSS/JS from C# `resources/`) - Non-Angular CSS/JS assets integrated and linked in HTML templates.
+* **2025-05-29** Phase 1, Step 1.3: Integrate Pre-compiled Angular SPA Assets - Angular project copied, build process established, and assets integrated with Go HTML generation.
