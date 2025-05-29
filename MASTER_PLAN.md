@@ -55,7 +55,8 @@ To port the HTML reporting functionality from the C# ReportGenerator tool to the
         * Combine `custom.css` and theme CSS into `output/report.css`.
         * Update `base_layout.gohtml` to link these CSS and JS files.
     * **C# Reference:** `src/ReportGenerator.Core/Reporting/Builders/Rendering/resources/*`, `HtmlRenderer.SaveCss`
-    * **Status:** PENDING.
+    * **Status:** DONE.
+    * **Summary:** Created `go_report_generator/assets/htmlreport/`, copied relevant CSS/JS files from C# (`custom.css`, `custom.js`, `chartist.min.css`, `chartist.min.js`, and theme files). Implemented logic in `HtmlReportBuilder` to copy these to the output. Combined `custom.css` and `custom_dark.css` (as a default theme example) into `report.css`. Updated `base_layout.gohtml` to link `report.css`, `chartist.min.css`, `custom.js`, and `chartist.min.js`. Verified by generating a sample report.
 * **Step 1.3: Integrate Pre-compiled Angular SPA Assets**
     * **Goal:** Integrate the static files (JS, CSS, assets) from the pre-compiled Angular SPA into the Go build process and output directory.
     * **Tasks:**
@@ -188,3 +189,4 @@ This section tracks how components from the C# project are handled in the Go por
 * **[Date]** CLI arguments for input/output and TextSummary report type.
 * **[Date]** Phase 0: Pre-flight Checks & Setup - CLI argument for "Html" added.
 * **[Date]** Phase 1, Step 1.1: HTML Report Builder and Basic Templates (Go) - Initial `HtmlReportBuilder` and `base_layout.gohtml` created.
+* **2025-05-29** Phase 1, Step 1.2: Copy and Integrate Static Assets (CSS/JS from C# `resources/`) - Non-Angular CSS/JS assets integrated and linked in HTML templates.
