@@ -1,0 +1,5 @@
+# Angular build output
+dist/
+
+# Dependencies
+node_modules/

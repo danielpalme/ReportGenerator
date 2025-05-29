@@ -98,7 +98,20 @@ To port the HTML reporting functionality from the C# ReportGenerator tool to the
         * Implement logic in `htmlreport/builder.go` to copy Angular's `dist/` output to the Go `output/` directory.
         * Update `base_layout.gohtml` to correctly link Angular's JS/CSS bundles (e.g., `styles.*.css`, `runtime.*.js`, `main.*.js`).
     * **C# Reference:** `src/AngularComponents/`, `ReportGenerator.Core.csproj` (for EmbeddedResource), `HtmlRenderer.cs` (for script/style linking).
-    * **Status:** PENDING.
+    * **Status:** DONE.
+    * **Summary (Step 1.3):**
+        * Copied `src/AngularComponents` to `go_report_generator/frontend_spa/` (this directory contains the Angular SPA source).
+        * **Developer Note:** The Angular SPA must be built manually by the developer. Navigate to `go_report_generator/frontend_spa/` and run `npm install` (once) and then `npm run build_prod` (or equivalent). This will generate the necessary static assets in `go_report_generator/frontend_spa/dist/coverage-app/browser/`.
+        * Updated `go_report_generator/internal/reporter/htmlreport/builder.go`:
+            * Added `copyAngularAssets` function to copy all files and subdirectories from `frontend_spa/dist/coverage-app/browser/` (once built by the developer) to the Go report output directory.
+            * Implemented `parseAngularIndexHTML` to read the Angular-generated `index.html` (from the developer's build) and extract hashed JS/CSS filenames.
+            * The Go `CreateReport` function passes these filenames to the HTML template.
+        * Updated `go_report_generator/internal/reporter/htmlreport/templates.go`:
+            * Modified `baseLayoutTemplate` to dynamically link the Angular CSS and JS files using the extracted names.
+            * Added `<app-root></app-root>` to the template for Angular bootstrapping.
+        * Placeholder Angular asset files (previously used for simulation) have been removed.
+        * Created `go_report_generator/frontend_spa/.gitignore` to exclude `dist/` and `node_modules/` from Git tracking.
+        * The `Testprojects/generate_reports.py` script contains a comment reminding about the manual Angular build step.
 
 ---
 ### Phase 2: Rendering Data with Angular (Go Backend Provides Data)
