@@ -78,16 +78,7 @@ coverage-report/
 docs/*
 .github/*
 
-**/*.ico
-**/*.png
-**/*.jpg
-**/*.js
-**/*.css
-**/*.svg
-**/*.ttf
-**/*.woff
-**/*.woff2
-**/*.eot
+
 
 
 **go_report_generator/README.md

@@ -10,7 +10,8 @@ const baseLayoutTemplate = `<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ .Title }}</title>
-    <!-- CSS links will go here -->
+    <link rel="stylesheet" type="text/css" href="report.css">
+    <link rel="stylesheet" type="text/css" href="chartist.min.css">
 </head>
 <body>
     <h1>Report for {{ .ParserName }}</h1>
@@ -19,7 +20,8 @@ const baseLayoutTemplate = `<!DOCTYPE html>
         <!-- Main report content will be rendered here -->
         {{ .Content }}
     </div>
-    <!-- JS script includes will go here -->
+    <script type="text/javascript" src="chartist.min.js"></script>
+    <script type="text/javascript" src="custom.js"></script>
 </body>
 </html>`
 
