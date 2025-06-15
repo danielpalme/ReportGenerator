@@ -382,7 +382,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
             var sut = new CodeFile("C:\\temp\\Program.cs", new int[] { -1, 0, 2 }, new LineVisitStatus[] { LineVisitStatus.NotCoverable, LineVisitStatus.NotCovered, LineVisitStatus.Covered });
             sut.AddCodeElement(new CodeElement("NotCoverable", CodeElementType.Method, 1, 1, null));
             sut.AddCodeElement(new CodeElement("NotCovered", CodeElementType.Method, 2, 2, null));
-            sut.AddCodeElement(new CodeElement("Covered", CodeElementType.Method, 3, 3, null));
+            sut.AddCodeElement(new CodeElement("Covered", CodeElementType.Method, 3, 3, 0.5m));
 
             Assert.Equal(1, sut.CoveredCodeElements);
         }
