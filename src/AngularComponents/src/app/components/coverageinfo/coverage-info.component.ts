@@ -194,7 +194,7 @@ import { Helper } from "./viewmodels/helper.class";
             </tr>
             <tr class="filterbar">
               <td>
-                <input type="text" [(ngModel)]="settings.filter" placeholder="{{translations.filter}}" />
+                <input type="search" [(ngModel)]="settings.filter" placeholder="{{translations.filter}}" />
               </td>
               @if (settings.showLineCoverage) {
                 <td class="center" colspan="6">
@@ -451,6 +451,10 @@ export class CoverageInfoComponent {
 
       this.settings.groupingMaximum = groupingMaximum;
       console.log("Grouping maximum: " + groupingMaximum);
+
+      if ((<any>this.window).applyMaximumGroupingLevel) {
+        this.settings.grouping = groupingMaximum;
+      }
 
       this.settings.showBranchCoverage = this.branchCoverageAvailable;
       this.settings.showMethodCoverage = this.methodCoverageAvailable;

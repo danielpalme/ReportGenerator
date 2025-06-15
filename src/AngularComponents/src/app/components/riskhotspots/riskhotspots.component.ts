@@ -44,7 +44,7 @@ import { RiskHotspotsSettings } from "./data/riskhotspots-settings.class";
           <div class="col-center"></div>
           <div class="col-right">
             <span>{{translations.filter}} </span>
-            <input type="text" [(ngModel)]="settings.filter" (ngModelChange)="updateRiskHotpots()">
+            <input type="search" [(ngModel)]="settings.filter" (ngModelChange)="updateRiskHotpots()">
           </div>
         </div>
         <div class="table-responsive">

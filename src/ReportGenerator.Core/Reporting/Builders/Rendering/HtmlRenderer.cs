@@ -479,7 +479,12 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         }
 
         /// <inheritdoc />
-        public void CustomSummary(IEnumerable<Assembly> assemblies, IEnumerable<RiskHotspot> riskHotspots, bool branchCoverageAvailable, bool methodCoverageAvailable)
+        public void CustomSummary(
+            IEnumerable<Assembly> assemblies,
+            IEnumerable<RiskHotspot> riskHotspots,
+            bool branchCoverageAvailable,
+            bool methodCoverageAvailable,
+            bool applyMaximumGroupingLevel)
         {
             if (assemblies == null)
             {
@@ -751,6 +756,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             this.javaScriptContent.AppendLine("var branchCoverageAvailable = " + branchCoverageAvailable.ToString().ToLowerInvariant() + ";");
             this.javaScriptContent.AppendLine("var methodCoverageAvailable = " + methodCoverageAvailable.ToString().ToLowerInvariant() + ";");
+            this.javaScriptContent.AppendLine("var applyMaximumGroupingLevel = " + applyMaximumGroupingLevel.ToString().ToLowerInvariant() + ";");
             this.javaScriptContent.AppendLine("var maximumDecimalPlacesForCoverageQuotas = " + MathExtensions.MaximumDecimalPlaces + ";");
             this.javaScriptContent.AppendLine();
         }

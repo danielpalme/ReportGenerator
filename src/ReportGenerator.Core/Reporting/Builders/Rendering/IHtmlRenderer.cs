@@ -95,7 +95,13 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="riskHotspots">The risk hotspots.</param>
         /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
         /// <param name="methodCoverageAvailable">if set to <c>true</c> method coverage is available.</param>
-        void CustomSummary(IEnumerable<Assembly> assemblies, IEnumerable<RiskHotspot> riskHotspots, bool branchCoverageAvailable, bool methodCoverageAvailable);
+        /// <param name="applyMaximumGroupingLevel">if set to <c>true</c> the maximum grouping level should be applied instead of the default 'By assembly' grouping.</param>
+        void CustomSummary(
+            IEnumerable<Assembly> assemblies,
+            IEnumerable<RiskHotspot> riskHotspots,
+            bool branchCoverageAvailable,
+            bool methodCoverageAvailable,
+            bool applyMaximumGroupingLevel);
 
         /// <summary>
         /// Adds a file analysis table to the report.

@@ -70,6 +70,7 @@ CHANGELOG
 5.4.8.0
 
     * New: #741 Charts does not render "Full method coverage" elements if coverage information is not available
+    * New: Added new setting "applyMaximumGroupingLevel". This allows to apply the maximum grouping level instead of the default 'By assembly' grouping in HTML reports.
 
 5.4.7.0
 
@@ -150,7 +151,7 @@ CHANGELOG
 
 5.3.0.0
 
-    * New: Azure DevOps task: Added new setting "publishCodeCoverageResults" This allows to publish report in 'Code Coverage' tab directly. 
+    * New: Azure DevOps task: Added new setting "publishCodeCoverageResults". This allows to publish report in 'Code Coverage' tab directly.
            Makes the 'PublishCodeCoverageResults' task obsolete.
     * New: #662: Added ability to filter by coverage in Html reports
     * New: #667: Added new report type 'MarkdownAssembliesSummary'
