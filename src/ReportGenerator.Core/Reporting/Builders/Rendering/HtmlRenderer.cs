@@ -1062,18 +1062,20 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                             series.Write(", ");
                         }
 
+                        series.Write("{ 'meta': ");
+                        series.Write(i);
+                        series.Write(", 'value': ");
+
                         if (filteredHistoricCoverages[i].CoverageQuota.HasValue)
                         {
-                            series.Write("{ 'meta': ");
-                            series.Write(i);
-                            series.Write(", 'value': ");
                             series.Write(filteredHistoricCoverages[i].CoverageQuota.Value.ToString(CultureInfo.InvariantCulture));
-                            series.Write(" }");
                         }
                         else
                         {
                             series.Write("null");
                         }
+
+                        series.Write(" }");
                     }
                 }
 
@@ -1089,18 +1091,20 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                             series.Write(", ");
                         }
 
+                        series.Write("{ 'meta': ");
+                        series.Write(i);
+                        series.Write(", 'value': ");
+
                         if (filteredHistoricCoverages[i].BranchCoverageQuota.HasValue)
                         {
-                            series.Write("{ 'meta': ");
-                            series.Write(i);
-                            series.Write(", 'value': ");
                             series.Write(filteredHistoricCoverages[i].BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture));
-                            series.Write(" }");
                         }
                         else
                         {
                             series.Write("null");
                         }
+
+                        series.Write(" }");
                     }
                 }
 
@@ -1116,18 +1120,20 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                             series.Write(", ");
                         }
 
+                        series.Write("{ 'meta': ");
+                        series.Write(i);
+                        series.Write(", 'value': ");
+
                         if (filteredHistoricCoverages[i].CodeElementCoverageQuota.HasValue)
                         {
-                            series.Write("{ 'meta': ");
-                            series.Write(i);
-                            series.Write(", 'value': ");
                             series.Write(filteredHistoricCoverages[i].CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture));
-                            series.Write(" }");
                         }
                         else
                         {
                             series.Write("null");
                         }
+
+                        series.Write(" }");
                     }
                 }
 
@@ -1143,18 +1149,20 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                             series.Write(", ");
                         }
 
+                        series.Write("{ 'meta': ");
+                        series.Write(i);
+                        series.Write(", 'value': ");
+
                         if (filteredHistoricCoverages[i].FullCodeElementCoverageQuota.HasValue)
                         {
-                            series.Write("{ 'meta': ");
-                            series.Write(i);
-                            series.Write(", 'value': ");
                             series.Write(filteredHistoricCoverages[i].FullCodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture));
-                            series.Write(" }");
                         }
                         else
                         {
                             series.Write("null");
                         }
+
+                        series.Write(" }");
                     }
                 }
 

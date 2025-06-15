@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.4.8.0
+
+    * New: #741 Charts does not render "Full method coverage" elements if coverage information is not available
+
 5.4.7.0
 
     * New: #731 Added option to break build when maximum risk hotspots metrics are exceeded
