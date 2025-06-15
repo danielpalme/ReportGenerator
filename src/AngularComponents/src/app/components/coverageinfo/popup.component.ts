@@ -11,24 +11,36 @@ import { Metric } from "./data/metric.class";
     <div class="mt-1">
       <label><input type="checkbox" [(ngModel)]="showLineCoverage" (change)="showLineCoverageChange.emit(this.showLineCoverage)" /> {{ translations.coverage }}</label>
     </div>
-    <div class="mt-1" *ngIf="branchCoverageAvailable">
-      <label><input type="checkbox" [(ngModel)]="showBranchCoverage" (change)="showBranchCoverageChange.emit(this.showBranchCoverage)" /> {{ translations.branchCoverage }}</label>
-    </div>
-    <div class="mt-1">
-      <label><input type="checkbox" [(ngModel)]="showMethodCoverage" (change)="showMethodCoverageChange.emit(this.showMethodCoverage)" [disabled]="!methodCoverageAvailable" /> {{ translations.methodCoverage }}</label><pro-button *ngIf="!methodCoverageAvailable" [translations]="translations"></pro-button>
-    </div>
-    <div class="mt-1">
-      <label><input type="checkbox" [(ngModel)]="showMethodFullCoverage" (change)="showMethodFullCoverageChange.emit(this.showMethodFullCoverage)" [disabled]="!methodCoverageAvailable" /> {{ translations.fullMethodCoverage }}</label><pro-button *ngIf="!methodCoverageAvailable" [translations]="translations"></pro-button>
-    </div>
-    <ng-container *ngIf="metrics.length > 0">
-      <br />
-      <br/>
-      <b>{{translations.metrics}}</b><pro-button *ngIf="!methodCoverageAvailable" [translations]="translations"></pro-button>
-      <div class="mt-1" *ngFor="let metric of metrics">
-        <label><input type="checkbox" [checked]="isMetricSelected(metric)" (change)="toggleMetric(metric)" [disabled]="!methodCoverageAvailable" /> {{ metric.name }}</label>&nbsp;<a [href]="metric.explanationUrl" *ngIf="metric.explanationUrl" target="_blank"><i class="icon-info-circled"></i></a>
+    @if (branchCoverageAvailable) {
+      <div class="mt-1">
+        <label><input type="checkbox" [(ngModel)]="showBranchCoverage" (change)="showBranchCoverageChange.emit(this.showBranchCoverage)" /> {{ translations.branchCoverage }}</label>
       </div>
-    </ng-container>
+    }
+    <div class="mt-1">
+      <label><input type="checkbox" [(ngModel)]="showMethodCoverage" (change)="showMethodCoverageChange.emit(this.showMethodCoverage)" [disabled]="!methodCoverageAvailable" /> {{ translations.methodCoverage }}</label>@if (!methodCoverageAvailable) {
+      <pro-button [translations]="translations"></pro-button>
+    }
   </div>
+  <div class="mt-1">
+    <label><input type="checkbox" [(ngModel)]="showMethodFullCoverage" (change)="showMethodFullCoverageChange.emit(this.showMethodFullCoverage)" [disabled]="!methodCoverageAvailable" /> {{ translations.fullMethodCoverage }}</label>@if (!methodCoverageAvailable) {
+    <pro-button [translations]="translations"></pro-button>
+  }
+</div>
+@if (metrics.length > 0) {
+  <br />
+  <br/>
+  <b>{{translations.metrics}}</b>@if (!methodCoverageAvailable) {
+  <pro-button [translations]="translations"></pro-button>
+}
+@for (metric of metrics; track metric) {
+  <div class="mt-1">
+    <label><input type="checkbox" [checked]="isMetricSelected(metric)" (change)="toggleMetric(metric)" [disabled]="!methodCoverageAvailable" /> {{ metric.name }}</label>&nbsp;@if (metric.explanationUrl) {
+    <a [href]="metric.explanationUrl" target="_blank"><i class="icon-info-circled"></i></a>
+  }
+</div>
+}
+}
+</div>
 </div>`,
     standalone: false
 })

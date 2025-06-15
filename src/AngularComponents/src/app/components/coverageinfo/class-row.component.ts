@@ -6,191 +6,237 @@ import { ClassViewModel } from "./viewmodels/class-viewmodel.class";
     selector: "[class-row]",
     template: `
 <td>
-  <a [href]="clazz.reportPath" *ngIf="clazz.reportPath !== ''">{{clazz.name}}</a>
-  <ng-container *ngIf="clazz.reportPath === ''">{{clazz.name}}</ng-container>
+  @if (clazz.reportPath !== '') {
+    <a [href]="clazz.reportPath">{{clazz.name}}</a>
+  }
+  @if (clazz.reportPath === '') {
+    {{clazz.name}}
+  }
 </td>
-<td class="right" *ngIf="lineCoverageAvailable">
-  <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
-    <div class="currenthistory {{getClassName(clazz.coveredLines, clazz.currentHistoricCoverage.cl)}}">
+@if (lineCoverageAvailable) {
+  <td class="right">
+    @if (clazz.currentHistoricCoverage !== null) {
+      <div class="currenthistory {{getClassName(clazz.coveredLines, clazz.currentHistoricCoverage.cl)}}">
+        {{clazz.coveredLines}}
+      </div>
+      <div [title]="clazz.currentHistoricCoverage.et">
+        {{clazz.currentHistoricCoverage.cl}}
+      </div>
+    }
+    @if (clazz.currentHistoricCoverage === null) {
       {{clazz.coveredLines}}
-    </div>
-    <div [title]="clazz.currentHistoricCoverage.et">
-      {{clazz.currentHistoricCoverage.cl}}
-    </div>
-  </ng-container>
-  <ng-container *ngIf="clazz.currentHistoricCoverage === null">
-    {{clazz.coveredLines}}
-  </ng-container>
-</td>
-<td class="right" *ngIf="lineCoverageAvailable">
-  <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
-    <div class="currenthistory {{getClassName(clazz.currentHistoricCoverage.ucl, clazz.uncoveredLines)}}">
+    }
+  </td>
+}
+@if (lineCoverageAvailable) {
+  <td class="right">
+    @if (clazz.currentHistoricCoverage !== null) {
+      <div class="currenthistory {{getClassName(clazz.currentHistoricCoverage.ucl, clazz.uncoveredLines)}}">
+        {{clazz.uncoveredLines}}
+      </div>
+      <div [title]="clazz.currentHistoricCoverage.et">
+        {{clazz.currentHistoricCoverage.ucl}}
+      </div>
+    }
+    @if (clazz.currentHistoricCoverage === null) {
       {{clazz.uncoveredLines}}
-    </div>
-    <div [title]="clazz.currentHistoricCoverage.et">
-      {{clazz.currentHistoricCoverage.ucl}}
-    </div>
-  </ng-container>
-  <ng-container *ngIf="clazz.currentHistoricCoverage === null">
-    {{clazz.uncoveredLines}}
-  </ng-container>
-</td>
-<td class="right" *ngIf="lineCoverageAvailable">
-  <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
-    <div class="currenthistory">{{clazz.coverableLines}}</div>
-    <div [title]="clazz.currentHistoricCoverage.et">{{clazz.currentHistoricCoverage.cal}}</div>
-  </ng-container>
-  <ng-container *ngIf="clazz.currentHistoricCoverage === null">
-    {{clazz.coverableLines}}
-  </ng-container>
-</td>
-<td class="right" *ngIf="lineCoverageAvailable">
-  <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
-    <div class="currenthistory">{{clazz.totalLines}}</div>
-    <div [title]="clazz.currentHistoricCoverage.et">{{clazz.currentHistoricCoverage.tl}}</div>
-  </ng-container>
-  <ng-container *ngIf="clazz.currentHistoricCoverage === null">
-    {{clazz.totalLines}}
-  </ng-container>
-</td>
-<td class="right" [title]="clazz.coverageRatioText" *ngIf="lineCoverageAvailable">
-  <div coverage-history-chart [historicCoverages]="clazz.lineCoverageHistory"
-    *ngIf="clazz.lineCoverageHistory.length > 1"
-    [ngClass]="{'historiccoverageoffset': clazz.currentHistoricCoverage !== null}"
-    class="tinylinecoveragechart ct-chart" title="{{translations.history + ': ' + translations.coverage}}">
-  </div>
-  <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
-    <div class="currenthistory {{getClassName(clazz.coverage, clazz.currentHistoricCoverage.lcq)}}">
+    }
+  </td>
+}
+@if (lineCoverageAvailable) {
+  <td class="right">
+    @if (clazz.currentHistoricCoverage !== null) {
+      <div class="currenthistory">{{clazz.coverableLines}}</div>
+      <div [title]="clazz.currentHistoricCoverage.et">{{clazz.currentHistoricCoverage.cal}}</div>
+    }
+    @if (clazz.currentHistoricCoverage === null) {
+      {{clazz.coverableLines}}
+    }
+  </td>
+}
+@if (lineCoverageAvailable) {
+  <td class="right">
+    @if (clazz.currentHistoricCoverage !== null) {
+      <div class="currenthistory">{{clazz.totalLines}}</div>
+      <div [title]="clazz.currentHistoricCoverage.et">{{clazz.currentHistoricCoverage.tl}}</div>
+    }
+    @if (clazz.currentHistoricCoverage === null) {
+      {{clazz.totalLines}}
+    }
+  </td>
+}
+@if (lineCoverageAvailable) {
+  <td class="right" [title]="clazz.coverageRatioText">
+    @if (clazz.lineCoverageHistory.length > 1) {
+      <div coverage-history-chart [historicCoverages]="clazz.lineCoverageHistory"
+        [ngClass]="{'historiccoverageoffset': clazz.currentHistoricCoverage !== null}"
+        class="tinylinecoveragechart ct-chart" title="{{translations.history + ': ' + translations.coverage}}">
+      </div>
+    }
+    @if (clazz.currentHistoricCoverage !== null) {
+      <div class="currenthistory {{getClassName(clazz.coverage, clazz.currentHistoricCoverage.lcq)}}">
+        {{clazz.coveragePercentage}}
+      </div>
+      <div [title]="clazz.currentHistoricCoverage.et + ': ' + clazz.currentHistoricCoverage.coverageRatioText">{{clazz.currentHistoricCoverage.lcq}}%</div>
+    }
+    @if (clazz.currentHistoricCoverage === null) {
       {{clazz.coveragePercentage}}
-    </div>
-    <div [title]="clazz.currentHistoricCoverage.et + ': ' + clazz.currentHistoricCoverage.coverageRatioText">{{clazz.currentHistoricCoverage.lcq}}%</div>
-  </ng-container>
-  <ng-container *ngIf="clazz.currentHistoricCoverage === null">
-    {{clazz.coveragePercentage}}
-  </ng-container>
-</td>
-<td class="right" *ngIf="lineCoverageAvailable"><coverage-bar [percentage]="clazz.coverage"></coverage-bar></td>
-<td class="right" *ngIf="branchCoverageAvailable">
-  <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
-    <div class="currenthistory {{getClassName(clazz.coveredBranches, clazz.currentHistoricCoverage.cb)}}">
+    }
+  </td>
+}
+@if (lineCoverageAvailable) {
+  <td class="right"><coverage-bar [percentage]="clazz.coverage"></coverage-bar></td>
+}
+@if (branchCoverageAvailable) {
+  <td class="right">
+    @if (clazz.currentHistoricCoverage !== null) {
+      <div class="currenthistory {{getClassName(clazz.coveredBranches, clazz.currentHistoricCoverage.cb)}}">
+        {{clazz.coveredBranches}}
+      </div>
+      <div [title]="clazz.currentHistoricCoverage.et">
+        {{clazz.currentHistoricCoverage.cb}}
+      </div>
+    }
+    @if (clazz.currentHistoricCoverage === null) {
       {{clazz.coveredBranches}}
-    </div>
-    <div [title]="clazz.currentHistoricCoverage.et">
-      {{clazz.currentHistoricCoverage.cb}}
-    </div>
-  </ng-container>
-  <ng-container *ngIf="clazz.currentHistoricCoverage === null">
-    {{clazz.coveredBranches}}
-  </ng-container>
-</td>
+    }
+  </td>
+}
 
-<td class="right" *ngIf="branchCoverageAvailable">
-  <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
-    <div class="currenthistory">{{clazz.totalBranches}}</div>
-    <div [title]="clazz.currentHistoricCoverage.et">{{clazz.currentHistoricCoverage.tb}}</div>
-  </ng-container>
-  <ng-container *ngIf="clazz.currentHistoricCoverage === null">
-    {{clazz.totalBranches}}
-  </ng-container>
-</td>
-<td class="right" *ngIf="branchCoverageAvailable" [title]="clazz.branchCoverageRatioText">
-  <div coverage-history-chart [historicCoverages]="clazz.branchCoverageHistory"
-    *ngIf="clazz.branchCoverageHistory.length > 1"
-    [ngClass]="{'historiccoverageoffset': clazz.currentHistoricCoverage !== null}"
-    class="tinybranchcoveragechart ct-chart" title="{{translations.history + ': ' + translations.branchCoverage}}">
-  </div>
-  <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
-    <div class="currenthistory {{getClassName(clazz.branchCoverage, clazz.currentHistoricCoverage.bcq)}}">
+@if (branchCoverageAvailable) {
+  <td class="right">
+    @if (clazz.currentHistoricCoverage !== null) {
+      <div class="currenthistory">{{clazz.totalBranches}}</div>
+      <div [title]="clazz.currentHistoricCoverage.et">{{clazz.currentHistoricCoverage.tb}}</div>
+    }
+    @if (clazz.currentHistoricCoverage === null) {
+      {{clazz.totalBranches}}
+    }
+  </td>
+}
+@if (branchCoverageAvailable) {
+  <td class="right" [title]="clazz.branchCoverageRatioText">
+    @if (clazz.branchCoverageHistory.length > 1) {
+      <div coverage-history-chart [historicCoverages]="clazz.branchCoverageHistory"
+        [ngClass]="{'historiccoverageoffset': clazz.currentHistoricCoverage !== null}"
+        class="tinybranchcoveragechart ct-chart" title="{{translations.history + ': ' + translations.branchCoverage}}">
+      </div>
+    }
+    @if (clazz.currentHistoricCoverage !== null) {
+      <div class="currenthistory {{getClassName(clazz.branchCoverage, clazz.currentHistoricCoverage.bcq)}}">
+        {{clazz.branchCoveragePercentage}}
+      </div>
+      <div [title]="clazz.currentHistoricCoverage.et + ': ' + clazz.currentHistoricCoverage.branchCoverageRatioText">{{clazz.currentHistoricCoverage.bcq}}%</div>
+    }
+    @if (clazz.currentHistoricCoverage === null) {
       {{clazz.branchCoveragePercentage}}
-    </div>
-    <div [title]="clazz.currentHistoricCoverage.et + ': ' + clazz.currentHistoricCoverage.branchCoverageRatioText">{{clazz.currentHistoricCoverage.bcq}}%</div>
-  </ng-container>
-  <ng-container *ngIf="clazz.currentHistoricCoverage === null">
-    {{clazz.branchCoveragePercentage}}
-  </ng-container>
-</td>
-<td class="right" *ngIf="branchCoverageAvailable"><coverage-bar [percentage]="clazz.branchCoverage"></coverage-bar></td>
+    }
+  </td>
+}
+@if (branchCoverageAvailable) {
+  <td class="right"><coverage-bar [percentage]="clazz.branchCoverage"></coverage-bar></td>
+}
 
-<td class="right" *ngIf="methodCoverageAvailable">
-  <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
-    <div class="currenthistory {{getClassName(clazz.coveredMethods, clazz.currentHistoricCoverage.cm)}}">
+@if (methodCoverageAvailable) {
+  <td class="right">
+    @if (clazz.currentHistoricCoverage !== null) {
+      <div class="currenthistory {{getClassName(clazz.coveredMethods, clazz.currentHistoricCoverage.cm)}}">
+        {{clazz.coveredMethods}}
+      </div>
+      <div [title]="clazz.currentHistoricCoverage.et">
+        {{clazz.currentHistoricCoverage.cm}}
+      </div>
+    }
+    @if (clazz.currentHistoricCoverage === null) {
       {{clazz.coveredMethods}}
-    </div>
-    <div [title]="clazz.currentHistoricCoverage.et">
-      {{clazz.currentHistoricCoverage.cm}}
-    </div>
-  </ng-container>
-  <ng-container *ngIf="clazz.currentHistoricCoverage === null">
-    {{clazz.coveredMethods}}
-  </ng-container>
-</td>
-<td class="right" *ngIf="methodCoverageAvailable">
-  <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
-    <div class="currenthistory">{{clazz.totalMethods}}</div>
-    <div [title]="clazz.currentHistoricCoverage.et">{{clazz.currentHistoricCoverage.tm}}</div>
-  </ng-container>
-  <ng-container *ngIf="clazz.currentHistoricCoverage === null">
-    {{clazz.totalMethods}}
-  </ng-container>
-</td>
-<td class="right" *ngIf="methodCoverageAvailable" [title]="clazz.methodCoverageRatioText">
-  <div coverage-history-chart [historicCoverages]="clazz.methodCoverageHistory"
-    *ngIf="clazz.methodCoverageHistory.length > 1"
-    [ngClass]="{'historiccoverageoffset': clazz.currentHistoricCoverage !== null}"
-    class="tinymethodcoveragechart ct-chart" title="{{translations.history + ': ' + translations.methodCoverage}}">
-  </div>
-  <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
-    <div class="currenthistory {{getClassName(clazz.methodCoverage, clazz.currentHistoricCoverage.mcq)}}">
+    }
+  </td>
+}
+@if (methodCoverageAvailable) {
+  <td class="right">
+    @if (clazz.currentHistoricCoverage !== null) {
+      <div class="currenthistory">{{clazz.totalMethods}}</div>
+      <div [title]="clazz.currentHistoricCoverage.et">{{clazz.currentHistoricCoverage.tm}}</div>
+    }
+    @if (clazz.currentHistoricCoverage === null) {
+      {{clazz.totalMethods}}
+    }
+  </td>
+}
+@if (methodCoverageAvailable) {
+  <td class="right" [title]="clazz.methodCoverageRatioText">
+    @if (clazz.methodCoverageHistory.length > 1) {
+      <div coverage-history-chart [historicCoverages]="clazz.methodCoverageHistory"
+        [ngClass]="{'historiccoverageoffset': clazz.currentHistoricCoverage !== null}"
+        class="tinymethodcoveragechart ct-chart" title="{{translations.history + ': ' + translations.methodCoverage}}">
+      </div>
+    }
+    @if (clazz.currentHistoricCoverage !== null) {
+      <div class="currenthistory {{getClassName(clazz.methodCoverage, clazz.currentHistoricCoverage.mcq)}}">
+        {{clazz.methodCoveragePercentage}}
+      </div>
+      <div [title]="clazz.currentHistoricCoverage.et + ': ' + clazz.currentHistoricCoverage.methodCoverageRatioText">{{clazz.currentHistoricCoverage.mcq}}%</div>
+    }
+    @if (clazz.currentHistoricCoverage === null) {
       {{clazz.methodCoveragePercentage}}
-    </div>
-    <div [title]="clazz.currentHistoricCoverage.et + ': ' + clazz.currentHistoricCoverage.methodCoverageRatioText">{{clazz.currentHistoricCoverage.mcq}}%</div>
-  </ng-container>
-  <ng-container *ngIf="clazz.currentHistoricCoverage === null">
-    {{clazz.methodCoveragePercentage}}
-  </ng-container>
-</td>
-<td class="right" *ngIf="methodCoverageAvailable"><coverage-bar [percentage]="clazz.methodCoverage"></coverage-bar></td>
+    }
+  </td>
+}
+@if (methodCoverageAvailable) {
+  <td class="right"><coverage-bar [percentage]="clazz.methodCoverage"></coverage-bar></td>
+}
 
-<td class="right" *ngIf="methodFullCoverageAvailable">
-  <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
-    <div class="currenthistory {{getClassName(clazz.fullyCoveredMethods, clazz.currentHistoricCoverage.fcm)}}">
+@if (methodFullCoverageAvailable) {
+  <td class="right">
+    @if (clazz.currentHistoricCoverage !== null) {
+      <div class="currenthistory {{getClassName(clazz.fullyCoveredMethods, clazz.currentHistoricCoverage.fcm)}}">
+        {{clazz.fullyCoveredMethods}}
+      </div>
+      <div [title]="clazz.currentHistoricCoverage.et">
+        {{clazz.currentHistoricCoverage.fcm}}
+      </div>
+    }
+    @if (clazz.currentHistoricCoverage === null) {
       {{clazz.fullyCoveredMethods}}
-    </div>
-    <div [title]="clazz.currentHistoricCoverage.et">
-      {{clazz.currentHistoricCoverage.fcm}}
-    </div>
-  </ng-container>
-  <ng-container *ngIf="clazz.currentHistoricCoverage === null">
-    {{clazz.fullyCoveredMethods}}
-  </ng-container>
-</td>
-<td class="right" *ngIf="methodFullCoverageAvailable">
-  <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
-    <div class="currenthistory">{{clazz.totalMethods}}</div>
-    <div [title]="clazz.currentHistoricCoverage.et">{{clazz.currentHistoricCoverage.tm}}</div>
-  </ng-container>
-  <ng-container *ngIf="clazz.currentHistoricCoverage === null">
-    {{clazz.totalMethods}}
-  </ng-container>
-</td>
-<td class="right" *ngIf="methodFullCoverageAvailable" [title]="clazz.methodFullCoverageRatioText">
-  <div coverage-history-chart [historicCoverages]="clazz.methodFullCoverageHistory"
-    *ngIf="clazz.methodFullCoverageHistory.length > 1"
-    [ngClass]="{'historiccoverageoffset': clazz.currentHistoricCoverage !== null}"
-    class="tinyfullmethodcoveragechart ct-chart" title="{{translations.history + ': ' + translations.fullMethodCoverage}}">
-  </div>
-  <ng-container *ngIf="clazz.currentHistoricCoverage !== null">
-    <div class="currenthistory {{getClassName(clazz.methodFullCoverage, clazz.currentHistoricCoverage.mfcq)}}">
+    }
+  </td>
+}
+@if (methodFullCoverageAvailable) {
+  <td class="right">
+    @if (clazz.currentHistoricCoverage !== null) {
+      <div class="currenthistory">{{clazz.totalMethods}}</div>
+      <div [title]="clazz.currentHistoricCoverage.et">{{clazz.currentHistoricCoverage.tm}}</div>
+    }
+    @if (clazz.currentHistoricCoverage === null) {
+      {{clazz.totalMethods}}
+    }
+  </td>
+}
+@if (methodFullCoverageAvailable) {
+  <td class="right" [title]="clazz.methodFullCoverageRatioText">
+    @if (clazz.methodFullCoverageHistory.length > 1) {
+      <div coverage-history-chart [historicCoverages]="clazz.methodFullCoverageHistory"
+        [ngClass]="{'historiccoverageoffset': clazz.currentHistoricCoverage !== null}"
+        class="tinyfullmethodcoveragechart ct-chart" title="{{translations.history + ': ' + translations.fullMethodCoverage}}">
+      </div>
+    }
+    @if (clazz.currentHistoricCoverage !== null) {
+      <div class="currenthistory {{getClassName(clazz.methodFullCoverage, clazz.currentHistoricCoverage.mfcq)}}">
+        {{clazz.methodFullCoveragePercentage}}
+      </div>
+      <div [title]="clazz.currentHistoricCoverage.et + ': ' + clazz.currentHistoricCoverage.methodFullCoverageRatioText">{{clazz.currentHistoricCoverage.mfcq}}%</div>
+    }
+    @if (clazz.currentHistoricCoverage === null) {
       {{clazz.methodFullCoveragePercentage}}
-    </div>
-    <div [title]="clazz.currentHistoricCoverage.et + ': ' + clazz.currentHistoricCoverage.methodFullCoverageRatioText">{{clazz.currentHistoricCoverage.mfcq}}%</div>
-  </ng-container>
-  <ng-container *ngIf="clazz.currentHistoricCoverage === null">
-    {{clazz.methodFullCoveragePercentage}}
-  </ng-container>
-</td>
-<td class="right" *ngIf="methodFullCoverageAvailable"><coverage-bar [percentage]="clazz.methodFullCoverage"></coverage-bar></td>
-<td class="right" *ngFor="let metric of visibleMetrics">{{ clazz.metrics[metric.abbreviation] }}</td>`,
+    }
+  </td>
+}
+@if (methodFullCoverageAvailable) {
+  <td class="right"><coverage-bar [percentage]="clazz.methodFullCoverage"></coverage-bar></td>
+}
+@for (metric of visibleMetrics; track metric) {
+  <td class="right">{{ clazz.metrics[metric.abbreviation] }}</td>
+}`,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })

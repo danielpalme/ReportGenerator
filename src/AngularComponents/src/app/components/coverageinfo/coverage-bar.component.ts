@@ -4,9 +4,15 @@ import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
     selector: "coverage-bar",
     template: `
   <table class="coverage">
-    <td class="gray covered100" *ngIf="grayVisible"> </td>
-    <td class="green {{greenClass}}" *ngIf="greenVisible"> </td>
-    <td class="red {{redClass}}" *ngIf="redVisible"> </td>
+    @if (grayVisible) {
+      <td class="gray covered100"> </td>
+    }
+    @if (greenVisible) {
+      <td class="green {{greenClass}}"> </td>
+    }
+    @if (redVisible) {
+      <td class="red {{redClass}}"> </td>
+    }
   </table>`,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false

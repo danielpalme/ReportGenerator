@@ -8,38 +8,54 @@ import { RiskHotspotsSettings } from "./data/riskhotspots-settings.class";
 @Component({
     selector: "risk-hotspots",
     template: `
-    <div *ngIf="totalNumberOfRiskHotspots > 0">
-      <div class="customizebox">
-        <div>
-          <select [(ngModel)]="settings.assembly" name="assembly" (ngModelChange)="updateRiskHotpots()">
-            <option value="">{{translations.assembly}}</option>
-            <option *ngFor="let assembly of assemblies" [value]="assembly">{{assembly}}</option>
-          </select>
+    @if (totalNumberOfRiskHotspots > 0) {
+      <div>
+        <div class="customizebox">
+          <div>
+            <select [(ngModel)]="settings.assembly" name="assembly" (ngModelChange)="updateRiskHotpots()">
+              <option value="">{{translations.assembly}}</option>
+              @for (assembly of assemblies; track assembly) {
+                <option [value]="assembly">{{assembly}}</option>
+              }
+            </select>
+          </div>
+          <div class="col-center">
+            @if (totalNumberOfRiskHotspots > 10) {
+              <span>{{translations.top}}</span>
+            }
+            @if (totalNumberOfRiskHotspots > 10) {
+              <select [(ngModel)]="settings.numberOfRiskHotspots">
+                <option value="10">10</option>
+                @if (totalNumberOfRiskHotspots > 10) {
+                  <option value="20">20</option>
+                }
+                @if (totalNumberOfRiskHotspots > 20) {
+                  <option value="50">50</option>
+                }
+                @if (totalNumberOfRiskHotspots > 50) {
+                  <option value="100">100</option>
+                }
+                @if (totalNumberOfRiskHotspots > 100) {
+                  <option [value]="totalNumberOfRiskHotspots">{{translations.all}}</option>
+                }
+              </select>
+            }
+          </div>
+          <div class="col-center"></div>
+          <div class="col-right">
+            <span>{{translations.filter}} </span>
+            <input type="text" [(ngModel)]="settings.filter" (ngModelChange)="updateRiskHotpots()">
+          </div>
         </div>
-        <div class="col-center">
-          <span *ngIf="totalNumberOfRiskHotspots > 10">{{translations.top}}</span>
-          <select [(ngModel)]="settings.numberOfRiskHotspots" *ngIf="totalNumberOfRiskHotspots > 10">
-            <option value="10">10</option>
-            <option value="20" *ngIf="totalNumberOfRiskHotspots > 10">20</option>
-            <option value="50" *ngIf="totalNumberOfRiskHotspots > 20">50</option>
-            <option value="100" *ngIf="totalNumberOfRiskHotspots > 50">100</option>
-            <option [value]="totalNumberOfRiskHotspots" *ngIf="totalNumberOfRiskHotspots > 100">{{translations.all}}</option>
-          </select>
-        </div>
-        <div class="col-center"></div>
-        <div class="col-right">
-          <span>{{translations.filter}} </span>
-          <input type="text" [(ngModel)]="settings.filter" (ngModelChange)="updateRiskHotpots()">
-        </div>
-      </div>
-
-      <div class="table-responsive">
-        <table class="overview table-fixed stripped">
-          <colgroup>
+        <div class="table-responsive">
+          <table class="overview table-fixed stripped">
+            <colgroup>
             <col class="column-min-200">
             <col class="column-min-200">
             <col class="column-min-200">
-            <col class="column105" *ngFor="let riskHotspotMetric of riskHotspotMetrics">
+            @for (riskHotspotMetric of riskHotspotMetrics; track riskHotspotMetric) {
+              <col class="column105">
+            }
           </colgroup>
           <thead>
             <tr>
@@ -55,32 +71,39 @@ import { RiskHotspotsSettings } from "./data/riskhotspots-settings.class";
               [ngClass]="{'icon-up-dir_active': settings.sortBy === 'method' && settings.sortOrder === 'asc',
               'icon-down-dir_active': settings.sortBy === 'method' && settings.sortOrder === 'desc',
               'icon-up-down-dir': settings.sortBy !== 'method'}"></i>{{translations.method}}</a></th>
-              <th *ngFor="let riskHotspotMetric of riskHotspotMetrics; index as i">
-                <a href="#" (click)="updateSorting('' + i, $event)"><i
+              @for (riskHotspotMetric of riskHotspotMetrics; track riskHotspotMetric; let i = $index) {
+                <th>
+                  <a href="#" (click)="updateSorting('' + i, $event)"><i
                 [ngClass]="{'icon-up-dir_active': settings.sortBy === '' + i && settings.sortOrder === 'asc',
                 'icon-down-dir_active': settings.sortBy === '' + i && settings.sortOrder === 'desc',
                 'icon-up-down-dir': settings.sortBy !== '' + i}"></i>{{riskHotspotMetric.name}}</a>
-                <a href="{{riskHotspotMetric.explanationUrl}}" target="_blank"><i class="icon-info-circled"></i></a>
-              </th>
+                  <a href="{{riskHotspotMetric.explanationUrl}}" target="_blank"><i class="icon-info-circled"></i></a>
+                </th>
+              }
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let riskHotspot of riskHotspots | slice:0:settings.numberOfRiskHotspots">
-              <td>{{riskHotspot.assembly}}</td>
-              <td><a [href]="riskHotspot.reportPath + queryString">{{riskHotspot.class}}</a></td>
-              <td [title]="riskHotspot.methodName">
-                <a [href]="riskHotspot.reportPath + queryString + '#file' + riskHotspot.fileIndex + '_line' + riskHotspot.line">
-                  {{riskHotspot.methodShortName}}
-                </a>
-              </td>
-              <td class="right" *ngFor="let metric of riskHotspot.metrics"
-                [ngClass]="{'lightred': metric.exceeded, 'lightgreen': !metric.exceeded}">{{metric.value}}</td>
-            </tr>
+            @for (riskHotspot of riskHotspots | slice:0:settings.numberOfRiskHotspots; track riskHotspot) {
+              <tr>
+                <td>{{riskHotspot.assembly}}</td>
+                <td><a [href]="riskHotspot.reportPath + queryString">{{riskHotspot.class}}</a></td>
+                <td [title]="riskHotspot.methodName">
+                  <a [href]="riskHotspot.reportPath + queryString + '#file' + riskHotspot.fileIndex + '_line' + riskHotspot.line">
+                    {{riskHotspot.methodShortName}}
+                  </a>
+                </td>
+                @for (metric of riskHotspot.metrics; track metric) {
+                  <td class="right"
+                  [ngClass]="{'lightred': metric.exceeded, 'lightgreen': !metric.exceeded}">{{metric.value}}</td>
+                }
+              </tr>
+            }
           </tbody>
         </table>
       </div>
     </div>
-  `,
+    }
+    `,
     styles: [],
     standalone: false
 })
