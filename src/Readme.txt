@@ -71,6 +71,7 @@ CHANGELOG
 
     * New: #741 Charts does not render "Full method coverage" elements if coverage information is not available
     * New: Added new setting "applyMaximumGroupingLevel". This allows to apply the maximum grouping level instead of the default 'By assembly' grouping in HTML reports.
+    * New: Improved lcov support (take FNDA elements into account to determine whether a code element has been covered)
 
 5.4.7.0
 

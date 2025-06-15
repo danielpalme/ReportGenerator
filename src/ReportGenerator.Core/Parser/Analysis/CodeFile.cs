@@ -251,9 +251,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
             get
             {
                 return this.CodeElements.Count(
-                    x => this.lineCoverage.Skip(x.FirstLine)
-                        .Take(x.LastLine - x.FirstLine + 1)
-                        .Any(y => y > 0));
+                    x => x.CoverageQuota.GetValueOrDefault() > 0);
             }
         }
 

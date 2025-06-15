@@ -125,6 +125,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             var branchesByLineNumber = new Dictionary<int, ICollection<Branch>>();
 
+            int fndaCounter = -1;
+
             while (true)
             {
                 string line = lines[currentLine];
@@ -173,6 +175,19 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                         branches.Add(branch);
 
                         branchesByLineNumber.Add(lineNumber, branches);
+                    }
+                }
+                else if (line.StartsWith("FNDA:"))
+                {
+                    fndaCounter++;
+
+                    line = line.Substring(5);
+                    string[] tokens = line.Split(',');
+                    int executionCount = int.Parse(tokens[0], CultureInfo.InvariantCulture);
+
+                    if (executionCount == 0)
+                    {
+                        codeElements[fndaCounter].NotExecuted = true;
                     }
                 }
                 else if (line.StartsWith("DA:"))
@@ -234,12 +249,16 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     lastLine = codeElements[i + 1].FirstLine - 1;
                 }
 
+                decimal? coverageOfCodeElement = codeElement.NotExecuted
+                    ? 0
+                    : codeFile.CoverageQuotaInRange(codeElement.FirstLine, lastLine);
+
                 codeFile.AddCodeElement(new CodeElement(
                     codeElement.Name,
                     CodeElementType.Method,
                     codeElement.FirstLine,
                     lastLine,
-                    codeFile.CoverageQuotaInRange(codeElement.FirstLine, lastLine)));
+                    coverageOfCodeElement));
             }
 
             @class.AddFile(codeFile);
