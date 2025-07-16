@@ -171,6 +171,10 @@
         "Node16": {
             "target": "reportgenerator.js",
             "argumentFormat": ""
+        },
+        "Node20_1": {
+            "target": "reportgenerator.js",
+            "argumentFormat": ""
         }
     },
     "messages": {

@@ -67,11 +67,15 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.4.9.0
+
+    * New: #744: Azure DevOps task: Added support for nodeJS 20
+
 5.4.8.0
 
+    * New: #737 Improved lcov support (take FNDA elements into account to determine whether a code element has been covered)
     * New: #741 Charts does not render "Full method coverage" elements if coverage information is not available
     * New: Added new setting "applyMaximumGroupingLevel". This allows to apply the maximum grouping level instead of the default 'By assembly' grouping in HTML reports.
-    * New: Improved lcov support (take FNDA elements into account to determine whether a code element has been covered)
 
 5.4.7.0
 
