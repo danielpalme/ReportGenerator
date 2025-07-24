@@ -240,7 +240,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             var codeFile = new CodeFile(filePath, coverage, lineVisitStatus);
 
-            SetCodeElements(codeFile, fileId, methodsOfFile);
+            this.SetCodeElements(codeFile, fileId, methodsOfFile);
 
             return codeFile;
         }
@@ -251,13 +251,13 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="codeFile">The code file.</param>
         /// <param name="fileId">The id of the file.</param>
         /// <param name="methods">The methods.</param>
-        private static void SetCodeElements(CodeFile codeFile, string fileId, IEnumerable<XElement> methods)
+        private void SetCodeElements(CodeFile codeFile, string fileId, IEnumerable<XElement> methods)
         {
             foreach (var method in methods)
             {
-                string methodName = ExtractMethodName(method.Parent.Attribute("Name").Value, method.Attribute("Name").Value);
+                string methodName = this.ExtractMethodName(method.Parent.Attribute("Name").Value, method.Attribute("Name").Value);
 
-                if (LambdaMethodNameRegex.IsMatch(methodName))
+                if (!this.RawMode && LambdaMethodNameRegex.IsMatch(methodName))
                 {
                     continue;
                 }
@@ -302,8 +302,13 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="typeName">The name of the class.</param>
         /// <param name="methodName">The full method name.</param>
         /// <returns>The method name.</returns>
-        private static string ExtractMethodName(string typeName, string methodName)
+        private string ExtractMethodName(string typeName, string methodName)
         {
+            if (this.RawMode)
+            {
+                return methodName;
+            }
+
             if (typeName.Contains("|") || methodName.Contains("|"))
             {
                 Match match = LocalFunctionMethodNameRegex.Match(typeName + methodName);

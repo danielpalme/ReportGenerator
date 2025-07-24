@@ -69,6 +69,10 @@ CHANGELOG
 
 5.4.9.0
 
+    * Fix: #746: Improved "raw mode" (settings:rawMode=true): Leave method names unchanged
+
+5.4.9.0
+
     * New: #744: Azure DevOps task: Added support for nodeJS 20
 
 5.4.8.0
