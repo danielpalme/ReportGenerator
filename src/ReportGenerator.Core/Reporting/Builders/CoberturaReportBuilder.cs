@@ -211,7 +211,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             rootElement.Add(new XAttribute("branches-valid", summaryResult.TotalBranches.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)));
             rootElement.Add(new XAttribute("complexity", summaryComplexity.HasValue ? summaryComplexity.Value.ToString(CultureInfo.InvariantCulture) : "NaN"));
             rootElement.Add(new XAttribute("version", 0));
-            rootElement.Add(new XAttribute("timestamp", ((long)(DateTime.Now - new DateTime(1970, 1, 1)).TotalSeconds).ToString(CultureInfo.InvariantCulture)));
+            rootElement.Add(new XAttribute("timestamp", ((long)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds).ToString(CultureInfo.InvariantCulture)));
 
             var sourcesElement = new XElement("sources");
 

@@ -67,9 +67,13 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
-5.4.9.0
+5.4.12.0
 
-    * Fix: #746: Improved "raw mode" (settings:rawMode=true): Leave method names unchanged
+    * Fix: #750: Cobertura reports now contain timestamp in UTC format
+
+5.4.10.0
+
+    * New: #746: Improved "raw mode" (settings:rawMode=true): Leave method names unchanged
 
 5.4.9.0
 
