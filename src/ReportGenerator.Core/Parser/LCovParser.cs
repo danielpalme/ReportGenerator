@@ -183,7 +183,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                     line = line.Substring(5);
                     string[] tokens = line.Split(',');
-                    int executionCount = int.Parse(tokens[0], CultureInfo.InvariantCulture);
+                    int executionCount = tokens[0].ParseLargeInteger();
 
                     if (executionCount == 0)
                     {

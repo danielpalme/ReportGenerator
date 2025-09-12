@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.4.13.0
+
+    * Fix: #751: Improved suport for large numbers in LCOV files
+
 5.4.12.0
 
     * Fix: #750: Cobertura reports now contain timestamp in UTC format
