@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <ProjectGuid>{19A59768-9410-440D-A857-A1B5.4.1287B8}</ProjectGuid>
+    <ProjectGuid>{19A59768-9410-440D-A857-A1B5.4.1387B8}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Palmmedia.ReportGenerator</RootNamespace>
     <AssemblyName>ReportGenerator</AssemblyName>
@@ -8,8 +8,8 @@
     <AssemblyTitle>ReportGenerator.Console</AssemblyTitle>
     <Product>ReportGenerator.Console</Product>
     <Copyright>Copyright © 2022</Copyright>
-    <AssemblyVersion>5.4.12.0</AssemblyVersion>
-    <FileVersion>5.4.12.0</FileVersion>
+    <AssemblyVersion>5.4.13.0</AssemblyVersion>
+    <FileVersion>5.4.13.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>

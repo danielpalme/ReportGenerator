@@ -13,7 +13,7 @@
     "version": {
         "Major": 5,
         "Minor": 4,
-        "Patch": 12
+        "Patch": 13
     },
     "instanceNameFormat": "ReportGenerator",
     "groups": [
