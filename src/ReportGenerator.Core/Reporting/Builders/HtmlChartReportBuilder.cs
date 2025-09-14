@@ -52,7 +52,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 reportRenderer.Chart(historicCoverages, proVersion);
             }
 
-            reportRenderer.CustomSummary(summaryResult.Assemblies, new List<RiskHotspot>(), summaryResult.SupportsBranchCoverage, true);
+            reportRenderer.CustomSummary(summaryResult.Assemblies, new List<RiskHotspot>(), summaryResult.SupportsBranchCoverage, true, false);
 
             reportRenderer.SaveSummaryReport(targetDirectory);
 

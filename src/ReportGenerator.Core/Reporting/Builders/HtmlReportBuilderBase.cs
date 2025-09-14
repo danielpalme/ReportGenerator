@@ -401,7 +401,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 assembliesWithClasses,
                 this.ReportContext.RiskHotspotAnalysisResult.RiskHotspots,
                 summaryResult.SupportsBranchCoverage,
-                proVersion);
+                proVersion,
+                this.ReportContext.Settings.ApplyMaximumGroupingLevel);
 
             reportRenderer.AddFooter();
             reportRenderer.SaveSummaryReport(this.CreateTargetDirectory());

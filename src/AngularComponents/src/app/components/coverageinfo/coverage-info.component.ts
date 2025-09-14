@@ -12,261 +12,382 @@ import { Helper } from "./viewmodels/helper.class";
 @Component({
     selector: "coverage-info",
     template: `
-  <div *ngIf="codeElements.length > 0">
-    <popup *ngIf="popupVisible"
-      [(visible)]="popupVisible"
-      [translations]="translations"
-      [branchCoverageAvailable]="branchCoverageAvailable"
-      [methodCoverageAvailable]="methodCoverageAvailable"
-      [metrics]="metrics"
-      [(showLineCoverage)]="settings.showLineCoverage"
-      [(showBranchCoverage)]="settings.showBranchCoverage"
-      [(showMethodCoverage)]="settings.showMethodCoverage"
-      [(showMethodFullCoverage)]="settings.showFullMethodCoverage"
-      [(visibleMetrics)]="settings.visibleMetrics">
-    </popup>
-    <div class="customizebox">
-      <div>
-        <a href="#" (click)="collapseAll($event)">{{translations.collapseAll}}</a>
-        |
-        <a href="#" (click)="expandAll($event)">{{translations.expandAll}}</a>
-      </div>
-      <div class="col-center">
-        <span class="slider-label">
-          <ng-container *ngIf="settings.grouping === -1">{{translations.noGrouping}}</ng-container>
-          <ng-container *ngIf="settings.grouping === 0">{{translations.byAssembly}}</ng-container>
-          <ng-container *ngIf="settings.grouping > 0">{{translations.byNamespace + ' ' + this.settings.grouping}}</ng-container>
-        </span>
-        <br />
-        {{translations.grouping}}
-        <input type="range" step="1" min="-1" [max]="settings.groupingMaximum"
-          [(ngModel)]="settings.grouping" (ngModelChange)="updateCoverageInfo()"/>
-      </div>
-      <div class="col-center">
-        <ng-container *ngIf="historicCoverageExecutionTimes.length > 0">
-          <div>
-            {{translations.compareHistory}}
-            <select [(ngModel)]="settings.historyComparisionDate" (ngModelChange)="updateCurrentHistoricCoverage()">
-              <option value="">{{translations.date}}</option>
-              <option *ngFor="let time of historicCoverageExecutionTimes" [value]="time">{{time}}</option>
-            </select>
+  @if (codeElements.length > 0) {
+    <div>
+      @if (popupVisible) {
+        <popup
+          [(visible)]="popupVisible"
+          [translations]="translations"
+          [branchCoverageAvailable]="branchCoverageAvailable"
+          [methodCoverageAvailable]="methodCoverageAvailable"
+          [metrics]="metrics"
+          [(showLineCoverage)]="settings.showLineCoverage"
+          [(showBranchCoverage)]="settings.showBranchCoverage"
+          [(showMethodCoverage)]="settings.showMethodCoverage"
+          [(showMethodFullCoverage)]="settings.showFullMethodCoverage"
+          [(visibleMetrics)]="settings.visibleMetrics">
+        </popup>
+      }
+      <div class="customizebox">
+        <div>
+          <a href="#" (click)="collapseAll($event)">{{translations.collapseAll}}</a>
+          |
+          <a href="#" (click)="expandAll($event)">{{translations.expandAll}}</a>
+        </div>
+        <div class="col-center">
+          <span class="slider-label">
+            @if (settings.grouping === -1) {
+              {{translations.noGrouping}}
+            }
+            @if (settings.grouping === 0) {
+              {{translations.byAssembly}}
+            }
+            @if (settings.grouping > 0) {
+              {{translations.byNamespace + ' ' + this.settings.grouping}}
+            }
+          </span>
+          <br />
+          {{translations.grouping}}
+          <input type="range" step="1" min="-1" [max]="settings.groupingMaximum"
+            [(ngModel)]="settings.grouping" (ngModelChange)="updateCoverageInfo()"/>
           </div>
-          <br *ngIf="settings.historyComparisionDate !== ''" />
-          <div *ngIf="settings.historyComparisionDate !== ''">
-            <select [(ngModel)]="settings.historyComparisionType">
-              <option value="">{{translations.filter}}</option>
-              <option value="allChanges">{{translations.allChanges}}</option>
-              <option value="lineCoverageIncreaseOnly">{{translations.lineCoverageIncreaseOnly}}</option>
-              <option value="lineCoverageDecreaseOnly">{{translations.lineCoverageDecreaseOnly}}</option>
-              <option value="branchCoverageIncreaseOnly" *ngIf="branchCoverageAvailable">
-                {{translations.branchCoverageIncreaseOnly}}
-              </option>
-              <option value="branchCoverageDecreaseOnly" *ngIf="branchCoverageAvailable">
-                {{translations.branchCoverageDecreaseOnly}}
-              </option>
-              <option value="methodCoverageIncreaseOnly" *ngIf="methodCoverageAvailable">
-                {{translations.methodCoverageIncreaseOnly}}
-              </option>
-              <option value="methodCoverageDecreaseOnly" *ngIf="methodCoverageAvailable">
-                {{translations.methodCoverageDecreaseOnly}}
-              </option>
-              <option value="fullMethodCoverageIncreaseOnly" *ngIf="methodCoverageAvailable">
-                {{translations.fullMethodCoverageIncreaseOnly}}
-              </option>
-              <option value="fullMethodCoverageDecreaseOnly" *ngIf="methodCoverageAvailable">
-                {{translations.fullMethodCoverageDecreaseOnly}}
-              </option>
-            </select>
+          <div class="col-center">
+            @if (historicCoverageExecutionTimes.length > 0) {
+              <div>
+                {{translations.compareHistory}}
+                <select [(ngModel)]="settings.historyComparisionDate" (ngModelChange)="updateCurrentHistoricCoverage()">
+                  <option value="">{{translations.date}}</option>
+                  @for (time of historicCoverageExecutionTimes; track time) {
+                    <option [value]="time">{{time}}</option>
+                  }
+                </select>
+              </div>
+              @if (settings.historyComparisionDate !== '') {
+                <br />
+              }
+              @if (settings.historyComparisionDate !== '') {
+                <div>
+                  <select [(ngModel)]="settings.historyComparisionType">
+                    <option value="">{{translations.filter}}</option>
+                    <option value="allChanges">{{translations.allChanges}}</option>
+                    <option value="lineCoverageIncreaseOnly">{{translations.lineCoverageIncreaseOnly}}</option>
+                    <option value="lineCoverageDecreaseOnly">{{translations.lineCoverageDecreaseOnly}}</option>
+                    @if (branchCoverageAvailable) {
+                      <option value="branchCoverageIncreaseOnly">
+                        {{translations.branchCoverageIncreaseOnly}}
+                      </option>
+                    }
+                    @if (branchCoverageAvailable) {
+                      <option value="branchCoverageDecreaseOnly">
+                        {{translations.branchCoverageDecreaseOnly}}
+                      </option>
+                    }
+                    @if (methodCoverageAvailable) {
+                      <option value="methodCoverageIncreaseOnly">
+                        {{translations.methodCoverageIncreaseOnly}}
+                      </option>
+                    }
+                    @if (methodCoverageAvailable) {
+                      <option value="methodCoverageDecreaseOnly">
+                        {{translations.methodCoverageDecreaseOnly}}
+                      </option>
+                    }
+                    @if (methodCoverageAvailable) {
+                      <option value="fullMethodCoverageIncreaseOnly">
+                        {{translations.fullMethodCoverageIncreaseOnly}}
+                      </option>
+                    }
+                    @if (methodCoverageAvailable) {
+                      <option value="fullMethodCoverageDecreaseOnly">
+                        {{translations.fullMethodCoverageDecreaseOnly}}
+                      </option>
+                    }
+                  </select>
+                </div>
+              }
+            }
           </div>
-        </ng-container>
-      </div>
-      <div class="col-right right">
-          <button type="button" (click)="popupVisible=true;"><i class="icon-cog"></i>{{ metrics.length > 0 ? translations.selectCoverageTypesAndMetrics :  translations.selectCoverageTypes}}</button>
-      </div>
-    </div>
-
-    <div class="table-responsive">
-      <table class="overview table-fixed stripped">
-        <colgroup>
-          <col class="column-min-200">
-          <col class="column90" *ngIf="settings.showLineCoverage">
-          <col class="column105" *ngIf="settings.showLineCoverage">
-          <col class="column100" *ngIf="settings.showLineCoverage">
-          <col class="column70" *ngIf="settings.showLineCoverage">
-          <col class="column98" *ngIf="settings.showLineCoverage">
-          <col class="column112" *ngIf="settings.showLineCoverage">
-          <col class="column90" *ngIf="branchCoverageAvailable && settings.showBranchCoverage">
-          <col class="column70" *ngIf="branchCoverageAvailable && settings.showBranchCoverage">
-          <col class="column98" *ngIf="branchCoverageAvailable && settings.showBranchCoverage">
-          <col class="column112" *ngIf="branchCoverageAvailable && settings.showBranchCoverage">
-          <col class="column90" *ngIf="methodCoverageAvailable && settings.showMethodCoverage">
-          <col class="column70" *ngIf="methodCoverageAvailable && settings.showMethodCoverage">
-          <col class="column98" *ngIf="methodCoverageAvailable && settings.showMethodCoverage">
-          <col class="column112" *ngIf="methodCoverageAvailable && settings.showMethodCoverage">
-          <col class="column90" *ngIf="methodCoverageAvailable && settings.showFullMethodCoverage">
-          <col class="column70" *ngIf="methodCoverageAvailable && settings.showFullMethodCoverage">
-          <col class="column98" *ngIf="methodCoverageAvailable && settings.showFullMethodCoverage">
-          <col class="column112" *ngIf="methodCoverageAvailable && settings.showFullMethodCoverage">
-          <col class="column112" *ngFor="let metric of settings.visibleMetrics">
-        </colgroup>
-        <thead>
-          <tr class="header">
-            <th></th>
-            <th class="center" colspan="6" *ngIf="settings.showLineCoverage">{{translations.coverage}}</th>
-            <th class="center" colspan="4" *ngIf="branchCoverageAvailable && settings.showBranchCoverage">{{translations.branchCoverage}}</th>
-            <th class="center" colspan="4" *ngIf="methodCoverageAvailable && settings.showMethodCoverage">{{translations.methodCoverage}}</th>
-            <th class="center" colspan="4" *ngIf="methodCoverageAvailable && settings.showFullMethodCoverage">{{translations.fullMethodCoverage}}</th>
-            <th class="center" [attr.colspan]="settings.visibleMetrics.length" *ngIf="settings.visibleMetrics.length > 0">{{translations.metrics}}</th>
-          </tr>
-          <tr class="filterbar">
-            <td>
-              <input type="text" [(ngModel)]="settings.filter" placeholder="{{translations.filter}}" />
-            </td>
-            <td class="center" colspan="6" *ngIf="settings.showLineCoverage">
-              <ngx-slider [(value)]="settings.lineCoverageMin" [(highValue)]="settings.lineCoverageMax" [options]="sliderOptions"></ngx-slider>
-            </td>
-            <td class="center" colspan="4" *ngIf="branchCoverageAvailable && settings.showBranchCoverage">
-              <ngx-slider [(value)]="settings.branchCoverageMin" [(highValue)]="settings.branchCoverageMax" [options]="sliderOptions"></ngx-slider>
-            </td>
-            <td class="center" colspan="4" *ngIf="methodCoverageAvailable && settings.showMethodCoverage">
-              <ngx-slider [(value)]="settings.methodCoverageMin" [(highValue)]="settings.methodCoverageMax" [options]="sliderOptions"></ngx-slider>
-            </td>
-            <td class="center" colspan="4" *ngIf="methodCoverageAvailable && settings.showFullMethodCoverage">
-              <ngx-slider [(value)]="settings.methodFullCoverageMin" [(highValue)]="settings.methodFullCoverageMax" [options]="sliderOptions"></ngx-slider>
-            </td>
-            <td class="center" [attr.colspan]="settings.visibleMetrics.length" *ngIf="settings.visibleMetrics.length > 0"></td>
-          </tr>
-          <tr>
-            <th><a href="#" (click)="updateSorting('name', $event)"><i
+          <div class="col-right right">
+            <button type="button" (click)="popupVisible=true;"><i class="icon-cog"></i>{{ metrics.length > 0 ? translations.selectCoverageTypesAndMetrics :  translations.selectCoverageTypes}}</button>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="overview table-fixed stripped">
+            <colgroup>
+            <col class="column-min-200">
+            @if (settings.showLineCoverage) {
+              <col class="column90">
+            }
+            @if (settings.showLineCoverage) {
+              <col class="column105">
+            }
+            @if (settings.showLineCoverage) {
+              <col class="column100">
+            }
+            @if (settings.showLineCoverage) {
+              <col class="column70">
+            }
+            @if (settings.showLineCoverage) {
+              <col class="column98">
+            }
+            @if (settings.showLineCoverage) {
+              <col class="column112">
+            }
+            @if (branchCoverageAvailable && settings.showBranchCoverage) {
+              <col class="column90">
+            }
+            @if (branchCoverageAvailable && settings.showBranchCoverage) {
+              <col class="column70">
+            }
+            @if (branchCoverageAvailable && settings.showBranchCoverage) {
+              <col class="column98">
+            }
+            @if (branchCoverageAvailable && settings.showBranchCoverage) {
+              <col class="column112">
+            }
+            @if (methodCoverageAvailable && settings.showMethodCoverage) {
+              <col class="column90">
+            }
+            @if (methodCoverageAvailable && settings.showMethodCoverage) {
+              <col class="column70">
+            }
+            @if (methodCoverageAvailable && settings.showMethodCoverage) {
+              <col class="column98">
+            }
+            @if (methodCoverageAvailable && settings.showMethodCoverage) {
+              <col class="column112">
+            }
+            @if (methodCoverageAvailable && settings.showFullMethodCoverage) {
+              <col class="column90">
+            }
+            @if (methodCoverageAvailable && settings.showFullMethodCoverage) {
+              <col class="column70">
+            }
+            @if (methodCoverageAvailable && settings.showFullMethodCoverage) {
+              <col class="column98">
+            }
+            @if (methodCoverageAvailable && settings.showFullMethodCoverage) {
+              <col class="column112">
+            }
+            @for (metric of settings.visibleMetrics; track metric) {
+              <col class="column112">
+            }
+          </colgroup>
+          <thead>
+            <tr class="header">
+              <th></th>
+              @if (settings.showLineCoverage) {
+                <th class="center" colspan="6">{{translations.coverage}}</th>
+              }
+              @if (branchCoverageAvailable && settings.showBranchCoverage) {
+                <th class="center" colspan="4">{{translations.branchCoverage}}</th>
+              }
+              @if (methodCoverageAvailable && settings.showMethodCoverage) {
+                <th class="center" colspan="4">{{translations.methodCoverage}}</th>
+              }
+              @if (methodCoverageAvailable && settings.showFullMethodCoverage) {
+                <th class="center" colspan="4">{{translations.fullMethodCoverage}}</th>
+              }
+              @if (settings.visibleMetrics.length > 0) {
+                <th class="center" [attr.colspan]="settings.visibleMetrics.length">{{translations.metrics}}</th>
+              }
+            </tr>
+            <tr class="filterbar">
+              <td>
+                <input type="search" [(ngModel)]="settings.filter" placeholder="{{translations.filter}}" />
+              </td>
+              @if (settings.showLineCoverage) {
+                <td class="center" colspan="6">
+                  <ngx-slider [(value)]="settings.lineCoverageMin" [(highValue)]="settings.lineCoverageMax" [options]="sliderOptions"></ngx-slider>
+                </td>
+              }
+              @if (branchCoverageAvailable && settings.showBranchCoverage) {
+                <td class="center" colspan="4">
+                  <ngx-slider [(value)]="settings.branchCoverageMin" [(highValue)]="settings.branchCoverageMax" [options]="sliderOptions"></ngx-slider>
+                </td>
+              }
+              @if (methodCoverageAvailable && settings.showMethodCoverage) {
+                <td class="center" colspan="4">
+                  <ngx-slider [(value)]="settings.methodCoverageMin" [(highValue)]="settings.methodCoverageMax" [options]="sliderOptions"></ngx-slider>
+                </td>
+              }
+              @if (methodCoverageAvailable && settings.showFullMethodCoverage) {
+                <td class="center" colspan="4">
+                  <ngx-slider [(value)]="settings.methodFullCoverageMin" [(highValue)]="settings.methodFullCoverageMax" [options]="sliderOptions"></ngx-slider>
+                </td>
+              }
+              @if (settings.visibleMetrics.length > 0) {
+                <td class="center" [attr.colspan]="settings.visibleMetrics.length"></td>
+              }
+            </tr>
+            <tr>
+              <th><a href="#" (click)="updateSorting('name', $event)"><i
               [ngClass]="{'icon-up-dir_active': settings.sortBy === 'name' && settings.sortOrder === 'asc',
               'icon-down-dir_active': settings.sortBy === 'name' && settings.sortOrder === 'desc',
               'icon-up-down-dir': settings.sortBy !== 'name'}"></i>{{translations.name}}</a></th>
-            <th class="right" *ngIf="settings.showLineCoverage"><a href="#" (click)="updateSorting('covered', $event)"><i
+              @if (settings.showLineCoverage) {
+                <th class="right"><a href="#" (click)="updateSorting('covered', $event)"><i
               [ngClass]="{'icon-up-dir_active': settings.sortBy === 'covered' && settings.sortOrder === 'asc',
               'icon-down-dir_active': settings.sortBy === 'covered' && settings.sortOrder === 'desc',
               'icon-up-down-dir': settings.sortBy !== 'covered'}"></i>{{translations.covered}}</a></th>
-            <th class="right" *ngIf="settings.showLineCoverage"><a href="#" (click)="updateSorting('uncovered', $event)"><i
+              }
+              @if (settings.showLineCoverage) {
+                <th class="right"><a href="#" (click)="updateSorting('uncovered', $event)"><i
               [ngClass]="{'icon-up-dir_active': settings.sortBy === 'uncovered' && settings.sortOrder === 'asc',
               'icon-down-dir_active': settings.sortBy === 'uncovered' && settings.sortOrder === 'desc',
               'icon-up-down-dir': settings.sortBy !== 'uncovered'}"></i>{{translations.uncovered}}</a></th>
-            <th class="right" *ngIf="settings.showLineCoverage"><a href="#" (click)="updateSorting('coverable', $event)"><i
+              }
+              @if (settings.showLineCoverage) {
+                <th class="right"><a href="#" (click)="updateSorting('coverable', $event)"><i
                 [ngClass]="{'icon-up-dir_active': settings.sortBy === 'coverable' && settings.sortOrder === 'asc',
                 'icon-down-dir_active': settings.sortBy === 'coverable' && settings.sortOrder === 'desc',
                 'icon-up-down-dir': settings.sortBy !== 'coverable'}"></i>{{translations.coverable}}</a></th>
-            <th class="right" *ngIf="settings.showLineCoverage"><a href="#" (click)="updateSorting('total', $event)"><i
+              }
+              @if (settings.showLineCoverage) {
+                <th class="right"><a href="#" (click)="updateSorting('total', $event)"><i
                 [ngClass]="{'icon-up-dir_active': settings.sortBy === 'total' && settings.sortOrder === 'asc',
                 'icon-down-dir_active': settings.sortBy === 'total' && settings.sortOrder === 'desc',
                 'icon-up-down-dir': settings.sortBy !== 'total'}"></i>{{translations.total}}</a></th>
-            <th class="center" colspan="2" *ngIf="settings.showLineCoverage">
-                <a href="#" (click)="updateSorting('coverage', $event)"><i
+              }
+              @if (settings.showLineCoverage) {
+                <th class="center" colspan="2">
+                  <a href="#" (click)="updateSorting('coverage', $event)"><i
                   [ngClass]="{'icon-up-dir_active': settings.sortBy === 'coverage' && settings.sortOrder === 'asc',
                   'icon-down-dir_active': settings.sortBy === 'coverage' && settings.sortOrder === 'desc',
                   'icon-up-down-dir': settings.sortBy !== 'coverage'}"></i>{{translations.percentage}}</a></th>
-            <th class="right" *ngIf="branchCoverageAvailable && settings.showBranchCoverage"><a href="#" (click)="updateSorting('covered_branches', $event)"><i
+                }
+                @if (branchCoverageAvailable && settings.showBranchCoverage) {
+                  <th class="right"><a href="#" (click)="updateSorting('covered_branches', $event)"><i
               [ngClass]="{'icon-up-dir_active': settings.sortBy === 'covered_branches' && settings.sortOrder === 'asc',
               'icon-down-dir_active': settings.sortBy === 'covered_branches' && settings.sortOrder === 'desc',
               'icon-up-down-dir': settings.sortBy !== 'covered_branches'}"></i>{{translations.covered}}</a></th>
-            <th class="right" *ngIf="branchCoverageAvailable && settings.showBranchCoverage"><a href="#" (click)="updateSorting('total_branches', $event)"><i
+                }
+                @if (branchCoverageAvailable && settings.showBranchCoverage) {
+                  <th class="right"><a href="#" (click)="updateSorting('total_branches', $event)"><i
                 [ngClass]="{'icon-up-dir_active': settings.sortBy === 'total_branches' && settings.sortOrder === 'asc',
                 'icon-down-dir_active': settings.sortBy === 'total_branches' && settings.sortOrder === 'desc',
                 'icon-up-down-dir': settings.sortBy !== 'total_branches'}"></i>{{translations.total}}</a></th>
-            <th class="center" colspan="2" *ngIf="branchCoverageAvailable && settings.showBranchCoverage">
-                <a href="#" (click)="updateSorting('branchcoverage', $event)"><i
+                }
+                @if (branchCoverageAvailable && settings.showBranchCoverage) {
+                  <th class="center" colspan="2">
+                    <a href="#" (click)="updateSorting('branchcoverage', $event)"><i
                   [ngClass]="{'icon-up-dir_active': settings.sortBy === 'branchcoverage' && settings.sortOrder === 'asc',
                   'icon-down-dir_active': settings.sortBy === 'branchcoverage' && settings.sortOrder === 'desc',
                   'icon-up-down-dir': settings.sortBy !== 'branchcoverage'}"></i>{{translations.percentage}}</a></th>
-            <th class="right" *ngIf="methodCoverageAvailable && settings.showMethodCoverage"><a href="#" (click)="updateSorting('covered_methods', $event)"><i
+                  }
+                  @if (methodCoverageAvailable && settings.showMethodCoverage) {
+                    <th class="right"><a href="#" (click)="updateSorting('covered_methods', $event)"><i
               [ngClass]="{'icon-up-dir_active': settings.sortBy === 'covered_methods' && settings.sortOrder === 'asc',
               'icon-down-dir_active': settings.sortBy === 'covered_methods' && settings.sortOrder === 'desc',
               'icon-up-down-dir': settings.sortBy !== 'covered_methods'}"></i>{{translations.covered}}</a></th>
-            <th class="right" *ngIf="methodCoverageAvailable && settings.showMethodCoverage"><a href="#" (click)="updateSorting('total_methods', $event)"><i
+                  }
+                  @if (methodCoverageAvailable && settings.showMethodCoverage) {
+                    <th class="right"><a href="#" (click)="updateSorting('total_methods', $event)"><i
                 [ngClass]="{'icon-up-dir_active': settings.sortBy === 'total_methods' && settings.sortOrder === 'asc',
                 'icon-down-dir_active': settings.sortBy === 'total_methods' && settings.sortOrder === 'desc',
                 'icon-up-down-dir': settings.sortBy !== 'total_methods'}"></i>{{translations.total}}</a></th>
-            <th class="center" colspan="2" *ngIf="methodCoverageAvailable && settings.showMethodCoverage">
-                <a href="#" (click)="updateSorting('methodcoverage', $event)"><i
+                  }
+                  @if (methodCoverageAvailable && settings.showMethodCoverage) {
+                    <th class="center" colspan="2">
+                      <a href="#" (click)="updateSorting('methodcoverage', $event)"><i
                   [ngClass]="{'icon-up-dir_active': settings.sortBy === 'methodcoverage' && settings.sortOrder === 'asc',
                   'icon-down-dir_active': settings.sortBy === 'methodcoverage' && settings.sortOrder === 'desc',
                   'icon-up-down-dir': settings.sortBy !== 'methodcoverage'}"></i>{{translations.percentage}}</a></th>
-            <th class="right" *ngIf="methodCoverageAvailable && settings.showFullMethodCoverage"><a href="#" (click)="updateSorting('fullycovered_methods', $event)"><i
+                    }
+                    @if (methodCoverageAvailable && settings.showFullMethodCoverage) {
+                      <th class="right"><a href="#" (click)="updateSorting('fullycovered_methods', $event)"><i
               [ngClass]="{'icon-up-dir_active': settings.sortBy === 'fullycovered_methods' && settings.sortOrder === 'asc',
               'icon-down-dir_active': settings.sortBy === 'fullycovered_methods' && settings.sortOrder === 'desc',
               'icon-up-down-dir': settings.sortBy !== 'fullycovered_methods'}"></i>{{translations.covered}}</a></th>
-            <th class="right" *ngIf="methodCoverageAvailable && settings.showFullMethodCoverage"><a href="#" (click)="updateSorting('total_methods', $event)"><i
+                    }
+                    @if (methodCoverageAvailable && settings.showFullMethodCoverage) {
+                      <th class="right"><a href="#" (click)="updateSorting('total_methods', $event)"><i
                 [ngClass]="{'icon-up-dir_active': settings.sortBy === 'total_methods' && settings.sortOrder === 'asc',
                 'icon-down-dir_active': settings.sortBy === 'total_methods' && settings.sortOrder === 'desc',
                 'icon-up-down-dir': settings.sortBy !== 'total_methods'}"></i>{{translations.total}}</a></th>
-            <th class="center" colspan="2" *ngIf="methodCoverageAvailable && settings.showFullMethodCoverage">
-                <a href="#" (click)="updateSorting('methodfullcoverage', $event)"><i
+                    }
+                    @if (methodCoverageAvailable && settings.showFullMethodCoverage) {
+                      <th class="center" colspan="2">
+                        <a href="#" (click)="updateSorting('methodfullcoverage', $event)"><i
                   [ngClass]="{'icon-up-dir_active': settings.sortBy === 'methodfullcoverage' && settings.sortOrder === 'asc',
                   'icon-down-dir_active': settings.sortBy === 'methodfullcoverage' && settings.sortOrder === 'desc',
                   'icon-up-down-dir': settings.sortBy !== 'methodfullcoverage'}"></i>{{translations.percentage}}</a></th>
-            <th *ngFor="let metric of settings.visibleMetrics">
-              <a href="#" (click)="updateSorting(metric.abbreviation, $event)"><i
+                      }
+                      @for (metric of settings.visibleMetrics; track metric) {
+                        <th>
+                          <a href="#" (click)="updateSorting(metric.abbreviation, $event)"><i
                   [ngClass]="{'icon-up-dir_active': settings.sortBy === metric.abbreviation && settings.sortOrder === 'asc',
                   'icon-down-dir_active': settings.sortBy === metric.abbreviation && settings.sortOrder === 'desc',
                   'icon-up-down-dir': settings.sortBy !== metric.abbreviation}"></i>{{metric.name}}</a><a href="{{metric.explanationUrl}}" target="_blank"><i class="icon-info-circled"></i></a>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <ng-container *ngFor="let element of codeElements">
-            <tr *ngIf="element.visible(settings)"
-              codeelement-row
-              [element]="element"
-              [collapsed]="element.collapsed"
-              [lineCoverageAvailable]="settings.showLineCoverage"
-              [branchCoverageAvailable]="branchCoverageAvailable && settings.showBranchCoverage"
-              [methodCoverageAvailable]="methodCoverageAvailable && settings.showMethodCoverage"
-              [methodFullCoverageAvailable]="methodCoverageAvailable && settings.showFullMethodCoverage"
-              [visibleMetrics]="settings.visibleMetrics">
-            </tr>
-            <ng-container *ngFor="let clazz of element.classes">
-              <tr *ngIf="!element.collapsed
-                && clazz.visible(settings)"
-                class-row [clazz]="clazz"
-                  [translations]="translations"
-                  [lineCoverageAvailable]="settings.showLineCoverage"
-                  [branchCoverageAvailable]="branchCoverageAvailable && settings.showBranchCoverage"
-                  [methodCoverageAvailable]="methodCoverageAvailable && settings.showMethodCoverage"
-                  [methodFullCoverageAvailable]="methodCoverageAvailable && settings.showFullMethodCoverage"
-                  [visibleMetrics]="settings.visibleMetrics"
-                  [historyComparisionDate]="settings.historyComparisionDate">
-              </tr>
-            </ng-container>
-            <ng-container *ngFor="let subElement of element.subElements">
-              <ng-container *ngIf="!element.collapsed
-                && subElement.visible(settings)">
-               <tr class="namespace"
-                 codeelement-row
-                 [element]="subElement"
-                 [collapsed]="subElement.collapsed"
-                 [lineCoverageAvailable]="settings.showLineCoverage"
-                 [branchCoverageAvailable]="branchCoverageAvailable && settings.showBranchCoverage"
-                 [methodCoverageAvailable]="methodCoverageAvailable && settings.showMethodCoverage"
-                 [methodFullCoverageAvailable]="methodCoverageAvailable && settings.showFullMethodCoverage"
-                 [visibleMetrics]="settings.visibleMetrics">
-                </tr>
-                <ng-container *ngFor="let clazz of subElement.classes">
-                  <tr class="namespace" *ngIf="!subElement.collapsed
-                   && clazz.visible(settings)"
-                   class-row [clazz]="clazz"
-                    [translations]="translations"
-                    [lineCoverageAvailable]="settings.showLineCoverage"
-                    [branchCoverageAvailable]="branchCoverageAvailable && settings.showBranchCoverage"
-                    [methodCoverageAvailable]="methodCoverageAvailable && settings.showMethodCoverage"
-                    [methodFullCoverageAvailable]="methodCoverageAvailable && settings.showFullMethodCoverage"
-                    [visibleMetrics]="settings.visibleMetrics"
-                    [historyComparisionDate]="settings.historyComparisionDate">
-                  </tr>
-                </ng-container>
-              </ng-container>
-            </ng-container>
-          </ng-container>
-        </tbody>
-      </table>
-    </div>
-  </div>`,
+                          </th>
+                        }
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @for (element of codeElements; track element) {
+                        @if (element.visible(settings)) {
+                          <tr
+                            codeelement-row
+                            [element]="element"
+                            [collapsed]="element.collapsed"
+                            [lineCoverageAvailable]="settings.showLineCoverage"
+                            [branchCoverageAvailable]="branchCoverageAvailable && settings.showBranchCoverage"
+                            [methodCoverageAvailable]="methodCoverageAvailable && settings.showMethodCoverage"
+                            [methodFullCoverageAvailable]="methodCoverageAvailable && settings.showFullMethodCoverage"
+                            [visibleMetrics]="settings.visibleMetrics">
+                          </tr>
+                        }
+                        @for (clazz of element.classes; track clazz) {
+                          @if (!element.collapsed
+                            && clazz.visible(settings)) {
+                            <tr
+                              class-row [clazz]="clazz"
+                              [translations]="translations"
+                              [lineCoverageAvailable]="settings.showLineCoverage"
+                              [branchCoverageAvailable]="branchCoverageAvailable && settings.showBranchCoverage"
+                              [methodCoverageAvailable]="methodCoverageAvailable && settings.showMethodCoverage"
+                              [methodFullCoverageAvailable]="methodCoverageAvailable && settings.showFullMethodCoverage"
+                              [visibleMetrics]="settings.visibleMetrics"
+                              [historyComparisionDate]="settings.historyComparisionDate">
+                            </tr>
+                          }
+                        }
+                        @for (subElement of element.subElements; track subElement) {
+                          @if (!element.collapsed
+                            && subElement.visible(settings)) {
+                            <tr class="namespace"
+                              codeelement-row
+                              [element]="subElement"
+                              [collapsed]="subElement.collapsed"
+                              [lineCoverageAvailable]="settings.showLineCoverage"
+                              [branchCoverageAvailable]="branchCoverageAvailable && settings.showBranchCoverage"
+                              [methodCoverageAvailable]="methodCoverageAvailable && settings.showMethodCoverage"
+                              [methodFullCoverageAvailable]="methodCoverageAvailable && settings.showFullMethodCoverage"
+                              [visibleMetrics]="settings.visibleMetrics">
+                            </tr>
+                            @for (clazz of subElement.classes; track clazz) {
+                              @if (!subElement.collapsed
+                                && clazz.visible(settings)) {
+                                <tr class="namespace"
+                                  class-row [clazz]="clazz"
+                                  [translations]="translations"
+                                  [lineCoverageAvailable]="settings.showLineCoverage"
+                                  [branchCoverageAvailable]="branchCoverageAvailable && settings.showBranchCoverage"
+                                  [methodCoverageAvailable]="methodCoverageAvailable && settings.showMethodCoverage"
+                                  [methodFullCoverageAvailable]="methodCoverageAvailable && settings.showFullMethodCoverage"
+                                  [visibleMetrics]="settings.visibleMetrics"
+                                  [historyComparisionDate]="settings.historyComparisionDate">
+                                </tr>
+                              }
+                            }
+                          }
+                        }
+                      }
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            }`,
     standalone: false
 })
 export class CoverageInfoComponent {
@@ -330,6 +451,10 @@ export class CoverageInfoComponent {
 
       this.settings.groupingMaximum = groupingMaximum;
       console.log("Grouping maximum: " + groupingMaximum);
+
+      if ((<any>this.window).applyMaximumGroupingLevel) {
+        this.settings.grouping = groupingMaximum;
+      }
 
       this.settings.showBranchCoverage = this.branchCoverageAvailable;
       this.settings.showMethodCoverage = this.methodCoverageAvailable;

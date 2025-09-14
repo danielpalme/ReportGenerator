@@ -349,6 +349,15 @@ namespace Palmmedia.ReportGenerator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The risk hotspot value {0} for assembly &apos;{1}&apos; class &apos;{2}&apos; method &apos;{3}&apos; metric &apos;{4}&apos; is greater than the maximum threshold of {5}..
+        /// </summary>
+        internal static string ErrorRiskHotspot {
+            get {
+                return ResourceManager.GetString("ErrorRiskHotspot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Executable.
         /// </summary>
         internal static string Executable {

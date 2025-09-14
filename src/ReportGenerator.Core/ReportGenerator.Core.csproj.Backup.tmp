@@ -1,0 +1,108 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Palmmedia.ReportGenerator.Core</RootNamespace>
+    <OutputType>Exe</OutputType>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <AssemblyName>ReportGenerator.Core</AssemblyName>
+    <AssemblyVersion>5.4.12.0</AssemblyVersion>
+    <FileVersion>5.4.12.0</FileVersion>
+  </PropertyGroup>
+    
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>stylecop.ruleset</CodeAnalysisRuleSet>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Reporting\Builders\Rendering\resources\chartist.min.css" />
+    <None Remove="Reporting\Builders\Rendering\resources\chartist.min.js" />
+    <None Remove="Reporting\Builders\Rendering\resources\custom-azurepipelines_adaptive.css" />
+    <None Remove="Reporting\Builders\Rendering\resources\custom-azurepipelines_dark.css" />
+    <None Remove="Reporting\Builders\Rendering\resources\custom.css" />
+    <None Remove="Reporting\Builders\Rendering\resources\custom-azurepipelines.css" />
+    <None Remove="Reporting\Builders\Rendering\resources\custom.js" />
+    <None Remove="Reporting\Builders\Rendering\resources\custom_adaptive.css" />
+    <None Remove="Reporting\Builders\Rendering\resources\custom_bluered.css" />
+    <None Remove="Reporting\Builders\Rendering\resources\custom_dark.css" />
+    <None Remove="Reporting\Builders\Rendering\resources\main.js" />
+    <None Remove="Reporting\Builders\Rendering\resources\polyfills.js" />
+    <None Remove="Reporting\Builders\Rendering\resources\runtime.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\chartist.min.css" />
+    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\chartist.min.js" />
+    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom_bluered.css" />
+    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom_dark.css" />
+    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom_adaptive.css" />
+    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom-azurepipelines_adaptive.css" />
+    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom-azurepipelines_dark.css" />
+    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom.css" />
+    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom-azurepipelines.css" />
+    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\custom.js" />
+    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\main.js" />
+    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\polyfills.js" />
+    <EmbeddedResource Include="Reporting\Builders\Rendering\resources\runtime.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Help.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Help.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\ReportResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ReportResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Help.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Help.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\ReportResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ReportResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotNetConfig" Version="1.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="9.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.9" />
+    <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="9.0.9" />
+    <PackageReference Include="System.Text.Json" Version="9.0.9" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="8.0.0" />
+  </ItemGroup>
+
+</Project>

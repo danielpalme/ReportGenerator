@@ -7,33 +7,71 @@ import { CodeElementViewModel } from "./viewmodels/codelement-viewmodel.class";
     template: `
 <th><a href="#" (click)="element.toggleCollapse($event)">
   <i [ngClass]="{'icon-plus': element.collapsed, 'icon-minus': !element.collapsed}"></i>
-  {{element.name}}</a>
+{{element.name}}</a>
 </th>
-<th class="right" *ngIf="lineCoverageAvailable">{{element.coveredLines}}</th>
-<th class="right" *ngIf="lineCoverageAvailable">{{element.uncoveredLines}}</th>
-<th class="right" *ngIf="lineCoverageAvailable">{{element.coverableLines}}</th>
-<th class="right" *ngIf="lineCoverageAvailable">{{element.totalLines}}</th>
-<th class="right" [title]="element.coverageRatioText" *ngIf="lineCoverageAvailable">{{element.coveragePercentage}}</th>
-<th class="right" *ngIf="lineCoverageAvailable"><coverage-bar [percentage]="element.coverage"></coverage-bar></th>
-<th class="right" *ngIf="branchCoverageAvailable">{{element.coveredBranches}}</th>
-<th class="right" *ngIf="branchCoverageAvailable">{{element.totalBranches}}</th>
-<th class="right" *ngIf="branchCoverageAvailable" [title]="element.branchCoverageRatioText">{{element.branchCoveragePercentage}}</th>
-<th class="right" *ngIf="branchCoverageAvailable">
-  <coverage-bar [percentage]="element.branchCoverage"></coverage-bar>
-</th>
-<th class="right" *ngIf="methodCoverageAvailable">{{element.coveredMethods}}</th>
-<th class="right" *ngIf="methodCoverageAvailable">{{element.totalMethods}}</th>
-<th class="right" *ngIf="methodCoverageAvailable" [title]="element.methodCoverageRatioText">{{element.methodCoveragePercentage}}</th>
-<th class="right" *ngIf="methodCoverageAvailable">
-  <coverage-bar [percentage]="element.methodCoverage"></coverage-bar>
-</th>
-<th class="right" *ngIf="methodFullCoverageAvailable">{{element.fullyCoveredMethods}}</th>
-<th class="right" *ngIf="methodFullCoverageAvailable">{{element.totalMethods}}</th>
-<th class="right" *ngIf="methodFullCoverageAvailable" [title]="element.methodFullCoverageRatioText">{{element.methodFullCoveragePercentage}}</th>
-<th class="right" *ngIf="methodFullCoverageAvailable">
-  <coverage-bar [percentage]="element.methodFullCoverage"></coverage-bar>
-</th>
-<th class="right" *ngFor="let metric of visibleMetrics"></th>`,
+@if (lineCoverageAvailable) {
+  <th class="right">{{element.coveredLines}}</th>
+}
+@if (lineCoverageAvailable) {
+  <th class="right">{{element.uncoveredLines}}</th>
+}
+@if (lineCoverageAvailable) {
+  <th class="right">{{element.coverableLines}}</th>
+}
+@if (lineCoverageAvailable) {
+  <th class="right">{{element.totalLines}}</th>
+}
+@if (lineCoverageAvailable) {
+  <th class="right" [title]="element.coverageRatioText">{{element.coveragePercentage}}</th>
+}
+@if (lineCoverageAvailable) {
+  <th class="right"><coverage-bar [percentage]="element.coverage"></coverage-bar></th>
+}
+@if (branchCoverageAvailable) {
+  <th class="right">{{element.coveredBranches}}</th>
+}
+@if (branchCoverageAvailable) {
+  <th class="right">{{element.totalBranches}}</th>
+}
+@if (branchCoverageAvailable) {
+  <th class="right" [title]="element.branchCoverageRatioText">{{element.branchCoveragePercentage}}</th>
+}
+@if (branchCoverageAvailable) {
+  <th class="right">
+    <coverage-bar [percentage]="element.branchCoverage"></coverage-bar>
+  </th>
+}
+@if (methodCoverageAvailable) {
+  <th class="right">{{element.coveredMethods}}</th>
+}
+@if (methodCoverageAvailable) {
+  <th class="right">{{element.totalMethods}}</th>
+}
+@if (methodCoverageAvailable) {
+  <th class="right" [title]="element.methodCoverageRatioText">{{element.methodCoveragePercentage}}</th>
+}
+@if (methodCoverageAvailable) {
+  <th class="right">
+    <coverage-bar [percentage]="element.methodCoverage"></coverage-bar>
+  </th>
+}
+@if (methodFullCoverageAvailable) {
+  <th class="right">{{element.fullyCoveredMethods}}</th>
+}
+@if (methodFullCoverageAvailable) {
+  <th class="right">{{element.totalMethods}}</th>
+}
+@if (methodFullCoverageAvailable) {
+  <th class="right" [title]="element.methodFullCoverageRatioText">{{element.methodFullCoveragePercentage}}</th>
+}
+@if (methodFullCoverageAvailable) {
+  <th class="right">
+    <coverage-bar [percentage]="element.methodFullCoverage"></coverage-bar>
+  </th>
+}
+@for (metric of visibleMetrics; track metric) {
+  <th class="right"></th>
+}`,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })

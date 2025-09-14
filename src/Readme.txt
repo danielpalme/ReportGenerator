@@ -67,6 +67,32 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.4.13.0
+
+    * Fix: #751: Improved support for large numbers in LCOV files
+
+5.4.12.0
+
+    * Fix: #750: Cobertura reports now contain timestamp in UTC format
+
+5.4.10.0
+
+    * New: #746: Improved "raw mode" (settings:rawMode=true): Leave method names unchanged
+
+5.4.9.0
+
+    * New: #744: Azure DevOps task: Added support for nodeJS 20
+
+5.4.8.0
+
+    * New: #737 Improved lcov support (take FNDA elements into account to determine whether a code element has been covered)
+    * New: #741 Charts does not render "Full method coverage" elements if coverage information is not available
+    * New: Added new setting "applyMaximumGroupingLevel". This allows to apply the maximum grouping level instead of the default 'By assembly' grouping in HTML reports.
+
+5.4.7.0
+
+    * New: #731 Added option to break build when maximum risk hotspots metrics are exceeded
+
 5.4.6.0
 
     * Fix: #730 Added support for the REPORTGENERATOR_LICENSE environment variable in the MSBuild task (contributed by @0xced)
@@ -142,7 +168,7 @@ CHANGELOG
 
 5.3.0.0
 
-    * New: Azure DevOps task: Added new setting "publishCodeCoverageResults" This allows to publish report in 'Code Coverage' tab directly. 
+    * New: Azure DevOps task: Added new setting "publishCodeCoverageResults". This allows to publish report in 'Code Coverage' tab directly.
            Makes the 'PublishCodeCoverageResults' task obsolete.
     * New: #662: Added ability to filter by coverage in Html reports
     * New: #667: Added new report type 'MarkdownAssembliesSummary'

@@ -56,6 +56,23 @@ namespace Palmmedia.ReportGenerator.Core.Common
         }
 
         /// <summary>
+        /// Computes the sum of the sequence of System.Int32 values that are obtained by invoking a transform function on each element of the input sequence. If an OverflowException occurs, the Int32.MaxValue is returned.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <param name="source">A sequence of values that are used to calculate a sum.</param>
+        /// <param name="selector">A transform function to apply to each element.</param>
+        /// <returns>The sum of the projected values.</returns>
+        public static int? SafeSumNullable<TSource>(this IEnumerable<TSource> source, Func<TSource, int?> selector)
+        {
+            if (source.All(x => !selector(x).HasValue))
+            {
+                return null;
+            }
+
+            return source.SafeSum(selector);
+        }
+
+        /// <summary>
         /// Computes the sum of the sequence of System.Int64 values that are obtained by invoking a transform function on each element of the input sequence. If an OverflowException occurs, the Int64.MaxValue is returned.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of source.</typeparam>

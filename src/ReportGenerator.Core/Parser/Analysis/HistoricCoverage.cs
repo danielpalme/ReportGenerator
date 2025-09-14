@@ -133,13 +133,13 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// Gets the code elements coverage quota.
         /// </summary>
         /// <value>The code elements coverage quota.</value>
-        public decimal? CodeElementCoverageQuota => (this.TotalCodeElements.GetValueOrDefault() == 0) ? (decimal?)null : MathExtensions.CalculatePercentage(this.CoveredCodeElements.GetValueOrDefault(), this.TotalCodeElements.GetValueOrDefault());
+        public decimal? CodeElementCoverageQuota => (!this.CoveredCodeElements.HasValue || this.TotalCodeElements.GetValueOrDefault() == 0) ? (decimal?)null : MathExtensions.CalculatePercentage(this.CoveredCodeElements.GetValueOrDefault(), this.TotalCodeElements.GetValueOrDefault());
 
         /// <summary>
         /// Gets the full code elements coverage quota.
         /// </summary>
         /// <value>The full code elements coverage quota.</value>
-        public decimal? FullCodeElementCoverageQuota => (this.TotalCodeElements.GetValueOrDefault() == 0) ? (decimal?)null : MathExtensions.CalculatePercentage(this.FullCoveredCodeElements.GetValueOrDefault(), this.TotalCodeElements.GetValueOrDefault());
+        public decimal? FullCodeElementCoverageQuota => (!this.FullCoveredCodeElements.HasValue || this.TotalCodeElements.GetValueOrDefault() == 0) ? (decimal?)null : MathExtensions.CalculatePercentage(this.FullCoveredCodeElements.GetValueOrDefault(), this.TotalCodeElements.GetValueOrDefault());
 
         /// <summary>
         /// Determines whether the specified <see cref="object" />, is equal to this instance.
@@ -163,6 +163,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                     && historicCoverage.CoveredBranches == this.CoveredBranches
                     && historicCoverage.TotalBranches == this.TotalBranches
                     && historicCoverage.CoveredCodeElements == this.CoveredCodeElements
+                    && historicCoverage.FullCoveredCodeElements == this.FullCoveredCodeElements
                     && historicCoverage.TotalCodeElements == this.TotalCodeElements;
             }
         }
@@ -179,6 +180,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
                 + this.CoveredBranches
                 + this.TotalBranches
                 + this.CoveredCodeElements.GetValueOrDefault()
+                + this.FullCoveredCodeElements.GetValueOrDefault()
                 + this.TotalCodeElements.GetValueOrDefault();
     }
 }

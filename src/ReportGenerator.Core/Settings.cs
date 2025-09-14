@@ -77,6 +77,11 @@ namespace Palmmedia.ReportGenerator.Core
         public int MaximumDecimalPlacesForCoverageQuotas { get; set; } = 1;
 
         /// <summary>
+        /// Gets or sets a value indicating whether the maximum grouping level should be applied instead of the default 'By assembly' grouping.
+        /// </summary>
+        public bool ApplyMaximumGroupingLevel { get; set; } = false;
+
+        /// <summary>
         /// Gets or sets the prefix for history files.
         /// </summary>
         public string HistoryFileNamePrefix { get; set; }

@@ -255,8 +255,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             var codeFile = new CodeFile(filePath, coverage, lineVisitStatus, branches);
 
-            SetMethodMetrics(codeFile, methodsOfFile);
-            SetCodeElements(codeFile, methodsOfFile);
+            this.SetMethodMetrics(codeFile, methodsOfFile);
+            this.SetCodeElements(codeFile, methodsOfFile);
 
             return codeFile;
         }
@@ -266,19 +266,19 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// </summary>
         /// <param name="codeFile">The code file.</param>
         /// <param name="methodsOfFile">The methods of the file.</param>
-        private static void SetMethodMetrics(CodeFile codeFile, IEnumerable<XElement> methodsOfFile)
+        private void SetMethodMetrics(CodeFile codeFile, IEnumerable<XElement> methodsOfFile)
         {
             foreach (var method in methodsOfFile)
             {
                 string fullName = method.Attribute("name").Value + method.Attribute("signature").Value;
-                fullName = ExtractMethodName(fullName, method.Parent.Parent.Attribute("name").Value);
+                string methodName = this.ExtractMethodName(fullName, method.Parent.Parent.Attribute("name").Value);
 
-                if (fullName.Contains("__") && LambdaMethodNameRegex.IsMatch(fullName))
+                if (!this.RawMode && methodName.Contains("__") && LambdaMethodNameRegex.IsMatch(methodName))
                 {
                     continue;
                 }
 
-                string shortName = GetShortMethodName(fullName);
+                string shortName = GetShortMethodName(methodName);
 
                 var metrics = new List<Metric>();
 
@@ -326,7 +326,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     metrics.Insert(0, Metric.CrapScore((decimal)crapScore));
                 }
 
-                var methodMetric = new MethodMetric(fullName, shortName, metrics);
+                var methodMetric = new MethodMetric(methodName, shortName, metrics);
 
                 var line = method
                     .Elements("lines")
@@ -373,42 +373,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             }
 
             return result;
-        }
-
-        /// <summary>
-        /// Extracts the methods/properties of the given <see cref="XElement">XElements</see>.
-        /// </summary>
-        /// <param name="codeFile">The code file.</param>
-        /// <param name="methodsOfFile">The methods of the file.</param>
-        private static void SetCodeElements(CodeFile codeFile, IEnumerable<XElement> methodsOfFile)
-        {
-            foreach (var method in methodsOfFile)
-            {
-                string fullName = method.Attribute("name").Value + method.Attribute("signature").Value;
-                string methodName = ExtractMethodName(fullName, method.Parent.Parent.Attribute("name").Value);
-
-                if (methodName.Contains("__") && LambdaMethodNameRegex.IsMatch(methodName))
-                {
-                    continue;
-                }
-
-                var lines = method.Elements("lines")
-                    .Elements("line");
-
-                if (lines.Any())
-                {
-                    int firstLine = int.Parse(lines.First().Attribute("number").Value, CultureInfo.InvariantCulture);
-                    int lastLine = int.Parse(lines.Last().Attribute("number").Value, CultureInfo.InvariantCulture);
-
-                    codeFile.AddCodeElement(new CodeElement(
-                        methodName,
-                        methodName,
-                        methodName.StartsWith("get_") || methodName.StartsWith("set_") ? CodeElementType.Property : CodeElementType.Method,
-                        firstLine,
-                        lastLine,
-                        codeFile.CoverageQuotaInRange(firstLine, lastLine)));
-                }
-            }
         }
 
         /// <summary>
@@ -470,14 +434,70 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             return result;
         }
 
+        private static string GetShortMethodName(string fullName)
+        {
+            int indexOpen = fullName.IndexOf('(');
+
+            if (indexOpen <= 0)
+            {
+                return fullName;
+            }
+
+            int indexClose = fullName.IndexOf(')');
+            string signature = indexClose - indexOpen > 1 ? "(...)" : "()";
+
+            return $"{fullName.Substring(0, indexOpen)}{signature}";
+        }
+
+        /// <summary>
+        /// Extracts the methods/properties of the given <see cref="XElement">XElements</see>.
+        /// </summary>
+        /// <param name="codeFile">The code file.</param>
+        /// <param name="methodsOfFile">The methods of the file.</param>
+        private void SetCodeElements(CodeFile codeFile, IEnumerable<XElement> methodsOfFile)
+        {
+            foreach (var method in methodsOfFile)
+            {
+                string fullName = method.Attribute("name").Value + method.Attribute("signature").Value;
+                string methodName = this.ExtractMethodName(fullName, method.Parent.Parent.Attribute("name").Value);
+
+                if (!this.RawMode && methodName.Contains("__") && LambdaMethodNameRegex.IsMatch(methodName))
+                {
+                    continue;
+                }
+
+                var lines = method.Elements("lines")
+                    .Elements("line");
+
+                if (lines.Any())
+                {
+                    int firstLine = int.Parse(lines.First().Attribute("number").Value, CultureInfo.InvariantCulture);
+                    int lastLine = int.Parse(lines.Last().Attribute("number").Value, CultureInfo.InvariantCulture);
+
+                    codeFile.AddCodeElement(new CodeElement(
+                        methodName,
+                        methodName,
+                        methodName.StartsWith("get_") || methodName.StartsWith("set_") ? CodeElementType.Property : CodeElementType.Method,
+                        firstLine,
+                        lastLine,
+                        codeFile.CoverageQuotaInRange(firstLine, lastLine)));
+                }
+            }
+        }
+
         /// <summary>
         /// Extracts the method name. For async methods the original name is returned.
         /// </summary>
         /// <param name="methodName">The full method name.</param>
         /// <param name="className">The name of the class.</param>
         /// <returns>The method name.</returns>
-        private static string ExtractMethodName(string methodName, string className)
+        private string ExtractMethodName(string methodName, string className)
         {
+            if (this.RawMode)
+            {
+                return methodName;
+            }
+
             if (methodName.Contains("|") || className.Contains("|"))
             {
                 Match match = LocalFunctionMethodNameRegex.Match(className + methodName);
@@ -498,21 +518,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             }
 
             return methodName;
-        }
-
-        private static string GetShortMethodName(string fullName)
-        {
-            int indexOpen = fullName.IndexOf('(');
-
-            if (indexOpen <= 0)
-            {
-                return fullName;
-            }
-
-            int indexClose = fullName.IndexOf(')');
-            string signature = indexClose - indexOpen > 1 ? "(...)" : "()";
-
-            return $"{fullName.Substring(0, indexOpen)}{signature}";
         }
     }
 }

@@ -27,6 +27,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         public int FirstLine { get; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether the method has not been executed.
+        /// </summary>
+        public bool NotExecuted { get; set; }
+
+        /// <summary>
         /// Returns a <see cref="string"/> that represents this instance.
         /// </summary>
         /// <returns>
