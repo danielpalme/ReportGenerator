@@ -82,7 +82,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         [Fact]
         public void FilesOfClassTest()
         {
-            Assert.Single(this.parserResult.Assemblies.Single(a => a.Name == "Coasterbeispiel - 3b XML for ReportGenerator").Classes.Single(c => c.Name == "PassengerScan").Files);
+            Assert.Single(this.parserResult.Assemblies.Single(a => a.Name == "Coasterbeispiel - XML4ReportGenerator").Classes.Single(c => c.Name == "PassengerScan").Files);
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         [Fact]
         public void GetCoverableLinesOfClassTest()
         {
-            Assert.Equal(5, this.parserResult.Assemblies.Single(a => a.Name == "Coasterbeispiel - 3b XML for ReportGenerator").Classes.Single(c => c.Name == "PassengerScan").CoverableLines);
+            Assert.Equal(5, this.parserResult.Assemblies.Single(a => a.Name == "Coasterbeispiel - XML4ReportGenerator").Classes.Single(c => c.Name == "PassengerScan").CoverableLines);
         }
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         [Fact]
         public void MethodMetricsTest()
         {
-            var metrics = this.parserResult.Assemblies.Single(a => a.Name == "Coasterbeispiel - 3b XML for ReportGenerator").Classes.Single(c => c.Name == "PassengerScan").Files.Single(f => f.Path == "C:\\temp\\PassengerScan.cpp").MethodMetrics.ToArray();
+            var metrics = this.parserResult.Assemblies.Single(a => a.Name == "Coasterbeispiel - XML4ReportGenerator").Classes.Single(c => c.Name == "PassengerScan").Files.Single(f => f.Path == "C:\\temp\\PassengerScan.cpp").MethodMetrics.ToArray();
 
             Assert.Single(metrics);
 
@@ -150,12 +150,12 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         }
 
         private static CodeFile GetFile(IEnumerable<Assembly> assemblies, string className, string fileName) => assemblies
-                .Single(a => a.Name == "Coasterbeispiel - 3b XML for ReportGenerator").Classes
+                .Single(a => a.Name == "Coasterbeispiel - XML4ReportGenerator").Classes
                 .Single(c => c.Name == className).Files
                 .Single(f => f.Path == fileName);
 
         private static FileAnalysis GetFileAnalysis(IEnumerable<Assembly> assemblies, string className, string fileName) => assemblies
-                .Single(a => a.Name == "Coasterbeispiel - 3b XML for ReportGenerator").Classes
+                .Single(a => a.Name == "Coasterbeispiel - XML4ReportGenerator").Classes
                 .Single(c => c.Name == className).Files
                 .Single(f => f.Path == fileName)
                 .AnalyzeFile(new CachingFileReader(new LocalFileReader(), 0, null));

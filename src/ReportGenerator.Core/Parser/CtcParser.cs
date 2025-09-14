@@ -46,14 +46,16 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             var assemblies = new List<Assembly>();
 
-            var assemblyElementGrouping = report.Descendants("project")
-                .GroupBy(m => m.Attribute("name").Value)
-                .Where(a => this.AssemblyFilter.IsElementIncludedInReport(a.Key))
-                .ToArray();
+            var root = report.Element("file")?.Parent;
 
-            foreach (var elements in assemblyElementGrouping)
+            if (root != null)
             {
-                assemblies.Add(this.ProcessAssembly(elements.ToArray(), elements.Key));
+                string name = root.Attribute("projectName").Value;
+
+                if (this.AssemblyFilter.IsElementIncludedInReport(name))
+                {
+                    assemblies.Add(this.ProcessAssembly(new XElement[] { root }, name));
+                }
             }
 
             var result = new ParserResult(assemblies.OrderBy(a => a.Name).ToList(), true, this.ToString());
@@ -72,7 +74,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             Logger.DebugFormat(Resources.CurrentAssembly, assemblyName);
 
             var files = modules
-                .Where(m => m.Attribute("name").Value.Equals(assemblyName))
+                .Where(m => m.Attribute("projectName").Value.Equals(assemblyName))
                 .Elements("file")
                 .Where(f => this.FileFilter.IsElementIncludedInReport(f.Attribute("name").Value))
                 .OrderBy(f => f.Attribute("name").Value)
@@ -114,11 +116,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .ToArray();
 
             var linesOfFile = lines
-                .Where(line => line.Attribute("type").Value == "Executable")
+                .Where(line => line.Attribute("codeType").Value == "Executable")
                 .Select(line => new
                 {
                     LineNumber = int.Parse(line.Attribute("number").Value, CultureInfo.InvariantCulture),
-                    Visits = line.Attribute("status").Value == "Executed" ? 1 : 0
+                    Visits = line.Attribute("isExecuted").Value == "Executed" ? 1 : 0
                 })
                 .OrderBy(seqpnt => seqpnt.LineNumber)
                 .ToArray();
@@ -190,36 +192,24 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                 if (mcdcMeasure != null)
                 {
-                    var mcdcValue = mcdcMeasure.Attribute("TER");
-                    if (mcdcValue != null && mcdcValue.Value != null)
-                    {
-                        decimal? value = Math.Round(decimal.Parse(mcdcValue.Value, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero);
-                        metrics.Add(Metric.Mcdc(value));
-                    }
+                    decimal? value = Math.Round(decimal.Parse(mcdcMeasure.Value.TrimEnd('%'), CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero);
+                    metrics.Add(Metric.Mcdc(value));
                 }
 
                 var decisionMeasure = measures.FirstOrDefault(m => m.Attribute("name").Value.Equals("Decision", StringComparison.OrdinalIgnoreCase));
 
                 if (decisionMeasure != null)
                 {
-                    var decisionValue = decisionMeasure.Attribute("TER");
-                    if (decisionValue != null && decisionValue.Value != null)
-                    {
-                        decimal? value = Math.Round(decimal.Parse(decisionValue.Value, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero);
-                        metrics.Add(Metric.Decision(value));
-                    }
+                    decimal? value = Math.Round(decimal.Parse(decisionMeasure.Value.TrimEnd('%'), CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero);
+                    metrics.Add(Metric.Decision(value));
                 }
 
                 var statementMeasure = measures.FirstOrDefault(m => m.Attribute("name").Value.Equals("Statement", StringComparison.OrdinalIgnoreCase));
 
                 if (statementMeasure != null)
                 {
-                    var statementValue = statementMeasure.Attribute("TER");
-                    if (statementValue != null && statementValue.Value != null)
-                    {
-                        decimal? value = Math.Round(decimal.Parse(statementValue.Value, CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero);
-                        metrics.Add(Metric.Statement(value));
-                    }
+                    decimal? value = Math.Round(decimal.Parse(statementMeasure.Value.TrimEnd('%'), CultureInfo.InvariantCulture), 2, MidpointRounding.AwayFromZero);
+                    metrics.Add(Metric.Statement(value));
                 }
 
                 if (metrics.Count == 0)
@@ -262,7 +252,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                 var lines = method
                     .Elements("line")
-                    .Where(line => line.Attribute("type").Value == "Executable")
+                    .Where(line => line.Attribute("codeType").Value == "Executable")
                     .ToArray();
 
                 if (lines.Length == 0)
@@ -301,7 +291,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                 var lines = method
                     .Elements("line")
-                    .Where(line => line.Attribute("type").Value == "Executable")
+                    .Where(line => line.Attribute("codeType").Value == "Executable")
                     .ToArray();
 
                 if (lines.Length == 0)
@@ -312,7 +302,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 foreach (var line in lines)
                 {
                     var levelDecisionProbe = line.Elements("probe")
-                    .Where(p => p.Attribute("level")?.Value == "LevelDecision")
                     .FirstOrDefault();
 
                     if (levelDecisionProbe == null)
@@ -323,14 +312,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     var tfcombinations = levelDecisionProbe
                         .Elements("tfcombination")
                         .Select(x => new CtcProbeDetail(
-                            x.Attribute("Achieved").Value == "Achieved",
+                            x.Attribute("achieved").Value == "Achieved",
                             x.Element("description").Value))
                         .ToList();
 
                     var mcdcs = levelDecisionProbe
                         .Elements("mcdc")
                         .Select(x => new CtcProbeDetail(
-                            x.Attribute("Achieved").Value == "Achieved",
+                            x.Attribute("achieved").Value == "Achieved",
                             x.Element("description").Value))
                         .ToList();
 
@@ -360,7 +349,6 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             foreach (var line in lines)
             {
                 var levelDecisionProbe = line.Elements("probe")
-                    .Where(p => p.Attribute("level")?.Value == "LevelDecision")
                     .FirstOrDefault();
 
                 if (levelDecisionProbe == null)
@@ -368,8 +356,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                     continue;
                 }
 
-                var trueCountElement = levelDecisionProbe.Element("trueCount");
-                var falseCountElement = levelDecisionProbe.Element("falseCount");
+                var trueCountElement = levelDecisionProbe.Attribute("trueCount");
+                var falseCountElement = levelDecisionProbe.Attribute("falseCount");
 
                 // Both counts must be present, otherwise it is not a branch
                 if (trueCountElement == null
@@ -389,7 +377,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                 if (tfcombinations.Length > 0)
                 {
-                    numberOfCoveredBranches = tfcombinations.Count(tc => tc.Attribute("Achieved").Value == "Achieved");
+                    numberOfCoveredBranches = tfcombinations.Count(tc => tc.Attribute("achieved").Value == "Achieved");
                     numberOfTotalBranches = tfcombinations.Length;
                 }
                 else

@@ -466,7 +466,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                         yield return result;
                     }
-                    else if (item.Attribute("ctcreport-version") != null)
+                    else if (item.Attribute("ctcreportVersion") != null)
                     {
                         if (this.reportContext != null
                             && this.reportContext.ReportConfiguration.License.DetermineLicenseType() != LicenseType.Pro)
