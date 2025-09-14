@@ -69,7 +69,7 @@ CHANGELOG
 
 5.4.13.0
 
-    * Fix: #751: Improved suport for large numbers in LCOV files
+    * Fix: #751: Improved support for large numbers in LCOV files
 
 5.4.12.0
 
