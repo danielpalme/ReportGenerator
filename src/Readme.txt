@@ -67,6 +67,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.4.14.0
+
+    * New: #753: Added title element to SVGs generated with SvgChart report type
+
 5.4.13.0
 
     * Fix: #751: Improved support for large numbers in LCOV files
