@@ -50,6 +50,7 @@ Compatibility:
 -JaCoCo (version 0.8.3 or greater)
 -Clover
 -Mono (mprof-report)
+-Testwell CTC++ (PRO version only)
 -gcov
 -lcov
 
@@ -69,6 +70,7 @@ CHANGELOG
 
 5.4.14.0
 
+    * New: Added support for Testwell CTC++ coverage files (PRO version only)
     * New: #753: Added title element to SVGs generated with SvgChart report type
 
 5.4.13.0
