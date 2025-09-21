@@ -10,22 +10,22 @@
   "private": true,
   "dependencies": {
     "@angular-slider/ngx-slider": "^20.0.0",
-    "@angular/animations": "^20.2.4",
-    "@angular/common": "^20.2.4",
-    "@angular/compiler": "^20.2.4",
-    "@angular/core": "^20.2.4",
-    "@angular/forms": "^20.2.4",
-    "@angular/platform-browser": "^20.2.4",
-    "@angular/platform-browser-dynamic": "^20.2.4",
-    "@angular/router": "^20.2.4",
+    "@angular/animations": "^20.3.0",
+    "@angular/common": "^20.3.0",
+    "@angular/compiler": "^20.3.0",
+    "@angular/core": "^20.3.0",
+    "@angular/forms": "^20.3.0",
+    "@angular/platform-browser": "^20.3.0",
+    "@angular/platform-browser-dynamic": "^20.3.0",
+    "@angular/router": "^20.3.0",
     "rxjs": "~7.8.2",
     "tslib": "^2.6.3",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^20.2.2",
-    "@angular/cli": "^20.2.2",
-    "@angular/compiler-cli": "^20.2.4",
+    "@angular-devkit/build-angular": "^20.3.1",
+    "@angular/cli": "^20.3.1",
+    "@angular/compiler-cli": "^20.3.0",
     "@types/node": "^12.11.1",
     "typescript": "~5.8.3"
   }

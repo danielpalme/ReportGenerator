@@ -2,7 +2,7 @@
   "profiles": {
     "ReportGenerator.Console.NetCore": {
       "commandName": "Project",
-      "commandLineArgs": "\"-reports:..\\..\\..\\..\\..\\src\\Testprojects\\CTC\\source-0000*.xml\" \"-targetdir:C:\\Users\\Daniel Palme\\Desktop\\coverage\" -reporttypes:Html;"
+      "commandLineArgs": "\"-reports:..\\..\\..\\..\\..\\src\\Testprojects\\CSharp\\Reports\\Cobertura_coverlet.xml\" \"-targetdir:C:\\Users\\Daniel Palme\\Desktop\\coverage\" -reporttypes:Html; -filefilters:-*Abstract*.cs"
     }
   }
 }

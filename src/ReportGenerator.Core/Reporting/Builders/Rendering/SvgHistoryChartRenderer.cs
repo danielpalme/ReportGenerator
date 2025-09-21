@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Text;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
+using Palmmedia.ReportGenerator.Core.Properties;
 
 namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 {
@@ -85,6 +87,19 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
     <text x=""45"" y=""13"" class=""ct-label"">100</text>
 </g>");
 
+            var toolTips = historicCoverages.Select(h =>
+                string.Format(
+                    "{0} - {1}{2}{3}{4}{5}{6}{7}",
+                    h.ExecutionTime.ToShortDateString(),
+                    h.ExecutionTime.ToLongTimeString(),
+                    h.CoverageQuota.HasValue ? string.Format(CultureInfo.InvariantCulture, "\r\n{0} {1}% ({2}/{3})", WebUtility.HtmlEncode(ReportResources.Coverage2), h.CoverageQuota.Value, h.CoveredLines, h.CoverableLines) : null,
+                    h.BranchCoverageQuota.HasValue ? string.Format(CultureInfo.InvariantCulture, "\r\n{0} {1}% ({2}/{3})", WebUtility.HtmlEncode(ReportResources.BranchCoverage2), h.BranchCoverageQuota.Value, h.CoveredBranches, h.TotalBranches) : null,
+                    methodCoverageAvailable && h.CodeElementCoverageQuota.HasValue ? string.Format(CultureInfo.InvariantCulture, "\r\n{0} {1}% ({2}/{3})", WebUtility.HtmlEncode(ReportResources.CodeElementCoverageQuota2), h.CodeElementCoverageQuota.Value, h.CoveredCodeElements, h.TotalCodeElements) : null,
+                    methodCoverageAvailable && h.FullCodeElementCoverageQuota.HasValue ? string.Format(CultureInfo.InvariantCulture, "\r\n{0} {1}% ({2}/{3})", WebUtility.HtmlEncode(ReportResources.FullCodeElementCoverageQuota), h.FullCodeElementCoverageQuota.Value, h.FullCoveredCodeElements, h.TotalCodeElements) : null,
+                    string.Format(CultureInfo.InvariantCulture, "\r\n{0} {1}", WebUtility.HtmlEncode(ReportResources.TotalLines), h.TotalLines),
+                    h.Tag != null ? string.Format(CultureInfo.InvariantCulture, "\r\n{0} {1}", WebUtility.HtmlEncode(ReportResources.Tag), h.Tag) : string.Empty))
+                .ToArray();
+
             int numberOfLines = historicCoverages.Count;
 
             if (numberOfLines == 1)
@@ -135,10 +150,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     float y = 15 + (((100 - (float)historicCoverages[i].CoverageQuota.Value) * totalHeight) / 100);
 
                     sb.AppendFormat(
-                        "<line x1=\"{0}\" y1=\"{2}\" x2=\"{1}\" y2=\"{2}\" class=\"ct-point\"></line>",
+                        "<line x1=\"{0}\" y1=\"{2}\" x2=\"{1}\" y2=\"{2}\" class=\"ct-point\"><title>{3}</title></line>",
                         x.ToString("F3", CultureInfo.InvariantCulture),
                         (x + 0.01f).ToString("F3", CultureInfo.InvariantCulture),
-                        y.ToString("F3", CultureInfo.InvariantCulture));
+                        y.ToString("F3", CultureInfo.InvariantCulture),
+                        toolTips[i]);
                 }
 
                 sb.AppendLine("</g>");
@@ -182,10 +198,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     float y = 15 + (((100 - (float)historicCoverages[i].BranchCoverageQuota.Value) * totalHeight) / 100);
 
                     sb.AppendFormat(
-                        "<line x1=\"{0}\" y1=\"{2}\" x2=\"{1}\" y2=\"{2}\" class=\"ct-point\"></line>",
+                        "<line x1=\"{0}\" y1=\"{2}\" x2=\"{1}\" y2=\"{2}\" class=\"ct-point\"><title>{3}</title></line>",
                         x.ToString("F3", CultureInfo.InvariantCulture),
                         (x + 0.01f).ToString("F3", CultureInfo.InvariantCulture),
-                        y.ToString("F3", CultureInfo.InvariantCulture));
+                        y.ToString("F3", CultureInfo.InvariantCulture),
+                        toolTips[i]);
                 }
 
                 sb.AppendLine("</g>");
@@ -229,10 +246,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     float y = 15 + (((100 - (float)historicCoverages[i].CodeElementCoverageQuota.Value) * totalHeight) / 100);
 
                     sb.AppendFormat(
-                        "<line x1=\"{0}\" y1=\"{2}\" x2=\"{1}\" y2=\"{2}\" class=\"ct-point\"></line>",
+                        "<line x1=\"{0}\" y1=\"{2}\" x2=\"{1}\" y2=\"{2}\" class=\"ct-point\"><title>{3}</title></line>",
                         x.ToString("F3", CultureInfo.InvariantCulture),
                         (x + 0.01f).ToString("F3", CultureInfo.InvariantCulture),
-                        y.ToString("F3", CultureInfo.InvariantCulture));
+                        y.ToString("F3", CultureInfo.InvariantCulture),
+                        toolTips[i]);
                 }
 
                 sb.AppendLine("</g>");
@@ -276,10 +294,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     float y = 15 + (((100 - (float)historicCoverages[i].FullCodeElementCoverageQuota.Value) * totalHeight) / 100);
 
                     sb.AppendFormat(
-                        "<line x1=\"{0}\" y1=\"{2}\" x2=\"{1}\" y2=\"{2}\" class=\"ct-point\"></line>",
+                        "<line x1=\"{0}\" y1=\"{2}\" x2=\"{1}\" y2=\"{2}\" class=\"ct-point\"><title>{3}</title></line>",
                         x.ToString("F3", CultureInfo.InvariantCulture),
                         (x + 0.01f).ToString("F3", CultureInfo.InvariantCulture),
-                        y.ToString("F3", CultureInfo.InvariantCulture));
+                        y.ToString("F3", CultureInfo.InvariantCulture),
+                        toolTips[i]);
                 }
 
                 sb.AppendLine("</g>");
