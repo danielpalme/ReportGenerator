@@ -71,7 +71,7 @@ CHANGELOG
 
 5.4.15.0
 
-    * New: #753: Added support for Scoverage input format
+    * New: #752: Added support for Scoverage input format
 
 5.4.14.0
 
