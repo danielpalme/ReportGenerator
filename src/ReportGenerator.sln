@@ -154,6 +154,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CTC", "CTC", "{02EA681E-C7D
 		Testprojects\CTC\source-00004.xml = Testprojects\CTC\source-00004.xml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scala", "Scala", "{5B32C4FE-6EB9-4A2C-8999-4B22B11F7FA4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{DEA9E2B4-90D3-4235-A0C5-33BA186C648C}"
+	ProjectSection(SolutionItems) = preProject
+		Testprojects\Scala\Reports\scoverage.xml = Testprojects\Scala\Reports\scoverage.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -207,6 +214,7 @@ Global
 		{DF7C180A-CE3E-41CE-B088-5345779C548B} = {0AB95F76-AA76-40B2-81E9-AE42550BDB26}
 		{9EE7E19D-250E-48A9-A9B9-455B5534D91C} = {0AB95F76-AA76-40B2-81E9-AE42550BDB26}
 		{83869904-851E-487E-8817-9FF24C11E53C} = {0AB95F76-AA76-40B2-81E9-AE42550BDB26}
+		{DEA9E2B4-90D3-4235-A0C5-33BA186C648C} = {5B32C4FE-6EB9-4A2C-8999-4B22B11F7FA4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2D015F29-27FC-43DD-91EE-3E5BA880F7D2}

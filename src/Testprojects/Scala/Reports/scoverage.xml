@@ -1,0 +1,985 @@
+<!-- Repository: https://github.com/scoverage/sbt-scoverage-samples -->
+<scoverage 
+statement-count="239" statements-invoked="172" statement-rate="71.97" branch-rate="60.98" version="1.0" timestamp="1758478127975">
+    <packages>
+        <package name="org.scoverage.samples" statement-count="237" statements-invoked="171" statement-rate="72.15">
+            <classes>
+                <class 
+                name="org.scoverage.samples.EitherMappableFuture" filename="C:\temp\src\main\scala\org\scoverage\samples\Futures.scala" statement-count="2" statements-invoked="2" statement-rate="100.00" branch-rate="100.00">
+                    <methods>
+                        <method 
+                        name="org.scoverage.samples/EitherMappableFuture/futureToEitherMappable" statement-count="1" statements-invoked="1" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="EitherMappableFuture" class-type="Object" full-class-name="org.scoverage.samples.EitherMappableFuture" source="C:\temp\src\main\scala\org\scoverage\samples\Futures.scala" method="futureToEitherMappable" start="1241" end="1269" line="51" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="org.scoverage.samples/EitherMappableFuture/mapEither" statement-count="1" statements-invoked="1" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="EitherMappableFuture" class-type="Class" full-class-name="org.scoverage.samples.EitherMappableFuture" source="C:\temp\src\main\scala\org\scoverage\samples\Futures.scala" method="mapEither" start="989" end="1107" line="42" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="org.scoverage.samples.ClientActor" filename="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" statement-count="43" statements-invoked="34" statement-rate="79.07" branch-rate="57.14">
+                    <methods>
+                        <method 
+                        name="org.scoverage.samples/ClientActor/&lt;none&gt;" statement-count="2" statements-invoked="2" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="&lt;none&gt;" start="323" end="345" line="14" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="&lt;none&gt;" start="427" end="442" line="17" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="org.scoverage.samples/ClientActor/clientName" statement-count="1" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="clientName" start="462" end="473" line="18" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="org.scoverage.samples/ClientActor/clientName_=" statement-count="8" statements-invoked="6" statement-rate="75.00" branch-rate="50.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="clientName_=" start="602" end="611" line="21" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="clientName_=" start="617" end="624" line="21" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="clientName_=" start="512" end="527" line="19" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="clientName_=" start="570" end="600" line="21" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="clientName_=" start="617" end="624" line="21" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="clientName_=" start="602" end="611" line="21" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="clientName_=" start="553" end="624" line="21" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="clientName_=" start="530" end="550" line="20" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="org.scoverage.samples/ClientActor/preStart" statement-count="11" statements-invoked="11" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="preStart" start="1314" end="1331" line="43" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="preStart" start="1132" end="1182" line="40" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="preStart" start="1346" end="1348" line="44" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="preStart" start="1296" end="1299" line="43" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="preStart" start="1314" end="1318" line="43" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="preStart" start="1248" end="1340" line="43" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="preStart" start="1148" end="1181" line="40" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="preStart" start="1118" end="1182" line="40" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="preStart" start="1130" end="1130" line="40" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="preStart" start="1296" end="1312" line="43" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="preStart" start="1332" end="1332" line="43" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="org.scoverage.samples/ClientActor/receive" statement-count="21" statements-invoked="15" statement-rate="71.43" branch-rate="60.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="receive" start="705" end="885" line="25" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="receive" start="1001" end="1037" line="35" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="receive" start="862" end="865" line="29" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="receive" start="679" end="885" line="25" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="receive" start="925" end="961" line="33" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="receive" start="770" end="877" line="27" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="receive" start="683" end="703" line="25" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="receive" start="695" end="703" line="25" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="receive" start="756" end="877" line="27" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="receive" start="1001" end="1037" line="35" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="receive" start="800" end="816" line="28" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="receive" start="679" end="679" line="25" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="receive" start="828" end="867" line="29" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="receive" start="925" end="961" line="33" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="receive" start="933" end="960" line="33" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="receive" start="847" end="866" line="29" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="receive" start="768" end="768" line="27" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="receive" start="1009" end="1036" line="35" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="receive" start="715" end="747" line="26" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="receive" start="679" end="679" line="25" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="ClientActor" class-type="Class" full-class-name="org.scoverage.samples.ClientActor" source="C:\temp\src\main\scala\org\scoverage\samples\ClientActor.scala" method="receive" start="642" end="642" line="23" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="org.scoverage.samples.RandomQuoteGenerator" filename="C:\temp\src\main\scala\org\scoverage\samples\QuoteGenerator.scala" statement-count="21" statements-invoked="16" statement-rate="76.19" branch-rate="50.00">
+                    <methods>
+                        <method 
+                        name="org.scoverage.samples/RandomQuoteGenerator/generate" statement-count="18" statements-invoked="16" statement-rate="88.89" branch-rate="50.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="RandomQuoteGenerator" class-type="Class" full-class-name="org.scoverage.samples.RandomQuoteGenerator" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteGenerator.scala" method="generate" start="460" end="576" line="22" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="RandomQuoteGenerator" class-type="Class" full-class-name="org.scoverage.samples.RandomQuoteGenerator" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteGenerator.scala" method="generate" start="817" end="842" line="33" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="RandomQuoteGenerator" class-type="Class" full-class-name="org.scoverage.samples.RandomQuoteGenerator" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteGenerator.scala" method="generate" start="683" end="706" line="30" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="RandomQuoteGenerator" class-type="Class" full-class-name="org.scoverage.samples.RandomQuoteGenerator" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteGenerator.scala" method="generate" start="495" end="504" line="22" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="RandomQuoteGenerator" class-type="Class" full-class-name="org.scoverage.samples.RandomQuoteGenerator" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteGenerator.scala" method="generate" start="588" end="849" line="28" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="RandomQuoteGenerator" class-type="Class" full-class-name="org.scoverage.samples.RandomQuoteGenerator" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteGenerator.scala" method="generate" start="650" end="681" line="30" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="RandomQuoteGenerator" class-type="Class" full-class-name="org.scoverage.samples.RandomQuoteGenerator" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteGenerator.scala" method="generate" start="566" end="576" line="25" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="RandomQuoteGenerator" class-type="Class" full-class-name="org.scoverage.samples.RandomQuoteGenerator" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteGenerator.scala" method="generate" start="718" end="737" line="31" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="RandomQuoteGenerator" class-type="Class" full-class-name="org.scoverage.samples.RandomQuoteGenerator" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteGenerator.scala" method="generate" start="745" end="790" line="32" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="RandomQuoteGenerator" class-type="Class" full-class-name="org.scoverage.samples.RandomQuoteGenerator" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteGenerator.scala" method="generate" start="474" end="474" line="22" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="RandomQuoteGenerator" class-type="Class" full-class-name="org.scoverage.samples.RandomQuoteGenerator" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteGenerator.scala" method="generate" start="764" end="789" line="32" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="RandomQuoteGenerator" class-type="Class" full-class-name="org.scoverage.samples.RandomQuoteGenerator" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteGenerator.scala" method="generate" start="605" end="638" line="29" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="RandomQuoteGenerator" class-type="Class" full-class-name="org.scoverage.samples.RandomQuoteGenerator" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteGenerator.scala" method="generate" start="798" end="843" line="33" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="RandomQuoteGenerator" class-type="Class" full-class-name="org.scoverage.samples.RandomQuoteGenerator" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteGenerator.scala" method="generate" start="535" end="544" line="23" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="RandomQuoteGenerator" class-type="Class" full-class-name="org.scoverage.samples.RandomQuoteGenerator" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteGenerator.scala" method="generate" start="683" end="706" line="30" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="RandomQuoteGenerator" class-type="Class" full-class-name="org.scoverage.samples.RandomQuoteGenerator" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteGenerator.scala" method="generate" start="512" end="576" line="23" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="RandomQuoteGenerator" class-type="Class" full-class-name="org.scoverage.samples.RandomQuoteGenerator" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteGenerator.scala" method="generate" start="718" end="737" line="31" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="RandomQuoteGenerator" class-type="Class" full-class-name="org.scoverage.samples.RandomQuoteGenerator" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteGenerator.scala" method="generate" start="514" end="514" line="23" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="org.scoverage.samples/RandomQuoteGenerator/&lt;init&gt;" statement-count="3" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="RandomQuoteGenerator" class-type="Class" full-class-name="org.scoverage.samples.RandomQuoteGenerator" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteGenerator.scala" method="&lt;init&gt;" start="229" end="235" line="13" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="RandomQuoteGenerator" class-type="Class" full-class-name="org.scoverage.samples.RandomQuoteGenerator" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteGenerator.scala" method="&lt;init&gt;" start="223" end="223" line="12" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="RandomQuoteGenerator" class-type="Class" full-class-name="org.scoverage.samples.RandomQuoteGenerator" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteGenerator.scala" method="&lt;init&gt;" start="240" end="274" line="14" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="org.scoverage.samples.CreditEngine" filename="C:\temp\src\main\scala\org\scoverage\samples\CreditEngine.scala" statement-count="24" statements-invoked="22" statement-rate="91.67" branch-rate="80.00">
+                    <methods>
+                        <method 
+                        name="org.scoverage.samples/CreditEngine/receive" statement-count="23" statements-invoked="21" statement-rate="91.30" branch-rate="80.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="CreditEngine" class-type="Class" full-class-name="org.scoverage.samples.CreditEngine" source="C:\temp\src\main\scala\org\scoverage\samples\CreditEngine.scala" method="receive" start="293" end="303" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="CreditEngine" class-type="Class" full-class-name="org.scoverage.samples.CreditEngine" source="C:\temp\src\main\scala\org\scoverage\samples\CreditEngine.scala" method="receive" start="335" end="335" line="12" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="CreditEngine" class-type="Class" full-class-name="org.scoverage.samples.CreditEngine" source="C:\temp\src\main\scala\org\scoverage\samples\CreditEngine.scala" method="receive" start="151" end="151" line="8" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="CreditEngine" class-type="Class" full-class-name="org.scoverage.samples.CreditEngine" source="C:\temp\src\main\scala\org\scoverage\samples\CreditEngine.scala" method="receive" start="268" end="268" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="CreditEngine" class-type="Class" full-class-name="org.scoverage.samples.CreditEngine" source="C:\temp\src\main\scala\org\scoverage\samples\CreditEngine.scala" method="receive" start="379" end="407" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="CreditEngine" class-type="Class" full-class-name="org.scoverage.samples.CreditEngine" source="C:\temp\src\main\scala\org\scoverage\samples\CreditEngine.scala" method="receive" start="350" end="357" line="12" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="CreditEngine" class-type="Class" full-class-name="org.scoverage.samples.CreditEngine" source="C:\temp\src\main\scala\org\scoverage\samples\CreditEngine.scala" method="receive" start="242" end="251" line="10" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="CreditEngine" class-type="Class" full-class-name="org.scoverage.samples.CreditEngine" source="C:\temp\src\main\scala\org\scoverage\samples\CreditEngine.scala" method="receive" start="375" end="375" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="CreditEngine" class-type="Class" full-class-name="org.scoverage.samples.CreditEngine" source="C:\temp\src\main\scala\org\scoverage\samples\CreditEngine.scala" method="receive" start="184" end="220" line="9" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="CreditEngine" class-type="Class" full-class-name="org.scoverage.samples.CreditEngine" source="C:\temp\src\main\scala\org\scoverage\samples\CreditEngine.scala" method="receive" start="417" end="458" line="14" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="CreditEngine" class-type="Class" full-class-name="org.scoverage.samples.CreditEngine" source="C:\temp\src\main\scala\org\scoverage\samples\CreditEngine.scala" method="receive" start="259" end="316" line="11" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="CreditEngine" class-type="Class" full-class-name="org.scoverage.samples.CreditEngine" source="C:\temp\src\main\scala\org\scoverage\samples\CreditEngine.scala" method="receive" start="177" end="495" line="8" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="CreditEngine" class-type="Class" full-class-name="org.scoverage.samples.CreditEngine" source="C:\temp\src\main\scala\org\scoverage\samples\CreditEngine.scala" method="receive" start="337" end="370" line="12" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="CreditEngine" class-type="Class" full-class-name="org.scoverage.samples.CreditEngine" source="C:\temp\src\main\scala\org\scoverage\samples\CreditEngine.scala" method="receive" start="284" end="291" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="CreditEngine" class-type="Class" full-class-name="org.scoverage.samples.CreditEngine" source="C:\temp\src\main\scala\org\scoverage\samples\CreditEngine.scala" method="receive" start="270" end="316" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="CreditEngine" class-type="Class" full-class-name="org.scoverage.samples.CreditEngine" source="C:\temp\src\main\scala\org\scoverage\samples\CreditEngine.scala" method="receive" start="326" end="370" line="12" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="CreditEngine" class-type="Class" full-class-name="org.scoverage.samples.CreditEngine" source="C:\temp\src\main\scala\org\scoverage\samples\CreditEngine.scala" method="receive" start="326" end="370" line="12" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="CreditEngine" class-type="Class" full-class-name="org.scoverage.samples.CreditEngine" source="C:\temp\src\main\scala\org\scoverage\samples\CreditEngine.scala" method="receive" start="417" end="458" line="14" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="CreditEngine" class-type="Class" full-class-name="org.scoverage.samples.CreditEngine" source="C:\temp\src\main\scala\org\scoverage\samples\CreditEngine.scala" method="receive" start="259" end="316" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="CreditEngine" class-type="Class" full-class-name="org.scoverage.samples.CreditEngine" source="C:\temp\src\main\scala\org\scoverage\samples\CreditEngine.scala" method="receive" start="229" end="251" line="10" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="CreditEngine" class-type="Class" full-class-name="org.scoverage.samples.CreditEngine" source="C:\temp\src\main\scala\org\scoverage\samples\CreditEngine.scala" method="receive" start="359" end="369" line="12" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="CreditEngine" class-type="Class" full-class-name="org.scoverage.samples.CreditEngine" source="C:\temp\src\main\scala\org\scoverage\samples\CreditEngine.scala" method="receive" start="375" end="375" line="13" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="CreditEngine" class-type="Class" full-class-name="org.scoverage.samples.CreditEngine" source="C:\temp\src\main\scala\org\scoverage\samples\CreditEngine.scala" method="receive" start="305" end="315" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="org.scoverage.samples/CreditEngine/&lt;none&gt;" statement-count="1" statements-invoked="1" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="CreditEngine" class-type="Class" full-class-name="org.scoverage.samples.CreditEngine" source="C:\temp\src\main\scala\org\scoverage\samples\CreditEngine.scala" method="&lt;none&gt;" start="109" end="133" line="6" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="org.scoverage.samples.DefaultArgumentsObject" filename="C:\temp\src\main\scala\org\scoverage\samples\DefaultArgumentsObject.scala" statement-count="1" statements-invoked="1" statement-rate="100.00" branch-rate="100.00">
+                    <methods>
+                        <method 
+                        name="org.scoverage.samples/DefaultArgumentsObject/&lt;none&gt;" statement-count="1" statements-invoked="1" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="DefaultArgumentsObject" class-type="Object" full-class-name="org.scoverage.samples.DefaultArgumentsObject" source="C:\temp\src\main\scala\org\scoverage\samples\DefaultArgumentsObject.scala" method="&lt;none&gt;" start="217" end="224" line="9" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="org.scoverage.samples.Platform" filename="C:\temp\src\main\scala\org\scoverage\samples\Platform.scala" statement-count="19" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                    <methods>
+                        <method 
+                        name="org.scoverage.samples/Platform/&lt;none&gt;" statement-count="19" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="Platform" class-type="Object" full-class-name="org.scoverage.samples.Platform" source="C:\temp\src\main\scala\org\scoverage\samples\Platform.scala" method="&lt;none&gt;" start="263" end="307" line="11" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="Platform" class-type="Object" full-class-name="org.scoverage.samples.Platform" source="C:\temp\src\main\scala\org\scoverage\samples\Platform.scala" method="&lt;none&gt;" start="506" end="517" line="17" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="Platform" class-type="Object" full-class-name="org.scoverage.samples.Platform" source="C:\temp\src\main\scala\org\scoverage\samples\Platform.scala" method="&lt;none&gt;" start="407" end="526" line="15" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="Platform" class-type="Object" full-class-name="org.scoverage.samples.Platform" source="C:\temp\src\main\scala\org\scoverage\samples\Platform.scala" method="&lt;none&gt;" start="343" end="384" line="12" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="Platform" class-type="Object" full-class-name="org.scoverage.samples.Platform" source="C:\temp\src\main\scala\org\scoverage\samples\Platform.scala" method="&lt;none&gt;" start="117" end="146" line="7" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="Platform" class-type="Object" full-class-name="org.scoverage.samples.Platform" source="C:\temp\src\main\scala\org\scoverage\samples\Platform.scala" method="&lt;none&gt;" start="425" end="427" line="15" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="Platform" class-type="Object" full-class-name="org.scoverage.samples.Platform" source="C:\temp\src\main\scala\org\scoverage\samples\Platform.scala" method="&lt;none&gt;" start="187" end="240" line="10" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="Platform" class-type="Object" full-class-name="org.scoverage.samples.Platform" source="C:\temp\src\main\scala\org\scoverage\samples\Platform.scala" method="&lt;none&gt;" start="417" end="418" line="15" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="Platform" class-type="Object" full-class-name="org.scoverage.samples.Platform" source="C:\temp\src\main\scala\org\scoverage\samples\Platform.scala" method="&lt;none&gt;" start="215" end="239" line="10" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="Platform" class-type="Object" full-class-name="org.scoverage.samples.Platform" source="C:\temp\src\main\scala\org\scoverage\samples\Platform.scala" method="&lt;none&gt;" start="278" end="306" line="11" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="Platform" class-type="Object" full-class-name="org.scoverage.samples.Platform" source="C:\temp\src\main\scala\org\scoverage\samples\Platform.scala" method="&lt;none&gt;" start="493" end="504" line="17" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="Platform" class-type="Object" full-class-name="org.scoverage.samples.Platform" source="C:\temp\src\main\scala\org\scoverage\samples\Platform.scala" method="&lt;none&gt;" start="441" end="526" line="16" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="Platform" class-type="Object" full-class-name="org.scoverage.samples.Platform" source="C:\temp\src\main\scala\org\scoverage\samples\Platform.scala" method="&lt;none&gt;" start="371" end="383" line="12" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="Platform" class-type="Object" full-class-name="org.scoverage.samples.Platform" source="C:\temp\src\main\scala\org\scoverage\samples\Platform.scala" method="&lt;none&gt;" start="465" end="518" line="17" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="Platform" class-type="Object" full-class-name="org.scoverage.samples.Platform" source="C:\temp\src\main\scala\org\scoverage\samples\Platform.scala" method="&lt;none&gt;" start="349" end="369" line="12" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="Platform" class-type="Object" full-class-name="org.scoverage.samples.Platform" source="C:\temp\src\main\scala\org\scoverage\samples\Platform.scala" method="&lt;none&gt;" start="193" end="213" line="10" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="Platform" class-type="Object" full-class-name="org.scoverage.samples.Platform" source="C:\temp\src\main\scala\org\scoverage\samples\Platform.scala" method="&lt;none&gt;" start="328" end="385" line="12" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="Platform" class-type="Object" full-class-name="org.scoverage.samples.Platform" source="C:\temp\src\main\scala\org\scoverage\samples\Platform.scala" method="&lt;none&gt;" start="471" end="491" line="17" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="Platform" class-type="Object" full-class-name="org.scoverage.samples.Platform" source="C:\temp\src\main\scala\org\scoverage\samples\Platform.scala" method="&lt;none&gt;" start="172" end="241" line="10" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="org.scoverage.samples.QuoteCache" filename="C:\temp\src\main\scala\org\scoverage\samples\QuoteCache.scala" statement-count="10" statements-invoked="10" statement-rate="100.00" branch-rate="100.00">
+                    <methods>
+                        <method 
+                        name="org.scoverage.samples/QuoteCache/&lt;none&gt;" statement-count="6" statements-invoked="6" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="QuoteCache" class-type="Trait" full-class-name="org.scoverage.samples.QuoteCache" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteCache.scala" method="&lt;none&gt;" start="249" end="265" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="QuoteCache" class-type="Trait" full-class-name="org.scoverage.samples.QuoteCache" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteCache.scala" method="&lt;none&gt;" start="241" end="273" line="11" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="QuoteCache" class-type="Trait" full-class-name="org.scoverage.samples.QuoteCache" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteCache.scala" method="&lt;none&gt;" start="105" end="162" line="8" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="QuoteCache" class-type="Trait" full-class-name="org.scoverage.samples.QuoteCache" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteCache.scala" method="&lt;none&gt;" start="248" end="248" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="QuoteCache" class-type="Trait" full-class-name="org.scoverage.samples.QuoteCache" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteCache.scala" method="&lt;none&gt;" start="241" end="273" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="QuoteCache" class-type="Trait" full-class-name="org.scoverage.samples.QuoteCache" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteCache.scala" method="&lt;none&gt;" start="210" end="210" line="10" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="org.scoverage.samples/QuoteCache/preStart" statement-count="4" statements-invoked="4" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="QuoteCache" class-type="Trait" full-class-name="org.scoverage.samples.QuoteCache" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteCache.scala" method="preStart" start="356" end="360" line="15" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="QuoteCache" class-type="Trait" full-class-name="org.scoverage.samples.QuoteCache" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteCache.scala" method="preStart" start="355" end="355" line="15" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="QuoteCache" class-type="Trait" full-class-name="org.scoverage.samples.QuoteCache" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteCache.scala" method="preStart" start="319" end="381" line="15" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="QuoteCache" class-type="Trait" full-class-name="org.scoverage.samples.QuoteCache" source="C:\temp\src\main\scala\org\scoverage\samples\QuoteCache.scala" method="preStart" start="362" end="380" line="15" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="org.scoverage.samples.SimpleObject2" filename="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" statement-count="32" statements-invoked="18" statement-rate="56.25" branch-rate="44.44">
+                    <methods>
+                        <method 
+                        name="org.scoverage.samples/SimpleObject2/method2" statement-count="22" statements-invoked="13" statement-rate="59.09" branch-rate="50.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method2" start="883" end="887" line="31" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method2" start="922" end="970" line="32" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method2" start="922" end="970" line="32" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method2" start="846" end="905" line="31" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method2" start="1011" end="1015" line="33" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method2" start="946" end="957" line="32" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method2" start="987" end="1034" line="33" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method2" start="796" end="829" line="30" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method2" start="870" end="881" line="31" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method2" start="965" end="969" line="32" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method2" start="864" end="868" line="31" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method2" start="759" end="1041" line="29" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method2" start="1005" end="1009" line="33" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method2" start="889" end="904" line="31" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method2" start="814" end="828" line="30" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method2" start="940" end="944" line="32" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method2" start="987" end="1034" line="33" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method2" start="1017" end="1033" line="33" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method2" start="846" end="905" line="31" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method2" start="796" end="829" line="30" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method2" start="959" end="963" line="32" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method2" start="765" end="765" line="29" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="org.scoverage.samples/SimpleObject2/method1" statement-count="10" statements-invoked="5" statement-rate="50.00" branch-rate="40.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method1" start="616" end="680" line="22" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method1" start="259" end="686" line="12" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method1" start="525" end="528" line="19" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method1" start="678" end="680" line="24" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method1" start="627" end="669" line="23" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method1" start="276" end="276" line="12" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method1" start="461" end="464" line="17" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method1" start="382" end="388" line="15" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method1" start="276" end="276" line="12" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject2" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject2" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject2.scala" method="method1" start="594" end="602" line="21" branch="true" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="org.scoverage.samples.InstrumentLoader" filename="C:\temp\src\main\scala\org\scoverage\samples\InstrumentLoader.scala" statement-count="8" statements-invoked="6" statement-rate="75.00" branch-rate="50.00">
+                    <methods>
+                        <method 
+                        name="org.scoverage.samples/InstrumentLoader/&lt;none&gt;" statement-count="6" statements-invoked="4" statement-rate="66.67" branch-rate="50.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="InstrumentLoader" class-type="Object" full-class-name="org.scoverage.samples.InstrumentLoader" source="C:\temp\src\main\scala\org\scoverage\samples\InstrumentLoader.scala" method="&lt;none&gt;" start="323" end="330" line="12" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="InstrumentLoader" class-type="Object" full-class-name="org.scoverage.samples.InstrumentLoader" source="C:\temp\src\main\scala\org\scoverage\samples\InstrumentLoader.scala" method="&lt;none&gt;" start="392" end="402" line="15" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="InstrumentLoader" class-type="Object" full-class-name="org.scoverage.samples.InstrumentLoader" source="C:\temp\src\main\scala\org\scoverage\samples\InstrumentLoader.scala" method="&lt;none&gt;" start="323" end="330" line="12" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="InstrumentLoader" class-type="Object" full-class-name="org.scoverage.samples.InstrumentLoader" source="C:\temp\src\main\scala\org\scoverage\samples\InstrumentLoader.scala" method="&lt;none&gt;" start="336" end="345" line="12" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="InstrumentLoader" class-type="Object" full-class-name="org.scoverage.samples.InstrumentLoader" source="C:\temp\src\main\scala\org\scoverage\samples\InstrumentLoader.scala" method="&lt;none&gt;" start="291" end="321" line="12" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="InstrumentLoader" class-type="Object" full-class-name="org.scoverage.samples.InstrumentLoader" source="C:\temp\src\main\scala\org\scoverage\samples\InstrumentLoader.scala" method="&lt;none&gt;" start="336" end="345" line="12" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="org.scoverage.samples/InstrumentLoader/randomInstrument" statement-count="2" statements-invoked="2" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="InstrumentLoader" class-type="Object" full-class-name="org.scoverage.samples.InstrumentLoader" source="C:\temp\src\main\scala\org\scoverage\samples\InstrumentLoader.scala" method="randomInstrument" start="441" end="473" line="17" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="InstrumentLoader" class-type="Object" full-class-name="org.scoverage.samples.InstrumentLoader" source="C:\temp\src\main\scala\org\scoverage\samples\InstrumentLoader.scala" method="randomInstrument" start="455" end="455" line="17" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="org.scoverage.samples.PriceEngine" filename="C:\temp\src\main\scala\org\scoverage\samples\PriceEngine.scala" statement-count="22" statements-invoked="22" statement-rate="100.00" branch-rate="100.00">
+                    <methods>
+                        <method 
+                        name="org.scoverage.samples/PriceEngine/receive" statement-count="14" statements-invoked="14" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="PriceEngine" class-type="Class" full-class-name="org.scoverage.samples.PriceEngine" source="C:\temp\src\main\scala\org\scoverage\samples\PriceEngine.scala" method="receive" start="587" end="590" line="22" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="PriceEngine" class-type="Class" full-class-name="org.scoverage.samples.PriceEngine" source="C:\temp\src\main\scala\org\scoverage\samples\PriceEngine.scala" method="receive" start="521" end="612" line="22" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="PriceEngine" class-type="Class" full-class-name="org.scoverage.samples.PriceEngine" source="C:\temp\src\main\scala\org\scoverage\samples\PriceEngine.scala" method="receive" start="440" end="481" line="18" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="PriceEngine" class-type="Class" full-class-name="org.scoverage.samples.PriceEngine" source="C:\temp\src\main\scala\org\scoverage\samples\PriceEngine.scala" method="receive" start="335" end="612" line="13" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="PriceEngine" class-type="Class" full-class-name="org.scoverage.samples.PriceEngine" source="C:\temp\src\main\scala\org\scoverage\samples\PriceEngine.scala" method="receive" start="411" end="429" line="17" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="PriceEngine" class-type="Class" full-class-name="org.scoverage.samples.PriceEngine" source="C:\temp\src\main\scala\org\scoverage\samples\PriceEngine.scala" method="receive" start="569" end="585" line="22" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="PriceEngine" class-type="Class" full-class-name="org.scoverage.samples.PriceEngine" source="C:\temp\src\main\scala\org\scoverage\samples\PriceEngine.scala" method="receive" start="311" end="311" line="12" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="PriceEngine" class-type="Class" full-class-name="org.scoverage.samples.PriceEngine" source="C:\temp\src\main\scala\org\scoverage\samples\PriceEngine.scala" method="receive" start="604" end="604" line="22" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="PriceEngine" class-type="Class" full-class-name="org.scoverage.samples.PriceEngine" source="C:\temp\src\main\scala\org\scoverage\samples\PriceEngine.scala" method="receive" start="587" end="603" line="22" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="PriceEngine" class-type="Class" full-class-name="org.scoverage.samples.PriceEngine" source="C:\temp\src\main\scala\org\scoverage\samples\PriceEngine.scala" method="receive" start="344" end="350" line="14" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="PriceEngine" class-type="Class" full-class-name="org.scoverage.samples.PriceEngine" source="C:\temp\src\main\scala\org\scoverage\samples\PriceEngine.scala" method="receive" start="499" end="612" line="21" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="PriceEngine" class-type="Class" full-class-name="org.scoverage.samples.PriceEngine" source="C:\temp\src\main\scala\org\scoverage\samples\PriceEngine.scala" method="receive" start="644" end="650" line="25" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="PriceEngine" class-type="Class" full-class-name="org.scoverage.samples.PriceEngine" source="C:\temp\src\main\scala\org\scoverage\samples\PriceEngine.scala" method="receive" start="569" end="572" line="22" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="PriceEngine" class-type="Class" full-class-name="org.scoverage.samples.PriceEngine" source="C:\temp\src\main\scala\org\scoverage\samples\PriceEngine.scala" method="receive" start="644" end="650" line="25" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="org.scoverage.samples/PriceEngine/stop" statement-count="6" statements-invoked="6" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="PriceEngine" class-type="Class" full-class-name="org.scoverage.samples.PriceEngine" source="C:\temp\src\main\scala\org\scoverage\samples\PriceEngine.scala" method="stop" start="687" end="706" line="29" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="PriceEngine" class-type="Class" full-class-name="org.scoverage.samples.PriceEngine" source="C:\temp\src\main\scala\org\scoverage\samples\PriceEngine.scala" method="stop" start="714" end="734" line="30" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="PriceEngine" class-type="Class" full-class-name="org.scoverage.samples.PriceEngine" source="C:\temp\src\main\scala\org\scoverage\samples\PriceEngine.scala" method="stop" start="683" end="683" line="29" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="PriceEngine" class-type="Class" full-class-name="org.scoverage.samples.PriceEngine" source="C:\temp\src\main\scala\org\scoverage\samples\PriceEngine.scala" method="stop" start="732" end="732" line="30" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="PriceEngine" class-type="Class" full-class-name="org.scoverage.samples.PriceEngine" source="C:\temp\src\main\scala\org\scoverage\samples\PriceEngine.scala" method="stop" start="714" end="734" line="30" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="PriceEngine" class-type="Class" full-class-name="org.scoverage.samples.PriceEngine" source="C:\temp\src\main\scala\org\scoverage\samples\PriceEngine.scala" method="stop" start="683" end="683" line="29" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="org.scoverage.samples/PriceEngine/preStart" statement-count="2" statements-invoked="2" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="PriceEngine" class-type="Class" full-class-name="org.scoverage.samples.PriceEngine" source="C:\temp\src\main\scala\org\scoverage\samples\PriceEngine.scala" method="preStart" start="780" end="799" line="34" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="PriceEngine" class-type="Class" full-class-name="org.scoverage.samples.PriceEngine" source="C:\temp\src\main\scala\org\scoverage\samples\PriceEngine.scala" method="preStart" start="785" end="785" line="34" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="org.scoverage.samples.Charmax" filename="C:\temp\src\main\scala\org\scoverage\samples\Charmax.scala" statement-count="1" statements-invoked="1" statement-rate="100.00" branch-rate="100.00">
+                    <methods>
+                        <method 
+                        name="org.scoverage.samples/Charmax/foo" statement-count="1" statements-invoked="1" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="Charmax" class-type="Object" full-class-name="org.scoverage.samples.Charmax" source="C:\temp\src\main\scala\org\scoverage\samples\Charmax.scala" method="foo" start="78" end="96" line="4" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="org.scoverage.samples.Futures" filename="C:\temp\src\main\scala\org\scoverage\samples\Futures.scala" statement-count="9" statements-invoked="7" statement-rate="77.78" branch-rate="50.00">
+                    <methods>
+                        <method 
+                        name="org.scoverage.samples/Futures/meaningful" statement-count="5" statements-invoked="3" statement-rate="60.00" branch-rate="50.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="Futures" class-type="Class" full-class-name="org.scoverage.samples.Futures" source="C:\temp\src\main\scala\org\scoverage\samples\Futures.scala" method="meaningful" start="673" end="681" line="27" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="Futures" class-type="Class" full-class-name="org.scoverage.samples.Futures" source="C:\temp\src\main\scala\org\scoverage\samples\Futures.scala" method="meaningful" start="597" end="610" line="25" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="Futures" class-type="Class" full-class-name="org.scoverage.samples.Futures" source="C:\temp\src\main\scala\org\scoverage\samples\Futures.scala" method="meaningful" start="642" end="649" line="26" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="Futures" class-type="Class" full-class-name="org.scoverage.samples.Futures" source="C:\temp\src\main\scala\org\scoverage\samples\Futures.scala" method="meaningful" start="673" end="681" line="27" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="Futures" class-type="Class" full-class-name="org.scoverage.samples.Futures" source="C:\temp\src\main\scala\org\scoverage\samples\Futures.scala" method="meaningful" start="642" end="649" line="26" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="org.scoverage.samples/Futures/insert" statement-count="3" statements-invoked="3" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="Futures" class-type="Class" full-class-name="org.scoverage.samples.Futures" source="C:\temp\src\main\scala\org\scoverage\samples\Futures.scala" method="insert" start="329" end="437" line="16" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="Futures" class-type="Class" full-class-name="org.scoverage.samples.Futures" source="C:\temp\src\main\scala\org\scoverage\samples\Futures.scala" method="insert" start="307" end="324" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="Futures" class-type="Class" full-class-name="org.scoverage.samples.Futures" source="C:\temp\src\main\scala\org\scoverage\samples\Futures.scala" method="insert" start="442" end="478" line="19" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="org.scoverage.samples/Futures/check" statement-count="1" statements-invoked="1" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="Futures" class-type="Class" full-class-name="org.scoverage.samples.Futures" source="C:\temp\src\main\scala\org\scoverage\samples\Futures.scala" method="check" start="541" end="554" line="22" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="org.scoverage.samples.OrderEngine" filename="C:\temp\src\main\scala\org\scoverage\samples\OrderEngine.scala" statement-count="24" statements-invoked="24" statement-rate="100.00" branch-rate="100.00">
+                    <methods>
+                        <method 
+                        name="org.scoverage.samples/OrderEngine/receive" statement-count="24" statements-invoked="24" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="OrderEngine" class-type="Class" full-class-name="org.scoverage.samples.OrderEngine" source="C:\temp\src\main\scala\org\scoverage\samples\OrderEngine.scala" method="receive" start="460" end="468" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="OrderEngine" class-type="Class" full-class-name="org.scoverage.samples.OrderEngine" source="C:\temp\src\main\scala\org\scoverage\samples\OrderEngine.scala" method="receive" start="616" end="627" line="18" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="OrderEngine" class-type="Class" full-class-name="org.scoverage.samples.OrderEngine" source="C:\temp\src\main\scala\org\scoverage\samples\OrderEngine.scala" method="receive" start="669" end="714" line="21" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="OrderEngine" class-type="Class" full-class-name="org.scoverage.samples.OrderEngine" source="C:\temp\src\main\scala\org\scoverage\samples\OrderEngine.scala" method="receive" start="418" end="469" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="OrderEngine" class-type="Class" full-class-name="org.scoverage.samples.OrderEngine" source="C:\temp\src\main\scala\org\scoverage\samples\OrderEngine.scala" method="receive" start="574" end="628" line="18" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="OrderEngine" class-type="Class" full-class-name="org.scoverage.samples.OrderEngine" source="C:\temp\src\main\scala\org\scoverage\samples\OrderEngine.scala" method="receive" start="331" end="345" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="OrderEngine" class-type="Class" full-class-name="org.scoverage.samples.OrderEngine" source="C:\temp\src\main\scala\org\scoverage\samples\OrderEngine.scala" method="receive" start="539" end="550" line="17" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="OrderEngine" class-type="Class" full-class-name="org.scoverage.samples.OrderEngine" source="C:\temp\src\main\scala\org\scoverage\samples\OrderEngine.scala" method="receive" start="685" end="714" line="21" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="OrderEngine" class-type="Class" full-class-name="org.scoverage.samples.OrderEngine" source="C:\temp\src\main\scala\org\scoverage\samples\OrderEngine.scala" method="receive" start="703" end="713" line="21" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="OrderEngine" class-type="Class" full-class-name="org.scoverage.samples.OrderEngine" source="C:\temp\src\main\scala\org\scoverage\samples\OrderEngine.scala" method="receive" start="533" end="567" line="17" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="OrderEngine" class-type="Class" full-class-name="org.scoverage.samples.OrderEngine" source="C:\temp\src\main\scala\org\scoverage\samples\OrderEngine.scala" method="receive" start="669" end="714" line="21" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="OrderEngine" class-type="Class" full-class-name="org.scoverage.samples.OrderEngine" source="C:\temp\src\main\scala\org\scoverage\samples\OrderEngine.scala" method="receive" start="388" end="409" line="12" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="OrderEngine" class-type="Class" full-class-name="org.scoverage.samples.OrderEngine" source="C:\temp\src\main\scala\org\scoverage\samples\OrderEngine.scala" method="receive" start="431" end="431" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="OrderEngine" class-type="Class" full-class-name="org.scoverage.samples.OrderEngine" source="C:\temp\src\main\scala\org\scoverage\samples\OrderEngine.scala" method="receive" start="589" end="589" line="18" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="OrderEngine" class-type="Class" full-class-name="org.scoverage.samples.OrderEngine" source="C:\temp\src\main\scala\org\scoverage\samples\OrderEngine.scala" method="receive" start="187" end="718" line="7" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="OrderEngine" class-type="Class" full-class-name="org.scoverage.samples.OrderEngine" source="C:\temp\src\main\scala\org\scoverage\samples\OrderEngine.scala" method="receive" start="323" end="478" line="11" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="OrderEngine" class-type="Class" full-class-name="org.scoverage.samples.OrderEngine" source="C:\temp\src\main\scala\org\scoverage\samples\OrderEngine.scala" method="receive" start="323" end="478" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="OrderEngine" class-type="Class" full-class-name="org.scoverage.samples.OrderEngine" source="C:\temp\src\main\scala\org\scoverage\samples\OrderEngine.scala" method="receive" start="512" end="628" line="16" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="OrderEngine" class-type="Class" full-class-name="org.scoverage.samples.OrderEngine" source="C:\temp\src\main\scala\org\scoverage\samples\OrderEngine.scala" method="receive" start="400" end="409" line="12" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="OrderEngine" class-type="Class" full-class-name="org.scoverage.samples.OrderEngine" source="C:\temp\src\main\scala\org\scoverage\samples\OrderEngine.scala" method="receive" start="552" end="566" line="17" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="OrderEngine" class-type="Class" full-class-name="org.scoverage.samples.OrderEngine" source="C:\temp\src\main\scala\org\scoverage\samples\OrderEngine.scala" method="receive" start="683" end="683" line="21" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="OrderEngine" class-type="Class" full-class-name="org.scoverage.samples.OrderEngine" source="C:\temp\src\main\scala\org\scoverage\samples\OrderEngine.scala" method="receive" start="433" end="469" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="OrderEngine" class-type="Class" full-class-name="org.scoverage.samples.OrderEngine" source="C:\temp\src\main\scala\org\scoverage\samples\OrderEngine.scala" method="receive" start="591" end="628" line="18" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="OrderEngine" class-type="Class" full-class-name="org.scoverage.samples.OrderEngine" source="C:\temp\src\main\scala\org\scoverage\samples\OrderEngine.scala" method="receive" start="204" end="204" line="7" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="org.scoverage.samples.TypeTreeObjects" filename="C:\temp\src\main\scala\org\scoverage\samples\TypeTreeObjects.scala" statement-count="3" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                    <methods>
+                        <method 
+                        name="org.scoverage.samples/TypeTreeObjects/&lt;none&gt;" statement-count="3" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="TypeTreeObjects" class-type="Class" full-class-name="org.scoverage.samples.TypeTreeObjects" source="C:\temp\src\main\scala\org\scoverage\samples\TypeTreeObjects.scala" method="&lt;none&gt;" start="192" end="192" line="7" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="TypeTreeObjects" class-type="Class" full-class-name="org.scoverage.samples.TypeTreeObjects" source="C:\temp\src\main\scala\org\scoverage\samples\TypeTreeObjects.scala" method="&lt;none&gt;" start="154" end="169" line="7" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="TypeTreeObjects" class-type="Class" full-class-name="org.scoverage.samples.TypeTreeObjects" source="C:\temp\src\main\scala\org\scoverage\samples\TypeTreeObjects.scala" method="&lt;none&gt;" start="154" end="199" line="7" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="org.scoverage.samples.SimpleObject" filename="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject.scala" statement-count="18" statements-invoked="8" statement-rate="44.44" branch-rate="33.33">
+                    <methods>
+                        <method 
+                        name="org.scoverage.samples/SimpleObject/method" statement-count="16" statements-invoked="7" statement-rate="43.75" branch-rate="33.33">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject.scala" method="method" start="526" end="630" line="20" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject.scala" method="method" start="474" end="490" line="18" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject.scala" method="method" start="540" end="547" line="20" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject.scala" method="method" start="502" end="512" line="19" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject.scala" method="method" start="334" end="630" line="14" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject.scala" method="method" start="371" end="383" line="15" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject.scala" method="method" start="559" end="570" line="21" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject.scala" method="method" start="606" end="610" line="23" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject.scala" method="method" start="397" end="414" line="16" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject.scala" method="method" start="397" end="414" line="16" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject.scala" method="method" start="606" end="610" line="23" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject.scala" method="method" start="502" end="512" line="19" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject.scala" method="method" start="348" end="348" line="14" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject.scala" method="method" start="530" end="547" line="20" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject.scala" method="method" start="371" end="383" line="15" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject.scala" method="method" start="559" end="570" line="21" branch="true" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="org.scoverage.samples/SimpleObject/getSomething" statement-count="1" statements-invoked="1" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject.scala" method="getSomething" start="176" end="196" line="8" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="org.scoverage.samples/SimpleObject/getOtherSomething" statement-count="1" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples" class="SimpleObject" class-type="Object" full-class-name="org.scoverage.samples.SimpleObject" source="C:\temp\src\main\scala\org\scoverage\samples\SimpleObject.scala" method="getOtherSomething" start="232" end="252" line="10" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+            </classes>
+        </package>
+        <package name="org.scoverage.samples.ignored" statement-count="1" statements-invoked="0" statement-rate="0.00">
+            <classes>
+                <class 
+                name="org.scoverage.samples.ignored.IgnoredObject" filename="C:\temp\src\main\scala\org\scoverage\samples\ignored\IgnoredObject.scala" statement-count="1" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                    <methods>
+                        <method 
+                        name="org.scoverage.samples.ignored/IgnoredObject/test" statement-count="1" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="org.scoverage.samples.ignored" class="IgnoredObject" class-type="Class" full-class-name="org.scoverage.samples.ignored.IgnoredObject" source="C:\temp\src\main\scala\org\scoverage\samples\ignored\IgnoredObject.scala" method="test" start="82" end="109" line="4" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+            </classes>
+        </package>
+        <package name="subpackage2.validators" statement-count="1" statements-invoked="1" statement-rate="100.00">
+            <classes>
+                <class 
+                name="subpackage2.validators.OrderValidator" filename="C:\temp\src\main\scala\org\scoverage\samples\domain.scala" statement-count="1" statements-invoked="1" statement-rate="100.00" branch-rate="100.00">
+                    <methods>
+                        <method 
+                        name="subpackage2.validators/OrderValidator/validate" statement-count="1" statements-invoked="1" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="subpackage2.validators" class="OrderValidator" class-type="Class" full-class-name="subpackage2.validators.OrderValidator" source="C:\temp\src\main\scala\org\scoverage\samples\domain.scala" method="validate" start="721" end="768" line="35" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+            </classes>
+        </package>
+    </packages>
+</scoverage>

@@ -49,6 +49,7 @@ Compatibility:
 -Cobertura
 -JaCoCo (version 0.8.3 or greater)
 -Clover
+-Scoverage
 -Mono (mprof-report)
 -Testwell CTC++ (PRO version only)
 -gcov
@@ -68,10 +69,14 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.4.15.0
+
+    * New: #753: Added support for Scoverage input format
+
 5.4.14.0
 
     * New: Added support for Testwell CTC++ coverage files (PRO version only)
-    * New: #753: Added title element to SVGs generated with SvgChart report type
+    * New: #753: Added title elements to SVGs generated with SvgChart report type
 
 5.4.13.0
 

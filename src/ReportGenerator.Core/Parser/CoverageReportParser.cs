@@ -501,6 +501,22 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 yield break;
             }
 
+            elements = this.GetXElements(filePath, "scoverage").ToArray();
+
+            if (elements.Length > 0)
+            {
+                foreach (var item in elements)
+                {
+                    if (item.Elements("packages").Any())
+                    {
+                        Logger.DebugFormat(Resources.InitiatingParser, "scoverage");
+                        yield return new SCoverageParser(this.assemblyFilter, this.classFilter, this.fileFilter).Parse(item);
+                    }
+                }
+
+                yield break;
+            }
+
             elements = this.GetXElements(filePath, "CoverageDSPriv").ToArray();
 
             if (elements.Length > 0)

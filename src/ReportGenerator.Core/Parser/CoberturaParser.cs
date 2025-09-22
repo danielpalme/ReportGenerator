@@ -467,12 +467,13 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 }
 
                 var lines = method.Elements("lines")
-                    .Elements("line");
+                    .Elements("line")
+                    .ToArray();
 
-                if (lines.Any())
+                if (lines.Length > 0)
                 {
-                    int firstLine = int.Parse(lines.First().Attribute("number").Value, CultureInfo.InvariantCulture);
-                    int lastLine = int.Parse(lines.Last().Attribute("number").Value, CultureInfo.InvariantCulture);
+                    int firstLine = int.Parse(lines[0].Attribute("number").Value, CultureInfo.InvariantCulture);
+                    int lastLine = int.Parse(lines[lines.Length - 1].Attribute("number").Value, CultureInfo.InvariantCulture);
 
                     codeFile.AddCodeElement(new CodeElement(
                         methodName,
