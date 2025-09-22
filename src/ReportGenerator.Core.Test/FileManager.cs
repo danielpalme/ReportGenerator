@@ -57,6 +57,8 @@ namespace Palmmedia.ReportGenerator.Core.Test
 
         internal static string GetJavaReportDirectory() => Path.Combine(GetFilesDirectory(), "Java", "Reports");
 
+        internal static string GetScalaReportDirectory() => Path.Combine(GetFilesDirectory(), "Scala", "Reports");
+
         internal static string GetCPlusPlusReportDirectory() => Path.Combine(GetFilesDirectory(), "C++", "Reports");
 
         internal static string GetCSharpCodeDirectory() => Path.Combine(GetFilesDirectory(), "CSharp", "Project");

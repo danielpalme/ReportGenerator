@@ -255,7 +255,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 {
                     coveragePercent = decimal.Parse(statementRate.Value, CultureInfo.InvariantCulture);
 
-                    metrics.Add(Metric.Coverage(coveragePercent));
+                    metrics.Add(Metric.Statement(coveragePercent));
                 }
 
                 var branchRate = method.Attribute("branch-rate");
