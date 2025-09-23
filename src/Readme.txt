@@ -72,6 +72,7 @@ CHANGELOG
 5.4.15.0
 
     * New: #752: Added support for Scoverage input format
+    * New: #753: Added tiny history charts to HTML reports (if JavaScript is disabled)
 
 5.4.14.0
 

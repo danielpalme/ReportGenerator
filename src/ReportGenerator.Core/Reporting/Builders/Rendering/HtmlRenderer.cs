@@ -390,13 +390,13 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.reportTextWriter.WriteLine("<col class=\"column105\" />");
             this.reportTextWriter.WriteLine("<col class=\"column100\" />");
             this.reportTextWriter.WriteLine("<col class=\"column70\" />");
-            this.reportTextWriter.WriteLine("<col class=\"column60\" />");
+            this.reportTextWriter.WriteLine("<col class=\"column98\" />");
             this.reportTextWriter.WriteLine("<col class=\"column112\" />");
             if (branchCoverageAvailable)
             {
                 this.reportTextWriter.WriteLine("<col class=\"column90\" />");
                 this.reportTextWriter.WriteLine("<col class=\"column70\" />");
-                this.reportTextWriter.WriteLine("<col class=\"column60\" />");
+                this.reportTextWriter.WriteLine("<col class=\"column98\" />");
                 this.reportTextWriter.WriteLine("<col class=\"column112\" />");
             }
 
@@ -404,12 +404,12 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             {
                 this.reportTextWriter.WriteLine("<col class=\"column90\" />");
                 this.reportTextWriter.WriteLine("<col class=\"column70\" />");
-                this.reportTextWriter.WriteLine("<col class=\"column60\" />");
+                this.reportTextWriter.WriteLine("<col class=\"column98\" />");
                 this.reportTextWriter.WriteLine("<col class=\"column112\" />");
 
                 this.reportTextWriter.WriteLine("<col class=\"column90\" />");
                 this.reportTextWriter.WriteLine("<col class=\"column70\" />");
-                this.reportTextWriter.WriteLine("<col class=\"column60\" />");
+                this.reportTextWriter.WriteLine("<col class=\"column98\" />");
                 this.reportTextWriter.WriteLine("<col class=\"column112\" />");
             }
 
@@ -1368,6 +1368,12 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             string filenameColumn = @class.Name;
 
+            var historicCoverages = this.FilterHistoricCoverages(@class.HistoricCoverages, 10);
+            var lineCoverageHistory = historicCoverages.Select(h => h.CoverageQuota);
+            var branchCoverageHistory = historicCoverages.Select(h => h.BranchCoverageQuota);
+            var methodCoverageHistory = historicCoverages.Select(h => h.CodeElementCoverageQuota);
+            var methodFullCoverageHistory = historicCoverages.Select(h => h.FullCodeElementCoverageQuota);
+
             if (!this.onlySummary)
             {
                 filenameColumn = string.Format(
@@ -1384,8 +1390,12 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.reportTextWriter.Write("<td class=\"right\">{0}</td>", @class.CoverableLines);
             this.reportTextWriter.Write("<td class=\"right\">{0}</td>", @class.TotalLines.GetValueOrDefault());
             this.reportTextWriter.Write(
-                "<td title=\"{0}\" class=\"right\">{1}</td>",
+                "<td title=\"{0}\" class=\"right\">{1}{2}</td>",
                 @class.CoverageQuota.HasValue ? $"{@class.CoveredLines}/{@class.CoverableLines}" : string.Empty,
+                GenerateTinyCoverageChart(
+                    "tinylinecoveragechart",
+                    ReportResources.History + ": " + ReportResources.Coverage,
+                    lineCoverageHistory),
                 @class.CoverageQuota.HasValue ? @class.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
 
             WriteCoverageTable(this.reportTextWriter, "td", @class.CoverageQuota);
@@ -1395,8 +1405,12 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 this.reportTextWriter.Write("<td class=\"right\">{0}</td>", @class.CoveredBranches);
                 this.reportTextWriter.Write("<td class=\"right\">{0}</td>", @class.TotalBranches);
                 this.reportTextWriter.Write(
-                    "<td class=\"right\" title=\"{0}\">{1}</td>",
+                    "<td class=\"right\" title=\"{0}\">{1}{2}</td>",
                     @class.BranchCoverageQuota.HasValue ? $"{@class.CoveredBranches}/{@class.TotalBranches}" : "-",
+                    GenerateTinyCoverageChart(
+                        "tinybranchcoveragechart",
+                        ReportResources.History + ": " + ReportResources.BranchCoverage,
+                        branchCoverageHistory),
                     @class.BranchCoverageQuota.HasValue ? @class.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
                 WriteCoverageTable(this.reportTextWriter, "td", @class.BranchCoverageQuota);
             }
@@ -1406,16 +1420,24 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 this.reportTextWriter.Write("<td class=\"right\">{0}</td>", @class.CoveredCodeElements);
                 this.reportTextWriter.Write("<td class=\"right\">{0}</td>", @class.TotalCodeElements);
                 this.reportTextWriter.Write(
-                    "<td class=\"right\" title=\"{0}\">{1}</td>",
+                    "<td class=\"right\" title=\"{0}\">{1}{2}</td>",
                     @class.CodeElementCoverageQuota.HasValue ? $"{@class.CoveredCodeElements}/{@class.TotalCodeElements}" : "-",
+                    GenerateTinyCoverageChart(
+                        "tinymethodcoveragechart",
+                        ReportResources.History + ": " + ReportResources.CodeElementCoverageQuota,
+                        methodCoverageHistory),
                     @class.CodeElementCoverageQuota.HasValue ? @class.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
                 WriteCoverageTable(this.reportTextWriter, "td", @class.CodeElementCoverageQuota);
 
                 this.reportTextWriter.Write("<td class=\"right\">{0}</td>", @class.FullCoveredCodeElements);
                 this.reportTextWriter.Write("<td class=\"right\">{0}</td>", @class.TotalCodeElements);
                 this.reportTextWriter.Write(
-                    "<td class=\"right\" title=\"{0}\">{1}</td>",
+                    "<td class=\"right\" title=\"{0}\">{1}{2}</td>",
                     @class.FullCodeElementCoverageQuota.HasValue ? $"{@class.FullCoveredCodeElements}/{@class.TotalCodeElements}" : "-",
+                    GenerateTinyCoverageChart(
+                        "tinyfullmethodcoveragechart",
+                        ReportResources.History + ": " + ReportResources.FullCodeElementCoverageQuota,
+                        methodFullCoverageHistory),
                     @class.FullCodeElementCoverageQuota.HasValue ? @class.FullCodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
                 WriteCoverageTable(this.reportTextWriter, "td", @class.FullCodeElementCoverageQuota);
             }
@@ -1533,6 +1555,44 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 default:
                     return lightcolor ? "lightgray" : "gray";
             }
+        }
+
+        private static string GenerateTinyCoverageChart(
+            string cssClass,
+            string title,
+            IEnumerable<decimal?> values)
+        {
+            string result = string.Empty;
+
+            if (!values.Any(v => v.HasValue))
+            {
+                return result;
+            }
+
+            var historicCoverages = values.Select(v => v.GetValueOrDefault()).ToArray();
+
+            if (historicCoverages.Length < 2)
+            {
+                return result;
+            }
+
+            string path = string.Empty;
+
+            for (int i = 0; i < historicCoverages.Length; i++)
+            {
+                path += i == 0 ? "M" : "L";
+                path += $"{(30m * i / (historicCoverages.Length - 1)).ToString(CultureInfo.InvariantCulture)}";
+                path += $",{(18 - (18 * historicCoverages[i] / 100)).ToString(CultureInfo.InvariantCulture)}";
+            }
+
+            result = string.Format(
+                CultureInfo.InvariantCulture,
+                "<div class=\"{0} ct-chart\" title=\"{1}\"><svg width=\"30\" height=\"18\" class=\"ct-chart-line\"><g class=\"ct-series ct-series-a\"><path d=\"{2}\" class=\"ct-line\"></path></g></svg></div>",
+                cssClass,
+                title,
+                path);
+
+            return result;
         }
 
         private static string GetTooltip(LineAnalysis analysis)
