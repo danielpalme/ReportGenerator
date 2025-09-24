@@ -22,7 +22,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <summary>
         /// The <see cref="HtmlReportBuilder"/>.
         /// </summary>
-        private readonly IReportBuilder htmlReportBuilder = new HtmlReportBuilder(false);
+        private readonly IReportBuilder htmlReportBuilder = new HtmlInlineCssAndJavaScriptReportBuilder();
 
         /// <summary>
         /// The report context.
@@ -118,20 +118,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         }
 
         /// <summary>
-        /// Adds the 'file:///' prefix for CSS and java script links.
-        /// </summary>
-        /// <param name="content">The content.</param>
-        /// <returns>The processed content.</returns>
-        private static string AddFilePrefixForCssAndJavaScript(string content)
-        {
-            content = content.Replace("<link rel=\"stylesheet\" type=\"text/css\" href=\"report.css\" />", "<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///report.css\" />");
-            content = content.Replace("<script type=\"text/javascript\" src=\"main.js\"></script>", "<script type=\"text/javascript\" src=\"file:///main.js\"></script>");
-            content = content.Replace("<script type=\"text/javascript\" src=\"class.js\"></script>", "<script type=\"text/javascript\" src=\"file:///class.js\"></script>");
-
-            return content;
-        }
-
-        /// <summary>
         /// Creates the MHTML file.
         /// </summary>
         private void CreateMhtmlFile()
@@ -172,7 +158,6 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
                 string file = "index.html";
                 string content = File.ReadAllText(Path.Combine(htmlReportTargetDirectory, file));
-                content = AddFilePrefixForCssAndJavaScript(content);
                 content = content.Replace("<tr><td><a href=\"", "<tr><td><a href=\"file:///");
                 WriteFile(writer, file, "text/html", content);
 
@@ -185,27 +170,9 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
                     file = reportFile.Substring(reportFile.LastIndexOf(Path.DirectorySeparatorChar) + 1);
                     content = File.ReadAllText(reportFile);
-                    content = AddFilePrefixForCssAndJavaScript(content);
                     content = content.Replace("<a href=\"index.html\"", "<a href=\"file:///index.html\"");
                     WriteFile(writer, file, "text/html", content);
                 }
-
-                file = "main.js";
-                content = File.ReadAllText(Path.Combine(htmlReportTargetDirectory, file));
-                content = content.Replace(", \"reportPath\": \"", ", \"reportPath\": \"file:///");
-                content = content.Replace(", \"rp\": \"", ", \"rp\": \"file:///");
-                WriteFile(writer, file, "application/javascript", content);
-
-                file = "class.js";
-                if (File.Exists(Path.Combine(htmlReportTargetDirectory, file)))
-                {
-                    content = File.ReadAllText(Path.Combine(htmlReportTargetDirectory, file));
-                    WriteFile(writer, file, "application/javascript", content);
-                }
-
-                file = "report.css";
-                content = File.ReadAllText(Path.Combine(htmlReportTargetDirectory, file));
-                WriteFile(writer, file, "text/css", content);
 
                 writer.Write("------=_NextPart_000_0000_01D23618.54EBCBE0--");
             }

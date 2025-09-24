@@ -69,6 +69,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.4.16.0
+
+    * Fix: #755: Improved MHTML reports (inline CSS)
+
 5.4.15.0
 
     * New: #752: Added support for Scoverage input format
