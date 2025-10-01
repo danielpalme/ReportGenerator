@@ -69,6 +69,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.4.17.0
+
+    * Fix: #757: Improved title elements in SVGs charts embedded in MHTML report
+
 5.4.16.0
 
     * Fix: #755: Improved MHTML reports (inline CSS)

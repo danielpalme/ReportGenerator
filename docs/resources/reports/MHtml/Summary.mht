@@ -965,7 +965,7 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
 </div>
 </div>
 <h1>Coverage history</h1>
-<div class="historychart ct-chart" data-data="historyChartDataa76f60eee4ed4326a765f53c3ce385c4"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="ct-chart" width="1200" height="150" viewBox="0 0 1200 150">
+<div class="historychart ct-chart" data-data="historyChartDatab1795ba48ede437b9111e83c872ee3b4"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="ct-chart" width="1200" height="150" viewBox="0 0 1200 150">
 <style type="text/css">
         <![CDATA[
         .ct-chart .ct-grid {
@@ -1031,206 +1031,206 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
     <text x="45" y="13" class="ct-label">100</text>
 </g><g class="ct-series ct-series-a">
 <path d="M50.000,61.400L192.500,59.000L335.000,57.400L477.500,56.600L620.000,59.000L762.500,57.400L905.000,56.600L1047.500,56.600L1190.000,45.600" class="ct-line"></path>
-<line x1="50.000" y1="61.400" x2="50.010" y2="61.400" class="ct-point"><title>01.02.2022 - 20:50:35
-Line coverage: 53.6% (67/125)
-Branch coverage: 50% (30/60)
-Method coverage: 58.3% (14/24)
-Full method coverage 25% (6/24)
-Total lines: 260</title></line><line x1="192.500" y1="59.000" x2="192.510" y2="59.000" class="ct-point"><title>02.02.2022 - 20:50:35
-Line coverage: 56% (70/125)
-Branch coverage: 43.3% (26/60)
-Method coverage: 45.8% (11/24)
-Full method coverage 25% (6/24)
-Total lines: 260</title></line><line x1="335.000" y1="57.400" x2="335.010" y2="57.400" class="ct-point"><title>03.02.2022 - 20:50:35
-Line coverage: 57.6% (72/125)
-Branch coverage: 46.6% (28/60)
-Method coverage: 50% (12/24)
-Full method coverage 29.1% (7/24)
-Total lines: 260</title></line><line x1="477.500" y1="56.600" x2="477.510" y2="56.600" class="ct-point"><title>04.02.2022 - 20:50:35
-Line coverage: 58.4% (73/125)
-Branch coverage: 48.3% (29/60)
-Method coverage: 54.1% (13/24)
-Full method coverage 33.3% (8/24)
-Total lines: 260</title></line><line x1="620.000" y1="59.000" x2="620.010" y2="59.000" class="ct-point"><title>05.02.2022 - 20:50:35
-Line coverage: 56% (70/125)
-Branch coverage: 50% (30/60)
-Method coverage: 54.1% (13/24)
-Full method coverage 33.3% (8/24)
-Total lines: 260</title></line><line x1="762.500" y1="57.400" x2="762.510" y2="57.400" class="ct-point"><title>06.02.2022 - 20:50:35
-Line coverage: 57.6% (72/125)
-Branch coverage: 50% (30/60)
-Method coverage: 62.5% (15/24)
-Full method coverage 37.5% (9/24)
-Total lines: 260</title></line><line x1="905.000" y1="56.600" x2="905.010" y2="56.600" class="ct-point"><title>07.02.2022 - 20:50:35
-Line coverage: 58.4% (73/125)
-Branch coverage: 50% (30/60)
-Method coverage: 66.6% (16/24)
-Full method coverage 37.5% (9/24)
-Total lines: 260</title></line><line x1="1047.500" y1="56.600" x2="1047.510" y2="56.600" class="ct-point"><title>09.02.2022 - 20:50:35
-Line coverage: 58.4% (73/125)
-Branch coverage: 45% (27/60)
-Method coverage: 66.6% (16/24)
-Full method coverage 37.5% (9/24)
-Total lines: 260</title></line><line x1="1190.000" y1="45.600" x2="1190.010" y2="45.600" class="ct-point"><title>24.09.2025 - 19:54:35
-Line coverage: 69.4% (75/108)
-Branch coverage: 50% (4/8)
-Method coverage: 66.6% (16/24)
-Full method coverage 50% (12/24)
+<line x1="50.000" y1="61.400" x2="50.010" y2="61.400" class="ct-point"><title>01.02.2022 - 20:50:35&#13;
+Line coverage: 53.6% (67/125)&#13;
+Branch coverage: 50% (30/60)&#13;
+Method coverage: 58.3% (14/24)&#13;
+Full method coverage 25% (6/24)&#13;
+Total lines: 260</title></line><line x1="192.500" y1="59.000" x2="192.510" y2="59.000" class="ct-point"><title>02.02.2022 - 20:50:35&#13;
+Line coverage: 56% (70/125)&#13;
+Branch coverage: 43.3% (26/60)&#13;
+Method coverage: 45.8% (11/24)&#13;
+Full method coverage 25% (6/24)&#13;
+Total lines: 260</title></line><line x1="335.000" y1="57.400" x2="335.010" y2="57.400" class="ct-point"><title>03.02.2022 - 20:50:35&#13;
+Line coverage: 57.6% (72/125)&#13;
+Branch coverage: 46.6% (28/60)&#13;
+Method coverage: 50% (12/24)&#13;
+Full method coverage 29.1% (7/24)&#13;
+Total lines: 260</title></line><line x1="477.500" y1="56.600" x2="477.510" y2="56.600" class="ct-point"><title>04.02.2022 - 20:50:35&#13;
+Line coverage: 58.4% (73/125)&#13;
+Branch coverage: 48.3% (29/60)&#13;
+Method coverage: 54.1% (13/24)&#13;
+Full method coverage 33.3% (8/24)&#13;
+Total lines: 260</title></line><line x1="620.000" y1="59.000" x2="620.010" y2="59.000" class="ct-point"><title>05.02.2022 - 20:50:35&#13;
+Line coverage: 56% (70/125)&#13;
+Branch coverage: 50% (30/60)&#13;
+Method coverage: 54.1% (13/24)&#13;
+Full method coverage 33.3% (8/24)&#13;
+Total lines: 260</title></line><line x1="762.500" y1="57.400" x2="762.510" y2="57.400" class="ct-point"><title>06.02.2022 - 20:50:35&#13;
+Line coverage: 57.6% (72/125)&#13;
+Branch coverage: 50% (30/60)&#13;
+Method coverage: 62.5% (15/24)&#13;
+Full method coverage 37.5% (9/24)&#13;
+Total lines: 260</title></line><line x1="905.000" y1="56.600" x2="905.010" y2="56.600" class="ct-point"><title>07.02.2022 - 20:50:35&#13;
+Line coverage: 58.4% (73/125)&#13;
+Branch coverage: 50% (30/60)&#13;
+Method coverage: 66.6% (16/24)&#13;
+Full method coverage 37.5% (9/24)&#13;
+Total lines: 260</title></line><line x1="1047.500" y1="56.600" x2="1047.510" y2="56.600" class="ct-point"><title>09.02.2022 - 20:50:35&#13;
+Line coverage: 58.4% (73/125)&#13;
+Branch coverage: 45% (27/60)&#13;
+Method coverage: 66.6% (16/24)&#13;
+Full method coverage 37.5% (9/24)&#13;
+Total lines: 260</title></line><line x1="1190.000" y1="45.600" x2="1190.010" y2="45.600" class="ct-point"><title>01.10.2025 - 19:25:59&#13;
+Line coverage: 69.4% (75/108)&#13;
+Branch coverage: 50% (4/8)&#13;
+Method coverage: 66.6% (16/24)&#13;
+Full method coverage 50% (12/24)&#13;
 Total lines: 260</title></line></g>
 <g class="ct-series ct-series-b">
 <path d="M50.000,65.000L192.500,71.700L335.000,68.400L477.500,66.700L620.000,65.000L762.500,65.000L905.000,65.000L1047.500,70.000L1190.000,65.000" class="ct-line"></path>
-<line x1="50.000" y1="65.000" x2="50.010" y2="65.000" class="ct-point"><title>01.02.2022 - 20:50:35
-Line coverage: 53.6% (67/125)
-Branch coverage: 50% (30/60)
-Method coverage: 58.3% (14/24)
-Full method coverage 25% (6/24)
-Total lines: 260</title></line><line x1="192.500" y1="71.700" x2="192.510" y2="71.700" class="ct-point"><title>02.02.2022 - 20:50:35
-Line coverage: 56% (70/125)
-Branch coverage: 43.3% (26/60)
-Method coverage: 45.8% (11/24)
-Full method coverage 25% (6/24)
-Total lines: 260</title></line><line x1="335.000" y1="68.400" x2="335.010" y2="68.400" class="ct-point"><title>03.02.2022 - 20:50:35
-Line coverage: 57.6% (72/125)
-Branch coverage: 46.6% (28/60)
-Method coverage: 50% (12/24)
-Full method coverage 29.1% (7/24)
-Total lines: 260</title></line><line x1="477.500" y1="66.700" x2="477.510" y2="66.700" class="ct-point"><title>04.02.2022 - 20:50:35
-Line coverage: 58.4% (73/125)
-Branch coverage: 48.3% (29/60)
-Method coverage: 54.1% (13/24)
-Full method coverage 33.3% (8/24)
-Total lines: 260</title></line><line x1="620.000" y1="65.000" x2="620.010" y2="65.000" class="ct-point"><title>05.02.2022 - 20:50:35
-Line coverage: 56% (70/125)
-Branch coverage: 50% (30/60)
-Method coverage: 54.1% (13/24)
-Full method coverage 33.3% (8/24)
-Total lines: 260</title></line><line x1="762.500" y1="65.000" x2="762.510" y2="65.000" class="ct-point"><title>06.02.2022 - 20:50:35
-Line coverage: 57.6% (72/125)
-Branch coverage: 50% (30/60)
-Method coverage: 62.5% (15/24)
-Full method coverage 37.5% (9/24)
-Total lines: 260</title></line><line x1="905.000" y1="65.000" x2="905.010" y2="65.000" class="ct-point"><title>07.02.2022 - 20:50:35
-Line coverage: 58.4% (73/125)
-Branch coverage: 50% (30/60)
-Method coverage: 66.6% (16/24)
-Full method coverage 37.5% (9/24)
-Total lines: 260</title></line><line x1="1047.500" y1="70.000" x2="1047.510" y2="70.000" class="ct-point"><title>09.02.2022 - 20:50:35
-Line coverage: 58.4% (73/125)
-Branch coverage: 45% (27/60)
-Method coverage: 66.6% (16/24)
-Full method coverage 37.5% (9/24)
-Total lines: 260</title></line><line x1="1190.000" y1="65.000" x2="1190.010" y2="65.000" class="ct-point"><title>24.09.2025 - 19:54:35
-Line coverage: 69.4% (75/108)
-Branch coverage: 50% (4/8)
-Method coverage: 66.6% (16/24)
-Full method coverage 50% (12/24)
+<line x1="50.000" y1="65.000" x2="50.010" y2="65.000" class="ct-point"><title>01.02.2022 - 20:50:35&#13;
+Line coverage: 53.6% (67/125)&#13;
+Branch coverage: 50% (30/60)&#13;
+Method coverage: 58.3% (14/24)&#13;
+Full method coverage 25% (6/24)&#13;
+Total lines: 260</title></line><line x1="192.500" y1="71.700" x2="192.510" y2="71.700" class="ct-point"><title>02.02.2022 - 20:50:35&#13;
+Line coverage: 56% (70/125)&#13;
+Branch coverage: 43.3% (26/60)&#13;
+Method coverage: 45.8% (11/24)&#13;
+Full method coverage 25% (6/24)&#13;
+Total lines: 260</title></line><line x1="335.000" y1="68.400" x2="335.010" y2="68.400" class="ct-point"><title>03.02.2022 - 20:50:35&#13;
+Line coverage: 57.6% (72/125)&#13;
+Branch coverage: 46.6% (28/60)&#13;
+Method coverage: 50% (12/24)&#13;
+Full method coverage 29.1% (7/24)&#13;
+Total lines: 260</title></line><line x1="477.500" y1="66.700" x2="477.510" y2="66.700" class="ct-point"><title>04.02.2022 - 20:50:35&#13;
+Line coverage: 58.4% (73/125)&#13;
+Branch coverage: 48.3% (29/60)&#13;
+Method coverage: 54.1% (13/24)&#13;
+Full method coverage 33.3% (8/24)&#13;
+Total lines: 260</title></line><line x1="620.000" y1="65.000" x2="620.010" y2="65.000" class="ct-point"><title>05.02.2022 - 20:50:35&#13;
+Line coverage: 56% (70/125)&#13;
+Branch coverage: 50% (30/60)&#13;
+Method coverage: 54.1% (13/24)&#13;
+Full method coverage 33.3% (8/24)&#13;
+Total lines: 260</title></line><line x1="762.500" y1="65.000" x2="762.510" y2="65.000" class="ct-point"><title>06.02.2022 - 20:50:35&#13;
+Line coverage: 57.6% (72/125)&#13;
+Branch coverage: 50% (30/60)&#13;
+Method coverage: 62.5% (15/24)&#13;
+Full method coverage 37.5% (9/24)&#13;
+Total lines: 260</title></line><line x1="905.000" y1="65.000" x2="905.010" y2="65.000" class="ct-point"><title>07.02.2022 - 20:50:35&#13;
+Line coverage: 58.4% (73/125)&#13;
+Branch coverage: 50% (30/60)&#13;
+Method coverage: 66.6% (16/24)&#13;
+Full method coverage 37.5% (9/24)&#13;
+Total lines: 260</title></line><line x1="1047.500" y1="70.000" x2="1047.510" y2="70.000" class="ct-point"><title>09.02.2022 - 20:50:35&#13;
+Line coverage: 58.4% (73/125)&#13;
+Branch coverage: 45% (27/60)&#13;
+Method coverage: 66.6% (16/24)&#13;
+Full method coverage 37.5% (9/24)&#13;
+Total lines: 260</title></line><line x1="1190.000" y1="65.000" x2="1190.010" y2="65.000" class="ct-point"><title>01.10.2025 - 19:25:59&#13;
+Line coverage: 69.4% (75/108)&#13;
+Branch coverage: 50% (4/8)&#13;
+Method coverage: 66.6% (16/24)&#13;
+Full method coverage 50% (12/24)&#13;
 Total lines: 260</title></line></g>
 <g class="ct-series ct-series-c">
 <path d="M50.000,56.700L192.500,69.200L335.000,65.000L477.500,60.900L620.000,60.900L762.500,52.500L905.000,48.400L1047.500,48.400L1190.000,48.400" class="ct-line"></path>
-<line x1="50.000" y1="56.700" x2="50.010" y2="56.700" class="ct-point"><title>01.02.2022 - 20:50:35
-Line coverage: 53.6% (67/125)
-Branch coverage: 50% (30/60)
-Method coverage: 58.3% (14/24)
-Full method coverage 25% (6/24)
-Total lines: 260</title></line><line x1="192.500" y1="69.200" x2="192.510" y2="69.200" class="ct-point"><title>02.02.2022 - 20:50:35
-Line coverage: 56% (70/125)
-Branch coverage: 43.3% (26/60)
-Method coverage: 45.8% (11/24)
-Full method coverage 25% (6/24)
-Total lines: 260</title></line><line x1="335.000" y1="65.000" x2="335.010" y2="65.000" class="ct-point"><title>03.02.2022 - 20:50:35
-Line coverage: 57.6% (72/125)
-Branch coverage: 46.6% (28/60)
-Method coverage: 50% (12/24)
-Full method coverage 29.1% (7/24)
-Total lines: 260</title></line><line x1="477.500" y1="60.900" x2="477.510" y2="60.900" class="ct-point"><title>04.02.2022 - 20:50:35
-Line coverage: 58.4% (73/125)
-Branch coverage: 48.3% (29/60)
-Method coverage: 54.1% (13/24)
-Full method coverage 33.3% (8/24)
-Total lines: 260</title></line><line x1="620.000" y1="60.900" x2="620.010" y2="60.900" class="ct-point"><title>05.02.2022 - 20:50:35
-Line coverage: 56% (70/125)
-Branch coverage: 50% (30/60)
-Method coverage: 54.1% (13/24)
-Full method coverage 33.3% (8/24)
-Total lines: 260</title></line><line x1="762.500" y1="52.500" x2="762.510" y2="52.500" class="ct-point"><title>06.02.2022 - 20:50:35
-Line coverage: 57.6% (72/125)
-Branch coverage: 50% (30/60)
-Method coverage: 62.5% (15/24)
-Full method coverage 37.5% (9/24)
-Total lines: 260</title></line><line x1="905.000" y1="48.400" x2="905.010" y2="48.400" class="ct-point"><title>07.02.2022 - 20:50:35
-Line coverage: 58.4% (73/125)
-Branch coverage: 50% (30/60)
-Method coverage: 66.6% (16/24)
-Full method coverage 37.5% (9/24)
-Total lines: 260</title></line><line x1="1047.500" y1="48.400" x2="1047.510" y2="48.400" class="ct-point"><title>09.02.2022 - 20:50:35
-Line coverage: 58.4% (73/125)
-Branch coverage: 45% (27/60)
-Method coverage: 66.6% (16/24)
-Full method coverage 37.5% (9/24)
-Total lines: 260</title></line><line x1="1190.000" y1="48.400" x2="1190.010" y2="48.400" class="ct-point"><title>24.09.2025 - 19:54:35
-Line coverage: 69.4% (75/108)
-Branch coverage: 50% (4/8)
-Method coverage: 66.6% (16/24)
-Full method coverage 50% (12/24)
+<line x1="50.000" y1="56.700" x2="50.010" y2="56.700" class="ct-point"><title>01.02.2022 - 20:50:35&#13;
+Line coverage: 53.6% (67/125)&#13;
+Branch coverage: 50% (30/60)&#13;
+Method coverage: 58.3% (14/24)&#13;
+Full method coverage 25% (6/24)&#13;
+Total lines: 260</title></line><line x1="192.500" y1="69.200" x2="192.510" y2="69.200" class="ct-point"><title>02.02.2022 - 20:50:35&#13;
+Line coverage: 56% (70/125)&#13;
+Branch coverage: 43.3% (26/60)&#13;
+Method coverage: 45.8% (11/24)&#13;
+Full method coverage 25% (6/24)&#13;
+Total lines: 260</title></line><line x1="335.000" y1="65.000" x2="335.010" y2="65.000" class="ct-point"><title>03.02.2022 - 20:50:35&#13;
+Line coverage: 57.6% (72/125)&#13;
+Branch coverage: 46.6% (28/60)&#13;
+Method coverage: 50% (12/24)&#13;
+Full method coverage 29.1% (7/24)&#13;
+Total lines: 260</title></line><line x1="477.500" y1="60.900" x2="477.510" y2="60.900" class="ct-point"><title>04.02.2022 - 20:50:35&#13;
+Line coverage: 58.4% (73/125)&#13;
+Branch coverage: 48.3% (29/60)&#13;
+Method coverage: 54.1% (13/24)&#13;
+Full method coverage 33.3% (8/24)&#13;
+Total lines: 260</title></line><line x1="620.000" y1="60.900" x2="620.010" y2="60.900" class="ct-point"><title>05.02.2022 - 20:50:35&#13;
+Line coverage: 56% (70/125)&#13;
+Branch coverage: 50% (30/60)&#13;
+Method coverage: 54.1% (13/24)&#13;
+Full method coverage 33.3% (8/24)&#13;
+Total lines: 260</title></line><line x1="762.500" y1="52.500" x2="762.510" y2="52.500" class="ct-point"><title>06.02.2022 - 20:50:35&#13;
+Line coverage: 57.6% (72/125)&#13;
+Branch coverage: 50% (30/60)&#13;
+Method coverage: 62.5% (15/24)&#13;
+Full method coverage 37.5% (9/24)&#13;
+Total lines: 260</title></line><line x1="905.000" y1="48.400" x2="905.010" y2="48.400" class="ct-point"><title>07.02.2022 - 20:50:35&#13;
+Line coverage: 58.4% (73/125)&#13;
+Branch coverage: 50% (30/60)&#13;
+Method coverage: 66.6% (16/24)&#13;
+Full method coverage 37.5% (9/24)&#13;
+Total lines: 260</title></line><line x1="1047.500" y1="48.400" x2="1047.510" y2="48.400" class="ct-point"><title>09.02.2022 - 20:50:35&#13;
+Line coverage: 58.4% (73/125)&#13;
+Branch coverage: 45% (27/60)&#13;
+Method coverage: 66.6% (16/24)&#13;
+Full method coverage 37.5% (9/24)&#13;
+Total lines: 260</title></line><line x1="1190.000" y1="48.400" x2="1190.010" y2="48.400" class="ct-point"><title>01.10.2025 - 19:25:59&#13;
+Line coverage: 69.4% (75/108)&#13;
+Branch coverage: 50% (4/8)&#13;
+Method coverage: 66.6% (16/24)&#13;
+Full method coverage 50% (12/24)&#13;
 Total lines: 260</title></line></g>
 <g class="ct-series ct-series-d">
 <path d="M50.000,90.000L192.500,90.000L335.000,85.900L477.500,81.700L620.000,81.700L762.500,77.500L905.000,77.500L1047.500,77.500L1190.000,65.000" class="ct-line"></path>
-<line x1="50.000" y1="90.000" x2="50.010" y2="90.000" class="ct-point"><title>01.02.2022 - 20:50:35
-Line coverage: 53.6% (67/125)
-Branch coverage: 50% (30/60)
-Method coverage: 58.3% (14/24)
-Full method coverage 25% (6/24)
-Total lines: 260</title></line><line x1="192.500" y1="90.000" x2="192.510" y2="90.000" class="ct-point"><title>02.02.2022 - 20:50:35
-Line coverage: 56% (70/125)
-Branch coverage: 43.3% (26/60)
-Method coverage: 45.8% (11/24)
-Full method coverage 25% (6/24)
-Total lines: 260</title></line><line x1="335.000" y1="85.900" x2="335.010" y2="85.900" class="ct-point"><title>03.02.2022 - 20:50:35
-Line coverage: 57.6% (72/125)
-Branch coverage: 46.6% (28/60)
-Method coverage: 50% (12/24)
-Full method coverage 29.1% (7/24)
-Total lines: 260</title></line><line x1="477.500" y1="81.700" x2="477.510" y2="81.700" class="ct-point"><title>04.02.2022 - 20:50:35
-Line coverage: 58.4% (73/125)
-Branch coverage: 48.3% (29/60)
-Method coverage: 54.1% (13/24)
-Full method coverage 33.3% (8/24)
-Total lines: 260</title></line><line x1="620.000" y1="81.700" x2="620.010" y2="81.700" class="ct-point"><title>05.02.2022 - 20:50:35
-Line coverage: 56% (70/125)
-Branch coverage: 50% (30/60)
-Method coverage: 54.1% (13/24)
-Full method coverage 33.3% (8/24)
-Total lines: 260</title></line><line x1="762.500" y1="77.500" x2="762.510" y2="77.500" class="ct-point"><title>06.02.2022 - 20:50:35
-Line coverage: 57.6% (72/125)
-Branch coverage: 50% (30/60)
-Method coverage: 62.5% (15/24)
-Full method coverage 37.5% (9/24)
-Total lines: 260</title></line><line x1="905.000" y1="77.500" x2="905.010" y2="77.500" class="ct-point"><title>07.02.2022 - 20:50:35
-Line coverage: 58.4% (73/125)
-Branch coverage: 50% (30/60)
-Method coverage: 66.6% (16/24)
-Full method coverage 37.5% (9/24)
-Total lines: 260</title></line><line x1="1047.500" y1="77.500" x2="1047.510" y2="77.500" class="ct-point"><title>09.02.2022 - 20:50:35
-Line coverage: 58.4% (73/125)
-Branch coverage: 45% (27/60)
-Method coverage: 66.6% (16/24)
-Full method coverage 37.5% (9/24)
-Total lines: 260</title></line><line x1="1190.000" y1="65.000" x2="1190.010" y2="65.000" class="ct-point"><title>24.09.2025 - 19:54:35
-Line coverage: 69.4% (75/108)
-Branch coverage: 50% (4/8)
-Method coverage: 66.6% (16/24)
-Full method coverage 50% (12/24)
+<line x1="50.000" y1="90.000" x2="50.010" y2="90.000" class="ct-point"><title>01.02.2022 - 20:50:35&#13;
+Line coverage: 53.6% (67/125)&#13;
+Branch coverage: 50% (30/60)&#13;
+Method coverage: 58.3% (14/24)&#13;
+Full method coverage 25% (6/24)&#13;
+Total lines: 260</title></line><line x1="192.500" y1="90.000" x2="192.510" y2="90.000" class="ct-point"><title>02.02.2022 - 20:50:35&#13;
+Line coverage: 56% (70/125)&#13;
+Branch coverage: 43.3% (26/60)&#13;
+Method coverage: 45.8% (11/24)&#13;
+Full method coverage 25% (6/24)&#13;
+Total lines: 260</title></line><line x1="335.000" y1="85.900" x2="335.010" y2="85.900" class="ct-point"><title>03.02.2022 - 20:50:35&#13;
+Line coverage: 57.6% (72/125)&#13;
+Branch coverage: 46.6% (28/60)&#13;
+Method coverage: 50% (12/24)&#13;
+Full method coverage 29.1% (7/24)&#13;
+Total lines: 260</title></line><line x1="477.500" y1="81.700" x2="477.510" y2="81.700" class="ct-point"><title>04.02.2022 - 20:50:35&#13;
+Line coverage: 58.4% (73/125)&#13;
+Branch coverage: 48.3% (29/60)&#13;
+Method coverage: 54.1% (13/24)&#13;
+Full method coverage 33.3% (8/24)&#13;
+Total lines: 260</title></line><line x1="620.000" y1="81.700" x2="620.010" y2="81.700" class="ct-point"><title>05.02.2022 - 20:50:35&#13;
+Line coverage: 56% (70/125)&#13;
+Branch coverage: 50% (30/60)&#13;
+Method coverage: 54.1% (13/24)&#13;
+Full method coverage 33.3% (8/24)&#13;
+Total lines: 260</title></line><line x1="762.500" y1="77.500" x2="762.510" y2="77.500" class="ct-point"><title>06.02.2022 - 20:50:35&#13;
+Line coverage: 57.6% (72/125)&#13;
+Branch coverage: 50% (30/60)&#13;
+Method coverage: 62.5% (15/24)&#13;
+Full method coverage 37.5% (9/24)&#13;
+Total lines: 260</title></line><line x1="905.000" y1="77.500" x2="905.010" y2="77.500" class="ct-point"><title>07.02.2022 - 20:50:35&#13;
+Line coverage: 58.4% (73/125)&#13;
+Branch coverage: 50% (30/60)&#13;
+Method coverage: 66.6% (16/24)&#13;
+Full method coverage 37.5% (9/24)&#13;
+Total lines: 260</title></line><line x1="1047.500" y1="77.500" x2="1047.510" y2="77.500" class="ct-point"><title>09.02.2022 - 20:50:35&#13;
+Line coverage: 58.4% (73/125)&#13;
+Branch coverage: 45% (27/60)&#13;
+Method coverage: 66.6% (16/24)&#13;
+Full method coverage 37.5% (9/24)&#13;
+Total lines: 260</title></line><line x1="1190.000" y1="65.000" x2="1190.010" y2="65.000" class="ct-point"><title>01.10.2025 - 19:25:59&#13;
+Line coverage: 69.4% (75/108)&#13;
+Branch coverage: 50% (4/8)&#13;
+Method coverage: 66.6% (16/24)&#13;
+Full method coverage 50% (12/24)&#13;
 Total lines: 260</title></line></g>
 </svg>
 </div>
 <script type="text/javascript">/* <![CDATA[ */ 
-var historyChartDataa76f60eee4ed4326a765f53c3ce385c4 = {
+var historyChartDatab1795ba48ede437b9111e83c872ee3b4 = {
     "series" : [[{ 'meta': 0, 'value': 53.6 }, { 'meta': 1, 'value': 56 }, { 'meta': 2, 'value': 57.6 }, { 'meta': 3, 'value': 58.4 }, { 'meta': 4, 'value': 56 }, { 'meta': 5, 'value': 57.6 }, { 'meta': 6, 'value': 58.4 }, { 'meta': 7, 'value': 58.4 }, { 'meta': 8, 'value': 69.4 }],
 [{ 'meta': 0, 'value': 50 }, { 'meta': 1, 'value': 43.3 }, { 'meta': 2, 'value': 46.6 }, { 'meta': 3, 'value': 48.3 }, { 'meta': 4, 'value': 50 }, { 'meta': 5, 'value': 50 }, { 'meta': 6, 'value': 50 }, { 'meta': 7, 'value': 45 }, { 'meta': 8, 'value': 50 }],
 [{ 'meta': 0, 'value': 58.3 }, { 'meta': 1, 'value': 45.8 }, { 'meta': 2, 'value': 50 }, { 'meta': 3, 'value': 54.1 }, { 'meta': 4, 'value': 54.1 }, { 'meta': 5, 'value': 62.5 }, { 'meta': 6, 'value': 66.6 }, { 'meta': 7, 'value': 66.6 }, { 'meta': 8, 'value': 66.6 }],
 [{ 'meta': 0, 'value': 25 }, { 'meta': 1, 'value': 25 }, { 'meta': 2, 'value': 29.1 }, { 'meta': 3, 'value': 33.3 }, { 'meta': 4, 'value': 33.3 }, { 'meta': 5, 'value': 37.5 }, { 'meta': 6, 'value': 37.5 }, { 'meta': 7, 'value': 37.5 }, { 'meta': 8, 'value': 50 }]
 ],
-    "tooltips" : ['<h3>01.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 53.6% (67/125)<br /><span class="branchcoverage"></span> Branch coverage: 50% (30/60)<br /><span class="codeelementcoverage"></span> Method coverage: 58.3% (14/24)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 25% (6/24)<br />Total lines: 260','<h3>02.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 56% (70/125)<br /><span class="branchcoverage"></span> Branch coverage: 43.3% (26/60)<br /><span class="codeelementcoverage"></span> Method coverage: 45.8% (11/24)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 25% (6/24)<br />Total lines: 260','<h3>03.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 57.6% (72/125)<br /><span class="branchcoverage"></span> Branch coverage: 46.6% (28/60)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (12/24)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 29.1% (7/24)<br />Total lines: 260','<h3>04.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 58.4% (73/125)<br /><span class="branchcoverage"></span> Branch coverage: 48.3% (29/60)<br /><span class="codeelementcoverage"></span> Method coverage: 54.1% (13/24)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 33.3% (8/24)<br />Total lines: 260','<h3>05.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 56% (70/125)<br /><span class="branchcoverage"></span> Branch coverage: 50% (30/60)<br /><span class="codeelementcoverage"></span> Method coverage: 54.1% (13/24)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 33.3% (8/24)<br />Total lines: 260','<h3>06.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 57.6% (72/125)<br /><span class="branchcoverage"></span> Branch coverage: 50% (30/60)<br /><span class="codeelementcoverage"></span> Method coverage: 62.5% (15/24)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 37.5% (9/24)<br />Total lines: 260','<h3>07.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 58.4% (73/125)<br /><span class="branchcoverage"></span> Branch coverage: 50% (30/60)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (16/24)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 37.5% (9/24)<br />Total lines: 260','<h3>09.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 58.4% (73/125)<br /><span class="branchcoverage"></span> Branch coverage: 45% (27/60)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (16/24)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 37.5% (9/24)<br />Total lines: 260','<h3>24.09.2025 - 19:54:35</h3><br /><span class="linecoverage"></span> Line coverage: 69.4% (75/108)<br /><span class="branchcoverage"></span> Branch coverage: 50% (4/8)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (16/24)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 50% (12/24)<br />Total lines: 260']
+    "tooltips" : ['<h3>01.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 53.6% (67/125)<br /><span class="branchcoverage"></span> Branch coverage: 50% (30/60)<br /><span class="codeelementcoverage"></span> Method coverage: 58.3% (14/24)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 25% (6/24)<br />Total lines: 260','<h3>02.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 56% (70/125)<br /><span class="branchcoverage"></span> Branch coverage: 43.3% (26/60)<br /><span class="codeelementcoverage"></span> Method coverage: 45.8% (11/24)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 25% (6/24)<br />Total lines: 260','<h3>03.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 57.6% (72/125)<br /><span class="branchcoverage"></span> Branch coverage: 46.6% (28/60)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (12/24)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 29.1% (7/24)<br />Total lines: 260','<h3>04.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 58.4% (73/125)<br /><span class="branchcoverage"></span> Branch coverage: 48.3% (29/60)<br /><span class="codeelementcoverage"></span> Method coverage: 54.1% (13/24)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 33.3% (8/24)<br />Total lines: 260','<h3>05.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 56% (70/125)<br /><span class="branchcoverage"></span> Branch coverage: 50% (30/60)<br /><span class="codeelementcoverage"></span> Method coverage: 54.1% (13/24)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 33.3% (8/24)<br />Total lines: 260','<h3>06.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 57.6% (72/125)<br /><span class="branchcoverage"></span> Branch coverage: 50% (30/60)<br /><span class="codeelementcoverage"></span> Method coverage: 62.5% (15/24)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 37.5% (9/24)<br />Total lines: 260','<h3>07.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 58.4% (73/125)<br /><span class="branchcoverage"></span> Branch coverage: 50% (30/60)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (16/24)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 37.5% (9/24)<br />Total lines: 260','<h3>09.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 58.4% (73/125)<br /><span class="branchcoverage"></span> Branch coverage: 45% (27/60)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (16/24)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 37.5% (9/24)<br />Total lines: 260','<h3>01.10.2025 - 19:25:59</h3><br /><span class="linecoverage"></span> Line coverage: 69.4% (75/108)<br /><span class="branchcoverage"></span> Branch coverage: 50% (4/8)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (16/24)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 50% (12/24)<br />Total lines: 260']
 };
  /* ]]> */ </script>
 <h1>Risk Hotspots</h1>
@@ -1275,7 +1275,7 @@ var historyChartDataa76f60eee4ed4326a765f53c3ce385c4 = {
 </table>
 </div>
 </coverage-info>
-<div class="footer">Generated by: ReportGenerator 5.4.15.0<br />24.09.2025 - 19:54:35<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div></div>
+<div class="footer">Generated by: ReportGenerator 5.4.16.0<br />01.10.2025 - 19:25:59<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div></div>
 <script type="text/javascript">/* <![CDATA[ */ /* Chartist.js 0.11.4
  * Copyright © 2019 Gion Kunz
  * Free to use under either the WTFPL license or the MIT license.
@@ -1491,10 +1491,10 @@ var assemblies = [
   {
     "name": "Sample",
     "classes": [
-      { "name": "Sample.PartialClass", "rp": "Sample_PartialClass.html", "cl": 12, "ucl": 10, "cal": 22, "tl": 53, "cb": 1, "tb": 2, "cm": 3, "fcm": 2, "tm": 6, "lch": [40.9,54.5,59,59,45.4,50,50,59,54.5], "bch": [50,40,40,45,45,45,45,45,50], "mch": [50,33.3,50,66.6,66.6,66.6,83.3,83.3,50], "mfch": [33.3,33.3,50,50,50,50,50,50,33.3], "hc": [{ "et": "01.02.2022 - 20:50:35", "cl": 9, "ucl": 13, "cal": 22, "tl": 53, "lcq": 40.9, "cb": 10, "tb": 20, "bcq": 50, "cm": 3, "fcm": 2, "tm": 6, "mcq": 50, "mfcq": 33.3 }, { "et": "02.02.2022 - 20:50:35", "cl": 12, "ucl": 10, "cal": 22, "tl": 53, "lcq": 54.5, "cb": 8, "tb": 20, "bcq": 40, "cm": 2, "fcm": 2, "tm": 6, "mcq": 33.3, "mfcq": 33.3 }, { "et": "03.02.2022 - 20:50:35", "cl": 13, "ucl": 9, "cal": 22, "tl": 53, "lcq": 59, "cb": 8, "tb": 20, "bcq": 40, "cm": 3, "fcm": 3, "tm": 6, "mcq": 50, "mfcq": 50 }, { "et": "04.02.2022 - 20:50:35", "cl": 13, "ucl": 9, "cal": 22, "tl": 53, "lcq": 59, "cb": 9, "tb": 20, "bcq": 45, "cm": 4, "fcm": 3, "tm": 6, "mcq": 66.6, "mfcq": 50 }, { "et": "05.02.2022 - 20:50:35", "cl": 10, "ucl": 12, "cal": 22, "tl": 53, "lcq": 45.4, "cb": 9, "tb": 20, "bcq": 45, "cm": 4, "fcm": 3, "tm": 6, "mcq": 66.6, "mfcq": 50 }, { "et": "06.02.2022 - 20:50:35", "cl": 11, "ucl": 11, "cal": 22, "tl": 53, "lcq": 50, "cb": 9, "tb": 20, "bcq": 45, "cm": 4, "fcm": 3, "tm": 6, "mcq": 66.6, "mfcq": 50 }, { "et": "07.02.2022 - 20:50:35", "cl": 11, "ucl": 11, "cal": 22, "tl": 53, "lcq": 50, "cb": 9, "tb": 20, "bcq": 45, "cm": 5, "fcm": 3, "tm": 6, "mcq": 83.3, "mfcq": 50 }, { "et": "08.02.2022 - 20:50:35", "cl": 13, "ucl": 9, "cal": 22, "tl": 53, "lcq": 59, "cb": 9, "tb": 20, "bcq": 45, "cm": 5, "fcm": 3, "tm": 6, "mcq": 83.3, "mfcq": 50 }, { "et": "09.02.2022 - 20:50:35", "cl": 13, "ucl": 9, "cal": 22, "tl": 53, "lcq": 59, "cb": 9, "tb": 20, "bcq": 45, "cm": 5, "fcm": 3, "tm": 6, "mcq": 83.3, "mfcq": 50 }, { "et": "24.09.2025 - 19:54:35", "cl": 12, "ucl": 10, "cal": 22, "tl": 53, "lcq": 54.5, "cb": 1, "tb": 2, "bcq": 50, "cm": 3, "fcm": 2, "tm": 6, "mcq": 50, "mfcq": 33.3 }], "metrics": { "cc": 1,  "npth": 0,  "seq": 0,  "bcov": 0,  "crp": 2 } },
-      { "name": "Test.Program", "rp": "Sample_Program.html", "cl": 15, "ucl": 0, "cal": 15, "tl": 84, "cb": 0, "tb": 0, "cm": 3, "fcm": 3, "tm": 3, "lch": [79.5,79.5,79.5,100], "bch": [], "mch": [66.6,66.6,66.6,100], "mfch": [0,16.6,33.3,100], "hc": [{ "et": "01.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "fcm": 0, "tm": 6, "mcq": 66.6, "mfcq": 0 }, { "et": "02.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "fcm": 0, "tm": 6, "mcq": 66.6, "mfcq": 0 }, { "et": "03.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "fcm": 0, "tm": 6, "mcq": 66.6, "mfcq": 0 }, { "et": "04.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "fcm": 1, "tm": 6, "mcq": 66.6, "mfcq": 16.6 }, { "et": "05.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "fcm": 1, "tm": 6, "mcq": 66.6, "mfcq": 16.6 }, { "et": "06.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "fcm": 2, "tm": 6, "mcq": 66.6, "mfcq": 33.3 }, { "et": "07.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "fcm": 2, "tm": 6, "mcq": 66.6, "mfcq": 33.3 }, { "et": "08.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "fcm": 2, "tm": 6, "mcq": 66.6, "mfcq": 33.3 }, { "et": "09.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "fcm": 2, "tm": 6, "mcq": 66.6, "mfcq": 33.3 }, { "et": "24.09.2025 - 19:54:35", "cl": 15, "ucl": 0, "cal": 15, "tl": 84, "lcq": 100, "cb": 0, "tb": 0, "bcq": 0, "cm": 3, "fcm": 3, "tm": 3, "mcq": 100, "mfcq": 100 }], "metrics": { "cc": 3,  "npth": 0,  "seq": 100,  "bcov": 100,  "crp": 3 } },
-      { "name": "Test.TestClass", "rp": "Sample_TestClass.html", "cl": 24, "ucl": 9, "cal": 33, "tl": 38, "cb": 2, "tb": 4, "cm": 4, "fcm": 3, "tm": 5, "lch": [72.7], "bch": [50], "mch": [80], "mfch": [60], "hc": [{ "et": "24.09.2025 - 19:54:35", "cl": 24, "ucl": 9, "cal": 33, "tl": 38, "lcq": 72.7, "cb": 2, "tb": 4, "bcq": 50, "cm": 4, "fcm": 3, "tm": 5, "mcq": 80, "mfcq": 60 }], "metrics": { "cc": 4,  "npth": 4,  "seq": 0,  "bcov": 50 } },
-      { "name": "Test.TestClass2", "rp": "Sample_TestClass2.html", "cl": 24, "ucl": 14, "cal": 38, "tl": 85, "cb": 1, "tb": 2, "cm": 6, "fcm": 4, "tm": 10, "lch": [39.4,39.4,42.1,44.7,39.4,63.1], "bch": [50,40,40,40,40,50], "mch": [60,40,40,60,60,60], "mfch": [40,40,40,40,40,40], "hc": [{ "et": "01.02.2022 - 20:50:35", "cl": 15, "ucl": 23, "cal": 38, "tl": 85, "lcq": 39.4, "cb": 10, "tb": 20, "bcq": 50, "cm": 6, "fcm": 4, "tm": 10, "mcq": 60, "mfcq": 40 }, { "et": "02.02.2022 - 20:50:35", "cl": 15, "ucl": 23, "cal": 38, "tl": 85, "lcq": 39.4, "cb": 8, "tb": 20, "bcq": 40, "cm": 4, "fcm": 4, "tm": 10, "mcq": 40, "mfcq": 40 }, { "et": "03.02.2022 - 20:50:35", "cl": 16, "ucl": 22, "cal": 38, "tl": 85, "lcq": 42.1, "cb": 8, "tb": 20, "bcq": 40, "cm": 4, "fcm": 4, "tm": 10, "mcq": 40, "mfcq": 40 }, { "et": "04.02.2022 - 20:50:35", "cl": 16, "ucl": 22, "cal": 38, "tl": 85, "lcq": 42.1, "cb": 8, "tb": 20, "bcq": 40, "cm": 4, "fcm": 4, "tm": 10, "mcq": 40, "mfcq": 40 }, { "et": "05.02.2022 - 20:50:35", "cl": 16, "ucl": 22, "cal": 38, "tl": 85, "lcq": 42.1, "cb": 8, "tb": 20, "bcq": 40, "cm": 4, "fcm": 4, "tm": 10, "mcq": 40, "mfcq": 40 }, { "et": "06.02.2022 - 20:50:35", "cl": 17, "ucl": 21, "cal": 38, "tl": 85, "lcq": 44.7, "cb": 8, "tb": 20, "bcq": 40, "cm": 6, "fcm": 4, "tm": 10, "mcq": 60, "mfcq": 40 }, { "et": "07.02.2022 - 20:50:35", "cl": 17, "ucl": 21, "cal": 38, "tl": 85, "lcq": 44.7, "cb": 8, "tb": 20, "bcq": 40, "cm": 6, "fcm": 4, "tm": 10, "mcq": 60, "mfcq": 40 }, { "et": "08.02.2022 - 20:50:35", "cl": 15, "ucl": 23, "cal": 38, "tl": 85, "lcq": 39.4, "cb": 8, "tb": 20, "bcq": 40, "cm": 6, "fcm": 4, "tm": 10, "mcq": 60, "mfcq": 40 }, { "et": "09.02.2022 - 20:50:35", "cl": 15, "ucl": 23, "cal": 38, "tl": 85, "lcq": 39.4, "cb": 8, "tb": 20, "bcq": 40, "cm": 6, "fcm": 4, "tm": 10, "mcq": 60, "mfcq": 40 }, { "et": "24.09.2025 - 19:54:35", "cl": 24, "ucl": 14, "cal": 38, "tl": 85, "lcq": 63.1, "cb": 1, "tb": 2, "bcq": 50, "cm": 6, "fcm": 4, "tm": 10, "mcq": 60, "mfcq": 40 }], "metrics": { "cc": 5,  "npth": 2,  "seq": 0,  "bcov": 0,  "crp": 5 } },
+      { "name": "Sample.PartialClass", "rp": "Sample_PartialClass.html", "cl": 12, "ucl": 10, "cal": 22, "tl": 53, "cb": 1, "tb": 2, "cm": 3, "fcm": 2, "tm": 6, "lch": [40.9,54.5,59,59,45.4,50,50,59,54.5], "bch": [50,40,40,45,45,45,45,45,50], "mch": [50,33.3,50,66.6,66.6,66.6,83.3,83.3,50], "mfch": [33.3,33.3,50,50,50,50,50,50,33.3], "hc": [{ "et": "01.02.2022 - 20:50:35", "cl": 9, "ucl": 13, "cal": 22, "tl": 53, "lcq": 40.9, "cb": 10, "tb": 20, "bcq": 50, "cm": 3, "fcm": 2, "tm": 6, "mcq": 50, "mfcq": 33.3 }, { "et": "02.02.2022 - 20:50:35", "cl": 12, "ucl": 10, "cal": 22, "tl": 53, "lcq": 54.5, "cb": 8, "tb": 20, "bcq": 40, "cm": 2, "fcm": 2, "tm": 6, "mcq": 33.3, "mfcq": 33.3 }, { "et": "03.02.2022 - 20:50:35", "cl": 13, "ucl": 9, "cal": 22, "tl": 53, "lcq": 59, "cb": 8, "tb": 20, "bcq": 40, "cm": 3, "fcm": 3, "tm": 6, "mcq": 50, "mfcq": 50 }, { "et": "04.02.2022 - 20:50:35", "cl": 13, "ucl": 9, "cal": 22, "tl": 53, "lcq": 59, "cb": 9, "tb": 20, "bcq": 45, "cm": 4, "fcm": 3, "tm": 6, "mcq": 66.6, "mfcq": 50 }, { "et": "05.02.2022 - 20:50:35", "cl": 10, "ucl": 12, "cal": 22, "tl": 53, "lcq": 45.4, "cb": 9, "tb": 20, "bcq": 45, "cm": 4, "fcm": 3, "tm": 6, "mcq": 66.6, "mfcq": 50 }, { "et": "06.02.2022 - 20:50:35", "cl": 11, "ucl": 11, "cal": 22, "tl": 53, "lcq": 50, "cb": 9, "tb": 20, "bcq": 45, "cm": 4, "fcm": 3, "tm": 6, "mcq": 66.6, "mfcq": 50 }, { "et": "07.02.2022 - 20:50:35", "cl": 11, "ucl": 11, "cal": 22, "tl": 53, "lcq": 50, "cb": 9, "tb": 20, "bcq": 45, "cm": 5, "fcm": 3, "tm": 6, "mcq": 83.3, "mfcq": 50 }, { "et": "08.02.2022 - 20:50:35", "cl": 13, "ucl": 9, "cal": 22, "tl": 53, "lcq": 59, "cb": 9, "tb": 20, "bcq": 45, "cm": 5, "fcm": 3, "tm": 6, "mcq": 83.3, "mfcq": 50 }, { "et": "09.02.2022 - 20:50:35", "cl": 13, "ucl": 9, "cal": 22, "tl": 53, "lcq": 59, "cb": 9, "tb": 20, "bcq": 45, "cm": 5, "fcm": 3, "tm": 6, "mcq": 83.3, "mfcq": 50 }, { "et": "01.10.2025 - 19:25:59", "cl": 12, "ucl": 10, "cal": 22, "tl": 53, "lcq": 54.5, "cb": 1, "tb": 2, "bcq": 50, "cm": 3, "fcm": 2, "tm": 6, "mcq": 50, "mfcq": 33.3 }], "metrics": { "cc": 1,  "npth": 0,  "seq": 0,  "bcov": 0,  "crp": 2 } },
+      { "name": "Test.Program", "rp": "Sample_Program.html", "cl": 15, "ucl": 0, "cal": 15, "tl": 84, "cb": 0, "tb": 0, "cm": 3, "fcm": 3, "tm": 3, "lch": [79.5,79.5,79.5,100], "bch": [], "mch": [66.6,66.6,66.6,100], "mfch": [0,16.6,33.3,100], "hc": [{ "et": "01.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "fcm": 0, "tm": 6, "mcq": 66.6, "mfcq": 0 }, { "et": "02.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "fcm": 0, "tm": 6, "mcq": 66.6, "mfcq": 0 }, { "et": "03.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "fcm": 0, "tm": 6, "mcq": 66.6, "mfcq": 0 }, { "et": "04.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "fcm": 1, "tm": 6, "mcq": 66.6, "mfcq": 16.6 }, { "et": "05.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "fcm": 1, "tm": 6, "mcq": 66.6, "mfcq": 16.6 }, { "et": "06.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "fcm": 2, "tm": 6, "mcq": 66.6, "mfcq": 33.3 }, { "et": "07.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "fcm": 2, "tm": 6, "mcq": 66.6, "mfcq": 33.3 }, { "et": "08.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "fcm": 2, "tm": 6, "mcq": 66.6, "mfcq": 33.3 }, { "et": "09.02.2022 - 20:50:35", "cl": 35, "ucl": 9, "cal": 44, "tl": 84, "lcq": 79.5, "cb": 0, "tb": 0, "bcq": 0, "cm": 4, "fcm": 2, "tm": 6, "mcq": 66.6, "mfcq": 33.3 }, { "et": "01.10.2025 - 19:25:59", "cl": 15, "ucl": 0, "cal": 15, "tl": 84, "lcq": 100, "cb": 0, "tb": 0, "bcq": 0, "cm": 3, "fcm": 3, "tm": 3, "mcq": 100, "mfcq": 100 }], "metrics": { "cc": 3,  "npth": 0,  "seq": 100,  "bcov": 100,  "crp": 3 } },
+      { "name": "Test.TestClass", "rp": "Sample_TestClass.html", "cl": 24, "ucl": 9, "cal": 33, "tl": 38, "cb": 2, "tb": 4, "cm": 4, "fcm": 3, "tm": 5, "lch": [72.7], "bch": [50], "mch": [80], "mfch": [60], "hc": [{ "et": "01.10.2025 - 19:25:59", "cl": 24, "ucl": 9, "cal": 33, "tl": 38, "lcq": 72.7, "cb": 2, "tb": 4, "bcq": 50, "cm": 4, "fcm": 3, "tm": 5, "mcq": 80, "mfcq": 60 }], "metrics": { "cc": 4,  "npth": 4,  "seq": 0,  "bcov": 50 } },
+      { "name": "Test.TestClass2", "rp": "Sample_TestClass2.html", "cl": 24, "ucl": 14, "cal": 38, "tl": 85, "cb": 1, "tb": 2, "cm": 6, "fcm": 4, "tm": 10, "lch": [39.4,39.4,42.1,44.7,39.4,63.1], "bch": [50,40,40,40,40,50], "mch": [60,40,40,60,60,60], "mfch": [40,40,40,40,40,40], "hc": [{ "et": "01.02.2022 - 20:50:35", "cl": 15, "ucl": 23, "cal": 38, "tl": 85, "lcq": 39.4, "cb": 10, "tb": 20, "bcq": 50, "cm": 6, "fcm": 4, "tm": 10, "mcq": 60, "mfcq": 40 }, { "et": "02.02.2022 - 20:50:35", "cl": 15, "ucl": 23, "cal": 38, "tl": 85, "lcq": 39.4, "cb": 8, "tb": 20, "bcq": 40, "cm": 4, "fcm": 4, "tm": 10, "mcq": 40, "mfcq": 40 }, { "et": "03.02.2022 - 20:50:35", "cl": 16, "ucl": 22, "cal": 38, "tl": 85, "lcq": 42.1, "cb": 8, "tb": 20, "bcq": 40, "cm": 4, "fcm": 4, "tm": 10, "mcq": 40, "mfcq": 40 }, { "et": "04.02.2022 - 20:50:35", "cl": 16, "ucl": 22, "cal": 38, "tl": 85, "lcq": 42.1, "cb": 8, "tb": 20, "bcq": 40, "cm": 4, "fcm": 4, "tm": 10, "mcq": 40, "mfcq": 40 }, { "et": "05.02.2022 - 20:50:35", "cl": 16, "ucl": 22, "cal": 38, "tl": 85, "lcq": 42.1, "cb": 8, "tb": 20, "bcq": 40, "cm": 4, "fcm": 4, "tm": 10, "mcq": 40, "mfcq": 40 }, { "et": "06.02.2022 - 20:50:35", "cl": 17, "ucl": 21, "cal": 38, "tl": 85, "lcq": 44.7, "cb": 8, "tb": 20, "bcq": 40, "cm": 6, "fcm": 4, "tm": 10, "mcq": 60, "mfcq": 40 }, { "et": "07.02.2022 - 20:50:35", "cl": 17, "ucl": 21, "cal": 38, "tl": 85, "lcq": 44.7, "cb": 8, "tb": 20, "bcq": 40, "cm": 6, "fcm": 4, "tm": 10, "mcq": 60, "mfcq": 40 }, { "et": "08.02.2022 - 20:50:35", "cl": 15, "ucl": 23, "cal": 38, "tl": 85, "lcq": 39.4, "cb": 8, "tb": 20, "bcq": 40, "cm": 6, "fcm": 4, "tm": 10, "mcq": 60, "mfcq": 40 }, { "et": "09.02.2022 - 20:50:35", "cl": 15, "ucl": 23, "cal": 38, "tl": 85, "lcq": 39.4, "cb": 8, "tb": 20, "bcq": 40, "cm": 6, "fcm": 4, "tm": 10, "mcq": 60, "mfcq": 40 }, { "et": "01.10.2025 - 19:25:59", "cl": 24, "ucl": 14, "cal": 38, "tl": 85, "lcq": 63.1, "cb": 1, "tb": 2, "bcq": 50, "cm": 6, "fcm": 4, "tm": 10, "mcq": 60, "mfcq": 40 }], "metrics": { "cc": 5,  "npth": 2,  "seq": 0,  "bcov": 0,  "crp": 5 } },
     ]},
 ];
 
@@ -2526,7 +2526,7 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
 </div>
 </div>
 <h1>Coverage history</h1>
-<div class="historychart ct-chart" data-data="historyChartData355081317b004e488f62fc31a83f07cf"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="ct-chart" width="1200" height="150" viewBox="0 0 1200 150">
+<div class="historychart ct-chart" data-data="historyChartData1cf40ac438ba459b92f3693dd6cda52a"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="ct-chart" width="1200" height="150" viewBox="0 0 1200 150">
 <style type="text/css">
         <![CDATA[
         .ct-chart .ct-grid {
@@ -2592,206 +2592,206 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
     <text x="45" y="13" class="ct-label">100</text>
 </g><g class="ct-series ct-series-a">
 <path d="M50.000,74.100L192.500,60.500L335.000,56.000L477.500,56.000L620.000,69.600L762.500,65.000L905.000,65.000L1047.500,56.000L1190.000,60.500" class="ct-line"></path>
-<line x1="50.000" y1="74.100" x2="50.010" y2="74.100" class="ct-point"><title>01.02.2022 - 20:50:35
-Line coverage: 40.9% (9/22)
-Branch coverage: 50% (10/20)
-Method coverage: 50% (3/6)
-Full method coverage 33.3% (2/6)
-Total lines: 53</title></line><line x1="192.500" y1="60.500" x2="192.510" y2="60.500" class="ct-point"><title>02.02.2022 - 20:50:35
-Line coverage: 54.5% (12/22)
-Branch coverage: 40% (8/20)
-Method coverage: 33.3% (2/6)
-Full method coverage 33.3% (2/6)
-Total lines: 53</title></line><line x1="335.000" y1="56.000" x2="335.010" y2="56.000" class="ct-point"><title>03.02.2022 - 20:50:35
-Line coverage: 59% (13/22)
-Branch coverage: 40% (8/20)
-Method coverage: 50% (3/6)
-Full method coverage 50% (3/6)
-Total lines: 53</title></line><line x1="477.500" y1="56.000" x2="477.510" y2="56.000" class="ct-point"><title>04.02.2022 - 20:50:35
-Line coverage: 59% (13/22)
-Branch coverage: 45% (9/20)
-Method coverage: 66.6% (4/6)
-Full method coverage 50% (3/6)
-Total lines: 53</title></line><line x1="620.000" y1="69.600" x2="620.010" y2="69.600" class="ct-point"><title>05.02.2022 - 20:50:35
-Line coverage: 45.4% (10/22)
-Branch coverage: 45% (9/20)
-Method coverage: 66.6% (4/6)
-Full method coverage 50% (3/6)
-Total lines: 53</title></line><line x1="762.500" y1="65.000" x2="762.510" y2="65.000" class="ct-point"><title>06.02.2022 - 20:50:35
-Line coverage: 50% (11/22)
-Branch coverage: 45% (9/20)
-Method coverage: 66.6% (4/6)
-Full method coverage 50% (3/6)
-Total lines: 53</title></line><line x1="905.000" y1="65.000" x2="905.010" y2="65.000" class="ct-point"><title>07.02.2022 - 20:50:35
-Line coverage: 50% (11/22)
-Branch coverage: 45% (9/20)
-Method coverage: 83.3% (5/6)
-Full method coverage 50% (3/6)
-Total lines: 53</title></line><line x1="1047.500" y1="56.000" x2="1047.510" y2="56.000" class="ct-point"><title>08.02.2022 - 20:50:35
-Line coverage: 59% (13/22)
-Branch coverage: 45% (9/20)
-Method coverage: 83.3% (5/6)
-Full method coverage 50% (3/6)
-Total lines: 53</title></line><line x1="1190.000" y1="60.500" x2="1190.010" y2="60.500" class="ct-point"><title>24.09.2025 - 19:54:35
-Line coverage: 54.5% (12/22)
-Branch coverage: 50% (1/2)
-Method coverage: 50% (3/6)
-Full method coverage 33.3% (2/6)
+<line x1="50.000" y1="74.100" x2="50.010" y2="74.100" class="ct-point"><title>01.02.2022 - 20:50:35&#13;
+Line coverage: 40.9% (9/22)&#13;
+Branch coverage: 50% (10/20)&#13;
+Method coverage: 50% (3/6)&#13;
+Full method coverage 33.3% (2/6)&#13;
+Total lines: 53</title></line><line x1="192.500" y1="60.500" x2="192.510" y2="60.500" class="ct-point"><title>02.02.2022 - 20:50:35&#13;
+Line coverage: 54.5% (12/22)&#13;
+Branch coverage: 40% (8/20)&#13;
+Method coverage: 33.3% (2/6)&#13;
+Full method coverage 33.3% (2/6)&#13;
+Total lines: 53</title></line><line x1="335.000" y1="56.000" x2="335.010" y2="56.000" class="ct-point"><title>03.02.2022 - 20:50:35&#13;
+Line coverage: 59% (13/22)&#13;
+Branch coverage: 40% (8/20)&#13;
+Method coverage: 50% (3/6)&#13;
+Full method coverage 50% (3/6)&#13;
+Total lines: 53</title></line><line x1="477.500" y1="56.000" x2="477.510" y2="56.000" class="ct-point"><title>04.02.2022 - 20:50:35&#13;
+Line coverage: 59% (13/22)&#13;
+Branch coverage: 45% (9/20)&#13;
+Method coverage: 66.6% (4/6)&#13;
+Full method coverage 50% (3/6)&#13;
+Total lines: 53</title></line><line x1="620.000" y1="69.600" x2="620.010" y2="69.600" class="ct-point"><title>05.02.2022 - 20:50:35&#13;
+Line coverage: 45.4% (10/22)&#13;
+Branch coverage: 45% (9/20)&#13;
+Method coverage: 66.6% (4/6)&#13;
+Full method coverage 50% (3/6)&#13;
+Total lines: 53</title></line><line x1="762.500" y1="65.000" x2="762.510" y2="65.000" class="ct-point"><title>06.02.2022 - 20:50:35&#13;
+Line coverage: 50% (11/22)&#13;
+Branch coverage: 45% (9/20)&#13;
+Method coverage: 66.6% (4/6)&#13;
+Full method coverage 50% (3/6)&#13;
+Total lines: 53</title></line><line x1="905.000" y1="65.000" x2="905.010" y2="65.000" class="ct-point"><title>07.02.2022 - 20:50:35&#13;
+Line coverage: 50% (11/22)&#13;
+Branch coverage: 45% (9/20)&#13;
+Method coverage: 83.3% (5/6)&#13;
+Full method coverage 50% (3/6)&#13;
+Total lines: 53</title></line><line x1="1047.500" y1="56.000" x2="1047.510" y2="56.000" class="ct-point"><title>08.02.2022 - 20:50:35&#13;
+Line coverage: 59% (13/22)&#13;
+Branch coverage: 45% (9/20)&#13;
+Method coverage: 83.3% (5/6)&#13;
+Full method coverage 50% (3/6)&#13;
+Total lines: 53</title></line><line x1="1190.000" y1="60.500" x2="1190.010" y2="60.500" class="ct-point"><title>01.10.2025 - 19:25:59&#13;
+Line coverage: 54.5% (12/22)&#13;
+Branch coverage: 50% (1/2)&#13;
+Method coverage: 50% (3/6)&#13;
+Full method coverage 33.3% (2/6)&#13;
 Total lines: 53</title></line></g>
 <g class="ct-series ct-series-b">
 <path d="M50.000,65.000L192.500,75.000L335.000,75.000L477.500,70.000L620.000,70.000L762.500,70.000L905.000,70.000L1047.500,70.000L1190.000,65.000" class="ct-line"></path>
-<line x1="50.000" y1="65.000" x2="50.010" y2="65.000" class="ct-point"><title>01.02.2022 - 20:50:35
-Line coverage: 40.9% (9/22)
-Branch coverage: 50% (10/20)
-Method coverage: 50% (3/6)
-Full method coverage 33.3% (2/6)
-Total lines: 53</title></line><line x1="192.500" y1="75.000" x2="192.510" y2="75.000" class="ct-point"><title>02.02.2022 - 20:50:35
-Line coverage: 54.5% (12/22)
-Branch coverage: 40% (8/20)
-Method coverage: 33.3% (2/6)
-Full method coverage 33.3% (2/6)
-Total lines: 53</title></line><line x1="335.000" y1="75.000" x2="335.010" y2="75.000" class="ct-point"><title>03.02.2022 - 20:50:35
-Line coverage: 59% (13/22)
-Branch coverage: 40% (8/20)
-Method coverage: 50% (3/6)
-Full method coverage 50% (3/6)
-Total lines: 53</title></line><line x1="477.500" y1="70.000" x2="477.510" y2="70.000" class="ct-point"><title>04.02.2022 - 20:50:35
-Line coverage: 59% (13/22)
-Branch coverage: 45% (9/20)
-Method coverage: 66.6% (4/6)
-Full method coverage 50% (3/6)
-Total lines: 53</title></line><line x1="620.000" y1="70.000" x2="620.010" y2="70.000" class="ct-point"><title>05.02.2022 - 20:50:35
-Line coverage: 45.4% (10/22)
-Branch coverage: 45% (9/20)
-Method coverage: 66.6% (4/6)
-Full method coverage 50% (3/6)
-Total lines: 53</title></line><line x1="762.500" y1="70.000" x2="762.510" y2="70.000" class="ct-point"><title>06.02.2022 - 20:50:35
-Line coverage: 50% (11/22)
-Branch coverage: 45% (9/20)
-Method coverage: 66.6% (4/6)
-Full method coverage 50% (3/6)
-Total lines: 53</title></line><line x1="905.000" y1="70.000" x2="905.010" y2="70.000" class="ct-point"><title>07.02.2022 - 20:50:35
-Line coverage: 50% (11/22)
-Branch coverage: 45% (9/20)
-Method coverage: 83.3% (5/6)
-Full method coverage 50% (3/6)
-Total lines: 53</title></line><line x1="1047.500" y1="70.000" x2="1047.510" y2="70.000" class="ct-point"><title>08.02.2022 - 20:50:35
-Line coverage: 59% (13/22)
-Branch coverage: 45% (9/20)
-Method coverage: 83.3% (5/6)
-Full method coverage 50% (3/6)
-Total lines: 53</title></line><line x1="1190.000" y1="65.000" x2="1190.010" y2="65.000" class="ct-point"><title>24.09.2025 - 19:54:35
-Line coverage: 54.5% (12/22)
-Branch coverage: 50% (1/2)
-Method coverage: 50% (3/6)
-Full method coverage 33.3% (2/6)
+<line x1="50.000" y1="65.000" x2="50.010" y2="65.000" class="ct-point"><title>01.02.2022 - 20:50:35&#13;
+Line coverage: 40.9% (9/22)&#13;
+Branch coverage: 50% (10/20)&#13;
+Method coverage: 50% (3/6)&#13;
+Full method coverage 33.3% (2/6)&#13;
+Total lines: 53</title></line><line x1="192.500" y1="75.000" x2="192.510" y2="75.000" class="ct-point"><title>02.02.2022 - 20:50:35&#13;
+Line coverage: 54.5% (12/22)&#13;
+Branch coverage: 40% (8/20)&#13;
+Method coverage: 33.3% (2/6)&#13;
+Full method coverage 33.3% (2/6)&#13;
+Total lines: 53</title></line><line x1="335.000" y1="75.000" x2="335.010" y2="75.000" class="ct-point"><title>03.02.2022 - 20:50:35&#13;
+Line coverage: 59% (13/22)&#13;
+Branch coverage: 40% (8/20)&#13;
+Method coverage: 50% (3/6)&#13;
+Full method coverage 50% (3/6)&#13;
+Total lines: 53</title></line><line x1="477.500" y1="70.000" x2="477.510" y2="70.000" class="ct-point"><title>04.02.2022 - 20:50:35&#13;
+Line coverage: 59% (13/22)&#13;
+Branch coverage: 45% (9/20)&#13;
+Method coverage: 66.6% (4/6)&#13;
+Full method coverage 50% (3/6)&#13;
+Total lines: 53</title></line><line x1="620.000" y1="70.000" x2="620.010" y2="70.000" class="ct-point"><title>05.02.2022 - 20:50:35&#13;
+Line coverage: 45.4% (10/22)&#13;
+Branch coverage: 45% (9/20)&#13;
+Method coverage: 66.6% (4/6)&#13;
+Full method coverage 50% (3/6)&#13;
+Total lines: 53</title></line><line x1="762.500" y1="70.000" x2="762.510" y2="70.000" class="ct-point"><title>06.02.2022 - 20:50:35&#13;
+Line coverage: 50% (11/22)&#13;
+Branch coverage: 45% (9/20)&#13;
+Method coverage: 66.6% (4/6)&#13;
+Full method coverage 50% (3/6)&#13;
+Total lines: 53</title></line><line x1="905.000" y1="70.000" x2="905.010" y2="70.000" class="ct-point"><title>07.02.2022 - 20:50:35&#13;
+Line coverage: 50% (11/22)&#13;
+Branch coverage: 45% (9/20)&#13;
+Method coverage: 83.3% (5/6)&#13;
+Full method coverage 50% (3/6)&#13;
+Total lines: 53</title></line><line x1="1047.500" y1="70.000" x2="1047.510" y2="70.000" class="ct-point"><title>08.02.2022 - 20:50:35&#13;
+Line coverage: 59% (13/22)&#13;
+Branch coverage: 45% (9/20)&#13;
+Method coverage: 83.3% (5/6)&#13;
+Full method coverage 50% (3/6)&#13;
+Total lines: 53</title></line><line x1="1190.000" y1="65.000" x2="1190.010" y2="65.000" class="ct-point"><title>01.10.2025 - 19:25:59&#13;
+Line coverage: 54.5% (12/22)&#13;
+Branch coverage: 50% (1/2)&#13;
+Method coverage: 50% (3/6)&#13;
+Full method coverage 33.3% (2/6)&#13;
 Total lines: 53</title></line></g>
 <g class="ct-series ct-series-c">
 <path d="M50.000,65.000L192.500,81.700L335.000,65.000L477.500,48.400L620.000,48.400L762.500,48.400L905.000,31.700L1047.500,31.700L1190.000,65.000" class="ct-line"></path>
-<line x1="50.000" y1="65.000" x2="50.010" y2="65.000" class="ct-point"><title>01.02.2022 - 20:50:35
-Line coverage: 40.9% (9/22)
-Branch coverage: 50% (10/20)
-Method coverage: 50% (3/6)
-Full method coverage 33.3% (2/6)
-Total lines: 53</title></line><line x1="192.500" y1="81.700" x2="192.510" y2="81.700" class="ct-point"><title>02.02.2022 - 20:50:35
-Line coverage: 54.5% (12/22)
-Branch coverage: 40% (8/20)
-Method coverage: 33.3% (2/6)
-Full method coverage 33.3% (2/6)
-Total lines: 53</title></line><line x1="335.000" y1="65.000" x2="335.010" y2="65.000" class="ct-point"><title>03.02.2022 - 20:50:35
-Line coverage: 59% (13/22)
-Branch coverage: 40% (8/20)
-Method coverage: 50% (3/6)
-Full method coverage 50% (3/6)
-Total lines: 53</title></line><line x1="477.500" y1="48.400" x2="477.510" y2="48.400" class="ct-point"><title>04.02.2022 - 20:50:35
-Line coverage: 59% (13/22)
-Branch coverage: 45% (9/20)
-Method coverage: 66.6% (4/6)
-Full method coverage 50% (3/6)
-Total lines: 53</title></line><line x1="620.000" y1="48.400" x2="620.010" y2="48.400" class="ct-point"><title>05.02.2022 - 20:50:35
-Line coverage: 45.4% (10/22)
-Branch coverage: 45% (9/20)
-Method coverage: 66.6% (4/6)
-Full method coverage 50% (3/6)
-Total lines: 53</title></line><line x1="762.500" y1="48.400" x2="762.510" y2="48.400" class="ct-point"><title>06.02.2022 - 20:50:35
-Line coverage: 50% (11/22)
-Branch coverage: 45% (9/20)
-Method coverage: 66.6% (4/6)
-Full method coverage 50% (3/6)
-Total lines: 53</title></line><line x1="905.000" y1="31.700" x2="905.010" y2="31.700" class="ct-point"><title>07.02.2022 - 20:50:35
-Line coverage: 50% (11/22)
-Branch coverage: 45% (9/20)
-Method coverage: 83.3% (5/6)
-Full method coverage 50% (3/6)
-Total lines: 53</title></line><line x1="1047.500" y1="31.700" x2="1047.510" y2="31.700" class="ct-point"><title>08.02.2022 - 20:50:35
-Line coverage: 59% (13/22)
-Branch coverage: 45% (9/20)
-Method coverage: 83.3% (5/6)
-Full method coverage 50% (3/6)
-Total lines: 53</title></line><line x1="1190.000" y1="65.000" x2="1190.010" y2="65.000" class="ct-point"><title>24.09.2025 - 19:54:35
-Line coverage: 54.5% (12/22)
-Branch coverage: 50% (1/2)
-Method coverage: 50% (3/6)
-Full method coverage 33.3% (2/6)
+<line x1="50.000" y1="65.000" x2="50.010" y2="65.000" class="ct-point"><title>01.02.2022 - 20:50:35&#13;
+Line coverage: 40.9% (9/22)&#13;
+Branch coverage: 50% (10/20)&#13;
+Method coverage: 50% (3/6)&#13;
+Full method coverage 33.3% (2/6)&#13;
+Total lines: 53</title></line><line x1="192.500" y1="81.700" x2="192.510" y2="81.700" class="ct-point"><title>02.02.2022 - 20:50:35&#13;
+Line coverage: 54.5% (12/22)&#13;
+Branch coverage: 40% (8/20)&#13;
+Method coverage: 33.3% (2/6)&#13;
+Full method coverage 33.3% (2/6)&#13;
+Total lines: 53</title></line><line x1="335.000" y1="65.000" x2="335.010" y2="65.000" class="ct-point"><title>03.02.2022 - 20:50:35&#13;
+Line coverage: 59% (13/22)&#13;
+Branch coverage: 40% (8/20)&#13;
+Method coverage: 50% (3/6)&#13;
+Full method coverage 50% (3/6)&#13;
+Total lines: 53</title></line><line x1="477.500" y1="48.400" x2="477.510" y2="48.400" class="ct-point"><title>04.02.2022 - 20:50:35&#13;
+Line coverage: 59% (13/22)&#13;
+Branch coverage: 45% (9/20)&#13;
+Method coverage: 66.6% (4/6)&#13;
+Full method coverage 50% (3/6)&#13;
+Total lines: 53</title></line><line x1="620.000" y1="48.400" x2="620.010" y2="48.400" class="ct-point"><title>05.02.2022 - 20:50:35&#13;
+Line coverage: 45.4% (10/22)&#13;
+Branch coverage: 45% (9/20)&#13;
+Method coverage: 66.6% (4/6)&#13;
+Full method coverage 50% (3/6)&#13;
+Total lines: 53</title></line><line x1="762.500" y1="48.400" x2="762.510" y2="48.400" class="ct-point"><title>06.02.2022 - 20:50:35&#13;
+Line coverage: 50% (11/22)&#13;
+Branch coverage: 45% (9/20)&#13;
+Method coverage: 66.6% (4/6)&#13;
+Full method coverage 50% (3/6)&#13;
+Total lines: 53</title></line><line x1="905.000" y1="31.700" x2="905.010" y2="31.700" class="ct-point"><title>07.02.2022 - 20:50:35&#13;
+Line coverage: 50% (11/22)&#13;
+Branch coverage: 45% (9/20)&#13;
+Method coverage: 83.3% (5/6)&#13;
+Full method coverage 50% (3/6)&#13;
+Total lines: 53</title></line><line x1="1047.500" y1="31.700" x2="1047.510" y2="31.700" class="ct-point"><title>08.02.2022 - 20:50:35&#13;
+Line coverage: 59% (13/22)&#13;
+Branch coverage: 45% (9/20)&#13;
+Method coverage: 83.3% (5/6)&#13;
+Full method coverage 50% (3/6)&#13;
+Total lines: 53</title></line><line x1="1190.000" y1="65.000" x2="1190.010" y2="65.000" class="ct-point"><title>01.10.2025 - 19:25:59&#13;
+Line coverage: 54.5% (12/22)&#13;
+Branch coverage: 50% (1/2)&#13;
+Method coverage: 50% (3/6)&#13;
+Full method coverage 33.3% (2/6)&#13;
 Total lines: 53</title></line></g>
 <g class="ct-series ct-series-d">
 <path d="M50.000,81.700L192.500,81.700L335.000,65.000L477.500,65.000L620.000,65.000L762.500,65.000L905.000,65.000L1047.500,65.000L1190.000,81.700" class="ct-line"></path>
-<line x1="50.000" y1="81.700" x2="50.010" y2="81.700" class="ct-point"><title>01.02.2022 - 20:50:35
-Line coverage: 40.9% (9/22)
-Branch coverage: 50% (10/20)
-Method coverage: 50% (3/6)
-Full method coverage 33.3% (2/6)
-Total lines: 53</title></line><line x1="192.500" y1="81.700" x2="192.510" y2="81.700" class="ct-point"><title>02.02.2022 - 20:50:35
-Line coverage: 54.5% (12/22)
-Branch coverage: 40% (8/20)
-Method coverage: 33.3% (2/6)
-Full method coverage 33.3% (2/6)
-Total lines: 53</title></line><line x1="335.000" y1="65.000" x2="335.010" y2="65.000" class="ct-point"><title>03.02.2022 - 20:50:35
-Line coverage: 59% (13/22)
-Branch coverage: 40% (8/20)
-Method coverage: 50% (3/6)
-Full method coverage 50% (3/6)
-Total lines: 53</title></line><line x1="477.500" y1="65.000" x2="477.510" y2="65.000" class="ct-point"><title>04.02.2022 - 20:50:35
-Line coverage: 59% (13/22)
-Branch coverage: 45% (9/20)
-Method coverage: 66.6% (4/6)
-Full method coverage 50% (3/6)
-Total lines: 53</title></line><line x1="620.000" y1="65.000" x2="620.010" y2="65.000" class="ct-point"><title>05.02.2022 - 20:50:35
-Line coverage: 45.4% (10/22)
-Branch coverage: 45% (9/20)
-Method coverage: 66.6% (4/6)
-Full method coverage 50% (3/6)
-Total lines: 53</title></line><line x1="762.500" y1="65.000" x2="762.510" y2="65.000" class="ct-point"><title>06.02.2022 - 20:50:35
-Line coverage: 50% (11/22)
-Branch coverage: 45% (9/20)
-Method coverage: 66.6% (4/6)
-Full method coverage 50% (3/6)
-Total lines: 53</title></line><line x1="905.000" y1="65.000" x2="905.010" y2="65.000" class="ct-point"><title>07.02.2022 - 20:50:35
-Line coverage: 50% (11/22)
-Branch coverage: 45% (9/20)
-Method coverage: 83.3% (5/6)
-Full method coverage 50% (3/6)
-Total lines: 53</title></line><line x1="1047.500" y1="65.000" x2="1047.510" y2="65.000" class="ct-point"><title>08.02.2022 - 20:50:35
-Line coverage: 59% (13/22)
-Branch coverage: 45% (9/20)
-Method coverage: 83.3% (5/6)
-Full method coverage 50% (3/6)
-Total lines: 53</title></line><line x1="1190.000" y1="81.700" x2="1190.010" y2="81.700" class="ct-point"><title>24.09.2025 - 19:54:35
-Line coverage: 54.5% (12/22)
-Branch coverage: 50% (1/2)
-Method coverage: 50% (3/6)
-Full method coverage 33.3% (2/6)
+<line x1="50.000" y1="81.700" x2="50.010" y2="81.700" class="ct-point"><title>01.02.2022 - 20:50:35&#13;
+Line coverage: 40.9% (9/22)&#13;
+Branch coverage: 50% (10/20)&#13;
+Method coverage: 50% (3/6)&#13;
+Full method coverage 33.3% (2/6)&#13;
+Total lines: 53</title></line><line x1="192.500" y1="81.700" x2="192.510" y2="81.700" class="ct-point"><title>02.02.2022 - 20:50:35&#13;
+Line coverage: 54.5% (12/22)&#13;
+Branch coverage: 40% (8/20)&#13;
+Method coverage: 33.3% (2/6)&#13;
+Full method coverage 33.3% (2/6)&#13;
+Total lines: 53</title></line><line x1="335.000" y1="65.000" x2="335.010" y2="65.000" class="ct-point"><title>03.02.2022 - 20:50:35&#13;
+Line coverage: 59% (13/22)&#13;
+Branch coverage: 40% (8/20)&#13;
+Method coverage: 50% (3/6)&#13;
+Full method coverage 50% (3/6)&#13;
+Total lines: 53</title></line><line x1="477.500" y1="65.000" x2="477.510" y2="65.000" class="ct-point"><title>04.02.2022 - 20:50:35&#13;
+Line coverage: 59% (13/22)&#13;
+Branch coverage: 45% (9/20)&#13;
+Method coverage: 66.6% (4/6)&#13;
+Full method coverage 50% (3/6)&#13;
+Total lines: 53</title></line><line x1="620.000" y1="65.000" x2="620.010" y2="65.000" class="ct-point"><title>05.02.2022 - 20:50:35&#13;
+Line coverage: 45.4% (10/22)&#13;
+Branch coverage: 45% (9/20)&#13;
+Method coverage: 66.6% (4/6)&#13;
+Full method coverage 50% (3/6)&#13;
+Total lines: 53</title></line><line x1="762.500" y1="65.000" x2="762.510" y2="65.000" class="ct-point"><title>06.02.2022 - 20:50:35&#13;
+Line coverage: 50% (11/22)&#13;
+Branch coverage: 45% (9/20)&#13;
+Method coverage: 66.6% (4/6)&#13;
+Full method coverage 50% (3/6)&#13;
+Total lines: 53</title></line><line x1="905.000" y1="65.000" x2="905.010" y2="65.000" class="ct-point"><title>07.02.2022 - 20:50:35&#13;
+Line coverage: 50% (11/22)&#13;
+Branch coverage: 45% (9/20)&#13;
+Method coverage: 83.3% (5/6)&#13;
+Full method coverage 50% (3/6)&#13;
+Total lines: 53</title></line><line x1="1047.500" y1="65.000" x2="1047.510" y2="65.000" class="ct-point"><title>08.02.2022 - 20:50:35&#13;
+Line coverage: 59% (13/22)&#13;
+Branch coverage: 45% (9/20)&#13;
+Method coverage: 83.3% (5/6)&#13;
+Full method coverage 50% (3/6)&#13;
+Total lines: 53</title></line><line x1="1190.000" y1="81.700" x2="1190.010" y2="81.700" class="ct-point"><title>01.10.2025 - 19:25:59&#13;
+Line coverage: 54.5% (12/22)&#13;
+Branch coverage: 50% (1/2)&#13;
+Method coverage: 50% (3/6)&#13;
+Full method coverage 33.3% (2/6)&#13;
 Total lines: 53</title></line></g>
 </svg>
 </div>
 <script type="text/javascript">/* <![CDATA[ */ 
-var historyChartData355081317b004e488f62fc31a83f07cf = {
+var historyChartData1cf40ac438ba459b92f3693dd6cda52a = {
     "series" : [[{ 'meta': 0, 'value': 40.9 }, { 'meta': 1, 'value': 54.5 }, { 'meta': 2, 'value': 59 }, { 'meta': 3, 'value': 59 }, { 'meta': 4, 'value': 45.4 }, { 'meta': 5, 'value': 50 }, { 'meta': 6, 'value': 50 }, { 'meta': 7, 'value': 59 }, { 'meta': 8, 'value': 54.5 }],
 [{ 'meta': 0, 'value': 50 }, { 'meta': 1, 'value': 40 }, { 'meta': 2, 'value': 40 }, { 'meta': 3, 'value': 45 }, { 'meta': 4, 'value': 45 }, { 'meta': 5, 'value': 45 }, { 'meta': 6, 'value': 45 }, { 'meta': 7, 'value': 45 }, { 'meta': 8, 'value': 50 }],
 [{ 'meta': 0, 'value': 50 }, { 'meta': 1, 'value': 33.3 }, { 'meta': 2, 'value': 50 }, { 'meta': 3, 'value': 66.6 }, { 'meta': 4, 'value': 66.6 }, { 'meta': 5, 'value': 66.6 }, { 'meta': 6, 'value': 83.3 }, { 'meta': 7, 'value': 83.3 }, { 'meta': 8, 'value': 50 }],
 [{ 'meta': 0, 'value': 33.3 }, { 'meta': 1, 'value': 33.3 }, { 'meta': 2, 'value': 50 }, { 'meta': 3, 'value': 50 }, { 'meta': 4, 'value': 50 }, { 'meta': 5, 'value': 50 }, { 'meta': 6, 'value': 50 }, { 'meta': 7, 'value': 50 }, { 'meta': 8, 'value': 33.3 }]
 ],
-    "tooltips" : ['<h3>01.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 40.9% (9/22)<br /><span class="branchcoverage"></span> Branch coverage: 50% (10/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (3/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 33.3% (2/6)<br />Total lines: 53','<h3>02.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 54.5% (12/22)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 33.3% (2/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 33.3% (2/6)<br />Total lines: 53','<h3>03.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 59% (13/22)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (3/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 50% (3/6)<br />Total lines: 53','<h3>04.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 59% (13/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 50% (3/6)<br />Total lines: 53','<h3>05.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 45.4% (10/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 50% (3/6)<br />Total lines: 53','<h3>06.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 50% (11/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 50% (3/6)<br />Total lines: 53','<h3>07.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 50% (11/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 83.3% (5/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 50% (3/6)<br />Total lines: 53','<h3>08.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 59% (13/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 83.3% (5/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 50% (3/6)<br />Total lines: 53','<h3>24.09.2025 - 19:54:35</h3><br /><span class="linecoverage"></span> Line coverage: 54.5% (12/22)<br /><span class="branchcoverage"></span> Branch coverage: 50% (1/2)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (3/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 33.3% (2/6)<br />Total lines: 53']
+    "tooltips" : ['<h3>01.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 40.9% (9/22)<br /><span class="branchcoverage"></span> Branch coverage: 50% (10/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (3/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 33.3% (2/6)<br />Total lines: 53','<h3>02.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 54.5% (12/22)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 33.3% (2/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 33.3% (2/6)<br />Total lines: 53','<h3>03.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 59% (13/22)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (3/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 50% (3/6)<br />Total lines: 53','<h3>04.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 59% (13/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 50% (3/6)<br />Total lines: 53','<h3>05.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 45.4% (10/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 50% (3/6)<br />Total lines: 53','<h3>06.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 50% (11/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 50% (3/6)<br />Total lines: 53','<h3>07.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 50% (11/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 83.3% (5/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 50% (3/6)<br />Total lines: 53','<h3>08.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 59% (13/22)<br /><span class="branchcoverage"></span> Branch coverage: 45% (9/20)<br /><span class="codeelementcoverage"></span> Method coverage: 83.3% (5/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 50% (3/6)<br />Total lines: 53','<h3>01.10.2025 - 19:25:59</h3><br /><span class="linecoverage"></span> Line coverage: 54.5% (12/22)<br /><span class="branchcoverage"></span> Branch coverage: 50% (1/2)<br /><span class="codeelementcoverage"></span> Method coverage: 50% (3/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 33.3% (2/6)<br />Total lines: 53']
 };
  /* ]]> */ </script>
 <h1>Metrics</h1>
@@ -2884,7 +2884,7 @@ var historyChartData355081317b004e488f62fc31a83f07cf = {
 </tbody>
 </table>
 </div>
-<div class="footer">Generated by: ReportGenerator 5.4.15.0<br />24.09.2025 - 19:54:35<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
+<div class="footer">Generated by: ReportGenerator 5.4.16.0<br />01.10.2025 - 19:25:59<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
 <div class="containerright">
 <div class="containerrightfixed">
 <h1>Methods/Properties</h1>
@@ -4068,7 +4068,7 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
 </div>
 </div>
 <h1>Coverage history</h1>
-<div class="historychart ct-chart" data-data="historyChartDataf745deed55bd47118cc26ae5182f7af3"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="ct-chart" width="1200" height="150" viewBox="0 0 1200 150">
+<div class="historychart ct-chart" data-data="historyChartData1325d501fe194f8c8378987b14279fe2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="ct-chart" width="1200" height="150" viewBox="0 0 1200 150">
 <style type="text/css">
         <![CDATA[
         .ct-chart .ct-grid {
@@ -4134,71 +4134,71 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
     <text x="45" y="13" class="ct-label">100</text>
 </g><g class="ct-series ct-series-a">
 <path d="M50.000,35.500L430.000,35.500L810.000,35.500L1190.000,15.000" class="ct-line"></path>
-<line x1="50.000" y1="35.500" x2="50.010" y2="35.500" class="ct-point"><title>01.02.2022 - 20:50:35
-Line coverage: 79.5% (35/44)
-Method coverage: 66.6% (4/6)
-Full method coverage 0% (0/6)
-Total lines: 84</title></line><line x1="430.000" y1="35.500" x2="430.010" y2="35.500" class="ct-point"><title>04.02.2022 - 20:50:35
-Line coverage: 79.5% (35/44)
-Method coverage: 66.6% (4/6)
-Full method coverage 16.6% (1/6)
-Total lines: 84</title></line><line x1="810.000" y1="35.500" x2="810.010" y2="35.500" class="ct-point"><title>06.02.2022 - 20:50:35
-Line coverage: 79.5% (35/44)
-Method coverage: 66.6% (4/6)
-Full method coverage 33.3% (2/6)
-Total lines: 84</title></line><line x1="1190.000" y1="15.000" x2="1190.010" y2="15.000" class="ct-point"><title>24.09.2025 - 19:54:35
-Line coverage: 100% (15/15)
-Method coverage: 100% (3/3)
-Full method coverage 100% (3/3)
+<line x1="50.000" y1="35.500" x2="50.010" y2="35.500" class="ct-point"><title>01.02.2022 - 20:50:35&#13;
+Line coverage: 79.5% (35/44)&#13;
+Method coverage: 66.6% (4/6)&#13;
+Full method coverage 0% (0/6)&#13;
+Total lines: 84</title></line><line x1="430.000" y1="35.500" x2="430.010" y2="35.500" class="ct-point"><title>04.02.2022 - 20:50:35&#13;
+Line coverage: 79.5% (35/44)&#13;
+Method coverage: 66.6% (4/6)&#13;
+Full method coverage 16.6% (1/6)&#13;
+Total lines: 84</title></line><line x1="810.000" y1="35.500" x2="810.010" y2="35.500" class="ct-point"><title>06.02.2022 - 20:50:35&#13;
+Line coverage: 79.5% (35/44)&#13;
+Method coverage: 66.6% (4/6)&#13;
+Full method coverage 33.3% (2/6)&#13;
+Total lines: 84</title></line><line x1="1190.000" y1="15.000" x2="1190.010" y2="15.000" class="ct-point"><title>01.10.2025 - 19:25:59&#13;
+Line coverage: 100% (15/15)&#13;
+Method coverage: 100% (3/3)&#13;
+Full method coverage 100% (3/3)&#13;
 Total lines: 84</title></line></g>
 <g class="ct-series ct-series-c">
 <path d="M50.000,48.400L430.000,48.400L810.000,48.400L1190.000,15.000" class="ct-line"></path>
-<line x1="50.000" y1="48.400" x2="50.010" y2="48.400" class="ct-point"><title>01.02.2022 - 20:50:35
-Line coverage: 79.5% (35/44)
-Method coverage: 66.6% (4/6)
-Full method coverage 0% (0/6)
-Total lines: 84</title></line><line x1="430.000" y1="48.400" x2="430.010" y2="48.400" class="ct-point"><title>04.02.2022 - 20:50:35
-Line coverage: 79.5% (35/44)
-Method coverage: 66.6% (4/6)
-Full method coverage 16.6% (1/6)
-Total lines: 84</title></line><line x1="810.000" y1="48.400" x2="810.010" y2="48.400" class="ct-point"><title>06.02.2022 - 20:50:35
-Line coverage: 79.5% (35/44)
-Method coverage: 66.6% (4/6)
-Full method coverage 33.3% (2/6)
-Total lines: 84</title></line><line x1="1190.000" y1="15.000" x2="1190.010" y2="15.000" class="ct-point"><title>24.09.2025 - 19:54:35
-Line coverage: 100% (15/15)
-Method coverage: 100% (3/3)
-Full method coverage 100% (3/3)
+<line x1="50.000" y1="48.400" x2="50.010" y2="48.400" class="ct-point"><title>01.02.2022 - 20:50:35&#13;
+Line coverage: 79.5% (35/44)&#13;
+Method coverage: 66.6% (4/6)&#13;
+Full method coverage 0% (0/6)&#13;
+Total lines: 84</title></line><line x1="430.000" y1="48.400" x2="430.010" y2="48.400" class="ct-point"><title>04.02.2022 - 20:50:35&#13;
+Line coverage: 79.5% (35/44)&#13;
+Method coverage: 66.6% (4/6)&#13;
+Full method coverage 16.6% (1/6)&#13;
+Total lines: 84</title></line><line x1="810.000" y1="48.400" x2="810.010" y2="48.400" class="ct-point"><title>06.02.2022 - 20:50:35&#13;
+Line coverage: 79.5% (35/44)&#13;
+Method coverage: 66.6% (4/6)&#13;
+Full method coverage 33.3% (2/6)&#13;
+Total lines: 84</title></line><line x1="1190.000" y1="15.000" x2="1190.010" y2="15.000" class="ct-point"><title>01.10.2025 - 19:25:59&#13;
+Line coverage: 100% (15/15)&#13;
+Method coverage: 100% (3/3)&#13;
+Full method coverage 100% (3/3)&#13;
 Total lines: 84</title></line></g>
 <g class="ct-series ct-series-d">
 <path d="M50.000,115.000L430.000,98.400L810.000,81.700L1190.000,15.000" class="ct-line"></path>
-<line x1="50.000" y1="115.000" x2="50.010" y2="115.000" class="ct-point"><title>01.02.2022 - 20:50:35
-Line coverage: 79.5% (35/44)
-Method coverage: 66.6% (4/6)
-Full method coverage 0% (0/6)
-Total lines: 84</title></line><line x1="430.000" y1="98.400" x2="430.010" y2="98.400" class="ct-point"><title>04.02.2022 - 20:50:35
-Line coverage: 79.5% (35/44)
-Method coverage: 66.6% (4/6)
-Full method coverage 16.6% (1/6)
-Total lines: 84</title></line><line x1="810.000" y1="81.700" x2="810.010" y2="81.700" class="ct-point"><title>06.02.2022 - 20:50:35
-Line coverage: 79.5% (35/44)
-Method coverage: 66.6% (4/6)
-Full method coverage 33.3% (2/6)
-Total lines: 84</title></line><line x1="1190.000" y1="15.000" x2="1190.010" y2="15.000" class="ct-point"><title>24.09.2025 - 19:54:35
-Line coverage: 100% (15/15)
-Method coverage: 100% (3/3)
-Full method coverage 100% (3/3)
+<line x1="50.000" y1="115.000" x2="50.010" y2="115.000" class="ct-point"><title>01.02.2022 - 20:50:35&#13;
+Line coverage: 79.5% (35/44)&#13;
+Method coverage: 66.6% (4/6)&#13;
+Full method coverage 0% (0/6)&#13;
+Total lines: 84</title></line><line x1="430.000" y1="98.400" x2="430.010" y2="98.400" class="ct-point"><title>04.02.2022 - 20:50:35&#13;
+Line coverage: 79.5% (35/44)&#13;
+Method coverage: 66.6% (4/6)&#13;
+Full method coverage 16.6% (1/6)&#13;
+Total lines: 84</title></line><line x1="810.000" y1="81.700" x2="810.010" y2="81.700" class="ct-point"><title>06.02.2022 - 20:50:35&#13;
+Line coverage: 79.5% (35/44)&#13;
+Method coverage: 66.6% (4/6)&#13;
+Full method coverage 33.3% (2/6)&#13;
+Total lines: 84</title></line><line x1="1190.000" y1="15.000" x2="1190.010" y2="15.000" class="ct-point"><title>01.10.2025 - 19:25:59&#13;
+Line coverage: 100% (15/15)&#13;
+Method coverage: 100% (3/3)&#13;
+Full method coverage 100% (3/3)&#13;
 Total lines: 84</title></line></g>
 </svg>
 </div>
 <script type="text/javascript">/* <![CDATA[ */ 
-var historyChartDataf745deed55bd47118cc26ae5182f7af3 = {
+var historyChartData1325d501fe194f8c8378987b14279fe2 = {
     "series" : [[{ 'meta': 0, 'value': 79.5 }, { 'meta': 1, 'value': 79.5 }, { 'meta': 2, 'value': 79.5 }, { 'meta': 3, 'value': 100 }],
 [],
 [{ 'meta': 0, 'value': 66.6 }, { 'meta': 1, 'value': 66.6 }, { 'meta': 2, 'value': 66.6 }, { 'meta': 3, 'value': 100 }],
 [{ 'meta': 0, 'value': 0 }, { 'meta': 1, 'value': 16.6 }, { 'meta': 2, 'value': 33.3 }, { 'meta': 3, 'value': 100 }]
 ],
-    "tooltips" : ['<h3>01.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 79.5% (35/44)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 0% (0/6)<br />Total lines: 84','<h3>04.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 79.5% (35/44)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 16.6% (1/6)<br />Total lines: 84','<h3>06.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 79.5% (35/44)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 33.3% (2/6)<br />Total lines: 84','<h3>24.09.2025 - 19:54:35</h3><br /><span class="linecoverage"></span> Line coverage: 100% (15/15)<br /><span class="codeelementcoverage"></span> Method coverage: 100% (3/3)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 100% (3/3)<br />Total lines: 84']
+    "tooltips" : ['<h3>01.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 79.5% (35/44)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 0% (0/6)<br />Total lines: 84','<h3>04.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 79.5% (35/44)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 16.6% (1/6)<br />Total lines: 84','<h3>06.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 79.5% (35/44)<br /><span class="codeelementcoverage"></span> Method coverage: 66.6% (4/6)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 33.3% (2/6)<br />Total lines: 84','<h3>01.10.2025 - 19:25:59</h3><br /><span class="linecoverage"></span> Line coverage: 100% (15/15)<br /><span class="codeelementcoverage"></span> Method coverage: 100% (3/3)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 100% (3/3)<br />Total lines: 84']
 };
  /* ]]> */ </script>
 <h1>Metrics</h1>
@@ -4313,7 +4313,7 @@ var historyChartDataf745deed55bd47118cc26ae5182f7af3 = {
 </tbody>
 </table>
 </div>
-<div class="footer">Generated by: ReportGenerator 5.4.15.0<br />24.09.2025 - 19:54:35<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
+<div class="footer">Generated by: ReportGenerator 5.4.16.0<br />01.10.2025 - 19:25:59<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
 <div class="containerright">
 <div class="containerrightfixed">
 <h1>Methods/Properties</h1>
@@ -5494,7 +5494,7 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
 </div>
 </div>
 <h1>Coverage history</h1>
-<div class="historychart ct-chart" data-data="historyChartData2b182f3cb6574069bb2a44e619e45ee6"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="ct-chart" width="1200" height="150" viewBox="0 0 1200 150">
+<div class="historychart ct-chart" data-data="historyChartDataa50b05fe607c4516b2b579fabc4a5561"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="ct-chart" width="1200" height="150" viewBox="0 0 1200 150">
 <style type="text/css">
         <![CDATA[
         .ct-chart .ct-grid {
@@ -5560,46 +5560,46 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
     <text x="45" y="13" class="ct-label">100</text>
 </g><g class="ct-series ct-series-a">
 <path d="M50.000,42.300" class="ct-line"></path>
-<line x1="50.000" y1="42.300" x2="50.010" y2="42.300" class="ct-point"><title>24.09.2025 - 19:54:35
-Line coverage: 72.7% (24/33)
-Branch coverage: 50% (2/4)
-Method coverage: 80% (4/5)
-Full method coverage 60% (3/5)
+<line x1="50.000" y1="42.300" x2="50.010" y2="42.300" class="ct-point"><title>01.10.2025 - 19:25:59&#13;
+Line coverage: 72.7% (24/33)&#13;
+Branch coverage: 50% (2/4)&#13;
+Method coverage: 80% (4/5)&#13;
+Full method coverage 60% (3/5)&#13;
 Total lines: 38</title></line></g>
 <g class="ct-series ct-series-b">
 <path d="M50.000,65.000" class="ct-line"></path>
-<line x1="50.000" y1="65.000" x2="50.010" y2="65.000" class="ct-point"><title>24.09.2025 - 19:54:35
-Line coverage: 72.7% (24/33)
-Branch coverage: 50% (2/4)
-Method coverage: 80% (4/5)
-Full method coverage 60% (3/5)
+<line x1="50.000" y1="65.000" x2="50.010" y2="65.000" class="ct-point"><title>01.10.2025 - 19:25:59&#13;
+Line coverage: 72.7% (24/33)&#13;
+Branch coverage: 50% (2/4)&#13;
+Method coverage: 80% (4/5)&#13;
+Full method coverage 60% (3/5)&#13;
 Total lines: 38</title></line></g>
 <g class="ct-series ct-series-c">
 <path d="M50.000,35.000" class="ct-line"></path>
-<line x1="50.000" y1="35.000" x2="50.010" y2="35.000" class="ct-point"><title>24.09.2025 - 19:54:35
-Line coverage: 72.7% (24/33)
-Branch coverage: 50% (2/4)
-Method coverage: 80% (4/5)
-Full method coverage 60% (3/5)
+<line x1="50.000" y1="35.000" x2="50.010" y2="35.000" class="ct-point"><title>01.10.2025 - 19:25:59&#13;
+Line coverage: 72.7% (24/33)&#13;
+Branch coverage: 50% (2/4)&#13;
+Method coverage: 80% (4/5)&#13;
+Full method coverage 60% (3/5)&#13;
 Total lines: 38</title></line></g>
 <g class="ct-series ct-series-d">
 <path d="M50.000,55.000" class="ct-line"></path>
-<line x1="50.000" y1="55.000" x2="50.010" y2="55.000" class="ct-point"><title>24.09.2025 - 19:54:35
-Line coverage: 72.7% (24/33)
-Branch coverage: 50% (2/4)
-Method coverage: 80% (4/5)
-Full method coverage 60% (3/5)
+<line x1="50.000" y1="55.000" x2="50.010" y2="55.000" class="ct-point"><title>01.10.2025 - 19:25:59&#13;
+Line coverage: 72.7% (24/33)&#13;
+Branch coverage: 50% (2/4)&#13;
+Method coverage: 80% (4/5)&#13;
+Full method coverage 60% (3/5)&#13;
 Total lines: 38</title></line></g>
 </svg>
 </div>
 <script type="text/javascript">/* <![CDATA[ */ 
-var historyChartData2b182f3cb6574069bb2a44e619e45ee6 = {
+var historyChartDataa50b05fe607c4516b2b579fabc4a5561 = {
     "series" : [[{ 'meta': 0, 'value': 72.7 }],
 [{ 'meta': 0, 'value': 50 }],
 [{ 'meta': 0, 'value': 80 }],
 [{ 'meta': 0, 'value': 60 }]
 ],
-    "tooltips" : ['<h3>24.09.2025 - 19:54:35</h3><br /><span class="linecoverage"></span> Line coverage: 72.7% (24/33)<br /><span class="branchcoverage"></span> Branch coverage: 50% (2/4)<br /><span class="codeelementcoverage"></span> Method coverage: 80% (4/5)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 60% (3/5)<br />Total lines: 38']
+    "tooltips" : ['<h3>01.10.2025 - 19:25:59</h3><br /><span class="linecoverage"></span> Line coverage: 72.7% (24/33)<br /><span class="branchcoverage"></span> Branch coverage: 50% (2/4)<br /><span class="codeelementcoverage"></span> Method coverage: 80% (4/5)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 60% (3/5)<br />Total lines: 38']
 };
  /* ]]> */ </script>
 <h1>Metrics</h1>
@@ -5669,7 +5669,7 @@ var historyChartData2b182f3cb6574069bb2a44e619e45ee6 = {
 </tbody>
 </table>
 </div>
-<div class="footer">Generated by: ReportGenerator 5.4.15.0<br />24.09.2025 - 19:54:35<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
+<div class="footer">Generated by: ReportGenerator 5.4.16.0<br />01.10.2025 - 19:25:59<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
 <div class="containerright">
 <div class="containerrightfixed">
 <h1>Methods/Properties</h1>
@@ -6852,7 +6852,7 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
 </div>
 </div>
 <h1>Coverage history</h1>
-<div class="historychart ct-chart" data-data="historyChartDatafa2c3c0439c543bcbad6b9cf16bcca12"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="ct-chart" width="1200" height="150" viewBox="0 0 1200 150">
+<div class="historychart ct-chart" data-data="historyChartDatac1b2ad9aeab141b0b201511727e5ff87"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="ct-chart" width="1200" height="150" viewBox="0 0 1200 150">
 <style type="text/css">
         <![CDATA[
         .ct-chart .ct-grid {
@@ -6918,146 +6918,146 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
     <text x="45" y="13" class="ct-label">100</text>
 </g><g class="ct-series ct-series-a">
 <path d="M50.000,75.600L278.000,75.600L506.000,72.900L734.000,70.300L962.000,75.600L1190.000,51.900" class="ct-line"></path>
-<line x1="50.000" y1="75.600" x2="50.010" y2="75.600" class="ct-point"><title>01.02.2022 - 20:50:35
-Line coverage: 39.4% (15/38)
-Branch coverage: 50% (10/20)
-Method coverage: 60% (6/10)
-Full method coverage 40% (4/10)
-Total lines: 85</title></line><line x1="278.000" y1="75.600" x2="278.010" y2="75.600" class="ct-point"><title>02.02.2022 - 20:50:35
-Line coverage: 39.4% (15/38)
-Branch coverage: 40% (8/20)
-Method coverage: 40% (4/10)
-Full method coverage 40% (4/10)
-Total lines: 85</title></line><line x1="506.000" y1="72.900" x2="506.010" y2="72.900" class="ct-point"><title>03.02.2022 - 20:50:35
-Line coverage: 42.1% (16/38)
-Branch coverage: 40% (8/20)
-Method coverage: 40% (4/10)
-Full method coverage 40% (4/10)
-Total lines: 85</title></line><line x1="734.000" y1="70.300" x2="734.010" y2="70.300" class="ct-point"><title>06.02.2022 - 20:50:35
-Line coverage: 44.7% (17/38)
-Branch coverage: 40% (8/20)
-Method coverage: 60% (6/10)
-Full method coverage 40% (4/10)
-Total lines: 85</title></line><line x1="962.000" y1="75.600" x2="962.010" y2="75.600" class="ct-point"><title>08.02.2022 - 20:50:35
-Line coverage: 39.4% (15/38)
-Branch coverage: 40% (8/20)
-Method coverage: 60% (6/10)
-Full method coverage 40% (4/10)
-Total lines: 85</title></line><line x1="1190.000" y1="51.900" x2="1190.010" y2="51.900" class="ct-point"><title>24.09.2025 - 19:54:35
-Line coverage: 63.1% (24/38)
-Branch coverage: 50% (1/2)
-Method coverage: 60% (6/10)
-Full method coverage 40% (4/10)
+<line x1="50.000" y1="75.600" x2="50.010" y2="75.600" class="ct-point"><title>01.02.2022 - 20:50:35&#13;
+Line coverage: 39.4% (15/38)&#13;
+Branch coverage: 50% (10/20)&#13;
+Method coverage: 60% (6/10)&#13;
+Full method coverage 40% (4/10)&#13;
+Total lines: 85</title></line><line x1="278.000" y1="75.600" x2="278.010" y2="75.600" class="ct-point"><title>02.02.2022 - 20:50:35&#13;
+Line coverage: 39.4% (15/38)&#13;
+Branch coverage: 40% (8/20)&#13;
+Method coverage: 40% (4/10)&#13;
+Full method coverage 40% (4/10)&#13;
+Total lines: 85</title></line><line x1="506.000" y1="72.900" x2="506.010" y2="72.900" class="ct-point"><title>03.02.2022 - 20:50:35&#13;
+Line coverage: 42.1% (16/38)&#13;
+Branch coverage: 40% (8/20)&#13;
+Method coverage: 40% (4/10)&#13;
+Full method coverage 40% (4/10)&#13;
+Total lines: 85</title></line><line x1="734.000" y1="70.300" x2="734.010" y2="70.300" class="ct-point"><title>06.02.2022 - 20:50:35&#13;
+Line coverage: 44.7% (17/38)&#13;
+Branch coverage: 40% (8/20)&#13;
+Method coverage: 60% (6/10)&#13;
+Full method coverage 40% (4/10)&#13;
+Total lines: 85</title></line><line x1="962.000" y1="75.600" x2="962.010" y2="75.600" class="ct-point"><title>08.02.2022 - 20:50:35&#13;
+Line coverage: 39.4% (15/38)&#13;
+Branch coverage: 40% (8/20)&#13;
+Method coverage: 60% (6/10)&#13;
+Full method coverage 40% (4/10)&#13;
+Total lines: 85</title></line><line x1="1190.000" y1="51.900" x2="1190.010" y2="51.900" class="ct-point"><title>01.10.2025 - 19:25:59&#13;
+Line coverage: 63.1% (24/38)&#13;
+Branch coverage: 50% (1/2)&#13;
+Method coverage: 60% (6/10)&#13;
+Full method coverage 40% (4/10)&#13;
 Total lines: 85</title></line></g>
 <g class="ct-series ct-series-b">
 <path d="M50.000,65.000L278.000,75.000L506.000,75.000L734.000,75.000L962.000,75.000L1190.000,65.000" class="ct-line"></path>
-<line x1="50.000" y1="65.000" x2="50.010" y2="65.000" class="ct-point"><title>01.02.2022 - 20:50:35
-Line coverage: 39.4% (15/38)
-Branch coverage: 50% (10/20)
-Method coverage: 60% (6/10)
-Full method coverage 40% (4/10)
-Total lines: 85</title></line><line x1="278.000" y1="75.000" x2="278.010" y2="75.000" class="ct-point"><title>02.02.2022 - 20:50:35
-Line coverage: 39.4% (15/38)
-Branch coverage: 40% (8/20)
-Method coverage: 40% (4/10)
-Full method coverage 40% (4/10)
-Total lines: 85</title></line><line x1="506.000" y1="75.000" x2="506.010" y2="75.000" class="ct-point"><title>03.02.2022 - 20:50:35
-Line coverage: 42.1% (16/38)
-Branch coverage: 40% (8/20)
-Method coverage: 40% (4/10)
-Full method coverage 40% (4/10)
-Total lines: 85</title></line><line x1="734.000" y1="75.000" x2="734.010" y2="75.000" class="ct-point"><title>06.02.2022 - 20:50:35
-Line coverage: 44.7% (17/38)
-Branch coverage: 40% (8/20)
-Method coverage: 60% (6/10)
-Full method coverage 40% (4/10)
-Total lines: 85</title></line><line x1="962.000" y1="75.000" x2="962.010" y2="75.000" class="ct-point"><title>08.02.2022 - 20:50:35
-Line coverage: 39.4% (15/38)
-Branch coverage: 40% (8/20)
-Method coverage: 60% (6/10)
-Full method coverage 40% (4/10)
-Total lines: 85</title></line><line x1="1190.000" y1="65.000" x2="1190.010" y2="65.000" class="ct-point"><title>24.09.2025 - 19:54:35
-Line coverage: 63.1% (24/38)
-Branch coverage: 50% (1/2)
-Method coverage: 60% (6/10)
-Full method coverage 40% (4/10)
+<line x1="50.000" y1="65.000" x2="50.010" y2="65.000" class="ct-point"><title>01.02.2022 - 20:50:35&#13;
+Line coverage: 39.4% (15/38)&#13;
+Branch coverage: 50% (10/20)&#13;
+Method coverage: 60% (6/10)&#13;
+Full method coverage 40% (4/10)&#13;
+Total lines: 85</title></line><line x1="278.000" y1="75.000" x2="278.010" y2="75.000" class="ct-point"><title>02.02.2022 - 20:50:35&#13;
+Line coverage: 39.4% (15/38)&#13;
+Branch coverage: 40% (8/20)&#13;
+Method coverage: 40% (4/10)&#13;
+Full method coverage 40% (4/10)&#13;
+Total lines: 85</title></line><line x1="506.000" y1="75.000" x2="506.010" y2="75.000" class="ct-point"><title>03.02.2022 - 20:50:35&#13;
+Line coverage: 42.1% (16/38)&#13;
+Branch coverage: 40% (8/20)&#13;
+Method coverage: 40% (4/10)&#13;
+Full method coverage 40% (4/10)&#13;
+Total lines: 85</title></line><line x1="734.000" y1="75.000" x2="734.010" y2="75.000" class="ct-point"><title>06.02.2022 - 20:50:35&#13;
+Line coverage: 44.7% (17/38)&#13;
+Branch coverage: 40% (8/20)&#13;
+Method coverage: 60% (6/10)&#13;
+Full method coverage 40% (4/10)&#13;
+Total lines: 85</title></line><line x1="962.000" y1="75.000" x2="962.010" y2="75.000" class="ct-point"><title>08.02.2022 - 20:50:35&#13;
+Line coverage: 39.4% (15/38)&#13;
+Branch coverage: 40% (8/20)&#13;
+Method coverage: 60% (6/10)&#13;
+Full method coverage 40% (4/10)&#13;
+Total lines: 85</title></line><line x1="1190.000" y1="65.000" x2="1190.010" y2="65.000" class="ct-point"><title>01.10.2025 - 19:25:59&#13;
+Line coverage: 63.1% (24/38)&#13;
+Branch coverage: 50% (1/2)&#13;
+Method coverage: 60% (6/10)&#13;
+Full method coverage 40% (4/10)&#13;
 Total lines: 85</title></line></g>
 <g class="ct-series ct-series-c">
 <path d="M50.000,55.000L278.000,75.000L506.000,75.000L734.000,55.000L962.000,55.000L1190.000,55.000" class="ct-line"></path>
-<line x1="50.000" y1="55.000" x2="50.010" y2="55.000" class="ct-point"><title>01.02.2022 - 20:50:35
-Line coverage: 39.4% (15/38)
-Branch coverage: 50% (10/20)
-Method coverage: 60% (6/10)
-Full method coverage 40% (4/10)
-Total lines: 85</title></line><line x1="278.000" y1="75.000" x2="278.010" y2="75.000" class="ct-point"><title>02.02.2022 - 20:50:35
-Line coverage: 39.4% (15/38)
-Branch coverage: 40% (8/20)
-Method coverage: 40% (4/10)
-Full method coverage 40% (4/10)
-Total lines: 85</title></line><line x1="506.000" y1="75.000" x2="506.010" y2="75.000" class="ct-point"><title>03.02.2022 - 20:50:35
-Line coverage: 42.1% (16/38)
-Branch coverage: 40% (8/20)
-Method coverage: 40% (4/10)
-Full method coverage 40% (4/10)
-Total lines: 85</title></line><line x1="734.000" y1="55.000" x2="734.010" y2="55.000" class="ct-point"><title>06.02.2022 - 20:50:35
-Line coverage: 44.7% (17/38)
-Branch coverage: 40% (8/20)
-Method coverage: 60% (6/10)
-Full method coverage 40% (4/10)
-Total lines: 85</title></line><line x1="962.000" y1="55.000" x2="962.010" y2="55.000" class="ct-point"><title>08.02.2022 - 20:50:35
-Line coverage: 39.4% (15/38)
-Branch coverage: 40% (8/20)
-Method coverage: 60% (6/10)
-Full method coverage 40% (4/10)
-Total lines: 85</title></line><line x1="1190.000" y1="55.000" x2="1190.010" y2="55.000" class="ct-point"><title>24.09.2025 - 19:54:35
-Line coverage: 63.1% (24/38)
-Branch coverage: 50% (1/2)
-Method coverage: 60% (6/10)
-Full method coverage 40% (4/10)
+<line x1="50.000" y1="55.000" x2="50.010" y2="55.000" class="ct-point"><title>01.02.2022 - 20:50:35&#13;
+Line coverage: 39.4% (15/38)&#13;
+Branch coverage: 50% (10/20)&#13;
+Method coverage: 60% (6/10)&#13;
+Full method coverage 40% (4/10)&#13;
+Total lines: 85</title></line><line x1="278.000" y1="75.000" x2="278.010" y2="75.000" class="ct-point"><title>02.02.2022 - 20:50:35&#13;
+Line coverage: 39.4% (15/38)&#13;
+Branch coverage: 40% (8/20)&#13;
+Method coverage: 40% (4/10)&#13;
+Full method coverage 40% (4/10)&#13;
+Total lines: 85</title></line><line x1="506.000" y1="75.000" x2="506.010" y2="75.000" class="ct-point"><title>03.02.2022 - 20:50:35&#13;
+Line coverage: 42.1% (16/38)&#13;
+Branch coverage: 40% (8/20)&#13;
+Method coverage: 40% (4/10)&#13;
+Full method coverage 40% (4/10)&#13;
+Total lines: 85</title></line><line x1="734.000" y1="55.000" x2="734.010" y2="55.000" class="ct-point"><title>06.02.2022 - 20:50:35&#13;
+Line coverage: 44.7% (17/38)&#13;
+Branch coverage: 40% (8/20)&#13;
+Method coverage: 60% (6/10)&#13;
+Full method coverage 40% (4/10)&#13;
+Total lines: 85</title></line><line x1="962.000" y1="55.000" x2="962.010" y2="55.000" class="ct-point"><title>08.02.2022 - 20:50:35&#13;
+Line coverage: 39.4% (15/38)&#13;
+Branch coverage: 40% (8/20)&#13;
+Method coverage: 60% (6/10)&#13;
+Full method coverage 40% (4/10)&#13;
+Total lines: 85</title></line><line x1="1190.000" y1="55.000" x2="1190.010" y2="55.000" class="ct-point"><title>01.10.2025 - 19:25:59&#13;
+Line coverage: 63.1% (24/38)&#13;
+Branch coverage: 50% (1/2)&#13;
+Method coverage: 60% (6/10)&#13;
+Full method coverage 40% (4/10)&#13;
 Total lines: 85</title></line></g>
 <g class="ct-series ct-series-d">
 <path d="M50.000,75.000L278.000,75.000L506.000,75.000L734.000,75.000L962.000,75.000L1190.000,75.000" class="ct-line"></path>
-<line x1="50.000" y1="75.000" x2="50.010" y2="75.000" class="ct-point"><title>01.02.2022 - 20:50:35
-Line coverage: 39.4% (15/38)
-Branch coverage: 50% (10/20)
-Method coverage: 60% (6/10)
-Full method coverage 40% (4/10)
-Total lines: 85</title></line><line x1="278.000" y1="75.000" x2="278.010" y2="75.000" class="ct-point"><title>02.02.2022 - 20:50:35
-Line coverage: 39.4% (15/38)
-Branch coverage: 40% (8/20)
-Method coverage: 40% (4/10)
-Full method coverage 40% (4/10)
-Total lines: 85</title></line><line x1="506.000" y1="75.000" x2="506.010" y2="75.000" class="ct-point"><title>03.02.2022 - 20:50:35
-Line coverage: 42.1% (16/38)
-Branch coverage: 40% (8/20)
-Method coverage: 40% (4/10)
-Full method coverage 40% (4/10)
-Total lines: 85</title></line><line x1="734.000" y1="75.000" x2="734.010" y2="75.000" class="ct-point"><title>06.02.2022 - 20:50:35
-Line coverage: 44.7% (17/38)
-Branch coverage: 40% (8/20)
-Method coverage: 60% (6/10)
-Full method coverage 40% (4/10)
-Total lines: 85</title></line><line x1="962.000" y1="75.000" x2="962.010" y2="75.000" class="ct-point"><title>08.02.2022 - 20:50:35
-Line coverage: 39.4% (15/38)
-Branch coverage: 40% (8/20)
-Method coverage: 60% (6/10)
-Full method coverage 40% (4/10)
-Total lines: 85</title></line><line x1="1190.000" y1="75.000" x2="1190.010" y2="75.000" class="ct-point"><title>24.09.2025 - 19:54:35
-Line coverage: 63.1% (24/38)
-Branch coverage: 50% (1/2)
-Method coverage: 60% (6/10)
-Full method coverage 40% (4/10)
+<line x1="50.000" y1="75.000" x2="50.010" y2="75.000" class="ct-point"><title>01.02.2022 - 20:50:35&#13;
+Line coverage: 39.4% (15/38)&#13;
+Branch coverage: 50% (10/20)&#13;
+Method coverage: 60% (6/10)&#13;
+Full method coverage 40% (4/10)&#13;
+Total lines: 85</title></line><line x1="278.000" y1="75.000" x2="278.010" y2="75.000" class="ct-point"><title>02.02.2022 - 20:50:35&#13;
+Line coverage: 39.4% (15/38)&#13;
+Branch coverage: 40% (8/20)&#13;
+Method coverage: 40% (4/10)&#13;
+Full method coverage 40% (4/10)&#13;
+Total lines: 85</title></line><line x1="506.000" y1="75.000" x2="506.010" y2="75.000" class="ct-point"><title>03.02.2022 - 20:50:35&#13;
+Line coverage: 42.1% (16/38)&#13;
+Branch coverage: 40% (8/20)&#13;
+Method coverage: 40% (4/10)&#13;
+Full method coverage 40% (4/10)&#13;
+Total lines: 85</title></line><line x1="734.000" y1="75.000" x2="734.010" y2="75.000" class="ct-point"><title>06.02.2022 - 20:50:35&#13;
+Line coverage: 44.7% (17/38)&#13;
+Branch coverage: 40% (8/20)&#13;
+Method coverage: 60% (6/10)&#13;
+Full method coverage 40% (4/10)&#13;
+Total lines: 85</title></line><line x1="962.000" y1="75.000" x2="962.010" y2="75.000" class="ct-point"><title>08.02.2022 - 20:50:35&#13;
+Line coverage: 39.4% (15/38)&#13;
+Branch coverage: 40% (8/20)&#13;
+Method coverage: 60% (6/10)&#13;
+Full method coverage 40% (4/10)&#13;
+Total lines: 85</title></line><line x1="1190.000" y1="75.000" x2="1190.010" y2="75.000" class="ct-point"><title>01.10.2025 - 19:25:59&#13;
+Line coverage: 63.1% (24/38)&#13;
+Branch coverage: 50% (1/2)&#13;
+Method coverage: 60% (6/10)&#13;
+Full method coverage 40% (4/10)&#13;
 Total lines: 85</title></line></g>
 </svg>
 </div>
 <script type="text/javascript">/* <![CDATA[ */ 
-var historyChartDatafa2c3c0439c543bcbad6b9cf16bcca12 = {
+var historyChartDatac1b2ad9aeab141b0b201511727e5ff87 = {
     "series" : [[{ 'meta': 0, 'value': 39.4 }, { 'meta': 1, 'value': 39.4 }, { 'meta': 2, 'value': 42.1 }, { 'meta': 3, 'value': 44.7 }, { 'meta': 4, 'value': 39.4 }, { 'meta': 5, 'value': 63.1 }],
 [{ 'meta': 0, 'value': 50 }, { 'meta': 1, 'value': 40 }, { 'meta': 2, 'value': 40 }, { 'meta': 3, 'value': 40 }, { 'meta': 4, 'value': 40 }, { 'meta': 5, 'value': 50 }],
 [{ 'meta': 0, 'value': 60 }, { 'meta': 1, 'value': 40 }, { 'meta': 2, 'value': 40 }, { 'meta': 3, 'value': 60 }, { 'meta': 4, 'value': 60 }, { 'meta': 5, 'value': 60 }],
 [{ 'meta': 0, 'value': 40 }, { 'meta': 1, 'value': 40 }, { 'meta': 2, 'value': 40 }, { 'meta': 3, 'value': 40 }, { 'meta': 4, 'value': 40 }, { 'meta': 5, 'value': 40 }]
 ],
-    "tooltips" : ['<h3>01.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 39.4% (15/38)<br /><span class="branchcoverage"></span> Branch coverage: 50% (10/20)<br /><span class="codeelementcoverage"></span> Method coverage: 60% (6/10)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 40% (4/10)<br />Total lines: 85','<h3>02.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 39.4% (15/38)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 40% (4/10)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 40% (4/10)<br />Total lines: 85','<h3>03.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 42.1% (16/38)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 40% (4/10)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 40% (4/10)<br />Total lines: 85','<h3>06.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 44.7% (17/38)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 60% (6/10)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 40% (4/10)<br />Total lines: 85','<h3>08.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 39.4% (15/38)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 60% (6/10)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 40% (4/10)<br />Total lines: 85','<h3>24.09.2025 - 19:54:35</h3><br /><span class="linecoverage"></span> Line coverage: 63.1% (24/38)<br /><span class="branchcoverage"></span> Branch coverage: 50% (1/2)<br /><span class="codeelementcoverage"></span> Method coverage: 60% (6/10)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 40% (4/10)<br />Total lines: 85']
+    "tooltips" : ['<h3>01.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 39.4% (15/38)<br /><span class="branchcoverage"></span> Branch coverage: 50% (10/20)<br /><span class="codeelementcoverage"></span> Method coverage: 60% (6/10)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 40% (4/10)<br />Total lines: 85','<h3>02.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 39.4% (15/38)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 40% (4/10)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 40% (4/10)<br />Total lines: 85','<h3>03.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 42.1% (16/38)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 40% (4/10)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 40% (4/10)<br />Total lines: 85','<h3>06.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 44.7% (17/38)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 60% (6/10)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 40% (4/10)<br />Total lines: 85','<h3>08.02.2022 - 20:50:35</h3><br /><span class="linecoverage"></span> Line coverage: 39.4% (15/38)<br /><span class="branchcoverage"></span> Branch coverage: 40% (8/20)<br /><span class="codeelementcoverage"></span> Method coverage: 60% (6/10)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 40% (4/10)<br />Total lines: 85','<h3>01.10.2025 - 19:25:59</h3><br /><span class="linecoverage"></span> Line coverage: 63.1% (24/38)<br /><span class="branchcoverage"></span> Branch coverage: 50% (1/2)<br /><span class="codeelementcoverage"></span> Method coverage: 60% (6/10)<br /><span class="fullcodeelementcoverage"></span> Full method coverage 40% (4/10)<br />Total lines: 85']
 };
  /* ]]> */ </script>
 <h1>Metrics</h1>
@@ -7176,7 +7176,7 @@ var historyChartDatafa2c3c0439c543bcbad6b9cf16bcca12 = {
 </tbody>
 </table>
 </div>
-<div class="footer">Generated by: ReportGenerator 5.4.15.0<br />24.09.2025 - 19:54:35<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
+<div class="footer">Generated by: ReportGenerator 5.4.16.0<br />01.10.2025 - 19:25:59<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
 <div class="containerright">
 <div class="containerrightfixed">
 <h1>Methods/Properties</h1>

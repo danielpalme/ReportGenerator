@@ -92,12 +92,12 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     "{0} - {1}{2}{3}{4}{5}{6}{7}",
                     h.ExecutionTime.ToShortDateString(),
                     h.ExecutionTime.ToLongTimeString(),
-                    h.CoverageQuota.HasValue ? string.Format(CultureInfo.InvariantCulture, "\r\n{0} {1}% ({2}/{3})", WebUtility.HtmlEncode(ReportResources.Coverage2), h.CoverageQuota.Value, h.CoveredLines, h.CoverableLines) : null,
-                    h.BranchCoverageQuota.HasValue ? string.Format(CultureInfo.InvariantCulture, "\r\n{0} {1}% ({2}/{3})", WebUtility.HtmlEncode(ReportResources.BranchCoverage2), h.BranchCoverageQuota.Value, h.CoveredBranches, h.TotalBranches) : null,
-                    methodCoverageAvailable && h.CodeElementCoverageQuota.HasValue ? string.Format(CultureInfo.InvariantCulture, "\r\n{0} {1}% ({2}/{3})", WebUtility.HtmlEncode(ReportResources.CodeElementCoverageQuota2), h.CodeElementCoverageQuota.Value, h.CoveredCodeElements, h.TotalCodeElements) : null,
-                    methodCoverageAvailable && h.FullCodeElementCoverageQuota.HasValue ? string.Format(CultureInfo.InvariantCulture, "\r\n{0} {1}% ({2}/{3})", WebUtility.HtmlEncode(ReportResources.FullCodeElementCoverageQuota), h.FullCodeElementCoverageQuota.Value, h.FullCoveredCodeElements, h.TotalCodeElements) : null,
-                    string.Format(CultureInfo.InvariantCulture, "\r\n{0} {1}", WebUtility.HtmlEncode(ReportResources.TotalLines), h.TotalLines),
-                    h.Tag != null ? string.Format(CultureInfo.InvariantCulture, "\r\n{0} {1}", WebUtility.HtmlEncode(ReportResources.Tag), h.Tag) : string.Empty))
+                    h.CoverageQuota.HasValue ? string.Format(CultureInfo.InvariantCulture, "&#13;\r\n{0} {1}% ({2}/{3})", WebUtility.HtmlEncode(ReportResources.Coverage2), h.CoverageQuota.Value, h.CoveredLines, h.CoverableLines) : null,
+                    h.BranchCoverageQuota.HasValue ? string.Format(CultureInfo.InvariantCulture, "&#13;\r\n{0} {1}% ({2}/{3})", WebUtility.HtmlEncode(ReportResources.BranchCoverage2), h.BranchCoverageQuota.Value, h.CoveredBranches, h.TotalBranches) : null,
+                    methodCoverageAvailable && h.CodeElementCoverageQuota.HasValue ? string.Format(CultureInfo.InvariantCulture, "&#13;\r\n{0} {1}% ({2}/{3})", WebUtility.HtmlEncode(ReportResources.CodeElementCoverageQuota2), h.CodeElementCoverageQuota.Value, h.CoveredCodeElements, h.TotalCodeElements) : null,
+                    methodCoverageAvailable && h.FullCodeElementCoverageQuota.HasValue ? string.Format(CultureInfo.InvariantCulture, "&#13;\r\n{0} {1}% ({2}/{3})", WebUtility.HtmlEncode(ReportResources.FullCodeElementCoverageQuota), h.FullCodeElementCoverageQuota.Value, h.FullCoveredCodeElements, h.TotalCodeElements) : null,
+                    string.Format(CultureInfo.InvariantCulture, "&#13;\r\n{0} {1}", WebUtility.HtmlEncode(ReportResources.TotalLines), h.TotalLines),
+                    h.Tag != null ? string.Format(CultureInfo.InvariantCulture, "&#13;\r\n{0} {1}", WebUtility.HtmlEncode(ReportResources.Tag), h.Tag) : string.Empty))
                 .ToArray();
 
             int numberOfLines = historicCoverages.Count;
