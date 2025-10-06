@@ -35,7 +35,7 @@ The following output formats are supported by ReportGenerator:
 -TeamCitySummary
 -TextSummary, TextDeltaSummary
 -CsvSummary
--MarkdownSummary, MarkdownAssembliesSummary, MarkdownSummaryGithub, MarkdownDeltaSummary
+-Markdown, MarkdownSummary, MarkdownAssembliesSummary, MarkdownSummaryGithub, MarkdownDeltaSummary
 -SvgChart
 -Badges
 -Custom formats (https://github.com/danielpalme/ReportGenerator/wiki/Custom-reports)
@@ -71,6 +71,8 @@ CHANGELOG
 
 5.4.17.0
 
+
+    * New: #756: Added new report type 'Markdown'
     * Fix: #757: Improved title elements in SVGs charts embedded in MHTML report
 
 5.4.16.0

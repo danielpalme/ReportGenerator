@@ -13,14 +13,14 @@ using Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering;
 namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 {
     /// <summary>
-    /// Implementation of <see cref="IReportBuilder"/> that uses <see cref="ILatexRenderer"/> to create reports.
+    /// Implementation of <see cref="IReportBuilder"/> that uses <see cref="IMarkdownRenderer"/> to create reports.
     /// </summary>
-    public abstract class LatexReportBuilderBase : IReportBuilder
+    public abstract class MarkdownReportBuilderBase : IReportBuilder
     {
         /// <summary>
         /// The Logger.
         /// </summary>
-        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(LatexReportBuilderBase));
+        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(MarkdownReportBuilderBase));
 
         /// <summary>
         /// Gets the report type.
@@ -39,12 +39,17 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         public IReportContext ReportContext { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether links should be included in the report.
+        /// </summary>
+        protected bool WithLinks { get; set; } = false;
+
+        /// <summary>
         /// Creates a class report.
         /// </summary>
         /// <param name="reportRenderer">The report renderer.</param>
         /// <param name="class">The class.</param>
         /// <param name="fileAnalyses">The file analyses that correspond to the class.</param>
-        public virtual void CreateClassReport(ILatexRenderer reportRenderer, Class @class, IEnumerable<FileAnalysis> fileAnalyses)
+        public virtual void CreateClassReport(IMarkdownRenderer reportRenderer, Class @class, IEnumerable<FileAnalysis> fileAnalyses)
         {
             if (reportRenderer == null)
             {
@@ -138,14 +143,23 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                     }
                     else
                     {
-                        reportRenderer.BeginLineAnalysisTable();
+                        int maximumLineNumberDigits = 1;
+                        int maximumLineVisitsDigits = 1;
+
+                        if (fileAnalysis.Lines.Any())
+                        {
+                            maximumLineNumberDigits = (int)Math.Floor(Math.Log10(Math.Max(1, fileAnalysis.Lines.Max(l => l.LineNumber))) + 1);
+                            maximumLineVisitsDigits = (int)Math.Floor(Math.Log10(Math.Max(1, fileAnalysis.Lines.Max(l => l.LineVisits))) + 1);
+                        }
+
+                        reportRenderer.BeginLineAnalysisBlock();
 
                         foreach (var line in fileAnalysis.Lines)
                         {
-                            reportRenderer.LineAnalysis(fileIndex, line);
+                            reportRenderer.LineAnalysis(fileIndex, line, maximumLineNumberDigits, maximumLineVisitsDigits);
                         }
 
-                        reportRenderer.FinishTable();
+                        reportRenderer.FinishLineAnalysisBlock();
                     }
 
                     fileIndex++;
@@ -178,7 +192,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// </summary>
         /// <param name="reportRenderer">The report renderer.</param>
         /// <param name="summaryResult">The summary result.</param>
-        public virtual void CreateSummaryReport(ILatexRenderer reportRenderer, SummaryResult summaryResult)
+        public virtual void CreateSummaryReport(IMarkdownRenderer reportRenderer, SummaryResult summaryResult)
         {
             if (reportRenderer == null)
             {
@@ -269,7 +283,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
                 if (this.ReportContext.RiskHotspotAnalysisResult.RiskHotspots.Count > 0)
                 {
-                    reportRenderer.RiskHotspots(this.ReportContext.RiskHotspotAnalysisResult.RiskHotspots);
+                    reportRenderer.RiskHotspots(this.ReportContext.RiskHotspotAnalysisResult.RiskHotspots, this.WithLinks);
                 }
                 else
                 {
@@ -289,7 +303,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
                     foreach (var @class in assembly.Classes)
                     {
-                        reportRenderer.SummaryClass(@class, summaryResult.SupportsBranchCoverage, proVersion);
+                        reportRenderer.SummaryClass(@class, summaryResult.SupportsBranchCoverage, proVersion, this.WithLinks);
                     }
                 }
 

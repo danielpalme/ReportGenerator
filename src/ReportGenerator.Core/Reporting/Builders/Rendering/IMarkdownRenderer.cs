@@ -5,9 +5,9 @@ using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 {
     /// <summary>
-    /// Latex report renderer.
+    /// Markdown report renderer.
     /// </summary>
-    public interface ILatexRenderer
+    public interface IMarkdownRenderer
     {
         /// <summary>
         /// Begins the summary report.
@@ -52,9 +52,14 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         void BeginSummaryTable(bool branchCoverageAvailable, bool methodCoverageAvailable);
 
         /// <summary>
-        /// Adds a file analysis table to the report.
+        /// Adds a file analysis block to the report.
         /// </summary>
-        void BeginLineAnalysisTable();
+        void BeginLineAnalysisBlock();
+
+        /// <summary>
+        /// Finishes the current file analysis block.
+        /// </summary>
+        void FinishLineAnalysisBlock();
 
         /// <summary>
         /// Adds a table row with two cells to the report.
@@ -88,7 +93,9 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// </summary>
         /// <param name="fileIndex">The index of the file.</param>
         /// <param name="analysis">The line analysis.</param>
-        void LineAnalysis(int fileIndex, LineAnalysis analysis);
+        /// <param name="maximumLineNumberDigits">The maximum line number digits.</param>
+        /// <param name="maximumLineVisitsDigits">The maximum number of line visits digits.</param>
+        void LineAnalysis(int fileIndex, LineAnalysis analysis, int maximumLineNumberDigits, int maximumLineVisitsDigits);
 
         /// <summary>
         /// Finishes the current table.
@@ -99,7 +106,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// Summary of risk hotspots.
         /// </summary>
         /// <param name="riskHotspots">The risk hotspots.</param>
-        void RiskHotspots(IEnumerable<RiskHotspot> riskHotspots);
+        /// <param name="withLinks">if set to <c>true</c> links to the classes are included.</param>
+        void RiskHotspots(IEnumerable<RiskHotspot> riskHotspots, bool withLinks);
 
         /// <summary>
         /// Adds the coverage information of an assembly to the report.
@@ -115,7 +123,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="class">The class.</param>
         /// <param name="branchCoverageAvailable">if set to <c>true</c> branch coverage is available.</param>
         /// <param name="methodCoverageAvailable">if set to <c>true</c> method coverage is available.</param>
-        void SummaryClass(Class @class, bool branchCoverageAvailable, bool methodCoverageAvailable);
+        /// <param name="withLinks">if set to <c>true</c> links to the classes are included.</param>
+        void SummaryClass(Class @class, bool branchCoverageAvailable, bool methodCoverageAvailable, bool withLinks);
 
         /// <summary>
         /// Saves a summary report.

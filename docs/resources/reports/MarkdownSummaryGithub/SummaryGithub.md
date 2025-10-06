@@ -3,7 +3,7 @@
 
 |||
 |:---|:---|
-| Generated on: | 09.02.2025 - 18:57:03 |
+| Generated on: | 06.10.2025 - 20:48:45 |
 | Parser: | OpenCover |
 | Assemblies: | 1 |
 | Classes: | 4 |
@@ -17,9 +17,9 @@
 | Covered branches: | 4 |
 | Total branches: | 8 |
 | **Method coverage:** | 66.6% (16 of 24) |
-| **Full method coverage:** | 37.5% (9 of 24) |
+| **Full method coverage:** | 50% (12 of 24) |
 | Covered methods: | 16 |
-| Fully covered methods: | 9 |
+| Fully covered methods: | 12 |
 | Total methods: | 24 |
 
 </details>
@@ -29,10 +29,10 @@
 
 |**Name**|**Line**|**Branch**|**Method**|**Full method**|
 |:---|---:|---:|---:|---:|
-|**Sample**|**69.4%**|**50%**|**66.6%**|**37.5%**|
+|**Sample**|**69.4%**|**50%**|**66.6%**|**50%**|
 |Sample.PartialClass|54.5%|50%|50%|33.3%|
 |Test.Program|100%||100%|100%|
-|Test.TestClass|72.7%|50%|80%|20%|
-|Test.TestClass2|63.1%|50%|60%|30%|
+|Test.TestClass|72.7%|50%|80%|60%|
+|Test.TestClass2|63.1%|50%|60%|40%|
 
 </details>
