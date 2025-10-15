@@ -69,8 +69,11 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
-5.4.17.0
+5.4.18.0
 
+    * Fix: #760: Improved  light/dark mode when "Auto Dark Mode for Web Contents" is enabled in Chrome/Edge
+
+5.4.17.0
 
     * New: #756: Added new report type 'Markdown'
     * Fix: #757: Improved title elements in SVGs charts embedded in MHTML report

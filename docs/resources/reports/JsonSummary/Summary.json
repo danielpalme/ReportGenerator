@@ -1,6 +1,6 @@
 {
   "summary": {
-    "generatedon": "2025-02-09T17:56:57Z",
+    "generatedon": "2025-10-15T18:25:09Z",
     "parser": "OpenCover",
     "assemblies": 1,
     "classes": 4,
@@ -14,17 +14,17 @@
     "totalbranches": 8,
     "branchcoverage": 50,
     "coveredmethods": 16,
-    "fullcoveredmethods": 9,
+    "fullcoveredmethods": 12,
     "totalmethods": 24,
     "methodcoverage": 66.6,
-    "fullmethodcoverage": 37.5
+    "fullmethodcoverage": 50
  },
   "coverage": {
     "assemblies": [
-      { "name": "Sample", "classes": 4, "coverage": 69.4, "coveredlines": 75, "coverablelines": 108, "totallines": 260, "branchcoverage": 50, "coveredbranches": 4, "totalbranches": 8, "methodcoverage": 66.6, "fullmethodcoverage": 37.5, "coveredmethods": 16, "fullcoveredmethods": 9, "totalmethods": 24, "classesinassembly": [
+      { "name": "Sample", "classes": 4, "coverage": 69.4, "coveredlines": 75, "coverablelines": 108, "totallines": 260, "branchcoverage": 50, "coveredbranches": 4, "totalbranches": 8, "methodcoverage": 66.6, "fullmethodcoverage": 50, "coveredmethods": 16, "fullcoveredmethods": 12, "totalmethods": 24, "classesinassembly": [
         { "name": "Sample.PartialClass", "coverage": 54.5, "coveredlines": 12, "coverablelines": 22, "totallines": 53, "branchcoverage": 50, "coveredbranches": 1, "totalbranches": 2, "methodcoverage": 50, "fullmethodcoverage": 33.3, "coveredmethods": 3, "fullcoveredmethods": 2, "totalmethods": 6 },
         { "name": "Test.Program", "coverage": 100, "coveredlines": 15, "coverablelines": 15, "totallines": 84, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "fullmethodcoverage": 100, "coveredmethods": 3, "fullcoveredmethods": 3, "totalmethods": 3 },
-        { "name": "Test.TestClass", "coverage": 72.7, "coveredlines": 24, "coverablelines": 33, "totallines": 38, "branchcoverage": 50, "coveredbranches": 2, "totalbranches": 4, "methodcoverage": 80, "fullmethodcoverage": 20, "coveredmethods": 4, "fullcoveredmethods": 1, "totalmethods": 5 },
-        { "name": "Test.TestClass2", "coverage": 63.1, "coveredlines": 24, "coverablelines": 38, "totallines": 85, "branchcoverage": 50, "coveredbranches": 1, "totalbranches": 2, "methodcoverage": 60, "fullmethodcoverage": 30, "coveredmethods": 6, "fullcoveredmethods": 3, "totalmethods": 10 } ] } ]
+        { "name": "Test.TestClass", "coverage": 72.7, "coveredlines": 24, "coverablelines": 33, "totallines": 38, "branchcoverage": 50, "coveredbranches": 2, "totalbranches": 4, "methodcoverage": 80, "fullmethodcoverage": 60, "coveredmethods": 4, "fullcoveredmethods": 3, "totalmethods": 5 },
+        { "name": "Test.TestClass2", "coverage": 63.1, "coveredlines": 24, "coverablelines": 38, "totallines": 85, "branchcoverage": 50, "coveredbranches": 1, "totalbranches": 2, "methodcoverage": 60, "fullmethodcoverage": 40, "coveredmethods": 6, "fullcoveredmethods": 4, "totalmethods": 10 } ] } ]
   }
 }

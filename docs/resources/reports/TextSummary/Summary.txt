@@ -1,5 +1,5 @@
 Summary
-  Generated on: 09.02.2025 - 18:56:59
+  Generated on: 15.10.2025 - 20:25:10
   Parser: OpenCover
   Assemblies: 1
   Classes: 4
@@ -13,9 +13,9 @@ Summary
   Covered branches: 4
   Total branches: 8
   Method coverage: 66.6% (16 of 24)
-  Full method coverage: 37.5% (9 of 24)
+  Full method coverage: 50% (12 of 24)
   Covered methods: 16
-  Fully covered methods: 9
+  Fully covered methods: 12
   Total methods: 24
 
 Sample                  69.4%

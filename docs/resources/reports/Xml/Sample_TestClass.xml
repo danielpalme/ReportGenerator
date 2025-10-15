@@ -15,10 +15,10 @@
     <Totalbranches>4</Totalbranches>
     <Branchcoverage>50</Branchcoverage>
     <Coveredmethods>4</Coveredmethods>
-    <Fullcoveredmethods>1</Fullcoveredmethods>
+    <Fullcoveredmethods>3</Fullcoveredmethods>
     <Totalmethods>5</Totalmethods>
     <Methodcoverage>80</Methodcoverage>
-    <Fullmethodcoverage>20</Fullmethodcoverage>
+    <Fullmethodcoverage>60</Fullmethodcoverage>
   </Summary>
   <Metrics>
     <Element name="SampleFunction">

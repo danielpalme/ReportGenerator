@@ -1,3 +1,7 @@
+:root {
+    color-scheme: dark;
+}
+
 @media screen {
     html {
         background-color: #333;
