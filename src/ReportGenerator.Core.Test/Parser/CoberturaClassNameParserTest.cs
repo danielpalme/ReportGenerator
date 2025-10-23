@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Palmmedia.ReportGenerator.Core.Test.Parser
 {
-    public class ClassNameParserTest
+    public class CoberturaClassNameParserTest
     {
         [Theory]
         // RawMode
@@ -176,7 +176,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         public void ParseClassName(string rawName, bool rawMode, string expectedName,
             string expectedDisplayName, bool expectedInclude)
         {
-            var result = ClassNameParser.ParseClassName(rawName, rawMode);
+            var result = CoberturaClassNameParser.ParseClassName(rawName, rawMode);
 
             Assert.Equal(expectedName, result.Name);
             Assert.Equal(expectedDisplayName, result.DisplayName);

@@ -6,7 +6,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
     /// <summary>
     /// Parses class names and extracts generic type information.
     /// </summary>
-    internal static class ClassNameParser
+    internal static class CoberturaClassNameParser
     {
         /// <summary>
         /// Regex to clean class names from compiler generated parts.
@@ -24,7 +24,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="rawName">The raw/full name.</param>
         /// <param name="rawMode">Indicates whether class names are interpreted (false) or not (true).</param>
         /// <returns>The parser result.</returns>
-        public static ClassNameParserResult ParseClassName(string rawName, bool rawMode)
+        public static CoberturaClassNameParserResult ParseClassName(string rawName, bool rawMode)
         {
             if (rawName == null)
             {
@@ -33,7 +33,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             if (rawMode)
             {
-                return new ClassNameParserResult(rawName, rawName, rawName, true);
+                return new CoberturaClassNameParserResult(rawName, rawName, rawName, true);
             }
 
             int nestedClassSeparatorIndex = rawName.IndexOf('/');
@@ -41,7 +41,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
             if (nestedClassSeparatorIndex > -1)
             {
                 string className = rawName.Substring(0, nestedClassSeparatorIndex);
-                return new ClassNameParserResult(className, className, rawName, IncludeClass(className));
+                return new CoberturaClassNameParserResult(className, className, rawName, IncludeClass(className));
             }
 
             if (rawName.Contains("<"))
@@ -50,14 +50,14 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
                 if (cleanedClassName.Equals(rawName))
                 {
-                    return new ClassNameParserResult(rawName, rawName, rawName, IncludeClass(rawName));
+                    return new CoberturaClassNameParserResult(rawName, rawName, rawName, IncludeClass(rawName));
                 }
 
                 var match = GenericClassRegex.Match(cleanedClassName);
 
                 if (match.Success)
                 {
-                    return new ClassNameParserResult(
+                    return new CoberturaClassNameParserResult(
                         match.Groups["ClassName"].Value,
                         match.Groups["ClassName"].Value + match.Groups["GenericTypes"].Value,
                         rawName,
@@ -65,7 +65,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 }
                 else
                 {
-                    return new ClassNameParserResult(
+                    return new CoberturaClassNameParserResult(
                         cleanedClassName,
                         cleanedClassName,
                         rawName,
@@ -73,7 +73,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 }
             }
 
-            return new ClassNameParserResult(rawName, rawName, rawName, IncludeClass(rawName));
+            return new CoberturaClassNameParserResult(rawName, rawName, rawName, IncludeClass(rawName));
         }
 
         /// <summary>

@@ -46,6 +46,7 @@ namespace Test
             }
 
             new GenericAsyncClass<object>().MyAsyncMethod().Wait();
+            new GenericAsyncClass<object>().MyAsyncMethod(new object()).Wait();
             new ClassWithLocalFunctions<object>.MyNestedClass<object>().MyAsyncMethod<object>(null).GetAwaiter().GetResult();
         }
 

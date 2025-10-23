@@ -120,7 +120,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 .ToArray();
 
             var classNames = classes
-                .Select(c => ClassNameParser.ParseClassName(c.Attribute("name").Value, this.RawMode))
+                .Select(c => CoberturaClassNameParser.ParseClassName(c.Attribute("name").Value, this.RawMode))
                 .Where(c => c.Include)
                 .Distinct()
                 .Where(c => this.ClassFilter.IsElementIncludedInReport(c.Name))
@@ -140,7 +140,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <param name="allClasses">All class elements.</param>
         /// <param name="assembly">The assembly.</param>
         /// <param name="classNameParserResult">Name of the class.</param>
-        private void ProcessClass(XElement[] allClasses, Assembly assembly, ClassNameParserResult classNameParserResult)
+        private void ProcessClass(XElement[] allClasses, Assembly assembly, CoberturaClassNameParserResult classNameParserResult)
         {
             bool FilterClass(XElement element)
             {

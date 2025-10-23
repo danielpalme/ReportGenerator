@@ -1,18 +1,18 @@
 ﻿namespace Palmmedia.ReportGenerator.Core.Parser
 {
     /// <summary>
-    /// Result of the <see cref="ClassNameParser"/>.
+    /// Result of the <see cref="CoberturaClassNameParser"/>.
     /// </summary>
-    internal class ClassNameParserResult
+    internal class CoberturaClassNameParserResult
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClassNameParserResult"/> class.
+        /// Initializes a new instance of the <see cref="CoberturaClassNameParserResult"/> class.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="displayName">The display name.</param>
         /// <param name="rawName">The raw/full name.</param>
         /// <param name="include">Indicates whether the class should be included in the report.</param>
-        public ClassNameParserResult(
+        public CoberturaClassNameParserResult(
             string name,
             string displayName,
             string rawName,
@@ -35,6 +35,11 @@
         public string DisplayName { get; }
 
         /// <summary>
+        /// Gets or sets the generic type.
+        /// </summary>
+        public string GenericType { get; set; }
+
+        /// <summary>
         /// Gets the raw/full name.
         /// </summary>
         public string RawName { get; }
@@ -53,13 +58,13 @@
         /// <inheritdoc />
         public override bool Equals(object obj)
         {
-            if (obj == null || !obj.GetType().Equals(typeof(ClassNameParserResult)))
+            if (obj == null || !obj.GetType().Equals(typeof(CoberturaClassNameParserResult)))
             {
                 return false;
             }
             else
             {
-                var classNameParserResult = (ClassNameParserResult)obj;
+                var classNameParserResult = (CoberturaClassNameParserResult)obj;
                 return classNameParserResult.Name.Equals(this.Name)
                     && classNameParserResult.DisplayName.Equals(this.DisplayName);
             }
