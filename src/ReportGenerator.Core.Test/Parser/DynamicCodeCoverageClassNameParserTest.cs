@@ -62,6 +62,14 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
             null,
             "Test.Program",
             true)]
+        [InlineData(
+            "AutoMapperExtensions.<>c__1<TResult>",
+            "Test",
+            "AutoMapperExtensions",
+            "AutoMapperExtensions",
+            null,
+            "Test.AutoMapperExtensions",
+            true)]
         public void ParseClassName(
             string rawName,
             string @namespace,

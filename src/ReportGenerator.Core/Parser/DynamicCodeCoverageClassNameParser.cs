@@ -11,7 +11,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <summary>
         /// Regex to clean class names from compiler generated parts.
         /// </summary>
-        private static readonly Regex CleanupRegex = new Regex(".<.*>\\w_?_?\\w*\\d*", RegexOptions.Compiled);
+        private static readonly Regex CleanupRegex = new Regex("\\.<>\\w_?_?\\w*\\d*<.*>|\\.<.*>\\w_?_?\\w*\\d*", RegexOptions.Compiled);
 
         /// <summary>
         /// Regex to analyze if a class name represents a generic class.
