@@ -10,17 +10,14 @@
         /// </summary>
         /// <param name="namespaceOfClass">The namespace.</param>
         /// <param name="name">The name.</param>
-        /// <param name="displayName">The display name.</param>
         /// <param name="include">Indicates whether the class should be included in the report.</param>
         public DynamicCodeCoverageClassNameParserResult(
             string namespaceOfClass,
             string name,
-            string displayName,
             bool include)
         {
             this.Namespace = namespaceOfClass;
             this.Name = name;
-            this.DisplayName = displayName;
             this.Include = include;
         }
 
@@ -35,19 +32,9 @@
         public string Name { get; }
 
         /// <summary>
-        /// Gets the display name.
-        /// </summary>
-        public string DisplayName { get; }
-
-        /// <summary>
-        /// Gets or sets the generic type.
-        /// </summary>
-        public string GenericType { get; set; }
-
-        /// <summary>
         /// Gets the full name.
         /// </summary>
-        public string FullName => this.Namespace == null ? this.DisplayName : $"{this.Namespace}.{this.DisplayName}";
+        public string FullName => this.Namespace == null ? this.Name : $"{this.Namespace}.{this.Name}";
 
         /// <summary>
         /// Gets a value indicating whether the class should be included in the report.
@@ -57,7 +44,7 @@
         /// <inheritdoc />
         public override string ToString()
         {
-            return this.DisplayName;
+            return this.Name;
         }
 
         /// <inheritdoc />
@@ -71,12 +58,11 @@
             {
                 var classNameParserResult = (DynamicCodeCoverageClassNameParserResult)obj;
                 return string.Equals(classNameParserResult.Name, this.Name)
-                    && string.Equals(classNameParserResult.DisplayName, this.DisplayName)
                     && string.Equals(classNameParserResult.Namespace, this.Namespace);
             }
         }
 
         /// <inheritdoc />
-        public override int GetHashCode() => this.Name.GetHashCode() + this.DisplayName.GetHashCode() + (this.Namespace?.GetHashCode()).GetValueOrDefault();
+        public override int GetHashCode() => this.Name.GetHashCode() + (this.Namespace?.GetHashCode()).GetValueOrDefault();
     }
 }

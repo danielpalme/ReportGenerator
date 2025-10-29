@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Test
 {
@@ -44,6 +45,17 @@ namespace Test
             var lambda = (char c) => c == 'a';
 
             var chars2 = "abc".Where(lambda).ToArray();
+        }
+
+
+        public void GenericMethod<T>(T messageObject)
+        {
+
+        }
+
+        public async Task GenericAsyncMethod<T>(T messageObject)
+        {
+
         }
 
         public class NestedClass

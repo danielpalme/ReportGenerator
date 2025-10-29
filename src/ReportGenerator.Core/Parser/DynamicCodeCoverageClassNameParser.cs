@@ -11,7 +11,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <summary>
         /// Regex to clean class names from compiler generated parts.
         /// </summary>
-        private static readonly Regex CleanupRegex = new Regex("\\.<>\\w_?_?\\w*\\d*<.*>|\\.<.*>\\w_?_?\\w*\\d*", RegexOptions.Compiled);
+        private static readonly Regex CleanupRegex = new Regex("<.*?>", RegexOptions.Compiled);
 
         /// <summary>
         /// Regex to analyze if a class name represents a generic class.
@@ -39,36 +39,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser
 
             if (nestedClassSeparatorIndex > -1)
             {
-                string className = cleanedClassName.Substring(0, nestedClassSeparatorIndex);
-                return new DynamicCodeCoverageClassNameParserResult(namespaceOfClass, className, className, IncludeClass(className));
+                cleanedClassName = cleanedClassName.Substring(0, nestedClassSeparatorIndex);
             }
 
-            if (cleanedClassName.Contains("<"))
-            {
-                var match = GenericClassRegex.Match(cleanedClassName);
-
-                if (match.Success)
-                {
-                    return new DynamicCodeCoverageClassNameParserResult(
-                        namespaceOfClass,
-                        match.Groups["ClassName"].Value,
-                        match.Groups["ClassName"].Value + match.Groups["GenericTypes"].Value,
-                        IncludeClass(match.Groups["ClassName"].Value))
-                    {
-                        GenericType = match.Groups["GenericTypes"].Value
-                    };
-                }
-                else
-                {
-                    return new DynamicCodeCoverageClassNameParserResult(
-                        namespaceOfClass,
-                        cleanedClassName,
-                        cleanedClassName,
-                        IncludeClass(cleanedClassName));
-                }
-            }
-
-            return new DynamicCodeCoverageClassNameParserResult(namespaceOfClass, cleanedClassName, cleanedClassName, IncludeClass(cleanedClassName));
+            return new DynamicCodeCoverageClassNameParserResult(namespaceOfClass, cleanedClassName, IncludeClass(rawName));
         }
 
         /// <summary>
@@ -78,8 +52,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <returns>True if the class should be included; otherwise, false.</returns>
         private static bool IncludeClass(string name)
         {
-            return !name.Contains("<>")
-                && !name.StartsWith("$", StringComparison.OrdinalIgnoreCase);
+            return !name.StartsWith("$", StringComparison.OrdinalIgnoreCase);
         }
     }
 }
