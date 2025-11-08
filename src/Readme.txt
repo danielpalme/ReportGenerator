@@ -69,6 +69,11 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.5.0.0
+
+    * New: Added support for .NET 10
+    * New: #763: Added new setting "includeAllDatesInCharts".
+
 5.4.18.0
 
     * Fix: #760: Improved light/dark mode when "Auto Dark Mode for Web Contents" is enabled in Chrome/Edge

@@ -107,7 +107,9 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
             foreach (var historicCoverage in historicCoverages)
             {
-                if (result.Count == 0 || !result[result.Count - 1].Equals(historicCoverage))
+                if (result.Count == 0
+                    || this.ReportContext.Settings.IncludeAllDatesInCharts
+                    || !result[result.Count - 1].Equals(historicCoverage))
                 {
                     result.Add(historicCoverage);
                 }

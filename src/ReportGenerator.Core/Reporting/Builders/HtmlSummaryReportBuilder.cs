@@ -33,7 +33,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         /// <param name="summaryResult">The summary result.</param>
         public override void CreateSummaryReport(SummaryResult summaryResult)
         {
-            using (var renderer = new HtmlRenderer(new Dictionary<string, string>(), true, HtmlMode.InlineCssAndJavaScript))
+            using (var renderer = new HtmlRenderer(new Dictionary<string, string>(), true, HtmlMode.InlineCssAndJavaScript, includeAllDatesInCharts: this.ReportContext.Settings.IncludeAllDatesInCharts))
             {
                 this.CreateSummaryReport(renderer, summaryResult);
             }

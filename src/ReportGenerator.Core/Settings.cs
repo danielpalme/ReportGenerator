@@ -92,5 +92,11 @@ namespace Palmmedia.ReportGenerator.Core
         /// In raw mode the coverage data is reported for each class separately.
         /// </summary>
         public bool RawMode { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether all dates should be included in charts.
+        /// If <code>false</code> consecutive elements with the same value will result in a single value in the chart.
+        /// </summary>
+        public bool IncludeAllDatesInCharts { get; set; }
     }
 }

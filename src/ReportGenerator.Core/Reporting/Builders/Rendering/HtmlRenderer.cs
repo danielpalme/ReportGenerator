@@ -52,6 +52,12 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         private readonly HtmlMode htmlMode;
 
         /// <summary>
+        /// Indicating whether all dates should be included in charts.
+        /// </summary>
+
+        private readonly bool includeAllDatesInCharts;
+
+        /// <summary>
         /// Contains report specific JavaScript content.
         /// </summary>
         private readonly StringBuilder javaScriptContent;
@@ -81,6 +87,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// </summary>
         private bool classReport;
 
+
         /// <summary>
         /// Initializes a new instance of the <see cref="HtmlRenderer" /> class.
         /// </summary>
@@ -89,12 +96,14 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="htmlMode">Defines how CSS and JavaScript are referenced.</param>
         /// <param name="cssFileResource">Optional CSS file resource.</param>
         /// <param name="additionalCssFileResource">Optional additional CSS file resource.</param>
+        /// <param name="includeAllDatesInCharts">Indicating whether all dates should be included in charts.</param>
         internal HtmlRenderer(
             IDictionary<string, string> fileNameByClass,
             bool onlySummary,
             HtmlMode htmlMode,
             string cssFileResource = "custom.css",
-            string additionalCssFileResource = "custom_adaptive.css")
+            string additionalCssFileResource = "custom_adaptive.css",
+            bool includeAllDatesInCharts = false)
         {
             this.fileNameByClass = fileNameByClass;
             this.onlySummary = onlySummary;
@@ -102,6 +111,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.javaScriptContent = StringBuilderCache.Get();
             this.cssFileResource = cssFileResource;
             this.additionalCssFileResources = additionalCssFileResource == null ? new string[0] : new[] { additionalCssFileResource };
+            this.includeAllDatesInCharts = includeAllDatesInCharts;
         }
 
         /// <summary>
@@ -112,12 +122,14 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="htmlMode">Defines how CSS and JavaScript are referenced.</param>
         /// <param name="additionalCssFileResources">Optional additional CSS file resources.</param>
         /// <param name="cssFileResource">Optional CSS file resource.</param>
+        /// <param name="includeAllDatesInCharts">Indicating whether all dates should be included in charts.</param>
         internal HtmlRenderer(
             IDictionary<string, string> fileNameByClass,
             bool onlySummary,
             HtmlMode htmlMode,
             string[] additionalCssFileResources,
-            string cssFileResource = "custom.css")
+            string cssFileResource = "custom.css",
+            bool includeAllDatesInCharts = false)
         {
             this.fileNameByClass = fileNameByClass;
             this.onlySummary = onlySummary;
@@ -125,6 +137,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
             this.javaScriptContent = StringBuilderCache.Get();
             this.additionalCssFileResources = additionalCssFileResources ?? new string[0];
             this.cssFileResource = cssFileResource;
+            this.includeAllDatesInCharts = includeAllDatesInCharts;
         }
 
         /// <inheritdoc />
@@ -2069,7 +2082,9 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             foreach (var historicCoverage in historicCoverages)
             {
-                if (result.Count == 0 || !result[result.Count - 1].Equals(historicCoverage))
+                if (result.Count == 0
+                    || this.includeAllDatesInCharts
+                    || !result[result.Count - 1].Equals(historicCoverage))
                 {
                     result.Add(historicCoverage);
                 }
