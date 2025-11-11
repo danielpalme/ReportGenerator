@@ -58,6 +58,10 @@ jobs:
       run: dotnet publish -c ${{ env.BuildConfiguration }} -f net9.0 ReportGenerator.Console.NetCore.csproj
       working-directory: src/ReportGenerator.Console.NetCore
 
+    - name: dotnet publish Console.NetCore 10.0
+      run: dotnet publish -c ${{ env.BuildConfiguration }} -f net10.0 ReportGenerator.Console.NetCore.csproj
+      working-directory: src/ReportGenerator.Console.NetCore
+
     - name: dotnet publish DotnetGlobalTool 8.0
       run: dotnet publish -c ${{ env.BuildConfiguration }} -f net8.0 ReportGenerator.DotnetGlobalTool.csproj
       working-directory: src/ReportGenerator.DotnetGlobalTool
