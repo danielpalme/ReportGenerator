@@ -7,7 +7,7 @@ env:
   buildPlatform: Any CPU
   buildConfiguration: Release
   version: 5.4.18
-  dotnetSDKVersion: 9.0.306
+  dotnetSDKVersion: 10.0.100
   nodeVersion: 22
 
 jobs:
@@ -66,6 +66,10 @@ jobs:
       run: dotnet publish -c ${{ env.BuildConfiguration }} -f net9.0 ReportGenerator.DotnetGlobalTool.csproj
       working-directory: src/ReportGenerator.DotnetGlobalTool
 
+    - name: dotnet publish DotnetGlobalTool 10.0
+      run: dotnet publish -c ${{ env.BuildConfiguration }} -f net10.0 ReportGenerator.DotnetGlobalTool.csproj
+      working-directory: src/ReportGenerator.DotnetGlobalTool
+
     - name: Test
       run: dotnet test src\ReportGenerator.Core.Test\ReportGenerator.Core.Test.csproj --configuration ${{ env.BuildConfiguration }} --no-build /p:CollectCoverage=true /p:DeterministicSourcePaths=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=opencover%2ccobertura /p:CoverletOutput=../target/reports/coverage/
 
@@ -114,6 +118,7 @@ jobs:
         mkdir tmpzip\net47
         mkdir tmpzip\net8.0
         mkdir tmpzip\net9.0
+        mkdir tmpzip\net10.0
 
     - name: 'Prepare ZIP release'
       run: |
@@ -125,6 +130,7 @@ jobs:
         xcopy "src\ReportGenerator.Console\bin\Release\ReportGenerator.exe.config" "tmpzip\net47"
         xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\net8.0\publish\*' 'tmpzip\net8.0' /s
         xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\net9.0\publish\*' 'tmpzip\net9.0' /s
+        xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\net10.0\publish\*' 'tmpzip\net10.0' /s
 
     - name: 'Pack ZIP release'
       run: Compress-Archive -Path tmpzip/* -DestinationPath src/target/packages/ReportGenerator_${{ env.Version }}.zip
@@ -179,7 +185,7 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         name: ReportGenerator_${{ env.Version }}
-        body: This release requires .NET Framework 4.7 or .NET 8.0/9.0
+        body: This release requires .NET Framework 4.7 or .NET 8.0/9.0/10.0
         tag_name: v${{ env.Version }}
         files: ReportGenerator_${{ env.Version }}.zip
       env:

@@ -49,5 +49,9 @@ dotnet reportgenerator [options]</description>
     <!-- Net9.0 ('tools\net9.0' directory) -->
     <file src="..\..\ReportGenerator.DotnetGlobalTool\bin\Release\net9.0\publish\**\*.*" target="tools\net9.0\any" />
     <file src="DotnetToolSettings.xml" target="tools\net9.0\any" />
+
+    <!-- Net10.0 ('tools\net10.0' directory) -->
+    <file src="..\..\ReportGenerator.DotnetGlobalTool\bin\Release\net10.0\publish\**\*.*" target="tools\net10.0\any" />
+    <file src="DotnetToolSettings.xml" target="tools\net10.0\any" />
   </files>
 </package>
