@@ -69,6 +69,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.5.1.0
+
+    * New: #769: Added support for Cobertura files exported from Swift (contributed by @Vovanni)
+
 5.5.0.0
 
     * New: Added support for .NET 10
