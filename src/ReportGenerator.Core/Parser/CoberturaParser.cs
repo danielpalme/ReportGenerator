@@ -113,9 +113,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         private Assembly ProcessAssembly(XElement[] modules, string assemblyName)
         {
             Logger.DebugFormat(Resources.CurrentAssembly, assemblyName);
-
-            var classes = modules
-                .Elements("classes")
+            var classesParent = modules.Elements("classes").Any()
+                ? modules.Elements("classes")
+                : modules;
+            var classes = classesParent
                 .Elements("class")
                 .ToArray();
 
@@ -270,7 +271,13 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         {
             foreach (var method in methodsOfFile)
             {
-                string fullName = method.Attribute("name").Value + method.Attribute("signature").Value;
+                string fullName = method.Attribute("name").Value;
+                var signature = method.Attribute("signature")?.Value;
+                if (signature != null)
+                {
+                    fullName += signature;
+                }
+
                 string methodName = this.ExtractMethodName(fullName, method.Parent.Parent.Attribute("name").Value);
 
                 if (!this.RawMode && methodName.Contains("__") && LambdaMethodNameRegex.IsMatch(methodName))
@@ -458,7 +465,13 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         {
             foreach (var method in methodsOfFile)
             {
-                string fullName = method.Attribute("name").Value + method.Attribute("signature").Value;
+                string fullName = method.Attribute("name").Value;
+                var signature = method.Attribute("signature")?.Value;
+                if (signature != null)
+                {
+                    fullName += signature;
+                }
+
                 string methodName = this.ExtractMethodName(fullName, method.Parent.Parent.Attribute("name").Value);
 
                 if (!this.RawMode && methodName.Contains("__") && LambdaMethodNameRegex.IsMatch(methodName))

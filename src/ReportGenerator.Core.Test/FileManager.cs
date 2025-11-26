@@ -71,6 +71,8 @@ namespace Palmmedia.ReportGenerator.Core.Test
 
         internal static string GetCtcReportsDirectory() => Path.Combine(GetFilesDirectory(), "CTC");
 
+        internal static string GetOtherReportsDirectory() => Path.Combine(GetFilesDirectory(), "Other");
+
         internal static string GetFilesDirectory()
         {
             if (filesDirectory == null)
