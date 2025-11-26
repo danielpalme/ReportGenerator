@@ -98,5 +98,10 @@ namespace Palmmedia.ReportGenerator.Core
         /// If <code>false</code> consecutive elements with the same value will result in a single value in the chart.
         /// </summary>
         public bool IncludeAllDatesInCharts { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether empty trailing line in source files should be preserved.
+        /// </summary>
+        public bool PreserveTrailingEmtpyLine { get; set; }
     }
 }

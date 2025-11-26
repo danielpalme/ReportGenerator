@@ -29,6 +29,11 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
         /// </summary>
         private readonly IReadOnlyList<string> sourceDirectories;
 
+        /// <summary>
+        /// Indicates whether empty trailing line in source files should be preserved.
+        /// </summary>
+        private readonly bool preserveTrailingEmtpyLine;
+
         static LocalFileReader()
         {
             var directories = new List<string>();
@@ -54,7 +59,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
         /// Initializes a new instance of the <see cref="LocalFileReader" /> class.
         /// </summary>
         public LocalFileReader()
-            : this(Enumerable.Empty<string>())
+            : this(Enumerable.Empty<string>(), false)
         {
         }
 
@@ -62,7 +67,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
         /// Initializes a new instance of the <see cref="LocalFileReader" /> class.
         /// </summary>
         /// <param name="sourceDirectories">The source directories.</param>
-        public LocalFileReader(IEnumerable<string> sourceDirectories)
+        /// <param name="preserveTrailingEmtpyLine">Indicates whether empty trailing line in source files should be preserved.</param>
+        public LocalFileReader(IEnumerable<string> sourceDirectories, bool preserveTrailingEmtpyLine)
         {
             if (sourceDirectories == null)
             {
@@ -70,6 +76,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
             }
 
             this.sourceDirectories = sourceDirectories.ToList();
+            this.preserveTrailingEmtpyLine = preserveTrailingEmtpyLine;
         }
 
         /// <summary>
@@ -90,8 +97,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
                     return null;
                 }
 
-                var encoding = FileHelper.GetEncoding(mappedPath);
-                string[] lines = File.ReadAllLines(mappedPath, encoding);
+                string[] lines = this.ReadAllLinesPreserveTrailingEmpty(mappedPath);
 
                 error = null;
                 return lines;
@@ -165,6 +171,54 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
             }
 
             return path;
+        }
+
+        /// <summary>
+        /// Reads all lines of a file, preserving a trailing empty line if present.
+        /// </summary>
+        /// <param name="path">The path of the file.</param>
+        /// <returns>The lines of the file.</returns>
+        private string[] ReadAllLinesPreserveTrailingEmpty(string path)
+        {
+            var lines = new List<string>();
+
+            var encoding = FileHelper.GetEncoding(path);
+            using (var reader = new StreamReader(path, encoding))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    lines.Add(line);
+                }
+
+                // If the file ends with a line break, ReadLine() returns null after the last empty line.
+                // We need to check if the file ends with a line break and add an empty string if so.
+                // Use preserveTrailingEmtpyLine option here to stick to the default behavior
+                if (this.preserveTrailingEmtpyLine
+                    && lines.Count > 0
+                    && FileEndsWithNewline(path))
+                {
+                    lines.Add(string.Empty);
+                }
+            }
+
+            return lines.ToArray();
+        }
+
+        /// <summary>
+        /// Checks if the file ends with a newline character.
+        /// </summary>
+        /// <param name="path">The path of the file.</param>
+        /// <returns>True if the file ends with a newline character, otherwise false.</returns>
+        private static bool FileEndsWithNewline(string path)
+        {
+            using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                if (fs.Length == 0) return false;
+                fs.Seek(-1, SeekOrigin.End);
+                int lastByte = fs.ReadByte();
+                return lastByte == '\n' || lastByte == '\r';
+            }
         }
     }
 }

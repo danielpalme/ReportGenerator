@@ -15,6 +15,8 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.FileReading
 
         private static readonly string NotExistingFile = Path.Combine(FileManager.GetJavaReportDirectory(), "OpenCover.xml");
 
+        private static readonly string PreserveEmptyLinesTestFile = Path.Combine(FileManager.GetOtherReportsDirectory(), "PreserveEmptyLinesTestFile.txt");
+
         [Fact]
         public void NoSourceDirectories_FileExists_DefaultPathReturned()
         {
@@ -38,7 +40,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.FileReading
         [Fact]
         public void ExistingSourceDirectory_FileNotExists_MappedPathReturned()
         {
-            var sut = new LocalFileReader(new[] { FileManager.GetCSharpReportDirectory() });
+            var sut = new LocalFileReader(new[] { FileManager.GetCSharpReportDirectory() }, false);
 
             string[] lines = sut.LoadFile(NotExistingFile, out string error);
             Assert.Null(error);
@@ -48,7 +50,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.FileReading
         [Fact]
         public void NotExistingSourceDirectory_FileNotExists_DefaultPathReturned()
         {
-            var sut = new LocalFileReader(new[] { FileManager.GetCPlusPlusReportDirectory() });
+            var sut = new LocalFileReader(new[] { FileManager.GetCPlusPlusReportDirectory() }, false);
 
             string[] lines = sut.LoadFile(NotExistingFile, out string error);
             Assert.NotNull(error);
@@ -61,11 +63,23 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.FileReading
         [InlineData("/_2/OpenCover.xml")]
         public void DeterminicticPath_ExistingSourceDirectory_FileExists_MappedPathReturned(string filename)
         {
-            var sut = new LocalFileReader(new[] { FileManager.GetCSharpReportDirectory() });
+            var sut = new LocalFileReader(new[] { FileManager.GetCSharpReportDirectory() }, false);
 
             string[] lines = sut.LoadFile(filename, out string error);
             Assert.Null(error);
             Assert.True(lines.Length > 0);
+        }
+
+        [Theory]
+        [InlineData(false, 4)]
+        [InlineData(true, 5)]
+        public void LoadFile_PreserveTrailingEmtpyLineSettingApplied(bool preserveTrailingEmtpyLine, int expectedNumberOfLines)
+        {
+            var sut = new LocalFileReader(new string[0], preserveTrailingEmtpyLine);
+
+            string[] lines = sut.LoadFile(PreserveEmptyLinesTestFile, out string error);
+            Assert.Null(error);
+            Assert.Equal(expectedNumberOfLines, lines.Length);
         }
     }
 }
