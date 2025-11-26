@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<coverage branches-valid="1.0" branches-covered="1.0" branch-rate="1.0" complexity="0.0" lines-covered="1" lines-valid="2" timestamp="1764144659" line-rate="0.5">
+	<packages>
+		<package branch-rate="1.0" complexity="0.0" name="ComponentsTests/app" line-rate="0.5">
+			<class branch-rate="1.0" complexity="0.0" name="ComponentsTests/app/FirstTest/swift" filename="test_folder/firstTest.swift" line-rate="0.5">
+				<methods>
+					<method name="static URL.currentApplicationSupport.getter" line-rate="0" branch-rate="1.0" complexity="0.0">
+						<lines>
+							<line number="5" branch="false" hits="0" />
+						</lines>
+					</method>
+					<method name="implicit closure #1 in static URL.currentApplicationSupport.getter" line-rate="1" branch-rate="1.0" complexity="0.0">
+						<lines>
+							<line number="16" branch="false" hits="1" />
+						</lines>
+					</method>
+				</methods>
+			</class>
+		</package>
+	</packages>
+</coverage>

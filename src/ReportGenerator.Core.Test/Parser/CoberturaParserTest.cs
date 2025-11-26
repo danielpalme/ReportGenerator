@@ -21,15 +21,19 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
     {
         private static readonly string FilePathJavaReport = Path.Combine(FileManager.GetJavaReportDirectory(), "Cobertura2.1.1.xml");
         private static readonly string FilePathCSharpReport = Path.Combine(FileManager.GetCSharpReportDirectory(), "Cobertura_coverlet.xml");
+        private static readonly string FilePathSwiftReport = Path.Combine(FileManager.GetOtherReportsDirectory(), "Cobertura_Swift.xml");
 
         private readonly ParserResult javaParserResult;
         private readonly ParserResult csharpParserResult;
+        private readonly ParserResult swiftParserResult;
 
         public CoberturaParserTest()
         {
             this.javaParserResult = ParseReport(FilePathJavaReport);
 
             this.csharpParserResult = ParseReport(FilePathCSharpReport);
+
+            this.swiftParserResult = ParseReport(FilePathSwiftReport);
         }
 
         /// <summary>
@@ -164,6 +168,47 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
         public void MethodMetricsTest_2(string assemblyName, string className, string filePath, string methodName, int expectedMethodMetrics, double expectedComplexity, double expectedLineCoverage, double expectedBranchCoverage, double expectedCrapScore)
         {
             var methodMetrics = csharpParserResult
+                .Assemblies.Single(a => a.Name == assemblyName)
+                .Classes.Single(c => c.Name == className)
+                .Files.Single(f => f.Path == filePath)
+                .MethodMetrics.ToArray();
+
+            Assert.Equal(expectedMethodMetrics, methodMetrics.Length);
+
+            var methodMetric = methodMetrics.First(m => m.FullName == methodName);
+            Assert.Equal(methodName, methodMetric.FullName);
+            Assert.Equal(4, methodMetric.Metrics.Count());
+
+            var complexityMetric = methodMetric.Metrics.Single(m => m.MetricType == MetricType.CodeQuality && m.Abbreviation == "cc");
+            Assert.Equal("Cyclomatic complexity", complexityMetric.Name);
+            Assert.True(complexityMetric.Value.HasValue);
+            Assert.Equal((decimal)expectedComplexity, complexityMetric.Value);
+
+            var lineCoverageMetric = methodMetric.Metrics.Single(m => m.MetricType == MetricType.CoveragePercentual && m.Abbreviation == "cov");
+            Assert.Equal("Line coverage", lineCoverageMetric.Name);
+            Assert.True(lineCoverageMetric.Value.HasValue);
+            Assert.Equal((decimal)expectedLineCoverage, lineCoverageMetric.Value);
+
+            var branchCoverageMetric = methodMetric.Metrics.Single(m => m.MetricType == MetricType.CoveragePercentual && m.Abbreviation == "bcov");
+            Assert.Equal("Branch coverage", branchCoverageMetric.Name);
+            Assert.True(branchCoverageMetric.Value.HasValue);
+            Assert.Equal((decimal)expectedBranchCoverage, branchCoverageMetric.Value);
+
+            var crapScoreMetric = methodMetric.Metrics.Single(m => m.MetricType == MetricType.CodeQuality && m.Abbreviation == "crp");
+            Assert.Equal("Crap Score", crapScoreMetric.Name);
+            Assert.True(crapScoreMetric.Value.HasValue);
+            Assert.Equal((decimal)expectedCrapScore, crapScoreMetric.Value);
+        }
+
+        /// <summary>
+        /// A test for Swift MethodMetrics
+        /// </summary>
+        [Theory]
+        [InlineData("ComponentsTests/app", "ComponentsTests", "test_folder/firstTest.swift", "static URL.currentApplicationSupport.getter", 2, 0, 0, 100, 0)]
+        [InlineData("ComponentsTests/app", "ComponentsTests", "test_folder/firstTest.swift", "implicit closure #1 in static URL.currentApplicationSupport.getter", 2, 0, 100, 100, 0)]
+        public void MethodMetricsTest_3(string assemblyName, string className, string filePath, string methodName, int expectedMethodMetrics, double expectedComplexity, double expectedLineCoverage, double expectedBranchCoverage, double expectedCrapScore)
+        {
+            var methodMetrics = swiftParserResult
                 .Assemblies.Single(a => a.Name == assemblyName)
                 .Classes.Single(c => c.Name == className)
                 .Files.Single(f => f.Path == filePath)

@@ -92,6 +92,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other", "Other", "{0974779A
 		Testprojects\Other\Clover_Groovy.xml = Testprojects\Other\Clover_Groovy.xml
 		Testprojects\Other\Clover_Istanbul.xml = Testprojects\Other\Clover_Istanbul.xml
 		Testprojects\Other\Cobertura_Istanbul.xml = Testprojects\Other\Cobertura_Istanbul.xml
+		Testprojects\Other\Cobertura_Swift.xml = Testprojects\Other\Cobertura_Swift.xml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportGenerator.MSBuild", "ReportGenerator.MSBuild\ReportGenerator.MSBuild.csproj", "{E0AC1EE8-82A3-41EE-BD42-44659CDBD333}"
