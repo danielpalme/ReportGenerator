@@ -102,6 +102,6 @@ namespace Palmmedia.ReportGenerator.Core
         /// <summary>
         /// Gets or sets a value indicating whether empty trailing line in source files should be preserved.
         /// </summary>
-        public bool PreserveTrailingEmtpyLine { get; set; }
+        public bool PreserveTrailingEmptyLine { get; set; }
     }
 }

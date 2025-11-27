@@ -32,7 +32,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
         /// <summary>
         /// Indicates whether empty trailing line in source files should be preserved.
         /// </summary>
-        private readonly bool preserveTrailingEmtpyLine;
+        private readonly bool preserveTrailingEmptyLine;
 
         static LocalFileReader()
         {
@@ -67,8 +67,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
         /// Initializes a new instance of the <see cref="LocalFileReader" /> class.
         /// </summary>
         /// <param name="sourceDirectories">The source directories.</param>
-        /// <param name="preserveTrailingEmtpyLine">Indicates whether empty trailing line in source files should be preserved.</param>
-        public LocalFileReader(IEnumerable<string> sourceDirectories, bool preserveTrailingEmtpyLine)
+        /// <param name="preserveTrailingEmptyLine">Indicates whether empty trailing line in source files should be preserved.</param>
+        public LocalFileReader(IEnumerable<string> sourceDirectories, bool preserveTrailingEmptyLine)
         {
             if (sourceDirectories == null)
             {
@@ -76,7 +76,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
             }
 
             this.sourceDirectories = sourceDirectories.ToList();
-            this.preserveTrailingEmtpyLine = preserveTrailingEmtpyLine;
+            this.preserveTrailingEmptyLine = preserveTrailingEmptyLine;
         }
 
         /// <summary>
@@ -193,8 +193,8 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
 
                 // If the file ends with a line break, ReadLine() returns null after the last empty line.
                 // We need to check if the file ends with a line break and add an empty string if so.
-                // Use preserveTrailingEmtpyLine option here to stick to the default behavior
-                if (this.preserveTrailingEmtpyLine
+                // Use preserveTrailingEmptyLine option here to stick to the default behavior
+                if (this.preserveTrailingEmptyLine
                     && lines.Count > 0
                     && FileEndsWithNewline(path))
                 {

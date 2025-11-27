@@ -73,9 +73,9 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.FileReading
         [Theory]
         [InlineData(false, 4)]
         [InlineData(true, 5)]
-        public void LoadFile_PreserveTrailingEmtpyLineSettingApplied(bool preserveTrailingEmtpyLine, int expectedNumberOfLines)
+        public void LoadFile_PreserveTrailingEmptyLineSettingApplied(bool preserveTrailingEmptyLine, int expectedNumberOfLines)
         {
-            var sut = new LocalFileReader(new string[0], preserveTrailingEmtpyLine);
+            var sut = new LocalFileReader(new string[0], preserveTrailingEmptyLine);
 
             string[] lines = sut.LoadFile(PreserveEmptyLinesTestFile, out string error);
             Assert.Null(error);

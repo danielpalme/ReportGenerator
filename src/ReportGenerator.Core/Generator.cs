@@ -332,7 +332,7 @@ namespace Palmmedia.ReportGenerator.Core
             DateTime executionTime = DateTime.Now;
 
             var fileReader = new CachingFileReader(
-                new LocalFileReader(reportConfiguration.SourceDirectories, settings.PreserveTrailingEmtpyLine),
+                new LocalFileReader(reportConfiguration.SourceDirectories, settings.PreserveTrailingEmptyLine),
                 settings.CachingDurationOfRemoteFilesInMinutes,
                 settings.CustomHeadersForRemoteFiles);
 

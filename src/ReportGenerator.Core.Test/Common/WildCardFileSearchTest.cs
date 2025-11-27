@@ -20,7 +20,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Common
         }
 
         [Fact]
-        public void GetFiles_FilePatternEmtpy_ArgumentException()
+        public void GetFiles_FilePatternEmpty_ArgumentException()
         {
             Assert.Throws<ArgumentException>(() => WildCardFileSearch.GetFiles(string.Empty).ToArray());
         }

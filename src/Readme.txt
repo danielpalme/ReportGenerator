@@ -71,7 +71,7 @@ CHANGELOG
 
 5.5.1.0
 
-    * New: #766: Added new setting "preserveTrailingEmtpyLine".
+    * New: #766: Added new setting "preserveTrailingEmptyLine".
     * New: #769: Added support for Cobertura files exported from Swift (contributed by @Vovanni)
 
 5.5.0.0
