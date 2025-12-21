@@ -27,8 +27,8 @@
   
   <!-- Tools -->
   <PropertyGroup>
-    <NuGetCommandLine>&quot;$(UserProfile)\.nuget\packages\nuget.commandline\6.8.0\tools\NuGet.exe&quot;</NuGetCommandLine>
-    <ChocolateyCommandLine>&quot;$(UserProfile)\.nuget\packages\chocolatey\2.2.2\tools\chocolateyInstall\choco.exe&quot;</ChocolateyCommandLine>
+    <NuGetCommandLine>&quot;$(UserProfile)\.nuget\packages\nuget.commandline\7.0.1\tools\NuGet.exe&quot;</NuGetCommandLine>
+    <ChocolateyCommandLine>&quot;$(UserProfile)\.nuget\packages\chocolatey\2.6.0\tools\chocolateyInstall\choco.exe&quot;</ChocolateyCommandLine>
   </PropertyGroup>
   
   <Target Name="Clean">
