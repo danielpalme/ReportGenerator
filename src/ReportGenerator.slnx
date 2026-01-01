@@ -1,0 +1,116 @@
+<Solution>
+  <Folder Name="/C++/" />
+  <Folder Name="/C++/Project/">
+    <File Path="Testprojects/C++/Projects/build.sh" />
+    <File Path="Testprojects/C++/Projects/main.cpp" />
+  </Folder>
+  <Folder Name="/C++/Project/sub/">
+    <File Path="Testprojects/C++/Projects/sub/calculator.cpp" />
+  </Folder>
+  <Folder Name="/C++/Reports/">
+    <File Path="Testprojects/C++/Reports/Cobertura_CPPCoverage.xml" />
+    <File Path="Testprojects/C++/Reports/lcov.info" />
+  </Folder>
+  <Folder Name="/C++/Reports/gcov/" />
+  <Folder Name="/C++/Reports/gcov/basic/">
+    <File Path="Testprojects/C++/Reports/gcov/basic/calculator.cpp.gcov" />
+    <File Path="Testprojects/C++/Reports/gcov/basic/main.cpp.gcov" />
+  </Folder>
+  <Folder Name="/C++/Reports/gcov/branch_counts/">
+    <File Path="Testprojects/C++/Reports/gcov/branch_counts/calculator.cpp.gcov" />
+    <File Path="Testprojects/C++/Reports/gcov/branch_counts/main.cpp.gcov" />
+  </Folder>
+  <Folder Name="/C++/Reports/gcov/branch_probabilities/">
+    <File Path="Testprojects/C++/Reports/gcov/branch_probabilities/calculator.cpp.gcov" />
+    <File Path="Testprojects/C++/Reports/gcov/branch_probabilities/main.cpp.gcov" />
+  </Folder>
+  <Folder Name="/C++/Reports/gcov/branch_unconditional/">
+    <File Path="Testprojects/C++/Reports/gcov/branch_unconditional/calculator.cpp.gcov" />
+    <File Path="Testprojects/C++/Reports/gcov/branch_unconditional/main.cpp.gcov" />
+  </Folder>
+  <Folder Name="/CSharp/" />
+  <Folder Name="/CSharp/Reports/">
+    <File Path="Testprojects/CSharp/Reports/Cobertura_altcover.xml" />
+    <File Path="Testprojects/CSharp/Reports/Cobertura_coverlet.xml" />
+    <File Path="Testprojects/CSharp/Reports/Cobertura_dotnet-coverage.xml" />
+    <File Path="Testprojects/CSharp/Reports/dotCover.xml" />
+    <File Path="Testprojects/CSharp/Reports/DynamicCodeCoverage.xml" />
+    <File Path="Testprojects/CSharp/Reports/lcov.info" />
+    <File Path="Testprojects/CSharp/Reports/mprof-report.xml" />
+    <File Path="Testprojects/CSharp/Reports/MultiDynamicCodeCoverage.xml" />
+    <File Path="Testprojects/CSharp/Reports/MultiNCover1.5.8.xml" />
+    <File Path="Testprojects/CSharp/Reports/MultiOpenCover.xml" />
+    <File Path="Testprojects/CSharp/Reports/MultiPartcover2.2.xml" />
+    <File Path="Testprojects/CSharp/Reports/MultiPartcover2.3.xml" />
+    <File Path="Testprojects/CSharp/Reports/MultiVisualStudio2010.coveragexml" />
+    <File Path="Testprojects/CSharp/Reports/NCover1.5.8.xml" />
+    <File Path="Testprojects/CSharp/Reports/OpenCover.xml" />
+    <File Path="Testprojects/CSharp/Reports/OpenCoverWithEmbeddedSource.xml" />
+    <File Path="Testprojects/CSharp/Reports/OpenCoverWithTrackedMethods.xml" />
+    <File Path="Testprojects/CSharp/Reports/OpenCover_altcover.xml" />
+    <File Path="Testprojects/CSharp/Reports/OpenCover_coverlet.xml" />
+    <File Path="Testprojects/CSharp/Reports/Partcover2.2.xml" />
+    <File Path="Testprojects/CSharp/Reports/Partcover2.3.0.35109.xml" />
+    <File Path="Testprojects/CSharp/Reports/Partcover2.3.xml" />
+    <File Path="Testprojects/CSharp/Reports/Partcover4.0.10620.xml" />
+    <File Path="Testprojects/CSharp/Reports/VisualStudio2010.coveragexml" />
+    <File Path="Testprojects/CSharp/Reports/VisualStudio2012.coveragexml" />
+    <File Path="Testprojects/CSharp/Reports/VisualStudio2013.coveragexml" />
+    <File Path="Testprojects/CSharp/Reports/VisualStudio2022.coveragexml" />
+  </Folder>
+  <Folder Name="/CTC/">
+    <File Path="Testprojects/CTC/source-00001.xml" />
+    <File Path="Testprojects/CTC/source-00002.xml" />
+    <File Path="Testprojects/CTC/source-00003.xml" />
+    <File Path="Testprojects/CTC/source-00004.xml" />
+  </Folder>
+  <Folder Name="/FSharp/" />
+  <Folder Name="/FSharp/Reports/">
+    <File Path="Testprojects/CSharp/Reports/MultidotCover.xml" />
+    <File Path="Testprojects/CSharp/Reports/VisualStudio2022.coveragexml" />
+    <File Path="Testprojects/FSharp/Reports/dotCover.xml" />
+    <File Path="Testprojects/FSharp/Reports/DynamicCodeCoverage.xml" />
+    <File Path="Testprojects/FSharp/Reports/OpenCover.xml" />
+    <File Path="Testprojects/FSharp/Reports/VisualStudio2010.coveragexml" />
+    <File Path="Testprojects/FSharp/Reports/VisualStudio2013.coveragexml" />
+  </Folder>
+  <Folder Name="/Java/" />
+  <Folder Name="/Java/Project/" />
+  <Folder Name="/Java/Project/test/">
+    <File Path="Testprojects/Java/Project/test/AbstractClass.java" />
+    <File Path="Testprojects/Java/Project/test/AbstractClass_SampleImpl1.java" />
+    <File Path="Testprojects/Java/Project/test/AbstractClass_SampleImpl2.java" />
+    <File Path="Testprojects/Java/Project/test/GenericClass.java" />
+    <File Path="Testprojects/Java/Project/test/Program.java" />
+    <File Path="Testprojects/Java/Project/test/TestClass.java" />
+  </Folder>
+  <Folder Name="/Java/Project/test/sub/">
+    <File Path="Testprojects/Java/Project/test/sub/Sub.java" />
+  </Folder>
+  <Folder Name="/Java/Reports/">
+    <File Path="Testprojects/Java/Reports/Clover_OpenClover4.3.1.xml" />
+    <File Path="Testprojects/Java/Reports/Cobertura2.1.1.xml" />
+    <File Path="Testprojects/Java/Reports/JaCoCo0.7.7.xml" />
+    <File Path="Testprojects/Java/Reports/JaCoCo0.8.3.xml" />
+  </Folder>
+  <Folder Name="/Other/">
+    <File Path="Testprojects/Other/Clover_Groovy.xml" />
+    <File Path="Testprojects/Other/Clover_Istanbul.xml" />
+    <File Path="Testprojects/Other/Cobertura_Istanbul.xml" />
+    <File Path="Testprojects/Other/Cobertura_Swift.xml" />
+  </Folder>
+  <Folder Name="/Scala/" />
+  <Folder Name="/Scala/Reports/">
+    <File Path="Testprojects/Scala/Reports/scoverage.xml" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
+  <Project Path="ReportGenerator.Console.NetCore/ReportGenerator.Console.NetCore.csproj" />
+  <Project Path="ReportGenerator.Console/ReportGenerator.Console.Net.csproj" />
+  <Project Path="ReportGenerator.Core.Test/ReportGenerator.Core.Test.csproj" />
+  <Project Path="ReportGenerator.Core/ReportGenerator.Core.csproj" />
+  <Project Path="ReportGenerator.DotnetCorePluginLoader/ReportGenerator.DotnetCorePluginLoader.csproj" />
+  <Project Path="ReportGenerator.DotnetGlobalTool/ReportGenerator.DotnetGlobalTool.csproj" />
+  <Project Path="ReportGenerator.MSBuild/ReportGenerator.MSBuild.csproj" />
+</Solution>

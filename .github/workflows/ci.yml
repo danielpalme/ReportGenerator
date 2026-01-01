@@ -3,7 +3,7 @@ name: CI-CD
 on: [push, pull_request]
 
 env:
-  solution: 'src\ReportGenerator.sln'
+  solution: 'src\ReportGenerator.slnx'
   buildPlatform: Any CPU
   buildConfiguration: Release
   version: 5.5.1
