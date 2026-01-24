@@ -14,7 +14,7 @@
   },
   "homepage": "https://github.com/danielpalme/ReportGenerator",
   "dependencies": {
-    "azure-pipelines-task-lib": "^5.2.4"
+    "azure-pipelines-task-lib": "^5.2.6"
   },
   "devDependencies": {
     "@types/node": "^24.10.1",
