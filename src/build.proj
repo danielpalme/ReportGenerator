@@ -50,7 +50,7 @@
   </Target>
 
   <Target Name="Compile">
-    <MSBuild Projects="ReportGenerator.sln" Targets="Restore;Build" Properties="Configuration=Release" />
+    <MSBuild Projects="ReportGenerator.slnx" Targets="Restore;Build" Properties="Configuration=Release" />
 
     <Exec Command="dotnet publish -c Release -f net8.0 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
     <Exec Command="dotnet publish -c Release -f net9.0 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />

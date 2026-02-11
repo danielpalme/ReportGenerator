@@ -7,7 +7,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
 {
     public class MsBuildTest
     {
-        [Fact]
+        [Fact(Skip = "Not working with Github Action")]
         public void ExecuteMSBuildScript_NetFull()
         {
             string configuration = "Release";
