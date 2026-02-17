@@ -69,6 +69,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.5.2.0
+
+    * Fix: #773: Improved handling of file paths on Unix systems
+
 5.5.1.0
 
     * New: #766: Added new setting "preserveTrailingEmptyLine".

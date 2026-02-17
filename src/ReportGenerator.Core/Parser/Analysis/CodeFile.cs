@@ -324,9 +324,22 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
             else
             {
                 var codeFile = (CodeFile)obj;
+
                 string fileNameToCompare = codeFile.Path.Substring(codeFile.Path.LastIndexOf('\\') + 1);
+                int indexOfSlash = codeFile.Path.LastIndexOf('/');
+
+                if (indexOfSlash != -1)
+                {
+                    fileNameToCompare = codeFile.Path.Substring(indexOfSlash + 1);
+                }
 
                 string fileName = this.Path.Substring(this.Path.LastIndexOf('\\') + 1);
+                indexOfSlash = this.Path.LastIndexOf('/');
+                if (indexOfSlash != -1)
+                {
+                    fileName = this.Path.Substring(this.Path.LastIndexOf('/') + 1);
+                }
+
                 return fileName.Equals(fileNameToCompare, StringComparison.OrdinalIgnoreCase);
             }
         }
