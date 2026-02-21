@@ -190,6 +190,22 @@
             stroke: #c71bca !important;
         }
 
+        .ct-chart-bar .ct-series.ct-series-a .ct-bar.linecoverage {
+            stroke: #0078D4 !important;
+        }
+
+        .ct-chart-bar .ct-series.ct-series-a .ct-bar.branchcoverage {
+            stroke: #6dc428 !important;
+        }
+
+        .ct-chart-bar .ct-series.ct-series-a .ct-bar.codeelementcoverage {
+            stroke: #e58f1d !important;
+        }
+
+        .ct-chart-bar .ct-series.ct-series-a .ct-bar.fullcodeelementcoverage {
+            stroke: #c71bca !important;
+        }
+
         .linecoverage {
             background-color: #0078D4;
         }

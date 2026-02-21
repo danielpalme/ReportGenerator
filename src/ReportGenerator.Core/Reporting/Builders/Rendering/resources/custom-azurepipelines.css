@@ -166,6 +166,11 @@ a.percentagebar {
 .ct-chart .ct-series.ct-series-c .ct-line, .ct-chart .ct-series.ct-series-c .ct-point { stroke: #0aad0a !important;}
 .ct-chart .ct-series.ct-series-d .ct-line, .ct-chart .ct-series.ct-series-d .ct-point { stroke: #FF6A00 !important;}
 
+.ct-chart-bar .ct-series.ct-series-a .ct-bar.linecoverage { stroke: #0078D4 !important;}
+.ct-chart-bar .ct-series.ct-series-a .ct-bar.branchcoverage { stroke: #1c2298 !important;}
+.ct-chart-bar .ct-series.ct-series-a .ct-bar.codeelementcoverage { stroke: #0aad0a !important;}
+.ct-chart-bar .ct-series.ct-series-a .ct-bar.fullcodeelementcoverage { stroke: #FF6A00 !important;}
+
 .tinylinecoveragechart, .tinybranchcoveragechart, .tinymethodcoveragechart, .tinyfullmethodcoveragechart { background-color: #fff; margin-left: -3px; float: left; border: 1px solid #c1c1c1; width: 30px; height: 18px; }
 .historiccoverageoffset { margin-top: 7px; }
 

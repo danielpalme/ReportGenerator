@@ -41,6 +41,11 @@
         .ct-chart .ct-series.ct-series-c .ct-line, .ct-chart .ct-series.ct-series-c .ct-point { stroke: #e58f1d !important; }
         .ct-chart .ct-series.ct-series-d .ct-line, .ct-chart .ct-series.ct-series-d .ct-point { stroke: #c71bca !important; }
 
+        .ct-chart-bar .ct-series.ct-series-a .ct-bar.linecoverage { stroke: #0078D4 !important;}
+        .ct-chart-bar .ct-series.ct-series-a .ct-bar.branchcoverage { stroke: #6dc428 !important;}
+        .ct-chart-bar .ct-series.ct-series-a .ct-bar.codeelementcoverage { stroke: #e58f1d !important;}
+        .ct-chart-bar .ct-series.ct-series-a .ct-bar.fullcodeelementcoverage { stroke: #c71bca !important;}
+
         .linecoverage { background-color: #0078D4; }
         .branchcoverage { background-color: #6dc428; }
         .codeelementcoverage { background-color: #e58f1d; }

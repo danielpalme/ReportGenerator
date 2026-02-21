@@ -441,4 +441,10 @@
   <data name="TrueFalseCombinations" xml:space="preserve">
     <value>True/False combinations</value>
   </data>
+  <data name="CoverageDelta" xml:space="preserve">
+    <value>Coverage delta</value>
+  </data>
+  <data name="Latest" xml:space="preserve">
+    <value>Latest</value>
+  </data>
 </root>

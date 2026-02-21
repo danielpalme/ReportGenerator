@@ -1215,6 +1215,124 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         }
 
         /// <inheritdoc />
+        public void DeltaChart(IEnumerable<HistoricCoverage> historicCoverages, bool methodCoverageAvailable)
+        {
+            if (historicCoverages == null)
+            {
+                throw new ArgumentNullException(nameof(historicCoverages));
+            }
+
+            var filteredHistoricCoverages = this.FilterHistoricCoverages(historicCoverages, 100);
+
+            if (filteredHistoricCoverages.Count > 1)
+            {
+                var latestHistoricCoverage = filteredHistoricCoverages[filteredHistoricCoverages.Count - 1];
+                var previousHistoricCoverage = filteredHistoricCoverages[filteredHistoricCoverages.Count - 2];
+
+                var labels = new List<string>();
+                var diffValues = new List<decimal>();
+                var metaIdentifiers = new List<string>();
+
+                string lastestTag = null;
+                string previousTag = null;
+
+                if (latestHistoricCoverage.Tag != null)
+                {
+                    lastestTag = $" ({WebUtility.HtmlEncode(ReportResources.Tag)} {latestHistoricCoverage.Tag})";
+                }
+
+                if (previousHistoricCoverage.Tag != null)
+                {
+                    previousTag = $" ({WebUtility.HtmlEncode(ReportResources.Tag)} {previousHistoricCoverage.Tag})";
+                }
+
+                StringBuilder diffToolTip = new StringBuilder();
+                diffToolTip.Append($"<h3>{WebUtility.HtmlEncode(ReportResources.CoverageDelta)}</h3>");
+                diffToolTip.Append($"<br/>{WebUtility.HtmlEncode(ReportResources.Latest)}: {latestHistoricCoverage.ExecutionTime.ToShortDateString()} - {latestHistoricCoverage.ExecutionTime.ToLongTimeString()}{lastestTag}");
+                diffToolTip.Append($"<br/>{WebUtility.HtmlEncode(ReportResources.Previous)}: {previousHistoricCoverage.ExecutionTime.ToShortDateString()} - {previousHistoricCoverage.ExecutionTime.ToLongTimeString()}{previousTag}");
+                diffToolTip.Append("<br />");
+
+                if (latestHistoricCoverage.CoverageQuota.HasValue && previousHistoricCoverage.CoverageQuota.HasValue)
+                {
+                    var coverageDiff = latestHistoricCoverage.CoverageQuota.Value - previousHistoricCoverage.CoverageQuota.Value;
+
+                    labels.Add(ReportResources.Coverage);
+                    diffValues.Add(coverageDiff);
+                    diffToolTip.Append($"<br /><span class=\"linecoverage\"></span> {WebUtility.HtmlEncode(ReportResources.Coverage2)} {(coverageDiff > 0 ? "+" : string.Empty)}{coverageDiff.ToString(CultureInfo.InvariantCulture)}%");
+                    metaIdentifiers.Add("linecoverage");
+                }
+
+                if (latestHistoricCoverage.BranchCoverageQuota.HasValue && previousHistoricCoverage.BranchCoverageQuota.HasValue)
+                {
+                    var coverageDiff = latestHistoricCoverage.BranchCoverageQuota.Value - previousHistoricCoverage.BranchCoverageQuota.Value;
+
+                    labels.Add(ReportResources.BranchCoverage);
+                    diffValues.Add(coverageDiff);
+                    diffToolTip.Append($"<br /><span class=\"branchcoverage\"></span> {WebUtility.HtmlEncode(ReportResources.BranchCoverage2)} {(coverageDiff > 0 ? "+" : string.Empty)}{coverageDiff.ToString(CultureInfo.InvariantCulture)}%");
+                    metaIdentifiers.Add("branchcoverage");
+                }
+
+                if (methodCoverageAvailable && latestHistoricCoverage.BranchCoverageQuota.HasValue && previousHistoricCoverage.BranchCoverageQuota.HasValue)
+                {
+                    var coverageDiff = latestHistoricCoverage.CodeElementCoverageQuota.Value - previousHistoricCoverage.CodeElementCoverageQuota.Value;
+
+                    labels.Add(ReportResources.CodeElementCoverageQuota);
+                    diffValues.Add(coverageDiff);
+                    diffToolTip.Append($"<br /><span class=\"codeelementcoverage\"></span> {WebUtility.HtmlEncode(ReportResources.CodeElementCoverageQuota2)} {(coverageDiff > 0 ? "+" : string.Empty)}{coverageDiff.ToString(CultureInfo.InvariantCulture)}%");
+                    metaIdentifiers.Add("codeelementcoverage");
+                }
+
+                if (methodCoverageAvailable && latestHistoricCoverage.BranchCoverageQuota.HasValue && previousHistoricCoverage.BranchCoverageQuota.HasValue)
+                {
+                    var coverageDiff = latestHistoricCoverage.FullCodeElementCoverageQuota.Value - previousHistoricCoverage.FullCodeElementCoverageQuota.Value;
+
+                    labels.Add(ReportResources.FullCodeElementCoverageQuota);
+                    diffValues.Add(coverageDiff);
+                    diffToolTip.Append($"<br /><span class=\"fullcodeelementcoverage\"></span> {WebUtility.HtmlEncode(ReportResources.FullCodeElementCoverageQuota2)} {(coverageDiff > 0 ? "+" : string.Empty)}{coverageDiff.ToString(CultureInfo.InvariantCulture)}%");
+                    metaIdentifiers.Add("fullcodeelementcoverage");
+                }
+
+                if (labels.Count > 0)
+                {
+                    this.Header(ReportResources.CoverageDelta);
+
+                    string id = Guid.NewGuid().ToString("N");
+                    int metaCounter = 0;
+
+                    int minMaxValue = (int)Math.Ceiling(diffValues.Select(v => Math.Abs(v)).Max());
+
+                    if (minMaxValue == 0)
+                    {
+                        minMaxValue = 1;
+                    }
+
+                    string svgHistory = SvgHistoryChartRenderer.RenderHistoryDiffChart(minMaxValue, labels, diffValues, metaIdentifiers);
+
+                    this.reportTextWriter.WriteLine(
+                        "<div class=\"historydiffchart ct-chart\" data-data=\"historyChartData{0}\">{1}</div>",
+                        id,
+                        svgHistory);
+
+                    this.reportTextWriter.WriteLine("<script type=\"text/javascript\">/* <![CDATA[ */ ");
+
+                    this.reportTextWriter.WriteLine("var historyChartData{0} = {{", id);
+                    this.reportTextWriter.Write("    \"minMaxValue\" : {0:f2},", minMaxValue.ToString(CultureInfo.InvariantCulture));
+                    this.reportTextWriter.Write("    \"labels\" : [");
+                    this.reportTextWriter.Write(string.Join(",", labels.Select(l => $"'{l}'")));
+                    this.reportTextWriter.WriteLine("],");
+                    this.reportTextWriter.Write("    \"series\" : [[");
+                    this.reportTextWriter.Write(string.Join(",", diffValues.Select(v => $"{{ 'meta': '{metaIdentifiers[metaCounter++]}', 'value': {v.ToString(CultureInfo.InvariantCulture)} }}")));
+                    this.reportTextWriter.WriteLine("]],");
+
+                    this.reportTextWriter.WriteLine($"    \"tooltip\" : '{diffToolTip}'");
+                    this.reportTextWriter.WriteLine("};");
+                    this.reportTextWriter.WriteLine(" /* ]]> */ </script>");
+                }
+            }
+
+        }
+
+        /// <inheritdoc />
         public void BeginRiskHotspots()
         {
             this.reportTextWriter.WriteLine("<risk-hotspots>");

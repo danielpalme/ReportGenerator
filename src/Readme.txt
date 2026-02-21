@@ -71,6 +71,7 @@ CHANGELOG
 
 5.5.2.0
 
+    * New: #772: Added coverage delta chart for comparision with previous coverage report
     * Fix: #773: Improved handling of file paths on Unix systems
 
 5.5.1.0

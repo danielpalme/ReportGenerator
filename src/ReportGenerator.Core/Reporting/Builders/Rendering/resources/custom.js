@@ -199,3 +199,68 @@ var charts = document.getElementsByClassName('historychart');
 for (i = 0, l = charts.length; i < l; i++) {
     renderChart(charts[i]);
 }
+
+/* History diff charts */
+var renderDiffChart = function (chart) {
+    // Remove current children (e.g. PNG placeholder)
+    while (chart.firstChild) {
+        chart.firstChild.remove();
+    }
+
+    var chartData = window[chart.getAttribute('data-data')];
+    var options = {
+        reverseData: true,
+        horizontalBars: true,
+        low: -chartData.minMaxValue,
+        high: chartData.minMaxValue,
+        axisX: {
+            onlyInteger: true
+        },
+        axisY: {
+            offset: 150
+        }
+    };
+    var barChart = new Chartist.Bar(chart, {
+        labels: chartData.labels,
+        series: chartData.series
+    }, options);
+
+    var tooltip = document.createElement("div");
+    tooltip.className = "tooltip";
+    tooltip.innerHTML = chartData.tooltip;
+
+    chart.appendChild(tooltip);
+
+    /* Tooltips */
+    var moveToolTip = function (event) {
+        var box = chart.getBoundingClientRect();
+        var left = event.pageX - box.left - window.pageXOffset;
+
+        left = left + 20;
+        if (left + tooltip.offsetWidth > box.width) {
+            left -= tooltip.offsetWidth + 40;
+        }
+
+        tooltip.style.left = left + 'px';
+
+        tooltip.style.display = 'block';
+    };
+
+    var hideToolTip = function () {
+        tooltip.style.display = 'none';
+    };
+    chart.addEventListener('mousemove', moveToolTip);
+    chart.addEventListener('mouseout', hideToolTip);
+
+    barChart.on('created', function () {
+        var chartBars = chart.getElementsByClassName('ct-bar');
+        for (i = 0, l = chartBars.length; i < l; i++) {
+            chartBars[i].classList.add(chartBars[chartBars.length - 1 - i].getAttribute('ct:meta'));
+        }
+    });
+};
+
+var charts = document.getElementsByClassName('historydiffchart');
+for (i = 0, l = charts.length; i < l; i++) {
+    renderDiffChart(charts[i]);
+}

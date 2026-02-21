@@ -155,6 +155,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             {
                 reportRenderer.Header(ReportResources.History);
                 reportRenderer.Chart(@class.HistoricCoverages, proVersion);
+
+                reportRenderer.DeltaChart(@class.HistoricCoverages, proVersion);
             }
 
             if (@class.Files.Any(f => f.MethodMetrics.Any()))
@@ -329,6 +331,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             {
                 reportRenderer.Header(ReportResources.History);
                 reportRenderer.Chart(historicCoverages, proVersion);
+
+                reportRenderer.DeltaChart(historicCoverages, proVersion);
             }
 
             var sumableMetrics = summaryResult.SumableMetrics;

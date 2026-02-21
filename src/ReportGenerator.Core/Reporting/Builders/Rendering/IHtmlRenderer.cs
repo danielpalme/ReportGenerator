@@ -141,6 +141,13 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         void Chart(IEnumerable<HistoricCoverage> historicCoverages, bool methodCoverageAvailable);
 
         /// <summary>
+        /// Renderes a delate chart comparing the latest with the previous execution.
+        /// </summary>
+        /// <param name="historicCoverages">The historic coverages.</param>
+        /// <param name="methodCoverageAvailable">if set to <c>true</c> method coverage is available.</param>
+        void DeltaChart(IEnumerable<HistoricCoverage> historicCoverages, bool methodCoverageAvailable);
+
+        /// <summary>
         /// Start of risk hotspots section.
         /// </summary>
         void BeginRiskHotspots();
