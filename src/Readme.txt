@@ -69,6 +69,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.5.3.0
+
+    * Fix: #776: Fix issue in coverage delta chart
+
 5.5.2.0
 
     * New: #772: Added coverage delta chart for comparision with previous coverage report

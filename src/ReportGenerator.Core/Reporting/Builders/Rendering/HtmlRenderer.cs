@@ -1282,7 +1282,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
                     if (methodCoverageAvailable)
                     {
-                        if (currentHistoricCoverage.BranchCoverageQuota.HasValue && previousHistoricCoverage.BranchCoverageQuota.HasValue)
+                        if (currentHistoricCoverage.CodeElementCoverageQuota.HasValue && previousHistoricCoverage.CodeElementCoverageQuota.HasValue)
                         {
                             var coverageDiff = currentHistoricCoverage.CodeElementCoverageQuota.Value - previousHistoricCoverage.CodeElementCoverageQuota.Value;
 
@@ -1294,7 +1294,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                             codeElementDiffValues.Add(null);
                         }
 
-                        if (currentHistoricCoverage.BranchCoverageQuota.HasValue && previousHistoricCoverage.BranchCoverageQuota.HasValue)
+                        if (currentHistoricCoverage.FullCodeElementCoverageQuota.HasValue && previousHistoricCoverage.FullCodeElementCoverageQuota.HasValue)
                         {
                             var coverageDiff = currentHistoricCoverage.FullCodeElementCoverageQuota.Value - previousHistoricCoverage.FullCodeElementCoverageQuota.Value;
 
