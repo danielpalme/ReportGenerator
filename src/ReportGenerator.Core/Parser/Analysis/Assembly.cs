@@ -14,7 +14,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <summary>
         /// List of classes in assembly.
         /// </summary>
-        private readonly ConcurrentBag<Class> classes = new ConcurrentBag<Class>();
+        private readonly ConcurrentQueue<Class> classes = new ConcurrentQueue<Class>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Assembly"/> class.
@@ -175,7 +175,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <param name="class">The class to add.</param>
         internal void AddClass(Class @class)
         {
-            this.classes.Add(@class);
+            this.classes.Enqueue(@class);
         }
 
         /// <summary>
