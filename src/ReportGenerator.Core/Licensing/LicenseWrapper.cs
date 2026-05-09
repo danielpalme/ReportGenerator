@@ -11,6 +11,11 @@
         public License License { get; set; }
 
         /// <summary>
+        /// Gets or sets the signature type.
+        /// </summary>
+        public string SignatureType { get; set; }
+
+        /// <summary>
         /// Gets or sets the signature.
         /// </summary>
         public string Signature { get; set; }

@@ -70,6 +70,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.5.10.0
+
+    * New: Added support for Sha256 signed licenses
+
 5.5.9.0
 
     * New: Added new setting "applyQueryStringToAllLinks" to apply query string to referenced CSS and JavaScript files and links to support SAS tokens (e.g. on blob storage) (#349)

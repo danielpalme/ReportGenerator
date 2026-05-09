@@ -109,9 +109,20 @@ namespace Palmmedia.ReportGenerator.Core.Licensing
                     {
                         rsa.FromXmlString(PublicRsaKey);
 
+                        HashAlgorithm hashAlgorithm;
+
+                        if (SignatureType.Sha256.Equals(cachedLicense.SignatureType))
+                        {
+                            hashAlgorithm = SHA256.Create();
+                        }
+                        else
+                        {
+                            hashAlgorithm = SHA1.Create();
+                        }
+
                         if (!rsa.VerifyData(
                             Encoding.UTF8.GetBytes(cachedLicense.License.GetSignatureInput()),
-                            SHA1.Create(),
+                            hashAlgorithm,
                             Convert.FromBase64String(cachedLicense.Signature)))
                         {
                             return false;
