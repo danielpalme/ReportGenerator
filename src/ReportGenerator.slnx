@@ -113,4 +113,5 @@
   <Project Path="ReportGenerator.DotnetCorePluginLoader/ReportGenerator.DotnetCorePluginLoader.csproj" />
   <Project Path="ReportGenerator.DotnetGlobalTool/ReportGenerator.DotnetGlobalTool.csproj" />
   <Project Path="ReportGenerator.MSBuild/ReportGenerator.MSBuild.csproj" />
+  <Project Path="ReportGenerator.Mtp/ReportGenerator.Mtp.csproj" />
 </Solution>

@@ -74,6 +74,18 @@ jobs:
       run: dotnet publish -c ${{ env.BuildConfiguration }} -f net10.0 ReportGenerator.DotnetGlobalTool.csproj
       working-directory: src/ReportGenerator.DotnetGlobalTool
 
+    - name: dotnet publish Mtp 8.0
+      run: dotnet publish -c ${{ env.BuildConfiguration }} -f net8.0 ReportGenerator.Mtp.csproj
+      working-directory: src/ReportGenerator.Mtp
+
+    - name: dotnet publish Mtp 9.0
+      run: dotnet publish -c ${{ env.BuildConfiguration }} -f net9.0 ReportGenerator.Mtp.csproj
+      working-directory: src/ReportGenerator.Mtp
+
+    - name: dotnet publish Mtp 10.0
+      run: dotnet publish -c ${{ env.BuildConfiguration }} -f net10.0 ReportGenerator.Mtp.csproj
+      working-directory: src/ReportGenerator.Mtp
+
     - name: Test
       run: dotnet test src\ReportGenerator.Core.Test\ReportGenerator.Core.Test.csproj --configuration ${{ env.BuildConfiguration }} --no-build /p:CollectCoverage=true /p:DeterministicSourcePaths=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=opencover%2ccobertura /p:CoverletOutput=../target/reports/coverage/
 
@@ -141,6 +153,9 @@ jobs:
 
     - name: 'NuGet pack dotnet-reportgenerator-globaltool'
       run: nuget pack src/Deployment/nuget/dotnet-reportgenerator-globaltool.nuspec -OutputDirectory src/target/packages -Version ${{ env.Version }}
+
+    - name: 'NuGet pack dotnet-reportgenerator-mtp'
+      run: nuget pack src/Deployment/nuget/dotnet-reportgenerator-mtp.nuspec -OutputDirectory src/target/packages -Version ${{ env.Version }}
 
     - name: 'NuGet pack ReportGenerator.Core'
       run: nuget pack src/Deployment/nuget/ReportGenerator.Core.nuspec -OutputDirectory src/target/packages -Version ${{ env.Version }}
@@ -215,6 +230,10 @@ jobs:
 
     - name: 'NuGet push dotnet-reportgenerator-globaltool'
       run: nuget push dotnet-reportgenerator-globaltool.${{ env.Version }}.nupkg -ApiKey ${{ secrets.NUGETAPIKEY }} -Source https://www.nuget.org/api/v2/package
+      continue-on-error: true
+
+    - name: 'NuGet push dotnet-reportgenerator-mtp'
+      run: nuget push dotnet-reportgenerator-mtp.${{ env.Version }}.nupkg -ApiKey ${{ secrets.NUGETAPIKEY }} -Source https://www.nuget.org/api/v2/package
       continue-on-error: true
 
     - name: 'NuGet push ReportGenerator.Core'

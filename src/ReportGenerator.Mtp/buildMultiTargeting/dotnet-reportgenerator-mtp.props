@@ -1,0 +1,9 @@
+<Project>
+  <ItemGroup>
+    <TestingPlatformBuilderHook Include="E79AB858-D0D2-4F0C-A9BC-BE8AAA83F149" >
+      <DisplayName>ReportGenerator</DisplayName>
+      <TypeFullName>Palmmedia.ReportGenerator.Mtp.TestingPlatformBuilderHook</TypeFullName>
+    </TestingPlatformBuilderHook>
+  </ItemGroup>
+
+</Project>

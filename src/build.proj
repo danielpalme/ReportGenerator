@@ -60,6 +60,10 @@
     <Exec Command="dotnet publish -c Release -f net9.0 ReportGenerator.DotnetGlobalTool.csproj" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
     <Exec Command="dotnet publish -c Release -f net10.0 ReportGenerator.DotnetGlobalTool.csproj" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
 
+    <Exec Command="dotnet publish -c Release -f net8.0 ReportGenerator.Mtp.csproj" WorkingDirectory="ReportGenerator.Mtp" />
+    <Exec Command="dotnet publish -c Release -f net9.0 ReportGenerator.Mtp.csproj" WorkingDirectory="ReportGenerator.Mtp" />
+    <Exec Command="dotnet publish -c Release -f net10.0 ReportGenerator.Mtp.csproj" WorkingDirectory="ReportGenerator.Mtp" />
+
     <RemoveDir Directories="bin" />
     <RemoveDir Directories="obj" />
   </Target>
@@ -111,6 +115,7 @@
     <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\ReportGenerator.nuspec -OutputDirectory target\packages -Version $(Version)" />
     <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\ReportGenerator.Core.nuspec -OutputDirectory target\packages -Version $(Version)" />
     <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\dotnet-reportgenerator-globaltool.nuspec -OutputDirectory target\packages -Version $(Version)" />
+    <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\dotnet-reportgenerator-mtp.nuspec -OutputDirectory target\packages -Version $(Version)" />
     
     <!-- Chocolatey -->
     <Exec Command="$(ChocolateyCommandLine) pack Deployment\chocolatey\reportgenerator.portable.nuspec --outputdirectory=target\packages --version=$(Version)" />
@@ -121,6 +126,7 @@
     <Exec Command="$(NuGetCommandLine) push .\target\packages\ReportGenerator.$(Version).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
     <Exec Command="$(NuGetCommandLine) push .\target\packages\ReportGenerator.Core.$(Version).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
     <Exec Command="$(NuGetCommandLine) push .\target\packages\dotnet-reportgenerator-globaltool.$(Version).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
+    <Exec Command="$(NuGetCommandLine) push .\target\packages\dotnet-reportgenerator-mtp.$(Version).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
     
     <!-- Chocolatey -->
     <Exec Command="$(ChocolateyCommandLine) push .\target\packages\reportgenerator.portable.$(Version).nupkg --apikey $(ChocolateyApiKey) --source https://push.chocolatey.org/" />
