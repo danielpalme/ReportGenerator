@@ -60,8 +60,6 @@
     <Exec Command="dotnet publish -c Release -f net9.0 ReportGenerator.DotnetGlobalTool.csproj" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
     <Exec Command="dotnet publish -c Release -f net10.0 ReportGenerator.DotnetGlobalTool.csproj" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
 
-    <Exec Command="dotnet publish -c Release -f net8.0 ReportGenerator.Mtp.csproj" WorkingDirectory="ReportGenerator.Mtp" />
-    <Exec Command="dotnet publish -c Release -f net9.0 ReportGenerator.Mtp.csproj" WorkingDirectory="ReportGenerator.Mtp" />
     <Exec Command="dotnet publish -c Release -f net10.0 ReportGenerator.Mtp.csproj" WorkingDirectory="ReportGenerator.Mtp" />
 
     <RemoveDir Directories="bin" />

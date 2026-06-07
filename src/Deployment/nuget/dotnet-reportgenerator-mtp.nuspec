@@ -22,6 +22,18 @@ TODO TODO</description>
     <language>en-US</language>
     <tags>Code Coverage Reporting Testing TDD Utility</tags>
     <repository type="git" url="https://github.com/danielpalme/ReportGenerator.git" />
+    <dependencies>
+      <group targetFramework="net10.0">
+        <dependency id="Microsoft.Extensions.Configuration" version="10" />
+        <dependency id="Microsoft.Extensions.Configuration.Binder" version="10" />
+        <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="10" />
+        <dependency id="Microsoft.Extensions.Configuration.Json" version="10" />
+        <dependency id="Microsoft.Extensions.ObjectPool" version="10" />
+        <dependency id="Microsoft.Testing.Platform" version="2.2.3" />
+        <dependency id="DotNetConfig" version="1.2.0" />
+        <dependency id="McMaster.NETCore.Plugins" version="1.4.0" />
+      </group>
+    </dependencies>
   </metadata>
   <files>
     <file src="..\logo_plugin_64.png" target="icon.png" />
@@ -29,23 +41,16 @@ TODO TODO</description>
     <file src="..\..\Readme.txt" target="Readme.txt" />
     <file src="Readme_dotnet-reportgenerator-mtp.md" target="Readme.md" />
     
-    <file src="..\..\ReportGenerator.Mtp\build\**\*.*" target="build\net8.0" />
-    <file src="..\..\ReportGenerator.Mtp\build\**\*.*" target="build\net9.0" />
     <file src="..\..\ReportGenerator.Mtp\build\**\*.*" target="build\net10.0" />
-
     <file src="..\..\ReportGenerator.Mtp\buildMultiTargeting\**\*.*" target="buildMultiTargeting" />
-
-    <file src="..\..\ReportGenerator.Mtp\buildTransitive\**\*.*" target="buildTransitive\net8.0" />
-    <file src="..\..\ReportGenerator.Mtp\buildTransitive\**\*.*" target="buildTransitive\net9.0" />
     <file src="..\..\ReportGenerator.Mtp\buildTransitive\**\*.*" target="buildTransitive\net10.0" />
 
-    <!-- Net8.0 ('tools\net8.0' directory) -->
-    <file src="..\..\ReportGenerator.Mtp\bin\Release\net8.0\publish\**\*.*" target="lib\net8.0" />
-
-    <!-- Net9.0 ('tools\net9.0' directory) -->
-    <file src="..\..\ReportGenerator.Mtp\bin\Release\net9.0\publish\**\*.*" target="lib\net9.0" />
-
-    <!-- Net10.0 ('tools\net10.0' directory) -->
-    <file src="..\..\ReportGenerator.Mtp\bin\Release\net10.0\publish\**\*.*" target="lib\net10.0" />
+	  <!-- Net10.0 -->
+    <file src="..\..\ReportGenerator.Mtp\bin\Release\net10.0\publish\ReportGenerator.Core.dll" target="lib\net10.0\" />
+    <file src="..\..\ReportGenerator.Mtp\bin\Release\net10.0\publish\ReportGenerator.Core.xml" target="lib\net10.0\" />
+    <file src="..\..\ReportGenerator.Mtp\bin\Release\net10.0\publish\ReportGenerator.DotnetCorePluginLoader.dll" target="lib\net10.0\" />
+    <file src="..\..\ReportGenerator.Mtp\bin\Release\net10.0\publish\ReportGenerator.DotnetCorePluginLoader.xml" target="lib\net10.0\" />
+    <file src="..\..\ReportGenerator.Mtp\bin\Release\net10.0\publish\ReportGenerator.Mtp.deps.json" target="lib\net10.0\" />
+    <file src="..\..\ReportGenerator.Mtp\bin\Release\net10.0\publish\ReportGenerator.Mtp.dll" target="lib\net10.0\" />
   </files>
 </package>
