@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="18.7.1" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="18.8.2" />
   </ItemGroup>
 
   <ItemGroup>
