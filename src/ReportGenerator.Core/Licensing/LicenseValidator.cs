@@ -39,6 +39,7 @@ namespace Palmmedia.ReportGenerator.Core.Licensing
             { Guid.Parse("d78f42ba-a0b9-40b3-a9f7-b73bc31aa449"), DateTime.MinValue },
             { Guid.Parse("0d70e384-160e-436d-82a2-dcfee0580a4e"), DateTime.MinValue },
             { Guid.Parse("db804939-0802-42d4-b6a3-0a03e9c19c6a"), DateTime.MinValue },
+            { Guid.Parse("cd06a2a1-67ff-43b7-baa5-4a54865f2f72"), DateTime.MinValue },
             { Guid.Parse("265472d9-799d-44db-b7f2-b8da433812f9"), new DateTime(2023, 7, 28) },
             { Guid.Parse("16823d5b-b7da-48b7-94d9-73dbce61059c"), new DateTime(2023, 11, 1) },
             { Guid.Parse("14978526-1719-48cb-aa6d-6d48b7a99af9"), new DateTime(2023, 11, 1) },
@@ -55,6 +56,7 @@ namespace Palmmedia.ReportGenerator.Core.Licensing
             { Guid.Parse("c5e2eaca-8cb5-4636-967b-e4898afc547c"), new DateTime(2026, 3, 10) },
             { Guid.Parse("6a84e4fb-ed63-4b2e-b397-f7e30800243c"), new DateTime(2026, 3, 20) },
             { Guid.Parse("173da48a-ed7f-4459-b882-70d2fae52707"), new DateTime(2026, 5, 20) },
+            { Guid.Parse("af8d0d6e-f825-471f-815a-4a0eeb71370a"), new DateTime(2026, 11, 20) },
         };
 
         /// <summary>
