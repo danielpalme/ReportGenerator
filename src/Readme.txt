@@ -70,6 +70,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.5.11.0
+
+    * Fix: #786 Improved HTML table layout for Firefox
+
 5.5.10.0
 
     * New: Added support for Sha256 signed licenses
