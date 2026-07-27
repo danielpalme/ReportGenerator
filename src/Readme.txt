@@ -73,6 +73,7 @@ CHANGELOG
 5.5.11.0
 
     * Fix: #786 Improved HTML table layout for Firefox
+    * Fix: #785 Changed hover color for table rows in HTML reports to improve readability in dark mode
 
 5.5.10.0
 
