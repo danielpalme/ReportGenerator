@@ -185,6 +185,24 @@ jobs:
       with:
         name: packages
 
+    - name: 'NuGet login (OIDC → temp API key)'       
+      uses: NuGet/login@v1
+      id: login
+      with:
+        user: ${{ secrets.NUGET_USER }}
+
+    - name: 'NuGet push dotnet-reportgenerator-globaltool'
+      run: nuget push dotnet-reportgenerator-globaltool.${{ env.Version }}.nupkg -ApiKey ${{steps.login.outputs.NUGET_API_KEY}} -Source https://www.nuget.org/api/v2/package
+      continue-on-error: true
+
+    - name: 'NuGet push ReportGenerator.Core'
+      run: nuget push ReportGenerator.Core.${{ env.Version }}.nupkg -ApiKey ${{steps.login.outputs.NUGET_API_KEY}} -Source https://www.nuget.org/api/v2/package
+      continue-on-error: true
+
+    - name: 'NuGet push ReportGenerator'
+      run: nuget push ReportGenerator.${{ env.Version }}.nupkg -ApiKey ${{steps.login.outputs.NUGET_API_KEY}} -Source https://www.nuget.org/api/v2/package
+      continue-on-error: true
+      
     - name: GitHubRelease
       uses: softprops/action-gh-release@v2
       with:
@@ -212,18 +230,6 @@ jobs:
     #     protocol: ftps
     #     dangerous-clean-slate: true
     #   continue-on-error: true
-
-    - name: 'NuGet push dotnet-reportgenerator-globaltool'
-      run: nuget push dotnet-reportgenerator-globaltool.${{ env.Version }}.nupkg -ApiKey ${{ secrets.NUGETAPIKEY }} -Source https://www.nuget.org/api/v2/package
-      continue-on-error: true
-
-    - name: 'NuGet push ReportGenerator.Core'
-      run: nuget push ReportGenerator.Core.${{ env.Version }}.nupkg -ApiKey ${{ secrets.NUGETAPIKEY }} -Source https://www.nuget.org/api/v2/package
-      continue-on-error: true
-
-    - name: 'NuGet push ReportGenerator'
-      run: nuget push ReportGenerator.${{ env.Version }}.nupkg -ApiKey ${{ secrets.NUGETAPIKEY }} -Source https://www.nuget.org/api/v2/package
-      continue-on-error: true
 
     - name: 'Chocolatey push reportgenerator.portable'
       run: .$env:USERPROFILE\.nuget\packages\chocolatey\2.6.0\tools\chocolateyInstall\choco.exe push reportgenerator.portable.${{ env.Version }}.nupkg --apikey ${{ secrets.CHOCOLATEYAPIKEY }} --source https://push.chocolatey.org/
