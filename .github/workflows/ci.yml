@@ -75,12 +75,12 @@ jobs:
       working-directory: src/ReportGenerator.DotnetGlobalTool
 
     - name: Test
-      run: dotnet test src\ReportGenerator.Core.Test\ReportGenerator.Core.Test.csproj --configuration ${{ env.BuildConfiguration }} --no-build /p:CollectCoverage=true /p:DeterministicSourcePaths=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=opencover%2ccobertura /p:CoverletOutput=../target/reports/coverage/
+      run: dotnet test --project src\ReportGenerator.Core.Test\ReportGenerator.Core.Test.csproj --configuration ${{ env.BuildConfiguration }} --no-build --coverlet --coverlet-output-format opencover --coverlet-output-format cobertura --results-directory src\target\reports\coverage /p:DeterministicSourcePaths=true
 
     - name: ReportGenerator
       uses: danielpalme/ReportGenerator-GitHub-Action@v5
       with:
-        reports: 'src\target\reports\coverage\coverage.opencover.xml'
+        reports: 'src\target\reports\coverage\coverage.opencover.*.xml'
         targetdir: 'src\target\reports\coverage'
         reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges;MarkdownSummaryGithub'
         assemblyfilters: '-xunit*'
@@ -149,7 +149,7 @@ jobs:
       run: nuget pack src/Deployment/nuget/ReportGenerator.nuspec -OutputDirectory src/target/packages -Version ${{ env.Version }}
 
     - name: 'Chocolatey pack reportgenerator.portable'
-      run: .$env:USERPROFILE\.nuget\packages\chocolatey\2.6.0\tools\chocolateyInstall\choco.exe pack src/Deployment/chocolatey/reportgenerator.portable.nuspec --outputdirectory=src/target/packages --version=${{ env.Version }}
+      run: .$env:USERPROFILE\.nuget\packages\chocolatey\2.7.4\tools\chocolateyInstall\choco.exe pack src/Deployment/chocolatey/reportgenerator.portable.nuspec --outputdirectory=src/target/packages --version=${{ env.Version }}
 
     - name: 'Publish Artifact: packages'
       uses: actions/upload-artifact@v4

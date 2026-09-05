@@ -2,13 +2,13 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Deploy">
   <ItemGroup>
     <PackageReference Include="chocolatey">
-      <Version>2.6.0</Version>
+      <Version>2.7.4</Version>
     </PackageReference>
     <PackageReference Include="MSBuildTasks">
       <Version>1.5.0.235</Version>
     </PackageReference>
     <PackageReference Include="NuGet.CommandLine">
-      <Version>7.0.1</Version>
+      <Version>7.9.0</Version>
     </PackageReference>
   </ItemGroup>
   
@@ -27,8 +27,8 @@
   
   <!-- Tools -->
   <PropertyGroup>
-    <NuGetCommandLine>&quot;$(UserProfile)\.nuget\packages\nuget.commandline\7.0.1\tools\NuGet.exe&quot;</NuGetCommandLine>
-    <ChocolateyCommandLine>&quot;$(UserProfile)\.nuget\packages\chocolatey\2.6.0\tools\chocolateyInstall\choco.exe&quot;</ChocolateyCommandLine>
+    <NuGetCommandLine>&quot;$(UserProfile)\.nuget\packages\nuget.commandline\7.9.0\tools\NuGet.exe&quot;</NuGetCommandLine>
+    <ChocolateyCommandLine>&quot;$(UserProfile)\.nuget\packages\chocolatey\2.7.4\tools\chocolateyInstall\choco.exe&quot;</ChocolateyCommandLine>
   </PropertyGroup>
   
   <Target Name="Clean">
@@ -66,12 +66,12 @@
 
   <Target Name="Test" DependsOnTargets="Clean; Compile">
     <MakeDir Directories="target\reports\coverage" />
-    <Exec Command="dotnet test --no-build ReportGenerator.Core.Test.csproj -c Release /p:CollectCoverage=true /p:DeterministicSourcePaths=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=\&quot;opencover,cobertura\&quot; /p:CoverletOutput=../target/reports/coverage/" WorkingDirectory="ReportGenerator.Core.Test" />
+    <Exec Command="dotnet test --no-build ReportGenerator.Core.Test.csproj -c Release -coverlet --coverlet-output-format opencover --coverlet-output-format cobertura --results-directory ../target/reports/coverage/ /p:DeterministicSourcePaths=true" WorkingDirectory="ReportGenerator.Core.Test" />
   </Target>
 
   <Target Name="Report" DependsOnTargets="Test">
     <ItemGroup>
-      <CoverageFiles Include="target\reports\coverage\coverage.opencover.xml" />
+      <CoverageFiles Include="target\reports\coverage\coverage.opencover.*.xml" />
     </ItemGroup>
 
     <ReportGenerator ReportFiles="@(CoverageFiles)" ReportTypes="Html;Badges" TargetDirectory="target\reports\coverage" AssemblyFilters="-Moq;-xunit*" HistoryDirectory="target\reports\coveragehistory" VerbosityLevel="Warning" />
