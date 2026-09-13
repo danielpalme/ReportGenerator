@@ -189,7 +189,7 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
 
 .tooltip { position: absolute; display: none; padding: 5px; background: #F4C63D; color: #453D3F; pointer-events: none; z-index: 1; min-width: 250px; }
 
-.column-min-200 { min-width: 200px; }
+.column-min-200 { width: 200px; }
 .column70 { width: 70px; }
 .column90 { width: 90px; }
 .column98 { width: 98px; }
@@ -629,7 +629,7 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
             border: 5px solid #333;
         }
 
-        .overview tr:hover > td {
+        .overview tbody tr:hover > td {
             background-color: #2E2D2C;
         }
 

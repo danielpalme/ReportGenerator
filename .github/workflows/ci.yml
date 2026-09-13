@@ -6,32 +6,32 @@ env:
   solution: 'src\ReportGenerator.slnx'
   buildPlatform: Any CPU
   buildConfiguration: Release
-  version: 5.5.10
-  dotnetSDKVersion: 10.0.301
+  version: 5.5.11
+  dotnetSDKVersion: 10.0.401
   nodeVersion: 24
 
 jobs:
   build:
 
-    runs-on: windows-2025-vs2026
+    runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
 
     - name: 'Install npm'
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v7
       with:
         node-version: '${{ env.nodeVersion }}'
 
     - name: setup-msbuild
-      uses: microsoft/setup-msbuild@v2
+      uses: microsoft/setup-msbuild@v3
 
     - name: 'Install dependendies'
       run: msbuild .\build.proj /t:Restore
       working-directory: src
 
     - name: 'Setup .NET Core'
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v6
       with:
         dotnet-version: ${{ env.dotnetSDKVersion }}
 
@@ -42,7 +42,7 @@ jobs:
       run: dotnet --version
 
     - name: 'Use NuGet 6.x'
-      uses: nuget/setup-nuget@v2
+      uses: nuget/setup-nuget@v4
 
     - name: 'NuGet Restore'
       run: nuget restore ${{ env.solution }}
@@ -79,12 +79,12 @@ jobs:
       working-directory: src/ReportGenerator.Mtp
 
     - name: Test
-      run: dotnet test src\ReportGenerator.Core.Test\ReportGenerator.Core.Test.csproj --configuration ${{ env.BuildConfiguration }} --no-build /p:CollectCoverage=true /p:DeterministicSourcePaths=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=opencover%2ccobertura /p:CoverletOutput=../target/reports/coverage/
+      run: dotnet test --project src\ReportGenerator.Core.Test\ReportGenerator.Core.Test.csproj --configuration ${{ env.BuildConfiguration }} --no-build --coverlet --coverlet-output-format opencover --coverlet-output-format cobertura --results-directory src\target\reports\coverage /p:DeterministicSourcePaths=true
 
     - name: ReportGenerator
       uses: danielpalme/ReportGenerator-GitHub-Action@v5
       with:
-        reports: 'src\target\reports\coverage\coverage.opencover.xml'
+        reports: 'src\target\reports\coverage\coverage.opencover.*.xml'
         targetdir: 'src\target\reports\coverage'
         reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges;MarkdownSummaryGithub'
         assemblyfilters: '-xunit*'
@@ -95,7 +95,7 @@ jobs:
       shell: bash
  
     - name: 'Publish code coverage results'
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: CoverageReport
         path: src/target/reports/coverage
@@ -156,10 +156,10 @@ jobs:
       run: nuget pack src/Deployment/nuget/ReportGenerator.nuspec -OutputDirectory src/target/packages -Version ${{ env.Version }}
 
     - name: 'Chocolatey pack reportgenerator.portable'
-      run: .$env:USERPROFILE\.nuget\packages\chocolatey\2.6.0\tools\chocolateyInstall\choco.exe pack src/Deployment/chocolatey/reportgenerator.portable.nuspec --outputdirectory=src/target/packages --version=${{ env.Version }}
+      run: .$env:USERPROFILE\.nuget\packages\chocolatey\2.7.4\tools\chocolateyInstall\choco.exe pack src/Deployment/chocolatey/reportgenerator.portable.nuspec --outputdirectory=src/target/packages --version=${{ env.Version }}
 
     - name: 'Publish Artifact: packages'
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         path: src/target/packages
         name: packages
@@ -171,29 +171,47 @@ jobs:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && startsWith(github.event.commits[0].message, 'Release ') }}
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
 
     - name: 'Install npm'
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v7
       with:
         node-version: '${{ env.nodeVersion }}'
 
     - name: setup-msbuild
-      uses: microsoft/setup-msbuild@v2
+      uses: microsoft/setup-msbuild@v3
 
     - name: 'Install dependendies'
       run: msbuild .\build.proj /t:Restore
       working-directory: src
 
     - name: 'Use NuGet 6.x'
-      uses: nuget/setup-nuget@v2
+      uses: nuget/setup-nuget@v4
 
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v8
       with:
         name: packages
 
+    - name: 'NuGet login (OIDC → temp API key)'       
+      uses: NuGet/login@v1.2.0
+      id: login
+      with:
+        user: ${{ secrets.NUGET_USER }}
+
+    - name: 'NuGet push dotnet-reportgenerator-globaltool'
+      run: nuget push dotnet-reportgenerator-globaltool.${{ env.Version }}.nupkg -ApiKey ${{steps.login.outputs.NUGET_API_KEY}} -Source https://www.nuget.org/api/v2/package
+      continue-on-error: true
+
+    - name: 'NuGet push ReportGenerator.Core'
+      run: nuget push ReportGenerator.Core.${{ env.Version }}.nupkg -ApiKey ${{steps.login.outputs.NUGET_API_KEY}} -Source https://www.nuget.org/api/v2/package
+      continue-on-error: true
+
+    - name: 'NuGet push ReportGenerator'
+      run: nuget push ReportGenerator.${{ env.Version }}.nupkg -ApiKey ${{steps.login.outputs.NUGET_API_KEY}} -Source https://www.nuget.org/api/v2/package
+      continue-on-error: true
+      
     - name: GitHubRelease
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         name: ReportGenerator_${{ env.Version }}
         body: This release requires .NET Framework 4.7 or .NET 8.0/9.0/10.0
