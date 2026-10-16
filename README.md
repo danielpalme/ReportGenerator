@@ -200,10 +200,10 @@ Given the following `.netconfig`:
 ```gitconfig
 [ReportGenerator]
   reporttypes = "Html;Latex"
-  targetdirectory = "report"
-  historydirectory = "history"
+  targetdir = "report"
+  historydir = "history"
   assemblyfilters = "+Include;-Excluded"
-  verbosityLevel = "Verbose"
+  verbosity = "Verbose"
 ```
 
 The above target could be simplified as:
