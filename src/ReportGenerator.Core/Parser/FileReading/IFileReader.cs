@@ -1,9 +1,9 @@
 namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
 {
     /// <summary>
-    /// Interface for file access.
+    /// Interface for file access. Reads the source files shown in the reports.
     /// </summary>
-    internal interface IFileReader
+    public interface IFileReader
     {
         /// <summary>
         /// Loads the file with the given path.
