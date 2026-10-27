@@ -10,10 +10,6 @@ env:
   dotnetSDKVersion: 10.0.403
   nodeVersion: 24
 
-permissions:
-  id-token: write
-  contents: read
-
 jobs:
   build:
 
@@ -162,6 +158,10 @@ jobs:
         name: packages
 
   publish:
+
+    permissions:
+      id-token: write
+      contents: write
 
     needs: build
     runs-on: windows-latest
