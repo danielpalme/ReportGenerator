@@ -70,6 +70,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.5.12.0
+
+    * New: #790 Allow a custom file reader for the source files when generating a report (contributed by @jeremy-morren)
+
 5.5.11.0
 
     * Fix: #786 Improved HTML table layout for Firefox
