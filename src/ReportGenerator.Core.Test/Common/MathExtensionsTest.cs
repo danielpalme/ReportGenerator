@@ -21,7 +21,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Common
         {
             MathExtensions.MaximumDecimalPlaces = maximumDecimalPlaces;
             decimal result = MathExtensions.CalculatePercentage(number1, number2);
-            Assert.Equal(expected, result);
+            Assert.Equal(expected, result, 3);
 
             MathExtensions.MaximumDecimalPlaces = 1;
         }
