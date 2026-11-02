@@ -79,6 +79,14 @@ https://github.com/danielpalme/ReportGenerator/wiki/Custom-history-storage</desc
     <file src="..\..\ReportGenerator.Core\bin\Release\appsettings.json" target="lib\net10.0\" />
     <file src="..\..\ReportGenerator.DotnetCorePluginLoader\bin\Release\net10.0\ReportGenerator.DotnetCorePluginLoader.dll" target="lib\net10.0\" />
     <file src="..\..\ReportGenerator.DotnetCorePluginLoader\bin\Release\net10.0\ReportGenerator.DotnetCorePluginLoader.xml" target="lib\net10.0\" />
+
+	  <!-- Execution .NET 11.x (see https://github.com/coverlet-coverage/coverlet/pull/694) -->
+    <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.deps.json" target="lib\net11.0\" />
+    <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.dll" target="lib\net11.0\" />
+    <file src="..\..\ReportGenerator.Core\bin\Release\ReportGenerator.Core.xml" target="lib\net11.0\" />
+    <file src="..\..\ReportGenerator.Core\bin\Release\appsettings.json" target="lib\net11.0\" />
+    <file src="..\..\ReportGenerator.DotnetCorePluginLoader\bin\Release\net11.0\ReportGenerator.DotnetCorePluginLoader.dll" target="lib\net11.0\" />
+    <file src="..\..\ReportGenerator.DotnetCorePluginLoader\bin\Release\net11.0\ReportGenerator.DotnetCorePluginLoader.xml" target="lib\net11.0\" />
   </files>
 </package>
 
