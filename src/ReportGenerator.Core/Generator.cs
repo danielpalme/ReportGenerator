@@ -414,6 +414,7 @@ namespace Palmmedia.ReportGenerator.Core
                 var builder = new ConfigurationBuilder()
                     .SetBasePath(AppContext.BaseDirectory)
                     .AddJsonFile("appsettings.json")
+                    .AddDotNetConfig()
                     .AddCommandLine(args);
 
                 return builder.Build();
@@ -423,6 +424,7 @@ namespace Palmmedia.ReportGenerator.Core
                 // This can happen when excuted within MSBuild (dotnet msbuild): JSON configuration gets ignored
                 var builder = new ConfigurationBuilder()
                     .SetBasePath(AppContext.BaseDirectory)
+                    .AddDotNetConfig()
                     .AddCommandLine(args);
 
                 return builder.Build();

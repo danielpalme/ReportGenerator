@@ -125,7 +125,7 @@ Examples:
 
 #### .netconfig support
 
-All the above parameters can also be persisted in a [.netconfig](https://dotnetconfig.org) file, under a `[ReportGenerator]` 
+All the above parameters can also be persisted in a [.netconfig](https://dotnetconfig.github.io/dotnet-config/) file, under a `[ReportGenerator]` 
 section. Examples:
 
 ```gitconfig
@@ -135,9 +135,47 @@ section. Examples:
 	reporttypes = "Latex;HtmlSummary"
 	assemblyfilters = "+Test;-Test"
 	classfilters = "+Test2;-Test2"
+
+# See: https://github.com/danielpalme/ReportGenerator/wiki/Settings#risk-hotspots
+
+[ReportGenerator "RiskHotspotsAnalysisThresholds"]
+	metricThresholdForCyclomaticComplexity = 15
+	metricThresholdForCrapScore = 30
+	metricThresholdForNPathComplexity = 200
+	maximumThresholdForCyclomaticComplexity = null
+	maximumThresholdForCrapScore = null
+	maximumThresholdForNPathComplexity = null
+
+# See: https://github.com/danielpalme/ReportGenerator/wiki/Settings#minimum-coverage-thresholds
+
+[ReportGenerator "MinimumCoverageThresholds"]
+	lineCoverage = null
+	branchCoverage = null
+	methodCoverage = null
+	fullMethodCoverage = null
+
+# See: https://github.com/danielpalme/ReportGenerator/wiki/Settings#other-settings
+
+[ReportGenerator "Settings"]
+	numberOfReportsParsedInParallel = 1
+	numberOfReportsMergedInParallel = 1
+	maximumNumberOfHistoricCoverageFiles = 100
+	cachingDurationOfRemoteFilesInMinutes = 10080
+	disableRiskHotspots = false
+	excludeTestProjects = false
+	createSubdirectoryForAllReportTypes = false
+	customHeadersForRemoteFiles = null
+	defaultAssemblyName = "Default"
+	maximumDecimalPlacesForCoverageQuotas = 1
+	applyMaximumGroupingLevel = false
+	historyFileNamePrefix = null
+	rawMode = false
+	includeAllDatesInCharts = false
+	preserveTrailingEmptyLine = false
+	applyQueryStringToAllLinks =  false
 ```
 
-All the plural options can also be specified as multiple singular entries, like:
+All the plural options can also be specified as multiple singular entries like:
 
 ```gitconfig
 [ReportGenerator]
@@ -159,7 +197,7 @@ All the plural options can also be specified as multiple singular entries, like:
 	sourcedir = "test"
 ```
 
-Adding/removing values is trivial using the [dotnet-config](https://dotnetconfig.org) CLI:
+Adding/removing values is trivial using the [dotnet-config](https://dotnetconfig.github.io/dotnet-config/) CLI:
 
 ```bash
 # set a single-valued variable
