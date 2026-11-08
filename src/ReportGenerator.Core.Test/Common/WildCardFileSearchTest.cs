@@ -58,7 +58,7 @@ namespace Palmmedia.ReportGenerator.Core.Test.Common
         public void GetFiles_SingleDirectory_XmlFilesFound()
         {
             var files = WildCardFileSearch.GetFiles(Path.Combine(FileManager.GetCSharpReportDirectory(), "*.xml")).ToArray();
-            Assert.Equal(25, files.Length);
+            Assert.Equal(26, files.Length);
         }
 
         [Fact]
