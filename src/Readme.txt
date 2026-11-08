@@ -73,6 +73,7 @@ CHANGELOG
 5.6.0.0
 
     * New: #792 Added ability to configure all settings via .netconfig file (see https://github.com/danielpalme/ReportGenerator/wiki/Settings)
+    * New: #668 SonarQube report now exports mapped/absolute paths gets modified by given source directories
 
 5.5.12.0
 

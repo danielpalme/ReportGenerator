@@ -70,7 +70,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
                 if (!this.fileElementsByName.TryGetValue(fileAnalysis.Path, out fileElement))
                 {
-                    fileElement = new XElement("file", new XAttribute("path", fileAnalysis.Path));
+                    fileElement = new XElement("file", new XAttribute("path", fileAnalysis.MappedPath));
                     this.document.Root.Add(fileElement);
 
                     this.fileElementsByName.Add(fileAnalysis.Path, fileElement);

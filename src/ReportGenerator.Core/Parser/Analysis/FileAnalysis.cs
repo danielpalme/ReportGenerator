@@ -16,19 +16,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// Initializes a new instance of the <see cref="FileAnalysis"/> class.
         /// </summary>
         /// <param name="path">The path of the source file.</param>
-        internal FileAnalysis(string path)
+        /// <param name="mappedPath">The mapped path.</param>
+        /// <param name="error">The error.</param>
+        internal FileAnalysis(string path, string mappedPath, string error)
         {
             this.Path = path;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FileAnalysis"/> class.
-        /// </summary>
-        /// <param name="path">The path of the source file.</param>
-        /// <param name="error">The error.</param>
-        internal FileAnalysis(string path, string error)
-            : this(path)
-        {
+            this.MappedPath = mappedPath;
             this.Error = error;
         }
 
@@ -37,6 +30,12 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// </summary>
         /// <value>The path.</value>
         public string Path { get; }
+
+        /// <summary>
+        /// Gets the mapped path.
+        /// </summary>
+        /// <value>The mapped path.</value>
+        public string MappedPath { get; }
 
         /// <summary>
         /// Gets the error.

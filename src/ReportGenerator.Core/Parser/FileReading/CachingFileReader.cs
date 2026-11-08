@@ -64,14 +64,16 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
         /// Loads the file with the given path.
         /// </summary>
         /// <param name="path">The path.</param>
+        /// <param name="mappedPath">The mapped path.</param>
         /// <param name="error">Error message if file reading failed, otherwise <code>null</code>.</param>
         /// <returns><code>null</code> if an error occurs, otherwise the lines of the file.</returns>
-        public string[] LoadFile(string path, out string error)
+        public string[] LoadFile(string path, out string mappedPath, out string error)
         {
             try
             {
                 if (path.StartsWith("http://") || path.StartsWith("https://"))
                 {
+                    mappedPath = path;
                     string cacheDirectory = Path.Combine(Path.GetTempPath(), "ReportGenerator_Cache");
 
                     // GetHashCode does not produce same hash on every run (See: https://andrewlock.net/why-is-string-gethashcode-different-each-time-i-run-my-program-in-net-core/)
@@ -117,14 +119,26 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
                 }
                 else
                 {
-                    return this.localFileReader.LoadFile(path, out error);
+                    return this.localFileReader.LoadFile(path, out mappedPath, out error);
                 }
             }
             catch (Exception ex)
             {
+                mappedPath = path;
                 error = string.Format(CultureInfo.InvariantCulture, Resources.ErrorDuringReadingFile, path, ex.GetExceptionMessageForDisplay());
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Loads the file with the given path.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <param name="error">Error message if file reading failed, otherwise <code>null</code>.</param>
+        /// <returns><code>null</code> if an error occurs, otherwise the lines of the file.</returns>
+        public string[] LoadFile(string path, out string error)
+        {
+            return this.LoadFile(path, out _, out error);
         }
 
         private static string GetSha1Hash(string input)
