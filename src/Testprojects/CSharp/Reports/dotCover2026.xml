@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Root CoveredStatements="5640" TotalStatements="27052" CoveragePercent="21" ReportType="Xml">
+  <Assembly Name="Test" CoveredStatements="161" TotalStatements="270" CoveragePercent="60">
+    <Namespace Name="Test" CoveredStatements="161" TotalStatements="270" CoveragePercent="60">
+      <Type Name="AbstractClass" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+        <Constructor Name="AbstractClass()" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" />
+      </Type>
+      <Type Name="AbstractClass_SampleImpl1" CoveredStatements="4" TotalStatements="8" CoveragePercent="50">
+        <Constructor Name="AbstractClass_SampleImpl1()" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" />
+        <Method Name="Method1():void" CoveredStatements="0" TotalStatements="2" CoveragePercent="0" />
+        <Method Name="Method2():void" CoveredStatements="0" TotalStatements="2" CoveragePercent="0" />
+      </Type>
+      <Type Name="AbstractClass_SampleImpl2" CoveredStatements="4" TotalStatements="8" CoveragePercent="50">
+        <Constructor Name="AbstractClass_SampleImpl2()" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" />
+        <Method Name="Method1():void" CoveredStatements="0" TotalStatements="2" CoveragePercent="0" />
+        <Method Name="Method2():void" CoveredStatements="0" TotalStatements="2" CoveragePercent="0" />
+      </Type>
+      <Type Name="AbstractGenericClass&lt;TModel,TState&gt;" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+        <Method Name="PostProcess(ISomeObjectInterface&lt;TModel,TState&gt;):bool" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+      </Type>
+      <Type Name="AnalyzerTestClass" CoveredStatements="0" TotalStatements="12" CoveragePercent="0">
+        <Constructor Name="AnalyzerTestClass()" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" />
+        <AutoProperty Name="AutoProperty:string" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <Method Name="DoSomething(string,string[],Guid,IEnumerable&lt;string&gt;,IList&lt;string&gt;,Decimal,int,long,Dictionary&lt;string,int&gt;,out int,float,double,bool,byte,char,object,sbyte,short,uint,ulong,ushort):string" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" />
+        <Method Name="GenericMethod&lt;T1,T2&gt;(T1,T2,int):void" CoveredStatements="0" TotalStatements="2" CoveragePercent="0" />
+      </Type>
+      <Type Name="AsyncClass" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+        <Method Name="SendAsync(HttpRequestMessage,CancellationToken):Task&lt;HttpResponseMessage&gt;" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+          <InternalCompiledMethod Name="MoveNext():void" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" />
+        </Method>
+      </Type>
+      <Type Name="AutoMapperExtensions" CoveredStatements="0" TotalStatements="9" CoveragePercent="0">
+        <Method Name="MergeIntoSeveral&lt;TResult&gt;(IMapper,params object[]):TResult" CoveredStatements="0" TotalStatements="6" CoveragePercent="0">
+          <OwnCoverage CoveredStatements="0" TotalStatements="4" CoveragePercent="0" />
+          <AnonymousMethod Name="(object):bool" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <AnonymousMethod Name="(TResult,object):TResult" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </Method>
+        <Method Name="MergeIntoSingle&lt;TResult&gt;(IMapper,object):TResult" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+      </Type>
+      <Type Name="ClassWithExcludes" CoveredStatements="8" TotalStatements="10" CoveragePercent="80">
+        <AutoProperty Name="ExcludedProperty:string" CoveredStatements="1" TotalStatements="2" CoveragePercent="50">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="1" TotalStatements="1" CoveragePercent="100" />
+        </AutoProperty>
+        <AutoProperty Name="IncludedProperty:string" CoveredStatements="1" TotalStatements="2" CoveragePercent="50">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="1" TotalStatements="1" CoveragePercent="100" />
+        </AutoProperty>
+        <Method Name="ExcludedMethod():void" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" />
+        <Method Name="IncludedMethod():void" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" />
+      </Type>
+      <Type Name="ClassWithLocalFunctions&lt;T1&gt;" CoveredStatements="9" TotalStatements="10" CoveragePercent="90">
+        <Type Name="MyNestedClass&lt;T2&gt;" CoveredStatements="9" TotalStatements="10" CoveragePercent="90">
+          <AutoProperty Name="MyProperty:T2" CoveredStatements="1" TotalStatements="2" CoveragePercent="50">
+            <PropertyGetter CoveredStatements="1" TotalStatements="1" CoveragePercent="100" />
+            <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          </AutoProperty>
+          <Method Name="MyAsyncMethod&lt;T3&gt;(T3):Task" CoveredStatements="8" TotalStatements="8" CoveragePercent="100">
+            <InternalCompiledMethod Name="MoveNext():void" CoveredStatements="8" TotalStatements="8" CoveragePercent="100">
+              <OwnCoverage CoveredStatements="3" TotalStatements="3" CoveragePercent="100" />
+              <LocalFunction Name="MyAsyncLocalFunction&lt;T4&gt;():Task" CoveredStatements="5" TotalStatements="5" CoveragePercent="100">
+                <InternalCompiledMethod Name="MoveNext():void" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" />
+              </LocalFunction>
+            </InternalCompiledMethod>
+          </Method>
+        </Type>
+      </Type>
+      <Type Name="CodeContract_Contract" CoveredStatements="0" TotalStatements="4" CoveragePercent="0">
+        <Method Name="Calculate(int):int" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" />
+      </Type>
+      <Type Name="CodeContract_Target" CoveredStatements="7" TotalStatements="7" CoveragePercent="100">
+        <Method Name="Calculate(int):int" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" />
+      </Type>
+      <Type Name="GenericAsyncClass&lt;T&gt;" CoveredStatements="5" TotalStatements="30" CoveragePercent="17">
+        <Type Name="InnerGenericClass&lt;U&gt;" CoveredStatements="0" TotalStatements="10" CoveragePercent="0">
+          <Method Name="MyNestedAsyncGenericMethod&lt;U1&gt;(U1):Task&lt;T&gt;" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+            <InternalCompiledMethod Name="MoveNext():void" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+          </Method>
+          <Method Name="MyNestedAsyncMethod():Task" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+            <InternalCompiledMethod Name="MoveNext():void" CoveredStatements="0" TotalStatements="2" CoveragePercent="0" />
+          </Method>
+          <Method Name="MyNestedAsyncMethod(U):Task&lt;U&gt;" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+            <InternalCompiledMethod Name="MoveNext():void" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+          </Method>
+          <Method Name="MyNestedMethod():void" CoveredStatements="0" TotalStatements="2" CoveragePercent="0" />
+        </Type>
+        <Type Name="InnerNonGenericClass" CoveredStatements="0" TotalStatements="7" CoveragePercent="0">
+          <Method Name="MyNestedAsyncGenericMethod&lt;U1&gt;(U1):Task&lt;T&gt;" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+            <InternalCompiledMethod Name="MoveNext():void" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+          </Method>
+          <Method Name="MyNestedAsyncMethod():Task" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+            <InternalCompiledMethod Name="MoveNext():void" CoveredStatements="0" TotalStatements="2" CoveragePercent="0" />
+          </Method>
+          <Method Name="MyNestedMethod():void" CoveredStatements="0" TotalStatements="2" CoveragePercent="0" />
+        </Type>
+        <Method Name="DoWork():void" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+        <Method Name="MyAsyncGenericMethod&lt;T1&gt;(T1):Task&lt;T&gt;" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+          <InternalCompiledMethod Name="MoveNext():void" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+        </Method>
+        <Method Name="MyAsyncMethod():Task" CoveredStatements="2" TotalStatements="2" CoveragePercent="100">
+          <InternalCompiledMethod Name="MoveNext():void" CoveredStatements="2" TotalStatements="2" CoveragePercent="100" />
+        </Method>
+        <Method Name="MyAsyncMethod(T):Task&lt;T&gt;" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
+          <InternalCompiledMethod Name="MoveNext():void" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" />
+        </Method>
+        <Method Name="MyMethod():void" CoveredStatements="0" TotalStatements="2" CoveragePercent="0" />
+      </Type>
+      <Type Name="GenericClass&lt;TModel,TState&gt;" CoveredStatements="8" TotalStatements="8" CoveragePercent="100">
+        <Method Name="PostProcess(ISomeObjectInterface&lt;TModel,TState&gt;):bool" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" />
+        <Method Name="Process(ISomeObjectInterface&lt;TModel,TState&gt;):bool" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" />
+      </Type>
+      <Type Name="PartialClass" CoveredStatements="12" TotalStatements="24" CoveragePercent="50">
+        <Property Name="SomeProperty:int" CoveredStatements="6" TotalStatements="12" CoveragePercent="50">
+          <PropertyGetter CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="6" TotalStatements="9" CoveragePercent="67" />
+        </Property>
+        <Method Name="ExecutedMethod_1():void" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" />
+        <Method Name="ExecutedMethod_2():void" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" />
+        <Method Name="UnExecutedMethod_1():void" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+        <Method Name="UnExecutedMethod_2():void" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+      </Type>
+      <Type Name="PartialClassWithAutoProperties" CoveredStatements="2" TotalStatements="5" CoveragePercent="40">
+        <Property Name="ExpressionBodiedProperty:string" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </Property>
+        <AutoProperty Name="Property1:string" CoveredStatements="1" TotalStatements="2" CoveragePercent="50">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="1" TotalStatements="1" CoveragePercent="100" />
+        </AutoProperty>
+        <AutoProperty Name="Property2:string" CoveredStatements="1" TotalStatements="2" CoveragePercent="50">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="1" TotalStatements="1" CoveragePercent="100" />
+        </AutoProperty>
+      </Type>
+      <Type Name="Program" CoveredStatements="40" TotalStatements="43" CoveragePercent="93">
+        <Type Name="EchoHandler" CoveredStatements="7" TotalStatements="7" CoveragePercent="100">
+          <Constructor Name="EchoHandler(HttpResponseMessage)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" />
+          <Method Name="SendAsync(HttpRequestMessage,CancellationToken):Task&lt;HttpResponseMessage&gt;" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" />
+        </Type>
+        <Method Name="CallAsyncMethod():void" CoveredStatements="6" TotalStatements="6" CoveragePercent="100">
+          <InternalCompiledMethod Name="MoveNext():void" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" />
+        </Method>
+        <Method Name="Main(string[]):void" CoveredStatements="27" TotalStatements="30" CoveragePercent="90" />
+      </Type>
+      <Type Name="SomeClass" CoveredStatements="1" TotalStatements="2" CoveragePercent="50">
+        <AutoProperty Name="Property1:string" CoveredStatements="1" TotalStatements="2" CoveragePercent="50">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="1" TotalStatements="1" CoveragePercent="100" />
+        </AutoProperty>
+      </Type>
+      <Type Name="TestClass" CoveredStatements="23" TotalStatements="33" CoveragePercent="70">
+        <Type Name="NestedClass" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+          <Method Name="SampleFunction():void" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+        </Type>
+        <Method Name="GenericAsyncMethod&lt;T&gt;(T):Task" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <InternalCompiledMethod Name="MoveNext():void" CoveredStatements="0" TotalStatements="2" CoveragePercent="0" />
+        </Method>
+        <Method Name="GenericMethod&lt;T&gt;(T):void" CoveredStatements="0" TotalStatements="2" CoveragePercent="0" />
+        <Method Name="MethodWithLambda():void" CoveredStatements="7" TotalStatements="7" CoveragePercent="100">
+          <OwnCoverage CoveredStatements="5" TotalStatements="5" CoveragePercent="100" />
+          <AnonymousMethod Name="(char):bool" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" />
+          <AnonymousMethod Name="(char):bool" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" />
+        </Method>
+        <Method Name="ParentMethod():void" CoveredStatements="7" TotalStatements="7" CoveragePercent="100">
+          <OwnCoverage CoveredStatements="4" TotalStatements="4" CoveragePercent="100" />
+          <LocalFunction Name="NestedLocalFunction(string):string" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" />
+        </Method>
+        <Method Name="SampleFunction():void" CoveredStatements="9" TotalStatements="12" CoveragePercent="75" />
+      </Type>
+      <Type Name="TestClass2" CoveredStatements="30" TotalStatements="46" CoveragePercent="65">
+        <Constructor Name="TestClass2()" CoveredStatements="0" TotalStatements="6" CoveragePercent="0" />
+        <Constructor Name="TestClass2(string)" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" />
+        <AutoProperty Name="ExecutedProperty:string" CoveredStatements="2" TotalStatements="2" CoveragePercent="100">
+          <PropertyGetter CoveredStatements="1" TotalStatements="1" CoveragePercent="100" />
+          <PropertySetter CoveredStatements="1" TotalStatements="1" CoveragePercent="100" />
+        </AutoProperty>
+        <AutoProperty Name="UnExecutedProperty:string" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <Method Name="DoSomething(string,string[],Guid,IEnumerable&lt;string&gt;,IList&lt;string&gt;,Decimal,int,Dictionary&lt;string,int&gt;,out int,float,double,bool,byte,char,object,sbyte,short,uint,ulong,ushort):string" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" />
+        <Method Name="ExecutedMethod():void" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" />
+        <Method Name="SampleFunction(string):void" CoveredStatements="18" TotalStatements="18" CoveragePercent="100">
+          <OwnCoverage CoveredStatements="16" TotalStatements="16" CoveragePercent="100" />
+          <AnonymousMethod Name="(int):int" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" />
+          <AnonymousMethod Name="(string):bool" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" />
+        </Method>
+        <Method Name="UnExecutedMethod():void" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" />
+      </Type>
+    </Namespace>
+  </Assembly>
+  <Assembly Name="UnitTests" CoveredStatements="6" TotalStatements="8" CoveragePercent="75">
+    <Namespace Name="UnitTests" CoveredStatements="6" TotalStatements="6" CoveragePercent="100">
+      <Type Name="UnitTest" CoveredStatements="6" TotalStatements="6" CoveragePercent="100">
+        <Method Name="CSharp_ExecuteTest1():void" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" />
+        <Method Name="CSharp_ExecuteTest2():void" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" />
+      </Type>
+    </Namespace>
+    <Type Name="AutoGeneratedProgram" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+      <Method Name="Main(string[]):void" CoveredStatements="0" TotalStatements="2" CoveragePercent="0" />
+    </Type>
+  </Assembly>
+</Root>

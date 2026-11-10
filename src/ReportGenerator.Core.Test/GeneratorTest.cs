@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Palmmedia.ReportGenerator.Core.CodeAnalysis;
 using Palmmedia.ReportGenerator.Core.Parser;
 using Palmmedia.ReportGenerator.Core.Parser.FileReading;
@@ -147,7 +146,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
 
             return (reportConfiguration, settings, parserResult);
         }
-        
+
         private class DictionaryFileReader : IFileReader
         {
             public const string Error = "CUSTOM_FILE_READER_ERROR";
@@ -161,12 +160,22 @@ namespace Palmmedia.ReportGenerator.Core.Test
 
             public List<string> RequestedPaths { get; } = new List<string>();
 
-            public string[] LoadFile(string path, out string error)
+
+            /// <summary>
+            /// Loads the file with the given path.
+            /// </summary>
+            /// <param name="path">The path.</param>
+            /// <param name="mappedPath">The mapped path.</param>
+            /// <param name="error">Error message if file reading failed, otherwise <code>null</code>.</param>
+            /// <returns><code>null</code> if an error occurs, otherwise the lines of the file.</returns>
+            public string[] LoadFile(string path, out string mappedPath, out string error)
             {
                 lock (this.RequestedPaths)
                 {
                     this.RequestedPaths.Add(path);
                 }
+
+                mappedPath = path;
 
                 if (this.files.TryGetValue(path, out string[] lines))
                 {
@@ -176,6 +185,11 @@ namespace Palmmedia.ReportGenerator.Core.Test
 
                 error = Error;
                 return null;
+            }
+
+            public string[] LoadFile(string path, out string error)
+            {
+                return this.LoadFile(path, out _, out error);
             }
         }
     }

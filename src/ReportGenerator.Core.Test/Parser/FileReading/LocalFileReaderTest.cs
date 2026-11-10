@@ -22,7 +22,8 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.FileReading
         {
             var sut = new LocalFileReader();
 
-            string[] lines = sut.LoadFile(ExistingFile, out string error);
+            string[] lines = sut.LoadFile(ExistingFile, out string mappedPath, out string error);
+            Assert.Equal(ExistingFile, mappedPath);
             Assert.Null(error);
             Assert.True(lines.Length > 0);
         }
@@ -32,7 +33,8 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.FileReading
         {
             var sut = new LocalFileReader();
 
-            string[] lines = sut.LoadFile(NotExistingFile, out string error);
+            string[] lines = sut.LoadFile(NotExistingFile, out string mappedPath, out string error);
+            Assert.Equal(NotExistingFile, mappedPath);
             Assert.NotNull(error);
             Assert.Null(lines);
         }
@@ -42,7 +44,8 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.FileReading
         {
             var sut = new LocalFileReader(new[] { FileManager.GetCSharpReportDirectory() }, false);
 
-            string[] lines = sut.LoadFile(NotExistingFile, out string error);
+            string[] lines = sut.LoadFile(NotExistingFile, out string mappedPath, out string error);
+            Assert.Equal(ExistingFile, mappedPath);
             Assert.Null(error);
             Assert.True(lines.Length > 0);
         }
@@ -52,7 +55,8 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.FileReading
         {
             var sut = new LocalFileReader(new[] { FileManager.GetCPlusPlusReportDirectory() }, false);
 
-            string[] lines = sut.LoadFile(NotExistingFile, out string error);
+            string[] lines = sut.LoadFile(NotExistingFile, out string mappedPath, out string error);
+            Assert.Equal(NotExistingFile, mappedPath);
             Assert.NotNull(error);
             Assert.Null(lines);
         }
@@ -65,7 +69,8 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.FileReading
         {
             var sut = new LocalFileReader(new[] { FileManager.GetCSharpReportDirectory() }, false);
 
-            string[] lines = sut.LoadFile(filename, out string error);
+            string[] lines = sut.LoadFile(filename, out string mappedPath, out string error);
+            Assert.Equal(ExistingFile, mappedPath);
             Assert.Null(error);
             Assert.True(lines.Length > 0);
         }
@@ -77,7 +82,8 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.FileReading
         {
             var sut = new LocalFileReader(new string[0], preserveTrailingEmptyLine);
 
-            string[] lines = sut.LoadFile(PreserveEmptyLinesTestFile, out string error);
+            string[] lines = sut.LoadFile(PreserveEmptyLinesTestFile, out string mappedPath, out string error);
+            Assert.Equal(PreserveEmptyLinesTestFile, mappedPath);
             Assert.Null(error);
             Assert.Equal(expectedNumberOfLines, lines.Length);
         }
