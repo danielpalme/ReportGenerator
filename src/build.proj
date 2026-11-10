@@ -55,10 +55,12 @@
     <Exec Command="dotnet publish -c Release -f net8.0 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
     <Exec Command="dotnet publish -c Release -f net9.0 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
     <Exec Command="dotnet publish -c Release -f net10.0 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
+    <Exec Command="dotnet publish -c Release -f net11.0 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
 
     <Exec Command="dotnet publish -c Release -f net8.0 ReportGenerator.DotnetGlobalTool.csproj" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
     <Exec Command="dotnet publish -c Release -f net9.0 ReportGenerator.DotnetGlobalTool.csproj" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
     <Exec Command="dotnet publish -c Release -f net10.0 ReportGenerator.DotnetGlobalTool.csproj" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
+    <Exec Command="dotnet publish -c Release -f net11.0 ReportGenerator.DotnetGlobalTool.csproj" WorkingDirectory="ReportGenerator.DotnetGlobalTool" />
 
     <RemoveDir Directories="bin" />
     <RemoveDir Directories="obj" />
@@ -84,6 +86,7 @@
       <ZipFileContentNetCore80 Include="ReportGenerator.Console.NetCore\bin\Release\net8.0\publish\**\*.*"/>
       <ZipFileContentNetCore90 Include="ReportGenerator.Console.NetCore\bin\Release\net9.0\publish\**\*.*"/>
       <ZipFileContentNetCore100 Include="ReportGenerator.Console.NetCore\bin\Release\net10.0\publish\**\*.*"/>
+      <ZipFileContentNetCore110 Include="ReportGenerator.Console.NetCore\bin\Release\net11.0\publish\**\*.*"/>
     </ItemGroup>
 
     <!-- ZIP -->
@@ -94,6 +97,7 @@
     <Copy SourceFiles="@(ZipFileContentNetCore80)" DestinationFolder="tmpzip\net8.0\%(RecursiveDir)" />
     <Copy SourceFiles="@(ZipFileContentNetCore90)" DestinationFolder="tmpzip\net9.0\%(RecursiveDir)" />
     <Copy SourceFiles="@(ZipFileContentNetCore100)" DestinationFolder="tmpzip\net10.0\%(RecursiveDir)" />
+    <Copy SourceFiles="@(ZipFileContentNetCore110)" DestinationFolder="tmpzip\net11.0\%(RecursiveDir)" />
    <ItemGroup>
       <ZipFileContent Include="tmpzip\**\*.*"/>
     </ItemGroup> 

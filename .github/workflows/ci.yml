@@ -7,7 +7,7 @@ env:
   buildPlatform: Any CPU
   buildConfiguration: Release
   version: 5.5.12
-  dotnetSDKVersion: 10.0.403
+  dotnetSDKVersion: 11.0.100
   nodeVersion: 24
 
 jobs:
@@ -62,6 +62,10 @@ jobs:
       run: dotnet publish -c ${{ env.BuildConfiguration }} -f net10.0 ReportGenerator.Console.NetCore.csproj
       working-directory: src/ReportGenerator.Console.NetCore
 
+    - name: dotnet publish Console.NetCore 11.0
+      run: dotnet publish -c ${{ env.BuildConfiguration }} -f net11.0 ReportGenerator.Console.NetCore.csproj
+      working-directory: src/ReportGenerator.Console.NetCore
+
     - name: dotnet publish DotnetGlobalTool 8.0
       run: dotnet publish -c ${{ env.BuildConfiguration }} -f net8.0 ReportGenerator.DotnetGlobalTool.csproj
       working-directory: src/ReportGenerator.DotnetGlobalTool
@@ -72,6 +76,10 @@ jobs:
 
     - name: dotnet publish DotnetGlobalTool 10.0
       run: dotnet publish -c ${{ env.BuildConfiguration }} -f net10.0 ReportGenerator.DotnetGlobalTool.csproj
+      working-directory: src/ReportGenerator.DotnetGlobalTool
+
+    - name: dotnet publish DotnetGlobalTool 11.0
+      run: dotnet publish -c ${{ env.BuildConfiguration }} -f net11.0 ReportGenerator.DotnetGlobalTool.csproj
       working-directory: src/ReportGenerator.DotnetGlobalTool
 
     - name: Test
@@ -123,6 +131,7 @@ jobs:
         mkdir tmpzip\net8.0
         mkdir tmpzip\net9.0
         mkdir tmpzip\net10.0
+        mkdir tmpzip\net11.0
 
     - name: 'Prepare ZIP release'
       run: |
@@ -135,6 +144,7 @@ jobs:
         xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\net8.0\publish\*' 'tmpzip\net8.0' /s
         xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\net9.0\publish\*' 'tmpzip\net9.0' /s
         xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\net10.0\publish\*' 'tmpzip\net10.0' /s
+        xcopy 'src\ReportGenerator.Console.NetCore\bin\Release\net11.0\publish\*' 'tmpzip\net11.0' /s
 
     - name: 'Pack ZIP release'
       run: Compress-Archive -Path tmpzip/* -DestinationPath src/target/packages/ReportGenerator_${{ env.Version }}.zip
@@ -211,7 +221,7 @@ jobs:
       uses: softprops/action-gh-release@v3
       with:
         name: ReportGenerator_${{ env.Version }}
-        body: This release requires .NET Framework 4.7 or .NET 8.0/9.0/10.0
+        body: This release requires .NET Framework 4.7 or .NET 8.0/9.0/10.0/11.0
         tag_name: v${{ env.Version }}
         files: ReportGenerator_${{ env.Version }}.zip
       env:
