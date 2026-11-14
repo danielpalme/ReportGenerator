@@ -10,7 +10,7 @@ namespace Test
             Console.WriteLine(".ctor");
         }
 
-        public string DoSomething(
+        public string? DoSomething(
             string value,
             string[] stringArray,
             Guid id,
@@ -41,6 +41,6 @@ namespace Test
         {
         }
 
-        public string AutoProperty { get; set; }
+        public string? AutoProperty { get; set; }
     }
 }

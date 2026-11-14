@@ -18,13 +18,13 @@ namespace Test
         where TModel : SomeModel
         where TState : IState
     {
-        public override bool Process(ISomeObjectInterface<TModel, TState> someObject)
+        public override bool Process(ISomeObjectInterface<TModel, TState>? someObject)
         {
             Console.WriteLine("Process");
             return true;
         }
 
-        public override bool PostProcess(ISomeObjectInterface<TModel, TState> someObject)
+        public override bool PostProcess(ISomeObjectInterface<TModel, TState>? someObject)
         {
             Console.WriteLine("PostProcess");
             return true;

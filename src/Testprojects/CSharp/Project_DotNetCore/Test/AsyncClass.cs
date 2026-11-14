@@ -8,7 +8,7 @@ namespace Test
     {
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            request.Properties.Add("hello", true);
+            request.Options.Set(new HttpRequestOptionsKey<bool>("hello"), true);
             return await base.SendAsync(request, cancellationToken);
         }
     }
