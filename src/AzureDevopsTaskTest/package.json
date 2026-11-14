@@ -2,6 +2,10 @@
   "devDependencies": {
     "tfx-cli": "^0.24.2"
   },
+  "overrides": {
+    "glob": "^14.0.6",
+    "minimatch": "^11.0.1"
+  },
   "scripts": {
     "tfx": "tfx"
   }
