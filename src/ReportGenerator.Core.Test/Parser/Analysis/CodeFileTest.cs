@@ -339,8 +339,9 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
         public void AnalyzeFile_AdditionFileReaderNoError_RegularFileReaderIgnored()
         {
             var additionalFileReader = Substitute.For<IFileReader>();
+            string mappedPathArg = Arg.Any<string>();
             string errorArg = Arg.Any<string>();
-            additionalFileReader.LoadFile(Arg.Any<string>(), out errorArg)
+            additionalFileReader.LoadFile(Arg.Any<string>(), out mappedPathArg, out errorArg)
                 .Returns(new[] { "Test" });
 
             var fileReader = Substitute.For<IFileReader>();
@@ -354,8 +355,8 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
             Assert.NotNull(fileAnalysis);
             Assert.Null(fileAnalysis.Error);
 
-            additionalFileReader.Received(1).LoadFile(Arg.Any<string>(), out errorArg);
-            fileReader.DidNotReceive().LoadFile(Arg.Any<string>(), out errorArg);
+            additionalFileReader.Received(1).LoadFile(Arg.Any<string>(), out mappedPathArg, out errorArg);
+            fileReader.DidNotReceive().LoadFile(Arg.Any<string>(), out mappedPathArg, out errorArg);
         }
 
         /// <summary>
@@ -365,20 +366,21 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
         public void AnalyzeFile_AdditionFileReaderReturnsError_RegularFileReaderUsed()
         {
             var additionalFileReader = Substitute.For<IFileReader>();
+            string mappedPathArg = Arg.Any<string>();
             string errorArg = Arg.Any<string>();
             string errorOut = "Some error";
-            additionalFileReader.LoadFile(Arg.Any<string>(), out errorArg)
+            additionalFileReader.LoadFile(Arg.Any<string>(), out mappedPathArg, out errorArg)
                 .Returns(x =>
                 {
-                    x[1] = errorOut;
+                    x[2] = errorOut;
                     return null;
                 });
 
             var fileReader = Substitute.For<IFileReader>();
-            fileReader.LoadFile(Arg.Any<string>(), out errorArg)
+            fileReader.LoadFile(Arg.Any<string>(), out mappedPathArg, out errorArg)
                 .Returns(x =>
                  {
-                     x[1] = errorOut;
+                     x[2] = errorOut;
                      return new[] { "Test" };
                  });
 
@@ -394,8 +396,8 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser.Analysis
             Assert.Equal(4, sut.TotalLines);
             Assert.Equal(4, fileAnalysis.Lines.Count());
 
-            additionalFileReader.Received(1).LoadFile(Arg.Any<string>(), out errorArg);
-            fileReader.Received(1).LoadFile(Arg.Any<string>(), out errorArg);
+            additionalFileReader.Received(1).LoadFile(Arg.Any<string>(), out mappedPathArg, out errorArg);
+            fileReader.Received(1).LoadFile(Arg.Any<string>(), out mappedPathArg, out errorArg);
         }
 
         /// <summary>

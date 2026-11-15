@@ -7,7 +7,7 @@ namespace Test
     {
         public class MyNestedClass<T2>
         {
-            public T2 MyProperty { get; set; }
+            public T2? MyProperty { get; set; }
 
             public async Task MyAsyncMethod<T3>(T3 myParam)
             {

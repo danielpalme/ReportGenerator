@@ -1,14 +1,14 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
+    <TargetFrameworks>net8.0;net9.0;net10.0;net11.0</TargetFrameworks>
     <ApplicationIcon>ProgramIcon.ico</ApplicationIcon>
     <AssemblyName>ReportGenerator</AssemblyName>
     <RootNamespace>Palmmedia.ReportGenerator</RootNamespace>
     <StartupObject>Palmmedia.ReportGenerator.Console.NetCore.Program</StartupObject>
-    <AssemblyVersion>5.5.11.0</AssemblyVersion>
-    <FileVersion>5.5.11.0</FileVersion>
+    <AssemblyVersion>5.6.0.0</AssemblyVersion>
+    <FileVersion>5.6.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

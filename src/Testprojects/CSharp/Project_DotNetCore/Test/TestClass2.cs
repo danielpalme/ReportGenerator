@@ -12,7 +12,7 @@ namespace Test
 
         public string ExecutedProperty { get; set; }
 
-        public string UnExecutedProperty { get; set; }
+        public string? UnExecutedProperty { get; set; }
 
         public TestClass2()
         {
@@ -57,7 +57,7 @@ namespace Test
             }
         }
 
-        public string DoSomething(string value,
+        public string? DoSomething(string value,
             string[] stringArray,
             Guid id,
             IEnumerable<string> stringEnumerable,

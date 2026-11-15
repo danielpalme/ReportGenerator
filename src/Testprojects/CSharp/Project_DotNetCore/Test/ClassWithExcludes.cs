@@ -3,10 +3,10 @@ namespace Test
 {
     public class ClassWithExcludes
     {
-        public string IncludedProperty { get; set; }
+        public string? IncludedProperty { get; set; }
 
         [CoverageExclude]
-        public string ExcludedProperty { get; set; }
+        public string? ExcludedProperty { get; set; }
 
         public void IncludedMethod()
         {

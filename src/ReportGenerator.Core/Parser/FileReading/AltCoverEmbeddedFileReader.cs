@@ -40,10 +40,13 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
         /// Loads the file with the given path.
         /// </summary>
         /// <param name="path">The path.</param>
+        /// <param name="mappedPath">The mapped path.</param>
         /// <param name="error">Error message if file reading failed, otherwise <code>null</code>.</param>
         /// <returns><code>null</code> if an error occurs, otherwise the lines of the file.</returns>
-        public string[] LoadFile(string path, out string error)
+        public string[] LoadFile(string path, out string mappedPath, out string error)
         {
+            mappedPath = path;
+
             try
             {
                 byte[] base64Decoded = Convert.FromBase64String(this.base64DeflateCompressedFile);
@@ -60,6 +63,17 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
                 error = string.Format(CultureInfo.InvariantCulture, Resources.ErrorDuringReadingFile, path, ex.GetExceptionMessageForDisplay());
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Loads the file with the given path.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <param name="error">Error message if file reading failed, otherwise <code>null</code>.</param>
+        /// <returns><code>null</code> if an error occurs, otherwise the lines of the file.</returns>
+        public string[] LoadFile(string path, out string error)
+        {
+            return this.LoadFile(path, out _, out error);
         }
 
         private byte[] Decompress(byte[] data)

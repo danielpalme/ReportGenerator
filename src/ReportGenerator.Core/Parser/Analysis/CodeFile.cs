@@ -450,19 +450,21 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
         /// <returns>The analysis result.</returns>
         internal FileAnalysis AnalyzeFile(IFileReader fileReader)
         {
+            string mappedPath = null;
             string error = null;
 
             string[] lines = null;
 
             if (this.additionalFileReader != null)
             {
-                lines = this.additionalFileReader.LoadFile(this.Path, out error);
+                lines = this.additionalFileReader.LoadFile(this.Path, out mappedPath, out error);
             }
 
             if (this.additionalFileReader == null || error != null)
             {
+                mappedPath = null;
                 error = null;
-                lines = fileReader.LoadFile(this.Path, out error);
+                lines = fileReader.LoadFile(this.Path, out mappedPath, out error);
             }
 
             if (error != null)
@@ -477,7 +479,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Analysis
 
             int currentLineNumber = 0;
 
-            var result = new FileAnalysis(this.Path, error);
+            var result = new FileAnalysis(this.Path, mappedPath, error);
             ICollection<Branch> branchesOfLine = null;
 
             foreach (var line in lines)

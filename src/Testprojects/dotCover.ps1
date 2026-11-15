@@ -14,3 +14,25 @@ $pathToReplace2 = [regex]::Escape((Get-Location).Path + "\FSharp\Project")
 
 (gc "FSharp\Reports\dotCover.xml") | % { $_ -replace $pathToReplace1, $replacement } | Out-File "FSharp\Reports\dotCover.xml" -Encoding UTF8
 (gc "FSharp\Reports\dotCover.xml") | % { $_ -replace $pathToReplace2, $replacement } | Out-File "FSharp\Reports\dotCover.xml" -Encoding UTF8
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 2026.3.0-rc01
+
+dotnet tool install --global JetBrains.dotCover.CommandLineTools --version 2026.3.0-rc01
+
+dotCover cover --xml-report-output CSharp\Reports\dotCover2026.xml -- test CSharp\Project_DotNetCore\UnitTests\UnitTests.csproj
+
+dotCover cover --target-executable FSharp\Project\bin\Debug\Test.exe --xml-report-output FSharp\Reports\dotCover2026.xml
+
+$pathToReplace1 = [regex]::Escape((Get-Location).Path + "\CSharp\Project_DotNetCore\bin\Debug")
+$pathToReplace2 = [regex]::Escape((Get-Location).Path + "\CSharp\Project_DotNetCore")
+$replacement = "C:\temp"
+
+(gc "CSharp\Reports\dotCover2026.xml") | % { $_ -replace $pathToReplace1, $replacement } | Out-File "CSharp\Reports\dotCover2026.xml" -Encoding UTF8
+(gc "CSharp\Reports\dotCover2026.xml") | % { $_ -replace $pathToReplace2, $replacement } | Out-File "CSharp\Reports\dotCover2026.xml" -Encoding UTF8
+
+$pathToReplace1 = [regex]::Escape((Get-Location).Path + "\FSharp\Project\bin\Debug")
+$pathToReplace2 = [regex]::Escape((Get-Location).Path + "\FSharp\Project")
+
+(gc "FSharp\Reports\dotCover2026.xml") | % { $_ -replace $pathToReplace1, $replacement } | Out-File "FSharp\Reports\dotCover2026.xml" -Encoding UTF8
+(gc "FSharp\Reports\dotCover2026.xml") | % { $_ -replace $pathToReplace2, $replacement } | Out-File "FSharp\Reports\dotCover2026.xml" -Encoding UTF8

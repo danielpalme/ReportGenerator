@@ -70,6 +70,16 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.6.0.0
+
+    * New: Added support for .NET 11
+    * New: #792 Added ability to configure all settings via .netconfig file (see https://github.com/danielpalme/ReportGenerator/wiki/Settings)
+    * New: #668 SonarQube report now exports mapped/absolute paths if they got modified by the given source directories
+
+5.5.12.0
+
+    * New: #790 Allow a custom file reader for the source files when generating a report (contributed by @jeremy-morren)
+
 5.5.11.0
 
     * Fix: #786 Improved HTML table layout for Firefox

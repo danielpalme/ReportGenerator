@@ -18,7 +18,7 @@ namespace Test
         {
         }
 
-        public async Task<T> MyAsyncGenericMethod<T1>(T1 something)
+        public async Task<T?> MyAsyncGenericMethod<T1>(T1 something)
         {
             return default;
         }
@@ -38,7 +38,7 @@ namespace Test
             {
             }
 
-            public async Task<T> MyNestedAsyncGenericMethod<U1>(U1 something)
+            public async Task<T?> MyNestedAsyncGenericMethod<U1>(U1 something)
             {
                 return default;
             }
@@ -59,7 +59,7 @@ namespace Test
             {
             }
 
-            public async Task<T> MyNestedAsyncGenericMethod<U1>(U1 something)
+            public async Task<T?> MyNestedAsyncGenericMethod<U1>(U1 something)
             {
                 return default;
             }

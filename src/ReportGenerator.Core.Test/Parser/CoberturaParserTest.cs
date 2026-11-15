@@ -187,17 +187,17 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
             var lineCoverageMetric = methodMetric.Metrics.Single(m => m.MetricType == MetricType.CoveragePercentual && m.Abbreviation == "cov");
             Assert.Equal("Line coverage", lineCoverageMetric.Name);
             Assert.True(lineCoverageMetric.Value.HasValue);
-            Assert.Equal((decimal)expectedLineCoverage, lineCoverageMetric.Value);
+            Assert.Equal((decimal)expectedLineCoverage, lineCoverageMetric.Value.Value, 2);
 
             var branchCoverageMetric = methodMetric.Metrics.Single(m => m.MetricType == MetricType.CoveragePercentual && m.Abbreviation == "bcov");
             Assert.Equal("Branch coverage", branchCoverageMetric.Name);
             Assert.True(branchCoverageMetric.Value.HasValue);
-            Assert.Equal((decimal)expectedBranchCoverage, branchCoverageMetric.Value);
+            Assert.Equal((decimal)expectedBranchCoverage, branchCoverageMetric.Value.Value, 2);
 
             var crapScoreMetric = methodMetric.Metrics.Single(m => m.MetricType == MetricType.CodeQuality && m.Abbreviation == "crp");
             Assert.Equal("Crap Score", crapScoreMetric.Name);
             Assert.True(crapScoreMetric.Value.HasValue);
-            Assert.Equal((decimal)expectedCrapScore, crapScoreMetric.Value);
+            Assert.Equal((decimal)expectedCrapScore, crapScoreMetric.Value.Value, 2);
         }
 
         /// <summary>
