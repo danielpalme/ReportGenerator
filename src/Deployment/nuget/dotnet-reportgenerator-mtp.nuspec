@@ -24,12 +24,22 @@ TODO TODO</description>
     <repository type="git" url="https://github.com/danielpalme/ReportGenerator.git" />
     <dependencies>
       <group targetFramework="net10.0">
-        <dependency id="Microsoft.Extensions.Configuration" version="10" />
-        <dependency id="Microsoft.Extensions.Configuration.Binder" version="10" />
-        <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="10" />
-        <dependency id="Microsoft.Extensions.Configuration.Json" version="10" />
-        <dependency id="Microsoft.Extensions.ObjectPool" version="10" />
-        <dependency id="Microsoft.Testing.Platform" version="2.2.3" />
+        <dependency id="Microsoft.Extensions.Configuration" version="11.0.0" />
+        <dependency id="Microsoft.Extensions.Configuration.Binder" version="11.0.0" />
+        <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="11.0.0" />
+        <dependency id="Microsoft.Extensions.Configuration.Json" version="11.0.0" />
+        <dependency id="Microsoft.Extensions.ObjectPool" version="11.0.0" />
+        <dependency id="Microsoft.Testing.Platform" version="2.5.3" />
+        <dependency id="DotNetConfig" version="1.2.0" />
+        <dependency id="McMaster.NETCore.Plugins" version="1.4.0" />
+      </group>
+      <group targetFramework="net11.0">
+        <dependency id="Microsoft.Extensions.Configuration" version="11.0.0" />
+        <dependency id="Microsoft.Extensions.Configuration.Binder" version="11.0.0" />
+        <dependency id="Microsoft.Extensions.Configuration.CommandLine" version="11.0.0" />
+        <dependency id="Microsoft.Extensions.Configuration.Json" version="11.0.0" />
+        <dependency id="Microsoft.Extensions.ObjectPool" version="11.0.0" />
+        <dependency id="Microsoft.Testing.Platform" version="2.5.3" />
         <dependency id="DotNetConfig" version="1.2.0" />
         <dependency id="McMaster.NETCore.Plugins" version="1.4.0" />
       </group>
