@@ -42,6 +42,7 @@ TODO TODO</description>
     <file src="Readme_dotnet-reportgenerator-mtp.md" target="Readme.md" />
     
     <file src="..\..\ReportGenerator.Mtp\build\**\*.*" target="build\net10.0" />
+    <file src="..\..\ReportGenerator.Mtp\build\**\*.*" target="build\net11.0" />
     <file src="..\..\ReportGenerator.Mtp\buildMultiTargeting\**\*.*" target="buildMultiTargeting" />
     <file src="..\..\ReportGenerator.Mtp\buildTransitive\**\*.*" target="buildTransitive\net10.0" />
 
@@ -52,5 +53,13 @@ TODO TODO</description>
     <file src="..\..\ReportGenerator.Mtp\bin\Release\net10.0\publish\ReportGenerator.DotnetCorePluginLoader.xml" target="lib\net10.0\" />
     <file src="..\..\ReportGenerator.Mtp\bin\Release\net10.0\publish\ReportGenerator.Mtp.deps.json" target="lib\net10.0\" />
     <file src="..\..\ReportGenerator.Mtp\bin\Release\net10.0\publish\ReportGenerator.Mtp.dll" target="lib\net10.0\" />
+
+	  <!-- Net11.0 -->
+    <file src="..\..\ReportGenerator.Mtp\bin\Release\net11.0\publish\ReportGenerator.Core.dll" target="lib\net11.0\" />
+    <file src="..\..\ReportGenerator.Mtp\bin\Release\net11.0\publish\ReportGenerator.Core.xml" target="lib\net11.0\" />
+    <file src="..\..\ReportGenerator.Mtp\bin\Release\net11.0\publish\ReportGenerator.DotnetCorePluginLoader.dll" target="lib\net11.0\" />
+    <file src="..\..\ReportGenerator.Mtp\bin\Release\net11.0\publish\ReportGenerator.DotnetCorePluginLoader.xml" target="lib\net11.0\" />
+    <file src="..\..\ReportGenerator.Mtp\bin\Release\net11.0\publish\ReportGenerator.Mtp.deps.json" target="lib\net11.0\" />
+    <file src="..\..\ReportGenerator.Mtp\bin\Release\net11.0\publish\ReportGenerator.Mtp.dll" target="lib\net11.0\" />
   </files>
 </package>
