@@ -180,6 +180,30 @@ namespace Palmmedia.ReportGenerator.Core.Test.Parser
                 .Single(c => c.Name == className).Files
                 .Single(f => f.Path == fileName);
 
+        /// <summary>
+        /// A test for DA lines with a checksum (DA:<line>,<count>,<checksum>)
+        /// </summary>
+        [Fact]
+        public void LineVisitsWithChecksumTest()
+        {
+            var filter = Substitute.For<IFilter>();
+            filter.IsElementIncludedInReport(Arg.Any<string>()).Returns(true);
+
+            string[] lines =
+            {
+                "SF:util.c",
+                "DA:2,3,a1b2c3",
+                "DA:4,0,d4e5f6",
+                "end_of_record"
+            };
+
+            var parserResult = new LCovParser(filter, filter, filter).Parse(lines);
+
+            var @class = parserResult.Assemblies.Single().Classes.Single();
+            Assert.Equal(2, @class.CoverableLines);
+            Assert.Equal(1, @class.CoveredLines);
+        }
+
         private static FileAnalysis GetFileAnalysis(IEnumerable<Assembly> assemblies, string className, string fileName) => assemblies
                 .Single(a => a.Name == "Default").Classes
                 .Single(c => c.Name == className).Files
