@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Testing.Platform.CommandLine;
 using Microsoft.Testing.Platform.Extensions;
+using Microsoft.Testing.Platform.Extensions.Messages;
 using Microsoft.Testing.Platform.Extensions.TestHostControllers;
 using Microsoft.Testing.Platform.Logging;
 using Microsoft.Testing.Platform.OutputDevice;
-using Palmmedia.ReportGenerator.Core;
-using Palmmedia.ReportGenerator.Mtp.Logging;
+using Microsoft.Testing.Platform.Services;
 
 namespace Palmmedia.ReportGenerator.Mtp
 {
-    internal sealed class ReportGeneratorOutOfProcessHandler : ITestHostProcessLifetimeHandler
+    internal sealed class ReportGeneratorOutOfProcessHandler : IDataConsumer, ITestHostProcessLifetimeHandler
     {
         private readonly IExtension extension;
 
@@ -33,70 +33,49 @@ namespace Palmmedia.ReportGenerator.Mtp
 
         public Task<bool> IsEnabledAsync() => Task.FromResult(this.isEnabled);
 
+        public Type[] DataTypesConsumed => [typeof(TestCoverageReportMessage)];
+
+        private readonly ITestCoverageResult coverage;
+
         public ReportGeneratorOutOfProcessHandler(
             IExtension extension,
             ILoggerFactory loggerFactory,
             IOutputDevice outputDevice,
-            ICommandLineOptions commandLineOptions)
+            ICommandLineOptions commandLineOptions,
+            ITestCoverageResult coverage)
         {
+            Console.WriteLine("ReportGenerator.MTP - ReportGeneratorOutOfProcessHandler constructor");
             this.extension = extension;
             this.loggerFactory = loggerFactory;
             this.outputDevice = outputDevice;
             this.commandLineOptions = commandLineOptions;
             this.isEnabled = commandLineOptions.IsOptionSet("reportgenerator");
+            this.coverage = coverage;
         }
 
         public Task BeforeTestHostProcessStartAsync(CancellationToken cancellationToken)
         {
+            Console.WriteLine("ReportGenerator.MTP - BeforeTestHostProcessStartAsync ");
             return Task.CompletedTask;
         }
 
         public Task OnTestHostProcessStartedAsync(ITestHostProcessInformation testHostProcessInformation, CancellationToken cancellationToken)
         {
+            Console.WriteLine("ReportGenerator.MTP - OnTestHostProcessStartedAsync ");
             return Task.CompletedTask;
         }
 
         public Task OnTestHostProcessExitedAsync(ITestHostProcessInformation testHostProcessInformation, CancellationToken cancellationToken)
         {
-            var logger = this.loggerFactory.CreateLogger("ReportGenerator");
-            var loggerFactoryAdapter = new ReportGeneratorLoggerAdapterFactory(this.extension, logger, this.outputDevice);
-            Core.Logging.LoggerFactory.Configure(loggerFactoryAdapter);
-
-            var reportConfiguration = new ReportConfigurationBuilder()
-               .Create(this.GetCommandLineOptions());
-            new Generator().GenerateReport(reportConfiguration);
+            Console.WriteLine("ReportGenerator.MTP - OnTestHostProcessExitedAsync ");
 
             return Task.CompletedTask;
         }
 
-        private Dictionary<string, string> GetCommandLineOptions()
+        public Task ConsumeAsync(IDataProducer dataProducer, IData value, CancellationToken cancellationToken)
         {
-            var result = new Dictionary<string, string>();
-
-            foreach (var commandLineArgumentName in CommandLineArgumentNames.ValidNames)
-            {
-                if (this.commandLineOptions.TryGetOptionArgumentList(commandLineArgumentName, out var argumentList))
-                {
-                    if (argumentList.Length > 0)
-                    {
-                        result.Add(commandLineArgumentName.Replace("reportgenerator-", string.Empty), argumentList[0]);
-                    }
-                }
-            }
-
-            if (!result.ContainsKey("reports"))
-            {
-                result.Add("reports", "**/TestResults/coverage.cobertura*.xml");
-            }
-
-            if (!result.ContainsKey("targetdir"))
-            {
-                result.Add("targetdir", "coveragereport");
-            }
-
-            // TODO: Handle custom settings
-
-            return result;
+            Console.WriteLine($"ReportGenerator.MTP - Received data of type {value.GetType().Name} from {dataProducer.Uid}");
+            return Task.CompletedTask;
         }
     }
 }
