@@ -193,9 +193,10 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 }
                 else if (line.StartsWith("DA:"))
                 {
-                    line = line.Substring(3);
-                    int lineNumber = int.Parse(line.Substring(0, line.IndexOf(',')), CultureInfo.InvariantCulture);
-                    int visits = line.Substring(line.IndexOf(',') + 1).ParseLargeInteger();
+                    // DA:<line number>,<execution count>[,<checksum>]
+                    string[] tokens = line.Substring(3).Split(',');
+                    int lineNumber = int.Parse(tokens[0], CultureInfo.InvariantCulture);
+                    int visits = tokens[1].ParseLargeInteger();
 
                     maxiumLineNumber = Math.Max(maxiumLineNumber, lineNumber);
 
