@@ -25,6 +25,7 @@ namespace Palmmedia.ReportGenerator.Mtp
                     sp.GetService<ILoggerFactory>(),
                     sp.GetService<IOutputDevice>(),
                     sp.GetCommandLineOptions(),
+                    sp.GetConfiguration(),
                     sp.GetService<ITestCoverageResult>());
 
             //builder.TestHost.AddTestHostApplicationLifetime(handlerFactory);
