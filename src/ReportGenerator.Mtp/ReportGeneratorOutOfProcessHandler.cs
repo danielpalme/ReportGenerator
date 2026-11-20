@@ -1,7 +1,10 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Testing.Platform.CommandLine;
+using Microsoft.Testing.Platform.Configurations;
 using Microsoft.Testing.Platform.Extensions;
 using Microsoft.Testing.Platform.Extensions.Messages;
 using Microsoft.Testing.Platform.Extensions.TestHostControllers;
@@ -20,6 +23,8 @@ namespace Palmmedia.ReportGenerator.Mtp
         private readonly IOutputDevice outputDevice;
 
         private readonly ICommandLineOptions commandLineOptions;
+
+        private readonly IConfiguration configuration;
 
         private readonly bool isEnabled;
 
@@ -42,40 +47,65 @@ namespace Palmmedia.ReportGenerator.Mtp
             ILoggerFactory loggerFactory,
             IOutputDevice outputDevice,
             ICommandLineOptions commandLineOptions,
+            IConfiguration configuration,
             ITestCoverageResult coverage)
         {
-            Console.WriteLine("ReportGenerator.MTP - ReportGeneratorOutOfProcessHandler constructor");
             this.extension = extension;
             this.loggerFactory = loggerFactory;
             this.outputDevice = outputDevice;
             this.commandLineOptions = commandLineOptions;
+            this.configuration = configuration;
             this.isEnabled = commandLineOptions.IsOptionSet("reportgenerator");
             this.coverage = coverage;
+            Trace($"ReportGeneratorOutOfProcessHandler constructor (instance {this.GetHashCode()})");
         }
 
         public Task BeforeTestHostProcessStartAsync(CancellationToken cancellationToken)
         {
-            Console.WriteLine("ReportGenerator.MTP - BeforeTestHostProcessStartAsync ");
+            Trace($"BeforeTestHostProcessStartAsync (instance {this.GetHashCode()})");
             return Task.CompletedTask;
         }
 
         public Task OnTestHostProcessStartedAsync(ITestHostProcessInformation testHostProcessInformation, CancellationToken cancellationToken)
         {
-            Console.WriteLine("ReportGenerator.MTP - OnTestHostProcessStartedAsync ");
+            Trace($"OnTestHostProcessStartedAsync (instance {this.GetHashCode()}, test host pid {testHostProcessInformation.PID})");
             return Task.CompletedTask;
         }
 
         public Task OnTestHostProcessExitedAsync(ITestHostProcessInformation testHostProcessInformation, CancellationToken cancellationToken)
         {
-            Console.WriteLine("ReportGenerator.MTP - OnTestHostProcessExitedAsync ");
-
+            Trace($"OnTestHostProcessExitedAsync (instance {this.GetHashCode()}, test host pid {testHostProcessInformation.PID})");
+            this.TraceCoberturaFiles();
             return Task.CompletedTask;
         }
 
         public Task ConsumeAsync(IDataProducer dataProducer, IData value, CancellationToken cancellationToken)
         {
-            Console.WriteLine($"ReportGenerator.MTP - Received data of type {value.GetType().Name} from {dataProducer.Uid}");
+            if (value is TestCoverageReportMessage report)
+            {
+                Trace($"ConsumeAsync (instance {this.GetHashCode()}): {nameof(TestCoverageReportMessage)} from '{dataProducer.Uid}', format {report.Format}, path '{report.ReportPath}', exists {File.Exists(report.ReportPath)}");
+            }
+            else
+            {
+                Trace($"ConsumeAsync (instance {this.GetHashCode()}): {value.GetType().Name} from '{dataProducer.Uid}'");
+            }
+
             return Task.CompletedTask;
+        }
+
+        // Diagnostics for https://github.com/microsoft/testfx/issues/8904: the PID tells which process
+        // (test host controller or test host) runs each callback; the file listing shows whether
+        // coverage reports exist when the callback runs.
+        private static void Trace(string message)
+            => Console.WriteLine($"ReportGenerator.MTP [{DateTime.Now:HH:mm:ss.fff} pid {Environment.ProcessId}] - {message}");
+
+        private void TraceCoberturaFiles()
+        {
+            string resultsDirectory = this.configuration.GetTestResultDirectory();
+            string[] files = Directory.Exists(resultsDirectory)
+                ? Directory.GetFiles(resultsDirectory, "coverage.cobertura*.xml")
+                : [];
+            Trace($"  Cobertura files in '{resultsDirectory}': {(files.Length == 0 ? "<none>" : string.Join(", ", files.Select(Path.GetFileName)))}");
         }
     }
 }
