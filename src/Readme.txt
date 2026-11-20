@@ -70,6 +70,10 @@ For further details take a look at LICENSE.txt.
 
 CHANGELOG
 
+5.6.1.0
+
+    * Fix: LCOV: Ignore checksum in DA lines (contributed by @jayhemnani9910)
+
 5.6.0.0
 
     * New: Added support for .NET 11
