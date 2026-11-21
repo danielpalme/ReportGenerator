@@ -165,9 +165,9 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         }
 
         /// <inheritdoc />
-        public void KeyValueRow(string key, string value, bool emphasized)
+        public void KeyValueRow(string key, string value, bool emphasize)
         {
-            if (emphasized)
+            if (emphasize)
             {
                 this.reportTextWriter.WriteLine($"| **{key}** | {value} |");
             }

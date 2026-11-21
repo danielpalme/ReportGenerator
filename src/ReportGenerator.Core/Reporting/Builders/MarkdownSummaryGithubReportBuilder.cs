@@ -118,7 +118,16 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                 reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.Assemblies2, assembliesWithClasses.Count().ToString(CultureInfo.InvariantCulture));
                 reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.Classes, assembliesWithClasses.SelectMany(a => a.Classes).Count().ToString(CultureInfo.InvariantCulture));
                 reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.Files2, assembliesWithClasses.SelectMany(a => a.Classes).SelectMany(a => a.Files).Distinct().Count().ToString(CultureInfo.InvariantCulture));
-                reportTextWriter.WriteLine("| **{0}** | {1} |", ReportResources.Coverage2, summaryResult.CoverageQuota.HasValue ? $"{summaryResult.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}% ({summaryResult.CoveredLines.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {summaryResult.CoverableLines.ToString(CultureInfo.InvariantCulture)})" : string.Empty);
+
+                if (summaryResult.CoverageQuota.HasValue)
+                {
+                    reportTextWriter.WriteLine("| **{0}** | {1} |", ReportResources.Coverage2, $"{summaryResult.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}% ({summaryResult.CoveredLines.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {summaryResult.CoverableLines.ToString(CultureInfo.InvariantCulture)})");
+                }
+                else
+                {
+                    reportTextWriter.WriteLine("| **{0}** | |", ReportResources.Coverage2);
+                }
+
                 reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.CoveredLines, summaryResult.CoveredLines.ToString(CultureInfo.InvariantCulture));
                 reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.UncoveredLines, (summaryResult.CoverableLines - summaryResult.CoveredLines).ToString(CultureInfo.InvariantCulture));
                 reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.CoverableLines, summaryResult.CoverableLines.ToString(CultureInfo.InvariantCulture));
@@ -142,8 +151,24 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
 
                 if (proVersion)
                 {
-                    reportTextWriter.WriteLine("| **{0}** | {1} |", ReportResources.CodeElementCoverageQuota2, summaryResult.CodeElementCoverageQuota.HasValue ? $"{summaryResult.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}% ({summaryResult.CoveredCodeElements.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {summaryResult.TotalCodeElements.ToString(CultureInfo.InvariantCulture)})" : string.Empty);
-                    reportTextWriter.WriteLine("| **{0}** | {1} |", ReportResources.FullCodeElementCoverageQuota2, summaryResult.FullCodeElementCoverageQuota.HasValue ? $"{summaryResult.FullCodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}% ({summaryResult.FullCoveredCodeElements.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {summaryResult.TotalCodeElements.ToString(CultureInfo.InvariantCulture)})" : string.Empty);
+                    if (summaryResult.CodeElementCoverageQuota.HasValue)
+                    {
+                        reportTextWriter.WriteLine("| **{0}** | {1} |", ReportResources.CodeElementCoverageQuota2, $"{summaryResult.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}% ({summaryResult.CoveredCodeElements.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {summaryResult.TotalCodeElements.ToString(CultureInfo.InvariantCulture)})");
+                    }
+                    else
+                    {
+                        reportTextWriter.WriteLine("| **{0}** | |", ReportResources.CodeElementCoverageQuota2);
+                    }
+
+                    if (summaryResult.FullCodeElementCoverageQuota.HasValue)
+                    {
+                        reportTextWriter.WriteLine("| **{0}** | {1} |", ReportResources.FullCodeElementCoverageQuota2, $"{summaryResult.FullCodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}% ({summaryResult.FullCoveredCodeElements.ToString(CultureInfo.InvariantCulture)} {ReportResources.Of} {summaryResult.TotalCodeElements.ToString(CultureInfo.InvariantCulture)})");
+                    }
+                    else
+                    {
+                        reportTextWriter.WriteLine("| **{0}** | |", ReportResources.FullCodeElementCoverageQuota2);
+                    }
+
                     reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.CoveredCodeElements, summaryResult.CoveredCodeElements.ToString(CultureInfo.InvariantCulture));
                     reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.FullCoveredCodeElements, summaryResult.FullCoveredCodeElements.ToString(CultureInfo.InvariantCulture));
                     reportTextWriter.WriteLine("| {0} | {1} |", ReportResources.TotalCodeElements, summaryResult.TotalCodeElements.ToString(CultureInfo.InvariantCulture));
@@ -216,18 +241,47 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
                         reportTextWriter.WriteLine();
 
                         reportTextWriter.Write("|**{0}**", InsertLineBreaks(assembly.Name));
-                        reportTextWriter.Write("|**{0}**", assembly.CoverageQuota.HasValue ? assembly.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
+
+                        if (assembly.CoverageQuota.HasValue)
+                        {
+                            reportTextWriter.Write($"|**{assembly.CoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}%**");
+                        }
+                        else
+                        {
+                            reportTextWriter.Write("|");
+                        }
 
                         if (summaryResult.SupportsBranchCoverage)
                         {
-                            reportTextWriter.Write("|**{0}**", assembly.BranchCoverageQuota.HasValue ? assembly.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
+                            if (assembly.BranchCoverageQuota.HasValue)
+                            {
+                                reportTextWriter.Write($"|**{assembly.BranchCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}%**");
+                            }
+                            else
+                            {
+                                reportTextWriter.Write("|");
+                            }
                         }
 
                         if (proVersion)
                         {
-                            reportTextWriter.Write("|**{0}**", assembly.CodeElementCoverageQuota.HasValue ? assembly.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
+                            if (assembly.CodeElementCoverageQuota.HasValue)
+                            {
+                                reportTextWriter.Write($"|**{assembly.CodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}%**");
+                            }
+                            else
+                            {
+                                reportTextWriter.Write("|");
+                            }
 
-                            reportTextWriter.Write("|**{0}**", assembly.FullCodeElementCoverageQuota.HasValue ? assembly.FullCodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty);
+                            if (assembly.FullCodeElementCoverageQuota.HasValue)
+                            {
+                                reportTextWriter.Write($"|**{assembly.FullCodeElementCoverageQuota.Value.ToString(CultureInfo.InvariantCulture)}%**");
+                            }
+                            else
+                            {
+                                reportTextWriter.Write("|");
+                            }
                         }
 
                         reportTextWriter.WriteLine("|");
